@@ -24,8 +24,9 @@ using System.Collections.Generic;
 using Evolution;
 
 using Do.Addins;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Do.Addins.Evolution
 {
 
 	public class EvolutionContactItemSource : IItemSource

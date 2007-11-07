@@ -22,9 +22,9 @@ using System.Threading;
 using System.Diagnostics;
 
 using Do.Addins;
-using RhythmboxAddin;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Do.Addins.Rhythmbox
 {
 	
 	

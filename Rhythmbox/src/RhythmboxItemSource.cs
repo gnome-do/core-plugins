@@ -21,8 +21,9 @@ using System;
 using System.Collections.Generic;
 
 using Do.Addins;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Do.Addins.Rhythmbox
 {
 	
 	public class RhythmboxItemSource : IItemSource

@@ -20,9 +20,9 @@
 using System;
 using System.Diagnostics;
 
-using RhythmboxAddin;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Do.Addins.Rhythmbox
 {
 
 	public class RhythmboxPlayCommand : ICommand

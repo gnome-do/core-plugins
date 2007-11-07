@@ -20,7 +20,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Do.Addins
+namespace Do.Addins.Pidgin
 {
 	
 	public class Pidgin

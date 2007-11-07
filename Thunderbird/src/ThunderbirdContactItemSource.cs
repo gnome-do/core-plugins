@@ -25,9 +25,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Do.Addins;
+using Do.Universe;
+
 using Beagle.Util;
 
-namespace Do.Universe
+namespace Do.Addins.Thunderbird
 {
 
 	public class ThunderbirdContactItemSource : IItemSource

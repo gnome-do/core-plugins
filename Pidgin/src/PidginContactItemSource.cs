@@ -23,8 +23,9 @@ using System.Xml;
 using System.Collections.Generic;
 
 using Do.Addins;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Do.Addins.Pidgin
 {
 	public class PidginContactItemSource : IItemSource
 	{

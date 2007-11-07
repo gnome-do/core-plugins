@@ -20,9 +20,8 @@
 using System;
 using System.Diagnostics;
 
-namespace RhythmboxAddin
+namespace Do.Addins.Rhythmbox
 {
-	
 	
 	public class Rhythmbox
 	{

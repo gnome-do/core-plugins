@@ -22,8 +22,9 @@ using System.Threading;
 using System.Diagnostics;
 
 using Do.Addins;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Do.Addins.Pidgin
 {
 	
 	public class PidginChatCommand : ICommand
