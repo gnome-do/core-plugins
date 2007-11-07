@@ -1,0 +1,24 @@
+<CombineEntry name="Packages" fileversion="2.0" ctype="PackagingProject">
+  <Packages>
+    <Package name="Tarball">
+      <Builder rootEntry="./Do Addins.mds" TargetDirectory="/home/dave/src/do-addins" DefaultConfiguration="Debug" ctype="TarballDeployTarget">
+        <ChildEntries>
+          <Entry>./Evolution/Evolution.mdp</Entry>
+          <Entry>./Thunderbird/Thunderbird.mdp</Entry>
+          <Entry>./Pidgin/Pidgin.mdp</Entry>
+          <Entry>./Rhythmbox/Rhythmbox.mdp</Entry>
+        </ChildEntries>
+      </Builder>
+    </Package>
+    <Package name="Linux Binaries">
+      <Builder rootEntry="./Do Addins.mds" targetFile="./Do Addins.tar.gz" platform="Linux" ctype="BinariesZipPackageBuilder">
+        <ChildEntries>
+          <Entry>./Evolution/Evolution.mdp</Entry>
+          <Entry>./Thunderbird/Thunderbird.mdp</Entry>
+          <Entry>./Pidgin/Pidgin.mdp</Entry>
+          <Entry>./Rhythmbox/Rhythmbox.mdp</Entry>
+        </ChildEntries>
+      </Builder>
+    </Package>
+  </Packages>
+</CombineEntry>

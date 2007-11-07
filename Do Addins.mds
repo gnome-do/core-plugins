@@ -1,0 +1,33 @@
+<Combine name="Do Addins" fileversion="2.0" outputpath="./build/bin/">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="Rhythmbox" configuration="Debug" />
+      <Entry build="True" name="Packages" configuration="" />
+      <Entry build="True" name="Thunderbird" configuration="Debug" />
+      <Entry build="True" name="Pidgin" configuration="Debug" />
+      <Entry build="True" name="Evolution" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="Rhythmbox" configuration="Release" />
+      <Entry build="True" name="Packages" configuration="" />
+      <Entry build="True" name="Thunderbird" configuration="Release" />
+      <Entry build="True" name="Pidgin" configuration="Release" />
+      <Entry build="True" name="Evolution" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="Rhythmbox" single="False">
+    <Execute type="None" entry="Rhythmbox" />
+    <Execute type="None" entry="Packages" />
+    <Execute type="None" entry="Thunderbird" />
+    <Execute type="None" entry="Pidgin" />
+    <Execute type="None" entry="Evolution" />
+  </StartMode>
+  <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
+  <Entries>
+    <Entry filename="./Rhythmbox/Rhythmbox.mdp" />
+    <Entry filename="./Packages.mdse" />
+    <Entry filename="./Thunderbird/Thunderbird.mdp" />
+    <Entry filename="./Pidgin/Pidgin.mdp" />
+    <Entry filename="./Evolution/Evolution.mdp" />
+  </Entries>
+</Combine>
