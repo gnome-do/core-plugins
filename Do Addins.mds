@@ -6,6 +6,7 @@
       <Entry build="True" name="Thunderbird" configuration="Debug" />
       <Entry build="True" name="Pidgin" configuration="Debug" />
       <Entry build="True" name="Evolution" configuration="Debug" />
+      <Entry build="True" name="Templates" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -13,14 +14,16 @@
       <Entry build="True" name="Thunderbird" configuration="Release" />
       <Entry build="True" name="Pidgin" configuration="Release" />
       <Entry build="True" name="Evolution" configuration="Release" />
+      <Entry build="True" name="Templates" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="Rhythmbox" single="False">
+  <StartMode startupentry="Templates" single="True">
     <Execute type="None" entry="Rhythmbox" />
     <Execute type="None" entry="Packages" />
     <Execute type="None" entry="Thunderbird" />
     <Execute type="None" entry="Pidgin" />
     <Execute type="None" entry="Evolution" />
+    <Execute type="None" entry="Templates" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -29,5 +32,6 @@
     <Entry filename="./Thunderbird/Thunderbird.mdp" />
     <Entry filename="./Pidgin/Pidgin.mdp" />
     <Entry filename="./Evolution/Evolution.mdp" />
+    <Entry filename="./Templates/Templates.mdp" />
   </Entries>
 </Combine>
