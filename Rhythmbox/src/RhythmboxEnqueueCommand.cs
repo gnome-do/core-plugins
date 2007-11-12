@@ -1,4 +1,4 @@
-//  RhythmboxPlayCommand.cs
+//  RhythmboxEnqueueCommand.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -25,23 +25,23 @@ using Do.Universe;
 namespace Do.Addins.Rhythmbox
 {
 
-	public class RhythmboxPlayCommand : ICommand
+	public class RhythmboxEnqueueCommand : ICommand
 	{
 		
-		public RhythmboxPlayCommand ()
+		public RhythmboxEnqueueCommand ()
 		{
 		}
 		
 		public string Name {
-			get { return "Play"; }
+			get { return "Add to Play Queue"; }
 		}
 		
 		public string Description {
-			get { return "Play an item in Rhythmbox."; }
+			get { return "Add an item to Rhythmbox's play queue."; }
 		}
 		
 		public string Icon {
-			get { return "rhythmbox"; }
+			get { return "add"; }
 		}
 		
 		public Type[] SupportedItemTypes {
@@ -69,7 +69,6 @@ namespace Do.Addins.Rhythmbox
 		{
 			Rhythmbox.StartIfNeccessary ();
 			
-			Rhythmbox.Client ("--clear-queue --no-present", true);
 			foreach (IItem item in items) {
 				MusicAlbumItem album;
 				string enqueue;
@@ -78,9 +77,8 @@ namespace Do.Addins.Rhythmbox
 				album = item as MusicAlbumItem;
 				foreach (string track in album.Tracks)
 					enqueue += string.Format ("--enqueue \"{0}\" ", track);
-				Rhythmbox.Client (enqueue, true);
+				Rhythmbox.Client (enqueue);
 			}
-			Rhythmbox.Client ("--next --play --no-present");
 		}
 	}
 }
