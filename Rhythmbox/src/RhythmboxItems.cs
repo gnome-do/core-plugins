@@ -27,7 +27,37 @@ using Do.Universe;
 namespace Do.Addins.Rhythmbox
 {
 	
+	class BrowseMusicItem: IItem
+	{
+		string name, description;
+		
+		public BrowseMusicItem (string name, string description)
+		{
+			this.name = name;
+			this.description = description;
+		}
+		
+		public string Name { get { return name; } }
+		public string Description { get { return description; } }
+		public string Icon { get { return "gtk-cdrom"; } }
+	}
 	
+	class BrowseArtistsMusicItem : BrowseMusicItem
+	{
+		public BrowseArtistsMusicItem ():
+			base ("Browse Artists", "Browse Rhythmbox Music by Artist")
+		{
+		}
+	}
+	
+	class BrowseAlbumsMusicItem : BrowseMusicItem
+	{
+		public BrowseAlbumsMusicItem ():
+			base ("Browse Albums", "Browse Rhythmbox Music by Album")
+		{
+		}
+	}
+
 	public class RhythmboxRunnableItem : IRunnableItem
 	{
 		public static readonly RhythmboxRunnableItem[] DefaultItems =

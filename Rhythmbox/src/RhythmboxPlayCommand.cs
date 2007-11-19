@@ -18,6 +18,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Threading;
 using System.Diagnostics;
 
 using Do.Universe;
@@ -47,7 +48,7 @@ namespace Do.Addins.Rhythmbox
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof (MusicAlbumItem),
+					typeof (MusicItem),
 				};
 			}
 		}
@@ -67,20 +68,20 @@ namespace Do.Addins.Rhythmbox
 		
 		public void Perform (IItem[] items, IItem[] modifierItems)
 		{
-			Rhythmbox.StartIfNeccessary ();
-			
-			Rhythmbox.Client ("--clear-queue --no-present", true);
-			foreach (IItem item in items) {
-				MusicAlbumItem album;
-				string enqueue;
+			new Thread ((ThreadStart) delegate {
+				Rhythmbox.StartIfNeccessary ();
 				
-				enqueue = "--no-present ";
-				album = item as MusicAlbumItem;
-				foreach (string track in album.Tracks)
-					enqueue += string.Format ("--enqueue \"{0}\" ", track);
-				Rhythmbox.Client (enqueue, true);
-			}
-			Rhythmbox.Client ("--next --play --no-present");
+				Rhythmbox.Client ("--clear-queue --no-present", true);
+				foreach (IItem item in items) {
+					string enqueue;
+					
+					enqueue = "--no-present ";
+					foreach (TrackMusicItem track in Rhythmbox.TracksFor (item as MusicItem))
+						enqueue += string.Format ("--enqueue \"{0}\" ", track.File);
+					Rhythmbox.Client (enqueue, true);
+				}
+				Rhythmbox.Client ("--next --play --no-present");
+			}).Start ();
 		}
 	}
 }

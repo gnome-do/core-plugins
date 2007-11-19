@@ -21,21 +21,22 @@ using System;
 using System.Collections.Generic;
 
 using Do.Addins;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Do.Addins.Rhythmbox
 {
 	
-	public class MusicAlbumItem : IItem
+	public abstract class MusicItem : IItem
 	{
+		protected string name, artist, year, cover;
 		
-		SortedList<string, string> tracks;
-		string name, artist, year, cover;
-		
-		public MusicAlbumItem () {
-			tracks = new SortedList<string, string> ();
+		public MusicItem ()
+		{
 		}
 		
-		public MusicAlbumItem (string name, string artist, string year, string cover) : this () {
+		public MusicItem (string name, string artist, string year, string cover):
+			this ()
+		{
 			this.name = name;
 			this.artist = artist;
 			this.year = year;
@@ -43,24 +44,54 @@ namespace Do.Universe
 		}
 		
 		public virtual string Name { get { return name; } }
-		public string Description { get { return string.Format ("{0}", artist, year); } }
-		public string Icon { get { return Cover ?? "gtk-cdrom"; } }
+		public virtual string Description { get { return artist; } }
+		public virtual string Icon { get { return Cover ?? "gtk-cdrom"; } }
+		
+		public string Artist {
+			get { return artist; }
+		}
 		
 		public string Cover {
 			get { return cover; }
 			set { cover = value; }
 		}
-		
-		public ICollection<string> Tracks {
-			get { return tracks.Values; }
-		}
-		
-		public void AddTrack (string track)
+	
+	}
+	
+	public class AlbumMusicItem : MusicItem
+	{
+		public AlbumMusicItem (string name, string artist, string year, string cover):
+			base (name, artist, year, cover)
 		{
-			try {
-				tracks.Add (track, track);
-			} catch {}
 		}
 	}
-
+	
+	public class ArtistMusicItem : MusicItem
+	{
+		public ArtistMusicItem (string artist, string cover):
+			base ()
+		{
+			this.artist = this.name = artist;
+			this.cover = cover;
+		}
+		
+		public override string Name { get { return artist; } }
+		public override string Description { get { return string.Format ("All music by {0}", artist); } }
+	}
+	
+	public class TrackMusicItem : MusicItem
+	{
+		string file, album;
+		
+		public TrackMusicItem (string name, string artist, string album, string year, string cover, string file):
+			base (name, artist, year, cover)
+		{
+			this.file = file;
+			this.album = album;
+			this.cover = "gnome-mime-audio";
+		}
+		
+		public string File { get { return file; } }
+		public override string Description { get { return string.Format ("{0} - {1}", artist, album); } }
+	}
 }

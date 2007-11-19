@@ -30,18 +30,9 @@ namespace Do.Addins.Rhythmbox
 	
 	public class RhythmboxMusicItemSource : IItemSource
 	{
-		static readonly string kMusicLibraryFile;
-		static readonly string kCoverArtDirectory;
-		
-		static RhythmboxMusicItemSource () {
-			string home;
-			
-			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			kMusicLibraryFile = "~/.gnome2/rhythmbox/rhythmdb.xml".Replace("~", home);
-			kCoverArtDirectory = "~/.gnome2/rhythmbox/covers".Replace("~", home);
-		}
-		
 		List<IItem> items;
+		List<AlbumMusicItem> albums;
+		List<ArtistMusicItem> artists;
 		
 		public RhythmboxMusicItemSource ()
 		{
@@ -56,122 +47,53 @@ namespace Do.Addins.Rhythmbox
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof (MusicAlbumItem),
+					typeof (MusicItem),
+					typeof (BrowseMusicItem),
 				};
 			}
 		}
 		
 		public ICollection<IItem> Items { get { return items; } }
-		public ICollection<IItem> ChildrenOfItem (IItem item) { return null; }
+		
+		public ICollection<IItem> ChildrenOfItem (IItem parent) {
+			List<IItem> children;
+			
+			children = new List<IItem> ();
+			if (parent is ArtistMusicItem) {
+				foreach (AlbumMusicItem album in AllAlbumsBy (parent as ArtistMusicItem))
+					children.Add (album);
+			}
+			else if (parent is AlbumMusicItem) {
+				foreach (TrackMusicItem track in Rhythmbox.TracksFor (parent as AlbumMusicItem))
+					children.Add (track);
+			}
+			else if (parent is BrowseAlbumsMusicItem) {
+				foreach (AlbumMusicItem album in albums)
+					children.Add (album);
+			}
+			else if (parent is BrowseArtistsMusicItem) {
+				foreach (ArtistMusicItem album in artists)
+					children.Add (album);
+			}
+			return children;
+		}
 		
 		public void UpdateItems ()
 		{
-			XmlDocument db;
-			Dictionary<string, IItem> albums;
-			Dictionary<string, IItem> artists;
-			
 			items.Clear ();
-			db = new XmlDocument ();
-			albums = new Dictionary<string, IItem> ();
-			artists = new Dictionary<string, IItem> ();
-			try {
-				db.Load (kMusicLibraryFile);
-
-				foreach (XmlNode entry in db.GetElementsByTagName ("entry")) {
-					MusicAlbumItem album, artist_album;
-					string song_title, album_title, artist, year, cover;
-					string track_file;
-					
-					song_title = album_title = artist = year = cover = track_file = null;
-					if (entry.Attributes.GetNamedItem ("type").Value != "song") continue;
-					foreach (XmlNode song_attr in entry.ChildNodes) {
-						switch (song_attr.Name) {
-						case "title":
-							song_title = song_attr.InnerText;
-							break;
-						case "album":
-							album_title = song_attr.InnerText;
-							break;
-						case "artist":
-							artist = song_attr.InnerText;
-							break;
-						case "year":
-							year = song_attr.InnerText;
-							break;
-						case "location":
-							track_file = song_attr.InnerText;
-							break;
-						}
-					}
-					if (song_title == null || album_title == null) continue;
-					
-					cover = string.Format ("{0} - {1}.jpg", artist, album_title);
-					cover = Path.Combine (kCoverArtDirectory, cover);
-					if (!File.Exists (cover)) cover = null;
-					
-					if (!albums.ContainsKey (album_title)) {
-						albums[album_title] = new MusicAlbumItem (album_title, artist, year, cover);
-					}
-					if (!artists.ContainsKey (artist)) {
-						artists[artist] = new MusicAlbumItem (artist, "All music by " + artist, year, cover);
-					}
-					album = albums[album_title] as MusicAlbumItem;
-					artist_album = artists[artist] as MusicAlbumItem;
-					album.AddTrack (track_file);
-					artist_album.AddTrack (track_file);
-				}
-				items.AddRange (albums.Values);
-				items.AddRange (artists.Values);
-				
-			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
-			}
+			Rhythmbox.LoadAlbumsAndArtists (out albums, out artists);
+			foreach (IItem album in albums) items.Add (album);
+			foreach (IItem artist in artists) items.Add (artist);
 		}
 		
-		/*
-		ContactItem ContactItemFromBuddyXmlNode (XmlNode buddy_node)
+		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)
 		{
-			ContactItem buddy;
-			string proto, name, alias, icon;
+			// List<AlbumMusicItem> artist_albums;
 			
-			try {
-				name = alias = icon = null;
-				// The messaging protocol (e.g. "prpl-jabber" for Jabber).
-				proto = buddy_node.Attributes.GetNamedItem ("proto").Value;
-				foreach (XmlNode attr in buddy_node.ChildNodes) {
-					switch (attr.Name) {
-					// The screen name.
-					case "name":
-						name = attr.InnerText;
-						break;
-					// The alias, or real name.
-					case "alias":
-						alias = attr.InnerText;
-						break;
-					// Buddy icon image file.
-					case "setting":
-						if (attr.Attributes.GetNamedItem ("name").Value == "buddy_icon") {
-							icon = Path.Combine (kBuddyIconDirectory, attr.InnerText);
-						}
-						break;
-					}
-				}
-			} catch {
-				// Bad buddy.
-				return null;
-			}
-			// If crucial details are missing, we can't make a buddy.
-			if (name == null || proto == null) return null;
-			
-			// Create a new buddy, add the details we have.
-			buddy = new ContactItem ();
-			if (alias != null)
-					buddy.Name = alias;
-			if (icon != null)
-					buddy.Photo = icon;
-			AddScreenNameToContact (buddy, proto, name);
-			return buddy;
+			// artist_albums = new List<AlbumMusicItem> ();
+			return albums.FindAll (delegate (AlbumMusicItem album) {
+				return album.Artist == artist.Name;
+			});
 		}
-		*/
 	}
 }
