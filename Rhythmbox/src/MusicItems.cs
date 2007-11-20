@@ -47,14 +47,9 @@ namespace Do.Addins.Rhythmbox
 		public virtual string Description { get { return artist; } }
 		public virtual string Icon { get { return Cover ?? "gtk-cdrom"; } }
 		
-		public string Artist {
-			get { return artist; }
-		}
-		
-		public string Cover {
-			get { return cover; }
-			set { cover = value; }
-		}
+		public virtual string Artist { get { return artist; } }
+		public virtual string Year { get { return year; } }
+		public virtual string Cover { get { return cover; } }
 	
 	}
 	
@@ -75,23 +70,24 @@ namespace Do.Addins.Rhythmbox
 			this.cover = cover;
 		}
 		
-		public override string Name { get { return artist; } }
 		public override string Description { get { return string.Format ("All music by {0}", artist); } }
 	}
 	
-	public class TrackMusicItem : MusicItem
+	public class SongMusicItem : MusicItem
 	{
 		string file, album;
 		
-		public TrackMusicItem (string name, string artist, string album, string year, string cover, string file):
+		public SongMusicItem (string name, string artist, string album, string year, string cover, string file):
 			base (name, artist, year, cover)
 		{
 			this.file = file;
 			this.album = album;
-			this.cover = "gnome-mime-audio";
 		}
 		
-		public string File { get { return file; } }
+		public override string Icon { get { return "gnome-mime-audio"; } }
 		public override string Description { get { return string.Format ("{0} - {1}", artist, album); } }
+		
+		public virtual string File { get { return file; } }
+		public virtual string Album { get { return album; } }
 	}
 }

@@ -75,8 +75,8 @@ namespace Do.Addins.Rhythmbox
 					string enqueue;
 					
 					enqueue = "--no-present ";
-					foreach (TrackMusicItem track in Rhythmbox.TracksFor (item as MusicItem))
-						enqueue += string.Format ("--enqueue \"{0}\" ", track.File);
+					foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
+						enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
 					Rhythmbox.Client (enqueue);
 				}
 			}).Start ();

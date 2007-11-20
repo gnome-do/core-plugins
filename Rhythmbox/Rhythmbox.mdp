@@ -1,5 +1,5 @@
 <Project name="Rhythmbox" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <CustomCommands>
         <Command type="AfterBuild" command="cp ./bin/Debug/Rhythmbox.dll /home/dave/.do/addins" />
@@ -20,7 +20,6 @@
     <File name="./src" subtype="Directory" buildaction="Compile" />
     <File name="./src/Rhythmbox.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/RhythmboxItems.cs" subtype="Code" buildaction="Compile" />
-    <File name="./src/RhythmboxItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/RhythmboxPlayCommand.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/RhythmboxMusicItemSource.cs" subtype="Code" buildaction="Compile" />

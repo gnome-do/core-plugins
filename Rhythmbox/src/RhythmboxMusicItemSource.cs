@@ -49,6 +49,7 @@ namespace Do.Addins.Rhythmbox
 				return new Type[] {
 					typeof (MusicItem),
 					typeof (BrowseMusicItem),
+					typeof (ApplicationItem),
 				};
 			}
 		}
@@ -59,13 +60,18 @@ namespace Do.Addins.Rhythmbox
 			List<IItem> children;
 			
 			children = new List<IItem> ();
-			if (parent is ArtistMusicItem) {
+			if (parent is ApplicationItem && parent.Name == "Rhythmbox Music Player") {
+				children.Add (new BrowseAlbumsMusicItem ());
+				children.Add (new BrowseArtistsMusicItem ());
+				children.AddRange (RhythmboxRunnableItem.DefaultItems);
+			}
+			else if (parent is ArtistMusicItem) {
 				foreach (AlbumMusicItem album in AllAlbumsBy (parent as ArtistMusicItem))
 					children.Add (album);
 			}
 			else if (parent is AlbumMusicItem) {
-				foreach (TrackMusicItem track in Rhythmbox.TracksFor (parent as AlbumMusicItem))
-					children.Add (track);
+				foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (parent as AlbumMusicItem))
+					children.Add (song);
 			}
 			else if (parent is BrowseAlbumsMusicItem) {
 				foreach (AlbumMusicItem album in albums)
@@ -81,6 +87,7 @@ namespace Do.Addins.Rhythmbox
 		public void UpdateItems ()
 		{
 			items.Clear ();
+			items.AddRange (RhythmboxRunnableItem.DefaultItems);
 			Rhythmbox.LoadAlbumsAndArtists (out albums, out artists);
 			foreach (IItem album in albums) items.Add (album);
 			foreach (IItem artist in artists) items.Add (artist);
@@ -88,9 +95,6 @@ namespace Do.Addins.Rhythmbox
 		
 		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)
 		{
-			// List<AlbumMusicItem> artist_albums;
-			
-			// artist_albums = new List<AlbumMusicItem> ();
 			return albums.FindAll (delegate (AlbumMusicItem album) {
 				return album.Artist == artist.Name;
 			});
