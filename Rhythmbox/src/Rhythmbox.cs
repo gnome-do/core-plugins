@@ -50,9 +50,14 @@ namespace Do.Addins.Rhythmbox
 
 			albums = new Dictionary<string, AlbumMusicItem> ();
 			artists = new Dictionary<string, ArtistMusicItem> ();
-			foreach (SongMusicItem song in LoadAllSongs ()) {
-				albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);
-				artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
+			foreach (SongMusicItem song in LoadAllSongs ()) {	
+				// Don't let null covers replace non-null covers.
+				if (!artists.ContainsKey (song.Artist) || artists[song.Artist].Cover == null) {
+					artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
+				}
+				if (!albums.ContainsKey (song.Album) || albums[song.Album].Cover == null) {
+					albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);	
+				}
 			}
 			albums_out.AddRange (albums.Values);
 			artists_out.AddRange (artists.Values);

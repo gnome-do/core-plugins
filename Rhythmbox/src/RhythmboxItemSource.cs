@@ -87,7 +87,15 @@ namespace Do.Addins.Rhythmbox
 		public void UpdateItems ()
 		{
 			items.Clear ();
+			
+			// Add play, pause, etc. controls.
 			items.AddRange (RhythmboxRunnableItem.DefaultItems);
+			
+			// Add browse features.
+			items.Add (new BrowseAlbumsMusicItem ());
+			items.Add (new BrowseArtistsMusicItem ());
+			
+			// Add albums and artists.
 			Rhythmbox.LoadAlbumsAndArtists (out albums, out artists);
 			foreach (IItem album in albums) items.Add (album);
 			foreach (IItem artist in artists) items.Add (artist);
