@@ -22,9 +22,9 @@
     <File name="./src/RhythmboxItems.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/RhythmboxPlayCommand.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./src/RhythmboxMusicItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/MusicItems.cs" subtype="Code" buildaction="Compile" />
     <File name="./src/RhythmboxEnqueueCommand.cs" subtype="Code" buildaction="Compile" />
+    <File name="./src/RhythmboxItemSource.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=1.0.2857.21073, Culture=neutral" />
