@@ -28,23 +28,23 @@ namespace Do.Addins.Rhythmbox
 
 	public class RhythmboxEnqueueCommand : ICommand
 	{
-		
+
 		public RhythmboxEnqueueCommand ()
 		{
 		}
-		
+
 		public string Name {
 			get { return "Add to Play Queue"; }
 		}
-		
+
 		public string Description {
 			get { return "Add an item to Rhythmbox's play queue."; }
 		}
-		
+
 		public string Icon {
 			get { return "add"; }
 		}
-		
+
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
@@ -52,7 +52,7 @@ namespace Do.Addins.Rhythmbox
 				};
 			}
 		}
-		
+
 		public Type[] SupportedModifierItemTypes {
 			get { return null; }
 		}
@@ -60,26 +60,26 @@ namespace Do.Addins.Rhythmbox
 		public bool SupportsItem (IItem item) {
 			return true;
 		}
-		
+
 		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
 		{
 			return false;
 		}
-		
+
 		public void Perform (IItem[] items, IItem[] modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.StartIfNeccessary ();
-				
-				foreach (IItem item in items) {
+					Rhythmbox.StartIfNeccessary ();
+
+					foreach (IItem item in items) {
 					string enqueue;
-					
+
 					enqueue = "--no-present ";
 					foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
-						enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
+					enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
 					Rhythmbox.Client (enqueue);
-				}
-			}).Start ();
+					}
+					}).Start ();
 		}
 	}
 }

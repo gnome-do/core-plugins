@@ -28,23 +28,23 @@ namespace Do.Addins.Rhythmbox
 
 	public class RhythmboxPlayCommand : ICommand
 	{
-		
+
 		public RhythmboxPlayCommand ()
 		{
 		}
-		
+
 		public string Name {
 			get { return "Play"; }
 		}
-		
+
 		public string Description {
 			get { return "Play an item in Rhythmbox."; }
 		}
-		
+
 		public string Icon {
 			get { return "rhythmbox"; }
 		}
-		
+
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
@@ -52,7 +52,7 @@ namespace Do.Addins.Rhythmbox
 				};
 			}
 		}
-		
+
 		public Type[] SupportedModifierItemTypes {
 			get { return null; }
 		}
@@ -60,28 +60,28 @@ namespace Do.Addins.Rhythmbox
 		public bool SupportsItem (IItem item) {
 			return true;
 		}
-		
+
 		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
 		{
 			return false;
 		}
-		
+
 		public void Perform (IItem[] items, IItem[] modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.StartIfNeccessary ();
-				
-				Rhythmbox.Client ("--clear-queue --no-present", true);
-				foreach (IItem item in items) {
+					Rhythmbox.StartIfNeccessary ();
+
+					Rhythmbox.Client ("--clear-queue --no-present", true);
+					foreach (IItem item in items) {
 					string enqueue;
-					
+
 					enqueue = "--no-present ";
 					foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
-						enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
+					enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
 					Rhythmbox.Client (enqueue, true);
-				}
-				Rhythmbox.Client ("--next --play --no-present");
-			}).Start ();
+					}
+					Rhythmbox.Client ("--next --play --no-present");
+					}).Start ();
 		}
 	}
 }

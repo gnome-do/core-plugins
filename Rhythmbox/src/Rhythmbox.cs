@@ -25,26 +25,26 @@ using System.Collections.Generic;
 
 namespace Do.Addins.Rhythmbox
 {
-	
+
 	public class Rhythmbox
 	{
 		static readonly string kMusicLibraryFile;
 		static readonly string kCoverArtDirectory;
-		
+
 		static Rhythmbox ()
 		{
 			string home;
-			
+
 			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			kMusicLibraryFile = "~/.gnome2/rhythmbox/rhythmdb.xml".Replace("~", home);
 			kCoverArtDirectory = "~/.gnome2/rhythmbox/covers".Replace("~", home);
 		}
-		
+
 		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out)
 		{
 			Dictionary<string, AlbumMusicItem> albums;
 			Dictionary<string, ArtistMusicItem> artists;
-			
+
 			albums_out = new List<AlbumMusicItem> ();
 			artists_out = new List<ArtistMusicItem> ();
 
@@ -62,25 +62,25 @@ namespace Do.Addins.Rhythmbox
 			albums_out.AddRange (albums.Values);
 			artists_out.AddRange (artists.Values);
 		}
-		
+
 		public static List<SongMusicItem> LoadSongsFor (MusicItem item)
 		{
 			SortedList<string, SongMusicItem> songs;
-			
+
 			if (item is SongMusicItem) {
 				List<SongMusicItem> single = new List<SongMusicItem> ();
 				single.Add (item as SongMusicItem);
 				return single;
 			}
-			
+
 			songs = new SortedList<string, SongMusicItem> ();
 			foreach (SongMusicItem song in LoadAllSongs ()) {
 				switch (item.GetType ().Name) {
-				case "AlbumMusicItem":
-					if (item.Name != song.Album) continue;
+					case "AlbumMusicItem":
+						if (item.Name != song.Album) continue;
 					break;
-				case "ArtistMusicItem":
-					if (item.Name != song.Artist) continue;
+					case "ArtistMusicItem":
+						if (item.Name != song.Artist) continue;
 					break;
 				}
 				try {
@@ -89,12 +89,12 @@ namespace Do.Addins.Rhythmbox
 			}
 			return new List<SongMusicItem> (songs.Values);
 		}
-		
+
 		public static List<SongMusicItem> LoadAllSongs ()
 		{
 			XmlDocument db;
 			List<SongMusicItem> songs;
-			
+
 			db = new XmlDocument ();
 			songs = new List<SongMusicItem> ();
 			try {
@@ -102,34 +102,34 @@ namespace Do.Addins.Rhythmbox
 				foreach (XmlNode entry in db.GetElementsByTagName ("entry")) {
 					SongMusicItem song;
 					string song_file, song_name, album_name, artist_name, year, cover;
-					
+
 					song_file = song_name = album_name = artist_name = year = cover = null;
 					if (entry.Attributes.GetNamedItem ("type").Value != "song") continue;
 					foreach (XmlNode song_attr in entry.ChildNodes) {
 						switch (song_attr.Name) {
-						case "title":
-							song_name = song_attr.InnerText;
+							case "title":
+								song_name = song_attr.InnerText;
 							break;
-						case "album":
-							album_name = song_attr.InnerText;
+							case "album":
+								album_name = song_attr.InnerText;
 							break;
-						case "artist":
-							artist_name = song_attr.InnerText;
+							case "artist":
+								artist_name = song_attr.InnerText;
 							break;
-						case "year":
-							year = song_attr.InnerText;
+							case "year":
+								year = song_attr.InnerText;
 							break;
-						case "location":
-							song_file = song_attr.InnerText;
+							case "location":
+								song_file = song_attr.InnerText;
 							break;
 						}
 					}
 					if (song_name == null) continue;
-					
+
 					cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
 					cover = Path.Combine (kCoverArtDirectory, cover);
 					if (!File.Exists (cover)) cover = null;
-						
+
 					song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
 					songs.Add (song);
 				}
@@ -138,7 +138,7 @@ namespace Do.Addins.Rhythmbox
 			}
 			return songs;
 		}
-		
+
 		public static void StartIfNeccessary ()
 		{
 			if (!InstanceIsRunning)
@@ -147,12 +147,12 @@ namespace Do.Addins.Rhythmbox
 				System.Threading.Thread.Sleep (3 * 1000);
 			}
 		}
-		
+
 		public static bool InstanceIsRunning
 		{
 			get {
 				Process pidof;
-				
+
 				try {
 					// Use pidof command to look for Rhythmbox process. Exit
 					// status is 0 if at least one matching process is found.
@@ -165,12 +165,12 @@ namespace Do.Addins.Rhythmbox
 				}
 			}
 		}
-		
+
 		public static void Client (string command)
 		{
 			Client (command, false);
 		}
-		
+
 		public static void Client (string command, bool wait)
 		{
 			Process client;

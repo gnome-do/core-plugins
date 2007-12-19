@@ -25,15 +25,15 @@ using Do.Universe;
 
 namespace Do.Addins.Rhythmbox
 {
-	
+
 	public abstract class MusicItem : IItem
 	{
 		protected string name, artist, year, cover;
-		
+
 		public MusicItem ()
 		{
 		}
-		
+
 		public MusicItem (string name, string artist, string year, string cover):
 			this ()
 		{
@@ -42,17 +42,17 @@ namespace Do.Addins.Rhythmbox
 			this.year = year;
 			this.cover = cover;
 		}
-		
+
 		public virtual string Name { get { return name; } }
 		public virtual string Description { get { return artist; } }
 		public virtual string Icon { get { return Cover ?? "gtk-cdrom"; } }
-		
+
 		public virtual string Artist { get { return artist; } }
 		public virtual string Year { get { return year; } }
 		public virtual string Cover { get { return cover; } }
-	
+
 	}
-	
+
 	public class AlbumMusicItem : MusicItem
 	{
 		public AlbumMusicItem (string name, string artist, string year, string cover):
@@ -60,7 +60,7 @@ namespace Do.Addins.Rhythmbox
 		{
 		}
 	}
-	
+
 	public class ArtistMusicItem : MusicItem
 	{
 		public ArtistMusicItem (string artist, string cover):
@@ -69,24 +69,34 @@ namespace Do.Addins.Rhythmbox
 			this.artist = this.name = artist;
 			this.cover = cover;
 		}
-		
-		public override string Description { get { return string.Format ("All music by {0}", artist); } }
+
+		public override string Description
+		{
+			get {
+				return string.Format ("All music by {0}", artist);
+			}
+		}
 	}
-	
+
 	public class SongMusicItem : MusicItem
 	{
 		string file, album;
-		
+
 		public SongMusicItem (string name, string artist, string album, string year, string cover, string file):
 			base (name, artist, year, cover)
 		{
 			this.file = file;
 			this.album = album;
 		}
-		
+
 		public override string Icon { get { return "gnome-mime-audio"; } }
-		public override string Description { get { return string.Format ("{0} - {1}", artist, album); } }
-		
+		public override string Description
+		{
+			get {
+				return string.Format ("{0} - {1}", artist, album);
+			}
+		}
+
 		public virtual string File { get { return file; } }
 		public virtual string Album { get { return album; } }
 	}

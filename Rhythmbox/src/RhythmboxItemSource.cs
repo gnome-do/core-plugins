@@ -27,19 +27,19 @@ using Do.Universe;
 
 namespace Do.Addins.Rhythmbox
 {
-	
+
 	public class RhythmboxMusicItemSource : IItemSource
 	{
 		List<IItem> items;
 		List<AlbumMusicItem> albums;
 		List<ArtistMusicItem> artists;
-		
+
 		public RhythmboxMusicItemSource ()
 		{
 			items = new List<IItem> ();
 			UpdateItems ();
 		}
-		
+
 		public string Name { get { return "Rhythmbox Music"; } }
 		public string Description { get { return "Provides access to artists and albums from Rhythmbox."; } }
 		public string Icon { get { return "rhythmbox"; } }
@@ -53,12 +53,12 @@ namespace Do.Addins.Rhythmbox
 				};
 			}
 		}
-		
+
 		public ICollection<IItem> Items { get { return items; } }
-		
+
 		public ICollection<IItem> ChildrenOfItem (IItem parent) {
 			List<IItem> children;
-			
+
 			children = new List<IItem> ();
 			if (parent is ApplicationItem && parent.Name == "Rhythmbox Music Player") {
 				children.Add (new BrowseAlbumsMusicItem ());
@@ -83,29 +83,29 @@ namespace Do.Addins.Rhythmbox
 			}
 			return children;
 		}
-		
+
 		public void UpdateItems ()
 		{
 			items.Clear ();
-			
+
 			// Add play, pause, etc. controls.
 			items.AddRange (RhythmboxRunnableItem.DefaultItems);
-			
+
 			// Add browse features.
 			items.Add (new BrowseAlbumsMusicItem ());
 			items.Add (new BrowseArtistsMusicItem ());
-			
+
 			// Add albums and artists.
 			Rhythmbox.LoadAlbumsAndArtists (out albums, out artists);
 			foreach (IItem album in albums) items.Add (album);
 			foreach (IItem artist in artists) items.Add (artist);
 		}
-		
+
 		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)
 		{
 			return albums.FindAll (delegate (AlbumMusicItem album) {
-				return album.Artist == artist.Name;
-			});
+					return album.Artist == artist.Name;
+					});
 		}
 	}
 }

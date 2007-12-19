@@ -26,22 +26,22 @@ using Do.Universe;
 
 namespace Do.Addins.Rhythmbox
 {
-	
+
 	class BrowseMusicItem: IItem
 	{
 		string name, description;
-		
+
 		public BrowseMusicItem (string name, string description)
 		{
 			this.name = name;
 			this.description = description;
 		}
-		
+
 		public string Name { get { return name; } }
 		public string Description { get { return description; } }
 		public string Icon { get { return "gtk-cdrom"; } }
 	}
-	
+
 	class BrowseArtistsMusicItem : BrowseMusicItem
 	{
 		public BrowseArtistsMusicItem ():
@@ -49,7 +49,7 @@ namespace Do.Addins.Rhythmbox
 		{
 		}
 	}
-	
+
 	class BrowseAlbumsMusicItem : BrowseMusicItem
 	{
 		public BrowseAlbumsMusicItem ():
@@ -61,56 +61,56 @@ namespace Do.Addins.Rhythmbox
 	public class RhythmboxRunnableItem : IRunnableItem
 	{
 		public static readonly RhythmboxRunnableItem[] DefaultItems =
-		  new RhythmboxRunnableItem[] {
-			
-			new RhythmboxRunnableItem ("Play",
-		                               "Play Current Track in Rhythmbox",
-			                           "player_play",
-			                           "--play"),
-			
-			new RhythmboxRunnableItem ("Pause",
-			                           "Pause Rhythmbox Playback",
-			                           "player_pause",
-			                           "--play-pause"),
-			
-			new RhythmboxRunnableItem ("Next",
-			                           "Play Next Track in Rhythmbox",
-			                           "player_end",
-			                           "--next"),
-			
-			new RhythmboxRunnableItem ("Previous",
-			                           "Play Previous Track in Rhythmbox",
-			                           "player_start",
-			                           "--previous"),
-			
-			new RhythmboxRunnableItem ("Show Current Track",
-			                           "Show Notification of Current Track in Rhythmbox",
-			                           "gnome-mime-audio",
-			                           "--notify"),
-			
-			new RhythmboxRunnableItem ("Mute",
-			                           "Mute Rhythmbox Playback",
-			                           "audio-volume-muted",
-			                           "--mute"),
-			
-			new RhythmboxRunnableItem ("Unmute",
-			                           "Unmute Rhythmbox Playback",
-			                           "audio-volume-high",
-			                           "--unmute"),
-			
-			new RhythmboxRunnableItem ("Volume Up",
-			                           "Increase Rhythmbox Playback Volume",
-			                           "audio-volume-high",
-			                           "--volume-up"),
-			
-			new RhythmboxRunnableItem ("Volume Down",
-			                           "Decrease Rhythmbox Playback Volume",
-			                           "audio-volume-low",
-			                           "--volume-down"),
-		};
-		
+			new RhythmboxRunnableItem[] {
+
+				new RhythmboxRunnableItem ("Play",
+						"Play Current Track in Rhythmbox",
+						"player_play",
+						"--play"),
+
+				new RhythmboxRunnableItem ("Pause",
+						"Pause Rhythmbox Playback",
+						"player_pause",
+						"--play-pause"),
+
+				new RhythmboxRunnableItem ("Next",
+						"Play Next Track in Rhythmbox",
+						"player_end",
+						"--next"),
+
+				new RhythmboxRunnableItem ("Previous",
+						"Play Previous Track in Rhythmbox",
+						"player_start",
+						"--previous"),
+
+				new RhythmboxRunnableItem ("Show Current Track",
+						"Show Notification of Current Track in Rhythmbox",
+						"gnome-mime-audio",
+						"--notify"),
+
+				new RhythmboxRunnableItem ("Mute",
+						"Mute Rhythmbox Playback",
+						"audio-volume-muted",
+						"--mute"),
+
+				new RhythmboxRunnableItem ("Unmute",
+						"Unmute Rhythmbox Playback",
+						"audio-volume-high",
+						"--unmute"),
+
+				new RhythmboxRunnableItem ("Volume Up",
+						"Increase Rhythmbox Playback Volume",
+						"audio-volume-high",
+						"--volume-up"),
+
+				new RhythmboxRunnableItem ("Volume Down",
+						"Decrease Rhythmbox Playback Volume",
+						"audio-volume-low",
+						"--volume-down"),
+			};
+
 		string name, description, icon, command;
-		
+
 		public RhythmboxRunnableItem (string name, string description, string icon, string command)
 		{
 			this.name = name;
@@ -118,18 +118,18 @@ namespace Do.Addins.Rhythmbox
 			this.icon = icon;
 			this.command = command;
 		}
-		
+
 		public string Name { get { return name; } }
 		public string Description { get { return description; } }
 		public string Icon { get { return icon; } }
-		
+
 		public void Run ()
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.StartIfNeccessary ();
-				Rhythmbox.Client (command);
-			}).Start ();
+					Rhythmbox.StartIfNeccessary ();
+					Rhythmbox.Client (command);
+					}).Start ();
 		}
-		
+
 	}
 }
