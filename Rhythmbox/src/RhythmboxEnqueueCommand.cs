@@ -69,17 +69,19 @@ namespace Do.Addins.Rhythmbox
 		public void Perform (IItem[] items, IItem[] modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-					Rhythmbox.StartIfNeccessary ();
+				Rhythmbox.StartIfNeccessary ();
 
-					foreach (IItem item in items) {
+				foreach (IItem item in items) {
 					string enqueue;
 
 					enqueue = "--no-present ";
-					foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
-					enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
-					Rhythmbox.Client (enqueue);
+					foreach (SongMusicItem song in
+						Rhythmbox.LoadSongsFor (item as MusicItem)) {
+						enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
 					}
-					}).Start ();
+					Rhythmbox.Client (enqueue);
+				}
+			}).Start ();
 		}
 	}
 }

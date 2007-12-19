@@ -104,8 +104,8 @@ namespace Do.Addins.Rhythmbox
 		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)
 		{
 			return albums.FindAll (delegate (AlbumMusicItem album) {
-					return album.Artist == artist.Name;
-					});
+				return album.Artist == artist.Name;
+			});
 		}
 	}
 }
