@@ -1,23 +1,21 @@
 <CombineEntry name="Packages" fileversion="2.0" ctype="PackagingProject">
   <Packages>
-    <Package name="Tarball">
-      <Builder rootEntry="./Do Addins.mds" TargetDirectory="/home/dave/src/do-addins" DefaultConfiguration="Debug" ctype="TarballDeployTarget">
+    <Package name="Binaries">
+      <Builder rootEntry="./DoPlugins.mds" targetFile="./DoPlugins.tar.gz" platform="Linux" ctype="BinariesZipPackageBuilder">
         <ChildEntries>
-          <Entry>./Evolution/Evolution.mdp</Entry>
           <Entry>./Thunderbird/Thunderbird.mdp</Entry>
-          <Entry>./Pidgin/Pidgin.mdp</Entry>
-          <Entry>./Rhythmbox/Rhythmbox.mdp</Entry>
-        </ChildEntries>
-      </Builder>
-    </Package>
-    <Package name="Linux Binaries">
-      <Builder rootEntry="./Do Addins.mds" targetFile="./Do Addins.tar.gz" platform="Linux" ctype="BinariesZipPackageBuilder">
-        <ChildEntries>
           <Entry>./Evolution/Evolution.mdp</Entry>
-          <Entry>./Thunderbird/Thunderbird.mdp</Entry>
-          <Entry>./Pidgin/Pidgin.mdp</Entry>
           <Entry>./Rhythmbox/Rhythmbox.mdp</Entry>
+          <Entry>./Pidgin/Pidgin.mdp</Entry>
+          <Entry>./LocateFiles/LocateFiles.mdp</Entry>
         </ChildEntries>
+        <ExcludedFiles>
+          <File>Evolution,Linux.PkgConfig,evolution.pc</File>
+          <File>Pidgin,Linux.PkgConfig,pidgin.pc</File>
+          <File>Rhythmbox,Linux.PkgConfig,rhythmbox.pc</File>
+          <File>Thunderbird,Linux.PkgConfig,thunderbird.pc</File>
+          <File>LocateFiles,Linux.PkgConfig,locatefiles.pc</File>
+        </ExcludedFiles>
       </Builder>
     </Package>
   </Packages>
