@@ -27,38 +27,34 @@ using Do.Universe;
 namespace Do.Addins.Pidgin
 {
 	
-	public class PidginChatCommand : ICommand
+	public class PidginChatCommand : AbstractCommand
 	{
 		
 		public PidginChatCommand ()
 		{
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return "Chat"; }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return "Send an instant message to a friend."; }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "internet-group-chat"; }
 		}
 		
-		public Type[] SupportedItemTypes {
+		public override Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ContactItem),
 				};
 			}
 		}
-		
-		public Type[] SupportedModifierItemTypes {
-			get { return null; }
-		}
 
-		public bool SupportsItem (IItem item)
+		public override bool SupportsItem (IItem item)
 		{
 			bool has_im;
 			ContactItem c;
@@ -69,12 +65,7 @@ namespace Do.Addins.Pidgin
 			return has_im;
 		}
 		
-		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
-		{
-			return false;
-		}
-		
-		public void Perform (IItem[] items, IItem[] modifierItems)
+		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
 			string protocol, screenname, dbus_instruction;
 			ContactItem c;
@@ -101,6 +92,7 @@ namespace Do.Addins.Pidgin
 					}).Start ();
 				}
 			}
+			return null;
 		}
 		
 	}

@@ -26,26 +26,26 @@ using Do.Universe;
 namespace Do.Addins.Rhythmbox
 {
 
-	public class RhythmboxPlayCommand : ICommand
+	public class RhythmboxPlayCommand : AbstractCommand
 	{
 
 		public RhythmboxPlayCommand ()
 		{
 		}
 
-		public string Name {
+		public override string Name {
 			get { return "Play"; }
 		}
 
-		public string Description {
+		public override string Description {
 			get { return "Play an item in Rhythmbox."; }
 		}
 
-		public string Icon {
+		public override string Icon {
 			get { return "rhythmbox"; }
 		}
 
-		public Type[] SupportedItemTypes {
+		public override Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (MusicItem),
@@ -53,20 +53,7 @@ namespace Do.Addins.Rhythmbox
 			}
 		}
 
-		public Type[] SupportedModifierItemTypes {
-			get { return null; }
-		}
-
-		public bool SupportsItem (IItem item) {
-			return true;
-		}
-
-		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
-		{
-			return false;
-		}
-
-		public void Perform (IItem[] items, IItem[] modifierItems)
+		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Rhythmbox.StartIfNeccessary ();
@@ -82,6 +69,7 @@ namespace Do.Addins.Rhythmbox
 				Rhythmbox.Client ("--next --no-present");
 				Rhythmbox.Client ("--play --no-present");
 			}).Start ();
+			return null;
 		}
 	}
 }
