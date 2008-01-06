@@ -33,10 +33,12 @@ namespace Do.Addins.Evolution
 	{
 		
 		List<IItem> contacts;
+		List<string> pictureFiles;
 		
 		public EvolutionContactItemSource ()
 		{
 			contacts = new List<IItem> ();
+			pictureFiles = new List<string> ();
 			UpdateItems ();
 		}
 		
@@ -76,6 +78,15 @@ namespace Do.Addins.Evolution
 			SourceList sources;
 		
 			contacts.Clear ();
+			// Clear the temporary contact picture files.
+			foreach (string file in pictureFiles) {
+				try {
+					File.Delete (file);
+				} catch {
+				}
+			}
+			pictureFiles.Clear ();
+			
 			sources = new SourceList ("/apps/evolution/addressbook/sources");
 			foreach (SourceGroup group in sources.Groups)
 			foreach (Source source in group.Sources) {
@@ -117,9 +128,14 @@ namespace Do.Addins.Evolution
 			
 			switch (e_contact.Photo.PhotoType) {
 			case ContactPhotoType.Inlined:
-				contact.Photo = Path.GetTempFileName () + ".jpg";
+				string tmp = Path.GetTempFileName ();
+				contact.Photo = tmp  + ".jpg";
+				try {
+					File.Delete (tmp);
+				} catch { }
 				try {
 					File.WriteAllBytes (contact.Photo, e_contact.Photo.Data);
+					pictureFiles.Add (contact.Photo);
 				} catch {
 					contact.Photo = null;
 				}
