@@ -45,6 +45,14 @@ AC_SUBST(DO_ADDINS_LIBS)
 AC_SUBST(DO_DBUS_LIBS)
 AC_SUBST(EVOLUTION_LIBS)
 
+dnl Plugin install paths
+
+AC_ARG_WITH(plugin-path, [  --with-plugin-path=DIR  [libdir/gnome-do/plugins] ],
+			 [plugin_path="$withval"], 
+			 [plugin_path="$libdir/gnome-do/plugins"])
+
+AC_SUBST(plugin_path)
+
 CSFLAGS=
 
 AC_SUBST(CSFLAGS)

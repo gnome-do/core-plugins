@@ -1,5 +1,7 @@
 SUBDIRS=src
 
+EXTRA_DIST=Evolution.mdp
+
 ASSEMBLY_NAME=Evolution
 ASSEMBLY=$(ASSEMBLY_NAME).dll
 
@@ -17,3 +19,10 @@ all: $(ASSEMBLY)
 
 $(ASSEMBLY): $(evolution_sources)
 	$(CSC) $(CSFLAGS) $(evolution_references) -target:library -out:$@ $(evolution_sources)
+
+install-exec-local: $(ASSEMBLY)
+	mkdir -p $(plugin_path)
+	install -m 644 $(ASSEMBLY) $(plugin_path)
+
+uninstall-local:
+	rm $(plugin_path)/$(ASSEMBLY)
