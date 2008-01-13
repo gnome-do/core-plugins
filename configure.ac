@@ -65,10 +65,10 @@ AC_CONFIG_FILES([
 	Rhythmbox/src/Makefile
 	Pidgin/Makefile
 	Pidgin/src/Makefile
+	LocateFiles/Makefile
 ])
 
 AC_OUTPUT
 
-dnl	LocateFiles/Makefile
 dnl	Thunderbird/Makefile
 dnl	Templates/Makefile
