@@ -9,16 +9,18 @@ CSFLAGS+= -debug+ -debug:full
 
 CLEANFILES = $(ASSEMBLY){,.mdb}
 
-evolution_references = $(DO_ADDINS_LIBS) $(DO_DBUS_LIBS) $(EVOLUTION_LIBS)
+evolution_references = $(DO_ADDINS_LIBS) $(EVOLUTION_SHARP_LIBS)
 
 evolution_sources  = 	\
-			src/AssemblyInfo.cs \
-			src/EvolutionContactItemSource.cs
+			AssemblyInfo.cs \
+			EvolutionContactItemSource.cs
+
+evolution_build_sources = $(addprefix $(srcdir)/src/, $(evolution_sources))
 
 all: $(ASSEMBLY)
 
-$(ASSEMBLY): $(evolution_sources)
-	$(CSC) $(CSFLAGS) $(evolution_references) -target:library -out:$@ $(evolution_sources)
+$(ASSEMBLY): $(evolution_build_sources)
+	$(CSC) $(CSFLAGS) $(evolution_references) -target:library -out:$@ $(evolution_build_sources)
 
 install-exec-local: $(ASSEMBLY)
 	mkdir -p $(plugin_path)

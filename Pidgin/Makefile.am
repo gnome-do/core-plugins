@@ -13,15 +13,17 @@ CLEANFILES = $(ASSEMBLY){,.mdb}
 pidgin_references = $(DO_ADDINS_LIBS)
 
 pidgin_sources  = 	\
-			src/AssemblyInfo.cs \
-			src/PidginChatCommand.cs \
-			src/PidginContactItemSource.cs \
-			src/Pidgin.cs
+			AssemblyInfo.cs \
+			PidginChatCommand.cs \
+			PidginContactItemSource.cs \
+			Pidgin.cs
+
+pidgin_build_sources = $(addprefix $(srcdir)/src/, $(pidgin_sources))
 
 all: $(ASSEMBLY)
 
-$(ASSEMBLY): $(pidgin_sources)
-	$(CSC) $(CSFLAGS) $(pidgin_references) -target:library -out:$@ $(pidgin_sources)
+$(ASSEMBLY): $(pidgin_build_sources)
+	$(CSC) $(CSFLAGS) $(pidgin_references) -target:library -out:$@ $(pidgin_build_sources)
 
 install-exec-local: $(ASSEMBLY)
 	mkdir -p $(plugin_path)

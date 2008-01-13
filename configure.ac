@@ -39,11 +39,11 @@ dnl - Check dependencies
 
 PKG_CHECK_MODULES([DO_ADDINS], [do.addins])
 PKG_CHECK_MODULES([DO_DBUS], [do.dbus])
-PKG_CHECK_MODULES([EVOLUTION], [evolution-sharp])
+PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
 
 AC_SUBST(DO_ADDINS_LIBS)
 AC_SUBST(DO_DBUS_LIBS)
-AC_SUBST(EVOLUTION_LIBS)
+AC_SUBST(EVOLUTION_SHARP_LIBS)
 
 dnl Plugin install paths
 

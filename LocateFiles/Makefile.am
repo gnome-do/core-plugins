@@ -1,6 +1,6 @@
 ASSEMBLY_NAME=LocateFiles
 
-EXTRA_DIST=$(ASSEMBLY_NAME).mdp
+EXTRA_DIST=$(ASSEMBLY_NAME).mdp AssemblyInfo.cs LocateFilesCommand.cs
 
 ASSEMBLY=$(ASSEMBLY_NAME).dll
 
@@ -14,10 +14,12 @@ locate_files_sources =	\
 			AssemblyInfo.cs \
 			LocateFilesCommand.cs
 
+locate_files_build_sources = $(addprefix $(srcdir)/, $(locate_files_sources))
+
 all: $(ASSEMBLY)
 
-$(ASSEMBLY): $(locate_files_sources)
-	$(CSC) $(CSFLAGS) $(locate_files_references) -target:library -out:$@ $(locate_files_sources)
+$(ASSEMBLY): $(locate_files_build_sources)
+	$(CSC) $(CSFLAGS) $(locate_files_references) -target:library -out:$@ $(locate_files_build_sources)
 
 install-exec-local: $(ASSEMBLY)
 	mkdir -p $(plugin_path)
