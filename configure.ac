@@ -61,12 +61,13 @@ AC_CONFIG_FILES([
 	Makefile
 	Evolution/Makefile
 	Evolution/src/Makefile
+	Rhythmbox/Makefile
+	Rhythmbox/src/Makefile
 ])
 
 AC_OUTPUT
 
 dnl	LocateFiles/Makefile
 dnl	Pidgin/Makefile
-dnl	Phythmbox/Makefile
 dnl	Thunderbird/Makefile
 dnl	Templates/Makefile
