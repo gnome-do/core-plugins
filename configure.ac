@@ -66,9 +66,10 @@ AC_CONFIG_FILES([
 	Pidgin/Makefile
 	Pidgin/src/Makefile
 	LocateFiles/Makefile
+	Thunderbird/Makefile
+	Thunderbird/src/Makefile
 ])
 
 AC_OUTPUT
 
-dnl	Thunderbird/Makefile
 dnl	Templates/Makefile
