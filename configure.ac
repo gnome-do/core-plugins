@@ -68,8 +68,7 @@ AC_CONFIG_FILES([
 	LocateFiles/Makefile
 	Thunderbird/Makefile
 	Thunderbird/src/Makefile
+	Templates/Makefile
 ])
 
 AC_OUTPUT
-
-dnl	Templates/Makefile
