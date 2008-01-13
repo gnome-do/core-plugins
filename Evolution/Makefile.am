@@ -7,7 +7,7 @@ ASSEMBLY=$(ASSEMBLY_NAME).dll
 
 CSFLAGS+= -debug+ -debug:full
 
-CLEANFILES = $(ASSEMBLY_NAME).*
+CLEANFILES = $(ASSEMBLY){,.mdb}
 
 evolution_references = $(DO_ADDINS_LIBS) $(DO_DBUS_LIBS) $(EVOLUTION_LIBS)
 
