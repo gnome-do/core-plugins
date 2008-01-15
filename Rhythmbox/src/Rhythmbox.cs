@@ -96,8 +96,7 @@ namespace Do.Addins.Rhythmbox
 			songs = new List<SongMusicItem> ();
 			try {
 				using (XmlReader reader = XmlReader.Create (MusicLibraryFile)) {
-					reader.ReadToFollowing ("entry");
-				    do {
+					while (reader.ReadToFollowing ("entry")) {
 						SongMusicItem song;
 						string song_file, song_name, album_name, artist_name, year, cover;
 						
@@ -105,21 +104,20 @@ namespace Do.Addins.Rhythmbox
 							reader.ReadToFollowing ("entry");
 							continue;
 						}
-						reader.Read ();
-						
-						reader.ReadToNextSibling ("title");
+
+						reader.ReadToFollowing ("title");
 						song_name = reader.ReadString ();						
 						
-						reader.ReadToNextSibling ("artist");
+						reader.ReadToFollowing ("artist");
 						artist_name = reader.ReadString ();	
 						
-						reader.ReadToNextSibling ("album");
+						reader.ReadToFollowing ("album");
 						album_name = reader.ReadString ();
 						
-						reader.ReadToNextSibling ("location");
+						reader.ReadToFollowing ("location");
 						song_file = reader.ReadString ();
 						
-						reader.ReadToNextSibling ("date");
+						reader.ReadToFollowing ("date");
 						year = reader.ReadString ();
 				
 						cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
@@ -128,7 +126,7 @@ namespace Do.Addins.Rhythmbox
 
 						song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
 						songs.Add (song);
-				    } while (reader.ReadToNextSibling ("entry"));
+					}
 					reader.Close ();
 				}
 			} catch (Exception e) {
