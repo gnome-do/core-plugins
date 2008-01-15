@@ -26,18 +26,17 @@ using System.Collections.Generic;
 namespace Do.Addins.Rhythmbox
 {
 
-	public class Rhythmbox
+	public static class Rhythmbox
 	{
-		static readonly string kMusicLibraryFile;
-		static readonly string kCoverArtDirectory;
+		static readonly string MusicLibraryFile;
+		static readonly string CoverArtDirectory;
 
 		static Rhythmbox ()
 		{
 			string home;
-
 			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			kMusicLibraryFile = "~/.gnome2/rhythmbox/rhythmdb.xml".Replace("~", home);
-			kCoverArtDirectory = "~/.gnome2/rhythmbox/covers".Replace("~", home);
+			MusicLibraryFile = "~/.gnome2/rhythmbox/rhythmdb.xml".Replace("~", home);
+			CoverArtDirectory = "~/.gnome2/rhythmbox/covers".Replace("~", home);
 		}
 
 		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out)
@@ -92,46 +91,45 @@ namespace Do.Addins.Rhythmbox
 
 		public static List<SongMusicItem> LoadAllSongs ()
 		{
-			XmlDocument db;
 			List<SongMusicItem> songs;
 
-			db = new XmlDocument ();
 			songs = new List<SongMusicItem> ();
 			try {
-				db.Load (kMusicLibraryFile);
-				foreach (XmlNode entry in db.GetElementsByTagName ("entry")) {
-					SongMusicItem song;
-					string song_file, song_name, album_name, artist_name, year, cover;
-
-					song_file = song_name = album_name = artist_name = year = cover = null;
-					if (entry.Attributes.GetNamedItem ("type").Value != "song") continue;
-					foreach (XmlNode song_attr in entry.ChildNodes) {
-						switch (song_attr.Name) {
-							case "title":
-								song_name = song_attr.InnerText;
-							break;
-							case "album":
-								album_name = song_attr.InnerText;
-							break;
-							case "artist":
-								artist_name = song_attr.InnerText;
-							break;
-							case "year":
-								year = song_attr.InnerText;
-							break;
-							case "location":
-								song_file = song_attr.InnerText;
-							break;
+				using (XmlReader reader = XmlReader.Create (MusicLibraryFile)) {
+					reader.ReadToFollowing ("entry");
+				    do {
+						SongMusicItem song;
+						string song_file, song_name, album_name, artist_name, year, cover;
+						
+						if (reader.GetAttribute ("type") != "song") {
+							reader.ReadToFollowing ("entry");
+							continue;
 						}
-					}
-					if (song_name == null) continue;
+						reader.Read ();
+						
+						reader.ReadToNextSibling ("title");
+						song_name = reader.ReadString ();						
+						
+						reader.ReadToNextSibling ("artist");
+						artist_name = reader.ReadString ();	
+						
+						reader.ReadToNextSibling ("album");
+						album_name = reader.ReadString ();
+						
+						reader.ReadToNextSibling ("location");
+						song_file = reader.ReadString ();
+						
+						reader.ReadToNextSibling ("date");
+						year = reader.ReadString ();
+				
+						cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
+						cover = Path.Combine (CoverArtDirectory, cover);
+						if (!File.Exists (cover)) cover = null;
 
-					cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
-					cover = Path.Combine (kCoverArtDirectory, cover);
-					if (!File.Exists (cover)) cover = null;
-
-					song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
-					songs.Add (song);
+						song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
+						songs.Add (song);
+				    } while (reader.ReadToNextSibling ("entry"));
+					reader.Close ();
 				}
 			} catch (Exception e) {
 				Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
@@ -141,8 +139,7 @@ namespace Do.Addins.Rhythmbox
 
 		public static void StartIfNeccessary ()
 		{
-			if (!InstanceIsRunning)
-			{
+			if (!InstanceIsRunning) {
 				Process.Start ("rhythmbox-client", "--no-present");
 				System.Threading.Thread.Sleep (3 * 1000);
 			}

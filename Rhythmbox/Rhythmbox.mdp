@@ -2,7 +2,7 @@
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <CustomCommands>
-        <Command type="AfterBuild" command="cp ./bin/Debug/Rhythmbox.dll /home/dave/.do/addins" />
+        <Command type="AfterBuild" command="cp ./bin/Debug/Rhythmbox.dll /home/dave/.do/plugins" />
       </CustomCommands>
       <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="Rhythmbox" />
       <Build debugmode="True" target="Library" />
