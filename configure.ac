@@ -69,6 +69,8 @@ AC_CONFIG_FILES([
 	Thunderbird/Makefile
 	Thunderbird/src/Makefile
 	GoogleCalculator/Makefile
+	OpenSearch/Makefile
+	OpenSearch/src/Makefile
 	Templates/Makefile
 ])
 
