@@ -1,4 +1,4 @@
-ASSEMBLY_NAME=GoogleCalculatorCommand
+ASSEMBLY_NAME=GoogleCalculatorAction
 ASSEMBLY=$(ASSEMBLY_NAME).dll
 
 CSFLAGS+= -debug+ -debug:full
@@ -8,7 +8,7 @@ CLEANFILES = $(ASSEMBLY){,.mdb}
 google_calculator_references = $(DO_ADDINS_LIBS)
 
 google_calculator_sources  = 	\
-			GoogleCalculatorCommand.cs
+			GoogleCalculatorAction.cs
 
 all: $(ASSEMBLY)
 

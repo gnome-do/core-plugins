@@ -1,4 +1,4 @@
-//  RhythmboxPlayCommand.cs
+//  RhythmboxEnqueueAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -26,23 +26,23 @@ using Do.Universe;
 namespace Do.Addins.Rhythmbox
 {
 
-	public class RhythmboxPlayCommand : AbstractCommand
+	public class RhythmboxEnqueueAction : AbstractAction
 	{
 
-		public RhythmboxPlayCommand ()
+		public RhythmboxEnqueueAction ()
 		{
 		}
 
 		public override string Name {
-			get { return "Play"; }
+			get { return "Add to Play Queue"; }
 		}
 
 		public override string Description {
-			get { return "Play an item in Rhythmbox."; }
+			get { return "Add an item to Rhythmbox's play queue."; }
 		}
 
 		public override string Icon {
-			get { return "rhythmbox"; }
+			get { return "add"; }
 		}
 
 		public override Type[] SupportedItemTypes {
@@ -58,16 +58,16 @@ namespace Do.Addins.Rhythmbox
 			new Thread ((ThreadStart) delegate {
 				Rhythmbox.StartIfNeccessary ();
 
-				Rhythmbox.Client ("--pause --no-present");
-				Rhythmbox.Client ("--clear-queue --no-present", true);
 				foreach (IItem item in items) {
-					string enqueue = "--no-present ";
-					foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
-						enqueue = string.Format ("{0} --enqueue \"{1}\" ", enqueue, song.File);
-					Rhythmbox.Client (enqueue, true);
+					string enqueue;
+
+					enqueue = "--no-present ";
+					foreach (SongMusicItem song in
+						Rhythmbox.LoadSongsFor (item as MusicItem)) {
+						enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
+					}
+					Rhythmbox.Client (enqueue);
 				}
-				Rhythmbox.Client ("--next --no-present");
-				Rhythmbox.Client ("--play --no-present");
 			}).Start ();
 			return null;
 		}

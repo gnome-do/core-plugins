@@ -1,4 +1,4 @@
-//  PidginChatCommand.cs (requires package libpurple-bin to use purple-remote)
+//  PidginChatAction.cs (requires package libpurple-bin to use purple-remote)
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -27,10 +27,10 @@ using Do.Universe;
 namespace Do.Addins.Pidgin
 {
 	
-	public class PidginChatCommand : AbstractCommand
+	public class PidginChatAction : AbstractAction
 	{
 		
-		public PidginChatCommand ()
+		public PidginChatAction ()
 		{
 		}
 		

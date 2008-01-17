@@ -1,4 +1,4 @@
-//  GoogleCalculatorCommand.cs
+//  GoogleCalculatorAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -27,13 +27,13 @@ using Do.Universe;
 namespace Do.Plugins.Google
 {
 
-	public class GoogleCalculatorCommand : AbstractCommand
+	public class GoogleCalculatorAction : AbstractAction
 	{
 
 		const string BeginReply = "<img src=/images/calc_img.gif alt=\"\"></td><td>&nbsp;</td><td nowrap><h2 class=r><font size=+1><b>";
 		const string EndReply = "</b>";
 
-		public GoogleCalculatorCommand ()
+		public GoogleCalculatorAction ()
 		{
 		}
 

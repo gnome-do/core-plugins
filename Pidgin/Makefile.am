@@ -14,7 +14,7 @@ pidgin_references = $(DO_ADDINS_LIBS)
 
 pidgin_sources  = 	\
 			AssemblyInfo.cs \
-			PidginChatCommand.cs \
+			PidginChatAction.cs \
 			PidginContactItemSource.cs \
 			Pidgin.cs
 

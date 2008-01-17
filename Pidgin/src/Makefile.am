@@ -1,4 +1,4 @@
 EXTRA_DIST=AssemblyInfo.cs \
-	PidginChatCommand.cs \
+	PidginChatAction.cs \
 	PidginContactItemSource.cs \
 	Pidgin.cs

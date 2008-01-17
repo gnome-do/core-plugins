@@ -1,4 +1,4 @@
-/* LocateFilesCommand.cs
+/* LocateFilesAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 namespace Do.Universe
 {
-	public class LocateFilesCommand : AbstractCommand
+	public class LocateFilesAction : AbstractAction
 	{
 		
 		bool allowHidden = false;
@@ -71,7 +71,7 @@ namespace Do.Universe
 			try {
 				locate.Start ();
 			} catch {
-				Console.Error.WriteLine ("LocateFilesCommand error: The program 'locate' could not be found.");
+				Console.Error.WriteLine ("LocateFilesAction error: The program 'locate' could not be found.");
 				return null;
 			}
 

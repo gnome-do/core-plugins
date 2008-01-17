@@ -1,6 +1,6 @@
 ASSEMBLY_NAME=LocateFiles
 
-EXTRA_DIST=$(ASSEMBLY_NAME).mdp AssemblyInfo.cs LocateFilesCommand.cs
+EXTRA_DIST=$(ASSEMBLY_NAME).mdp AssemblyInfo.cs LocateFilesAction.cs
 
 ASSEMBLY=$(ASSEMBLY_NAME).dll
 
@@ -12,7 +12,7 @@ locate_files_references = $(DO_ADDINS_LIBS)
 
 locate_files_sources =	\
 			AssemblyInfo.cs \
-			LocateFilesCommand.cs
+			LocateFilesAction.cs
 
 locate_files_build_sources = $(addprefix $(srcdir)/, $(locate_files_sources))
 

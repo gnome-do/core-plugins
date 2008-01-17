@@ -15,9 +15,9 @@ rhythmbox_sources  = 	\
 			AssemblyInfo.cs \
 			Rhythmbox.cs \
 			RhythmboxItems.cs \
-			RhythmboxPlayCommand.cs \
+			RhythmboxPlayAction.cs \
 			MusicItems.cs \
-			RhythmboxEnqueueCommand.cs \
+			RhythmboxEnqueueAction.cs \
 			RhythmboxItemSource.cs
 
 rhythmbox_build_sources = $(addprefix $(srcdir)/src/, $(rhythmbox_sources))
