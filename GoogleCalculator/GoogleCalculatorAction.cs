@@ -30,7 +30,8 @@ namespace Do.Plugins.Google
 	public class GoogleCalculatorAction : AbstractAction
 	{
 
-		const string BeginReply = "<img src=/images/calc_img.gif alt=\"\"></td><td>&nbsp;</td><td nowrap><h2 class=r><font size=+1><b>";
+		const string BeginCalculator = "<img src=/images/calc_img.gif";
+		const string BeginReply = "<td nowrap><h2 class=r><font size=+1><b>";
 		const string EndReply = "</b>";
 
 		public GoogleCalculatorAction ()
@@ -60,24 +61,33 @@ namespace Do.Plugins.Google
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
 			string expression, url, page, reply;
-			int beginReply, endReply;
+			int beginCalculator, beginReply, endReply;
 		 
 			expression = (items[0] as ITextItem).Text;
 			url	= GoogleCalculatorURLWithExpression (expression);
 			try {
 				page = GetWebpageContents (url);
+
+				// Make sure the page contains a calculation result by
+				// checking for the presence of the Calculator image:
+				beginCalculator = page.IndexOf (BeginCalculator);
+				if (beginCalculator < 0) {
+					throw new Exception ();
+				}
+				page = page.Substring (beginCalculator);
+				
+				// Try to extract the reply:
 				beginReply = page.IndexOf (BeginReply);
 				if (beginReply < 0) {
-					throw new Exception ("Google Calculator could not " +
-						 "evaluate the expression.");
+					throw new Exception ();
 				}
 				reply = page.Substring (beginReply + BeginReply.Length);
 				endReply = reply.IndexOf (EndReply); 
 				reply = reply.Substring (0, endReply);
-				// Strip HTML tags.
+				// Strip HTML tags:
 				reply = Regex.Replace (reply, @"<[^>]+>", "");
-			} catch (Exception e) {
-				reply = e.Message;
+			} catch {
+				reply = "Google Calculator could not evaluate the expression.";
 			}
 
 			return new IItem[] { new TextItem (reply) };
