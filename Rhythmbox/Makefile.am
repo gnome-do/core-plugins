@@ -22,14 +22,9 @@ rhythmbox_sources  = 	\
 
 rhythmbox_build_sources = $(addprefix $(srcdir)/src/, $(rhythmbox_sources))
 
+plugin_DATA = $(ASSEMBLY)
+
 all: $(ASSEMBLY)
 
 $(ASSEMBLY): $(rhythmbox_build_sources)
 	$(CSC) $(CSFLAGS) $(rhythmbox_references) -target:library -out:$@ $(rhythmbox_build_sources)
-
-install-exec-local: $(ASSEMBLY)
-	mkdir -p $(plugin_path)
-	install -m 644 $(ASSEMBLY) $(plugin_path)
-
-uninstall-local:
-	rm $(plugin_path)/$(ASSEMBLY)

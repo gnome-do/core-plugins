@@ -19,14 +19,9 @@ thunderbird_sources =	\
 
 thunderbird_build_sources = $(addprefix $(srcdir)/src/, $(thunderbird_sources))
 
+plugin_DATA = $(ASSEMBLY)
+
 all: $(ASSEMBLY)
 
 $(ASSEMBLY): $(thunderbird_build_sources)
 	$(CSC) $(CSFLAGS) $(thunderbird_references) -target:library -out:$@ $(thunderbird_build_sources)
-
-install-exec-local: $(ASSEMBLY)
-	mkdir -p $(plugin_path)
-	install -m 644 $(ASSEMBLY) $(plugin_path)
-
-uninstall-local:
-	rm $(plugin_path)/$(ASSEMBLY)

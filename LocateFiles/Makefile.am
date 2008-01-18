@@ -16,14 +16,9 @@ locate_files_sources =	\
 
 locate_files_build_sources = $(addprefix $(srcdir)/, $(locate_files_sources))
 
+plugin_DATA = $(ASSEMBLY)
+
 all: $(ASSEMBLY)
 
 $(ASSEMBLY): $(locate_files_build_sources)
 	$(CSC) $(CSFLAGS) $(locate_files_references) -target:library -out:$@ $(locate_files_build_sources)
-
-install-exec-local: $(ASSEMBLY)
-	mkdir -p $(plugin_path)
-	install -m 644 $(ASSEMBLY) $(plugin_path)
-
-uninstall-local:
-	rm $(plugin_path)/$(ASSEMBLY)

@@ -20,14 +20,9 @@ pidgin_sources  = 	\
 
 pidgin_build_sources = $(addprefix $(srcdir)/src/, $(pidgin_sources))
 
+plugin_DATA = $(ASSEMBLY)
+
 all: $(ASSEMBLY)
 
 $(ASSEMBLY): $(pidgin_build_sources)
 	$(CSC) $(CSFLAGS) $(pidgin_references) -target:library -out:$@ $(pidgin_build_sources)
-
-install-exec-local: $(ASSEMBLY)
-	mkdir -p $(plugin_path)
-	install -m 644 $(ASSEMBLY) $(plugin_path)
-
-uninstall-local:
-	rm $(plugin_path)/$(ASSEMBLY)

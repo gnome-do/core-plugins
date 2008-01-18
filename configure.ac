@@ -47,11 +47,11 @@ AC_SUBST(EVOLUTION_SHARP_LIBS)
 
 dnl Plugin install paths
 
-AC_ARG_WITH(plugin-path, [  --with-plugin-path=DIR  [libdir/gnome-do/plugins] ],
-			 [plugin_path="$withval"], 
-			 [plugin_path="$libdir/gnome-do/plugins"])
+AC_ARG_WITH(plugindir, [  --with-plugindir=DIR  [libdir/gnome-do/plugins] ],
+		       [plugindir="$withval"], 
+		       [plugindir="$libdir/gnome-do/plugins"])
 
-AC_SUBST(plugin_path)
+AC_SUBST(plugindir)
 
 CSFLAGS=
 
@@ -69,6 +69,8 @@ AC_CONFIG_FILES([
 	Thunderbird/Makefile
 	Thunderbird/src/Makefile
 	GoogleCalculator/Makefile
+	OpenSearch/Makefile
+	OpenSearch/src/Makefile
 	Templates/Makefile
 ])
 
