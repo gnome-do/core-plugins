@@ -71,6 +71,8 @@ AC_CONFIG_FILES([
 	GoogleCalculator/Makefile
 	OpenSearch/Makefile
 	OpenSearch/src/Makefile
+	Pastebin/Makefile
+	Pastebin/src/Makefile
 	Templates/Makefile
 ])
 

@@ -1,3 +1,3 @@
-SUBDIRS = Evolution Rhythmbox Pidgin LocateFiles Thunderbird GoogleCalculator OpenSearch Templates
+SUBDIRS = Evolution Rhythmbox Pidgin LocateFiles Thunderbird GoogleCalculator OpenSearch Pastebin Templates
 
 EXTRA_DIST = DoPlugins.mds Packages.mdse
