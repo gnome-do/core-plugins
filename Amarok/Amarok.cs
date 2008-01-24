@@ -167,7 +167,6 @@ namespace Do.Plugins.Amarok
 		public static void Client (string command, bool wait)
 		{
 			Process client;
-			Console.WriteLine (command);
 			try {
 				client = Process.Start ("amarok", command);
 				if (wait)
