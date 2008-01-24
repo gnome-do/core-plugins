@@ -62,6 +62,7 @@ AC_CONFIG_FILES([
 	Evolution/Makefile
 	Evolution/src/Makefile
 	Epiphany/Makefile
+	Amarok/Makefile
 	Rhythmbox/Makefile
 	Rhythmbox/src/Makefile
 	Pidgin/Makefile
