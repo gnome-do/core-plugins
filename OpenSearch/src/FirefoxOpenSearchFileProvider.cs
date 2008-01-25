@@ -47,6 +47,10 @@ namespace Do.Plugins.OpenSearch
 				potentialPaths.Add (path.Remove (path.IndexOf ("searchplugins/") + "searchplugins/".Length));
 			}
 			
+			string firefoxDefaultPath = GetFirefoxDefaultProfilePath ();
+			if(firefoxDefaultPath != null)
+				potentialPaths.Add(firefoxDefaultPath);
+			
 			Dictionary<string,int> unique = new Dictionary<string,int> ();
 			openSearchFilePaths = new List<string>();
 			foreach(string potentialPath in potentialPaths)
@@ -55,7 +59,7 @@ namespace Do.Plugins.OpenSearch
 					unique.Add(potentialPath,0);
 					openSearchFilePaths.Add(potentialPath);			
 				}
-			}				
+			}			
 		}
 		
 		public List<string> OpenSearchFilePaths
@@ -63,6 +67,45 @@ namespace Do.Plugins.OpenSearch
 			get { return openSearchFilePaths; }
 		}
 		
-
+		public string GetFirefoxDefaultProfilePath ()
+		{
+			try
+			{
+				string BeginProfileName = "Path=";
+				string BeginDefaultProfile = "Default=1";
+				string profile = null;
+				string home = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
+				string profilePath = Path.Combine (home, ".mozilla/firefox/profiles.ini");
+				
+				using(StreamReader reader = File.OpenText (profilePath))
+				{
+					for (string line = reader.ReadLine (); line != null; line = reader.ReadLine ()) 
+					{
+						if (line.StartsWith (BeginDefaultProfile)) break;
+						if (line.StartsWith (BeginProfileName)) {
+							line = line.Trim ();
+							line = line.Substring (BeginProfileName.Length);
+							profile = line;
+						}
+					}
+				}
+					
+				if(profile != null)
+				{
+					string path = Path.Combine (home, ".mozilla/firefox");
+					path = Path.Combine (path, profile);
+					path = Path.Combine (path, "searchplugins");
+					
+					return path;
+				}
+			}
+			catch
+			{
+				// just return null if we've got problems
+			}
+				
+			return null;
+		}
 	}
 }
+
