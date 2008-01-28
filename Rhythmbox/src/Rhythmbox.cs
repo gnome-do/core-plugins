@@ -20,6 +20,7 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
@@ -31,12 +32,21 @@ namespace Do.Addins.Rhythmbox
 		static readonly string MusicLibraryFile;
 		static readonly string CoverArtDirectory;
 
+		static List<SongMusicItem> songs;
+
+		static Timer clearSongsTimer;
+		const int SecondsSongsCached = 5*60;
+
 		static Rhythmbox ()
 		{
 			string home;
+
 			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			MusicLibraryFile = "~/.gnome2/rhythmbox/rhythmdb.xml".Replace("~", home);
 			CoverArtDirectory = "~/.gnome2/rhythmbox/covers".Replace("~", home);
+
+			clearSongsTimer = new Timer (ClearSongs);
+			songs = new List<SongMusicItem> ();
 		}
 
 		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out)
@@ -89,50 +99,63 @@ namespace Do.Addins.Rhythmbox
 			return new List<SongMusicItem> (songs.Values);
 		}
 
+		private static void ClearSongs (object state)
+		{
+			lock (songs) {
+				songs.Clear ();
+			}
+		}
+
 		public static List<SongMusicItem> LoadAllSongs ()
 		{
-			List<SongMusicItem> songs;
+			List<SongMusicItem> songsCopy;
 
-			songs = new List<SongMusicItem> ();
-			try {
-				using (XmlReader reader = XmlReader.Create (MusicLibraryFile)) {
-					while (reader.ReadToFollowing ("entry")) {
-						SongMusicItem song;
-						string song_file, song_name, album_name, artist_name, year, cover;
+			lock (songs) {
+				// Begin a new timer to clear the songs SecondsSongsCached seconds from now.
+				clearSongsTimer.Change (SecondsSongsCached*1000, Timeout.Infinite);
+				if (songs.Count == 0) {
+					// Song list is not cached. Load songs from database.
+					try {
+						using (XmlReader reader = XmlReader.Create (MusicLibraryFile)) {
+							while (reader.ReadToFollowing ("entry")) {
+								SongMusicItem song;
+								string song_file, song_name, album_name, artist_name, year, cover;
+								
+								if (reader.GetAttribute ("type") != "song") {
+									reader.ReadToFollowing ("entry");
+									continue;
+								}
+
+								reader.ReadToFollowing ("title");
+								song_name = reader.ReadString ();						
+								
+								reader.ReadToFollowing ("artist");
+								artist_name = reader.ReadString ();	
+								
+								reader.ReadToFollowing ("album");
+								album_name = reader.ReadString ();
+								
+								reader.ReadToFollowing ("location");
+								song_file = reader.ReadString ();
+								
+								reader.ReadToFollowing ("date");
+								year = reader.ReadString ();
 						
-						if (reader.GetAttribute ("type") != "song") {
-							reader.ReadToFollowing ("entry");
-							continue;
+								cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
+								cover = Path.Combine (CoverArtDirectory, cover);
+								if (!File.Exists (cover)) cover = null;
+
+								song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
+								songs.Add (song);
+							}
 						}
-
-						reader.ReadToFollowing ("title");
-						song_name = reader.ReadString ();						
-						
-						reader.ReadToFollowing ("artist");
-						artist_name = reader.ReadString ();	
-						
-						reader.ReadToFollowing ("album");
-						album_name = reader.ReadString ();
-						
-						reader.ReadToFollowing ("location");
-						song_file = reader.ReadString ();
-						
-						reader.ReadToFollowing ("date");
-						year = reader.ReadString ();
-				
-						cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
-						cover = Path.Combine (CoverArtDirectory, cover);
-						if (!File.Exists (cover)) cover = null;
-
-						song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
-						songs.Add (song);
+					} catch (Exception e) {
+						Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
 					}
-					reader.Close ();
 				}
-			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
+				songsCopy = new List<SongMusicItem> (songs);
 			}
-			return songs;
+			return songsCopy;
 		}
 
 		public static void StartIfNeccessary ()
