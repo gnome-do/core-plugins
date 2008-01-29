@@ -35,7 +35,7 @@ namespace Do.Addins.Rhythmbox
 		static List<SongMusicItem> songs;
 
 		static Timer clearSongsTimer;
-		const int SecondsSongsCached = 5*60;
+		const int SecondsSongsCached = 45;
 
 		static Rhythmbox ()
 		{
