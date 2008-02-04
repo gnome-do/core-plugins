@@ -88,7 +88,7 @@ namespace Do.Universe
 				// of the file name. It may be faster to use grep, but I've
 				// tested this and it seems prety snappy.
 				if (Path.GetFileName (path).ToLower().Contains (query))
-					files.Add (FileItem.Create (path));
+					files.Add (new FileItem (path));
 			}
 			files.Sort (new FileItemNameComparer (query));
 			return files.ToArray ();
