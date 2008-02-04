@@ -1,4 +1,4 @@
-EXTRA_DIST = Amarok.cs AmarokItems.cs AmarokItemSource.cs AmarokPlayAction.cs AssemblyInfo.cs MusicItems.cs
+EXTRA_DIST = Amarok.cs AmarokItems.cs AmarokItemSource.cs AmarokPlayAction.cs AmarokEnqueueAction.cs AssemblyInfo.cs MusicItems.cs
 
 ASSEMBLY_NAME=Amarok
 ASSEMBLY=$(ASSEMBLY_NAME).dll
@@ -14,6 +14,7 @@ amarok_sources  = 	\
 				AmarokItems.cs \
 				AmarokItemSource.cs \
 				AmarokPlayAction.cs \
+				AmarokEnqueueAction.cs \
 				AssemblyInfo.cs \
 				MusicItems.cs
 
