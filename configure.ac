@@ -59,6 +59,7 @@ AC_SUBST(CSFLAGS)
 
 AC_CONFIG_FILES([
 	Makefile
+	GNOME-Session/Makefile
 	Evolution/Makefile
 	Evolution/src/Makefile
 	Epiphany/Makefile
