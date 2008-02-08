@@ -23,7 +23,6 @@ using System.Collections.Generic;
 
 using Evolution;
 
-using Do.Addins;
 using Do.Universe;
 
 namespace Do.Addins.Evolution
@@ -39,7 +38,9 @@ namespace Do.Addins.Evolution
 		{
 			contacts = new List<IItem> ();
 			pictureFiles = new List<string> ();
-			UpdateItems ();
+			try {
+				_UpdateItems ();
+			} catch { }
 		}
 		
 		public Type[] SupportedItemTypes {
@@ -56,11 +57,12 @@ namespace Do.Addins.Evolution
 		
 		public void UpdateItems ()
 		{
+			return;	// No updating until the leak is fixed.
 			try {
 				_UpdateItems ();
 			} catch (Exception e) {
-				Console.WriteLine ("Cannot index evolution contacts because a {0} was thrown: {1}", e.GetType (), e.Message);
-				return;
+				Console.Error.WriteLine ("Cannot index Evolution contacts: {0}",
+					e.Message);
 			}
 		}
 		
@@ -117,41 +119,48 @@ namespace Do.Addins.Evolution
 		ContactItem CreateEvolutionContactItem (Contact e_contact) {
 			ContactItem contact;
 						
-			contact = new ContactItem (e_contact.FullName);
+			contact = ContactItem.Create (e_contact.FullName);
 			
 			if (e_contact.Email1 != null && e_contact.Email1 != "")
-				contact.Emails.Add (e_contact.Email1);
+				contact["email"] = e_contact.Email1;
 			if (e_contact.Email2 != null && e_contact.Email2 != "")
-				contact.Emails.Add (e_contact.Email2);
+				contact["email2"] = e_contact.Email2;
 			if (e_contact.Email3 != null && e_contact.Email3 != "")
-				contact.Emails.Add (e_contact.Email3);
+				contact["email3"] = e_contact.Email3;
 			
-			contact.AIMs.AddRange (e_contact.ImAim);
-			contact.Jabbers.AddRange (e_contact.ImJabber);
+			for (int i = 0; i < e_contact.ImAim.Length; ++i)
+				contact["aim" + (i>0?i.ToString ():"")] = e_contact.ImAim[i];
+			for (int i = 0; i < e_contact.ImJabber.Length; ++i)
+				contact["jabber" + (i>0?i.ToString ():"")] = e_contact.ImJabber[i];
 			
-			switch (e_contact.Photo.PhotoType) {
-				case ContactPhotoType.Inlined:
-					string tmp = Path.GetTempFileName ();
-					contact.Photo = tmp  + ".jpg";
-					try {
-						File.Delete (tmp);
-					} catch { }
-					try {
-						File.WriteAllBytes (contact.Photo, e_contact.Photo.Data);
-						pictureFiles.Add (contact.Photo);
-					} catch {
-						contact.Photo = null;
-					}
-					break;
-				case ContactPhotoType.Uri:
-					if (File.Exists (e_contact.Photo.Uri)) {
-						contact.Photo = e_contact.Photo.Uri;
-					}
-					break;
-			}
-			ContactItemStore.SynchronizeContactWithStore (ref contact);
+			// Been getting some excpetions from g_boxed_copy
+			// when I attempt to read contact photos...
+			try {
+				switch (e_contact.Photo.PhotoType) {
+					case ContactPhotoType.Inlined:
+						string tmp = Path.GetTempFileName ();
+						string photo = tmp  + ".jpg";
+						try {
+							File.Delete (tmp);
+						} catch { }
+						try {
+							File.WriteAllBytes (photo, e_contact.Photo.Data);
+							pictureFiles.Add (photo);
+							contact["photo"] = photo;
+						} catch { }
+						break;
+					case ContactPhotoType.Uri:
+						if (File.Exists (e_contact.Photo.Uri)) {
+							contact["photo"] = e_contact.Photo.Uri;
+						}
+						break;
+				}
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.StackTrace);
+				Console.Error.WriteLine ("Error while loading evolution photo for contact {0}: {1}",
+					contact["name"], e.Message);
+		   	}
 			return contact;
 		}
-		
 	}
 }

@@ -22,14 +22,12 @@ using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 
-using Do.Addins;
 using Do.Universe;
 
 namespace Do.Addins.Pidgin
 {
 	public class PidginContactItemSource : IItemSource
 	{
-
 		static readonly string kBuddyListFile;
 		static readonly string kBuddyIconDirectory;
 		
@@ -67,7 +65,16 @@ namespace Do.Addins.Pidgin
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item)
 		{
-			return null;
+			ContactItem buddy = item as ContactItem;
+			List<IItem> details;
+
+			details = new List<IItem> ();
+			foreach (string detail in buddy.Details) {
+				if (detail.StartsWith ("prpl-")) {
+					details.Add (new PidginHandleContactDetailItem (detail, buddy[detail]));
+				}
+			}
+			return details;
 		}
 		
 		public void UpdateItems ()
@@ -88,7 +95,6 @@ namespace Do.Addins.Pidgin
 					
 					buddy = ContactItemFromBuddyXmlNode (buddy_node);
 					if (buddy == null) continue;
-					ContactItemStore.SynchronizeContactWithStore (ref buddy);
 					buddies_seen[buddy] = true;
 				}
 				
@@ -135,30 +141,12 @@ namespace Do.Addins.Pidgin
 			if (name == null || proto == null) return null;
 			
 			// Create a new buddy, add the details we have.
-			buddy = new ContactItem ();
-			if (alias != null)
-					buddy.Name = alias;
+			buddy = ContactItem.Create (alias ?? name);
 			if (icon != null)
-					buddy.Photo = icon;
-			AddScreenNameToContact (buddy, proto, name);
+				buddy["photo"] = icon;
+			buddy[proto] = name;
+
 			return buddy;
-		}
-		
-		void AddScreenNameToContact (ContactItem buddy, string proto, string name)
-		{
-			if (buddy == null || proto == null || name == null)
-				return;
-			
-			switch (proto) {
-			case "prpl-aim":
-				if (!buddy.AIMs.Contains (name))
-					buddy.AIMs.Add (name);
-				break;
-			case "prpl-jabber":
-				if (!buddy.Jabbers.Contains (name))
-					buddy.Jabbers.Add (name);
-				break;
-			}
 		}
 	}
 }

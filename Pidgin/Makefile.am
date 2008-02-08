@@ -16,6 +16,7 @@ pidgin_sources  = 	\
 			AssemblyInfo.cs \
 			PidginChatAction.cs \
 			PidginContactItemSource.cs \
+			PidginHandleContactDetailItem.cs \
 			Pidgin.cs
 
 pidgin_build_sources = $(addprefix $(srcdir)/src/, $(pidgin_sources))

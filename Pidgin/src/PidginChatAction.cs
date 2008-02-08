@@ -21,76 +21,86 @@ using System;
 using System.Threading;
 using System.Diagnostics;
 
-using Do.Addins;
 using Do.Universe;
 
 namespace Do.Addins.Pidgin
 {
-	
 	public class PidginChatAction : AbstractAction
 	{
-		
 		public PidginChatAction ()
 		{
 		}
 		
-		public override string Name {
+		public override string Name
+		{
 			get { return "Chat"; }
 		}
 		
-		public override string Description {
+		public override string Description
+		{
 			get { return "Send an instant message to a friend."; }
 		}
 		
-		public override string Icon {
+		public override string Icon
+		{
 			get { return "internet-group-chat"; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override Type[] SupportedItemTypes
+		{
 			get {
 				return new Type[] {
 					typeof (ContactItem),
+					typeof (PidginHandleContactDetailItem),
 				};
 			}
 		}
 
 		public override bool SupportsItem (IItem item)
 		{
-			bool has_im;
-			ContactItem c;
-			
-			c = item as ContactItem;
-			has_im = c.AIMs.Count > 0 ||
-				     c.Jabbers.Count > 0;
-			return has_im;
+			if (item is ContactItem) {
+				foreach (string detail in (item as ContactItem).Details) {
+					if (detail.StartsWith ("prpl-")) return true;
+				}
+				return false;
+			} else if (item is PidginHandleContactDetailItem) {
+				return true;
+			}
+			return false;
 		}
 		
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
+			IItem item = items[0];
 			string protocol, screenname, dbus_instruction;
-			ContactItem c;
 
 			protocol = screenname = "";
-			foreach (IItem item in items) {
-				if (item is ContactItem) {
-					c = item as ContactItem;
-					if (c.Jabbers.Count > 0) {
-						protocol = "jabber";
-						screenname = c.Jabbers[0];
-					} else if (c.AIMs.Count > 0) {
-						protocol = "aim";
-						screenname = c.AIMs[0];
+			if (item is ContactItem) {
+				// Just grab the first protocol we see.
+				ContactItem contact = item as ContactItem;
+				foreach (string detail in contact.Details) {
+					if (detail.StartsWith ("prpl-")) {
+						protocol = detail;
+						screenname = contact[detail];
+						break;
+					}
+				}
+			} else if (item is PidginHandleContactDetailItem) {
+				protocol = (item as PidginHandleContactDetailItem).Key;
+				screenname = (item as PidginHandleContactDetailItem).Value;
+			}
+			if (null != protocol && null != screenname) {
+				new Thread ((ThreadStart) delegate {
+					if (!Pidgin.InstanceIsRunning ()) {
+						Process.Start ("pidgin");
+						Thread.Sleep (4 * 1000);
 					}
 
-					new Thread ((ThreadStart) delegate {
-						if (!Pidgin.InstanceIsRunning ()) {
-							Process.Start ("pidgin");
-							Thread.Sleep (4 * 1000);
-						}
-						dbus_instruction = string.Format ("\"{0}:goim?screenname={1}\"", protocol, screenname);
-						Process.Start ("purple-remote", dbus_instruction);
-					}).Start ();
-				}
+					if (protocol.Contains ("-"))
+						protocol = protocol.Substring (protocol.IndexOf ("-")+1);
+					dbus_instruction = string.Format ("\"{0}:goim?screenname={1}\"", protocol, screenname);
+					Process.Start ("purple-remote", dbus_instruction);
+				}).Start ();
 			}
 			return null;
 		}
