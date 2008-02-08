@@ -75,6 +75,7 @@ AC_CONFIG_FILES([
 	OpenSearch/src/Makefile
 	Pastebin/Makefile
 	Pastebin/src/Makefile
+	SimplePlugins/Makefile
 	Templates/Makefile
 ])
 
