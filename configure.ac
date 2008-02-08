@@ -1,6 +1,5 @@
 AC_PREREQ([2.54])
 AC_INIT([Do-plugins], [0.3])
-AC_CANONICAL_SYSTEM
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AM_MAINTAINER_MODE
@@ -47,9 +46,9 @@ AC_SUBST(EVOLUTION_SHARP_LIBS)
 
 dnl Plugin install paths
 
-AC_ARG_WITH(plugindir, [  --with-plugindir=DIR  [libdir/gnome-do/plugins] ],
+AC_ARG_WITH(plugindir, [  --with-plugindir=DIR    Plugin install path [$datadir/gnome-do/plugins] ],
 		       [plugindir="$withval"], 
-		       [plugindir="$libdir/gnome-do/plugins"])
+		       [plugindir="$datadir/gnome-do/plugins"])
 
 AC_SUBST(plugindir)
 
