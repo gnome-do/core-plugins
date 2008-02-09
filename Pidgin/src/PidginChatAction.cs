@@ -1,4 +1,4 @@
-//  PidginChatAction.cs (requires package libpurple-bin to use purple-remote)
+//  PidginChatAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -19,7 +19,6 @@
 
 using System;
 using System.Threading;
-using System.Diagnostics;
 
 using Do.Universe;
 
@@ -72,34 +71,27 @@ namespace Do.Addins.Pidgin
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
 			IItem item = items[0];
-			string protocol, screenname, dbus_instruction;
+			string name = null;
 
-			protocol = screenname = "";
 			if (item is ContactItem) {
 				// Just grab the first protocol we see.
 				ContactItem contact = item as ContactItem;
 				foreach (string detail in contact.Details) {
 					if (detail.StartsWith ("prpl-")) {
-						protocol = detail;
-						screenname = contact[detail];
-						break;
+						name = contact[detail];
+						// If this buddy is online, break, else keep looking.
+						if (Pidgin.BuddyIsOnline (name)) break;
 					}
 				}
 			} else if (item is PidginHandleContactDetailItem) {
-				protocol = (item as PidginHandleContactDetailItem).Key;
-				screenname = (item as PidginHandleContactDetailItem).Value;
+				name = (item as PidginHandleContactDetailItem).Value;
 			}
-			if (null != protocol && null != screenname) {
+			if (null != name) {
 				new Thread ((ThreadStart) delegate {
-					if (!Pidgin.InstanceIsRunning ()) {
-						Process.Start ("pidgin");
-						Thread.Sleep (4 * 1000);
-					}
-
-					if (protocol.Contains ("-"))
-						protocol = protocol.Substring (protocol.IndexOf ("-")+1);
-					dbus_instruction = string.Format ("\"{0}:goim?screenname={1}\"", protocol, screenname);
-					Process.Start ("purple-remote", dbus_instruction);
+					Pidgin.StartIfNeccessary ();
+					Gtk.Application.Invoke (delegate {
+						Pidgin.OpenConversationWithBuddy (name);
+					});
 				}).Start ();
 			}
 			return null;
