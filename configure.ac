@@ -1,5 +1,5 @@
 AC_PREREQ([2.54])
-AC_INIT([Do-plugins], [0.3])
+AC_INIT([Do-plugins], [0.3.0])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AM_MAINTAINER_MODE
