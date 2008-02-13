@@ -19,27 +19,124 @@
 
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
+
+using NDesk.DBus;
+using org.freedesktop.DBus;
 
 namespace Do.Addins.Pidgin
 {
-	
 	public class Pidgin
 	{
-		
-		public static bool InstanceIsRunning ()
+		const string PurpleObjectPath = "/im/pidgin/purple/PurpleObject";
+		const string PurpleServiceBusName = "im.pidgin.purple.PurpleService";
+
+		[Interface ("im.pidgin.purple.PurpleInterface")]
+		public interface IPurpleObject
 		{
-			Process pidof;
-			
+			int[] PurpleAccountsGetAllActive ();
+			bool PurpleBuddyIsOnline (int buddy);
+			int PurpleBuddyGetAccount (int buddy);
+			bool PurpleAccountIsConnected (int account);
+			int PurpleFindBuddy (int account, string name);
+			void PurpleConversationPresent (int conversation);
+			int PurpleAccountsFindConnected (string account, string proto);
+			int PurpleConversationNew (uint type, int account, string name);
+		}
+
+		public static IPurpleObject GetPurpleObject ()
+		{
 			try {
-				// Use pidof command to look for pidgin process. Exit
-				// status is 0 if at least one matching process is found.
-				// If there's any error, just assume some Purple client
-				// is running.
-				pidof = Process.Start ("pidof", "pidgin");
-				pidof.WaitForExit ();
-				return pidof.ExitCode == 0;
+				return Bus.Session.GetObject<IPurpleObject>
+					(PurpleServiceBusName, new ObjectPath (PurpleObjectPath));
 			} catch {
-				return true;
+				return null;
+			}
+		}
+
+		private static int[] ConnectedAccounts {
+			get {
+				List<int> connected;
+				IPurpleObject prpl;
+
+				prpl = GetPurpleObject ();
+				connected = new List<int> ();
+				try {
+					foreach (int account in prpl.PurpleAccountsGetAllActive ()) {
+						if (prpl.PurpleAccountIsConnected (account))
+							connected.Add (account);
+					}
+				} catch { }
+				return connected.ToArray ();
+			}
+		}
+
+		public static bool BuddyIsOnline (string name)
+		{
+			int account;
+			return GetBuddyIsOnlineAndAccount (name, out account);   
+		}
+
+		public static bool GetBuddyIsOnlineAndAccount (string name, out int account_out)
+		{
+			IPurpleObject prpl;
+			int buddy;
+		   
+			prpl = GetPurpleObject ();
+			try {
+				foreach (int account in ConnectedAccounts) {
+					buddy = prpl.PurpleFindBuddy (account, name);
+					if (prpl.PurpleBuddyIsOnline (buddy)) {
+						account_out = account;
+						return true;
+					}
+				}
+			} catch { }
+			account_out = -1;
+			return false;
+		}
+
+		public static void OpenConversationWithBuddy (string name)
+		{
+			IPurpleObject prpl;
+			int account, conversation;
+
+			prpl = GetPurpleObject ();
+			try {
+				GetBuddyIsOnlineAndAccount (name, out account);
+				if (account == -1)
+					account = prpl.PurpleAccountsFindConnected ("", "");
+				conversation = prpl.PurpleConversationNew (1, account, name);
+				prpl.PurpleConversationPresent (conversation);
+			} catch (Exception e) {
+				Console.Error.WriteLine ("Could not create new Pidgin conversation: {0}", e.Message);
+			}
+		}
+
+		public static bool InstanceIsRunning
+		{
+			get {
+				Process pidof;
+				
+				try {
+					// Use pidof command to look for pidgin process. Exit
+					// status is 0 if at least one matching process is found.
+					// If there's any error, just assume some Purple client
+					// is running.
+					pidof = Process.Start ("pidof", "pidgin");
+					pidof.WaitForExit ();
+					return pidof.ExitCode == 0;
+				} catch {
+					return true;
+				}
+			}
+		}
+
+		public static void StartIfNeccessary ()
+		{
+			if (!InstanceIsRunning) {
+				Process.Start ("pidgin");
+				System.Threading.Thread.Sleep (4 * 1000);
 			}
 		}
 	}

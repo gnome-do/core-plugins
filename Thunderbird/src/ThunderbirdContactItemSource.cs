@@ -24,7 +24,6 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-using Do.Addins;
 using Do.Universe;
 
 using Beagle.Util;
@@ -63,7 +62,7 @@ namespace Do.Addins.Thunderbird
 			try {
 				_UpdateItems ();
 			} catch (Exception e) {
-				Console.WriteLine ("Cannot index Thunderbird contacts because a {0} was thrown: {1}", e.GetType (), e.Message);
+				Console.Error.WriteLine ("Cannot index Thunderbird contacts because a {0} was thrown: {1}", e.GetType (), e.Message);
 				return;
 			}
 		}
@@ -101,8 +100,6 @@ namespace Do.Addins.Thunderbird
 			ContactItem contact;
 			string name, email;
 			
-			contact = new ContactItem ();
-			
 //			foreach (object o in row.Keys)
 //				Console.WriteLine ("\t{0} --> {1}", o, row[o]);
 			
@@ -114,14 +111,13 @@ namespace Do.Addins.Thunderbird
 			name = row["DisplayName"] as string;
 			if (name == null || name == string.Empty)
 				name = string.Format ("{0} {1}", row["FirstName"], row["LastName"]);
-			contact.Name = name;
+			contact = ContactItem.Create (name);
 			
 			// Email
 			email = row["PrimaryEmail"] as string;
 			if (email != null && email != string.Empty)
-				contact.Emails.Add (email);
+				contact["email"] = email;
 			
-			ContactItemStore.SynchronizeContactWithStore (ref contact);
 			return contact;
 		}
 		
