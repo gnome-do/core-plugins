@@ -124,7 +124,5 @@ namespace Do.Plugins.Google
 		 
 			return content;
 		}
-
-
 	}
 }
