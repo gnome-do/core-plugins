@@ -22,6 +22,8 @@ using System.IO;
 using System.Data;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 using Mono.Data.Sqlite;
 
@@ -31,14 +33,16 @@ namespace Do.Plugins.Amarok
 	public static class Amarok
 	{
 		static readonly string MusicLibraryFile;
-		static readonly string CoverArtDirectory;
+		static readonly string AmazonCoverArtDirectory;
+		static readonly string LocalCoverArtDirectory;
 
 		static Amarok ()
 		{
 			string home;
 			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			MusicLibraryFile = "~/.kde/share/apps/amarok/collection.db".Replace("~", home);
-			CoverArtDirectory = "~/.gnome2/amarok/covers".Replace("~", home);
+			AmazonCoverArtDirectory = "~/.kde/share/apps/amarok/albumcovers/large/".Replace("~", home);
+			LocalCoverArtDirectory = "~/.kde/share/apps/amarok/albumcovers/tagcover/".Replace("~", home);
 		}
 
 		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out)
@@ -102,7 +106,11 @@ namespace Do.Plugins.Amarok
 
 					db.Open ();
 					query = db.CreateCommand ();
-					query.CommandText = "SELECT a.name, t.title, t.url, i.path, album.name FROM tags t, artist a, album LEFT JOIN statistics s ON (t.url = s.url) LEFT JOIN images i ON (a.name = i.artist AND album.name = i.album) WHERE t.album = album.id AND t.artist = a.id";
+					
+					//Get the albums with local cover art
+					query.CommandText = "SELECT a.name, t.url, t.title, album.name, e.hash FROM tags t, artist a, album, embed e WHERE t.album = album.id AND t.artist = a.id AND album.name IN "
+						+ "(SELECT album.name FROM tags t, artist a, album, embed e WHERE t.album = album.id AND t.artist = a.id AND e.url = t.url)"
+						+ "AND e.hash IN (SELECT e.hash FROM tags t, artist a, album, embed e WHERE t.album = album.id AND t.artist = a.id AND e.url = t.url)";
 					using (IDataReader reader = query.ExecuteReader ()) {
 						while (reader.Read ()) {
 
@@ -110,15 +118,45 @@ namespace Do.Plugins.Amarok
 							string song_file, song_name, album_name, artist_name, year, cover;
 							
 							year = null;
-							song_name = reader[1] as string;
+							song_name = reader[2] as string;
 							artist_name = reader[0] as string;
-							song_file = reader[2] as string;
-							cover = reader[3] as string;
-							album_name = reader[4] as string;
+							song_file = reader[1] as string;
+							cover = reader[4] as string;
+							album_name = reader[3] as string;
 							
 							if (song_file[0] == '.')
 								song_file = song_file.Substring (1);
 
+							cover = LocalCoverArtDirectory + cover;
+							if (string.IsNullOrEmpty (cover) || !File.Exists (cover))
+								cover = null;
+
+							song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
+							songs.Add (song);
+						}
+					}
+					
+					//Get the albums with Amazon cover art
+					query.CommandText = "SELECT a.name, t.url, t.title, album.name FROM tags t, artist a, album, embed e WHERE t.album = album.id AND t.artist = a.id AND album.name NOT IN "
+						+ "(SELECT album.name FROM tags t, artist a, album, embed e WHERE t.album = album.id AND t.artist = a.id AND e.url = t.url)";
+					using (IDataReader reader = query.ExecuteReader ()) {
+						while (reader.Read ()) {
+
+							SongMusicItem song;
+							string song_file, song_name, album_name, artist_name, year, cover;
+							
+							year = null;
+							song_name = reader[2] as string;
+							artist_name = reader[0] as string;
+							song_file = reader[1] as string;
+							album_name = reader[3] as string;
+							
+							cover = (CalculateMD5Hash ((artist_name + album_name).ToLower ())).ToLower ();
+							
+							if (song_file[0] == '.')
+								song_file = song_file.Substring (1);
+							
+							cover = AmazonCoverArtDirectory + cover;
 							if (string.IsNullOrEmpty (cover) || !File.Exists (cover))
 								cover = null;
 
@@ -132,6 +170,26 @@ namespace Do.Plugins.Amarok
 			}
 			return songs;
 		}
+		
+		// description of your code here
+		//http://blogs.msdn.com/csharpfaq/archive/2006/10/09/How-do-I-calculate-a-MD5-hash-from-a-string_3F00_.aspx
+
+		public static string CalculateMD5Hash (string input)
+		{
+			// step 1, calculate MD5 hash from input
+		    MD5 md5 = System.Security.Cryptography.MD5.Create ();
+		    byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes (input);
+		    byte[] hash = md5.ComputeHash (inputBytes);
+		 
+		    // step 2, convert byte array to hex string
+		    StringBuilder sb = new StringBuilder();
+		    for (int i = 0; i < hash.Length; i++)
+		    {
+		        sb.Append (hash[i].ToString ("X2"));
+		    }
+		    return sb.ToString();
+		}
+
 
 		public static void StartIfNeccessary ()
 		{
