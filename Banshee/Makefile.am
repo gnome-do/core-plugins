@@ -26,4 +26,4 @@ plugin_DATA = $(ASSEMBLY)
 all: $(ASSEMBLY)
 
 $(ASSEMBLY): $(banshee_build_sources)
-	$(CSC) $(CSFLAGS) $(banshee_references) -target:library -out:$@ $(banshee_build_sources)
+	$(CSC) $(CSFLAGS) $(banshee_references) -r:Mono.Data.Sqlite -r:System.Data -pkg:ndesk-dbus-1.0 -pkg:ndesk-dbus-glib-1.0 -target:library -out:$@ $(banshee_build_sources)
