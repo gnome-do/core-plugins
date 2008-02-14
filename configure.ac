@@ -77,6 +77,8 @@ AC_CONFIG_FILES([
 	Pastebin/src/Makefile
 	SimplePlugins/Makefile
 	Templates/Makefile
+    Banshee/Makefile
+    Banshee/src/Makefile
 ])
 
 AC_OUTPUT
