@@ -28,67 +28,73 @@ using Do.Universe;
 
 namespace GnomeDoSSH {
 
-    public class HostItem : IItem {
-        string name;
+	public class HostItem : IOpenableItem {
+		string name;
 
-        public HostItem (string hostname) {
-            this.name = hostname;
-        }
+		public HostItem (string hostname)
+		{
+			name = hostname;
+		}
 
-        public string Name { get { return name; } }
-        public string Description { get { return "Hostname"; } }
-        public string Icon { get { return "network-server"; } }
-        public string Text { get { return name; } }
-    }
+		public string Name { get { return name; } }
+		public string Description { get { return "SSH Host"; } }
+		public string Icon { get { return "gnome-globe"; } }
 
-  public class SSHHostItemSource : IItemSource {
-    List<IItem> items;
+		public string Text { get { return name; } }
 
-    public SSHHostItemSource ()
-    {
-      items = new List<IItem> ();
-      UpdateItems ();
-    }
+		public void Open ()
+		{
+			string uri = "ssh://" + name;
+			System.Diagnostics.Process.Start ("nautilus", uri);
+		}
+	}
 
-    public string Name { get { return "SSH Hosts"; } }
-    public string Description { get { return "Parses ssh-config"; } }
-    public string Icon { get { return "network-server"; } }
+	public class SSHHostItemSource : IItemSource {
+		List<IItem> items;
 
-    public Type[] SupportedItemTypes {
-      get {
-        return new Type[] { typeof (HostItem) };
-      }
-    }
+		public SSHHostItemSource ()
+		{
+			items = new List<IItem> ();
+			UpdateItems ();
+		}
 
-    public ICollection<IItem> Items {
-      get { return items; }
-    }
+		public string Name { get { return "SSH Hosts"; } }
+		public string Description { get { return "Parses ssh-config"; } }
+		public string Icon { get { return "network-server"; } }
 
-    public ICollection<IItem> ChildrenOfItem (IItem parent)
-    {
-      return null;  
-    }
+		public Type[] SupportedItemTypes {
+			get {
+				return new Type[] { typeof (HostItem) };
+			}
+		}
 
-    public void UpdateItems ()
-    {
-        try {
-            FileStream fs = new FileStream (System.Environment.GetEnvironmentVariable ("HOME") + "/.ssh/config", FileMode.Open, FileAccess.Read);
-            StreamReader reader = new StreamReader (fs);
+		public ICollection<IItem> Items {
+			get { return items; }
+		}
 
-            Regex r = new Regex ("^\\s*Host\\s+([^ ]+)\\s*$");
+		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		{
+			return null;  
+		}
 
-            string s;
-            while ((s = reader.ReadLine ()) != null) {
-                Match m = r.Match (s);
-                if (m.Groups.Count == 2) {
-                    items.Add(new HostItem (m.Groups [1].ToString ()));
-                }
-            }
-        }
-        catch (Exception) {
-            return;
-        }
-    }
-  }
+		public void UpdateItems ()
+		{
+			try {
+				string hostsFile = Environment.GetEnvironmentVariable ("HOME") + "/.ssh/config";
+				FileStream fs = new FileStream (hostsFile, FileMode.Open, FileAccess.Read);
+				StreamReader reader = new StreamReader (fs);
+
+				Regex r = new Regex ("^\\s*Host\\s+([^ ]+)\\s*$");
+
+				string s;
+				while ((s = reader.ReadLine ()) != null) {
+					Match m = r.Match (s);
+					if (m.Groups.Count == 2) {
+						items.Add (new HostItem (m.Groups [1].ToString ()));
+					}
+				}
+			} catch { }
+		}
+	}
 }
 
