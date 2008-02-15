@@ -39,10 +39,12 @@ dnl - Check dependencies
 PKG_CHECK_MODULES([DO_ADDINS], [do.addins])
 PKG_CHECK_MODULES([DO_DBUS], [do.dbus])
 PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
+PKG_CHECK_MODULES([GCONF_SHARP], [gconf-sharp-2.0])
 
 AC_SUBST(DO_ADDINS_LIBS)
 AC_SUBST(DO_DBUS_LIBS)
 AC_SUBST(EVOLUTION_SHARP_LIBS)
+AC_SUBST(GCONF_SHARP_LIBS)
 
 dnl Plugin install paths
 
@@ -79,6 +81,7 @@ AC_CONFIG_FILES([
 	Templates/Makefile
     Banshee/Makefile
     Banshee/src/Makefile
+    SSH/Makefile
 ])
 
 AC_OUTPUT
