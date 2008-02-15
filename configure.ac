@@ -83,6 +83,7 @@ AC_CONFIG_FILES([
     Banshee/src/Makefile
     SSH/Makefile
     AppendText/Makefile
+    Archive/Makefile
 ])
 
 AC_OUTPUT
