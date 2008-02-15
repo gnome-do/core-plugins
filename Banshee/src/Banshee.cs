@@ -19,6 +19,7 @@
 using System;
 using System.Data;
 using System.IO;
+using System.Threading;
 using System.Collections.Generic;
 using Mono.Data.Sqlite;
 
@@ -29,14 +30,26 @@ namespace Do.Addins.Banshee {
 
                 static readonly string kMusicLibraryFile;
                 static readonly string kCoverArtDirectory;
+                static List<SongMusicItem> songs;
+                
+                static Timer clearSongsTimer;
+                const int SecondsSongsCached = 45;
 
                 static Banshee()
                 {
-                    string home;
+                        string home;
 
-                    home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-                    kMusicLibraryFile = "~/.config/banshee/banshee.db".Replace("~", home);
-                    kCoverArtDirectory = "~/.config/banshee/covers".Replace("~", home);
+                        home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+                        kMusicLibraryFile = "~/.config/banshee/banshee.db".Replace("~", home);
+                        kCoverArtDirectory = "~/.config/banshee/covers".Replace("~", home);
+                        
+                        clearSongsTimer = new Timer (ClearSongs);
+                        songs = new List<SongMusicItem> ();
+                }
+                
+                private static void ClearSongs (object state)
+                {
+                        lock (songs) { songs.Clear(); }
                 }
 
                 public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out,
@@ -100,55 +113,63 @@ namespace Do.Addins.Banshee {
                 public static List<SongMusicItem> LoadAllSongs ()
                 {
                         IDbConnection conn;
-                        List<SongMusicItem> songs;
+                        List<SongMusicItem> songsCopy;
 
-                        conn = new SqliteConnection("URI=file:" + kMusicLibraryFile);
-                        songs = new List<SongMusicItem> ();
-                        try {
-                                conn.Open();
-                                IDbCommand query = conn.CreateCommand();
-                                query.CommandText = "SELECT Title,AlbumTitle,Artist,Uri FROM Tracks";
-                                IDataReader reader = query.ExecuteReader();
-                                while (reader.Read()) {
+                        lock (songs)
+                        {
+                                // Begin a new timer to clear the songs SecondsSongsCached seconds from now.
+                                clearSongsTimer.Change (SecondsSongsCached*1000, Timeout.Infinite);
+                                if (songs.Count == 0) {
+                                        // Song list is not cached. Load songs from database.
+                                        conn = new SqliteConnection("URI=file:" + kMusicLibraryFile);
                                         try {
-                                                SongMusicItem song;
-                                                string song_name = reader.GetString(0);
-                                                string album_name = reader.GetString(1);
-                                                string artist_name = reader.GetString(2);
-                                                string song_file = reader.GetString(3);
-                                                string cover = null;
-                                                
-                                                if ((song_name == null || album_name == null) || song_file == null)
-                                                        continue;
+                                                conn.Open();
+                                                IDbCommand query = conn.CreateCommand();
+                                                query.CommandText = "SELECT Title,AlbumTitle,Artist,Uri FROM Tracks";
+                                                IDataReader reader = query.ExecuteReader();
+                                                while (reader.Read()) {
+                                                        try {
+                                                                SongMusicItem song;
+                                                                string song_name = reader.GetString(0);
+                                                                string album_name = reader.GetString(1);
+                                                                string artist_name = reader.GetString(2);
+                                                                string song_file = reader.GetString(3);
+                                                                string cover = null;
+                                                                
+                                                                if ((song_name == null || album_name == null) || song_file == null)
+                                                                        continue;
 
-                                                cover = string.Format ("{0}-{1}.jpg",
-                                                                        artist_name.ToLower(),
-                                                                        album_name.ToLower());
-                                                cover = Path.Combine (kCoverArtDirectory, cover);
+                                                                cover = string.Format ("{0}-{1}.jpg",
+                                                                                        artist_name.ToLower(),
+                                                                                        album_name.ToLower());
+                                                                cover = Path.Combine (kCoverArtDirectory, cover);
 
-                                                if (!File.Exists (cover))
-                                                        cover = null;
+                                                                if (!File.Exists (cover))
+                                                                        cover = null;
 
-                                                song = new SongMusicItem (song_name, artist_name, album_name,
-                                                                          String.Empty, cover, song_file);
-                                                songs.Add (song);
+                                                                song = new SongMusicItem (song_name, artist_name, album_name,
+                                                                                          String.Empty, cover, song_file);
+                                                                songs.Add (song);
+                                                        }
+                                                        catch (Exception) {
+                                                                //Console.Error.WriteLine (e.StackTrace);
+                                                                //Console.Error.WriteLine ("Got Exception: {0}", e.Message);
+                                                                continue;
+                                                        }
+                                                }
                                         }
                                         catch (Exception e) {
-                                                Console.Error.WriteLine (e.StackTrace);
-                                                Console.Error.WriteLine ("Got Exception: {0}", e.Message);
-                                                continue;
+                                                //Console.Error.WriteLine (e.StackTrace);
+                                                Console.Error.WriteLine ("Could not read Banshee database file: {0}", e.Message);
+                                        }
+                                        finally {
+                                                if (conn.State == ConnectionState.Open)
+                                                    conn.Close();
                                         }
                                 }
+                                songsCopy = new List<SongMusicItem> (songs);
                         }
-                        catch (Exception e) {
-                                Console.Error.WriteLine (e.StackTrace);
-                                Console.Error.WriteLine ("Could not read Banshee database file: {0}", e.Message);
-                        }
-                        finally {
-                                if (conn.State == ConnectionState.Open)
-                                    conn.Close();
-                        }
-                        return songs;
+                        return songsCopy;
                 }
         }
 }
