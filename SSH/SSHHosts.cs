@@ -79,6 +79,7 @@ namespace GnomeDoSSH {
 
 		public void UpdateItems ()
 		{
+			items.Clear ();
 			try {
 				string hostsFile = Environment.GetEnvironmentVariable ("HOME") + "/.ssh/config";
 				FileStream fs = new FileStream (hostsFile, FileMode.Open, FileAccess.Read);
