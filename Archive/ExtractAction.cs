@@ -42,7 +42,7 @@ namespace GnomeDoArchive {
 		
 		public override string Icon {
 			get {
-				return "extract-archive";
+				return "gnome-mime-application-x-archive";
 			}
 		}
 		
@@ -64,10 +64,10 @@ namespace GnomeDoArchive {
 		{
 			IFileItem fi = items[0] as IFileItem;
 
-			Process process = new Process();
+			Process process = new Process ();
 			process.StartInfo.FileName = "/usr/bin/file-roller";
-			process.StartInfo.Arguments = " -f " + fi.Path;
-			process.Start();
+			process.StartInfo.Arguments = "-f " + fi.Path;
+			process.Start ();
 			return null;
 		}
 	}
@@ -89,7 +89,7 @@ namespace GnomeDoArchive {
 		
 		public override string Icon {
 			get {
-				return "extract";
+				return "gnome-mime-application-x-archive";
 			}
 		}
 		
@@ -111,10 +111,10 @@ namespace GnomeDoArchive {
 		{
 			IFileItem fi = items[0] as IFileItem;
 
-			Process process = new Process();
+			Process process = new Process ();
 			process.StartInfo.FileName = "/usr/bin/file-roller";
-			process.StartInfo.Arguments = " -h " + fi.Path;
-			process.Start();
+			process.StartInfo.Arguments = "-h " + fi.Path;
+			process.Start ();
 			return null;
 		}
 	}
