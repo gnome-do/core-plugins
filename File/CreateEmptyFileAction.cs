@@ -43,7 +43,7 @@ namespace GnomeDoFile {
 		
 		public override string Icon {
 			get {
-				return "new-file";
+				return "filenew";
 			}
 		}
 		
