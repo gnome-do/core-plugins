@@ -78,7 +78,7 @@ namespace GnomeDoFile {
 			FileItem parent = items [0] as FileItem;
 
 			// Don't create the file if the parent is not a dir
-			if (parent.MimeType == "x-directory/normal") {
+			if (parent.MimeType != "x-directory/normal") {
 				return null;
 			}
 
