@@ -75,20 +75,29 @@ namespace GnomeDoFile {
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			FileItem fi = items [0] as FileItem;
+			FileItem parent = items [0] as FileItem;
+
+			// Don't create the file if the parent is not a dir
+			if (parent.MimeType == "x-directory/normal") {
+				return null;
+			}
+
 			ITextItem ti = modItems [0] as ITextItem;
 
-			string filename = fi.Path + "/" + ti.Text;
+			// Create the filename for the new file
+			string filename = parent.Path + "/" + ti.Text;
 
 			try {
 				using (FileStream w = File.Open (filename, FileMode.CreateNew, FileAccess.Write)) {
-					// Do nothing just create the file.
+					// Do nothing just create the file
 					w.Close();
 				}
 			}
 			catch (Exception) {
 				return null;
 			}
+
+			// Return the new file, so new actions can be used on it
 			return new IItem[]{ new FileItem(filename) };
 		}
 	}
