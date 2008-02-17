@@ -79,11 +79,12 @@ AC_CONFIG_FILES([
 	Pastebin/src/Makefile
 	SimplePlugins/Makefile
 	Templates/Makefile
-    Banshee/Makefile
-    Banshee/src/Makefile
-    SSH/Makefile
-    AppendText/Makefile
-    Archive/Makefile
+	Banshee/Makefile
+	Banshee/src/Makefile
+	SSH/Makefile
+	AppendText/Makefile
+	Archive/Makefile
+	File/Makefile
 ])
 
 AC_OUTPUT
