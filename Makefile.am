@@ -25,7 +25,6 @@ ENABLED_SUBDIRS += SSH
 endif
 
 SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
-	  GoogleCalculator Templates GNOME-Session SimplePlugins AppendText \
-	  Archive File
+	  GoogleCalculator Templates GNOME-Session SimplePlugins File
 
 EXTRA_DIST = DoPlugins.mds Packages.mdse COPYRIGHT
