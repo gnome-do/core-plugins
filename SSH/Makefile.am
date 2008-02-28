@@ -1,4 +1,4 @@
-EXTRA_DIST=
+EXTRA_DIST=SSHAction.cs SSHHosts.cs
 
 ASSEMBLY_NAME=SSH
 ASSEMBLY=$(ASSEMBLY_NAME).dll
@@ -14,7 +14,7 @@ ssh_sources= \
 		SSHAction.cs \
 		SSHHosts.cs
 
-ssh_build_sources = $(ssh_sources)
+ssh_build_sources = $(addprefix $(srcdir)/, $(ssh_sources))
 
 plugin_DATA = $(ASSEMBLY)
 

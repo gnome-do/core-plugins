@@ -1,4 +1,4 @@
-EXTRA_DIST=
+EXTRA_DIST=AppendTextAction.cs
 
 ASSEMBLY_NAME=AppendText
 ASSEMBLY=$(ASSEMBLY_NAME).dll
@@ -12,7 +12,7 @@ appendtext_references=$(DO_ADDINS_LIBS)
 appendtext_sources= \
 		AppendTextAction.cs
 
-appendtext_build_sources = $(appendtext_sources)
+appendtext_build_sources = $(addprefix $(srcdir)/, $(appendtext_sources))
 
 plugin_DATA = $(ASSEMBLY)
 

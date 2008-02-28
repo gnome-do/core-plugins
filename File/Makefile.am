@@ -1,4 +1,4 @@
-EXTRA_DIST=
+EXTRA_DIST=CreateEmptyFileAction.cs
 
 ASSEMBLY_NAME=File
 ASSEMBLY=$(ASSEMBLY_NAME).dll
@@ -12,7 +12,7 @@ file_references=$(DO_ADDINS_LIBS)
 file_sources= \
 		CreateEmptyFileAction.cs
 
-file_build_sources = $(file_sources)
+file_build_sources = $(addprefix $(srcdir)/,$(file_sources))
 
 plugin_DATA = $(ASSEMBLY)
 
