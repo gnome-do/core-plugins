@@ -9,7 +9,8 @@ CSFLAGS+= -debug+ -debug:full
 
 CLEANFILES = $(ASSEMBLY){,.mdb}
 
-banshee_references = $(DO_ADDINS_LIBS)
+banshee_references = $(DO_ADDINS_LIBS) $(NDESK_DBUS_LIBS) -r:Mono.Data.Sqlite \
+	             -r:System.Data
 
 banshee_sources  = 	\
 			AssemblyInfo.cs \
@@ -26,4 +27,4 @@ plugin_DATA = $(ASSEMBLY)
 all: $(ASSEMBLY)
 
 $(ASSEMBLY): $(banshee_build_sources)
-	$(CSC) $(CSFLAGS) $(banshee_references) -r:Mono.Data.Sqlite -r:System.Data -pkg:ndesk-dbus-1.0 -pkg:ndesk-dbus-glib-1.0 -target:library -out:$@ $(banshee_build_sources)
+	$(CSC) $(CSFLAGS) $(banshee_references) -target:library -out:$@ $(banshee_build_sources)
