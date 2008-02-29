@@ -1,4 +1,4 @@
-/* LaunchpadCodeItem.cs
+/* LaunchpadPersonItem.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this source distribution.
@@ -24,44 +24,15 @@ using Do.Addins;
 
 namespace Do.Launchpad
 {
-	/*
-	 * Needs a better way to find the main code tree for a project.
-	 */
-#if false
-	public class LaunchpadCodeBrowseItem : LaunchpadItem
+	public class LaunchpadUserPageItem : LaunchpadItem
 	{
-		public LaunchpadCodeBrowseItem() { }
-		public string Name { get { return "Code Browse"; } }
-		public string Description { get { return "Browse Code For Launchpad Project"; } }
-
-		public string Icon
-		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadCode.png"); }
-		}
-
-		public bool SupportsItems(IItem[] items)
-		{
-			//Project name can't have a space
-			Regex numbers = new Regex(@"\s+");
-			return !numbers.IsMatch((items[0] as ITextItem).Text);
-		}
-
-		public void Perform (IItem item)
-		{
-			Util.Environment.Open(string.Format("https://codebrowse.launchpad.net/~vcs-imports/{0}/main/files", (item as ITextItem).Text));
-		}
-	}
-#endif
-
-	public class LaunchpadCodeOverviewItem : LaunchpadItem
-	{
-		public LaunchpadCodeOverviewItem() { }
-		public string Name { get { return "Code Overview"; } }
-		public string Description { get { return "Launchpad Code Overview"; } }
+		public LaunchpadUserPageItem() { }
+		public string Name { get { return "User Page"; } }
+		public string Description { get { return "Go to user's page in launchpad"; } }
 		
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadCode.png"); }
+			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadUser.png"); }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -73,7 +44,33 @@ namespace Do.Launchpad
 
 		public void Perform (IItem item)
 		{
-			Util.Environment.Open(string.Format("https://code.launchpad.net/{0}", (item as ITextItem).Text));
+			Util.Environment.Open(string.Format("https://launchpad.net/~{0}", (item as ITextItem).Text));
 		}
 	}
+
+	public class LaunchpadUserSearchItem : LaunchpadItem
+	{
+		public LaunchpadUserSearchItem() { }
+		public string Name { get { return "User Search"; } }
+		public string Description { get { return "Search for a user in launchpad"; } }
+		
+		public string Icon
+		{ 
+			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadUser.png"); }
+		}
+
+		public bool SupportsItems(IItem[] items)
+		{
+			return true;
+		}
+
+		public void Perform (IItem item)
+		{
+			Regex spaces = new Regex(@"\s+");
+			string query = (item as ITextItem).Text;
+			string[] qwords = spaces.Split(query);
+			Util.Environment.Open(string.Format("https://launchpad.net/people?name={0}&searchfor=peopleonly", string.Join("+", qwords)));
+		}
+	}
+
 }

@@ -71,20 +71,7 @@ namespace Do.Launchpad
 			get
 			{
 				return new Type[] {
-					typeof(LaunchpadAnswerSearchItem),
-						typeof(LaunchpadProjectAnswersItem),
-						typeof(LaunchpadBlueprintsItem),
-						typeof(LaunchpadBlueprintSearchItem),
-						typeof(LaunchpadBlueprintsRegisterItem),
-						typeof(LaunchpadBugNumberItem),
-						typeof(LaunchpadBugReportItem),
-						typeof(LaunchpadPackageBugsItem),
-						typeof(LaunchpadBugSearchItem),
-						typeof(LaunchpadCodeBrowseItem),
-						typeof(LaunchpadCodeOverviewItem),
-						typeof(LaunchpadRegisterItem),
-						typeof(LaunchpadTranslationSearchItem),
-						typeof(LaunchpadTranslationReleaseItem)
+					typeof(LaunchpadItem)
 				};
 			}
 		}
@@ -101,11 +88,13 @@ namespace Do.Launchpad
 					new LaunchpadBugReportItem(),
 					new LaunchpadPackageBugsItem(),
 					new LaunchpadBugSearchItem(),
-					new LaunchpadCodeBrowseItem(),
 					new LaunchpadCodeOverviewItem(),
 					new LaunchpadRegisterItem(),
 					new LaunchpadTranslationSearchItem(),
-					new LaunchpadTranslationReleaseItem()
+					new LaunchpadTranslationReleaseItem(),
+					new LaunchpadProjectPageItem(),
+					new LaunchpadUserPageItem(),
+					new LaunchpadUserSearchItem()
 			};
 		}
 

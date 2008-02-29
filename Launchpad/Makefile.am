@@ -18,8 +18,9 @@ launchpad_sources =  \
 	LaunchpadRegisterItem.cs \
 	LaunchpadAction.cs \
 	LaunchpadTranslationsItem.cs \
-	LaunchpadItemSource.cs \
-	LaunchpadAnswersItem.cs
+	LaunchpadAnswersItem.cs \
+	LaunchpadPersonItem.cs \
+	LaunchpadProjectItem.cs
 
 launchpad_resources = \
 	Resources/LaunchpadBlueprints.png \
@@ -28,7 +29,8 @@ launchpad_resources = \
 	Resources/LaunchpadRegister.png \
 	Resources/LaunchpadTranslations.png \
 	Resources/Launchpad.png \
-	Resources/LaunchpadAnswers.png
+	Resources/LaunchpadAnswers.png \
+	Resources/LaunchpadUser.png
 
 plugin_DATA = $(ASSEMBLY)
 

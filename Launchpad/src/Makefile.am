@@ -7,5 +7,5 @@ EXTRA_DIST = \
 						 LaunchpadRegisterItem.cs \
 						 LaunchpadAction.cs \
 						 LaunchpadTranslationsItem.cs \
-						 LaunchpadItemSource.cs \
-						 LaunchpadAnswersItem.cs
+						 LaunchpadAnswersItem.cs \
+						 LaunchpadPersonItem.cs
