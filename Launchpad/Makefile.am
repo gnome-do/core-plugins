@@ -10,25 +10,25 @@ CLEANFILES = $(ASSEMBLY){,.mdb}
 launchpad_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:Mono.Posix.dll -r:System
 
 launchpad_sources =  \
-										 AssemblyInfo.cs \
-										 LaunchpadCodeItem.cs \
-										 LaunchpadBugsItem.cs \
-										 LaunchpadBlueprintsItem.cs \
-										 LaunchpadIcons.cs \
-										 LaunchpadRegisterItem.cs \
-										 LaunchpadAction.cs \
-										 LaunchpadItemSource.cs \
-										 LaunchpadTranslationsItem.cs \
-										 LaunchpadAnswersItem.cs
+	AssemblyInfo.cs \
+	LaunchpadCodeItem.cs \
+	LaunchpadBugsItem.cs \
+	LaunchpadBlueprintsItem.cs \
+	LaunchpadIcons.cs \
+	LaunchpadRegisterItem.cs \
+	LaunchpadAction.cs \
+	LaunchpadTranslationsItem.cs \
+	LaunchpadItemSource.cs \
+	LaunchpadAnswersItem.cs
 
 launchpad_resources = \
-						Resources/LaunchpadBlueprints.png \
-						Resources/LaunchpadBugs.png \
-						Resources/LaunchpadCode.png \
-						Resources/LaunchpadRegister.png \
-						Resources/LaunchpadTranslations.png \
-						Resources/Launchpad.png \
-						Resources/LaunchpadAnswers.png
+	Resources/LaunchpadBlueprints.png \
+	Resources/LaunchpadBugs.png \
+	Resources/LaunchpadCode.png \
+	Resources/LaunchpadRegister.png \
+	Resources/LaunchpadTranslations.png \
+	Resources/Launchpad.png \
+	Resources/LaunchpadAnswers.png
 
 plugin_DATA = $(ASSEMBLY)
 

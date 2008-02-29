@@ -40,21 +40,9 @@ namespace Do.Launchpad
 			get
 			{
 				return new Type[] {
-					typeof(LaunchpadAnswerSearchItem),
-						typeof(LaunchpadProjectAnswersItem),
-						typeof(LaunchpadBlueprintsItem),
-						typeof(LaunchpadBlueprintSearchItem),
-						typeof(LaunchpadBlueprintsRegisterItem),
-						typeof(LaunchpadBugNumberItem),
-						typeof(LaunchpadBugReportItem),
-						typeof(LaunchpadPackageBugsItem),
-						typeof(LaunchpadBugSearchItem),
-						typeof(LaunchpadCodeBrowseItem),
-						typeof(LaunchpadCodeOverviewItem),
-						typeof(LaunchpadItemSource),
-						typeof(LaunchpadRegisterItem),
-						typeof(LaunchpadTranslationSearchItem),
-						typeof(LaunchpadTranslationReleaseItem)
+					typeof(LaunchpadBlueprintsRegisterItem),
+					typeof(LaunchpadBugReportItem),
+					typeof(LaunchpadRegisterItem)
 				};
 			}
 		}
@@ -77,20 +65,9 @@ namespace Do.Launchpad
 		public void UpdateItems ()
 		{
 			lpsections.Clear();
-			lpsections.Add(new LaunchpadAnswerSearchItem());
-			lpsections.Add(new LaunchpadProjectAnswersItem());
-			lpsections.Add(new LaunchpadBlueprintsItem());
-			lpsections.Add(new LaunchpadBlueprintSearchItem());
 			lpsections.Add(new LaunchpadBlueprintsRegisterItem());
-			lpsections.Add(new LaunchpadBugNumberItem());
 			lpsections.Add(new LaunchpadBugReportItem());
-			lpsections.Add(new LaunchpadPackageBugsItem());
-			lpsections.Add(new LaunchpadBugSearchItem());
-			//lpsections.Add(new LaunchpadCodeBrowseItem()); //not working right now.
-			lpsections.Add(new LaunchpadCodeOverviewItem());
 			lpsections.Add(new LaunchpadRegisterItem());
-			lpsections.Add(new LaunchpadTranslationSearchItem());
-			lpsections.Add(new LaunchpadTranslationReleaseItem());
 		}
 
 		public ICollection<IItem> Items {
@@ -102,3 +79,4 @@ namespace Do.Launchpad
 		}
 	}
 }
+

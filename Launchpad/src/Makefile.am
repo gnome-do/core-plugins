@@ -6,6 +6,6 @@ EXTRA_DIST = \
 						 LaunchpadIcons.cs \
 						 LaunchpadRegisterItem.cs \
 						 LaunchpadAction.cs \
-						 LaunchpadItemSource.cs \
 						 LaunchpadTranslationsItem.cs \
+						 LaunchpadItemSource.cs \
 						 LaunchpadAnswersItem.cs

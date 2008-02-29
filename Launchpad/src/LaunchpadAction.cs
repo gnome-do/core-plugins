@@ -89,6 +89,26 @@ namespace Do.Launchpad
 			}
 		}
 
+		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		{
+			return new IItem[] {
+				new LaunchpadAnswerSearchItem(),
+					new LaunchpadProjectAnswersItem(),
+					new LaunchpadBlueprintsItem(),
+					new LaunchpadBlueprintSearchItem(),
+					new LaunchpadBlueprintsRegisterItem(),
+					new LaunchpadBugNumberItem(),
+					new LaunchpadBugReportItem(),
+					new LaunchpadPackageBugsItem(),
+					new LaunchpadBugSearchItem(),
+					new LaunchpadCodeBrowseItem(),
+					new LaunchpadCodeOverviewItem(),
+					new LaunchpadRegisterItem(),
+					new LaunchpadTranslationSearchItem(),
+					new LaunchpadTranslationReleaseItem()
+			};
+		}
+
     public override bool SupportsItem (IItem item)
     {
         return true;
