@@ -82,7 +82,6 @@ namespace Do.Launchpad
 						typeof(LaunchpadBugSearchItem),
 						typeof(LaunchpadCodeBrowseItem),
 						typeof(LaunchpadCodeOverviewItem),
-						typeof(LaunchpadItemSource),
 						typeof(LaunchpadRegisterItem),
 						typeof(LaunchpadTranslationSearchItem),
 						typeof(LaunchpadTranslationReleaseItem)
