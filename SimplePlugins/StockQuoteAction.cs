@@ -28,7 +28,7 @@ using Do.Addins;
 namespace Do.Plugins.Universe
 {
 	/// <summary>
-	/// Given an ITextItem, DefineWordAction will query Google Finance
+	/// Given an ITextItem, StockQuoteAction will query Google Finance
 	/// for the quote, then scrape out the price, daily movement and percent move
 	/// </summary>
 	public class StockQuoteAction : AbstractAction
@@ -40,10 +40,9 @@ namespace Do.Plugins.Universe
 		const string BeginPercent =  "_cp\">";
 		const string EndResult = "</span>";
 
-		Regex wordRegex;
-		
 		public StockQuoteAction ()
-		{ }
+		{
+		}
 		
 		public override string Name {
 			get { return "Stock Quote"; }

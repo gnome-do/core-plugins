@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Threading;
 
 using Do.Universe;
 
@@ -27,6 +28,8 @@ namespace GNOME.Session
 	class SessionCommandItem : IRunnableItem
 	{
 		public delegate void RunDelegate ();
+
+		const int SessionItemRunDelay = 500;
 
 		RunDelegate run;
 		string name, description, icon;
@@ -46,7 +49,12 @@ namespace GNOME.Session
 
 		public virtual void Run ()
 		{
-			run ();
+			new Thread ((ThreadStart)
+				delegate {
+					Thread.Sleep (SessionItemRunDelay);
+					run ();
+				}
+			).Start ();
 		}
 	}
 }
