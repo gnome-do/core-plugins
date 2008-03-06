@@ -97,8 +97,8 @@ namespace Do.Launchpad
 	public class LaunchpadBugSearchItem : LaunchpadItem
 	{
 		public LaunchpadBugSearchItem() { }
-		public string Name { get { return "Bug Search"; } }
-		public string Description { get { return "Search for Bug in Launchpad"; } }
+		public string Name { get { return "Ubuntu Bug Search"; } }
+		public string Description { get { return "Search for Ubuntu bugs at Launchpad"; } }
 		public string Icon
 		{ 
 			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBugs.png"); }
