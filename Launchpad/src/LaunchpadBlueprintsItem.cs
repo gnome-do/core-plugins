@@ -77,7 +77,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBlueprintsRegisterItem() { }
 		public string Name { get { return "Register Blueprints"; } }
-		public string Description { get { return "Register Launchpad Blueprints"; } }
+		public string Description { get { return "Register a blueprint at Launchpad"; } }
 		public string Icon
 		{ 
 			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBlueprints.png"); }
