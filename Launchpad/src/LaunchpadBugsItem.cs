@@ -52,7 +52,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBugReportItem() { }
 		public string Name { get { return "Bug Report"; } }
-		public string Description { get { return "Report New Launchpad Bug"; } }
+		public string Description { get { return "Report an Ubuntu bug at Launchpad"; } }
 		
 		public string Icon
 		{ 
