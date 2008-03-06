@@ -31,7 +31,7 @@ using Mono.Unix;
 
 namespace Do.Plugins.Pastebin
 {
-	public class PastebinCommand : AbstractCommand
+	public class PastebinAction : AbstractAction
 	{
 		public override string Name
 		{
