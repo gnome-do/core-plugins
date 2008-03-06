@@ -28,7 +28,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadAnswerSearchItem() { }
 		public string Name { get { return "Answers Search"; } }
-		public string Description { get { return "Search for Launchpad Answers"; } }
+		public string Description { get { return "Search for answers at Launchpad"; } }
 		public string Icon
 		{ 
 			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadAnswers.png"); }

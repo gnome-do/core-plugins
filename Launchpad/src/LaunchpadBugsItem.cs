@@ -28,7 +28,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBugNumberItem() { }
 		public string Name { get { return "Bug Number"; } }
-		public string Description { get { return "Find Bug by Bug Number"; } }
+		public string Description { get { return "Find bug by number"; } }
 		
 		public string Icon
 		{ 
@@ -52,7 +52,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBugReportItem() { }
 		public string Name { get { return "Bug Report"; } }
-		public string Description { get { return "Report New Launchpad Bug"; } }
+		public string Description { get { return "Report an Ubuntu bug at Launchpad"; } }
 		
 		public string Icon
 		{ 
@@ -73,8 +73,8 @@ namespace Do.Launchpad
 	public class LaunchpadPackageBugsItem : LaunchpadItem
 	{
 		public LaunchpadPackageBugsItem() { }
-		public string Name { get { return "Bugs for Package"; } }
-		public string Description { get { return "Find all bugs for a Launchpad Package"; } }
+		public string Name { get { return "Project Bugs"; } }
+		public string Description { get { return "Show open bugs in a project at Launchpad"; } }
 		
 		public string Icon
 		{ 
@@ -97,8 +97,8 @@ namespace Do.Launchpad
 	public class LaunchpadBugSearchItem : LaunchpadItem
 	{
 		public LaunchpadBugSearchItem() { }
-		public string Name { get { return "Bug Search"; } }
-		public string Description { get { return "Search for Bug in Launchpad"; } }
+		public string Name { get { return "Ubuntu Bug Search"; } }
+		public string Description { get { return "Search for Ubuntu bugs at Launchpad"; } }
 		public string Icon
 		{ 
 			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBugs.png"); }

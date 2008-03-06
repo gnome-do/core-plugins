@@ -27,8 +27,8 @@ namespace Do.Launchpad
 	public class LaunchpadBlueprintsItem : LaunchpadItem
 	{
 		public LaunchpadBlueprintsItem() { }
-		public string Name { get { return "Package Blueprints"; } }
-		public string Description { get { return "Blueprints for specified Launchpad Package"; } }
+		public string Name { get { return "Project Blueprints"; } }
+		public string Description { get { return "Show blueprints for specified project at Launchpad"; } }
 
 		public string Icon
 		{ 
@@ -52,7 +52,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBlueprintSearchItem() { }
 		public string Name { get { return "Blueprint Search"; } }
-		public string Description { get { return "Launchpad Blueprint Search"; } }
+		public string Description { get { return "Search for blueprints at Launchpad"; } }
 
 		public string Icon
 		{ 
@@ -77,7 +77,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBlueprintsRegisterItem() { }
 		public string Name { get { return "Register Blueprints"; } }
-		public string Description { get { return "Register Launchpad Blueprints"; } }
+		public string Description { get { return "Register a blueprint at Launchpad"; } }
 		public string Icon
 		{ 
 			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBlueprints.png"); }

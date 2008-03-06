@@ -57,7 +57,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadCodeOverviewItem() { }
 		public string Name { get { return "Code Overview"; } }
-		public string Description { get { return "Launchpad Code Overview"; } }
+		public string Description { get { return "Browse project code at Launchpad"; } }
 		
 		public string Icon
 		{ 

@@ -27,8 +27,8 @@ namespace Do.Launchpad
 	public class LaunchpadRegisterItem : LaunchpadItem
 	{
 		public LaunchpadRegisterItem() { }
-		public string Name { get { return "Register"; } }
-		public string Description { get { return "Register a new Launchpad Project"; } }
+		public string Name { get { return "Register Project"; } }
+		public string Description { get { return "Register a new project at Launchpad"; } }
 
 		public string Icon
 		{ 
