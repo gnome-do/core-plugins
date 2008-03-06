@@ -52,7 +52,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBlueprintSearchItem() { }
 		public string Name { get { return "Blueprint Search"; } }
-		public string Description { get { return "Launchpad Blueprint Search"; } }
+		public string Description { get { return "Search for blueprints at Launchpad"; } }
 
 		public string Icon
 		{ 
