@@ -73,8 +73,8 @@ namespace Do.Launchpad
 	public class LaunchpadPackageBugsItem : LaunchpadItem
 	{
 		public LaunchpadPackageBugsItem() { }
-		public string Name { get { return "Bugs for Package"; } }
-		public string Description { get { return "Find all bugs for a Launchpad Package"; } }
+		public string Name { get { return "Project Bugs"; } }
+		public string Description { get { return "Show open bugs in a project at Launchpad"; } }
 		
 		public string Icon
 		{ 
