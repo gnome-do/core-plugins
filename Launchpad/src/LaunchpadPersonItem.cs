@@ -28,7 +28,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadUserPageItem() { }
 		public string Name { get { return "User Page"; } }
-		public string Description { get { return "Go to user's page in launchpad"; } }
+		public string Description { get { return "Go to user's page in Launchpad"; } }
 		
 		public string Icon
 		{ 
@@ -52,7 +52,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadUserSearchItem() { }
 		public string Name { get { return "User Search"; } }
-		public string Description { get { return "Search for a user in launchpad"; } }
+		public string Description { get { return "Search for a user in Launchpad"; } }
 		
 		public string Icon
 		{ 
