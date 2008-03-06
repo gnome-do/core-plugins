@@ -28,7 +28,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBugNumberItem() { }
 		public string Name { get { return "Bug Number"; } }
-		public string Description { get { return "Find Bug by Bug Number"; } }
+		public string Description { get { return "Find bug by number"; } }
 		
 		public string Icon
 		{ 
