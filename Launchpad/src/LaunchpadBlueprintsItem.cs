@@ -27,8 +27,8 @@ namespace Do.Launchpad
 	public class LaunchpadBlueprintsItem : LaunchpadItem
 	{
 		public LaunchpadBlueprintsItem() { }
-		public string Name { get { return "Package Blueprints"; } }
-		public string Description { get { return "Blueprints for specified Launchpad Package"; } }
+		public string Name { get { return "Project Blueprints"; } }
+		public string Description { get { return "Show blueprints for specified project at Launchpad"; } }
 
 		public string Icon
 		{ 
