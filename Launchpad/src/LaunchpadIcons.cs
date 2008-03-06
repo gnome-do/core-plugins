@@ -80,6 +80,12 @@ namespace Do.Launchpad
 			{
 				//Extract the icon from the resource file.
 				Stream icon = asm.GetManifestResourceStream(iconName);
+				//TODO: Use a facility within gnome-do's core for creating
+				//temporary icons
+				if (false == Directory.Exists("/tmp/gnome-do"))
+					Directory.CreateDirectory("/tmp/gnome-do");
+				if (false == Directory.Exists("/tmp/gnome-do/icons"))
+					Directory.CreateDirectory("/tmp/gnome-do/icons");
 				string tmp_filename = Path.Combine("/tmp/gnome-do/icons", iconName);
 				BinaryReader input = new BinaryReader(icon);
 				BinaryWriter output = new BinaryWriter(File.OpenWrite(tmp_filename));
