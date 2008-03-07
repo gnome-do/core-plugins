@@ -1,5 +1,5 @@
-AC_PREREQ([2.54])
-AC_INIT([Do-plugins], [0.3.0])
+AC_PREREQ(2.61)
+AC_INIT([Do-plugins],[0.3.0])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AM_MAINTAINER_MODE
@@ -46,8 +46,7 @@ AC_SUBST(DO_DBUS_LIBS)
 dnl - Evolution plugin
 
 AC_ARG_ENABLE([evolution-plugin],
-	AC_HELP_STRING([--enable-evolution-plugin],
-                       [Enable the Evolution plugin]),
+	AS_HELP_STRING([--enable-evolution-plugin],[Enable the Evolution plugin]),
 	enable_evo_plugin=$enableval,
 	enable_evo_plugin=yes)
 
@@ -75,7 +74,7 @@ AM_CONDITIONAL(ENABLE_EVO_PLUGIN, test "x$enable_evo_plugin" = "xyes")
 
 dnl - Amarok plugin
 AC_ARG_ENABLE([amarok-plugin],
-	AC_HELP_STRING([--enable-amarok-plugin], [Enable the Amarok plugin]),
+	AS_HELP_STRING([--enable-amarok-plugin],[Enable the Amarok plugin]),
 	enable_amarok_plugin=$enableval,
 	enable_amarok_plugin=yes)
 
@@ -83,8 +82,7 @@ AM_CONDITIONAL(ENABLE_AMAROK_PLUGIN, test "x$enable_amarok_plugin" = "xyes")
 
 dnl - OpenSearch plugin
 AC_ARG_ENABLE([opensearch-plugin],
-	AC_HELP_STRING([--enable-opensearch-plugin], 
-                       [Enable the OpenSearch plugin]),
+	AS_HELP_STRING([--enable-opensearch-plugin],[Enable the OpenSearch plugin]),
 	enable_opensearch_plugin=$enableval,
 	enable_opensearch_plugin=yes)
 
@@ -93,8 +91,7 @@ AM_CONDITIONAL(ENABLE_OPENSEARCH_PLUGIN,
 
 dnl - Pastebin plugin
 AC_ARG_ENABLE([pastebin-plugin],
-	AC_HELP_STRING([--enable-pastebin-plugin], 
-	               [Enable the Pastebin plugin]),
+	AS_HELP_STRING([--enable-pastebin-plugin],[Enable the Pastebin plugin]),
 	enable_pastebin_plugin=$enableval,
 	enable_pastebin_plugin=yes)
 
@@ -102,8 +99,7 @@ AM_CONDITIONAL(ENABLE_PASTEBIN_PLUGIN, test "x$enable_pastebin_plugin" = "xyes")
 
 dnl - Banshee plugin
 AC_ARG_ENABLE([banshee-plugin],
-	AC_HELP_STRING([--enable-banshee-plugin],
-                       [Enable the Banshee plugin]),
+	AS_HELP_STRING([--enable-banshee-plugin],[Enable the Banshee plugin]),
 	enable_banshee_plugin=$enableval,
 	enable_banshee_plugin=yes)
 
@@ -132,8 +128,7 @@ AM_CONDITIONAL(ENABLE_BANSHEE_PLUGIN, test "x$enable_banshee_plugin" = "xyes")
 
 dnl - SSH plugin
 AC_ARG_ENABLE([ssh-plugin],
-	AC_HELP_STRING([--enable-ssh-plugin],
-                       [Enable the SSH plugin]),
+	AS_HELP_STRING([--enable-ssh-plugin],[Enable the SSH plugin]),
 	enable_ssh_plugin=$enableval,
 	enable_ssh_plugin=yes)
 
@@ -159,11 +154,18 @@ fi
 
 AM_CONDITIONAL(ENABLE_SSH_PLUGIN, test "x$enable_ssh_plugin" = "xyes")
 
+dnl - Launchpad plugin
+AC_ARG_ENABLE([launchpad-plugin],
+	AS_HELP_STRING([--enable-launchpad-plugin],[Enable the Launchpad plugin]),
+	enable_launchpad_plugin=$enableval,
+	enable_launchpad_plugin=yes)
+
+AM_CONDITIONAL(ENABLE_LAUNCHPAD_PLUGIN, test "x$enable_launchpad_plugin" = "xyes")
+
 dnl Plugin install paths
 
 AC_ARG_WITH(plugindir, 
-            AC_HELP_STRING([--with-plugindir=DIR],
-	                   [Plugin install path [$datadir/gnome-do/plugins]]),
+            AS_HELP_STRING([--with-plugindir=DIR],[Plugin install path [$datadir/gnome-do/plugins]]),
             [plugindir="$withval"], 
 	    [plugindir="$datadir/gnome-do/plugins"])
 
@@ -198,6 +200,8 @@ AC_CONFIG_FILES([
 	Banshee/src/Makefile
 	SSH/Makefile
 	File/Makefile
+	Launchpad/Makefile
+	Launchpad/src/Makefile
 ])
 
 AC_OUTPUT

@@ -24,6 +24,10 @@ if ENABLE_SSH_PLUGIN
 ENABLED_SUBDIRS += SSH
 endif
 
+if ENABLE_LAUNCHPAD_PLUGIN
+ENABLED_SUBDIRS += Launchpad
+endif
+
 SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
 	  GoogleCalculator Templates GNOME-Session SimplePlugins File
 
