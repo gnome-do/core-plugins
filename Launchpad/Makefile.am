@@ -1,4 +1,4 @@
-SUBDIRS=src
+SUBDIRS=src Resources
 
 ASSEMBLY_NAME=Launchpad
 ASSEMBLY=$(ASSEMBLY_NAME).dll

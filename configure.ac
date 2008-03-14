@@ -202,6 +202,7 @@ AC_CONFIG_FILES([
 	File/Makefile
 	Launchpad/Makefile
 	Launchpad/src/Makefile
+	Launchpad/Resources/Makefile
 ])
 
 AC_OUTPUT
