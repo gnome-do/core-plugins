@@ -1,11 +1,11 @@
 EXTRA_DIST = AssemblyInfo.cs \
-	     LaunchpadCodeItem.cs \
-	     LaunchpadBugsItem.cs \
-	     LaunchpadBlueprintsItem.cs \
-	     LaunchpadIcons.cs \
-	     LaunchpadRegisterItem.cs \
 	     LaunchpadAction.cs \
-	     LaunchpadTranslationsItem.cs \
 	     LaunchpadAnswersItem.cs \
+	     LaunchpadBlueprintsItem.cs \
+	     LaunchpadBugsItem.cs \
+	     LaunchpadCodeItem.cs \
+	     LaunchpadIcons.cs \
 	     LaunchpadPersonItem.cs \
-	     LaunchpadProjectItem.cs
+	     LaunchpadProjectItem.cs \
+	     LaunchpadRegisterItem.cs \
+	     LaunchpadTranslationsItem.cs
