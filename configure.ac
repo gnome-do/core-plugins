@@ -162,6 +162,16 @@ AC_ARG_ENABLE([launchpad-plugin],
 
 AM_CONDITIONAL(ENABLE_LAUNCHPAD_PLUGIN, test "x$enable_launchpad_plugin" = "xyes")
 
+dnl - Tomboy plugin
+AC_ARG_ENABLE([tomboy-plugin],
+	AS_HELP_STRING([--enable-tomboy-plugin],[Enable the Tomboy plugin]),
+	enable_tomboy_plugin=$enableval,
+	enable_tomboy_plugin=yes)
+
+AM_CONDITIONAL(ENABLE_TOMBOY_PLUGIN, test "x$enable_tomboy_plugin" = "xyes")
+
+
+
 dnl Plugin install paths
 
 AC_ARG_WITH(plugindir, 
@@ -203,6 +213,7 @@ AC_CONFIG_FILES([
 	Launchpad/Makefile
 	Launchpad/src/Makefile
 	Launchpad/Resources/Makefile
+	Tomboy/Makefile
 ])
 
 AC_OUTPUT

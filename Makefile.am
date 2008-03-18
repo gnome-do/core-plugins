@@ -28,6 +28,11 @@ if ENABLE_LAUNCHPAD_PLUGIN
 ENABLED_SUBDIRS += Launchpad
 endif
 
+if ENABLE_TOMBOY_PLUGIN
+ENABLED_SUBDIRS += Tomboy
+endif
+
+
 SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
 	  GoogleCalculator Templates GNOME-Session SimplePlugins File
 
