@@ -48,9 +48,9 @@ dnl - Evolution plugin
 AC_ARG_ENABLE([evolution-plugin],
 	AS_HELP_STRING([--enable-evolution-plugin],[Enable the Evolution plugin]),
 	enable_evo_plugin=$enableval,
-	enable_evo_plugin=yes)
+	enable_evo_plugin=auto)
 
-if test "x$enable_evo_plugin" = "xyes" ; then
+if test "x$enable_evo_plugin" != "xno" ; then
 PKG_CHECK_MODULES([EVOLUTION_SHARP],
 		  [evolution-sharp],
 		  has_evo_deps=yes,
@@ -58,15 +58,15 @@ PKG_CHECK_MODULES([EVOLUTION_SHARP],
 AC_SUBST(EVOLUTION_SHARP_LIBS)
 fi
 
-if test "x$has_evo_deps" != "xyes" ; then
+if test "x$has_evo_deps" = "xno" ; then
 	if test "x$enable_evo_plugin" = "xyes" ; then
 		dnl Error out if explicitly asked for the Evolution plugin
 		AC_MSG_ERROR([Could not find evolution-sharp])
 	fi
 	enable_evo_plugin="no"
 else
-	if test "x$enable_evo_plugin" != "xyes" ; then
-		enable_evo_plugin="no"
+	if test "x$enable_evo_plugin" = "xauto" ; then
+		enable_evo_plugin="yes"
 	fi
 fi
 
@@ -101,9 +101,9 @@ dnl - Banshee plugin
 AC_ARG_ENABLE([banshee-plugin],
 	AS_HELP_STRING([--enable-banshee-plugin],[Enable the Banshee plugin]),
 	enable_banshee_plugin=$enableval,
-	enable_banshee_plugin=yes)
+	enable_banshee_plugin=auto)
 
-if test "x$enable_banshee_plugin" = "xyes" ; then
+if test "x$enable_banshee_plugin" != "xno" ; then
 PKG_CHECK_MODULES([NDESK_DBUS],
 		  [ndesk-dbus-1.0 ndesk-dbus-glib-1.0],
 		  has_banshee_deps=yes,
@@ -111,15 +111,15 @@ PKG_CHECK_MODULES([NDESK_DBUS],
 AC_SUBST(NDESK_DBUS_LIBS)
 fi
 
-if test "x$has_banshee_deps" != "xyes" ; then
+if test "x$has_banshee_deps" = "xno" ; then
 	if test "x$enable_banshee_plugin" = "xyes" ; then
 		dnl Error out if explicitly asked for the BANSHEE plugin
 		AC_MSG_ERROR([Could not find ndesk-dbus or ndesk-dbus-glib])
 	fi
 	enable_banshee_plugin="no"
 else
-	if test "x$enable_banshee_plugin" != "xyes" ; then
-		enable_banshee_plugin="no"
+	if test "x$enable_banshee_plugin" = "xauto" ; then
+		enable_banshee_plugin="yes"
 	fi
 fi
 
@@ -132,7 +132,7 @@ AC_ARG_ENABLE([ssh-plugin],
 	enable_ssh_plugin=$enableval,
 	enable_ssh_plugin=yes)
 
-if test "x$enable_ssh_plugin" = "xyes" ; then
+if test "x$enable_ssh_plugin" != "xno" ; then
 PKG_CHECK_MODULES([GCONF_SHARP],
 		  [gconf-sharp-2.0],
 		  has_ssh_deps=yes,
@@ -140,15 +140,15 @@ PKG_CHECK_MODULES([GCONF_SHARP],
 AC_SUBST(GCONF_SHARP_LIBS)
 fi
 
-if test "x$has_ssh_deps" != "xyes" ; then
+if test "x$has_ssh_deps" = "xno" ; then
 	if test "x$enable_ssh_plugin" = "xyes" ; then
 		dnl Error out if explicitly asked for the SSH plugin
 		AC_MSG_ERROR([Could not find gconf-sharp-2.0])
 	fi
 	enable_ssh_plugin="no"
 else
-	if test "x$enable_ssh_plugin" != "xyes" ; then
-		enable_ssh_plugin="no"
+	if test "x$enable_ssh_plugin" = "xauto" ; then
+		enable_ssh_plugin="yes"
 	fi
 fi
 
