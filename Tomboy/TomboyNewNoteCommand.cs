@@ -32,7 +32,7 @@ namespace Do.Addins.Tomboy
 		}
 		
 		public string Name {
-			get { return "Create Tomboy Note"; }
+			get { return "New Tomboy Note"; }
 		}
 		
 		public string Description {
@@ -40,7 +40,7 @@ namespace Do.Addins.Tomboy
 		}
 		
 		public string Icon {
-			get { return "/usr/share/icons/Tango/scalable/actions/gtk-new.svg"; }
+			get { return "tomboy"; }
 		}
 		
 		public Type[] SupportedItemTypes {

@@ -48,7 +48,10 @@ namespace Do.Addins.Tomboy
 		private static ITBoy TomboyInstance = null;
 
 		static private ITBoy FindInstance() {
-	        if (!Bus.Session.NameHasOwner(BUS_NAME))
+			// try to start the service by default
+ 			Bus.Session.StartServiceByName(BUS_NAME);
+
+			if (!Bus.Session.NameHasOwner(BUS_NAME))
 	            throw new Exception(String.Format("Name {0} has no owner", BUS_NAME));
 
 	        return Bus.Session.GetObject<ITBoy>(BUS_NAME, new ObjectPath (OBJECT_PATH));
