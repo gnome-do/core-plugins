@@ -3,7 +3,7 @@ EXTRA_DIST = 	\
 			TomboyItem.cs \
 			TomboyItemSource.cs \
 			TomboyNewNoteCommand.cs \
-			TomboySearchNotesCommand.cs \
+			TomboySearchNotesCommand.cs
 
 
 ASSEMBLY_NAME=Tomboy
@@ -20,7 +20,7 @@ tomboy_sources  = 	\
 			TomboyItem.cs \
 			TomboyItemSource.cs \
 			TomboyNewNoteCommand.cs \
-			TomboySearchNotesCommand.cs \
+			TomboySearchNotesCommand.cs
 
 tomboy_build_sources = $(addprefix $(srcdir)/, $(tomboy_sources))
 
