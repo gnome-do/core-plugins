@@ -21,6 +21,7 @@ using System.Data;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Mono.Data.Sqlite;
 
 
@@ -31,7 +32,7 @@ namespace Do.Addins.Banshee {
                 static readonly string kMusicLibraryFile;
                 static readonly string kCoverArtDirectory;
                 static List<SongMusicItem> songs;
-                
+
                 static Timer clearSongsTimer;
                 const int SecondsSongsCached = 45;
 
@@ -42,14 +43,33 @@ namespace Do.Addins.Banshee {
                         home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
                         kMusicLibraryFile = "~/.config/banshee/banshee.db".Replace("~", home);
                         kCoverArtDirectory = "~/.config/banshee/covers".Replace("~", home);
-                        
+
                         clearSongsTimer = new Timer (ClearSongs);
                         songs = new List<SongMusicItem> ();
                 }
-                
+
                 private static void ClearSongs (object state)
                 {
                         lock (songs) { songs.Clear(); }
+                }
+
+                private static string CreateArtistAlbumId (string artist, string album)
+                // from Banshee's TrackInfo.cs
+                {
+                        string sm_artist = CreateArtistAlbumIdPart (artist);
+                        string sm_album = CreateArtistAlbumIdPart (album);
+
+                        return sm_artist == null || sm_album == null
+                                ? null
+                                : String.Format ("{0}-{1}", sm_artist, sm_album);
+                }
+
+                private static string CreateArtistAlbumIdPart (string part)
+                // from Banshee's TrackInfo.cs
+                {
+                        return part == null || part == String.Empty
+                                ? null
+                                : Regex.Replace(part, @"[^A-Za-z0-9]*", "").ToLower();
                 }
 
                 public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out,
@@ -135,13 +155,12 @@ namespace Do.Addins.Banshee {
                                                                 string artist_name = reader.GetString(2);
                                                                 string song_file = reader.GetString(3);
                                                                 string cover = null;
-                                                                
+
                                                                 if ((song_name == null || album_name == null) || song_file == null)
                                                                         continue;
 
-                                                                cover = string.Format ("{0}-{1}.jpg",
-                                                                                        artist_name.ToLower(),
-                                                                                        album_name.ToLower());
+                                                                cover = string.Format ("{0}.jpg",
+                                                                                        CreateArtistAlbumId(artist_name, album_name));
                                                                 cover = Path.Combine (kCoverArtDirectory, cover);
 
                                                                 if (!File.Exists (cover))
