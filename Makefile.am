@@ -32,6 +32,10 @@ if ENABLE_TOMBOY_PLUGIN
 ENABLED_SUBDIRS += Tomboy
 endif
 
+if ENABLE_TWITTER_PLUGIN
+ENABLED_SUBDIRS += Twitter
+endif
+
 
 SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
 	  GoogleCalculator Templates GNOME-Session SimplePlugins File

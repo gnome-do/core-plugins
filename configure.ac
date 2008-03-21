@@ -170,6 +170,14 @@ AC_ARG_ENABLE([tomboy-plugin],
 
 AM_CONDITIONAL(ENABLE_TOMBOY_PLUGIN, test "x$enable_tomboy_plugin" = "xyes")
 
+dnl - Twitter plugin
+AC_ARG_ENABLE([twitter-plugin],
+        AS_HELP_STRING([--enable-twitter-plugin],[Enable the Twitter plugin]),
+        enable_twitter_plugin=$enableval,
+        enable_twitter_plugin=yes)
+
+AM_CONDITIONAL(ENABLE_TWITTER_PLUGIN, test "x$enable_twitter_plugin" = "xyes")
+
 
 
 dnl Plugin install paths
@@ -214,6 +222,7 @@ AC_CONFIG_FILES([
 	Launchpad/src/Makefile
 	Launchpad/Resources/Makefile
 	Tomboy/Makefile
+        Twitter/Makefile
 ])
 
 AC_OUTPUT
