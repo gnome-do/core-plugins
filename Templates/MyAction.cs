@@ -28,18 +28,18 @@ using Do.Universe;
 namespace MyAddinNamespace
 {
 
-	public class MyCommand : ICommand
+	public class MyAction : IAction
 	{
 		
 		public string Name {
 			get {
-				return "The name of the command.";
+				return "The name of the action.";
 			}
 		}
 		
 		public string Description {
 			get {
-				return "A description of the command.";
+				return "A description of the action.";
 			}
 		}
 		
@@ -48,7 +48,7 @@ namespace MyAddinNamespace
 				// Look in /usr/share/icons/Tango/* for some great icons
 				// to use. Just return the name of the icon, without the
 				// path or extension.
-				return "my-command-icon";
+				return "my-action-icon";
 			}
 		}
 		

@@ -1,1 +1,1 @@
-EXTRA_DIST = Main.cs MyCommand.cs MyItem.cs MyItemSource.cs Templates.mdp
+EXTRA_DIST = Main.cs MyAction.cs MyItem.cs MyItemSource.cs Templates.mdp
