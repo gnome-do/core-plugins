@@ -55,7 +55,7 @@ namespace Do.Twitter
                 
                 public string Icon {
                         get {
-                                return TwitterIcons.Instance.GetIconPath ("twitter-icon.png");
+                                return "twitter-icon.png@Twitter";
                         }
                 }
                 
