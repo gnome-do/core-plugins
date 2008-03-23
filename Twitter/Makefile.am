@@ -1,6 +1,5 @@
 EXTRA_DIST = 	\
 			Twitter.cs \
-			TwitterIcon.cs \
 			Notifications.cs
 
 ASSEMBLY_NAME=Twitter
@@ -14,11 +13,9 @@ twitter_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System -r:Mono.Posix $(NDES
 
 twitter_sources  = 	\
 			Twitter.cs \
-			TwitterIcon.cs \
 			Notifications.cs
 
 twitter_resources =     \
-			twitter-icon.svg \
 			twitter-icon.png
 
 twitter_build_sources = $(addprefix $(srcdir)/, $(twitter_sources))
