@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Threading;
 using System.Collections.Generic;
 
 using Do.Universe;
@@ -41,7 +42,7 @@ namespace GNOME.Session
 		}
 
 		public string Name { get { return "GNOME Session Commands"; } }
-		public string Description { get { return "Logout, Shutdown, Restart, etc."; } }
+		public string Description { get { return "Log out, Shutdown, Restart, etc."; } }
 		public string Icon { get { return "system-log-out"; } }
 
 		public ICollection<IItem> Items
@@ -50,7 +51,7 @@ namespace GNOME.Session
 				return new IItem[] {
 
 					new SessionCommandItem (
-						"Logout",
+						"Log Out",
 						"Close your session and return to the login screen.",
 						"system-log-out",
 						PowerManagement.Logout),
