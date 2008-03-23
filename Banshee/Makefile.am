@@ -1,30 +1,84 @@
-SUBDIRS=src
 
-EXTRA_DIST=Banshee.mdp
+EXTRA_DIST =  
 
-ASSEMBLY_NAME=Banshee
-ASSEMBLY=$(ASSEMBLY_NAME).dll
+# Warning: This is an automatically generated file, do not edit!
 
-CSFLAGS+= -debug+ -debug:full
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-CLEANFILES = $(ASSEMBLY){,.mdb}
+ASSEMBLY = bin/Debug/Banshee.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
-banshee_references = $(DO_ADDINS_LIBS) $(NDESK_DBUS_LIBS) -r:Mono.Data.Sqlite \
-	             -r:System.Data
 
-banshee_sources  = 	\
-			AssemblyInfo.cs \
-			Banshee.cs \
-			BansheeItems.cs \
-			BansheeAction.cs \
-			BansheeDBus.cs \
-			BansheeItemSource.cs
+endif
 
-banshee_build_sources = $(addprefix $(srcdir)/src/, $(banshee_sources))
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/Banshee.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-plugin_DATA = $(ASSEMBLY)
 
-all: $(ASSEMBLY)
+endif
 
-$(ASSEMBLY): $(banshee_build_sources)
-	$(CSC) $(CSFLAGS) $(banshee_references) -target:library -out:$@ $(banshee_build_sources)
+AL=al2
+SATELLITE_ASSEMBLY_NAME=.resources.dll
+
+LINUX_PKGCONFIG = \
+	$(BANSHEE_PC)  
+
+
+	
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+
+FILES = \
+	src/AssemblyInfo.cs \
+	src/Banshee.cs \
+	src/BansheeAction.cs \
+	src/BansheeDBus.cs \
+	src/BansheeItems.cs \
+	src/BansheeItemSource.cs 
+
+DATA_FILES = 
+
+RESOURCES = 
+
+EXTRAS = \
+	banshee.pc.in 
+
+REFERENCES =  \
+	$(DOADDINS_LIBS) \
+	System \
+	System.Xml \
+	System.Data \
+	Mono.Data.Sqlite \
+	$(NDESK_DBUS_10_LIBS) \
+	$(NDESK_DBUS_GLIB_10_LIBS)
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+BANSHEE_PC = $(BUILD_DIR)/banshee.pc
+
+$(eval $(call emit-deploy-wrapper,BANSHEE_PC,banshee.pc))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)

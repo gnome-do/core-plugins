@@ -1,41 +1,93 @@
-<Combine name="DoPlugins" fileversion="2.0" outputpath="./build/bin/">
+<Combine name="Do Plugins" fileversion="2.0" outputpath="build/bin/">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="Rhythmbox" configuration="Debug" />
-      <Entry build="True" name="Thunderbird" configuration="Debug" />
-      <Entry build="True" name="Pidgin" configuration="Debug" />
-      <Entry build="True" name="Evolution" configuration="Debug" />
-      <Entry build="True" name="Templates" configuration="Debug" />
+      <Entry build="False" name="Templates" configuration="Debug" />
       <Entry build="True" name="Packages" configuration="" />
+      <Entry build="True" name="Rhythmbox" configuration="Debug" />
+      <Entry build="True" name="Amarok" configuration="Debug" />
+      <Entry build="True" name="Banshee" configuration="Debug" />
+      <Entry build="True" name="Epiphany" configuration="Debug" />
+      <Entry build="True" name="Evolution" configuration="Debug" />
+      <Entry build="True" name="File" configuration="Debug" />
+      <Entry build="True" name="GNOME-Session" configuration="Debug" />
+      <Entry build="True" name="GoogleCalculator" configuration="Debug" />
+      <Entry build="True" name="Launchpad" configuration="Debug" />
       <Entry build="True" name="LocateFiles" configuration="Debug" />
+      <Entry build="True" name="OpenSearch" configuration="Debug" />
+      <Entry build="True" name="Pastebin" configuration="Debug" />
+      <Entry build="True" name="Pidgin" configuration="Debug" />
+      <Entry build="True" name="SimplePlugins" configuration="Debug" />
+      <Entry build="True" name="SSH" configuration="Debug" />
+      <Entry build="True" name="Thunderbird" configuration="Debug" />
+      <Entry build="True" name="Tomboy" configuration="Debug" />
+      <Entry build="True" name="Twitter" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="Rhythmbox" configuration="Release" />
-      <Entry build="True" name="Thunderbird" configuration="Release" />
-      <Entry build="True" name="Pidgin" configuration="Release" />
-      <Entry build="True" name="Evolution" configuration="Release" />
-      <Entry build="True" name="Templates" configuration="Release" />
+      <Entry build="False" name="Templates" configuration="Release" />
       <Entry build="True" name="Packages" configuration="" />
+      <Entry build="True" name="Rhythmbox" configuration="Release" />
+      <Entry build="True" name="Amarok" configuration="Release" />
+      <Entry build="True" name="Banshee" configuration="Release" />
+      <Entry build="True" name="Epiphany" configuration="Release" />
+      <Entry build="True" name="Evolution" configuration="Release" />
+      <Entry build="True" name="File" configuration="Release" />
+      <Entry build="True" name="GNOME-Session" configuration="Release" />
+      <Entry build="True" name="GoogleCalculator" configuration="Release" />
+      <Entry build="True" name="Launchpad" configuration="Release" />
       <Entry build="True" name="LocateFiles" configuration="Release" />
+      <Entry build="True" name="OpenSearch" configuration="Release" />
+      <Entry build="True" name="Pastebin" configuration="Release" />
+      <Entry build="True" name="Pidgin" configuration="Release" />
+      <Entry build="True" name="SimplePlugins" configuration="Release" />
+      <Entry build="True" name="SSH" configuration="Release" />
+      <Entry build="True" name="Thunderbird" configuration="Release" />
+      <Entry build="True" name="Tomboy" configuration="Release" />
+      <Entry build="True" name="Twitter" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
-    <Execute type="None" entry="Rhythmbox" />
-    <Execute type="None" entry="Thunderbird" />
-    <Execute type="None" entry="Pidgin" />
-    <Execute type="None" entry="Evolution" />
     <Execute type="None" entry="Templates" />
     <Execute type="None" entry="Packages" />
+    <Execute type="None" entry="Rhythmbox" />
+    <Execute type="None" entry="Amarok" />
+    <Execute type="None" entry="Banshee" />
+    <Execute type="None" entry="Epiphany" />
+    <Execute type="None" entry="Evolution" />
+    <Execute type="None" entry="File" />
+    <Execute type="None" entry="GNOME-Session" />
+    <Execute type="None" entry="GoogleCalculator" />
+    <Execute type="None" entry="Launchpad" />
     <Execute type="None" entry="LocateFiles" />
+    <Execute type="None" entry="OpenSearch" />
+    <Execute type="None" entry="Pastebin" />
+    <Execute type="None" entry="Pidgin" />
+    <Execute type="None" entry="SimplePlugins" />
+    <Execute type="None" entry="SSH" />
+    <Execute type="None" entry="Thunderbird" />
+    <Execute type="None" entry="Tomboy" />
+    <Execute type="None" entry="Twitter" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
-    <Entry filename="./Rhythmbox/Rhythmbox.mdp" />
-    <Entry filename="./Thunderbird/Thunderbird.mdp" />
-    <Entry filename="./Pidgin/Pidgin.mdp" />
-    <Entry filename="./Evolution/Evolution.mdp" />
-    <Entry filename="./Templates/Templates.mdp" />
-    <Entry filename="./Packages.mdse" />
-    <Entry filename="./LocateFiles/LocateFiles.mdp" />
+    <Entry filename="Templates/Templates.mdp" />
+    <Entry filename="Packages.mdse" />
+    <Entry filename="Rhythmbox/Rhythmbox.mdp" />
+    <Entry filename="Amarok/Amarok.mdp" />
+    <Entry filename="Banshee/Banshee.mdp" />
+    <Entry filename="Epiphany/Epiphany.mdp" />
+    <Entry filename="Evolution/Evolution.mdp" />
+    <Entry filename="File/File.mdp" />
+    <Entry filename="GNOME-Session/GNOME-Session.mdp" />
+    <Entry filename="GoogleCalculator/GoogleCalculator.mdp" />
+    <Entry filename="Launchpad/Launchpad.mdp" />
+    <Entry filename="LocateFiles/LocateFiles.mdp" />
+    <Entry filename="OpenSearch/OpenSearch.mdp" />
+    <Entry filename="Pastebin/Pastebin.mdp" />
+    <Entry filename="Pidgin/Pidgin.mdp" />
+    <Entry filename="SimplePlugins/SimplePlugins.mdp" />
+    <Entry filename="SSH/SSH.mdp" />
+    <Entry filename="Thunderbird/Thunderbird.mdp" />
+    <Entry filename="Tomboy/Tomboy.mdp" />
+    <Entry filename="Twitter/Twitter.mdp" />
   </Entries>
 </Combine>

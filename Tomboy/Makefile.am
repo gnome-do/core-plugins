@@ -1,32 +1,80 @@
-EXTRA_DIST = 	\
-			TomboyDBus.cs \
-			TomboyItem.cs \
-			TomboyItemSource.cs \
-			TomboyNewNoteCommand.cs \
-			TomboySearchNotesCommand.cs
+
+EXTRA_DIST =  
+
+# Warning: This is an automatically generated file, do not edit!
+
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
+
+ASSEMBLY = bin/Debug/Tomboy.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
 
-ASSEMBLY_NAME=Tomboy
-ASSEMBLY=$(ASSEMBLY_NAME).dll
+endif
 
-CSFLAGS+= -debug+ -debug:full
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/Tomboy.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-CLEANFILES = $(ASSEMBLY){,.mdb}
 
-tomboy_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS)
+endif
 
-tomboy_sources  = 	\
-			TomboyDBus.cs \
-			TomboyItem.cs \
-			TomboyItemSource.cs \
-			TomboyNewNoteCommand.cs \
-			TomboySearchNotesCommand.cs
+AL=al2
+SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-tomboy_build_sources = $(addprefix $(srcdir)/, $(tomboy_sources))
+LINUX_PKGCONFIG = \
+	$(TOMBOY_PC)  
 
-plugin_DATA = $(ASSEMBLY)
 
-all: $(ASSEMBLY)
+	
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
-$(ASSEMBLY): $(tomboy_sources)
-	$(CSC) $(CSFLAGS) $(tomboy_references) -target:library -out:$@ $(tomboy_build_sources)
+FILES = \
+	src/TomboyDBus.cs \
+	src/TomboyItem.cs \
+	src/TomboyItemSource.cs \
+	src/TomboyNewNoteCommand.cs \
+	src/TomboySearchNotesCommand.cs 
+
+DATA_FILES = 
+
+RESOURCES = 
+
+EXTRAS = \
+	tomboy.pc.in 
+
+REFERENCES =  \
+	$(DOADDINS_LIBS) \
+	$(NDESK_DBUS_10_LIBS) \
+	$(NDESK_DBUS_GLIB_10_LIBS) \
+	System
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+TOMBOY_PC = $(BUILD_DIR)/tomboy.pc
+
+$(eval $(call emit-deploy-wrapper,TOMBOY_PC,tomboy.pc))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
