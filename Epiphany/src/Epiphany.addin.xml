@@ -2,7 +2,6 @@
  
 	<Runtime>
 		<Import assembly="Epiphany.dll"/>
-		<Import assembly="Do.Addins.dll"/>
 	</Runtime>
 	
 	<Dependencies>

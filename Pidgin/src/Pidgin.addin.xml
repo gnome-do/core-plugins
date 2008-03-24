@@ -2,7 +2,6 @@
  
 	<Runtime>
 		<Import assembly="Pidgin.dll"/>
-		<Import assembly="Do.Addins.dll"/>
 	</Runtime>
 	
 	<Dependencies>

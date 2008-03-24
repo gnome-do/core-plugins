@@ -2,7 +2,6 @@
  
 	<Runtime>
 		<Import assembly="GNOME-Session.dll"/>
-		<Import assembly="Do.Addins.dll"/>
 	</Runtime>
 	
 	<Dependencies>

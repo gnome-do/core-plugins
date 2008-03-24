@@ -1,5 +1,5 @@
-<Combine name="Do Plugins" fileversion="2.0" outputpath="build/bin/">
-  <Configurations active="Debug">
+<Combine name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
+  <Configurations active="Repo">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Debug" />
       <Entry build="True" name="Packages" configuration="" />
@@ -43,6 +43,31 @@
       <Entry build="True" name="Thunderbird" configuration="Release" />
       <Entry build="True" name="Tomboy" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
+    </Configuration>
+    <Configuration name="Repo" ctype="CombineConfiguration">
+      <CustomCommands>
+        <Command type="AfterBuild" command="mdtoolize" workingdir="${ProjectDir}/buildrepo" />
+      </CustomCommands>
+      <Entry build="False" name="Templates" configuration="Repo" />
+      <Entry build="True" name="Packages" configuration="Repo" />
+      <Entry build="True" name="Rhythmbox" configuration="Repo" />
+      <Entry build="True" name="Amarok" configuration="Repo" />
+      <Entry build="True" name="Banshee" configuration="Repo" />
+      <Entry build="True" name="Epiphany" configuration="Repo" />
+      <Entry build="True" name="Evolution" configuration="Repo" />
+      <Entry build="True" name="File" configuration="Repo" />
+      <Entry build="True" name="GNOME-Session" configuration="Repo" />
+      <Entry build="True" name="GoogleCalculator" configuration="Repo" />
+      <Entry build="True" name="Launchpad" configuration="Repo" />
+      <Entry build="True" name="LocateFiles" configuration="Repo" />
+      <Entry build="True" name="OpenSearch" configuration="Repo" />
+      <Entry build="True" name="Pastebin" configuration="Repo" />
+      <Entry build="True" name="Pidgin" configuration="Repo" />
+      <Entry build="True" name="SimplePlugins" configuration="Repo" />
+      <Entry build="True" name="SSH" configuration="Repo" />
+      <Entry build="True" name="Thunderbird" configuration="Repo" />
+      <Entry build="True" name="Tomboy" configuration="Repo" />
+      <Entry build="True" name="Twitter" configuration="Repo" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">

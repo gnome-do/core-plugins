@@ -2,7 +2,6 @@
  
 	<Runtime>
 		<Import assembly="SimplePlugins.dll"/>
-		<Import assembly="Do.Addins.dll"/>
 	</Runtime>
 	
 	<Dependencies>

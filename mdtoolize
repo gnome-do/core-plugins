@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ ! -e "./repo" ]; then
+	mkdir repo
+fi
+
+mdtool setup pack `ls | grep addin.xml` -d:./repo
+mdtool setup rep-build repo
+
+cp -r repo ~/.do-repo

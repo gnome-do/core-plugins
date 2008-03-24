@@ -1,4 +1,7 @@
 <CombineEntry name="Packages" fileversion="2.0" ctype="PackagingProject">
+  <Configurations active="Repo">
+    <Configuration name="Repo" ctype="PackagingProjectConfiguration" />
+  </Configurations>
   <Packages>
     <Package name="Binaries">
       <Builder rootEntry="DoPlugins.mds" targetFile="DoPlugins.tar.gz" platform="Linux" ctype="BinariesZipPackageBuilder">

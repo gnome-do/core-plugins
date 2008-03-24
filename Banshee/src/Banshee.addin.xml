@@ -2,7 +2,6 @@
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
-		<Import assembly="Do.Addins.dll"/>
 	</Runtime>
 	
 	<Dependencies>
