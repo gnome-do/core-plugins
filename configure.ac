@@ -108,6 +108,25 @@ Thunderbird/src/AssemblyInfo.cs
 Launchpad/src/AssemblyInfo.cs 
 OpenSearch/src/AssemblyInfo.cs
 Pastebin/src/AssemblyInfo.cs
-])
+Amarok/Amarok.mdp
+Banshee/Banshee.mdp
+Epiphany/Epiphany.mdp
+Evolution/Evolution.mdp
+File/File.mdp
+GNOME-Session/GNOME-Session.mdp
+GoogleCalculator/GoogleCalculator.mdp
+Launchpad/Launchpad.mdp
+LocateFiles/LocateFiles.mdp
+OpenSearch/OpenSearch.mdp
+Pastebin/Pastebin.mdp
+Pidgin/Pidgin.mdp
+Rhythmbox/Rhythmbox.mdp
+SSH/SSH.mdp
+SimplePlugins/SimplePlugins.mdp
+Templates/Templates.mdp
+Thunderbird/Thunderbird.mdp
+Tomboy/Tomboy.mdp
+Twitter/Twitter.mdp
 
+])
 AC_OUTPUT
