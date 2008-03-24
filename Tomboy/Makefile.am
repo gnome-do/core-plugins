@@ -13,6 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
+TOMBOY_ADDIN_XML_SOURCE=src/Tomboy.addin.xml
 
 endif
 
@@ -25,18 +26,22 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
+TOMBOY_ADDIN_XML_SOURCE=src/Tomboy.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
+PROGRAMFILES = \
+	$(TOMBOY_ADDIN_XML)  
+
 LINUX_PKGCONFIG = \
 	$(TOMBOY_PC)  
 
 
 	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/TomboyDBus.cs \
@@ -45,7 +50,8 @@ FILES = \
 	src/TomboyNewNoteCommand.cs \
 	src/TomboySearchNotesCommand.cs 
 
-DATA_FILES = 
+DATA_FILES = \
+	src/Tomboy.addin.xml 
 
 RESOURCES = 
 
@@ -60,12 +66,14 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
+TOMBOY_ADDIN_XML = $(BUILD_DIR)/Tomboy.addin.xml
 TOMBOY_PC = $(BUILD_DIR)/tomboy.pc
 
+$(eval $(call emit-deploy-target,TOMBOY_ADDIN_XML))
 $(eval $(call emit-deploy-wrapper,TOMBOY_PC,tomboy.pc))
 
 

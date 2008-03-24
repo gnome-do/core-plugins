@@ -14,7 +14,7 @@
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Do.Addins.Banshee.BansheeItemSource" />
 	</Extension>
-	<Extension path = "/Do/Action"?
+	<Extension path = "/Do/Action">
 		<Action type="Do.Addins.Banshee.BansheePlayAction" />"
 	</Extension>
 </Addin>

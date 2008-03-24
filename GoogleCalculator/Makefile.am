@@ -13,6 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
+GOOGLECALCULATORACTION_ADDIN_XML_SOURCE=src/GoogleCalculatorAction.addin.xml
 
 endif
 
@@ -25,28 +26,32 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
+GOOGLECALCULATORACTION_ADDIN_XML_SOURCE=src/GoogleCalculatorAction.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
+PROGRAMFILES = \
+	$(GOOGLECALCULATORACTION_ADDIN_XML)  
+
 LINUX_PKGCONFIG = \
 	$(GOOGLECALCULATOR_PC)  
 
 
 	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/GoogleCalculatorAction.cs 
 
-DATA_FILES = 
+DATA_FILES = \
+	src/GoogleCalculatorAction.addin.xml 
 
 RESOURCES = 
 
 EXTRAS = \
-	src/GoogleCalculatorAction.addin.xml \
 	googlecalculator.pc.in 
 
 REFERENCES =  \
@@ -55,12 +60,14 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
+GOOGLECALCULATORACTION_ADDIN_XML = $(BUILD_DIR)/GoogleCalculatorAction.addin.xml
 GOOGLECALCULATOR_PC = $(BUILD_DIR)/googlecalculator.pc
 
+$(eval $(call emit-deploy-target,GOOGLECALCULATORACTION_ADDIN_XML))
 $(eval $(call emit-deploy-wrapper,GOOGLECALCULATOR_PC,googlecalculator.pc))
 
 

@@ -13,6 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
+SSH_ADDIN_XML_SOURCE=src/SSH.addin.xml
 
 endif
 
@@ -25,24 +26,29 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
+SSH_ADDIN_XML_SOURCE=src/SSH.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
+PROGRAMFILES = \
+	$(SSH_ADDIN_XML)  
+
 LINUX_PKGCONFIG = \
 	$(SSH_PC)  
 
 
 	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/SSHAction.cs \
 	src/SSHHosts.cs 
 
-DATA_FILES = 
+DATA_FILES = \
+	src/SSH.addin.xml 
 
 RESOURCES = 
 
@@ -57,12 +63,14 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
+SSH_ADDIN_XML = $(BUILD_DIR)/SSH.addin.xml
 SSH_PC = $(BUILD_DIR)/ssh.pc
 
+$(eval $(call emit-deploy-target,SSH_ADDIN_XML))
 $(eval $(call emit-deploy-wrapper,SSH_PC,ssh.pc))
 
 

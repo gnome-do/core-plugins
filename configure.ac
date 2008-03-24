@@ -1,12 +1,8 @@
 dnl Warning: This is an automatically generated file, do not edit!
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([Do Plugins], [0.4.0.1])
+AC_INIT([Do Plugins], [0.1])
 AM_INIT_AUTOMAKE([foreign])
-
-ASM_VERSION="$VERSION"
-AC_SUBST(ASM_VERSION)
-
 
 dnl pkg-config
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
@@ -49,13 +45,13 @@ fi
 
 
 dnl package checks, common for all configs
-PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
-PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
-PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
+PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
+PKG_CHECK_MODULES([DODBUS], [do.dbus])
+PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
+PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([DOADDINS], [do.addins])
-PKG_CHECK_MODULES([DODBUS], [do.dbus])
 
 dnl package checks, per config
 
@@ -98,35 +94,7 @@ LocateFiles/locatefiles.pc
 SimplePlugins/simpleplugins.pc
 Launchpad/launchpad.pc
 File/Makefile
-Amarok/src/AssemblyInfo.cs
-Banshee/src/AssemblyInfo.cs 
-Evolution/src/AssemblyInfo.cs
-LocateFiles/src/AssemblyInfo.cs
-Pidgin/src/AssemblyInfo.cs
-Rhythmbox/src/AssemblyInfo.cs
-Thunderbird/src/AssemblyInfo.cs
-Launchpad/src/AssemblyInfo.cs 
-OpenSearch/src/AssemblyInfo.cs
-Pastebin/src/AssemblyInfo.cs
-Amarok/Amarok.mdp
-Banshee/Banshee.mdp
-Epiphany/Epiphany.mdp
-Evolution/Evolution.mdp
-File/File.mdp
-GNOME-Session/GNOME-Session.mdp
-GoogleCalculator/GoogleCalculator.mdp
-Launchpad/Launchpad.mdp
-LocateFiles/LocateFiles.mdp
-OpenSearch/OpenSearch.mdp
-Pastebin/Pastebin.mdp
-Pidgin/Pidgin.mdp
-Rhythmbox/Rhythmbox.mdp
-SSH/SSH.mdp
-SimplePlugins/SimplePlugins.mdp
-Templates/Templates.mdp
-Thunderbird/Thunderbird.mdp
-Tomboy/Tomboy.mdp
-Twitter/Twitter.mdp
 
 ])
+
 AC_OUTPUT

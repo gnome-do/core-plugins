@@ -13,6 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
+FILE_ADDIN_XML_SOURCE=src/File.addin.xml
 
 endif
 
@@ -25,23 +26,28 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
+FILE_ADDIN_XML_SOURCE=src/File.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
+PROGRAMFILES = \
+	$(FILE_ADDIN_XML)  
+
 LINUX_PKGCONFIG = \
 	$(FILE_PC)  
 
 
 	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/CreateEmptyFileAction.cs 
 
-DATA_FILES = 
+DATA_FILES = \
+	src/File.addin.xml 
 
 RESOURCES = 
 
@@ -54,13 +60,15 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
 FILE_PC = $(BUILD_DIR)/file.pc
+FILE_ADDIN_XML = $(BUILD_DIR)/File.addin.xml
 
 $(eval $(call emit-deploy-wrapper,FILE_PC,file.pc))
+$(eval $(call emit-deploy-target,FILE_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

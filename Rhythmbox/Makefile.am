@@ -13,6 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
+RHYTHMBOX_ADDIN_XML_SOURCE=src/Rhythmbox.addin.xml
 
 endif
 
@@ -25,18 +26,22 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
+RHYTHMBOX_ADDIN_XML_SOURCE=src/Rhythmbox.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
+PROGRAMFILES = \
+	$(RHYTHMBOX_ADDIN_XML)  
+
 LINUX_PKGCONFIG = \
 	$(RHYTHMBOX_PC)  
 
 
 	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/MusicItems.cs \
@@ -47,12 +52,12 @@ FILES = \
 	src/RhythmboxPlayAction.cs \
 	src/AssemblyInfo.cs 
 
-DATA_FILES = 
+DATA_FILES = \
+	src/Rhythmbox.addin.xml 
 
 RESOURCES = 
 
 EXTRAS = \
-	src/Rhythmbox.addin.xml \
 	rhythmbox.pc.in 
 
 REFERENCES =  \
@@ -63,13 +68,15 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
 RHYTHMBOX_PC = $(BUILD_DIR)/rhythmbox.pc
+RHYTHMBOX_ADDIN_XML = $(BUILD_DIR)/Rhythmbox.addin.xml
 
 $(eval $(call emit-deploy-wrapper,RHYTHMBOX_PC,rhythmbox.pc))
+$(eval $(call emit-deploy-target,RHYTHMBOX_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

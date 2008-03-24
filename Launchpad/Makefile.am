@@ -13,6 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
+LAUNCHPAD_ADDIN_XML_SOURCE=src/Launchpad.addin.xml
 
 endif
 
@@ -25,18 +26,22 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
+LAUNCHPAD_ADDIN_XML_SOURCE=src/Launchpad.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
+PROGRAMFILES = \
+	$(LAUNCHPAD_ADDIN_XML)  
+
 LINUX_PKGCONFIG = \
 	$(LAUNCHPAD_PC)  
 
 
 	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -51,7 +56,8 @@ FILES = \
 	src/LaunchpadRegisterItem.cs \
 	src/LaunchpadTranslationsItem.cs 
 
-DATA_FILES = 
+DATA_FILES = \
+	src/Launchpad.addin.xml 
 
 RESOURCES = \
 	Resources/Launchpad.png \
@@ -73,13 +79,15 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
 LAUNCHPAD_PC = $(BUILD_DIR)/launchpad.pc
+LAUNCHPAD_ADDIN_XML = $(BUILD_DIR)/Launchpad.addin.xml
 
 $(eval $(call emit-deploy-wrapper,LAUNCHPAD_PC,launchpad.pc))
+$(eval $(call emit-deploy-target,LAUNCHPAD_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

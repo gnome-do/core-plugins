@@ -13,7 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-EYEOFGNOMEPLAYSLIDESHOWACTION_ADDIN_XML_SOURCE=src/EyeOfGNOMEPlaySlideshowAction.addin.xml
+SIMPLEPLUGINS_ADDIN_XML_SOURCE=src/SimplePlugins.addin.xml
 
 endif
 
@@ -26,7 +26,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-EYEOFGNOMEPLAYSLIDESHOWACTION_ADDIN_XML_SOURCE=src/EyeOfGNOMEPlaySlideshowAction.addin.xml
+SIMPLEPLUGINS_ADDIN_XML_SOURCE=src/SimplePlugins.addin.xml
 
 endif
 
@@ -34,7 +34,7 @@ AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
 PROGRAMFILES = \
-	$(EYEOFGNOMEPLAYSLIDESHOWACTION_ADDIN_XML)  
+	$(SIMPLEPLUGINS_ADDIN_XML)  
 
 LINUX_PKGCONFIG = \
 	$(SIMPLEPLUGINS_PC)  
@@ -51,7 +51,7 @@ FILES = \
 	src/StockQuoteAction.cs 
 
 DATA_FILES = \
-	src/EyeOfGNOMEPlaySlideshowAction.addin.xml 
+	src/SimplePlugins.addin.xml 
 
 RESOURCES = 
 
@@ -69,10 +69,10 @@ CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG)
 include $(top_srcdir)/Makefile.include
 
 SIMPLEPLUGINS_PC = $(BUILD_DIR)/simpleplugins.pc
-EYEOFGNOMEPLAYSLIDESHOWACTION_ADDIN_XML = $(BUILD_DIR)/EyeOfGNOMEPlaySlideshowAction.addin.xml
+SIMPLEPLUGINS_ADDIN_XML = $(BUILD_DIR)/SimplePlugins.addin.xml
 
 $(eval $(call emit-deploy-wrapper,SIMPLEPLUGINS_PC,simpleplugins.pc))
-$(eval $(call emit-deploy-target,EYEOFGNOMEPLAYSLIDESHOWACTION_ADDIN_XML))
+$(eval $(call emit-deploy-target,SIMPLEPLUGINS_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

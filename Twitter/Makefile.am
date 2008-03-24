@@ -13,6 +13,7 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
+TWITTER_ADDIN_XML_SOURCE=src/Twitter.addin.xml
 
 endif
 
@@ -25,24 +26,29 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
+TWITTER_ADDIN_XML_SOURCE=src/Twitter.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
+PROGRAMFILES = \
+	$(TWITTER_ADDIN_XML)  
+
 LINUX_PKGCONFIG = \
 	$(TWITTER_PC)  
 
 
 	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/Notifications.cs \
 	src/Twitter.cs 
 
-DATA_FILES = 
+DATA_FILES = \
+	src/Twitter.addin.xml 
 
 RESOURCES = \
 	twitter-icon.png 
@@ -60,13 +66,15 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
 TWITTER_PC = $(BUILD_DIR)/twitter.pc
+TWITTER_ADDIN_XML = $(BUILD_DIR)/Twitter.addin.xml
 
 $(eval $(call emit-deploy-wrapper,TWITTER_PC,twitter.pc))
+$(eval $(call emit-deploy-target,TWITTER_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

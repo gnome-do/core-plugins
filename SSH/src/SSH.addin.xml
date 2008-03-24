@@ -1,7 +1,7 @@
 <Addin id="SSH" namespace= "Do" version="1.0">
  
 	<Runtime>
-		<Import assembly="SSHAction.dll"/>
+		<Import assembly="SSH.dll"/>
 		<Import assembly="Do.Addins.dll"/>
 	</Runtime>
 	
