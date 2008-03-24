@@ -1,5 +1,5 @@
 <Project name="Launchpad" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Debug">
+  <Configurations active="Repo">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Launchpad" />
       <Build debugmode="True" target="Library" />
@@ -13,7 +13,7 @@
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Repo" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Debug" assembly="Launchpad" />
+      <Output directory="../buildrepo" assembly="Launchpad" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
@@ -41,6 +41,7 @@
     <File name="Resources/LaunchpadRegister.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadTranslations.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadUser.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/Launchpad.addin.xml" subtype="Code" buildaction="FileCopy" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
