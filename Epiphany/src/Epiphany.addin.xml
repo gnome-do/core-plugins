@@ -1,4 +1,4 @@
-<Addin id="Amarok" namespace= "Do" version="1.0">
+<Addin id="Epiphany" namespace= "Do" version="1.0">
  
 	<Runtime>
 		<Import assembly="Epiphany.dll"/>
