@@ -1,4 +1,4 @@
-<Addin id="Rhythmbox" namespace= "Do" version="1.0">
+<Addin id="Evolution" namespace= "Do" version="1.0">
  
 	<Runtime>
 		<Import assembly="Evolution.dll"/>

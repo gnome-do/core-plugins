@@ -1,7 +1,7 @@
-<Addin id="Gnome Session" namespace= "Do" version="1.0">
+<Addin id="File" namespace= "Do" version="1.0">
  
 	<Runtime>
-		<Import assembly="GNOME-Session.dll"/>
+		<Import assembly="File.dll"/>
 		<Import assembly="Do.Addins.dll"/>
 	</Runtime>
 	
@@ -11,7 +11,7 @@
 	
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
-	<Extension path = "/Do/ItemSource">
-		<ItemSource type="GNOME.Session.SessionCommandsItemSource" />
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.CreateEmptyFileAction" />
 	</Extension>
 </Addin>
