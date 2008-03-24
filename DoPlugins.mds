@@ -1,4 +1,4 @@
-<Combine name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
+<Combine releaseversion="0.4.0.1" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
   <Configurations active="Repo">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Debug" />

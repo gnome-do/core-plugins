@@ -8,3 +8,6 @@ endif
 if ENABLE_RELEASE
  SUBDIRS =  .  Rhythmbox Amarok Banshee Epiphany Evolution File GNOME-Session GoogleCalculator Launchpad LocateFiles OpenSearch Pastebin Pidgin SimplePlugins SSH Thunderbird Tomboy Twitter
 endif
+if ENABLE_REPO
+ SUBDIRS =  .  Rhythmbox Amarok Banshee Epiphany Evolution File GNOME-Session GoogleCalculator Launchpad LocateFiles OpenSearch Pastebin Pidgin SimplePlugins SSH Thunderbird Tomboy Twitter
+endif

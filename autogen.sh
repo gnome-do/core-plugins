@@ -1,6 +1,6 @@
 #! /bin/sh
 
-PROJECT="Do Plugins"
+PROJECT=DoPlugins
 FILE=
 CONFIGURE=configure.ac
 
