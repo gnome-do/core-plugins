@@ -32,7 +32,7 @@ namespace Do.Launchpad
 
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadTranslations.png"); }
+			get { return "LaunchpadTranslations.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -58,7 +58,7 @@ namespace Do.Launchpad
 
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadTranslations.png"); }
+			get { return "LaunchpadTranslations.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)

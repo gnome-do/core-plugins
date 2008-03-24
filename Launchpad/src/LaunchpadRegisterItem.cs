@@ -32,7 +32,7 @@ namespace Do.Launchpad
 
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadRegister.png"); }
+			get { return "LaunchpadRegister.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)

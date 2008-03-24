@@ -32,7 +32,7 @@ namespace Do.Launchpad
 
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBlueprints.png"); }
+			get { return "LaunchpadBlueprints.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -56,7 +56,7 @@ namespace Do.Launchpad
 
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBlueprints.png"); }
+			get { return "LaunchpadBlueprints.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -80,7 +80,7 @@ namespace Do.Launchpad
 		public string Description { get { return "Register a blueprint at Launchpad"; } }
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBlueprints.png"); }
+			get { return "LaunchpadBlueprints.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)

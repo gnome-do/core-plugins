@@ -46,7 +46,7 @@ namespace Do.Launchpad
 
 		public override string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("Launchpad.png"); }
+			get { return "Launchpad.png@Launchpad"; }
 		}
 
 		public override Type[] SupportedItemTypes

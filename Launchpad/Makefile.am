@@ -14,7 +14,6 @@ launchpad_sources =  \
 	LaunchpadCodeItem.cs \
 	LaunchpadBugsItem.cs \
 	LaunchpadBlueprintsItem.cs \
-	LaunchpadIcons.cs \
 	LaunchpadRegisterItem.cs \
 	LaunchpadAction.cs \
 	LaunchpadTranslationsItem.cs \
