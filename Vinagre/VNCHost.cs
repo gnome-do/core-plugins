@@ -77,13 +77,15 @@ namespace GnomeDoVNC
 				StreamReader reader = File.OpenText(bookmarksFile);
 				string s;
 				while ((s = reader.ReadLine ()) != null) {
-					if((s.Substring(0,1).Equals("[")) && (s.Substring(s.Length - 1,1).Equals("]"))) {
-						s = s.Substring(1,s.Length - 2);
-						items.Add (new HostItem(s));
+					if (s.Length > 1) {
+						if ((s.Substring (0,1).Equals ("[")) && (s.Substring (s.Length - 1,1).Equals ("]"))) {
+							s = s.Substring (1,s.Length - 2);
+							items.Add (new HostItem(s));
+						}
 					}
 				}
 			} catch { 
-				Console.Error.WriteLine("[ERROR] " + bookmarksFile + " cannot be read!");
+				Console.Error.WriteLine ("[ERROR] " + bookmarksFile + " cannot be read!");
 			} 
 		}
 	}

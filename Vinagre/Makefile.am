@@ -12,7 +12,7 @@ CLEANFILES = $(ASSEMBLY){,.mdb}
 
 vinagre_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS)
 
-tomboy_sources  = 	\
+vinagre_sources  = 	\
 			VNCHost.cs
 			Vinagre.cs
 

@@ -144,10 +144,10 @@ ASSEMBLY_NAME = Vinagre
 ASSEMBLY = $(ASSEMBLY_NAME).dll
 CLEANFILES = $(ASSEMBLY){,.mdb}
 vinagre_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS)
-tomboy_sources = \
+vinagre_sources = \
 			VNCHost.cs
 
-vinagre_build_sources = $(addprefix $(srcdir)/, $(tomboy_sources))
+vinagre_build_sources = $(addprefix $(srcdir)/, $(vinagre_sources))
 plugin_DATA = $(ASSEMBLY)
 all: all-am
 
