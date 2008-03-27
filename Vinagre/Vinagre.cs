@@ -66,7 +66,7 @@ namespace GnomeDoVNC {
             }
             else {
                 HostItem hostitem = items [0] as HostItem;
-                hostname = hostitem.Text;
+                hostname = hostitem.Description + ":" + hostitem.Port;
             }
 
 			Process vinagre = new Process ();

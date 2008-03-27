@@ -27,18 +27,21 @@ using Do.Universe;
 namespace GnomeDoVNC 
 {
 	public class HostItem : IItem {
-		string name;
+		string bookmark, hostname, port;
 
-		public HostItem (string hostname)
+		public HostItem (string bookmark, string hostname, string port	)
 		{
-			name = hostname;
+			this.bookmark = bookmark;
+			this.hostname = hostname;
+			this.port = port;
 		}
 
-		public string Name { get { return name; } }
-		public string Description { get { return "VNC Host"; } }
+		public string Name { get { return bookmark; } }
+		public string Description { get { return hostname; } }
 		public string Icon { get { return "gnome-globe"; } }
 
-		public string Text { get { return name; } }
+		public string Text { get { return bookmark; } }
+		public string Port { get { return port; } }
 	}
 	
 	public class VNCHostItem : IItemSource {
@@ -75,12 +78,14 @@ namespace GnomeDoVNC
 			string bookmarksFile = Environment.GetEnvironmentVariable ("HOME") + "/.gnome2/vinagre.bookmarks";
 			try {
 				StreamReader reader = File.OpenText(bookmarksFile);
-				string s;
+				string s, host, port;
 				while ((s = reader.ReadLine ()) != null) {
 					if (s.Length > 1) {
 						if ((s.Substring (0,1).Equals ("[")) && (s.Substring (s.Length - 1,1).Equals ("]"))) {
 							s = s.Substring (1,s.Length - 2);
-							items.Add (new HostItem(s));
+							host = reader.ReadLine ();
+							port = reader.ReadLine ();
+							items.Add (new HostItem(s, host.Substring (5,host.Length - 5), port.Substring (5,port.Length - 5)));
 						}
 					}
 				}
