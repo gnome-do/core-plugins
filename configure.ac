@@ -183,6 +183,7 @@ AC_ARG_ENABLE([vinagre-plugin],
 	AS_HELP_STRING([--enable-vinagre-plugin],[Enable the Vinagre plugin]),
 	enable_vinagre_plugin=$enableval,
 	enable_vinagre_plugin=yes)
+
 AM_CONDITIONAL(ENABLE_VINAGRE_PLUGIN, test "x$enable_vinagre_plugin" = "xyes")
 
 dnl Plugin install paths

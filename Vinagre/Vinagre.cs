@@ -45,9 +45,9 @@ namespace GnomeDoVNC {
 		public override Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof(ITextItem),
 					typeof(HostItem),
 					typeof(VNCHostItem),
+					typeof(ITextItem),
 				};
 			}
 		}

@@ -13,10 +13,9 @@ CLEANFILES = $(ASSEMBLY){,.mdb}
 vinagre_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS)
 
 vinagre_sources  = 	\
-			VNCHost.cs
-			Vinagre.cs
+			VNCHost.cs Vinagre.cs
 
-vinagre_build_sources = $(addprefix $(srcdir)/, $(tomboy_sources))
+vinagre_build_sources = $(addprefix $(srcdir)/, $(vinagre_sources))
 
 plugin_DATA = $(ASSEMBLY)
 
