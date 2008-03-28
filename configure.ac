@@ -195,34 +195,35 @@ AC_SUBST(CSFLAGS)
 
 AC_CONFIG_FILES([
 	Makefile
-	GNOME-Session/Makefile
+	Amarok/Makefile
+	Banshee/Makefile
+	Banshee/src/Makefile
+	Epiphany/Makefile
 	Evolution/Makefile
 	Evolution/src/Makefile
-	Epiphany/Makefile
-	Amarok/Makefile
-	Rhythmbox/Makefile
-	Rhythmbox/src/Makefile
-	Pidgin/Makefile
-	Pidgin/src/Makefile
-	LocateFiles/Makefile
-	Thunderbird/Makefile
-	Thunderbird/src/Makefile
+	File/Makefile
+	GNOME-Screenshot/Makefile
+	GNOME-Session/Makefile
 	GoogleCalculator/Makefile
+	Launchpad/Makefile
+	Launchpad/Resources/Makefile
+	Launchpad/src/Makefile
+	LocateFiles/Makefile
 	OpenSearch/Makefile
 	OpenSearch/src/Makefile
 	Pastebin/Makefile
 	Pastebin/src/Makefile
+	Pidgin/Makefile
+	Pidgin/src/Makefile
+	Rhythmbox/Makefile
+	Rhythmbox/src/Makefile
+	SSH/Makefile
 	SimplePlugins/Makefile
 	Templates/Makefile
-	Banshee/Makefile
-	Banshee/src/Makefile
-	SSH/Makefile
-	File/Makefile
-	Launchpad/Makefile
-	Launchpad/src/Makefile
-	Launchpad/Resources/Makefile
+	Thunderbird/Makefile
+	Thunderbird/src/Makefile
 	Tomboy/Makefile
-        Twitter/Makefile
+	Twitter/Makefile
 ])
 
 AC_OUTPUT

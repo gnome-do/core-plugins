@@ -38,6 +38,6 @@ endif
 
 
 SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
-	  GoogleCalculator Templates GNOME-Session SimplePlugins File
+	  GoogleCalculator Templates GNOME-Session GNOME-Screenshot SimplePlugins File
 
 EXTRA_DIST = DoPlugins.mds Packages.mdse COPYRIGHT
