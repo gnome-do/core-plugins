@@ -28,7 +28,7 @@ namespace GNOME {
 		}
 		
 		public override string Description {
-			get { return "Takes screenshot of the current window."; }
+			get { return "Take a screenshot of the current window."; }
 		}
 		
 		public override string Icon {

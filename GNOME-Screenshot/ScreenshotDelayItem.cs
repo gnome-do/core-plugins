@@ -39,7 +39,7 @@ namespace GNOME {
 		public string Description {
 			get {
 				return string.Format (
-					"Waits {0} second{1} before taking screenshot.",
+					"Wait {0} second{1} before taking the screenshot.",
 					seconds,
 					seconds == 1 ? "" : "s");
 			}
