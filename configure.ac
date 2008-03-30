@@ -3,9 +3,6 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
 AC_INIT([DoPlugins], [0.4.0.1])
 AM_INIT_AUTOMAKE([foreign])
-ASM_VERSION="$VERSION"
-AC_SUBST(ASM_VERSION)
-
 
 dnl pkg-config
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
@@ -35,7 +32,7 @@ if test "x$enable_debug" = "xyes" ; then
 fi
 AC_ARG_ENABLE(release,
 	AC_HELP_STRING([--enable-release],
-		[Use 'RELEASE' Configuration [default=YES]]),
+		[Use 'RELEASE' Configuration [default=NO]]),
 		enable_release=yes, enable_release=no)
 AM_CONDITIONAL(ENABLE_RELEASE, test x$enable_release = xyes)
 if test "x$enable_release" = "xyes" ; then
@@ -43,26 +40,29 @@ if test "x$enable_release" = "xyes" ; then
 fi
 AC_ARG_ENABLE(repo,
 	AC_HELP_STRING([--enable-repo],
-		[Use 'REPO' Configuration [default=NO]]),
+		[Use 'REPO' Configuration [default=YES]]),
 		enable_repo=yes, enable_repo=no)
 AM_CONDITIONAL(ENABLE_REPO, test x$enable_repo = xyes)
 if test "x$enable_repo" = "xyes" ; then
 	CONFIG_REQUESTED="yes"
 fi
 if test -z "$CONFIG_REQUESTED" ; then
-	AM_CONDITIONAL(ENABLE_RELEASE, true)
-	enable_release=yes
+	AM_CONDITIONAL(ENABLE_REPO, true)
+	enable_repo=yes
 fi
 
 
 dnl package checks, common for all configs
-PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
-PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
+PKG_CHECK_MODULES([DODBUS], [do.dbus])
 PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([DOADDINS], [do.addins])
-PKG_CHECK_MODULES([DODBUS], [do.dbus])
+PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
+PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
+PKG_CHECK_MODULES([GNOME_DESKTOP_SHARP_20], [gnome-desktop-sharp-2.0])
 PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
+PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
+PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
 
 dnl package checks, per config
 
@@ -77,10 +77,12 @@ LocateFiles/Makefile
 SSH/ssh.pc
 OpenSearch/opensearch.pc
 GoogleCalculator/googlecalculator.pc
+WindowManager/windowmanager.pc
 Rhythmbox/Makefile
 GNOME-Session/gnome-session.pc
 Amarok/Makefile
 Banshee/banshee.pc
+WindowManager/Makefile
 Makefile
 OpenSearch/Makefile
 Launchpad/Makefile
@@ -105,35 +107,6 @@ LocateFiles/locatefiles.pc
 SimplePlugins/simpleplugins.pc
 Launchpad/launchpad.pc
 File/Makefile
-Amarok/src/AssemblyInfo.cs
-Banshee/src/AssemblyInfo.cs 
-Evolution/src/AssemblyInfo.cs
-LocateFiles/src/AssemblyInfo.cs
-Pidgin/src/AssemblyInfo.cs
-Rhythmbox/src/AssemblyInfo.cs
-Thunderbird/src/AssemblyInfo.cs
-Launchpad/src/AssemblyInfo.cs 
-OpenSearch/src/AssemblyInfo.cs
-Pastebin/src/AssemblyInfo.cs
-Amarok/Amarok.mdp
-Banshee/Banshee.mdp
-Epiphany/Epiphany.mdp
-Evolution/Evolution.mdp
-File/File.mdp
-GNOME-Session/GNOME-Session.mdp
-GoogleCalculator/GoogleCalculator.mdp
-Launchpad/Launchpad.mdp
-LocateFiles/LocateFiles.mdp
-OpenSearch/OpenSearch.mdp
-Pastebin/Pastebin.mdp
-Pidgin/Pidgin.mdp
-Rhythmbox/Rhythmbox.mdp
-SSH/SSH.mdp
-SimplePlugins/SimplePlugins.mdp
-Templates/Templates.mdp
-Thunderbird/Thunderbird.mdp
-Tomboy/Tomboy.mdp
-Twitter/Twitter.mdp
 
 ])
 

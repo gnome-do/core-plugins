@@ -7,4 +7,5 @@ fi
 mdtool setup pack `ls | grep addin.xml` -d:./repo
 mdtool setup rep-build repo
 
+rm -rf ~/.do-repo
 cp -r repo ~/.do-repo

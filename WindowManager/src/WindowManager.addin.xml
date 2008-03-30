@@ -1,0 +1,31 @@
+<Addin id="WindowManager" namespace= "Do" version="1.0">
+ 
+	<Runtime>
+		<Import assembly="WindowManager.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/Action">
+		<Action type="WindowManager.WindowMinimizeAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="WindowManager.WindowShadeAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="WindowManager.WindowRestoreAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="WindowManager.WindowFocusAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="WindowManager.WindowTileAction" />
+	</Extension>
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="WindowManager.ScreenItemSource" />
+	</Extension>
+</Addin>

@@ -21,6 +21,7 @@
       <Entry build="True" name="Thunderbird" configuration="Debug" />
       <Entry build="True" name="Tomboy" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
+      <Entry build="True" name="WindowManager" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -43,6 +44,7 @@
       <Entry build="True" name="Thunderbird" configuration="Release" />
       <Entry build="True" name="Tomboy" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
+      <Entry build="True" name="WindowManager" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -68,6 +70,7 @@
       <Entry build="True" name="Thunderbird" configuration="Repo" />
       <Entry build="True" name="Tomboy" configuration="Repo" />
       <Entry build="True" name="Twitter" configuration="Repo" />
+      <Entry build="True" name="WindowManager" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
@@ -91,6 +94,7 @@
     <Execute type="None" entry="Thunderbird" />
     <Execute type="None" entry="Tomboy" />
     <Execute type="None" entry="Twitter" />
+    <Execute type="None" entry="WindowManager" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -114,5 +118,6 @@
     <Entry filename="Thunderbird/Thunderbird.mdp" />
     <Entry filename="Tomboy/Tomboy.mdp" />
     <Entry filename="Twitter/Twitter.mdp" />
+    <Entry filename="WindowManager/WindowManager.mdp" />
   </Entries>
 </Combine>
