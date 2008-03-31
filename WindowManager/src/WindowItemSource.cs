@@ -28,7 +28,62 @@ using Wnck;
 
 namespace WindowManager
 {
-	
+	public class WindowItemSource : IItemSource
+	{
+		List<IItem> items;
+		
+		public string Name {
+			get {
+				return "Generic Window Items";
+			}
+		}
+
+		public string Description {
+			get {
+				return "Useful Generically Understood Window Items";
+			}
+		}
+
+		public string Icon {
+			get {
+				return "gnome-window-manager";
+			}
+		}
+
+		public Type[] SupportedItemTypes {
+			get {
+				return new Type [] {
+					typeof (GenericWindowItem)};
+			}
+		}
+
+		public ICollection<IItem> Items {
+			get {
+				return items;
+			}
+		}
+
+		public WindowItemSource ()
+		{
+			items = new List<IItem> ();
+			
+			items.Add (new GenericWindowItem ("Current Window",
+			                                  "The Currently Active Window",
+			                                  "gnome-window-manager"));
+		}
+		
+		public ICollection<IItem> ChildrenOfItem (IItem item)
+		{
+			return null;
+		}
+
+		public void UpdateItems ()
+		{
+			return;
+		}
+		
+		
+	}
 	
 	public class ScreenItemSource : IItemSource
 	{
@@ -61,8 +116,8 @@ namespace WindowManager
 
 		public ICollection<IItem> Items {
 			get {
-				items.Add (new ScreenItem ("Current Viewport", 
-				                           "Everything on the Current Viewport",
+				items.Add (new ScreenItem ("Current Desktop", 
+				                           "Everything on the Current Desktop",
 				                           "desktop"));
 				
 				return items;

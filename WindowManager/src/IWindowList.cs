@@ -27,10 +27,9 @@ using Do.Universe;
 
 namespace WindowManager
 {
-	public interface IWindowActionItem : IItem
-	{
-		
-	}
+//	public interface IWindowActionItem : IItem
+//	{
+//	}
 	
 	public interface IWindowItem : IItem
 	{
@@ -39,6 +38,5 @@ namespace WindowManager
 	
 	public interface IScreenItem : IItem
 	{
-		
 	}
 }

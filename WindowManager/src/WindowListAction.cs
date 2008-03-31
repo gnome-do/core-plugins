@@ -92,29 +92,42 @@ namespace WindowManager
 		public override IItem[] DynamicModifierItemsForItem (IItem item)
 		{
 			IItem[] items;
-			string application = (item as ApplicationItem).Exec;
-			application = application.Split (new char[] {' '})[0];
 			
-			if (!procListDyn.ContainsKey (application)) return null;
-			
-			List<Window> winList;
-			procListDyn.TryGetValue(application, out winList);
-			
-			items = new IItem[winList.Count];
-			for (int i = 0; i < winList.Count; i++) {
-				items[i] = new WindowItem (winList[i], item.Icon);
+			if (item.GetType () == typeof (ApplicationItem)) {
+				string application = (item as ApplicationItem).Exec;
+				application = application.Split (new char[] {' '})[0];
+				
+				if (!procListDyn.ContainsKey (application)) return null;
+				
+				List<Window> winList;
+				procListDyn.TryGetValue(application, out winList);
+				
+				items = new IItem[winList.Count];
+				for (int i = 0; i < winList.Count; i++) {
+					items[i] = new WindowItem (winList[i], item.Icon);
+				}
+			} else if (item.GetType () == typeof (GenericWindowItem)) {
+				items = new IItem [1];
+				
+				items[0] = new WindowItem (WindowListItems.CurrentWindow, 
+				                           "gnome-window-manager");
+			} else {
+				return null;
 			}
 			return items;
 		}
 
 		public override Type[] SupportedItemTypes {
 			get { return new Type[] {
-					typeof (ApplicationItem) };
+					typeof (ApplicationItem),
+					typeof (GenericWindowItem) };
 			}
 		}
 
 		public override bool SupportsItem (IItem item)
 		{
+			if (item.GetType () == typeof (GenericWindowItem)) return true;
+			
 			string application = (item as ApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
@@ -137,6 +150,13 @@ namespace WindowManager
 		private static Dictionary<string, List<Window>> windowList;
 		private static Wnck.Screen scrn;
 		private static bool listLock;
+		private static Window currentWindow;
+		
+		public static Window CurrentWindow {
+			get {
+				return currentWindow;
+			}
+		}
 		
 		static WindowListItems ()
 		{
@@ -147,6 +167,9 @@ namespace WindowManager
 			scrn = Screen.Default;
 			scrn.WindowOpened += OnWindowOpened;
 			scrn.WindowClosed += OnWindowClosed;
+			scrn.ActiveWindowChanged += OnActiveWindowChanged;
+			
+			currentWindow = scrn.ActiveWindow;
 		}
 			
 		public static void GetList (out Dictionary<string, List<Window>> winList)
@@ -158,8 +181,16 @@ namespace WindowManager
 			}
 		}
 		
+		private static void OnActiveWindowChanged (object o, ActiveWindowChangedArgs args)
+		{
+			if (!scrn.ActiveWindow.IsSkipTasklist)
+				currentWindow = scrn.ActiveWindow;
+		}
+		
 		private static void OnWindowOpened (object o, WindowOpenedArgs args)
 		{
+			if (args.Window.IsSkipTasklist) return;
+			
 			Thread updateRunner = new Thread (new ThreadStart (UpdateList));
 			
 			updateRunner.Start ();
@@ -167,6 +198,8 @@ namespace WindowManager
 		
 		private static void OnWindowClosed (object o, WindowClosedArgs args)
 		{
+			if (args.Window.IsSkipTasklist) return;
+			
 			Thread updateRunner = new Thread (new ThreadStart (UpdateList));
 			
 			updateRunner.Start ();
@@ -241,14 +274,14 @@ namespace WindowManager
 
 	}
 	
-	public class WindowMinimizeAction : WindowActionAction 
+	public class WindowMinimizeAction : WindowActionAction
 	{
 		public override string Name {
-			get { return "Minimize Window"; }
+			get { return "Minimize/Restore"; }
 		}
 		
 		public override string Description {
-			get { return "Minimize a Window to the Taskbar"; }
+			get { return "Minimize/Restore a Window"; }
 		}
 
 		public override string Icon {
@@ -257,31 +290,13 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			(modItems[0] as WindowItem).Window.Minimize ();
-			return null;
-		}
-
-	}
-	
-	public class WindowRestoreAction : WindowActionAction 
-	{
-		public override string Name {
-			get { return "Restore Window"; }
-		}
-		
-		public override string Description {
-			get { return "Restore a Minimized Window"; }
-		}
-
-		public override string Icon {
-			get { return "redo"; }
-		}
-
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
-		{
-			Wnck.Window w = (modItems[0] as WindowItem).Window;
+			Window w = (modItems[0] as WindowItem).Window;
+			
 			if (w.IsMinimized)
 				w.Unminimize (Gtk.Global.CurrentEventTime);
+			else
+				w.Minimize ();
+			
 			return null;
 		}
 
@@ -368,119 +383,6 @@ namespace WindowManager
 
 			}
 			w.Activate (Gtk.Global.CurrentEventTime);
-			return null;
-		}
-
-	}
-	
-	public class WindowTileAction : WindowActionAction
-	{
-		public override string Name {
-			get { return "Tile Windows"; }
-		}
-		
-		public override string Description {
-			get { return "Tile All Windows in Current Viewport"; }
-		}
-
-		public override string Icon {
-			get { return "preferences-system-windows"; }
-		}
-		
-		public override Type[] SupportedItemTypes {
-			get { return new Type [] {
-				typeof (IScreenItem), };
-			}
-		}
-
-		public override bool ModifierItemsOptional {
-			get { return true; }
-		}
-
-		public override Type[] SupportedModifierItemTypes {
-			get { return new Type [] {}; }
-		}
-		
-		public override bool SupportsItem (IItem item)
-		{
-			return true;
-		}
-		
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
-		{
-			return null;
-		}
-
-		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
-		{
-			return false;
-		}
-		
-		private void SetWindowGeometry (Window w, int x, int y, int width, int height)
-		{
-			w.SetGeometry (WindowGravity.Northwest, 
-                           WindowMoveResizeMask.Width,
-			               x, y, width, height);
-			w.SetGeometry (WindowGravity.Northwest, 
-                           WindowMoveResizeMask.Height,
-			               x, y, width, height);
-			w.SetGeometry (WindowGravity.Northwest, 
-                           WindowMoveResizeMask.X,
-			               x, y, width, height);
-			w.SetGeometry (WindowGravity.Northwest, 
-                           WindowMoveResizeMask.Y,
-			               x, y, width, height);
-		}
-
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
-		{
-			List<Window> windowList = new List<Window> ();
-			
-			Dictionary<string, List<Window>> processesList;
-			
-			WindowListItems.GetList (out processesList);
-			
-			foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
-				foreach (Window w in kvp.Value) {
-					if (w.IsInViewport (Screen.Default.ActiveWorkspace))
-						windowList.Add (w);
-				}
-			}
-			
-			//can't tile no windows
-			if (windowList.Count <= 1) return null;
-			
-			int square, height, width;
-			
-			square = (int) Math.Ceiling (Math.Sqrt (windowList.Count));
-			
-			width = square;
-			
-			height = 1;
-			while (width * height < windowList.Count) {
-				height++;
-			}
-			
-			int windowWidth, windowHeight;
-			windowWidth = Screen.Default.Width / width;
-			windowHeight = (Screen.Default.Height - 48) / height;
-			
-			int row = 0, column = 0;
-			int x, y;
-			foreach (Window w in windowList)
-			{
-				x = column * windowWidth;
-				y = (row * windowHeight) + 24;
-				
-				SetWindowGeometry (w, x, y, windowWidth, windowHeight);
-				
-				column++;
-				if (column == width) {
-					column = 0;
-					row++;
-				}
-			}
-			
 			return null;
 		}
 

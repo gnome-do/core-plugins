@@ -23,9 +23,41 @@
 using System;
 using Wnck;
 
+using Do.Universe;
+
 namespace WindowManager
 {
-	
+	public class GenericWindowItem : IItem
+	{
+		string name, description, icon;
+		
+		public GenericWindowItem (string name, string description, string icon) 
+		{
+			this.name = name;
+			this.description = description;
+			this.icon = icon;
+		}
+		
+		public string Name {
+			get {
+				return name;
+			}
+		}
+
+		public string Description {
+			get {
+				return description;
+			}
+		}
+
+		public string Icon {
+			get {
+				return icon;
+			}
+		}
+
+		
+	}
 	
 	public class WindowItem : IWindowItem
 	{
