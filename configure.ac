@@ -12,6 +12,18 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
+dnl Handle Boo compiler
+AC_PATH_PROG(BOOC, booc, no)
+BOO="Boo"
+
+if test "x$BOOC" = "xno" ; then
+	AC_MSG_ERROR([No $BOO compiler found])
+else
+	BOOC=$BOOC
+fi
+
+AC_SUBST(BOOC)
+
 dnl Handle various possible C# compilers
 AC_PATH_PROG(CSC, csc, no)
 AC_PATH_PROG(GMCS, gmcs, no)
@@ -204,6 +216,7 @@ AC_CONFIG_FILES([
 	File/Makefile
 	GNOME-Screenshot/Makefile
 	GNOME-Session/Makefile
+	GNOME-Terminal/Makefile
 	GoogleCalculator/Makefile
 	Launchpad/Makefile
 	Launchpad/Resources/Makefile

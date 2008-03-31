@@ -37,7 +37,18 @@ ENABLED_SUBDIRS += Twitter
 endif
 
 
-SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
-	  GoogleCalculator Templates GNOME-Session GNOME-Screenshot SimplePlugins File
+SUBDIRS = $(ENABLED_SUBDIRS) 	\
+			Epiphany			\
+			File				\
+			GNOME-Screenshot	\
+			GNOME-Session		\
+			GNOME-Terminal		\
+			GoogleCalculator	\
+			LocateFiles			\
+			Pidgin				\
+			Rhythmbox			\
+			SimplePlugins		\
+			Templates			\
+			Thunderbird		
 
 EXTRA_DIST = DoPlugins.mds Packages.mdse COPYRIGHT
