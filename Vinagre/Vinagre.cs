@@ -50,10 +50,8 @@ namespace GnomeDoVNC {
 			return true;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems) {
-			
+		public override IItem[] Perform (IItem[] items, IItem[] modItems) {			
             string hostname;
-
             if (items [0] is ITextItem) {
                 ITextItem textitem = items [0] as ITextItem;
                 hostname = textitem.Text;
@@ -62,7 +60,6 @@ namespace GnomeDoVNC {
                 HostItem hostitem = items [0] as HostItem;
                 hostname = hostitem.Description + ":" + hostitem.Port;
             }
-
 			Process vinagre = new Process ();
 			vinagre.StartInfo.FileName = "vinagre";
 			vinagre.StartInfo.Arguments = hostname;

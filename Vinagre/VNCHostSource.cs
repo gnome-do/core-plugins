@@ -37,9 +37,11 @@ namespace GnomeDoVNC {
 		public string Name { 
 			get { return "Vinagre Bookmarks"; }
 		}
+		
 		public string Description { 
 			get { return "Indexes your Vinagre Bookmarks"; }
 		}
+		
 		public string Icon {
 			get { return "gnome-globe"; }
 		}
