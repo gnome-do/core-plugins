@@ -1,6 +1,7 @@
 EXTRA_DIST = 	\
-			VNCHost.cs
-			Vinagre.cs
+			VNCHost.cs \
+			Vinagre.cs \
+			VNCHostSource.cs
 
 
 ASSEMBLY_NAME=Vinagre
@@ -13,7 +14,7 @@ CLEANFILES = $(ASSEMBLY){,.mdb}
 vinagre_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS)
 
 vinagre_sources  = 	\
-			VNCHost.cs Vinagre.cs
+			VNCHost.cs Vinagre.cs VNCHostSource.cs
 
 vinagre_build_sources = $(addprefix $(srcdir)/, $(vinagre_sources))
 

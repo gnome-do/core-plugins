@@ -138,14 +138,16 @@ target_alias =
 top_builddir = ..
 top_srcdir = ..
 EXTRA_DIST = \
-			VNCHost.cs
+			VNCHost.cs \
+			Vinagre.cs \
+			VNCHostSource.cs
 
 ASSEMBLY_NAME = Vinagre
 ASSEMBLY = $(ASSEMBLY_NAME).dll
 CLEANFILES = $(ASSEMBLY){,.mdb}
 vinagre_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS)
 vinagre_sources = \
-			VNCHost.cs Vinagre.cs
+			VNCHost.cs Vinagre.cs VNCHostSource.cs
 
 vinagre_build_sources = $(addprefix $(srcdir)/, $(vinagre_sources))
 plugin_DATA = $(ASSEMBLY)
@@ -330,7 +332,6 @@ uninstall-am: uninstall-pluginDATA
 	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am uninstall \
 	uninstall-am uninstall-pluginDATA
 
-			Vinagre.cs
 
 all: $(ASSEMBLY)
 
