@@ -186,6 +186,14 @@ AC_ARG_ENABLE([vinagre-plugin],
 
 AM_CONDITIONAL(ENABLE_VINAGRE_PLUGIN, test "x$enable_vinagre_plugin" = "xyes")
 
+dnl - GCalendar plugin
+AC_ARG_ENABLE([gcalendar-plugin],
+	AS_HELP_STRING([--enable-gcalendar-plugin],[Enable the Vinagre plugin]),
+	enable_gcalendar_plugin=$enableval,
+	enable_gcalendar_plugin=yes)
+
+AM_CONDITIONAL(ENABLE_GCALENDAR_PLUGIN, test "x$enable_gcalendar_plugin" = "xyes")
+
 dnl Plugin install paths
 
 AC_ARG_WITH(plugindir, 
@@ -213,6 +221,7 @@ AC_CONFIG_FILES([
 	LocateFiles/Makefile
 	Thunderbird/Makefile
 	Thunderbird/src/Makefile
+	GCalendar/Makefile
 	GoogleCalculator/Makefile
 	OpenSearch/Makefile
 	OpenSearch/src/Makefile
@@ -228,7 +237,7 @@ AC_CONFIG_FILES([
 	Launchpad/src/Makefile
 	Launchpad/Resources/Makefile
 	Tomboy/Makefile
-        Twitter/Makefile
+    Twitter/Makefile
 	Vinagre/Makefile
 ])
 

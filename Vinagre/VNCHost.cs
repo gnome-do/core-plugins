@@ -1,7 +1,5 @@
 /* VNCHost.cs
- * Authors:
- * 	Alex Launi <alex.launi@gmail.com>
- *
+ 
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
  * source distribution.
@@ -20,15 +18,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-using System.IO;
-using System.Collections.Generic;
-
-using Do.Universe;
-
-namespace GnomeDoVNC 
-{
-	public class HostItem : IItem {
+namespace GnomeDoVNC {	
+	public class HostItem : IItem  {
 		string bookmark, hostname, port;
 
 		public HostItem (string bookmark, string hostname, string port	)
@@ -38,63 +29,21 @@ namespace GnomeDoVNC
 			this.port = port;
 		}
 
-		public string Name { get { return bookmark; } }
-		public string Description { get { return hostname; } }
-		public string Icon { get { return "gnome-globe"; } }
-
-		public string Text { get { return bookmark; } }
-		public string Port { get { return port; } }
-	}
-	
-	public class VNCHostItem : IItemSource {
-		List<IItem> items;
-
-		public VNCHostItem ()
-		{
-			items = new List<IItem> ();
-			UpdateItems ();
+		public string Name { 
+			get { return bookmark; }
+		}
+		public string Description { 
+			get { return hostname; }
+		}
+		public string Icon { 
+			get { return "gnome-globe"; } 
 		}
 
-		public string Name { get { return "Vinagre Bookmarks"; } }
-		public string Description { get { return "Indexes your Vinagre Bookmarks"; } }
-		public string Icon { get { return "gnome-globe"; } }
-
-		public Type[] SupportedItemTypes {
-			get {
-				return new Type[] { typeof (VNCHostItem), typeof (HostItem) };
-			}
+		public string Text {
+			get { return bookmark; }
 		}
-
-		public ICollection<IItem> Items {
-			get { return items; }
-		}
-
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
-		{
-			return null;  
-		}
-
-		public void UpdateItems ()
-		{
-			items.Clear ();
-			string bookmarksFile = Environment.GetEnvironmentVariable ("HOME") + "/.gnome2/vinagre.bookmarks";
-			try {
-				StreamReader reader = File.OpenText(bookmarksFile);
-				string s, host, port;
-				while ((s = reader.ReadLine ()) != null) {
-					if (s.Length > 1) {
-						if ((s.Substring (0,1).Equals ("[")) && (s.Substring (s.Length - 1,1).Equals ("]"))) {
-							s = s.Substring (1,s.Length - 2);
-							host = reader.ReadLine ();
-							port = reader.ReadLine ();
-							items.Add (new HostItem(s, host.Substring (5,host.Length - 5), port.Substring (5,port.Length - 5)));
-						}
-					}
-				}
-			} catch { 
-				Console.Error.WriteLine ("[ERROR] " + bookmarksFile + " cannot be read!");
-			} 
+		public string Port {
+			get { return port; }
 		}
 	}
 }
-

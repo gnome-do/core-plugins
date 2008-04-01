@@ -40,7 +40,11 @@ if ENABLE_VINAGRE_PLUGIN
 ENABLED_SUBDIRS += Vinagre
 endif
 
+if ENABLE_GCALENDAR_PLUGIN
+ENABLED_SUBDIRS += GCalendar
+endif
+
 SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
-	  GoogleCalculator Templates GNOME-Session SimplePlugins File Vinagre
+	  GoogleCalculator Templates GNOME-Session SimplePlugins File Vinagre GCalendar
 
 EXTRA_DIST = DoPlugins.mds Packages.mdse COPYRIGHT

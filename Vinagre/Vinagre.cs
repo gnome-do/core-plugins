@@ -1,6 +1,4 @@
 /* Vinagre.cs
- * Authors:
- * 	Alex Launi <alex.launi@gmail.com>
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -28,24 +26,18 @@ using Do.Universe;
 namespace GnomeDoVNC {
 	public class VNCAction : AbstractAction {
 		public override string Name { 
-			get { 
-				return "Connect with VNC"; 
-			}
+			get { return "Connect with VNC"; }
 		}
 		
 		public override string Description {
-			get {
-				return "Connect with VNC"; 
-			}
+			get { return "Connect with VNC"; }
 		}
 		public override string Icon {
-			get {
-				return "vinagre";
-			}
+			get { return "vinagre";	}
 		}
 		
 		public override Type[] SupportedItemTypes {
-			get {
+			get { 
 				return new Type[] {
 					typeof(HostItem),
 					typeof(VNCHostItem),
