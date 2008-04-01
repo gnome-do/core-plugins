@@ -20,6 +20,7 @@
 
 using System;
 using System.Text;
+using System.IO;
 using System.Collections.Generic;
 
 using Do.Addins;
@@ -72,7 +73,7 @@ namespace Do.GCalendar
 			    //eventUrl = events.Entries[i].href;
 			    eventUrl = "http://calendar.google.com/";
 				//Console.Error.WriteLine(eventUrl);
-				//Console.Error.WriteLine(events.Entries[i].
+				Console.Error.WriteLine(events.Entries[i].Id.Uri.ToString ());
 				children.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl));
 			}
 			return children;
@@ -83,7 +84,6 @@ namespace Do.GCalendar
 		    items.Clear ();
 			DoGCal cal = new DoGCal ();
 			AtomFeed calList = cal.GetCalendars ();
-			items.Add (new GCalendarItem ("All Calendars" , "http://www.google.com/calendar/feeds/default"));
 			for (int i = 0; i < calList.Entries.Count; i++) {
 				//Console.Error.WriteLine (calList.Entries[i].Id.Uri.ToString ());
 				string calUrl = calList.Entries[i].Id.Uri.ToString ();

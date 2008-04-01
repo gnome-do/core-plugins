@@ -93,11 +93,7 @@ namespace Do.GCalendar {
             EventFeed events = service.SearchEvents ((items[0] as GCalendarItem).URL,
                             search_text);
             for (int i = 0 ; i < events.Entries.Count; i++) {
-				//Console.Error.WriteLine(events.Entries[i].Title.Text);
-			    //eventUrl = events.Entries[i].href;
 			    eventUrl = "http://calendar.google.com/";
-				//Console.Error.WriteLine(eventUrl);
-				//Console.Error.WriteLine(events.Entries[i].
 				cal_items.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl));
 			}
 			return cal_items.ToArray ();

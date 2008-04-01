@@ -31,7 +31,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 subdir = GCalendar
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -147,10 +147,10 @@ ASSEMBLY = $(ASSEMBLY_NAME).dll
 CLEANFILES = $(ASSEMBLY){,.mdb}
 gcalendar_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS) \
 	$(GCONF_SHARP_LIBS) \
-	-r:/home/alex/gcal-mono/clients/cs/Google.GData.AccessControl.dll \
-	-r:/home/alex/gcal-mono/clients/cs/Google.GData.Calendar.dll \
-	-r:/home/alex/gcal-mono/clients/cs/Google.GData.Client.dll \
-	-r:/home/alex/gcal-mono/clients/cs/Google.GData.Extensions.dll
+	-r:Google.GData.AccessControl.dll \
+	-r:Google.GData.Calendar.dll \
+	-r:Google.GData.Client.dll \
+	-r:Google.GData.Extensions.dll
 
 gcalendar_sources = \
 			DoGCal.cs GCalendarItemSource.cs \
