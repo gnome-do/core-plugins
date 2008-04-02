@@ -1,5 +1,5 @@
 /* VNCHostSource.cs
- 
+
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
  * source distribution.
@@ -25,65 +25,65 @@ using System.Collections.Generic;
 using Do.Universe;
 
 namespace GnomeDoVNC {	
-	public class VNCHostItem : IItemSource {
-		List<IItem> items;
+		public class VNCHostItem : IItemSource {
+				List<IItem> items;
 
-		public VNCHostItem ()
-		{
-			items = new List<IItem> ();
-			UpdateItems ();
-		}
-
-		public string Name { 
-			get { return "Vinagre Bookmarks"; }
-		}
-		
-		public string Description { 
-			get { return "Indexes your Vinagre Bookmarks"; }
-		}
-		
-		public string Icon {
-			get { return "gnome-globe"; }
-		}
-
-		public Type[] SupportedItemTypes {
-			get {
-				return new Type[] { typeof (VNCHostItem), typeof (HostItem) };
-			}
-		}
-
-		public ICollection<IItem> Items {
-			get { return items; }
-		}
-
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
-		{
-			return null;  
-		}
-
-		public void UpdateItems ()
-		{
-			items.Clear ();
-			string bookmarks_file = Environment.GetEnvironmentVariable ("HOME") + "/.gnome2/vinagre.bookmarks";
-			string s, host, port;
-			try {
-				StreamReader reader = File.OpenText(bookmarks_file);
-				while ((s = reader.ReadLine ()) != null) {
-					if (s.Length > 1) {
-						if ((s.Substring (0,1).Equals ("[")) && (s.Substring (s.Length - 1,1).Equals ("]"))) {
-							s = s.Substring (1, s.Length - 2);
-							host = reader.ReadLine ();
-							port = reader.ReadLine ();
-							host = host.Substring (5, host.Length - 5);
-							port = port.Substring (5, port.Length - 5);
-							items.Add (new HostItem(s, host, port));
-						}
-					}
+				public VNCHostItem ()
+				{
+						items = new List<IItem> ();
+						UpdateItems ();
 				}
-			} catch { 
-				Console.Error.WriteLine ("[ERROR] " + bookmarks_file + " cannot be read!");
-			} 
+
+				public string Name { 
+						get { return "Vinagre Bookmarks"; }
+				}
+
+				public string Description { 
+						get { return "Indexes your Vinagre Bookmarks"; }
+				}
+
+				public string Icon {
+						get { return "gnome-globe"; }
+				}
+
+				public Type[] SupportedItemTypes {
+						get {
+								return new Type[] { typeof (VNCHostItem), typeof (HostItem) };
+						}
+				}
+
+				public ICollection<IItem> Items {
+						get { return items; }
+				}
+
+				public ICollection<IItem> ChildrenOfItem (IItem parent)
+				{
+						return null;  
+				}
+
+				public void UpdateItems ()
+				{
+						items.Clear ();
+						string bookmarks_file = Environment.GetEnvironmentVariable ("HOME") + "/.gnome2/vinagre.bookmarks";
+						string s, host, port;
+						try {
+								StreamReader reader = File.OpenText(bookmarks_file);
+								while ((s = reader.ReadLine ()) != null) {
+										if (s.Length > 1) {
+												if ((s.Substring (0,1).Equals ("[")) && (s.Substring (s.Length - 1,1).Equals ("]"))) {
+														s = s.Substring (1, s.Length - 2);
+														host = reader.ReadLine ();
+														port = reader.ReadLine ();
+														host = host.Substring (5, host.Length - 5);
+														port = port.Substring (5, port.Length - 5);
+														items.Add (new HostItem(s, host, port));
+												}
+										}
+								}
+						} catch { 
+								Console.Error.WriteLine ("[ERROR] " + bookmarks_file + " cannot be read!");
+						} 
+				}
 		}
-	}
 }
 
