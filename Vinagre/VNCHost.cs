@@ -25,34 +25,34 @@ using System.Collections.Generic;
 using Do.Universe;
 
 namespace GnomeDoVNC {	
-		public class HostItem : IItem  {
-				string bookmark, hostname, port;
+	public class HostItem : IItem  {
+		string bookmark, hostname, port;
 
-				public HostItem (string bookmark, string hostname, string port	)
-				{
-						this.bookmark = bookmark;
-						this.hostname = hostname;
-						this.port = port;
-				}
-
-				public string Name { 
-						get { return bookmark; }
-				}
-
-				public string Description { 
-						get { return hostname; }
-				}
-
-				public string Icon { 
-						get { return "gnome-globe"; } 
-				}
-
-				public string Text {
-						get { return bookmark; }
-				}
-
-				public string Port {
-						get { return port; }
-				}
+		public HostItem (string bookmark, string hostname, string port	)
+		{
+			this.bookmark = bookmark;
+			this.hostname = hostname;
+			this.port = port;
 		}
+
+		public string Name { 
+			get { return bookmark; }
+		}
+
+		public string Description { 
+			get { return hostname; }
+		}
+
+		public string Icon { 
+			get { return "gnome-globe"; } 
+		}
+
+		public string Text {
+			get { return bookmark; }
+		}
+
+		public string Port {
+			get { return port; }
+		}
+	}
 }
