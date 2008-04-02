@@ -24,48 +24,48 @@ using System.Diagnostics;
 using Do.Universe;
 
 namespace GnomeDoVNC {
-	public class VNCAction : AbstractAction {
-		public override string Name { 
-			get { return "Connect with VNC"; }
-		}
+    public class VNCAction : AbstractAction {
+        public override string Name { 
+            get { return "Connect with VNC"; }
+        }
 
-		public override string Description {
-			get { return "Connect with VNC"; }
-		}
+        public override string Description {
+            get { return "Connect with VNC"; }
+        }
 
-		public override string Icon {
-			get { return "vinagre";	}
-		}
+        public override string Icon {
+            get { return "vinagre"; }
+        }
 
-		public override Type[] SupportedItemTypes {
-			get { 
-				return new Type[] {
-					typeof(HostItem),
-					typeof(VNCHostItem),
-					typeof(ITextItem),
-				};
-			}
-		}
+        public override Type[] SupportedItemTypes {
+            get { 
+                return new Type[] {
+                    typeof(HostItem),
+                    typeof(VNCHostItem),
+                    typeof(ITextItem),
+                };
+            }
+        }
 
-		public override bool SupportsItem (IItem item) {
-			return true;
-		}
+        public override bool SupportsItem (IItem item) {
+            return true;
+        }
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems) {			
-			string hostname;
-			if (items [0] is ITextItem) {
-				ITextItem textitem = items [0] as ITextItem;
-				hostname = textitem.Text;
-			}
-			else {
-				HostItem hostitem = items [0] as HostItem;
-				hostname = hostitem.Description + ":" + hostitem.Port;
-			}
-			Process vinagre = new Process ();
-			vinagre.StartInfo.FileName = "vinagre";
-			vinagre.StartInfo.Arguments = hostname;
-			vinagre.Start ();
-			return null;
-		}
-	}
+        public override IItem[] Perform (IItem[] items, IItem[] modItems) {         
+            string hostname;
+            if (items [0] is ITextItem) {
+                ITextItem textitem = items [0] as ITextItem;
+                hostname = textitem.Text;
+            }
+            else {
+                HostItem hostitem = items [0] as HostItem;
+                hostname = hostitem.Description + ":" + hostitem.Port;
+            }
+            Process vinagre = new Process ();
+            vinagre.StartInfo.FileName = "vinagre";
+            vinagre.StartInfo.Arguments = hostname;
+            vinagre.Start ();
+            return null;
+        }
+    }
 }
