@@ -36,6 +36,9 @@ if ENABLE_TWITTER_PLUGIN
 ENABLED_SUBDIRS += Twitter
 endif
 
+if ENABLE_TASQUE_PLUGIN
+ENABLED_SUBDIRS += Tasque
+endif
 
 SUBDIRS = $(ENABLED_SUBDIRS) 	\
 			Epiphany			\
@@ -48,6 +51,7 @@ SUBDIRS = $(ENABLED_SUBDIRS) 	\
 			Pidgin				\
 			Rhythmbox			\
 			SimplePlugins		\
+			Tasque                  \
 			Templates			\
 			Thunderbird		
 
