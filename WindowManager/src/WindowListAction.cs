@@ -42,6 +42,7 @@ namespace WindowManager
 	{
 		protected Dictionary<string, List<Window>> procList;
 		protected Dictionary<string, List<Window>> procListDyn;
+		protected Dictionary<string, string> matchList;
 		protected Screen scrn;
 		
 		public WindowActionAction()
@@ -52,6 +53,7 @@ namespace WindowManager
 			
 			WindowListItems.GetList (out procList);
 			WindowListItems.GetList (out procListDyn);
+			matchList = new Dictionary<string,string> ();
 			
 			WindowListItems.ListUpdated += UpdateList;
 		}
@@ -93,7 +95,7 @@ namespace WindowManager
 		{
 			IItem[] items;
 			
-			if (item.GetType () == typeof (ApplicationItem)) {
+			if (item is ApplicationItem) {
 				string application = (item as ApplicationItem).Exec;
 				application = application.Split (new char[] {' '})[0];
 				
@@ -126,14 +128,22 @@ namespace WindowManager
 
 		public override bool SupportsItem (IItem item)
 		{
-			if (item.GetType () == typeof (GenericWindowItem)) return true;
+			if (item is GenericWindowItem) return true;
 			
 			string application = (item as ApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
+			if (matchList.ContainsKey (application)) {
+				string s;
+				matchList.TryGetValue (application, out s);
+				if (s != item.Name) return false;
+			} else {
+				matchList.Add (application, item.Name);
+			}
+			
 			if (!procList.ContainsKey (application)) return false;
 			
-			procList.Remove (application); //fixme potential crasher!
+			//procList.Remove (application); //fixme potential crasher!
 			return true;
 		}
 
@@ -165,11 +175,9 @@ namespace WindowManager
 			windowList = new Dictionary<string,List<Window>> ();
 			
 			scrn = Screen.Default;
-			scrn.WindowOpened += OnWindowOpened;
-			scrn.WindowClosed += OnWindowClosed;
+			scrn.WindowOpened        += OnWindowOpened;
+			scrn.WindowClosed        += OnWindowClosed;
 			scrn.ActiveWindowChanged += OnActiveWindowChanged;
-			
-			currentWindow = scrn.ActiveWindow;
 		}
 			
 		public static void GetList (out Dictionary<string, List<Window>> winList)
@@ -210,6 +218,7 @@ namespace WindowManager
 			if (listLock) return;
 			
 			listLock = true;
+			
 			windowList.Clear ();
 			
 			ProcessStartInfo st = new ProcessStartInfo ("ps");
@@ -225,6 +234,7 @@ namespace WindowManager
 				if (w.IsSkipTasklist) continue;
 				
 				st.Arguments = "c -o cmd --no-headers " + w.Pid;
+				
 				process = Process.Start (st);
 				
 				process.WaitForExit ();

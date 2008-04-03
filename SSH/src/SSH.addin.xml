@@ -13,4 +13,7 @@
 	<Extension path = "/Do/Action">
 		<Action type="GnomeDoSSH.SSHAction" />
 	</Extension>
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="GnomedoSSH.SSHHostItemSource" />
+	</Extension>
 </Addin>
