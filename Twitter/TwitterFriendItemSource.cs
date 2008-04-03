@@ -55,12 +55,12 @@
          
          public void UpdateItems () {
              string url, username, password;
-             string screen_name, image, name;
+             string screen_name, name;
              HttpWebResponse response;
              XmlDocument friends = new XmlDocument ();
              GConf.Client gconf = new GConf.Client ();
              ContactItem twit_friend_by_name, twit_friend_by_sn;
-             screen_name = name = image = username = password = "";
+             screen_name = name = username = password = "";
              items.Clear ();
              
              try {
@@ -84,8 +84,6 @@
                          screen_name = attr.InnerText; break;
                      case("name"):
                          name = attr.InnerText; break;
-                     case("profile_image_url"):
-                         image =  attr.InnerText; break;
                      }
                  }
                  //Here we make two contact items to make searching a little bit
