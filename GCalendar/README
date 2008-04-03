@@ -1,0 +1,8 @@
+==== GCalendar Gnome-Do Plugin ====
+I'm still learning, so this might not be the best way, but it's all I've got right now.
+If anyone has a better idea of how to handle the GData libs let me know. 
+For now I'm just going to Include them in my branch and you can pull them down with the .dll or source.
+
+1. Put the .dll and Google.* in your do plugins directory, they must be in the same directory for the plugin to work.
+2. Load Do, on first run the plugin creates two gconf keys in /apps/gnome-do/plugins/gcal. Set your gmail username and password (with @gmail.com).
+3. Run do again, you should now be able to search, browse and, create new events with Do.
