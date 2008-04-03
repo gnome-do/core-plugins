@@ -1,19 +1,19 @@
-<Project name="OpenSearch" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Pastebin" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Debug" assembly="OpenSearch" />
+      <Output directory="bin/Debug" assembly="Pastebin" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Release" assembly="OpenSearch" />
+      <Output directory="bin/Release" assembly="Pastebin" />
       <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Repo" ctype="DotNetProjectConfiguration">
-      <Output directory="../buildrepo" assembly="OpenSearch" />
+      <Output directory="../buildrepo" assembly="Pastebin" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
@@ -22,25 +22,17 @@
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/FirefoxOpenSearchFileProvider.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/IOpenSearchFile.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/IOpenSearchFileProvider.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/IOpenSearchItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/MozillaSearchFile.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/OpenSearch.addin.xml" subtype="Code" buildaction="FileCopy" />
-    <File name="src/OpenSearch.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/OpenSearchAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/OpenSearchFile.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/OpenSearchFileManager.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/OpenSearchFileType.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/OpenSearchFileTypeIdentifier.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/OpenSearchItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/XmlNamespaceHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/IPastebinProvider.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ITextSyntaxItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Paste2.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Pastebin.addin.xml" subtype="Code" buildaction="FileCopy" />
+    <File name="src/Pastebin.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PastebinAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TextSyntaxItem.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=@ASM_VERSION@, Culture=neutral" />
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=4.0.1, Culture=neutral" />
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </References>
