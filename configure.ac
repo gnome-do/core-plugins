@@ -12,6 +12,18 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
+dnl Handle Boo compiler
+AC_PATH_PROG(BOOC, booc, no)
+BOO="Boo"
+
+if test "x$BOOC" = "xno" ; then
+	AC_MSG_ERROR([No $BOO compiler found])
+else
+	BOOC=$BOOC
+fi
+
+AC_SUBST(BOOC)
+
 dnl Handle various possible C# compilers
 AC_PATH_PROG(CSC, csc, no)
 AC_PATH_PROG(GMCS, gmcs, no)
@@ -162,6 +174,14 @@ AC_ARG_ENABLE([launchpad-plugin],
 
 AM_CONDITIONAL(ENABLE_LAUNCHPAD_PLUGIN, test "x$enable_launchpad_plugin" = "xyes")
 
+dnl - Tasque plugin
+AC_ARG_ENABLE([tasque-plugin],
+        AS_HELP_STRING([--enable-tasque-plugin],[Enable the Tasque plugin]),
+        enable_tasque_plugin=$enableval,
+        enable_tasque_plugin=yes)
+
+AM_CONDITIONAL(ENABLE_TASQUE_PLUGIN, test "x$enable_tasque_plugin" = "xyes")
+
 dnl - Tomboy plugin
 AC_ARG_ENABLE([tomboy-plugin],
 	AS_HELP_STRING([--enable-tomboy-plugin],[Enable the Tomboy plugin]),
@@ -195,34 +215,39 @@ AC_SUBST(CSFLAGS)
 
 AC_CONFIG_FILES([
 	Makefile
-	GNOME-Session/Makefile
+	Amarok/Makefile
+	Banshee/Makefile
+	Banshee/src/Makefile
+	Epiphany/Makefile
 	Evolution/Makefile
 	Evolution/src/Makefile
-	Epiphany/Makefile
-	Amarok/Makefile
-	Rhythmbox/Makefile
-	Rhythmbox/src/Makefile
-	Pidgin/Makefile
-	Pidgin/src/Makefile
-	LocateFiles/Makefile
-	Thunderbird/Makefile
-	Thunderbird/src/Makefile
+	File/Makefile
+	GCalendar/Makefile
+	GNOME-Screenshot/Makefile
+	GNOME-Session/Makefile
+	GNOME-Terminal/Makefile
 	GoogleCalculator/Makefile
+	Launchpad/Makefile
+	Launchpad/Resources/Makefile
+	Launchpad/src/Makefile
+	LocateFiles/Makefile
 	OpenSearch/Makefile
 	OpenSearch/src/Makefile
 	Pastebin/Makefile
 	Pastebin/src/Makefile
-	SimplePlugins/Makefile
-	Templates/Makefile
-	Banshee/Makefile
-	Banshee/src/Makefile
+	Pidgin/Makefile
+	Pidgin/src/Makefile
+	Rhythmbox/Makefile
+	Rhythmbox/src/Makefile
 	SSH/Makefile
-	File/Makefile
-	Launchpad/Makefile
-	Launchpad/src/Makefile
-	Launchpad/Resources/Makefile
+	SimplePlugins/Makefile
+	Tasque/Makefile
+	Templates/Makefile
+	Thunderbird/Makefile
+	Thunderbird/src/Makefile
 	Tomboy/Makefile
-        Twitter/Makefile
+	Twitter/Makefile
+	Vinagre/Makefile
 ])
 
 AC_OUTPUT

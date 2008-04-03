@@ -36,8 +36,25 @@ if ENABLE_TWITTER_PLUGIN
 ENABLED_SUBDIRS += Twitter
 endif
 
+if ENABLE_TASQUE_PLUGIN
+ENABLED_SUBDIRS += Tasque
+endif
 
-SUBDIRS = $(ENABLED_SUBDIRS) Epiphany Rhythmbox Pidgin LocateFiles Thunderbird \
-	  GoogleCalculator Templates GNOME-Session SimplePlugins File
+SUBDIRS = $(ENABLED_SUBDIRS) 	\
+			Epiphany			\
+			File				\
+			GCalendar		\
+			GNOME-Screenshot	\
+			GNOME-Session		\
+			GNOME-Terminal		\
+			GoogleCalculator	\
+			LocateFiles			\
+			Pidgin				\
+			Rhythmbox			\
+			SimplePlugins		\
+			Tasque                  \
+			Templates			\
+			Thunderbird		\
+			Vinagre
 
 EXTRA_DIST = DoPlugins.mds Packages.mdse COPYRIGHT
