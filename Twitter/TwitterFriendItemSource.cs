@@ -41,7 +41,7 @@
          
          public Type[] SupportedItemTypes {
              get {
-                 return new Type[] { typeof (TwitterFriendItem) };
+                 return new Type[] { typeof (ContactItem) };
              }
          }
          
