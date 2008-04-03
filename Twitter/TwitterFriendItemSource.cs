@@ -59,7 +59,7 @@
              HttpWebResponse response;
              XmlDocument friends = new XmlDocument ();
              GConf.Client gconf = new GConf.Client ();
-             ContactItem twit_friend;
+             ContactItem twit_friend_by_name, twit_friend_by_sn;
              screen_name = name = image = username = password = "";
              items.Clear ();
              
@@ -88,10 +88,15 @@
                          image =  attr.InnerText; break;
                      }
                  }
-                 Console.Error.WriteLine(name + ":" + screen_name);
-                 twit_friend =  ContactItem.Create (name);
-                 twit_friend["twitter.screename"] = "@" + screen_name;
-                 items.Add (twit_friend);
+                 //Here we make two contact items to make searching a little bit
+                 //easier. One can search by a real name and get an assload of contact
+                 //details, or by twitter screen name.
+                 twit_friend_by_name =  ContactItem.Create (name);
+                 twit_friend_by_name["twitter.screename"] = "@" + screen_name;
+                 items.Add (twit_friend_by_name);
+                 twit_friend_by_sn = ContactItem.Create (screen_name);
+                 twit_friend_by_sn["twitter.screename"] = "@" + screen_name;
+                 items.Add(twit_friend_by_sn);
              }
          }
      }
