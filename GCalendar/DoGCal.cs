@@ -22,9 +22,7 @@ using System;
 using System.IO;
 using System.Net;
 
-using Google.GData.AccessControl;
 using Google.GData.Client;
-using Google.GData.Extensions;
 using Google.GData.Calendar;
 
 using GConf;

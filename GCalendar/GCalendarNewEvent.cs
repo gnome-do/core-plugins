@@ -25,9 +25,7 @@ using System.Collections.Generic;
 using Do.Addins;
 using Do.Universe;
 
-using Google.GData.AccessControl;
 using Google.GData.Client;
-using Google.GData.Extensions;
 using Google.GData.Calendar;
 
 namespace Do.GCalendar

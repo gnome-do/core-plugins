@@ -26,9 +26,7 @@ using System.Collections.Generic;
 using Do.Addins;
 using Do.Universe;
 
-using Google.GData.AccessControl;
 using Google.GData.Client;
-using Google.GData.Extensions;
 using Google.GData.Calendar;
 
 namespace Do.GCalendar
@@ -71,9 +69,9 @@ namespace Do.GCalendar
 			for (int i = 0 ; i < events.Entries.Count; i++) {
 				//Console.Error.WriteLine(events.Entries[i].Title.Text);
 			    //eventUrl = events.Entries[i].href;
-			    eventUrl = "http://calendar.google.com/";
+			    eventUrl = events.Entries[i].AlternateUri.Content;
 				//Console.Error.WriteLine(eventUrl);
-				Console.Error.WriteLine(events.Entries[i].Id.Uri.ToString ());
+				//Console.Error.WriteLine(events.Entries[i].Id.Uri.ToString ());
 				children.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl));
 			}
 			return children;

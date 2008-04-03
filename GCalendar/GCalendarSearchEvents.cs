@@ -25,9 +25,7 @@ using System.Collections.Generic;
 using Do.Addins;
 using Do.Universe;
 
-using Google.GData.AccessControl;
 using Google.GData.Client;
-using Google.GData.Extensions;
 using Google.GData.Calendar;
 
 namespace Do.GCalendar {
@@ -93,7 +91,7 @@ namespace Do.GCalendar {
             EventFeed events = service.SearchEvents ((items[0] as GCalendarItem).URL,
                             search_text);
             for (int i = 0 ; i < events.Entries.Count; i++) {
-			    eventUrl = "http://calendar.google.com/";
+			    eventUrl = events.Entries[i].AlternateUri.Content;
 				cal_items.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl));
 			}
 			return cal_items.ToArray ();
