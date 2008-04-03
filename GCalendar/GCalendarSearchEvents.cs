@@ -82,7 +82,7 @@ namespace Do.GCalendar {
         public IItem[] Perform (IItem[] items, IItem[] modifierItems) {
             List<IItem> cal_items = new List<IItem> ();
             string search_text = "";
-            string eventUrl;
+            string eventUrl, eventDesc;
             DoGCal service = new DoGCal ();
             foreach (IItem item in modifierItems) {
                 search_text += (item as ITextItem).Text;
@@ -92,7 +92,9 @@ namespace Do.GCalendar {
                             search_text);
             for (int i = 0 ; i < events.Entries.Count; i++) {
 			    eventUrl = events.Entries[i].AlternateUri.Content;
-				cal_items.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl));
+			    eventDesc = events.Entries[i].Content.Content;
+				cal_items.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl,
+				        eventDesc));
 			}
 			return cal_items.ToArray ();
         }

@@ -26,11 +26,12 @@ using Do.Universe;
 
 namespace Do.GCalendar {
 	public class GCalendarEventItem : IURLItem {
-		string name, url;
-		public GCalendarEventItem (string name, string url)
+		string name, url, desc;
+		public GCalendarEventItem (string name, string url, string desc)
 		{
 			this.name = name;
 			this.url = url;
+			this.desc = desc;
 		}
 		
 		public string Name {
@@ -38,7 +39,7 @@ namespace Do.GCalendar {
 		}
 		
 		public string Description {
-			get { return "Google Calendar Event"; }
+			get { return desc; }
 		}
 		
 		public string Icon {

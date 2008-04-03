@@ -64,15 +64,14 @@ namespace Do.GCalendar
 			GCalendarItem calItem = parent as GCalendarItem;
 			DoGCal cal = new DoGCal ();
 			List<IItem> children = new List<IItem> ();
-			string eventUrl;
+			string eventUrl, eventDesc;
 			EventFeed events = cal.GetEvents (calItem.URL);
 			for (int i = 0 ; i < events.Entries.Count; i++) {
-				//Console.Error.WriteLine(events.Entries[i].Title.Text);
-			    //eventUrl = events.Entries[i].href;
+			    //Console.WriteLine(events.Entries[i].gdwhen);
 			    eventUrl = events.Entries[i].AlternateUri.Content;
-				//Console.Error.WriteLine(eventUrl);
-				//Console.Error.WriteLine(events.Entries[i].Id.Uri.ToString ());
-				children.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl));
+			    eventDesc = events.Entries[i].Content.Content;
+				children.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl,
+				        eventDesc));
 			}
 			return children;
 		}
@@ -83,7 +82,6 @@ namespace Do.GCalendar
 			DoGCal cal = new DoGCal ();
 			AtomFeed calList = cal.GetCalendars ();
 			for (int i = 0; i < calList.Entries.Count; i++) {
-				//Console.Error.WriteLine (calList.Entries[i].Id.Uri.ToString ());
 				string calUrl = calList.Entries[i].Id.Uri.ToString ();
 				items.Add (new GCalendarItem (calList.Entries[i].Title.Text, 
 				        calUrl.Replace ("/default","") + "/private/full"));
