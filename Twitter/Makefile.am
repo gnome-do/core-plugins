@@ -2,7 +2,8 @@ EXTRA_DIST = 	\
 			Twitter.cs \
 			Notifications.cs \
 			TwitterFriendItem.cs \
-			TwitterFriendItemSource.cs
+			TwitterFriendItemSource.cs \
+			twitter-icon.png
 
 ASSEMBLY_NAME=Twitter
 ASSEMBLY=$(ASSEMBLY_NAME).dll
