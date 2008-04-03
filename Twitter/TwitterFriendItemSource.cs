@@ -59,8 +59,10 @@
              HttpWebResponse response;
              XmlDocument friends = new XmlDocument ();
              GConf.Client gconf = new GConf.Client ();
+             ContactItem twit_friend;
              screen_name = name = image = username = password = "";
              items.Clear ();
+             
              try {
                  username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
                  password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
@@ -68,11 +70,13 @@
                  gconf.Set ("/apps/gnome-do/plugins/twitter/username","");
                  gconf.Set ("/apps/gnome-do/plugins/twitter/password","");
              }
+             
              url = "http://twitter.com/statuses/friends.xml";
              HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
              request.Credentials = new NetworkCredential (username,password);
              response = (HttpWebResponse) request.GetResponse ();
              friends.Load (response.GetResponseStream ());
+             response.Close ();
              foreach (XmlNode user_node in friends.GetElementsByTagName ("user")) {
                  foreach (XmlNode attr in user_node.ChildNodes) {
                      switch(attr.Name) {
@@ -84,8 +88,10 @@
                          image =  attr.InnerText; break;
                      }
                  }
-                 items.Add (new TwitterFriendItem (screen_name,name,image));
-
+                 Console.Error.WriteLine(name + ":" + screen_name);
+                 twit_friend =  ContactItem.Create (name);
+                 twit_friend["twitter.screename"] = "@" + screen_name;
+                 items.Add (twit_friend);
              }
          }
      }

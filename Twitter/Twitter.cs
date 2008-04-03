@@ -74,7 +74,7 @@ namespace Do.Twitter
         {
             string reply = "";
             if (modItems.Length > 0)
-                reply = (modItems[0] as TwitterFriendItem).Description + " ";
+                reply = (modItems[0] as ContactItem)["twitter.screename"] + " ";
             string tweet = EscapeTweet ((items [0] as ITextItem).Text);
             string url = "http://twitter.com/statuses/update.json?status=" + reply + tweet;
             HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
@@ -101,7 +101,7 @@ namespace Do.Twitter
         }
         
         public Type[] SupportedModifierItemTypes {
-            get { return new Type[] { typeof (TwitterFriendItem) }; }
+            get { return new Type[] { typeof (ContactItem) }; }
         }
 
         public bool ModifierItemsOptional {
@@ -110,7 +110,7 @@ namespace Do.Twitter
                         
         public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
         {
-            return true;
+            return (modItem as ContactItem)["twitter.screename"] != null;
         }
         
         public IItem[] DynamicModifierItemsForItem (IItem item)
