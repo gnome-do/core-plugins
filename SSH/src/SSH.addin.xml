@@ -14,6 +14,6 @@
 		<Action type="GnomeDoSSH.SSHAction" />
 	</Extension>
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="GnomedoSSH.SSHHostItemSource" />
+		<ItemSource type="GnomeDoSSH.SSHHostItemSource" />
 	</Extension>
 </Addin>

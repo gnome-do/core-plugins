@@ -191,8 +191,13 @@ namespace WindowManager
 		
 		private static void OnActiveWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
-			if (!scrn.ActiveWindow.IsSkipTasklist)
-				currentWindow = scrn.ActiveWindow;
+			try {
+				if (!scrn.ActiveWindow.IsSkipTasklist)
+					currentWindow = scrn.ActiveWindow;
+			}
+			catch {
+				
+			}
 		}
 		
 		private static void OnWindowOpened (object o, WindowOpenedArgs args)

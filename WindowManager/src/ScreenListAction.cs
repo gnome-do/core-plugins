@@ -274,11 +274,11 @@ namespace WindowManager
 	public class ScreenRestoreAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return "Cascade Windows"; }
+			get { return "Restore Windows"; }
 		}
 		
 		public override string Description {
-			get { return "Cascade all windows"; }
+			get { return "Restore Windows to their Previous Positions"; }
 		}
 
 		public override string Icon {
