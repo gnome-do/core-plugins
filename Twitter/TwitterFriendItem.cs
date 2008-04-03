@@ -41,7 +41,7 @@ namespace Do.Twitter
         }
 
         public string Icon { 
-            get { return image; } 
+            get { return "stock_person"; } 
         }
     }
 }

@@ -21,7 +21,6 @@
  using System;
  using System.Net;
  using System.Xml;
- using System.Diagnostics;
  using System.Collections.Generic;
  
  using GConf;
@@ -55,18 +54,25 @@
          }
          
          public void UpdateItems () {
-             GConf.Client gconf = new GConf.Client ();
-             string username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
-             string password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
-             XmlDocument friends = new XmlDocument ();
-             items.Clear ();
-             string uri = string.Format("http://{0}:{1}@twitter.com/statuses/friends.xml",username,password);
-             string dest = Environment.GetEnvironmentVariable ("HOME") + "/.local/share/gnome-do/friends.xml";
+             string url, username, password;
              string screen_name, image, name;
-             screen_name = name = image = "";
-             System.Diagnostics.Process p = System.Diagnostics.Process.Start("wget", string.Format("{0} --output-document={1}", uri, dest) ); 
-             p.WaitForExit ();
-             friends.Load (dest);
+             HttpWebResponse response;
+             XmlDocument friends = new XmlDocument ();
+             GConf.Client gconf = new GConf.Client ();
+             screen_name = name = image = username = password = "";
+             items.Clear ();
+             try {
+                 username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
+                 password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
+             } catch (NoSuchKeyException) {
+                 gconf.Set ("/apps/gnome-do/plugins/twitter/username","");
+                 gconf.Set ("/apps/gnome-do/plugins/twitter/password","");
+             }
+             url = "http://twitter.com/statuses/friends.xml";
+             HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
+             request.Credentials = new NetworkCredential (username,password);
+             response = (HttpWebResponse) request.GetResponse ();
+             friends.Load (response.GetResponseStream ());
              foreach (XmlNode user_node in friends.GetElementsByTagName ("user")) {
                  foreach (XmlNode attr in user_node.ChildNodes) {
                      switch(attr.Name) {
@@ -81,7 +87,6 @@
                  items.Add (new TwitterFriendItem (screen_name,name,image));
 
              }
-             System.IO.File.Delete (dest);
          }
      }
  }
