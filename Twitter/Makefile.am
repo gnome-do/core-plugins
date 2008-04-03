@@ -1,6 +1,8 @@
 EXTRA_DIST = 	\
 			Twitter.cs \
-			Notifications.cs
+			Notifications.cs \
+			TwitterFriendItem.cs \
+			TwitterFriendItemSource.cs
 
 ASSEMBLY_NAME=Twitter
 ASSEMBLY=$(ASSEMBLY_NAME).dll
@@ -13,7 +15,9 @@ twitter_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System -r:Mono.Posix $(NDES
 
 twitter_sources  = 	\
 			Twitter.cs \
-			Notifications.cs
+			Notifications.cs \
+			TwitterFriendItem.cs \
+			TwitterFriendItemSource.cs
 
 twitter_resources =     \
 			twitter-icon.png
