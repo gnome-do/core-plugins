@@ -63,8 +63,7 @@ namespace Do.GCalendar
 		
 		public EventFeed GetEvents (string calUrl)
 		{
-		    DateTime now = DateTime.Now;
-			return GetEvents (calUrl, now, new DateTime(now.Year + 4,12,21));
+			return GetEvents (calUrl, DateTime.Now, DateTime.Now.AddYears(1));
 		}
 		
 		public EventFeed GetEvents (string calUrl, DateTime startTime,

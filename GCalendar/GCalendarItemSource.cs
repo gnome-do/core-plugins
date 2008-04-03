@@ -28,6 +28,7 @@ using Do.Universe;
 
 using Google.GData.Client;
 using Google.GData.Calendar;
+using Google.GData.Extensions;
 
 namespace Do.GCalendar
 {	
@@ -64,15 +65,26 @@ namespace Do.GCalendar
 			GCalendarItem calItem = parent as GCalendarItem;
 			DoGCal cal = new DoGCal ();
 			List<IItem> children = new List<IItem> ();
-			string eventUrl, eventDesc;
+			string eventUrl, eventDesc, start;
 			EventFeed events = cal.GetEvents (calItem.URL);
-			for (int i = 0 ; i < events.Entries.Count; i++) {
-			    //Console.WriteLine(events.Entries[i].gdwhen);
+			/*for (int i = 0 ; i < events.Entries.Count; i++) {
+			    Console.WriteLine(events.Entries[i].Times.StartTime);
 			    eventUrl = events.Entries[i].AlternateUri.Content;
 			    eventDesc = events.Entries[i].Content.Content;
 				children.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl,
 				        eventDesc));
-			}
+			}*/
+			foreach (EventEntry entry in events.Entries) {
+			    eventUrl = entry.AlternateUri.Content;
+			    eventDesc = entry.Content.Content;
+			    if (entry.Times.Count > 0) {
+			        start = entry.Times[0].StartTime.ToString ();
+			        start = start.Substring (0,start.IndexOf (' '));
+			        eventDesc = start + " - " + eventDesc;
+                }
+			    children.Add (new GCalendarEventItem (entry.Title.Text, eventUrl,
+			            eventDesc));
+            }
 			return children;
 		}
 
