@@ -22,7 +22,7 @@ gnome_screenshot_sources  = 	\
 	TakeScreenshotAction.cs			 \
 	WholeScreenScreenshotItem.cs
 
-gnome_screenshot_build_sources = $(gnome_screenshot_sources)
+gnome_screenshot_build_sources = $(addprefix $(srcdir)/, $(gnome_screenshot_sources))
 
 plugin_DATA = $(ASSEMBLY)
 

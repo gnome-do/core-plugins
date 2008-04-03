@@ -14,7 +14,7 @@ gnome_terminal_sources  = 	\
 			OpenTerminalHereAction.boo \
 			RunInTerminalAction.boo
 
-gnome_terminal_build_sources = $(gnome_terminal_sources)
+gnome_terminal_build_sources = $(addprefix $(srcdir)/, $(gnome_terminal_sources))
 
 plugin_DATA = $(ASSEMBLY)
 
