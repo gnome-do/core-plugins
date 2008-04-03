@@ -142,38 +142,6 @@ namespace Do.Twitter
             request.Credentials = new NetworkCredential (username, password);
             return true;
         }
-        
-        private string EscapeTweet (string tweet) {
-            String retstring = tweet.Replace ("%", "%25")
-                                    .Replace ("#", "%23")
-                                    .Replace ("{", "%7B")
-                                    .Replace ("}", "%7D")
-                                    .Replace ("|", "%7C")
-                                    .Replace ("\\", "%5C")
-                                    .Replace ("^", "%5E")
-                                    .Replace ("~", "%7E")
-                                    .Replace ("[", "%5B")
-                                    .Replace ("]", "%5D")
-                                    .Replace ("`", "%60")
-                                    .Replace (";", "%3B")
-                                    .Replace (")", "%29")
-                                    .Replace ("/", "%2F");
-
-                   retstring = tweet.Replace ("(", "%28")
-                                    .Replace ("?", "%3F")
-                                    .Replace (":", "%3A")
-                                    .Replace ("@", "%40")
-                                    .Replace ("=", "%3D")
-                                    .Replace ("&", "%26")
-                                    .Replace ("$", "%24")
-                                    .Replace ("\"", "%22")
-                                    .Replace ("'", "%27")
-                                    .Replace ("*", "%2A")
-                                    .Replace ("+", "%2B")
-                                    .Replace ("!", "%21")
-                                    .Replace (" ", "+");
-            return retstring;
-        }
 
         private bool SetRequestProxy (HttpWebRequest request, GConf.Client gconf)
         {
