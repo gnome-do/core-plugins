@@ -3,7 +3,8 @@ EXTRA_DIST = 	\
 			GCalendarItem.cs GCalendarEventItem.cs \
 			GCalendarSearchEvents.cs GCalendarNewEvent.cs \
 			Google.GData.AccessControl.dll Google.GData.Calendar.dll \
-			Google.GData.Client.dll Google.GData.Extensions.dll
+			Google.GData.Client.dll Google.GData.Extensions.dll \
+			gcalendar-icon.png
 
 
 ASSEMBLY_NAME=GCalendar
@@ -16,11 +17,11 @@ CLEANFILES = $(ASSEMBLY){,.mdb}
 gcalendar_google_references = \
     Google.GData.AccessControl.dll Google.GData.Calendar.dll \
     Google.GData.Client.dll Google.GData.Extensions.dll
-        
+
 gcalendar_google_build_reference = $(addprefix -r:$(srcdir)/,$(gcalendar_google_references))
 
 gcalendar_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS) \
-	$(GCONF_SHARP_LIBS) $(gcalendar_google_build_reference)
+	$(GCONF_SHARP_LIBS) $(gcalendar_google_build_reference) $(gcalendar_resources)
 
 gcalendar_sources  = 	\
 			DoGCal.cs GCalendarItemSource.cs \

@@ -36,7 +36,7 @@ namespace Do.GCalendar {
         }
         
         public string Name {
-            get { return "Search Google Calendar"; }
+            get { return "Search Events"; }
         }
         
         public string Description {
@@ -44,13 +44,13 @@ namespace Do.GCalendar {
         }
         
         public string Icon {
-            get { return "date"; }
+            get { return "stock_calendar"; }
         }
         
         public Type[] SupportedItemTypes {
             get {
                 return new Type[] {
-                    typeof (GCalendarItem),
+                    typeof (ITextItem),
                 };
             }
         }
@@ -58,7 +58,7 @@ namespace Do.GCalendar {
         public Type[] SupportedModifierItemTypes {
             get { 
                 return new Type[] {
-                    typeof (ITextItem),
+                    typeof (GCalendarItem),
                 };
             }
         }
@@ -82,20 +82,24 @@ namespace Do.GCalendar {
         public IItem[] Perform (IItem[] items, IItem[] modifierItems) {
             List<IItem> cal_items = new List<IItem> ();
             string search_text = "";
-            string eventUrl, eventDesc;
+            string eventUrl, eventDesc, start;
             DoGCal service = new DoGCal ();
-            foreach (IItem item in modifierItems) {
+            foreach (IItem item in items) {
                 search_text += (item as ITextItem).Text;
             }
-            
-            EventFeed events = service.SearchEvents ((items[0] as GCalendarItem).URL,
+            EventFeed events = service.SearchEvents ((modifierItems[0] as GCalendarItem).URL,
                             search_text);
-            for (int i = 0 ; i < events.Entries.Count; i++) {
-			    eventUrl = events.Entries[i].AlternateUri.Content;
-			    eventDesc = events.Entries[i].Content.Content;
-				cal_items.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl,
-				        eventDesc));
-			}
+			foreach (EventEntry entry in events.Entries) {
+			    eventUrl = entry.AlternateUri.Content;
+			    eventDesc = entry.Content.Content;
+			    if (entry.Times.Count > 0) {
+			        start = entry.Times[0].StartTime.ToString ();
+			        start = start.Substring (0,start.IndexOf (' '));
+			        eventDesc = start + " - " + eventDesc;
+                }
+			    cal_items.Add (new GCalendarEventItem (entry.Title.Text, eventUrl,
+			            eventDesc));
+            }
 			return cal_items.ToArray ();
         }
     }

@@ -37,7 +37,7 @@ namespace Do.GCalendar
 		}
 		
 		public string Name {
-			get { return "New Google Calendar Event"; }
+			get { return "New Event"; }
 		}
 		
 		public string Description {
@@ -45,13 +45,13 @@ namespace Do.GCalendar
         }
 			
 		public string Icon {
-			get { return "date"; }
+			get { return "stock_new-appointment"; }
 		}
 		
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof (GCalendarItem),
+					typeof (ITextItem),
 				};
 			}
 		}
@@ -59,7 +59,7 @@ namespace Do.GCalendar
 		public Type[] SupportedModifierItemTypes {
 		    get {
 		        return new Type[] {
-		            typeof (ITextItem),
+		            typeof (GCalendarItem),
                 };
             }
         }
@@ -82,11 +82,20 @@ namespace Do.GCalendar
         
         public IItem[] Perform (IItem[] items, IItem[] modifierItems) {
             DoGCal service = new DoGCal ();
-            string cal_url = (items[0] as GCalendarItem).URL;
-            string event_data = (modifierItems[0] as ITextItem).Text;
-            service.NewEvent (cal_url, event_data);
+            string cal_url = (modifierItems[0] as GCalendarItem).URL;
+            string event_data = (items[0] as ITextItem).Text;
             
-            return null;
+            EventEntry entry = service.NewEvent (cal_url, event_data);
+            
+            string eventUrl = entry.AlternateUri.Content;
+            string eventDesc = entry.Content.Content;
+            if (entry.Times.Count > 0) {
+                string start = entry.Times[0].StartTime.ToString ();
+                start = start.Substring (0,start.IndexOf (' '));
+                eventDesc = start + " - " + eventDesc;
+            }
+            return new IItem[] { (new GCalendarEventItem (entry.Title.Text, eventUrl,
+                    eventDesc)), };
         }
 	}
 }

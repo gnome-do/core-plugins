@@ -67,13 +67,6 @@ namespace Do.GCalendar
 			List<IItem> children = new List<IItem> ();
 			string eventUrl, eventDesc, start;
 			EventFeed events = cal.GetEvents (calItem.URL);
-			/*for (int i = 0 ; i < events.Entries.Count; i++) {
-			    Console.WriteLine(events.Entries[i].Times.StartTime);
-			    eventUrl = events.Entries[i].AlternateUri.Content;
-			    eventDesc = events.Entries[i].Content.Content;
-				children.Add (new GCalendarEventItem (events.Entries[i].Title.Text, eventUrl,
-				        eventDesc));
-			}*/
 			foreach (EventEntry entry in events.Entries) {
 			    eventUrl = entry.AlternateUri.Content;
 			    eventDesc = entry.Content.Content;

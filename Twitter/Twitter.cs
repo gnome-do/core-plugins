@@ -1,4 +1,4 @@
-/* Twitter.cs
+/* DoTwitter.cs
  *
  * This is a simple action for posting to twitter using GNOME DO.
  *
@@ -20,165 +20,93 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net;
-
-using Mono;
-using Mono.Unix;
-
-using GConf;
+using System.Xml;
+using System.Collections.Generic;
 
 using NDesk.DBus;
 using org.freedesktop;
 using org.freedesktop.DBus;
 
+using GConf;
 using Do.Universe;
 
 namespace Do.Twitter
 {
-    public class Twitter : IAction
+    public static class Twitter
     {
-        public string Name {
-           get {
-               return "Tweet";
-           }
-        }
-        
-        public string Description {
+        public static string Username {
             get {
-                return "Update Twitter Status";
-            }
-        }
-        
-        public string Icon {
-            get {
-                return "twitter-icon.png@Twitter";
-            }
-        }
-        
-        public Type[] SupportedItemTypes {
-            get {
-                return new Type[] {
-                    typeof (ITextItem),
-                };
-            }
-        }
-
-        public bool SupportsItem (IItem item) 
-        {
-            return true;
-        }
-
-        public IItem[] Perform (IItem[] items, IItem[] modItems)
-        {
-            string reply = "";
-            if (modItems.Length > 0)
-                reply = (modItems[0] as TwitterFriendItem).Description + " ";
-            string tweet = EscapeTweet ((items [0] as ITextItem).Text);
-            string url = "http://twitter.com/statuses/update.json?status=" + reply + tweet;
-            HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
-            request.Method = "POST";
-
-            GConf.Client gconf = new GConf.Client ();
-
-            if (!SetRequestCredentials (request, gconf)) return null;
-            if (!SetRequestProxy (request, gconf)) return null;
-            try {
-                request.GetResponse ();
-                SendNotification ("Tweet Successful", "Successfully posted tweet '" 
-                                + (items [0] as ITextItem).Text
-                                + "' to Twitter.");
-            } catch (Exception e) {
-                Console.WriteLine (e.ToString ());
-                SendNotification ("Tweet Failed", "Unable to post tweet. Check your login "
-                                + "settings (/apps/gnome-do/plugins/twitter). If you are "
-                                + "behind a proxy, also make sure that the settings in "
-                                + "/system/http_proxy are correct.\n\nDetails:\n" 
-                                + e.ToString ());
-            }
-            return null;
-        }
-        
-        public Type[] SupportedModifierItemTypes {
-            get { return new Type[] { typeof (TwitterFriendItem) }; }
-        }
-
-        public bool ModifierItemsOptional {
-            get { return true; }
-        }
-                        
-        public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
-        {
-            return true;
-        }
-        
-        public IItem[] DynamicModifierItemsForItem (IItem item)
-        {
-            return null;
-        }
-
-        
-
-        private bool SetRequestCredentials (HttpWebRequest request, GConf.Client gconf)
-        {
-            String username;
-            String password;
-
-            try {
-                username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as String;
-                password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as String;
-            }
-            catch (GConf.NoSuchKeyException) {
-                gconf.Set ("/apps/gnome-do/plugins/twitter/username", "");
-                gconf.Set ("/apps/gnome-do/plugins/twitter/password", "");
-                SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
+                GConf.Client gconf = new GConf.Client ();
+                string username = "";
+                try {
+                    username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
+                } catch (NoSuchKeyException) {
+                    gconf.Set ("/apps/gnome-do/plugins/twitter/username",username);
+                    Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
                               + "login information have been created "
                               + "in /apps/gnome-do/plugins/twitter/\n"
                               + "Please set your username and password "
                               + "in order to post tweets");
-                return false;
+                }
+                return username;
             }
-            request.Credentials = new NetworkCredential (username, password);
-            return true;
         }
         
-        private string EscapeTweet (string tweet) {
-            String retstring = tweet.Replace ("%", "%25")
-                                    .Replace ("#", "%23")
-                                    .Replace ("{", "%7B")
-                                    .Replace ("}", "%7D")
-                                    .Replace ("|", "%7C")
-                                    .Replace ("\\", "%5C")
-                                    .Replace ("^", "%5E")
-                                    .Replace ("~", "%7E")
-                                    .Replace ("[", "%5B")
-                                    .Replace ("]", "%5D")
-                                    .Replace ("`", "%60")
-                                    .Replace (";", "%3B")
-                                    .Replace (")", "%29")
-                                    .Replace ("/", "%2F");
-
-                   retstring = tweet.Replace ("(", "%28")
-                                    .Replace ("?", "%3F")
-                                    .Replace (":", "%3A")
-                                    .Replace ("@", "%40")
-                                    .Replace ("=", "%3D")
-                                    .Replace ("&", "%26")
-                                    .Replace ("$", "%24")
-                                    .Replace ("\"", "%22")
-                                    .Replace ("'", "%27")
-                                    .Replace ("*", "%2A")
-                                    .Replace ("+", "%2B")
-                                    .Replace ("!", "%21")
-                                    .Replace (" ", "+");
-            return retstring;
+        public static string Password {
+            get {
+                GConf.Client gconf = new GConf.Client ();
+                string password = "";
+                try {
+                    password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
+                } catch (NoSuchKeyException) {
+                    gconf.Set ("/apps/gnome-do/plugins/twitter/username",password);
+                    Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
+                              + "login information have been created "
+                              + "in /apps/gnome-do/plugins/twitter/\n"
+                              + "Please set your username and password "
+                              + "in order to post tweets");
+                }
+                return password;
+            }
         }
+        
+        public static IItem[] GetTwitterFriends () {
+            List<IItem> items = new List<IItem> ();
+            XmlDocument friends = new XmlDocument ();
+            string url = "http://twitter.com/statuses/friends.xml";
 
-        private bool SetRequestProxy (HttpWebRequest request, GConf.Client gconf)
+            HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
+            request.Credentials = new NetworkCredential (Twitter.Username,Twitter.Password);
+            if(!SetRequestProxy (request, new GConf.Client ()))
+                return null;
+                
+            HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
+            friends.Load (response.GetResponseStream ());
+            string screen_name, name;
+            screen_name = name = "";
+            foreach (XmlNode user_node in friends.GetElementsByTagName ("user")) {
+                foreach (XmlNode attr in user_node.ChildNodes) {
+                    switch(attr.Name) {
+                    case("screen_name"):
+                        screen_name = attr.InnerText; break;
+                    case("name"):
+                        name = attr.InnerText; break;
+                    }
+                }
+                ContactItem twit_friend_by_name = ContactItem.Create(name);
+                twit_friend_by_name["twitter.screename"] = "@" + screen_name;
+                ContactItem twit_friend_by_screename = ContactItem.Create(screen_name);
+                twit_friend_by_screename["twitter.screename"] = "@" + screen_name;
+                items.Add (twit_friend_by_name);
+                items.Add (twit_friend_by_screename);
+            }
+            return items.ToArray ();
+        }
+        
+        public static bool SetRequestProxy (HttpWebRequest request, GConf.Client gconf)
         {
             bool use_proxy;
-
             try {
                     use_proxy = (bool) gconf.Get ("/system/http_proxy/use_http_proxy");
             }
@@ -187,9 +115,9 @@ namespace Do.Twitter
             }
 
             if (use_proxy) {
-                String phost;
+                string phost;
                 int pport;
-                String[] pignore;
+                string[] pignore;
                 bool pauth;                
                 try {
                     phost = gconf.Get ("/system/http_proxy/host") as String;
@@ -198,7 +126,7 @@ namespace Do.Twitter
                     pauth = (bool) gconf.Get ("/system/http_proxy/use_authentication");                
                 }
                 catch (GConf.NoSuchKeyException) {
-                    SendNotification ("Unable to load proxy settings", 
+                    Twitter.SendNotification ("Unable to load proxy settings", 
                                   "You have specified in GConf that "
                                 + "you are using a proxy server, but no proxy "
                                 + "settings could be found. Please check "
@@ -215,7 +143,7 @@ namespace Do.Twitter
                         papass = gconf.Get ("/system/http_proxy/authentication_password") as String;
                     }
                     catch (GConf.NoSuchKeyException) {
-                        SendNotification ("Unable to load proxy settings",
+                        Twitter.SendNotification ("Unable to load proxy settings",
                                       "You have specified in GConf that "
                                     + "you are using a proxy server, but no proxy "
                                     + "settings could be found. Please check "
@@ -230,7 +158,7 @@ namespace Do.Twitter
             return true;
         }
         
-        private void SendNotification (string title, string message)
+        public static void SendNotification (string title, string message)
         {
             Bus bus = Bus.Session;
             Notifications nf = bus.GetObject<Notifications> ("org.freedesktop.Notifications", new ObjectPath ("/org/freedesktop/Notifications"));
