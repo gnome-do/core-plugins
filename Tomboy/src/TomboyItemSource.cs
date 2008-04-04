@@ -21,30 +21,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Do.Addins;
 using Do.Universe;
 
-namespace Do.Addins.Tomboy
-{
-	
-	public class TomboyItemSource : IItemSource {
-		private List<IItem> notes = null;	
-
-		public struct NoteStruct {
-			public string title;
-			public long changed_date;
-			
-			public NoteStruct(string note_title, long note_changed_date) {
-				title = note_title;
-				changed_date = note_changed_date;
-			}
-		}
+namespace Tomboy
+{	
+	public class TomboyItemSource : IItemSource
+	{
+		List<IItem> notes;	
 
 		/// <summary>
 		/// When creating an instance of this item source get the initial
 		/// list of tomboy notes
 		/// </summary>
-		public TomboyItemSource() {
+		public TomboyItemSource ()
+		{
 			notes = new List<IItem> ();			
 			UpdateItems ();
 		}
@@ -96,7 +86,7 @@ namespace Do.Addins.Tomboy
 		/// </returns>
 		public ICollection<IItem> Items {
 			get {
-				return this.notes;
+				return notes;
 			}
 		}
 		
@@ -111,17 +101,12 @@ namespace Do.Addins.Tomboy
 		public void UpdateItems ()
 		{			
 			try {
-				TomboyDBus TBoy = new TomboyDBus();
-				ArrayList note_titles = TBoy.GetAllNoteTitles();
-				
-				foreach(string title in note_titles) {
-					long changed_date = TBoy.GetNoteChangedDate(title);
-					NoteStruct new_note = new NoteStruct(title, changed_date);
-					notes.Add(new TomboyItem(new_note));
+				TomboyDBus tb = new TomboyDBus();
+				foreach(string title in tb.GetAllNoteTitles ()) {
+					notes.Add (new TomboyItem (title));
 				}
 			} catch (Exception e) {
-				Console.WriteLine ("Cannot index Tomboy Notes because a {0} was thrown: {1}", e.GetType (), e.Message);
-				return;
+				Console.Error.WriteLine ("Cannot index Tomboy Notes: {0}", e.Message);
 			}
 		}
 	}

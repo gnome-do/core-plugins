@@ -22,7 +22,7 @@ using System.Diagnostics;
 
 using Do.Universe;
 
-namespace Do.Addins.Tomboy
+namespace Tomboy
 {	
 	public class TomboyNewNoteCommand : IAction
 	{

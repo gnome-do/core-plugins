@@ -18,58 +18,48 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Threading;
-
-using Do.Addins;
 using Do.Universe;
 
-namespace Do.Addins.Tomboy
+namespace Tomboy
 {
-	
 	public class TomboyItem : IOpenableItem
 	{
 		string title;
-		long changed_date;
+		
 		/// <summary>
 		/// The Tomboy Item only has one property, the title
 		/// </summary>
 		/// <param name="note_title">
 		/// A <see cref="System.String"/>
 		/// </param>
-		public TomboyItem(TomboyItemSource.NoteStruct note)
+		public TomboyItem (string title)
 		{
-			this.title = note.title;
-			this.changed_date = note.changed_date;
+			this.title = title;
 		}
 		
-		public string Name { get { return title; } }
+		public string Name {
+			get { return title; }
+		}
+		
 		public string Description {
 			get { 
-				// This is an example of a UNIX timestamp for the date/time 11-04-2005 09:25.
-				// First make a System.DateTime equivalent to the UNIX Epoch.
-				System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
-
-				// Add the number of seconds in UNIX timestamp to be converted.
-				dateTime = dateTime.AddSeconds(changed_date);
-
-				// The dateTime now contains the right date/time so to format the string,
-				// use the standard formatting methods of the DateTime object.
-				string printDate = dateTime.ToShortDateString() +" "+ dateTime.ToShortTimeString();
-
-				// Print the date and time
-				string desc = "Last changed at: " + printDate; 
-				return desc; 
+				return "Tomboy note"; 
 			} 
 		}
-		public string Icon { get { return "tomboy"; } }
+		
+		public string Icon {
+			get {
+				return "tomboy";
+			}
+		}
 		
 		/// <summary>
-		/// This is because we implement IRunnableItem
+		/// This is because we implement IOpenableItem
 		/// We use this method to run this instance of the item
 		/// </summary>
-		public void Open () {
-			TomboyDBus tomboy_instance = new TomboyDBus();
-			tomboy_instance.OpenNote(title);
+		public void Open ()
+		{
+			new TomboyDBus ().OpenNote (title);
 		}
 	}
 }

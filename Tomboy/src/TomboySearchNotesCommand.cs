@@ -1,4 +1,4 @@
-//  RhythmboxPlayCommand.cs
+//  TomboySearchNotesCommand.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -22,30 +22,23 @@ using System.Diagnostics;
 
 using Do.Universe;
 
-namespace Do.Addins.Tomboy
+namespace Tomboy
 {
-	
-	
-	public class TomboySearchNotesCommand : IAction
-	{
-		
-		public TomboySearchNotesCommand()
-		{
-		}
-		
-		public string Name {
+	public class TomboySearchNotesCommand : AbstractAction
+	{			
+		public override string Name {
 			get { return "Search Tomboy Notes"; }
 		}
 		
-		public string Description {
-			get { return "Search your Tomboy Notes bodies"; }
+		public override string Description {
+			get { return "Searches contents of Tomboy notes"; }
 		}
 		
-		public string Icon {
-			get { return "/usr/share/icons/Tango/scalable/actions/gtk-find.svg"; }
+		public override string Icon {
+			get { return "gtk-find"; }
 		}
 		
-		public Type[] SupportedItemTypes {
+		public override Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -53,30 +46,10 @@ namespace Do.Addins.Tomboy
 			}
 		}
 		
-		public Type[] SupportedModifierItemTypes {
-			get { return null; }
-		}
-		
-	    public bool ModifierItemsOptional {
-		  get { return false; }
-	    }
-
-		public bool SupportsItem (IItem item) {
-			return true;
-		}
-		
-	    public bool SupportsModifierItemForItems (IItem[] items, IItem modItem) {
-	      return false;
-	    }
-			
-	    public IItem[] DynamicModifierItemsForItem (IItem item) {
-	      return null;
-	    }
-		
-		public IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
-			TomboyDBus tomboy_instance = new TomboyDBus();
-			tomboy_instance.SearchNotes((items[0] as ITextItem).Text);
+			TomboyDBus tb = new TomboyDBus ();
+			tb.SearchNotes ((items [0] as ITextItem).Text);
 			return null;
 		}
 	}
