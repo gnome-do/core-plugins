@@ -28,7 +28,7 @@ namespace Do.Universe
 	{
 		
 		bool allowHidden = false;
-		uint maxResults = 1000;
+		const uint maxResults = 500;
 		
 		public override string Name
 		{
@@ -65,19 +65,16 @@ namespace Do.Universe
 			
 			locate = new System.Diagnostics.Process ();
 			locate.StartInfo.FileName = "locate";
-			locate.StartInfo.Arguments = string.Format ("-i -n {0} \"{1}\"", maxResults, query);
+			locate.StartInfo.Arguments = string.Format ("-i \"{0}\"", query);
 			locate.StartInfo.RedirectStandardOutput = true;
 			locate.StartInfo.UseShellExecute = false;
-			try {
-				locate.Start ();
-			} catch {
-				Console.Error.WriteLine ("LocateFilesAction error: The program 'locate' could not be found.");
-				return null;
-			}
+			locate.Start ();
 
 			string path;
+			uint results = 0;
 			query = query.ToLower ();
-			while (null != (path = locate.StandardOutput.ReadLine ())) {
+			while (results < maxResults &&
+				       null != (path = locate.StandardOutput.ReadLine ())) {
 				// Disallow hidden directories in the absolute path.
 				// This gets rid of messy .svn directories and their contents.
 				if (!allowHidden &&
@@ -87,8 +84,10 @@ namespace Do.Universe
 				// Only allow files that contain the query as a substring
 				// of the file name. It may be faster to use grep, but I've
 				// tested this and it seems prety snappy.
-				if (Path.GetFileName (path).ToLower().Contains (query))
+				if (Path.GetFileName (path).ToLower().Contains (query)) {
+					results++;
 					files.Add (new FileItem (path));
+				}
 			}
 			files.Sort (new FileItemNameComparer (query));
 			return files.ToArray ();
