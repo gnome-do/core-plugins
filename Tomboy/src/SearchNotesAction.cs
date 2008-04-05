@@ -24,7 +24,7 @@ using Do.Universe;
 
 namespace Tomboy
 {
-	public class TomboySearchNotesCommand : AbstractAction
+	public class SearchNotesAction : AbstractAction
 	{			
 		public override string Name {
 			get { return "Search Tomboy Notes"; }

@@ -1,4 +1,4 @@
-//  TomboyItems.cs
+//  NoteItem.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -22,7 +22,7 @@ using Do.Universe;
 
 namespace Tomboy
 {
-	public class TomboyItem : IOpenableItem
+	public class NoteItem : IOpenableItem
 	{
 		string title;
 		
@@ -32,7 +32,7 @@ namespace Tomboy
 		/// <param name="note_title">
 		/// A <see cref="System.String"/>
 		/// </param>
-		public TomboyItem (string title)
+		public NoteItem (string title)
 		{
 			this.title = title;
 		}

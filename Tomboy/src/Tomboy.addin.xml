@@ -11,12 +11,12 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<Action type = "Do.Addins.Tomboy.TomboyItemSource" />
+		<Action type = "Tomboy.NotesItemSource" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="Do.Addins.Tomboy.TomboyNewNoteCommand" />
+		<Action type="Tomboy.NewNoteAction" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="Do.Addins.Tomboy.TomboySearchNotesCommand" />
+		<Action type="Tomboy.SearchNotesAction" />
 	</Extension>
 </Addin>

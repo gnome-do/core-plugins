@@ -1,8 +1,8 @@
-//  TomboyItems.cs
+//  NotesItemSource.cs
 //
-//  GNOME Do is the legal property of its developers, whose names are too numerous
-//  to list here.  Please refer to the COPYRIGHT file distributed with this
-//  source distribution.
+//  GNOME Do is the legal property of its developers, whose names are too
+//  numerous to list here.  Please refer to the COPYRIGHT file distributed with
+//  this source distribution.
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ using Do.Universe;
 
 namespace Tomboy
 {	
-	public class TomboyItemSource : IItemSource
+	public class NotesItemSource : IItemSource
 	{
 		List<IItem> notes;	
 
@@ -33,10 +33,9 @@ namespace Tomboy
 		/// When creating an instance of this item source get the initial
 		/// list of tomboy notes
 		/// </summary>
-		public TomboyItemSource ()
+		public NotesItemSource ()
 		{
 			notes = new List<IItem> ();			
-			UpdateItems ();
 		}
 		
 		/// <summary>
@@ -70,7 +69,7 @@ namespace Tomboy
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof (TomboyItem),
+					typeof (NoteItem),
 				};
 			}
 		}
@@ -85,9 +84,7 @@ namespace Tomboy
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
 		public ICollection<IItem> Items {
-			get {
-				return notes;
-			}
+			get { return notes; }
 		}
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item)
@@ -96,17 +93,14 @@ namespace Tomboy
 		}
 		
 		/// <summary>
-		/// This method run in the constructor to find the notes we can get a hold of
+		/// This method run in the constructor to find the notes we can get
+		/// ahold of.
 		/// </summary>
 		public void UpdateItems ()
 		{			
-			try {
-				TomboyDBus tb = new TomboyDBus();
-				foreach(string title in tb.GetAllNoteTitles ()) {
-					notes.Add (new TomboyItem (title));
-				}
-			} catch (Exception e) {
-				Console.Error.WriteLine ("Cannot index Tomboy Notes: {0}", e.Message);
+			TomboyDBus tb = new TomboyDBus();
+			foreach(string title in tb.GetAllNoteTitles ()) {
+				notes.Add (new NoteItem (title));
 			}
 		}
 	}

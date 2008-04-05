@@ -22,6 +22,7 @@
       <Entry build="True" name="Tomboy" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="WindowManager" configuration="Debug" />
+      <Entry build="True" name="Firefox" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -45,6 +46,7 @@
       <Entry build="True" name="Tomboy" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
       <Entry build="True" name="WindowManager" configuration="Release" />
+      <Entry build="True" name="Firefox" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -71,6 +73,7 @@
       <Entry build="True" name="Tomboy" configuration="Repo" />
       <Entry build="True" name="Twitter" configuration="Repo" />
       <Entry build="True" name="WindowManager" configuration="Debug" />
+      <Entry build="True" name="Firefox" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
@@ -95,6 +98,7 @@
     <Execute type="None" entry="Tomboy" />
     <Execute type="None" entry="Twitter" />
     <Execute type="None" entry="WindowManager" />
+    <Execute type="None" entry="Firefox" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -119,5 +123,6 @@
     <Entry filename="Tomboy/Tomboy.mdp" />
     <Entry filename="Twitter/Twitter.mdp" />
     <Entry filename="WindowManager/WindowManager.mdp" />
+    <Entry filename="Firefox/Firefox.mdp" />
   </Entries>
 </Combine>

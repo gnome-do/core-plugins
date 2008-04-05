@@ -1,4 +1,4 @@
-//  RhythmboxPlayCommand.cs
+//  NewNoteAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -24,26 +24,21 @@ using Do.Universe;
 
 namespace Tomboy
 {	
-	public class TomboyNewNoteCommand : IAction
+	public class NewNoteAction : AbstractAction
 	{
-		
-		public TomboyNewNoteCommand()
-		{
-		}
-		
-		public string Name {
+		public override string Name {
 			get { return "New Tomboy Note"; }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return "Create a new empty Tomboy note"; }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "tomboy"; }
 		}
 		
-		public Type[] SupportedItemTypes {
+		public override Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -51,36 +46,14 @@ namespace Tomboy
 			}
 		}
 		
-		public Type[] SupportedModifierItemTypes {
-			get { return null; }
-		}
-		
-	    public bool ModifierItemsOptional {
-		  get { return false; }
-	    }
-
-		public bool SupportsItem (IItem item) {
-			return true;
-		}
-		
-	    public bool SupportsModifierItemForItems (IItem[] items, IItem modItem) {
-	      return false;
-	    }
-			
-	    public IItem[] DynamicModifierItemsForItem (IItem item) {
-	      return null;
-	    }
-		
-		public IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
-			TextItemPerform(items[0] as ITextItem);
-			return null;
+			return ITextItemPerform (items [0] as ITextItem);
 		}
 		
-		protected IItem[] TextItemPerform(ITextItem item) {
-			TomboyDBus tomboy_instance = new TomboyDBus();
-			// create a new note with the title filled in
-			tomboy_instance.CreateNewNote(item.Text);
+		protected IItem [] ITextItemPerform (ITextItem item) {
+			TomboyDBus tb = new TomboyDBus ();
+			tb.CreateNewNote (item.Text);
 			return null;
 		}
 	}
