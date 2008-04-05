@@ -25,6 +25,9 @@
 		<Action type="WindowManager.ScreenTileAction" />
 	</Extension>
 	<Extension path = "/Do/Action">
+		<Action type="WindowManager.ScreenCascadeAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
 		<Action type="WindowManager.ScreenRestoreAction" />
 	</Extension>
 	<Extension path = "/Do/ItemSource">
