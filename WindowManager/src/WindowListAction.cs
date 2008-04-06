@@ -283,7 +283,14 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			(modItems[0] as WindowItem).Window.Maximize ();
+			Wnck.Window w = (modItems[0] as WindowItem);
+			
+			if (w.IsMaximized) {
+				w.Unmaximize ();
+			} else {
+				w.Maximize ();
+			}
+			
 			return null;
 		}
 
@@ -292,7 +299,7 @@ namespace WindowManager
 	public class WindowMinimizeAction : WindowActionAction
 	{
 		public override string Name {
-			get { return "Minimize/Restore"; }
+			get { return "Minimize Window"; }
 		}
 		
 		public override string Description {
@@ -320,11 +327,11 @@ namespace WindowManager
 	public class WindowShadeAction : WindowActionAction 
 	{
 		public override string Name {
-			get { return "Shade/UnShade"; }
+			get { return "Shade Window"; }
 		}
 		
 		public override string Description {
-			get { return "Shade a Window into its Titlebar"; }
+			get { return "Shade/Unshade a Window into its Titlebar"; }
 		}
 
 		public override string Icon {
