@@ -7,26 +7,26 @@ if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = bin/Debug/Tasque.dll
+ASSEMBLY = bin/Debug/Firefox.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-TASQUE_ADDIN_XML_SOURCE=src/Tasque.addin.xml
+FIREFOX_ADDIN_XML_SOURCE=src/Firefox.addin.xml
 
 endif
 
 if ENABLE_RELEASE
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/Tasque.dll
+ASSEMBLY = bin/Release/Firefox.dll
 ASSEMBLY_MDB = 
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-TASQUE_ADDIN_XML_SOURCE=src/Tasque.addin.xml
+FIREFOX_ADDIN_XML_SOURCE=src/Firefox.addin.xml
 
 endif
 
@@ -34,13 +34,13 @@ if ENABLE_REPO
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = bin/Debug/Tasque.dll
+ASSEMBLY = bin/Debug/Firefox.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-TASQUE_ADDIN_XML_SOURCE=src/Tasque.addin.xml
+FIREFOX_ADDIN_XML_SOURCE=src/Firefox.addin.xml
 
 endif
 
@@ -48,35 +48,29 @@ AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
 PROGRAMFILES = \
-	$(TASQUE_ADDIN_XML)  
+	$(FIREFOX_ADDIN_XML)  
 
 LINUX_PKGCONFIG = \
-	$(TASQUE_PC)  
+	$(FIREFOX_PC)  
 
 
 	
 all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
-	src/Tasque.cs \
-	src/TasqueAction.cs \
-	src/TasqueCategoryItem.cs \
-	src/TasqueDBus.cs 
+	src/FirefoxBookmarkItemSource.cs 
 
 DATA_FILES = \
-	src/Tasque.addin.xml 
+	src/Firefox.addin.xml 
 
 RESOURCES = 
 
 EXTRAS = \
-	tasque.pc.in 
+	firefox.pc.in 
 
 REFERENCES =  \
 	System \
-	$(DOADDINS_LIBS) \
-	$(GCONF_SHARP_20_LIBS) \
-	$(NDESK_DBUS_GLIB_10_LIBS) \
-	$(NDESK_DBUS_10_LIBS)
+	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 
@@ -84,11 +78,11 @@ CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG)
 
 include $(top_srcdir)/Makefile.include
 
-TASQUE_PC = $(BUILD_DIR)/tasque.pc
-TASQUE_ADDIN_XML = $(BUILD_DIR)/Tasque.addin.xml
+FIREFOX_ADDIN_XML = $(BUILD_DIR)/Firefox.addin.xml
+FIREFOX_PC = $(BUILD_DIR)/firefox.pc
 
-$(eval $(call emit-deploy-wrapper,TASQUE_PC,tasque.pc))
-$(eval $(call emit-deploy-target,TASQUE_ADDIN_XML))
+$(eval $(call emit-deploy-target,FIREFOX_ADDIN_XML))
+$(eval $(call emit-deploy-wrapper,FIREFOX_PC,firefox.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
