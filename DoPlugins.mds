@@ -1,5 +1,5 @@
 <Combine releaseversion="0.4.0.1" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
-  <Configurations active="Debug">
+  <Configurations active="Repo">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Debug" />
       <Entry build="True" name="Packages" configuration="" />
@@ -20,9 +20,12 @@
       <Entry build="True" name="SSH" configuration="Debug" />
       <Entry build="True" name="Thunderbird" configuration="Debug" />
       <Entry build="True" name="Tomboy" configuration="Debug" />
-      <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="WindowManager" configuration="Debug" />
       <Entry build="True" name="Firefox" configuration="Debug" />
+      <Entry build="True" name="Twitter" configuration="Debug" />
+      <Entry build="True" name="Vinagre" configuration="Debug" />
+      <Entry build="True" name="GCalendar" configuration="Debug" />
+      <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -44,9 +47,12 @@
       <Entry build="True" name="SSH" configuration="Release" />
       <Entry build="True" name="Thunderbird" configuration="Release" />
       <Entry build="True" name="Tomboy" configuration="Release" />
-      <Entry build="True" name="Twitter" configuration="Release" />
       <Entry build="True" name="WindowManager" configuration="Release" />
       <Entry build="True" name="Firefox" configuration="Release" />
+      <Entry build="True" name="Twitter" configuration="Release" />
+      <Entry build="True" name="Vinagre" configuration="Release" />
+      <Entry build="True" name="GCalendar" configuration="Release" />
+      <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -71,9 +77,12 @@
       <Entry build="True" name="SSH" configuration="Debug" />
       <Entry build="True" name="Thunderbird" configuration="Debug" />
       <Entry build="True" name="Tomboy" configuration="Debug" />
-      <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="WindowManager" configuration="Debug" />
       <Entry build="True" name="Firefox" configuration="Debug" />
+      <Entry build="True" name="Twitter" configuration="Debug" />
+      <Entry build="True" name="Vinagre" configuration="Debug" />
+      <Entry build="True" name="GCalendar" configuration="Debug" />
+      <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
@@ -96,9 +105,13 @@
     <Execute type="None" entry="SSH" />
     <Execute type="None" entry="Thunderbird" />
     <Execute type="None" entry="Tomboy" />
-    <Execute type="None" entry="Twitter" />
     <Execute type="None" entry="WindowManager" />
     <Execute type="None" entry="Firefox" />
+    <Execute type="None" entry="Twitter" />
+    <Execute type="None" entry="Vinagre" />
+    <Execute type="None" entry="GCalendar" />
+    <Execute type="None" entry="GNOME-Screenshot" />
+    <Execute type="None" entry="GNOME-Terminal" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -121,8 +134,11 @@
     <Entry filename="SSH/SSH.mdp" />
     <Entry filename="Thunderbird/Thunderbird.mdp" />
     <Entry filename="Tomboy/Tomboy.mdp" />
-    <Entry filename="Twitter/Twitter.mdp" />
     <Entry filename="WindowManager/WindowManager.mdp" />
     <Entry filename="Firefox/Firefox.mdp" />
+    <Entry filename="Twitter/Twitter.mdp" />
+    <Entry filename="Vinagre/Vinagre.mdp" />
+    <Entry filename="GCalendar/GCalendar.mdp" />
+    <Entry filename="GNOME-Screenshot/GNOME-Screenshot.mdp" />
   </Entries>
 </Combine>

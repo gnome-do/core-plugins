@@ -1,7 +1,8 @@
-/* LaunchpadRegisterItem.cs
+/* ScreenshotItem.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this source distribution.
+ * COPYRIGHT file distributed with this
+ * source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,33 +17,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 using System;
-using System.Text.RegularExpressions;
+
 using Do.Universe;
 
-using Do.Addins;
-
-namespace Do.Launchpad
-{
-	public class LaunchpadRegisterItem : LaunchpadItem
-	{
-		public LaunchpadRegisterItem() { }
-		public string Name { get { return "Register Project"; } }
-		public string Description { get { return "Register a new project at Launchpad"; } }
-
-		public string Icon
-		{ 
-			get { return "LaunchpadRegister.png@Launchpad"; }
-		}
-
-		public bool SupportsItems(IItem[] items)
-		{
-			return true;
-		}
-
-		public void Perform (IItem item)
-		{
-			Util.Environment.Open("https://launchpad.net/projects/+new");
-		}
+namespace GNOME {
+	abstract class ScreenshotItem : IItem {
+		public abstract string Name { get; }
+		public abstract string Description { get; }
+		public abstract string Icon { get; }
 	}
 }

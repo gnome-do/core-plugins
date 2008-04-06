@@ -1,3 +1,4 @@
+<<<<<<< TREE
 
 EXTRA_DIST =  
 
@@ -76,6 +77,32 @@ DATA_FILES = \
 RESOURCES = \
 	Resources/Launchpad.png \
 	Resources/LaunchpadAnswers.png \
+=======
+SUBDIRS=src Resources
+
+ASSEMBLY_NAME=Launchpad
+ASSEMBLY=$(ASSEMBLY_NAME).dll
+
+CSFLAGS+= -debug+ -debug:full
+
+CLEANFILES = $(ASSEMBLY){,.mdb}
+
+launchpad_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:Mono.Posix.dll -r:System
+
+launchpad_sources =  \
+	AssemblyInfo.cs \
+	LaunchpadCodeItem.cs \
+	LaunchpadBugsItem.cs \
+	LaunchpadBlueprintsItem.cs \
+	LaunchpadRegisterItem.cs \
+	LaunchpadAction.cs \
+	LaunchpadTranslationsItem.cs \
+	LaunchpadAnswersItem.cs \
+	LaunchpadPersonItem.cs \
+	LaunchpadProjectItem.cs
+
+launchpad_resources = \
+>>>>>>> MERGE-SOURCE
 	Resources/LaunchpadBlueprints.png \
 	Resources/LaunchpadBugs.png \
 	Resources/LaunchpadCode.png \

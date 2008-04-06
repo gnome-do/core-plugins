@@ -1,7 +1,8 @@
-/* LaunchpadRegisterItem.cs
+/* GCalendarItemSource.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this source distribution.
+ * COPYRIGHT file distributed with this
+ * source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,33 +17,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 using System;
-using System.Text.RegularExpressions;
-using Do.Universe;
+using System.Text;
 
 using Do.Addins;
+using Do.Universe;
 
-namespace Do.Launchpad
+namespace Do.GCalendar
 {
-	public class LaunchpadRegisterItem : LaunchpadItem
-	{
-		public LaunchpadRegisterItem() { }
-		public string Name { get { return "Register Project"; } }
-		public string Description { get { return "Register a new project at Launchpad"; } }
-
-		public string Icon
-		{ 
-			get { return "LaunchpadRegister.png@Launchpad"; }
-		}
-
-		public bool SupportsItems(IItem[] items)
+    public class GCalendarItem : IURLItem
+    {
+        string name, url;
+		
+		public GCalendarItem (string name, string url)
 		{
-			return true;
+			this.name = name;
+			this.url = url;
 		}
-
-		public void Perform (IItem item)
-		{
-			Util.Environment.Open("https://launchpad.net/projects/+new");
+		
+		public string Name {
+			get { return name; }
+		}
+		
+		public string Description {
+			get { return "Google Calendar"; }
+		}
+		
+		public string Icon {
+			get { return "date"; }
+		}
+		
+		public string URL {
+			get { return url; }
 		}
 	}
 }

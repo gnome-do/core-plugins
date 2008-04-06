@@ -32,7 +32,7 @@ namespace Do.Launchpad
 		
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBugs.png"); }
+			get { return "LaunchpadBugs.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -56,7 +56,7 @@ namespace Do.Launchpad
 		
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBugs.png"); }
+			get { return "LaunchpadBugs.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -78,7 +78,7 @@ namespace Do.Launchpad
 		
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBugs.png"); }
+			get { return "LaunchpadBugs.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -101,7 +101,7 @@ namespace Do.Launchpad
 		public string Description { get { return "Search for Ubuntu bugs at Launchpad"; } }
 		public string Icon
 		{ 
-			get { return LaunchpadIcons.Instance.GetIconPath("LaunchpadBugs.png"); }
+			get { return "LaunchpadBugs.png@Launchpad"; }
 		}
 
 		public bool SupportsItems(IItem[] items)

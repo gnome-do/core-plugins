@@ -1,7 +1,8 @@
-/* LaunchpadRegisterItem.cs
+/* WholeScreenScreenshotItem.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this source distribution.
+ * COPYRIGHT file distributed with this
+ * source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,33 +17,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 using System;
-using System.Text.RegularExpressions;
-using Do.Universe;
 
-using Do.Addins;
+namespace GNOME {
 
-namespace Do.Launchpad
-{
-	public class LaunchpadRegisterItem : LaunchpadItem
-	{
-		public LaunchpadRegisterItem() { }
-		public string Name { get { return "Register Project"; } }
-		public string Description { get { return "Register a new project at Launchpad"; } }
-
-		public string Icon
-		{ 
-			get { return "LaunchpadRegister.png@Launchpad"; }
+	class WholeScreenScreenshotItem : ScreenshotItem {
+		public override string Name {
+			get { return "Whole screen"; }
 		}
-
-		public bool SupportsItems(IItem[] items)
-		{
-			return true;
+		
+		public override string Description {
+			get { return "Take a screenshot of the entire screen."; }
 		}
-
-		public void Perform (IItem item)
-		{
-			Util.Environment.Open("https://launchpad.net/projects/+new");
+		
+		public override string Icon {
+			get { return "display"; }
 		}
 	}
 }
