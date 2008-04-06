@@ -1,11 +1,20 @@
 #!/bin/bash
 
-if [ ! -e "./repo" ]; then
-	mkdir repo
+if [ ! -e "./buildrepo/repo" ]; then
+	mkdir -p buildrepo/repo
 fi
+
+cp */bin/Debug/*.addin.xml buildrepo
+cp */bin/Debug/*.dll buildrepo
+
+cd buildrepo
 
 mdtool setup pack `ls | grep addin.xml` -d:./repo
 mdtool setup rep-build repo
 
-rm -rf ~/.do-repo
-cp -r repo ~/.do-repo
+rm -rf ~/.config/gnome-do/local-repo
+cp -r repo ~/.config/gnome-do/local-repo
+
+cd ..
+
+rm -rf buildrepo

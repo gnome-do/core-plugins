@@ -1,5 +1,5 @@
 <Combine releaseversion="0.4.0.1" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
-  <Configurations active="Repo">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Debug" />
       <Entry build="True" name="Packages" configuration="" />
@@ -50,28 +50,28 @@
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
-        <Command type="AfterBuild" command="mdtoolize" workingdir="${ProjectDir}/buildrepo" />
+        <Command type="AfterBuild" command="mdtoolize" workingdir="${CombineDir}" />
       </CustomCommands>
-      <Entry build="False" name="Templates" configuration="Repo" />
-      <Entry build="True" name="Packages" configuration="Repo" />
-      <Entry build="True" name="Rhythmbox" configuration="Repo" />
-      <Entry build="True" name="Amarok" configuration="Repo" />
-      <Entry build="True" name="Banshee" configuration="Repo" />
-      <Entry build="True" name="Epiphany" configuration="Repo" />
-      <Entry build="True" name="Evolution" configuration="Repo" />
-      <Entry build="True" name="File" configuration="Repo" />
-      <Entry build="True" name="GNOME-Session" configuration="Repo" />
-      <Entry build="True" name="GoogleCalculator" configuration="Repo" />
-      <Entry build="True" name="Launchpad" configuration="Repo" />
-      <Entry build="True" name="LocateFiles" configuration="Repo" />
-      <Entry build="True" name="OpenSearch" configuration="Repo" />
-      <Entry build="True" name="Pastebin" configuration="Repo" />
-      <Entry build="True" name="Pidgin" configuration="Repo" />
-      <Entry build="True" name="SimplePlugins" configuration="Repo" />
-      <Entry build="True" name="SSH" configuration="Repo" />
-      <Entry build="True" name="Thunderbird" configuration="Repo" />
-      <Entry build="True" name="Tomboy" configuration="Repo" />
-      <Entry build="True" name="Twitter" configuration="Repo" />
+      <Entry build="False" name="Templates" configuration="Debug" />
+      <Entry build="False" name="Packages" configuration="Unknown Configuration" />
+      <Entry build="True" name="Rhythmbox" configuration="Debug" />
+      <Entry build="True" name="Amarok" configuration="Debug" />
+      <Entry build="True" name="Banshee" configuration="Debug" />
+      <Entry build="True" name="Epiphany" configuration="Debug" />
+      <Entry build="True" name="Evolution" configuration="Debug" />
+      <Entry build="True" name="File" configuration="Debug" />
+      <Entry build="True" name="GNOME-Session" configuration="Debug" />
+      <Entry build="True" name="GoogleCalculator" configuration="Debug" />
+      <Entry build="True" name="Launchpad" configuration="Debug" />
+      <Entry build="True" name="LocateFiles" configuration="Debug" />
+      <Entry build="True" name="OpenSearch" configuration="Debug" />
+      <Entry build="True" name="Pastebin" configuration="Debug" />
+      <Entry build="True" name="Pidgin" configuration="Debug" />
+      <Entry build="True" name="SimplePlugins" configuration="Debug" />
+      <Entry build="True" name="SSH" configuration="Debug" />
+      <Entry build="True" name="Thunderbird" configuration="Debug" />
+      <Entry build="True" name="Tomboy" configuration="Debug" />
+      <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="WindowManager" configuration="Debug" />
       <Entry build="True" name="Firefox" configuration="Debug" />
     </Configuration>

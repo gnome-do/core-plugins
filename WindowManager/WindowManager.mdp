@@ -12,12 +12,6 @@
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" win32Icon="." ctype="CSharpCompilerParameters" />
     </Configuration>
-    <Configuration name="Repo" ctype="DotNetProjectConfiguration">
-      <Output directory="../buildrepo" assemblyKeyFile="." assembly="WindowManager" />
-      <Build debugmode="True" target="Library" />
-      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" definesymbols="DEBUG" generatexmldocumentation="False" win32Icon="." ctype="CSharpCompilerParameters" />
-    </Configuration>
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />

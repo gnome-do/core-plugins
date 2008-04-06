@@ -1,5 +1,5 @@
 <Project name="Templates" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations>
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Templates" />
       <Build debugmode="True" target="Exe" />
