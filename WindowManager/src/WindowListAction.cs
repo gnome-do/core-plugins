@@ -283,12 +283,12 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			Wnck.Window w = (modItems[0] as WindowItem);
+			WindowItem w = (modItems[0] as WindowItem);
 			
-			if (w.IsMaximized) {
-				w.Unmaximize ();
+			if (w.Window.IsMaximized) {
+				w.Window.Unmaximize ();
 			} else {
-				w.Maximize ();
+				w.Window.Maximize ();
 			}
 			
 			return null;

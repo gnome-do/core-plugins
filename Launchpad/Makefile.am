@@ -1,4 +1,3 @@
-<<<<<<< TREE
 
 EXTRA_DIST =  
 
@@ -35,11 +34,11 @@ if ENABLE_REPO
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = ../buildrepo/Launchpad.dll
+ASSEMBLY = bin/Debug/Launchpad.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
-BUILD_DIR = ../buildrepo
+BUILD_DIR = bin/Debug
 
 LAUNCHPAD_ADDIN_XML_SOURCE=src/Launchpad.addin.xml
 
@@ -77,32 +76,6 @@ DATA_FILES = \
 RESOURCES = \
 	Resources/Launchpad.png \
 	Resources/LaunchpadAnswers.png \
-=======
-SUBDIRS=src Resources
-
-ASSEMBLY_NAME=Launchpad
-ASSEMBLY=$(ASSEMBLY_NAME).dll
-
-CSFLAGS+= -debug+ -debug:full
-
-CLEANFILES = $(ASSEMBLY){,.mdb}
-
-launchpad_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:Mono.Posix.dll -r:System
-
-launchpad_sources =  \
-	AssemblyInfo.cs \
-	LaunchpadCodeItem.cs \
-	LaunchpadBugsItem.cs \
-	LaunchpadBlueprintsItem.cs \
-	LaunchpadRegisterItem.cs \
-	LaunchpadAction.cs \
-	LaunchpadTranslationsItem.cs \
-	LaunchpadAnswersItem.cs \
-	LaunchpadPersonItem.cs \
-	LaunchpadProjectItem.cs
-
-launchpad_resources = \
->>>>>>> MERGE-SOURCE
 	Resources/LaunchpadBlueprints.png \
 	Resources/LaunchpadBugs.png \
 	Resources/LaunchpadCode.png \

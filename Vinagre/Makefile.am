@@ -1,26 +1,89 @@
-EXTRA_DIST = 	\
-			VNCHost.cs \
-			Vinagre.cs \
-			VNCHostSource.cs
+
+EXTRA_DIST =  
+
+# Warning: This is an automatically generated file, do not edit!
+
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
+
+ASSEMBLY = bin/Debug/Vinagre.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
 
-ASSEMBLY_NAME=Vinagre
-ASSEMBLY=$(ASSEMBLY_NAME).dll
+endif
 
-CSFLAGS+= -debug+ -debug:full
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/Vinagre.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-CLEANFILES = $(ASSEMBLY){,.mdb}
 
-vinagre_references = $(DO_ADDINS_LIBS) $(DO_LIBS) -r:System $(NDESK_DBUS_LIBS)
+endif
 
-vinagre_sources  = 	\
-			VNCHost.cs Vinagre.cs VNCHostSource.cs
+if ENABLE_REPO
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-vinagre_build_sources = $(addprefix $(srcdir)/, $(vinagre_sources))
+ASSEMBLY = bin/Debug/Vinagre.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
-plugin_DATA = $(ASSEMBLY)
 
-all: $(ASSEMBLY)
+endif
 
-$(ASSEMBLY): $(vinagre_sources)
-	$(CSC) $(CSFLAGS) $(vinagre_references) -target:library -out:$@ $(vinagre_build_sources)
+AL=al2
+SATELLITE_ASSEMBLY_NAME=.resources.dll
+
+LINUX_PKGCONFIG = \
+	$(VINAGRE_PC)  
+
+
+	
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+
+FILES = \
+	src/Vinagre.cs \
+	src/VNCHost.cs \
+	src/VNCHostSource.cs 
+
+DATA_FILES = 
+
+RESOURCES = 
+
+EXTRAS = \
+	vinagre.pc.in 
+
+REFERENCES =  \
+	System \
+	$(DOADDINS_LIBS)
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+VINAGRE_PC = $(BUILD_DIR)/vinagre.pc
+
+$(eval $(call emit-deploy-wrapper,VINAGRE_PC,vinagre.pc))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)

@@ -34,11 +34,11 @@ if ENABLE_REPO
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = ../buildrepo/Tomboy.dll
+ASSEMBLY = bin/Debug/Tomboy.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
-BUILD_DIR = ../buildrepo
+BUILD_DIR = bin/Debug
 
 TOMBOY_ADDIN_XML_SOURCE=src/Tomboy.addin.xml
 
@@ -60,9 +60,9 @@ all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG)
 FILES = \
 	src/TomboyDBus.cs \
 	src/TomboyItem.cs \
-	src/TomboyItemSource.cs \
-	src/TomboyNewNoteCommand.cs \
-	src/TomboySearchNotesCommand.cs 
+	src/NewNoteAction.cs \
+	src/NotesItemSource.cs \
+	src/SearchNotesAction.cs 
 
 DATA_FILES = \
 	src/Tomboy.addin.xml 
@@ -73,10 +73,10 @@ EXTRAS = \
 	tomboy.pc.in 
 
 REFERENCES =  \
-	$(DOADDINS_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
-	System
+	System \
+	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 

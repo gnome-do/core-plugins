@@ -2,6 +2,10 @@
  
 	<Runtime>
 		<Import assembly="GCalendar.dll"/>
+		<Import assembly="Google.GData.AccessControl.dll"/>
+		<Import assembly="Google.GData.Calendar.dll"/>
+		<Import assembly="Google.GData.Client.dll"/>
+		<Import assembly="Google.GData.Extensions.dll"/>
 	</Runtime>
 	
 	<Dependencies>

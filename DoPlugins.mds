@@ -26,6 +26,7 @@
       <Entry build="True" name="Vinagre" configuration="Debug" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
+      <Entry build="True" name="Tasque" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -53,6 +54,7 @@
       <Entry build="True" name="Vinagre" configuration="Release" />
       <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
+      <Entry build="True" name="Tasque" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -83,6 +85,7 @@
       <Entry build="True" name="Vinagre" configuration="Debug" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
+      <Entry build="True" name="Tasque" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
@@ -112,6 +115,7 @@
     <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="GNOME-Screenshot" />
     <Execute type="None" entry="GNOME-Terminal" />
+    <Execute type="None" entry="Tasque" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -140,5 +144,6 @@
     <Entry filename="Vinagre/Vinagre.mdp" />
     <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="GNOME-Screenshot/GNOME-Screenshot.mdp" />
+    <Entry filename="Tasque/Tasque.mdp" />
   </Entries>
 </Combine>

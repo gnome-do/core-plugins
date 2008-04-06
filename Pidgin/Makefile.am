@@ -34,11 +34,11 @@ if ENABLE_REPO
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = ../buildrepo/Pidgin.dll
+ASSEMBLY = bin/Debug/Pidgin.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
-BUILD_DIR = ../buildrepo
+BUILD_DIR = bin/Debug
 
 PIDGIN_ADDIN_XML_SOURCE=src/Pidgin.addin.xml
 
@@ -74,11 +74,11 @@ EXTRAS = \
 
 REFERENCES =  \
 	System \
-	$(DOADDINS_LIBS) \
 	System.Xml \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
-	$(GTK_SHARP_20_LIBS)
+	$(GTK_SHARP_20_LIBS) \
+	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 

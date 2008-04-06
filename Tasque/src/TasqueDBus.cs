@@ -1,0 +1,94 @@
+// TasqueDBus.cs
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, see <http://www.gnu.org/licenses/> or 
+// write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+// Boston, MA 02111-1307 USA
+//
+
+
+using System;
+using System.Collections;
+using NDesk.DBus;
+using org.freedesktop.DBus;
+
+using Do.Universe;
+
+
+namespace Tasque.DBus
+{
+	[Interface("org.gnome.Tasque.RemoteControl")]
+	public interface ITasque
+	{
+	        string CreateTask (string categoryName, string taskName, bool enterEditMode);
+		string[] GetCategoryNames ();
+		void ShowTasks ();
+	}
+
+	public class TasqueDBus
+	{
+		
+		private const string OBJECT_PATH = "/org/gnome/Tasque/RemoteControl";
+		private const string BUS_NAME = "org.gnome.Tasque";
+		private static ITasque Tasque;
+
+		public TasqueDBus ()
+		{
+			try {
+			        Tasque = FindInstance ();
+	                } catch (Exception) {
+	                        Console.Error.WriteLine ("Could not locate Tasque on D-Bus. Make sure Tasque is running");
+	                }
+	        
+	                BusG.Init();
+		}
+	
+		static private ITasque FindInstance () 
+	        {
+	                if (!Bus.Session.NameHasOwner (BUS_NAME)) 
+	                        throw new Exception (String.Format("Name {0} has no owner", BUS_NAME));
+	    
+	                return Bus.Session.GetObject<ITasque> (BUS_NAME, new ObjectPath (OBJECT_PATH));
+	        }
+		
+		
+		public ArrayList GetCategoryNames () 
+		{
+			string[] categories = null;
+			categories = Tasque.GetCategoryNames ();
+			ArrayList CategoryNames = new ArrayList ();
+			
+			foreach (string category in categories) 
+				CategoryNames.Add (category);
+			
+			return CategoryNames;
+		}
+
+		
+		public string CreateTask (string category, string task) 
+		{
+			ArrayList list = GetCategoryNames ();
+			
+			if (list.Contains (category)) 
+				return Tasque.CreateTask (category, task,false);
+			else 
+				return Tasque.CreateTask (list[0].ToString(), task, false);
+			
+		}
+		
+		public void ShowTasks ()
+		{
+			Tasque.ShowTasks ();
+		}
+	}
+}

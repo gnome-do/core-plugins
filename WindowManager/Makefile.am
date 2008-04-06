@@ -61,7 +61,8 @@ FILES = \
 	src/WindowListAction.cs \
 	src/IWindowList.cs \
 	src/WindowItem.cs \
-	src/WindowItemSource.cs 
+	src/WindowItemSource.cs \
+	src/ScreenListAction.cs 
 
 DATA_FILES = \
 	src/WindowManager.addin.xml 

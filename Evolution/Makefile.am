@@ -34,11 +34,11 @@ if ENABLE_REPO
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = ../buildrepo/Evolution.dll
+ASSEMBLY = bin/Debug/Evolution.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
-BUILD_DIR = ../buildrepo
+BUILD_DIR = bin/Debug
 
 EVOLUTION_ADDIN_XML_SOURCE=src/Evolution.addin.xml
 
@@ -70,9 +70,9 @@ EXTRAS = \
 	evolution.pc.in 
 
 REFERENCES =  \
-	$(DOADDINS_LIBS) \
 	$(EVOLUTION_SHARP_LIBS) \
-	System
+	System \
+	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 
