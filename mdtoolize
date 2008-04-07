@@ -12,9 +12,9 @@ cd buildrepo
 mdtool setup pack `ls | grep addin.xml` -d:./repo
 mdtool setup rep-build repo
 
-rm -rf ~/.local/share/gnome-do/local-repo
-cp -r repo ~/.local/share/gnome-do/local-repo
+rm -rf ~/.local/share/gnome-do/repo
+mkdir -p ~/.local/share/gnome-do/repo
+cp -r repo ~/.local/share/gnome-do
 
 cd ..
-
 rm -rf buildrepo
