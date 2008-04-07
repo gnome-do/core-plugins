@@ -76,7 +76,7 @@ namespace WindowManager
 		}
 
 		public override bool ModifierItemsOptional {
-			get { return false; }
+			get { return true; }
 		}
 		
 		protected void UpdateList ()
@@ -99,10 +99,10 @@ namespace WindowManager
 				string application = (item as ApplicationItem).Exec;
 				application = application.Split (new char[] {' '})[0];
 				
-				if (!procListDyn.ContainsKey (application)) return null;
+				if (!procList.ContainsKey (application)) return null;
 				
 				List<Window> winList;
-				procListDyn.TryGetValue(application, out winList);
+				procList.TryGetValue(application, out winList);
 				
 				items = new IItem[winList.Count];
 				for (int i = 0; i < winList.Count; i++) {
@@ -155,118 +155,6 @@ namespace WindowManager
 
 	}
 	
-	public class WindowListItems
-	{
-		private static Dictionary<string, List<Window>> windowList;
-		private static Wnck.Screen scrn;
-		private static bool listLock;
-		private static Window currentWindow;
-		
-		public static Window CurrentWindow {
-			get {
-				return currentWindow;
-			}
-		}
-		
-		static WindowListItems ()
-		{
-			Gtk.Application.Init (); //why do i HAVE to do this?
-			
-			windowList = new Dictionary<string,List<Window>> ();
-			
-			scrn = Screen.Default;
-			scrn.WindowOpened        += OnWindowOpened;
-			scrn.WindowClosed        += OnWindowClosed;
-			scrn.ActiveWindowChanged += OnActiveWindowChanged;
-		}
-			
-		public static void GetList (out Dictionary<string, List<Window>> winList)
-		{
-			winList = new Dictionary<string,List<Window>> ();
-			
-			foreach (KeyValuePair<string, List<Window>> kvp in windowList) {
-				winList.Add (kvp.Key, kvp.Value);
-			}
-		}
-		
-		private static void OnActiveWindowChanged (object o, ActiveWindowChangedArgs args)
-		{
-			try {
-				if (!scrn.ActiveWindow.IsSkipTasklist)
-					currentWindow = scrn.ActiveWindow;
-			}
-			catch {
-				
-			}
-		}
-		
-		private static void OnWindowOpened (object o, WindowOpenedArgs args)
-		{
-			if (args.Window.IsSkipTasklist) return;
-			
-			Thread updateRunner = new Thread (new ThreadStart (UpdateList));
-			
-			updateRunner.Start ();
-		}
-		
-		private static void OnWindowClosed (object o, WindowClosedArgs args)
-		{
-			if (args.Window.IsSkipTasklist) return;
-			
-			Thread updateRunner = new Thread (new ThreadStart (UpdateList));
-			
-			updateRunner.Start ();
-		}
-		
-		private static void UpdateList ()
-		{
-			if (listLock) return;
-			
-			listLock = true;
-			
-			windowList.Clear ();
-			
-			ProcessStartInfo st = new ProcessStartInfo ("ps");
-			st.RedirectStandardOutput = true;
-			st.UseShellExecute = false;
-			
-			Process process;
-			string processName;
-			
-			foreach (Window w in scrn.Windows) {
-				if (w.Pid == 0) continue;
-				
-				if (w.IsSkipTasklist) continue;
-				
-				st.Arguments = "c -o cmd --no-headers " + w.Pid;
-				
-				process = Process.Start (st);
-				
-				process.WaitForExit ();
-				if (process.ExitCode != 0) continue;
-				
-				processName = process.StandardOutput.ReadLine ();
-				if (windowList.ContainsKey (processName)) {
-					List<Window> winList;
-					windowList.TryGetValue (processName, out winList);
-					winList.Add (w);
-				} else {
-					List<Window> winList = new List<Window> ();
-					winList.Add (w);
-					windowList.Add (processName, winList);
-				}
-			}
-			
-			listLock = false;
-			
-			ListUpdated ();
-		}
-		
-		public static event ListUpdatedDelegate ListUpdated;
-		
-		public delegate void ListUpdatedDelegate ();
-	}
-	
 	public class WindowMaximizeAction : WindowActionAction 
 	{
 		public override string Name {
@@ -283,13 +171,37 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			WindowItem w = (modItems[0] as WindowItem);
-			
-			if (w.Window.IsMaximized) {
-				w.Window.Unmaximize ();
+			if (modItems.Length > 0) {
+				WindowItem w = (modItems[0] as WindowItem);
+				
+				if (w.Window.IsMaximized) {
+					w.Window.Unmaximize ();
+				} else {
+					w.Window.Maximize ();
+				}
 			} else {
-				w.Window.Maximize ();
+				if (items[0] is ApplicationItem) {
+					string application = (items[0] as ApplicationItem).Exec;
+					application = application.Split(new char [] {' '})[0];
+					
+					List<Window> windows = WindowListItems.GetApplication(application);
+					
+					bool maximize = true;
+					foreach (Window w in windows) {
+						if (w.IsMaximized) maximize = false;
+					}
+					
+					foreach (Window w in windows) {
+						if (maximize)
+							w.Maximize ();
+						else
+							w.Unmaximize ();
+					}
+				} else if (items[0] is GenericWindowItem) {
+					throw new NotImplementedException ();
+				}
 			}
+			
 			
 			return null;
 		}
@@ -312,12 +224,39 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			Window w = (modItems[0] as WindowItem).Window;
-			
-			if (w.IsMinimized)
-				w.Unminimize (Gtk.Global.CurrentEventTime);
-			else
-				w.Minimize ();
+			if (modItems.Length > 0) { //user selected a mod item
+				Window w = (modItems[0] as WindowItem).Window;
+				
+				if (w.IsMinimized)
+					w.Unminimize (Gtk.Global.CurrentEventTime);
+				else
+					w.Minimize ();
+				
+			} else { //no mod item
+				if (items[0] is ApplicationItem) { //it was an application item
+					string application;
+					ApplicationItem app = (items[0] as ApplicationItem);
+					
+					application = app.Exec;
+					application = application.Split (new char[] {' '})[0];
+					
+					List<Window> windowList = WindowListItems.GetApplication (application);
+					
+					bool minimize = false;
+					foreach (Window w in windowList) {
+						if (!w.IsMinimized) minimize = true;
+					}
+					
+					foreach (Window w in windowList) {
+						if (minimize)
+							w.Minimize ();
+						else
+							w.Unminimize (Gtk.Global.CurrentEventTime);
+					}
+				} else if (items[0] is GenericWindowItem) {
+					throw new NotImplementedException ();
+				}
+			}
 			
 			return null;
 		}
@@ -340,11 +279,37 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			Wnck.Window w = (modItems[0] as WindowItem).Window;
-			if (w.IsShaded)
-				w.Unshade ();
-			else
-				w.Shade ();
+			if (modItems.Length > 0)
+			{
+				Wnck.Window w = (modItems[0] as WindowItem).Window;
+				if (w.IsShaded)
+					w.Unshade ();
+				else
+					w.Shade ();
+			} else {
+				if (items[0] is ApplicationItem) {
+					string application = (items[0] as ApplicationItem).Exec;
+					application = application.Split(new char [] {' '})[0];
+					
+					List<Window> windows = WindowListItems.GetApplication (application);
+					
+					bool shade = true;
+					foreach (Window w in windows) {
+						if (w.IsShaded) shade = false;
+					}
+					
+					foreach (Window w in windows) {
+						if (shade) 
+							w.Shade();
+						else
+							w.Unshade ();
+					}
+				} else if (items[0] is GenericWindowItem) {
+					throw new NotImplementedException ();
+				}
+			}
+			
+			
 			return null;
 		}
 
@@ -363,10 +328,22 @@ namespace WindowManager
 		public override string Icon {
 			get { return "window-new"; }
 		}
-
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		
+		private List<Window> SortWindowsToStack (List<Window> windows)
 		{
-			Wnck.Window w = (modItems[0] as WindowItem).Window;
+			Window[] stack = Screen.Default.WindowsStacked;
+			List<Window> outList = new List<Window> ();
+			
+			for (int i = 0; i < stack.Length; i++) {
+				if (windows.Contains (stack[i]))
+					outList.Add (stack[i]);
+			}
+			
+			return outList;
+		}
+		
+		private void FocusWindowViewport (Window w)
+		{
 			if (!w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)) {
 				int viewX, viewY, viewW, viewH;
 				int midX, midY;
@@ -402,9 +379,45 @@ namespace WindowManager
 					midX += wsp.Height;
 				
 				Wnck.Screen.Default.MoveViewport (midX, midY);
-
 			}
+			
 			w.Activate (Gtk.Global.CurrentEventTime);
+		}
+
+		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		{
+			if (modItems.Length > 0) {
+				Wnck.Window w = (modItems[0] as WindowItem).Window;
+				
+				FocusWindowViewport (w);
+			} else {
+				if (items[0] is ApplicationItem) {
+					string application = (items[0] as ApplicationItem).Exec;
+					application = application.Split (new char[] {' '})[0];
+					
+					List<Window> windows = WindowListItems.GetApplication (application);
+					
+					windows = SortWindowsToStack (windows);
+					
+					for (int i = 0; i < windows.Count; i++) {
+						if ( i == windows.Count - 1) {
+							Window w = windows[i];
+							//The WM is ultimately going to determine what order this is done it.
+							//It seems to like doing it in reverse order (stacks are fun)
+							//So we delay to make sure this one is done last...
+							//TODO: Do things in reverse to deal with GTK being dumb?
+							GLib.Timeout.Add (150, delegate {
+								FocusWindowViewport (w);
+								return false;
+							});
+						} else {
+							windows[i].Activate (Gtk.Global.CurrentEventTime);
+						}
+					}
+				} else if (items[0] is GenericWindowItem) {
+					throw new NotImplementedException ();
+				}
+			}
 			return null;
 		}
 
