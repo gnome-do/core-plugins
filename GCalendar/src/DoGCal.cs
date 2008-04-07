@@ -21,6 +21,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 
 using Google.GData.Client;
 using Google.GData.Calendar;
@@ -36,7 +37,7 @@ namespace Do.GCalendar
 		private static bool is_updating_calendars = false;
 		private static bool is_updating_events = false;
 		private static AtomFeed calendars;
-		
+			
 		static DoGCal ()
 		{
 			GConf.Client gconf = new GConf.Client ();
@@ -47,8 +48,13 @@ namespace Do.GCalendar
 				gconf.Set ("/apps/gnome-do/plugins/gcal/username","");
 				gconf.Set ("/apps/gnome-do/plugins/gcal/password","");
 			}
-			Connect ();
-			UpdateCalendars ();
+			try {
+				Connect ();
+				UpdateCalendars ();
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
+				Console.Error.WriteLine ("constructor");
+			}
 		}
 		
 		public static AtomFeed Calendars {
@@ -57,8 +63,13 @@ namespace Do.GCalendar
 
 		public static void Connect () 
 		{
-			service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
-            service.setUserCredentials(username, password);	
+			try {
+				service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
+				service.setUserCredentials(username, password);
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
+				Console.Error.WriteLine ("connect");
+			}
 		}
 		
 		public static void UpdateCalendars ()

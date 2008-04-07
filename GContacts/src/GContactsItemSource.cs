@@ -149,7 +149,7 @@ namespace Do.GContacts
 				items.Clear ();
 				Console.Error.WriteLine (we.Response);
 				Console.Error.WriteLine (we.Message);
-				items.Add (new BookmarkItem ("GMail Contacts Authentication!"
+				items.Add (new BookmarkItem ("GMail Contacts Authentication"
 				                             ,"https://www.google.com/accounts/DisplayUnlockCaptcha"));
 				auth_token = null;
 			}
