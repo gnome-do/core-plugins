@@ -81,11 +81,11 @@ namespace Do.GCalendar
         }
         
         public IItem[] Perform (IItem[] items, IItem[] modifierItems) {
-            DoGCal service = new DoGCal ();
+            //DoGCal service = new DoGCal ();
             string cal_url = (modifierItems[0] as GCalendarItem).URL;
             string event_data = (items[0] as ITextItem).Text;
             
-            EventEntry entry = service.NewEvent (cal_url, event_data);
+            EventEntry entry = DoGCal.NewEvent (cal_url, event_data);
             
             string eventUrl = entry.AlternateUri.Content;
             string eventDesc = entry.Content.Content;

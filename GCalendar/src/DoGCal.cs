@@ -31,10 +31,13 @@ namespace Do.GCalendar
 {
 	public class DoGCal
 	{
-		string username, password;
-		CalendarService service;
+		private static string username, password;
+		private static CalendarService service;
+		private static bool is_updating_calendars = false;
+		private static bool is_updating_events = false;
+		private static AtomFeed calendars;
 		
-		public DoGCal ()
+		static DoGCal ()
 		{
 			GConf.Client gconf = new GConf.Client ();
 			try {
@@ -45,46 +48,65 @@ namespace Do.GCalendar
 				gconf.Set ("/apps/gnome-do/plugins/gcal/password","");
 			}
 			Connect ();
+			UpdateCalendars ();
+		}
+		
+		public static AtomFeed Calendars {
+			get { return calendars; }
 		}
 
-		public void Connect () 
+		public static void Connect () 
 		{
 			service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
             service.setUserCredentials(username, password);	
 		}
 		
-		public AtomFeed GetCalendars ()
+		public static void UpdateCalendars ()
 		{
+			if(is_updating_calendars) return;
+			
+			is_updating_calendars = true;
+			
 			FeedQuery query = new FeedQuery ();
-            query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
-            
-            return service.Query (query);
+			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
+			calendars = service.Query (query);
+			
+			is_updating_calendars = false;
 		}
 		
-		public EventFeed GetEvents (string calUrl)
+		public static EventFeed GetEvents (string calUrl)
 		{
 			return GetEvents (calUrl, DateTime.Now, DateTime.Now.AddMonths(1));
 		}
 		
-		public EventFeed GetEvents (string calUrl, DateTime startTime,
+		public static EventFeed GetEvents (string calUrl, DateTime startTime,
 		                            DateTime endTime)
         {
+			if (is_updating_events) return null;
+			
+			is_updating_events = true;
+			
             EventQuery query = new EventQuery (calUrl);
             query.StartTime = startTime;
             query.EndTime = endTime;
-                    
-            return service.Query (query) as EventFeed;
+			query.SortOrder = CalendarSortOrder.ascending;
+			EventFeed events = service.Query (query) as EventFeed;
+			
+			is_updating_events = false;
+			
+			return events;
         }
         
-        public EventFeed SearchEvents (string calUrl, string needle) 
+        public static EventFeed SearchEvents (string calUrl, string needle) 
         {
             EventQuery query = new EventQuery(calUrl);
+			query.StartTime = DateTime.Now;
             query.Query = needle;
 
             return service.Query(query) as EventFeed;
         }
         
-        public EventEntry NewEvent (string calUrl, string data) 
+        public static EventEntry NewEvent (string calUrl, string data) 
         {
             EventEntry entry = new EventEntry ();
             entry.QuickAdd = true;

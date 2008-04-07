@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.IO;
+using System.Threading;
 using System.Collections.Generic;
 
 using Do.Addins;
@@ -39,6 +40,7 @@ namespace Do.GCalendar
 		public GCalendarItemSource ()
 		{
 			items = new List<IItem> ();
+			//UpdateItems ();
 		}
 
 		public string Name { get { return "Google Calendars"; } }
@@ -63,10 +65,9 @@ namespace Do.GCalendar
 		public ICollection<IItem> ChildrenOfItem (IItem parent)
 		{
 			GCalendarItem calItem = parent as GCalendarItem;
-			DoGCal cal = new DoGCal ();
 			List<IItem> children = new List<IItem> ();
 			string eventUrl, eventDesc, start;
-			EventFeed events = cal.GetEvents (calItem.URL);
+			EventFeed events = DoGCal.GetEvents (calItem.URL);
 			foreach (EventEntry entry in events.Entries) {
 			    eventUrl = entry.AlternateUri.Content;
 			    eventDesc = entry.Content.Content;
@@ -84,8 +85,10 @@ namespace Do.GCalendar
 		public void UpdateItems ()
 		{	
 		    items.Clear ();
-			DoGCal cal = new DoGCal ();
-			AtomFeed calList = cal.GetCalendars ();
+			Thread updateRunner = new Thread (new ThreadStart (DoGCal.UpdateCalendars));
+			updateRunner.Start ();
+			AtomFeed calList = DoGCal.Calendars;
+			if (calList == null) return;
 			for (int i = 0; i < calList.Entries.Count; i++) {
 				string calUrl = calList.Entries[i].Id.Uri.ToString ();
 				items.Add (new GCalendarItem (calList.Entries[i].Title.Text, 

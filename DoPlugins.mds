@@ -27,6 +27,7 @@
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
+      <Entry build="True" name="GContacts" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -55,6 +56,7 @@
       <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
       <Entry build="True" name="Tasque" configuration="Release" />
+      <Entry build="True" name="GContacts" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -86,6 +88,7 @@
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
+      <Entry build="True" name="GContacts" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
@@ -116,6 +119,7 @@
     <Execute type="None" entry="GNOME-Screenshot" />
     <Execute type="None" entry="GNOME-Terminal" />
     <Execute type="None" entry="Tasque" />
+    <Execute type="None" entry="GContacts" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -145,5 +149,6 @@
     <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="GNOME-Screenshot/GNOME-Screenshot.mdp" />
     <Entry filename="Tasque/Tasque.mdp" />
+    <Entry filename="GContacts/GContacts.mdp" />
   </Entries>
 </Combine>
