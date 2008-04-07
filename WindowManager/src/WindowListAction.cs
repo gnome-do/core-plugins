@@ -198,7 +198,14 @@ namespace WindowManager
 							w.Unmaximize ();
 					}
 				} else if (items[0] is GenericWindowItem) {
-					throw new NotImplementedException ();
+					if ((items[0] as GenericWindowItem).WindowType == GenericWindowType.CurrentWindow) {
+						Window w = WindowListItems.CurrentWindow;
+						
+						if (w.IsMaximized) 
+							w.Unmaximize ();
+						else
+							w.Maximize ();
+					}
 				}
 			}
 			
@@ -254,7 +261,14 @@ namespace WindowManager
 							w.Unminimize (Gtk.Global.CurrentEventTime);
 					}
 				} else if (items[0] is GenericWindowItem) {
-					throw new NotImplementedException ();
+					if ((items[0] as GenericWindowItem).WindowType == GenericWindowType.CurrentWindow) {
+						Window w = WindowListItems.CurrentWindow;
+						
+						if (w.IsMinimized) 
+							w.Unminimize (Gtk.Global.CurrentEventTime);
+						else
+							w.Minimize ();
+					}
 				}
 			}
 			
@@ -305,7 +319,14 @@ namespace WindowManager
 							w.Unshade ();
 					}
 				} else if (items[0] is GenericWindowItem) {
-					throw new NotImplementedException ();
+					if ((items[0] as GenericWindowItem).WindowType == GenericWindowType.CurrentWindow) {
+						Window w = WindowListItems.CurrentWindow;
+						
+						if (w.IsShaded)
+							w.Unshade ();
+						else
+							w.Shade ();
+					}
 				}
 			}
 			
@@ -415,7 +436,7 @@ namespace WindowManager
 						}
 					}
 				} else if (items[0] is GenericWindowItem) {
-					throw new NotImplementedException ();
+					return null;
 				}
 			}
 			return null;

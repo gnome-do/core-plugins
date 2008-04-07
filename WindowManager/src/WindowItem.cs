@@ -27,15 +27,26 @@ using Do.Universe;
 
 namespace WindowManager
 {
+	public enum GenericWindowType
+	{
+		CurrentWindow = 0,
+		PreviousWindow = 1,
+		CurrentApplication = 2,
+		PreviousApplication = 3,
+	}
+	
 	public class GenericWindowItem : IItem
 	{
 		string name, description, icon;
+		GenericWindowType windowType;
 		
-		public GenericWindowItem (string name, string description, string icon) 
+		public GenericWindowItem (string name, string description, string icon, 
+		                          GenericWindowType windowType) 
 		{
 			this.name = name;
 			this.description = description;
 			this.icon = icon;
+			this.windowType = windowType;
 		}
 		
 		public string Name {
@@ -56,6 +67,11 @@ namespace WindowManager
 			}
 		}
 
+		public GenericWindowType WindowType {
+			get {
+				return windowType;
+			}
+		}
 		
 	}
 	
