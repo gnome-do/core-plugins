@@ -198,6 +198,35 @@ AC_ARG_ENABLE([twitter-plugin],
 
 AM_CONDITIONAL(ENABLE_TWITTER_PLUGIN, test "x$enable_twitter_plugin" = "xyes")
 
+dnl - DiskMounter plugin
+AC_ARG_ENABLE([diskmounter-plugin],
+        AS_HELP_STRING([--enable-diskmounter-plugin],[Enable the DiskMounter plugin]),
+        enable_diskmounter_plugin=$enableval,
+        enable_diskmounter_plugin=yes)
+
+AM_CONDITIONAL(ENABLE_DISKMOUNTER_PLUGIN, test "x$enable_diskmounter_plugin" = "xyes")
+
+if test "x$enable_diskmounter_plugin" != "xno" ; then
+PKG_CHECK_MODULES(GNOME_VFS_SHARP, 
+                  gnome-vfs-sharp-2.0 >= 2.8.0,
+		  has_diskmounter_deps=yes,
+		  has_diskmounter_deps=no)
+AC_SUBST(GNOME_VFS_SHARP_LIBS)
+fi
+
+if test "x$has_diskmounter_deps" = "xno" ; then
+	if test "x$enable_diskmounter_plugin" = "xyes" ; then
+		dnl Error out if explicitly asked for the Disk Mounter plugin
+		AC_MSG_ERROR([Could not find gnome-vfs-sharp])
+	fi
+	enable_diskmounter_plugin="no"
+else
+	if test "x$enable_diskmounter_plugin" = "xauto" ; then
+		enable_diskmounter_plugin="yes"
+	fi
+fi
+
+AM_CONDITIONAL(ENABLE_DISKMOUNTER_PLUGIN, test "x$enable_diskmounter_plugin" = "xyes")
 
 
 dnl Plugin install paths
@@ -218,6 +247,7 @@ AC_CONFIG_FILES([
 	Amarok/Makefile
 	Banshee/Makefile
 	Banshee/src/Makefile
+	DiskMounter/Makefile
 	Epiphany/Makefile
 	Evolution/Makefile
 	Evolution/src/Makefile

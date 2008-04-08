@@ -40,13 +40,18 @@ if ENABLE_TASQUE_PLUGIN
 ENABLED_SUBDIRS += Tasque
 endif
 
+if ENABLE_DISKMOUNTER_PLUGIN
+ENABLED_SUBDIRS += DiskMounter
+endif
+
 SUBDIRS = $(ENABLED_SUBDIRS) 	\
+                        DiskMounter             \
 			Epiphany			\
 			File				\
 			GCalendar		\
 			GNOME-Screenshot	\
 			GNOME-Session		\
-			GNOME-Terminal		\
+			GNOME-Terminal          \
 			GoogleCalculator	\
 			LocateFiles			\
 			Pidgin				\
@@ -55,6 +60,7 @@ SUBDIRS = $(ENABLED_SUBDIRS) 	\
 			Tasque                  \
 			Templates			\
 			Thunderbird		\
-			Vinagre
+			Vinagre                        
+			
 
 EXTRA_DIST = DoPlugins.mds Packages.mdse COPYRIGHT
