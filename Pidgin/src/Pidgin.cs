@@ -95,6 +95,12 @@ namespace Do.Addins.Pidgin
 			account_out = -1;
 			return false;
 		}
+		/*
+		public static void SetAvailabilityStatus (int status, string message)
+		{
+			IPurpleObject prpl = GetPurpleObject ();
+		}
+		*/	
 
 		public static void OpenConversationWithBuddy (string name)
 		{

@@ -21,6 +21,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Security.Cryptography.X509Certificates;
 
 using Google.GData.Client;
@@ -34,7 +35,7 @@ namespace Do.GCalendar
 	{
 		private static string username, password;
 		private static CalendarService service;
-		private static AtomFeed calendars;
+		private static AtomFeed calendars = new AtomFeed (null,null);
 			
 		static DoGCal ()
 		{
@@ -72,11 +73,11 @@ namespace Do.GCalendar
 		
 		public static void UpdateCalendars ()
 		{
-			lock (calendars) {
-				FeedQuery query = new FeedQuery ();
-				query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
-				calendars = service.Query (query);
-			}
+			if(!Monitor.TryEnter (calendars)) return;
+			FeedQuery query = new FeedQuery ();
+			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
+			calendars = service.Query (query);
+			Monitor.Exit (calendars);
 		}
 		
 		public static EventFeed GetEvents (string calUrl)
