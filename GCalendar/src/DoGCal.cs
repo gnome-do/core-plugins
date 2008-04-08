@@ -34,8 +34,6 @@ namespace Do.GCalendar
 	{
 		private static string username, password;
 		private static CalendarService service;
-		private static bool is_updating_calendars = false;
-		private static bool is_updating_events = false;
 		private static AtomFeed calendars;
 			
 		static DoGCal ()
@@ -74,15 +72,11 @@ namespace Do.GCalendar
 		
 		public static void UpdateCalendars ()
 		{
-			if(is_updating_calendars) return;
-			
-			is_updating_calendars = true;
-			
-			FeedQuery query = new FeedQuery ();
-			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
-			calendars = service.Query (query);
-			
-			is_updating_calendars = false;
+			lock (calendars) {
+				FeedQuery query = new FeedQuery ();
+				query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
+				calendars = service.Query (query);
+			}
 		}
 		
 		public static EventFeed GetEvents (string calUrl)
@@ -93,18 +87,11 @@ namespace Do.GCalendar
 		public static EventFeed GetEvents (string calUrl, DateTime startTime,
 		                            DateTime endTime)
         {
-			if (is_updating_events) return null;
-			
-			is_updating_events = true;
-			
             EventQuery query = new EventQuery (calUrl);
             query.StartTime = startTime;
             query.EndTime = endTime;
 			query.SortOrder = CalendarSortOrder.ascending;
-			EventFeed events = service.Query (query) as EventFeed;
-			
-			is_updating_events = false;
-			
+			EventFeed events = service.Query (query) as EventFeed;			
 			return events;
         }
         
