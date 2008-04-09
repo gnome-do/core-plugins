@@ -426,14 +426,9 @@ namespace WindowManager
 							//The WM is ultimately going to determine what order this is done it.
 							//It seems to like doing it in reverse order (stacks are fun)
 							//So we delay to make sure this one is done last...
-							//TODO: Do things in reverse to deal with GTK being dumb?
-							GLib.Timeout.Add (150, delegate {
-								FocusWindowViewport (w);
-								return false;
-							});
-						} else {
-							windows[i].Activate (Gtk.Global.CurrentEventTime);
+							FocusWindowViewport (w);
 						}
+						windows[i].Activate (Gtk.Global.CurrentEventTime);
 					}
 				} else if (items[0] is GenericWindowItem) {
 					return null;

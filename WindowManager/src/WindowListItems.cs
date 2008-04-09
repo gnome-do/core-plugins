@@ -34,7 +34,7 @@ namespace WindowManager
 	{
 		private static Dictionary<string, List<Window>> windowList;
 		private static Wnck.Screen scrn;
-		private static bool listLock;
+		private static object listLock = new object ();
 		private static Window currentWindow;
 		
 		public static Window CurrentWindow {
@@ -115,9 +115,9 @@ namespace WindowManager
 		
 		private static void UpdateList ()
 		{
-			if (listLock) return;
+			if (!Monitor.TryEnter (listLock))
+				return;
 			
-			listLock = true;
 			windowList.Clear ();
 			
 			ProcessStartInfo st = new ProcessStartInfo ("ps");
@@ -151,9 +151,8 @@ namespace WindowManager
 				}
 			}
 			
-			listLock = false;
-			
 			ListUpdated ();
+			Monitor.Exit (listLock);
 		}
 		
 		public static event ListUpdatedDelegate ListUpdated;
