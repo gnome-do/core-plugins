@@ -23,7 +23,7 @@ using System.Diagnostics;
 
 using Do.Universe;
 
-namespace GnomeDoVNC {
+namespace VinagreVNC {
     public class VNCAction : AbstractAction {
         public override string Name { 
             get { return "Connect with VNC"; }

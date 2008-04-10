@@ -71,6 +71,18 @@ namespace WindowManager
 			                                  "The Currently Active Window",
 			                                  "gnome-window-manager",
 			                                  GenericWindowType.CurrentWindow));
+			items.Add (new GenericWindowItem ("Current Application",
+			                                  "The Currently Active Application",
+			                                  "gnome-window-manager",
+			                                  GenericWindowType.CurrentApplication));
+			items.Add (new GenericWindowItem ("Previous Window",
+			                                  "The Previously Active Window",
+			                                  "gnome-window-manager",
+			                                  GenericWindowType.PreviousWindow));
+			items.Add (new GenericWindowItem ("Previous Application",
+			                                  "The Previously Active Application",
+			                                  "gnome-window-manager",
+			                                  GenericWindowType.PreviousApplication));
 		}
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item)

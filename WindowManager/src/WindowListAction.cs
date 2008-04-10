@@ -151,11 +151,54 @@ namespace WindowManager
 		{
 			return null;
 		}
+	}
+	
+	//Most actions that are toggleable have identical logic for what to do with differnt types
+	//of groups.  So lets just put it all here.
+	public abstract class WindowTogglableAction : WindowActionAction
+	{
+		public abstract void ToggleGroup (List<Window> windows);
+		public abstract void ToggleWindow (Window window);
+		
+		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		{
+			if (modItems.Length > 0) { //user selected a mod item
+				Window w = (modItems[0] as WindowItem).Window;
+				
+				ToggleWindow (w);
+			} else { //no mod item
+				if (items[0] is ApplicationItem) { //it was an application item
+					string application;
+					ApplicationItem app = (items[0] as ApplicationItem);
+					
+					application = app.Exec;
+					application = application.Split (new char[] {' '})[0];
+					
+					List<Window> windowList = WindowListItems.GetApplication (application);
 
+					ToggleGroup (windowList);
+				} else if (items[0] is GenericWindowItem) {
+					GenericWindowItem generic;
+					generic = (items[0] as GenericWindowItem);
+					
+					if (generic.WindowType == GenericWindowType.CurrentWindow) {
+						ToggleWindow (WindowListItems.CurrentWindow);
+					} else if (generic.WindowType == GenericWindowType.CurrentApplication) {
+						ToggleGroup (WindowListItems.CurrentApplication);
+					} else if (generic.WindowType == GenericWindowType.PreviousWindow) {
+						ToggleWindow (WindowListItems.PreviousWindow);
+					} else if (generic.WindowType == GenericWindowType.PreviousApplication) {
+						ToggleGroup (WindowListItems.PreviousApplication);
+					}
+				}
+			}
+			
+			return null;
+		}
 
 	}
 	
-	public class WindowMaximizeAction : WindowActionAction 
+	public class WindowMaximizeAction : WindowTogglableAction
 	{
 		public override string Name {
 			get { return "Maximize Window"; }
@@ -169,53 +212,31 @@ namespace WindowManager
 			get { return "up"; }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override void ToggleGroup (List<Window> windows)
 		{
-			if (modItems.Length > 0) {
-				WindowItem w = (modItems[0] as WindowItem);
-				
-				if (w.Window.IsMaximized) {
-					w.Window.Unmaximize ();
-				} else {
-					w.Window.Maximize ();
-				}
-			} else {
-				if (items[0] is ApplicationItem) {
-					string application = (items[0] as ApplicationItem).Exec;
-					application = application.Split(new char [] {' '})[0];
-					
-					List<Window> windows = WindowListItems.GetApplication(application);
-					
-					bool maximize = true;
-					foreach (Window w in windows) {
-						if (w.IsMaximized) maximize = false;
-					}
-					
-					foreach (Window w in windows) {
-						if (maximize)
-							w.Maximize ();
-						else
-							w.Unmaximize ();
-					}
-				} else if (items[0] is GenericWindowItem) {
-					if ((items[0] as GenericWindowItem).WindowType == GenericWindowType.CurrentWindow) {
-						Window w = WindowListItems.CurrentWindow;
-						
-						if (w.IsMaximized) 
-							w.Unmaximize ();
-						else
-							w.Maximize ();
-					}
-				}
+			bool maximize = false;
+			foreach (Window w in windows) {
+				if (!w.IsMaximized) maximize = true;
 			}
 			
-			
-			return null;
+			foreach (Window w in windows) {
+				if (maximize)
+					w.Maximize ();
+				else
+					w.Unmaximize ();
+			}
 		}
 
+		public override void ToggleWindow (Window window)
+		{
+			if (window.IsMaximized)
+				window.Unmaximize ();
+			else
+				window.Maximize ();
+		}
 	}
 	
-	public class WindowMinimizeAction : WindowActionAction
+	public class WindowMinimizeAction : WindowTogglableAction
 	{
 		public override string Name {
 			get { return "Minimize Window"; }
@@ -228,56 +249,32 @@ namespace WindowManager
 		public override string Icon {
 			get { return "down"; }
 		}
-
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		
+		public override void ToggleWindow (Window window)
 		{
-			if (modItems.Length > 0) { //user selected a mod item
-				Window w = (modItems[0] as WindowItem).Window;
-				
-				if (w.IsMinimized)
-					w.Unminimize (Gtk.Global.CurrentEventTime);
-				else
-					w.Minimize ();
-				
-			} else { //no mod item
-				if (items[0] is ApplicationItem) { //it was an application item
-					string application;
-					ApplicationItem app = (items[0] as ApplicationItem);
-					
-					application = app.Exec;
-					application = application.Split (new char[] {' '})[0];
-					
-					List<Window> windowList = WindowListItems.GetApplication (application);
-					
-					bool minimize = false;
-					foreach (Window w in windowList) {
-						if (!w.IsMinimized) minimize = true;
-					}
-					
-					foreach (Window w in windowList) {
-						if (minimize)
-							w.Minimize ();
-						else
-							w.Unminimize (Gtk.Global.CurrentEventTime);
-					}
-				} else if (items[0] is GenericWindowItem) {
-					if ((items[0] as GenericWindowItem).WindowType == GenericWindowType.CurrentWindow) {
-						Window w = WindowListItems.CurrentWindow;
-						
-						if (w.IsMinimized) 
-							w.Unminimize (Gtk.Global.CurrentEventTime);
-						else
-							w.Minimize ();
-					}
-				}
+			if (window.IsMinimized)
+				window.Unminimize (Gtk.Global.CurrentEventTime);
+			else
+				window.Minimize ();
+		}
+		
+		public override void ToggleGroup (List<Window> windows)
+		{
+			bool minimize = false;
+			foreach (Window w in windows) {
+				if (!w.IsMinimized) minimize = true;
 			}
 			
-			return null;
+			foreach (Window w in windows) {
+				if (minimize)
+					w.Minimize ();
+				else
+					w.Unminimize (Gtk.Global.CurrentEventTime);
+			}
 		}
-
 	}
 	
-	public class WindowShadeAction : WindowActionAction 
+	public class WindowShadeAction : WindowTogglableAction
 	{
 		public override string Name {
 			get { return "Shade Window"; }
@@ -290,50 +287,29 @@ namespace WindowManager
 		public override string Icon {
 			get { return "top"; }
 		}
-
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		
+		public override void ToggleWindow (Window window)
 		{
-			if (modItems.Length > 0)
-			{
-				Wnck.Window w = (modItems[0] as WindowItem).Window;
-				if (w.IsShaded)
-					w.Unshade ();
-				else
-					w.Shade ();
-			} else {
-				if (items[0] is ApplicationItem) {
-					string application = (items[0] as ApplicationItem).Exec;
-					application = application.Split(new char [] {' '})[0];
-					
-					List<Window> windows = WindowListItems.GetApplication (application);
-					
-					bool shade = true;
-					foreach (Window w in windows) {
-						if (w.IsShaded) shade = false;
-					}
-					
-					foreach (Window w in windows) {
-						if (shade) 
-							w.Shade();
-						else
-							w.Unshade ();
-					}
-				} else if (items[0] is GenericWindowItem) {
-					if ((items[0] as GenericWindowItem).WindowType == GenericWindowType.CurrentWindow) {
-						Window w = WindowListItems.CurrentWindow;
-						
-						if (w.IsShaded)
-							w.Unshade ();
-						else
-							w.Shade ();
-					}
-				}
+			if (window.IsShaded)
+				window.Unshade ();
+			else
+				window.Shade ();
+		}
+		
+		public override void ToggleGroup (List<Window> windows)
+		{
+			bool shade = true;
+			foreach (Window w in windows) {
+				if (w.IsShaded) shade = false;
 			}
 			
-			
-			return null;
+			foreach (Window w in windows) {
+				if (shade) 
+					w.Shade();
+				else
+					w.Unshade ();
+			}
 		}
-
 	}
 	
 	public class WindowFocusAction : WindowActionAction 
@@ -417,26 +393,27 @@ namespace WindowManager
 					application = application.Split (new char[] {' '})[0];
 					
 					List<Window> windows = WindowListItems.GetApplication (application);
-					
 					windows = SortWindowsToStack (windows);
 					
-					for (int i = 0; i < windows.Count; i++) {
-						if ( i == windows.Count - 1) {
-							Window w = windows[i];
-							//The WM is ultimately going to determine what order this is done it.
-							//It seems to like doing it in reverse order (stacks are fun)
-							//So we delay to make sure this one is done last...
-							//TODO: Do things in reverse to deal with GTK being dumb?
-							GLib.Timeout.Add (150, delegate {
-								FocusWindowViewport (w);
-								return false;
-							});
-						} else {
-							windows[i].Activate (Gtk.Global.CurrentEventTime);
-						}
-					}
+//					for (int i = 0; i < windows.Count; i++) {
+//						if ( i == windows.Count - 1) {
+//							Window w = windows[i];
+//							//The WM is ultimately going to determine what order this is done it.
+//							//It seems to like doing it in reverse order (stacks are fun)
+//							//So we delay to make sure this one is done last...
+//							FocusWindowViewport (w);
+//						}
+//						windows[i].Activate (Gtk.Global.CurrentEventTime);
+//					}
+					//Only focus the top window, otherwise we end up in blinky hell (see above)
+					FocusWindowViewport (windows[windows.Count - 1]);
+					
 				} else if (items[0] is GenericWindowItem) {
-					return null;
+					GenericWindowItem generic = (items[0] as GenericWindowItem);
+					
+					if (generic.WindowType == GenericWindowType.PreviousApplication ||
+					    generic.WindowType == GenericWindowType.PreviousWindow)
+						FocusWindowViewport (WindowListItems.PreviousWindow);
 				}
 			}
 			return null;

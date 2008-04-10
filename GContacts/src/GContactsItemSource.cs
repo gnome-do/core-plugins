@@ -69,7 +69,6 @@ namespace Do.GContacts
 				if (GContact.Auth_Token == null)
 					return;
 			}
-			if (GContact.Contacts.Count > 0) return;
 			Thread updateRunner = new Thread (new ThreadStart (GContact.UpdateContacts));
 			updateRunner.Start ();
 			items = GContact.Contacts;

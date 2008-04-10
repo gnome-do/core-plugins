@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace GnomeDoVNC {  
+namespace VinagreVNC {  
     public class VNCHostItem : IItemSource {
         List<IItem> items;
 

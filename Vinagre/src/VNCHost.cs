@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace GnomeDoVNC {  
+namespace VinagreVNC {  
     public class HostItem : IItem  {
         string bookmark, hostname, port;
 

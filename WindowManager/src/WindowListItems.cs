@@ -34,12 +34,53 @@ namespace WindowManager
 	{
 		private static Dictionary<string, List<Window>> windowList;
 		private static Wnck.Screen scrn;
-		private static bool listLock;
+		private static object listLock = new object ();
 		private static Window currentWindow;
+		private static Window previousWindow;
 		
 		public static Window CurrentWindow {
 			get {
 				return currentWindow;
+			}
+		}
+		
+		public static Window PreviousWindow {
+			get {
+				return previousWindow;
+			}
+		}
+		
+		public static List<Window> CurrentApplication {
+			get {
+				int pid;
+				List<Window> outList;
+				
+				pid = CurrentWindow.Pid;
+				outList = new List<Window> ();
+				
+				foreach (Window w in scrn.WindowsStacked) {
+					if (w.Pid == pid && !w.IsSkipTasklist)
+						outList.Add(w);
+				}
+				
+				return outList;
+			}
+		}
+		
+		public static List<Window> PreviousApplication {
+			get {
+				int pid;
+				List<Window> outList;
+				
+				pid = PreviousWindow.Pid;
+				outList = new List<Window> ();
+				
+				foreach (Window w in scrn.WindowsStacked) {
+					if (w.Pid == pid && !w.IsSkipTasklist)
+						outList.Add(w);
+				}
+				
+				return outList;
 			}
 		}
 		
@@ -76,8 +117,10 @@ namespace WindowManager
 		private static void OnActiveWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
 			try {
-				if (!scrn.ActiveWindow.IsSkipTasklist)
+				if (!scrn.ActiveWindow.IsSkipTasklist) {
+					previousWindow = currentWindow;
 					currentWindow = scrn.ActiveWindow;
+				}
 			}
 			catch {
 				
@@ -115,9 +158,9 @@ namespace WindowManager
 		
 		private static void UpdateList ()
 		{
-			if (listLock) return;
+			if (!Monitor.TryEnter (listLock))
+				return;
 			
-			listLock = true;
 			windowList.Clear ();
 			
 			ProcessStartInfo st = new ProcessStartInfo ("ps");
@@ -151,9 +194,8 @@ namespace WindowManager
 				}
 			}
 			
-			listLock = false;
-			
 			ListUpdated ();
+			Monitor.Exit (listLock);
 		}
 		
 		public static event ListUpdatedDelegate ListUpdated;
