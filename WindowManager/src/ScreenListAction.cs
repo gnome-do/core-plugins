@@ -56,6 +56,48 @@ namespace WindowManager
 			Screen.Default.WindowClosed += OnWindowClosed;
 		}
 		
+		public static Gdk.Rectangle GetScreenMinusPanelGeometry {
+			get {
+				Gdk.Rectangle outRect = new Gdk.Rectangle ();
+
+				Screen scrn = Screen.Default;
+				outRect.Width = scrn.Width;
+				outRect.Height = scrn.Height;
+				
+				foreach (Window w in scrn.Windows) {
+					if (!w.IsSkipTasklist) continue;
+					if (w.WindowType == WindowType.Dock) {
+						//ok this is likely a panel.  Lets make sure!
+						Gdk.Rectangle windowGeo = new Gdk.Rectangle ();
+						w.GetGeometry (out windowGeo.X, out windowGeo.Y, 
+						               out windowGeo.Width, out windowGeo.Height);
+							
+						//we would like to know which edge it sits against
+						if (windowGeo.Y == 0 && windowGeo.Width > windowGeo.Height) {
+							//top edge
+							outRect.Y += windowGeo.Height;
+							outRect.Height -= windowGeo.Height;
+						} else if (windowGeo.X == 0 && windowGeo.Height > windowGeo.Width) {
+							//left edge
+							outRect.X += windowGeo.Width;
+							outRect.Width -= windowGeo.Width;
+						} else if (windowGeo.Y == scrn.Height - windowGeo.Height &&
+						           windowGeo.Width > windowGeo.Height) {
+							//bottom edge
+							outRect.Height -= windowGeo.Height;
+						} else if (windowGeo.X == scrn.Width - windowGeo.Width &&
+						           windowGeo.Height > windowGeo.Width) {
+							//right edge
+							outRect.Width -= windowGeo.Width;
+						}
+					}
+				}
+				
+				
+				return outRect;
+			}
+		}
+		
 		/// <summary>
 		/// Removes unused windows in the window list that have been closed
 		/// </summary>
@@ -200,6 +242,26 @@ namespace WindowManager
                            WindowMoveResizeMask.Y,
 			               x, y, width, height);
 		}
+		
+		protected List<Window> ViewportWindows {
+			get {
+				List<Window> windowList = new List<Window> ();
+				
+				Dictionary<string, List<Window>> processesList;
+				
+				WindowListItems.GetList (out processesList);
+				
+				//We need a list of every window in our current viewport only
+				foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
+					foreach (Window w in kvp.Value) {
+						if (w.IsInViewport (Screen.Default.ActiveWorkspace))
+							windowList.Add (w);
+					}
+				}
+				
+				return windowList;
+			}
+		}
 	}
 	
 	public class ScreenTileAction : ScreenActionAction
@@ -218,19 +280,8 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			List<Window> windowList = new List<Window> ();
-			
-			Dictionary<string, List<Window>> processesList;
-			
-			WindowListItems.GetList (out processesList);
-			
-			//We need a list of every window in our current viewport only
-			foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
-				foreach (Window w in kvp.Value) {
-					if (w.IsInViewport (Screen.Default.ActiveWorkspace))
-						windowList.Add (w);
-				}
-			}
+			List<Window> windowList = ViewportWindows;
+			Gdk.Rectangle screenGeo = DoModifyGeometry.GetScreenMinusPanelGeometry;
 			
 			//can't tile no windows
 			if (windowList.Count <= 1) return null;
@@ -251,22 +302,24 @@ namespace WindowManager
 			}
 			
 			int windowWidth, windowHeight;
-			windowWidth = Screen.Default.Width / width;
+			windowWidth = screenGeo.Width / width;
 			
-			//subtract 48 because our default bars are 48 tall.  I don't know
-			//how to figure this out without hardcoding it yet.
-			//TODO: Add gconf support for this.
-			windowHeight = (Screen.Default.Height - 48) / height;
+			windowHeight = screenGeo.Height / height;
 			
 			int row = 0, column = 0;
 			int x, y;
 			
-			foreach (Window w in windowList) {
-				x = column * windowWidth;
-				y = (row * windowHeight) + 24;
+			for (int i = 0; i < windowList.Count; i++) {
+				x = (column * windowWidth) + screenGeo.X;
+				y = (row * windowHeight) + screenGeo.Y;
 				
-				DoModifyGeometry.SetWindowGeometry (w, x, y, windowHeight, 
-				                                    windowWidth, true);
+				if (i == windowList.Count - 1) {
+					DoModifyGeometry.SetWindowGeometry (windowList[i], x, y,
+					                                    windowHeight, screenGeo.Width - x, true);
+				} else {
+					DoModifyGeometry.SetWindowGeometry (windowList[i], x, y, windowHeight, 
+					                                    windowWidth, true);
+				}
 				
 				column++;
 				if (column == width) {
@@ -296,19 +349,7 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			List<Window> windowList = new List<Window> ();
-			
-			Dictionary<string, List<Window>> processesList;
-			
-			WindowListItems.GetList (out processesList);
-			
-			//We need a list of every window in our current viewport only
-			foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
-				foreach (Window w in kvp.Value) {
-					if (w.IsInViewport (Screen.Default.ActiveWorkspace))
-						windowList.Add (w);
-				}
-			}
+			List<Window> windowList = ViewportWindows;
 			
 			//can't tile no windows
 			if (windowList.Count <= 1) return null;
@@ -348,6 +389,54 @@ namespace WindowManager
 			return null;
 		}
 		
+	}
+	
+	public class ScreenShelfAction : ScreenActionAction
+	{
+		public override string Name {
+			get { return "Shelf Windows"; }
+		}
+		
+		public override string Description {
+			get { return "Places your windows in a configurable shelf arrangement"; }
+		}
+		
+		public override string Icon {
+			get { return "preferences-system-windows"; }
+		}
+
+		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		{
+			return base.DynamicModifierItemsForItem (item);
+		}
+		
+		private Window LargestWindow (List<Window> windows)
+		{
+			Window largest = windows[0];
+			int largest_size = 0;
+			
+			foreach (Window w in windows) {
+				int x, y, height, width;
+				w.GetGeometry (out x, out y, out width, out height);
+				
+				if (width * height > largest_size) {
+					largest = w;
+					largest_size = width * height;
+				}
+			}
+			
+			return largest;
+		}
+
+		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		{
+			//magic goes here (a.k.a the code that was here is too embarassing to release even into
+			//a beta tree
+			
+			return null;
+		}
+
+
 	}
 	
 	public class ScreenRestoreAction : ScreenActionAction
