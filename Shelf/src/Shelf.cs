@@ -150,8 +150,7 @@ namespace Shelf
 
 		public override bool SupportsItem (IItem item)
 		{
-			if (ShelfContainer.Items.Contains (item))
-				return true;
+			return ShelfContainer.Items.Contains (item);
 		}
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
