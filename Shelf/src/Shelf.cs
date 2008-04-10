@@ -150,9 +150,13 @@ namespace Shelf
 
 		public override bool SupportsItem (IItem item)
 		{
+<<<<<<< TREE
 			if (ShelfContainer.Items.Contains (item))
 				return true;
 			return false;
+=======
+			return ShelfContainer.Items.Contains (item);
+>>>>>>> MERGE-SOURCE
 		}
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
