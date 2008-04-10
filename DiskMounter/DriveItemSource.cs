@@ -23,38 +23,37 @@ using Gnome.Vfs;
 using Mount;
 using Do.Universe;
 
-namespace Mount
-{
-	public class DriveItemSource : IItemSource
-	{
+namespace Mount {
+
+	public class DriveItemSource : IItemSource {
+
 		List<IItem> items;
-                private static Gnome.Vfs.VolumeMonitor monitor;
-                
+		private static Gnome.Vfs.VolumeMonitor monitor;
+
 		public DriveItemSource ()
 		{
-                        Vfs.Initialize ();
-			monitor = Gnome.Vfs.VolumeMonitor.Get();
+			Vfs.Initialize ();
+			monitor = Gnome.Vfs.VolumeMonitor.Get ();
 			items = new List<IItem> ();
-			UpdateItems ();
 		}
-                
+
 		public string Name {
-			get { return "Drive Item"; }
+			get { return "Drives"; }
 		}
-		
+
 		public string Description {
-			get { return ""; }
+			get { return "Available mounted and unmounted drives."; }
 		}
-		
+
 		public string Icon {
 			get { return "harddrive"; }
 		}
-                
+
 		public Type[] SupportedItemTypes {
 			get {
-			return new Type[] {
+				return new Type[] {
 					typeof (MountedDriveItem),
-                                        typeof (UnmountedDriveItem),
+						   typeof (UnmountedDriveItem),
 				};
 			}
 		}
@@ -62,33 +61,22 @@ namespace Mount
 		public ICollection<IItem> Items {
 			get { return items; }
 		}
-		
+
 		public ICollection<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}
-		
+
 		public void UpdateItems ()
 		{
+			items.Clear ();
 
-			Gnome.Vfs.Drive[] drives;
-			
-			try {                       
-                                drives = monitor.ConnectedDrives;
-			        items.Clear();
-                      
-			        foreach (Drive drive in drives){
-                                        if (drive.IsMounted)
-                                                items.Add (new MountedDriveItem(drive));
-                                        else
-                                                items.Add (new UnmountedDriveItem(drive));                 
-                                }
-			
-			} catch (Exception e) {
-				Console.Error.WriteLine ("Something went wrong while updating DriveItemSource :  {0}" , e.Message);
+			foreach (Drive drive in monitor.ConnectedDrives){
+				if (drive.IsMounted)
+					items.Add (new MountedDriveItem (drive));
+				else
+					items.Add (new UnmountedDriveItem (drive));                 
 			}
-
 		}  
-                
 	}
 }
