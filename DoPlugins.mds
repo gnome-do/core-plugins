@@ -28,7 +28,6 @@
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
       <Entry build="True" name="GContacts" configuration="Debug" />
-      <Entry build="True" name="Shelf" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -58,7 +57,6 @@
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
       <Entry build="True" name="Tasque" configuration="Release" />
       <Entry build="True" name="GContacts" configuration="Release" />
-      <Entry build="True" name="Shelf" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -91,7 +89,6 @@
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
       <Entry build="True" name="GContacts" configuration="Debug" />
-      <Entry build="True" name="Shelf" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
@@ -154,6 +151,5 @@
     <Entry filename="GNOME-Screenshot/GNOME-Screenshot.mdp" />
     <Entry filename="Tasque/Tasque.mdp" />
     <Entry filename="GContacts/GContacts.mdp" />
-    <Entry filename="Shelf/Shelf.mdp" />
   </Entries>
 </Combine>
