@@ -109,23 +109,23 @@ namespace Do.GCalendar
 		
 		private static void SetCredentials ()
 		{
+			string keyring_item_name = "Google Account";
+			Hashtable request_attributes = new Hashtable();
+			request_attributes["name"] = keyring_item_name;
 			try {
-				string keyring_item_name = "Google Account";
-				Hashtable request_attributes = new Hashtable();
-				request_attributes["name"] = keyring_item_name;
-
 				foreach(ItemData result in Ring.Find(ItemType.GenericSecret, request_attributes)) {
 					if(!result.Attributes.ContainsKey("name") || !result.Attributes.ContainsKey("username") ||
 						(result.Attributes["name"] as string) != keyring_item_name) 
 						continue;
 					
-					string username = (string)result.Attributes["username"];
-					string password = result.Secret;
+					username = (string)result.Attributes["username"];
+					password = result.Secret;
 
 					if (username == null || username == String.Empty || password == null || password == String.Empty)
 						throw new ApplicationException ("Invalid username/password in keyring");
 				}
-			} catch {
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
 				string account_info = Environment.GetEnvironmentVariable ("HOME")
 					+ "/.config/gnome-do/google-name";
 				try {
