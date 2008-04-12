@@ -8,9 +8,8 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading;
+using System.Collections;
 using System.Collections.Generic;
-
-using GConf;
 
 using Do.Addins;
 using Do.Universe;
@@ -25,16 +24,7 @@ namespace Do.GContacts
 		
 		public GContactsItemSource()
 		{
-			GConf.Client gconf = new GConf.Client ();
 			items = new List<IItem> ();
-			try {
-				GContact.Username = gconf.Get ("/apps/gnome-do/plugins/gcontacts/username") as string;
-				GContact.Password = gconf.Get ("/apps/gnome-do/plugins/gcontacts/password") as string;
-			} catch (GConf.NoSuchKeyException) {
-				gconf.Set ("/apps/gnome-do/plugins/gcontacts/username","");
-				gconf.Set ("/apps/gnome-do/plugins/gcontacts/password","");
-				Console.Error.WriteLine ("Please set GConf keys");
-			}
 		}
 		
 		public string Name { get { return "GMail Contacts"; } }

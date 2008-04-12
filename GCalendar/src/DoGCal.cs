@@ -22,12 +22,12 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections;
 
 using Google.GData.Client;
 using Google.GData.Calendar;
 
-using GConf;
+using Gnome.Keyring;
 
 namespace Do.GCalendar
 {
@@ -38,21 +38,13 @@ namespace Do.GCalendar
 		private static AtomFeed calendars = new AtomFeed (null,null);
 			
 		static DoGCal ()
-		{
-			GConf.Client gconf = new GConf.Client ();
-			try {
-				username = gconf.Get ("/apps/gnome-do/plugins/gcal/username") as string;
-				password = gconf.Get ("/apps/gnome-do/plugins/gcal/password") as string;
-			} catch (GConf.NoSuchKeyException) {
-				gconf.Set ("/apps/gnome-do/plugins/gcal/username","");
-				gconf.Set ("/apps/gnome-do/plugins/gcal/password","");
-			}
+		{	
+			SetCredentials ();
 			try {
 				Connect ();
 				UpdateCalendars ();
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
-				Console.Error.WriteLine ("constructor");
 			}
 		}
 		
@@ -114,5 +106,58 @@ namespace Do.GCalendar
             
             return (EventEntry) service.Insert(post_uri, entry);
         }
+		
+		private static void SetCredentials ()
+		{
+			try {
+				string keyring_item_name = "Google Account";
+				Hashtable request_attributes = new Hashtable();
+				request_attributes["name"] = keyring_item_name;
+
+				foreach(ItemData result in Ring.Find(ItemType.GenericSecret, request_attributes)) {
+					if(!result.Attributes.ContainsKey("name") || !result.Attributes.ContainsKey("username") ||
+						(result.Attributes["name"] as string) != keyring_item_name) 
+						continue;
+					
+					string username = (string)result.Attributes["username"];
+					string password = result.Secret;
+
+					if (username == null || username == String.Empty || password == null || password == String.Empty)
+						throw new ApplicationException ("Invalid username/password in keyring");
+				}
+			} catch {
+				string account_info = Environment.GetEnvironmentVariable ("HOME")
+					+ "/.config/gnome-do/google-name";
+				try {
+					StreamReader reader = File.OpenText(account_info);
+					username = reader.ReadLine ();
+					password = reader.ReadLine ();
+					WriteAccount ();
+				} catch { 
+					Console.Error.WriteLine ("[ERROR] " + account_info + " cannot be read!");
+				} 
+			}
+		}
+		private static void WriteAccount ()
+		{
+			string keyring_item_name = "Google Account";
+			string keyring;
+			try {
+				keyring = Ring.GetDefaultKeyring();
+			} catch {
+				username = null;
+				password = null;
+				return;
+			}
+			Hashtable update_request_attributes = new Hashtable();
+			update_request_attributes["name"] = keyring_item_name;
+			update_request_attributes["username"] = username;
+
+			try {
+				Ring.CreateItem(keyring, ItemType.GenericSecret, keyring_item_name, update_request_attributes, password, true);
+			} catch (Exception e) {
+				Console.WriteLine(e.Message);
+			}
+		}
 	}
 }
