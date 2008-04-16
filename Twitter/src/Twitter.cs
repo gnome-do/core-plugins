@@ -22,6 +22,7 @@
 using System;
 using System.Net;
 using System.Xml;
+using System.Threading;
 using System.Collections.Generic;
 
 using NDesk.DBus;
@@ -31,58 +32,85 @@ using org.freedesktop.DBus;
 using GConf;
 using Do.Universe;
 
-namespace Do.Twitter
+namespace Twitter
 {
     public static class Twitter
     {
+		static List<IItem> items;
+		static string username, password;
+		private static Timer ClearContactsTimer;
+		const int CacheSeconds  = 350; //cache contacts
+		
+		static Twitter () 
+		{
+			items = new List<IItem> ();
+			SetUsername ();
+			SetPassword ();
+			ClearContactsTimer = new Timer (ClearContacts);
+		}
+		
+		public static List<IItem> Friends {
+			get { return items; }
+		}
+		
         public static string Username {
-            get {
-                GConf.Client gconf = new GConf.Client ();
-                string username = "";
-                try {
-                    username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
-                } catch (NoSuchKeyException) {
-                    gconf.Set ("/apps/gnome-do/plugins/twitter/username",username);
-                    Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
-                              + "login information have been created "
-                              + "in /apps/gnome-do/plugins/twitter/\n"
-                              + "Please set your username and password "
-                              + "in order to post tweets");
-                }
-                return username;
+            get { return username; }
+		}
+		
+		public static string Password {
+			get { return password; } 
+		}
+        
+		private static void SetUsername ()
+		{
+			GConf.Client gconf = new GConf.Client ();
+            try {
+                username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
+            } catch (NoSuchKeyException) {
+                gconf.Set ("/apps/gnome-do/plugins/twitter/username",username);
+                Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
+                          + "login information have been created "
+                          + "in /apps/gnome-do/plugins/twitter/\n"
+                          + "Please set your username and password "
+                          + "in order to post tweets");
             }
         }
         
-        public static string Password {
-            get {
-                GConf.Client gconf = new GConf.Client ();
-                string password = "";
-                try {
-                    password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
-                } catch (NoSuchKeyException) {
-                    gconf.Set ("/apps/gnome-do/plugins/twitter/username",password);
-                    Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
-                              + "login information have been created "
-                              + "in /apps/gnome-do/plugins/twitter/\n"
-                              + "Please set your username and password "
-                              + "in order to post tweets");
-                }
-                return password;
+        private static void SetPassword ()
+		{
+            GConf.Client gconf = new GConf.Client ();
+            try {
+                password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
+            } catch (NoSuchKeyException) {
+                gconf.Set ("/apps/gnome-do/plugins/twitter/username",password);
+                Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
+                          + "login information have been created "
+                          + "in /apps/gnome-do/plugins/twitter/\n"
+                          + "Please set your username and password "
+                          + "in order to post tweets");
             }
         }
         
-        public static IItem[] GetTwitterFriends () {
-            List<IItem> items = new List<IItem> ();
+        public static void GetTwitterFriends () 
+		{
+			if (!Monitor.TryEnter (items)) return;
+			ClearContactsTimer.Change (CacheSeconds*1000, Timeout.Infinite);
+			if (items.Count > 0) return;
+			
             XmlDocument friends = new XmlDocument ();
             string url = "http://twitter.com/statuses/friends.xml";
 
             HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
             request.Credentials = new NetworkCredential (Twitter.Username,Twitter.Password);
-            if(!SetRequestProxy (request, new GConf.Client ()))
-                return null;
-                
-            HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
-            friends.Load (response.GetResponseStream ());
+            if(!SetRequestProxy (request, new GConf.Client ())) return;
+			try {
+				HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
+				friends.Load (response.GetResponseStream ());
+			} catch (WebException e) {
+				Console.Error.WriteLine (e);
+				return;
+			}
+			
             string screen_name, name;
             screen_name = name = "";
             foreach (XmlNode user_node in friends.GetElementsByTagName ("user")) {
@@ -95,14 +123,24 @@ namespace Do.Twitter
                     }
                 }
                 ContactItem twit_friend_by_name = ContactItem.Create(name);
-                twit_friend_by_name["twitter.screename"] = "@" + screen_name;
-                ContactItem twit_friend_by_screename = ContactItem.Create(screen_name);
-                twit_friend_by_screename["twitter.screename"] = "@" + screen_name;
+                twit_friend_by_name["twitter.screenname"] = "@" + screen_name;
+				//Console.Error.WriteLine (twit_friend_by_name["twitter.screenname"]);
+                ContactItem twit_friend_by_screenname = ContactItem.Create(screen_name);
+                twit_friend_by_screenname["twitter.screename"] = "@" + screen_name;
+				//Console.Error.WriteLine (twit_friend_by_screenname["twitter.screenname"]);
                 items.Add (twit_friend_by_name);
-                items.Add (twit_friend_by_screename);
+                items.Add (twit_friend_by_screenname);
             }
-            return items.ToArray ();
+			Monitor.Exit (items);
         }
+		
+		private static void ClearContacts (object state)
+		{
+			lock (items) {
+				items.Clear ();
+				Console.Error.WriteLine ("Contacts Cleared " + items.Count);
+			}		
+		}
         
         public static bool SetRequestProxy (HttpWebRequest request, GConf.Client gconf)
         {

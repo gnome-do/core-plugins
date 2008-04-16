@@ -59,7 +59,6 @@ namespace Do.GCalendar
 				service.setUserCredentials(username, password);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
-				Console.Error.WriteLine ("connect");
 			}
 		}
 		
@@ -68,10 +67,15 @@ namespace Do.GCalendar
 			if(!Monitor.TryEnter (calendars)) return;
 			FeedQuery query = new FeedQuery ();
 			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
-			calendars = service.Query (query);
-			Monitor.Exit (calendars);
+			try {
+				calendars = service.Query (query);
+			} catch (WebException e) {
+				Console.Error.WriteLine (e);
+			} finally {
+				Monitor.Exit (calendars);
+			}
 		}
-		
+				
 		public static EventFeed GetEvents (string calUrl)
 		{
 			return GetEvents (calUrl, DateTime.Now, DateTime.Now.AddMonths(1));
@@ -79,7 +83,7 @@ namespace Do.GCalendar
 		
 		public static EventFeed GetEvents (string calUrl, DateTime startTime,
 		                            DateTime endTime)
-        {
+        {			
             EventQuery query = new EventQuery (calUrl);
             query.StartTime = startTime;
             query.EndTime = endTime;
@@ -93,7 +97,6 @@ namespace Do.GCalendar
             EventQuery query = new EventQuery(calUrl);
 			query.StartTime = DateTime.Now;
             query.Query = needle;
-
             return service.Query(query) as EventFeed;
         }
         
@@ -103,7 +106,6 @@ namespace Do.GCalendar
             entry.QuickAdd = true;
             entry.Content.Content = data;
             Uri post_uri = new Uri(calUrl);
-            
             return (EventEntry) service.Insert(post_uri, entry);
         }
 		

@@ -24,7 +24,7 @@ using System.Net;
 
 using Do.Universe;
 
-namespace Do.Twitter
+namespace Twitter
 {
     public class TweetAction : IAction
     {
@@ -103,16 +103,12 @@ namespace Do.Twitter
                         
         public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
         {
-            return (modItem as ContactItem)["twitter.screename"] != null;
+            return (modItem as ContactItem)["twitter.screenname"] != null;
         }
         
         public IItem[] DynamicModifierItemsForItem (IItem item)
         {
-            try {
-                return Twitter.GetTwitterFriends ();
-            } catch {
-                return null;
-            }
+            return null;
         }
         
         private string EscapeTweet (string tweet) {

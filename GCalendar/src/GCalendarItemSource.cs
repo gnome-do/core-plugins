@@ -41,7 +41,7 @@ namespace Do.GCalendar
 		public GCalendarItemSource ()
 		{
 			items = new List<IItem> ();
-			//UpdateItems ();
+			UpdateItems ();
 		}
 
 		public string Name { get { return "Google Calendars"; } }
@@ -73,7 +73,6 @@ namespace Do.GCalendar
 				events = DoGCal.GetEvents (calItem.URL);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
-				Console.Error.WriteLine ("ChildrenOfItem");
 				return null;
 			}
 			foreach (EventEntry entry in events.Entries) {
@@ -100,7 +99,6 @@ namespace Do.GCalendar
 				calList = DoGCal.Calendars;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
-				Console.Error.WriteLine ("UpdateItems");
 				return;
 			}
 			if (calList == null) return;

@@ -121,6 +121,7 @@
     <Execute type="None" entry="Tasque" />
     <Execute type="None" entry="GContacts" />
     <Execute type="None" entry="Shelf" />
+    <Execute type="None" entry="PackageManager" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
