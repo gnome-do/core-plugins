@@ -23,11 +23,13 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Collections;
+using System.Collections.Generic;
 
 using Google.GData.Client;
 using Google.GData.Calendar;
 
 using Gnome.Keyring;
+using Do.Universe;
 
 namespace Do.GCalendar
 {
@@ -35,20 +37,23 @@ namespace Do.GCalendar
 	{
 		private static string username, password;
 		private static CalendarService service;
-		private static AtomFeed calendars = new AtomFeed (null,null);
+		private static List<IItem> calendars;
+		private static Timer ClearCalendarsTimer;
+		const int CacheSeconds  = 500; //cache contacts
 			
 		static DoGCal ()
 		{	
+			calendars = new List<IItem> ();
+			ClearCalendarsTimer = new Timer (ClearCalendars);
 			SetCredentials ();
 			try {
 				Connect ();
-				UpdateCalendars ();
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}
 		}
 		
-		public static AtomFeed Calendars {
+		public static List<IItem> Calendars {
 			get { return calendars; }
 		}
 
@@ -61,19 +66,37 @@ namespace Do.GCalendar
 				Console.Error.WriteLine (e.Message);
 			}
 		}
-		
 		public static void UpdateCalendars ()
+		{		
+			if (!Monitor.TryEnter (calendars)) return;
+			if (calendars.Count > 0) {
+				Monitor.Exit (calendars);
+				return;
+			}
+			
+			ClearCalendarsTimer.Change (CacheSeconds*1000, Timeout.Infinite);
+			AtomFeed cal_list = QueryCalendars ();
+			if (cal_list == null) return;
+			
+			for (int i = 0; i < cal_list.Entries.Count; i++) {
+				string cal_url = cal_list.Entries[i].Id.Uri.ToString ();
+				calendars.Add (new GCalendarItem (cal_list.Entries[i].Title.Text, 
+				        cal_url.Replace ("/default","") + "/private/full"));
+			}
+			Monitor.Exit (calendars);
+			//Console.Error.WriteLine ("Querying Calendar list");
+		}
+		
+		public static AtomFeed QueryCalendars ()
 		{
-			if(!Monitor.TryEnter (calendars)) return;
 			FeedQuery query = new FeedQuery ();
 			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
 			try {
-				calendars = service.Query (query);
+				return service.Query (query);
 			} catch (WebException e) {
 				Console.Error.WriteLine (e);
-			} finally {
-				Monitor.Exit (calendars);
 			}
+			return null;
 		}
 				
 		public static EventFeed GetEvents (string calUrl)
@@ -140,6 +163,15 @@ namespace Do.GCalendar
 				} 
 			}
 		}
+		
+		private static void ClearCalendars (object state)
+		{
+			lock (calendars) {
+				//Console.Error.WriteLine ("Clearing Calendar List");
+				calendars.Clear ();
+			}		
+		}
+		
 		private static void WriteAccount ()
 		{
 			string keyring_item_name = "Google Account";

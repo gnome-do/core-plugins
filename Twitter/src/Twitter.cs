@@ -95,7 +95,10 @@ namespace Twitter
 		{
 			if (!Monitor.TryEnter (items)) return;
 			ClearContactsTimer.Change (CacheSeconds*1000, Timeout.Infinite);
-			if (items.Count > 0) return;
+			if (items.Count > 0) {
+				Monitor.Exit (items);
+				return;
+			}
 			
             XmlDocument friends = new XmlDocument ();
             string url = "http://twitter.com/statuses/friends.xml";
@@ -123,10 +126,10 @@ namespace Twitter
                     }
                 }
                 ContactItem twit_friend_by_name = ContactItem.Create(name);
-                twit_friend_by_name["twitter.screenname"] = "@" + screen_name;
+                twit_friend_by_name["twitter.screenname"] = screen_name;
 				//Console.Error.WriteLine (twit_friend_by_name["twitter.screenname"]);
                 ContactItem twit_friend_by_screenname = ContactItem.Create(screen_name);
-                twit_friend_by_screenname["twitter.screename"] = "@" + screen_name;
+                twit_friend_by_screenname["twitter.screename"] = screen_name;
 				//Console.Error.WriteLine (twit_friend_by_screenname["twitter.screenname"]);
                 items.Add (twit_friend_by_name);
                 items.Add (twit_friend_by_screenname);
@@ -138,7 +141,7 @@ namespace Twitter
 		{
 			lock (items) {
 				items.Clear ();
-				Console.Error.WriteLine ("Contacts Cleared " + items.Count);
+				//Console.Error.WriteLine ("Contacts Cleared " + items.Count);
 			}		
 		}
         

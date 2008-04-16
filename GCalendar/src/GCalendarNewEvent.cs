@@ -30,7 +30,7 @@ using Google.GData.Calendar;
 
 namespace Do.GCalendar
 {
-	public class GCalendarNewEvent : IAction
+	public sealed class GCalendarNewEvent : IAction
 	{
 		public GCalendarNewEvent()
 		{

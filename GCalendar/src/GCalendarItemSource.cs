@@ -34,7 +34,7 @@ using Google.GData.Extensions;
 
 namespace Do.GCalendar
 {	
-	public class GCalendarItemSource : IItemSource
+	public sealed class GCalendarItemSource : IItemSource
 	{
 		List<IItem> items;
 
@@ -91,21 +91,13 @@ namespace Do.GCalendar
 
 		public void UpdateItems ()
 		{	
-		    items.Clear ();
-			AtomFeed calList;
 			try {
 				Thread updateRunner = new Thread (new ThreadStart (DoGCal.UpdateCalendars));
 				updateRunner.Start ();
-				calList = DoGCal.Calendars;
+				items = DoGCal.Calendars;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 				return;
-			}
-			if (calList == null) return;
-			for (int i = 0; i < calList.Entries.Count; i++) {
-				string calUrl = calList.Entries[i].Id.Uri.ToString ();
-				items.Add (new GCalendarItem (calList.Entries[i].Title.Text, 
-				        calUrl.Replace ("/default","") + "/private/full"));
 			}
 		}
 	}

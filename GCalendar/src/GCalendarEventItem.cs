@@ -25,7 +25,7 @@ using Do.Addins;
 using Do.Universe;
 
 namespace Do.GCalendar {
-	public class GCalendarEventItem : IURLItem {
+	public sealed class GCalendarEventItem : IURLItem {
 		string name, url, desc;
 		public GCalendarEventItem (string name, string url, string desc)
 		{

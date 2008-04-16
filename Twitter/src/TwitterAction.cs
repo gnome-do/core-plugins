@@ -26,7 +26,7 @@ using Do.Universe;
 
 namespace Twitter
 {
-    public class TweetAction : IAction
+    public sealed class TweetAction : IAction
     {
         public string Name {
            get {
@@ -61,11 +61,13 @@ namespace Twitter
 
         public IItem[] Perform (IItem[] items, IItem[] modItems)
         {
-            string reply = "";
-            if (modItems.Length > 0)
-                reply = (modItems[0] as ContactItem)["twitter.screename"] + " ";
-            string tweet = EscapeTweet ((items [0] as ITextItem).Text);
-            string url = "http://twitter.com/statuses/update.json?status=" + reply + tweet;
+			string tweet, escaped_tweet;
+			if (modItems.Length > 0)
+				tweet = BuildTweet(items [0], modItems [0]);
+			else
+				tweet = BuildTweet(items [0], null);
+			escaped_tweet = EscapeTweet(tweet);
+            string url = "http://twitter.com/statuses/update.json?status=" + escaped_tweet;
             HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
             request.Credentials = new NetworkCredential (Twitter.Username, Twitter.Password);
             request.Method = "POST";
@@ -76,8 +78,7 @@ namespace Twitter
             try {
                 request.GetResponse ();
                 Twitter.SendNotification ("Tweet Successful", "Successfully posted tweet '" 
-                                + reply + " " + (items [0] as ITextItem).Text
-                                + "' to Twitter.");
+                                + tweet + "' to Twitter.");
             } catch (Exception e) {
                 Console.WriteLine (e.ToString ());
                 Twitter.SendNotification ("Tweet Failed", "Unable to post tweet. Check your login "
@@ -88,6 +89,27 @@ namespace Twitter
             }
             return null;
         }
+		
+		private string BuildTweet(IItem t, IItem c)
+		{
+			ITextItem text = (ITextItem) t;
+			ContactItem contact = (ContactItem) c;
+			string tweet = "";
+			
+			//Handle situations without a contact
+			if (contact == null)
+				tweet = text.Text;
+			else {
+				// Direct messaging
+				if (text.Text.Substring (0,2).Equals ("d "))
+					tweet = "d " + contact["twitter.screenname"] +
+						" " +	text.Text.Substring (2);
+				// Tweet replying
+				else
+					tweet = "@" + contact["twitter.screenname"] + " " + text.Text;
+			}
+			return tweet;
+		}
         
         public Type[] SupportedModifierItemTypes {
             get { 

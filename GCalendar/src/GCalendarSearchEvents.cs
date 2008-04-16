@@ -29,7 +29,7 @@ using Google.GData.Client;
 using Google.GData.Calendar;
 
 namespace Do.GCalendar {
-    public class GCalendarSearchEvents : IAction
+    public sealed class GCalendarSearchEvents : IAction
     {
         public GCalendarSearchEvents()
         {
