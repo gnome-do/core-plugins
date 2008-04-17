@@ -67,7 +67,7 @@ namespace Twitter
 			else
 				tweet = BuildTweet(items [0], null);
 			escaped_tweet = EscapeTweet(tweet);
-            string url = "http://twitter.com/statuses/update.json?status=" + escaped_tweet;
+            string url = "http://twitter.com/statuses/update.json?source=Do&status=" + escaped_tweet;
             HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
             request.Credentials = new NetworkCredential (Twitter.Username, Twitter.Password);
             request.Method = "POST";

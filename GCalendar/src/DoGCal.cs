@@ -88,12 +88,12 @@ namespace Do.GCalendar
 		}
 		
 		public static AtomFeed QueryCalendars ()
-		{
+		{			
 			FeedQuery query = new FeedQuery ();
 			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
 			try {
 				return service.Query (query);
-			} catch (WebException e) {
+			} catch (Exception e) {
 				Console.Error.WriteLine (e);
 			}
 			return null;
@@ -111,7 +111,13 @@ namespace Do.GCalendar
             query.StartTime = startTime;
             query.EndTime = endTime;
 			query.SortOrder = CalendarSortOrder.ascending;
-			EventFeed events = service.Query (query) as EventFeed;			
+			EventFeed events;
+			try {
+				events = service.Query (query) as EventFeed;
+			} catch (WebException e) {
+				events = null;
+				Console.Error.WriteLine (e);
+			}
 			return events;
         }
         
@@ -120,7 +126,14 @@ namespace Do.GCalendar
             EventQuery query = new EventQuery(calUrl);
 			query.StartTime = DateTime.Now;
             query.Query = needle;
-            return service.Query(query) as EventFeed;
+			EventFeed events;
+			try {
+				events = service.Query(query) as EventFeed;
+			} catch (WebException e) {
+				events = null;
+				Console.Error.WriteLine (e);
+			}
+            return events; 
         }
         
         public static EventEntry NewEvent (string calUrl, string data) 
@@ -129,7 +142,14 @@ namespace Do.GCalendar
             entry.QuickAdd = true;
             entry.Content.Content = data;
             Uri post_uri = new Uri(calUrl);
-            return (EventEntry) service.Insert(post_uri, entry);
+			EventEntry nevent;
+			try {
+				nevent = service.Insert(post_uri, entry) as EventEntry;
+			} catch (WebException e) {
+				nevent = null;
+				Console.Error.WriteLine (e);
+			}
+            return nevent;
         }
 		
 		private static void SetCredentials ()
