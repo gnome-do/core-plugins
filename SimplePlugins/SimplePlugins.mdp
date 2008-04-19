@@ -17,7 +17,7 @@
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="src/AppendTextAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/AptUrl.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/SimplePlugins.addin.xml" subtype="Code" buildaction="FileCopy" />
+    <File name="src/SimplePlugins.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/EyeOfGNOMEPlaySlideshowAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GoogleMapAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/StockQuoteAction.cs" subtype="Code" buildaction="Compile" />

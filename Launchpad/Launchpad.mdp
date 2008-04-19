@@ -35,7 +35,7 @@
     <File name="Resources/LaunchpadRegister.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadTranslations.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadUser.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/Launchpad.addin.xml" subtype="Code" buildaction="FileCopy" />
+    <File name="src/Launchpad.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

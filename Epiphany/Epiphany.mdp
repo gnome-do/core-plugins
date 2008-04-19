@@ -15,7 +15,7 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/Epiphany.addin.xml" subtype="Code" buildaction="FileCopy" />
+    <File name="src/Epiphany.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/EpiphanyBookmarkItemSource.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>

@@ -25,7 +25,7 @@
     <File name="src/GCalendarItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarNewEvent.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarSearchEvents.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/GCalendar.addin.xml" subtype="Code" buildaction="FileCopy" />
+    <File name="src/GCalendar.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="resources/calIcon.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>

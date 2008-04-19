@@ -19,7 +19,7 @@
     <File name="src/Twitter.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TwitterAction.cs" subtype="Code" buildaction="Compile" />
     <File name="twitter-icon.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/Twitter.addin.xml" subtype="Code" buildaction="FileCopy" />
+    <File name="src/Twitter.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/TwitterFriendSource.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
