@@ -31,7 +31,7 @@ namespace Do.Launchpad
 		public string Description { get { return "Search for answers at Launchpad"; } }
 		public string Icon
 		{ 
-			get { return "LaunchpadAnswers.png@Launchpad"; }
+			get { return "LaunchpadAnswers.png@" + GetType ().Assembly.FullName; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -56,7 +56,7 @@ namespace Do.Launchpad
 
 		public string Icon
 		{ 
-			get { return "LaunchpadAnswers.png@Launchpad"; }
+			get { return "LaunchpadAnswers.png@" + GetType ().Assembly.FullName; }
 		}
 
 		public bool SupportsItems(IItem[] items)

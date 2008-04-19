@@ -42,7 +42,7 @@ namespace Twitter
         
         public string Icon {
             get {
-                return "twitter-icon.png@Twitter";
+                return "twitter-icon.png@" + GetType ().Assembly.FullName;
             }
         }
         

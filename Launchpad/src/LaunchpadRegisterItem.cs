@@ -32,7 +32,7 @@ namespace Do.Launchpad
 
 		public string Icon
 		{ 
-			get { return "LaunchpadRegister.png@Launchpad"; }
+			get { return "LaunchpadRegister.png@" + GetType ().Assembly.FullName; }
 		}
 
 		public bool SupportsItems(IItem[] items)

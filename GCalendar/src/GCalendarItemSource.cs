@@ -46,7 +46,7 @@ namespace GCalendar
 
 		public string Name { get { return "Google Calendars"; } }
 		public string Description { get { return "Indexes your Google Calendars"; } }
-		public string Icon { get { return "calIcon.png@GCalendar"; } }
+		public string Icon { get { return "calIcon.png@" + GetType ().Assembly.FullName; } }
 
 		public Type[] SupportedItemTypes
 		{

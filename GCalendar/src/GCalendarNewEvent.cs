@@ -45,7 +45,7 @@ namespace GCalendar
         }
 			
 		public string Icon {
-			get { return "calIcon.png@GCalendar"; }
+			get { return "calIcon.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public Type[] SupportedItemTypes {

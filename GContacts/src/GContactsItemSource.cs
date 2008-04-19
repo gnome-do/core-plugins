@@ -29,7 +29,7 @@ namespace GContacts
 		
 		public string Name { get { return "GMail Contacts"; } }
 		public string Description { get { return "Indexes your GMail Contacts"; } }
-		public string Icon { get { return "gmail-logo.png@GContacts"; } }
+		public string Icon { get { return "gmail-logo.png@" + GetType ().Assembly.FullName; } }
 		
 		public Type[] SupportedItemTypes {
 			get {

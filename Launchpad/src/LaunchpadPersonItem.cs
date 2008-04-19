@@ -32,7 +32,7 @@ namespace Do.Launchpad
 		
 		public string Icon
 		{ 
-			get { return "LaunchpadUser.png@Launchpad"; }
+			get { return "LaunchpadUser.png@" + GetType ().Assembly.FullName; }
 		}
 
 		public bool SupportsItems(IItem[] items)
@@ -56,7 +56,7 @@ namespace Do.Launchpad
 		
 		public string Icon
 		{ 
-			get { return "LaunchpadUser.png@Launchpad"; }
+			get { return "LaunchpadUser.png@" + GetType ().Assembly.FullName; }
 		}
 
 		public bool SupportsItems(IItem[] items)
