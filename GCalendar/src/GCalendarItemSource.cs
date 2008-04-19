@@ -32,7 +32,7 @@ using Google.GData.Client;
 using Google.GData.Calendar;
 using Google.GData.Extensions;
 
-namespace Do.GCalendar
+namespace GCalendar
 {	
 	public sealed class GCalendarItemSource : IItemSource
 	{
@@ -46,7 +46,7 @@ namespace Do.GCalendar
 
 		public string Name { get { return "Google Calendars"; } }
 		public string Description { get { return "Indexes your Google Calendars"; } }
-		public string Icon { get { return "date"; } }
+		public string Icon { get { return "calIcon.png@GCalendar"; } }
 
 		public Type[] SupportedItemTypes
 		{

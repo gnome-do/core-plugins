@@ -11,6 +11,6 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.GContacts.GContactsItemSource" />
+		<ItemSource type="GContacts.GContactsItemSource" />
 	</Extension>
 </Addin>

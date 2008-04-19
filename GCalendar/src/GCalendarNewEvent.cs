@@ -28,7 +28,7 @@ using Do.Universe;
 using Google.GData.Client;
 using Google.GData.Calendar;
 
-namespace Do.GCalendar
+namespace GCalendar
 {
 	public sealed class GCalendarNewEvent : IAction
 	{
@@ -45,7 +45,7 @@ namespace Do.GCalendar
         }
 			
 		public string Icon {
-			get { return "stock_new-appointment"; }
+			get { return "calIcon.png@GCalendar"; }
 		}
 		
 		public Type[] SupportedItemTypes {

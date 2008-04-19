@@ -15,12 +15,12 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.GCalendar.GCalendarItemSource" />
+		<ItemSource type="GCalendar.GCalendarItemSource" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="Do.GCalendar.GCalendarNewEvent" />
+		<Action type="GCalendar.GCalendarNewEvent" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="Do.GCalendar.GCalendarSearchEvents" />
+		<Action type="GCalendar.GCalendarSearchEvents" />
 	</Extension>
 </Addin>

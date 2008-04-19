@@ -24,7 +24,7 @@ using System.Text;
 using Do.Addins;
 using Do.Universe;
 
-namespace Do.GCalendar
+namespace GCalendar
 {
     public class GCalendarItem : IURLItem
     {

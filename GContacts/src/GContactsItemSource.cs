@@ -16,7 +16,7 @@ using Do.Universe;
 
 using Google.GData.Client;
 
-namespace Do.GContacts
+namespace GContacts
 {
 	public class GContactsItemSource : IItemSource
 	{
@@ -29,7 +29,7 @@ namespace Do.GContacts
 		
 		public string Name { get { return "GMail Contacts"; } }
 		public string Description { get { return "Indexes your GMail Contacts"; } }
-		public string Icon { get { return "email"; } }
+		public string Icon { get { return "gmail-logo.png@GContacts"; } }
 		
 		public Type[] SupportedItemTypes {
 			get {

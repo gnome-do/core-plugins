@@ -31,7 +31,7 @@ using Google.GData.Calendar;
 using Gnome.Keyring;
 using Do.Universe;
 
-namespace Do.GCalendar
+namespace GCalendar
 {
 	public class DoGCal
 	{
