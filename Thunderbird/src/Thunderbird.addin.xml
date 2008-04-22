@@ -4,7 +4,7 @@
 	version="1.0"
 	name="Thunderbird"
 	description="Indexes your Thunderbird contacts"
-	author=""
+	author="David Siegel"
 >
  
 	<Runtime>
