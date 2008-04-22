@@ -1,4 +1,11 @@
-<Addin id="WindowManager" namespace= "Do" version="1.0">
+<Addin 
+	id="WindowManager" 
+	namespace= "Do" 
+	version="1.0"
+	name="Window Manager"
+	description="Perform actions on your windows or groups of windows with Do.  Also provides the ability to tile windows"
+	author="Jason Smith"
+>
  
 	<Runtime>
 		<Import assembly="WindowManager.dll"/>

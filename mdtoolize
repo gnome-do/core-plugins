@@ -5,7 +5,7 @@
 #fi
 
 #cp */bin/Debug/*.addin.xml ~/.local/share/gnome-do/addins-registry
-cp */bin/Debug/*.dll ~/.local/share/gnome-do/addins-registry
+cp */bin/Debug/*.dll ~/.local/share/gnome-do/plugin-install
 
 #cd buildrepo
 

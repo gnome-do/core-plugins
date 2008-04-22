@@ -262,6 +262,17 @@ namespace WindowManager
 				return windowList;
 			}
 		}
+		
+		protected List<Window> VisibleViewportWindows {
+			get {
+				List<Window> windows = ViewportWindows;
+				foreach (Window w in windows) {
+					if (w.IsMinimized)
+						windows.Remove (w);
+				}
+				return windows;
+			}
+		}
 	}
 	
 	public class ScreenTileAction : ScreenActionAction
@@ -280,7 +291,7 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			List<Window> windowList = ViewportWindows;
+			List<Window> windowList = VisibleViewportWindows;
 			Gdk.Rectangle screenGeo = DoModifyGeometry.GetScreenMinusPanelGeometry;
 			
 			//can't tile no windows
@@ -349,7 +360,7 @@ namespace WindowManager
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			List<Window> windowList = ViewportWindows;
+			List<Window> windowList = VisibleViewportWindows;
 			
 			//can't tile no windows
 			if (windowList.Count <= 1) return null;

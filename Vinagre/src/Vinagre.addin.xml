@@ -1,4 +1,11 @@
-<Addin id="VinagreVNC" namespace= "Do" version="1.0">
+<Addin 
+	id="VinagreVNC" 
+	namespace= "Do" 
+	version="1.0"
+	name="Vinagre VNC"
+	description="Browse your VNC Viewer Bookmarks and connect to remote servers."
+	author="Alex Launi"
+>
  
 	<Runtime>
 		<Import assembly="Vinagre.dll"/>
