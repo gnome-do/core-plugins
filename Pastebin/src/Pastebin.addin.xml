@@ -1,4 +1,11 @@
-<Addin id="Pastebin" namespace= "Do" version="1.0">
+<Addin
+	id="Pastebin"
+	namespace="Do"
+	version="1.0"
+	name="Pastebin"
+	description="Paste text to an online paste bin"
+	author=""
+>
  
 	<Runtime>
 		<Import assembly="Pastebin.dll"/>

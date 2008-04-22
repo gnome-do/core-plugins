@@ -1,4 +1,11 @@
-<Addin id="Epiphany" namespace= "Do" version="1.0">
+<Addin 
+	id="Epiphany"
+	namespace="Do"
+	version="1.0"
+	name="Epiphany"
+	description="Indexes your Epiphany bookmarks"
+	author="David Siegel"
+>
  
 	<Runtime>
 		<Import assembly="Epiphany.dll"/>

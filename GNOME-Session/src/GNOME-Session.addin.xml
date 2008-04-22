@@ -1,4 +1,11 @@
-<Addin id="Gnome Session" namespace= "Do" version="1.0">
+<Addin
+	id="Gnome Session"
+	namespace= "Do"
+	version="1.0"
+	name="GNOME Session"
+	description="Log out, lock your screen, shutdown, hibernate, etc."
+	author="David Siegel"
+>
  
 	<Runtime>
 		<Import assembly="GNOME-Session.dll"/>

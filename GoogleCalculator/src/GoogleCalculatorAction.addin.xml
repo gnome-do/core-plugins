@@ -1,4 +1,11 @@
-<Addin id="GoogleCalculator" namespace= "Do" version="1.0">
+<Addin
+	id="GoogleCalculator"
+	namespace= "Do"
+	version="1.0"
+	name="Google Calculator"
+	description="Perform calculations, and currency/quantity conversion."
+	author="David Siegel"
+>
  
 	<Runtime>
 		<Import assembly="GoogleCalculator.dll"/>

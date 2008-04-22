@@ -1,4 +1,11 @@
-<Addin id="Pidgin" namespace= "Do" version="1.0">
+<Addin
+	id="Pidgin"
+	namespace="Do"
+	version="1.0"
+	name="Pidgin"
+	description="Indexes your buddy list and initiate chats with Pidgin buddies."
+	author="David Siegel"
+>
  
 	<Runtime>
 		<Import assembly="Pidgin.dll"/>

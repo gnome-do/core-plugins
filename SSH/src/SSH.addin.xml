@@ -1,14 +1,14 @@
-<Addin 
-	id="Banshee"
-	namespace= "Do"
+<Addin
+	id="SSH"
+	namespace="Do"
 	version="1.0"
-	name="Banshee"
-	description="Searches and plays Banshee music"
-	author=""
+	name="SSH"
+	description="Indexes ssh hosts and provides 'Connect with SSH' action"
+	author="Peter Stuifzand"
 >
  
 	<Runtime>
-		<Import assembly="Banshee.dll"/>
+		<Import assembly="SSH.dll"/>
 	</Runtime>
 	
 	<Dependencies>
@@ -18,9 +18,9 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Addins.Banshee.BansheeItemSource" />
+		<ItemSource type="GnomeDoSSH.SSHHostItemSource" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="Do.Addins.Banshee.BansheePlayAction" />"
+		<Action type="GnomeDoSSH.SSHAction" />
 	</Extension>
 </Addin>

@@ -1,4 +1,11 @@
-<Addin id="Tasque" namespace= "Do" version="1.0">
+<Addin
+	id="Tasque"
+	namespace="Do"
+	version="1.0"
+	name="Tasque"
+	description="Plugin for creating new task in Tasque."
+	author="Guillaume Béland"
+>
  
 	<Runtime>
 		<Import assembly="Tasque.dll"/>

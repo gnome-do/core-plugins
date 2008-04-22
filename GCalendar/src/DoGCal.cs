@@ -62,6 +62,7 @@ namespace GCalendar
 			try {
 				service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
 				service.setUserCredentials(username, password);
+				//Console.Error.WriteLine("GCal: Connected");
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}
@@ -70,6 +71,7 @@ namespace GCalendar
 		{		
 			if (!Monitor.TryEnter (calendars)) return;
 			if (calendars.Count > 0) {
+				//Console.Error.WriteLine("GCal: Cache not cleared, returning");
 				Monitor.Exit (calendars);
 				return;
 			}
@@ -84,7 +86,7 @@ namespace GCalendar
 				        cal_url.Replace ("/default","") + "/private/full"));
 			}
 			Monitor.Exit (calendars);
-			//Console.Error.WriteLine ("Querying Calendar list");
+			//Console.Error.WriteLine("GCal: Calendar list set");
 		}
 		
 		public static AtomFeed QueryCalendars ()
@@ -92,6 +94,7 @@ namespace GCalendar
 			FeedQuery query = new FeedQuery ();
 			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
 			try {
+				//Console.Error.WriteLine("GCal: Querying calendars");
 				return service.Query (query);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e);
@@ -113,6 +116,7 @@ namespace GCalendar
 			query.SortOrder = CalendarSortOrder.ascending;
 			EventFeed events;
 			try {
+				//Console.Error.WriteLine("GCal: Getting list of events");
 				events = service.Query (query) as EventFeed;
 			} catch (WebException e) {
 				events = null;
@@ -128,6 +132,7 @@ namespace GCalendar
             query.Query = needle;
 			EventFeed events;
 			try {
+				//Console.Error.WriteLine("GCal: Searching events");
 				events = service.Query(query) as EventFeed;
 			} catch (WebException e) {
 				events = null;
@@ -187,7 +192,7 @@ namespace GCalendar
 		private static void ClearCalendars (object state)
 		{
 			lock (calendars) {
-				//Console.Error.WriteLine ("Clearing Calendar List");
+				Console.Error.WriteLine ("GCal: Clearing Calendar List");
 				calendars.Clear ();
 			}		
 		}

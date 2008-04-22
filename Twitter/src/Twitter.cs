@@ -96,19 +96,24 @@ namespace Twitter
 			if (!Monitor.TryEnter (items)) return;
 			ClearContactsTimer.Change (CacheSeconds*1000, Timeout.Infinite);
 			if (items.Count > 0) {
+				//Console.Error.WriteLine("Twitter: items not 0, returning");
 				Monitor.Exit (items);
 				return;
 			}
 			
             XmlDocument friends = new XmlDocument ();
             string url = "http://twitter.com/statuses/friends.xml";
-
+			
+			//Console.Error.WriteLine("Twitter: Creating WebRequest");
             HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
             request.Credentials = new NetworkCredential (Twitter.Username,Twitter.Password);
+			request.Timeout = 5000;
             if(!SetRequestProxy (request, new GConf.Client ())) return;
 			try {
+				//Console.Error.WriteLine("Twitter: Getting response from twitter");
 				HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 				friends.Load (response.GetResponseStream ());
+				response.Close ();
 			} catch (WebException e) {
 				Console.Error.WriteLine (e);
 				return;
@@ -116,6 +121,7 @@ namespace Twitter
 			
             string screen_name, name;
             screen_name = name = "";
+			//Console.Error.WriteLine("Twitter: Parsing XML");
             foreach (XmlNode user_node in friends.GetElementsByTagName ("user")) {
                 foreach (XmlNode attr in user_node.ChildNodes) {
                     switch(attr.Name) {
@@ -135,13 +141,14 @@ namespace Twitter
                 items.Add (twit_friend_by_screenname);
             }
 			Monitor.Exit (items);
+			//Console.Error.WriteLine("Twitter: Finished");
         }
 		
 		private static void ClearContacts (object state)
 		{
 			lock (items) {
 				items.Clear ();
-				//Console.Error.WriteLine ("Contacts Cleared " + items.Count);
+				//Console.Error.WriteLine ("Twitter: Contacts Cleared ");
 			}		
 		}
         

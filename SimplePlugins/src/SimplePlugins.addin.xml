@@ -1,4 +1,11 @@
-<Addin id="SimplePlugins" namespace= "Do" version="1.0">
+<Addin
+	id="SimplePlugins"
+	namespace="Do"
+	version="1.0"
+	name="Simple Plugins Pack"
+	description="Contains a handful of simple, but useful plugins."
+	author="David Siegel, Christer Edwards"
+>
  
 	<Runtime>
 		<Import assembly="SimplePlugins.dll"/>

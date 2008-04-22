@@ -1,4 +1,11 @@
-<Addin id="OpenSearch" namespace= "Do" version="1.0">
+<Addin
+	id="OpenSearch"
+	namespace= "Do"
+	version="1.0"
+	name="Search Web"
+	description="Search the web using your installed OpenSearch plugins."
+	author=""	
+>
  
 	<Runtime>
 		<Import assembly="OpenSearch.dll"/>

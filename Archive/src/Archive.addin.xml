@@ -1,4 +1,11 @@
-<Addin id="Archive" namespace= "Do" version="1.0">
+<Addin
+	id="Archive"
+	namespace="Do"
+	version="1.0"
+	name="Archive"
+	description="Create and extract archive files"
+	author="Guillaume Beland"
+>
  
 	<Runtime>
 		<Import assembly="Archive.dll"/>

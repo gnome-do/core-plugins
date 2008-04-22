@@ -1,4 +1,11 @@
-<Addin id="Twitter" namespace= "Do" version="1.0">
+<Addin
+	id="Twitter"
+	namespace="Do"
+	version="1.0"
+	name="Twitter"
+	description=" Provides 'Tweet' action for updating Twitter status."
+	author="Jacob Andreas, Alex Launi"
+>
  
 	<Runtime>
 		<Import assembly="Twitter.dll"/>

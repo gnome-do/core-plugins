@@ -127,6 +127,7 @@
     <Execute type="None" entry="GContacts" />
     <Execute type="None" entry="Archive" />
     <Execute type="None" entry="Archive" />
+    <Execute type="None" entry="Facebook" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>

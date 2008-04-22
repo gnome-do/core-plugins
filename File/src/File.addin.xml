@@ -1,4 +1,11 @@
-<Addin id="File" namespace= "Do" version="1.0">
+<Addin 
+	id="File"
+	namespace="Do"
+	version="1.0"
+	name="File"
+	description="Indexes files in user-specified directories. Allows you to move, copy, delete, and browse files."
+	author="David Siegel"
+>
  
 	<Runtime>
 		<Import assembly="File.dll"/>

@@ -1,4 +1,11 @@
-<Addin id="Launchpad" namespace= "Do" version="1.0">
+<Addin
+	id="Launchpad"
+	namespace="Do"
+	version="1.0"
+	name="Launchpad"
+	description="Provides integration with launchpad.net"
+	author=""
+>
  
 	<Runtime>
 		<Import assembly="Launchpad.dll"/>

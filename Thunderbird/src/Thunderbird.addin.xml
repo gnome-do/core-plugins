@@ -1,4 +1,11 @@
-<Addin id="Thunderbird" namespace= "Do" version="1.0">
+<Addin
+	id="Thunderbird"
+	namespace="Do"
+	version="1.0"
+	name="Thunderbird"
+	description="Indexes your Thunderbird contacts"
+	author=""
+>
  
 	<Runtime>
 		<Import assembly="Thunderbird.dll"/>

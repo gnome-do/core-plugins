@@ -1,4 +1,11 @@
-<Addin id="Tomboy" namespace= "Do" version="1.0">
+<Addin
+	id="Tomboy"
+	namespace="Do"
+	version="1.0"
+	name="Tomboy"
+	description="Indexes, and allows for creating and searching Tomboy notes"
+	author="Rick Harding"
+>
  
 	<Runtime>
 		<Import assembly="Tomboy.dll"/>

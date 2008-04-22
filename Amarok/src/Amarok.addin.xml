@@ -1,4 +1,11 @@
-<Addin id="Amarok" namespace= "Do" version="1.0">
+<Addin 
+	id="Amarok" 
+	namespace="Do"
+	version="1.0"
+	name="Amarok"
+	description="Searches and plays Amarok music"
+	author=""
+>
  
 	<Runtime>
 		<Import assembly="Amarok.dll"/>

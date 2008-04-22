@@ -1,4 +1,11 @@
-<Addin id="GMailContacts" namespace= "Do" version="1.0">
+<Addin 
+	id="GMailContacts"
+	namespace= "Do"
+	version="1.0"
+	name="GMail Contacts"
+	description="Indexes your GMail contacts"
+	author="Alex Launi"
+>
  
 	<Runtime>
 		<Import assembly="GContacts.dll"/>

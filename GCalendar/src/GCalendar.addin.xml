@@ -3,7 +3,7 @@
 	namespace= "Do" 
 	version="1.0"
 	name="Google Calendar"
-	description="Allows you to browse your google calendar events as well as set and modify them."
+	description="Allows you to create, search, and browse your Google calendar events."
 	author="Alex Launi"
 >
  
