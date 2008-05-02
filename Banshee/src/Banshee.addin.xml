@@ -4,7 +4,7 @@
 	version="1.0"
 	name="Banshee"
 	description="Searches and plays Banshee music"
-	author=""
+	author="Mathieu Cadet"
 >
  
 	<Runtime>

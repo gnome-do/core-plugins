@@ -39,7 +39,7 @@ namespace Twitter
 		static List<IItem> items;
 		static string username, password;
 		private static Timer ClearContactsTimer;
-		const int CacheSeconds  = 350; //cache contacts
+		const int CacheSeconds  = 200000; //cache contacts
 		
 		static Twitter () 
 		{
@@ -93,14 +93,16 @@ namespace Twitter
         
         public static void GetTwitterFriends () 
 		{
+			Console.Error.WriteLine ("Twitter: Beginning friends update");
 			if (!Monitor.TryEnter (items)) return;
-			ClearContactsTimer.Change (CacheSeconds*1000, Timeout.Infinite);
+			ClearContactsTimer.Change (CacheSeconds, Timeout.Infinite);
+			Console.Error.WriteLine ("Twitter: friends count at {0}",items.Count);
 			if (items.Count > 0) {
-				//Console.Error.WriteLine("Twitter: items not 0, returning");
+				Console.Error.WriteLine("Twitter: items not 0, returning");
 				Monitor.Exit (items);
 				return;
 			}
-			
+			//items.Clear ();
             XmlDocument friends = new XmlDocument ();
             string url = "http://twitter.com/statuses/friends.xml";
 			
@@ -116,6 +118,11 @@ namespace Twitter
 				response.Close ();
 			} catch (WebException e) {
 				Console.Error.WriteLine (e);
+				Monitor.Exit (items);
+				return;
+			}
+			catch (XmlException e) {
+				Console.Error.WriteLine (e.Message);
 				return;
 			}
 			
@@ -146,10 +153,12 @@ namespace Twitter
 		
 		private static void ClearContacts (object state)
 		{
+			Console.Error.WriteLine ("Twitter: Attempting to clear contacts");
 			lock (items) {
 				items.Clear ();
-				//Console.Error.WriteLine ("Twitter: Contacts Cleared ");
-			}		
+				Console.Error.WriteLine ("Twitter: Contacts Cleared ");
+			}
+			Console.Error.WriteLine ("Twitter: Finished clearing contacts");
 		}
         
         public static bool SetRequestProxy (HttpWebRequest request, GConf.Client gconf)

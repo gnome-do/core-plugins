@@ -165,7 +165,6 @@ namespace GContacts
 					
 					username = (string)result.Attributes["username"];
 					password = result.Secret;
-
 					if (username == null || username == String.Empty || password == null || password == String.Empty)
 						throw new ApplicationException ("Invalid username/password in keyring");
 				}
