@@ -127,13 +127,13 @@ namespace GCalendar
         
         public static EventFeed SearchEvents (string calUrl, string needle) 
         {
-			string [] keywords = {"from ","until "," in ", "after ", "before ", " on "};
+			string [] keywords = {"from ","until ","in ", "after ", "before ", "on "};
             EventQuery query = new EventQuery(calUrl);
 			DateTime [] dates = ParseEventDates (needle,keywords);
 			query.StartTime = dates[0];
 			query.EndTime = dates[1];
-			//Console.Error.WriteLine ("Start Date: {0}",dates[0]);
-			//Console.Error.WriteLine ("End Date: {0}",dates[1]);
+			Console.Error.WriteLine ("Start Date: {0}",dates[0]);
+			Console.Error.WriteLine ("End Date: {0}",dates[1]);
             query.Query = ParseSearchString (needle,keywords);
 			EventFeed events;
 			try {
@@ -218,9 +218,10 @@ namespace GCalendar
 			}
 			
 			// Get date ranges for single date keywords
-			if (needle.Contains ("in ") || needle.Contains ("before ") || needle.Contains ("after ")
-			    || needle.Contains (" on ") || needle.Contains ("until ") || 
-			    (needle.Contains ("from ") && !( needle.Contains (" to ") || needle.Contains("-"))))
+			if ((needle.StartsWith ("in ") || needle.Contains (" in ")) || needle.Contains ("before ") ||
+			    needle.Contains ("after ") || (needle.StartsWith ("on ") || needle.Contains (" on ")) ||
+			    needle.Contains ("until ") || (needle.Contains ("from ") && !( needle.Contains (" to ") ||
+			                                                                  needle.Contains("-"))))
 				return ParseSingleDate (needle);
 			else if (needle.Contains ("from "))
 				return ParseDateRange (needle);
@@ -231,7 +232,7 @@ namespace GCalendar
 		private static DateTime [] ParseSingleDate (string needle)
 		{
 			DateTime [] dates = new DateTime [2];
-			if (needle.Contains ("in ")) {
+			if (needle.StartsWith ("in") || needle.Contains (" in ")) {
 				needle = StripDatePrefix (needle);
 				Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
@@ -249,7 +250,7 @@ namespace GCalendar
 				dates[0] = DateTime.Parse (needle);
 				dates[1] = dates[0].AddYears (5);
 			}
-			else if (needle.Contains (" on ")) {
+			else if (needle.StartsWith ("on ") || needle.Contains (" on ")) {
 				needle = StripDatePrefix (needle);
 				Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
