@@ -17,22 +17,25 @@
 	
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
-	<Extension path = "/Do/Action">
-	    <Action type="Do.Files.MoveToAction" />
-   	</Extension>
-    <Extension path = "/Do/Action">
-		<Action type="Do.Files.RenameToAction" />
-    </Extension>
-    <Extension path = "/Do/Action">
-      	<Action type="Do.Files.CopyToAction" />
-    </Extension>
-    <Extension path = "/Do/Action">
-       	<Action type="Do.Files.MoveToTrashAction" />
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Universe.FileItemSource" />
 	</Extension>
-    <Extension path = "/Do/Action">
-		<Action type="Do.Files.CreateEmptyFileAction" />
-    </Extension>
-    <Extension path = "/Do/Action">
-		<Action type="Do.Files.CreateDirectory" />
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.MoveToAction" />
+   	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.RenameToAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+      		<Action type="GnomeDoFile.CopyToAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+	       	<Action type="GnomeDoFile.MoveToTrashAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.CreateEmptyFileAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.CreateDirectory" />
 	</Extension>
 </Addin>

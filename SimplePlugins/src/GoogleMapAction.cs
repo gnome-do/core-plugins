@@ -22,7 +22,7 @@ using System;
 using Do.Universe;
 using Do.Addins;
 
-namespace Do.Plugins.Universe
+namespace SimplePlugins.GoogleMaps
 {
 	/// <summary>
 	/// Given an ITextItem, GoogleMapAction will plot its location,

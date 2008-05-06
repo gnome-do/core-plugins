@@ -23,7 +23,7 @@ using System.IO;
 
 using Do.Universe;
 
-namespace Do.Files {
+namespace GnomeDoFile {
 	public class CreateDirectory : AbstractAction {
 
 		public override string Name {

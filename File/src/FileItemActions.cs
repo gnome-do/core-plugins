@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace Do.Files {
+namespace GnomeDoFile {
 	class CopyToAction : IAction {
 
 		public string Name { get { return "Copy to..."; } } 
@@ -258,8 +258,8 @@ namespace Do.Files {
 
 		string Trash {
 			get { 
-				return Paths.Combine (
-						Paths.ReadXdgUserDir ("XDG_DATA_HOME", ".local/share"),
+				return Do.Paths.Combine (
+						Do.Paths.ReadXdgUserDir ("XDG_DATA_HOME", ".local/share"),
 						"Trash/files");
 			}
 		}

@@ -27,7 +27,7 @@
 		<Action type="GnomeDoAppendText.AppendTextAction" />
 	</Extension>
 	<Extension path= "/Do/Action">
-		<Action type="Do.Plugins.Universe.GoogleMapAction" />
+		<Action type="SimplePlugins.GoogleMaps.GoogleMapAction" />
 	</Extension>
 	<Extension path= "/Do/Action">
 		<Action type="Do.Plugins.Universe.StockQuoteAction" />
