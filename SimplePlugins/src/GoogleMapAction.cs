@@ -77,6 +77,10 @@ namespace Do.Plugins.Universe
 			return !string.IsNullOrEmpty (word);
 		}
 		
+		public override bool ModifierItemsOptional {
+            get { return true; }
+        }
+		
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
 			string expression, url;
