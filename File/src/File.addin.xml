@@ -18,8 +18,13 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Universe.FileItemSource" />
+		<ItemSource type="GnomeDoFile.FileItemSource" />
 	</Extension>
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="GnomeDoFile.RecentFileItemSource" />
+	</Extension>
+
+	<!--- Actions -->
 	<Extension path = "/Do/Action">
 		<Action type="GnomeDoFile.MoveToAction" />
    	</Extension>
