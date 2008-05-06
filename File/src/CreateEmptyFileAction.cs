@@ -26,7 +26,7 @@ using System.IO;
 
 using Do.Universe;
 
-namespace GnomeDoFile {
+namespace Do.Files {
 	public class CreateEmptyFileAction : AbstractAction {
 
 		public override string Name {
