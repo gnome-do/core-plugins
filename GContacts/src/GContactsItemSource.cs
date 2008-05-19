@@ -1,24 +1,31 @@
-// GContactsItemSource.cs created with MonoDevelop
-// User: alex at 9:33 AM 4/5/2008
+// GContactItemSource.cs
+// 
+// Copyright (C) 2008 [Alex Launi]
 //
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
 using System;
-using System.IO;
-using System.Net;
 using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
 
-using Do.Addins;
 using Do.Universe;
-
-using Google.GData.Client;
+using Do.Addins;
 
 namespace GContacts
-{
-	public class GContactsItemSource : IItemSource
+{	
+	public sealed class GContactsItemSource : IItemSource
 	{
 		private List<IItem> items;
 		
@@ -28,74 +35,42 @@ namespace GContacts
 		}
 		
 		public string Name { get { return "GMail Contacts"; } }
-		public string Description { get { return "Indexes your GMail Contacts"; } }
+		public string Description { get { return "Indexes your GMail contacts"; } }
 		public string Icon { get { return "gmail-logo.png@" + GetType ().Assembly.FullName; } }
 		
-		public Type[] SupportedItemTypes {
+		public Type [] SupportedItemTypes {
 			get {
-				return new Type[] {
+				return new Type [] {
 					typeof (ContactItem),
-					typeof (BookmarkItem),
 				};
 			}
 		}
 		
 		public ICollection<IItem> Items {
-			get {
-				return items;
-			}
+			get { return items; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item) {
-			return null;
-		}
-		
-		
-		public void UpdateItems () {
-			if (GContact.Auth_Token == null) {
-				GContact.Auth_Token = Authorize (GContact.Username,GContact.Password);
-				if (GContact.Auth_Token == null)
-					return;
-			}
-			Thread updateRunner = new Thread (new ThreadStart (GContact.UpdateContacts));
-			updateRunner.Start ();
-			items = GContact.Contacts;
-		}
-		
-		private string Authorize (string username, string password) {
-			string postdata,auth_token;
-			string appid = "alexLauni-doGmailContacts-1";
-			items.Clear ();
+		public ICollection<IItem> ChildrenOfItem (IItem item) 
+		{
+			ContactItem buddy = (item as ContactItem);
+			List<IItem> children = new List<IItem> ();
 			
-			//Begin HTTP POST request to google
-			//Console.Error.WriteLine("THIS IS THE NEW VERSION");
-			try {
-				HttpWebRequest req = (HttpWebRequest) WebRequest.Create
-					("https://www.google.com/accounts/ClientLogin");
-				req.Method = "POST";
-				req.ContentType = "application/x-www-form-urlencoded";
-				postdata=string.Format ("accountType=GOOGLE_OR_HOSTED&Email={0}" +
-				         "&Passwd={1}&service=cp&source={2}",username,password,appid);
-				req.ContentLength = postdata.Length;
-				StreamWriter sw = new StreamWriter (req.GetRequestStream (),
-				                                    System.Text.Encoding.ASCII);
-				sw.Write (postdata);
-				sw.Close ();
-				
-				StreamReader sr = new StreamReader (req.GetResponse ().GetResponseStream ());
-				sr.ReadLine ();
-				sr.ReadLine ();
-				auth_token = sr.ReadLine ();
-				auth_token = auth_token.Substring (5, auth_token.Length - 5);
-			} catch (WebException we) {
-				items.Clear ();
-				Console.Error.WriteLine (we.Response);
-				Console.Error.WriteLine (we.Message);
-				items.Add (new BookmarkItem ("GMail Contacts Authentication"
-				                             ,"https://www.google.com/accounts/DisplayUnlockCaptcha"));
-				auth_token = null;
-			}
-			return auth_token;
+			foreach (string detail in buddy.Details)
+				if (detail.StartsWith ("email"))
+					children.Add (new GMailContact (buddy.Name, buddy[detail]));
+			return children;
 		}
+		
+		public void UpdateItems () 
+		{
+			try {
+				Thread updateRunner = new Thread (new ThreadStart (GContact.UpdateContacts));
+				updateRunner.Start ();
+				items = GContact.Contacts;
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
+		}	
 	}
 }

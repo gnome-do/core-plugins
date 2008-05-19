@@ -34,7 +34,8 @@ namespace Do.Addins.Pidgin
 		[Interface ("im.pidgin.purple.PurpleInterface")]
 		public interface IPurpleObject
 		{
-			int[] PurpleAccountsGetAllActive ();
+			int [] PurpleAccountsGetAllActive ();
+			int[] PurpleAccountsGetAll ();
 			bool PurpleBuddyIsOnline (int buddy);
 			int PurpleBuddyGetAccount (int buddy);
 			bool PurpleAccountIsConnected (int account);
@@ -42,6 +43,21 @@ namespace Do.Addins.Pidgin
 			void PurpleConversationPresent (int conversation);
 			int PurpleAccountsFindConnected (string account, string proto);
 			int PurpleConversationNew (uint type, int account, string name);
+			int PurpleSavedstatusNew (string title, uint type);
+			void PurpleSavedstatusSetMessage (int type, string message);
+			void PurpleSavedstatusActivate (int status);
+			int [] PurpleSavedstatusesGetAll ();
+			bool PurpleSavedstatusIsTransient (int saved_status);
+			int PurpleSavedstatusGetType (int saved_status);
+			string PurpleSavedstatusGetMessage (int saved_status);
+			string PurpleSavedstatusGetTitle (int saved_status);
+			int PurpleSavedstatusGetCurrent ();
+			int PurpleSavedstatusFind (string title);
+			string PurpleAccountGetProtocolName (int account);
+			string PurpleAccountGetAlias (int account);
+			void PurpleAccountConnect (int account);
+			void PurpleAccountDisconnect (int account);
+			string PurpleAccountGetUsername (int account);
 		}
 
 		public static IPurpleObject GetPurpleObject ()
@@ -95,12 +111,27 @@ namespace Do.Addins.Pidgin
 			account_out = -1;
 			return false;
 		}
-		/*
-		public static void SetAvailabilityStatus (int status, string message)
-		{
-			IPurpleObject prpl = GetPurpleObject ();
+		
+		public enum StatusType {
+			Available = 2,
+			Unavailable = 3,
+			Invisible = 4,
+			Away = 5,
 		}
-		*/	
+		
+		public static void PurpleSetAvailabilityStatus  (uint kind, string message)
+		{
+			IPurpleObject prpl;
+			
+			prpl = GetPurpleObject ();
+			int status;
+			try {
+				status = prpl.PurpleSavedstatusNew ("", kind);
+				prpl.PurpleSavedstatusSetMessage (status, message);
+				prpl.PurpleSavedstatusActivate (status);
+			} catch {
+			}
+		}
 
 		public static void OpenConversationWithBuddy (string name)
 		{

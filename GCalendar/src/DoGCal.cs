@@ -61,6 +61,7 @@ namespace GCalendar
 		{
 			try {
 				service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
+				Console.Error.WriteLine ("Connecting to GCal with {0}:{1}",username,password);
 				service.setUserCredentials(username, password);
 				//Console.Error.WriteLine("GCal: Connected");
 			} catch (Exception e) {
@@ -175,7 +176,7 @@ namespace GCalendar
 					
 					username = (string)result.Attributes["username"];
 					password = result.Secret;
-
+					Console.Error.WriteLine ("{0} : {1}",username, password);
 					if (username == null || username == String.Empty || password == null || password == String.Empty)
 						throw new ApplicationException ("Invalid username/password in keyring");
 				}

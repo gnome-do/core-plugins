@@ -67,11 +67,11 @@ namespace Twitter
             try {
                 username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
             } catch (NoSuchKeyException) {
-                gconf.Set ("/apps/gnome-do/plugins/twitter/username",username);
-                Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
-                          + "login information have been created "
+                gconf.Set ("/apps/gnome-do/plugins/twitter/username","");
+                Twitter.SendNotification ("GConf key created", "GConf key for storing your Twitter "
+                          + "login information has been created "
                           + "in /apps/gnome-do/plugins/twitter/\n"
-                          + "Please set your username and password "
+                          + "Please set your username "
                           + "in order to post tweets");
             }
         }
@@ -82,11 +82,11 @@ namespace Twitter
             try {
                 password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
             } catch (NoSuchKeyException) {
-                gconf.Set ("/apps/gnome-do/plugins/twitter/username",password);
-                Twitter.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
-                          + "login information have been created "
+                gconf.Set ("/apps/gnome-do/plugins/twitter/password","");
+                Twitter.SendNotification ("GConf key created", "GConf key for storing your Twitter "
+                          + "login information has been created "
                           + "in /apps/gnome-do/plugins/twitter/\n"
-                          + "Please set your username and password "
+                          + "Please set your password "
                           + "in order to post tweets");
             }
         }

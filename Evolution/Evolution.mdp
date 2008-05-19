@@ -17,7 +17,7 @@
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Evolution.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/EvolutionContactItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EvolutionContactItemSource.cs" subtype="Code" buildaction="Nothing" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="evolution-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=457eed85bd9370df" />
