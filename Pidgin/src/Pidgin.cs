@@ -113,6 +113,7 @@ namespace Do.Addins.Pidgin
 		}
 		
 		public enum StatusType {
+			Offline = 1,
 			Available = 2,
 			Unavailable = 3,
 			Invisible = 4,

@@ -78,15 +78,17 @@ namespace Do.Addins.Rhythmbox
 		}
 	}
 
-	public class SongMusicItem : MusicItem
+	public class SongMusicItem : MusicItem, IComparable
 	{
 		string file, album;
+		int track;
 
-		public SongMusicItem (string name, string artist, string album, string year, string cover, string file):
+		public SongMusicItem (string name, string artist, string album, string year, string cover, string file, int track):
 			base (name, artist, year, cover)
 		{
 			this.file = file;
 			this.album = album;
+			this.track = track;
 		}
 
 		public override string Icon { get { return "gnome-mime-audio"; } }
@@ -99,5 +101,14 @@ namespace Do.Addins.Rhythmbox
 
 		public virtual string File { get { return file; } }
 		public virtual string Album { get { return album; } }
+		public virtual int Track { get { return track; } }
+		
+		public int CompareTo (object o)
+		{
+			SongMusicItem other = o as SongMusicItem;
+			if (album.CompareTo (other.Album) == 0)
+				return track - other.Track;
+			return album.CompareTo (other.Album);
+		}
 	}
 }

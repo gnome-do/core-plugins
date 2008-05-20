@@ -35,6 +35,7 @@ namespace Do.Addins.Pidgin
 		public string Name {
 			get {
 				switch (status) {
+				case 1: return "Offline";
 				case 2: return "Available";
 				case 3: return "Busy";
 				case 4: return "Invisible";
@@ -51,6 +52,7 @@ namespace Do.Addins.Pidgin
 		public string Icon { 
 			get  { 
 				switch (status) {
+				case 1: return iconBase + "offline.png";
 				case 2: return iconBase + "available.png";
 				case 3: return iconBase + "busy.png";
 				//there is not a 48px invisible icon.

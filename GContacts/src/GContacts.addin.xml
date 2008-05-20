@@ -10,8 +10,8 @@
 	<Runtime>
 		<Import assembly="GContacts.dll"/>
 		<Import assembly="Google.GData.Contacts.dll"/>
-        <Import assembly="Google.GData.Client.dll"/>
-        <Import assembly="Google.GData.Extensions.dll"/>
+	        <Import assembly="Google.GData.Client.dll"/>
+        	<Import assembly="Google.GData.Extensions.dll"/>
 	</Runtime>
 	
 	<Dependencies>

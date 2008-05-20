@@ -30,9 +30,9 @@ namespace Do.Addins.Pidgin
 		
 		public PidginSetStatusAction ()
 		{
-			pidginStatuses = new IItem [] {new PidginStatusTypeItem (2),
-					new PidginStatusTypeItem (3), new PidginStatusTypeItem (4),
-					new PidginStatusTypeItem (5)};
+			pidginStatuses = new IItem [] {new PidginStatusTypeItem (1), 
+				new PidginStatusTypeItem (2), new PidginStatusTypeItem (3),
+				new PidginStatusTypeItem (4), new PidginStatusTypeItem (5)};
 		}
 		
 		public string Name { get { return "Set status"; } }

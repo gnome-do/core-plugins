@@ -126,7 +126,7 @@ namespace GContacts
 					
 					username = (result.Attributes ["username"] as string);
 					password = result.Secret;
-					Console.Error.WriteLine ("{0} : {1}",username,password);
+					//Console.Error.WriteLine ("{0} : {1}",username,password);
 					if (username == null || username == String.Empty || password == null || password == String.Empty)
 						throw new ApplicationException ("Invalid username/password in keyring");
 				}

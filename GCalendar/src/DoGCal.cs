@@ -61,7 +61,7 @@ namespace GCalendar
 		{
 			try {
 				service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
-				Console.Error.WriteLine ("Connecting to GCal with {0}:{1}",username,password);
+				//Console.Error.WriteLine ("Connecting to GCal with {0}:{1}",username,password);
 				service.setUserCredentials(username, password);
 				//Console.Error.WriteLine("GCal: Connected");
 			} catch (Exception e) {
@@ -133,8 +133,8 @@ namespace GCalendar
 			DateTime [] dates = ParseEventDates (needle,keywords);
 			query.StartTime = dates[0];
 			query.EndTime = dates[1];
-			Console.Error.WriteLine ("Start Date: {0}",dates[0]);
-			Console.Error.WriteLine ("End Date: {0}",dates[1]);
+			//Console.Error.WriteLine ("Start Date: {0}",dates[0]);
+			//Console.Error.WriteLine ("End Date: {0}",dates[1]);
             query.Query = ParseSearchString (needle,keywords);
 			EventFeed events;
 			try {
@@ -176,7 +176,7 @@ namespace GCalendar
 					
 					username = (string)result.Attributes["username"];
 					password = result.Secret;
-					Console.Error.WriteLine ("{0} : {1}",username, password);
+					//Console.Error.WriteLine ("{0} : {1}",username, password);
 					if (username == null || username == String.Empty || password == null || password == String.Empty)
 						throw new ApplicationException ("Invalid username/password in keyring");
 				}
@@ -213,7 +213,7 @@ namespace GCalendar
 				if (needle.Contains(keyword)) {
 					keydex = needle.IndexOf (keyword);
 					needle = needle.Substring (keydex, needle.Length - keydex);
-					Console.Error.WriteLine ("Needle stripped to {0}",needle);
+					//Console.Error.WriteLine ("Needle stripped to {0}",needle);
 					break;
 				}
 			}
@@ -235,25 +235,25 @@ namespace GCalendar
 			DateTime [] dates = new DateTime [2];
 			if (needle.StartsWith ("in") || needle.Contains (" in ")) {
 				needle = StripDatePrefix (needle);
-				Console.Error.WriteLine ("Parsing {0}",needle);
+				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
 				dates[1] = dates[0].AddMonths (1);
 			}
 			else if (needle.Contains ("before") || needle.Contains ("until ")) {
 				needle = StripDatePrefix (needle);
 				dates[0] = DateTime.Now;
-				Console.Error.WriteLine ("Parsing {0}",needle);
+				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[1] = DateTime.Parse (needle);
 			}
 			else if (needle.Contains ("after ") || needle.Contains ("from ")) {
 				needle = StripDatePrefix (needle);
-				Console.Error.WriteLine ("Parsing {0}",needle);
+				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
 				dates[1] = dates[0].AddYears (5);
 			}
 			else if (needle.StartsWith ("on ") || needle.Contains (" on ")) {
 				needle = StripDatePrefix (needle);
-				Console.Error.WriteLine ("Parsing {0}",needle);
+				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
 				dates[1] = dates[0].AddDays(1);
 			}
@@ -291,12 +291,12 @@ namespace GCalendar
 		
 		private static string StripDatePrefix (string needle)
 		{
-			Console.Error.WriteLine ("Raw needle: {0}",needle);
+			//Console.Error.WriteLine ("Raw needle: {0}",needle);
 			needle = needle.Trim ().ToLower ();
-			Console.Error.WriteLine ("Needle phase 1: {0}",needle);
-			Console.Error.WriteLine ("Index of first space: {0}",needle.IndexOf (" "));
+			//Console.Error.WriteLine ("Needle phase 1: {0}",needle);
+			//Console.Error.WriteLine ("Index of first space: {0}",needle.IndexOf (" "));
 			needle = needle.Substring (needle.IndexOf (" "));
-			Console.Error.WriteLine ("Needle phase 2: {0}",needle);
+			//Console.Error.WriteLine ("Needle phase 2: {0}",needle);
 			return needle;
 		}
 		
@@ -308,7 +308,7 @@ namespace GCalendar
 				needle = needle.Substring(0,needle.IndexOf (keyword)).Trim ();
 			}
 			
-			Console.Error.WriteLine ("Searching for {0}",needle);
+			//Console.Error.WriteLine ("Searching for {0}",needle);
 			return needle;				                        
 		}
 		
