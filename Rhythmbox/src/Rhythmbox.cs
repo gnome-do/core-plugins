@@ -74,7 +74,7 @@ namespace Do.Addins.Rhythmbox
 
 		public static List<SongMusicItem> LoadSongsFor (MusicItem item)
 		{
-			SortedList<string, SongMusicItem> songs;
+			SortedList<SongMusicItem, SongMusicItem> songs;
 
 			if (item is SongMusicItem) {
 				List<SongMusicItem> single = new List<SongMusicItem> ();
@@ -82,7 +82,7 @@ namespace Do.Addins.Rhythmbox
 				return single;
 			}
 
-			songs = new SortedList<string, SongMusicItem> ();
+			songs = new SortedList<SongMusicItem, SongMusicItem> ();
 			foreach (SongMusicItem song in LoadAllSongs ()) {
 				switch (item.GetType ().Name) {
 					case "AlbumMusicItem":
@@ -93,7 +93,7 @@ namespace Do.Addins.Rhythmbox
 					break;
 				}
 				try {
-					songs.Add (song.File, song);
+					songs.Add (song, song);
 				} catch { }
 			}
 			return new List<SongMusicItem> (songs.Values);
@@ -120,6 +120,7 @@ namespace Do.Addins.Rhythmbox
 							while (reader.ReadToFollowing ("entry")) {
 								SongMusicItem song;
 								string song_file, song_name, album_name, artist_name, year, cover;
+								int song_track = 0; //set to 0 for default
 								
 								if (reader.GetAttribute ("type") != "song") {
 									reader.ReadToFollowing ("entry");
@@ -135,6 +136,10 @@ namespace Do.Addins.Rhythmbox
 								reader.ReadToFollowing ("album");
 								album_name = reader.ReadString ();
 								
+								reader.ReadToFollowing ("track-number");
+								if (!Int32.TryParse (reader.ReadString (), out song_track))
+								    song_track = 0;
+								    
 								reader.ReadToFollowing ("location");
 								song_file = reader.ReadString ();
 								
@@ -145,7 +150,7 @@ namespace Do.Addins.Rhythmbox
 								cover = Path.Combine (CoverArtDirectory, cover);
 								if (!File.Exists (cover)) cover = null;
 
-								song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file);
+								song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
 								songs.Add (song);
 							}
 						}
