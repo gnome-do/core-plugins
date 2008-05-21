@@ -93,7 +93,7 @@
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
       <Entry build="True" name="GContacts" configuration="Debug" />
-      <Entry build="True" name="Archive" configuration="Default" />
+      <Entry build="False" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Debug" />
     </Configuration>
   </Configurations>
@@ -126,8 +126,6 @@
     <Execute type="None" entry="Tasque" />
     <Execute type="None" entry="GContacts" />
     <Execute type="None" entry="Archive" />
-    <Execute type="None" entry="Archive" />
-    <Execute type="None" entry="Facebook" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>

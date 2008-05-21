@@ -1,20 +1,19 @@
 #!/bin/bash
 
-#if [ ! -e "./buildrepo/repo" ]; then
-#	mkdir -p buildrepo/repo
-#fi
+INSTALL=~/.local/share/gnome-do/plugin-install
+REPO=$INSTALL/repo
+ASSEMBLIES=`find . -name "*.dll" | grep bin/Debug`
+MANIFESTS=`find . -name "*.addin.xml"`
 
-#cp */bin/Debug/*.addin.xml ~/.local/share/gnome-do/addins-registry
-cp */bin/Debug/*.dll ~/.local/share/gnome-do/plugin-install
+rm -rf $INSTALL $REPO
+mkdir -p $INSTALL $REPO
 
-#cd buildrepo
+cp $ASSEMBLIES $INSTALL
+cp $MANIFESTS $INSTALL
 
-#mdtool setup pack `ls | grep addin.xml` -d:./repo
-#mdtool setup rep-build repo
+cd $INSTALL
 
-#rm -rf ~/.local/share/gnome-do/repo
-#mkdir -p ~/.local/share/gnome-do/repo
-#cp -r repo ~/.local/share/gnome-do
+mdtool setup pack *.xml -d:$REPO
+mdtool setup rep-build $REPO
 
-#cd ..
-#rm -rf buildrepo
+rm *.xml
