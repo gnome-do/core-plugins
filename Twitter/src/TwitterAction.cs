@@ -1,167 +1,122 @@
-/* Twitter.cs
- *
- * This is a simple action for posting to twitter using GNOME DO.
- *
- * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this source distribution.
- *
+/*
+ * TwitterFriendsUpdater.cs
+ * 
+ * GNOME Do is the legal property of its developers, whose names are too numerous
+ * to list here.  Please refer to the COPYRIGHT file distributed with this
+ * source distribution.
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 using System;
-using System.Net;
+using System.Threading;
+using System.Collections.Generic;
 
+using Twitterizer.Framework;
 using Do.Universe;
 
-namespace Twitter
+using NDesk.DBus;
+using org.freedesktop;
+using org.freedesktop.DBus;
+
+namespace DoTwitter
 {
-    public sealed class TweetAction : IAction
-    {
-        public string Name {
-           get {
-               return "Tweet";
-           }
-        }
-        
-        public string Description {
-            get {
-                return "Update Twitter Status";
-            }
-        }
-        
-        public string Icon {
-            get {
-                return "twitter-icon.png@" + GetType ().Assembly.FullName;
-            }
-        }
-        
-        public Type[] SupportedItemTypes {
-            get {
-                return new Type[] {
-                    typeof (ITextItem),
-                };
-            }
-        }
-
-        public bool SupportsItem (IItem item) 
-        {
-            return true;
-        }
-
-        public IItem[] Perform (IItem[] items, IItem[] modItems)
-        {
-			string tweet, escaped_tweet;
-			if (modItems.Length > 0)
-				tweet = BuildTweet(items [0], modItems [0]);
-			else
-				tweet = BuildTweet(items [0], null);
-			escaped_tweet = EscapeTweet(tweet);
-            string url = "http://twitter.com/statuses/update.json?source=Do&status=" + escaped_tweet;
-            HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
-            request.Credentials = new NetworkCredential (Twitter.Username, Twitter.Password);
-            request.Method = "POST";
-
-            GConf.Client gconf = new GConf.Client ();
-
-            if (!Twitter.SetRequestProxy (request, gconf)) return null;
-            try {
-                request.GetResponse ();
-                Twitter.SendNotification ("Tweet Successful", "Successfully posted tweet '" 
-                                + tweet + "' to Twitter.");
-            } catch (Exception e) {
-                Console.WriteLine (e.ToString ());
-                Twitter.SendNotification ("Tweet Failed", "Unable to post tweet. Check your login "
+	public static class TwitterAction
+	{
+		private static List<IItem> items;
+		private static string username, password, status;
+		
+		static TwitterAction ()
+		{
+			items = new List<IItem> ();
+		} 
+		
+		public static List<IItem> Friends {
+			get { return items; }
+		}
+		
+		public static string Username {
+			set { username = value; }
+		}
+		
+		public static string Password {
+			set { password = value; }
+		}
+		
+		public static string Status {
+			set { status = value; }
+		}
+		
+		public static void Tweet ()
+		{
+			Twitter t = new Twitter (username, password);
+			try {
+				t.Update (status);
+				SendNotification ("Tweet Successful", "Successfully posted tweet '" 
+                                + status + "' to Twitter.");
+			} catch (TwitterizerException e) {
+				SendNotification ("Tweet Failed", "Unable to post tweet. Check your login "
                                 + "settings (/apps/gnome-do/plugins/twitter). If you are "
                                 + "behind a proxy, also make sure that the settings in "
                                 + "/system/http_proxy are correct.\n\nDetails:\n" 
                                 + e.ToString ());
-            }
-            return null;
-        }
-		
-		private string BuildTweet(IItem t, IItem c)
-		{
-			ITextItem text = (ITextItem) t;
-			ContactItem contact = (ContactItem) c;
-			string tweet = "";
-			
-			//Handle situations without a contact
-			if (contact == null)
-				tweet = text.Text;
-			else {
-				// Direct messaging
-				if (text.Text.Substring (0,2).Equals ("d "))
-					tweet = "d " + contact["twitter.screenname"] +
-						" " +	text.Text.Substring (2);
-				// Tweet replying
-				else
-					tweet = "@" + contact["twitter.screenname"] + " " + text.Text;
 			}
-			return tweet;
 		}
-        
-        public Type[] SupportedModifierItemTypes {
-            get { 
-                return new Type[] {
-                    typeof (ContactItem),
-                };
-            }
-        }
-
-        public bool ModifierItemsOptional {
-            get { return true; }
-        }
-                        
-        public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		
+		public static void UpdateFriends ()
+		{
+			if (!Monitor.TryEnter (items)) return;
+			
+			Twitter t = new Twitter (username, password);
+			TwitterUserCollection friends;
+			
+			try {
+				friends = t.Friends ();
+			} catch (TwitterizerException e) {
+				Console.Error.WriteLine (e);
+				Monitor.Exit (items);
+				return;
+			} catch (NullReferenceException e) {
+				Console.Error.WriteLine (e);
+				Monitor.Exit (items);
+				return;
+			} 
+			
+			ContactItem tfriend;
+			
+			foreach (TwitterUser friend in friends) {
+				tfriend = ContactItem.Create (friend.ScreenName);
+				tfriend["twitter.screenname"] = friend.ScreenName;
+				tfriend["description"] = friend.ScreenName;
+				items.Add (tfriend);
+				
+				tfriend = ContactItem.Create (friend.UserName);
+				tfriend["twitter.screenname"] = friend.ScreenName;
+				tfriend["description"] = friend.ScreenName;
+				items.Add (tfriend);
+			}
+			
+			Monitor.Exit (items);
+		}
+		
+		public static void SendNotification (string title, string message)
         {
-            return (modItem as ContactItem)["twitter.screenname"] != null;
+            Bus bus = Bus.Session;
+            Notifications nf = bus.GetObject<Notifications> ("org.freedesktop.Notifications", new ObjectPath ("/org/freedesktop/Notifications"));
+            Dictionary <string,object> hints = new Dictionary <string,object> ();
+            nf.Notify (title, 0, "", title, message, new string[0], hints, -1);
         }
-        
-        public IItem[] DynamicModifierItemsForItem (IItem item)
-        {
-            return null;
-        }
-        
-        private string EscapeTweet (string tweet) {
-            String retstring = tweet.Replace ("%", "%25")
-                                    .Replace ("#", "%23")
-                                    .Replace ("{", "%7B")
-                                    .Replace ("}", "%7D")
-                                    .Replace ("|", "%7C")
-                                    .Replace ("\\", "%5C")
-                                    .Replace ("^", "%5E")
-                                    .Replace ("~", "%7E")
-                                    .Replace ("[", "%5B")
-                                    .Replace ("]", "%5D")
-                                    .Replace ("`", "%60")
-                                    .Replace (";", "%3B")
-                                    .Replace (")", "%29")
-                                    .Replace ("/", "%2F")
-					                .Replace ("(", "%28")
-                                    .Replace ("?", "%3F")
-                                    .Replace (":", "%3A")
-                                    .Replace ("@", "%40")
-                                    .Replace ("=", "%3D")
-                                    .Replace ("&", "%26")
-                                    .Replace ("$", "%24")
-                                    .Replace ("\"", "%22")
-                                    .Replace ("'", "%27")
-                                    .Replace ("*", "%2A")
-                                    .Replace ("+", "%2B")
-                                    .Replace ("!", "%21")
-                                    .Replace (" ", "+");
-            return retstring;
-        }
-    }
+	}
 }
+

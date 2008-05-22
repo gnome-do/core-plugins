@@ -1,42 +1,63 @@
-// TwitterFriendSource.cs created with MonoDevelop
-// User: alex at 5:19 PM 4/15/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
+/*
+ * TwitterFriendSource.cs
+ * 
+ * GNOME Do is the legal property of its developers, whose names are too numerous
+ * to list here.  Please refer to the COPYRIGHT file distributed with this
+ * source distribution.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 using System;
 using System.Threading;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Twitterizer.Framework;
 
-namespace Twitter
-{	
+namespace DoTwitter
+{
 	public sealed class TwitterFriendSource : IItemSource
 	{
-		List<IItem> items;
-		
+		private List<IItem> items;
 		public TwitterFriendSource()
 		{
 			items = new List<IItem> ();
 			UpdateItems ();
 		}
 		
-		public string Name { get { return "Twitter Friends"; } }
-		public string Description { get { return "Indexes your Twitter Friends"; } }
-		public string Icon { get { return "system-users"; } }
+		public string Name {
+			get { return "Twitter friends"; }
+		}
 		
-		public Type[] SupportedItemTypes
-		{
+		public string Description {
+			get { return "Indexes your Twitter friends"; }
+		}
+		
+		public string Icon {
+			get { return "system-users"; }
+		}
+		
+		public Type [] SupportedItemTypes {
 			get {
-				return new Type[] {
+				return new Type [] {
 					typeof (ContactItem),
 				};
 			}
 		}
 		
-		public ICollection<IItem> Items
-		{
+		public ICollection<IItem> Items {
 			get { return items; }
 		}
 		
@@ -47,9 +68,22 @@ namespace Twitter
 		
 		public void UpdateItems ()
 		{
-			Thread updateRunner = new Thread( new ThreadStart(Twitter.GetTwitterFriends));
+			string username, password;
+			GConf.Client gconf = new GConf.Client ();
+			
+			try {
+				username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
+				password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
+			} catch (GConf.NoSuchKeyException) {
+				return;
+			}
+			
+			TwitterAction.Username = username;
+			TwitterAction.Password = password;
+			
+			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateFriends));
 			updateRunner.Start ();
-			items = Twitter.Friends;
+			items = TwitterAction.Friends;
 		}
 	}
 }
