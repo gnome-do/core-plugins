@@ -147,9 +147,8 @@ namespace Twitter
                                     .Replace ("`", "%60")
                                     .Replace (";", "%3B")
                                     .Replace (")", "%29")
-                                    .Replace ("/", "%2F");
-
-                   retstring = tweet.Replace ("(", "%28")
+                                    .Replace ("/", "%2F")
+					                .Replace ("(", "%28")
                                     .Replace ("?", "%3F")
                                     .Replace (":", "%3A")
                                     .Replace ("@", "%40")

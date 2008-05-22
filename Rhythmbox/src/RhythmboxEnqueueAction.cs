@@ -66,7 +66,6 @@ namespace Do.Addins.Rhythmbox
 						Rhythmbox.LoadSongsFor (item as MusicItem)) {
 						enqueue += string.Format ("--enqueue \"{0}\" ", song.File);
 					}
-					Console.Error.WriteLine (enqueue);
 					Rhythmbox.Client (enqueue);
 				}
 			}).Start ();

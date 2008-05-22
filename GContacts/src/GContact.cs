@@ -72,7 +72,6 @@ namespace GContacts
 			query.NumberToRetrieve = 1000;
 			Console.Error.WriteLine (lastUpdated);
 			query.StartDate = lastUpdated;
-			query.ShowDeleted = false;
 			
 			try {
 				ContactsFeed feed = service.Query(query);
