@@ -74,10 +74,13 @@ namespace GMailContacts
 				{
 					if (String.IsNullOrEmpty (entry.Title.Text)) continue;
 					if (entry.Deleted) {
+						ContactItem enemy = ContactItem.Create (entry.Title.Text);
 						Console.Error.WriteLine("Has {0} been deleted? {1}",entry.Title.Text,
-						                        contacts.Contains (ContactItem.Create (entry.Title.Text)));
+						                        contacts.Contains (enemy));
+						contacts.Remove (enemy);
+						continue;
 					}
-					//Console.Error.WriteLine (entry.Title.Text);
+					Console.Error.WriteLine (entry.Title.Text);
 					buddy = ContactItem.CreateWithName (entry.Title.Text);					
 					foreach (PostalAddress postal in entry.PostalAddresses)
 						buddy["address"] = postal.Value.Replace('\n', ' ');
@@ -94,9 +97,10 @@ namespace GMailContacts
 							i++;
 						}
 					}
+					contacts.Add (buddy);
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
+				Console.Error.WriteLine ("GMailContacts Error: {0}",e.Message);
 			} finally {
 				Monitor.Exit (contacts);
 			}
@@ -132,7 +136,7 @@ namespace GMailContacts
 						throw new ApplicationException ("Invalid username/password in keyring");
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
+				Console.Error.WriteLine ("GMailContacts Error: {0}",e.Message);
 				string account_info = Environment.GetEnvironmentVariable ("HOME")
 					+ "/.config/gnome-do/google-name";
 				try {
@@ -160,7 +164,7 @@ namespace GMailContacts
 				Ring.CreateItem(keyring, ItemType.GenericSecret, keyringItemName,
 				                update_request_attributes, password, true);
 			} catch (Exception e) {
-				Console.WriteLine(e.Message);
+				Console.WriteLine("GMailContacts Error: {0}",e.Message);
 			}
 		}
 	}

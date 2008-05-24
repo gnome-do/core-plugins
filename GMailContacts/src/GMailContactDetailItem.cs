@@ -1,5 +1,5 @@
 /*
- * GMailContact.cs
+ * GMailContactDetailItem.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -24,26 +24,46 @@ using Do.Universe;
 
 namespace GMailContacts
 {
-	public class GMailContact : IContactDetailItem 
+	public class GMailContactDetailItem : IContactDetailItem 
 	{
-		private string key, value;
+		private string name, email, icon;
 		
-		public GMailContact(string name, string email)
+		public GMailContactDetailItem (string name, string email)
 		{
-			this.key = name;
-			this.value = email;
+			this.name = name;
+			this.email = email;
+			this.icon = "stock_person";
 		}
 		
-		public string Name { get { return key; } }
-		public string Description { get { return value; } }
-		public string Icon { get { return "stock_person"; } }
+		public GMailContactDetailItem (string name, string email, string icon)
+		{
+			this.name = name;
+			this.email = email;
+			this.icon = icon;
+		}
+		
+		public string Name {
+			get { return name; }
+		}
+		
+		public string Description {
+			get { return email; }
+		}
+		
+		public string Icon {
+			get { return icon; }
+		}
 		
 		public string Key {
-			get { return Key; }
+			get { 
+				return "email";
+			}
 		}
 		
 		public string Value {
-			get { return value; }
+			get { 
+				return email;
+			}
 		}
 	}
 }

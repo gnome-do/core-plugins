@@ -22,7 +22,7 @@
     <File name="Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
     <File name="src/GMail.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GMailContactItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/GMailContact.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/GMailContactDetailItem.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="Google.GData.Extensions.dll" />
