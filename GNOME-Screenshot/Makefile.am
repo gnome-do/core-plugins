@@ -1,32 +1,101 @@
-EXTRA_DIST = CurrentWindowScreenshotItem.cs   \
-		    	ScreenshotDelayItem.cs			 \
-		    	ScreenshotItem.cs				 \
-		    	ScreenshotItemSource.cs			 \
-		    	TakeScreenshotAction.cs			 \
-		    	WholeScreenScreenshotItem.cs
 
-ASSEMBLY_NAME=GNOME-Screenshot
-ASSEMBLY=$(ASSEMBLY_NAME).dll
+EXTRA_DIST =  
 
-CSFLAGS+= -debug+ -debug:full
+# Warning: This is an automatically generated file, do not edit!
 
-CLEANFILES = $(ASSEMBLY){,.mdb}
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-gnome_screenshot_references = $(DO_ADDINS_LIBS)
+ASSEMBLY = bin/Debug/GNOME-Screenshot.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
-gnome_screenshot_sources  = 	\
-	CurrentWindowScreenshotItem.cs   \
-	ScreenshotDelayItem.cs			 \
-	ScreenshotItem.cs				 \
-	ScreenshotItemSource.cs			 \
-	TakeScreenshotAction.cs			 \
-	WholeScreenScreenshotItem.cs
+GNOME_SCREENSHOT_ADDIN_XML_SOURCE=src/GNOME-Screenshot.addin.xml
 
-gnome_screenshot_build_sources = $(addprefix $(srcdir)/, $(gnome_screenshot_sources))
+endif
 
-plugin_DATA = $(ASSEMBLY)
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/GNOME-Screenshot.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-all: $(ASSEMBLY)
+GNOME_SCREENSHOT_ADDIN_XML_SOURCE=src/GNOME-Screenshot.addin.xml
 
-$(ASSEMBLY): $(gnome_screenshot_sources)
-	$(CSC) $(CSFLAGS) $(gnome_screenshot_references) -target:library -out:$@ $(gnome_screenshot_build_sources)
+endif
+
+if ENABLE_REPO
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
+
+ASSEMBLY = bin/Debug/GNOME-Screenshot.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
+
+GNOME_SCREENSHOT_ADDIN_XML_SOURCE=src/GNOME-Screenshot.addin.xml
+
+endif
+
+AL=al2
+SATELLITE_ASSEMBLY_NAME=.resources.dll
+
+PROGRAMFILES = \
+	$(GNOME_SCREENSHOT_ADDIN_XML)  
+
+LINUX_PKGCONFIG = \
+	$(GNOME_SCREENSHOT_PC)  
+
+
+	
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+FILES = \
+	src/CurrentWindowScreenshotItem.cs \
+	src/ScreenshotDelayItem.cs \
+	src/ScreenshotItem.cs \
+	src/ScreenshotItemSource.cs \
+	src/TakeScreenshotAction.cs \
+	src/WholeScreenScreenshotItem.cs 
+
+DATA_FILES = \
+	src/GNOME-Screenshot.addin.xml 
+
+RESOURCES = 
+
+EXTRAS = \
+	gnome-screenshot.pc.in 
+
+REFERENCES =  \
+	$(DOADDINS_LIBS) \
+	System
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+GNOME_SCREENSHOT_ADDIN_XML = $(BUILD_DIR)/GNOME-Screenshot.addin.xml
+GNOME_SCREENSHOT_PC = $(BUILD_DIR)/gnome-screenshot.pc
+
+$(eval $(call emit-deploy-target,GNOME_SCREENSHOT_ADDIN_XML))
+$(eval $(call emit-deploy-wrapper,GNOME_SCREENSHOT_PC,gnome-screenshot.pc))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)

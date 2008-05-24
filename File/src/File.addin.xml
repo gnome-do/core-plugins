@@ -1,0 +1,46 @@
+<Addin 
+	id="File"
+	namespace="Do"
+	version="1.0"
+	name="File"
+	description="Indexes files in user-specified directories. Allows you to move, copy, delete, and browse files."
+	author="David Siegel"
+>
+ 
+	<Runtime>
+		<Import assembly="File.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="GnomeDoFile.FileItemSource" />
+	</Extension>
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="GnomeDoFile.RecentFileItemSource" />
+	</Extension>
+
+	<!--- Actions -->
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.MoveToAction" />
+   	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.RenameToAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+      		<Action type="GnomeDoFile.CopyToAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+	       	<Action type="GnomeDoFile.MoveToTrashAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.CreateEmptyFileAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoFile.CreateDirectory" />
+	</Extension>
+</Addin>

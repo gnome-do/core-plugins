@@ -1,0 +1,6 @@
+Name: Rhythmbox
+Description: Rhythmbox
+Version: 0.1
+
+Requires: 
+Libs: -r:@expanded_libdir@/@PACKAGE@/Rhythmbox.dll

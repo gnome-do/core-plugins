@@ -1,30 +1,104 @@
-SUBDIRS=src
 
-EXTRA_DIST=Rhythmbox.mdp
+EXTRA_DIST =  
 
-ASSEMBLY_NAME=Rhythmbox
-ASSEMBLY=$(ASSEMBLY_NAME).dll
+# Warning: This is an automatically generated file, do not edit!
 
-CSFLAGS+= -debug+ -debug:full
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-CLEANFILES = $(ASSEMBLY){,.mdb}
+ASSEMBLY = bin/Debug/Rhythmbox.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
-rhythmbox_references = $(DO_ADDINS_LIBS)
+RHYTHMBOX_ADDIN_XML_SOURCE=src/Rhythmbox.addin.xml
 
-rhythmbox_sources  = 	\
-			AssemblyInfo.cs \
-			Rhythmbox.cs \
-			RhythmboxItems.cs \
-			RhythmboxPlayAction.cs \
-			MusicItems.cs \
-			RhythmboxEnqueueAction.cs \
-			RhythmboxItemSource.cs
+endif
 
-rhythmbox_build_sources = $(addprefix $(srcdir)/src/, $(rhythmbox_sources))
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/Rhythmbox.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-plugin_DATA = $(ASSEMBLY)
+RHYTHMBOX_ADDIN_XML_SOURCE=src/Rhythmbox.addin.xml
 
-all: $(ASSEMBLY)
+endif
 
-$(ASSEMBLY): $(rhythmbox_build_sources)
-	$(CSC) $(CSFLAGS) $(rhythmbox_references) -target:library -out:$@ $(rhythmbox_build_sources)
+if ENABLE_REPO
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
+
+ASSEMBLY = bin/Debug/Rhythmbox.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
+
+RHYTHMBOX_ADDIN_XML_SOURCE=src/Rhythmbox.addin.xml
+
+endif
+
+AL=al2
+SATELLITE_ASSEMBLY_NAME=.resources.dll
+
+PROGRAMFILES = \
+	$(RHYTHMBOX_ADDIN_XML)  
+
+LINUX_PKGCONFIG = \
+	$(RHYTHMBOX_PC)  
+
+
+	
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+FILES = \
+	src/MusicItems.cs \
+	src/Rhythmbox.cs \
+	src/RhythmboxEnqueueAction.cs \
+	src/RhythmboxItems.cs \
+	src/RhythmboxItemSource.cs \
+	src/RhythmboxPlayAction.cs \
+	src/AssemblyInfo.cs 
+
+DATA_FILES = \
+	src/Rhythmbox.addin.xml 
+
+RESOURCES = 
+
+EXTRAS = \
+	rhythmbox.pc.in 
+
+REFERENCES =  \
+	System.Xml \
+	System \
+	$(DOADDINS_LIBS) \
+	$(DODBUS_LIBS)
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+RHYTHMBOX_PC = $(BUILD_DIR)/rhythmbox.pc
+RHYTHMBOX_ADDIN_XML = $(BUILD_DIR)/Rhythmbox.addin.xml
+
+$(eval $(call emit-deploy-wrapper,RHYTHMBOX_PC,rhythmbox.pc))
+$(eval $(call emit-deploy-target,RHYTHMBOX_ADDIN_XML))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)

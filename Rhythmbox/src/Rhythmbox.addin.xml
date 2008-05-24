@@ -1,0 +1,27 @@
+<Addin
+	id="Rhythmbox"
+	namespace="Do"
+	version="1.0"
+	name="Rhythmbox"
+	description="Searches and plays Rhythmbox music."
+	author="David Siegel"
+>
+ 
+	<Runtime>
+		<Import assembly="Rhythmbox.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Addins.Rhythmbox.RhythmboxMusicItemSource" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="Do.Addins.Rhythmbox.RhythmboxEnqueueAction" />
+		<Action type="Do.Addins.Rhythmbox.RhythmboxPlayAction" />
+	</Extension>
+</Addin>

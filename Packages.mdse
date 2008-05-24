@@ -1,13 +1,16 @@
 <CombineEntry name="Packages" fileversion="2.0" ctype="PackagingProject">
+  <Configurations active="Unknown Configuration">
+    <Configuration name="Repo" ctype="PackagingProjectConfiguration" />
+  </Configurations>
   <Packages>
     <Package name="Binaries">
-      <Builder rootEntry="./DoPlugins.mds" targetFile="./DoPlugins.tar.gz" platform="Linux" ctype="BinariesZipPackageBuilder">
+      <Builder rootEntry="DoPlugins.mds" targetFile="DoPlugins.tar.gz" platform="Linux" ctype="BinariesZipPackageBuilder">
         <ChildEntries>
-          <Entry>./Thunderbird/Thunderbird.mdp</Entry>
-          <Entry>./Evolution/Evolution.mdp</Entry>
-          <Entry>./Rhythmbox/Rhythmbox.mdp</Entry>
-          <Entry>./Pidgin/Pidgin.mdp</Entry>
-          <Entry>./LocateFiles/LocateFiles.mdp</Entry>
+          <Entry>Thunderbird/Thunderbird.mdp</Entry>
+          <Entry>Evolution/Evolution.mdp</Entry>
+          <Entry>Rhythmbox/Rhythmbox.mdp</Entry>
+          <Entry>Pidgin/Pidgin.mdp</Entry>
+          <Entry>LocateFiles/LocateFiles.mdp</Entry>
         </ChildEntries>
         <ExcludedFiles>
           <File>Evolution,Linux.PkgConfig,evolution.pc</File>

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+INSTALL=~/.local/share/gnome-do/plugin-install
+REPO=$INSTALL/repo
+ASSEMBLIES=`find . -name "*.dll" | grep bin/Debug`
+MANIFESTS=`find . -name "*.addin.xml"`
+
+rm -rf $INSTALL $REPO
+mkdir -p $INSTALL $REPO
+
+cp $ASSEMBLIES $INSTALL
+cp $MANIFESTS $INSTALL
+
+cd $INSTALL
+
+mdtool setup pack *.xml -d:$REPO
+mdtool setup rep-build $REPO
+
+rm *.xml

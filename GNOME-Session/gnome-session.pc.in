@@ -1,0 +1,6 @@
+Name: GNOME-Session
+Description: GNOME-Session
+Version: 0.1
+
+Requires: 
+Libs: -r:@expanded_libdir@/@PACKAGE@/GNOME-Session.dll

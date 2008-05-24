@@ -1,19 +1,100 @@
-plugins_sources := $(wildcard *.cs)
-plugins_binaries := $(patsubst %.cs, %.dll, $(plugins_sources))
 
-plugins_build_sources := $(addprefix $(srcdir)/, $(plugins_sources))
+EXTRA_DIST =  
 
-EXTRA_DIST = $(plugins_sources)
+# Warning: This is an automatically generated file, do not edit!
 
-CSFLAGS+= -debug+ -debug:full
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-plugins_references = $(DO_ADDINS_LIBS) $(DO_DBUS_LIBS)
+ASSEMBLY = bin/Debug/SimplePlugins.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
-CLEANFILES = $(plugins_binaries) $(foreach dll,$(plugins_binaries), $(dll).mdb)
+SIMPLEPLUGINS_ADDIN_XML_SOURCE=src/SimplePlugins.addin.xml
 
-plugin_DATA = $(plugins_binaries)
+endif
 
-all: $(plugins_binaries)
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/SimplePlugins.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-%.dll : %.cs
-	$(CSC) $(CSFLAGS) $(plugins_references) -target:library -out:$@ $<
+SIMPLEPLUGINS_ADDIN_XML_SOURCE=src/SimplePlugins.addin.xml
+
+endif
+
+if ENABLE_REPO
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
+
+ASSEMBLY = bin/Debug/SimplePlugins.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
+
+SIMPLEPLUGINS_ADDIN_XML_SOURCE=src/SimplePlugins.addin.xml
+
+endif
+
+AL=al2
+SATELLITE_ASSEMBLY_NAME=.resources.dll
+
+PROGRAMFILES = \
+	$(SIMPLEPLUGINS_ADDIN_XML)  
+
+LINUX_PKGCONFIG = \
+	$(SIMPLEPLUGINS_PC)  
+
+
+	
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+FILES = \
+	src/AppendTextAction.cs \
+	src/AptUrl.cs \
+	src/EyeOfGNOMEPlaySlideshowAction.cs \
+	src/GoogleMapAction.cs \
+	src/StockQuoteAction.cs 
+
+DATA_FILES = \
+	src/SimplePlugins.addin.xml 
+
+RESOURCES = 
+
+EXTRAS = \
+	simpleplugins.pc.in 
+
+REFERENCES =  \
+	System \
+	$(DOADDINS_LIBS)
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+SIMPLEPLUGINS_PC = $(BUILD_DIR)/simpleplugins.pc
+SIMPLEPLUGINS_ADDIN_XML = $(BUILD_DIR)/SimplePlugins.addin.xml
+
+$(eval $(call emit-deploy-wrapper,SIMPLEPLUGINS_PC,simpleplugins.pc))
+$(eval $(call emit-deploy-target,SIMPLEPLUGINS_ADDIN_XML))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)

@@ -1,0 +1,23 @@
+<Addin 
+	id="Evolution"
+	namespace="Do"
+	version="1.0"
+	name="Evolution"
+	description="Indexes your Evolution contacts"
+	author="David Siegel"
+>
+ 
+	<Runtime>
+		<Import assembly="Evolution.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Addins.Evolution.EvolutionContactItemSource" />
+	</Extension>
+</Addin>

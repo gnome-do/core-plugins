@@ -1,0 +1,26 @@
+<Addin 
+	id="Gnome Screenshot"
+	namespace= "Do"
+	version="1.0"
+	name="Gnome Screenshot"
+	description="Take a screenshot of your entire screen or the current window with optional delay."
+	author="David Siegel"
+>
+ 
+	<Runtime>
+		<Import assembly="GNOME-Screenshot.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="GNOME.ScreenshotItemSource" />
+	</Extension>
+		<Extension path = "/Do/Action">
+		<Action type="GNOME.TakeScreenshotAction" />
+	</Extension>
+</Addin>

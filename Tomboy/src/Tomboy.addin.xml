@@ -1,0 +1,29 @@
+<Addin
+	id="Tomboy"
+	namespace="Do"
+	version="1.0"
+	name="Tomboy"
+	description="Indexes, and allows for creating and searching Tomboy notes"
+	author="Rick Harding"
+>
+ 
+	<Runtime>
+		<Import assembly="Tomboy.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type = "Tomboy.NotesItemSource" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="Tomboy.NewNoteAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="Tomboy.SearchNotesAction" />
+	</Extension>
+</Addin>

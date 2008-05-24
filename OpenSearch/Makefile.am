@@ -1,35 +1,112 @@
-SUBDIRS=src
 
-ASSEMBLY_NAME=OpenSearch
-ASSEMBLY=$(ASSEMBLY_NAME).dll
+EXTRA_DIST =  
 
-CSFLAGS+= -debug+ -debug:full
+# Warning: This is an automatically generated file, do not edit!
 
-CLEANFILES = $(ASSEMBLY){,.mdb}
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-open_search_references = $(DO_ADDINS_LIBS) -r:Mono.Posix.dll -r:System.Web
+ASSEMBLY = bin/Debug/OpenSearch.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
-open_search_sources  = 	\
-    AssemblyInfo.cs \
-    OpenSearch.cs \
-    FirefoxOpenSearchFileProvider.cs \
-    IOpenSearchFile.cs \
-    IOpenSearchFileProvider.cs \
-    IOpenSearchItem.cs \
-    OpenSearchItem.cs \
-    MozillaSearchFile.cs  \
-    OpenSearchAction.cs  \
-    OpenSearchFile.cs \
-    OpenSearchFileManager.cs \
-    OpenSearchFileType.cs \
-    OpenSearchFileTypeIdentifier.cs \
-    XmlNamespaceHelper.cs
+OPENSEARCH_ADDIN_XML_SOURCE=src/OpenSearch.addin.xml
 
-open_search_build_sources = $(addprefix $(srcdir)/src/, $(open_search_sources))
+endif
 
-plugin_DATA = $(ASSEMBLY)
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/OpenSearch.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-all: $(ASSEMBLY)
+OPENSEARCH_ADDIN_XML_SOURCE=src/OpenSearch.addin.xml
 
-$(ASSEMBLY): $(open_search_build_sources)
-	$(CSC) $(CSFLAGS) $(open_search_references) -target:library -out:$@ $(open_search_build_sources)
+endif
+
+if ENABLE_REPO
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
+
+ASSEMBLY = bin/Debug/OpenSearch.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
+
+OPENSEARCH_ADDIN_XML_SOURCE=src/OpenSearch.addin.xml
+
+endif
+
+AL=al2
+SATELLITE_ASSEMBLY_NAME=.resources.dll
+
+PROGRAMFILES = \
+	$(OPENSEARCH_ADDIN_XML)  
+
+LINUX_PKGCONFIG = \
+	$(OPENSEARCH_PC)  
+
+
+	
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+FILES = \
+	src/AssemblyInfo.cs \
+	src/FirefoxOpenSearchFileProvider.cs \
+	src/IOpenSearchFile.cs \
+	src/IOpenSearchFileProvider.cs \
+	src/IOpenSearchItem.cs \
+	src/MozillaSearchFile.cs \
+	src/OpenSearch.cs \
+	src/OpenSearchAction.cs \
+	src/OpenSearchFile.cs \
+	src/OpenSearchFileManager.cs \
+	src/OpenSearchFileType.cs \
+	src/OpenSearchFileTypeIdentifier.cs \
+	src/OpenSearchItem.cs \
+	src/XmlNamespaceHelper.cs 
+
+DATA_FILES = \
+	src/OpenSearch.addin.xml 
+
+RESOURCES = 
+
+EXTRAS = \
+	opensearch.pc.in 
+
+REFERENCES =  \
+	System \
+	System.Xml \
+	Mono.Posix \
+	System.Web \
+	$(DOADDINS_LIBS)
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+OPENSEARCH_ADDIN_XML = $(BUILD_DIR)/OpenSearch.addin.xml
+OPENSEARCH_PC = $(BUILD_DIR)/opensearch.pc
+
+$(eval $(call emit-deploy-target,OPENSEARCH_ADDIN_XML))
+$(eval $(call emit-deploy-wrapper,OPENSEARCH_PC,opensearch.pc))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)

@@ -1,0 +1,35 @@
+<Addin
+	id="SimplePlugins"
+	namespace="Do"
+	version="1.0"
+	name="Simple Plugins Pack"
+	description="Contains a handful of simple, but useful plugins."
+	author="David Siegel, Christer Edwards"
+>
+ 
+	<Runtime>
+		<Import assembly="SimplePlugins.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path= "/Do/Action">
+		<Action type="EyeOfGNOME.PlaySlideshowAction" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="apturl.APTAction" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="GnomeDoAppendText.AppendTextAction" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="SimplePlugins.GoogleMaps.GoogleMapAction" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="Do.Plugins.Universe.StockQuoteAction" />
+	</Extension>
+</Addin>
