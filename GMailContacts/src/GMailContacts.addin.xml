@@ -8,10 +8,10 @@
 >
  
 	<Runtime>
-		<Import assembly="GContacts.dll"/>
+		<Import assembly="GMailContacts.dll"/>
 		<Import assembly="Google.GData.Contacts.dll"/>
-	        <Import assembly="Google.GData.Client.dll"/>
-        	<Import assembly="Google.GData.Extensions.dll"/>
+        	<Import assembly="Google.GData.Client.dll"/>
+		<Import assembly="Google.GData.Extensions.dll"/>
 	</Runtime>
 	
 	<Dependencies>
@@ -21,6 +21,6 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="GContacts.GContactsItemSource" />
+		<ItemSource type="GMailContacts.GMailContactsItemSource" />
 	</Extension>
 </Addin>

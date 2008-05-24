@@ -1,5 +1,5 @@
 /*
- * TwitterFriendSource.cs
+ * GMailContactItemSource.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -24,30 +24,21 @@ using System.Threading;
 using System.Collections.Generic;
 
 using Do.Universe;
-using Twitterizer.Framework;
 
-namespace DoTwitter
-{
-	public sealed class TwitterFriendSource : IItemSource
+namespace GMailContacts
+{	
+	public sealed class GMailContactsItemSource : IItemSource
 	{
 		private List<IItem> items;
-		public TwitterFriendSource()
+		
+		public GMailContactsItemSource()
 		{
 			items = new List<IItem> ();
-			UpdateItems ();
 		}
 		
-		public string Name {
-			get { return "Twitter friends"; }
-		}
-		
-		public string Description {
-			get { return "Indexes your Twitter friends"; }
-		}
-		
-		public string Icon {
-			get { return "system-users"; }
-		}
+		public string Name { get { return "GMail Contacts"; } }
+		public string Description { get { return "Indexes your GMail contacts"; } }
+		public string Icon { get { return "gmail-logo.png@" + GetType ().Assembly.FullName; } }
 		
 		public Type [] SupportedItemTypes {
 			get {
@@ -61,16 +52,29 @@ namespace DoTwitter
 			get { return items; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		public ICollection<IItem> ChildrenOfItem (IItem item) 
 		{
-			return null;
+			ContactItem contact = (item as ContactItem);
+			List<IItem> details;
+			
+			details = new List<IItem> ();
+			foreach (string detail in contact.Details) {
+				if (detail.StartsWith ("email"))
+					details.Add (new GMailContactDetailItem (contact.Name, contact[detail]));
+			}
+			
+			return details;
 		}
 		
-		public void UpdateItems ()
-		{	
-			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateFriends));
-			updateRunner.Start ();
-			items = TwitterAction.Friends;
-		}
+		public void UpdateItems () 
+		{
+			try {
+				Thread updateRunner = new Thread (new ThreadStart (GMail.UpdateContacts));
+				updateRunner.Start ();
+				items = GMail.Contacts;
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
+			}
+		}	
 	}
 }

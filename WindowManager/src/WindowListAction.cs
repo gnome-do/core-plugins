@@ -26,6 +26,7 @@ using System.Diagnostics;
 using System.Threading;
 
 using Do.Universe;
+using Do.Addins;
 using Wnck;
 
 namespace WindowManager
@@ -84,7 +85,7 @@ namespace WindowManager
 			WindowListItems.GetList (out procList);
 			WindowListItems.GetList (out procListDyn);
 		}
-
+		
 		public override Type[] SupportedModifierItemTypes {
 			get { return new Type [] {
 				typeof (IWindowItem)};
@@ -129,7 +130,6 @@ namespace WindowManager
 		public override bool SupportsItem (IItem item)
 		{
 			if (item is GenericWindowItem) return true;
-			
 			string application = (item as ApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
@@ -418,6 +418,5 @@ namespace WindowManager
 			}
 			return null;
 		}
-
 	}
 }

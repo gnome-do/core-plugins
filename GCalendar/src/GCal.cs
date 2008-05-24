@@ -27,13 +27,14 @@ using System.Collections.Generic;
 
 using Google.GData.Client;
 using Google.GData.Calendar;
+using Google.GData.Extensions;
 
 using Gnome.Keyring;
 using Do.Universe;
 
 namespace GCalendar
 {
-	public class DoGCal
+	public class GCal
 	{
 		private static string username, password;
 		private static CalendarService service;
@@ -41,7 +42,7 @@ namespace GCalendar
 		private static Timer ClearCalendarsTimer;
 		const int CacheSeconds  = 500; //cache contacts
 			
-		static DoGCal ()
+		static GCal ()
 		{	
 			calendars = new List<IItem> ();
 			ClearCalendarsTimer = new Timer (ClearCalendars);
@@ -61,9 +62,7 @@ namespace GCalendar
 		{
 			try {
 				service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
-				//Console.Error.WriteLine ("Connecting to GCal with {0}:{1}",username,password);
 				service.setUserCredentials(username, password);
-				//Console.Error.WriteLine("GCal: Connected");
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}
@@ -95,10 +94,9 @@ namespace GCalendar
 			FeedQuery query = new FeedQuery ();
 			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
 			try {
-				//Console.Error.WriteLine("GCal: Querying calendars");
 				return service.Query (query);
 			} catch (Exception e) {
-				Console.Error.WriteLine (e);
+				Console.Error.WriteLine (e.Message);
 			}
 			return null;
 		}
@@ -117,11 +115,10 @@ namespace GCalendar
 			query.SortOrder = CalendarSortOrder.ascending;
 			EventFeed events;
 			try {
-				//Console.Error.WriteLine("GCal: Getting list of events");
 				events = service.Query (query) as EventFeed;
 			} catch (WebException e) {
 				events = null;
-				Console.Error.WriteLine (e);
+				Console.Error.WriteLine (e.Message);
 			}
 			return events;
         }
@@ -133,16 +130,13 @@ namespace GCalendar
 			DateTime [] dates = ParseEventDates (needle,keywords);
 			query.StartTime = dates[0];
 			query.EndTime = dates[1];
-			//Console.Error.WriteLine ("Start Date: {0}",dates[0]);
-			//Console.Error.WriteLine ("End Date: {0}",dates[1]);
             query.Query = ParseSearchString (needle,keywords);
 			EventFeed events;
 			try {
-				//Console.Error.WriteLine("GCal: Searching events");
 				events = service.Query(query) as EventFeed;
 			} catch (WebException e) {
 				events = null;
-				Console.Error.WriteLine (e);
+				Console.Error.WriteLine (e.Message);
 			}
             return events; 
         }
@@ -158,7 +152,7 @@ namespace GCalendar
 				nevent = service.Insert(post_uri, entry) as EventEntry;
 			} catch (WebException e) {
 				nevent = null;
-				Console.Error.WriteLine (e);
+				Console.Error.WriteLine (e.Message);
 			}
             return nevent;
         }
@@ -176,7 +170,6 @@ namespace GCalendar
 					
 					username = (string)result.Attributes["username"];
 					password = result.Secret;
-					//Console.Error.WriteLine ("{0} : {1}",username, password);
 					if (username == null || username == String.Empty || password == null || password == String.Empty)
 						throw new ApplicationException ("Invalid username/password in keyring");
 				}
@@ -205,7 +198,6 @@ namespace GCalendar
 		private static DateTime [] ParseEventDates (string needle, string [] keywords)
 		{
 			needle = needle.ToLower ();
-			Console.Error.WriteLine ("Raw String: {0}",needle);
 			
 			int keydex;
 			// String string to just dates if search term + date range found
@@ -291,12 +283,8 @@ namespace GCalendar
 		
 		private static string StripDatePrefix (string needle)
 		{
-			//Console.Error.WriteLine ("Raw needle: {0}",needle);
 			needle = needle.Trim ().ToLower ();
-			//Console.Error.WriteLine ("Needle phase 1: {0}",needle);
-			//Console.Error.WriteLine ("Index of first space: {0}",needle.IndexOf (" "));
 			needle = needle.Substring (needle.IndexOf (" "));
-			//Console.Error.WriteLine ("Needle phase 2: {0}",needle);
 			return needle;
 		}
 		
@@ -308,7 +296,6 @@ namespace GCalendar
 				needle = needle.Substring(0,needle.IndexOf (keyword)).Trim ();
 			}
 			
-			//Console.Error.WriteLine ("Searching for {0}",needle);
 			return needle;				                        
 		}
 		

@@ -52,6 +52,7 @@ namespace SimplePlugins.GoogleMaps
 		{
 			get {
 				return new Type[] {
+					typeof (ContactItem),
 					typeof (ITextItem),
 				};
 			}
@@ -61,6 +62,7 @@ namespace SimplePlugins.GoogleMaps
 		{
 			get {
 				return new Type[] {
+					typeof (ContactItem),
 					typeof (ITextItem),
 				};
 			}		
@@ -68,37 +70,46 @@ namespace SimplePlugins.GoogleMaps
 				
 		public override bool SupportsItem (IItem item)
 		{
-			string word;
-
-			word = null;
-			if (item is ITextItem) {
-				word = (item as ITextItem).Text;
-			}
-			return !string.IsNullOrEmpty (word);
+			if (item is ITextItem) return true;
+			return ContactItemSupportsAddress (item as ContactItem);
 		}
+		
+		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		{
+			if (modItem is ITextItem) return true;
+			return ContactItemSupportsAddress (modItem as ContactItem);
+		}
+
 		
 		public override bool ModifierItemsOptional {
             get { return true; }
         }
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IItem [] Perform (IItem [] items, IItem [] modifierItems)
 		{
-			string expression, url;
-			int i = 0;
-			foreach (IItem item in items) {
-				// Will evaluate to true when modifier item has
-				// text, and hence plot a route rather than a single location.
-				if (i < modifierItems.Length &&
-				    ((modifierItems[i] as ITextItem).Text) != "") {
-					expression = "from: "+((item as ITextItem).Text);
-					expression = expression + " to: "+((modifierItems[i] as ITextItem).Text);
-					url = GoogleMapsURLWithExpression (expression);
-				}
-				else {
-					url = GoogleMapsURLWithExpression ((item as ITextItem).Text);
-				}
-				Util.Environment.Open (url);
+			string expression, url, start, end;
+			start = end = String.Empty;
+			
+			if (items [0] is ITextItem)
+				start = (items [0] as ITextItem).Text;
+			else
+				start = (items [0] as ContactItem)["address"];
+			
+			if (modifierItems.Length > 0) {
+				if (modifierItems [0] is ITextItem)
+					end = (modifierItems [0] as ITextItem).Text;
+				else
+					end = (modifierItems [0] as ContactItem)["address"];
 			}
+						
+			expression = String.Format ("from: {0}", start);
+			if (!String.IsNullOrEmpty (end))
+				expression += String.Format (" to: {0}",end);
+
+			url = GoogleMapsURLWithExpression (expression);
+			
+			Util.Environment.Open (url);
+			
 			return null;
 		}
 		
@@ -108,6 +119,11 @@ namespace SimplePlugins.GoogleMaps
 				.Replace (" ", "+");
 		}
 		
-				
+		private bool ContactItemSupportsAddress (ContactItem item)
+		{
+			if (!String.IsNullOrEmpty(item["address"]))
+					return true;
+			return false;
+		}
 	}
 }

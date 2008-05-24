@@ -16,11 +16,20 @@
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="src/Notifications.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitter.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/TwitterAction.cs" subtype="Code" buildaction="Compile" />
     <File name="twitter-icon.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Twitter.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/TwitterTweet.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TwitterFriendSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TwitterAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitter.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/TwitterizerException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/TwitterRequest.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/TwitterRequestData.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/TwitterStatus.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/TwitterStatusCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/TwitterUser.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/TwitterUserCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.4.0.1, Culture=neutral" />
@@ -29,5 +38,6 @@
     <ProjectReference type="Gac" localcopy="True" refto="NDesk.DBus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="gconf-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </References>
 </Project>

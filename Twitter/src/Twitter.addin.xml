@@ -18,9 +18,9 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/Action">
-		<Action type="Twitter.TweetAction" />
+		<Action type="DoTwitter.TweetAction" />
 	</Extension>
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Twitter.TwitterFriendSource" />
+		<ItemSource type="DoTwitter.TwitterFriendSource" />
 	</Extension>
 </Addin>

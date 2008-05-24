@@ -84,7 +84,6 @@ namespace VinagreVNC {
                     }
                 }
             } catch { 
-                Console.Error.WriteLine ("[ERROR] " + bookmarks_file + " cannot be read!");
             } 
         }
     }

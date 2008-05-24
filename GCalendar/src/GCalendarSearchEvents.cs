@@ -83,11 +83,10 @@ namespace GCalendar {
             List<IItem> cal_items = new List<IItem> ();
             string search_text = "";
             string eventUrl, eventDesc, start;
-            //DoGCal service = new DoGCal ();
             foreach (IItem item in items) {
                 search_text += (item as ITextItem).Text;
             }
-            EventFeed events = DoGCal.SearchEvents ((modifierItems[0] as GCalendarItem).URL,
+            EventFeed events = GCal.SearchEvents ((modifierItems[0] as GCalendarItem).URL,
                             search_text);
 			foreach (EventEntry entry in events.Entries) {
 			    eventUrl = entry.AlternateUri.Content;

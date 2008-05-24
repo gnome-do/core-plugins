@@ -1,5 +1,5 @@
 /*
- * TwitterFriendSource.cs
+ * GMailContactDetailItem.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -20,57 +20,50 @@
  */
 
 using System;
-using System.Threading;
-using System.Collections.Generic;
-
 using Do.Universe;
-using Twitterizer.Framework;
 
-namespace DoTwitter
+namespace GMailContacts
 {
-	public sealed class TwitterFriendSource : IItemSource
+	public class GMailContactDetailItem : IContactDetailItem 
 	{
-		private List<IItem> items;
-		public TwitterFriendSource()
+		private string name, email, icon;
+		
+		public GMailContactDetailItem (string name, string email)
 		{
-			items = new List<IItem> ();
-			UpdateItems ();
+			this.name = name;
+			this.email = email;
+			this.icon = "stock_person";
+		}
+		
+		public GMailContactDetailItem (string name, string email, string icon)
+		{
+			this.name = name;
+			this.email = email;
+			this.icon = icon;
 		}
 		
 		public string Name {
-			get { return "Twitter friends"; }
+			get { return name; }
 		}
 		
 		public string Description {
-			get { return "Indexes your Twitter friends"; }
+			get { return email; }
 		}
 		
 		public string Icon {
-			get { return "system-users"; }
+			get { return icon; }
 		}
 		
-		public Type [] SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (ContactItem),
-				};
+		public string Key {
+			get { 
+				return "email";
 			}
 		}
 		
-		public ICollection<IItem> Items {
-			get { return items; }
-		}
-		
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
-		{
-			return null;
-		}
-		
-		public void UpdateItems ()
-		{	
-			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateFriends));
-			updateRunner.Start ();
-			items = TwitterAction.Friends;
+		public string Value {
+			get { 
+				return email;
+			}
 		}
 	}
 }
