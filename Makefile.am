@@ -1,4 +1,3 @@
-
 EXTRA_DIST =  expansions.m4 GCalendar/Google.GData.Client.dll GCalendar/Google.GData.Extensions.dll GCalendar/Google.GData.Calendar.dll GCalendar/Google.GData.AccessControl.dll
 
 #Warning: This is an automatically generated file, do not edit!
