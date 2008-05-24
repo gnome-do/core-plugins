@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INSTALL=~/.local/share/gnome-do/plugin-install
+INSTALL=~/.local/share/gnome-do/plugins
 REPO=$INSTALL/repo
 ASSEMBLIES=`find . -name "*.dll" | grep bin/Debug`
 MANIFESTS=`find . -name "*.addin.xml"`
