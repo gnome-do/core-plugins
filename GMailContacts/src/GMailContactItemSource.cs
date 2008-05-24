@@ -1,4 +1,4 @@
-// GContactItemSource.cs
+// GMailContactItemSource.cs
 // 
 // Copyright (C) 2008 [Alex Launi]
 //
@@ -21,15 +21,14 @@ using System.Threading;
 using System.Collections.Generic;
 
 using Do.Universe;
-using Do.Addins;
 
-namespace GContacts
+namespace GMailContacts
 {	
-	public sealed class GContactsItemSource : IItemSource
+	public sealed class GMailContactsItemSource : IItemSource
 	{
 		private List<IItem> items;
 		
-		public GContactsItemSource()
+		public GMailContactsItemSource()
 		{
 			items = new List<IItem> ();
 		}
@@ -55,21 +54,24 @@ namespace GContacts
 			ContactItem buddy = (item as ContactItem);
 			List<IItem> children = new List<IItem> ();
 			
-			foreach (string detail in buddy.Details)
-				if (detail.StartsWith ("email"))
-					children.Add (new GMailContact (buddy.Name, buddy[detail]));
+			foreach (string detail in buddy.Details) {
+				if (detail.StartsWith ("email")) {
+					ContactItem other = ContactItem.Create (buddy.Name);
+					other[detail] = buddy[detail];
+					children.Add (other);
+				}
+			}
 			return children;
 		}
 		
 		public void UpdateItems () 
 		{
 			try {
-				Thread updateRunner = new Thread (new ThreadStart (GContact.UpdateContacts));
+				Thread updateRunner = new Thread (new ThreadStart (GMail.UpdateContacts));
 				updateRunner.Start ();
-				items = GContact.Contacts;
+				items = GMail.Contacts;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
-				return;
 			}
 		}	
 	}

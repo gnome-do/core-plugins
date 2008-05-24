@@ -26,6 +26,8 @@ using System.Collections.Generic;
 using Twitterizer.Framework;
 using Do.Universe;
 
+using GConf;
+
 using NDesk.DBus;
 using org.freedesktop;
 using org.freedesktop.DBus;
@@ -35,23 +37,39 @@ namespace DoTwitter
 	public static class TwitterAction
 	{
 		private static List<IItem> items;
-		private static string username, password, status;
+		private static string status;
+		private static GConf.Client gconf;
 		
 		static TwitterAction ()
 		{
 			items = new List<IItem> ();
+			gconf = new GConf.Client ();
 		} 
 		
 		public static List<IItem> Friends {
 			get { return items; }
 		}
 		
-		public static string Username {
-			set { username = value; }
+		private static string Username {
+			get {
+				try {
+					return gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
+				} catch (GConf.NoSuchKeyException) {
+					gconf.Set ("/apps/gnome-do/plugins/twitter/username","");
+					throw new GConf.NoSuchKeyException ("/apps/gnome-do/plugins/twitter/username");
+				}
+			}
 		}
 		
-		public static string Password {
-			set { password = value; }
+		private static string Password {
+			get {
+				try {
+					return gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
+				} catch (GConf.NoSuchKeyException) {
+					gconf.Set ("/apps/gnome-do/plugins/twitter/password","");
+					throw new GConf.NoSuchKeyException ("/apps/gnome-do/plugins/twitter/password");
+				}
+			}
 		}
 		
 		public static string Status {
@@ -60,7 +78,18 @@ namespace DoTwitter
 		
 		public static void Tweet ()
 		{
-			Twitter t = new Twitter (username, password);
+			Twitter t;
+			try {
+				t = new Twitter (Username, Password);
+			} catch (GConf.NoSuchKeyException) {
+				TwitterAction.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
+	                          + "login information has been created "
+	                          + "in /apps/gnome-do/plugins/twitter/\n"
+	                          + "Please set your username and password\n"
+	                          + "in order to post tweets");
+				return; 
+			}
+			
 			try {
 				t.Update (status);
 				SendNotification ("Tweet Successful", "Successfully posted tweet '" 
@@ -78,17 +107,24 @@ namespace DoTwitter
 		{
 			if (!Monitor.TryEnter (items)) return;
 			
-			Twitter t = new Twitter (username, password);
+			Twitter t;
 			TwitterUserCollection friends;
+			
+			try {
+				t = new Twitter (Username, Password);
+			} catch (GConf.NoSuchKeyException) {
+				TwitterAction.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
+	                          + "login information has been created "
+	                          + "in /apps/gnome-do/plugins/twitter/\n"
+	                          + "Please set your username and password\n"
+	                          + "in order to post tweets");
+				return;
+			}
 			
 			try {
 				friends = t.Friends ();
 			} catch (TwitterizerException e) {
-				Console.Error.WriteLine (e);
-				Monitor.Exit (items);
-				return;
-			} catch (NullReferenceException e) {
-				Console.Error.WriteLine (e);
+				Console.Error.WriteLine (e.Message);
 				Monitor.Exit (items);
 				return;
 			} 

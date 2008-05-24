@@ -23,7 +23,6 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 
-using GConf;
 using Do.Universe;
 using Twitterizer.Framework;
 
@@ -79,30 +78,10 @@ namespace DoTwitter
         }
 
         public IItem[] Perform (IItem[] items, IItem[] modItems)
-        {
-			string username, password;
-			GConf.Client gconf = new GConf.Client ();
-			
-			try {
-				username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
-				password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
-			} catch (GConf.NoSuchKeyException) {
-				gconf.Set ("/apps/gnome-do/plugins/twitter/username","");
-				gconf.Set ("/apps/gnome-do/plugins/twitter/password","");
-                TwitterAction.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
-                          + "login information has been created "
-                          + "in /apps/gnome-do/plugins/twitter/\n"
-                          + "Please set your username and password\n"
-                          + "in order to post tweets");
-				return null;
-			}
-			
+        {			
 			TwitterAction.Status = (items[0] as ITextItem).Text;
 			if (modItems.Length > 0)
 				TwitterAction.Status = BuildTweet (items[0], modItems[0]);
-			
-			TwitterAction.Username = username;
-			TwitterAction.Password = password;
 			
 			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.Tweet));
 			updateRunner.Start ();

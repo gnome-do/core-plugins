@@ -67,20 +67,7 @@ namespace DoTwitter
 		}
 		
 		public void UpdateItems ()
-		{
-			string username, password;
-			GConf.Client gconf = new GConf.Client ();
-			
-			try {
-				username = gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
-				password = gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
-			} catch (GConf.NoSuchKeyException) {
-				return;
-			}
-			
-			TwitterAction.Username = username;
-			TwitterAction.Password = password;
-			
+		{	
 			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateFriends));
 			updateRunner.Start ();
 			items = TwitterAction.Friends;

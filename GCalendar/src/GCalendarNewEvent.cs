@@ -85,7 +85,7 @@ namespace GCalendar
             string cal_url = (modifierItems[0] as GCalendarItem).URL;
             string event_data = (items[0] as ITextItem).Text;
             
-            EventEntry entry = DoGCal.NewEvent (cal_url, event_data);
+            EventEntry entry = GCal.NewEvent (cal_url, event_data);
             
             string eventUrl = entry.AlternateUri.Content;
             string eventDesc = entry.Content.Content;

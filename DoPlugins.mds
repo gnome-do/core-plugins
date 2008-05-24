@@ -24,12 +24,12 @@
       <Entry build="True" name="Firefox" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="Vinagre" configuration="Debug" />
-      <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
-      <Entry build="True" name="GContacts" configuration="Debug" />
       <Entry build="True" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Debug" />
+      <Entry build="True" name="GMailContacts" configuration="Debug" />
+      <Entry build="True" name="GCalendar" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -55,12 +55,12 @@
       <Entry build="True" name="Firefox" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
       <Entry build="True" name="Vinagre" configuration="Release" />
-      <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
       <Entry build="True" name="Tasque" configuration="Release" />
-      <Entry build="True" name="GContacts" configuration="Release" />
       <Entry build="True" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Release" />
+      <Entry build="True" name="GMailContacts" configuration="Release" />
+      <Entry build="True" name="GCalendar" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -89,15 +89,15 @@
       <Entry build="True" name="Firefox" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="Vinagre" configuration="Debug" />
-      <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
-      <Entry build="True" name="GContacts" configuration="Debug" />
       <Entry build="False" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Debug" />
+      <Entry build="True" name="GMailContacts" configuration="Debug" />
+      <Entry build="True" name="GCalendar" configuration="Debug" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="GContacts" single="True">
+  <StartMode startupentry="Templates" single="True">
     <Execute type="None" entry="Templates" />
     <Execute type="None" entry="Packages" />
     <Execute type="None" entry="Rhythmbox" />
@@ -121,11 +121,11 @@
     <Execute type="None" entry="Firefox" />
     <Execute type="None" entry="Twitter" />
     <Execute type="None" entry="Vinagre" />
-    <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="GNOME-Screenshot" />
     <Execute type="None" entry="Tasque" />
-    <Execute type="None" entry="GContacts" />
     <Execute type="None" entry="Archive" />
+    <Execute type="None" entry="GMailContacts" />
+    <Execute type="None" entry="GCalendar" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -152,10 +152,10 @@
     <Entry filename="Firefox/Firefox.mdp" />
     <Entry filename="Twitter/Twitter.mdp" />
     <Entry filename="Vinagre/Vinagre.mdp" />
-    <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="GNOME-Screenshot/GNOME-Screenshot.mdp" />
     <Entry filename="Tasque/Tasque.mdp" />
-    <Entry filename="GContacts/GContacts.mdp" />
     <Entry filename="Archive/Archive.mdp" />
+    <Entry filename="GMailContacts/GMailContacts.mdp" />
+    <Entry filename="GCalendar/GCalendar.mdp" />
   </Entries>
 </Combine>

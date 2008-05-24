@@ -70,7 +70,7 @@ namespace GCalendar
 			string eventUrl, eventDesc, start;
 			EventFeed events;
 			try {
-				events = DoGCal.GetEvents (calItem.URL);
+				events = GCal.GetEvents (calItem.URL);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 				return null;
@@ -92,9 +92,9 @@ namespace GCalendar
 		public void UpdateItems ()
 		{	
 			try {
-				Thread updateRunner = new Thread (new ThreadStart (DoGCal.UpdateCalendars));
+				Thread updateRunner = new Thread (new ThreadStart (GCal.UpdateCalendars));
 				updateRunner.Start ();
-				items = DoGCal.Calendars;
+				items = GCal.Calendars;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 				return;
