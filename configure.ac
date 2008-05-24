@@ -66,58 +66,56 @@ PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
 
 dnl package checks, per config
 
-
 AC_CONFIG_FILES([
-Twitter/twitter.pc
-Tasque/Makefile
-OpenSearch/Makefile
-GCalendar/Makefile
-Epiphany/Makefile
-File/Makefile
-Pastebin/pastebin.pc
-Vinagre/vinagre.pc
-Twitter/Makefile
-SSH/ssh.pc
-LocateFiles/Makefile
-SimplePlugins/Makefile
-Firefox/Makefile
-OpenSearch/opensearch.pc
-Tasque/tasque.pc
-GoogleCalculator/googlecalculator.pc
-WindowManager/windowmanager.pc
-GNOME-Session/Makefile
-GoogleCalculator/Makefile
-GNOME-Session/gnome-session.pc
-Banshee/banshee.pc
-SSH/Makefile
-GNOME-Screenshot/Makefile
-Rhythmbox/Makefile
-Launchpad/Makefile
-Amarok/Makefile
-GNOME-Screenshot/gnome-screenshot.pc
-File/file.pc
-Amarok/amarok.pc
-Pidgin/Makefile
-Firefox/firefox.pc
-Evolution/Makefile
-Evolution/evolution.pc
-Banshee/Makefile
-Epiphany/epiphany.pc
-Pidgin/pidgin.pc
-Rhythmbox/rhythmbox.pc
-Thunderbird/thunderbird.pc
-Tomboy/tomboy.pc
-Pastebin/Makefile
-LocateFiles/locatefiles.pc
-SimplePlugins/simpleplugins.pc
-Launchpad/launchpad.pc
-Tomboy/Makefile
-Thunderbird/Makefile
-Makefile
-GCalendar/gcalendar.pc
-Vinagre/Makefile
-WindowManager/Makefile
-
+    Amarok/Makefile
+    Amarok/amarok.pc
+    Banshee/Makefile
+    Banshee/banshee.pc
+    Epiphany/Makefile
+    Epiphany/epiphany.pc
+    Evolution/Makefile
+    Evolution/evolution.pc
+    File/Makefile
+    File/file.pc
+    Firefox/Makefile
+    Firefox/firefox.pc
+    GCalendar/Makefile
+    GCalendar/gcalendar.pc
+    GNOME-Screenshot/Makefile
+    GNOME-Screenshot/gnome-screenshot.pc
+    GNOME-Session/Makefile
+    GNOME-Session/gnome-session.pc
+    GoogleCalculator/Makefile
+    GoogleCalculator/googlecalculator.pc
+    Launchpad/Makefile
+    Launchpad/launchpad.pc
+    LocateFiles/Makefile
+    LocateFiles/locatefiles.pc
+    Makefile
+    OpenSearch/Makefile
+    OpenSearch/opensearch.pc
+    Pastebin/Makefile
+    Pastebin/pastebin.pc
+    Pidgin/Makefile
+    Pidgin/pidgin.pc
+    Rhythmbox/Makefile
+    Rhythmbox/rhythmbox.pc
+    SSH/Makefile
+    SSH/ssh.pc
+    SimplePlugins/Makefile
+    SimplePlugins/simpleplugins.pc
+    Tasque/Makefile
+    Tasque/tasque.pc
+    Thunderbird/Makefile
+    Thunderbird/thunderbird.pc
+    Tomboy/Makefile
+    Tomboy/tomboy.pc
+    Twitter/Makefile
+    Twitter/twitter.pc
+    Vinagre/Makefile
+    Vinagre/vinagre.pc
+    WindowManager/Makefile
+    WindowManager/windowmanager.pc
 ])
 
 AC_OUTPUT
