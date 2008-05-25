@@ -145,8 +145,7 @@ namespace GMailContacts
 					password = reader.ReadLine ();
 					WriteAccount (username, password,keyring_item_name);
 				} catch { 
-					throw new FileNotFoundException ("Could not find file!",
-					                                 "~/.config/gnome-do/google-name");
+					Console.Error.WriteLine ("Could not find file! ~/.config/gnome-do/google-name");
 				} 
 			}
 		}
