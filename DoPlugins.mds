@@ -30,6 +30,7 @@
       <Entry build="True" name="Archive" configuration="Debug" />
       <Entry build="True" name="GMailContacts" configuration="Debug" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
+      <Entry build="True" name="DiskMounter" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="False" name="Templates" configuration="Release" />
@@ -61,6 +62,7 @@
       <Entry build="True" name="Archive" configuration="Release" />
       <Entry build="True" name="GMailContacts" configuration="Release" />
       <Entry build="True" name="GCalendar" configuration="Release" />
+      <Entry build="True" name="DiskMounter" configuration="Release" />
     </Configuration>
     <Configuration name="Repo" ctype="CombineConfiguration">
       <CustomCommands>
@@ -95,6 +97,7 @@
       <Entry build="True" name="Archive" configuration="Debug" />
       <Entry build="True" name="GMailContacts" configuration="Debug" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
+      <Entry build="True" name="DiskMounter" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Templates" single="True">
@@ -126,6 +129,7 @@
     <Execute type="None" entry="Archive" />
     <Execute type="None" entry="GMailContacts" />
     <Execute type="None" entry="GCalendar" />
+    <Execute type="None" entry="DiskMounter" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -157,5 +161,6 @@
     <Entry filename="Archive/Archive.mdp" />
     <Entry filename="GMailContacts/GMailContacts.mdp" />
     <Entry filename="GCalendar/GCalendar.mdp" />
+    <Entry filename="DiskMounter/DiskMounter.mdp" />
   </Entries>
 </Combine>

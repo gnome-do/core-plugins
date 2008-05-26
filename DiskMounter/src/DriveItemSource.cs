@@ -20,10 +20,9 @@ using System;
 using System.Collections.Generic;
 using Gnome.Vfs;
 
-using Mount;
 using Do.Universe;
 
-namespace Mount {
+namespace DiskMounter {
 
 	public class DriveItemSource : IItemSource {
 
@@ -52,8 +51,7 @@ namespace Mount {
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof (MountedDriveItem),
-						   typeof (UnmountedDriveItem),
+					typeof (DriveItem),
 				};
 			}
 		}
@@ -72,10 +70,7 @@ namespace Mount {
 			items.Clear ();
 
 			foreach (Drive drive in monitor.ConnectedDrives){
-				if (drive.IsMounted)
-					items.Add (new MountedDriveItem (drive));
-				else
-					items.Add (new UnmountedDriveItem (drive));                 
+				items.Add (new DriveItem (drive));              
 			}
 		}  
 	}

@@ -1,0 +1,33 @@
+<Addin
+	id="DiskMounter"
+	namespace="Do"
+	version="1.0"
+	name="Disk Mounter"
+	description="Mount and Unmount drive volumes in GNOME."
+	author="Guillaume Béland"
+>
+ 
+	<Runtime>
+		<Import assembly="DiskMounter.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Actions -->
+	<Extension path = "/Do/Action">
+		<Action type="DiskMounter.OpenVolume" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="DiskMounter.MountAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="DiskMounter.UnmountAction" />
+	</Extension>
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="DiskMounter.DriveItemSource" />
+	</Extension>
+</Addin>

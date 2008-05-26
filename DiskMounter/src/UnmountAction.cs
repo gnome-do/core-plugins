@@ -19,19 +19,16 @@
 using System;
 using System.Collections.Generic;
 
-using Gnome.Vfs;
-
-using Mount;
 using Do.Universe;
 
-namespace Mount
+namespace DiskMounter
 {
 	public class UnmountAction : AbstractAction
 	{
 	
-                public UnmountAction ()
-                {
-                }
+		public UnmountAction ()
+		{
+		}
                 
 		public override string Name {
 			get { return "Unmount"; }
@@ -47,26 +44,25 @@ namespace Mount
 		
 		public override Type[] SupportedItemTypes {
 			get {
-			        return new Type[] {
-				
-                                        typeof (MountedDriveItem),
+				return new Type[] {
+					typeof (DriveItem),
 				};
 			}
 		}
                 
-                public override bool SupportsItem (IItem item) 
-                {
-			return true;
+		public override bool SupportsItem (IItem item) 
+		{
+			return (item as DriveItem).IsMounted;
 		}
                 
-                public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
-                {
-                        return false;
-                }
+		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		{
+			return false;
+		}
 		
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-		        (items[0] as MountedDriveItem).Unmount ();
+			(items[0] as DriveItem).Unmount ();
 			return null;
 		}
 	}
