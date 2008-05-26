@@ -73,6 +73,7 @@ namespace GMailContacts
 				foreach (ContactEntry entry in feed.Entries)
 				{
 					if (String.IsNullOrEmpty (entry.Title.Text)) continue;
+					/*
 					if (entry.Deleted) {
 						ContactItem enemy = ContactItem.Create (entry.Title.Text);
 						Console.Error.WriteLine("Has {0} been deleted? {1}",entry.Title.Text,
@@ -80,6 +81,7 @@ namespace GMailContacts
 						contacts.Remove (enemy);
 						continue;
 					}
+					*/
 					Console.Error.WriteLine (entry.Title.Text);
 					buddy = ContactItem.CreateWithName (entry.Title.Text);					
 					foreach (PostalAddress postal in entry.PostalAddresses)
