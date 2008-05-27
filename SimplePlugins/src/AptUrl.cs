@@ -25,7 +25,7 @@ namespace apturl {
     public class APTAction : AbstractAction {
 
         public override string Name {
-            get { return "Install with apturl";  }
+            get { return "Install";  }
         }
 
         public override string Description {
