@@ -4,7 +4,7 @@ INSTALL=~/.local/share/gnome-do/plugins
 REPO=$INSTALL/repo
 ASSEMBLIES=`find . -name "*.dll" | grep bin/Debug`
 
-rm -rf $INSTALL $REPO
+rm -rf $INSTALL/*.dll $INSTALL/*.xml $INSTALL/*.mpack $REPO
 mkdir -p $INSTALL $REPO
 
 cp $ASSEMBLIES $INSTALL
