@@ -26,7 +26,6 @@ using Do.Universe;
 
 namespace GnomeDoFile {
 	class MoveToAction : IAction {
-
 		public string Name { get { return "Move to..."; } } 
 		public string Description { get { return "Moves a file or folder to another location."; } } 
 		public string Icon { get { return "forward"; } } 
@@ -77,7 +76,8 @@ namespace GnomeDoFile {
 			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
-					File.Move (FileItem.EscapedPath (src), FileItem.EscapedPath (dest));
+					File.Move (FileItem.EscapedPath (src), FileItem.EscapedPath (dest) 
+					           + "/" + src.Name);
 					seenPaths.Add (src.Path);
 
 					if (FileItem.IsDirectory (dest)) {
