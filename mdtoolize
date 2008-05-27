@@ -3,16 +3,22 @@
 INSTALL=~/.local/share/gnome-do/plugins
 REPO=$INSTALL/repo
 ASSEMBLIES=`find . -name "*.dll" | grep bin/Debug`
-MANIFESTS=`find . -name "*.addin.xml"`
 
-rm -rf $INSTALL $REPO
+rm -rf $INSTALL/*.dll $INSTALL/*.xml $INSTALL/*.mpack $REPO
 mkdir -p $INSTALL $REPO
 
 cp $ASSEMBLIES $INSTALL
-cp $MANIFESTS $INSTALL
+for ASM in $ASSEMBLIES; do
+    # For each assembly, copy its manifest files for building the repo.
+    BASEDIR=$ASM
+    BASEDIR=`dirname $BASEDIR`
+    BASEDIR=`dirname $BASEDIR`
+    BASEDIR=`dirname $BASEDIR`
+    MANIFESTS=`find $BASEDIR -name "*.addin.xml"`
+    cp $MANIFESTS $INSTALL
+done
 
 cd $INSTALL
-
 mdtool setup pack *.xml -d:$REPO
 mdtool setup rep-build $REPO
 
