@@ -25,12 +25,10 @@ using Evolution;
 
 using Do.Universe;
 
-namespace Do.Addins.Evolution
+namespace Do.Evolution
 {
-
 	public class EvolutionContactItemSource : IItemSource
 	{
-		
 		List<IItem> contacts;
 		List<string> pictureFiles;
 		
