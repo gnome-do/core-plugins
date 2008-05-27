@@ -44,50 +44,60 @@ namespace GnomeDoFile {
 			}
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override Type [] SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof(FileItem),
+				return new Type [] {
+					typeof (ITextItem),
 				};
 			}
 		}
 
-		public override Type[] SupportedModifierItemTypes {
+		public override Type [] SupportedModifierItemTypes {
 			get {
-				return new Type[] { typeof(ITextItem) };
+				return new Type [] { 
+					typeof (FileItem), 
+				};
 			}
 		}
 		
 		public override bool SupportsItem (IItem item)
 		{
-			// Check for archive types
-			FileItem fi = item as FileItem;
-			return fi.MimeType == "x-directory/normal";
+			return !(item as ITextItem).Text.Contains ("/") &&
+				!(item as ITextItem).Text.Equals (".") &&
+				!(item as ITextItem).Text.Equals ("..");
 		}
 
 		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
 		{
-			return true;
+			// Check for archive types
+			FileItem fi = modItem as FileItem;
+			return fi.MimeType == "x-directory/normal";
+		}
+		
+		public override bool ModifierItemsOptional {
+			get { return true; }
 		}
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			FileItem parent = items [0] as FileItem;
+			FileItem directory;
+			if (modItems.Length > 0)
+				directory = modItems [0] as FileItem;
+			else
+				directory = new FileItem (Environment.GetEnvironmentVariable ("HOME")
+				                          + "/Desktop");
 
-			// Don't create the file if the parent is not a dir
-			if (parent.MimeType != "x-directory/normal") {
-				return null;
-			}
-
-			ITextItem ti = modItems [0] as ITextItem;
+			ITextItem ti = items [0] as ITextItem;
 
 			// Create the filename for the new file
-			string dir_name = parent.Path + "/" + ti.Text;
-			System.Diagnostics.Process.Start ("mkdir", dir_name);
+			string filePath = directory.Path + "/" + ti.Text;
+			Directory.CreateDirectory (filePath);
+			//System.Diagnostics.Process.Start ("mkdir", dir_name);
 			
-
 			// Return the new file, so new actions can be used on it
-			return new IItem[]{ new FileItem(dir_name) };
+			return new IItem [] { 
+				new FileItem(filePath), 
+			};
 		}
 	}
 }

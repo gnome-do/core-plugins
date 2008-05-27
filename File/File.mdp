@@ -1,4 +1,4 @@
-<Project name="File" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="File" fileversion="2.0" DefaultNamespace="GnomeDoFile" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="File" />
@@ -18,9 +18,13 @@
     <File name="src/CreateEmptyFileAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/File.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/CreateDirectory.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/FileItemActions.cs" subtype="Code" buildaction="Compile" />
     <File name="src/FileItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RecentFileItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/FileCopyToAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/FileRenameToAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/FileMoveToAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/FileMoveToTrashAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/FileDeleteAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
