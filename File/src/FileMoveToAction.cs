@@ -76,8 +76,8 @@ namespace GnomeDoFile {
 			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
-					File.Move (FileItem.EscapedPath (src), FileItem.EscapedPath (dest) 
-					           + "/" + src.Name);
+					File.Move (FileItem.EscapedPath (src),
+					           Path.Combine (dest.Path, Path.GetFileName (src.Path)));
 					seenPaths.Add (src.Path);
 
 					if (FileItem.IsDirectory (dest)) {
