@@ -66,7 +66,7 @@ namespace Mozilla {
 		}
 		
 		public string Icon {
-			get { return "firefox"; }
+			get { return "firefox-3.0"; }
 		}
 		
 		public ICollection<IItem> Items {
