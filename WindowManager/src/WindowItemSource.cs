@@ -100,8 +100,6 @@ namespace WindowManager
 	
 	public class ScreenItemSource : IItemSource
 	{
-		List<IItem> items;
-		
 		public string Name {
 			get {
 				return "Window Screen Items";
@@ -129,9 +127,12 @@ namespace WindowManager
 
 		public ICollection<IItem> Items {
 			get {
+                List<IItem> items;
+		
+                items = new List<IItem> ();
 				items.Add (new ScreenItem ("Current Desktop", 
-				                           "Everything on the Current Desktop",
-				                           "desktop"));
+                   "Everything on the Current Desktop",
+                   "desktop"));
 				
 				return items;
 			}
@@ -140,7 +141,6 @@ namespace WindowManager
 		
 		public ScreenItemSource()
 		{
-			items = new List<IItem> ();
 		}
 
 		public ICollection<IItem> ChildrenOfItem (IItem item)
