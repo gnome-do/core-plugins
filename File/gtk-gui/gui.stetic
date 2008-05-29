@@ -14,13 +14,17 @@
         <property name="MemberName" />
         <property name="HasWindow">False</property>
         <child>
-          <widget class="Gtk.Label" id="label1">
+          <widget class="Gtk.Button" id="button1">
             <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Hello, world!</property>
+            <property name="CanFocus">True</property>
+            <property name="UseStock">True</property>
+            <property name="Type">StockItem</property>
+            <property name="StockId">gtk-spell-check</property>
+            <property name="label">gtk-spell-check</property>
           </widget>
           <packing>
-            <property name="X">110</property>
-            <property name="Y">112</property>
+            <property name="X">59</property>
+            <property name="Y">68</property>
           </packing>
         </child>
       </widget>
