@@ -1,8 +1,8 @@
 <Addin 
-	id="Gnome Screenshot"
+	id="GNOME Screenshot"
 	namespace= "Do"
 	version="1.0"
-	name="Gnome Screenshot"
+	name="GNOME Screenshot"
 	description="Take a screenshot of your entire screen or the current window with optional delay."
 	author="David Siegel"
 >

@@ -1,7 +1,7 @@
 <Addin
 	id="Pidgin"
 	namespace="Do"
-	version="1.0"
+	version="1.5"
 	name="Pidgin"
 	description="Indexes your buddy list and initiate chats with Pidgin buddies."
 	author="David Siegel"

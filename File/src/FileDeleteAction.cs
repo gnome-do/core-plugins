@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace GnomeDoFile {
+namespace FilePlugin {
 	abstract class DeleteAction : AbstractAction {
 
 		public override string Name { get { return "Delete File"; } } 

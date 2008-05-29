@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace GnomeDoFile {
+namespace FilePlugin {
 	class RenameToAction : IAction {
 		
 		public string Name { get { return "Rename to..."; } }

@@ -24,9 +24,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+using Do;
 using Do.Universe;
 
-namespace GnomeDoFile {
+namespace FilePlugin {
 	public class CreateEmptyFileAction : AbstractAction {
 
 		public override string Name {
@@ -83,30 +84,21 @@ namespace GnomeDoFile {
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			FileItem parent;
-			if (modItems.Length > 0)
-				parent = modItems [0] as FileItem;
-			else
-				parent = new FileItem (Environment.GetEnvironmentVariable ("HOME") +
-				                       "/Desktop");
-
-			ITextItem ti = items [0] as ITextItem;
-
-			// Create the filename for the new file
-			string filename = parent.Path + "/" + ti.Text;
-
-			try {
-				using (FileStream w = File.Open (filename, FileMode.CreateNew, FileAccess.Write)) {
-					// Do nothing just create the file
-					w.Close ();
-				}
+			string file, dir;
+			if (modItems.Length > 0) {
+				dir = (modItems [0] as FileItem).Path;
+			} else {
+				dir = FileItemSource.Desktop;
 			}
-			catch (Exception) {
+
+			file = (items [0] as ITextItem).Text;
+			file = Paths.Combine (dir, file);
+			try {
+				File.Create (file);
+			} catch (Exception) {
 				return null;
 			}
-
-			// Return the new file, so new actions can be used on it
-			return new IItem [] { new FileItem (filename) };
+			return new IItem [] { new FileItem (file) };
 		}
 	}
 }

@@ -1,4 +1,4 @@
-//  Evolution.cs (requires libevolution-cil)
+//  EvolutionContactItemSource.cs
 //
 //  GNOME Do is the legal property of its developers.
 //  Please refer to the COPYRIGHT file distributed with this
@@ -25,12 +25,10 @@ using Evolution;
 
 using Do.Universe;
 
-namespace Do.Addins.Evolution
+namespace Do.Evolution
 {
-
 	public class EvolutionContactItemSource : IItemSource
 	{
-		
 		List<IItem> contacts;
 		List<string> pictureFiles;
 		

@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using Do.Universe;
 
-namespace GnomeDoFile
+namespace FilePlugin
 {
 	public class RecentFileItemSource : IItemSource
 	{

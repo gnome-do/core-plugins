@@ -1,5 +1,5 @@
 <Addin 
-	id="GMailContacts"
+	id="GMail Contacts"
 	namespace= "Do"
 	version="1.0"
 	name="GMail Contacts"

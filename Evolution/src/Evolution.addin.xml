@@ -18,6 +18,6 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Addins.Evolution.EvolutionContactItemSource" />
+		<ItemSource type="Do.Evolution.EvolutionContactItemSource" />
 	</Extension>
 </Addin>

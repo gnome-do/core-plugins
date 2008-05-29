@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace GnomeDoFile {
+namespace FilePlugin {
 	class MoveToAction : IAction {
 		public string Name { get { return "Move to..."; } } 
 		public string Description { get { return "Moves a file or folder to another location."; } } 
