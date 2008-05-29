@@ -25,12 +25,12 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Addins;
 
-namespace GnomeDoFile {
+namespace FilePlugin {
 
 	/// <summary>
 	/// Indexes files recursively starting in a specific directory.
 	/// </summary>
-	public class FileItemSource : IItemSource {
+	public class FileItemSource : IItemSource, IConfigurable {
 
 		List<IItem> items;
 		bool include_hidden;
@@ -97,7 +97,11 @@ namespace GnomeDoFile {
 			include_hidden = false;
 			UpdateItems ();
 		}
-				
+		
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new Configuration ();
+		}
 		
 		static IEnumerable<DirectoryLevelPair> Deserialize ()
 		{
@@ -247,13 +251,13 @@ namespace GnomeDoFile {
 			}
 		}
 
-		static string Desktop {
+		public static string Desktop {
 			get {
 				return Do.Paths.ReadXdgUserDir ("XDG_DESKTOP_DIR", "Desktop");
 			}
 		}
 
-		static string Documents {
+		public static string Documents {
 			get {
 				return Do.Paths.ReadXdgUserDir ("XDG_DOCUMENTS_DIR", "Documents");
 			}

@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace GnomeDoFile {
+namespace FilePlugin {
 	class CopyToAction : IAction {
 
 		public string Name { get { return "Copy to..."; } } 

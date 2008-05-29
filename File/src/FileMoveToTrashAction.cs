@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace GnomeDoFile {
+namespace FilePlugin {
 	class MoveToTrashAction : AbstractAction {
 
 		public override string Name {
