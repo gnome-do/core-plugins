@@ -1,5 +1,5 @@
 <Combine releaseversion="0.4.9.9" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
-  <Configurations active="Debug">
+  <Configurations active="Release">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <CustomCommands>
         <Command type="AfterBuild" command="mdtoolize" workingdir="${CombineDir}" />

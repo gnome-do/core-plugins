@@ -44,6 +44,7 @@ namespace GCalendar
 			
 		static GCal ()
 		{	
+			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			calendars = new List<IItem> ();
 			ClearCalendarsTimer = new Timer (ClearCalendars);
 			SetCredentials ();

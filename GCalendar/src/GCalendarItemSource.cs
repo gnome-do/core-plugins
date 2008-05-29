@@ -34,7 +34,7 @@ using Google.GData.Extensions;
 
 namespace GCalendar
 {	
-	public sealed class GCalendarItemSource : IItemSource
+	public sealed class GCalendarItemSource : IItemSource, IConfigurable
 	{
 		List<IItem> items;
 
@@ -99,6 +99,11 @@ namespace GCalendar
 				Console.Error.WriteLine (e.Message);
 				return;
 			}
+		}
+		
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new Configuration ();
 		}
 	}
 }

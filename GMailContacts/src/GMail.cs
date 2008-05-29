@@ -43,6 +43,7 @@ namespace GMailContacts
 		
 		static GMail()
 		{
+			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			contacts = new List<IItem> ();
 			lastUpdated = new DateTime ();
 			service = new ContactsService ("alexLauni-gnomeDoGMailPlugin-1");
