@@ -23,12 +23,13 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 
+using Do.Addins;
 using Do.Universe;
 using Twitterizer.Framework;
 
 namespace DoTwitter
 {
-	public sealed class TwitterFriendSource : IItemSource
+	public sealed class TwitterFriendSource : IItemSource, IConfigurable
 	{
 		private List<IItem> items;
 		public TwitterFriendSource()
