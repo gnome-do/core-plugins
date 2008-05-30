@@ -27,13 +27,15 @@ namespace GMailContacts
 {	
 	
 	public class CertHandler : ICertificatePolicy
-	{
-		private Hashtable ht;
+	{		
+		/*
+		 * private Hashtable ht;
 		private void Load ()
 		{
 			if (ht == null)
 				ht = new Hashtable ();
 		}
+		*/
 		
 		public bool CheckValidationResult (ServicePoint sp, X509Certificate cert,
 		                                   WebRequest request, int error)

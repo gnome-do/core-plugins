@@ -292,7 +292,7 @@ namespace GCalendar
 						return;
 					}
 				}
-			} catch (Exception e) {
+			} catch (Exception) {
 				Console.Error.WriteLine ("No account info stored for {0}",
 				                         keyringItemName);
 			}

@@ -121,6 +121,8 @@ namespace GMailContacts
 			}
 		}
 		
+		/* 
+		 * `NOT IMPLEMENTED IN GDATA API YET
 		private static string GetBuddyPhotoFileLocation (string url)
 		{
 			string buddyIconDir;
@@ -131,6 +133,7 @@ namespace GMailContacts
 			//Client.DownloadFile(url, buddyIconDir + );
 			return null;
 		}
+		*/
 		
 		public static void GetUserAndPassFromKeyring (out string username, out string password,
 		                                              string keyringItemName)
@@ -148,7 +151,7 @@ namespace GMailContacts
 						return;
 					}
 				}
-			} catch (Exception e) {
+			} catch (Exception) {
 				Console.Error.WriteLine ("No account info stored for {0}",
 				                         keyringItemName);
 			}
