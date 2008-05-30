@@ -44,7 +44,7 @@ namespace Do.Launchpad
 
 		public void Perform (IItem item)
 		{
-			Util.Environment.Open(string.Format("https://bugs.launchpad.net/ubuntu/+bug/{0}", (item as ITextItem).Text));
+			Util.Environment.Open(string.Format("https://bugs.launchpad.net/bugs/{0}", (item as ITextItem).Text));
 		}
 	}
 
@@ -52,7 +52,7 @@ namespace Do.Launchpad
 	{
 		public LaunchpadBugReportItem() { }
 		public string Name { get { return "Bug Report"; } }
-		public string Description { get { return "Report an Ubuntu bug at Launchpad"; } }
+		public string Description { get { return "Report a bug at Launchpad"; } }
 		
 		public string Icon
 		{ 
@@ -66,7 +66,7 @@ namespace Do.Launchpad
 
 		public void Perform (IItem item)
 		{
-			Util.Environment.Open("https://launchpad.net/ubuntu/+filebug");
+			Util.Environment.Open(string.Format("https://launchpad.net/{0}/+filebug", (item as ITextItem).Text));
 		}
 	}
 
@@ -97,8 +97,8 @@ namespace Do.Launchpad
 	public class LaunchpadBugSearchItem : LaunchpadItem
 	{
 		public LaunchpadBugSearchItem() { }
-		public string Name { get { return "Ubuntu Bug Search"; } }
-		public string Description { get { return "Search for Ubuntu bugs at Launchpad"; } }
+		public string Name { get { return "Bug Search"; } }
+		public string Description { get { return "Search for bugs at Launchpad"; } }
 		public string Icon
 		{ 
 			get { return "LaunchpadBugs.png@" + GetType ().Assembly.FullName; }
@@ -114,7 +114,7 @@ namespace Do.Launchpad
 			Regex spaces = new Regex(@"\s+");
 			string query = (item as ITextItem).Text;
 			string[] qwords = spaces.Split(query);
-			Util.Environment.Open("https://bugs.launchpad.net/ubuntu/+bugs?field.searchtext=" + string.Join("+", qwords));
+			Util.Environment.Open("https://bugs.launchpad.net/+bugs?field.searchtext=" + string.Join("+", qwords));
 		}
 	}
 }
