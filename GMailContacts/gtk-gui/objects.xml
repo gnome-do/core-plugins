@@ -1,0 +1,6 @@
+<objects>
+  <object type="GMailContacts.Configuration" palette-category="GMailContacts" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+</objects>

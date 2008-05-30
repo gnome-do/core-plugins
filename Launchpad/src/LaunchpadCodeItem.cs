@@ -41,6 +41,7 @@ namespace Do.Launchpad
 
 		public bool SupportsItems(IItem[] items)
 		{
+            if (items == null) { return false; }
 			//Project name can't have a space
 			Regex numbers = new Regex(@"\s+");
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
@@ -66,6 +67,7 @@ namespace Do.Launchpad
 
 		public bool SupportsItems(IItem[] items)
 		{
+            if (items == null) { return false; }
 			//Project name can't have a space
 			Regex numbers = new Regex(@"\s+");
 			return !numbers.IsMatch((items[0] as ITextItem).Text);

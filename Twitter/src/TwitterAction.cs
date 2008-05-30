@@ -50,13 +50,17 @@ namespace DoTwitter
 			get { return items; }
 		}
 		
+		public static string GConfKeyBase {
+			get { return "/apps/gnome-do/plugins/twitter/"; }
+		}
+		
 		private static string Username {
 			get {
 				try {
-					return gconf.Get ("/apps/gnome-do/plugins/twitter/username") as string;
+					return gconf.Get (GConfKeyBase + "username") as string;
 				} catch (GConf.NoSuchKeyException) {
-					gconf.Set ("/apps/gnome-do/plugins/twitter/username","");
-					throw new GConf.NoSuchKeyException ("/apps/gnome-do/plugins/twitter/username");
+					gconf.Set (GConfKeyBase + "username","");
+					throw new GConf.NoSuchKeyException (GConfKeyBase + "username");
 				}
 			}
 		}
@@ -64,10 +68,10 @@ namespace DoTwitter
 		private static string Password {
 			get {
 				try {
-					return gconf.Get ("/apps/gnome-do/plugins/twitter/password") as string;
+					return gconf.Get (GConfKeyBase + "password") as string;
 				} catch (GConf.NoSuchKeyException) {
-					gconf.Set ("/apps/gnome-do/plugins/twitter/password","");
-					throw new GConf.NoSuchKeyException ("/apps/gnome-do/plugins/twitter/password");
+					gconf.Set (GConfKeyBase +  "password","");
+					throw new GConf.NoSuchKeyException (GConfKeyBase + "password");
 				}
 			}
 		}
@@ -84,7 +88,7 @@ namespace DoTwitter
 			} catch (GConf.NoSuchKeyException) {
 				TwitterAction.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
 	                          + "login information has been created "
-	                          + "in /apps/gnome-do/plugins/twitter/\n"
+	                          + "in " + GConfKeyBase + "\n"
 	                          + "Please set your username and password\n"
 	                          + "in order to post tweets");
 				return; 
@@ -96,7 +100,7 @@ namespace DoTwitter
                                 + status + "' to Twitter.");
 			} catch (TwitterizerException e) {
 				SendNotification ("Tweet Failed", "Unable to post tweet. Check your login "
-                                + "settings (/apps/gnome-do/plugins/twitter). If you are "
+                                + "settings ( " + GConfKeyBase + "). If you are "
                                 + "behind a proxy, also make sure that the settings in "
                                 + "/system/http_proxy are correct.\n\nDetails:\n" 
                                 + e.ToString ());
@@ -106,6 +110,7 @@ namespace DoTwitter
 		public static void UpdateFriends ()
 		{
 			if (!Monitor.TryEnter (items)) return;
+			items.Clear ();
 			
 			Twitter t;
 			TwitterUserCollection friends;
@@ -115,7 +120,7 @@ namespace DoTwitter
 			} catch (GConf.NoSuchKeyException) {
 				TwitterAction.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
 	                          + "login information has been created "
-	                          + "in /apps/gnome-do/plugins/twitter/\n"
+	                          + "in " + GConfKeyBase + "\n"
 	                          + "Please set your username and password\n"
 	                          + "in order to post tweets");
 				return;
@@ -153,6 +158,23 @@ namespace DoTwitter
             Dictionary <string,object> hints = new Dictionary <string,object> ();
             nf.Notify (title, 0, "", title, message, new string[0], hints, -1);
         }
+		
+		public static bool TryConnect (string username, string password)
+		{
+			Twitter test = new Twitter (username, password);
+			try {
+				test.Replies ();
+			} catch {
+				return false;
+			}
+			return true;
+		}
+		
+		public static void SetAccountData (string username, string password)
+		{
+			gconf.Set (GConfKeyBase + "username", username);
+			gconf.Set (GConfKeyBase + "password", password);
+		}
 	}
 }
 

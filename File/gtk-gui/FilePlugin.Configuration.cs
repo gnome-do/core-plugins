@@ -15,7 +15,7 @@ namespace FilePlugin {
         
         private Gtk.Fixed fixed1;
         
-        private Gtk.Label label1;
+        private Gtk.Button button1;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -27,13 +27,16 @@ namespace FilePlugin {
             this.fixed1.Name = "fixed1";
             this.fixed1.HasWindow = false;
             // Container child fixed1.Gtk.Fixed+FixedChild
-            this.label1 = new Gtk.Label();
-            this.label1.Name = "label1";
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Hello, world!");
-            this.fixed1.Add(this.label1);
-            Gtk.Fixed.FixedChild w1 = ((Gtk.Fixed.FixedChild)(this.fixed1[this.label1]));
-            w1.X = 110;
-            w1.Y = 112;
+            this.button1 = new Gtk.Button();
+            this.button1.CanFocus = true;
+            this.button1.Name = "button1";
+            this.button1.UseStock = true;
+            this.button1.UseUnderline = true;
+            this.button1.Label = "gtk-spell-check";
+            this.fixed1.Add(this.button1);
+            Gtk.Fixed.FixedChild w1 = ((Gtk.Fixed.FixedChild)(this.fixed1[this.button1]));
+            w1.X = 59;
+            w1.Y = 68;
             this.Add(this.fixed1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

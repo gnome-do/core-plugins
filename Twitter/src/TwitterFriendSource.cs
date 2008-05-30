@@ -73,5 +73,9 @@ namespace DoTwitter
 			updateRunner.Start ();
 			items = TwitterAction.Friends;
 		}
+		
+		public Gtk.Bin GetConfiguration () {
+			return new Configuration ();
+		}
 	}
 }

@@ -1,0 +1,6 @@
+<objects>
+  <object type="GCalendar.Configuration" palette-category="GCalendar" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+</objects>

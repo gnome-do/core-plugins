@@ -1,4 +1,4 @@
-//  EvolutionContactItemSource.cs
+//  ContactItemSource.cs
 //
 //  GNOME Do is the legal property of its developers.
 //  Please refer to the COPYRIGHT file distributed with this
@@ -21,18 +21,16 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-using Evolution;
-
 using Do.Universe;
 
-namespace Do.Evolution
+namespace Evolution
 {
-	public class EvolutionContactItemSource : IItemSource
+	public class ContactItemSource : IItemSource
 	{
 		List<IItem> contacts;
 		List<string> pictureFiles;
 		
-		public EvolutionContactItemSource ()
+		public ContactItemSource ()
 		{
 			contacts = new List<IItem> ();
 			pictureFiles = new List<string> ();
