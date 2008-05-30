@@ -23,11 +23,14 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 
+using Gtk;
+
+using Do.Addins;
 using Do.Universe;
 
 namespace GMailContacts
 {	
-	public sealed class GMailContactsItemSource : IItemSource
+	public sealed class GMailContactsItemSource : IItemSource, IConfigurable
 	{
 		private List<IItem> items;
 		
@@ -75,6 +78,11 @@ namespace GMailContacts
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}
-		}	
+		}
+		
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new Configuration ();
+		}
 	}
 }

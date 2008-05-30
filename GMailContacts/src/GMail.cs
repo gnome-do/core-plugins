@@ -37,6 +37,7 @@ namespace GMailContacts
 {
 	public static class GMail
 	{
+		private static string gAppName = "alexLauni-gnomeDoGMailPlugin-1";
 		private static List<IItem> contacts;
 		private static DateTime lastUpdated;
 		private static ContactsService service;
@@ -46,16 +47,27 @@ namespace GMailContacts
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			contacts = new List<IItem> ();
 			lastUpdated = new DateTime ();
-			service = new ContactsService ("alexLauni-gnomeDoGMailPlugin-1");
 			string username, password;
-			GetAccountDataFromKeyring (out username, out password);
-			try {
-				service.setUserCredentials (username, password);
-			} catch { }
+			GetUserAndPassFromKeyring (out username, out password, gAppName);
+			Connect (username, password);
 		}
 		
 		public static List<IItem> Contacts {
 			get { return contacts; }
+		}
+		
+		public static string GAppName {
+			get { return gAppName; }
+		}
+		
+		private static void Connect (string username, string password) 
+		{
+			try {
+				service = new ContactsService (GAppName);
+				service.setUserCredentials (username, password);
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
+			}
 		}
 		
 		public static void UpdateContacts ()
@@ -120,54 +132,66 @@ namespace GMailContacts
 			return null;
 		}
 		
-		private static void GetAccountDataFromKeyring (out string username, out string password)
+		public static void GetUserAndPassFromKeyring (out string username, out string password,
+		                                              string keyringItemName)
 		{
-			string keyring_item_name = "Google Account";
-			Hashtable request_attributes = new Hashtable();
-			request_attributes ["name"] = keyring_item_name;
-			
 			username = password = "";
+			Hashtable ht = new Hashtable ();
+			ht ["name"] = keyringItemName;
+			
 			try {
-				foreach(ItemData result in Ring.Find(ItemType.GenericSecret, request_attributes)) {
-					if(!result.Attributes.ContainsKey("name") || !result.Attributes.ContainsKey("username") ||
-						(result.Attributes ["name"] as string) != keyring_item_name) 
-						continue;
-					
-					username = (result.Attributes ["username"] as string);
-					password = result.Secret;
-					if (username == null || username == String.Empty || password == null || password == String.Empty)
-						throw new ApplicationException ("Invalid username/password in keyring");
+				foreach (ItemData s in Ring.Find (ItemType.GenericSecret, ht)) {
+					if (s.Attributes.ContainsKey ("name") && s.Attributes.ContainsKey ("username")
+					    && (s.Attributes ["name"] as string).Equals (keyringItemName)) {
+						username = s.Attributes ["username"] as string;
+						password = s.Secret;
+						return;
+					}
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine ("GMailContacts Error: {0}",e.Message);
-				string account_info = Environment.GetEnvironmentVariable ("HOME")
-					+ "/.config/gnome-do/google-name";
-				try {
-					StreamReader reader = File.OpenText(account_info);
-					username = reader.ReadLine ();
-					password = reader.ReadLine ();
-					WriteAccount (username, password,keyring_item_name);
-				} catch { 
-					Console.Error.WriteLine ("Could not find file! ~/.config/gnome-do/google-name");
-				} 
+				Console.Error.WriteLine ("No account info stored for {0}",
+				                         keyringItemName);
+			}
+		}
+				
+		public static void WriteAccountToKeyring (string username, string password,
+		                                   string keyringItemName)
+		{
+			string oldUsername, oldPassword, keyring;
+			
+			try {
+				keyring = Ring.GetDefaultKeyring ();
+				Hashtable ht = new Hashtable ();
+				ht["name"] = keyringItemName;
+				ht["username"] = username;
+				
+				GetUserAndPassFromKeyring (out oldUsername, out oldPassword,
+				                           keyringItemName);
+				
+				Ring.CreateItem (keyring, ItemType.GenericSecret, keyringItemName,
+				                 ht, password, true);
+			} catch (Exception e) {
+				Console.Error.WriteLine (e);
 			}
 		}
 		
-		private static void WriteAccount(string username, string password,
-		                                 string keyringItemName)
+		public static bool TryConnect (string username, string password)
 		{
-			string keyring;
-			keyring = Ring.GetDefaultKeyring();
-			Hashtable update_request_attributes = new Hashtable();
-			update_request_attributes ["name"] = keyringItemName;
-			update_request_attributes ["username"] = username;
-
+			ContactsService test;
+			ContactsQuery query; 
+			
+			test = new ContactsService (GAppName);
+			test.setUserCredentials (username, password);
+			query = new ContactsQuery(ContactsQuery.CreateContactsUri ("default"));
+			
 			try {
-				Ring.CreateItem(keyring, ItemType.GenericSecret, keyringItemName,
-				                update_request_attributes, password, true);
+				test.Query (query);
+				Connect (username, password);
 			} catch (Exception e) {
-				Console.WriteLine("GMailContacts Error: {0}",e.Message);
+				Console.Error.WriteLine (e.Message);
+				return false;
 			}
+			return true;
 		}
 	}
 }

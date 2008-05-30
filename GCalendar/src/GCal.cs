@@ -65,7 +65,7 @@ namespace GCalendar
 			get { return calendars; }
 		}
 
-		public static void Connect (string username, string password) 
+		private static void Connect (string username, string password) 
 		{
 			try {
 				service = new CalendarService (GAppName);
@@ -74,6 +74,7 @@ namespace GCalendar
 				Console.Error.WriteLine (e.Message);
 			}
 		}
+		
 		public static void UpdateCalendars ()
 		{		
 			if (!Monitor.TryEnter (calendars)) return;
@@ -295,10 +296,6 @@ namespace GCalendar
 				Console.Error.WriteLine ("No account info stored for {0}",
 				                         keyringItemName);
 			}
-		}
-		
-		private static void DeleteAccountFromKeyring (string keyringItemName)
-		{
 		}
 				
 		public static void WriteAccountToKeyring (string username, string password,
