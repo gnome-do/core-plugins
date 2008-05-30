@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Evolution"
-	description="Indexes your Evolution contacts"
+	description="Indexes your Evolution contacts."
 	author="David Siegel"
 >
  
@@ -17,7 +17,7 @@
 	
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
-	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Evolution.EvolutionContactItemSource" />
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Evolution.ContactItemSource" />
 	</Extension>
 </Addin>
