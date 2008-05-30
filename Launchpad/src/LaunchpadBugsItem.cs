@@ -66,7 +66,7 @@ namespace Do.Launchpad
 
 		public void Perform (IItem item)
 		{
-			Util.Environment.Open(string.Format("https://launchpad.net/{0}/+filebug", (item as ITextItem).Text));
+			Util.Environment.Open(string.Format("https://bugs.launchpad.net/bugs/+filebug", (item as ITextItem).Text));
 		}
 	}
 
@@ -114,7 +114,7 @@ namespace Do.Launchpad
 			Regex spaces = new Regex(@"\s+");
 			string query = (item as ITextItem).Text;
 			string[] qwords = spaces.Split(query);
-			Util.Environment.Open("https://bugs.launchpad.net/+bugs?field.searchtext=" + string.Join("+", qwords));
+			Util.Environment.Open("https://bugs.launchpad.net/bugs/+bugs?field.searchtext=" + string.Join("+", qwords));
 		}
 	}
 }
