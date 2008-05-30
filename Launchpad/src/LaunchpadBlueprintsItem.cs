@@ -37,6 +37,7 @@ namespace Do.Launchpad
 
 		public bool SupportsItems(IItem[] items)
 		{
+            if (items == null) { return false; }
 			//Package name can't have a space
 			Regex numbers = new Regex(@"\s+");
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
