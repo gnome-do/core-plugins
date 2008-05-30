@@ -36,6 +36,7 @@ namespace GCalendar
 {
 	public class GCal
 	{
+		private static string gAppName = "alexLauni-gnomeDoGCalPlugin-1.2";
 		private static string username, password;
 		private static CalendarService service;
 		private static List<IItem> calendars;
@@ -47,23 +48,28 @@ namespace GCalendar
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			calendars = new List<IItem> ();
 			ClearCalendarsTimer = new Timer (ClearCalendars);
-			SetCredentials ();
+			GetUserAndPassFromKeyring (out username, out password,
+			                           gAppName);
 			try {
-				Connect ();
+				Connect (username, password);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}
+		}
+		
+		public static string GAppName {
+			get { return gAppName; }
 		}
 		
 		public static List<IItem> Calendars {
 			get { return calendars; }
 		}
 
-		public static void Connect () 
+		public static void Connect (string username, string password) 
 		{
 			try {
-				service = new CalendarService("alexLauni-gnomeDoGCalPlugin-1");
-				service.setUserCredentials(username, password);
+				service = new CalendarService (GAppName);
+				service.setUserCredentials (username, password);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}
@@ -157,37 +163,6 @@ namespace GCalendar
 			}
             return nevent;
         }
-		
-		private static void SetCredentials ()
-		{
-			string keyring_item_name = "Google Account";
-			Hashtable request_attributes = new Hashtable();
-			request_attributes["name"] = keyring_item_name;
-			try {
-				foreach(ItemData result in Ring.Find(ItemType.GenericSecret, request_attributes)) {
-					if(!result.Attributes.ContainsKey("name") || !result.Attributes.ContainsKey("username") ||
-						(result.Attributes["name"] as string) != keyring_item_name) 
-						continue;
-					
-					username = (string)result.Attributes["username"];
-					password = result.Secret;
-					if (username == null || username == String.Empty || password == null || password == String.Empty)
-						throw new ApplicationException ("Invalid username/password in keyring");
-				}
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-				string account_info = Environment.GetEnvironmentVariable ("HOME")
-					+ "/.config/gnome-do/google-name";
-				try {
-					StreamReader reader = File.OpenText(account_info);
-					username = reader.ReadLine ();
-					password = reader.ReadLine ();
-					WriteAccount ();
-				} catch { 
-					Console.Error.WriteLine ("[ERROR] " + account_info + " cannot be read!");
-				} 
-			}
-		}
 		
 		private static void ClearCalendars (object state)
 		{
@@ -299,27 +274,71 @@ namespace GCalendar
 			
 			return needle;				                        
 		}
-		
-		private static void WriteAccount ()
+				
+		public static void GetUserAndPassFromKeyring (out string username, out string password,
+		                                              string keyringItemName)
 		{
-			string keyring_item_name = "Google Account";
-			string keyring;
+			username = password = "";
+			Hashtable ht = new Hashtable ();
+			ht ["name"] = keyringItemName;
+			
 			try {
-				keyring = Ring.GetDefaultKeyring();
-			} catch {
-				username = null;
-				password = null;
-				return;
-			}
-			Hashtable update_request_attributes = new Hashtable();
-			update_request_attributes["name"] = keyring_item_name;
-			update_request_attributes["username"] = username;
-
-			try {
-				Ring.CreateItem(keyring, ItemType.GenericSecret, keyring_item_name, update_request_attributes, password, true);
+				foreach (ItemData s in Ring.Find (ItemType.GenericSecret, ht)) {
+					if (s.Attributes.ContainsKey ("name") && s.Attributes.ContainsKey ("username")
+					    && (s.Attributes ["name"] as string).Equals (keyringItemName)) {
+						username = s.Attributes ["username"] as string;
+						password = s.Secret;
+						return;
+					}
+				}
 			} catch (Exception e) {
-				Console.WriteLine(e.Message);
+				Console.Error.WriteLine ("No account info stored for {0}",
+				                         keyringItemName);
 			}
+		}
+		
+		private static void DeleteAccountFromKeyring (string keyringItemName)
+		{
+		}
+				
+		public static void WriteAccountToKeyring (string username, string password,
+		                                   string keyringItemName)
+		{
+			string oldUsername, oldPassword, keyring;
+			
+			try {
+				keyring = Ring.GetDefaultKeyring ();
+				Hashtable ht = new Hashtable ();
+				ht["name"] = keyringItemName;
+				ht["username"] = username;
+				
+				GetUserAndPassFromKeyring (out oldUsername, out oldPassword,
+				                           keyringItemName);
+				
+				Ring.CreateItem (keyring, ItemType.GenericSecret, keyringItemName,
+				                 ht, password, true);
+			} catch (Exception e) {
+				Console.Error.WriteLine (e);
+			}
+		}
+		
+		public static bool TryConnect (string username, string password)
+		{
+			CalendarService test;
+			FeedQuery query;
+			
+			test = new CalendarService (GAppName);
+			test.setUserCredentials (username, password);
+			query = new FeedQuery ();
+			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
+			try {
+				test.Query (query);
+				Connect (username, password);
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
+				return false;
+			}
+			return true;
 		}
 	}
 }

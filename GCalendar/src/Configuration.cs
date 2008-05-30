@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Text.RegularExpressions;
 using Gtk;
 using Do.Addins;
 
@@ -30,6 +31,12 @@ namespace GCalendar
 		public Configuration()
 		{
 			this.Build();
+			string username, password;
+			
+			GCal.GetUserAndPassFromKeyring (out username, out password,
+			                                GCal.GAppName);
+			username_entry.Text = username;
+			passwd_entry.Text = password;
 		}
 
 		protected virtual void OnNewAcctClicked (object sender, System.EventArgs e)
@@ -37,9 +44,35 @@ namespace GCalendar
 			Util.Environment.Open ("https://www.google.com/accounts/NewAccount?service=cl");
 		}
 
-		protected virtual void OnUsernameEntryEditingDone (object sender, System.EventArgs e)
+		protected virtual void OnApplyBtnClicked (object sender, System.EventArgs e)
 		{
-			Console.Error.WriteLine (username_entry.Text);
+			string username = username_entry.Text.Trim ();
+			string password = passwd_entry.Text.Trim ();
+			
+			if (ValidateUsername (username) && ValidatePassword (password)
+			    && GCal.TryConnect (username, password)) {
+				valid_lbl.Markup = "<i>Account validation succeeded</i>!";
+				GCal.WriteAccountToKeyring (username, password, GCal.GAppName);
+				return;
+			}
+			
+			valid_lbl.Markup = "<i>Account validation failed!</i>";
 		}
+		
+		private bool ValidateUsername (string username)
+		{
+			const string emailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
+            + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
+            + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
+			
+			Regex validEmail = new Regex (emailPattern, RegexOptions.Compiled);
+			return validEmail.IsMatch (username);
+		}
+		
+		private bool ValidatePassword (string password)
+		{
+			return password.Length >= 8;
+		}
+		
 	}
 }
