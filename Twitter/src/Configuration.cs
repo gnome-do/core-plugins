@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Threading;
 using Gtk;
 using GConf;
 using Do.Addins;
@@ -56,13 +57,23 @@ namespace DoTwitter
 			string username = username_entry.Text.Trim ();
 			string password = passwd_entry.Text.Trim ();
 			
-			if (TwitterAction.TryConnect (username, password)) {
-				valid_lbl.Markup = "<i>Account validation succeeded</i>!";
-				TwitterAction.SetAccountData (username, password);
-				return;
-			}
+			apply_btn.Label = "Validating...";
+			apply_btn.Sensitive = false;
 			
-			valid_lbl.Markup = "<i>Account validation failed!</i>";
+			new Thread ((ThreadStart) delegate {
+				bool valid = TwitterAction.TryConnect (username, password);
+				
+				Gtk.Application.Invoke (delegate {
+					if (valid) {
+						valid_lbl.Markup = "<i>Account validation succeeded</i>!";
+						TwitterAction.SetAccountData (username, password);
+					} else {
+						valid_lbl.Markup = "<i>Account validation failed!</i>";
+					}
+					apply_btn.Label = "Apply";
+					apply_btn.Sensitive = true;
+				});
+			}).Start ();
 		}
 	}
 }

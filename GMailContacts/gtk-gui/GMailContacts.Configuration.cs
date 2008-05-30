@@ -35,9 +35,9 @@ namespace GMailContacts {
         
         private Gtk.Fixed fixed5;
         
-        private Gtk.Button apply_btn;
-        
         private Gtk.Fixed fixed6;
+        
+        private Gtk.Button apply_btn;
         
         private Gtk.VBox vbox4;
         
@@ -126,6 +126,7 @@ namespace GMailContacts {
             w5.Position = 0;
             w5.Expand = false;
             w5.Fill = false;
+            w5.Padding = ((uint)(5));
             // Container child vbox2.Gtk.Box+BoxChild
             this.vbox3 = new Gtk.VBox();
             this.vbox3.Name = "vbox3";
@@ -156,51 +157,38 @@ namespace GMailContacts {
             Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.hbox1[this.fixed5]));
             w7.Position = 0;
             // Container child hbox1.Gtk.Box+BoxChild
-            this.apply_btn = new Gtk.Button();
-            this.apply_btn.WidthRequest = 105;
-            this.apply_btn.CanFocus = true;
-            this.apply_btn.Name = "apply_btn";
-            this.apply_btn.UseUnderline = true;
-            // Container child apply_btn.Gtk.Container+ContainerChild
-            Gtk.Alignment w8 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w9 = new Gtk.HBox();
-            w9.Spacing = 2;
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w10 = new Gtk.Image();
-            w10.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-apply", Gtk.IconSize.Menu, 16);
-            w9.Add(w10);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w12 = new Gtk.Label();
-            w12.LabelProp = Mono.Unix.Catalog.GetString("_Validate");
-            w12.UseUnderline = true;
-            w9.Add(w12);
-            w8.Add(w9);
-            this.apply_btn.Add(w8);
-            this.hbox1.Add(this.apply_btn);
-            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(this.hbox1[this.apply_btn]));
-            w16.Position = 1;
-            w16.Expand = false;
-            w16.Fill = false;
-            // Container child hbox1.Gtk.Box+BoxChild
             this.fixed6 = new Gtk.Fixed();
             this.fixed6.Name = "fixed6";
             this.fixed6.HasWindow = false;
             this.hbox1.Add(this.fixed6);
-            Gtk.Box.BoxChild w17 = ((Gtk.Box.BoxChild)(this.hbox1[this.fixed6]));
-            w17.Position = 2;
+            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.hbox1[this.fixed6]));
+            w8.Position = 1;
+            // Container child hbox1.Gtk.Box+BoxChild
+            this.apply_btn = new Gtk.Button();
+            this.apply_btn.WidthRequest = 105;
+            this.apply_btn.CanFocus = true;
+            this.apply_btn.Name = "apply_btn";
+            this.apply_btn.UseStock = true;
+            this.apply_btn.UseUnderline = true;
+            this.apply_btn.Label = "gtk-apply";
+            this.hbox1.Add(this.apply_btn);
+            Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(this.hbox1[this.apply_btn]));
+            w9.Position = 2;
+            w9.Expand = false;
+            w9.Fill = false;
+            w9.Padding = ((uint)(10));
             this.vbox1.Add(this.hbox1);
-            Gtk.Box.BoxChild w18 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
-            w18.Position = 1;
-            w18.Expand = false;
-            w18.Fill = false;
+            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
+            w10.Position = 1;
+            w10.Expand = false;
+            w10.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.vbox4 = new Gtk.VBox();
             this.vbox4.Name = "vbox4";
             this.vbox4.Spacing = 6;
             this.vbox1.Add(this.vbox4);
-            Gtk.Box.BoxChild w19 = ((Gtk.Box.BoxChild)(this.vbox1[this.vbox4]));
-            w19.Position = 2;
+            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.vbox1[this.vbox4]));
+            w11.Position = 2;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbox2 = new Gtk.HBox();
             this.hbox2.Name = "hbox2";
@@ -210,30 +198,30 @@ namespace GMailContacts {
             this.fixed4.Name = "fixed4";
             this.fixed4.HasWindow = false;
             this.hbox2.Add(this.fixed4);
-            Gtk.Box.BoxChild w20 = ((Gtk.Box.BoxChild)(this.hbox2[this.fixed4]));
-            w20.Position = 0;
+            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.hbox2[this.fixed4]));
+            w12.Position = 0;
             // Container child hbox2.Gtk.Box+BoxChild
             this.hseparator1 = new Gtk.HSeparator();
             this.hseparator1.WidthRequest = 250;
             this.hseparator1.Name = "hseparator1";
             this.hbox2.Add(this.hseparator1);
-            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.hbox2[this.hseparator1]));
-            w21.Position = 1;
+            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.hbox2[this.hseparator1]));
+            w13.Position = 1;
             // Container child hbox2.Gtk.Box+BoxChild
             this.fixed1 = new Gtk.Fixed();
             this.fixed1.Name = "fixed1";
             this.fixed1.HasWindow = false;
             this.hbox2.Add(this.fixed1);
-            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.hbox2[this.fixed1]));
-            w22.Position = 2;
+            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox2[this.fixed1]));
+            w14.Position = 2;
             this.vbox1.Add(this.hbox2);
-            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
-            w23.Position = 3;
-            w23.Expand = false;
-            w23.Fill = false;
+            Gtk.Box.BoxChild w15 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
+            w15.Position = 3;
+            w15.Expand = false;
+            w15.Fill = false;
             this.vbox3.Add(this.vbox1);
-            Gtk.Box.BoxChild w24 = ((Gtk.Box.BoxChild)(this.vbox3[this.vbox1]));
-            w24.Position = 0;
+            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(this.vbox3[this.vbox1]));
+            w16.Position = 0;
             // Container child vbox3.Gtk.Box+BoxChild
             this.table2 = new Gtk.Table(((uint)(4)), ((uint)(1)), false);
             this.table2.Name = "table2";
@@ -245,8 +233,8 @@ namespace GMailContacts {
             this.label1.LabelProp = Mono.Unix.Catalog.GetString("<i>Don't have a Google account?</i>");
             this.label1.UseMarkup = true;
             this.table2.Add(this.label1);
-            Gtk.Table.TableChild w25 = ((Gtk.Table.TableChild)(this.table2[this.label1]));
-            w25.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table2[this.label1]));
+            w17.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.table3 = new Gtk.Table(((uint)(1)), ((uint)(3)), false);
             this.table3.Name = "table3";
@@ -257,17 +245,17 @@ namespace GMailContacts {
             this.fixed2.Name = "fixed2";
             this.fixed2.HasWindow = false;
             this.table3.Add(this.fixed2);
-            Gtk.Table.TableChild w26 = ((Gtk.Table.TableChild)(this.table3[this.fixed2]));
-            w26.LeftAttach = ((uint)(2));
-            w26.RightAttach = ((uint)(3));
-            w26.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w18 = ((Gtk.Table.TableChild)(this.table3[this.fixed2]));
+            w18.LeftAttach = ((uint)(2));
+            w18.RightAttach = ((uint)(3));
+            w18.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.fixed3 = new Gtk.Fixed();
             this.fixed3.Name = "fixed3";
             this.fixed3.HasWindow = false;
             this.table3.Add(this.fixed3);
-            Gtk.Table.TableChild w27 = ((Gtk.Table.TableChild)(this.table3[this.fixed3]));
-            w27.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w19 = ((Gtk.Table.TableChild)(this.table3[this.fixed3]));
+            w19.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.new_acct = new Gtk.Button();
             this.new_acct.CanFocus = true;
@@ -275,26 +263,26 @@ namespace GMailContacts {
             this.new_acct.UseUnderline = true;
             this.new_acct.Label = Mono.Unix.Catalog.GetString("Sign up for GMail");
             this.table3.Add(this.new_acct);
-            Gtk.Table.TableChild w28 = ((Gtk.Table.TableChild)(this.table3[this.new_acct]));
-            w28.LeftAttach = ((uint)(1));
-            w28.RightAttach = ((uint)(2));
-            w28.XOptions = ((Gtk.AttachOptions)(4));
-            w28.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w20 = ((Gtk.Table.TableChild)(this.table3[this.new_acct]));
+            w20.LeftAttach = ((uint)(1));
+            w20.RightAttach = ((uint)(2));
+            w20.XOptions = ((Gtk.AttachOptions)(4));
+            w20.YOptions = ((Gtk.AttachOptions)(4));
             this.table2.Add(this.table3);
-            Gtk.Table.TableChild w29 = ((Gtk.Table.TableChild)(this.table2[this.table3]));
-            w29.TopAttach = ((uint)(1));
-            w29.BottomAttach = ((uint)(4));
-            w29.YPadding = ((uint)(5));
-            w29.XOptions = ((Gtk.AttachOptions)(4));
-            w29.YOptions = ((Gtk.AttachOptions)(0));
+            Gtk.Table.TableChild w21 = ((Gtk.Table.TableChild)(this.table2[this.table3]));
+            w21.TopAttach = ((uint)(1));
+            w21.BottomAttach = ((uint)(4));
+            w21.YPadding = ((uint)(5));
+            w21.XOptions = ((Gtk.AttachOptions)(4));
+            w21.YOptions = ((Gtk.AttachOptions)(0));
             this.vbox3.Add(this.table2);
-            Gtk.Box.BoxChild w30 = ((Gtk.Box.BoxChild)(this.vbox3[this.table2]));
-            w30.Position = 1;
-            w30.Expand = false;
-            w30.Fill = false;
+            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.vbox3[this.table2]));
+            w22.Position = 1;
+            w22.Expand = false;
+            w22.Fill = false;
             this.vbox2.Add(this.vbox3);
-            Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.vbox2[this.vbox3]));
-            w31.Position = 1;
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox2[this.vbox3]));
+            w23.Position = 1;
             this.Add(this.vbox2);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

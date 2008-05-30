@@ -95,7 +95,6 @@ namespace GMailContacts
 						continue;
 					}
 					*/
-					Console.Error.WriteLine (entry.Title.Text);
 					buddy = ContactItem.CreateWithName (entry.Title.Text);					
 					foreach (PostalAddress postal in entry.PostalAddresses)
 						buddy["address"] = postal.Value.Replace('\n', ' ');

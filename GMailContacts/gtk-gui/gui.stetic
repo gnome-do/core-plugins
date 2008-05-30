@@ -7,7 +7,7 @@
   <import>
     <widget-library name="../bin/Release/GMailContacts.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="GMailContacts.Configuration" design-size="316 329">
+  <widget class="Gtk.Bin" id="GMailContacts.Configuration" design-size="316 420">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox2">
@@ -108,6 +108,7 @@
             <property name="AutoSize">True</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
+            <property name="Padding">5</property>
           </packing>
         </child>
         <child>
@@ -146,31 +147,32 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Button" id="apply_btn">
-                        <property name="MemberName" />
-                        <property name="WidthRequest">105</property>
-                        <property name="CanFocus">True</property>
-                        <property name="Type">TextAndIcon</property>
-                        <property name="Icon">stock:gtk-apply Menu</property>
-                        <property name="Label" translatable="yes">_Validate</property>
-                        <property name="UseUnderline">True</property>
-                        <signal name="Clicked" handler="OnApplyBtnClicked" />
-                      </widget>
-                      <packing>
-                        <property name="Position">1</property>
-                        <property name="AutoSize">True</property>
-                        <property name="Expand">False</property>
-                        <property name="Fill">False</property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="Gtk.Fixed" id="fixed6">
                         <property name="MemberName" />
                         <property name="HasWindow">False</property>
                       </widget>
                       <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Button" id="apply_btn">
+                        <property name="MemberName" />
+                        <property name="WidthRequest">105</property>
+                        <property name="CanFocus">True</property>
+                        <property name="UseStock">True</property>
+                        <property name="Type">StockItem</property>
+                        <property name="StockId">gtk-apply</property>
+                        <signal name="Clicked" handler="OnApplyBtnClicked" />
+                        <property name="label">gtk-apply</property>
+                      </widget>
+                      <packing>
                         <property name="Position">2</property>
                         <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                        <property name="Padding">10</property>
                       </packing>
                     </child>
                   </widget>

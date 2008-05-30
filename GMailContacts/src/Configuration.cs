@@ -48,15 +48,17 @@ namespace GMailContacts
 		{
 			string username = username_entry.Text.Trim ();
 			string password = passwd_entry.Text.Trim ();
-			
+			apply_btn.Label = "Validating...";
+			apply_btn.Sensitive = false;
 			if (ValidateUsername (username) && ValidatePassword (password)
 			    && GMail.TryConnect (username, password)) {
 				valid_lbl.Markup = "<i>Account validation succeeded</i>!";
 				GMail.WriteAccountToKeyring (username, password, GMail.GAppName);
-				return;
+			} else {			
+				valid_lbl.Markup = "<i>Account validation failed!</i>";
 			}
-			
-			valid_lbl.Markup = "<i>Account validation failed!</i>";
+			apply_btn.Label = "_Apply";
+			apply_btn.Sensitive = true;
 		}
 		
 		private bool ValidateUsername (string username)
