@@ -36,7 +36,7 @@ namespace GCalendar
 {
 	public class GCal
 	{
-		private static string gAppName = "alexLauni-gnomeDoGCalPlugin-1.2";
+		private static string gAppName = "alexLauni-gnomeDoGCalPlugin-1.2.2";
 		private static string username, password;
 		private static CalendarService service;
 		private static List<IItem> calendars;
@@ -301,7 +301,7 @@ namespace GCalendar
 		public static void WriteAccountToKeyring (string username, string password,
 		                                   string keyringItemName)
 		{
-			string oldUsername, oldPassword, keyring;
+			string keyring;
 			
 			try {
 				keyring = Ring.GetDefaultKeyring ();
@@ -309,11 +309,13 @@ namespace GCalendar
 				ht["name"] = keyringItemName;
 				ht["username"] = username;
 				
-				GetUserAndPassFromKeyring (out oldUsername, out oldPassword,
-				                           keyringItemName);
-				
 				Ring.CreateItem (keyring, ItemType.GenericSecret, keyringItemName,
 				                 ht, password, true);
+				
+				Console.Error.WriteLine ("Writing {0} to keyring.",username);
+				
+				GetUserAndPassFromKeyring (out username, out password, keyringItemName);
+				Console.Error.WriteLine ("{0} is now stored in keyring", username);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e);
 			}
