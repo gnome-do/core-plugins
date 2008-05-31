@@ -29,7 +29,8 @@ namespace GCalendar
 {
 	public partial class Configuration : AbstractLogin
 	{		
-		public Configuration () : base ()
+		public Configuration () : 
+			base ("Google Calendar")
 		{
 			this.Build (); 
 			
@@ -40,8 +41,6 @@ namespace GCalendar
 			base.Username.Text = username;
 			base.Password.Text = password;
 			
-			base.GetAccountLabel.Markup = "<i>Don't have a Google Calendar?</i>";
-			base.GetAccountButton.Label = "Sign up for Google Calendar";
 			base.GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
 		

@@ -28,7 +28,8 @@ namespace DoTwitter
 {
 	public partial class Configuration : AbstractLogin
 	{
-		public Configuration () : base ()
+		public Configuration () : 
+			base ("Twitter")
 		{
 			this.Build();
 			string username, password;
@@ -45,10 +46,7 @@ namespace DoTwitter
 			base.Username.Text = username;
 			base.Password.Text = password;
 			
-			base.GetAccountLabel.Markup = "<i>Don't have a Twitter account?</i>";
-			base.GetAccountButton.Label = "Get Twitter Account";
-			base.GetAccountButton.Uri = "https://twitter.com/signup";
-			
+			base.GetAccountButton.Uri = "https://twitter.com/signup";			
 		}
 		
 		protected override void Validate ()
