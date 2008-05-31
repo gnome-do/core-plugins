@@ -5,7 +5,7 @@
     <target-gtk-version>2.12.0</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../bin/Release/Twitter.dll" internal="true" />
+    <widget-library name="../bin/Debug/Twitter.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="DoTwitter.Configuration" design-size="316 329">
     <property name="MemberName" />
