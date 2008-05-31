@@ -1,9 +1,6 @@
 <Combine releaseversion="0.4.9.9" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <CustomCommands>
-        <Command type="AfterBuild" command="mdtoolize" workingdir="${CombineDir}" />
-      </CustomCommands>
       <Entry build="False" name="Templates" configuration="Debug" />
       <Entry build="True" name="Packages" configuration="" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
@@ -39,7 +36,7 @@
       <Entry build="False" name="Templates" configuration="Release" />
       <Entry build="True" name="Packages" configuration="" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
-      <Entry build="True" name="Amarok" configuration="Release" />
+      <Entry build="False" name="Amarok" configuration="Release" />
       <Entry build="True" name="Banshee" configuration="Release" />
       <Entry build="True" name="Epiphany" configuration="Release" />
       <Entry build="True" name="Evolution" configuration="Release" />

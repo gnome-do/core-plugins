@@ -1,5 +1,5 @@
 <Project name="Tasque" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Tasque" />
       <Build debugmode="True" target="Library" />
