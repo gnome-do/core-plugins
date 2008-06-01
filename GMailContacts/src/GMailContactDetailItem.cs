@@ -26,24 +26,32 @@ namespace GMailContacts
 {
 	public class GMailContactDetailItem : IContactDetailItem 
 	{
-		private string name, email, icon;
+		private string type, email, icon;
 		
-		public GMailContactDetailItem (string name, string email)
+		public GMailContactDetailItem (string type, string email)
 		{
-			this.name = name;
+			this.type = type.ToLower ();
 			this.email = email;
 			this.icon = "stock_person";
 		}
 		
-		public GMailContactDetailItem (string name, string email, string icon)
+		public GMailContactDetailItem (string type, string email, string icon)
 		{
-			this.name = name;
+			this.type = type;
 			this.email = email;
 			this.icon = icon;
 		}
 		
 		public string Name {
-			get { return name; }
+			get {
+				switch (type) {
+				case "email": return "Primary Email";
+				case "email.work": return "Work Email";
+				case "email.home": return "Home Email";
+				default:
+					return "Other Email";
+				}
+			}
 		}
 		
 		public string Description {
