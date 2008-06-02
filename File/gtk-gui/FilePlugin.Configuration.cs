@@ -13,11 +13,31 @@ namespace FilePlugin {
     
     public partial class Configuration {
         
+        private Gtk.Fixed fixed1;
+        
+        private Gtk.Button button1;
+        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget FilePlugin.Configuration
             Stetic.BinContainer.Attach(this);
             this.Name = "FilePlugin.Configuration";
+            // Container child FilePlugin.Configuration.Gtk.Container+ContainerChild
+            this.fixed1 = new Gtk.Fixed();
+            this.fixed1.Name = "fixed1";
+            this.fixed1.HasWindow = false;
+            // Container child fixed1.Gtk.Fixed+FixedChild
+            this.button1 = new Gtk.Button();
+            this.button1.CanFocus = true;
+            this.button1.Name = "button1";
+            this.button1.UseStock = true;
+            this.button1.UseUnderline = true;
+            this.button1.Label = "gtk-spell-check";
+            this.fixed1.Add(this.button1);
+            Gtk.Fixed.FixedChild w1 = ((Gtk.Fixed.FixedChild)(this.fixed1[this.button1]));
+            w1.X = 59;
+            w1.Y = 68;
+            this.Add(this.fixed1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }

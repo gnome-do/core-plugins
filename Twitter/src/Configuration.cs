@@ -43,31 +43,31 @@ namespace DoTwitter
 				password = "";
 			}
 			
-			Username.Text = username;
-			Password.Text = password;
+			base.Username.Text = username;
+			base.Password.Text = password;
 			
-			GetAccountButton.Uri = "https://twitter.com/signup";			
+			base.GetAccountButton.Uri = "https://twitter.com/signup";			
 		}
 		
 		protected override void Validate ()
 		{
-			string username = Username.Text;
-			string password = Password.Text;
+			string username = base.Username.Text;
+			string password = base.Password.Text;
 			
-			StatusLabel.Markup = "Validating...";
-			ValidateButton.Sensitive = false;
+			base.StatusLabel.Markup = "Validating...";
+			base.ValidateButton.Sensitive = false;
 			
 			new Thread ((ThreadStart) delegate {
 				bool valid = TwitterAction.TryConnect (username, password);
 				
 				Gtk.Application.Invoke (delegate {
 					if (valid) {
-						StatusLabel.Markup = "<i>Account validation succeeded</i>!";
+						base.StatusLabel.Markup = "<i>Account validation succeeded</i>!";
 						TwitterAction.SetAccountData (username, password);
 					} else {
-						StatusLabel.Markup = "<i>Account validation failed!</i>";
+						base.StatusLabel.Markup = "<i>Account validation failed!</i>";
 					}
-					ValidateButton.Sensitive = true;
+					base.ValidateButton.Sensitive = true;
 				});
 			}).Start ();
 		}

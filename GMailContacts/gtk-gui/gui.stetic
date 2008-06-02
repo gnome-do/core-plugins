@@ -165,7 +165,6 @@
                         <property name="UseStock">True</property>
                         <property name="Type">StockItem</property>
                         <property name="StockId">gtk-apply</property>
-                        <signal name="Clicked" handler="OnApplyBtnClicked" />
                         <property name="label">gtk-apply</property>
                       </widget>
                       <packing>
@@ -320,7 +319,6 @@
                         <property name="Type">TextOnly</property>
                         <property name="Label" translatable="yes">Sign up for GMail</property>
                         <property name="UseUnderline">True</property>
-                        <signal name="Clicked" handler="OnNewAcctClicked" />
                       </widget>
                       <packing>
                         <property name="LeftAttach">1</property>
