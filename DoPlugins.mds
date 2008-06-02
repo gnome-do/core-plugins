@@ -33,6 +33,7 @@
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="DiskMounter" configuration="Debug" />
       <Entry build="True" name="Text" configuration="Debug" />
+      <Entry build="True" name="GNOME Terminal" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -64,6 +65,7 @@
       <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="DiskMounter" configuration="Release" />
       <Entry build="True" name="Text" configuration="Release" />
+      <Entry build="True" name="GNOME Terminal" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -95,6 +97,7 @@
     <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="DiskMounter" />
     <Execute type="None" entry="Text" />
+    <Execute type="None" entry="GNOME Terminal" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -126,5 +129,6 @@
     <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="DiskMounter/DiskMounter.mdp" />
     <Entry filename="Text/Text.mdp" />
+    <Entry filename="GNOME Terminal/GNOME Terminal.mdp" />
   </Entries>
 </Combine>

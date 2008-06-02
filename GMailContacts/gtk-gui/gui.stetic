@@ -5,7 +5,7 @@
     <target-gtk-version>2.12.0</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../bin/Release/GMailContacts.dll" internal="true" />
+    <widget-library name="../bin/Debug/GMailContacts.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="GMailContacts.Configuration" design-size="316 420">
     <property name="MemberName" />
