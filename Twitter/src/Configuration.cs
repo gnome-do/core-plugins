@@ -20,7 +20,8 @@
 
 
 using System;
-using System.Threading;
+
+using Do.UI;
 using Do.Addins;
 using Gtk;
 
@@ -31,45 +32,12 @@ namespace DoTwitter
 		public Configuration () : 
 			base ("Twitter")
 		{
-			this.Build();
-			string username, password;
-			
-			GConf.Client gconf = new GConf.Client ();
-			try {
-				username = gconf.Get (TwitterAction.GConfKeyBase + "username") as string;
-				password = gconf.Get (TwitterAction.GConfKeyBase + "password") as string;
-			} catch (GConf.NoSuchKeyException) {
-				username = "";
-				password = "";
-			}
-			
-			base.Username.Text = username;
-			base.Password.Text = password;
-			
 			base.GetAccountButton.Uri = "https://twitter.com/signup";			
 		}
 		
-		protected override void Validate ()
+		protected override bool Validate ()
 		{
-			string username = base.Username.Text;
-			string password = base.Password.Text;
-			
-			base.StatusLabel.Markup = "Validating...";
-			base.ValidateButton.Sensitive = false;
-			
-			new Thread ((ThreadStart) delegate {
-				bool valid = TwitterAction.TryConnect (username, password);
-				
-				Gtk.Application.Invoke (delegate {
-					if (valid) {
-						base.StatusLabel.Markup = "<i>Account validation succeeded</i>!";
-						TwitterAction.SetAccountData (username, password);
-					} else {
-						base.StatusLabel.Markup = "<i>Account validation failed!</i>";
-					}
-					base.ValidateButton.Sensitive = true;
-				});
-			}).Start ();
+			return TwitterAction.TryConnect (UsernameEntry.Text, PasswordEntry.Text);
 		}
 	}
 }

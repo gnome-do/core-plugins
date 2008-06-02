@@ -19,11 +19,11 @@
  */
 
 using System;
-using System.Threading;
 using System.Text.RegularExpressions;
+
 using Gtk;
-using Do.Addins;
 using Do.UI;
+using Do.Addins;
 
 namespace GMailContacts
 {	

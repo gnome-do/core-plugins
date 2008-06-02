@@ -23,10 +23,8 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
 
-using Gnome.Keyring;
 using Do.Universe;
 
 using Google.GData.Client;
@@ -137,45 +135,6 @@ namespace GMailContacts
 			//WebClient client = new WebClient ();
 			//Client.DownloadFile(url, buddyIconDir + );
 			return null;
-		}
-		
-		
-		public static void GetUserAndPassFromKeyring (out string username, out string password,
-		                                              string keyringItemName)
-		{
-			username = password = "";
-			Hashtable ht = new Hashtable ();
-			ht ["name"] = keyringItemName;
-			
-			try {
-				foreach (ItemData s in Ring.Find (ItemType.GenericSecret, ht)) {
-					if (s.Attributes.ContainsKey ("name") && s.Attributes.ContainsKey ("username")
-					    && (s.Attributes ["name"] as string).Equals (keyringItemName)) {
-						username = s.Attributes ["username"] as string;
-						password = s.Secret;
-						return;
-					}
-				}
-			} catch (Exception) {
-				Console.Error.WriteLine ("No account info stored for {0}",
-				                         keyringItemName);
-			}
-		}
-				
-		public static void WriteAccountToKeyring (string username, string password,
-		                                   string keyringItemName)
-		{			
-			try {
-				keyring = Ring.GetDefaultKeyring ();
-				Hashtable ht = new Hashtable ();
-				ht["name"] = keyringItemName;
-				ht["username"] = username;
-				
-				Ring.CreateItem (keyring, ItemType.GenericSecret, keyringItemName,
-				                 ht, password, true);
-			} catch (Exception e) {
-				Console.Error.WriteLine (e);
-			}
 		}
 		*/
 		

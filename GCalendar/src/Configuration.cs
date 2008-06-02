@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
-using System.Threading;
 using System.Text.RegularExpressions;
+
 using Gtk;
+using Do.UI;
 using Do.Addins;
 
 namespace GCalendar
@@ -32,43 +32,14 @@ namespace GCalendar
 		public Configuration () : 
 			base ("Google Calendar")
 		{
-			this.Build (); 
-			
-			string username, password;
-			
-			GCal.GetUserAndPassFromKeyring (out username, out password,
-			                                GCal.GAppName);
-			Username.Text = username;
-			Password.Text = password;
-			
 			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
 		
-		protected override void Validate ()
+		protected override bool Validate ()
 		{
-			string username, password;
-			username = Username.Text;
-			password = Password.Text;
-			
-			if (ValidateUsername (username) && ValidatePassword (password))
-			{
-				StatusLabel.Markup = "Validating...";
-				ValidateButton.Sensitive = false;
-			
-				new Thread ((ThreadStart) delegate {
-					bool valid = GCal.TryConnect (username, password);
-					
-					Gtk.Application.Invoke (delegate {
-						if (valid) {
-							StatusLabel.Markup = "<i>Account validation succeeded</i>!";
-							GCal.WriteAccountToKeyring (username, password, GCal.GAppName);
-						} else {
-							StatusLabel.Markup = "<i>Account validation failed!</i>";
-						}
-						ValidateButton.Sensitive = true;
-					});
-				}).Start ();
-			}
+			if (ValidateUsername (UsernameEntry.Text) && PasswordEntry.Text.Length >= 8)
+				return GCal.TryConnect (UsernameEntry.Text, PasswordEntry.Text);
+			return false;
 		}
 		
 		private bool ValidateUsername (string username)
@@ -79,11 +50,6 @@ namespace GCalendar
 			
 			Regex validEmail = new Regex (emailPattern, RegexOptions.Compiled);
 			return validEmail.IsMatch (username);
-		}
-		
-		private bool ValidatePassword (string password)
-		{
-			return password.Length >= 8;
 		}
 	}
 }
