@@ -1,5 +1,5 @@
 <Addin
-	id="GNOME Terminal"
+	id="GNOMETerminal"
 	namespace= "Do"
 	version="1.0"
 	name="GNOME Terminal"
