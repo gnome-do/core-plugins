@@ -38,6 +38,7 @@ namespace GMailContacts
 	public static class GMail
 	{
 		private static string gAppName = "alexLauni-gnomeDoGMailPlugin-1";
+		private static string keyringName = "Passphrase for GMail (Gnome Do)";
 		private static List<IItem> contacts;
 		private static DateTime lastUpdated;
 		private static ContactsService service;
@@ -57,7 +58,7 @@ namespace GMailContacts
 		}
 		
 		public static string GAppName {
-			get { return gAppName; }
+			get { return keyringName; }
 		}
 		
 		private static void Connect (string username, string password) 

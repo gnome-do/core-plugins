@@ -26,7 +26,7 @@ using Do.Addins;
 
 namespace GMailContacts
 {	
-	public partial class Configuration : AbstractLogin
+	public partial class Configuration : AbstractLoginWidget
 	{
 		
 		public Configuration() : 
@@ -38,34 +38,34 @@ namespace GMailContacts
 			
 			GMail.GetUserAndPassFromKeyring (out username, out password,
 			                                GMail.GAppName);
-			base.Username.Text = username;
-			base.Password.Text = password;
+			Username.Text = username;
+			Password.Text = password;
 			
-			base.GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
+			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
 		
 		protected override void Validate ()
 		{
 			string username, password;
-			username = base.Username.Text;
-			password = base.Password.Text;
+			username = Username.Text;
+			password = Password.Text;
 			
 			if (ValidateUsername (username) && ValidatePassword (password))
 			{
-				base.StatusLabel.Markup = "Validating...";
-				base.ValidateButton.Sensitive = false;
+				StatusLabel.Markup = "Validating...";
+				ValidateButton.Sensitive = false;
 			
 				new Thread ((ThreadStart) delegate {
 					bool valid = GMail.TryConnect (username, password);
 					
 					Gtk.Application.Invoke (delegate {
 						if (valid) {
-							base.StatusLabel.Markup = "<i>Account validation succeeded</i>!";
+							StatusLabel.Markup = "<i>Account validation succeeded</i>!";
 							GMail.WriteAccountToKeyring (username, password, GMail.GAppName);
 						} else {
-							base.StatusLabel.Markup = "<i>Account validation failed!</i>";
+							StatusLabel.Markup = "<i>Account validation failed!</i>";
 						}
-						base.ValidateButton.Sensitive = true;
+						ValidateButton.Sensitive = true;
 					});
 				}).Start ();
 			}

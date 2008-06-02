@@ -26,7 +26,7 @@ using Gtk;
 
 namespace DoTwitter
 {
-	public partial class Configuration : AbstractLogin
+	public partial class Configuration : AbstractLoginWidget
 	{
 		public Configuration () : 
 			base ("Twitter")
@@ -43,31 +43,31 @@ namespace DoTwitter
 				password = "";
 			}
 			
-			base.Username.Text = username;
-			base.Password.Text = password;
+			Username.Text = username;
+			Password.Text = password;
 			
-			base.GetAccountButton.Uri = "https://twitter.com/signup";			
+			GetAccountButton.Uri = "https://twitter.com/signup";			
 		}
 		
 		protected override void Validate ()
 		{
-			string username = base.Username.Text;
-			string password = base.Password.Text;
+			string username = Username.Text;
+			string password = Password.Text;
 			
-			base.StatusLabel.Markup = "Validating...";
-			base.ValidateButton.Sensitive = false;
+			StatusLabel.Markup = "Validating...";
+			ValidateButton.Sensitive = false;
 			
 			new Thread ((ThreadStart) delegate {
 				bool valid = TwitterAction.TryConnect (username, password);
 				
 				Gtk.Application.Invoke (delegate {
 					if (valid) {
-						base.StatusLabel.Markup = "<i>Account validation succeeded</i>!";
+						StatusLabel.Markup = "<i>Account validation succeeded</i>!";
 						TwitterAction.SetAccountData (username, password);
 					} else {
-						base.StatusLabel.Markup = "<i>Account validation failed!</i>";
+						StatusLabel.Markup = "<i>Account validation failed!</i>";
 					}
-					base.ValidateButton.Sensitive = true;
+					ValidateButton.Sensitive = true;
 				});
 			}).Start ();
 		}

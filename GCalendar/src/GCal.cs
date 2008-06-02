@@ -37,6 +37,7 @@ namespace GCalendar
 	public class GCal
 	{
 		private static string gAppName = "alexLauni-gnomeDoGCalPlugin-1.2.2";
+		private static string keyringName = "Passphrase for Google Calendar (Gnome Do)";
 		private static string username, password;
 		private static CalendarService service;
 		private static List<IItem> calendars;
@@ -58,7 +59,7 @@ namespace GCalendar
 		}
 		
 		public static string GAppName {
-			get { return gAppName; }
+			get { return keyringName; }
 		}
 		
 		public static List<IItem> Calendars {
