@@ -1,8 +1,8 @@
 <Addin
-	id="GNOME Session and Power Management"
+	id="GNOME-Session"
 	namespace= "Do"
 	version="1.1"
-	name="GNOME Session and Power Management"
+	name="GNOME Session & Power Management"
 	description="Log out, lock your screen, shutdown, hibernate, etc."
 	author="David Siegel"
 >
