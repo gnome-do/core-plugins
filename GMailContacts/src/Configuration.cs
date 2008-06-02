@@ -23,6 +23,7 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using Gtk;
 using Do.Addins;
+using Do.UI;
 
 namespace GMailContacts
 {	
@@ -32,43 +33,14 @@ namespace GMailContacts
 		public Configuration() : 
 			base ("Gmail")
 		{
-			this.Build();
-			
-			string username, password;
-			
-			GMail.GetUserAndPassFromKeyring (out username, out password,
-			                                GMail.GAppName);
-			Username.Text = username;
-			Password.Text = password;
-			
 			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
 		
-		protected override void Validate ()
+		protected override bool Validate ()
 		{
-			string username, password;
-			username = Username.Text;
-			password = Password.Text;
-			
-			if (ValidateUsername (username) && ValidatePassword (password))
-			{
-				StatusLabel.Markup = "Validating...";
-				ValidateButton.Sensitive = false;
-			
-				new Thread ((ThreadStart) delegate {
-					bool valid = GMail.TryConnect (username, password);
-					
-					Gtk.Application.Invoke (delegate {
-						if (valid) {
-							StatusLabel.Markup = "<i>Account validation succeeded</i>!";
-							GMail.WriteAccountToKeyring (username, password, GMail.GAppName);
-						} else {
-							StatusLabel.Markup = "<i>Account validation failed!</i>";
-						}
-						ValidateButton.Sensitive = true;
-					});
-				}).Start ();
-			}
+			if (ValidateUsername (UsernameEntry.Text) && PasswordEntry.Text.Length >= 8)
+				return GMail.TryConnect (UsernameEntry.Text, PasswordEntry.Text);
+			return false;
 		}
 		
 		private bool ValidateUsername (string username)
@@ -79,11 +51,6 @@ namespace GMailContacts
 			
 			Regex validEmail = new Regex (emailPattern, RegexOptions.Compiled);
 			return validEmail.IsMatch (username);
-		}
-		
-		private bool ValidatePassword (string password)
-		{
-			return password.Length >= 8;
 		}
 	}
 }
