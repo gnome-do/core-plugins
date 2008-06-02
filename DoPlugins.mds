@@ -1,7 +1,9 @@
 <Combine releaseversion="0.4.9.9" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="False" name="Templates" configuration="Debug" />
+      <CustomCommands>
+        <Command type="AfterBuild" command="mdtoolize" workingdir="${CombineDir}" />
+      </CustomCommands>
       <Entry build="True" name="Packages" configuration="" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
       <Entry build="False" name="Amarok" configuration="Debug" />
@@ -16,7 +18,6 @@
       <Entry build="True" name="OpenSearch" configuration="Debug" />
       <Entry build="True" name="Pastebin" configuration="Debug" />
       <Entry build="True" name="Pidgin" configuration="Debug" />
-      <Entry build="True" name="SimplePlugins" configuration="Debug" />
       <Entry build="True" name="SSH" configuration="Debug" />
       <Entry build="True" name="Thunderbird" configuration="Debug" />
       <Entry build="True" name="Tomboy" configuration="Debug" />
@@ -31,12 +32,12 @@
       <Entry build="True" name="GMailContacts" configuration="Debug" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="DiskMounter" configuration="Debug" />
+      <Entry build="True" name="Text" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="False" name="Templates" configuration="Release" />
       <Entry build="True" name="Packages" configuration="" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
-      <Entry build="False" name="Amarok" configuration="Release" />
+      <Entry build="True" name="Amarok" configuration="Release" />
       <Entry build="True" name="Banshee" configuration="Release" />
       <Entry build="True" name="Epiphany" configuration="Release" />
       <Entry build="True" name="Evolution" configuration="Release" />
@@ -48,7 +49,6 @@
       <Entry build="True" name="OpenSearch" configuration="Release" />
       <Entry build="True" name="Pastebin" configuration="Release" />
       <Entry build="True" name="Pidgin" configuration="Release" />
-      <Entry build="True" name="SimplePlugins" configuration="Release" />
       <Entry build="True" name="SSH" configuration="Release" />
       <Entry build="True" name="Thunderbird" configuration="Release" />
       <Entry build="True" name="Tomboy" configuration="Release" />
@@ -63,10 +63,10 @@
       <Entry build="True" name="GMailContacts" configuration="Release" />
       <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="DiskMounter" configuration="Release" />
+      <Entry build="True" name="Text" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="Templates" single="True">
-    <Execute type="None" entry="Templates" />
+  <StartMode startupentry="Packages" single="True">
     <Execute type="None" entry="Packages" />
     <Execute type="None" entry="Rhythmbox" />
     <Execute type="None" entry="Amarok" />
@@ -81,7 +81,6 @@
     <Execute type="None" entry="OpenSearch" />
     <Execute type="None" entry="Pastebin" />
     <Execute type="None" entry="Pidgin" />
-    <Execute type="None" entry="SimplePlugins" />
     <Execute type="None" entry="SSH" />
     <Execute type="None" entry="Thunderbird" />
     <Execute type="None" entry="Tomboy" />
@@ -95,10 +94,10 @@
     <Execute type="None" entry="GMailContacts" />
     <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="DiskMounter" />
+    <Execute type="None" entry="Text" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
-    <Entry filename="Templates/Templates.mdp" />
     <Entry filename="Packages.mdse" />
     <Entry filename="Rhythmbox/Rhythmbox.mdp" />
     <Entry filename="Amarok/Amarok.mdp" />
@@ -113,7 +112,6 @@
     <Entry filename="OpenSearch/OpenSearch.mdp" />
     <Entry filename="Pastebin/Pastebin.mdp" />
     <Entry filename="Pidgin/Pidgin.mdp" />
-    <Entry filename="SimplePlugins/SimplePlugins.mdp" />
     <Entry filename="SSH/SSH.mdp" />
     <Entry filename="Thunderbird/Thunderbird.mdp" />
     <Entry filename="Tomboy/Tomboy.mdp" />
@@ -127,5 +125,6 @@
     <Entry filename="GMailContacts/GMailContacts.mdp" />
     <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="DiskMounter/DiskMounter.mdp" />
+    <Entry filename="Text/Text.mdp" />
   </Entries>
 </Combine>

@@ -100,21 +100,16 @@ namespace GMailContacts
 						buddy["address"] = postal.Value.Replace('\n', ' ');
 					foreach (PhoneNumber phone in entry.Phonenumbers)
 						buddy["phone"] = phone.Value.Replace('\n', ' ');
-					int i = 1;
+					int i = 0;
 					foreach (EMail email in entry.Emails)
 					{	
-						string detail;
-						if (email.Primary)
-							detail = "email";
-						else if (email.Work)
-							detail = "email.work";
-						else if (email.Home)
-							detail = "email.home";
+						if (email.Primary) {
+							buddy ["email"] = email.Address;
+						}
 						else {
-							detail = "email." + i;
+							buddy ["email." + i] = email.Address;
 							i++;
 						}
-						buddy [detail] = email.Address;
 					}
 					contacts.Add (buddy);
 				}
