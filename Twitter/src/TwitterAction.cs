@@ -92,8 +92,10 @@ namespace DoTwitter
 			if (!Monitor.TryEnter (items)) return;
 			items.Clear ();
 			
-			if (!(String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password)))
+			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
+				Monitor.Exit (items);
 				return;
+			}
 			
 			Twitter t;
 			TwitterUserCollection friends;
@@ -112,13 +114,13 @@ namespace DoTwitter
 			
 			foreach (TwitterUser friend in friends) {
 				tfriend = ContactItem.Create (friend.ScreenName);
-				tfriend["twitter.screenname"] = friend.ScreenName;
-				tfriend["description"] = friend.ScreenName;
+				tfriend ["twitter.screenname"] = friend.ScreenName;
+				tfriend ["description"] = friend.ScreenName;
 				items.Add (tfriend);
 				
 				tfriend = ContactItem.Create (friend.UserName);
-				tfriend["twitter.screenname"] = friend.ScreenName;
-				tfriend["description"] = friend.ScreenName;
+				tfriend ["twitter.screenname"] = friend.ScreenName;
+				tfriend ["description"] = friend.ScreenName;
 				items.Add (tfriend);
 			}
 			

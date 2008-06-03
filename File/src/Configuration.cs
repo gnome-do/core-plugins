@@ -17,5 +17,13 @@ namespace FilePlugin
 		{
 			this.Build();
 		}
+
+		protected virtual void OnAddBtnClicked (object sender, System.EventArgs e)
+		{
+		}
+
+		protected virtual void OnRemoveBtnClicked (object sender, System.EventArgs e)
+		{
+		}
 	}
 }
