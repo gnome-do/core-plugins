@@ -1,7 +1,7 @@
 <Addin 
 	id="GMail Contacts"
 	namespace= "Do"
-	version="1.0"
+	version="1.2"
 	name="GMail Contacts"
 	description="Indexes your GMail contacts"
 	author="Alex Launi"

@@ -26,8 +26,6 @@ using System.Collections.Generic;
 using Twitterizer.Framework;
 using Do.Universe;
 
-using GConf;
-
 using NDesk.DBus;
 using org.freedesktop;
 using org.freedesktop.DBus;
@@ -37,42 +35,28 @@ namespace DoTwitter
 	public static class TwitterAction
 	{
 		private static List<IItem> items;
-		private static string status;
-		private static GConf.Client gconf;
+		private static string status, username, password;
 		
 		static TwitterAction ()
 		{
 			items = new List<IItem> ();
-			gconf = new GConf.Client ();
+			Configuration.GetAccountData (out username, out password,
+				typeof (Configuration));
 		} 
 		
 		public static List<IItem> Friends {
 			get { return items; }
 		}
 		
-		public static string GConfKeyBase {
-			get { return "/apps/gnome-do/plugins/twitter/"; }
-		}
-		
 		private static string Username {
 			get {
-				try {
-					return gconf.Get (GConfKeyBase + "username") as string;
-				} catch (GConf.NoSuchKeyException) {
-					gconf.Set (GConfKeyBase + "username","");
-					throw new GConf.NoSuchKeyException (GConfKeyBase + "username");
-				}
+				return username;
 			}
 		}
 		
 		private static string Password {
 			get {
-				try {
-					return gconf.Get (GConfKeyBase + "password") as string;
-				} catch (GConf.NoSuchKeyException) {
-					gconf.Set (GConfKeyBase +  "password","");
-					throw new GConf.NoSuchKeyException (GConfKeyBase + "password");
-				}
+				return password;
 			}
 		}
 		
@@ -83,27 +67,23 @@ namespace DoTwitter
 		public static void Tweet ()
 		{
 			Twitter t;
-			try {
-				t = new Twitter (Username, Password);
-			} catch (GConf.NoSuchKeyException) {
-				TwitterAction.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
-	                          + "login information has been created "
-	                          + "in " + GConfKeyBase + "\n"
-	                          + "Please set your username and password\n"
-	                          + "in order to post tweets");
-				return; 
-			}
 			
-			try {
-				t.Update (status);
-				SendNotification ("Tweet Successful", "Successfully posted tweet '" 
+			if (!(String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
+				t = new Twitter (username, password);
+				try {
+					t.Update (status);
+					SendNotification ("Tweet Successful", "Successfully posted tweet '" 
                                 + status + "' to Twitter.");
-			} catch (TwitterizerException e) {
-				SendNotification ("Tweet Failed", "Unable to post tweet. Check your login "
-                                + "settings ( " + GConfKeyBase + "). If you are "
-                                + "behind a proxy, also make sure that the settings in "
-                                + "/system/http_proxy are correct.\n\nDetails:\n" 
-                                + e.ToString ());
+				} catch (TwitterizerException e) {
+					SendNotification ("Tweet Failed", "Unable to post tweet. "
+						+ "Check your login settings. If you are behind a " 
+						+ "proxy, also make sure that the settings in "
+                        + "/system/http_proxy are correct.\n\nDetails:\n" 
+                        + e.ToString ());
+				}
+			} else {
+				TwitterAction.SendNotification ("Missing Login Credentials",
+					"Please set login information in plugin configuration.");
 			}
 		}
 		
@@ -112,19 +92,13 @@ namespace DoTwitter
 			if (!Monitor.TryEnter (items)) return;
 			items.Clear ();
 			
+			if (!(String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password)))
+				return;
+			
 			Twitter t;
 			TwitterUserCollection friends;
 			
-			try {
-				t = new Twitter (Username, Password);
-			} catch (GConf.NoSuchKeyException) {
-				TwitterAction.SendNotification ("GConf keys created", "GConf keys for storing your Twitter "
-	                          + "login information has been created "
-	                          + "in " + GConfKeyBase + "\n"
-	                          + "Please set your username and password\n"
-	                          + "in order to post tweets");
-				return;
-			}
+			t = new Twitter (Username, Password);
 			
 			try {
 				friends = t.Friends ();
@@ -168,12 +142,6 @@ namespace DoTwitter
 				return false;
 			}
 			return true;
-		}
-		
-		public static void SetAccountData (string username, string password)
-		{
-			gconf.Set (GConfKeyBase + "username", username);
-			gconf.Set (GConfKeyBase + "password", password);
 		}
 	}
 }
