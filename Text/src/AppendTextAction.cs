@@ -23,7 +23,7 @@ using System.IO;
 
 using Do.Universe;
 
-namespace GnomeDoAppendText {	
+namespace Text {	
 	public class AppendTextAction : IAction {
 
 		public string Name { get { return "Append to..."; } }

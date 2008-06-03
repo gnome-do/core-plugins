@@ -113,7 +113,6 @@ namespace GMailContacts
 							detail = "buddy." + i;
 							i++;
 						}
-						buddy [detail] = email.Address;
 					}
 					contacts.Add (buddy);
 				}

@@ -53,14 +53,13 @@ namespace Evolution
 		
 		public void UpdateItems ()
 		{
-			/* // This leaks.
+			return;	// No updating until the leak is fixed.
 			try {
 				_UpdateItems ();
 			} catch (Exception e) {
 				Console.Error.WriteLine ("Cannot index Evolution contacts: {0}",
 					e.Message);
 			}
-			*/
 		}
 		
 		public ICollection<IItem> Items {

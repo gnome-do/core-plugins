@@ -26,9 +26,9 @@ namespace GMailContacts
 {
 	public class GMailContactDetailItem : IContactDetailItem 
 	{
-		private string type, email, icon;
+		private string name, email, icon;
 		
-		public GMailContactDetailItem (string type, string email)
+		public GMailContactDetailItem (string name, string email)
 		{
 			this.type = type;
 			this.email = email;

@@ -1,5 +1,5 @@
 <Project name="GMailContacts" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="GMailContacts" />
       <Build debugmode="True" target="Library" />
@@ -43,7 +43,6 @@
   </References>
   <GtkDesignInfo gtkVersion="2.12.0">
     <ExportedWidgets>
-      <Widget>GMailContacts.Configuration2</Widget>
       <Widget>GMailContacts.Configuration</Widget>
     </ExportedWidgets>
   </GtkDesignInfo>

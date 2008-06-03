@@ -34,7 +34,7 @@ namespace GCalendar
 {
 	public class GCal
 	{
-		private static string gAppName = "alexLauni-gnomeDoGCalPlugin-1.2.2";
+		private static string gAppName = "alexLauni-gnomeDoGCalPlugin-1.2";
 		private static string username, password;
 		private static CalendarService service;
 		private static List<IItem> calendars;
