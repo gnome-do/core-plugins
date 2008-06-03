@@ -96,9 +96,9 @@ namespace GMailContacts
 					*/
 					buddy = ContactItem.CreateWithName (entry.Title.Text);					
 					foreach (PostalAddress postal in entry.PostalAddresses)
-						buddy["address"] = postal.Value.Replace('\n', ' ');
+						buddy ["address"] = postal.Value.Replace('\n', ' ');
 					foreach (PhoneNumber phone in entry.Phonenumbers)
-						buddy["phone"] = phone.Value.Replace('\n', ' ');
+						buddy ["phone"] = phone.Value.Replace('\n', ' ');
 					int i = 0;
 					foreach (EMail email in entry.Emails)
 					{	
@@ -113,6 +113,7 @@ namespace GMailContacts
 							detail = "buddy." + i;
 							i++;
 						}
+						buddy [detail] = email.Address;
 					}
 					contacts.Add (buddy);
 				}

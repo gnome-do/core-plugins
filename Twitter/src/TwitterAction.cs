@@ -135,15 +135,12 @@ namespace DoTwitter
 		
 		public static bool TryConnect (string username, string password)
 		{
-			Console.Error.WriteLine ("I be running in a thread foo!");
 			Twitter test = new Twitter (username, password);
 			try {
 				test.Replies ();
 			} catch {
-				Console.Error.WriteLine ("I be returning false");
 				return false;
 			}
-			Console.Error.WriteLine ("I be returning true");
 			return true;
 		}
 	}

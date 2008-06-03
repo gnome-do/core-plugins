@@ -37,10 +37,10 @@ namespace GMailContacts
 			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
 		
-		protected override bool Validate ()
+		protected override bool Validate (string username, string password)
 		{
-			if (ValidateUsername (UsernameEntry.Text) && PasswordEntry.Text.Length >= 8)
-				return GMail.TryConnect (UsernameEntry.Text, PasswordEntry.Text);
+			if (ValidateUsername (username) && password.Length >= 8)
+				return GMail.TryConnect (username, password);
 			return false;
 		}
 		

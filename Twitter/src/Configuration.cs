@@ -34,9 +34,9 @@ namespace DoTwitter
 			GetAccountButton.Uri = "https://twitter.com/signup";			
 		}
 		
-		protected override bool Validate ()
+		protected override bool Validate (string username, string password)
 		{
-			return TwitterAction.TryConnect (UsernameEntry.Text, PasswordEntry.Text);
+			return TwitterAction.TryConnect (username, password);
 		}
 	}
 }
