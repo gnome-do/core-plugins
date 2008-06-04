@@ -2,7 +2,7 @@
 	id="GNOMESession"
 	namespace= "Do"
 	version="1.1"
-	name="GNOME Session & Power Management"
+	name="GNOME Session Management"
 	description="Log out, lock your screen, shutdown, hibernate, etc."
 	author="David Siegel"
 >

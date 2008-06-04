@@ -1,0 +1,23 @@
+<Addin 
+	id="GNOMEDictionary"
+	namespace= "Do"
+	version="1.0"
+	name="GNOME Dictionary"
+	description="Provides a 'Define' action for looking up definitions."
+	author="David Siegel"
+>
+ 
+	<Runtime>
+		<Import assembly="GNOME Dictionary.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/Action">
+		<Action type="GNOME.DefineAction" />
+	</Extension>
+</Addin>
