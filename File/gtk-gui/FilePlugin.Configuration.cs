@@ -13,6 +13,8 @@ namespace FilePlugin {
     
     public partial class Configuration {
         
+        private Gtk.Alignment alignment1;
+        
         private Gtk.VBox vbox2;
         
         private Gtk.ScrolledWindow node_scroll;
@@ -47,6 +49,10 @@ namespace FilePlugin {
             Stetic.BinContainer.Attach(this);
             this.Name = "FilePlugin.Configuration";
             // Container child FilePlugin.Configuration.Gtk.Container+ContainerChild
+            this.alignment1 = new Gtk.Alignment(0.5F, 0.5F, 1F, 1F);
+            this.alignment1.Name = "alignment1";
+            this.alignment1.BorderWidth = ((uint)(8));
+            // Container child alignment1.Gtk.Container+ContainerChild
             this.vbox2 = new Gtk.VBox();
             this.vbox2.Name = "vbox2";
             this.vbox2.Spacing = 6;
@@ -164,7 +170,8 @@ namespace FilePlugin {
             w13.Position = 1;
             w13.Expand = false;
             w13.Fill = false;
-            this.Add(this.vbox2);
+            this.alignment1.Add(this.vbox2);
+            this.Add(this.alignment1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
