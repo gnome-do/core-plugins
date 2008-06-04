@@ -19,13 +19,15 @@ namespace FilePlugin {
         
         private Gtk.VBox vbox1;
         
-        private Gtk.Table table1;
+        private Gtk.HButtonBox hbuttonbox1;
+        
+        private Gtk.Button remove_btn;
+        
+        private Gtk.Image image3;
         
         private Gtk.Button add_btn;
         
-        private Gtk.Fixed fixed1;
-        
-        private Gtk.Button remove_btn;
+        private Gtk.Image image1;
         
         private Gtk.VBox vbox3;
         
@@ -53,7 +55,6 @@ namespace FilePlugin {
             this.node_scroll.CanFocus = true;
             this.node_scroll.Name = "node_scroll";
             this.node_scroll.ShadowType = ((Gtk.ShadowType)(1));
-            this.node_scroll.BorderWidth = ((uint)(5));
             this.vbox2.Add(this.node_scroll);
             Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox2[this.node_scroll]));
             w1.Position = 0;
@@ -62,49 +63,47 @@ namespace FilePlugin {
             this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
-            this.table1 = new Gtk.Table(((uint)(1)), ((uint)(3)), true);
-            this.table1.Name = "table1";
-            this.table1.RowSpacing = ((uint)(6));
-            this.table1.ColumnSpacing = ((uint)(6));
-            this.table1.BorderWidth = ((uint)(5));
-            // Container child table1.Gtk.Table+TableChild
-            this.add_btn = new Gtk.Button();
-            this.add_btn.CanFocus = true;
-            this.add_btn.Name = "add_btn";
-            this.add_btn.UseStock = true;
-            this.add_btn.UseUnderline = true;
-            this.add_btn.Label = "gtk-add";
-            this.table1.Add(this.add_btn);
-            Gtk.Table.TableChild w2 = ((Gtk.Table.TableChild)(this.table1[this.add_btn]));
-            w2.LeftAttach = ((uint)(2));
-            w2.RightAttach = ((uint)(3));
-            w2.YOptions = ((Gtk.AttachOptions)(4));
-            // Container child table1.Gtk.Table+TableChild
-            this.fixed1 = new Gtk.Fixed();
-            this.fixed1.Name = "fixed1";
-            this.fixed1.HasWindow = false;
-            this.table1.Add(this.fixed1);
-            Gtk.Table.TableChild w3 = ((Gtk.Table.TableChild)(this.table1[this.fixed1]));
-            w3.LeftAttach = ((uint)(1));
-            w3.RightAttach = ((uint)(2));
-            w3.YOptions = ((Gtk.AttachOptions)(4));
-            // Container child table1.Gtk.Table+TableChild
+            this.hbuttonbox1 = new Gtk.HButtonBox();
+            this.hbuttonbox1.Name = "hbuttonbox1";
+            this.hbuttonbox1.Spacing = 4;
+            this.hbuttonbox1.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+            // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
             this.remove_btn = new Gtk.Button();
             this.remove_btn.CanFocus = true;
             this.remove_btn.Name = "remove_btn";
-            this.remove_btn.UseStock = true;
-            this.remove_btn.UseUnderline = true;
-            this.remove_btn.Label = "gtk-remove";
-            this.table1.Add(this.remove_btn);
-            Gtk.Table.TableChild w4 = ((Gtk.Table.TableChild)(this.table1[this.remove_btn]));
-            w4.YOptions = ((Gtk.AttachOptions)(4));
-            this.vbox1.Add(this.table1);
-            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox1[this.table1]));
-            w5.Position = 0;
+            // Container child remove_btn.Gtk.Container+ContainerChild
+            this.image3 = new Gtk.Image();
+            this.image3.Name = "image3";
+            this.image3.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 20);
+            this.remove_btn.Add(this.image3);
+            this.remove_btn.Label = null;
+            this.hbuttonbox1.Add(this.remove_btn);
+            Gtk.ButtonBox.ButtonBoxChild w3 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.remove_btn]));
+            w3.Expand = false;
+            w3.Fill = false;
+            // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
+            this.add_btn = new Gtk.Button();
+            this.add_btn.CanFocus = true;
+            this.add_btn.Name = "add_btn";
+            // Container child add_btn.Gtk.Container+ContainerChild
+            this.image1 = new Gtk.Image();
+            this.image1.Name = "image1";
+            this.image1.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-add", Gtk.IconSize.Button, 20);
+            this.add_btn.Add(this.image1);
+            this.add_btn.Label = null;
+            this.hbuttonbox1.Add(this.add_btn);
+            Gtk.ButtonBox.ButtonBoxChild w5 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.add_btn]));
+            w5.Position = 1;
             w5.Expand = false;
             w5.Fill = false;
+            this.vbox1.Add(this.hbuttonbox1);
+            Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbuttonbox1]));
+            w6.Position = 0;
+            w6.Expand = false;
+            w6.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.vbox3 = new Gtk.VBox();
+            this.vbox3.Name = "vbox3";
             this.vbox3.Spacing = 6;
             // Container child vbox3.Gtk.Box+BoxChild
             this.table2 = new Gtk.Table(((uint)(1)), ((uint)(3)), false);
@@ -116,31 +115,32 @@ namespace FilePlugin {
             this.fixed2.Name = "fixed2";
             this.fixed2.HasWindow = false;
             this.table2.Add(this.fixed2);
-            Gtk.Table.TableChild w6 = ((Gtk.Table.TableChild)(this.table2[this.fixed2]));
-            w6.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table2[this.fixed2]));
+            w7.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.fixed3 = new Gtk.Fixed();
             this.fixed3.Name = "fixed3";
             this.fixed3.HasWindow = false;
             this.table2.Add(this.fixed3);
-            Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table2[this.fixed3]));
-            w7.LeftAttach = ((uint)(2));
-            w7.RightAttach = ((uint)(3));
-            w7.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w8 = ((Gtk.Table.TableChild)(this.table2[this.fixed3]));
+            w8.LeftAttach = ((uint)(2));
+            w8.RightAttach = ((uint)(3));
+            w8.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.hseparator2 = new Gtk.HSeparator();
             this.hseparator2.WidthRequest = 171;
             this.hseparator2.Name = "hseparator2";
             this.table2.Add(this.hseparator2);
-            Gtk.Table.TableChild w8 = ((Gtk.Table.TableChild)(this.table2[this.hseparator2]));
-            w8.LeftAttach = ((uint)(1));
-            w8.RightAttach = ((uint)(2));
-            w8.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table2[this.hseparator2]));
+            w9.LeftAttach = ((uint)(1));
+            w9.RightAttach = ((uint)(2));
+            w9.YPadding = ((uint)(4));
+            w9.YOptions = ((Gtk.AttachOptions)(4));
             this.vbox3.Add(this.table2);
-            Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(this.vbox3[this.table2]));
-            w9.Position = 0;
-            w9.Expand = false;
-            w9.Fill = false;
+            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.vbox3[this.table2]));
+            w10.Position = 0;
+            w10.Expand = false;
+            w10.Fill = false;
             // Container child vbox3.Gtk.Box+BoxChild
             this.show_hidden_chk = new Gtk.CheckButton();
             this.show_hidden_chk.CanFocus = true;
@@ -150,20 +150,20 @@ namespace FilePlugin {
             this.show_hidden_chk.UseUnderline = true;
             this.show_hidden_chk.BorderWidth = ((uint)(5));
             this.vbox3.Add(this.show_hidden_chk);
-            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.vbox3[this.show_hidden_chk]));
-            w10.Position = 1;
-            w10.Expand = false;
-            w10.Fill = false;
-            this.vbox1.Add(this.vbox3);
-            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.vbox1[this.vbox3]));
+            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.vbox3[this.show_hidden_chk]));
             w11.Position = 1;
             w11.Expand = false;
             w11.Fill = false;
-            this.vbox2.Add(this.vbox1);
-            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox2[this.vbox1]));
+            this.vbox1.Add(this.vbox3);
+            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox1[this.vbox3]));
             w12.Position = 1;
             w12.Expand = false;
             w12.Fill = false;
+            this.vbox2.Add(this.vbox1);
+            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox2[this.vbox1]));
+            w13.Position = 1;
+            w13.Expand = false;
+            w13.Fill = false;
             this.Add(this.vbox2);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="Do.Addins, Version=0.4.9.9, Culture=neutral" />
-    <widget-library name="../bin/Release/File.dll" internal="true" />
+    <widget-library name="../bin/Debug/File.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="FilePlugin.Configuration" design-size="330 354">
     <property name="MemberName" />
@@ -19,7 +19,6 @@
             <property name="MemberName" />
             <property name="CanFocus">True</property>
             <property name="ShadowType">In</property>
-            <property name="BorderWidth">5</property>
             <child>
               <widget class="Gtk.Viewport" id="GtkViewport">
                 <property name="MemberName" />
@@ -40,74 +39,46 @@
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.Table" id="table1">
+              <widget class="Gtk.HButtonBox" id="hbuttonbox1">
                 <property name="MemberName" />
-                <property name="NRows">1</property>
-                <property name="NColumns">3</property>
-                <property name="Homogeneous">True</property>
-                <property name="RowSpacing">6</property>
-                <property name="ColumnSpacing">6</property>
-                <property name="BorderWidth">5</property>
-                <child>
-                  <widget class="Gtk.Button" id="add_btn">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="UseStock">True</property>
-                    <property name="Type">StockItem</property>
-                    <property name="StockId">gtk-add</property>
-                    <signal name="Clicked" handler="OnAddBtnClicked" />
-                    <property name="label">gtk-add</property>
-                  </widget>
-                  <packing>
-                    <property name="LeftAttach">2</property>
-                    <property name="RightAttach">3</property>
-                    <property name="AutoSize">False</property>
-                    <property name="YOptions">Fill</property>
-                    <property name="XExpand">True</property>
-                    <property name="XFill">True</property>
-                    <property name="XShrink">False</property>
-                    <property name="YExpand">False</property>
-                    <property name="YFill">True</property>
-                    <property name="YShrink">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Fixed" id="fixed1">
-                    <property name="MemberName" />
-                    <property name="HasWindow">False</property>
-                  </widget>
-                  <packing>
-                    <property name="LeftAttach">1</property>
-                    <property name="RightAttach">2</property>
-                    <property name="AutoSize">False</property>
-                    <property name="YOptions">Fill</property>
-                    <property name="XExpand">True</property>
-                    <property name="XFill">True</property>
-                    <property name="XShrink">False</property>
-                    <property name="YExpand">False</property>
-                    <property name="YFill">True</property>
-                    <property name="YShrink">False</property>
-                  </packing>
-                </child>
+                <property name="Spacing">4</property>
+                <property name="Size">2</property>
+                <property name="LayoutStyle">End</property>
                 <child>
                   <widget class="Gtk.Button" id="remove_btn">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="UseStock">True</property>
-                    <property name="Type">StockItem</property>
-                    <property name="StockId">gtk-remove</property>
+                    <property name="Type">Custom</property>
                     <signal name="Clicked" handler="OnRemoveBtnClicked" />
-                    <property name="label">gtk-remove</property>
+                    <child>
+                      <widget class="Gtk.Image" id="image3">
+                        <property name="MemberName" />
+                        <property name="Pixbuf">stock:gtk-remove Button</property>
+                      </widget>
+                    </child>
                   </widget>
                   <packing>
-                    <property name="AutoSize">False</property>
-                    <property name="YOptions">Fill</property>
-                    <property name="XExpand">True</property>
-                    <property name="XFill">True</property>
-                    <property name="XShrink">False</property>
-                    <property name="YExpand">False</property>
-                    <property name="YFill">True</property>
-                    <property name="YShrink">False</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Button" id="add_btn">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">Custom</property>
+                    <signal name="Clicked" handler="OnAddBtnClicked" />
+                    <child>
+                      <widget class="Gtk.Image" id="image1">
+                        <property name="MemberName" />
+                        <property name="Pixbuf">stock:gtk-add Button</property>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
                   </packing>
                 </child>
               </widget>
@@ -171,6 +142,7 @@
                       <packing>
                         <property name="LeftAttach">1</property>
                         <property name="RightAttach">2</property>
+                        <property name="YPadding">4</property>
                         <property name="AutoSize">True</property>
                         <property name="YOptions">Fill</property>
                         <property name="XExpand">True</property>

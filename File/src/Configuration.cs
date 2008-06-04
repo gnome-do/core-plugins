@@ -34,10 +34,11 @@ namespace FilePlugin
 			ListStore store = nview.Model as ListStore;
 			
 			FileChooserDialog fc =
-				new FileChooserDialog ("Choose a path", new Dialog (),
+				new FileChooserDialog ("Choose a folder to index", new Dialog (),
 					FileChooserAction.SelectFolder,
 					"Cancel", ResponseType.Cancel,
-					"Select", ResponseType.Accept);
+					"Ok", ResponseType.Accept);
+					
 			
 			if (fc.Run () == (int)ResponseType.Accept)
 				store.AppendValues (fc.Filename, "1");
@@ -53,10 +54,9 @@ namespace FilePlugin
 			nview.WriteConfig ();
 		}
 		
-		
 		protected void OnPathNodeViewSelectionChange (object sender, EventArgs e)
 		{
-			remove_btn.Sensitive = true;
+			remove_btn.Sensitive = nview.Selection.GetSelectedRows ().Length > 0;
 		}
 		
 		public void GConfChanged (object sender, NotifyEventArgs args)
