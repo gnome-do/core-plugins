@@ -41,7 +41,6 @@ namespace GCalendar
 		public GCalendarItemSource ()
 		{
 			items = new List<IItem> ();
-			UpdateItems ();
 		}
 
 		public string Name { get { return "Google Calendars"; } }
