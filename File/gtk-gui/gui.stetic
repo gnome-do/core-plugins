@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="Do.Addins, Version=0.4.9.9, Culture=neutral" />
-    <widget-library name="../bin/Release/File.dll" internal="true" />
+    <widget-library name="../bin/Debug/File.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="FilePlugin.Configuration" design-size="330 354">
     <property name="MemberName" />

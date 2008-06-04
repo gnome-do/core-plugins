@@ -44,7 +44,7 @@ namespace GMailContacts
 		{
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			contacts = new List<IItem> ();
-			lastUpdated = new DateTime ();
+			lastUpdated = new DateTime (1987, 11, 28);
 			string username, password;
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
@@ -85,15 +85,13 @@ namespace GMailContacts
 				foreach (ContactEntry entry in feed.Entries)
 				{
 					if (String.IsNullOrEmpty (entry.Title.Text)) continue;
-					/*
+					
 					if (entry.Deleted) {
 						ContactItem enemy = ContactItem.Create (entry.Title.Text);
-						Console.Error.WriteLine("Has {0} been deleted? {1}",entry.Title.Text,
-						                        contacts.Contains (enemy));
 						contacts.Remove (enemy);
 						continue;
 					}
-					*/
+					
 					buddy = ContactItem.CreateWithName (entry.Title.Text);					
 					foreach (PostalAddress postal in entry.PostalAddresses)
 						buddy ["address"] = postal.Value.Replace('\n', ' ');
@@ -146,6 +144,7 @@ namespace GMailContacts
 			test = new ContactsService (GAppName);
 			test.setUserCredentials (username, password);
 			query = new ContactsQuery(ContactsQuery.CreateContactsUri ("default"));
+			query.StartDate = DateTime.Now;
 			
 			try {
 				test.Query (query);
