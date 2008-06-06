@@ -38,9 +38,17 @@ namespace GMailContacts
 			items = new List<IItem> ();
 		}
 		
-		public string Name { get { return "GMail Contacts"; } }
-		public string Description { get { return "Indexes your GMail contacts"; } }
-		public string Icon { get { return "gmail-logo.png@" + GetType ().Assembly.FullName; } }
+		public string Name { 
+			get { return "GMail Contacts"; }
+		}
+		
+		public string Description { 
+			get { return "Indexes your GMail contacts"; }
+		}
+		
+		public string Icon { 
+			get { return "gmail-logo.png@" + GetType ().Assembly.FullName; }
+		}
 		
 		public Type [] SupportedItemTypes {
 			get {
@@ -61,11 +69,10 @@ namespace GMailContacts
 			
 			details = new List<IItem> ();
 			foreach (string detail in contact.Details) {
-				if (detail.StartsWith ("email"))
+				if (detail.StartsWith ("email.gmail"))
 					details.Add (new GMailContactDetailItem (
 						contact.Name, contact [detail]));
 			}
-			
 			return details;
 		}
 		

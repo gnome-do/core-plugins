@@ -29,12 +29,17 @@ namespace GMailContacts
 {	
 	public class Configuration : AbstractLoginWidget
 	{
+		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
+            + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
+            + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
+            
+        const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		
 		public Configuration () : 
-			base ("Gmail")
+			base ("GMail")
 		{
 			Build ();
-			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
+			GetAccountButton.Uri = Uri;
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -45,13 +50,9 @@ namespace GMailContacts
 		}
 		
 		private bool ValidateUsername (string username)
-		{
-			const string emailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
-            + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
-            + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
-			
-			Regex validEmail = new Regex (emailPattern, RegexOptions.Compiled);
-			return validEmail.IsMatch (username);
+		{			
+			return new Regex (EmailPattern, 
+				RegexOptions.Compiled).IsMatch (username);
 		}
 	}
 }

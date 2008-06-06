@@ -178,7 +178,7 @@ namespace Flickr {
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
             this.label1.Xalign = 0F;
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Default tags to use on images posted with Do. Seperate tags with a space; for multiple word tags use quotes. ex.) linux party \"gnome do\"");
+            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Default tags to use on images posted with Do. Seperate tags with a space; for multiple word tags use quotes. ex.) concert \"Mars Volta\" Omar");
             this.label1.Wrap = true;
             this.vbox5.Add(this.label1);
             Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.vbox5[this.label1]));

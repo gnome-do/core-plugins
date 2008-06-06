@@ -32,7 +32,7 @@ namespace GMailContacts
 		{
 			this.type = type;
 			this.email = email;
-			this.icon = "stock_person";
+			this.icon = "gmail-logo.png@" + GetType ().Assembly.FullName;
 		}
 		
 		public GMailContactDetailItem (string type, string email, string icon) :
@@ -44,11 +44,11 @@ namespace GMailContacts
 		public string Name {
 			get {
 				switch (type.ToLower ()) {
-				case "email":
+				case "email.gmail":
 					return "Primary Email";
-				case "email.home":
+				case "email.gmail.home":
 					return "Home Email";
-				case "email.work":
+				case "email.gmail.work":
 					return "Work Email";
 				default:
 					return "Other Email";
@@ -66,7 +66,7 @@ namespace GMailContacts
 		
 		public string Key {
 			get { 
-				return "email";
+				return "email.gmail";
 			}
 		}
 		
