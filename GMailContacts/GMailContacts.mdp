@@ -24,11 +24,7 @@
     <File name="src/GMailContactItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GMailContactDetailItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/CertHandler.cs" subtype="Code" buildaction="Compile" />
-    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
-    <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
-    <File name="gtk-gui/GMailContacts.Configuration.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="Google.GData.Extensions.dll" />

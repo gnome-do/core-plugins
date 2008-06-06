@@ -27,7 +27,7 @@ using Do.Addins;
 
 namespace GMailContacts
 {	
-	public partial class Configuration : AbstractLoginWidget
+	public class Configuration : AbstractLoginWidget
 	{
 		
 		public Configuration () : 

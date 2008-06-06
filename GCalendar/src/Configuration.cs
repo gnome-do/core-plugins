@@ -28,7 +28,7 @@ using Do.Addins;
 
 namespace GCalendar
 {
-	public partial class Configuration : AbstractLoginWidget
+	public class Configuration : AbstractLoginWidget
 	{		
 		public Configuration()
 		{
