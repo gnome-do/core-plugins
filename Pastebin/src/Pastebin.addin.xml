@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Pastebin"
-	description="Paste text to an online paste bin"
+	description="Paste text to an online pastebin."
 	author=""
 >
  
@@ -18,6 +18,6 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path= "/Do/Action">
-		<Action type="Do.Plugins.Pastebin.PastebinAction" />
+		<Action type="Pastebin.PastebinAction" />
 	</Extension>
 </Addin>
