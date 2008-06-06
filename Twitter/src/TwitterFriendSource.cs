@@ -35,7 +35,6 @@ namespace DoTwitter
 		public TwitterFriendSource()
 		{
 			items = new List<IItem> ();
-			UpdateItems ();
 		}
 		
 		public string Name {

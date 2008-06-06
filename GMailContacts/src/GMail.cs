@@ -23,10 +23,8 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
 
-using Gnome.Keyring;
 using Do.Universe;
 
 using Google.GData.Client;
@@ -46,9 +44,10 @@ namespace GMailContacts
 		{
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			contacts = new List<IItem> ();
-			lastUpdated = new DateTime ();
+			lastUpdated = new DateTime (1987, 11, 28);
 			string username, password;
-			GetUserAndPassFromKeyring (out username, out password, gAppName);
+			Configuration.GetAccountData (out username, out password,
+				typeof (Configuration));
 			Connect (username, password);
 		}
 		
@@ -86,30 +85,33 @@ namespace GMailContacts
 				foreach (ContactEntry entry in feed.Entries)
 				{
 					if (String.IsNullOrEmpty (entry.Title.Text)) continue;
-					/*
+					
 					if (entry.Deleted) {
 						ContactItem enemy = ContactItem.Create (entry.Title.Text);
-						Console.Error.WriteLine("Has {0} been deleted? {1}",entry.Title.Text,
-						                        contacts.Contains (enemy));
 						contacts.Remove (enemy);
 						continue;
 					}
-					*/
+					
 					buddy = ContactItem.CreateWithName (entry.Title.Text);					
 					foreach (PostalAddress postal in entry.PostalAddresses)
-						buddy["address"] = postal.Value.Replace('\n', ' ');
+						buddy ["address"] = postal.Value.Replace('\n', ' ');
 					foreach (PhoneNumber phone in entry.Phonenumbers)
-						buddy["phone"] = phone.Value.Replace('\n', ' ');
+						buddy ["phone"] = phone.Value.Replace('\n', ' ');
 					int i = 0;
 					foreach (EMail email in entry.Emails)
 					{	
-						if (email.Primary) {
-							buddy ["email"] = email.Address;
-						}
+						string detail = "email.other";
+						if (email.Primary)
+							detail = "email";
+						else if (email.Home)
+							detail = "email.home";
+						else if (email.Work)
+							detail = "email.work";
 						else {
-							buddy ["email." + i] = email.Address;
+							detail = "buddy." + i;
 							i++;
 						}
+						buddy [detail] = email.Address;
 					}
 					contacts.Add (buddy);
 				}
@@ -134,49 +136,6 @@ namespace GMailContacts
 		}
 		*/
 		
-		public static void GetUserAndPassFromKeyring (out string username, out string password,
-		                                              string keyringItemName)
-		{
-			username = password = "";
-			Hashtable ht = new Hashtable ();
-			ht ["name"] = keyringItemName;
-			
-			try {
-				foreach (ItemData s in Ring.Find (ItemType.GenericSecret, ht)) {
-					if (s.Attributes.ContainsKey ("name") && s.Attributes.ContainsKey ("username")
-					    && (s.Attributes ["name"] as string).Equals (keyringItemName)) {
-						username = s.Attributes ["username"] as string;
-						password = s.Secret;
-						return;
-					}
-				}
-			} catch (Exception) {
-				Console.Error.WriteLine ("No account info stored for {0}",
-				                         keyringItemName);
-			}
-		}
-				
-		public static void WriteAccountToKeyring (string username, string password,
-		                                   string keyringItemName)
-		{
-			string oldUsername, oldPassword, keyring;
-			
-			try {
-				keyring = Ring.GetDefaultKeyring ();
-				Hashtable ht = new Hashtable ();
-				ht["name"] = keyringItemName;
-				ht["username"] = username;
-				
-				GetUserAndPassFromKeyring (out oldUsername, out oldPassword,
-				                           keyringItemName);
-				
-				Ring.CreateItem (keyring, ItemType.GenericSecret, keyringItemName,
-				                 ht, password, true);
-			} catch (Exception e) {
-				Console.Error.WriteLine (e);
-			}
-		}
-		
 		public static bool TryConnect (string username, string password)
 		{
 			ContactsService test;
@@ -185,6 +144,7 @@ namespace GMailContacts
 			test = new ContactsService (GAppName);
 			test.setUserCredentials (username, password);
 			query = new ContactsQuery(ContactsQuery.CreateContactsUri ("default"));
+			query.StartDate = DateTime.Now;
 			
 			try {
 				test.Query (query);

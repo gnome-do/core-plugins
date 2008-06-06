@@ -5,42 +5,29 @@
 	name="Files and Folders"
 	description="Indexes files in user-specified directories. Allows you to move, copy, delete, and browse files."
 	author="David Siegel"
->
- 
+	>
+
 	<Runtime>
 		<Import assembly="File.dll"/>
 	</Runtime>
-	
+
 	<Dependencies>
 		<Addin id="Core" version="1.0" />
 	</Dependencies>
-	
+
 	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
-	<Extension path = "/Do/ItemSource">
+	<Extension path="/Do/ItemSource">
 		<ItemSource type="FilePlugin.FileItemSource" />
-	</Extension>
-	<Extension path = "/Do/ItemSource">
 		<ItemSource type="FilePlugin.RecentFileItemSource" />
 	</Extension>
 
 	<!--- Actions -->
-	<Extension path = "/Do/Action">
+	<Extension path="/Do/Action">
 		<Action type="FilePlugin.MoveToAction" />
-   	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="FilePlugin.RenameToAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
-      		<Action type="FilePlugin.CopyToAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
-	       	<Action type="FilePlugin.MoveToTrashAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
+		<Action type="FilePlugin.CopyToAction" />
+		<Action type="FilePlugin.MoveToTrashAction" />
 		<Action type="FilePlugin.CreateEmptyFileAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="FilePlugin.CreateDirectory" />
 	</Extension>
 </Addin>

@@ -20,60 +20,24 @@
  */
 
 using System;
-using System.Threading;
-using Gtk;
-using GConf;
+
+using Do.UI;
 using Do.Addins;
 
 namespace DoTwitter
 {
-	public partial class Configuration : Gtk.Bin
-	{		
-		public Configuration()
+	public partial class Configuration : AbstractLoginWidget
+	{
+		public Configuration () : 
+			base ("Twitter")
 		{
-			this.Build();
-			string username, password;
-			
-			GConf.Client gconf = new GConf.Client ();
-			try {
-				username = gconf.Get (TwitterAction.GConfKeyBase + "username") as string;
-				password = gconf.Get (TwitterAction.GConfKeyBase + "password") as string;
-			} catch (GConf.NoSuchKeyException) {
-				username = "";
-				password = "";
-			}
-			
-			username_entry.Text = username;
-			passwd_entry.Text = password;
+			Build ();
+			GetAccountButton.Uri = "https://twitter.com/signup";			
 		}
-
-		protected virtual void OnNewAcctClicked (object sender, System.EventArgs e)
+		
+		protected override bool Validate (string username, string password)
 		{
-			Util.Environment.Open ("https://twitter.com/signup");
-		}
-
-		protected virtual void OnApplyBtnClicked (object sender, System.EventArgs e)
-		{
-			string username = username_entry.Text.Trim ();
-			string password = passwd_entry.Text.Trim ();
-			
-			apply_btn.Label = "Validating...";
-			apply_btn.Sensitive = false;
-			
-			new Thread ((ThreadStart) delegate {
-				bool valid = TwitterAction.TryConnect (username, password);
-				
-				Gtk.Application.Invoke (delegate {
-					if (valid) {
-						valid_lbl.Markup = "<i>Account validation succeeded</i>!";
-						TwitterAction.SetAccountData (username, password);
-					} else {
-						valid_lbl.Markup = "<i>Account validation failed!</i>";
-					}
-					apply_btn.Label = "Apply";
-					apply_btn.Sensitive = true;
-				});
-			}).Start ();
+			return TwitterAction.TryConnect (username, password);
 		}
 	}
 }

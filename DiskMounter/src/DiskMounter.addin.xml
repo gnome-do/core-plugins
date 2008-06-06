@@ -16,18 +16,13 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<!-- Actions -->
-	<Extension path = "/Do/Action">
+	<Extension path="/Do/Action">
 		<Action type="DiskMounter.OpenVolume" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="DiskMounter.MountAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="DiskMounter.UnmountAction" />
 	</Extension>
-	<!-- Sources -->
-	<Extension path = "/Do/ItemSource">
+
+	<Extension path="/Do/ItemSource">
 		<ItemSource type="DiskMounter.DriveItemSource" />
 	</Extension>
 </Addin>

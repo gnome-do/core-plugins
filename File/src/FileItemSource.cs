@@ -25,6 +25,8 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Addins;
 
+using GConf;
+
 namespace FilePlugin {
 
 	/// <summary>
@@ -47,7 +49,7 @@ namespace FilePlugin {
 			}
 		}
 	
-		static string ConfigFile {
+		public static string ConfigFile {
 			get {
 				return Do.Paths.Combine (Do.Paths.ApplicationData,
 					"FileItemSource.config");
@@ -89,13 +91,24 @@ namespace FilePlugin {
 				return bookmarks;
 			}
 		}
-
+		
+		private GConf.Client gconf;
 		public FileItemSource ()
 		{
+			gconf = new GConf.Client ();
 			dirs = Deserialize ();
 			items = new List<IItem> ();
-			include_hidden = false;
+			try {
+				include_hidden = (bool) gconf.Get (GConfKeyBase + "include_hidden");
+			} catch {
+				gconf.Set (GConfKeyBase + "include_hidden", false);
+				include_hidden = false;
+			}
 			UpdateItems ();
+		}
+		
+		public static string GConfKeyBase {
+			get { return "/apps/gnome-do/plugins/files/"; }
 		}
 		
 		public Gtk.Bin GetConfiguration ()
@@ -260,6 +273,17 @@ namespace FilePlugin {
 		public static string Documents {
 			get {
 				return Do.Paths.ReadXdgUserDir ("XDG_DOCUMENTS_DIR", "Documents");
+			}
+		}
+		
+		public void GConfChanged (object sender, NotifyEventArgs args)
+		{
+			// sets the corresponding value in gconf
+			try {
+				include_hidden = (bool) gconf.Get (GConfKeyBase + "include_hidden");
+			} catch (GConf.NoSuchKeyException) {
+				gconf.Set (GConfKeyBase + "include_hidden", false);
+				include_hidden = false;
 			}
 		}
 	}

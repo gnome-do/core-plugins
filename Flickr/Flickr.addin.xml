@@ -1,0 +1,22 @@
+<Addin
+	id="Flickr"
+	namespace="Do"
+	version="1.0"
+	name="Flickr"
+	description="Upload photos to Flickr"
+	author="Alex Launi"
+>
+ 
+	<Runtime>
+		<Import assembly="Flickr.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<Extension path= "/Do/Action">
+		<Action type="Flickr.UploadAction"/>
+	</Extension>
+</Addin>

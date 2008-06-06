@@ -21,42 +21,26 @@
 
 using System;
 using System.Text.RegularExpressions;
+
 using Gtk;
+using Do.UI;
 using Do.Addins;
 
 namespace GCalendar
 {
-	public partial class Configuration : Gtk.Bin
+	public partial class Configuration : AbstractLoginWidget
 	{		
 		public Configuration()
 		{
-			this.Build();
-			string username, password;
-			
-			GCal.GetUserAndPassFromKeyring (out username, out password,
-			                                GCal.GAppName);
-			username_entry.Text = username;
-			passwd_entry.Text = password;
+			Build ();
+			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
-
-		protected virtual void OnNewAcctClicked (object sender, System.EventArgs e)
+		
+		protected override bool Validate (string username, string password)
 		{
-			Util.Environment.Open ("https://www.google.com/accounts/NewAccount?service=cl");
-		}
-
-		protected virtual void OnApplyBtnClicked (object sender, System.EventArgs e)
-		{
-			string username = username_entry.Text.Trim ();
-			string password = passwd_entry.Text.Trim ();
-			
-			if (ValidateUsername (username) && ValidatePassword (password)
-			    && GCal.TryConnect (username, password)) {
-				valid_lbl.Markup = "<i>Account validation succeeded</i>!";
-				GCal.WriteAccountToKeyring (username, password, GCal.GAppName);
-				return;
-			}
-			
-			valid_lbl.Markup = "<i>Account validation failed!</i>";
+			if (ValidateUsername (username) && password.Length >= 8)
+				return GCal.TryConnect (username, password);
+			return false;
 		}
 		
 		private bool ValidateUsername (string username)
@@ -68,11 +52,5 @@ namespace GCalendar
 			Regex validEmail = new Regex (emailPattern, RegexOptions.Compiled);
 			return validEmail.IsMatch (username);
 		}
-		
-		private bool ValidatePassword (string password)
-		{
-			return password.Length >= 8;
-		}
-		
 	}
 }

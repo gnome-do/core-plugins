@@ -22,14 +22,12 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
 
 using Google.GData.Client;
 using Google.GData.Calendar;
 using Google.GData.Extensions;
 
-using Gnome.Keyring;
 using Do.Universe;
 
 namespace GCalendar
@@ -48,8 +46,8 @@ namespace GCalendar
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			calendars = new List<IItem> ();
 			ClearCalendarsTimer = new Timer (ClearCalendars);
-			GetUserAndPassFromKeyring (out username, out password,
-			                           gAppName);
+			Configuration.GetAccountData (out username, out password,
+			                           typeof (Configuration));
 			try {
 				Connect (username, password);
 			} catch (Exception e) {
@@ -68,7 +66,7 @@ namespace GCalendar
 		private static void Connect (string username, string password) 
 		{
 			try {
-				service = new CalendarService (GAppName);
+				service = new CalendarService (gAppName);
 				service.setUserCredentials (username, password);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
@@ -275,56 +273,13 @@ namespace GCalendar
 			
 			return needle;				                        
 		}
-				
-		public static void GetUserAndPassFromKeyring (out string username, out string password,
-		                                              string keyringItemName)
-		{
-			username = password = "";
-			Hashtable ht = new Hashtable ();
-			ht ["name"] = keyringItemName;
-			
-			try {
-				foreach (ItemData s in Ring.Find (ItemType.GenericSecret, ht)) {
-					if (s.Attributes.ContainsKey ("name") && s.Attributes.ContainsKey ("username")
-					    && (s.Attributes ["name"] as string).Equals (keyringItemName)) {
-						username = s.Attributes ["username"] as string;
-						password = s.Secret;
-						return;
-					}
-				}
-			} catch (Exception) {
-				Console.Error.WriteLine ("No account info stored for {0}",
-				                         keyringItemName);
-			}
-		}
-				
-		public static void WriteAccountToKeyring (string username, string password,
-		                                   string keyringItemName)
-		{
-			string oldUsername, oldPassword, keyring;
-			
-			try {
-				keyring = Ring.GetDefaultKeyring ();
-				Hashtable ht = new Hashtable ();
-				ht["name"] = keyringItemName;
-				ht["username"] = username;
-				
-				GetUserAndPassFromKeyring (out oldUsername, out oldPassword,
-				                           keyringItemName);
-				
-				Ring.CreateItem (keyring, ItemType.GenericSecret, keyringItemName,
-				                 ht, password, true);
-			} catch (Exception e) {
-				Console.Error.WriteLine (e);
-			}
-		}
 		
 		public static bool TryConnect (string username, string password)
 		{
 			CalendarService test;
 			FeedQuery query;
 			
-			test = new CalendarService (GAppName);
+			test = new CalendarService (gAppName);
 			test.setUserCredentials (username, password);
 			query = new FeedQuery ();
 			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
