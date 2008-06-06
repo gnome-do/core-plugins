@@ -13,7 +13,7 @@ namespace DoTwitter {
     
     public partial class Configuration {
         
-        protected override void Build() {
+        protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget DoTwitter.Configuration
             Stetic.BinContainer.Attach(this);
