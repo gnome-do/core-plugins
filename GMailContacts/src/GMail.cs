@@ -1,20 +1,18 @@
-/*
- * GMail.cs
- * 
- * GNOME Do is the legal property of its developers, whose names are too numerous
- * to list here.  Please refer to the COPYRIGHT file distributed with this
- * source distribution.
- * 
+/* GMail.cs
+ *
+ * GNOME Do is the legal property of its developers. Please refer to the
+ * COPYRIGHT file distributed with this source distribution.
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -35,17 +33,17 @@ namespace GMailContacts
 {
 	public static class GMail
 	{
-		private static string gAppName = "alexLauni-gnomeDoGMailPlugin-1";
+		public const string GAppName = "alexLauni-gnomeDoGMailPlugin-1.2";
 		private static List<IItem> contacts;
-		private static DateTime lastUpdated;
+		private static DateTime last_updated;
 		private static ContactsService service;
 		
 		static GMail()
 		{
-			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
-			contacts = new List<IItem> ();
-			lastUpdated = new DateTime (1987, 11, 28);
 			string username, password;
+			ServicePointManager.CertificatePolicy = new CertHandler ();
+			contacts = new List<IItem> ();
+			last_updated = new DateTime (1987, 11, 28);
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
 			Connect (username, password);
@@ -53,10 +51,6 @@ namespace GMailContacts
 		
 		public static List<IItem> Contacts {
 			get { return contacts; }
-		}
-		
-		public static string GAppName {
-			get { return gAppName; }
 		}
 		
 		private static void Connect (string username, string password) 
@@ -72,14 +66,15 @@ namespace GMailContacts
 		public static void UpdateContacts ()
 		{
 			if (!Monitor.TryEnter (contacts)) return;
-			ContactsQuery query = new ContactsQuery(ContactsQuery.CreateContactsUri ("default"));
+			ContactsQuery query = new ContactsQuery (
+				ContactsQuery.CreateContactsUri ("default"));
 			query.NumberToRetrieve = 1000;
-			query.StartDate = lastUpdated;
+			query.StartDate = last_updated;
 			query.ShowDeleted = true;
 			
 			try {
 				ContactsFeed feed = service.Query(query);
-				lastUpdated = feed.Updated;
+				last_updated = feed.Updated;
 				
 				ContactItem buddy;
 				foreach (ContactEntry entry in feed.Entries)
@@ -87,29 +82,29 @@ namespace GMailContacts
 					if (String.IsNullOrEmpty (entry.Title.Text)) continue;
 					
 					if (entry.Deleted) {
-						ContactItem enemy = ContactItem.Create (entry.Title.Text);
+						ContactItem enemy = ContactItem.Create
+							(entry.Title.Text);
 						contacts.Remove (enemy);
 						continue;
 					}
 					
-					buddy = ContactItem.CreateWithName (entry.Title.Text);					
-					foreach (PostalAddress postal in entry.PostalAddresses)
-						buddy ["address"] = postal.Value.Replace('\n', ' ');
-					foreach (PhoneNumber phone in entry.Phonenumbers)
-						buddy ["phone"] = phone.Value.Replace('\n', ' ');
+					buddy = ContactItem.CreateWithName (entry.Title.Text);
+					buddy ["address.gmail"] = 
+						entry.PrimaryPostalAddress.Value.Replace ('\n',' ');
+					buddy ["phone.gmail"] = 
+						entry.PrimaryPhonenumber.Value.Replace ('\n',' ');
 					int i = 0;
 					foreach (EMail email in entry.Emails)
 					{	
-						string detail = "email.other";
+						string detail = "email.gmail.other";
 						if (email.Primary)
-							detail = "email";
+							detail = "email.gmail";
 						else if (email.Home)
-							detail = "email.home";
+							detail = "email.gmail.home";
 						else if (email.Work)
-							detail = "email.work";
+							detail = "email.gmail.work";
 						else {
-							detail = "buddy." + i;
-							i++;
+							detail = "email.gmail." + i++;
 						}
 						buddy [detail] = email.Address;
 					}
@@ -143,7 +138,8 @@ namespace GMailContacts
 			
 			test = new ContactsService (GAppName);
 			test.setUserCredentials (username, password);
-			query = new ContactsQuery(ContactsQuery.CreateContactsUri ("default"));
+			query = new ContactsQuery(
+				ContactsQuery.CreateContactsUri ("default"));
 			query.StartDate = DateTime.Now;
 			
 			try {

@@ -114,7 +114,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Flickr.UploadConfig" design-size="334 354">
+  <widget class="Gtk.Bin" id="Flickr.UploadConfig" design-size="346 354">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox3">
@@ -280,7 +280,7 @@
                           <widget class="Gtk.Label" id="label1">
                             <property name="MemberName" />
                             <property name="Xalign">0</property>
-                            <property name="LabelProp" translatable="yes">Default tags to use on images posted with Do. Seperate tags with a space; for multiple word tags use quotes. ex.) linux party "gnome do"</property>
+                            <property name="LabelProp" translatable="yes">Default tags to use on images posted with Do. Seperate tags with a space; for multiple word tags use quotes. ex.) concert "Mars Volta" Omar</property>
                             <property name="Wrap">True</property>
                           </widget>
                           <packing>
