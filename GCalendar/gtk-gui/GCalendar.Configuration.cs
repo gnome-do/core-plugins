@@ -13,7 +13,7 @@ namespace GCalendar {
     
     public partial class Configuration {
         
-        protected virtual void Build() {
+        protected override void Build() {
             Stetic.Gui.Initialize(this);
             // Widget GCalendar.Configuration
             Stetic.BinContainer.Attach(this);

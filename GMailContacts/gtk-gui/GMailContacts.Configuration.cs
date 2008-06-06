@@ -13,7 +13,7 @@ namespace GMailContacts {
     
     public partial class Configuration {
         
-        protected virtual void Build() {
+        protected override void Build() {
             Stetic.Gui.Initialize(this);
             // Widget GMailContacts.Configuration
             Stetic.BinContainer.Attach(this);
