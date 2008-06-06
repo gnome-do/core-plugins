@@ -31,6 +31,7 @@ namespace DoTwitter
 		public Configuration () : 
 			base ("Twitter")
 		{
+			Build ();
 			GetAccountButton.Uri = "https://twitter.com/signup";			
 		}
 		

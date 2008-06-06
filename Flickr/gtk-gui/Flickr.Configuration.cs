@@ -168,6 +168,7 @@ namespace Flickr {
             this.private_radio = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Private"));
             this.private_radio.CanFocus = true;
             this.private_radio.Name = "private_radio";
+            this.private_radio.Active = true;
             this.private_radio.DrawIndicator = true;
             this.private_radio.UseUnderline = true;
             this.private_radio.Group = new GLib.SList(System.IntPtr.Zero);

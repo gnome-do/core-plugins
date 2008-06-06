@@ -32,6 +32,7 @@ namespace GCalendar
 	{		
 		public Configuration()
 		{
+			Build ();
 			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
 		
