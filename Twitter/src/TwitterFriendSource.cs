@@ -46,7 +46,7 @@ namespace DoTwitter
 		}
 		
 		public string Icon {
-			get { return "system-users"; }
+			get { return "twitter_items.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public Type [] SupportedItemTypes {

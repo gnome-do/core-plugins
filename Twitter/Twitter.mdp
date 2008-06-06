@@ -31,6 +31,7 @@
     <File name="src/Twitterizer/TwitterUserCollection.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Twitterizer/Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="twitter_items.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.4.0.1, Culture=neutral" />
