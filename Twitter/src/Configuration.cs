@@ -26,7 +26,7 @@ using Do.Addins;
 
 namespace DoTwitter
 {
-	public partial class Configuration : AbstractLoginWidget
+	public class Configuration : AbstractLoginWidget
 	{
 		public Configuration () : 
 			base ("Twitter")

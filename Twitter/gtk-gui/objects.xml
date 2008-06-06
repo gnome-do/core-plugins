@@ -1,6 +1,0 @@
-<objects>
-  <object type="DoTwitter.Configuration" palette-category="DoTwitter" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals />
-  </object>
-</objects>
