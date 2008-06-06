@@ -1,0 +1,6 @@
+<objects>
+  <object type="Flickr.Configuration" palette-category="Flickr" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+</objects>
