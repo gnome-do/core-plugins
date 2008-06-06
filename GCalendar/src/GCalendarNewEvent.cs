@@ -32,10 +32,6 @@ namespace GCalendar
 {
 	public sealed class GCalendarNewEvent : IAction
 	{
-		public GCalendarNewEvent()
-		{
-		}
-		
 		public string Name {
 			get { return "New Event"; }
 		}
@@ -68,20 +64,23 @@ namespace GCalendar
             get {return false; }
         }
         
-        public bool SupportsItem (IItem item) {
+        public bool SupportsItem (IItem item) 
+        {
             return true;
         }
         
-        public bool SupportsModifierItemForItems (IItem[] item, IItem modItem) {
+        public bool SupportsModifierItemForItems (IItem[] item, IItem modItem) 
+        {
             return true;
         }
         
-        public IItem[] DynamicModifierItemsForItem (IItem item) {
+        public IItem[] DynamicModifierItemsForItem (IItem item) 
+        {
             return null;
         }
         
-        public IItem[] Perform (IItem[] items, IItem[] modifierItems) {
-            //DoGCal service = new DoGCal ();
+        public IItem[] Perform (IItem[] items, IItem[] modifierItems) 
+        {
             string cal_url = (modifierItems[0] as GCalendarItem).URL;
             string event_data = (items[0] as ITextItem).Text;
             

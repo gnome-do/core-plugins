@@ -34,6 +34,7 @@ namespace GCalendar
 {
 	public class GCal
 	{
+		const string FeedUri = "http://www.google.com/calendar/feeds/default";
 		private static string gAppName = "alexLauni-gnomeDoGCalPlugin-1.2";
 		private static string username, password;
 		private static CalendarService service;
@@ -98,7 +99,7 @@ namespace GCalendar
 		public static AtomFeed QueryCalendars ()
 		{			
 			FeedQuery query = new FeedQuery ();
-			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
+			query.Uri = new Uri (FeedUri);
 			try {
 				return service.Query (query);
 			} catch (Exception e) {
@@ -186,11 +187,13 @@ namespace GCalendar
 			}
 			
 			// Get date ranges for single date keywords
-			if ((needle.StartsWith ("in ") || needle.Contains (" in ")) || needle.Contains ("before ") ||
-			    needle.Contains ("after ") || (needle.StartsWith ("on ") || needle.Contains (" on ")) ||
-			    needle.Contains ("until ") || (needle.Contains ("from ") && !( needle.Contains (" to ") ||
-			                                                                  needle.Contains("-"))))
-				return ParseSingleDate (needle);
+			if ((needle.StartsWith ("in ") || needle.Contains (" in ")) || 
+				needle.Contains ("before ") || needle.Contains ("after ") ||
+				(needle.StartsWith ("on ") || needle.Contains (" on ")) ||
+			    needle.Contains ("until ") || (needle.Contains ("from ") &&
+			    !( needle.Contains (" to ") || needle.Contains("-"))))
+					return ParseSingleDate (needle);
+					
 			else if (needle.Contains ("from "))
 				return ParseDateRange (needle);
 			else 
@@ -202,25 +205,21 @@ namespace GCalendar
 			DateTime [] dates = new DateTime [2];
 			if (needle.StartsWith ("in") || needle.Contains (" in ")) {
 				needle = StripDatePrefix (needle);
-				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
 				dates[1] = dates[0].AddMonths (1);
 			}
 			else if (needle.Contains ("before") || needle.Contains ("until ")) {
 				needle = StripDatePrefix (needle);
 				dates[0] = DateTime.Now;
-				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[1] = DateTime.Parse (needle);
 			}
 			else if (needle.Contains ("after ") || needle.Contains ("from ")) {
 				needle = StripDatePrefix (needle);
-				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
 				dates[1] = dates[0].AddYears (5);
 			}
 			else if (needle.StartsWith ("on ") || needle.Contains (" on ")) {
 				needle = StripDatePrefix (needle);
-				//Console.Error.WriteLine ("Parsing {0}",needle);
 				dates[0] = DateTime.Parse (needle);
 				dates[1] = dates[0].AddDays(1);
 			}
@@ -231,7 +230,8 @@ namespace GCalendar
 		{
 			DateTime [] dates = new DateTime [2];
 			needle = needle.ToLower ();
-			needle = needle.Substring (needle.IndexOf ("from "), needle.Length - needle.IndexOf ("from "));
+			needle = needle.Substring (needle.IndexOf ("from "), 
+				needle.Length - needle.IndexOf ("from "));
 			try {
 				int seperatorIndex = needle.IndexOf ("-");
 				if (seperatorIndex == -1 )
@@ -282,7 +282,7 @@ namespace GCalendar
 			test = new CalendarService (gAppName);
 			test.setUserCredentials (username, password);
 			query = new FeedQuery ();
-			query.Uri = new Uri ("http://www.google.com/calendar/feeds/default");
+			query.Uri = new Uri (FeedUri);
 			try {
 				test.Query (query);
 				Connect (username, password);
