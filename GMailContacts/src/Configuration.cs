@@ -33,7 +33,6 @@ namespace GMailContacts
 		public Configuration () : 
 			base ("Gmail")
 		{
-			Build ();
 			GetAccountButton.Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		}
 		
