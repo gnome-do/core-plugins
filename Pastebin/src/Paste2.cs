@@ -26,6 +26,8 @@ namespace Pastebin
 {
 	public class Paste2 : IPastebinProvider
 	{		
+		private const string urlRoot = "http://paste2.org";
+	
 		private NameValueCollection parameters;
 		private List<TextSyntaxItem> supportedLanguages;
 		
@@ -88,10 +90,15 @@ namespace Pastebin
 		{		
 			parameters["code"] = content;
 		}
+
+		public bool ShouldAllowAutoRedirect
+		{
+			get { return false; }
+		}
 		
 		public string BaseUrl 
 		{ 
-			get { return "http://www.paste2.org/new-paste"; } 
+			get { return urlRoot + "/new-paste"; } 
 		}
 		
 		public NameValueCollection Parameters 
@@ -101,7 +108,7 @@ namespace Pastebin
 		
 		public string GetPasteUrlFromResponse (HttpWebResponse response)
 		{
-			return response.ResponseUri.ToString ();
+			return urlRoot + response.Headers["Location"];
 		}
 		
 		public List<TextSyntaxItem> SupportedLanguages 

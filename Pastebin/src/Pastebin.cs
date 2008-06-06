@@ -39,6 +39,7 @@ namespace Pastebin
 				request.Timeout = 15000;
 				request.Method = "POST";
 				request.ContentType = "application/x-www-form-urlencoded";
+				request.AllowAutoRedirect = pastebin.ShouldAllowAutoRedirect;
 
 				UTF8Encoding encoding = new UTF8Encoding ();
 				byte[] data = encoding.GetBytes (postQueryString);

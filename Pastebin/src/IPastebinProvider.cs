@@ -26,6 +26,8 @@ namespace Pastebin
 {	
 	public interface IPastebinProvider
 	{
+		bool ShouldAllowAutoRedirect { get; }
+		
 		string BaseUrl { get; }
 		
 		NameValueCollection Parameters { get; }
