@@ -35,7 +35,6 @@ namespace FilePlugin
 			NumColumns
 		}
 		
-		
 		private TextWriter writer;
 		
 		public PathNodeView () :
@@ -49,7 +48,7 @@ namespace FilePlugin
 			
 			cell = new CellRendererText ();
 			(cell as CellRendererText).Edited += OnPathEdited;
-			(cell as CellRendererText).Width = 325;
+			(cell as CellRendererText).Width = 310;
 			(cell as CellRendererText).Editable = true;
 			(cell as CellRendererText).Ellipsize = Pango.EllipsizeMode.Middle;
 			AppendColumn ("Path", cell, "text", Column.Path);

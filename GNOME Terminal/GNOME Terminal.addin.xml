@@ -18,11 +18,7 @@
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/Action">
 		<Action type="GNOME.Terminal.RunInTerminalAction" />
-	</Extension>
-	<Extension path="/Do/Action">
 		<Action type="GNOME.Terminal.OpenProfileAction" />
-	</Extension>
-	<Extension path="/Do/Action">
 		<Action type="GNOME.Terminal.OpenTerminalHereAction" />
 	</Extension>
 	<Extension path="/Do/ItemSource">

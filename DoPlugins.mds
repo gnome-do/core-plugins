@@ -4,7 +4,7 @@
       <Entry build="True" name="Packages" configuration="" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
       <Entry build="False" name="Amarok" configuration="Debug" />
-      <Entry build="True" name="Banshee" configuration="Debug" />
+      <Entry build="False" name="Banshee" configuration="Debug" />
       <Entry build="True" name="Epiphany" configuration="Debug" />
       <Entry build="True" name="Evolution" configuration="Debug" />
       <Entry build="True" name="File" configuration="Debug" />
