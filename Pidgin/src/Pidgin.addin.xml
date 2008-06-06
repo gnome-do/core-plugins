@@ -4,7 +4,7 @@
 	version="1.5"
 	name="Pidgin"
 	description="Indexes your buddy list and initiate chats with Pidgin buddies."
-	author="David Siegel"
+	author="David Siegel, Alex Launi"
 >
  
 	<Runtime>
@@ -17,27 +17,17 @@
 	
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
-	<Extension path = "/Do/ItemSource">
+	<Extension path="/Do/ItemSource">
 		<ItemSource type="Do.Addins.Pidgin.PidginContactItemSource" />
-	</Extension>
-	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Do.Addins.Pidgin.PidginAccountItemSource" />
-	</Extension>
-	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Do.Addins.Pidgin.PidginSavedStatusItemSource" />
 	</Extension>
 
 	<!--- Actions -->
 	<Extension path= "/Do/Action">
 		<Action type="Do.Addins.Pidgin.PidginChatAction" />
-	</Extension>
-	<Extension path= "/Do/Action">
 		<Action type="Do.Addins.Pidgin.PidginSetStatusAction" />
-	</Extension>
-	<Extension path= "/Do/Action">
 		<Action type="Do.Addins.Pidgin.PidginEnableAccount" />
-	</Extension>
-	<Extension path= "/Do/Action">
 		<Action type="Do.Addins.Pidgin.PidginDisableAccount" />
 	</Extension>
 

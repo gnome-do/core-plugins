@@ -19,8 +19,6 @@
 	<!-- Sources -->
 	<Extension path = "/Do/Action">
 		<Action type="Archive.ArchiveAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="Archive.ExtractAction" />
 	</Extension>
 </Addin>

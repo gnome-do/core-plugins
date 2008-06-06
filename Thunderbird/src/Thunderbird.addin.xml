@@ -16,7 +16,6 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Do.Addins.Thunderbird.ThunderbirdContactItemSource" />
 	</Extension>

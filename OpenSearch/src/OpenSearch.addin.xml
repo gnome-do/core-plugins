@@ -4,7 +4,7 @@
 	version="1.0"
 	name="OpenSearch Web Search"
 	description="Search the web using your installed OpenSearch plugins."
-	author=""	
+	author="Jason Jones"	
 >
  
 	<Runtime>

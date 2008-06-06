@@ -4,7 +4,7 @@
 	version="1.0"
 	name="Pastebin"
 	description="Paste text to an online pastebin."
-	author=""
+	author="Jason Jones"
 >
  
 	<Runtime>

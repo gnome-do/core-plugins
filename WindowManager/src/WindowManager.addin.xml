@@ -16,31 +16,18 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<Extension path = "/Do/Action">
+	<Extension path="/Do/Action">
 		<Action type="WindowManager.WindowMinimizeAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="WindowManager.WindowMaximizeAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="WindowManager.WindowShadeAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="WindowManager.WindowFocusAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="WindowManager.ScreenTileAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="WindowManager.ScreenCascadeAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type="WindowManager.ScreenRestoreAction" />
 	</Extension>
-	<Extension path = "/Do/ItemSource">
+
+	<Extension path="/Do/ItemSource">
 		<ItemSource type="WindowManager.ScreenItemSource" />
-	</Extension>
-	<Extension path = "/Do/ItemSource">
 		<ItemSource type="WindowManager.WindowItemSource" />
 	</Extension>
 </Addin>

@@ -16,8 +16,7 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
-	<Extension path = "/Do/ItemSource">
+	<Extension path="/Do/ItemSource">
 		<ItemSource type="Epiphany.EpiphanyBookmarkItemSource" />
 	</Extension>
 </Addin>

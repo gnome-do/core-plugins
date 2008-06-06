@@ -5,18 +5,17 @@
 	name="Firefox"
 	description="Indexes Firefox bookmarks."
 	author="David Siegel"
->
- 
+	>
+
 	<Runtime>
 		<Import assembly="Firefox.dll"/>
 	</Runtime>
-	
+
 	<Dependencies>
 		<Addin id="Core" version="1.0" />
 	</Dependencies>
-	
+
 	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="Mozilla.FirefoxBookmarkItemSource" />
 	</Extension>
