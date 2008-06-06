@@ -1,5 +1,17 @@
 <objects>
-  <object type="Flickr.Configuration" palette-category="Flickr" allow-children="false" base-type="Gtk.Bin">
+  <object type="Flickr.AccountConfig" palette-category="Flickr" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups>
+      <itemgroup label="AccountConfig Properties">
+        <property name="AuthToken" />
+        <property name="IsPublic" />
+        <property name="FamilyAllowed" />
+        <property name="FriendsAllowed" />
+        <property name="Tags" />
+      </itemgroup>
+    </itemgroups>
+    <signals />
+  </object>
+  <object type="Flickr.UploadConfig" palette-category="Flickr" allow-children="false" base-type="Gtk.Bin">
     <itemgroups />
     <signals />
   </object>

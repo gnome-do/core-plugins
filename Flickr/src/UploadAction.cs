@@ -28,16 +28,11 @@ using Do.Universe;
 using Do.Addins;
 
 using FlickrNet;
-using GConf;
 
 namespace Flickr
 {	
 	public class UploadAction : IAction, IConfigurable
-	{
-		static string API_KEY = "aa645b69c14422e095dee81dda21385b";
-		static string API_SECRET = "a266af1a63024d3d";
-		static string GCONF_KEY_TOKEN = "/apps/gnome-do/plugins/flickr/token";
-		
+	{		
 		public string Name {
 			get { return "Upload photo"; }
 		}
@@ -51,10 +46,9 @@ namespace Flickr
 		 * http://www.soulvisual.com/blog/
 		 */
 		public string Icon {
-		
 			get { return "flickr.png@" + GetType ().Assembly.FullName; }
 		}
-
+		
 		public Type [] SupportedItemTypes {
 			get { 
 				return new Type [] { typeof (IFileItem) };
@@ -89,17 +83,8 @@ namespace Flickr
 		
 		public IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
-			GConf.Client gconf = new GConf.Client ();
 			string tags;
-			
-			//Test to make sure we have a token in gconf
-			try {
-				gconf.Get (GCONF_KEY_TOKEN);
-			} catch (GConf.NoSuchKeyException) {
-				Console.Error.WriteLine ("Please authorize in configuration!");
-				return null;
-			}
-			tags = "";
+			tags = AccountConfig.Tags;
 			
 			if (modItems.Length > 0) {
 				foreach (IItem modItem in modItems) {
@@ -127,26 +112,25 @@ namespace Flickr
 		}
 		
 		public static void AsyncUploadToFlickr (List<FileItem> uploads, string tags)
-		{
-			GConf.Client gconf = new GConf.Client ();
-			string token = "";
-			try {
-				token = gconf.Get (GCONF_KEY_TOKEN) as string;
-			} catch (GConf.NoSuchKeyException) {
-				return;
-			}
-			
-			FlickrNet.Flickr flickr = new FlickrNet.Flickr (API_KEY, API_SECRET, token);
+		{			
+			FlickrNet.Flickr flickr = new FlickrNet.Flickr (
+				AccountConfig.ApiKey, AccountConfig.ApiSecret, AccountConfig.AuthToken);
 			new Thread ((ThreadStart) delegate {
 				foreach (FileItem file in uploads) {
-					flickr.UploadPicture (file.Path, file.Name, "", tags, true, true, true);
+					try {
+						flickr.UploadPicture (file.Path, file.Name, "", tags,
+							AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
+							AccountConfig.FriendsAllowed);
+					} catch (FlickrNet.FlickrWebException e) {
+						Console.Error.WriteLine (e);
+					}
 				}
 			}).Start ();
 		}
 		
 		public Gtk.Bin GetConfiguration ()
 		{
-			return new Configuration ();
+			return new UploadConfig ();
 		}
 		
 		private bool FileIsPicture (FileItem item)
