@@ -105,6 +105,7 @@ namespace FilePlugin {
             w5.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.vbox3 = new Gtk.VBox();
+            this.vbox3.Name = "vbox3";
             this.vbox3.Spacing = 6;
             // Container child vbox3.Gtk.Box+BoxChild
             this.table2 = new Gtk.Table(((uint)(1)), ((uint)(3)), false);
