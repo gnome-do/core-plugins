@@ -88,7 +88,7 @@ namespace GMailContacts
 		
 		public Gtk.Bin GetConfiguration ()
 		{
-			return new Configuration ();
+			return new GMailConfig ();
 		}
 	}
 }

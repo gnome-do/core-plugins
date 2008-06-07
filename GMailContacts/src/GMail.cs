@@ -41,11 +41,12 @@ namespace GMailContacts
 		static GMail()
 		{
 			string username, password;
+			username = password = "";
 			ServicePointManager.CertificatePolicy = new CertHandler ();
 			contacts = new List<IItem> ();
 			last_updated = new DateTime (1987, 11, 28);
-			Configuration.GetAccountData (out username, out password,
-				typeof (Configuration));
+			GMailConfig.GetAccountData (out username, out password,
+				typeof (GMailConfig));
 			Connect (username, password);
 		}
 		
@@ -89,10 +90,14 @@ namespace GMailContacts
 					}
 					
 					buddy = ContactItem.CreateWithName (entry.Title.Text);
-					buddy ["address.gmail"] = 
-						entry.PrimaryPostalAddress.Value.Replace ('\n',' ');
-					buddy ["phone.gmail"] = 
-						entry.PrimaryPhonenumber.Value.Replace ('\n',' ');
+					try {
+						buddy ["address.gmail"] = 
+							entry.PrimaryPostalAddress.Value.Replace ('\n',' ');
+					} catch { }
+					try {
+						buddy ["phone.gmail"] = 
+							entry.PrimaryPhonenumber.Value.Replace ('\n',' ');
+					} catch { }
 					int i = 0;
 					foreach (EMail email in entry.Emails)
 					{	
