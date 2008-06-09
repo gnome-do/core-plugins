@@ -93,7 +93,7 @@ namespace DoTwitter
 		public static void UpdateFriends ()
 		{
 			if (!Monitor.TryEnter (items)) return;
-			
+
 			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
 				Monitor.Exit (items);
 				return;
