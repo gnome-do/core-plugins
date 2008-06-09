@@ -36,9 +36,12 @@ namespace DoTwitter
 	{
 		private static List<IItem> items;
 		private static string status, username, password;
+		private static Timer clearFriendsTimer;
+		const int SecondsFriendsCached = 45;
 		
 		static TwitterAction ()
 		{
+			clearFriendsTimer = new Timer (ClearFriends);
 			items = new List<IItem> ();
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
@@ -90,7 +93,7 @@ namespace DoTwitter
 		public static void UpdateFriends ()
 		{
 			if (!Monitor.TryEnter (items)) return;
-			items.Clear ();
+			clearFriendsTimer.Change (SecondsFriendsCached*1000, Timeout.Infinite);
 			
 			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
 				Monitor.Exit (items);
@@ -144,6 +147,13 @@ namespace DoTwitter
 				return false;
 			}
 			return true;
+		}
+		
+		private static void ClearFriends (object state)
+		{
+			lock (items) {
+				items.Clear ();
+			}
 		}
 	}
 }
