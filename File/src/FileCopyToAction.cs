@@ -76,8 +76,7 @@ namespace FilePlugin {
 			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
-					File.Copy (FileItem.EscapedPath (src), 
-					           FileItem.EscapedPath (dest) + "/" + src.Name);
+					File.Copy (src.Path, FileItem.EscapedPath (dest) + "/" + src.Name);
 					//System.Diagnostics.Process.Start ("cp",
 					//		string.Format ("-r {0} {1}",
 					//			FileItem.EscapedPath (src), FileItem.EscapedPath (dest)));
