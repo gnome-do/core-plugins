@@ -66,7 +66,7 @@ namespace GMailContacts
 		
 		public string Key {
 			get { 
-				return "email.gmail";
+				return "email";
 			}
 		}
 		

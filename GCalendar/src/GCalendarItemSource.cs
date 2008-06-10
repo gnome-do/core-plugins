@@ -43,9 +43,17 @@ namespace GCalendar
 			items = new List<IItem> ();
 		}
 
-		public string Name { get { return "Google Calendars"; } }
-		public string Description { get { return "Indexes your Google Calendars"; } }
-		public string Icon { get { return "calIcon.png@" + GetType ().Assembly.FullName; } }
+		public string Name {
+			get { return "Google Calendars"; }
+		}
+		
+		public string Description {
+			get { return "Indexes your Google Calendars"; }
+		}
+		
+		public string Icon {
+			get { return "calIcon.png@" + GetType ().Assembly.FullName; }
+		}
 
 		public Type[] SupportedItemTypes
 		{
@@ -91,8 +99,7 @@ namespace GCalendar
 		public void UpdateItems ()
 		{	
 			try {
-				Thread updateRunner = new Thread (new ThreadStart (GCal.UpdateCalendars));
-				updateRunner.Start ();
+				new Thread (new ThreadStart (GCal.UpdateCalendars)).Start ();
 				items = GCal.Calendars;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);

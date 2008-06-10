@@ -79,9 +79,7 @@ namespace GMailContacts
 		public void UpdateItems () 
 		{
 			try {
-				Thread updateRunner = new Thread (
-					new ThreadStart (GMail.UpdateContacts));
-				updateRunner.Start ();
+				new Thread ((ThreadStart) (GMail.UpdateContacts)).Start ();
 				items = GMail.Contacts;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
@@ -90,7 +88,7 @@ namespace GMailContacts
 		
 		public Gtk.Bin GetConfiguration ()
 		{
-			return new Configuration ();
+			return new GMailConfig ();
 		}
 	}
 }
