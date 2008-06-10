@@ -81,7 +81,7 @@ namespace FilePlugin {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
 					dest = src.Path.Substring(0,src.Path.LastIndexOf("/")) + "/" + dest;
-					System.IO.File.Move (FileItem.EscapedPath (src), FileItem.EscapedPath (dest));
+					System.IO.File.Move (src.Path, dest);
 					seenPaths.Add (src.Path);
 				} catch (Exception e) {
 					Console.Error.WriteLine ("MoveToAction could not move "+
