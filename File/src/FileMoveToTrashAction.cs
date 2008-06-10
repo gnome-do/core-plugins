@@ -69,7 +69,7 @@ namespace FilePlugin {
 			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
-					File.Move (FileItem.EscapedPath (src), Trash + "/" + src.Name);
+					File.Move (src.Path, Trash + "/" + src.Name);
 					seenPaths.Add (src.Path);
 					src.Path = Path.Combine (Trash, Path.GetFileName (src.Path));
 				} catch (Exception e) {

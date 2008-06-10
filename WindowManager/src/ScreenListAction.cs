@@ -265,12 +265,7 @@ namespace WindowManager
 		
 		protected List<Window> VisibleViewportWindows {
 			get {
-				List<Window> windows = ViewportWindows;
-				foreach (Window w in windows) {
-					if (w.IsMinimized)
-						windows.Remove (w);
-				}
-				return windows;
+				return ViewportWindows.FindAll (delegate (Window w) { return !w.IsMinimized; });
 			}
 		}
 	}
