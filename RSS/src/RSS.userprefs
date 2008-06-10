@@ -1,0 +1,37 @@
+﻿<UserCombinePreferences version="1.0" filename="/home/jason/downloads/src/do-plugins/RSS/RSS.mds">
+  <Files>
+    <File name="Welcome" />
+    <File name="RssItemSource.cs" line="125" column="9" />
+    <File name="RssFeedAction.cs" line="152" column="10" />
+    <File name="Configuration.cs" line="21" column="20" />
+    <File name="gtk-gui/Do.Plugins.Rss.Configuration.cs" line="84" column="52" />
+    <File name="RssFeedLinkItem.cs" line="40" column="37" />
+    <File name="RssFeedItem.cs" line="64" column="4" />
+    <File name="FirefoxLiveBookmarksItemSource.cs" line="1" column="1" />
+    <File name="RSS.NET/RssFeed.cs" line="151" column="23" />
+    <File name="gtk-gui/gui.stetic" line="20" column="49" />
+  </Files>
+  <Views>
+    <ViewMemento id="ProjectPad">
+      <Node expanded="True">
+        <Node name="RSS" expanded="True">
+          <Node name="Resources" expanded="True">
+            <Node name="gui.stetic" selected="True" />
+          </Node>
+          <Node name="UserInterface" expanded="True" />
+          <Node name="RSS.NET" expanded="True" />
+        </Node>
+      </Node>
+    </ViewMemento>
+    <ViewMemento id="ClassPad">
+      <Node expanded="True" />
+    </ViewMemento>
+    <ViewMemento id="MonoDevelop.NUnit.TestPad">
+      <Node />
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Property key="ActiveWindow" value="/home/jason/downloads/src/do-plugins/RSS/gtk-gui/gui.stetic" />
+    <Property key="ActiveConfiguration" value="Debug" />
+  </Properties>
+</UserCombinePreferences>

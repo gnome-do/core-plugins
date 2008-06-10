@@ -18,7 +18,7 @@ from os import system
 from os.path import commonprefix, abspath
 from subprocess import Popen, PIPE
 
-REPO_VERSION = "0.4"
+REPO_VERSION = "0.5"
 REPO_NAME = "official"
 REPO_SCP = "gnomedo@do.davebsd.com:do.davebsd.com/repo/%s/%s" % \
 	(REPO_VERSION, REPO_NAME)
@@ -51,7 +51,7 @@ def build ():
 
 def publish ():
 	repo = escape (REPO_DIR)
-	system ("scp -r %s/* %s" % (repo, REPO_SCP))
+	system ("rsync -rve ssh --delete %s/* %s" % (repo, REPO_SCP))
 
 def manifests (asm=None):
 	dir = "."
