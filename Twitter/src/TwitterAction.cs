@@ -41,7 +41,7 @@ namespace DoTwitter
 		
 		static TwitterAction ()
 		{
-			clearFriendsTimer = new Timer (ClearFriends);
+			clearFriendsTimer = new Timer (ClearFriends, null, 600000, 600000);
 			items = new List<IItem> ();
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
@@ -98,7 +98,6 @@ namespace DoTwitter
 				Monitor.Exit (items);
 				return;
 			}
-			clearFriendsTimer.Change (SecondsFriendsCached*1000, Timeout.Infinite);
 			
 			Twitter t;
 			TwitterUserCollection friends;
