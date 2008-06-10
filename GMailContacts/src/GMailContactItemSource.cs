@@ -69,9 +69,9 @@ namespace GMailContacts
 			
 			details = new List<IItem> ();
 			foreach (string detail in contact.Details) {
-				if (detail.StartsWith ("email.gmail"))
+				if (detail.Contains ("."))
 					details.Add (new GMailContactDetailItem (
-						contact.Name, contact [detail]));
+						detail, contact [detail]));
 			}
 			return details;
 		}

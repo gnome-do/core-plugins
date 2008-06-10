@@ -90,27 +90,41 @@ namespace GMailContacts
 					}
 					
 					buddy = ContactItem.CreateWithName (entry.Title.Text);
-					try {
-						buddy ["address.gmail"] = 
-							entry.PrimaryPostalAddress.Value.Replace ('\n',' ');
-					} catch { }
-					try {
-						buddy ["phone.gmail"] = 
-							entry.PrimaryPhonenumber.Value.Replace ('\n',' ');
-					} catch { }
 					int i = 0;
+					foreach (PostalAddress address in entry.PostalAddresses) {
+						string detail = "address.gmail." + i;
+						if (address.Primary)
+							detail = "address.gmail";
+						else if (address.Home)
+							detail = "address.gmail.home";
+						else if (address.Work)
+							detail = "address.gmail.work";
+						buddy [detail] = address.Value.Replace ('\n',' ');
+						i++;
+					}
+					i = 0;
+					foreach (PhoneNumber phone in entry.Phonenumbers) {
+						string detail = "phone.gmail." + i;
+						if (phone.Primary)
+							detail = "phone.gmail";
+						else if (phone.Home)
+							detail = "phone.gmail.home";
+						else if (phone.Work)
+							detail = "phone.gmail.work";
+						buddy [detail] = phone.Value.Replace ('\n',' ');
+						i++;
+					}
+					i = 0;
 					foreach (EMail email in entry.Emails)
 					{	
-						string detail = "email.gmail.other";
+						string detail = "email.gmail." + i;
 						if (email.Primary)
 							detail = "email.gmail";
 						else if (email.Home)
 							detail = "email.gmail.home";
 						else if (email.Work)
 							detail = "email.gmail.work";
-						else {
-							detail = "email.gmail." + i++;
-						}
+						
 						buddy [detail] = email.Address;
 					}
 					contacts.Add (buddy);

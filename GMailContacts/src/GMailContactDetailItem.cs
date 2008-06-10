@@ -26,53 +26,57 @@ namespace GMailContacts
 {
 	public class GMailContactDetailItem : IContactDetailItem 
 	{
-		private string type, email, icon;
+		private string type, detail;
 		
-		public GMailContactDetailItem (string type, string email)
+		
+		public GMailContactDetailItem (string type, string detail)
 		{
 			this.type = type;
-			this.email = email;
-			this.icon = "gmail-logo.png@" + GetType ().Assembly.FullName;
-		}
-		
-		public GMailContactDetailItem (string type, string email, string icon) :
-			this (type, email)
-		{
-			this.icon = icon;
-		}
+			this.detail = detail;
+		}		
 		
 		public string Name {
 			get {
 				switch (type.ToLower ()) {
-				case "email.gmail":
-					return "Primary Email";
-				case "email.gmail.home":
-					return "Home Email";
-				case "email.gmail.work":
-					return "Work Email";
+				case "email.gmail": return "Primary Email";
+				case "email.gmail.home": return "Home Email";
+				case "email.gmail.work": return "Work Email";
+				case "address.gmail": return "Primary Address";
+				case "address.gmail.home": return "Home Address";
+				case "address.gmail.work": return "Work Address";
+				case "phone.gmail": return "Primary Phone";
+				case "phone.gmail.home": return "Home Phone";
+				case "phone.gmail.work": return "Work Phone";
 				default:
-					return "Other Email";
+					return "Other " + type.Substring (0, type.IndexOf ("."));
 				}
 			}
 		}
 		
 		public string Description {
-			get { return email; }
+			get { return detail; }
 		}
 		
 		public string Icon {
-			get { return icon; }
+			get {
+				switch (type.Substring (0,type.IndexOf ("."))) {
+				case "email": return "gmail-logo.png@" + GetType ().Assembly.FullName;
+				case "address": return "internet-mail";
+				case "phone": return "phone.png@" + GetType ().Assembly.FullName;
+				default: return "stock_person";
+				}
+			}
 		}
 		
 		public string Key {
-			get { 
-				return "email";
+			get {
+				return type;
 			}
 		}
 		
 		public string Value {
 			get { 
-				return email;
+				return detail;
 			}
 		}
 	}
