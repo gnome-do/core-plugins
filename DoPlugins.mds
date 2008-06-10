@@ -33,6 +33,7 @@
       <Entry build="True" name="GNOME Dictionary" configuration="Debug" />
       <Entry build="True" name="Flickr" configuration="Debug" />
       <Entry build="True" name="RSS" configuration="Debug" />
+      <Entry build="True" name="Google Maps" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -67,6 +68,7 @@
       <Entry build="True" name="GNOME Dictionary" configuration="Release" />
       <Entry build="True" name="Flickr" configuration="Release" />
       <Entry build="True" name="RSS" configuration="Release" />
+      <Entry build="True" name="Google Maps" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -101,6 +103,7 @@
     <Execute type="None" entry="GNOME Dictionary" />
     <Execute type="None" entry="Flickr" />
     <Execute type="None" entry="RSS" />
+    <Execute type="None" entry="Google Maps" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -135,5 +138,6 @@
     <Entry filename="GNOME Dictionary/GNOME Dictionary.mdp" />
     <Entry filename="Flickr/Flickr.mdp" />
     <Entry filename="RSS/RSS.mdp" />
+    <Entry filename="Google Maps/Google Maps.mdp" />
   </Entries>
 </Combine>
