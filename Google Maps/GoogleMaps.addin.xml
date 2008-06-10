@@ -1,0 +1,23 @@
+<Addin 
+	id="GoogleMaps"
+	namespace="Do"
+	version="1.0"
+	name="Google Maps"
+	description="Map a location or route in Google maps."
+	author="DR Colkitt"
+>
+ 
+	<Runtime>
+		<Import assembly="Google Maps.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/Action">
+		<Action type="Google.MapAction" />
+	</Extension>
+
+</Addin>
