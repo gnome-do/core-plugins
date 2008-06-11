@@ -41,8 +41,9 @@ namespace DoTwitter
 		
 		static TwitterAction ()
 		{
-			clearFriendsTimer = new Timer (ClearFriends, null, 600000, 600000);
 			items = new List<IItem> ();
+			clearFriendsTimer = new Timer (ClearFriends);
+			clearFriendsTimer.Change (600000, 600000);
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
 		} 
@@ -141,7 +142,7 @@ namespace DoTwitter
 		{
 			Twitter test = new Twitter (username, password);
 			try {
-				test.Replies ();
+				test.Friends ();
 			} catch {
 				return false;
 			}
@@ -156,4 +157,3 @@ namespace DoTwitter
 		}
 	}
 }
-
