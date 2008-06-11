@@ -67,12 +67,8 @@
       <Entry build="True" name="GNOME Terminal" configuration="Release" />
       <Entry build="True" name="GNOME Dictionary" configuration="Release" />
       <Entry build="True" name="Flickr" configuration="Release" />
-<<<<<<< TREE
-      <Entry build="True" name="RSS" configuration="Release" />
-=======
       <Entry build="True" name="RSS" configuration="Release" />
       <Entry build="True" name="Google Maps" configuration="Release" />
->>>>>>> MERGE-SOURCE
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -106,12 +102,8 @@
     <Execute type="None" entry="GNOME Terminal" />
     <Execute type="None" entry="GNOME Dictionary" />
     <Execute type="None" entry="Flickr" />
-<<<<<<< TREE
-    <Execute type="None" entry="RSS" />
-=======
     <Execute type="None" entry="RSS" />
     <Execute type="None" entry="Google Maps" />
->>>>>>> MERGE-SOURCE
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -145,11 +137,7 @@
     <Entry filename="GNOME Terminal/GNOME Terminal.mdp" />
     <Entry filename="GNOME Dictionary/GNOME Dictionary.mdp" />
     <Entry filename="Flickr/Flickr.mdp" />
-<<<<<<< TREE
-    <Entry filename="RSS/RSS.mdp" />
-=======
     <Entry filename="RSS/RSS.mdp" />
     <Entry filename="Google Maps/Google Maps.mdp" />
->>>>>>> MERGE-SOURCE
   </Entries>
 </Combine>
