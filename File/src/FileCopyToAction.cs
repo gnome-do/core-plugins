@@ -76,11 +76,11 @@ namespace FilePlugin {
 			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
-					File.Copy (src.Path, FileItem.EscapedPath (dest) + "/" + src.Name);
-					//System.Diagnostics.Process.Start ("cp",
-					//		string.Format ("-r {0} {1}",
-					//			FileItem.EscapedPath (src), FileItem.EscapedPath (dest)));
-
+					//File.Copy doesn't work on directories, WHY!?
+					System.Diagnostics.Process.Start ("cp", "-a " +
+						FileItem.EscapedPath (src.Path) + " " +
+						FileItem.EscapedPath (dest.Path + "/" + src.Name));
+						
 					seenPaths.Add (src.Path);
 					src.Path = Path.Combine (dest.Path, Path.GetFileName (src.Path));
 				} catch (Exception e) {

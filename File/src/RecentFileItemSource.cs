@@ -74,8 +74,8 @@ namespace FilePlugin
 		
 		public void UpdateItems ()
 		{
-			files.Clear ();
 			/*
+			files.Clear ();
 			foreach (Gtk.RecentInfo info in Gtk.RecentManager.Default.Items) {
 				Console.WriteLine ("Recent items source adding item: {0}", info);
 				files.Add (new FileItem (info.Uri));

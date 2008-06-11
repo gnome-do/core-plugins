@@ -84,7 +84,7 @@ namespace FilePlugin {
 					File.Move (src.Path, dest);
 					seenPaths.Add (src.Path);
 				} catch (Exception e) {
-					Console.Error.WriteLine ("MoveToAction could not move "+
+					Console.Error.WriteLine ("RenameToAction could not rename "+
 							src.Path + " to " + dest + ": " + e.Message);
 				}
 			}

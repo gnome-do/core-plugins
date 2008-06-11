@@ -92,7 +92,6 @@ namespace FilePlugin {
 			// Create the filename for the new file
 			string filePath = directory.Path + "/" + ti.Text;
 			Directory.CreateDirectory (filePath);
-			//System.Diagnostics.Process.Start ("mkdir", dir_name);
 			
 			// Return the new file, so new actions can be used on it
 			return new IItem [] { 
