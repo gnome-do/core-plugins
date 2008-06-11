@@ -41,6 +41,7 @@ namespace DoTwitter
 		
 		static TwitterAction ()
 		{
+			clearFriendsTimer = new Timer (ClearFriends, null, 600000, 600000);
 			items = new List<IItem> ();
 			clearFriendsTimer = new Timer (ClearFriends);
 			clearFriendsTimer.Change (600000, 600000);
