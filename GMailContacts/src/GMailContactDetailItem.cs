@@ -61,7 +61,7 @@ namespace GMailContacts
 			get {
 				switch (type.Substring (0,type.IndexOf ("."))) {
 				case "email": return "gmail-logo.png@" + GetType ().Assembly.FullName;
-				case "address": return "internet-mail";
+				case "address": return "go-home";
 				case "phone": return "phone.png@" + GetType ().Assembly.FullName;
 				default: return "stock_person";
 				}
