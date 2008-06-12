@@ -43,7 +43,7 @@ namespace GMailContacts
 		
 		protected override bool Validate (string username, string password)
 		{
-			if (ValidateUsername (username) && password.Length >= 8)
+			if (ValidateUsername (username) && password.Length > 0)
 				return GMail.TryConnect (username, password);
 			return false;
 		}

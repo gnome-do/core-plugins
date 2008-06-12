@@ -40,7 +40,7 @@ namespace GCalendar
 		
 		protected override bool Validate (string username, string password)
 		{
-			if (ValidateUsername (username) && password.Length >= 8)
+			if (ValidateUsername (username) && password.Length > 0)
 				return GCal.TryConnect (username, password);
 			return false;
 		}
