@@ -312,6 +312,43 @@ namespace WindowManager
 		}
 	}
 	
+	public class WindowCloseAction : WindowActionAction
+	{
+		public override string Name {
+			get { return "Close Window"; }
+		}
+		
+		public override string Description {
+			get { return "Close your current window."; }
+		}
+
+		public override string Icon {
+			get { return "gtk-close"; }
+		}
+
+		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		{
+			if (modItems.Length > 0) {
+				Wnck.Window w = (modItems[0] as WindowItem).Window;
+				
+				w.Close (Gtk.Global.CurrentEventTime);
+			} else {
+				if (items[0] is ApplicationItem) {
+					string application = (items[0] as ApplicationItem).Exec;
+					application = application.Split (new char[] {' '})[0];
+					
+					List<Window> windows = WindowListItems.GetApplication (application);
+
+					foreach (Window w in windows)
+						w.Close (Gtk.Global.CurrentEventTime);
+					
+				}
+			}
+			return null;
+		}
+
+	}
+	
 	public class WindowFocusAction : WindowActionAction 
 	{
 		public override string Name {
