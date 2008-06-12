@@ -21,6 +21,7 @@
 		<Action type="WindowManager.WindowMaximizeAction" />
 		<Action type="WindowManager.WindowShadeAction" />
 		<Action type="WindowManager.WindowFocusAction" />
+		<Action type="WindowManager.WindowCloseAction" />
 		<Action type="WindowManager.ScreenTileAction" />
 		<Action type="WindowManager.ScreenCascadeAction" />
 		<Action type="WindowManager.ScreenRestoreAction" />
