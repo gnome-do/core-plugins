@@ -27,12 +27,17 @@ REPO_DIR = abspath ("repo")
 REPO_CONFIG = "Debug"
 
 def main (argv):
+	if "--clean" in argv or "--all" in argv:
+		clean ()
 	if "--make" in argv or "--all" in argv:
 		make ()
 	if "--build" in argv or "--all" in argv:
 		build ()
 	if "--publish" in argv or "--all" in argv:
 		publish ()
+
+def clean ():
+	system ("rm -rf repo */bin")
 
 def make ():
 	system ("mdtool build")
