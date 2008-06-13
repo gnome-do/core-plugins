@@ -62,7 +62,7 @@ namespace Do.Riptide
 			client.DownloadFile (item.URL, tempFile);
 			
 			proc = new System.Diagnostics.Process ();
-			proc.StartInfo.FileName = "gnome-open";
+			proc.StartInfo.FileName = "xdg-open";
 			proc.StartInfo.Arguments = tempFile;
 			proc.StartInfo.UseShellExecute = false;
 			proc.Start ();
