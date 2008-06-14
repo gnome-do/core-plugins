@@ -34,6 +34,7 @@
       <Entry build="True" name="Flickr" configuration="Debug" />
       <Entry build="True" name="RSS" configuration="Debug" />
       <Entry build="True" name="Google Maps" configuration="Debug" />
+      <Entry build="True" name="Riptide" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -69,6 +70,7 @@
       <Entry build="True" name="Flickr" configuration="Release" />
       <Entry build="True" name="RSS" configuration="Release" />
       <Entry build="True" name="Google Maps" configuration="Release" />
+      <Entry build="True" name="Riptide" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -104,6 +106,7 @@
     <Execute type="None" entry="Flickr" />
     <Execute type="None" entry="RSS" />
     <Execute type="None" entry="Google Maps" />
+    <Execute type="None" entry="Riptide" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -139,5 +142,6 @@
     <Entry filename="Flickr/Flickr.mdp" />
     <Entry filename="RSS/RSS.mdp" />
     <Entry filename="Google Maps/Google Maps.mdp" />
+    <Entry filename="Riptide/Riptide.mdp" />
   </Entries>
 </Combine>

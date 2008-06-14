@@ -1,4 +1,4 @@
-// WindowItem.cs
+// ScreenItemSource.cs
 //
 //GNOME Do is the legal property of its developers. Please refer to the
 //COPYRIGHT file distributed with this
@@ -21,77 +21,66 @@
 //
 
 using System;
-using Wnck;
+using System.Collections.Generic;
 
 using Do.Universe;
+using Wnck;
 
 namespace WindowManager
-{	
-	public class WindowItem : IWindowItem
-	{
-		Wnck.Window window;
-		string icon;
-		
-		public string Name {
-			get {
-				return window.Name;
-			}
-		}
-
-		public string Description {
-			get {
-				return window.Name;
-			}
-		}
-		
-		public Wnck.Window Window {
-			get {
-				return window;
-			}
-		}
-
-		public string Icon {
-			get {
-				return icon;
-			}
-		}
-		
-		public WindowItem(Window w, string icon)
-		{
-			this.window = w;
-			this.icon = icon;
-		}
-		
-	}
+{
 	
-	public class ScreenItem : IScreenItem
+	public class ScreenItemSource : IItemSource
 	{
-		string name, description, icon;
-		
 		public string Name {
 			get {
-				return name;
+				return "Window Screen Items";
 			}
 		}
 
 		public string Description {
 			get {
-				return description;
+				return "Actions you can do to your screens.";
 			}
 		}
 
 		public string Icon {
 			get {
-				return icon;
+				return "desktop"; //fixme
+			}
+		}
+
+		public Type[] SupportedItemTypes {
+			get {
+				return new Type[] {
+					typeof (IScreenItem) };
+			}
+		}
+
+		public ICollection<IItem> Items {
+			get {
+                List<IItem> items;
+		
+                items = new List<IItem> ();
+				items.Add (new ScreenItem ("Current Desktop", 
+                   "Everything on the Current Desktop",
+                   "desktop"));
+				
+				return items;
 			}
 		}
 
 		
-		public ScreenItem (string name, string description, string icon) 
+		public ScreenItemSource()
 		{
-			this.name = name;
-			this.icon = icon;
-			this.description = description;
+		}
+
+		public ICollection<IItem> ChildrenOfItem (IItem item)
+		{
+			return null;
+		}
+
+		public void UpdateItems ()
+		{
 		}
 	}
 }

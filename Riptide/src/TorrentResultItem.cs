@@ -1,4 +1,4 @@
-// WindowItem.cs
+// TorrentResultItem.cs
 //
 //GNOME Do is the legal property of its developers. Please refer to the
 //COPYRIGHT file distributed with this
@@ -21,77 +21,62 @@
 //
 
 using System;
-using Wnck;
 
 using Do.Universe;
 
-namespace WindowManager
-{	
-	public class WindowItem : IWindowItem
+namespace Do.Riptide
+{
+	public class TorrentResultItem : IItem, IComparable
 	{
-		Wnck.Window window;
-		string icon;
+		private string name, url, size;
+		private int seeds, leechers;
 		
 		public string Name {
-			get {
-				return window.Name;
-			}
+			get { return name; }
 		}
 
 		public string Description {
 			get {
-				return window.Name;
-			}
-		}
-		
-		public Wnck.Window Window {
-			get {
-				return window;
+				return "Seeds: " + Seeds + ", Leechers: " + Leechers + ", Size: " + Size;
 			}
 		}
 
 		public string Icon {
-			get {
-				return icon;
-			}
+			get { return "gtk-save-as"; }
 		}
 		
-		public WindowItem(Window w, string icon)
-		{
-			this.window = w;
-			this.icon = icon;
+		public string URL {
+			get { return url; }
+			set { url = value; }
 		}
 		
-	}
-	
-	public class ScreenItem : IScreenItem
-	{
-		string name, description, icon;
+		public string Size {
+			get { return size; }
+			set { size = value; }
+		}
 		
-		public string Name {
-			get {
-				return name;
-			}
+		public int Seeds {
+			get { return seeds; }
+			set { seeds = value; }
 		}
-
-		public string Description {
-			get {
-				return description;
-			}
-		}
-
-		public string Icon {
-			get {
-				return icon;
-			}
-		}
-
 		
-		public ScreenItem (string name, string description, string icon) 
+		public int Leechers {
+			get { return leechers; }
+			set { leechers = value; }
+		}
+			
+		public TorrentResultItem(string name)
 		{
 			this.name = name;
-			this.icon = icon;
-			this.description = description;
+		}
+
+		public int CompareTo (object obj)
+		{
+			if (obj is TorrentResultItem) {
+				return this.Seeds.CompareTo ((obj as TorrentResultItem).Seeds) * -1;
+			} else {
+				throw new ArgumentException ("Object is not a TorrentResultItem");
+			}
 		}
 	}
 }
