@@ -84,12 +84,12 @@ namespace Flickr
 		public IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
 			string tags;
-			tags = AccountConfig.Tags;
+			tags = AccountConfig.Tags + " ";
 			
 			if (modItems.Length > 0) {
 				foreach (IItem modItem in modItems) {
 					ITextItem tag = (modItem as ITextItem);
-					tags += tag.Text + ", ";
+					tags += tag.Text + " ";
 				}
 			}
 			List<FileItem> uploads = new List<FileItem> ();
