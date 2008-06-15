@@ -55,8 +55,7 @@ namespace Do.Addins.Pidgin
 			int PurpleSavedstatusFind (string title);
 			string PurpleAccountGetProtocolName (int account);
 			string PurpleAccountGetAlias (int account);
-			void PurpleAccountConnect (int account);
-			void PurpleAccountDisconnect (int account);
+			void PurpleAccountSetEnabled (int account, string ui, uint value);
 			string PurpleAccountGetUsername (int account);
 		}
 
