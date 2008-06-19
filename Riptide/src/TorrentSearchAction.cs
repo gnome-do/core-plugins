@@ -78,7 +78,6 @@ namespace Do.Riptide
 			nodes = xdoc.SelectNodes ("/rss/channel/item");
 			
 			TorrentResultItem result;
-			Regex regx;
 			MatchCollection mc;
 			string description, seeds, leeches, size;
 			foreach (XmlNode n in nodes) {
