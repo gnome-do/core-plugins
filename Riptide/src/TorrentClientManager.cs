@@ -76,7 +76,7 @@ namespace Do.Riptide
 		
 		internal static int MaxDown {
 			get {
-				return prefs.Get<int> ("Maximum_Download_Speed", 900);
+				return prefs.Get<int> ("Maximum_Download_Speed", 0);
 			}
 			set {
 				prefs.Set<int> ("Maximum_Download_Speed", value);
@@ -86,7 +86,7 @@ namespace Do.Riptide
 		
 		internal static int MaxUp {
 			get {
-				return prefs.Get<int> ("Maximum_Upload_Speed", 10);
+				return prefs.Get<int> ("Maximum_Upload_Speed", 10 * 1024);
 			}
 			set {
 				prefs.Set<int> ("Maximum_Upload_Speed", value);
@@ -173,9 +173,9 @@ namespace Do.Riptide
 			if (args.NewState != TorrentState.Stopped) return;
 			
 			managers.Remove (args.TorrentManager);
-			client.Unregister (args.TorrentManager);
+			//client.Unregister (args.TorrentManager); //crashes???
 			
-			if (args.OldState == TorrentState.Downloading) {
+			if (args.OldState == TorrentState.Downloading) { //no worky -- FIXME!
 				foreach (TorrentFile file in args.TorrentManager.FileManager.Files) {
 					System.IO.File.Delete (file.Path);
 				}

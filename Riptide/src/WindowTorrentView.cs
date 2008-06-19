@@ -109,6 +109,7 @@ namespace Do.Riptide
 		protected void OnTorrentStopped (TorrentDisplay display, TorrentManager manager)
 		{
 			vbox.Remove (display);
+			manager.Stop ();
 			
 			display.Dispose ();
 			display = null;
