@@ -5,7 +5,7 @@
     <target-gtk-version>2.12.0</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.4.9.9, Culture=neutral" />
+    <widget-library name="Do.Addins, Version=0.5.0.1, Culture=neutral" />
     <widget-library name="../bin/Debug/Flickr.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Flickr.AccountConfig" design-size="401 347">
@@ -34,7 +34,7 @@
                         <property name="MemberName" />
                         <property name="Spacing">6</property>
                         <child>
-                          <widget class="Gtk.Label" id="label3">
+                          <widget class="Gtk.Label" id="status_lbl">
                             <property name="MemberName" />
                             <property name="LabelProp" translatable="yes">Do needs your authorization in order to upload photos to your flickr account. Press the "Authorize" button to open a web browser and give Do authorization. </property>
                             <property name="Wrap">True</property>
@@ -144,7 +144,6 @@
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="Label" translatable="yes">Private</property>
-                            <property name="Active">True</property>
                             <property name="DrawIndicator">True</property>
                             <property name="HasLabel">True</property>
                             <property name="UseUnderline">True</property>

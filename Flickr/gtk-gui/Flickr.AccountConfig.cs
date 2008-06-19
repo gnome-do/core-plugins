@@ -23,7 +23,7 @@ namespace Flickr {
         
         private Gtk.VBox vbox2;
         
-        private Gtk.Label label3;
+        private Gtk.Label status_lbl;
         
         private Gtk.Label label4;
         
@@ -60,12 +60,12 @@ namespace Flickr {
             this.vbox2.Name = "vbox2";
             this.vbox2.Spacing = 6;
             // Container child vbox2.Gtk.Box+BoxChild
-            this.label3 = new Gtk.Label();
-            this.label3.Name = "label3";
-            this.label3.LabelProp = Mono.Unix.Catalog.GetString("Do needs your authorization in order to upload photos to your flickr account. Press the \"Authorize\" button to open a web browser and give Do authorization. ");
-            this.label3.Wrap = true;
-            this.vbox2.Add(this.label3);
-            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox2[this.label3]));
+            this.status_lbl = new Gtk.Label();
+            this.status_lbl.Name = "status_lbl";
+            this.status_lbl.LabelProp = Mono.Unix.Catalog.GetString("Do needs your authorization in order to upload photos to your flickr account. Press the \"Authorize\" button to open a web browser and give Do authorization. ");
+            this.status_lbl.Wrap = true;
+            this.vbox2.Add(this.status_lbl);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox2[this.status_lbl]));
             w1.Position = 0;
             w1.Expand = false;
             w1.Fill = false;

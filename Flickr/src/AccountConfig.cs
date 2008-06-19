@@ -21,127 +21,71 @@ using System;
 using System.Threading;
 
 using Gtk;
-using GConf;
 using FlickrNet;
+using Do.Addins;
 
 namespace Flickr
 {	
 	public partial class AccountConfig : Gtk.Bin
 	{	
 		private FlickrNet.Flickr flickr;
-		private static GConf.Client gconf;
+		private static IPreferences prefs;
 		private string Frob; 
 		
-		static string API_KEY  			= "aa645b69c14422e095dee81dda21385b";
-		static string API_SECRET        = "a266af1a63024d3d";
-		static string GCONF_KEY_BASE    = "/apps/gnome-do/plugins/flickr/";
-		static string GCONF_KEY_TOKEN   = GCONF_KEY_BASE + "token";
-		static string GCONF_KEY_TAGS    = GCONF_KEY_BASE + "tags";
-		static string GCONF_KEY_PUBLIC  = GCONF_KEY_BASE + "is_public"; 
-		static string GCONF_KEY_FAMILY  = GCONF_KEY_BASE + "allow_family";
-		static string GCONF_KEY_FRIENDS = GCONF_KEY_BASE + "allow_friends";
+		public readonly static string ApiKey	= "aa645b69c14422e095dee81dda21385b";
+		public readonly static string ApiSecret	= "a266af1a63024d3d";
 		
 		public AccountConfig ()
 		{
 			this.Build();
-			gconf = new GConf.Client ();
-			try {
-				gconf.Get (GCONF_KEY_TOKEN);
+			flickr = new FlickrNet.Flickr (ApiKey, ApiSecret);
+			if (!String.IsNullOrEmpty (AuthToken)) {
+				Auth auth = flickr.AuthCheckToken (AuthToken);
+				Console.Error.WriteLine (auth.User.Username);
 				SetBtnStateComplete ();
-			} catch (GConf.NoSuchKeyException e) { 
-				Console.Error.WriteLine (e);
 			}
 		}
 		
 		static AccountConfig ()
 		{
-			gconf = new GConf.Client ();
-		}
-		
-		public static string ApiKey {
-			get { return API_KEY; }
-		}
-		
-		public static string ApiSecret {
-			get { return API_SECRET; }
+			prefs = Do.Addins.Util.GetPreferences ("flickr");
 		}
 		
 		public static string AuthToken {
-			get {
-				try {
-					return gconf.Get (GCONF_KEY_TOKEN) as string;
-				} catch (GConf.NoSuchKeyException) {
-					Console.Error.WriteLine ("No Auth Token! Please authorize");
-				}
-				return "";
-			}
-			set {
-				gconf.Set (GCONF_KEY_TOKEN, value);
-			}
+			get { return prefs ["token"]; }
+			set { prefs ["token"] = value; }
+		}
+		
+		public static string Username {
+			get { return prefs ["username"]; }
+			set { prefs ["username"] = value; }
 		}
 		
 		public static string Tags {
-			get {
-				try {
-					return gconf.Get (GCONF_KEY_TAGS) as string;
-				} catch (GConf.NoSuchKeyException) {
-					Tags = "";
-				}
-				return "";
-			}
-			set {
-				gconf.Set (GCONF_KEY_TAGS, value);
-			}
+			get { return prefs ["tags"]; }
+			set { prefs ["tags"] = value; }
 		}
 		
 		public static bool IsPublic {
-			get {
-				try {
-					return (bool) gconf.Get (GCONF_KEY_PUBLIC);
-				} catch (GConf.NoSuchKeyException) {
-					IsPublic = false;
-				}
-				return false;
-			}
-			set {
-				gconf.Set (GCONF_KEY_PUBLIC, value);
-			}
+			get { return prefs.Get<bool> ("is_public", false); }
+			set { prefs.Set<bool> ("is_public", value); }
 		}
 		
 		public static bool FamilyAllowed {
-			get {
-				try {
-					return (bool) gconf.Get (GCONF_KEY_FAMILY);
-				} catch (GConf.NoSuchKeyException) {
-					FamilyAllowed = false;
-				}
-				return false;
-			}
-			set {
-				gconf.Set (GCONF_KEY_FAMILY, value);
-			}
-			
+			get { return prefs.Get<bool> ("allow_family", false); }
+			set { prefs.Set<bool> ("allow_family", value); }
 		}
 		
 		public static bool FriendsAllowed {
-			get {
-				try {
-					return (bool) gconf.Get (GCONF_KEY_FRIENDS);
-				} catch (GConf.NoSuchKeyException) {
-					FriendsAllowed = false;
-				}
-				return false;
-			}
-			set {
-				gconf.Set (GCONF_KEY_FRIENDS, value);
-			}
+			get { return prefs.Get<bool> ("allow_friends", false); }
+			set { prefs.Set<bool> ("allow_friends", value); }
 		}
 		
 		protected virtual void OnAuthBtnClicked (object sender, EventArgs e)
 		{
-			flickr = new FlickrNet.Flickr (API_KEY, API_SECRET);
+			flickr = new FlickrNet.Flickr (ApiKey, ApiSecret);
 			Frob = flickr.AuthGetFrob ();
-			Do.Addins.Util.Environment.Open (flickr.AuthCalcUrl (Frob, AuthLevel.Delete));
+			Do.Addins.Util.Environment.Open (flickr.AuthCalcUrl (Frob, AuthLevel.Write));
 			Widget image = auth_btn.Image;
 			auth_btn.Label = ("Click to compete authorization");
 			auth_btn.Image = image; 
@@ -153,7 +97,8 @@ namespace Flickr
 		{
 			try {
 				Auth auth = flickr.AuthGetToken(Frob);
-		  		gconf.Set (GCONF_KEY_TOKEN, auth.Token);
+		  		AuthToken = auth.Token;
+		  		Username = auth.User.Username;
 		  		SetBtnStateComplete ();
 		  	} catch (FlickrNet.FlickrException ex) {
 		  		Console.Error.WriteLine (ex);
@@ -163,6 +108,8 @@ namespace Flickr
 		private void SetBtnStateComplete ()
 		{
 			Widget image = auth_btn.Image;
+			status_lbl.Text = String.Format ("Thank you {0} for allowing Do "
+				+ "access to Flickr.", Username);
 		  	auth_btn.Label = "Sign in as a different user";
 		  	auth_btn.Image = image;
 		  	auth_btn.Clicked -= new EventHandler (OnCompleteBtnClicked);

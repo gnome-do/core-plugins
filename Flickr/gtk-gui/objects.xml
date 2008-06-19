@@ -3,10 +3,11 @@
     <itemgroups>
       <itemgroup label="AccountConfig Properties">
         <property name="AuthToken" />
+        <property name="Tags" />
         <property name="IsPublic" />
         <property name="FamilyAllowed" />
         <property name="FriendsAllowed" />
-        <property name="Tags" />
+        <property name="Username" />
       </itemgroup>
     </itemgroups>
     <signals />
