@@ -106,7 +106,9 @@ namespace Do.Riptide
 		
 		internal static string DownloadDir {
 			get {
-				return prefs.Get<string> ("Download_Directory", System.Environment.SpecialFolder.Desktop.ToString ());
+				return prefs.Get<string> ("Download_Directory", 
+				                          System.Environment.GetFolderPath 
+				                          (System.Environment.SpecialFolder.Desktop));
 			}
 			set {
 				prefs.Set<string> ("Download_Directory", value);
