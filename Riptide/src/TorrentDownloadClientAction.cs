@@ -1,4 +1,4 @@
-// TorrentDownloadAction.cs
+// TorrentDownloadClientAction.cs
 //
 //GNOME Do is the legal property of its developers. Please refer to the
 //COPYRIGHT file distributed with this
@@ -21,10 +21,7 @@
 //
 
 using System;
-using System.Collections.Generic;
 using System.Net;
-using MonoTorrent.Common;
-using MonoTorrent.Client;
 
 using Do.Addins;
 using Do.Universe;
@@ -33,15 +30,15 @@ namespace Do.Riptide
 {
 	
 	
-	public class TorrentDownloadAction : AbstractAction, IConfigurable
+	public class TorrentDownloadClientAction : AbstractAction
 	{
 		
 		public override string Name {
-			get { return "Download Torrent"; }
+			get { return "Open Torrent"; }
 		}
 		
 		public override string Description {
-			get { return "Download a Right in Gnome Do!"; }
+			get { return "Download a torrent with your favorite torrent client"; }
 		}
 
 		public override string Icon {
@@ -74,10 +71,6 @@ namespace Do.Riptide
 			client.DownloadFileCompleted += OnFileDownloaded;
 			client.DownloadFileAsync (new System.Uri (item.URL), Paths.Combine (torrentFolder, filename), filename);
 			
-			NotificationBridge.ShowMessage ("Torrent Download", 
-			                                 "Gnome-Do is attempting to download the" + 
-			                                 " requested Torrent file");
-			
 			return null;
 		}
 		
@@ -90,29 +83,15 @@ namespace Do.Riptide
 			if (!System.IO.Directory.Exists (torrentFolder))
 				System.IO.Directory.CreateDirectory (torrentFolder);
 			
-			Torrent torrent = Torrent.Load (Paths.Combine (torrentFolder, filename));
-			TorrentManager manager = new TorrentManager(torrent, TorrentClientManager.DownloadDir, new TorrentSettings ());
+			System.Diagnostics.Process proc = new System.Diagnostics.Process ();
+			proc.StartInfo.FileName = "xdg-open";
+			proc.StartInfo.Arguments = Paths.Combine (torrentFolder, filename);
 			
-			manager.TorrentStateChanged += OnTorrentStateChanged;
-			
-			TorrentClientManager.NewTorrent (manager);
+			proc.Start ();
 		}
-
-		private void OnTorrentStateChanged (object o, TorrentStateChangedEventArgs args)
-		{
-			if (!TorrentClientManager.TorrentAlert || args.NewState == TorrentState.Hashing) return;
-			string body = args.TorrentManager.Torrent.Name + " is " + args.NewState.ToString ();
-			NotificationBridge.ShowMessage ("Torrent Information:", body);
-		}
-
-		public Gtk.Bin GetConfiguration ()
-		{
-			Gtk.Bin conf = new Configuration ();
-			return conf;
-		}
-
 	}
 }
+
 
 
 
