@@ -39,6 +39,7 @@ namespace Mozilla.Firefox {
 		
 		public BookmarkItemSource ()
 		{
+			items = LoadBookmarkItems ();
 		}
 		
 		public Type[] SupportedItemTypes {
@@ -72,7 +73,8 @@ namespace Mozilla.Firefox {
 		
 		public void UpdateItems ()
 		{
-			items = LoadBookmarkItems ();
+			// No updating for now -- Firefox only dumps JSON bookmarks
+			// data once each day.
 		}
 		
 		/// <summary>

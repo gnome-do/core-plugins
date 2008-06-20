@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using MonoTorrent.Client;
 
 using Do.Universe;
+using Do.Addins;
 
 namespace Do.Riptide
 {
@@ -54,11 +55,11 @@ namespace Do.Riptide
 
 		public override bool SupportsItem (IItem item)
 		{
-			return true;
+			return ((item as ITextItem).Text.Length == 0);
 		}
 		
 		public override Type[] SupportedItemTypes {
-			get { return new Type[] {typeof (IItem)}; }//fixme
+			get { return new Type[] {typeof (ITextItem)}; }
 		}
 
 

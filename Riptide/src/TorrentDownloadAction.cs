@@ -70,18 +70,28 @@ namespace Do.Riptide
 			filename = temp[temp.Length - 1];
 			
 			client = new WebClient ();
-			//client.DownloadFile (item.URL, Paths.Combine (torrentFolder, filename));
+			
+			/*client.DownloadFile (item.URL, Paths.Combine (torrentFolder, filename));
 			client.DownloadFileCompleted += OnFileDownloaded;
 			client.DownloadFileAsync (new System.Uri (item.URL), Paths.Combine (torrentFolder, filename), filename);
 			
 			NotificationBridge.ShowMessage ("Torrent Download", 
 			                                 "Gnome-Do is attempting to download the" + 
-			                                 " requested Torrent file");
+			                                 " requested Torrent file");*/
+			
+			client.DownloadFile (item.URL, Paths.Combine (torrentFolder, filename));
+			
+			Torrent torrent = Torrent.Load (Paths.Combine (torrentFolder, filename));
+			TorrentManager manager = new TorrentManager(torrent, TorrentClientManager.DownloadDir, new TorrentSettings ());
+			
+			manager.TorrentStateChanged += OnTorrentStateChanged;
+			
+			TorrentClientManager.NewTorrent (manager);
 			
 			return null;
 		}
 		
-		private void OnFileDownloaded (object o, System.ComponentModel.AsyncCompletedEventArgs args)
+		/*private void OnFileDownloaded (object o, System.ComponentModel.AsyncCompletedEventArgs args)
 		{
 			string torrentFolder;
 			string filename = args.UserState as string;
@@ -98,7 +108,7 @@ namespace Do.Riptide
 			manager.TorrentStateChanged += OnTorrentStateChanged;
 			
 			TorrentClientManager.NewTorrent (manager);
-		}
+		}*/
 
 		private void OnTorrentStateChanged (object o, TorrentStateChangedEventArgs args)
 		{
