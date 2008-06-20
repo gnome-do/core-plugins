@@ -34,7 +34,7 @@
       <Entry build="True" name="Flickr" configuration="Debug" />
       <Entry build="True" name="RSS" configuration="Debug" />
       <Entry build="True" name="Google Maps" configuration="Debug" />
-      <Entry build="True" name="Riptide" configuration="Debug" />
+      <Entry build="False" name="Riptide" configuration="Debug" />
       <Entry build="True" name="Shelf" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
