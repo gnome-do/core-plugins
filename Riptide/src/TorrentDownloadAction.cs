@@ -41,7 +41,7 @@ namespace Do.Riptide
 		}
 		
 		public override string Description {
-			get { return "Download a Right in Gnome Do!"; }
+			get { return "Download a Torrent Right in Gnome Do!"; }
 		}
 
 		public override string Icon {
@@ -85,6 +85,8 @@ namespace Do.Riptide
 		{
 			string torrentFolder;
 			string filename = args.UserState as string;
+			
+			Console.WriteLine ("File Downloaded");
 			
 			torrentFolder = Paths.Combine (Paths.UserData, "torrents/");
 			if (!System.IO.Directory.Exists (torrentFolder))

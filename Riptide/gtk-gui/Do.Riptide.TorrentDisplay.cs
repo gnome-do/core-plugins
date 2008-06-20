@@ -31,10 +31,6 @@ namespace Do.Riptide {
         
         private Gtk.Image image4;
         
-        private Gtk.Alignment alignment2;
-        
-        private Gtk.HSeparator hseparator2;
-        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget Do.Riptide.TorrentDisplay
@@ -57,6 +53,7 @@ namespace Do.Riptide {
             w1.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
+            this.hbox1.Name = "hbox1";
             this.hbox1.Spacing = 6;
             // Container child hbox1.Gtk.Box+BoxChild
             this.alignment1 = new Gtk.Alignment(0.5F, 0.5F, 1F, 1F);
@@ -108,21 +105,6 @@ namespace Do.Riptide {
             w8.Position = 1;
             w8.Expand = false;
             w8.Fill = false;
-            // Container child vbox1.Gtk.Box+BoxChild
-            this.alignment2 = new Gtk.Alignment(0.5F, 0.5F, 1F, 1F);
-            this.alignment2.Name = "alignment2";
-            this.alignment2.LeftPadding = ((uint)(20));
-            this.alignment2.RightPadding = ((uint)(20));
-            // Container child alignment2.Gtk.Container+ContainerChild
-            this.hseparator2 = new Gtk.HSeparator();
-            this.hseparator2.Name = "hseparator2";
-            this.alignment2.Add(this.hseparator2);
-            this.vbox1.Add(this.alignment2);
-            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.vbox1[this.alignment2]));
-            w10.PackType = ((Gtk.PackType)(1));
-            w10.Position = 2;
-            w10.Expand = false;
-            w10.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

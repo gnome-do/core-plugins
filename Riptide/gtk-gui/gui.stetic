@@ -261,7 +261,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Do.Riptide.TorrentDisplay" design-size="300 76">
+  <widget class="Gtk.Bin" id="Do.Riptide.TorrentDisplay" design-size="300 166">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox1">

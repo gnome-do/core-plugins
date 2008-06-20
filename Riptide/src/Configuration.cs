@@ -36,14 +36,14 @@ namespace Do.Riptide
 			check_progress_window.Active = TorrentClientManager.ProgressWindow;
 			check_torrent_alerts.Active = TorrentClientManager.TorrentAlert;
 			
-			if (TorrentClientManager.MaxDown >= 900) {
+			if (TorrentClientManager.MaxDown <= 0) {
 				check_max_download.Active = spin_download_speed.Sensitive = false;
 			} else {
 				check_max_download.Active = spin_download_speed.Sensitive = true;
 				spin_download_speed.Value = TorrentClientManager.MaxDown / 1024;
 			}
 			
-			if (TorrentClientManager.MaxUp >= 900) {
+			if (TorrentClientManager.MaxUp <= 0) {
 				check_max_upload.Active = spin_upload_speed.Sensitive = false;
 			} else {
 				check_max_upload.Active = spin_upload_speed.Sensitive = true;
@@ -61,7 +61,6 @@ namespace Do.Riptide
 				spin_download_speed.Value = 30;
 			} else {
 				spin_download_speed.Value = 0;
-				TorrentClientManager.MaxDown = 0;
 			}
 		}
 
@@ -72,7 +71,6 @@ namespace Do.Riptide
 				spin_upload_speed.Value = 10;
 			} else {
 				spin_upload_speed.Value = 0;
-				TorrentClientManager.MaxUp = 0;
 			}
 		}
 		protected virtual void OnCheckForceEncryptionClicked (object sender, System.EventArgs e)
