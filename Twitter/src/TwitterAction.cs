@@ -26,10 +26,6 @@ using System.Collections.Generic;
 using Twitterizer.Framework;
 using Do.Universe;
 
-using NDesk.DBus;
-using org.freedesktop;
-using org.freedesktop.DBus;
-
 namespace DoTwitter
 {
 	public static class TwitterAction
