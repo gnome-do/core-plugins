@@ -80,7 +80,7 @@ namespace Do.Universe
 
 		public override bool SupportsItem (IItem item)
 		{
-			return true;
+			return ShelfItemSource.InShelf (item);
 		}
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
@@ -121,7 +121,7 @@ namespace Do.Universe
 
 		public override bool SupportsItem (IItem item)
 		{
-			return (!(item is ShelfItem));
+			return (!(item is ShelfItem) && !ShelfItemSource.InShelf (item));
 		}
 
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
