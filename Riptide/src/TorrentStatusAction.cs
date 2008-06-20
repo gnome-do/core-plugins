@@ -59,7 +59,7 @@ namespace Do.Riptide
 		}
 		
 		public override Type[] SupportedItemTypes {
-			get { return new Type[] {typeof (ITextItem)}; }//fixme
+			get { return new Type[] {typeof (ITextItem)}; }
 		}
 
 

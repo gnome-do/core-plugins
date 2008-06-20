@@ -173,7 +173,7 @@ namespace Do.Riptide
 			if (args.NewState != TorrentState.Stopped) return;
 			
 			managers.Remove (args.TorrentManager);
-			//client.Unregister (args.TorrentManager); //crashes???
+			
 			
 			if (args.OldState == TorrentState.Downloading) { //no worky -- FIXME!
 				foreach (TorrentFile file in args.TorrentManager.FileManager.Files) {
@@ -181,7 +181,12 @@ namespace Do.Riptide
 				}
 			}
 			
-			args.TorrentManager.Dispose ();
+			//this is needed because if i dispose it now, it dies horribly.
+			GLib.Timeout.Add (60000, delegate {
+				client.Unregister (args.TorrentManager); //crashes???
+				args.TorrentManager.Dispose ();
+				return false;
+			});
 			
 			if (managers.Count <= 0)
 				torrentWindow.Hide ();
