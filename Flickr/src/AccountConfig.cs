@@ -37,13 +37,12 @@ namespace Flickr
 		
 		public AccountConfig ()
 		{
-			this.Build();
-			flickr = new FlickrNet.Flickr (ApiKey, ApiSecret);
+			Build();
 			if (!String.IsNullOrEmpty (AuthToken)) {
-				Auth auth = flickr.AuthCheckToken (AuthToken);
-				Console.Error.WriteLine (auth.User.Username);
+			flickr = new FlickrNet.Flickr (ApiKey, ApiSecret, AuthToken);
 				SetBtnStateComplete ();
-			}
+			} else
+				flickr = new FlickrNet.Flickr (ApiKey, ApiSecret);
 		}
 		
 		static AccountConfig ()
@@ -99,6 +98,7 @@ namespace Flickr
 				Auth auth = flickr.AuthGetToken(Frob);
 		  		AuthToken = auth.Token;
 		  		Username = auth.User.Username;
+		  		flickr = new FlickrNet.Flickr (ApiKey, ApiSecret, AuthToken);
 		  		SetBtnStateComplete ();
 		  	} catch (FlickrNet.FlickrException ex) {
 		  		Console.Error.WriteLine (ex);
@@ -107,11 +107,9 @@ namespace Flickr
 		
 		private void SetBtnStateComplete ()
 		{
-			Widget image = auth_btn.Image;
 			status_lbl.Text = String.Format ("Thank you {0} for allowing Do "
 				+ "access to Flickr.", Username);
 		  	auth_btn.Label = "Sign in as a different user";
-		  	auth_btn.Image = image;
 		  	auth_btn.Clicked -= new EventHandler (OnCompleteBtnClicked);
 		  	auth_btn.Clicked += new EventHandler (OnAuthBtnClicked);
 		}

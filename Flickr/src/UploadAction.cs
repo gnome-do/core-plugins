@@ -115,6 +115,7 @@ namespace Flickr
 		{			
 			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
 				AccountConfig.ApiSecret, AccountConfig.AuthToken);
+			Console.Error.WriteLine (flickr.PeopleGetUploadStatus ().BandwidthUsed);
 			new Thread ((ThreadStart) delegate {
 				int i = 1;
 				foreach (FileItem file in uploads) {
@@ -123,8 +124,8 @@ namespace Flickr
 							AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
 							AccountConfig.FriendsAllowed);
 							Do.Addins.NotificationBridge.ShowMessage ("Flickr",
-								String.Format ("Upload {0} of {1} complete.",
-									i, uploads.Count));
+								String.Format ("Uploaded {0}. ({1} of {2})",
+									file.Name, i, uploads.Count));
 							i++;
 					} catch (FlickrNet.FlickrException e) {
 						Console.Error.WriteLine (e);
