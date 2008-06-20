@@ -24,6 +24,7 @@ using System.Threading;
 using System.Collections.Generic;
 
 using Twitterizer.Framework;
+using Do.Addins;
 using Do.Universe;
 
 namespace DoTwitter
@@ -73,18 +74,20 @@ namespace DoTwitter
 				t = new Twitter (username, password);
 				try {
 					t.Update (status);
-					SendNotification ("Tweet Successful", "Successfully posted tweet '" 
-                                + status + "' to Twitter.");
+					Do.Addins.NotificationBridge.ShowMessage ("Tweet Successful", 
+						String.Format ("'{0}' successfully posted to Twitter.",
+						status));
 				} catch (TwitterizerException e) {
-					SendNotification ("Tweet Failed", "Unable to post tweet. "
-						+ "Check your login settings. If you are behind a " 
-						+ "proxy, also make sure that the settings in "
-                        + "/system/http_proxy are correct.\n\nDetails:\n" 
+					Do.Addins.NotificationBridge.ShowMessage ("Tweet Failed", 
+						"Unable to post tweet. Check your login settings. " 
+						+ "If you are behind a proxy, also make sure that the "
+						+ "settings in /system/http_proxy are correct.\n\nDetails:\n" 
                         + e.ToString ());
 				}
 			} else {
-				TwitterAction.SendNotification ("Missing Login Credentials",
-					"Please set login information in plugin configuration.");
+				Do.Addins.NotificationBridge.ShowMessage ("Tweet Failed",
+					"Missing Login Credentials. Please set login information "
+					+ "in plugin configuration.");
 			}
 		}
 		
@@ -126,15 +129,7 @@ namespace DoTwitter
 			
 			Monitor.Exit (items);
 		}
-		
-		public static void SendNotification (string title, string message)
-        {
-            Bus bus = Bus.Session;
-            Notifications nf = bus.GetObject<Notifications> ("org.freedesktop.Notifications", new ObjectPath ("/org/freedesktop/Notifications"));
-            Dictionary <string,object> hints = new Dictionary <string,object> ();
-            nf.Notify (title, 0, "", title, message, new string[0], hints, -1);
-        }
-		
+				
 		public static bool TryConnect (string username, string password)
 		{
 			Twitter test = new Twitter (username, password);
