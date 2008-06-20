@@ -177,7 +177,7 @@ namespace Do.Riptide
 			
 			if (args.OldState == TorrentState.Downloading) { //no worky -- FIXME!
 				foreach (TorrentFile file in args.TorrentManager.FileManager.Files) {
-					System.IO.File.Delete (file.Path);
+					System.IO.File.Delete (Paths.Combine (args.TorrentManager.SavePath, file.Path));
 				}
 			}
 			
