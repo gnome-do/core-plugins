@@ -1,4 +1,4 @@
-// WindowItem.cs
+// TorrentStatusAction.cs
 //
 //GNOME Do is the legal property of its developers. Please refer to the
 //COPYRIGHT file distributed with this
@@ -21,77 +21,61 @@
 //
 
 using System;
-using Wnck;
+using System.Collections.Generic;
+
+using MonoTorrent.Client;
 
 using Do.Universe;
 
-namespace WindowManager
-{	
-	public class WindowItem : IWindowItem
-	{
-		Wnck.Window window;
-		string icon;
-		
-		public string Name {
-			get {
-				return window.Name;
-			}
-		}
-
-		public string Description {
-			get {
-				return window.Name;
-			}
-		}
-		
-		public Wnck.Window Window {
-			get {
-				return window;
-			}
-		}
-
-		public string Icon {
-			get {
-				return icon;
-			}
-		}
-		
-		public WindowItem(Window w, string icon)
-		{
-			this.window = w;
-			this.icon = icon;
-		}
-		
-	}
+namespace Do.Riptide
+{
 	
-	public class ScreenItem : IScreenItem
+	
+	public class TorrentStatusAction : AbstractAction
 	{
-		string name, description, icon;
 		
-		public string Name {
+		public override string Name {
 			get {
-				return name;
+				return "Torrent Status";
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
-				return description;
+				return "Check Status of All Torrents";
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
-				return icon;
+				return "stock_internet";
 			}
 		}
 
-		
-		public ScreenItem (string name, string description, string icon) 
+		public override bool SupportsItem (IItem item)
 		{
-			this.name = name;
-			this.icon = icon;
-			this.description = description;
+			return true;
 		}
+		
+		public override Type[] SupportedItemTypes {
+			get { return new Type[] {typeof (IItem)}; }//fixme
+		}
+
+
+		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		{
+			List<IItem> outitems = new List<IItem> ();
+			foreach (TorrentManager t in TorrentClientManager.Managers) {
+				outitems.Add (new ActiveTorrentItem (t));
+			}
+			
+			return outitems.ToArray ();
+		}
+
+		
+		public TorrentStatusAction()
+		{
+		}
+
 	}
 }

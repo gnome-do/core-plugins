@@ -1,4 +1,4 @@
-// WindowItem.cs
+// TorrentActionItem.cs
 //
 //GNOME Do is the legal property of its developers. Please refer to the
 //COPYRIGHT file distributed with this
@@ -21,52 +21,18 @@
 //
 
 using System;
-using Wnck;
+using MonoTorrent.Client;
 
 using Do.Universe;
 
-namespace WindowManager
-{	
-	public class WindowItem : IWindowItem
-	{
-		Wnck.Window window;
-		string icon;
-		
-		public string Name {
-			get {
-				return window.Name;
-			}
-		}
-
-		public string Description {
-			get {
-				return window.Name;
-			}
-		}
-		
-		public Wnck.Window Window {
-			get {
-				return window;
-			}
-		}
-
-		public string Icon {
-			get {
-				return icon;
-			}
-		}
-		
-		public WindowItem(Window w, string icon)
-		{
-			this.window = w;
-			this.icon = icon;
-		}
-		
-	}
+namespace Do.Riptide
+{
 	
-	public class ScreenItem : IScreenItem
+	
+	public class ActiveTorrentItem : ITorrentItem
 	{
-		string name, description, icon;
+		private string name, description;
+		private TorrentManager torrent;
 		
 		public string Name {
 			get {
@@ -82,16 +48,28 @@ namespace WindowManager
 
 		public string Icon {
 			get {
-				return icon;
+				return "stock_internet";
+			}
+		}
+
+		public TorrentManager ActiveTorrent {
+			get {
+				return torrent;
 			}
 		}
 
 		
-		public ScreenItem (string name, string description, string icon) 
+		public ActiveTorrentItem(TorrentManager torrent)
 		{
-			this.name = name;
-			this.icon = icon;
-			this.description = description;
+			this.torrent = torrent;
+			this.name = torrent.Torrent.Name;
+			
+			if (torrent.Complete) {
+				description = "Seeding";
+			} else {
+				description = torrent.Progress.ToString () + "% Downloaded at " + 
+					torrent.Monitor.DownloadSpeed / 1024 + " KB/s";
+			}
 		}
 	}
 }

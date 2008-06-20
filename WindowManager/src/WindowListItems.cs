@@ -179,7 +179,7 @@ namespace WindowManager
 				
 				process = Process.Start (st);
 				
-				process.WaitForExit ();
+				process.WaitForExit (2000);
 				if (process.ExitCode != 0) continue;
 				
 				processName = process.StandardOutput.ReadLine ();

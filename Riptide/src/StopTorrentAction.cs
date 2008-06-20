@@ -1,4 +1,4 @@
-// WindowItem.cs
+// StopTorrentAction.cs
 //
 //GNOME Do is the legal property of its developers. Please refer to the
 //COPYRIGHT file distributed with this
@@ -21,77 +21,55 @@
 //
 
 using System;
-using Wnck;
+using MonoTorrent.Client;
+using MonoTorrent.Common;
 
+using Do.Addins;
 using Do.Universe;
 
-namespace WindowManager
-{	
-	public class WindowItem : IWindowItem
-	{
-		Wnck.Window window;
-		string icon;
-		
-		public string Name {
-			get {
-				return window.Name;
-			}
-		}
-
-		public string Description {
-			get {
-				return window.Name;
-			}
-		}
-		
-		public Wnck.Window Window {
-			get {
-				return window;
-			}
-		}
-
-		public string Icon {
-			get {
-				return icon;
-			}
-		}
-		
-		public WindowItem(Window w, string icon)
-		{
-			this.window = w;
-			this.icon = icon;
-		}
-		
-	}
+namespace Do.Riptide
+{
 	
-	public class ScreenItem : IScreenItem
+	
+	public class StopTorrentAction : AbstractAction
 	{
-		string name, description, icon;
 		
-		public string Name {
-			get {
-				return name;
-			}
+		public override string Name {
+			get { return "Stop Torrent"; }
 		}
-
-		public string Description {
-			get {
-				return description;
-			}
-		}
-
-		public string Icon {
-			get {
-				return icon;
-			}
-		}
-
 		
-		public ScreenItem (string name, string description, string icon) 
+		public override string Description {
+			get { return "Stop a Torrent"; }
+		}
+
+		public override string Icon {
+			get { return "gtk-stock-cancel"; }
+		}
+
+		public override Type[] SupportedItemTypes {
+			get { return new Type[] { typeof (ITorrentItem), }; }
+		}
+		
+		public override bool SupportsItem (IItem item)
 		{
-			this.name = name;
-			this.icon = icon;
-			this.description = description;
+			if (!(item is ITorrentItem)) return false;
+			
+			TorrentManager tor = (item as ITorrentItem).ActiveTorrent;
+			
+			return (tor.State != TorrentState.Stopped);
 		}
+
+
+		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		{
+			foreach (IItem item in items) {
+				if (!(item is ITorrentItem)) continue;
+				(item as ITorrentItem).ActiveTorrent.Stop ();
+			}
+			
+			return null;
+		}
+
 	}
 }
+

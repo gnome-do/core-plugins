@@ -1,0 +1,32 @@
+<Addin
+	id="Riptide"
+	namespace="Do"
+	version="0.6"
+	name="Riptide"
+	description="Do Away with Torrent Sites"
+	author="Jason Smith"
+>
+ 
+	<Runtime>
+		<Import assembly="Riptide.dll"/>
+		<Import assembly="MonoTorrent.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+
+	<!--- Actions -->
+	<Extension path= "/Do/Action">
+		<Action type="Do.Riptide.TorrentSearchAction" />
+		<Action type="Do.Riptide.TorrentDownloadAction" />
+		<Action type="Do.Riptide.TorrentDownloadClientAction" />
+		<Action type="Do.Riptide.TorrentStatusAction" />
+		<Action type="Do.Riptide.StopTorrentAction" />
+		<Action type="Do.Riptide.PauseTorrentAction" />
+		<Action type="Do.Riptide.ResumeTorrentAction" />
+	</Extension>
+
+</Addin>
