@@ -160,12 +160,16 @@ namespace Do.Riptide
 			client.Register (manager);
 			manager.TorrentStateChanged += OnTorrentStateChanged;
 			
-			if (ProgressWindow)
-				torrentWindow.Show ();
 			torrentWindow.AddTorrent (manager);
-			torrentWindow.Stick ();
 			
-			Gtk.Application.Invoke (delegate { manager.Start (); });
+			
+			Gtk.Application.Invoke (delegate { 
+				if (ProgressWindow)
+					torrentWindow.Show ();
+				
+				torrentWindow.Stick ();
+				manager.Start (); 
+			});
 		}
 		
 		protected static void OnTorrentStateChanged (object o, TorrentStateChangedEventArgs args)
@@ -175,7 +179,7 @@ namespace Do.Riptide
 			managers.Remove (args.TorrentManager);
 			
 			
-			if (args.OldState == TorrentState.Downloading) { //no worky -- FIXME!
+			if (args.OldState == TorrentState.Downloading) {
 				foreach (TorrentFile file in args.TorrentManager.FileManager.Files) {
 					System.IO.File.Delete (Paths.Combine (args.TorrentManager.SavePath, file.Path));
 				}
@@ -183,13 +187,13 @@ namespace Do.Riptide
 			
 			//this is needed because if i dispose it now, it dies horribly.
 			GLib.Timeout.Add (60000, delegate {
-				client.Unregister (args.TorrentManager); //crashes???
+				client.Unregister (args.TorrentManager);
 				args.TorrentManager.Dispose ();
 				return false;
 			});
 			
 			if (managers.Count <= 0)
-				torrentWindow.Hide ();
+				Gtk.Application.Invoke (delegate {torrentWindow.Hide (); });
 		}
 		
 		protected static void Resize ()
