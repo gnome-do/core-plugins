@@ -84,12 +84,12 @@ namespace Flickr
 		public IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
 			string tags;
-			tags = AccountConfig.Tags;
+			tags = AccountConfig.Tags + " ";
 			
 			if (modItems.Length > 0) {
 				foreach (IItem modItem in modItems) {
 					ITextItem tag = (modItem as ITextItem);
-					tags += tag.Text + ", ";
+					tags += tag.Text + " ";
 				}
 			}
 			List<FileItem> uploads = new List<FileItem> ();
@@ -113,15 +113,21 @@ namespace Flickr
 		
 		public static void AsyncUploadToFlickr (List<FileItem> uploads, string tags)
 		{			
-			FlickrNet.Flickr flickr = new FlickrNet.Flickr (
-				AccountConfig.ApiKey, AccountConfig.ApiSecret, AccountConfig.AuthToken);
+			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
+				AccountConfig.ApiSecret, AccountConfig.AuthToken);
+			Console.Error.WriteLine (flickr.PeopleGetUploadStatus ().BandwidthUsed);
 			new Thread ((ThreadStart) delegate {
+				int i = 1;
 				foreach (FileItem file in uploads) {
 					try {
 						flickr.UploadPicture (file.Path, file.Name, "", tags,
 							AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
 							AccountConfig.FriendsAllowed);
-					} catch (FlickrNet.FlickrWebException e) {
+							Do.Addins.NotificationBridge.ShowMessage ("Flickr",
+								String.Format ("Uploaded {0}. ({1} of {2})",
+									file.Name, i, uploads.Count));
+							i++;
+					} catch (FlickrNet.FlickrException e) {
 						Console.Error.WriteLine (e);
 					}
 				}

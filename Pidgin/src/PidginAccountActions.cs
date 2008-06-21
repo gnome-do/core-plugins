@@ -72,7 +72,8 @@ namespace Do.Addins.Pidgin
 			Pidgin.IPurpleObject prpl;
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountConnect ((items [0] as PidginAccountItem).ID);
+				prpl.PurpleAccountSetEnabled ((items [0] as PidginAccountItem).ID,
+					"gtk-gaim", 1);
 			} catch { }
 			
 			return null;
@@ -128,7 +129,8 @@ namespace Do.Addins.Pidgin
 			Pidgin.IPurpleObject prpl;
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountDisconnect ((items [0] as PidginAccountItem).ID);
+				prpl.PurpleAccountSetEnabled ((items [0] as PidginAccountItem).ID,
+					"gtk-gaim", 0);
 			} catch { }
 			
 			return null;
