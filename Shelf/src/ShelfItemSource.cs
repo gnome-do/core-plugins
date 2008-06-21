@@ -160,5 +160,10 @@ namespace Do.Universe
 		{
 			shelf[defaultName].RemoveItem (item);
 		}
+		
+		static public bool InShelf (IItem item)
+		{
+			return shelf[defaultName].Items.Contains (item);
+		}
 	}
 }

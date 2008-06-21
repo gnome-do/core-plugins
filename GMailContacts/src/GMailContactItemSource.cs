@@ -79,7 +79,9 @@ namespace GMailContacts
 		public void UpdateItems () 
 		{
 			try {
-				new Thread ((ThreadStart) (GMail.UpdateContacts)).Start ();
+				Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));
+				thread.IsBackground = true;
+				thread.Start ();
 				items = GMail.Contacts;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
