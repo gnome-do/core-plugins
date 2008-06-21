@@ -22,4 +22,7 @@
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Flickr.FlickrItemSource" />
 	</Extension>
+	<Extension path = "/Do/Configuration">
+		<Configuration type="Flickr.AccountConfig" />
+	</Extension>
 </Addin>

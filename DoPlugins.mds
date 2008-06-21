@@ -19,7 +19,6 @@
       <Entry build="True" name="Tomboy" configuration="Debug" />
       <Entry build="True" name="WindowManager" configuration="Debug" />
       <Entry build="True" name="Firefox" configuration="Debug" />
-      <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="Vinagre" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
@@ -36,6 +35,7 @@
       <Entry build="True" name="Google Maps" configuration="Debug" />
       <Entry build="True" name="Riptide" configuration="Debug" />
       <Entry build="True" name="Shelf" configuration="Debug" />
+      <Entry build="True" name="Twitter" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -56,7 +56,6 @@
       <Entry build="True" name="Tomboy" configuration="Release" />
       <Entry build="True" name="WindowManager" configuration="Release" />
       <Entry build="True" name="Firefox" configuration="Release" />
-      <Entry build="True" name="Twitter" configuration="Release" />
       <Entry build="True" name="Vinagre" configuration="Release" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
       <Entry build="True" name="Tasque" configuration="Release" />
@@ -73,6 +72,7 @@
       <Entry build="True" name="Google Maps" configuration="Release" />
       <Entry build="True" name="Riptide" configuration="Release" />
       <Entry build="True" name="Shelf" configuration="Release" />
+      <Entry build="True" name="Twitter" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -110,6 +110,7 @@
     <Execute type="None" entry="Google Maps" />
     <Execute type="None" entry="Riptide" />
     <Execute type="None" entry="Shelf" />
+    <Execute type="None" entry="Twitter" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -131,7 +132,6 @@
     <Entry filename="Tomboy/Tomboy.mdp" />
     <Entry filename="WindowManager/WindowManager.mdp" />
     <Entry filename="Firefox/Firefox.mdp" />
-    <Entry filename="Twitter/Twitter.mdp" />
     <Entry filename="Vinagre/Vinagre.mdp" />
     <Entry filename="GNOME-Screenshot/GNOME-Screenshot.mdp" />
     <Entry filename="Tasque/Tasque.mdp" />
@@ -147,5 +147,6 @@
     <Entry filename="Google Maps/Google Maps.mdp" />
     <Entry filename="Riptide/Riptide.mdp" />
     <Entry filename="Shelf/Shelf.mdp" />
+    <Entry filename="Twitter/Twitter.mdp" />
   </Entries>
 </Combine>

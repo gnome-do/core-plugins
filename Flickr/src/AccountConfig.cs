@@ -26,7 +26,7 @@ using Do.Addins;
 
 namespace Flickr
 {	
-	public partial class AccountConfig : Gtk.Bin
+	public partial class AccountConfig : Gtk.Bin, IConfigurable
 	{	
 		private FlickrNet.Flickr flickr;
 		private static IPreferences prefs;
@@ -48,6 +48,18 @@ namespace Flickr
 		static AccountConfig ()
 		{
 			prefs = Do.Addins.Util.GetPreferences ("flickr");
+		}
+		
+		public string Name {
+			get { return "fake"; }
+		}
+		
+		public string Icon {
+			get { return "fake"; }
+		}
+		
+		public string Description {
+			get { return "fake"; }
 		}
 		
 		public static string AuthToken {
@@ -112,6 +124,11 @@ namespace Flickr
 		  	auth_btn.Label = "Sign in as a different user";
 		  	auth_btn.Clicked -= new EventHandler (OnCompleteBtnClicked);
 		  	auth_btn.Clicked += new EventHandler (OnAuthBtnClicked);
+		}
+		
+		public Gtk.Bin GetConfiguration ()
+		{
+			return this;
 		}
 	}
 }

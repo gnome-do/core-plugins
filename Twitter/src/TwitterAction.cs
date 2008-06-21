@@ -33,15 +33,11 @@ namespace DoTwitter
 	{
 		private static List<IItem> items;
 		private static string status, username, password;
-		private static Timer clearFriendsTimer;
-		const int SecondsFriendsCached = 45;
 		
 		static TwitterAction ()
 		{
-			clearFriendsTimer = new Timer (ClearFriends, null, 600000, 600000);
+			GLib.Timeout.Add (600000, delegate { ClearFriends(null); return true; });
 			items = new List<IItem> ();
-			clearFriendsTimer = new Timer (ClearFriends);
-			clearFriendsTimer.Change (600000, 600000);
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
 		} 
