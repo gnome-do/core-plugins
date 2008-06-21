@@ -160,10 +160,9 @@ namespace Do.Riptide
 			client.Register (manager);
 			manager.TorrentStateChanged += OnTorrentStateChanged;
 			
-			torrentWindow.AddTorrent (manager);
-			
-			
 			Gtk.Application.Invoke (delegate { 
+				torrentWindow.AddTorrent (manager);
+				
 				if (ProgressWindow)
 					torrentWindow.Show ();
 				
