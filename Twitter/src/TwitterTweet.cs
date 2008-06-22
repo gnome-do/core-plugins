@@ -24,11 +24,12 @@ using System.Threading;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Do.Addins;
 using Twitterizer.Framework;
 
 namespace DoTwitter
 {		
-	public sealed class TweetAction : IAction 
+	public sealed class TweetAction : IAction, IConfigurable
 	{
 		public string Name {
 			get { return "Tweet"; }
@@ -87,6 +88,11 @@ namespace DoTwitter
 			updateRunner.Start ();
 			
 			return null;
+		}
+		
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new GenConfig ();
 		}
 		
 		private string BuildTweet(IItem t, IItem c)
