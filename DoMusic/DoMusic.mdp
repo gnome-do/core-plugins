@@ -1,0 +1,39 @@
+<Project name="DoMusic" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="DoMusic" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="DoMusic" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="." subtype="Directory" buildaction="Compile" />
+    <File name="src" subtype="Directory" buildaction="Compile" />
+    <File name="src/BrowseMusicItems.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ControlActionActions.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ControlActionSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/DefaultingActions.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/DoMusic.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EnqueueAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EnqueueModifier.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/IMusicSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/InternalMusicItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/MusicItems.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/MusicItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PlayAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PlayModifier.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/DoMusic.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.5.1.0, Culture=neutral, PublicKeyToken=null" />
+  </References>
+</Project>
