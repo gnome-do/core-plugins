@@ -36,6 +36,7 @@
       <Entry build="False" name="Riptide" configuration="Debug" />
       <Entry build="True" name="Shelf" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
+      <Entry build="True" name="VolumeControl" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -73,6 +74,7 @@
       <Entry build="True" name="Riptide" configuration="Release" />
       <Entry build="True" name="Shelf" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
+      <Entry build="True" name="VolumeControl" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -111,6 +113,7 @@
     <Execute type="None" entry="Riptide" />
     <Execute type="None" entry="Shelf" />
     <Execute type="None" entry="Twitter" />
+    <Execute type="None" entry="VolumeControl" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -148,5 +151,6 @@
     <Entry filename="Riptide/Riptide.mdp" />
     <Entry filename="Shelf/Shelf.mdp" />
     <Entry filename="Twitter/Twitter.mdp" />
+    <Entry filename="VolumeControl/VolumeControl.mdp" />
   </Entries>
 </Combine>
