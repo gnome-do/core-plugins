@@ -114,7 +114,6 @@ namespace DoTwitter
 				
 				tfriend = ContactItem.Create (friend.UserName);
 				tfriend ["twitter.screenname"] = friend.ScreenName;
-				tfriend ["description"] = friend.ScreenName;
 				items.Add (tfriend);
 			}
 			Monitor.Exit (items);
