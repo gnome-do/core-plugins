@@ -5,7 +5,7 @@
     <target-gtk-version>2.12.0</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.5.0.1, Culture=neutral" />
+    <widget-library name="Do.Addins, Version=0.5.1.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Riptide.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Do.Riptide.Configuration" design-size="300 317">
