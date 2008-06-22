@@ -62,17 +62,30 @@ namespace Do.Riptide
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
 			List<IItem> outItems;
-			outItems = new List<IItem> ();
 			string search;
-			search = HttpUtility.UrlEncode ((items[0] as ITextItem).Text);
+			WebRequest req = null;
+			WebResponse res = null;
 			
+			outItems = new List<IItem> ();
+			
+			search = HttpUtility.UrlEncode ((items[0] as ITextItem).Text);
 			search = "http://isohunt.com/js/rss/" + search;
 			
-			WebClient client = new WebClient ();
-			Stream stream = client.OpenRead (search);
+			req = WebRequest.Create (search);
+			req.Timeout = 10000;
+			
+			try {
+				res = req.GetResponse ();
+			} catch {
+				Do.Addins.NotificationBridge.ShowMessage ("Riptide:", "Torrent Search could not be performed");
+				return null;
+			}
+			
+			if (res == null)
+				return null;
 			
 			XmlDocument xdoc = new System.Xml.XmlDocument ();
-			xdoc.Load (stream);
+			xdoc.Load (res.GetResponseStream ());
 			
 			XmlNodeList nodes;
 			nodes = xdoc.SelectNodes ("/rss/channel/item");
