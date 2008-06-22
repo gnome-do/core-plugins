@@ -20,11 +20,11 @@
  */
 
 using System;
+using System.Net;
 using System.Threading;
 using System.Collections.Generic;
 
 using Twitterizer.Framework;
-using Do.Addins;
 using Do.Universe;
 
 namespace DoTwitter
@@ -32,30 +32,26 @@ namespace DoTwitter
 	public static class TwitterAction
 	{
 		private static List<IItem> items;
+		private static Twitter twitter;
 		private static string status, username, password;
+		private static DateTime lastUpdated;
+		static readonly string photo_directory;
 		
 		static TwitterAction ()
 		{
+			string home;
 			GLib.Timeout.Add (600000, delegate { ClearFriends(null); return true; });
 			items = new List<IItem> ();
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
+			twitter = new Twitter (username, password);
+			lastUpdated = DateTime.UtcNow;
+			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			photo_directory = "~/.local/share/gnome-do/Twitter/photos".Replace ("~", home);
 		} 
 		
 		public static List<IItem> Friends {
 			get { return items; }
-		}
-		
-		private static string Username {
-			get {
-				return username;
-			}
-		}
-		
-		private static string Password {
-			get {
-				return password;
-			}
 		}
 		
 		public static string Status {
@@ -64,12 +60,9 @@ namespace DoTwitter
 		
 		public static void Tweet ()
 		{
-			Twitter t;
-			
 			if (!(String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
-				t = new Twitter (username, password);
 				try {
-					t.Update (status);
+					twitter.Update (status);
 					Do.Addins.NotificationBridge.ShowMessage ("Tweet Successful", 
 						String.Format ("'{0}' successfully posted to Twitter.",
 						status));
@@ -95,14 +88,11 @@ namespace DoTwitter
 				Monitor.Exit (items);
 				return;
 			}
-			
-			Twitter t;
+
 			TwitterUserCollection friends;
 			
-			t = new Twitter (Username, Password);
-			
 			try {
-				friends = t.Friends ();
+				friends = twitter.Friends ();
 			} catch (TwitterizerException e) {
 				Console.Error.WriteLine (e.Message);
 				Monitor.Exit (items);
@@ -115,6 +105,11 @@ namespace DoTwitter
 				tfriend = ContactItem.Create (friend.ScreenName);
 				tfriend ["twitter.screenname"] = friend.ScreenName;
 				tfriend ["description"] = friend.ScreenName;
+				if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
+					tfriend ["photo"] = photo_directory + "/" + friend.ID;
+				else
+					DownloadBuddyIcon (friend.ProfileImageUri,
+						photo_directory + "/" + friend.ID);
 				items.Add (tfriend);
 				
 				tfriend = ContactItem.Create (friend.UserName);
@@ -122,8 +117,25 @@ namespace DoTwitter
 				tfriend ["description"] = friend.ScreenName;
 				items.Add (tfriend);
 			}
-			
 			Monitor.Exit (items);
+		}
+		
+		public static void UpdateTweets ()
+		{
+			if (!GenConfig.ShowFriendStatuses) return;
+			
+			try {
+				foreach (TwitterStatus tweet in twitter.FriendsTimeline ()) {
+					if (DateTime.Compare (tweet.Created, lastUpdated) > 0) {
+						Gtk.Application.Invoke (delegate {
+							Do.Addins.NotificationBridge.ShowMessage (
+								tweet.TwitterUser.ScreenName, tweet.Text,
+								photo_directory + "/" + tweet.TwitterUser.ID);
+						});
+						lastUpdated = tweet.Created;
+					}
+				}
+			} catch { }
 		}
 				
 		public static bool TryConnect (string username, string password)
@@ -131,6 +143,7 @@ namespace DoTwitter
 			Twitter test = new Twitter (username, password);
 			try {
 				test.Friends ();
+				twitter = new Twitter (username, password);
 			} catch {
 				return false;
 			}
@@ -143,5 +156,18 @@ namespace DoTwitter
 				items.Clear ();
 			}
 		}
+		
+		private static void DownloadBuddyIcon (Uri imageUri, string location)
+		{
+			WebClient client = new WebClient ();
+			if (!System.IO.Directory.Exists (photo_directory))
+				System.IO.Directory.CreateDirectory (photo_directory);
+			try {
+				client.DownloadFile (imageUri.AbsoluteUri, location);
+			} catch {
+				Console.Error.WriteLine ("{0} does not exist!",location);
+			}
+		}
+			
 	}
 }

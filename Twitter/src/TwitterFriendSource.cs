@@ -32,9 +32,11 @@ namespace DoTwitter
 	public sealed class TwitterFriendSource : IItemSource, IConfigurable
 	{
 		private List<IItem> items;
+		private const int TwitterTimeout = 30;
 		public TwitterFriendSource()
 		{
 			items = new List<IItem> ();
+			GLib.Timeout.Add (TwitterTimeout * 1000, GetUpdates);
 		}
 		
 		public string Name {
@@ -75,6 +77,13 @@ namespace DoTwitter
 		
 		public Gtk.Bin GetConfiguration () {
 			return new Configuration ();
+		}
+		
+		public bool GetUpdates ()
+		{
+			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateTweets));
+			updateRunner.Start ();
+			return true;
 		}
 	}
 }
