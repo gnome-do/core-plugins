@@ -128,9 +128,16 @@ namespace DoTwitter
 				foreach (TwitterStatus tweet in twitter.FriendsTimeline ()) {
 					if (DateTime.Compare (tweet.Created, lastUpdated) > 0) {
 						Gtk.Application.Invoke (delegate {
-							Do.Addins.NotificationBridge.ShowMessage (
-								tweet.TwitterUser.ScreenName, tweet.Text,
-								photo_directory + "/" + tweet.TwitterUser.ID);
+							if (System.IO.File.Exists (photo_directory + "/" + tweet.TwitterUser.ID))
+								Do.Addins.NotificationBridge.ShowMessage (
+									tweet.TwitterUser.ScreenName, tweet.Text,
+									photo_directory + "/" + tweet.TwitterUser.ID);
+							else {
+								Do.Addins.NotificationBridge.ShowMessage (
+									tweet.TwitterUser.ScreenName, tweet.Text);
+								DownloadBuddyIcon (tweet.TwitterUser.ProfileImageUri,
+									photo_directory + "/" + tweet.TwitterUser.ID);
+							}							
 						});
 						lastUpdated = tweet.Created;
 					}
