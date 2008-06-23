@@ -1,23 +1,0 @@
-8
-
-dir
-0
-file:///mnt/nixsys/progrepo/do-plugins/Amarok2/src
-file:///mnt/nixsys/progrepo
-add
-
-
-
-
-
-
-
-svn:special svn:externals svn:needs-lock
-
-Do Music Amarok.cs
-file
-
-
-
-add
-
