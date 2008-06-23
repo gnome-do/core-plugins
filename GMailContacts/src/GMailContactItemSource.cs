@@ -31,13 +31,6 @@ namespace GMailContacts
 {	
 	public sealed class GMailContactsItemSource : IItemSource, IConfigurable
 	{
-		private List<IItem> items;
-		
-		public GMailContactsItemSource()
-		{
-			items = new List<IItem> ();
-		}
-		
 		public string Name { 
 			get { return "GMail Contacts"; }
 		}
@@ -59,7 +52,7 @@ namespace GMailContacts
 		}
 		
 		public ICollection<IItem> Items {
-			get { return items; }
+			get { return GMail.Contacts; }
 		}
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item) 
@@ -82,7 +75,6 @@ namespace GMailContacts
 				Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));
 				thread.IsBackground = true;
 				thread.Start ();
-				items = GMail.Contacts;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}

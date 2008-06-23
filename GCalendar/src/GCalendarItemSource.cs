@@ -36,13 +36,6 @@ namespace GCalendar
 {	
 	public sealed class GCalendarItemSource : IItemSource, IConfigurable
 	{
-		List<IItem> items;
-
-		public GCalendarItemSource ()
-		{
-			items = new List<IItem> ();
-		}
-
 		public string Name {
 			get { return "Google Calendars"; }
 		}
@@ -67,7 +60,7 @@ namespace GCalendar
 
 		public ICollection<IItem> Items
 		{
-			get { return items; }
+			get { return GCal.Calendars; }
 		}
 
 		public ICollection<IItem> ChildrenOfItem (IItem parent)
@@ -98,12 +91,12 @@ namespace GCalendar
 
 		public void UpdateItems ()
 		{	
-			try {
-				new Thread (new ThreadStart (GCal.UpdateCalendars)).Start ();
-				items = GCal.Calendars;
+			try {			
+				Thread updateRunner = new Thread (new ThreadStart (GCal.UpdateCalendars));
+				updateRunner.IsBackground = true;
+				updateRunner.Start ();
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
-				return;
 			}
 		}
 		

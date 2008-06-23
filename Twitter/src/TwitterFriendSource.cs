@@ -69,6 +69,7 @@ namespace DoTwitter
 		public void UpdateItems ()
 		{	
 			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateFriends));
+			updateRunner.IsBackground = true;
 			updateRunner.Start ();
 		}
 		
