@@ -37,7 +37,7 @@
       <Entry build="True" name="Shelf" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="VolumeControl" configuration="Debug" />
-      <Entry build="True" name="DoMusic" configuration="Debug" />
+      <Entry build="True" name="Do.Music" configuration="" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -76,7 +76,7 @@
       <Entry build="True" name="Shelf" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
       <Entry build="True" name="VolumeControl" configuration="Release" />
-      <Entry build="True" name="DoMusic" configuration="Release" />
+      <Entry build="True" name="Do.Music" configuration="" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -117,7 +117,7 @@
     <Execute type="None" entry="Twitter" />
     <Execute type="None" entry="VolumeControl" />
     <Execute type="None" entry="Do Music" />
-    <Execute type="None" entry="DoMusic" />
+    <Execute type="None" entry="Do.Music" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -156,6 +156,6 @@
     <Entry filename="Shelf/Shelf.mdp" />
     <Entry filename="Twitter/Twitter.mdp" />
     <Entry filename="VolumeControl/VolumeControl.mdp" />
-    <Entry filename="DoMusic/DoMusic.mdp" />
+    <Entry filename="Do.Music/Do.Music.mds" />
   </Entries>
 </Combine>

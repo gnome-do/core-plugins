@@ -61,7 +61,7 @@ namespace Do.Riptide
 			
 			WebResponse res = null;	
 			WebRequest req;
-			Stream remoteStream;
+			Stream remoteStream, localStream;
 			
 			//We need a place to store our torrents
 			torrentFolder = Paths.Combine (Paths.UserData, "torrents/");
@@ -85,16 +85,26 @@ namespace Do.Riptide
 			}
 			
 			remoteStream = res.GetResponseStream ();
+			localStream = System.IO.File.Create (Paths.Combine (torrentFolder, filename));
 			
-			Torrent torrent = Torrent.Load (remoteStream);
+			byte[] buffer = new byte[1024];
+			int bytesRead;
+			
+			do {
+				bytesRead = remoteStream.Read (buffer, 0, buffer.Length);
+				localStream.Write (buffer, 0, bytesRead);
+			} while (bytesRead > 0);
+			
+			res.Close ();
+			remoteStream.Close ();
+			localStream.Close ();
+			
+			Torrent torrent = Torrent.Load (Paths.Combine (torrentFolder, filename));
 			TorrentManager manager = new TorrentManager(torrent, TorrentClientManager.DownloadDir, new TorrentSettings ());
 			
 			manager.TorrentStateChanged += OnTorrentStateChanged;
 			
 			TorrentClientManager.NewTorrent (manager);
-			
-			res.Close ();
-			remoteStream.Close ();
 			
 			return null;
 		}

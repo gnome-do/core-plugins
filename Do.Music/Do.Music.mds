@@ -1,0 +1,16 @@
+<Combine name="Do.Music" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="DoMusic" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="DoMusic" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="DoMusic" single="True">
+    <Execute type="None" entry="DoMusic" />
+  </StartMode>
+  <Entries>
+    <Entry filename="DoMusic/DoMusic.mdp" />
+  </Entries>
+</Combine>
