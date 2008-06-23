@@ -82,41 +82,37 @@ namespace DoTwitter
 		
 		public static void UpdateFriends ()
 		{
-			if (!Monitor.TryEnter (items)) return;
-
-			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
-				Monitor.Exit (items);
+			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password)))
 				return;
-			}
+			
+			if (!Monitor.TryEnter (items)) return;
 
 			TwitterUserCollection friends;
 			
 			try {
-				friends = twitter.Friends ();
-			} catch (TwitterizerException e) {
-				Console.Error.WriteLine (e.Message);
-				Monitor.Exit (items);
-				return;
-			} 
+				friends = twitter.Friends (); 
 			
-			ContactItem tfriend;
-			
-			foreach (TwitterUser friend in friends) {
-				tfriend = ContactItem.Create (friend.ScreenName);
-				tfriend ["twitter.screenname"] = friend.ScreenName;
-				tfriend ["description"] = friend.ScreenName;
-				if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
-					tfriend ["photo"] = photo_directory + "/" + friend.ID;
-				else
-					DownloadBuddyIcon (friend.ProfileImageUri,
-						photo_directory + "/" + friend.ID);
-				items.Add (tfriend);
+				ContactItem tfriend;
 				
-				tfriend = ContactItem.Create (friend.UserName);
-				tfriend ["twitter.screenname"] = friend.ScreenName;
-				items.Add (tfriend);
+				foreach (TwitterUser friend in friends) {
+					tfriend = ContactItem.Create (friend.ScreenName);
+					tfriend ["twitter.screenname"] = friend.ScreenName;
+					if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
+						tfriend ["photo"] = photo_directory + "/" + friend.ID;
+					else
+						DownloadBuddyIcon (friend.ProfileImageUri,
+							photo_directory + "/" + friend.ID);
+					items.Add (tfriend);
+					
+					tfriend = ContactItem.Create (friend.UserName);
+					tfriend ["twitter.screenname"] = friend.ScreenName;
+					items.Add (tfriend);
+				}
+			} catch (TwitterizerException e) {
+				Console.Error.WriteLine (e);
+			} finally {
+				Monitor.Exit (items);
 			}
-			Monitor.Exit (items);
 		}
 		
 		public static void UpdateTweets ()

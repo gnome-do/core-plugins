@@ -30,7 +30,7 @@ namespace DoTwitter
 		public Configuration () : 
 			base ("Twitter")
 		{
-			GetAccountButton.Uri = "https://twitter.com/signup";			
+			GetAccountButton.Uri = "https://twitter.com/signup";
 		}
 		
 		protected override bool Validate (string username, string password)
