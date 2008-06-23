@@ -1,0 +1,25 @@
+<Addin 
+	id="Banshee" 
+	namespace="DoMusicBanshee"
+	version="1.0"
+	name="Do Music Banshee"
+	description="Provides support to play music from Banshee with Do Music"
+	author="Zachary Goldberg"
+>
+
+	<Runtime>
+		<Import assembly="DoMusicBanshee.dll"/>
+	</Runtime>
+	
+	
+	<Dependencies>	
+		<Addin id='DoMusic' version="1.0" />
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+
+	
+	
+
+
+</Addin>
+	
