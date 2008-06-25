@@ -26,7 +26,7 @@ using Do.Addins;
 
 namespace Flickr
 {	
-	public partial class AccountConfig : Gtk.Bin, IConfigurable
+	public partial class AccountConfig : Gtk.Bin
 	{	
 		private FlickrNet.Flickr flickr;
 		private static IPreferences prefs;
@@ -48,18 +48,6 @@ namespace Flickr
 		static AccountConfig ()
 		{
 			prefs = Do.Addins.Util.GetPreferences ("flickr");
-		}
-		
-		public string Name {
-			get { return "fake"; }
-		}
-		
-		public string Icon {
-			get { return "fake"; }
-		}
-		
-		public string Description {
-			get { return "fake"; }
 		}
 		
 		public static string AuthToken {
