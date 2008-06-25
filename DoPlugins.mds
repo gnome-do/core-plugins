@@ -25,7 +25,6 @@
       <Entry build="True" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Debug" />
       <Entry build="True" name="GMailContacts" configuration="Debug" />
-      <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="DiskMounter" configuration="Debug" />
       <Entry build="True" name="Text" configuration="Debug" />
       <Entry build="True" name="GNOME Terminal" configuration="Debug" />
@@ -64,7 +63,6 @@
       <Entry build="True" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Release" />
       <Entry build="True" name="GMailContacts" configuration="Release" />
-      <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="DiskMounter" configuration="Release" />
       <Entry build="True" name="Text" configuration="Release" />
       <Entry build="True" name="GNOME Terminal" configuration="Release" />
@@ -144,7 +142,6 @@
     <Entry filename="Tasque/Tasque.mdp" />
     <Entry filename="Archive/Archive.mdp" />
     <Entry filename="GMailContacts/GMailContacts.mdp" />
-    <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="DiskMounter/DiskMounter.mdp" />
     <Entry filename="Text/Text.mdp" />
     <Entry filename="GNOME Terminal/GNOME Terminal.mdp" />
