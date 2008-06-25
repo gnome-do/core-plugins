@@ -21,22 +21,22 @@
       <Entry build="True" name="Firefox" configuration="Debug" />
       <Entry build="True" name="Vinagre" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
+      <Entry build="True" name="GNOME-Dictionary" configuration="Debug" />
+      <Entry build="True" name="GNOME-Terminal" configuration="Debug" />
+      <Entry build="True" name="GoogleMaps" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
-      <Entry build="True" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Debug" />
       <Entry build="True" name="GMailContacts" configuration="Debug" />
       <Entry build="True" name="DiskMounter" configuration="Debug" />
       <Entry build="True" name="Text" configuration="Debug" />
-      <Entry build="True" name="GNOME Terminal" configuration="Debug" />
-      <Entry build="True" name="GNOME Dictionary" configuration="Debug" />
       <Entry build="True" name="Flickr" configuration="Debug" />
       <Entry build="True" name="RSS" configuration="Debug" />
-      <Entry build="True" name="Google Maps" configuration="Debug" />
       <Entry build="True" name="Riptide" configuration="Debug" />
       <Entry build="True" name="Shelf" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="VolumeControl" configuration="Debug" />
       <Entry build="True" name="Do.Music" configuration="" />
+      <Entry build="True" name="GCalendar" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -59,22 +59,23 @@
       <Entry build="True" name="Firefox" configuration="Release" />
       <Entry build="True" name="Vinagre" configuration="Release" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
+      <Entry build="True" name="GNOME-Dictionary" configuration="Release" />
+      <Entry build="True" name="GNOME-Terminal" configuration="Release" />
+      <Entry build="True" name="GoogleMaps" configuration="Release" />
       <Entry build="True" name="Tasque" configuration="Release" />
       <Entry build="True" name="Archive" configuration="Default" />
       <Entry build="True" name="Archive" configuration="Release" />
       <Entry build="True" name="GMailContacts" configuration="Release" />
       <Entry build="True" name="DiskMounter" configuration="Release" />
       <Entry build="True" name="Text" configuration="Release" />
-      <Entry build="True" name="GNOME Terminal" configuration="Release" />
-      <Entry build="True" name="GNOME Dictionary" configuration="Release" />
       <Entry build="True" name="Flickr" configuration="Release" />
       <Entry build="True" name="RSS" configuration="Release" />
-      <Entry build="True" name="Google Maps" configuration="Release" />
       <Entry build="True" name="Riptide" configuration="Release" />
       <Entry build="True" name="Shelf" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
       <Entry build="True" name="VolumeControl" configuration="Release" />
       <Entry build="True" name="Do.Music" configuration="" />
+      <Entry build="True" name="GCalendar" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -105,17 +106,18 @@
     <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="DiskMounter" />
     <Execute type="None" entry="Text" />
-    <Execute type="None" entry="GNOME Terminal" />
-    <Execute type="None" entry="GNOME Dictionary" />
+    <Execute type="None" entry="GNOME-Terminal" />
+    <Execute type="None" entry="GNOME-Dictionary" />
     <Execute type="None" entry="Flickr" />
     <Execute type="None" entry="RSS" />
-    <Execute type="None" entry="Google Maps" />
+    <Execute type="None" entry="GoogleMaps" />
     <Execute type="None" entry="Riptide" />
     <Execute type="None" entry="Shelf" />
     <Execute type="None" entry="Twitter" />
     <Execute type="None" entry="VolumeControl" />
     <Execute type="None" entry="Do Music" />
     <Execute type="None" entry="Do.Music" />
+    <Execute type="None" entry="GCalendar" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -144,15 +146,16 @@
     <Entry filename="GMailContacts/GMailContacts.mdp" />
     <Entry filename="DiskMounter/DiskMounter.mdp" />
     <Entry filename="Text/Text.mdp" />
-    <Entry filename="GNOME Terminal/GNOME Terminal.mdp" />
-    <Entry filename="GNOME Dictionary/GNOME Dictionary.mdp" />
+    <Entry filename="GNOME-Terminal/GNOME-Terminal.mdp" />
+    <Entry filename="GNOME-Dictionary/GNOME-Dictionary.mdp" />
     <Entry filename="Flickr/Flickr.mdp" />
     <Entry filename="RSS/RSS.mdp" />
-    <Entry filename="Google Maps/Google Maps.mdp" />
+    <Entry filename="GoogleMaps/GoogleMaps.mdp" />
     <Entry filename="Riptide/Riptide.mdp" />
     <Entry filename="Shelf/Shelf.mdp" />
     <Entry filename="Twitter/Twitter.mdp" />
     <Entry filename="VolumeControl/VolumeControl.mdp" />
     <Entry filename="Do.Music/Do.Music.mds" />
+    <Entry filename="GCalendar/GCalendar.mdp" />
   </Entries>
 </Combine>

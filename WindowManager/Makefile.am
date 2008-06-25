@@ -7,13 +7,12 @@ if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = ../buildrepo/WindowManager.dll
+ASSEMBLY = bin/Debug/WindowManager.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
-BUILD_DIR = ../buildrepo
+BUILD_DIR = bin/Debug
 
-WINDOWMANAGER_ADDIN_XML_SOURCE=src/WindowManager.addin.xml
 
 endif
 
@@ -26,48 +25,33 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-WINDOWMANAGER_ADDIN_XML_SOURCE=src/WindowManager.addin.xml
-
-endif
-
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = ../buildrepo/WindowManager.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = ../buildrepo
-
-WINDOWMANAGER_ADDIN_XML_SOURCE=src/WindowManager.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-PROGRAMFILES = \
-	$(WINDOWMANAGER_ADDIN_XML)  
-
 LINUX_PKGCONFIG = \
 	$(WINDOWMANAGER_PC)  
 
 
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/WindowListAction.cs \
 	src/IWindowList.cs \
 	src/WindowItem.cs \
 	src/WindowItemSource.cs \
-	src/ScreenListAction.cs 
+	src/ScreenListAction.cs \
+	src/WindowListItems.cs \
+	src/GenericWindowItem.cs \
+	src/ScreenItemSource.cs 
 
-DATA_FILES = \
+DATA_FILES = 
+
+RESOURCES = \
 	src/WindowManager.addin.xml 
-
-RESOURCES = 
 
 EXTRAS = \
 	windowmanager.pc.in 
@@ -82,14 +66,12 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
-WINDOWMANAGER_ADDIN_XML = $(BUILD_DIR)/WindowManager.addin.xml
 WINDOWMANAGER_PC = $(BUILD_DIR)/windowmanager.pc
 
-$(eval $(call emit-deploy-target,WINDOWMANAGER_ADDIN_XML))
 $(eval $(call emit-deploy-wrapper,WINDOWMANAGER_PC,windowmanager.pc))
 
 

@@ -104,7 +104,7 @@ namespace FilePlugin {
 				gconf.Set (GConfKeyBase + "include_hidden", false);
 				include_hidden = false;
 			}
-			UpdateItems ();
+			//UpdateItems ();
 		}
 		
 		public static string GConfKeyBase {

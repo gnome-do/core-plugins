@@ -28,21 +28,8 @@ BUILD_DIR = bin/Release
 
 endif
 
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/Twitter.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-
-endif
-
 AL=al2
-SATELLITE_ASSEMBLY_NAME=.resources.dll
+SATELLITE_ASSEMBLY_NAME=DoTwitter.resources.dll
 
 LINUX_PKGCONFIG = \
 	$(TWITTER_PC)  
@@ -52,25 +39,42 @@ LINUX_PKGCONFIG = \
 all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
-	src/Notifications.cs \
-	src/Twitter.cs \
-	src/TwitterAction.cs 
+	src/Configuration.cs \
+	src/TwitterAction.cs \
+	src/TwitterFriendSource.cs \
+	src/TwitterTweet.cs \
+	src/Twitterizer/Twitter.cs \
+	src/Twitterizer/TwitterizerException.cs \
+	src/Twitterizer/TwitterRequest.cs \
+	src/Twitterizer/TwitterRequestData.cs \
+	src/Twitterizer/TwitterStatus.cs \
+	src/Twitterizer/TwitterStatusCollection.cs \
+	src/Twitterizer/TwitterUser.cs \
+	src/Twitterizer/TwitterUserCollection.cs \
+	src/Twitterizer/Properties/AssemblyInfo.cs \
+	gtk-gui/generated.cs \
+	src/GenConfig.cs \
+	gtk-gui/DoTwitter.GenConfig.cs 
 
 DATA_FILES = 
 
 RESOURCES = \
-	twitter-icon.png 
+	Twitter.addin.xml \
+	twitter-icon.png \
+	twitter_items.png \
+	gtk-gui/gui.stetic \
+	gtk-gui/objects.xml 
 
 EXTRAS = \
 	twitter.pc.in 
 
 REFERENCES =  \
 	$(DOADDINS_LIBS) \
+	$(GTK_SHARP_20_LIBS) \
 	System \
-	$(NDESK_DBUS_GLIB_10_LIBS) \
-	$(NDESK_DBUS_10_LIBS) \
 	System.Xml \
-	$(GCONF_SHARP_20_LIBS)
+	System.Web \
+	Mono.Posix
 
 DLL_REFERENCES = 
 

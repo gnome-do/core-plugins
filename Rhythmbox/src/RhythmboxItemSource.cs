@@ -37,7 +37,7 @@ namespace Do.Addins.Rhythmbox
 		public RhythmboxMusicItemSource ()
 		{
 			items = new List<IItem> ();
-			UpdateItems ();
+			//UpdateItems ();
 		}
 
 		public string Name { get { return "Rhythmbox Music"; } }

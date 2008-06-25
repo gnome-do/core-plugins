@@ -13,7 +13,6 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-GNOME_SCREENSHOT_ADDIN_XML_SOURCE=src/GNOME-Screenshot.addin.xml
 
 endif
 
@@ -26,49 +25,31 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-GNOME_SCREENSHOT_ADDIN_XML_SOURCE=src/GNOME-Screenshot.addin.xml
-
-endif
-
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/GNOME-Screenshot.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-GNOME_SCREENSHOT_ADDIN_XML_SOURCE=src/GNOME-Screenshot.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-PROGRAMFILES = \
-	$(GNOME_SCREENSHOT_ADDIN_XML)  
-
 LINUX_PKGCONFIG = \
 	$(GNOME_SCREENSHOT_PC)  
 
 
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/CurrentWindowScreenshotItem.cs \
 	src/ScreenshotDelayItem.cs \
 	src/ScreenshotItem.cs \
-	src/ScreenshotItemSource.cs \
 	src/TakeScreenshotAction.cs \
-	src/WholeScreenScreenshotItem.cs 
+	src/WholeScreenScreenshotItem.cs \
+	src/ScreenshotItemSource.cs 
 
-DATA_FILES = \
+DATA_FILES = 
+
+RESOURCES = \
 	src/GNOME-Screenshot.addin.xml 
-
-RESOURCES = 
 
 EXTRAS = \
 	gnome-screenshot.pc.in 
@@ -79,14 +60,12 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
-GNOME_SCREENSHOT_ADDIN_XML = $(BUILD_DIR)/GNOME-Screenshot.addin.xml
 GNOME_SCREENSHOT_PC = $(BUILD_DIR)/gnome-screenshot.pc
 
-$(eval $(call emit-deploy-target,GNOME_SCREENSHOT_ADDIN_XML))
 $(eval $(call emit-deploy-wrapper,GNOME_SCREENSHOT_PC,gnome-screenshot.pc))
 
 

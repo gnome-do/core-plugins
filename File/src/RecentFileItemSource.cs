@@ -33,7 +33,7 @@ namespace FilePlugin
 			files = new List<IItem> ();
 			Gtk.RecentManager.Default.Changed += OnRecentChanged;
 
-			UpdateItems ();
+			//UpdateItems ();
 		}
 		
 		protected void OnRecentChanged (object sender, EventArgs args)

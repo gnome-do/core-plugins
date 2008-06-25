@@ -29,10 +29,16 @@ using Do.Universe;
 namespace Do.Plugins.OpenSearch
 {
 	public class OpenSearchAction : AbstractAction
-	{		
+	{
+		static System.Threading.Thread th;
+		
 		static OpenSearchAction()
 		{
-			OpenSearch.GetOpenSearchItems ();
+			th = new System.Threading.Thread (new System.Threading.ThreadStart (OpenSearch.Init));
+			th.IsBackground = true;
+			th.Priority = System.Threading.ThreadPriority.Lowest;
+			th.Start ();
+			//OpenSearch.GetOpenSearchItems ();
 		}
 		
 		public override string Name
@@ -93,6 +99,8 @@ namespace Do.Plugins.OpenSearch
 	
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
+			if (th.IsAlive) return null;
+			
 			List<string> searchTerms;
 				
 			if (modifierItems.Length > 0)

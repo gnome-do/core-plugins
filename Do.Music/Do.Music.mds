@@ -1,26 +1,23 @@
 <Combine name="Do.Music" fileversion="2.0">
   <Configurations>
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="DoMusic" configuration="Debug" />
       <Entry build="True" name="DoMusicAmarok" configuration="Debug" />
       <Entry build="True" name="DoMusicBanshee" configuration="Debug" />
       <Entry build="True" name="DoMusicMPD" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="DoMusic" configuration="Release" />
       <Entry build="True" name="DoMusicAmarok" configuration="Release" />
       <Entry build="True" name="DoMusicBanshee" configuration="Release" />
       <Entry build="True" name="DoMusicMPD" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="DoMusic" single="True">
+  <StartMode startupentry="DoMusicAmarok" single="True">
     <Execute type="None" entry="DoMusic" />
     <Execute type="None" entry="DoMusicAmarok" />
     <Execute type="None" entry="DoMusicBanshee" />
     <Execute type="None" entry="DoMusicMPD" />
   </StartMode>
   <Entries>
-    <Entry filename="DoMusic/DoMusic.mdp" />
     <Entry filename="DoMusicAmarok/DoMusicAmarok.mdp" />
     <Entry filename="DoMusicBanshee/DoMusicBanshee.mdp" />
     <Entry filename="DoMusicMPD/DoMusicMPD.mdp" />

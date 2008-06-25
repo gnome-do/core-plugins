@@ -10,12 +10,32 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+using NDesk.DBus;
+
 namespace DoMusicBanshee
 {
+	[Interface("org.bansheeproject.Banshee.PlaybackController")]
+	public interface IBansheeControl
+	{
+		void Previous ();
+		void Next ();
+	}
 	
+	[Interface("org.bansheeproject.Banshee.PlayerEngine")]
+	public interface IBansheeEngine
+	{
+		void Play ();
+		void Pause ();
+		void TogglePlaying ();
+	}
 	
 	public class Banshee : IMusicSource
 	{
+		private IBansheeControl player = null;
+		private IBansheeEngine engine = null;
+		
+		private bool available = false;
+		private string busname = "org.bansheeproject.Banshee";
 		
 		public override string SourceName { get { return "Banshee"; } }
 		public override string Icon { get { return "media-player-banshee"; } }			
@@ -26,15 +46,28 @@ namespace DoMusicBanshee
 		/// This is called before every action to make sure things are still working.
 		/// </summary>
 		
-		public override bool IsAvailable(){
-			return true;
+		public override bool IsAvailable()
+		{
+			if (!Bus.Session.NameHasOwner (busname)) return false;
+			
+			if (engine == null) {
+				engine = Bus.Session.GetObject<IBansheeEngine> 
+					(busname, new ObjectPath ("/org/bansheeproject/Banshee/PlayerEngine"));
+			}
+			
+			if (player == null) {
+				player = Bus.Session.GetObject<IBansheeControl> 
+					(busname, new ObjectPath ("/org/bansheeproject/Banshee/PlaybackController"));
+			}
+			
+			return (player != null && engine != null);
 		}
 		
 		/// <summary>
 		/// Any necessary setup for your music source goes here
 		/// </summary>
-		public override void Initialize(){
-			
+		public override void Initialize()
+		{
 		}
 				
 		/// <summary>
@@ -54,73 +87,47 @@ namespace DoMusicBanshee
 			
 		}		
 		
-		public override void EnqueueSong(Song song){
-						     
-		}
-		
-		public override void Next (){
-			execCommand ("PlaybackController", "Next boolean:true", true);
-		}
-		
-	    public override void Prev (){
-			execCommand ("PlaybackController", "Previous boolean:true", true);
-		}
-		
-		public override void PauseResume (){
-			execCommand ("PlayerEngine", "Pause", true);
-		}
-		
-		public override void Play (){
-			execCommand ("PlayerEngine", "Play", true);
-		}
-		
-		public override void PlayArtist (Artist artist){
-			
-		}
-		
-		public override void PlayAlbum (Album album){
-			
-		}
-		
-		public override void PlaySong (Song song){
-			
-		}
-
-		/// <summary>
-		/// Private Functions
-		/// </summary>
-		//dbus-send --type=method_call --dest=org.bansheeproject.Banshee /org/bansheeproject/Banshee/PlayerEngine org.bansheeproject.Banshee.PlayerEngine.Pause
-		private void execCommand (string component, string name, bool isMethod)
+		public override void EnqueueSong (Song song)
 		{
-			string action = "";
-			if(isMethod){
-				action += "--type=method_call ";
-			}
-			action += "--dest=org.bansheeproject.Banshee ";
-			action += "/org/bansheeproject/Banshee/";
-			action += component;
-			action += " org.bansheeproject.Banshee." + component + "." + name;
-			exec("dbus-send",action);
 		}
 		
-		private string exec (string command, string args)
+		public override void Next ()
 		{
-			Process p = new Process();
-			p.StartInfo.FileName = command; 
-			p.StartInfo.Arguments = args;
-			p.StartInfo.RedirectStandardOutput = true;
-			p.StartInfo.RedirectStandardError = true;
-			p.StartInfo.UseShellExecute = false;
-			p.Start();				
-			string buffer = "";
+			if (IsAvailable ()) 
+				player.Next ();
+		}
+		
+	    public override void Prev ()
+		{
+			if (IsAvailable ()) 
+				player.Previous ();
+		}
+		
+		public override void PauseResume ()
+		{
+			if (IsAvailable ()) 
+				engine.TogglePlaying ();
+		}
+		
+		public override void Play ()
+		{
+			if (IsAvailable ()) 
+				engine.Play ();
+		}
+		
+		public override void PlayArtist (Artist artist)
+		{
 			
-			while (!p.HasExited) {
-				buffer += p.StandardOutput.ReadToEnd ();
-			}
-			string err = p.StandardError.ReadToEnd (); 
-			if( err.Length > 1)
-				throw new ApplicationException ("Banshee problem!");
-			return buffer;
+		}
+		
+		public override void PlayAlbum (Album album)
+		{
+			
+		}
+		
+		public override void PlaySong (Song song)
+		{
+			
 		}
 	}
 }
