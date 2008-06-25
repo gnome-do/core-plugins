@@ -35,7 +35,6 @@
       <Entry build="True" name="Shelf" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
       <Entry build="True" name="VolumeControl" configuration="Debug" />
-      <Entry build="True" name="Do.Music" configuration="" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
@@ -74,7 +73,6 @@
       <Entry build="True" name="Shelf" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
       <Entry build="True" name="VolumeControl" configuration="Release" />
-      <Entry build="True" name="Do.Music" configuration="" />
       <Entry build="True" name="GCalendar" configuration="Release" />
     </Configuration>
   </Configurations>
@@ -155,7 +153,6 @@
     <Entry filename="Shelf/Shelf.mdp" />
     <Entry filename="Twitter/Twitter.mdp" />
     <Entry filename="VolumeControl/VolumeControl.mdp" />
-    <Entry filename="Do.Music/Do.Music.mds" />
     <Entry filename="GCalendar/GCalendar.mdp" />
   </Entries>
 </Combine>
