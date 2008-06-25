@@ -32,7 +32,7 @@ namespace Do.Addins.Banshee {
                 public BansheeItemSource()
                 {
                         items = new List<IItem> ();
-                        UpdateItems();
+                        //UpdateItems();
                 }
 
                 public string Name {

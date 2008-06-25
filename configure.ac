@@ -45,16 +45,16 @@ fi
 
 
 dnl package checks, common for all configs
-PKG_CHECK_MODULES([FLICKRNET], [flickrnet])
-PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
-PKG_CHECK_MODULES([DOADDINS], [do.addins])
-PKG_CHECK_MODULES([GNOME_VFS_SHARP_20], [gnome-vfs-sharp-2.0])
-PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
-PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
-PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
-PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 PKG_CHECK_MODULES([GNOME_DESKTOP_SHARP_20], [gnome-desktop-sharp-2.0])
+PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
+PKG_CHECK_MODULES([GNOME_VFS_SHARP_20], [gnome-vfs-sharp-2.0])
+PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
+PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
+PKG_CHECK_MODULES([DOADDINS], [do.addins])
+PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
+PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
+PKG_CHECK_MODULES([FLICKRNET], [flickrnet])
 PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
 
 dnl package checks, per config

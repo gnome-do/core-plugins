@@ -17,6 +17,6 @@
 
 	<Extension path="/Do/ItemSource">
 	  <ItemSource type="MPD.MPD" />
-        </Extension>
+    </Extension>
 </Addin>
 	

@@ -43,9 +43,9 @@ FILES = \
 	src/Rhythmbox.cs \
 	src/RhythmboxEnqueueAction.cs \
 	src/RhythmboxItems.cs \
-	src/RhythmboxItemSource.cs \
 	src/RhythmboxPlayAction.cs \
-	src/AssemblyInfo.cs 
+	src/AssemblyInfo.cs \
+	src/RhythmboxItemSource.cs 
 
 DATA_FILES = 
 

@@ -42,9 +42,9 @@ FILES = \
 	src/CurrentWindowScreenshotItem.cs \
 	src/ScreenshotDelayItem.cs \
 	src/ScreenshotItem.cs \
-	src/ScreenshotItemSource.cs \
 	src/TakeScreenshotAction.cs \
-	src/WholeScreenScreenshotItem.cs 
+	src/WholeScreenScreenshotItem.cs \
+	src/ScreenshotItemSource.cs 
 
 DATA_FILES = 
 
