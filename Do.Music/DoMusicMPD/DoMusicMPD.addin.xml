@@ -10,8 +10,9 @@
 	<Runtime>
 		<Import assembly="DoMusicMPD.dll"/>
 	</Runtime>	
+	
 	<Dependencies>	
-		<Addin id='Core' version="1.0" />
+		<Addin id="Core" version="1.0" />
 	</Dependencies>	
 
 	<Extension path="/Do/ItemSource">
