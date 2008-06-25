@@ -13,7 +13,6 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-AMAROK_ADDIN_XML_SOURCE=src/Amarok.addin.xml
 
 endif
 
@@ -26,36 +25,18 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-AMAROK_ADDIN_XML_SOURCE=src/Amarok.addin.xml
-
-endif
-
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/Amarok.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-AMAROK_ADDIN_XML_SOURCE=src/Amarok.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-PROGRAMFILES = \
-	$(AMAROK_ADDIN_XML)  
-
 LINUX_PKGCONFIG = \
 	$(AMAROK_PC)  
 
 
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/Amarok.cs \
@@ -66,10 +47,10 @@ FILES = \
 	src/MusicItems.cs \
 	src/AssemblyInfo.cs 
 
-DATA_FILES = \
-	src/Amarok.addin.xml 
+DATA_FILES = 
 
-RESOURCES = 
+RESOURCES = \
+	src/Amarok.addin.xml 
 
 EXTRAS = \
 	amarok.pc.in 
@@ -83,15 +64,13 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
 AMAROK_PC = $(BUILD_DIR)/amarok.pc
-AMAROK_ADDIN_XML = $(BUILD_DIR)/Amarok.addin.xml
 
 $(eval $(call emit-deploy-wrapper,AMAROK_PC,amarok.pc))
-$(eval $(call emit-deploy-target,AMAROK_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

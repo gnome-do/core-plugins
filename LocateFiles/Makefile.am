@@ -13,7 +13,6 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-LOCATEFILES_ADDIN_XML_SOURCE=src/LocateFiles.addin.xml
 
 endif
 
@@ -26,45 +25,27 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-LOCATEFILES_ADDIN_XML_SOURCE=src/LocateFiles.addin.xml
-
-endif
-
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/LocateFiles.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-LOCATEFILES_ADDIN_XML_SOURCE=src/LocateFiles.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-PROGRAMFILES = \
-	$(LOCATEFILES_ADDIN_XML)  
-
 LINUX_PKGCONFIG = \
 	$(LOCATEFILES_PC)  
 
 
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/AssemblyInfo.cs \
 	src/LocateFilesAction.cs 
 
-DATA_FILES = \
-	src/LocateFiles.addin.xml 
+DATA_FILES = 
 
-RESOURCES = 
+RESOURCES = \
+	src/LocateFiles.addin.xml 
 
 EXTRAS = \
 	locatefiles.pc.in 
@@ -75,14 +56,12 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
-LOCATEFILES_ADDIN_XML = $(BUILD_DIR)/LocateFiles.addin.xml
 LOCATEFILES_PC = $(BUILD_DIR)/locatefiles.pc
 
-$(eval $(call emit-deploy-target,LOCATEFILES_ADDIN_XML))
 $(eval $(call emit-deploy-wrapper,LOCATEFILES_PC,locatefiles.pc))
 
 
