@@ -1,7 +1,7 @@
 <Addin
 	id="Firefox"
 	namespace="Do"
-	version="2.0"
+	version="2.0.1"
 	name="Firefox"
 	description="Indexes Firefox 3 bookmarks."
 	author="David Siegel"
