@@ -57,14 +57,12 @@ namespace GMailContacts
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item) 
 		{
-			ContactItem contact = (item as ContactItem);
-			List<IItem> details;
-			
-			details = new List<IItem> ();
+			ContactItem contact = item as ContactItem;
+			List<IItem> details = new List<IItem> ();
 			foreach (string detail in contact.Details) {
-				if (detail.Contains ("."))
-					details.Add (new GMailContactDetailItem (
-						detail, contact [detail]));
+				if (detail.Contains (".gmail"))
+					details.Add (
+						new GMailContactDetailItem (detail, contact [detail]));
 			}
 			return details;
 		}
