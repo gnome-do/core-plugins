@@ -32,8 +32,8 @@ namespace Evolution
 			this.detail = detail;
 		}
 
-		public virtual string Name { get { return Value; } }
-		public virtual string Description { get { return Owner ["name"]; } }
+		public virtual string Name { get { return Key; } }
+		public virtual string Description { get { return Value; } }
 		public virtual string Icon { get { return "stock_person"; } }
 
 		public virtual string Key { get { return detail; } }

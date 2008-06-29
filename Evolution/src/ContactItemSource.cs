@@ -56,9 +56,16 @@ namespace Evolution
 			List<IItem> details = new List<IItem> ();
 			ContactItem contact = item as ContactItem;
 			foreach (string detail in contact.Details) {
-				if (detail.StartsWith ("email") &&
-					detail.EndsWith (".evolution"))
+				if (!detail.EndsWith (".evolution")) continue;
+				
+				if (detail.StartsWith ("email"))
 					details.Add (new EmailContactDetailItem (contact, detail));
+				else if (detail.StartsWith ("phone"))
+					details.Add (new PhoneContactDetailItem (contact, detail));
+				else if (detail.StartsWith ("url.home"))
+					details.Add (new BookmarkItem ("Homepage", contact [detail]));
+				else if (detail.StartsWith ("url.blog"))
+					details.Add (new BookmarkItem ("Blog", contact [detail]));
 			}
 			return details;
 		}
@@ -93,19 +100,25 @@ namespace Evolution
 						
 			contact = ContactItem.Create (e_contact.FullName);
 			
-			if (e_contact.Email1 != null && e_contact.Email1 != "")
-				contact["email.evolution"] = e_contact.Email1;
-			if (e_contact.Email2 != null && e_contact.Email2 != "")
-				contact["email2.evolution"] = e_contact.Email2;
-			if (e_contact.Email3 != null && e_contact.Email3 != "")
-				contact["email3.evolution"] = e_contact.Email3;
+			MaybeAddDetail (contact, "email.home", e_contact.Email1);
+			MaybeAddDetail (contact, "email.work", e_contact.Email2);
+			MaybeAddDetail (contact, "email.other", e_contact.Email3);
 			
+			/*
 			for (int i = 0; i < e_contact.ImAim.Length; ++i)
 				contact["aim" + (i>0?i.ToString ():"") + ".evolution"] =
 					e_contact.ImAim[i];
 			for (int i = 0; i < e_contact.ImJabber.Length; ++i)
 				contact["jabber" + (i>0?i.ToString ():"") + ".evolution"] =
 					e_contact.ImJabber[i];
+			*/
+			
+			MaybeAddDetail (contact, "phone.mobile", e_contact.MobilePhone);
+			MaybeAddDetail (contact, "phone.home", e_contact.HomePhone);
+			MaybeAddDetail (contact, "phone.work", e_contact.CompanyPhone);
+			MaybeAddDetail (contact, "phone", e_contact.PrimaryPhone);
+			MaybeAddDetail (contact, "url.home", e_contact.HomepageUrl);
+			MaybeAddDetail (contact, "url.blog", e_contact.BlogUrl);
 			
 			// Been getting some exceptions from g_boxed_copy
 			// when I attempt to read contact photos...
@@ -133,6 +146,12 @@ namespace Evolution
 				Console.Error.WriteLine (e.StackTrace);
 		   	}
 			return contact;
+		}
+	
+		private void MaybeAddDetail (ContactItem contact, string key, string detail)
+		{
+			if (!string.IsNullOrEmpty (detail))
+				contact [key + ".evolution"] = detail;
 		}
 	}
 }

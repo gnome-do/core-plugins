@@ -1,4 +1,4 @@
-//  EmailContactDetailItem.cs
+//  PhoneContactDetailItem.cs
 //
 //  GNOME Do is the legal property of its developers.
 //  Please refer to the COPYRIGHT file distributed with this
@@ -22,30 +22,23 @@ using Do.Universe;
 
 namespace Evolution
 {
-	class EmailContactDetailItem : ContactDetailItem {
-		public EmailContactDetailItem (ContactItem owner, string detail) :
+	class PhoneContactDetailItem : ContactDetailItem {
+		public PhoneContactDetailItem (ContactItem owner, string detail) :
 			base (owner, detail)
 		{
 		}
 
 		public override string Name {
 			get {
-				return "Email";
-				/* // The home/other/work tags are not exact.
-				string desc = "";
-				if (Key.Contains (".work"))
-					desc += "Work Email";
-				else if (Key.Contains (".home"))
-					desc += "Home Email";
-				else if (Key.Contains (".other"))
-					desc += "Other Email";
-				return desc;
-				*/
+				if (Key.Contains (".work")) return "Work Phone";
+				if (Key.Contains (".home")) return "Home Phone";
+				if (Key.Contains (".mobile")) return "Mobile Phone";
+				return "Phone";
 			}
 		}
 
 		public override string Icon {
-			get { return "gnome-stock-mail-snd"; }
+			get { return "phone.png@" + GetType ().Assembly.FullName; }
 		}
 	}
 }
