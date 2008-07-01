@@ -102,20 +102,20 @@ namespace DoTwitter
 			ContactItem tfriend;
 			
 			foreach (TwitterUser friend in friends) {
-				tfriend = ContactItem.Create (friend.ScreenName);
-				tfriend ["twitter.screenname"] = friend.ScreenName;
-				tfriend ["description"] = friend.ScreenName;
-				if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
-					tfriend ["photo"] = photo_directory + "/" + friend.ID;
-				else
-					DownloadBuddyIcon (friend.ProfileImageUri,
-						photo_directory + "/" + friend.ID);
-				items.Add (tfriend);
-				
-				tfriend = ContactItem.Create (friend.UserName);
-				tfriend ["twitter.screenname"] = friend.ScreenName;
-				tfriend ["description"] = friend.ScreenName;
-				items.Add (tfriend);
+				//We're adding 2 contacts, one by real name and one by screen name,
+				for (int i = 0; i <= 1; i++) {
+					if (i == 0)
+						tfriend = ContactItem.Create (friend.ScreenName);
+					else	
+						tfriend = ContactItem.Create (friend.UserName);
+					tfriend ["twitter.screenname"] = friend.ScreenName;
+					if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
+						tfriend ["photo"] = photo_directory + "/" + friend.ID;
+					else
+						DownloadBuddyIcon (friend.ProfileImageUri,
+							photo_directory + "/" + friend.ID);
+					items.Add (tfriend);
+				}
 			}
 			Monitor.Exit (items);
 		}
