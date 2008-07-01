@@ -40,7 +40,12 @@ namespace DoTwitter
 		static TwitterAction ()
 		{
 			string home;
-			GLib.Timeout.Add (600000, delegate { ClearFriends(null); return true; });
+			
+			GLib.Timeout.Add (600000, delegate { 
+				ClearFriends (null); 
+				return true; 
+			});
+			
 			items = new List<IItem> ();
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
@@ -120,21 +125,30 @@ namespace DoTwitter
 			if (!GenConfig.ShowFriendStatuses) return;
 			
 			try {
+				string text, screenname;
+				Uri imageuri;
+				int userid;
 				foreach (TwitterStatus tweet in twitter.FriendsTimeline ()) {
 					if (DateTime.Compare (tweet.Created, lastUpdated) > 0) {
+						text = tweet.Text;
+						userid = tweet.TwitterUser.ID;
+						imageuri = tweet.TwitterUser.ProfileImageUri;
+						screenname = tweet.TwitterUser.ScreenName;
+						
 						Gtk.Application.Invoke (delegate {
-							if (System.IO.File.Exists (photo_directory + "/" + tweet.TwitterUser.ID))
+							if (System.IO.File.Exists (photo_directory + "/" + userid))
 								Do.Addins.NotificationBridge.ShowMessage (
-									tweet.TwitterUser.ScreenName, tweet.Text,
-									photo_directory + "/" + tweet.TwitterUser.ID);
+									screenname, text,
+									photo_directory + "/" + userid);
 							else {
 								Do.Addins.NotificationBridge.ShowMessage (
-									tweet.TwitterUser.ScreenName, tweet.Text);
-								DownloadBuddyIcon (tweet.TwitterUser.ProfileImageUri,
-									photo_directory + "/" + tweet.TwitterUser.ID);
-							}							
+									screenname, text);
+								DownloadBuddyIcon (imageuri,
+									photo_directory + "/" + userid);
+							}
 						});
 						lastUpdated = tweet.Created;
+						break;
 					}
 				}
 			} catch { }
