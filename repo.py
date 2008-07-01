@@ -20,8 +20,9 @@ from subprocess import Popen, PIPE
 
 REPO_VERSION = "0.5.1"
 REPO_NAME = "official"
-REPO_SCP = "gnomedo@do.davebsd.com:do.davebsd.com/repo/%s/%s" % \
-	(REPO_VERSION, REPO_NAME)
+#REPO_SCP = "gnomedo@do.davebsd.com:do.davebsd.com/repo/%s/%s" % \
+#	(REPO_VERSION, REPO_NAME)
+REPO_SCP = "/home/alauni/.local/share/gnome-do/repo"
 
 REPO_DIR = abspath ("repo")
 REPO_CONFIG = "Debug"
