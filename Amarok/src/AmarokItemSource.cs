@@ -37,7 +37,7 @@ namespace Do.Plugins.Amarok
 		public AmarokMusicItemSource ()
 		{
 			items = new List<IItem> ();
-			UpdateItems ();
+			//UpdateItems ();
 		}
 
 		public string Name { get { return "Amarok Music"; } }

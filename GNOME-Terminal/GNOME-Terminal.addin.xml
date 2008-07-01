@@ -8,7 +8,7 @@
 >
  
 	<Runtime>
-		<Import assembly="GNOME Terminal.dll"/>
+		<Import assembly="GNOME-Terminal.dll"/>
 	</Runtime>
 	
 	<Dependencies>

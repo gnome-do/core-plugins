@@ -37,7 +37,7 @@ namespace Do.Plugins.Rss
 		public RssItemSource()
 		{
 			items = new List<IItem>();
-			UpdateItems ();  
+			//UpdateItems ();  
 		}
 
 		public string Name { get { return null; } }

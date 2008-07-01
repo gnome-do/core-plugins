@@ -40,7 +40,12 @@ namespace DoTwitter
 		static TwitterAction ()
 		{
 			string home;
-			GLib.Timeout.Add (600000, delegate { ClearFriends(null); return true; });
+			
+			GLib.Timeout.Add (600000, delegate { 
+				ClearFriends (null); 
+				return true; 
+			});
+			
 			items = new List<IItem> ();
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
@@ -82,19 +87,35 @@ namespace DoTwitter
 		
 		public static void UpdateFriends ()
 		{
-			if (!Monitor.TryEnter (items)) return;
-
-			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
-				Monitor.Exit (items);
+			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password)))
 				return;
-			}
+			
+			if (!Monitor.TryEnter (items)) return;
 
 			TwitterUserCollection friends;
 			
 			try {
-				friends = twitter.Friends ();
+				friends = twitter.Friends (); 
+			
+				ContactItem tfriend;
+				
+				foreach (TwitterUser friend in friends) {
+					tfriend = ContactItem.Create (friend.ScreenName);
+					tfriend ["twitter.screenname"] = friend.ScreenName;
+					if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
+						tfriend ["photo"] = photo_directory + "/" + friend.ID;
+					else
+						DownloadBuddyIcon (friend.ProfileImageUri,
+							photo_directory + "/" + friend.ID);
+					items.Add (tfriend);
+					
+					tfriend = ContactItem.Create (friend.UserName);
+					tfriend ["twitter.screenname"] = friend.ScreenName;
+					items.Add (tfriend);
+				}
 			} catch (TwitterizerException e) {
-				Console.Error.WriteLine (e.Message);
+				Console.Error.WriteLine (e);
+			} finally {
 				Monitor.Exit (items);
 				return;
 			} 
@@ -117,7 +138,6 @@ namespace DoTwitter
 					items.Add (tfriend);
 				}
 			}
-			Monitor.Exit (items);
 		}
 		
 		public static void UpdateTweets ()
@@ -125,21 +145,30 @@ namespace DoTwitter
 			if (!GenConfig.ShowFriendStatuses) return;
 			
 			try {
+				string text, screenname;
+				Uri imageuri;
+				int userid;
 				foreach (TwitterStatus tweet in twitter.FriendsTimeline ()) {
 					if (DateTime.Compare (tweet.Created, lastUpdated) > 0) {
+						text = tweet.Text;
+						userid = tweet.TwitterUser.ID;
+						imageuri = tweet.TwitterUser.ProfileImageUri;
+						screenname = tweet.TwitterUser.ScreenName;
+						
 						Gtk.Application.Invoke (delegate {
-							if (System.IO.File.Exists (photo_directory + "/" + tweet.TwitterUser.ID))
+							if (System.IO.File.Exists (photo_directory + "/" + userid))
 								Do.Addins.NotificationBridge.ShowMessage (
-									tweet.TwitterUser.ScreenName, tweet.Text,
-									photo_directory + "/" + tweet.TwitterUser.ID);
+									screenname, text,
+									photo_directory + "/" + userid);
 							else {
 								Do.Addins.NotificationBridge.ShowMessage (
-									tweet.TwitterUser.ScreenName, tweet.Text);
-								DownloadBuddyIcon (tweet.TwitterUser.ProfileImageUri,
-									photo_directory + "/" + tweet.TwitterUser.ID);
-							}							
+									screenname, text);
+								DownloadBuddyIcon (imageuri,
+									photo_directory + "/" + userid);
+							}
 						});
 						lastUpdated = tweet.Created;
+						break;
 					}
 				}
 			} catch { }

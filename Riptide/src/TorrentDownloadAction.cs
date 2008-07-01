@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using MonoTorrent.Common;
 using MonoTorrent.Client;
@@ -57,7 +58,10 @@ namespace Do.Riptide
 			string torrentFolder;
 			string filename;
 			TorrentResultItem item;
-			WebClient client;
+			
+			WebResponse res = null;	
+			WebRequest req;
+			Stream remoteStream, localStream;
 			
 			//We need a place to store our torrents
 			torrentFolder = Paths.Combine (Paths.UserData, "torrents/");
@@ -69,17 +73,31 @@ namespace Do.Riptide
 			string[] temp = item.URL.Split (new char[] {'/'});
 			filename = temp[temp.Length - 1];
 			
-			client = new WebClient ();
+			req = WebRequest.Create (item.URL);
 			
-			/*client.DownloadFile (item.URL, Paths.Combine (torrentFolder, filename));
-			client.DownloadFileCompleted += OnFileDownloaded;
-			client.DownloadFileAsync (new System.Uri (item.URL), Paths.Combine (torrentFolder, filename), filename);
+			req.Timeout = 10000;
 			
-			NotificationBridge.ShowMessage ("Torrent Download", 
-			                                 "Gnome-Do is attempting to download the" + 
-			                                 " requested Torrent file");*/
+			try {
+				res = req.GetResponse ();
+			} catch {
+				NotificationBridge.ShowMessage ("Riptide Error", "Torrent file download timed out");
+				return null;
+			}
 			
-			client.DownloadFile (item.URL, Paths.Combine (torrentFolder, filename));
+			remoteStream = res.GetResponseStream ();
+			localStream = System.IO.File.Create (Paths.Combine (torrentFolder, filename));
+			
+			byte[] buffer = new byte[1024];
+			int bytesRead;
+			
+			do {
+				bytesRead = remoteStream.Read (buffer, 0, buffer.Length);
+				localStream.Write (buffer, 0, bytesRead);
+			} while (bytesRead > 0);
+			
+			res.Close ();
+			remoteStream.Close ();
+			localStream.Close ();
 			
 			Torrent torrent = Torrent.Load (Paths.Combine (torrentFolder, filename));
 			TorrentManager manager = new TorrentManager(torrent, TorrentClientManager.DownloadDir, new TorrentSettings ());

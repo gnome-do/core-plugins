@@ -31,13 +31,6 @@ namespace GMailContacts
 {	
 	public sealed class GMailContactsItemSource : IItemSource, IConfigurable
 	{
-		private List<IItem> items;
-		
-		public GMailContactsItemSource()
-		{
-			items = new List<IItem> ();
-		}
-		
 		public string Name { 
 			get { return "GMail Contacts"; }
 		}
@@ -59,19 +52,17 @@ namespace GMailContacts
 		}
 		
 		public ICollection<IItem> Items {
-			get { return items; }
+			get { return GMail.Contacts; }
 		}
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item) 
 		{
-			ContactItem contact = (item as ContactItem);
-			List<IItem> details;
-			
-			details = new List<IItem> ();
+			ContactItem contact = item as ContactItem;
+			List<IItem> details = new List<IItem> ();
 			foreach (string detail in contact.Details) {
-				if (detail.Contains ("."))
-					details.Add (new GMailContactDetailItem (
-						detail, contact [detail]));
+				if (detail.Contains (".gmail"))
+					details.Add (
+						new GMailContactDetailItem (detail, contact [detail]));
 			}
 			return details;
 		}
@@ -82,7 +73,6 @@ namespace GMailContacts
 				Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));
 				thread.IsBackground = true;
 				thread.Start ();
-				items = GMail.Contacts;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 			}

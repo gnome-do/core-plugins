@@ -13,7 +13,6 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-OPENSEARCH_ADDIN_XML_SOURCE=src/OpenSearch.addin.xml
 
 endif
 
@@ -26,36 +25,18 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-OPENSEARCH_ADDIN_XML_SOURCE=src/OpenSearch.addin.xml
-
-endif
-
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/OpenSearch.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-OPENSEARCH_ADDIN_XML_SOURCE=src/OpenSearch.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-PROGRAMFILES = \
-	$(OPENSEARCH_ADDIN_XML)  
-
 LINUX_PKGCONFIG = \
 	$(OPENSEARCH_PC)  
 
 
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -73,10 +54,10 @@ FILES = \
 	src/OpenSearchItem.cs \
 	src/XmlNamespaceHelper.cs 
 
-DATA_FILES = \
-	src/OpenSearch.addin.xml 
+DATA_FILES = 
 
-RESOURCES = 
+RESOURCES = \
+	src/OpenSearch.addin.xml 
 
 EXTRAS = \
 	opensearch.pc.in 
@@ -90,14 +71,12 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
-OPENSEARCH_ADDIN_XML = $(BUILD_DIR)/OpenSearch.addin.xml
 OPENSEARCH_PC = $(BUILD_DIR)/opensearch.pc
 
-$(eval $(call emit-deploy-target,OPENSEARCH_ADDIN_XML))
 $(eval $(call emit-deploy-wrapper,OPENSEARCH_PC,opensearch.pc))
 
 

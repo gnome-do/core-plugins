@@ -13,7 +13,6 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-LAUNCHPAD_ADDIN_XML_SOURCE=src/Launchpad.addin.xml
 
 endif
 
@@ -26,36 +25,18 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-LAUNCHPAD_ADDIN_XML_SOURCE=src/Launchpad.addin.xml
-
-endif
-
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/Launchpad.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-LAUNCHPAD_ADDIN_XML_SOURCE=src/Launchpad.addin.xml
 
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-PROGRAMFILES = \
-	$(LAUNCHPAD_ADDIN_XML)  
-
 LINUX_PKGCONFIG = \
 	$(LAUNCHPAD_PC)  
 
 
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -70,8 +51,7 @@ FILES = \
 	src/LaunchpadRegisterItem.cs \
 	src/LaunchpadTranslationsItem.cs 
 
-DATA_FILES = \
-	src/Launchpad.addin.xml 
+DATA_FILES = 
 
 RESOURCES = \
 	Resources/Launchpad.png \
@@ -81,7 +61,8 @@ RESOURCES = \
 	Resources/LaunchpadCode.png \
 	Resources/LaunchpadRegister.png \
 	Resources/LaunchpadTranslations.png \
-	Resources/LaunchpadUser.png 
+	Resources/LaunchpadUser.png \
+	src/Launchpad.addin.xml 
 
 EXTRAS = \
 	../Launchpad.old/Resources/Launchpad.png \
@@ -93,15 +74,13 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
 LAUNCHPAD_PC = $(BUILD_DIR)/launchpad.pc
-LAUNCHPAD_ADDIN_XML = $(BUILD_DIR)/Launchpad.addin.xml
 
 $(eval $(call emit-deploy-wrapper,LAUNCHPAD_PC,launchpad.pc))
-$(eval $(call emit-deploy-target,LAUNCHPAD_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

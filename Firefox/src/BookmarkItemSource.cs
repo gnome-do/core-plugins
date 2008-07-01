@@ -137,6 +137,7 @@ namespace Mozilla.Firefox {
 				iChildren = json.IndexOf (BeginChildren, iTitle);
 				
 				iUri = json.IndexOf (BeginUri, iTitle);
+				if (iUri < 0) break;
 				iUri += BeginUri.Length;
 				
 				if (iUri < iChildren) {

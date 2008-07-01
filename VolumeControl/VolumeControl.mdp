@@ -1,13 +1,13 @@
-<Project name="Evolution" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="VolumeControl" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Debug" assembly="Evolution" />
+      <Output directory="bin/Debug" assembly="VolumeControl" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Release" assembly="Evolution" />
+      <Output directory="bin/Release" assembly="VolumeControl" />
       <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
@@ -15,16 +15,16 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/ContactItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/ContactDetailItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/EmailContactDetailItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/PhoneContactDetailItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="Resources/phone.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/Evolution.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/VolumeUpItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/VolumeDownItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/VolumeMuteItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/VolumeUnmuteItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/VolumeItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="VolumeControl.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
-    <ProjectReference type="Gac" localcopy="True" refto="evolution-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=457eed85bd9370df" />
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.4.0.1, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.5.1.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </References>
 </Project>

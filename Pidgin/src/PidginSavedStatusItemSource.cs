@@ -17,7 +17,7 @@ namespace Do.Addins.Pidgin
 		
 		public PidginSavedStatusItemSource() {
 			statuses = new List<IItem> ();
-			UpdateItems();
+			//UpdateItems();
 		}
 		
 		public string Name { get { return "Pidgin Statuses"; } }

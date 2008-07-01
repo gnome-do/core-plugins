@@ -31,7 +31,7 @@ namespace VinagreVNC {
         public VNCHostItem ()
         {
             items = new List<IItem> ();
-            UpdateItems ();
+            //UpdateItems ();
         }
 
         public string Name { 

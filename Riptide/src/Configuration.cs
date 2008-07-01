@@ -38,6 +38,7 @@ namespace Do.Riptide
 			
 			if (TorrentClientManager.MaxDown <= 0) {
 				check_max_download.Active = spin_download_speed.Sensitive = false;
+				spin_download_speed.Value = 0;
 			} else {
 				check_max_download.Active = spin_download_speed.Sensitive = true;
 				spin_download_speed.Value = TorrentClientManager.MaxDown / 1024;
@@ -45,6 +46,7 @@ namespace Do.Riptide
 			
 			if (TorrentClientManager.MaxUp <= 0) {
 				check_max_upload.Active = spin_upload_speed.Sensitive = false;
+				spin_upload_speed.Value = 0;
 			} else {
 				check_max_upload.Active = spin_upload_speed.Sensitive = true;
 				spin_upload_speed.Value = TorrentClientManager.MaxUp / 1024;
@@ -94,13 +96,11 @@ namespace Do.Riptide
 		}
 		protected virtual void OnSpinDownloadSpeedValueChanged (object sender, System.EventArgs e)
 		{
-			if (check_max_download.Active)
-				TorrentClientManager.MaxDown = (int) spin_download_speed.Value * 1024;
+			TorrentClientManager.MaxDown = (int) spin_download_speed.Value * 1024;
 		}
 		protected virtual void OnSpinUploadSpeedValueChanged (object sender, System.EventArgs e)
 		{
-			if (check_max_upload.Active)
-				TorrentClientManager.MaxUp = (int) spin_upload_speed.Value * 1024;
+			TorrentClientManager.MaxUp = (int) spin_upload_speed.Value * 1024;
 		}
 		protected virtual void OnSpinDownloadPortValueChanged (object sender, System.EventArgs e)
 		{

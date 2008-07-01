@@ -45,7 +45,7 @@ namespace Do.Plugins.Rss
 		public FirefoxLiveBookmarksItemSource ()
 		{
 			bookmarks = new List<IItem> ();
-			UpdateItems ();
+			//UpdateItems ();
 		}
 
 		public Type[] SupportedItemTypes {

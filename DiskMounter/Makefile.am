@@ -1,31 +1,87 @@
-EXTRA_DIST = MountAction.cs \
-             UnmountAction.cs \
-             OpenVolumeAction.cs \
-             DriveItemSource.cs \
-             MountedDriveItem.cs \
-             UnmountedDriveItem.cs 
-             
-ASSEMBLY_NAME=DiskMounter
-ASSEMBLY=$(ASSEMBLY_NAME).dll
 
-CSFLAGS+= -debug+ -debug:full
+EXTRA_DIST =  
 
-CLEANFILES = $(ASSEMBLY){,.mdb}
+# Warning: This is an automatically generated file, do not edit!
 
-diskmounter_references = $(DO_ADDINS_LIBS) $(GNOME_VFS_SHARP_LIBS) -r:System
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-diskmounter_sources  = 	MountAction.cs \
-                        UnmountAction.cs \
-                        OpenVolumeAction.cs \
-                        DriveItemSource.cs \
-                        MountedDriveItem.cs \
-                        UnmountedDriveItem.cs 
+ASSEMBLY = bin/Debug/DiskMounter.dll
+ASSEMBLY_MDB = $(ASSEMBLY).mdb
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
 
-diskmounter_build_sources = $(addprefix $(srcdir)/, $(diskmounter_sources))
+DISKMOUNTER_ADDIN_XML_SOURCE=src/DiskMounter.addin.xml
 
-plugin_DATA = $(ASSEMBLY)
+endif
 
-all: $(ASSEMBLY)
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
+ASSEMBLY = bin/Release/DiskMounter.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Release
 
-$(ASSEMBLY): $(diskmounter_build_sources)
-	$(CSC) $(CSFLAGS) $(diskmounter_references) -target:library -out:$@ $(diskmounter_build_sources)
+DISKMOUNTER_ADDIN_XML_SOURCE=src/DiskMounter.addin.xml
+
+endif
+
+AL=al2
+SATELLITE_ASSEMBLY_NAME=DiskMounter.resources.dll
+
+PROGRAMFILES = \
+	$(DISKMOUNTER_ADDIN_XML)  
+
+LINUX_PKGCONFIG = \
+	$(DISKMOUNTER_PC)  
+
+
+	
+all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+FILES = \
+	src/DriveItem.cs \
+	src/DriveItemSource.cs \
+	src/MountAction.cs \
+	src/OpenVolumeAction.cs \
+	src/UnmountAction.cs 
+
+DATA_FILES = \
+	src/DiskMounter.addin.xml 
+
+RESOURCES = 
+
+EXTRAS = \
+	diskmounter.pc.in 
+
+REFERENCES =  \
+	System \
+	$(GNOME_VFS_SHARP_20_LIBS) \
+	$(DOADDINS_LIBS)
+
+DLL_REFERENCES = 
+
+CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+
+include $(top_srcdir)/Makefile.include
+
+DISKMOUNTER_ADDIN_XML = $(BUILD_DIR)/DiskMounter.addin.xml
+DISKMOUNTER_PC = $(BUILD_DIR)/diskmounter.pc
+
+$(eval $(call emit-deploy-target,DISKMOUNTER_ADDIN_XML))
+$(eval $(call emit-deploy-wrapper,DISKMOUNTER_PC,diskmounter.pc))
+
+
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(build_resx_resources) : %.resources: %.resx
+	resgen2 '$<' '$@'
+
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(dir $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)

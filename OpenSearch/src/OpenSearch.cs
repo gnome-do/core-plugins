@@ -42,5 +42,18 @@ namespace Do.Plugins.OpenSearch
 			
 			return openSearchItems;
 		}
+		
+		
+		/// <summary>
+		/// Brain-dead hack to fix someone elses bad code that I don't have the time to re-do
+		/// </summary>
+		/// <returns>
+		/// A <see cref="List`1"/>
+		/// </returns>
+		public static void Init()
+		{
+			OpenSearchFileManager.GetOpenSearchFiles ();
+			return;
+		}
 	}
 }

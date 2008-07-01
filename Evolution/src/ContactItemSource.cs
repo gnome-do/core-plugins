@@ -21,6 +21,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
+using Do;
 using Do.Universe;
 
 namespace Evolution
@@ -28,15 +29,10 @@ namespace Evolution
 	public class ContactItemSource : IItemSource
 	{
 		List<IItem> contacts;
-		List<string> pictureFiles;
 		
 		public ContactItemSource ()
 		{
 			contacts = new List<IItem> ();
-			pictureFiles = new List<string> ();
-			try {
-				_UpdateItems ();
-			} catch { }
 		}
 		
 		public Type[] SupportedItemTypes {
@@ -51,67 +47,52 @@ namespace Evolution
 		public string Description { get { return "Evolution Contacts"; } }
 		public string Icon { get { return "evolution"; } }
 		
-		public void UpdateItems ()
-		{
-			// No updating until the leak is fixed.
-			/*
-			try {
-				_UpdateItems ();
-			} catch (Exception e) {
-				Console.Error.WriteLine ("Cannot index Evolution contacts: {0}",
-					e.Message);
-			}
-			*/
-		}
-		
 		public ICollection<IItem> Items {
 			get { return contacts; }
 		}
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item)
 		{
-			return null;
+			List<IItem> details = new List<IItem> ();
+			ContactItem contact = item as ContactItem;
+			foreach (string detail in contact.Details) {
+				if (!detail.EndsWith (".evolution")) continue;
+				
+				if (detail.StartsWith ("email"))
+					details.Add (new EmailContactDetailItem (contact, detail));
+				else if (detail.StartsWith ("phone"))
+					details.Add (new PhoneContactDetailItem (contact, detail));
+				else if (detail.StartsWith ("url.home"))
+					details.Add (new BookmarkItem ("Homepage", contact [detail]));
+				else if (detail.StartsWith ("url.blog"))
+					details.Add (new BookmarkItem ("Blog", contact [detail]));
+			}
+			return details;
 		}
 		
-		void _UpdateItems ()
+		public void UpdateItems ()
 		{
-			SourceList sources;
-		
-			contacts.Clear ();
-			// Clear the temporary contact picture files.
-			foreach (string file in pictureFiles) {
-				try {
-					File.Delete (file);
-				} catch { }
-			}
-			pictureFiles.Clear ();
-			
-			using (sources = new SourceList ("/apps/evolution/addressbook/sources")) {
+			// Disallow updating due to memory leak.
+			if (contacts.Count > 0) return;
+			using (SourceList sources =
+				new SourceList ("/apps/evolution/addressbook/sources")) {
 				foreach (SourceGroup group in sources.Groups) {
 					foreach (Source source in group.Sources) {
-						Book address_book;
-						Contact[] e_contacts;
-						ContactItem contact;
-						
 						// Only index local address books
 						if (!source.IsLocal ()) continue;
-						
-						using (address_book = new Book (source)) {
-							address_book.Open (true);
-							e_contacts = address_book.GetContacts (BookQuery.AnyFieldContains (""));
-							foreach (Contact e_contact in e_contacts) {
+						using (Book book = new Book (source)) {
+							book.Open (true);
+							foreach (Contact c in book.GetContacts (
+								BookQuery.AnyFieldContains (""))) {
 								try {
-									contact = CreateEvolutionContactItem (e_contact);
-								} catch {
-									// bad contact
-									continue;
-								}
-								contacts.Add (contact);
+									contacts.Add (
+										CreateEvolutionContactItem (c));
+								} catch { /* bad contact */ }
 							}
-						} // End using address_book.
-					} // End foreach Source
-				} // End foreach SourceGroup
-			} // End using sources
+						}
+					}
+				}
+			}
 		}
 	
 		ContactItem CreateEvolutionContactItem (Contact e_contact) {
@@ -119,46 +100,58 @@ namespace Evolution
 						
 			contact = ContactItem.Create (e_contact.FullName);
 			
-			if (e_contact.Email1 != null && e_contact.Email1 != "")
-				contact["email"] = e_contact.Email1;
-			if (e_contact.Email2 != null && e_contact.Email2 != "")
-				contact["email2"] = e_contact.Email2;
-			if (e_contact.Email3 != null && e_contact.Email3 != "")
-				contact["email3"] = e_contact.Email3;
+			MaybeAddDetail (contact, "email.home", e_contact.Email1);
+			MaybeAddDetail (contact, "email.work", e_contact.Email2);
+			MaybeAddDetail (contact, "email.other", e_contact.Email3);
 			
+			/*
 			for (int i = 0; i < e_contact.ImAim.Length; ++i)
-				contact["aim" + (i>0?i.ToString ():"")] = e_contact.ImAim[i];
+				contact["aim" + (i>0?i.ToString ():"") + ".evolution"] =
+					e_contact.ImAim[i];
 			for (int i = 0; i < e_contact.ImJabber.Length; ++i)
-				contact["jabber" + (i>0?i.ToString ():"")] = e_contact.ImJabber[i];
+				contact["jabber" + (i>0?i.ToString ():"") + ".evolution"] =
+					e_contact.ImJabber[i];
+			*/
 			
-			// Been getting some excpetions from g_boxed_copy
+			MaybeAddDetail (contact, "phone.mobile", e_contact.MobilePhone);
+			MaybeAddDetail (contact, "phone.home", e_contact.HomePhone);
+			MaybeAddDetail (contact, "phone.work", e_contact.CompanyPhone);
+			MaybeAddDetail (contact, "phone", e_contact.PrimaryPhone);
+			MaybeAddDetail (contact, "url.home", e_contact.HomepageUrl);
+			MaybeAddDetail (contact, "url.blog", e_contact.BlogUrl);
+			
+			// Been getting some exceptions from g_boxed_copy
 			// when I attempt to read contact photos...
-			try {
+			if (string.IsNullOrEmpty (contact ["photo.evolution"])) try {
 				switch (e_contact.Photo.PhotoType) {
 					case ContactPhotoType.Inlined:
-						string tmp = Path.GetTempFileName ();
-						string photo = tmp  + ".jpg";
-						try {
-							File.Delete (tmp);
-						} catch { }
+						string photo = Paths.GetTemporaryFilePath () + ".jpg";
 						try {
 							File.WriteAllBytes (photo, e_contact.Photo.Data);
-							pictureFiles.Add (photo);
-							contact["photo"] = photo;
+							contact["photo"] = contact["photo.evolution"] =
+								photo;
 						} catch { }
 						break;
 					case ContactPhotoType.Uri:
 						if (File.Exists (e_contact.Photo.Uri)) {
-							contact["photo"] = e_contact.Photo.Uri;
+							contact["photo"] = contact["photo.evolution"] =
+								e_contact.Photo.Uri;
 						}
 						break;
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine (e.StackTrace);
-				Console.Error.WriteLine ("Error while loading evolution photo for contact {0}: {1}",
+				Console.Error.WriteLine (
+					"Error while loading evolution photo for contact {0}: {1}",
 					contact["name"], e.Message);
+				Console.Error.WriteLine (e.StackTrace);
 		   	}
 			return contact;
+		}
+	
+		private void MaybeAddDetail (ContactItem contact, string key, string detail)
+		{
+			if (!string.IsNullOrEmpty (detail))
+				contact [key + ".evolution"] = detail;
 		}
 	}
 }

@@ -13,7 +13,6 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Debug
 
-FILE_ADDIN_XML_SOURCE=src/File.addin.xml
 
 endif
 
@@ -26,63 +25,61 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-FILE_ADDIN_XML_SOURCE=src/File.addin.xml
-
-endif
-
-if ENABLE_REPO
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/File.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-FILE_ADDIN_XML_SOURCE=src/File.addin.xml
 
 endif
 
 AL=al2
-SATELLITE_ASSEMBLY_NAME=.resources.dll
-
-PROGRAMFILES = \
-	$(FILE_ADDIN_XML)  
+SATELLITE_ASSEMBLY_NAME=FilePlugin.resources.dll
 
 LINUX_PKGCONFIG = \
 	$(FILE_PC)  
 
 
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
 
 FILES = \
-	src/CreateEmptyFileAction.cs 
+	src/CreateEmptyFileAction.cs \
+	src/CreateDirectory.cs \
+	src/FileItemSource.cs \
+	src/RecentFileItemSource.cs \
+	src/FileCopyToAction.cs \
+	src/FileRenameToAction.cs \
+	src/FileMoveToAction.cs \
+	src/FileMoveToTrashAction.cs \
+	src/FileDeleteAction.cs \
+	gtk-gui/generated.cs \
+	src/Configuration.cs \
+	gtk-gui/FilePlugin.Configuration.cs \
+	src/PathNodeView.cs 
 
-DATA_FILES = \
-	src/File.addin.xml 
+DATA_FILES = 
 
-RESOURCES = 
+RESOURCES = \
+	src/File.addin.xml \
+	gtk-gui/gui.stetic \
+	gtk-gui/objects.xml 
 
 EXTRAS = \
 	file.pc.in 
 
 REFERENCES =  \
 	System \
-	$(DOADDINS_LIBS)
+	$(DOADDINS_LIBS) \
+	$(GTK_SHARP_20_LIBS) \
+	Mono.Posix \
+	$(GCONF_SHARP_20_LIBS) \
+	$(GLIB_SHARP_20_LIBS)
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
 
 FILE_PC = $(BUILD_DIR)/file.pc
-FILE_ADDIN_XML = $(BUILD_DIR)/File.addin.xml
 
 $(eval $(call emit-deploy-wrapper,FILE_PC,file.pc))
-$(eval $(call emit-deploy-target,FILE_ADDIN_XML))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

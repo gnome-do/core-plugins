@@ -44,7 +44,7 @@ namespace Do.Addins.Pidgin
 		public PidginContactItemSource ()
 		{
 			buddies = new List<IItem> ();
-			UpdateItems ();
+			//UpdateItems ();
 		}
 		
 		public Type[] SupportedItemTypes {
