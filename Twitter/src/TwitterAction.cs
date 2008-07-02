@@ -100,44 +100,25 @@ namespace DoTwitter
 				ContactItem tfriend;
 				
 				foreach (TwitterUser friend in friends) {
-					tfriend = ContactItem.Create (friend.ScreenName);
-					tfriend ["twitter.screenname"] = friend.ScreenName;
-					if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
-						tfriend ["photo"] = photo_directory + "/" + friend.ID;
-					else
-						DownloadBuddyIcon (friend.ProfileImageUri,
-							photo_directory + "/" + friend.ID);
-					items.Add (tfriend);
-					
-					tfriend = ContactItem.Create (friend.UserName);
-					tfriend ["twitter.screenname"] = friend.ScreenName;
-					items.Add (tfriend);
+					for (int i = 0; i <= 1; i++) {
+						if (i == 0)
+							tfriend = ContactItem.Create (friend.ScreenName);
+						else
+							tfriend = ContactItem.Create (friend.UserName);
+						tfriend ["twitter.screenname"] = friend.ScreenName;
+						if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
+							tfriend ["photo"] = photo_directory + "/" + friend.ID;
+						else
+							DownloadBuddyIcon (friend.ProfileImageUri,
+								photo_directory + "/" + friend.ID);
+						items.Add (tfriend);
+					}
 				}
 			} catch (TwitterizerException e) {
 				Console.Error.WriteLine (e);
 			} finally {
 				Monitor.Exit (items);
-				return;
 			} 
-			
-			ContactItem tfriend;
-			
-			foreach (TwitterUser friend in friends) {
-				//We're adding 2 contacts, one by real name and one by screen name,
-				for (int i = 0; i <= 1; i++) {
-					if (i == 0)
-						tfriend = ContactItem.Create (friend.ScreenName);
-					else	
-						tfriend = ContactItem.Create (friend.UserName);
-					tfriend ["twitter.screenname"] = friend.ScreenName;
-					if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
-						tfriend ["photo"] = photo_directory + "/" + friend.ID;
-					else
-						DownloadBuddyIcon (friend.ProfileImageUri,
-							photo_directory + "/" + friend.ID);
-					items.Add (tfriend);
-				}
-			}
 		}
 		
 		public static void UpdateTweets ()
@@ -149,12 +130,12 @@ namespace DoTwitter
 				Uri imageuri;
 				int userid;
 				foreach (TwitterStatus tweet in twitter.FriendsTimeline ()) {
+					if (tweet.TwitterUser.UserName.Equals (username)) return;
 					if (DateTime.Compare (tweet.Created, lastUpdated) > 0) {
 						text = tweet.Text;
 						userid = tweet.TwitterUser.ID;
 						imageuri = tweet.TwitterUser.ProfileImageUri;
 						screenname = tweet.TwitterUser.ScreenName;
-						
 						Gtk.Application.Invoke (delegate {
 							if (System.IO.File.Exists (photo_directory + "/" + userid))
 								Do.Addins.NotificationBridge.ShowMessage (
