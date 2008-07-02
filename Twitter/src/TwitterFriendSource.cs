@@ -21,6 +21,7 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
@@ -38,11 +39,11 @@ namespace DoTwitter
 		}
 		
 		public string Name {
-			get { return "Twitter friends"; }
+			get { return Catalog.GetString ("Twitter friends"); }
 		}
 		
 		public string Description {
-			get { return "Indexes your Twitter friends"; }
+			get { return Catalog.GetString ("Indexes your Twitter friends"); }
 		}
 		
 		public string Icon {

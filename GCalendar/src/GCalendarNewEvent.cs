@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
@@ -33,11 +34,11 @@ namespace GCalendar
 	public sealed class GCalendarNewEvent : IAction
 	{
 		public string Name {
-			get { return "New Event"; }
+			get { return Catalog.GetString ("New Event"); }
 		}
 		
 		public string Description {
-			get { return "Create a new event in Google Calendar"; }
+			get { return Catalog.GetString ("Create a new event in Google Calendar"); }
         }
 			
 		public string Icon {

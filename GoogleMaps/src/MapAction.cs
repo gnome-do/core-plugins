@@ -18,6 +18,7 @@
  */
 
 using System;
+using Mono.Unix;
 
 using Do.Universe;
 using Do.Addins;
@@ -32,12 +33,12 @@ namespace Google
 	public class MapAction : AbstractAction
 	{
 		public override string Name {
-			get { return "Map"; }
+			get { return Catalog.GetString ("Map"); }
 		}
 		
 		public override string Description
 		{
-			get { return "Map a location or route in Google maps."; }
+			get { return Catalog.GetString ("Map a location or route in Google maps."); }
 		}
 		
 		public override string Icon

@@ -20,6 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -28,13 +29,13 @@ namespace FilePlugin {
 
 		public override string Name {
 			get {
-				return "Create directory";
+				return Catalog.GetString ("Create directory");
 			}
 		}
 		
 		public override string Description {
 			get {
-				return "Creates an empty directory";
+				return Catalog.GetString ("Creates an empty directory");
 			}
 		}
 		

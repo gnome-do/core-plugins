@@ -21,14 +21,21 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
 namespace FilePlugin {
 	class RenameToAction : IAction {
 		
-		public string Name { get { return "Rename to..."; } }
-		public string Description { get { return "Renames a file."; } }
+		public string Name { 
+			get { return Catalog.GetString ("Rename to..."); }
+		}
+		
+		public string Description {
+			get { return Catalog.GetString ("Renames a file"); }
+		}
+		
 		public string Icon { get { return "forward"; } }
 		
 		public Type [] SupportedItemTypes {

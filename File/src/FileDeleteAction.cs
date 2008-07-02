@@ -21,14 +21,21 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
 namespace FilePlugin {
 	abstract class DeleteAction : AbstractAction {
 
-		public override string Name { get { return "Delete File"; } } 
-		public override string Description { get { return "Deletes a file or folder."; } } 
+		public override string Name {
+			get { return Catalog.GetString ("Delete File"); }
+		}
+		
+		public override string Description { 
+			get { return Catalog.GetString ("Deletes a file or folder."); }
+		}
+		
 		public override string Icon { get { return "gtk-delete"; } } 
 
 		public override Type [] SupportedItemTypes {

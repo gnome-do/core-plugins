@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
@@ -36,11 +37,11 @@ namespace GCalendar {
         }
         
         public string Name {
-            get { return "Search Events"; }
+            get { return Catalog.GetString ("Search Events"); }
         }
         
         public string Description {
-            get { return "Search Google Calendar for Events"; }
+            get { return Catalog.GetString ("Search Google Calendar for Events"); }
         }
         
         public string Icon {

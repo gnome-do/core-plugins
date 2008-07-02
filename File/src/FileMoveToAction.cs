@@ -21,13 +21,20 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
 namespace FilePlugin {
 	class MoveToAction : IAction {
-		public string Name { get { return "Move to..."; } } 
-		public string Description { get { return "Moves a file or folder to another location."; } } 
+		public string Name {
+			get { return Catalog.GetString ("Move to..."); }
+		}
+		
+		public string Description { 
+			get { return Catalog.GetString ("Moves a file or folder to another location."); }
+		}
+		
 		public string Icon { get { return "forward"; } } 
 
 		public Type [] SupportedItemTypes {

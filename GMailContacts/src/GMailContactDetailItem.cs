@@ -21,6 +21,7 @@
 
 using System;
 using Do.Universe;
+using Mono.Unix;
 
 namespace GMailContacts
 {
@@ -38,15 +39,15 @@ namespace GMailContacts
 		public string Name {
 			get {
 				switch (type.ToLower ()) {
-				case "email.gmail": return "Primary Email";
-				case "email.gmail.home": return "Home Email";
-				case "email.gmail.work": return "Work Email";
-				case "address.gmail": return "Primary Address";
-				case "address.gmail.home": return "Home Address";
-				case "address.gmail.work": return "Work Address";
-				case "phone.gmail": return "Primary Phone";
-				case "phone.gmail.home": return "Home Phone";
-				case "phone.gmail.work": return "Work Phone";
+				case "email.gmail": return Catalog.GetString ("Primary Email");
+				case "email.gmail.home": return Catalog.GetString ("Home Email");
+				case "email.gmail.work": return Catalog.GetString ("Work Email");
+				case "address.gmail": return Catalog.GetString ("Primary Address");
+				case "address.gmail.home": return Catalog.GetString ("Home Address");
+				case "address.gmail.work": return Catalog.GetString ("Work Address");
+				case "phone.gmail": return Catalog.GetString ("Primary Phone");
+				case "phone.gmail.home": return Catalog.GetString ("Home Phone");
+				case "phone.gmail.work": return Catalog.GetString ("Work Phone");
 				default:
 					return "Other " + type.Substring (0, type.IndexOf ("."));
 				}

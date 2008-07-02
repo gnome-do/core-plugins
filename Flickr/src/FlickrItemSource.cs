@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
@@ -29,12 +30,8 @@ namespace Flickr
 {	
 	public class FlickrItemSource : IItemSource, IConfigurable
 	{	
-		public FlickrItemSource()
-		{
-		}
-		
 		public string Name {
-			get { return "Account"; }
+			get { return Catalog.GetString ("Account"); }
 		}
 		
 		public string Description {

@@ -21,14 +21,21 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
 namespace FilePlugin {
 	class CopyToAction : IAction {
 
-		public string Name { get { return "Copy to..."; } } 
-		public string Description { get { return "Copies a file or folder to another location."; } } 
+		public string Name {
+			get { return Catalog.GetString ("Copy to..."); }
+		}
+		
+		public string Description {
+			get { return Catalog.GetString ("Copies a file or folder to another location."); }
+		}
+		
 		public string Icon { get { return "gtk-copy"; } } 
 
 		public Type [] SupportedItemTypes {

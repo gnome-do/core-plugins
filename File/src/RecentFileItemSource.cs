@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin
@@ -51,12 +52,12 @@ namespace FilePlugin
 		
 		public string Name
 		{
-			get { return "Recent Files"; }
+			get { return Catalog.GetString ("Recent Files"); }
 		}
 		
 		public string Description
 		{
-			get { return "Finds recently-opened files."; }
+			get { return Catalog.GetString ("Finds recently-opened files."); }
 		}
 		
 		public string Icon

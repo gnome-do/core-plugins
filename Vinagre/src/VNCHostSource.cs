@@ -21,6 +21,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -35,11 +36,11 @@ namespace VinagreVNC {
         }
 
         public string Name { 
-            get { return "Vinagre Bookmarks"; }
+            get { return Catalog.GetString ("Vinagre Bookmarks"); }
         }
 
         public string Description { 
-            get { return "Indexes your Vinagre Bookmarks"; }
+            get { return Catalog.GetString ("Indexes your Vinagre Bookmarks"); }
         }
 
         public string Icon {

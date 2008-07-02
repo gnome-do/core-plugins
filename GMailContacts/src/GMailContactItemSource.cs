@@ -21,6 +21,7 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Gtk;
 
@@ -32,11 +33,11 @@ namespace GMailContacts
 	public sealed class GMailContactsItemSource : IItemSource, IConfigurable
 	{
 		public string Name { 
-			get { return "GMail Contacts"; }
+			get { return Catalog.GetString ("GMail Contacts"); }
 		}
 		
 		public string Description { 
-			get { return "Indexes your GMail contacts"; }
+			get { return Catalog.GetString ("Indexes your GMail contacts"); }
 		}
 		
 		public string Icon { 

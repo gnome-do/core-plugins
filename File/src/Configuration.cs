@@ -5,6 +5,7 @@
 //
 
 using System;
+using Mono.Unix;
 using Gtk;
 using GConf;
 
@@ -34,8 +35,8 @@ namespace FilePlugin
 			ListStore store = nview.Model as ListStore;
 			
 			FileChooserDialog fc =
-				new FileChooserDialog ("Choose a folder to index", new Dialog (),
-					FileChooserAction.SelectFolder,
+				new FileChooserDialog (Catalog.GetString ("Choose a folder to index"),
+					new Dialog (), FileChooserAction.SelectFolder,
 					"Cancel", ResponseType.Cancel,
 					"Ok", ResponseType.Accept);
 					

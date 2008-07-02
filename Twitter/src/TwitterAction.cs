@@ -23,6 +23,7 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Twitterizer.Framework;
 using Do.Universe;
@@ -68,20 +69,21 @@ namespace DoTwitter
 			if (!(String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password))) {
 				try {
 					twitter.Update (status);
-					Do.Addins.NotificationBridge.ShowMessage ("Tweet Successful", 
-						String.Format ("'{0}' successfully posted to Twitter.",
-						status));
+					Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString (
+						"Tweet Successful"), Catalog.GetString (String.Format (
+						"'{0}' successfully posted to Twitter.",
+						status)));
 				} catch (TwitterizerException e) {
-					Do.Addins.NotificationBridge.ShowMessage ("Tweet Failed", 
-						"Unable to post tweet. Check your login settings. " 
-						+ "If you are behind a proxy, also make sure that the "
-						+ "settings in /system/http_proxy are correct.\n\nDetails:\n" 
-                        + e.ToString ());
+					Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString (
+						"Tweet Failed"), Catalog.GetString ("Unable to post tweet."
+						+ " Check your login settings. If you are behind a proxy, "
+						+ "also make sure that the settings in /system/http_proxy "
+						+ "are correct.\n\nDetails:\n") + e.ToString ());
 				}
 			} else {
-				Do.Addins.NotificationBridge.ShowMessage ("Tweet Failed",
-					"Missing Login Credentials. Please set login information "
-					+ "in plugin configuration.");
+				Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString (
+					"Tweet Failed"), Catalog.GetString ("Missing Login Credentials. "
+					+ "Please set login information in plugin configuration."));
 			}
 		}
 		

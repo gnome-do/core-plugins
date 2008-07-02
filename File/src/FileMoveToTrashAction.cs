@@ -21,6 +21,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -29,13 +30,13 @@ namespace FilePlugin {
 
 		public override string Name {
 			get {
-				return "Move to Trash";
+				return Catalog.GetString ("Move to Trash");
 			}
 		} 
 
 		public override string Description {
 			get {
-				return "Moves a file or folder to the trash.";
+				return Catalog.GetString ("Moves a file or folder to the trash.");
 			}
 		} 
 

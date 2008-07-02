@@ -23,6 +23,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 using Do.Addins;
@@ -34,11 +35,11 @@ namespace Flickr
 	public class UploadAction : IAction, IConfigurable
 	{		
 		public string Name {
-			get { return "Upload photo"; }
+			get { return Catalog.GetString ("Upload photo"); }
 		}
 		
 		public string Description {
-			get { return "Upload one or more photos to Flickr"; }
+			get { return Catalog.GetString ("Upload one or more photos to Flickr"); }
 		}
 		
 		/*

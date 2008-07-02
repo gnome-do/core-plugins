@@ -21,6 +21,7 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -41,8 +42,14 @@ namespace GNOME.Session
 			}
 		}
 
-		public string Name { get { return "GNOME Session Commands"; } }
-		public string Description { get { return "Log out, Shutdown, Restart, etc."; } }
+		public string Name { 
+			get { return Catalog.GetString ("GNOME Session Commands"); } 
+		}
+		
+		public string Description { 
+			get { return Catalog.GetString ("Log out, Shutdown, Restart, etc."); }
+		}
+		
 		public string Icon { get { return "system-log-out"; } }
 
 		public ICollection<IItem> Items
@@ -51,41 +58,40 @@ namespace GNOME.Session
 				return new IItem[] {
 
 					new SessionCommandItem (
-						"Log Out",
-						"Close your session and return to the login screen.",
+						Catalog.GetString ("Log Out"),
+						Catalog.GetString ("Close your session and return to the login screen."),
 						"system-log-out",
 						PowerManagement.Logout),
 
 					new SessionCommandItem (
-						"Shutdown",
-						"Turn your computer off.",
+						Catalog.GetString ("Shutdown"),
+						Catalog.GetString ("Turn your computer off."),
 						"system-shutdown",
 						PowerManagement.Shutdown),
 
 					new SessionCommandItem (
-						"Hibernate",
-						"Put your computer into hibernation mode.",
+						Catalog.GetString ("Hibernate"),
+						Catalog.GetString ("Put your computer into hibernation mode."),
 						"gnome-session-hibernate",
 						PowerManagement.Hibernate),
 
 					new SessionCommandItem (
-						"Suspend",
-						"Put your computer into suspend mode.",
+						Catalog.GetString ("Suspend"),
+						Catalog.GetString ("Put your computer into suspend mode."),
 						"gnome-session-suspend",
 						PowerManagement.Suspend),
 
 					new SessionCommandItem (
-						"Restart",
-						"Restart your computer.",
+						Catalog.GetString ("Restart"),
+						Catalog.GetString ("Restart your computer."),
 						"reload",
 						PowerManagement.Reboot),
 
 					new SessionCommandItem (
-						"Lock Screen",
-						"Lock your screen.",
+						Catalog.GetString ("Lock Screen"),
+						Catalog.GetString ("Lock your screen."),
 						"system-lock-screen",
 						ScreenSaver.Lock),
-
 				};
 			}
 		}

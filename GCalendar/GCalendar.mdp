@@ -17,7 +17,6 @@
     <File name="src/CertHandler.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCal.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/GCalendar.addin.xml" subtype="Code" buildaction="Nothing" />
     <File name="src/GCalendarEventItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarItemSource.cs" subtype="Code" buildaction="Compile" />
@@ -38,5 +37,6 @@
     <ProjectReference type="Assembly" localcopy="True" refto="Google.GData.Extensions.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.5.1.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </References>
 </Project>

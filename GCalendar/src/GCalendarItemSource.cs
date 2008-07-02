@@ -24,6 +24,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
@@ -37,11 +38,11 @@ namespace GCalendar
 	public sealed class GCalendarItemSource : IItemSource, IConfigurable
 	{
 		public string Name {
-			get { return "Google Calendars"; }
+			get { return Catalog.GetString ("Google Calendars"); }
 		}
 		
 		public string Description {
-			get { return "Indexes your Google Calendars"; }
+			get { return Catalog.GetString ("Indexes your Google Calendars"); }
 		}
 		
 		public string Icon {

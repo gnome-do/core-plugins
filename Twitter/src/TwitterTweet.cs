@@ -22,6 +22,7 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 using Do.Addins;
@@ -32,11 +33,11 @@ namespace DoTwitter
 	public sealed class TweetAction : IAction, IConfigurable
 	{
 		public string Name {
-			get { return "Tweet"; }
+			get { return Catalog.GetString ("Tweet"); }
 		}
 		
 		public string Description {
-			get { return "Update Twitter status"; }
+			get { return Catalog.GetString ("Update Twitter status"); }
 		}
 		
 		public string Icon {

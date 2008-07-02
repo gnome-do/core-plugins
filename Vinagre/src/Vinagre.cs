@@ -20,17 +20,18 @@
 
 using System;
 using System.Diagnostics;
+using Mono.Unix;
 
 using Do.Universe;
 
 namespace VinagreVNC {
     public class VNCAction : AbstractAction {
         public override string Name { 
-            get { return "Connect with VNC"; }
+            get { return Catalog.GetString ("Connect with VNC"); }
         }
 
         public override string Description {
-            get { return "Connect with VNC"; }
+            get { return Catalog.GetString ("Connect with VNC"); }
         }
 
         public override string Icon {

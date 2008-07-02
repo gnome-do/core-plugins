@@ -23,6 +23,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using Mono.Unix;
 
 using Do;
 using Do.Universe;
@@ -32,13 +33,13 @@ namespace FilePlugin {
 
 		public override string Name {
 			get {
-				return "Create empty file";
+				return Catalog.GetString ("Create empty file");
 			}
 		}
 		
 		public override string Description {
 			get {
-				return "Creates an empty file";
+				return Catalog.GetString ("Creates an empty file");
 			}
 		}
 		

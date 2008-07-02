@@ -21,6 +21,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 using Do.Addins;
@@ -173,12 +174,12 @@ namespace FilePlugin {
 		}
 		
 		public string Name {
-			get { return "File Indexer"; }
+			get { return Catalog.GetString ("File Indexer"); }
 		}
 		
 		public string Description {
 			get {
-				return string.Format ("Frequently used files and folders.");
+				return Catalog.GetString ("Frequently used files and folders.");
 			}
 		}
 		

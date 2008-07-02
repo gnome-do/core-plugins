@@ -20,6 +20,7 @@
 
 using System;
 using System.Text;
+using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
@@ -41,7 +42,7 @@ namespace GCalendar
 		}
 		
 		public string Description {
-			get { return "Google Calendar"; }
+			get { return Catalog.GetString ("Google Calendar"); }
 		}
 		
 		public string Icon {
