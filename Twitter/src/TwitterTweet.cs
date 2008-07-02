@@ -43,9 +43,9 @@ namespace DoTwitter
 			get { return "twitter-icon.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type[] SupportedItemTypes {
+		public Type [] SupportedItemTypes {
             get {
-                return new Type[] {
+                return new Type [] {
                     typeof (ITextItem),
                 };
             }
@@ -53,12 +53,12 @@ namespace DoTwitter
 
         public bool SupportsItem (IItem item) 
         {
-            return true;
+            return (item as ITextItem).Text.Length < 140;
         }
 		
-		public Type[] SupportedModifierItemTypes {
+		public Type [] SupportedModifierItemTypes {
             get { 
-                return new Type[] {
+                return new Type [] {
                     typeof (ContactItem),
                 };
             }
@@ -68,21 +68,21 @@ namespace DoTwitter
             get { return true; }
         }
                         
-        public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+        public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
         {
-            return (modItem as ContactItem)["twitter.screenname"] != null;
+            return (modItem as ContactItem) ["twitter.screenname"] != null;
         }
         
-        public IItem[] DynamicModifierItemsForItem (IItem item)
+        public IItem [] DynamicModifierItemsForItem (IItem item)
         {
             return null;
         }
 
-        public IItem[] Perform (IItem[] items, IItem[] modItems)
+        public IItem[] Perform (IItem [] items, IItem [] modItems)
         {			
-			TwitterAction.Status = (items[0] as ITextItem).Text;
+			TwitterAction.Status = (items [0] as ITextItem).Text;
 			if (modItems.Length > 0)
-				TwitterAction.Status = BuildTweet (items[0], modItems[0]);
+				TwitterAction.Status = BuildTweet (items [0], modItems [0]);
 			
 			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.Tweet));
 			updateRunner.Start ();
@@ -106,11 +106,11 @@ namespace DoTwitter
 			
 			// Direct messaging
 			if (text.Text.Substring (0,2).Equals ("d "))
-				tweet = "d " + contact["twitter.screenname"] +
+				tweet = "d " + contact ["twitter.screenname"] +
 					" " +	text.Text.Substring (2);
 			// Tweet replying
 			else
-				tweet = "@" + contact["twitter.screenname"] + " " + text.Text;
+				tweet = "@" + contact ["twitter.screenname"] + " " + text.Text;
 			
 			return tweet;
 		}
