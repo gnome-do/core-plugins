@@ -53,7 +53,8 @@ namespace Pastebin
 			get 
 			{
 				return new Type[] {
-					typeof (ITextItem)
+					typeof (ITextItem),
+					typeof (IFileItem)
 				};
 			}
 		}
@@ -71,6 +72,14 @@ namespace Pastebin
 					typeof (ITextSyntaxItem)
 				};
 			}
+		}
+		
+		public override bool SupportsItem (IItem item)
+		{
+			if (item is ITextItem) return true;
+			if ((item as FileItem).MimeType.StartsWith ("text/"))
+				return true;
+			return false;
 		}
 			
 		public override IItem[] DynamicModifierItemsForItem (IItem item)
@@ -94,11 +103,16 @@ namespace Pastebin
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{		
 			string text = string.Empty;
-					
+			ITextItem titem = null;
+			
 			foreach (IItem item in items)
 			{
-					
-				text += (item as ITextItem).Text;
+				if (item is IFileItem)
+					titem = new TextItem (File.ReadAllText (
+						(item as IFileItem).Path));
+				else
+					titem = new TextItem ((item as ITextItem).Text);
+				text += titem.Text;
 			}
 			
 			Paste2 pastebinProvider = null;
