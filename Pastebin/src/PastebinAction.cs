@@ -77,7 +77,8 @@ namespace Pastebin
 		public override bool SupportsItem (IItem item)
 		{
 			if (item is ITextItem) return true;
-			if ((item as FileItem).MimeType.StartsWith ("text/"))
+			if ((item as FileItem).MimeType.StartsWith ("text/") || 
+				(item as FileItem).MimeType.EndsWith ("/x-perl"))
 				return true;
 			return false;
 		}
