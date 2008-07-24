@@ -97,11 +97,12 @@ namespace Tomboy
 		/// ahold of.
 		/// </summary>
 		public void UpdateItems ()
-		{			
+		{
 			TomboyDBus tb = new TomboyDBus();
-			foreach(string title in tb.GetAllNoteTitles ()) {
+			if (!tb.Connected)
+				return;
+			foreach(string title in tb.GetAllNoteTitles ())
 				notes.Add (new NoteItem (title));
-			}
 		}
 	}
 	

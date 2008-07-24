@@ -41,34 +41,81 @@ namespace Tomboy
 	
 	class TomboyDBus	
 	{
+		#region Constants
+		
 		private const string OBJECT_PATH = "/org/gnome/Tomboy/RemoteControl";
 		private const string BUS_NAME = "org.gnome.Tomboy";
 		
+		#endregion
+		
+		#region Static Constructor, Methods, and Fields
+		
 		private static ITBoy TomboyInstance = null;
-
-		static private ITBoy FindInstance () {
-			// try to start the service by default
- 			Bus.Session.StartServiceByName (BUS_NAME);
-
-			if  (!Bus.Session.NameHasOwner (BUS_NAME))
-	            throw new Exception (String.Format ("Name {0} has no owner", BUS_NAME));
-
-	        return Bus.Session.GetObject<ITBoy> (BUS_NAME, new ObjectPath  (OBJECT_PATH));
-	    }
+		
+		static TomboyDBus ()
+		{
+			// Listen for coming/going of Tomboy service
+			org.freedesktop.DBus.IBus sessionBus = Bus.Session.GetObject<org.freedesktop.DBus.IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
+			sessionBus.NameOwnerChanged += OnDBusNameOwnerChanged;
+		}
+		
+		private static void OnDBusNameOwnerChanged (string serviceName, string oldOwner, string newOwner)
+		{
+			if (serviceName != BUS_NAME)
+				return;
+			
+			if (oldOwner == null && newOwner.Length > 0)
+				// Service has started
+				SetInstance ();
+			else
+				// Service has ended
+				TomboyInstance = null;
+		}
+				
+		private static void SetInstance ()
+		{
+			TomboyInstance = Bus.Session.GetObject<ITBoy> (BUS_NAME, new ObjectPath (OBJECT_PATH));
+		}
+		
+		#endregion
+		
+		#region Instance Constructor, Methods, and Properties
 		
 		public TomboyDBus () {
 			
 			try {
-	            TomboyInstance = FindInstance ();
-	        } catch (Exception) {
-	            Console.Error.WriteLine ("Could not locate Tomboy on D-Bus. Perhaps it's not running?");
-	        }
-	        
-	        BusG.Init ();
-			//Console.WriteLine ("Tomboy Version: {0}", TomboyInstance.Version ());			
+				BusG.Init ();
+				if (TomboyInstance == null)
+					FindInstance ();
+			} catch (Exception) {
+				Console.Error.WriteLine ("Could not locate Tomboy on D-Bus. Perhaps it's not running?");
+			}
+		}
+
+		private void FindInstance ()
+		{
+			if (Bus.Session.NameHasOwner (BUS_NAME))
+				SetInstance ();
+		}
+		
+		private void EnsureTomboyInstance ()
+		{
+			if (!Connected) {
+				Bus.Session.StartServiceByName (BUS_NAME);
+				SetInstance ();
+			}
+		}
+		
+		public bool Connected
+		{
+			get {
+				return TomboyInstance != null;
+			}
 		}
 		
 		public ArrayList GetAllNoteTitles () {
+			if (!Connected)
+				return new ArrayList ();
 			string[] AllNotes = null;
 			AllNotes = TomboyInstance.ListAllNotes ();
 			ArrayList AllNoteTitles = new ArrayList ();
@@ -80,42 +127,14 @@ namespace Tomboy
 			return AllNoteTitles;
 		}
 		
-		public long GetNoteChangedDate (string note_title) {
-			string note_uri = TomboyInstance.FindNote (note_title);
-			try {
-				return TomboyInstance.GetNoteChangeDate (note_uri);
-			} catch  (Exception) {
-	            Console.Error.WriteLine ("Could not find changed date for: {0}", note_title);
-			}
-			return 0;
-		}
-		
 		public void OpenNote (string note_title) {
+			EnsureTomboyInstance ();	
 			string note_uri = TomboyInstance.FindNote (note_title);
 			try {
 				TomboyInstance.DisplayNote (note_uri);
 			} catch  (Exception) {
 	            Console.Error.WriteLine ("Could not open the note: {0}", note_title);
 			}
-		}
-		
-		/// <summary>
-		/// Currently not used
-		/// </summary>
-		public void OpenSearch () {
-			TomboyInstance.DisplaySearch ();
-		}
-
-		/// <summary>
-		/// If there is no title, just create new note then use this method
-		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String"/>
-		/// </returns>
-		public string CreateNewNote () {
-			string uri = TomboyInstance.CreateNote ();
-			TomboyInstance.DisplayNote (uri);
-			return uri;
 		}
 		
 		/// <summary>
@@ -128,6 +147,7 @@ namespace Tomboy
 		/// A <see cref="System.String"/>
 		/// </returns>
 		public string CreateNewNote (string note_title) {
+			EnsureTomboyInstance ();
 			string uri = TomboyInstance.CreateNamedNote (note_title);
 			TomboyInstance.DisplayNote (uri);
 			return uri;
@@ -140,8 +160,10 @@ namespace Tomboy
 		/// A <see cref="System.String"/>
 		/// </param>
 		public void SearchNotes (string search_text) {
+			EnsureTomboyInstance ();
 			TomboyInstance.DisplaySearchWithText (search_text);
 		}
 		
+		#endregion
 	}
 }
