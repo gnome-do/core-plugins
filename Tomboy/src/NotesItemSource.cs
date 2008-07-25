@@ -27,7 +27,13 @@ namespace Tomboy
 {	
 	public class NotesItemSource : IItemSource
 	{
-		List<IItem> notes;	
+		private const string name = "Tomboy Note Indexer";
+		private const string desc = "Loads up Tomboy notes for searching";
+		private const string icon = "tomboy";
+		private static Type [] supportedTypes = new Type [] {
+			typeof (NoteItem) };
+		
+		private List<IItem> notes;
 
 		/// <summary>
 		/// When creating an instance of this item source get the initial
@@ -50,27 +56,25 @@ namespace Tomboy
 		/// </returns>
 		public string Name {
 			get {
-				return "Tomboy Note Indexer";
+				return name;
 			}
 		}
 		
 		public string Description {
 			get {
-				return "Loads up tomboy notes for searching";
+				return desc;
 			}
 		}
 		
 		public string Icon {
 			get {
-				return "tomboy";
+				return icon;
 			}
 		}
 		
 		public Type[] SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (NoteItem),
-				};
+				return supportedTypes;
 			}
 		}
 
@@ -99,6 +103,8 @@ namespace Tomboy
 		public void UpdateItems ()
 		{
 			TomboyDBus tb = new TomboyDBus();
+			// Only query Tomboy if it is already running.
+			// Do not start it prematurely.
 			if (!tb.Connected)
 				return;
 			foreach(string title in tb.GetAllNoteTitles ())

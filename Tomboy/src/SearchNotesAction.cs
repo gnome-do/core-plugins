@@ -25,30 +25,36 @@ using Do.Universe;
 namespace Tomboy
 {
 	public class SearchNotesAction : AbstractAction
-	{			
+	{
+		private const string name = "Search Tomboy Notes";
+		private const string desc = "Searches contents of Tomboy notes";
+		private const string icon = "gtk-find";
+		private static Type [] supportedTypes = new Type [] {
+			typeof (ITextItem) };
+		
 		public override string Name {
-			get { return "Search Tomboy Notes"; }
+			get { return name; }
 		}
 		
 		public override string Description {
-			get { return "Searches contents of Tomboy notes"; }
+			get { return desc; }
 		}
 		
 		public override string Icon {
-			get { return "gtk-find"; }
+			get { return icon; }
 		}
 		
 		public override Type[] SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
+				return supportedTypes;
 			}
 		}
 		
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
 			TomboyDBus tb = new TomboyDBus ();
+			// This action will start Tomboy if it is not
+			// already running.
 			tb.SearchNotes ((items [0] as ITextItem).Text);
 			return null;
 		}

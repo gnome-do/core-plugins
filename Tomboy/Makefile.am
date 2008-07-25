@@ -43,12 +43,17 @@ FILES = \
 	src/TomboyItem.cs \
 	src/NewNoteAction.cs \
 	src/NotesItemSource.cs \
-	src/SearchNotesAction.cs 
+	src/SearchNotesAction.cs \
+	src/TomboyConfiguration.cs \
+	gtk-gui/generated.cs \
+	gtk-gui/Tomboy.TomboyConfiguration.cs
 
 DATA_FILES = 
 
 RESOURCES = \
-	src/Tomboy.addin.xml 
+	src/Tomboy.addin.xml \
+	gtk-gui/gui.stetic \
+	gtk-gui/objects.xml
 
 EXTRAS = \
 	tomboy.pc.in 
@@ -57,7 +62,9 @@ REFERENCES =  \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
 	System \
-	$(DOADDINS_LIBS)
+	$(DOADDINS_LIBS) \
+	$(GTK_SHARP_20_LIBS) \
+	Mono.Posix
 
 DLL_REFERENCES = 
 

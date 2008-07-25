@@ -24,7 +24,10 @@ namespace Tomboy
 {
 	public class NoteItem : IOpenableItem
 	{
-		string title;
+		private const string desc = "Tomboy note";
+		private const string icon = "tomboy";
+		
+		private string title;
 		
 		/// <summary>
 		/// The Tomboy Item only has one property, the title
@@ -43,13 +46,13 @@ namespace Tomboy
 		
 		public string Description {
 			get { 
-				return "Tomboy note"; 
+				return desc; 
 			} 
 		}
 		
 		public string Icon {
 			get {
-				return "tomboy";
+				return icon;
 			}
 		}
 		
@@ -59,6 +62,8 @@ namespace Tomboy
 		/// </summary>
 		public void Open ()
 		{
+			// This action will start Tomboy if it is not
+			// already running.
 			new TomboyDBus ().OpenNote (title);
 		}
 	}

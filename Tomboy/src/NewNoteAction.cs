@@ -20,41 +20,81 @@
 using System;
 using System.Diagnostics;
 
+using Do.Addins;
 using Do.Universe;
 
 namespace Tomboy
 {	
-	public class NewNoteAction : AbstractAction
+	public class NewNoteAction : AbstractAction, IConfigurable
 	{
+		private const string name = "New Tomboy Note";
+		private const string desc = "Create a new Tomboy note";
+		private const string icon = "tomboy";
+		private static Type [] textItemTypeArray = new Type [] {
+			typeof (ITextItem) };
+		
 		public override string Name {
-			get { return "New Tomboy Note"; }
+			get { return name; }
 		}
 		
 		public override string Description {
-			get { return "Create a new empty Tomboy note"; }
+			get { return desc; }
 		}
 		
 		public override string Icon {
-			get { return "tomboy"; }
+			get { return icon; }
 		}
 		
 		public override Type[] SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
+				return textItemTypeArray;
 			}
+		}
+		
+		public override Type[] SupportedModifierItemTypes {
+			get {
+				return textItemTypeArray;
+			}
+		}
+		
+		public override bool ModifierItemsOptional {
+			get { return true; }
 		}
 		
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{
-			return ITextItemPerform (items [0] as ITextItem);
+			ITextItem mainItem = items [0] as ITextItem;
+			
+			ITextItem modItem = null;
+			if (modifierItems.Length > 0) {
+				modItem = modifierItems [0] as ITextItem;
+			}
+			
+			string title = null, content = null;
+			// Check prefs to see if first text item should be
+			// note title or content. The modifier item can provide
+			// content or title, respectively.
+			if (TomboyConfiguration.TitleFirst) {
+				title = mainItem.Text;
+				if (modItem != null)
+					content = modItem.Text;
+			} else {
+				content = mainItem.Text;
+				if (modItem != null)
+					title = modItem.Text;
+			}
+			
+			
+			TomboyDBus tb = new TomboyDBus ();
+			// Null values are acceptable here.
+			tb.CreateNewNote (title, content);
+			
+			return null;
 		}
 		
-		protected IItem [] ITextItemPerform (ITextItem item) {
-			TomboyDBus tb = new TomboyDBus ();
-			tb.CreateNewNote (item.Text);
-			return null;
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new TomboyConfiguration ();
 		}
 	}
 }

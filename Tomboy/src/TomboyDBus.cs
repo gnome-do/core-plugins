@@ -37,6 +37,7 @@ namespace Tomboy
 		string[] ListAllNotes ();
 		void DisplaySearchWithText (string search_text);
 		string Version ();
+		bool SetNoteContents (string uri, string text_contents);
 	}
 	
 	class TomboyDBus	
@@ -146,9 +147,43 @@ namespace Tomboy
 		/// <returns>
 		/// A <see cref="System.String"/>
 		/// </returns>
-		public string CreateNewNote (string note_title) {
+		public string CreateNewNote (string note_title, string note_content) {
 			EnsureTomboyInstance ();
-			string uri = TomboyInstance.CreateNamedNote (note_title);
+			
+			string uri = string.Empty;
+			
+			if (string.IsNullOrEmpty (note_title) &&
+			    (!TomboyConfiguration.DeriveTitle || string.IsNullOrEmpty (note_content))) {
+				uri = TomboyInstance.CreateNote ();
+			} else {
+				// Generate a title from the content if no title
+				// is provided and prefs say to do so.
+				if (string.IsNullOrEmpty (note_title) &&
+				    TomboyConfiguration.DeriveTitle &&
+				    !string.IsNullOrEmpty (note_content)) {
+					note_title = note_content.Trim ().Split ('\n') [0];
+					if (note_title.Length > 20)
+						note_title = note_title.Substring (0, 18) + "...";
+				}
+				
+				uri = TomboyInstance.CreateNamedNote (note_title);
+				int i = 2;
+				// In the case of a duplicate note title, append
+				// "(i)", increasing i until a unique title is
+				// found.  In the future, support for appending
+				// content to an existing note would be cool.
+				while (string.IsNullOrEmpty (uri)) {
+					string title_format = "{0} ({1})";
+					uri = TomboyInstance.CreateNamedNote (string.Format (title_format, note_title, i));
+					i++;
+				}
+			}
+			
+			note_title = TomboyInstance.GetNoteTitle (uri);
+			
+			if (!string.IsNullOrEmpty (note_content))
+				TomboyInstance.SetNoteContents (uri, note_title + "\n\n" + note_content);
+			
 			TomboyInstance.DisplayNote (uri);
 			return uri;
 		}
