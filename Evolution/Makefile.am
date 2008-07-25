@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(EVOLUTION_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/ContactItemSource.cs 
@@ -46,9 +41,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Evolution.addin.xml 
 
-EXTRAS = \
-	evolution.pc.in 
-
 REFERENCES =  \
 	$(EVOLUTION_SHARP_LIBS) \
 	System \
@@ -56,14 +48,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-EVOLUTION_PC = $(BUILD_DIR)/evolution.pc
-
-$(eval $(call emit-deploy-wrapper,EVOLUTION_PC,evolution.pc))
-
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'

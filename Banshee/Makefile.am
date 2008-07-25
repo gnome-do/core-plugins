@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(BANSHEE_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -51,9 +46,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Banshee.addin.xml 
 
-EXTRAS = \
-	banshee.pc.in 
-
 REFERENCES =  \
 	System \
 	System.Xml \
@@ -65,13 +57,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-BANSHEE_PC = $(BUILD_DIR)/banshee.pc
-
-$(eval $(call emit-deploy-wrapper,BANSHEE_PC,banshee.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=DoTwitter.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(TWITTER_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) 
 
 FILES = \
 	src/Configuration.cs \
@@ -65,9 +60,6 @@ RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml 
 
-EXTRAS = \
-	twitter.pc.in 
-
 REFERENCES =  \
 	$(DOADDINS_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
@@ -78,13 +70,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-TWITTER_PC = $(BUILD_DIR)/twitter.pc
-
-$(eval $(call emit-deploy-wrapper,TWITTER_PC,twitter.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(GOOGLECALCULATOR_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/GoogleCalculatorAction.cs 
@@ -46,22 +41,15 @@ DATA_FILES =
 RESOURCES = \
 	src/GoogleCalculatorAction.addin.xml 
 
-EXTRAS = \
-	googlecalculator.pc.in 
-
 REFERENCES =  \
 	System \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-GOOGLECALCULATOR_PC = $(BUILD_DIR)/googlecalculator.pc
-
-$(eval $(call emit-deploy-wrapper,GOOGLECALCULATOR_PC,googlecalculator.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

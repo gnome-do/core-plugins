@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(GNOME_SESSION_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/PowerManagement.cs \
@@ -49,9 +44,6 @@ DATA_FILES =
 RESOURCES = \
 	src/GNOME-Session.addin.xml 
 
-EXTRAS = \
-	gnome-session.pc.in 
-
 REFERENCES =  \
 	System \
 	$(NDESK_DBUS_10_LIBS) \
@@ -60,14 +52,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-GNOME_SESSION_PC = $(BUILD_DIR)/gnome-session.pc
-
-$(eval $(call emit-deploy-wrapper,GNOME_SESSION_PC,gnome-session.pc))
-
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'

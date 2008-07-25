@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(FIREFOX_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/BookmarkItemSource.cs 
@@ -46,23 +41,15 @@ DATA_FILES =
 RESOURCES = \
 	src/Firefox.addin.xml 
 
-EXTRAS = \
-	firefox.pc.in 
-
 REFERENCES =  \
 	System \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-FIREFOX_PC = $(BUILD_DIR)/firefox.pc
-
-$(eval $(call emit-deploy-wrapper,FIREFOX_PC,firefox.pc))
-
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'

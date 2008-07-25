@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(EPIPHANY_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/EpiphanyBookmarkItemSource.cs 
@@ -46,9 +41,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Epiphany.addin.xml 
 
-EXTRAS = \
-	epiphany.pc.in 
-
 REFERENCES =  \
 	System \
 	System.Xml \
@@ -56,13 +48,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-EPIPHANY_PC = $(BUILD_DIR)/epiphany.pc
-
-$(eval $(call emit-deploy-wrapper,EPIPHANY_PC,epiphany.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

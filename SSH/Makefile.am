@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(SSH_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/SSHAction.cs \
@@ -47,9 +42,6 @@ DATA_FILES =
 RESOURCES = \
 	src/SSH.addin.xml 
 
-EXTRAS = \
-	ssh.pc.in 
-
 REFERENCES =  \
 	System \
 	$(GCONF_SHARP_20_LIBS) \
@@ -58,13 +50,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-SSH_PC = $(BUILD_DIR)/ssh.pc
-
-$(eval $(call emit-deploy-wrapper,SSH_PC,ssh.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

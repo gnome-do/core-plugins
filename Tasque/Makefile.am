@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(TASQUE_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/Tasque.cs \
@@ -49,9 +44,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Tasque.addin.xml 
 
-EXTRAS = \
-	tasque.pc.in 
-
 REFERENCES =  \
 	System \
 	$(DOADDINS_LIBS) \
@@ -61,13 +53,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-TASQUE_PC = $(BUILD_DIR)/tasque.pc
-
-$(eval $(call emit-deploy-wrapper,TASQUE_PC,tasque.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

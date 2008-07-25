@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(PASTEBIN_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -52,9 +47,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Pastebin.addin.xml 
 
-EXTRAS = \
-	pastebin.pc.in 
-
 REFERENCES =  \
 	System \
 	Mono.Posix \
@@ -63,13 +55,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-PASTEBIN_PC = $(BUILD_DIR)/pastebin.pc
-
-$(eval $(call emit-deploy-wrapper,PASTEBIN_PC,pastebin.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

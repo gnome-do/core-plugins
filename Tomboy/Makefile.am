@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(TOMBOY_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/TomboyDBus.cs \
@@ -55,9 +50,6 @@ RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml
 
-EXTRAS = \
-	tomboy.pc.in 
-
 REFERENCES =  \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
@@ -68,13 +60,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-TOMBOY_PC = $(BUILD_DIR)/tomboy.pc
-
-$(eval $(call emit-deploy-wrapper,TOMBOY_PC,tomboy.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

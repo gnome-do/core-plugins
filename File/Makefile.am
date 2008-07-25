@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=FilePlugin.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(FILE_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/CreateEmptyFileAction.cs \
@@ -60,9 +55,6 @@ RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml 
 
-EXTRAS = \
-	file.pc.in 
-
 REFERENCES =  \
 	System \
 	$(DOADDINS_LIBS) \
@@ -76,11 +68,6 @@ DLL_REFERENCES =
 CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
-
-FILE_PC = $(BUILD_DIR)/file.pc
-
-$(eval $(call emit-deploy-wrapper,FILE_PC,file.pc))
-
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'

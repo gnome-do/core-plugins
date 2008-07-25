@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(OPENSEARCH_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -59,9 +54,6 @@ DATA_FILES =
 RESOURCES = \
 	src/OpenSearch.addin.xml 
 
-EXTRAS = \
-	opensearch.pc.in 
-
 REFERENCES =  \
 	System \
 	System.Xml \
@@ -71,13 +63,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-OPENSEARCH_PC = $(BUILD_DIR)/opensearch.pc
-
-$(eval $(call emit-deploy-wrapper,OPENSEARCH_PC,opensearch.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

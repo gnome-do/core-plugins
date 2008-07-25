@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(AMAROK_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/Amarok.cs \
@@ -52,8 +47,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Amarok.addin.xml 
 
-EXTRAS = \
-	amarok.pc.in 
 
 REFERENCES =  \
 	System \
@@ -67,10 +60,6 @@ DLL_REFERENCES =
 CLEANFILES = $(LINUX_PKGCONFIG) 
 
 include $(top_srcdir)/Makefile.include
-
-AMAROK_PC = $(BUILD_DIR)/amarok.pc
-
-$(eval $(call emit-deploy-wrapper,AMAROK_PC,amarok.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(RHYTHMBOX_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/MusicItems.cs \
@@ -52,9 +47,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Rhythmbox.addin.xml 
 
-EXTRAS = \
-	rhythmbox.pc.in 
-
 REFERENCES =  \
 	System.Xml \
 	System \
@@ -62,13 +54,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-RHYTHMBOX_PC = $(BUILD_DIR)/rhythmbox.pc
-
-$(eval $(call emit-deploy-wrapper,RHYTHMBOX_PC,rhythmbox.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

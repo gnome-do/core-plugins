@@ -36,12 +36,7 @@ SATELLITE_ASSEMBLY_NAME=DiskMounter.resources.dll
 PROGRAMFILES = \
 	$(DISKMOUNTER_ADDIN_XML)  
 
-LINUX_PKGCONFIG = \
-	$(DISKMOUNTER_PC)  
-
-
-	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY) $(PROGRAMFILES)
 
 FILES = \
 	src/DriveItem.cs \
@@ -55,9 +50,6 @@ DATA_FILES = \
 
 RESOURCES = 
 
-EXTRAS = \
-	diskmounter.pc.in 
-
 REFERENCES =  \
 	System \
 	$(GNOME_VFS_SHARP_20_LIBS) \
@@ -65,15 +57,13 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+CLEANFILES = $(PROGRAMFILES)
 
 include $(top_srcdir)/Makefile.include
 
 DISKMOUNTER_ADDIN_XML = $(BUILD_DIR)/DiskMounter.addin.xml
-DISKMOUNTER_PC = $(BUILD_DIR)/diskmounter.pc
 
 $(eval $(call emit-deploy-target,DISKMOUNTER_ADDIN_XML))
-$(eval $(call emit-deploy-wrapper,DISKMOUNTER_PC,diskmounter.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(GNOME_SCREENSHOT_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/CurrentWindowScreenshotItem.cs \
@@ -51,22 +46,15 @@ DATA_FILES =
 RESOURCES = \
 	src/GNOME-Screenshot.addin.xml 
 
-EXTRAS = \
-	gnome-screenshot.pc.in 
-
 REFERENCES =  \
 	$(DOADDINS_LIBS) \
 	System
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-GNOME_SCREENSHOT_PC = $(BUILD_DIR)/gnome-screenshot.pc
-
-$(eval $(call emit-deploy-wrapper,GNOME_SCREENSHOT_PC,gnome-screenshot.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

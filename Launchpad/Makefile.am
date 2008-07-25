@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(LAUNCHPAD_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -65,8 +60,7 @@ RESOURCES = \
 	src/Launchpad.addin.xml 
 
 EXTRAS = \
-	../Launchpad.old/Resources/Launchpad.png \
-	launchpad.pc.in 
+	../Launchpad.old/Resources/Launchpad.png
 
 REFERENCES =  \
 	System \
@@ -74,13 +68,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-LAUNCHPAD_PC = $(BUILD_DIR)/launchpad.pc
-
-$(eval $(call emit-deploy-wrapper,LAUNCHPAD_PC,launchpad.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

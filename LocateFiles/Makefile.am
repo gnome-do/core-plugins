@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(LOCATEFILES_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -47,22 +42,15 @@ DATA_FILES =
 RESOURCES = \
 	src/LocateFiles.addin.xml 
 
-EXTRAS = \
-	locatefiles.pc.in 
-
 REFERENCES =  \
 	System \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-LOCATEFILES_PC = $(BUILD_DIR)/locatefiles.pc
-
-$(eval $(call emit-deploy-wrapper,LOCATEFILES_PC,locatefiles.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

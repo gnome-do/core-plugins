@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(WINDOWMANAGER_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/WindowListAction.cs \
@@ -53,9 +48,6 @@ DATA_FILES =
 RESOURCES = \
 	src/WindowManager.addin.xml 
 
-EXTRAS = \
-	windowmanager.pc.in 
-
 REFERENCES =  \
 	System \
 	$(WNCK_SHARP_10_LIBS) \
@@ -66,13 +58,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-WINDOWMANAGER_PC = $(BUILD_DIR)/windowmanager.pc
-
-$(eval $(call emit-deploy-wrapper,WINDOWMANAGER_PC,windowmanager.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(VINAGRE_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/Vinagre.cs \
@@ -48,22 +43,15 @@ DATA_FILES =
 RESOURCES = \
 	src/Vinagre.addin.xml 
 
-EXTRAS = \
-	vinagre.pc.in 
-
 REFERENCES =  \
 	System \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-VINAGRE_PC = $(BUILD_DIR)/vinagre.pc
-
-$(eval $(call emit-deploy-wrapper,VINAGRE_PC,vinagre.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml

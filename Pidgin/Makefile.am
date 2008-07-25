@@ -31,12 +31,7 @@ endif
 AL=al2
 SATELLITE_ASSEMBLY_NAME=.resources.dll
 
-LINUX_PKGCONFIG = \
-	$(PIDGIN_PC)  
-
-
-	
-all: $(ASSEMBLY) $(LINUX_PKGCONFIG) 
+all: $(ASSEMBLY)
 
 FILES = \
 	src/AssemblyInfo.cs \
@@ -57,9 +52,6 @@ DATA_FILES =
 RESOURCES = \
 	src/Pidgin.addin.xml 
 
-EXTRAS = \
-	pidgin.pc.in 
-
 REFERENCES =  \
 	System \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
@@ -70,13 +62,9 @@ REFERENCES =  \
 
 DLL_REFERENCES = 
 
-CLEANFILES = $(LINUX_PKGCONFIG) 
+CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
-
-PIDGIN_PC = $(BUILD_DIR)/pidgin.pc
-
-$(eval $(call emit-deploy-wrapper,PIDGIN_PC,pidgin.pc))
 
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
