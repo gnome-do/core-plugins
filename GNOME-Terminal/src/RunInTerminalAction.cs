@@ -22,6 +22,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
+using Mono.Unix;
 using Do.Universe;
 
 namespace GNOME.Terminal
@@ -36,12 +37,12 @@ namespace GNOME.Terminal
 
 		public override string Name
 		{
-	      get { return "Run in Terminal"; }
+	      get { return Catalog.GetString ("Run in Terminal"); }
 	    }
 
 	    public override string Description
 		{
-	      get { return "Runs a command in GNOME Terminal."; }
+	      get { return Catalog.GetString ("Runs a command in GNOME Terminal."); }
 	    }
 
 	    public override string Icon

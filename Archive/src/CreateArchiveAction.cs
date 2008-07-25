@@ -23,6 +23,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+using Mono.Unix;
 using Do.Universe;
 
 namespace Archive {
@@ -36,11 +37,11 @@ namespace Archive {
                 }
                 
                 public override string Name {
-                        get { return "Create archive"; }
+                        get { return Catalog.GetString ("Create archive"); }
                 }
                 
                 public override string Description {
-                        get { return "Create an archive with the selected item"; }
+                        get { return Catalog.GetString ("Create an archive with the selected item"); }
                 }
         
                 public override string Icon {

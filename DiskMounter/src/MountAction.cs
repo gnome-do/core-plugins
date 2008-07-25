@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 
 using Gnome.Vfs;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -26,17 +27,12 @@ namespace DiskMounter
 {
 	public class MountAction : AbstractAction
 	{
-	
-		public MountAction ()
-		{
-		}
-                
 		public override string Name {
-			get { return "Mount"; }
+			get { return Catalog.GetString ("Mount"); }
 		}
 		
 		public override string Description {
-			get { return "Mount volume"; }
+			get { return Catalog.GetString ("Mount volume"); }
 		}
 		
 		public override string Icon {

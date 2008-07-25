@@ -25,6 +25,8 @@ using System.Collections.Generic;
 using Do;
 using Do.Universe;
 
+using Mono.Unix;
+
 namespace Mozilla.Firefox {
 
 	public class BookmarkItemSource : IItemSource {
@@ -51,11 +53,11 @@ namespace Mozilla.Firefox {
 		}
 		
 		public string Name {
-			get { return "Firefox Bookmarks"; }
+			get { return Catalog.GetString ("Firefox Bookmarks"); }
 		}
 		
 		public string Description {
-			get { return "Finds Firefox bookmarks in your default profile."; }
+			get { return Catalog.GetString ("Finds Firefox bookmarks in your default profile."); }
 		}
 		
 		public string Icon {

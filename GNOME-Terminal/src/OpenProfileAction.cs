@@ -20,7 +20,7 @@
 
 using System;
 using System.Diagnostics;
-
+using Mono.Unix;
 using Do.Universe;
 
 namespace GNOME.Terminal
@@ -33,12 +33,12 @@ namespace GNOME.Terminal
 
 	    public override string Name
 		{
-	      get { return "Open Profile"; }
+	      get { return Catalog.GetString ("Open Profile"); }
 	    }
 
 	    public override string Description
 		{
-	      get { return "Opens a GNOME Terminal with the selected profile."; }
+	      get { return Catalog.GetString ("Opens a GNOME Terminal with the selected profile."); }
 	    }
 
 	    public override string Icon

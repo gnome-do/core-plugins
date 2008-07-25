@@ -19,23 +19,19 @@
 using System;
 using System.Collections.Generic;
 
+using Mono.Unix;
 using Do.Universe;
 
 namespace DiskMounter
 {
 	public class UnmountAction : AbstractAction
 	{
-	
-		public UnmountAction ()
-		{
-		}
-                
 		public override string Name {
-			get { return "Unmount"; }
+			get { return Catalog.GetString ("Unmount"); }
 		}
 		
 		public override string Description {
-			get { return "Unmount volume"; }
+			get { return Catalog.GetString ("Unmount volume"); }
 		}
 		
 		public override string Icon {

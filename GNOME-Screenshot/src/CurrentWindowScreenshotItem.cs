@@ -19,16 +19,17 @@
  */
 
 using System;
+using Mono.Unix;
 
 namespace GNOME {
 
 	class CurrentWindowScreenshotItem : ScreenshotItem {
 		public override string Name {
-			get { return "Current window"; }
+			get { return Catalog.GetString ("Current window"); }
 		}
 		
 		public override string Description {
-			get { return "Take a screenshot of the current window."; }
+			get { return Catalog.GetString ("Take a screenshot of the current window."); }
 		}
 		
 		public override string Icon {
