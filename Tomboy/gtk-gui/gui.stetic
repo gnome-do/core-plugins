@@ -5,7 +5,7 @@
     <target-gtk-version>2.12.2</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.5.0.1, Culture=neutral" />
+    <widget-library name="Do.Addins, Version=0.5.1.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Tomboy.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Tomboy.TomboyConfiguration" design-size="413 300">
@@ -88,7 +88,7 @@
                       <widget class="Gtk.RadioButton" id="contentFirstRadioButton">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">First text item is content, second text item is title.</property>
+                        <property name="Label" translatable="yes">First pane is content, second pane is title.</property>
                         <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
@@ -106,7 +106,7 @@
                       <widget class="Gtk.RadioButton" id="titleFirstRadioButton">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">First text item is title, second text item is content.</property>
+                        <property name="Label" translatable="yes">First pane is title, second pane is content.</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
