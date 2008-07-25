@@ -25,6 +25,7 @@ using Do.Universe;
 using Tasque;
 using Tasque.DBus;
 using Tasque.Category.Item;
+using Mono.Unix;
 
 namespace Tasque
 {
@@ -37,11 +38,11 @@ namespace Tasque
                 }
 		
                 public override string Name {
-                        get { return "Create a new task"; }
+                        get { return Catalog.GetString ("Create a new task"); }
                 }
 		
                 public override string Description {
-                        get { return " Create a new task in Tasque"; }
+                        get { return Catalog.GetString ("Create a new task in Tasque"); }
 		}
 		
 		public override string Icon {

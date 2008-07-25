@@ -18,6 +18,7 @@
 
 using System;
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
@@ -35,12 +36,12 @@ namespace Do.Addins.Pidgin
 		public string Name {
 			get {
 				switch (status) {
-				case 1: return "Offline";
-				case 2: return "Available";
-				case 3: return "Busy";
-				case 4: return "Invisible";
-				case 5: return "Away";
-				default: return "Unknown Status";
+				case 1: return Catalog.GetString ("Offline");
+				case 2: return Catalog.GetString ("Available");
+				case 3: return Catalog.GetString ("Busy");
+				case 4: return Catalog.GetString ("Invisible");
+				case 5: return Catalog.GetString ("Away");
+				default: return Catalog.GetString ("Unknown Status");
 				}
 			}
 		}

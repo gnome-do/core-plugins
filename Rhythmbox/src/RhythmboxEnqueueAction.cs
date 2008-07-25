@@ -22,6 +22,7 @@ using System.Threading;
 using System.Diagnostics;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Rhythmbox
 {
@@ -34,11 +35,11 @@ namespace Do.Addins.Rhythmbox
 		}
 
 		public override string Name {
-			get { return "Add to Play Queue"; }
+			get { return Catalog.GetString ("Add to Play Queue"); }
 		}
 
 		public override string Description {
-			get { return "Add an item to Rhythmbox's play queue."; }
+			get { return Catalog.GetString ("Add an item to Rhythmbox's play queue."); }
 		}
 
 		public override string Icon {

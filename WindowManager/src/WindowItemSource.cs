@@ -25,6 +25,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 using Wnck;
+using Mono.Unix;
 
 namespace WindowManager
 {
@@ -34,13 +35,13 @@ namespace WindowManager
 		
 		public string Name {
 			get {
-				return "Generic Window Items";
+				return Catalog.GetString ("Generic Window Items");
 			}
 		}
 
 		public string Description {
 			get {
-				return "Useful Generically Understood Window Items";
+				return Catalog.GetString ("Useful Generically Understood Window Items");
 			}
 		}
 
@@ -67,20 +68,20 @@ namespace WindowManager
 		{
 			items = new List<IItem> ();
 			
-			items.Add (new GenericWindowItem ("Current Window",
-			                                  "The Currently Active Window",
+			items.Add (new GenericWindowItem (Catalog.GetString ("Current Window"),
+			                                  Catalog.GetString ("The Currently Active Window"),
 			                                  "gnome-window-manager",
 			                                  GenericWindowType.CurrentWindow));
-			items.Add (new GenericWindowItem ("Current Application",
-			                                  "The Currently Active Application",
+			items.Add (new GenericWindowItem (Catalog.GetString ("Current Application"),
+			                                  Catalog.GetString ("The Currently Active Application"),
 			                                  "gnome-window-manager",
 			                                  GenericWindowType.CurrentApplication));
-			items.Add (new GenericWindowItem ("Previous Window",
-			                                  "The Previously Active Window",
+			items.Add (new GenericWindowItem (Catalog.GetString ("Previous Window"),
+			                                  Catalog.GetString ("The Previously Active Window"),
 			                                  "gnome-window-manager",
 			                                  GenericWindowType.PreviousWindow));
-			items.Add (new GenericWindowItem ("Previous Application",
-			                                  "The Previously Active Application",
+			items.Add (new GenericWindowItem (Catalog.GetString ("Previous Application"),
+			                                  Catalog.GetString ("The Previously Active Application"),
 			                                  "gnome-window-manager",
 			                                  GenericWindowType.PreviousApplication));
 		}
@@ -93,8 +94,6 @@ namespace WindowManager
 		public void UpdateItems ()
 		{
 			return;
-		}
-		
-		
+		}		
 	}
 }

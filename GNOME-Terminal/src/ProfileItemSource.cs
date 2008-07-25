@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-
+using Mono.Unix;
 using Do.Universe;
 
 namespace GNOME.Terminal

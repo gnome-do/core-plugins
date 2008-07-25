@@ -21,14 +21,17 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadBugNumberItem : LaunchpadItem
 	{
-		public LaunchpadBugNumberItem() { }
-		public string Name { get { return "Bug Number"; } }
-		public string Description { get { return "Find bug by number"; } }
+		public string Name { get { return Catalog.GetString ("Bug Number"); } }
+		
+		public string Description { 
+			get { return Catalog.GetString ("Find bug by number"); }
+		}
 		
 		public string Icon
 		{ 
@@ -52,8 +55,10 @@ namespace Do.Launchpad
 	public class LaunchpadBugReportItem : LaunchpadItem
 	{
 		public LaunchpadBugReportItem() { }
-		public string Name { get { return "Bug Report"; } }
-		public string Description { get { return "Report a bug at Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Bug Report"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Report a bug at Launchpad"); }
+		}
 		
 		public string Icon
 		{ 
@@ -74,8 +79,10 @@ namespace Do.Launchpad
 	public class LaunchpadPackageBugsItem : LaunchpadItem
 	{
 		public LaunchpadPackageBugsItem() { }
-		public string Name { get { return "Project Bugs"; } }
-		public string Description { get { return "Show open bugs in a project at Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Project Bugs"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Show open bugs in a project at Launchpad"); } 
+		}
 		
 		public string Icon
 		{ 

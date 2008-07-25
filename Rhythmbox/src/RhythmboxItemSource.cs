@@ -24,6 +24,7 @@ using System.Collections.Generic;
 
 using Do.Addins;
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Rhythmbox
 {
@@ -40,8 +41,11 @@ namespace Do.Addins.Rhythmbox
 			//UpdateItems ();
 		}
 
-		public string Name { get { return "Rhythmbox Music"; } }
-		public string Description { get { return "Provides access to artists and albums from Rhythmbox."; } }
+		public string Name { get { return Catalog.GetString ("Rhythmbox Music"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Provides access to artists and albums from Rhythmbox."); }
+		}
+		
 		public string Icon { get { return "rhythmbox"; } }
 
 		public Type[] SupportedItemTypes {

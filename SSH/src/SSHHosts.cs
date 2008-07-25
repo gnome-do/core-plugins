@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace GnomeDoSSH {
 
@@ -37,7 +38,7 @@ namespace GnomeDoSSH {
 		}
 
 		public string Name { get { return name; } }
-		public string Description { get { return "SSH Host"; } }
+		public string Description { get { return Catalog.GetString ("SSH Host"); } }
 		public string Icon { get { return "gnome-globe"; } }
 
 		public string Text { get { return name; } }
@@ -45,7 +46,7 @@ namespace GnomeDoSSH {
 		public void Open ()
 		{
 			string uri = "ssh://" + name;
-			System.Diagnostics.Process.Start ("nautilus", uri);
+			Do.Addins.Util.Environment.Open (uri);
 		}
 	}
 
@@ -58,8 +59,8 @@ namespace GnomeDoSSH {
 			UpdateItems ();
 		}
 
-		public string Name { get { return "SSH Hosts"; } }
-		public string Description { get { return "Parses ssh-config"; } }
+		public string Name { get { return Catalog.GetString ("SSH Hosts"); } }
+		public string Description { get { return Catalog.GetString ("Parses ssh-config"); } }
 		public string Icon { get { return "network-server"; } }
 
 		public Type[] SupportedItemTypes {

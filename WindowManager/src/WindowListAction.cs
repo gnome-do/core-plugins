@@ -28,6 +28,7 @@ using System.Threading;
 using Do.Universe;
 using Do.Addins;
 using Wnck;
+using Mono.Unix;
 
 namespace WindowManager
 {
@@ -60,11 +61,11 @@ namespace WindowManager
 		}
 		
 		public override string Name {
-			get { return "Action Window"; }
+			get { return Catalog.GetString ("Action Window"); }
 		}
 		
 		public override string Description {
-			get { return "Action a Window."; }
+			get { return Catalog.GetString ("Action a Window."); }
 		}
 
 		public override string Icon {
@@ -201,11 +202,11 @@ namespace WindowManager
 	public class WindowMaximizeAction : WindowTogglableAction
 	{
 		public override string Name {
-			get { return "Maximize Window"; }
+			get { return Catalog.GetString ("Maximize Window"); }
 		}
 		
 		public override string Description {
-			get { return "Make a window consume the whole screen"; }
+			get { return Catalog.GetString ("Make a window consume the whole screen"); }
 		}
 
 		public override string Icon {
@@ -239,11 +240,11 @@ namespace WindowManager
 	public class WindowMinimizeAction : WindowTogglableAction
 	{
 		public override string Name {
-			get { return "Minimize Window"; }
+			get { return Catalog.GetString ("Minimize Window"); }
 		}
 		
 		public override string Description {
-			get { return "Minimize/Restore a Window"; }
+			get { return Catalog.GetString ("Minimize/Restore a Window"); }
 		}
 
 		public override string Icon {
@@ -277,11 +278,11 @@ namespace WindowManager
 	public class WindowShadeAction : WindowTogglableAction
 	{
 		public override string Name {
-			get { return "Shade Window"; }
+			get { return Catalog.GetString ("Shade Window"); }
 		}
 		
 		public override string Description {
-			get { return "Shade/Unshade a Window into its Titlebar"; }
+			get { return Catalog.GetString ("Shade/Unshade a Window into its Titlebar"); }
 		}
 
 		public override string Icon {
@@ -315,11 +316,11 @@ namespace WindowManager
 	public class WindowCloseAction : WindowActionAction
 	{
 		public override string Name {
-			get { return "Close Window"; }
+			get { return Catalog.GetString ("Close Window"); }
 		}
 		
 		public override string Description {
-			get { return "Close your current window."; }
+			get { return Catalog.GetString ("Close your current window."); }
 		}
 
 		public override string Icon {
@@ -352,11 +353,11 @@ namespace WindowManager
 	public class WindowFocusAction : WindowActionAction 
 	{
 		public override string Name {
-			get { return "Focus Window"; }
+			get { return Catalog.GetString ("Focus Window"); }
 		}
 		
 		public override string Description {
-			get { return "Bring a window into Focus"; }
+			get { return Catalog.GetString ("Bring a window into Focus"); }
 		}
 
 		public override string Icon {

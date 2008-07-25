@@ -22,6 +22,7 @@ using System.Threading;
 using System.Diagnostics;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Plugins.Amarok
 {
@@ -34,11 +35,11 @@ namespace Do.Plugins.Amarok
 		}
 
 		public override string Name {
-			get { return "Play"; }
+			get { return Catalog.GetString ("Play"); }
 		}
 
 		public override string Description {
-			get { return "Play an item in Amarok."; }
+			get { return Catalog.GetString ("Play an item in Amarok."); }
 		}
 
 		public override string Icon {

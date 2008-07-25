@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
@@ -20,8 +21,8 @@ namespace Do.Addins.Pidgin
 			//UpdateItems();
 		}
 		
-		public string Name { get { return "Pidgin Statuses"; } }
-		public string Description { get { return "Saved Pidgin statuses"; } }
+		public string Name { get { return Catalog.GetString ("Pidgin Statuses"); } }
+		public string Description { get { return Catalog.GetString ("Saved Pidgin statuses"); } }
 		public string Icon {get { return "pidgin"; } }
 		
 		public Type[] SupportedItemTypes {

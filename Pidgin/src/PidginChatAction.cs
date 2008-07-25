@@ -21,6 +21,7 @@ using System;
 using System.Threading;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
@@ -32,12 +33,12 @@ namespace Do.Addins.Pidgin
 		
 		public override string Name
 		{
-			get { return "Chat"; }
+			get { return Catalog.GetString ("Chat"); }
 		}
 		
 		public override string Description
 		{
-			get { return "Send an instant message to a friend."; }
+			get { return Catalog.GetString ("Send an instant message to a friend."); }
 		}
 		
 		public override string Icon

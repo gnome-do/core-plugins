@@ -21,14 +21,17 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadProjectPageItem : LaunchpadItem
 	{
-		public LaunchpadProjectPageItem() { }
-		public string Name { get { return "Project Page"; } }
-		public string Description { get { return "Go to project's page in launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Project Page"); } }
+		
+		public string Description { 
+			get { return Catalog.GetString ("Go to project's page in launchpad"); } 
+		}
 		
 		public string Icon
 		{ 

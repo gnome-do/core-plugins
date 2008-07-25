@@ -101,6 +101,7 @@ namespace Tomboy {
             this.contentFirstRadioButton = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("First text item is content, second text item is title."));
             this.contentFirstRadioButton.CanFocus = true;
             this.contentFirstRadioButton.Name = "contentFirstRadioButton";
+            this.contentFirstRadioButton.Active = true;
             this.contentFirstRadioButton.DrawIndicator = true;
             this.contentFirstRadioButton.UseUnderline = true;
             this.contentFirstRadioButton.Group = new GLib.SList(System.IntPtr.Zero);

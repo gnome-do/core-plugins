@@ -21,6 +21,7 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
@@ -30,9 +31,11 @@ namespace Do.Launchpad
 #if false
 	public class LaunchpadCodeBrowseItem : LaunchpadItem
 	{
-		public LaunchpadCodeBrowseItem() { }
-		public string Name { get { return "Code Browse"; } }
-		public string Description { get { return "Browse Code For Launchpad Project"; } }
+		public string Name { get { return Catalog.GetString ("Code Browse"); } }
+		
+		public string Description { 
+			get { return Catalog.GetString ("Browse Code For Launchpad Project"); } 
+		}
 
 		public string Icon
 		{ 
@@ -56,9 +59,11 @@ namespace Do.Launchpad
 
 	public class LaunchpadCodeOverviewItem : LaunchpadItem
 	{
-		public LaunchpadCodeOverviewItem() { }
-		public string Name { get { return "Code Overview"; } }
-		public string Description { get { return "Browse project code at Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Code Overview"); } }
+	
+		public string Description { 
+			get { return Catalog.GetString ("Browse project code at Launchpad"); }
+		}
 		
 		public string Icon
 		{ 

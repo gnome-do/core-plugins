@@ -27,6 +27,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Universe
 {	
@@ -55,13 +56,13 @@ namespace Do.Universe
 		
 		public string Name {
 			get {
-				return name + " Shelf";
+				return name + Catalog.GetString (" Shelf");
 			}
 		}
 		
 		public string Description {
 			get {
-				return "Your " + name + " Shelf Items";
+				return Catalog.GetString ("Your ") + name + Catalog.GetString (" Shelf Items");
 			}
 		}
 
@@ -92,13 +93,13 @@ namespace Do.Universe
 		
 		public string Name {
 			get {
-				return "Shelf Item Source";
+				return Catalog.GetString ("Shelf Item Source");
 			}
 		}
 
 		public string Description {
 			get {
-				return "Your Shelf Items";
+				return Catalog.GetString ("Your Shelf Items");
 			}
 		}
 
@@ -140,7 +141,7 @@ namespace Do.Universe
 		
 		public ShelfItemSource ()
 		{
-			defaultName = "Default";
+			defaultName = Catalog.GetString ("Default");
 			
 			if (shelf.Count == 0) {
 				shelf.Add (defaultName, new ShelfItem (defaultName));

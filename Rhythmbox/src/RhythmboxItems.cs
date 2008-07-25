@@ -23,6 +23,7 @@ using System.Diagnostics;
 
 using Do.Addins;
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Rhythmbox
 {
@@ -45,7 +46,8 @@ namespace Do.Addins.Rhythmbox
 	class BrowseArtistsMusicItem : BrowseMusicItem
 	{
 		public BrowseArtistsMusicItem ():
-			base ("Browse Artists", "Browse Rhythmbox Music by Artist")
+			base (Catalog.GetString ("Browse Artists"), 
+				Catalog.GetString ("Browse Rhythmbox Music by Artist"))
 		{
 		}
 	}
@@ -53,7 +55,8 @@ namespace Do.Addins.Rhythmbox
 	class BrowseAlbumsMusicItem : BrowseMusicItem
 	{
 		public BrowseAlbumsMusicItem ():
-			base ("Browse Albums", "Browse Rhythmbox Music by Album")
+			base (Catalog.GetString ("Browse Albums"), 
+				Catalog.GetString ("Browse Rhythmbox Music by Album"))
 		{
 		}
 	}
@@ -63,48 +66,48 @@ namespace Do.Addins.Rhythmbox
 		public static readonly RhythmboxRunnableItem[] DefaultItems =
 			new RhythmboxRunnableItem[] {
 
-				new RhythmboxRunnableItem ("Play",
-						"Play Current Track in Rhythmbox",
+				new RhythmboxRunnableItem (Catalog.GetString ("Play"),
+						Catalog.GetString ("Play Current Track in Rhythmbox"),
 						"player_play",
 						"--play"),
 
-				new RhythmboxRunnableItem ("Pause",
-						"Pause Rhythmbox Playback",
+				new RhythmboxRunnableItem (Catalog.GetString ("Pause"),
+						Catalog.GetString ("Pause Rhythmbox Playback"),
 						"player_pause",
 						"--play-pause"),
 
-				new RhythmboxRunnableItem ("Next",
-						"Play Next Track in Rhythmbox",
+				new RhythmboxRunnableItem (Catalog.GetString ("Next"),
+						Catalog.GetString ("Play Next Track in Rhythmbox"),
 						"player_end",
 						"--next"),
 
-				new RhythmboxRunnableItem ("Previous",
-						"Play Previous Track in Rhythmbox",
+				new RhythmboxRunnableItem (Catalog.GetString ("Previous"),
+						Catalog.GetString ("Play Previous Track in Rhythmbox"),
 						"player_start",
 						"--previous"),
 
-				new RhythmboxRunnableItem ("Show Current Track",
-						"Show Notification of Current Track in Rhythmbox",
+				new RhythmboxRunnableItem (Catalog.GetString ("Show Current Track"),
+						Catalog.GetString ("Show Notification of Current Track in Rhythmbox"),
 						"gnome-mime-audio",
 						"--notify"),
 
-				new RhythmboxRunnableItem ("Mute",
-						"Mute Rhythmbox Playback",
+				new RhythmboxRunnableItem (Catalog.GetString ("Mute"),
+						Catalog.GetString ("Mute Rhythmbox Playback"),
 						"audio-volume-muted",
 						"--mute"),
 
-				new RhythmboxRunnableItem ("Unmute",
-						"Unmute Rhythmbox Playback",
+				new RhythmboxRunnableItem (Catalog.GetString ("Unmute"),
+						Catalog.GetString ("Unmute Rhythmbox Playback"),
 						"audio-volume-high",
 						"--unmute"),
 
-				new RhythmboxRunnableItem ("Volume Up",
-						"Increase Rhythmbox Playback Volume",
+				new RhythmboxRunnableItem (Catalog.GetString ("Volume Up"),
+						Catalog.GetString ("Increase Rhythmbox Playback Volume"),
 						"audio-volume-high",
 						"--volume-up"),
 
-				new RhythmboxRunnableItem ("Volume Down",
-						"Decrease Rhythmbox Playback Volume",
+				new RhythmboxRunnableItem (Catalog.GetString ("Volume Down"),
+						Catalog.GetString ("Decrease Rhythmbox Playback Volume"),
 						"audio-volume-low",
 						"--volume-down"),
 			};

@@ -23,6 +23,8 @@ using System.Collections.Generic;
 using Do.Plugins;
 using Do.Universe;
 
+using Mono.Unix;
+
 namespace Do.Plugins.Amarok
 {
 
@@ -73,7 +75,7 @@ namespace Do.Plugins.Amarok
 		public override string Description
 		{
 			get {
-				return string.Format ("All music by {0}", artist);
+				return string.Format (Catalog.GetString("All music by") + " {0}", artist);
 			}
 		}
 	}
