@@ -94,6 +94,11 @@ if test -z "$CONFIG_REQUESTED" ; then
 	enable_debug=yes
 fi
 
+dnl Temporarily disable plugin builds
+dnl This should be turned into a configure option, with optional dependencies
+AM_CONDITIONAL(BUILD_BANSHEE, false)
+AM_CONDITIONAL(BUILD_AMAROK, false)
+
 AC_CONFIG_FILES([
 Amarok/Makefile
 Archive/Makefile

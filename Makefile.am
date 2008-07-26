@@ -1,14 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
-EXTRA_DIST = GCalendar/Google.GData.Client.dll \
-	GMailContacts/Google.GData.Client.dll \
-	GCalendar/Google.GData.Extensions.dll \
-	GCalendar/Google.GData.Calendar.dll \
-	GMailContacts/Google.GData.Contacts.dll \
-	GMailContacts/Google.GData.Extensions.dll \
-	Riptide/MonoTorrent.dll \
-	GCalendar/Google.GData.AccessControl.dll
+EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
-SUBDIRS = . po \
+SUBDIRS = . po BundledLibraries \
 	Archive \
 	DiskMounter \
 	Epiphany \
@@ -41,3 +34,10 @@ SUBDIRS = . po \
 	Vinagre \
 	VolumeControl \
 	WindowManager
+
+if BUILD_AMAROK
+SUBDIRS += Amarok 
+endif
+if BUILD_BANSHEE
+SUBDIRS += Banshee
+endif
