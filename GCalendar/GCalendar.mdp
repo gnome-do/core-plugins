@@ -22,21 +22,21 @@
     <File name="src/GCalendarItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarNewEvent.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarSearchEvents.cs" subtype="Code" buildaction="Compile" />
-    <File name="Google.GData.AccessControl.dll" subtype="Code" buildaction="Nothing" />
-    <File name="Google.GData.Calendar.dll" subtype="Code" buildaction="Nothing" />
-    <File name="Google.GData.Client.dll" subtype="Code" buildaction="Nothing" />
-    <File name="Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
     <File name="resources/calIcon.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="GCalendar.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="../BundledLibraries/Google.GData.AccessControl.dll" subtype="Code" buildaction="Nothing" />
+    <File name="../BundledLibraries/Google.GData.Calendar.dll" subtype="Code" buildaction="Nothing" />
+    <File name="../BundledLibraries/Google.GData.Client.dll" subtype="Code" buildaction="Nothing" />
+    <File name="../BundledLibraries/Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Assembly" localcopy="True" refto="Google.GData.AccessControl.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="Google.GData.Calendar.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="Google.GData.Client.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="Google.GData.Extensions.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.5.1.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.AccessControl.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Calendar.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Client.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Extensions.dll" />
   </References>
 </Project>
