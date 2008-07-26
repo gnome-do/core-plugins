@@ -9,9 +9,7 @@ EXTRA_DIST = GCalendar/Google.GData.Client.dll \
 	GCalendar/Google.GData.AccessControl.dll
 
 SUBDIRS = . po \
-	Amarok \
 	Archive \
-	Banshee \
 	DiskMounter \
 	Epiphany \
 	Evolution \
