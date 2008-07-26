@@ -1,0 +1,23 @@
+<Addin
+	id="Google Search"
+	namespace="Do"
+	version="1.0"
+	name="Search Google"
+	description="Searches google and returns results to Do"
+	author="Brian Lucas"
+>
+ 
+	<Runtime>
+		<Import assembly="InlineGoogleSearch.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/Action">
+		<Action type="InlineGoogleSearch.InlineGoogleSearch" />
+	</Extension>
+</Addin>
