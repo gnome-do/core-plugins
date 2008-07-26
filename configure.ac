@@ -123,6 +123,7 @@ Pastebin/Makefile
 Pidgin/Makefile
 Rhythmbox/Makefile
 Rhythmbox/src/Makefile
+Riptide/Makefile
 SSH/Makefile
 Tasque/Makefile
 Tomboy/Makefile
