@@ -36,6 +36,8 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
+PKG_CHECK_MODULES([FLICKRNET], [flickrnet])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
@@ -54,6 +56,8 @@ PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 PKG_CHECK_MODULES([DOADDINS], [do.addins])
 PKG_CHECK_MODULES([DODBUS], [do.dbus])
 
+AC_SUBST([EVOLUTION_SHARP_LIBS])
+AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])
 AC_SUBST([GLADE_SHARP_20_LIBS])
 AC_SUBST([GLIB_SHARP_20_LIBS])
@@ -96,12 +100,14 @@ fi
 
 AC_CONFIG_FILES([
 Amarok/Makefile
+Archive/Makefile
 Banshee/Makefile
 DiskMounter/Makefile
 Epiphany/Makefile
 Evolution/Makefile
 File/Makefile
 Firefox/Makefile
+Flickr/Makefile
 GNOME-Screenshot/Makefile
 GNOME-Session/Makefile
 GoogleCalculator/Makefile

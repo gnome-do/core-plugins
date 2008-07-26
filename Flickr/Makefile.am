@@ -7,7 +7,7 @@ if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = bin/Debug/Evolution.dll
+ASSEMBLY = bin/Debug/Banshee.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
@@ -19,7 +19,7 @@ endif
 if ENABLE_RELEASE
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/Evolution.dll
+ASSEMBLY = bin/Release/Banshee.dll
 ASSEMBLY_MDB = 
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
@@ -34,27 +34,36 @@ SATELLITE_ASSEMBLY_NAME=.resources.dll
 all: $(ASSEMBLY)
 
 FILES = \
-	src/ContactDetailItem.cs \
-	src/ContactItemSource.cs \
-	src/EmailContactDetailItem.cs \
-	src/PhoneContactDetailItem.cs
+	gtk-gui/Flickr.AccountConfig.cs \
+	gtk-gui/Flickr.UploadConfig.cs \
+	gtk-gui/generated.cs \
+	src/AccountConfig.cs \
+	src/FlickrItemSource.cs \
+	src/UploadAction.cs \
+	src/UploadConfig.cs
 
 DATA_FILES = 
 
 RESOURCES = \
-	Resources/Evolution.addin.xml \
-	Resources/phone.png
+	Flickr.addin.xml \
+	gtk-gui/gui.stetic \
+	gtk-gui/objects.xml \
+	resources/flickr.png
 
 REFERENCES =  \
-	$(EVOLUTION_SHARP_LIBS) \
 	System \
-	$(DOADDINS_LIBS)
+	Mono.Posix \
+	$(DOADDINS_LIBS) \
+	$(GCONF_SHARP_20_LIBS) \
+	$(GTK_SHARP_20_LIBS) \
+	$(FLICKRNET_LIBS)
 
 DLL_REFERENCES = 
 
 CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
+
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'

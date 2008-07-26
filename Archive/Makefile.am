@@ -7,7 +7,7 @@ if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 
-ASSEMBLY = bin/Debug/Evolution.dll
+ASSEMBLY = bin/Debug/Archive.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
@@ -19,7 +19,7 @@ endif
 if ENABLE_RELEASE
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/Evolution.dll
+ASSEMBLY = bin/Release/Archive.dll
 ASSEMBLY_MDB = 
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
@@ -34,20 +34,22 @@ SATELLITE_ASSEMBLY_NAME=.resources.dll
 all: $(ASSEMBLY)
 
 FILES = \
-	src/ContactDetailItem.cs \
-	src/ContactItemSource.cs \
-	src/EmailContactDetailItem.cs \
-	src/PhoneContactDetailItem.cs
+	src/ArchiveTypeItem.cs \
+	src/CreateArchiveAction.cs \
+	src/ExtractArchiveAction.cs
 
 DATA_FILES = 
 
 RESOURCES = \
-	Resources/Evolution.addin.xml \
-	Resources/phone.png
+	src/Archive.addin.xml 
 
 REFERENCES =  \
-	$(EVOLUTION_SHARP_LIBS) \
 	System \
+	System.Xml \
+	System.Data \
+	Mono.Data.Sqlite \
+	$(NDESK_DBUS_10_LIBS) \
+	$(NDESK_DBUS_GLIB_10_LIBS) \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
@@ -55,6 +57,7 @@ DLL_REFERENCES =
 CLEANFILES = 
 
 include $(top_srcdir)/Makefile.include
+
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'
