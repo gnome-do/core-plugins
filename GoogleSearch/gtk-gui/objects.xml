@@ -1,0 +1,10 @@
+<objects>
+  <object type="InlineGoogleSearch.InlineGoogleSearchConfig" palette-category="InlineGoogleSearch" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups>
+      <itemgroup label="InlineGoogleSearchConfig Properties">
+        <property name="SearchRestrictions" />
+      </itemgroup>
+    </itemgroups>
+    <signals />
+  </object>
+</objects>
