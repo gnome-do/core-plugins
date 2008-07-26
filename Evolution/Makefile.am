@@ -46,9 +46,11 @@ RESOURCES = \
 	Resources/phone.png
 
 REFERENCES =  \
-	$(EVOLUTION_SHARP_LIBS) \
 	System \
-	$(DOADDINS_LIBS)
+	Mono.Posix \
+	$(DOADDINS_LIBS) \
+	$(EVOLUTION_SHARP_LIBS)
+
 
 DLL_REFERENCES = 
 

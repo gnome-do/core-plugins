@@ -46,6 +46,7 @@ RESOURCES = \
 
 REFERENCES =  \
 	System \
+	Mono.Posix \
 	$(DOADDINS_LIBS) \
 	$(GCONF_SHARP_20_LIBS) \
 	$(NDESK_DBUS_GLIB_10_LIBS) \

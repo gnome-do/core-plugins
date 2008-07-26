@@ -52,6 +52,7 @@ RESOURCES =
 
 REFERENCES =  \
 	System \
+	Mono.Posix \
 	$(GNOME_VFS_SHARP_20_LIBS) \
 	$(DOADDINS_LIBS)
 

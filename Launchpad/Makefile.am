@@ -59,11 +59,11 @@ RESOURCES = \
 	Resources/LaunchpadUser.png \
 	src/Launchpad.addin.xml 
 
-EXTRAS = \
-	../Launchpad.old/Resources/Launchpad.png
+EXTRAS = 
 
 REFERENCES =  \
 	System \
+	Mono.Posix \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 

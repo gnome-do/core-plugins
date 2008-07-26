@@ -54,10 +54,11 @@ RESOURCES = \
 
 REFERENCES =  \
 	System \
+	System.Xml \
+	Mono.Posix \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
-	System.Xml \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 

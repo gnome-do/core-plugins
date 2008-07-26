@@ -47,8 +47,9 @@ RESOURCES = \
 	src/GNOME-Screenshot.addin.xml 
 
 REFERENCES =  \
-	$(DOADDINS_LIBS) \
-	System
+	System \
+	Mono.Posix \
+	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
 

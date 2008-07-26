@@ -48,8 +48,9 @@ RESOURCES = \
 	src/Rhythmbox.addin.xml 
 
 REFERENCES =  \
-	System.Xml \
 	System \
+	System.Xml \
+	Mono.Posix \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 

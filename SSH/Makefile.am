@@ -44,8 +44,9 @@ RESOURCES = \
 
 REFERENCES =  \
 	System \
-	$(GCONF_SHARP_20_LIBS) \
 	System.Xml \
+	Mono.Posix \
+	$(GCONF_SHARP_20_LIBS) \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 

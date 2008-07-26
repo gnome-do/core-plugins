@@ -45,11 +45,7 @@ RESOURCES = \
 
 REFERENCES =  \
 	System \
-	System.Xml \
-	System.Data \
-	Mono.Data.Sqlite \
-	$(NDESK_DBUS_10_LIBS) \
-	$(NDESK_DBUS_GLIB_10_LIBS) \
+	Mono.Posix \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 

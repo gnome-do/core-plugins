@@ -53,6 +53,7 @@ REFERENCES =  \
 	System.Xml \
 	System.Data \
 	Mono.Data.Sqlite \
+	Mono.Posix \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 

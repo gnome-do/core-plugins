@@ -44,6 +44,7 @@ RESOURCES = \
 REFERENCES =  \
 	System \
 	System.Xml \
+	Mono.Posix \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
