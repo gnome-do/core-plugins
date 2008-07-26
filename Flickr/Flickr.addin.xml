@@ -1,7 +1,7 @@
 <Addin
 	id="Flickr"
 	namespace="Do"
-	version="1.2"
+	version="1.4"
 	name="Flickr"
 	description="Upload photos to Flickr"
 	author="Alex Launi"
