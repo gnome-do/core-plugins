@@ -124,6 +124,7 @@ Pidgin/Makefile
 Rhythmbox/Makefile
 Rhythmbox/src/Makefile
 Riptide/Makefile
+RSS/Makefile
 SSH/Makefile
 Tasque/Makefile
 Tomboy/Makefile
