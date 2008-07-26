@@ -117,7 +117,7 @@ namespace DoTwitter
 					}
 				}
 			} catch (TwitterizerException e) {
-				Console.Error.WriteLine (e);
+				Console.Error.WriteLine (e.Message);
 			} finally {
 				Monitor.Exit (items);
 			} 

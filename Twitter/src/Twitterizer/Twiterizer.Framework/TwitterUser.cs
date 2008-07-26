@@ -13,28 +13,35 @@ namespace Twitterizer.Framework
             set { id = value; }
         }
 
-        private string userName;
+        private string userName = "";
         public string UserName
         {
             get { return userName; }
             set { userName = value; }
         }
 
-        private string screenName;
+        private string screenName = "";
         public string ScreenName
         {
             get { return screenName; }
             set { screenName = value; }
         }
 
-        private string location;
+        private string location = "";
         public string Location
         {
             get { return location; }
             set { location = value; }
         }
 
-        private string description;
+        private string timeZone = "";
+        public string TimeZone
+        {
+            get { return timeZone; }
+            set { timeZone = value; }
+        }
+
+        private string description = "";
         public string Description
         {
             get { return description; }
@@ -55,18 +62,25 @@ namespace Twitterizer.Framework
             set { profileUri = value; }
         }
 
-        private bool isProtected;
+        private bool isProtected  = false;
         public bool IsProtected
         {
             get { return isProtected; }
             set { isProtected = value; }
         }
 
-        private int numberOfFollowers;
+        private int numberOfFollowers = 0;
         public int NumberOfFollowers
         {
             get { return numberOfFollowers; }
             set { numberOfFollowers = value; }
+        }
+
+        private int friends_count = 0;
+        public int Friends_count
+        {
+            get { return friends_count; }
+            set { friends_count = value; }
         }
 
         private TwitterStatus status;

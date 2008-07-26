@@ -35,7 +35,10 @@ namespace DoTwitter
 		
 		protected override bool Validate (string username, string password)
 		{
-			return TwitterAction.TryConnect (username, password);
+			//return TwitterAction.TryConnect (username, password);
+			// we had too many problems with this failing for valid data,
+			// we're just going to return true until I find a better way
+			return true;
 		}
 	}
 }

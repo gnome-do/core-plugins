@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Configuration;
 using System.Web;
 
 namespace Twitterizer.Framework
@@ -24,9 +25,9 @@ namespace Twitterizer.Framework
             Data.Password = password;
             
             Data.ActionUri = new Uri(
-                string.Format("http://twitter.com/statuses/update.xml?source=Do&status={0}",
+                string.Format("http://twitter.com/statuses/update.xml?status={0}",
                   HttpUtility.UrlEncode(Status)));
-			
+
             Data = Request.PerformWebRequest(Data);
 
             return Data.Statuses[0];
@@ -40,12 +41,14 @@ namespace Twitterizer.Framework
             Data.Password = password;
 
             Data.ActionUri = new Uri(
-                string.Format("http://twitter.com/statuses/destroy/{0}.xml",ID));
+                string.Format("http://twitter.com/statuses/destroy/{0}.xml",
+                  ID));
 
             Data = Request.PerformWebRequest(Data);
         }
 
-        public TwitterStatus Show(int ID)
+       
+        public TwitterUser Show(string id_or_ScreenName)
         {
             TwitterRequest Request = new TwitterRequest();
             TwitterRequestData Data = new TwitterRequestData();
@@ -53,10 +56,12 @@ namespace Twitterizer.Framework
             Data.Password = password;
 
             Data.ActionUri = new Uri(
-                string.Format("http://twitter.com/statuses/show/{0}.xml",ID));
-            Data = Request.PerformWebRequest(Data);
+                string.Format("http://twitter.com/statuses/show/{0}.xml",
+                  id_or_ScreenName));
 
-            return Data.Statuses[0];
+            Data = Request.PerformWebRequest(Data, "GET");
+
+            return Data.Users[0];
         }
 
         public TwitterStatusCollection FriendsTimeline()
@@ -73,16 +78,83 @@ namespace Twitterizer.Framework
             return Data.Statuses;
         }
 
-        public TwitterUserCollection Friends()
+        public TwitterStatusCollection DirectMessages(ulong since_id)
         {
             TwitterRequest Request = new TwitterRequest();
             TwitterRequestData Data = new TwitterRequestData();
             Data.UserName = userName;
             Data.Password = password;
-            Data.ActionUri = new Uri("http://twitter.com/statuses/friends.xml");
+
+            Data.ActionUri = new Uri(
+                string.Format("http://twitter.com/direct_messages.xml",
+                since_id));
+
+            Data = Request.PerformWebRequest(Data,"GET");
+
+            return Data.Statuses;
+        }
+
+        public TwitterStatusCollection DirectMessagesSent()
+        {
+            return DirectMessagesSent(0);
+        }
+
+        public TwitterStatusCollection DirectMessagesSent(ulong since_id)
+        {
+            TwitterRequest Request = new TwitterRequest();
+            TwitterRequestData Data = new TwitterRequestData();
+            Data.UserName = userName;
+            Data.Password = password;
+
+            Data.ActionUri = new Uri(
+                string.Format("http://twitter.com/direct_messages/sent.xml",
+                since_id));
 
             Data = Request.PerformWebRequest(Data);
 
+            return Data.Statuses;
+        }
+		/*
+        public TwitterStatusCollection Archive()
+        {
+            return Archive(0);
+        }
+        
+        
+        public TwitterStatusCollection Archive(ulong since_id)
+        {
+            TwitterRequest Request = new TwitterRequest();
+            TwitterRequestData Data = new TwitterRequestData();
+            Data.UserName = userName;
+            Data.Password = password;
+
+            Data.ActionUri = new Uri(
+                string.Format(,
+                since_id));
+
+            Data = Request.PerformWebRequest(Data);
+
+            return Data.Statuses;
+        }
+		*/
+		
+        public TwitterUserCollection Friends()
+        {
+            return (Friends(1));
+        }
+
+        public TwitterUserCollection Friends(int page)
+        {
+            // page 0 == page 1 is the start
+            TwitterRequest Request = new TwitterRequest();
+            TwitterRequestData Data = new TwitterRequestData();
+            Data.UserName = userName;
+            Data.Password = password;
+           
+            Data.ActionUri = new Uri(
+                    string.Format("http://twitter.com/statuses/friends.xml?page={0}", page));
+
+            Data = Request.PerformWebRequest(Data);
             return Data.Users;
         }
 
@@ -126,12 +198,19 @@ namespace Twitterizer.Framework
 
         public TwitterUserCollection Followers()
         {
+            return (Followers(0));
+        }
+
+        public TwitterUserCollection Followers(int page)
+        {
             TwitterRequest Request = new TwitterRequest();
             TwitterRequestData Data = new TwitterRequestData();
             Data.UserName = userName;
             Data.Password = password;
 
-            Data.ActionUri = new Uri("http://twitter.com/statuses/followers.xml");
+            
+             Data.ActionUri = new Uri(
+                    string.Format("http://twitter.com/statuses/followers.xml?page={0}", page));
 
             Data = Request.PerformWebRequest(Data);
 
