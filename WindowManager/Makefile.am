@@ -50,6 +50,7 @@ RESOURCES = \
 
 REFERENCES =  \
 	System \
+	Mono.Posix \
 	$(WNCK_SHARP_10_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
