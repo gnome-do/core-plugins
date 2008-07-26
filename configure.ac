@@ -1,4 +1,3 @@
-dnl Warning: This is an automatically generated file, do not edit!
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
 AC_INIT([gnome-do-plugins], [0.4.9.9])
@@ -22,8 +21,6 @@ if test "x$PKG_CONFIG" = "xno"; then
 fi
 
 AC_PROG_INSTALL
-AC_PROG_CC
-AC_HEADER_STDC
 
 SHAMROCK_FIND_MONO_2_0_COMPILER
 SHAMROCK_CHECK_LINQ_FLAG
@@ -121,7 +118,6 @@ OpenSearch/Makefile
 Pastebin/Makefile
 Pidgin/Makefile
 Rhythmbox/Makefile
-Rhythmbox/src/Makefile
 Riptide/Makefile
 RSS/Makefile
 Shelf/Makefile
