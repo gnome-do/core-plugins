@@ -26,15 +26,10 @@ COMPILE_TARGET = library
 PROJECT_REFERENCES = 
 BUILD_DIR = bin/Release
 
-DISKMOUNTER_ADDIN_XML_SOURCE=src/DiskMounter.addin.xml
-
 endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=DiskMounter.resources.dll
-
-PROGRAMFILES = \
-	$(DISKMOUNTER_ADDIN_XML)  
 
 all: $(ASSEMBLY) $(PROGRAMFILES)
 
@@ -45,10 +40,8 @@ FILES = \
 	src/OpenVolumeAction.cs \
 	src/UnmountAction.cs 
 
-DATA_FILES = \
-	src/DiskMounter.addin.xml 
-
-RESOURCES = 
+RESOURCES = \
+	src/DiskMounter.addin.xml
 
 REFERENCES =  \
 	System \
@@ -61,11 +54,6 @@ DLL_REFERENCES =
 CLEANFILES = $(PROGRAMFILES)
 
 include $(top_srcdir)/Makefile.include
-
-DISKMOUNTER_ADDIN_XML = $(BUILD_DIR)/DiskMounter.addin.xml
-
-$(eval $(call emit-deploy-target,DISKMOUNTER_ADDIN_XML))
-
 
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'

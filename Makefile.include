@@ -49,6 +49,11 @@ pluginfiles_DATA = $(ASSEMBLY)
 linuxpkgconfigdir = @libdir@/pkgconfig
 linuxpkgconfig_DATA = $(LINUX_PKGCONFIG)
 
+############################################################
+# Bundled libs are bad, m'kay!                             #
+# But we've got a bunch of them, so let's make it easier   #
+############################################################
+bundledir = $(srcdir)/../BundledLibraries
 
 # macros
 

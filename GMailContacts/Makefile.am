@@ -50,6 +50,10 @@ RESOURCES = \
 	resources/gmail-logo.png \
 	resources/phone.png
 
+BUNDLED_LIBS = \
+	$(bundledir)/Google.GData.Extensions.dll \
+	$(bundledir)/Google.GData.Client.dll \
+	$(bundledir)/Google.GData.Contacts.dll
 
 REFERENCES =  \
 	System \
@@ -57,9 +61,7 @@ REFERENCES =  \
 	Mono.Posix \
 	$(DOADDINS_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
-	$(srcdir)/Google.GData.Extensions.dll \
-	$(srcdir)/Google.GData.Client.dll \
-	$(srcdir)/Google.GData.Contacts.dll
+	$(BUNDLED_LIBS)
 
 DLL_REFERENCES = 
 

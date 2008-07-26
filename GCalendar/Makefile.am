@@ -49,15 +49,18 @@ RESOURCES = \
 
 DATA_FILES = 
 
+BUNDLED_LIBS = \
+	$(bundledir)/Google.GData.AccessControl.dll \
+	$(bundledir)/Google.GData.Calendar.dll \
+	$(bundledir)/Google.GData.Client.dll \
+	$(bundledir)/Google.GData.Extensions.dll
+
 REFERENCES =  \
 	System \
 	Mono.Posix \
 	$(DOADDINS_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
-	$(srcdir)/Google.GData.AccessControl.dll \
-	$(srcdir)/Google.GData.Calendar.dll \
-	$(srcdir)/Google.GData.Client.dll \
-	$(srcdir)/Google.GData.Extensions.dll
+	$(BUNDLED_LIBS)
 
 DLL_REFERENCES = 
 

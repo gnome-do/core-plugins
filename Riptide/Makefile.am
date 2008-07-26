@@ -60,6 +60,9 @@ RESOURCES = \
 	gtk-gui/objects.xml \
 	Riptide.addin.xml
 
+BUNDLED_LIBS = \
+	$(bundledir)/MonoTorrent.dll
+
 REFERENCES =  \
 	System \
 	System.Xml \
@@ -69,7 +72,7 @@ REFERENCES =  \
 	$(DOADDINS_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GCONF_SHARP_20_LIBS) \
-	$(srcdir)/MonoTorrent.dll
+	$(BUNDLED_LIBS)
 
 DLL_REFERENCES = 
 
