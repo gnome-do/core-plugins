@@ -128,6 +128,7 @@ RSS/Makefile
 Shelf/Makefile
 SSH/Makefile
 Tasque/Makefile
+Text/Makefile
 Tomboy/Makefile
 Twitter/Makefile
 Vinagre/Makefile
