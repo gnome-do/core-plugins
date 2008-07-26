@@ -115,6 +115,7 @@ GNOME-Screenshot/Makefile
 GNOME-Session/Makefile
 GNOME-Terminal/Makefile
 GoogleCalculator/Makefile
+GoogleMaps/Makefile
 Launchpad/Makefile
 LocateFiles/Makefile
 OpenSearch/Makefile
