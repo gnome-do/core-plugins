@@ -1,7 +1,7 @@
 
 EXTRA_DIST =  
 
-# Warning: This is an automatically generated file, do not edit!
+
 
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
