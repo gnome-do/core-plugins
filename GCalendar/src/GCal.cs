@@ -28,6 +28,7 @@ using Google.GData.Client;
 using Google.GData.Calendar;
 using Google.GData.Extensions;
 
+using Gtk;
 using Do.Universe;
 
 namespace GCalendar
@@ -39,14 +40,18 @@ namespace GCalendar
 		private static string username, password;
 		private static CalendarService service;
 		private static List<IItem> calendars;
-		private static Timer ClearCalendarsTimer;
+		private static List<IItem> events;
+		private static List<string> notified;
 		const int CacheSeconds  = 500; //cache contacts
 			
 		static GCal ()
 		{	
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			calendars = new List<IItem> ();
-			ClearCalendarsTimer = new Timer (ClearCalendars);
+			events = new List<IItem> ();
+			notified = new List<string> ();
+			GLib.Timeout.Add (CacheSeconds * 1000, delegate { ClearList (ref calendars); return true; });
+			GLib.Timeout.Add (CacheSeconds * 1000, delegate { ClearList (ref events); return true; });
 			Configuration.GetAccountData (out username, out password,
 			                           typeof (Configuration));
 			try {
@@ -62,6 +67,10 @@ namespace GCalendar
 		
 		public static List<IItem> Calendars {
 			get { return calendars; }
+		}
+		
+		public static List<IItem> Events {
+			get { return events; }
 		}
 
 		private static void Connect (string username, string password) 
@@ -82,8 +91,6 @@ namespace GCalendar
 				Monitor.Exit (calendars);
 				return;
 			}
-			
-			ClearCalendarsTimer.Change (CacheSeconds*1000, Timeout.Infinite);
 			AtomFeed cal_list = QueryCalendars ();
 			if (cal_list == null) return;
 			
@@ -130,6 +137,69 @@ namespace GCalendar
 			return events;
         }
         
+        public static void UpdateEvents ()
+        {
+        	EventFeed eventsFeed;
+        	string eventUrl, eventDesc, start;
+        	
+        	lock (calendars) {
+        		lock (events) {
+        			foreach (GCalendarItem cal in calendars) {
+						try {
+							eventsFeed = GCal.GetEvents (cal.URL);
+						} catch (Exception e) {
+							Console.Error.WriteLine (e.Message);
+							return;
+						}
+						foreach (EventEntry entry in eventsFeed.Entries) {
+						    eventUrl = entry.AlternateUri.Content;
+						    eventDesc = entry.Content.Content;
+						    if (entry.Times.Count > 0) {
+						        start = entry.Times [0].StartTime.ToString ();
+						        start = start.Substring (0,start.IndexOf (' '));
+						        eventDesc = start + " - " + eventDesc;
+						        try {
+			                		SetReminder (entry.Title.Text, eventDesc,
+			                			entry.Times [0].StartTime, entry.EventId);
+			                		Console.Error.WriteLine ("{0} Has notification", entry.EventId);
+			                	} catch {
+			                		Console.Error.WriteLine (entry.Title.Text + "has no notifications");
+			                	}
+			                }
+						    events.Add (new GCalendarEventItem (entry.Title.Text, eventUrl,
+						            eventDesc));
+			            }
+					}
+				}
+			}
+        }
+        
+        private static void SetReminder (string title, string description, 
+        	DateTime when, string eid)
+        {
+        	Console.Error.WriteLine (when);
+        	Console.Error.Write (DateTime.Now);
+        	Console.Error.WriteLine ("SetReminder called");
+        	Console.Error.WriteLine (when.Millisecond - DateTime.Now.Millisecond);
+        	
+        	if (!(when.Millisecond - DateTime.Now.Millisecond < 36000000)) {
+        		Console.Error.WriteLine ("statement is false");
+        		return;
+        	}
+        		
+        	lock (notified) {
+        		notified.Add (eid);
+        	}
+        	
+        	Console.Error.WriteLine ("A message will be sent");
+        	GLib.Timeout.Add ((uint) (when.Millisecond - DateTime.Now.Millisecond),
+        		delegate {
+        			Console.Error.WriteLine ("Sending message");
+        			Do.Addins.NotificationBridge.ShowMessage (title, description); 
+	        		return false; }
+	        );
+        }
+        
         public static EventFeed SearchEvents (string calUrl, string needle) 
         {
 			string [] keywords = {"from ","until ","in ", "after ", "before ", "on "};
@@ -164,11 +234,11 @@ namespace GCalendar
             return nevent;
         }
 		
-		private static void ClearCalendars (object state)
+		private static void ClearList (ref List<IItem> list)
 		{
-			lock (calendars) {
-				calendars.Clear ();
-			}		
+			lock (list) {
+				list.Clear ();
+			}
 		}
 		
 		private static DateTime [] ParseEventDates (string needle, string [] keywords)

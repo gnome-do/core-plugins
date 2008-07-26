@@ -18,15 +18,6 @@
     <File name="src/TwitterAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TwitterFriendSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TwitterTweet.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitter.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/TwitterizerException.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/TwitterRequest.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/TwitterRequestData.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/TwitterStatus.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/TwitterStatusCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/TwitterUser.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/TwitterUserCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="Twitter.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="twitter-icon.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="twitter_items.png" subtype="Code" buildaction="EmbedAsResource" />
@@ -35,6 +26,17 @@
     <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/GenConfig.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/DoTwitter.GenConfig.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/Twitter.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/Twitterizer.Framework.csproj" subtype="Code" buildaction="Nothing" />
+    <File name="src/Twitterizer/Twiterizer.Framework/TwitterizerException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/TwitterRequest.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/TwitterRequestData.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/TwitterStatus.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/TwitterStatusCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/TwitterUser.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/TwitterUserCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twiterizer.Framework/Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Example.config" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.5.1.0, Culture=neutral, PublicKeyToken=null" />
@@ -44,6 +46,7 @@
     <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </References>
   <GtkDesignInfo gtkVersion="2.12.0">
     <ExportedWidgets>
