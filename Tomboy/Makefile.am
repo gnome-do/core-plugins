@@ -33,22 +33,22 @@ SATELLITE_ASSEMBLY_NAME=.resources.dll
 
 all: $(ASSEMBLY)
 
+DATA_FILES = 
+
 FILES = \
-	src/TomboyDBus.cs \
-	src/TomboyItem.cs \
+	gtk-gui/generated.cs \
+	gtk-gui/Tomboy.TomboyConfiguration.cs \
 	src/NewNoteAction.cs \
 	src/NotesItemSource.cs \
 	src/SearchNotesAction.cs \
 	src/TomboyConfiguration.cs \
-	gtk-gui/generated.cs \
-	gtk-gui/Tomboy.TomboyConfiguration.cs
-
-DATA_FILES = 
+	src/TomboyDBus.cs \
+	src/TomboyItem.cs
 
 RESOURCES = \
-	src/Tomboy.addin.xml \
 	gtk-gui/gui.stetic \
-	gtk-gui/objects.xml
+	gtk-gui/objects.xml \
+	src/Tomboy.addin.xml
 
 REFERENCES =  \
 	$(NDESK_DBUS_10_LIBS) \
