@@ -108,6 +108,7 @@ Evolution/Makefile
 File/Makefile
 Firefox/Makefile
 Flickr/Makefile
+GCalendar/Makefile
 GNOME-Screenshot/Makefile
 GNOME-Session/Makefile
 GoogleCalculator/Makefile
