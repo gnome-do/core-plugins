@@ -40,7 +40,7 @@ FILES = \
 	src/ShelfItemSource.cs
 
 RESOURCES = \
-	Do.Shelf.xml
+	Do.Shelf.addin.xml
 
 REFERENCES =  \
 	System \
