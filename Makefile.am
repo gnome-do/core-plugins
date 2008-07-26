@@ -1,4 +1,4 @@
-ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 EXTRA_DIST = GCalendar/Google.GData.Client.dll \
 	GMailContacts/Google.GData.Client.dll \
 	GCalendar/Google.GData.Extensions.dll \
