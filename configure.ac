@@ -136,6 +136,7 @@ VolumeControl/Makefile
 WindowManager/Makefile
 Makefile
 po/Makefile.in
+BundledLibraries/Makefile
 ])
 
 AC_OUTPUT
