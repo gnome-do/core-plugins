@@ -21,14 +21,16 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadBlueprintsItem : LaunchpadItem
 	{
-		public LaunchpadBlueprintsItem() { }
-		public string Name { get { return "Project Blueprints"; } }
-		public string Description { get { return "Show blueprints for specified project at Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Project Blueprints"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Show blueprints for specified project at Launchpad"); }
+		}
 
 		public string Icon
 		{ 
@@ -51,9 +53,10 @@ namespace Do.Launchpad
 
 	public class LaunchpadBlueprintSearchItem : LaunchpadItem
 	{
-		public LaunchpadBlueprintSearchItem() { }
-		public string Name { get { return "Blueprint Search"; } }
-		public string Description { get { return "Search for blueprints at Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Blueprint Search"); } }
+		public string Description {
+			get { return Catalog.GetString ("Search for blueprints at Launchpad"); }
+		}
 
 		public string Icon
 		{ 
@@ -76,9 +79,12 @@ namespace Do.Launchpad
 
 	public class LaunchpadBlueprintsRegisterItem : LaunchpadItem
 	{
-		public LaunchpadBlueprintsRegisterItem() { }
-		public string Name { get { return "Register Blueprints"; } }
-		public string Description { get { return "Register a blueprint at Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Register Blueprints"); } }
+		
+		public string Description {
+			get { return Catalog.GetString ("Register a blueprint at Launchpad"); }
+		}
+		
 		public string Icon
 		{ 
 			get { return "LaunchpadBlueprints.png@" + GetType ().Assembly.FullName; }

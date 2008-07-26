@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 
 using Do.Universe;
-
 using GConf;
 
 namespace GNOME.Terminal 

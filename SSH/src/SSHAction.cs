@@ -23,19 +23,20 @@ using Do.Universe;
 using System.Diagnostics;
 
 using GConf;
+using Mono.Unix;
 
 namespace GnomeDoSSH {
 	public class SSHAction : AbstractAction {
 		
 		public override string Name {
 			get {
-				return "Connect with SSH";
+				return Catalog.GetString ("Connect with SSH");
 			}
 		}
 		
 		public override string Description {
 			get {
-				return "Connect with SSH";
+				return Catalog.GetString ("Connect with SSH");
 			}
 		}
 		

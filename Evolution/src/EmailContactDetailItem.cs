@@ -19,6 +19,7 @@
 
 using System;
 using Do.Universe;
+using Mono.Unix;
 
 namespace Evolution
 {
@@ -30,7 +31,7 @@ namespace Evolution
 
 		public override string Name {
 			get {
-				return "Email";
+				return Catalog.GetString ("Email");
 				/* // The home/other/work tags are not exact.
 				string desc = "";
 				if (Key.Contains (".work"))

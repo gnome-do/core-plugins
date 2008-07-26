@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -36,11 +37,11 @@ namespace GNOME {
 		}
 		
 		public string Name {
-			get { return "GNOME Screenshot Items"; }
+			get { return Catalog.GetString ("GNOME Screenshot Items"); }
 		}
 		
 		public string Description {
-			get { return "Whole screen or current window."; }
+			get { return Catalog.GetString ("Whole screen or current window."); }
 		}
 		
 		public string Icon {

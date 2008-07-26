@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
@@ -35,8 +36,12 @@ namespace Do.Addins.Pidgin
 				new PidginStatusTypeItem (4), new PidginStatusTypeItem (5)};
 		}
 		
-		public string Name { get { return "Set status"; } }
-		public string Description { get { return "Set pidgin status message"; } }
+		public string Name { get { return Catalog.GetString ("Set status"); } }
+		
+		public string Description {
+			get { return Catalog.GetString ("Set pidgin status message"); }
+		}
+		
 		public string Icon { get { return "pidgin"; } }
 		
 		public Type [] SupportedItemTypes {

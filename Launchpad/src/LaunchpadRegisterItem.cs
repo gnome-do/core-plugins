@@ -21,17 +21,21 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadRegisterItem : LaunchpadItem
 	{
-		public LaunchpadRegisterItem() { }
-		public string Name { get { return "Register Project"; } }
-		public string Description { get { return "Register a new project at Launchpad"; } }
+		public string Name { 
+			get { return Catalog.GetString ("Register Project"); }
+		}
+		
+		public string Description { 
+			get { return Catalog.GetString ("Register a new project at Launchpad"); }
+		}
 
-		public string Icon
-		{ 
+		public string Icon { 
 			get { return "LaunchpadRegister.png@" + GetType ().Assembly.FullName; }
 		}
 

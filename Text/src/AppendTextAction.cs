@@ -22,12 +22,13 @@ using System;
 using System.IO;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Text {	
 	public class AppendTextAction : IAction {
 
-		public string Name { get { return "Append to..."; } }
-		public string Description { get { return "Appends text to a selected file."; } }
+		public string Name { get { return Catalog.GetString ("Append to..."); } }
+		public string Description { get { return Catalog.GetString ("Appends text to a selected file."); } }
 		public string Icon { get { return "text-editor"; } }
 
 		public Type[] SupportedItemTypes {

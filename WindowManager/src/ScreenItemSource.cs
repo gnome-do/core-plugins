@@ -25,6 +25,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 using Wnck;
+using Mono.Unix;
 
 namespace WindowManager
 {
@@ -33,13 +34,13 @@ namespace WindowManager
 	{
 		public string Name {
 			get {
-				return "Window Screen Items";
+				return Catalog.GetString ("Window Screen Items");
 			}
 		}
 
 		public string Description {
 			get {
-				return "Actions you can do to your screens.";
+				return Catalog.GetString ("Actions you can do to your screens.");
 			}
 		}
 
@@ -61,8 +62,8 @@ namespace WindowManager
                 List<IItem> items;
 		
                 items = new List<IItem> ();
-				items.Add (new ScreenItem ("Current Desktop", 
-                   "Everything on the Current Desktop",
+				items.Add (new ScreenItem (Catalog.GetString ("Current Desktop"), 
+                   Catalog.GetString ("Everything on the Current Desktop"),
                    "desktop"));
 				
 				return items;

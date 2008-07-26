@@ -22,6 +22,7 @@ using System.Collections.Generic;
 
 using Do.Addins;
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Rhythmbox
 {
@@ -73,7 +74,7 @@ namespace Do.Addins.Rhythmbox
 		public override string Description
 		{
 			get {
-				return string.Format ("All music by {0}", artist);
+				return string.Format (Catalog.GetString ("All music by") + " {0}", artist);
 			}
 		}
 	}

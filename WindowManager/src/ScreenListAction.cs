@@ -27,6 +27,7 @@ using System.Threading;
 
 using Do.Universe;
 using Wnck;
+using Mono.Unix;
 
 namespace WindowManager
 {
@@ -273,11 +274,11 @@ namespace WindowManager
 	public class ScreenTileAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return "Tile Windows"; }
+			get { return Catalog.GetString ("Tile Windows"); }
 		}
 		
 		public override string Description {
-			get { return "Tile All Windows in Current Viewport"; }
+			get { return Catalog.GetString ("Tile All Windows in Current Viewport"); }
 		}
 
 		public override string Icon {
@@ -342,11 +343,11 @@ namespace WindowManager
 	public class ScreenCascadeAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return "Cascade Windows"; }
+			get { return Catalog.GetString ("Cascade Windows"); }
 		}
 		
 		public override string Description {
-			get { return "Cascade your Windows"; }
+			get { return Catalog.GetString ("Cascade your Windows"); }
 		}
 		
 		public override string Icon {
@@ -400,11 +401,11 @@ namespace WindowManager
 	public class ScreenShelfAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return "Shelf Windows"; }
+			get { return Catalog.GetString ("Shelf Windows"); }
 		}
 		
 		public override string Description {
-			get { return "Places your windows in a configurable shelf arrangement"; }
+			get { return Catalog.GetString ("Places your windows in a configurable shelf arrangement"); }
 		}
 		
 		public override string Icon {
@@ -448,11 +449,11 @@ namespace WindowManager
 	public class ScreenRestoreAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return "Restore Windows"; }
+			get { return Catalog.GetString ("Restore Windows"); }
 		}
 		
 		public override string Description {
-			get { return "Restore Windows to their Previous Positions"; }
+			get { return Catalog.GetString ("Restore Windows to their Previous Positions"); }
 		}
 
 		public override string Icon {

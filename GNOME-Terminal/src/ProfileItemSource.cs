@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-
+using Mono.Unix;
 using Do.Universe;
 
 namespace GNOME.Terminal
@@ -39,8 +39,12 @@ namespace GNOME.Terminal
 			items = new List<IItem> ();
 		}
 
-	    public string Name { get { return "Gnome Terminal Profiles"; } }
-	    public string Description { get { return "Indexes your Gnome Terminal profiles."; } }
+	    public string Name { get { return Catalog.GetString ("Gnome Terminal Profiles"); } }
+	    
+	    public string Description {
+	    	get { return Catalog.GetString ("Indexes your Gnome Terminal profiles."); } 
+	    }
+	    
 	    public string Icon { get { return "gnome-terminal"; } }
 
 	    public Type[] SupportedItemTypes {

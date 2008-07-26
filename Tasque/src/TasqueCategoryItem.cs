@@ -22,6 +22,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 using Tasque.DBus;
+using Mono.Unix;
 
 
 namespace Tasque.Category.Item
@@ -43,7 +44,7 @@ namespace Tasque.Category.Item
 		
 		public string Description {
 			get {
-				return "Category";
+				return Catalog.GetString ("Category");
 			}
 		}
 		

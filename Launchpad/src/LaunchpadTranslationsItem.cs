@@ -21,14 +21,17 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadTranslationSearchItem : LaunchpadItem
 	{
 		public LaunchpadTranslationSearchItem() { }
-		public string Name { get { return "Translation Search"; } }
-		public string Description { get { return "Search for Translations in Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Translation Search"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Search for Translations in Launchpad"); } 
+		}
 
 		public string Icon
 		{ 
@@ -53,8 +56,10 @@ namespace Do.Launchpad
 	public class LaunchpadTranslationReleaseItem : LaunchpadItem
 	{
 		public LaunchpadTranslationReleaseItem() { }
-		public string Name { get { return "Release Translations"; } }
-		public string Description { get { return "Translations for Ubuntu Release Name"; } }
+		public string Name { get { return Catalog.GetString ("Release Translations"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Translations for Ubuntu Release Name"); }
+		}
 
 		public string Icon
 		{ 

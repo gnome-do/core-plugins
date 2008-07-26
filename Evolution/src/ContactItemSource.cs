@@ -24,6 +24,8 @@ using System.Collections.Generic;
 using Do;
 using Do.Universe;
 
+using Mono.Unix;
+
 namespace Evolution
 {
 	public class ContactItemSource : IItemSource
@@ -43,8 +45,8 @@ namespace Evolution
 			}
 		}
 		
-		public string Name { get { return "Evolution Contacts"; } }
-		public string Description { get { return "Evolution Contacts"; } }
+		public string Name { get { return Catalog.GetString ("Evolution Contacts"); } }
+		public string Description { get { return Catalog.GetString ("Evolution Contacts"); } }
 		public string Icon { get { return "evolution"; } }
 		
 		public ICollection<IItem> Items {

@@ -21,6 +21,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -29,11 +30,11 @@ namespace GNOME {
 	public class TakeScreenshotAction : AbstractAction {
 
 		public override string Name {
-			get { return "Take screenshot"; }
+			get { return Catalog.GetString ("Take screenshot"); }
 		}
 
 		public override string Description {
-			get { return "Takes a screenshot with optional delay."; }
+			get { return Catalog.GetString ("Takes a screenshot with optional delay."); }
 		}
 
 		public override string Icon {

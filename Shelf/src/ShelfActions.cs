@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using Mono.Unix;
 
 namespace Do.Universe
 {
@@ -29,11 +30,11 @@ namespace Do.Universe
 	public class ShelfExploreAction : AbstractAction
 	{
 		public override string Name {
-			get { return "Explore Shelf"; }
+			get { return Catalog.GetString ("Explore Shelf"); }
 		}
 
 		public override string Description {
-			get { return "Get a list of everything in your shelf"; }
+			get { return Catalog.GetString ("Get a list of everything in your shelf"); }
 		}
 
 		public override string Icon {
@@ -56,11 +57,11 @@ namespace Do.Universe
 	public class ShelfRemoveAction : AbstractAction
 	{
 		public override string Name {
-			get { return "Remove From Shelf"; }
+			get { return Catalog.GetString ("Remove From Shelf"); }
 		}
 		
 		public override string Description {
-			get { return "Remove Selected Item From Shelf"; }
+			get { return Catalog.GetString ("Remove Selected Item From Shelf"); }
 		}
 
 		public override string Icon {
@@ -97,11 +98,11 @@ namespace Do.Universe
 	public class ShelfAddAction : AbstractAction
 	{
 		public override string Name {
-			get { return "Add To Shelf"; }
+			get { return Catalog.GetString ("Add To Shelf"); }
 		}
 		
 		public override string Description {
-			get { return "Add Selected Item to Shelf"; }
+			get { return Catalog.GetString ("Add Selected Item to Shelf"); }
 		}
 
 		public override string Icon {

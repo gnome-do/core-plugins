@@ -21,6 +21,7 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
@@ -30,18 +31,14 @@ namespace Do.Launchpad
 	/// </summary>
 	class LaunchpadAction : AbstractAction
 	{
-		public LaunchpadAction ()
-		{
-		}
-
 		public override string Name
 		{
-			get { return "Launchpad"; }
+			get { return Catalog.GetString ("Launchpad"); }
 		}
 
 		public override string Description
 		{
-			get { return "Launchpad Shortcuts"; }
+			get { return Catalog.GetString ("Launchpad Shortcuts"); }
 		}
 
 		public override string Icon

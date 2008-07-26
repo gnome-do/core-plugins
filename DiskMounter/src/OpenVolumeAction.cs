@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 
 using Gnome.Vfs;
+using Mono.Unix;
 
 using Do.Universe;
 using Do.Addins;
@@ -35,11 +36,11 @@ namespace DiskMounter
         }
                 
 		public override string Name {
-			get { return "Open"; }
+			get { return Catalog.GetString ("Open"); }
 		}
 		
 		public override string Description {
-			get { return "Open"; }
+			get { return Catalog.GetString ("Open a removable volume"); }
 		}
 		
 		public override string Icon {

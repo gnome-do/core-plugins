@@ -20,13 +20,14 @@
 using System;
 using System.Collections.Generic;
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
 	public class PidginEnableAccount : IAction
 	{
-		public string Name { get { return "Sign on"; } }
-		public string Description { get { return "Enable pidgin account"; } }
+		public string Name { get { return Catalog.GetString ("Sign on"); } }
+		public string Description { get { return Catalog.GetString ("Enable pidgin account"); } }
 		public string Icon { get { return "pidgin"; } }
 		
 		public Type [] SupportedItemTypes {
@@ -82,8 +83,8 @@ namespace Do.Addins.Pidgin
 	
 	public class PidginDisableAccount : IAction
 	{
-		public string Name { get { return "Sign off"; } }
-		public string Description { get { return "Disble pidgin account"; } }
+		public string Name { get { return Catalog.GetString ("Sign off"); } }
+		public string Description { get { return Catalog.GetString ("Disble pidgin account"); } }
 		public string Icon { get { return "pidgin"; } }
 		
 		public Type [] SupportedItemTypes {

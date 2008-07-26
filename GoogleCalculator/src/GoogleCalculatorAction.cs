@@ -23,6 +23,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Plugins.Google
 {
@@ -43,7 +44,7 @@ namespace Do.Plugins.Google
 		}
 
 		public override string Description {
-			get { return "Perform a calculation using Google Calculator."; }
+			get { return Catalog.GetString ("Perform a calculation using Google Calculator."); }
 		}
 
 		public override string Icon {
@@ -87,7 +88,7 @@ namespace Do.Plugins.Google
 				// Strip HTML tags:
 				reply = Regex.Replace (reply, @"<[^>]+>", "");
 			} catch {
-				reply = "Google Calculator could not evaluate the expression.";
+				reply = Catalog.GetString ("Google Calculator could not evaluate the expression.");
 			}
 
 			return new IItem[] { new TextItem (reply) };

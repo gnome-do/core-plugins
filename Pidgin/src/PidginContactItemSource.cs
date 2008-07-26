@@ -23,6 +23,7 @@ using System.Xml;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
@@ -55,8 +56,12 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public string Name { get { return "Pidgin Buddies"; } }
-		public string Description { get { return "Buddies on your Pidgin buddy list."; } }
+		public string Name { get { return Catalog.GetString ("Pidgin Buddies"); } }
+		
+		public string Description {
+			get { return Catalog.GetString ("Buddies on your Pidgin buddy list."); } 
+		}
+		
 		public string Icon {get { return "pidgin"; } }
 		
 		public ICollection<IItem> Items {

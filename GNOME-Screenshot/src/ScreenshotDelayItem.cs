@@ -19,7 +19,7 @@
  */
 
 using System;
-
+using Mono.Unix;
 using Do.Universe;
 
 namespace GNOME {
@@ -33,15 +33,13 @@ namespace GNOME {
 		}
 
 		public string Name {
-			get { return string.Format ("{0}-second delay", seconds); }
+			get { return string.Format (Catalog.GetString ("{0}-second delay"), seconds); }
 		}
 
 		public string Description {
 			get {
-				return string.Format (
-					"Wait {0} second{1} before taking the screenshot.",
-					seconds,
-					seconds == 1 ? "" : "s");
+				return Catalog.GetPluralString ("Wait {0} second before taking the screenshot.",
+					"Wait {0} seconds before taking the screenshot.", seconds);
 			}
 		}
 

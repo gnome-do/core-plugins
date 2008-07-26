@@ -23,6 +23,7 @@ using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 
+using Mono.Unix;
 using Do.Addins;
 using Do.Universe;
 
@@ -38,8 +39,11 @@ namespace Epiphany
 			items = new List<IItem> ();
 		}
 
-		public string Name { get { return "Epiphany Bookmarks"; } }
-		public string Description { get { return "Indexes your Epiphany bookmarks."; } }
+		public string Name { get { return Catalog.GetString ("Epiphany Bookmarks"); } }
+		
+		public string Description { 
+			get { return Catalog.GetString ("Indexes your Epiphany bookmarks."); }
+		}
 		public string Icon { get { return "gnome-web-browser"; } }
 
 		public Type[] SupportedItemTypes

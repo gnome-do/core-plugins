@@ -24,6 +24,7 @@ using System.Collections.Generic;
 
 using Do.Plugins;
 using Do.Universe;
+using Mono.Unix;
 
 namespace Do.Plugins.Amarok
 {
@@ -40,8 +41,10 @@ namespace Do.Plugins.Amarok
 			//UpdateItems ();
 		}
 
-		public string Name { get { return "Amarok Music"; } }
-		public string Description { get { return "Provides access to artists and albums from Amarok."; } }
+		public string Name { get { return Catalog.GetString ("Amarok Music"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Provides access to artists and albums from Amarok."); } 
+		}
 		public string Icon { get { return "amarok"; } }
 
 		public Type[] SupportedItemTypes {

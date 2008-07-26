@@ -21,6 +21,7 @@
 using System;
 using System.IO; 
 using System.Collections.Generic;
+using Mono.Unix;
 
 namespace Do.Universe
 {
@@ -32,12 +33,12 @@ namespace Do.Universe
 		
 		public override string Name
 		{
-			get { return "Locate Files"; }
+			get { return Catalog.GetString ("Locate Files"); }
 		}
 		
 		public override string Description
 		{
-			get { return "Search your filesystem using locate."; }
+			get { return Catalog.GetString ("Search your filesystem using locate."); }
 		}
 		
 		public override string Icon

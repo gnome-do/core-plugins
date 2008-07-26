@@ -21,14 +21,17 @@ using System.Text.RegularExpressions;
 using Do.Universe;
 
 using Do.Addins;
+using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadAnswerSearchItem : LaunchpadItem
 	{
-		public LaunchpadAnswerSearchItem() { }
-		public string Name { get { return "Answers Search"; } }
-		public string Description { get { return "Search for answers at Launchpad"; } }
+		public string Name { get { return Catalog.GetString ("Answers Search"); } }
+		public string Description { 
+			get { return Catalog.GetString ("Search for answers at Launchpad"); } 
+		}
+		
 		public string Icon
 		{ 
 			get { return "LaunchpadAnswers.png@" + GetType ().Assembly.FullName; }
@@ -50,9 +53,8 @@ namespace Do.Launchpad
 
 	public class LaunchpadProjectAnswersItem : LaunchpadItem
 	{
-		public LaunchpadProjectAnswersItem() { }
-		public string Name { get { return "Answers"; } }
-		public string Description { get { return "Launchpad Answers"; } }
+		public string Name { get { return Catalog.GetString ("Answers"); } }
+		public string Description { get { return Catalog.GetString ("Launchpad Answers"); } }
 
 		public string Icon
 		{ 
