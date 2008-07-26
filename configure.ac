@@ -113,6 +113,7 @@ GMailContacts/Makefile
 GNOME-Dictionary/Makefile
 GNOME-Screenshot/Makefile
 GNOME-Session/Makefile
+GNOME-Terminal/Makefile
 GoogleCalculator/Makefile
 Launchpad/Makefile
 LocateFiles/Makefile
