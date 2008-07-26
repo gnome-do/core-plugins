@@ -93,7 +93,7 @@ namespace Flickr
 					tags += tag.Text + " ";
 				}
 			}
-			List<FileItem> uploads = new List<FileItem> ();
+			
 			foreach (IItem item in items) {
 				FileItem file = item as FileItem;
 				if (FileItem.IsDirectory (file)) {
@@ -102,35 +102,29 @@ namespace Flickr
 					foreach (FileInfo f in finfo) {
 						FileItem fi = new FileItem (f.FullName);
 						if (FileIsPicture (fi))
-							uploads.Add (fi);
+							AsyncUploadToFlickr (fi, tags);
 					}
 				} else {
-					uploads.Add (file);
+					AsyncUploadToFlickr (file, tags);
 				}
 			}
-			AsyncUploadToFlickr (uploads, tags);
 			return null;
 		}
 		
-		public static void AsyncUploadToFlickr (List<FileItem> uploads, string tags)
+		public static void AsyncUploadToFlickr (FileItem photo, string tags)
 		{			
 			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
 				AccountConfig.ApiSecret, AccountConfig.AuthToken);
-			Console.Error.WriteLine (flickr.PeopleGetUploadStatus ().BandwidthUsed);
+				
 			new Thread ((ThreadStart) delegate {
-				int i = 1;
-				foreach (FileItem file in uploads) {
-					try {
-						flickr.UploadPicture (file.Path, file.Name, "", tags,
-							AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
-							AccountConfig.FriendsAllowed);
-							Do.Addins.NotificationBridge.ShowMessage ("Flickr",
-								String.Format ("Uploaded {0}. ({1} of {2})",
-									file.Name, i, uploads.Count));
-							i++;
-					} catch (FlickrNet.FlickrException e) {
-						Console.Error.WriteLine (e);
-					}
+				try {
+					flickr.UploadPicture (photo.Path, photo.Name, "", tags,
+						AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
+						AccountConfig.FriendsAllowed);
+					Do.Addins.NotificationBridge.ShowMessage ("Flickr",
+						String.Format ("Uploaded {0}.", photo.Name));
+				} catch (FlickrNet.FlickrException e) {
+					Console.Error.WriteLine (e.Message);
 				}
 			}).Start ();
 		}
