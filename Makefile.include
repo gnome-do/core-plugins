@@ -36,11 +36,16 @@ EXTRA_DIST += $(build_sources) $(build_resx_files) $(build_others_files) $(ASSEM
 CLEANFILES += $(ASSEMBLY) $(ASSEMBLY).mdb $(BINARIES) $(build_resx_resources) $(build_satellite_assembly_list)
 DISTCLEANFILES = $(GENERATED_FILES) $(pc_files) $(BUILD_DIR)/*
 
-pkglib_SCRIPTS = $(ASSEMBLY)
 bin_SCRIPTS = $(BINARIES)
 
-programfilesdir = @libdir@/@PACKAGE@
-programfiles_DATA = $(PROGRAMFILES)
+############################################################
+# We want to install where GNOME-Do will pick our plugins  #
+# up from.  This is datadir/gnome-do/plugins               #
+############################################################
+pluginfilesdir = @datadir@/gnome-do/plugins
+bundledlibsdir = $(pluginfilesdir)
+bundledlibs_DATA = $(BUNDLED_LIBS)
+pluginfiles_DATA = $(ASSEMBLY)
 linuxpkgconfigdir = @libdir@/pkgconfig
 linuxpkgconfig_DATA = $(LINUX_PKGCONFIG)
 
