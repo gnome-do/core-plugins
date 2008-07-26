@@ -109,6 +109,7 @@ File/Makefile
 Firefox/Makefile
 Flickr/Makefile
 GCalendar/Makefile
+GMailContacts/Makefile
 GNOME-Screenshot/Makefile
 GNOME-Session/Makefile
 GoogleCalculator/Makefile
