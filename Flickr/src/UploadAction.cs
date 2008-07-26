@@ -33,7 +33,10 @@ using FlickrNet;
 namespace Flickr
 {	
 	public class UploadAction : IAction, IConfigurable
-	{		
+	{
+		static object count_lock = new object ();
+		static int upload_num;
+		
 		public string Name {
 			get { return Catalog.GetString ("Upload photo"); }
 		}
@@ -94,6 +97,8 @@ namespace Flickr
 				}
 			}
 			
+			//Build a list of all of the files to upload.
+			List<FileItem> uploads = new List<FileItem> ();
 			foreach (IItem item in items) {
 				FileItem file = item as FileItem;
 				if (FileItem.IsDirectory (file)) {
@@ -102,27 +107,41 @@ namespace Flickr
 					foreach (FileInfo f in finfo) {
 						FileItem fi = new FileItem (f.FullName);
 						if (FileIsPicture (fi))
-							AsyncUploadToFlickr (fi, tags);
+							uploads.Add (fi);
 					}
 				} else {
-					AsyncUploadToFlickr (file, tags);
+					uploads.Add (file);
+				}
+				upload_num = 1;
+				foreach (FileItem photo in uploads) {
+					AsyncUploadToFlickr (photo, tags, uploads.Count);
 				}
 			}
+			
 			return null;
 		}
 		
-		public static void AsyncUploadToFlickr (FileItem photo, string tags)
+		public static void AsyncUploadToFlickr (FileItem photo, string tags, int num)
 		{			
 			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
 				AccountConfig.ApiSecret, AccountConfig.AuthToken);
 				
 			new Thread ((ThreadStart) delegate {
 				try {
+					int thisUpload;
+					
 					flickr.UploadPicture (photo.Path, photo.Name, "", tags,
 						AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
 						AccountConfig.FriendsAllowed);
+					
+					lock (count_lock) {
+						thisUpload = upload_num;
+						upload_num++;
+					}
+					
 					Do.Addins.NotificationBridge.ShowMessage ("Flickr",
-						String.Format ("Uploaded {0}.", photo.Name));
+						String.Format ("Uploaded {0}. ({1} of {2})", photo.Name,
+						thisUpload, num), photo.Path); 
 				} catch (FlickrNet.FlickrException e) {
 					Console.Error.WriteLine (e.Message);
 				}
