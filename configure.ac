@@ -132,6 +132,7 @@ Text/Makefile
 Tomboy/Makefile
 Twitter/Makefile
 Vinagre/Makefile
+VolumeControl/Makefile
 WindowManager/Makefile
 Makefile
 po/Makefile.in
