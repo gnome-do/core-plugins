@@ -105,7 +105,7 @@ namespace InlineGoogleSearch
 					+ "callback=GwebSearch.RawCompletion"
 					+ "&context=0&lstkp=0&rsz=large&h1=en&"
 					+ "sig=8656f49c146c5220e273d16b4b6978b2&"
-					+ InlineGoogleSearchConfig.SearchRestrictions
+					+ InlineGoogleSearchConfig.SearchRestrictions + "&"
 					+ "q=" + (items[0] as ITextItem).Text + "&"
 					+ "v=1.0";
 			WebRequest wrq = WebRequest.Create(endpointURL);

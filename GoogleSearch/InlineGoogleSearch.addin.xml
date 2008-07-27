@@ -1,7 +1,7 @@
 <Addin
 	id="Google Search"
 	namespace="Do"
-	version="1.0"
+	version="1.0.1"
 	name="Search Google"
 	description="Searches google and returns results to Do"
 	author="Brian Lucas"
