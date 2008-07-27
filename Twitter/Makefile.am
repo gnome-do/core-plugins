@@ -34,22 +34,22 @@ SATELLITE_ASSEMBLY_NAME=DoTwitter.resources.dll
 all: $(ASSEMBLY) 
 
 FILES = \
+	gtk-gui/DoTwitter.GenConfig.cs \
+	gtk-gui/generated.cs \
 	src/Configuration.cs \
+	src/GenConfig.cs \
 	src/TwitterAction.cs \
 	src/TwitterFriendSource.cs \
 	src/TwitterTweet.cs \
-	src/Twitterizer/Twitter.cs \
-	src/Twitterizer/TwitterizerException.cs \
-	src/Twitterizer/TwitterRequest.cs \
-	src/Twitterizer/TwitterRequestData.cs \
-	src/Twitterizer/TwitterStatus.cs \
-	src/Twitterizer/TwitterStatusCollection.cs \
-	src/Twitterizer/TwitterUser.cs \
-	src/Twitterizer/TwitterUserCollection.cs \
-	src/Twitterizer/Properties/AssemblyInfo.cs \
-	gtk-gui/generated.cs \
-	src/GenConfig.cs \
-	gtk-gui/DoTwitter.GenConfig.cs 
+	src/Twitterizer/Twiterizer.Framework/Properties/AssemblyInfo.cs \
+	src/Twitterizer/Twiterizer.Framework/Twitter.cs \
+	src/Twitterizer/Twiterizer.Framework/TwitterizerException.cs \
+	src/Twitterizer/Twiterizer.Framework/TwitterRequest.cs \
+	src/Twitterizer/Twiterizer.Framework/TwitterRequestData.cs \
+	src/Twitterizer/Twiterizer.Framework/TwitterStatusCollection.cs \
+	src/Twitterizer/Twiterizer.Framework/TwitterStatus.cs \
+	src/Twitterizer/Twiterizer.Framework/TwitterUserCollection.cs \
+	src/Twitterizer/Twiterizer.Framework/TwitterUser.cs
 
 DATA_FILES = 
 
