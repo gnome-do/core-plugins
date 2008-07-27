@@ -24,6 +24,7 @@ using System;
 using System.Net;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using Do.Universe;
 using Do.Addins;
@@ -120,27 +121,34 @@ namespace InlineGoogleSearch
 		}
 		
 		/// <summary>
-		/// Parses Json String and returns List of strings containing URLs
-		/// This code could use some further tweaking to extract more of the
-		/// usefull information provided by google.  Right now it just strips
-		/// out the URLs and nothing else.
+		/// Parses Json String and returns List of BookmarkItems containing URLs
+		/// and Titles
 		/// </summary>
 		/// <param name="parseString">
 		/// Input Json String from Google <see cref="System.String"/>
 		/// </param>
 		/// <returns>
-		/// List of Strings containing URLs <see cref="List`1"/>
+		/// List of BookmarkItems containing URLs and Titles 
+		/// <see cref="List`1"/>
 		/// </returns>gconf
 		private List<IItem> Parse(string parseString){
 			List<IItem> items = new List<IItem> ();
 			string[] array;
-			array = parseString.Split(',');
+			array = Regex.Split(parseString, ",\"");
 			int ub = array.GetLength(0);
+			string title = "";
+			string uri = "";
 			for (int i=0; i<ub;i++){
-				if (array[i].Contains("\"url\"")){
-					array[i] = array[i].Remove(0,7);
+				if (array[i].Contains("url\"")){
+					array[i] = array[i].Remove(0,6);
 					array[i] = array[i].TrimEnd('"');
-					items.Add(new TextItem(array[i]));
+					uri = array[i];
+				}
+				if (array[i].Contains("titleNoFormatting\"")){
+					array[i] = array[i].Remove(0,20);
+					array[i] = array[i].TrimEnd('"');
+					title = array[i];
+					items.Add(new BookmarkItem(title, uri));
 				}
 			}
 			return items;
