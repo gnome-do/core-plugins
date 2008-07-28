@@ -53,7 +53,7 @@ namespace DoTwitter
 			twitter = new Twitter (username, password);
 			lastUpdated = DateTime.UtcNow;
 			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			photo_directory = "~/.local/share/gnome-do/Twitter/photos".Replace ("~", home);
+			photo_directory = "~/.local/share/gnome-do/Twitter/photos/".Replace ("~", home);
 		} 
 		
 		public static List<IItem> Friends {
@@ -108,11 +108,11 @@ namespace DoTwitter
 						else
 							tfriend = ContactItem.Create (friend.UserName);
 						tfriend ["twitter.screenname"] = friend.ScreenName;
-						if (System.IO.File.Exists (photo_directory + "/" + friend.ID))
-							tfriend ["photo"] = photo_directory + "/" + friend.ID;
+						if (System.IO.File.Exists (photo_directory + friend.ID))
+							tfriend ["photo"] = photo_directory + friend.ID;
 						else
 							DownloadBuddyIcon (friend.ProfileImageUri,
-								photo_directory + "/" + friend.ID);
+								photo_directory + friend.ID);
 						items.Add (tfriend);
 					}
 				}
@@ -132,22 +132,22 @@ namespace DoTwitter
 				Uri imageuri;
 				int userid;
 				foreach (TwitterStatus tweet in twitter.FriendsTimeline ()) {
-					if (tweet.TwitterUser.UserName.Equals (username)) return;
+					if (tweet.TwitterUser.ScreenName.Equals (username)) return;
 					if (DateTime.Compare (tweet.Created, lastUpdated) > 0) {
 						text = tweet.Text;
 						userid = tweet.TwitterUser.ID;
 						imageuri = tweet.TwitterUser.ProfileImageUri;
 						screenname = tweet.TwitterUser.ScreenName;
 						Gtk.Application.Invoke (delegate {
-							if (System.IO.File.Exists (photo_directory + "/" + userid))
+							if (System.IO.File.Exists (photo_directory + userid))
 								Do.Addins.NotificationBridge.ShowMessage (
 									screenname, text,
-									photo_directory + "/" + userid);
+									photo_directory + userid);
 							else {
 								Do.Addins.NotificationBridge.ShowMessage (
 									screenname, text);
 								DownloadBuddyIcon (imageuri,
-									photo_directory + "/" + userid);
+									photo_directory + userid);
 							}
 						});
 						lastUpdated = tweet.Created;
