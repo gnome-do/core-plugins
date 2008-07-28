@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="Do.Addins, Version=0.5.97.0, Culture=neutral" />
-    <widget-library name="../bin/Debug/InlineGoogleSearch.dll" internal="true" />
+    <widget-library name="../bin/Release/InlineGoogleSearch.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="InlineGoogleSearch.InlineGoogleSearchConfig" design-size="661 300">
     <property name="MemberName" />
