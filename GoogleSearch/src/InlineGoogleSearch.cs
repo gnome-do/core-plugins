@@ -21,11 +21,7 @@
 //
 
 using System;
-using System.Net;
-using System.IO;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
 using Do.Universe;
 using Do.Addins;
 using Mono.Unix;
@@ -91,67 +87,25 @@ namespace InlineGoogleSearch
 		/// Modifier Items. None <see cref="IItem"/>
 		/// </param>
 		/// <returns>
-		/// Array of Items. URLs to search results <see cref="IItem"/>
+		/// Array of Bookmark Items. URLs to search results <see cref="IItem"/>
 		/// </returns>
 		public override IItem[] Perform (IItem[] items, IItem[] modItems)
 		{
 			List<IItem> retItems = new List<IItem> ();
 			
-			//Check searchRestrictions from InlineGoogleSearchConfig and set
-			//safesearch string appropriately
-
-			//API string sent to google
-			String endpointURL =
-				"http://www.google.com/uds/GwebSearch?"
-					+ "callback=GwebSearch.RawCompletion"
-					+ "&context=0&lstkp=0&rsz=large&h1=en&"
-					+ "sig=8656f49c146c5220e273d16b4b6978b2&"
-					+ InlineGoogleSearchConfig.SearchRestrictions + "&"
-					+ "q=" + (items[0] as ITextItem).Text + "&"
-					+ "v=1.0";
-			WebRequest wrq = WebRequest.Create(endpointURL);
-			WebResponse wrs = wrq.GetResponse();
-			StreamReader sr = new StreamReader(wrs.GetResponseStream());
-			string parseString = sr.ReadLine();
-			//Parse the returned string to remove JSON markup and return only 
-			//URLs
-			retItems = Parse(parseString);
+			GoogleSearch googleSearch = new GoogleSearch();
+			googleSearch.setSafeSearchLevel
+				(InlineGoogleSearchConfig.SearchRestrictions);
+			googleSearch.setQuery((items[0] as ITextItem).Text);
+			GoogleSearchResult[] googleSearchResult = googleSearch.search();
 			
-			return retItems.ToArray();
-		}
-		
-		/// <summary>
-		/// Parses Json String and returns List of BookmarkItems containing URLs
-		/// and Titles
-		/// </summary>
-		/// <param name="parseString">
-		/// Input Json String from Google <see cref="System.String"/>
-		/// </param>
-		/// <returns>
-		/// List of BookmarkItems containing URLs and Titles 
-		/// <see cref="List`1"/>
-		/// </returns>gconf
-		private List<IItem> Parse(string parseString){
-			List<IItem> items = new List<IItem> ();
-			string[] array;
-			array = Regex.Split(parseString, ",\"");
-			int ub = array.GetLength(0);
-			string title = "";
-			string uri = "";
-			for (int i=0; i<ub;i++){
-				if (array[i].Contains("url\"")){
-					array[i] = array[i].Remove(0,6);
-					array[i] = array[i].TrimEnd('"');
-					uri = array[i];
-				}
-				if (array[i].Contains("titleNoFormatting\"")){
-					array[i] = array[i].Remove(0,20);
-					array[i] = array[i].TrimEnd('"');
-					title = array[i];
-					items.Add(new BookmarkItem(title, uri));
-				}
+			for(int i = 0; i < googleSearchResult.Length; i++){
+				retItems.Add(new BookmarkItem
+				             (googleSearchResult[i].titleNoFormatting,
+				              googleSearchResult[i].url));
 			}
-			return items;
+			
+			return retItems.ToArray();	
 		}
 
 		/// <summary>
