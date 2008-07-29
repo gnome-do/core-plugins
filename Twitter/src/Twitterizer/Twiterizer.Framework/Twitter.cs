@@ -25,7 +25,7 @@ namespace Twitterizer.Framework
             Data.Password = password;
             
             Data.ActionUri = new Uri(
-                string.Format("http://twitter.com/statuses/update.xml?status={0}",
+                string.Format("http://twitter.com/statuses/update.xml?source=Do&status={0}",
                   HttpUtility.UrlEncode(Status)));
 
             Data = Request.PerformWebRequest(Data);
