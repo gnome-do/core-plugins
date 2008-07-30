@@ -1,7 +1,7 @@
 <Addin
 	id="Twitter"
 	namespace="Do"
-	version="1.5.1"
+	version="1.6"
 	name="Twitter"
 	description=" Provides 'Tweet' action for updating Twitter status."
 	author="Jacob Andreas, Alex Launi"
