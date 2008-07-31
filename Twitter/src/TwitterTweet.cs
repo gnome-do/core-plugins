@@ -83,7 +83,7 @@ namespace DoTwitter
         {			
 			TwitterAction.Status = (items [0] as ITextItem).Text;
 			if (modItems.Length > 0)
-				TwitterAction.Status = BuildTweet (items [0], modItems [0]);
+				TwitterAction.Status = BuildTweet (items [0], modItems);
 			
 			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.Tweet));
 			updateRunner.Start ();
@@ -96,23 +96,27 @@ namespace DoTwitter
 			return new GenConfig ();
 		}
 		
-		private string BuildTweet(IItem t, IItem c)
+		private string BuildTweet(IItem t, IItem [] c)
 		{
-			ITextItem text = t as ITextItem;
-			ContactItem contact = c as ContactItem;
 			string tweet = "";
+			ITextItem text = t as ITextItem;
+			//ContactItem contact = c as ContactItem;
+			
 			
 			//Handle situations without a contact
-			if (contact == null) return text.Text;
+			if (c.Length == 0) return text.Text;
 			
 			// Direct messaging
 			if (text.Text.Substring (0,2).Equals ("d "))
-				tweet = "d " + contact ["twitter.screenname"] +
+				tweet = "d " + (c [0] as ContactItem) ["twitter.screenname"] +
 					" " +	text.Text.Substring (2);
 			// Tweet replying
-			else
-				tweet = "@" + contact ["twitter.screenname"] + " " + text.Text;
-			
+			else {
+				foreach (ContactItem contact in c) {
+					tweet += "@" + contact ["twitter.screenname"] + " " ;
+				}
+				tweet+= text.Text;
+			}
 			return tweet;
 		}
 	}
