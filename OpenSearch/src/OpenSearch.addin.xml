@@ -2,7 +2,7 @@
 	id="OpenSearch"
 	namespace= "Do"
 	version="1.0"
-	name="OpenSearch Web Search"
+	name="OpenSearch Web Search izzle"
 	description="Search the web using your installed OpenSearch plugins."
 	author="Jason Jones"	
 >
@@ -16,8 +16,11 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
-	<Extension path= "/Do/Action">
-		<Action type="Do.Plugins.OpenSearch.OpenSearchAction" />
+	<Extension path="/Do/Action">
+		<Action type="OpenSearch.OpenSearchAction" />
+	</Extension>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="OpenSearch.OpenSearchItemSource" />
 	</Extension>
 </Addin>

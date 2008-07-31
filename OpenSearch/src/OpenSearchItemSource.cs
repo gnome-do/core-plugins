@@ -1,4 +1,4 @@
-//  OpenSearch.cs
+//  OpenSearchItemSource.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -17,21 +17,70 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
+
 using Do.Universe;
+using Mono.Unix;
 
 namespace OpenSearch
-{	
-	public static class OpenSearch
-	{		
-		public static List<IItem> DoIt ()
+{
+	public class OpenSearchItemSource : IItemSource
+	{	
+		List<IItem> items;
+		
+		public OpenSearchItemSource ()
+		{
+			items = new List<IItem> ();
+			UpdateItems();
+		}		
+		
+		public string Name {
+			get {
+				return Catalog.GetString ("Open Search Items");
+			}
+		}
+
+		public string Description {
+			get {
+				return Catalog.GetString ("Installed Open Search Items");
+			}
+		}
+
+		public string Icon {
+			get {
+				return "www";
+			}
+		}
+
+		public Type[] SupportedItemTypes {
+			get {
+				return new Type [] {
+					typeof (IOpenSearchItem)};
+			}
+		}
+
+		public ICollection<IItem> Items {
+			get {
+				return items;
+			}
+		}
+		
+		public ICollection<IItem> ChildrenOfItem (IItem item)
+		{
+			return null;
+		}
+
+		public void UpdateItems ()
 		{
 			List<IItem> openSearchItems = new List<IItem> ();
 			
-			IOpenSearchFileProvider openSearchFileProvider = new FirefoxOpenSearchFileProvider ();
+			FirefoxOpenSearchDirectoryProvider firefoxProvider = new FirefoxOpenSearchDirectoryProvider ();
 			string validFilePattern = @"^.*\.xml$";			
 			
-			foreach (string path in openSearchFileProvider.OpenSearchFilePaths) {
+			foreach (string path in firefoxProvider.OpenSearchPluginDirectories) {
 				try {
 					if(!Directory.Exists(path))
 						continue;
@@ -41,17 +90,16 @@ namespace OpenSearch
 						if (!Regex.IsMatch (filePath, validFilePattern))
 							continue;
 						
-						OpenSearchItem item = OpenSearchParser.Create (filePath);
-						if (item != null)
+						IOpenSearchItem item = OpenSearchParser.Create (filePath);
+						if (item != null) {
 							openSearchItems.Add ( item );
+						}
 					}
 				} catch {
 					continue;
 				}
 			}
-			return openSearchItems;
-		}
-	
-		
+			items = openSearchItems;
+		}	
 	}
 }

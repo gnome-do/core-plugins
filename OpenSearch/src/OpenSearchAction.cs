@@ -19,28 +19,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web;
 
 using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
 
-namespace Do.Plugins.OpenSearch
+namespace OpenSearch
 {
 	public class OpenSearchAction : AbstractAction
-	{
-		static System.Threading.Thread th;
-		
-		static OpenSearchAction()
-		{
-			th = new System.Threading.Thread (new System.Threading.ThreadStart (OpenSearch.Init));
-			th.IsBackground = true;
-			th.Priority = System.Threading.ThreadPriority.Lowest;
-			th.Start ();
-			//OpenSearch.GetOpenSearchItems ();
-		}
-		
+	{		
 		public override string Name
 		{
 			get { return Catalog.GetString ("Search Web"); }
@@ -76,51 +64,27 @@ namespace Do.Plugins.OpenSearch
 		{
 			get {
 				return new Type[] {
-					typeof (OpenSearchItem),
+					typeof (IOpenSearchItem),
 				};
 			}
-		}
-				
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
-		{
-			try
-			{
-				List<IItem> items = new List<IItem>();
-				foreach(IItem openSearchItem in OpenSearch.GetOpenSearchItems ()) {
-					items.Add (openSearchItem);
-				}
-				return items.ToArray ();
-			}
-			catch
-			{
-				return null;
-			}
-		}
+		}			
 	
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
-		{
-			if (th.IsAlive) return null;
-			
+		{					
 			List<string> searchTerms;
 				
-			if (modifierItems.Length > 0)
-			{
+			if (modifierItems.Length > 0) {
 				searchTerms = new List<string> ();
 				foreach (IItem item in items) {
 					searchTerms.Add ((item as ITextItem).Text);
 				}
 				
 				foreach (string searchTerm in searchTerms) {
-					string url = BuildSearchUrl ((modifierItems[0] as IOpenSearchItem), searchTerm);
+					string url = (modifierItems[0] as IOpenSearchItem).BuildSearchUrl(searchTerm);
 					Util.Environment.Open (url);	
 				}
 			}
-			return null; 
-		}
-		
-		private static string BuildSearchUrl (IOpenSearchItem openSearchItem, string searchTerm)
-		{
-			return openSearchItem.UrlTemplate.Replace ("{searchTerms}",  HttpUtility.UrlEncode(searchTerm));
+			return null;
 		}
 	}
 }

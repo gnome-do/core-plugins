@@ -17,9 +17,11 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Web;
+
 using Do.Universe;
 
-namespace Do.Plugins.OpenSearch
+namespace OpenSearch
 {
 	public class OpenSearchItem	: IOpenSearchItem
 	{
@@ -50,6 +52,20 @@ namespace Do.Plugins.OpenSearch
 		public string UrlTemplate
 		{
 			get { return urlTemplate; }
+		}
+		
+		/// <summary>
+		/// Build a search URL for this OpenSearch item using the provided search terms.
+		/// </summary>
+		/// <param name="searchTerms">
+		/// The search terms to use in the URL template.
+		/// </param>
+		/// <returns>
+		/// A formatted search URL, using the provided search terms.
+		/// </returns>
+		public string BuildSearchUrl (string searchTerm)
+		{
+			return UrlTemplate.Replace ("{searchTerms}",  HttpUtility.UrlEncode(searchTerm));
 		}
 	}
 }

@@ -19,10 +19,22 @@
 
 using Do.Universe;
 
-namespace Do.Plugins.OpenSearch
+namespace OpenSearch
 {
 	public interface IOpenSearchItem : IItem
 	{
+		
 		string UrlTemplate { get; }
+		
+		/// <summary>
+		/// Build a search URL for this OpenSearch item using the provided search terms.
+		/// </summary>
+		/// <param name="searchTerms">
+		/// The search terms to use in the URL template.
+		/// </param>
+		/// <returns>
+		/// A formatted search URL, using the provided search terms.
+		/// </returns>
+		string BuildSearchUrl(string searchTerms);
 	}
 }
