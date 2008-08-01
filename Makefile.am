@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
-SUBDIRS = . po BundledLibraries \
+SUBDIRS = po BundledLibraries \
 	Archive \
 	DiskMounter \
 	Epiphany \
@@ -41,3 +41,10 @@ endif
 if BUILD_BANSHEE
 SUBDIRS += Banshee
 endif
+
+# Current dir _must_ be processed last; this ensures our repo is built with all the plugins
+SUBDIRS += .
+
+install-data-hook:
+	mdtool setup pack $(DESTDIR)/@datadir@/gnome-do/plugins/*.dll
+	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
