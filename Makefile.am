@@ -51,3 +51,7 @@ PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
 install-data-hook:
 	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
 	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
+
+uninstall-hook:
+	rm $(ASSEMBLY_INSTALL_DIR)/*.mpack
+	rm $(ASSEMBLY_INSTALL_DIR)/*.mrep
