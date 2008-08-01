@@ -50,8 +50,8 @@ namespace GCalendar
 			calendars = new List<IItem> ();
 			events = new List<IItem> ();
 			notified = new List<string> ();
-			GLib.Timeout.Add (CacheSeconds * 1000, delegate { ClearList (ref calendars); return true; });
-			GLib.Timeout.Add (CacheSeconds * 1000, delegate { ClearList (ref events); return true; });
+			GLib.Timeout.Add (CacheSeconds * 1000, delegate { ClearList (calendars); return true; });
+			GLib.Timeout.Add (CacheSeconds * 1000, delegate { ClearList (events); return true; });
 			Configuration.GetAccountData (out username, out password,
 			                           typeof (Configuration));
 			try {
@@ -234,7 +234,7 @@ namespace GCalendar
             return nevent;
         }
 		
-		private static void ClearList (ref List<IItem> list)
+		private static void ClearList (List<IItem> list)
 		{
 			lock (list) {
 				list.Clear ();
