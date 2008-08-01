@@ -45,6 +45,8 @@ endif
 # Current dir _must_ be processed last; this ensures our repo is built with all the plugins
 SUBDIRS += .
 
+ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
+PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
 install-data-hook:
-	mdtool setup pack $(DESTDIR)/@datadir@/gnome-do/plugins/*.dll
+	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
 	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
