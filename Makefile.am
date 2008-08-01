@@ -17,6 +17,7 @@ SUBDIRS = po BundledLibraries \
 	GNOME-Terminal \
 	GoogleCalculator \
 	GoogleMaps \
+	GoogleSearch \
 	Launchpad \
 	LocateFiles \
 	OpenSearch \
