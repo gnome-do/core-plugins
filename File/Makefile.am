@@ -34,19 +34,22 @@ SATELLITE_ASSEMBLY_NAME=FilePlugin.resources.dll
 all: $(ASSEMBLY)
 
 FILES = \
-	src/CreateEmptyFileAction.cs \
+	gtk-gui/FilePlugin.CompareConfig.cs \
+	gtk-gui/FilePlugin.Configuration.cs \
+	gtk-gui/generated.cs \
+	src/CompareAction.cs \
+	src/CompareConfig.cs \
+	src/Configuration.cs \
 	src/CreateDirectory.cs \
-	src/FileItemSource.cs \
-	src/RecentFileItemSource.cs \
+	src/CreateEmptyFileAction.cs \
 	src/FileCopyToAction.cs \
-	src/FileRenameToAction.cs \
+	src/FileDeleteAction.cs \
+	src/FileItemSource.cs \
 	src/FileMoveToAction.cs \
 	src/FileMoveToTrashAction.cs \
-	src/FileDeleteAction.cs \
-	gtk-gui/generated.cs \
-	src/Configuration.cs \
-	gtk-gui/FilePlugin.Configuration.cs \
-	src/PathNodeView.cs 
+	src/FileRenameToAction.cs \
+	src/PathNodeView.cs \
+	src/RecentFileItemSource.cs
 
 DATA_FILES = 
 
