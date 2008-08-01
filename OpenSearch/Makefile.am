@@ -35,19 +35,12 @@ all: $(ASSEMBLY)
 
 FILES = \
 	src/AssemblyInfo.cs \
-	src/FirefoxOpenSearchFileProvider.cs \
-	src/IOpenSearchFile.cs \
-	src/IOpenSearchFileProvider.cs \
+	src/FirefoxOpenSearchDirectoryProvider.cs \
 	src/IOpenSearchItem.cs \
-	src/MozillaSearchFile.cs \
-	src/OpenSearch.cs \
 	src/OpenSearchAction.cs \
-	src/OpenSearchFile.cs \
-	src/OpenSearchFileManager.cs \
-	src/OpenSearchFileType.cs \
-	src/OpenSearchFileTypeIdentifier.cs \
 	src/OpenSearchItem.cs \
-	src/XmlNamespaceHelper.cs 
+	src/OpenSearchItemSource.cs \
+	src/OpenSearchParser.cs
 
 DATA_FILES = 
 
