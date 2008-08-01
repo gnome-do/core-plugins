@@ -16,7 +16,6 @@
   <Contents>
     <File name="src/CertHandler.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/GCal.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarEventItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalendarItemSource.cs" subtype="Code" buildaction="Compile" />
