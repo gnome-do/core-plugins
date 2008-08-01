@@ -28,6 +28,7 @@
     <File name="../BundledLibraries/Google.GData.Calendar.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Client.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
+    <File name="src/GCal2.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
