@@ -1,3 +1,4 @@
+[encoding: UTF-8]
 Amarok/src/AmarokItemSource.cs
 Amarok/src/AmarokPlayAction.cs
 Amarok/src/MusicItems.cs
@@ -10,7 +11,9 @@ Epiphany/src/EpiphanyBookmarkItemSource.cs
 Evolution/src/ContactItemSource.cs
 Evolution/src/EmailContactDetailItem.cs
 Evolution/src/PhoneContactDetailItem.cs
+File/gtk-gui/FilePlugin.CompareConfig.cs
 File/gtk-gui/FilePlugin.Configuration.cs
+File/src/CompareAction.cs
 File/src/Configuration.cs
 File/src/CreateDirectory.cs
 File/src/CreateEmptyFileAction.cs
@@ -46,6 +49,8 @@ GNOME-Terminal/src/ProfileItemSource.cs
 GNOME-Terminal/src/RunInTerminalAction.cs
 GoogleCalculator/src/GoogleCalculatorAction.cs
 GoogleMaps/src/MapAction.cs
+GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs
+GoogleSearch/src/InlineGoogleSearch.cs
 Launchpad/src/LaunchpadAction.cs
 Launchpad/src/LaunchpadAnswersItem.cs
 Launchpad/src/LaunchpadBlueprintsItem.cs
@@ -57,6 +62,7 @@ Launchpad/src/LaunchpadRegisterItem.cs
 Launchpad/src/LaunchpadTranslationsItem.cs
 LocateFiles/src/LocateFilesAction.cs
 OpenSearch/src/OpenSearchAction.cs
+OpenSearch/src/OpenSearchItemSource.cs
 Pastebin/src/PastebinAction.cs
 Pidgin/src/PidginAccountActions.cs
 Pidgin/src/PidginAccountItemSource.cs
