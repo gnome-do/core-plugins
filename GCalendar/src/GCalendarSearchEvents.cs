@@ -72,35 +72,23 @@ namespace GCalendar {
             return true;
         }
         
-        public bool SupportsModifierItemForItems (IItem[] items, IItem modItem) {
+        public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+        {
             return true;
         }
         
-        public IItem[] DynamicModifierItemsForItem (IItem item) {
+        public IItem[] DynamicModifierItemsForItem (IItem item)
+        {
             return null;
         }
         
-        public IItem[] Perform (IItem[] items, IItem[] modifierItems) {
-            List<IItem> cal_items = new List<IItem> ();
+        public IItem[] Perform (IItem[] items, IItem[] modifierItems)
+        {
             string search_text = "";
-            string eventUrl, eventDesc, start;
             foreach (IItem item in items) {
                 search_text += (item as ITextItem).Text;
             }
-            EventFeed events = GCal.SearchEvents ((modifierItems[0] as GCalendarItem).URL,
-                            search_text);
-			foreach (EventEntry entry in events.Entries) {
-			    eventUrl = entry.AlternateUri.Content;
-			    eventDesc = entry.Content.Content;
-			    if (entry.Times.Count > 0) {
-			        start = entry.Times[0].StartTime.ToString ();
-			        start = start.Substring (0,start.IndexOf (' '));
-			        eventDesc = start + " - " + eventDesc;
-                }
-			    cal_items.Add (new GCalendarEventItem (entry.Title.Text, eventUrl,
-			            eventDesc));
-            }
-			return cal_items.ToArray ();
+            return GCal2.SearchEvents ((modifierItems[0] as GCalendarItem).URL, search_text);
         }
     }
 }
