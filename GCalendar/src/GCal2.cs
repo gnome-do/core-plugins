@@ -149,7 +149,12 @@ namespace GCalendar
 					} catch (WebException e) {			
 						Console.Error.WriteLine (e.Message);
 					}
-					catch (ArgumentException) { }
+					catch (GDataRequestException e) {
+						Console.Error.WriteLine (e.Message);
+					}
+					catch (ArgumentException) { 
+					
+					}
 				}
 			}
 		}
