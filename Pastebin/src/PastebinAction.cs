@@ -31,7 +31,7 @@ using Mono.Unix;
 
 namespace Pastebin
 {
-	public class PastebinAction : AbstractAction
+	public class PastebinAction : AbstractAction, IConfigurable
 	{
 		public override string Name
 		{
@@ -77,28 +77,25 @@ namespace Pastebin
 		public override bool SupportsItem (IItem item)
 		{
 			if (item is ITextItem) return true;
-			if ((item as FileItem).MimeType.StartsWith ("text/") || 
+			if (item is FileItem) {	
+				if ((item as FileItem).MimeType.StartsWith ("text/") || 
 				(item as FileItem).MimeType.EndsWith ("/x-perl"))
 				return true;
+			}
 			return false;
 		}
 			
 		public override IItem[] DynamicModifierItemsForItem (IItem item)
 		{
-			try
-			{
-				Paste2 pastebinProvider = new Paste2 ();
-				List<IItem> items = new List<IItem> ();
+			IPastebinProvider pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences ();
 
-				foreach(IItem languageItem in pastebinProvider.SupportedLanguages)
-					items.Add (languageItem);
+			List<IItem> items = new List<IItem> ();
+
+			foreach (IItem languageItem in pastebinProvider.SupportedLanguages) {
+				items.Add (languageItem);
+			}
 										
-				return items.ToArray ();
-			}
-			catch
-			{
-				return null;
-			}
+			return items.ToArray ();
 		}
 				
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
@@ -106,8 +103,7 @@ namespace Pastebin
 			string text = string.Empty;
 			ITextItem titem = null;
 			
-			foreach (IItem item in items)
-			{
+			foreach (IItem item in items) {
 				if (item is IFileItem)
 					titem = new TextItem (File.ReadAllText (
 						(item as IFileItem).Path));
@@ -116,22 +112,24 @@ namespace Pastebin
 				text += titem.Text;
 			}
 			
-			Paste2 pastebinProvider = null;
+			IPastebinProvider pastebinProvider = null;
 					
-			if (modifierItems.Length > 0)
-			{
-				pastebinProvider = new Paste2 (text, (modifierItems[0] as ITextSyntaxItem).Syntax);
+			if (modifierItems.Length > 0) {
+				pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences (text, (modifierItems[0] as ITextSyntaxItem).Syntax);
 			}
-			else
-			{
-				pastebinProvider = new Paste2 (text);		
+			else {
+				pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences (text);		
 			}
 					
 			string url = Pastebin.PostUsing (pastebinProvider);	
 					
 			return new IItem[] { new TextItem (url) };
 		}
-		
+				
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new PastebinConfig();
+		}				
 	}
 }
 

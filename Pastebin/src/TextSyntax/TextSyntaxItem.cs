@@ -23,7 +23,7 @@ namespace Pastebin
 {
 	public class TextSyntaxItem : ITextSyntaxItem
 	{	
-		private string name, description, icon, syntax;
+		private string name, description, icon, syntax;		
 		
 		public TextSyntaxItem (string name, string description, string icon, string syntax)
 		{
