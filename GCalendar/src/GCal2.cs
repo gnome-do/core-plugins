@@ -35,7 +35,6 @@ namespace GCalendar
 	public static class GCal2
 	{
 		private static CalendarService service;
-		
 		private static List<IItem> calendars;
 		private static object cal_lock;
 		
@@ -106,6 +105,14 @@ namespace GCalendar
 				return;
 			}
 			
+			foreach (AtomEntry calendar in calendar_feed.Entries) {
+				string cal_url = calendar.Id.Uri.Content.Replace ("/default","") + "/private/full";
+				calendars.Add (new GCalendarItem (calendar.Title.Text, cal_url));
+			}
+		}
+		
+		private static void UpdateCalFeed ()
+		{		
 			lock (cal_lock) {
 				foreach (AtomEntry calendar in calendarFeed.Entries) {
 					string cal_url = calendar.Id.Uri.Content.Replace ("/default","") + "/private/full";
