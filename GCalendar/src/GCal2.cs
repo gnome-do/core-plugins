@@ -60,16 +60,6 @@ namespace GCalendar
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
 			Connect (username, password);
-			
-			GLib.Timeout.Add (CacheSeconds * 1000, delegate { 
-				ClearCollection (calendars, cal_lock); 
-				return true; 
-			});
-			
-			GLib.Timeout.Add (CacheSeconds * 1000, delegate {
-				ClearCollection (events, events_lock); 
-				return true; 
-			});
 		}
 		
 		public static string GAppName {
@@ -105,29 +95,16 @@ namespace GCalendar
 				return;
 			}
 			
-			foreach (AtomEntry calendar in calendar_feed.Entries) {
+			calendars.Clear ();
+			calendars.Add  (new GCalendarItem ("All Events", ""));
+			foreach (AtomEntry calendar in calendarFeed.Entries) {
 				string cal_url = calendar.Id.Uri.Content.Replace ("/default","") + "/private/full";
 				calendars.Add (new GCalendarItem (calendar.Title.Text, cal_url));
 			}
 		}
 		
-		private static void UpdateCalFeed ()
-		{		
-			lock (cal_lock) {
-				foreach (AtomEntry calendar in calendarFeed.Entries) {
-					string cal_url = calendar.Id.Uri.Content.Replace ("/default","") + "/private/full";
-					calendars.Add (new GCalendarItem (calendar.Title.Text, cal_url));
-				}
-			}
-		}
-		
 		public static List<IItem> EventsForCalendar (string calendarName)
 		{
-			Console.Error.WriteLine ("Looking for {0}.\nFound:", calendarName);
-			foreach (string name in events.Keys) {
-				Console.Error.WriteLine (name);
-			}
-			
 			return events [calendarName];
 		}
 		
@@ -136,20 +113,21 @@ namespace GCalendar
 			string eventUrl, eventDesc, start;
 			Dictionary<string,string> cals = new Dictionary<string,string> ();
 			lock (cal_lock) {
-				foreach (GCalendarItem cal in calendars) {
-					try {
+				try {
+					foreach (GCalendarItem cal in calendars) {	
 						cals.Add (cal.Name, cal.URL);
-					} catch (ArgumentException) { }
-				}
-				if (cals.Count == 0) return;
+					}
+					cals.Add ("All Events", "");
+				} catch (ArgumentException) { }
 			}
+			if (cals.Count <= 1) return;
 			
 			lock (events_lock) {
+				events.Clear ();
+				events ["All Events"] = new List<IItem> ();
 				foreach (string cal in cals.Keys) {
 					if (!events.ContainsKey (cal))
 						events [cal] = new List<IItem> ();
-					//If our event list hasn't ben cleared, dont bother updating it
-					if (events [cal].Count != 0) continue;
 					
 					EventQuery query = new EventQuery (cals [cal]);
 					query.StartTime = DateTime.Now;
@@ -165,10 +143,13 @@ namespace GCalendar
 			                }
 							events [cal].Add (new GCalendarEventItem (entry.Title.Text, eventUrl,
 								eventDesc));
+							events ["All Events"].Add (new GCalendarEventItem (entry.Title.Text, eventUrl,
+								eventDesc));
 				         }
 					} catch (WebException e) {			
 						Console.Error.WriteLine (e.Message);
 					}
+					catch (ArgumentException) { }
 				}
 			}
 		}
@@ -225,13 +206,6 @@ namespace GCalendar
 				return null;
 			}
 			return events.ToArray ();
-        }
-        
-        private static void ClearCollection<T> (ICollection<T> collection, object listLock)
-        {
-        	lock (listLock) {
-        		collection.Clear ();
-        	}
         }
         
         private static DateTime [] ParseEventDates (string needle, string [] keywords)

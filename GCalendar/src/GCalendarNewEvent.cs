@@ -72,6 +72,9 @@ namespace GCalendar
         
         public bool SupportsModifierItemForItems (IItem[] item, IItem modItem) 
         {
+            if (modItem is GCalendarItem)
+        		return !(modItem as GCalendarItem).Name.Equals ("All Events");
+        		
             return true;
         }
         

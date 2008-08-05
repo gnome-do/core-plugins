@@ -47,7 +47,6 @@ namespace GCalendar
 			get {
 				return new Type[] {
 					typeof (GCalendarItem),
-					//typeof (GCalendarEventItem),
 				};
 			}
 		}
