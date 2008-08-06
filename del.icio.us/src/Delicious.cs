@@ -61,7 +61,7 @@ namespace Delicious
 		public static List<IItem> BookmarksForTag (string tag)
 		{
 			List<IItem> list = null;
-			bookmarks.TryGetValue (tag, out list);
+			bookmarks.TryGetValue (tag.ToLower (), out list);
 			return list;
 		}
 		
@@ -87,9 +87,9 @@ namespace Delicious
 						string [] itemTags;
 						itemTags = reader.GetAttribute ("tag").Split (' ');
 						foreach (string tag in itemTags) {
-							string t = tag;
+							string t = tag.ToLower ();
 							if (string.IsNullOrEmpty (tag))
-								t = "Untagged";
+								t = "untagged";
 							if (!bookmarks.ContainsKey (tag))
 								bookmarks [t] = new List<IItem> ();
 							bookmarks [t].Add (bookmark);
