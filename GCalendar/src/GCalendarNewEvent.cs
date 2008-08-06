@@ -72,6 +72,9 @@ namespace GCalendar
         
         public bool SupportsModifierItemForItems (IItem[] item, IItem modItem) 
         {
+            if (modItem is GCalendarItem)
+        		return !(modItem as GCalendarItem).Name.Equals ("All Events");
+        		
             return true;
         }
         
@@ -82,20 +85,10 @@ namespace GCalendar
         
         public IItem[] Perform (IItem[] items, IItem[] modifierItems) 
         {
-            string cal_url = (modifierItems[0] as GCalendarItem).URL;
-            string event_data = (items[0] as ITextItem).Text;
+            string calUrl = (modifierItems[0] as GCalendarItem).URL;
+            string eventData = (items[0] as ITextItem).Text;
             
-            EventEntry entry = GCal.NewEvent (cal_url, event_data);
-            
-            string eventUrl = entry.AlternateUri.Content;
-            string eventDesc = entry.Content.Content;
-            if (entry.Times.Count > 0) {
-                string start = entry.Times[0].StartTime.ToString ();
-                start = start.Substring (0,start.IndexOf (' '));
-                eventDesc = start + " - " + eventDesc;
-            }
-            return new IItem[] { (new GCalendarEventItem (entry.Title.Text, eventUrl,
-                    eventDesc)), };
+            return new IItem [] { GCal2.NewEvent (calUrl, eventData), };
         }
 	}
 }

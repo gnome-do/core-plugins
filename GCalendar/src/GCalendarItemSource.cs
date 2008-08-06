@@ -19,19 +19,12 @@
  */
 
 using System;
-using System.Text;
-using System.IO;
-using System.Net;
 using System.Threading;
 using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
-
-using Google.GData.Client;
-using Google.GData.Calendar;
-using Google.GData.Extensions;
 
 namespace GCalendar
 {	
@@ -54,51 +47,29 @@ namespace GCalendar
 			get {
 				return new Type[] {
 					typeof (GCalendarItem),
-					typeof (GCalendarEventItem),
 				};
 			}
 		}
 
 		public ICollection<IItem> Items
 		{
-			get { return GCal.Calendars; }
+			get { return GCal2.Calendars; }
 		}
 
 		public ICollection<IItem> ChildrenOfItem (IItem parent)
 		{
-			GCalendarItem calItem = parent as GCalendarItem;
-			List<IItem> children = new List<IItem> ();
-			string eventUrl, eventDesc, start;
-			EventFeed events;
-			try {
-				events = GCal.GetEvents (calItem.URL);
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-				return null;
-			}
-			foreach (EventEntry entry in events.Entries) {
-			    eventUrl = entry.AlternateUri.Content;
-			    eventDesc = entry.Content.Content;
-			    if (entry.Times.Count > 0) {
-			        start = entry.Times[0].StartTime.ToString ();
-			        start = start.Substring (0,start.IndexOf (' '));
-			        eventDesc = start + " - " + eventDesc;
-                }
-			    children.Add (new GCalendarEventItem (entry.Title.Text, eventUrl,
-			            eventDesc));
-            }
-			return children;
+			return GCal2.EventsForCalendar ((parent as GCalendarItem).Name);
 		}
 
 		public void UpdateItems ()
-		{	
-			try {			
-				Thread updateRunner = new Thread (new ThreadStart (GCal.UpdateCalendars));
-				updateRunner.IsBackground = true;
-				updateRunner.Start ();
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-			}
+		{
+			Thread updateCalendars = new Thread (new ThreadStart (GCal2.UpdateCalendars));
+			updateCalendars.IsBackground = true;
+			updateCalendars.Start ();
+			
+			Thread updateEvents = new Thread (new ThreadStart (GCal2.UpdateEvents));
+			updateEvents.IsBackground = true;
+			updateEvents.Start ();
 		}
 		
 		public Gtk.Bin GetConfiguration ()
