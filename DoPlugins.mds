@@ -37,6 +37,7 @@
       <Entry build="True" name="VolumeControl" configuration="Debug" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="InlineGoogleSearch" configuration="Debug" />
+      <Entry build="True" name="del.icio.us" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -76,6 +77,7 @@
       <Entry build="True" name="VolumeControl" configuration="Release" />
       <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="InlineGoogleSearch" configuration="Release" />
+      <Entry build="True" name="del.icio.us" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -119,6 +121,7 @@
     <Execute type="None" entry="Do.Music" />
     <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="InlineGoogleSearch" />
+    <Execute type="None" entry="del.icio.us" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -158,5 +161,6 @@
     <Entry filename="VolumeControl/VolumeControl.mdp" />
     <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="GoogleSearch/InlineGoogleSearch.mdp" />
+    <Entry filename="del.icio.us/del.icio.us.mdp" />
   </Entries>
 </Combine>
