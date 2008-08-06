@@ -77,13 +77,13 @@ namespace Delicious
 			if (!Monitor.TryEnter (book_lock)) return;
 			
 			bookmarks.Clear ();
-			bookmarks ["All Bookmarks"] = new List<IItem> ();
+			bookmarks ["all bookmarks"] = new List<IItem> ();
 			try {
 				while (reader.Read ()) {
 					if (reader.Name == "post") {
 						BookmarkItem bookmark =  new BookmarkItem (
 							reader.GetAttribute ("description"), reader.GetAttribute ("href"));
-						bookmarks ["All Bookmarks"].Add (bookmark);
+						bookmarks ["all bookmarks"].Add (bookmark);
 						string [] itemTags;
 						itemTags = reader.GetAttribute ("tag").Split (' ');
 						foreach (string tag in itemTags) {

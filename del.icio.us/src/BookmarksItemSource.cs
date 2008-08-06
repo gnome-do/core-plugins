@@ -18,7 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
 using System.Threading;
 using System.Collections.Generic;
@@ -52,7 +51,7 @@ namespace Delicious
 		}
 		
 		public ICollection<IItem> Items {
-			get { return Delicious.BookmarksForTag ("All Bookmarks"); }
+			get { return Delicious.BookmarksForTag ("all bookmarks"); }
 		}
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item)
