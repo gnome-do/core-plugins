@@ -18,6 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using System.Net;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -39,7 +40,7 @@ namespace Pastebin
 			parameters["code"] = "";
 			parameters["parent"] = "0";		
 			
-			supportedLanguages = new List<TextSyntaxItem> ();
+			supportedLanguages = new List<TextSyntaxItem> (); 
 			supportedLanguages.Add (new TextSyntaxItem ("Plain Text", "Plain Text", "file", "text"));
 			supportedLanguages.Add (new TextSyntaxItem ("Actionscript", "Actionscript", "file", "actionscript"));
 			supportedLanguages.Add (new TextSyntaxItem ("Ada", "Ada", "file", "ada"));
@@ -79,7 +80,7 @@ namespace Pastebin
 			supportedLanguages.Add (new TextSyntaxItem ("Winbatch", "Winbatch", "file", "winbatch"));		
 			supportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "xml"));
 		}
-		
+	
 		public Paste2 (string content, string syntax) : this ()
 		{		
 			parameters["lang"] = syntax;

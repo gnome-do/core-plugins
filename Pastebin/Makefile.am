@@ -1,8 +1,6 @@
 
 EXTRA_DIST =  
 
-
-
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
@@ -34,23 +32,32 @@ SATELLITE_ASSEMBLY_NAME=.resources.dll
 all: $(ASSEMBLY)
 
 FILES = \
+	gtk-gui/generated.cs \
+	gtk-gui/Pastebin.PastebinConfig.cs \
 	src/AssemblyInfo.cs \
-	src/IPastebinProvider.cs \
-	src/ITextSyntaxItem.cs \
-	src/Paste2.cs \
 	src/Pastebin.cs \
 	src/PastebinAction.cs \
-	src/TextSyntaxItem.cs 
+	src/Config/PastebinConfig.cs \
+	src/Providers/IPastebinProvider.cs \
+	src/Providers/Paste2.cs \
+	src/Providers/PastebinCA.cs \
+	src/Providers/PastebinProviderFactory.cs \
+	src/TextSyntax/ITextSyntaxItem.cs \
+	src/TextSyntax/TextSyntaxItem.cs 
 
 DATA_FILES = 
 
 RESOURCES = \
+	gtk-gui/gui.stetic \
+	gtk-gui/objects.xml \
 	src/Pastebin.addin.xml 
 
 REFERENCES =  \
 	System \
 	Mono.Posix \
 	System.Web \
+	$(GTK_SHARP_20_LIBS) \
+	$(GCONF_SHARP_20_LIBS) \
 	$(DOADDINS_LIBS)
 
 DLL_REFERENCES = 
