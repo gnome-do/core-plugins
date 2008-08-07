@@ -54,7 +54,7 @@ namespace DoTwitter
 
         public bool SupportsItem (IItem item) 
         {
-            return (item as ITextItem).Text.Length < 140;
+            return (item as ITextItem).Text.Length <= 140;
         }
 		
 		public Type [] SupportedModifierItemTypes {
@@ -71,7 +71,10 @@ namespace DoTwitter
                         
         public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
         {
-            return (modItem as ContactItem) ["twitter.screenname"] != null;
+        	//make sure we dont go over 140 chars with the contact screen name
+            return (modItem as ContactItem) ["twitter.screenname"] != null &&
+            	((items [0] as ITextItem).Text.Length + ((modItem as ContactItem) 
+            	["twitter.screenname"]).Length < 140);
         }
         
         public IItem [] DynamicModifierItemsForItem (IItem item)

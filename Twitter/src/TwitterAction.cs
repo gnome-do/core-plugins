@@ -33,6 +33,7 @@ namespace DoTwitter
 	public static class TwitterAction
 	{
 		private static List<IItem> items;
+		private static object friends_lock;
 		private static Twitter twitter;
 		private static string status, username, password;
 		private static DateTime lastUpdated;
@@ -42,19 +43,22 @@ namespace DoTwitter
 		{
 			string home;
 			
-			GLib.Timeout.Add (600000, delegate { 
-				ClearFriends (null); 
-				return true; 
-			});
-			
 			items = new List<IItem> ();
+			friends_lock = new object ();
+			
 			Configuration.GetAccountData (out username, out password,
 				typeof (Configuration));
-			twitter = new Twitter (username, password);
+			Connect (username, password);
 			lastUpdated = DateTime.UtcNow;
 			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			photo_directory = "~/.local/share/gnome-do/Twitter/photos/".Replace ("~", home);
 		} 
+		
+		public static bool Connect (string username, string password)
+		{
+			twitter = new Twitter (username, password);
+			return true;
+		}
 		
 		public static List<IItem> Friends {
 			get { return items; }
@@ -92,7 +96,7 @@ namespace DoTwitter
 			if ((String.IsNullOrEmpty (username) || String.IsNullOrEmpty (password)))
 				return;
 			
-			if (!Monitor.TryEnter (items)) return;
+			if (!Monitor.TryEnter (friends_lock)) return;
 
 			TwitterUserCollection friends;
 			
@@ -119,7 +123,7 @@ namespace DoTwitter
 			} catch (TwitterizerException e) {
 				Console.Error.WriteLine (e.Message);
 			} finally {
-				Monitor.Exit (items);
+				Monitor.Exit (friends_lock);
 			} 
 		}
 		
@@ -157,25 +161,6 @@ namespace DoTwitter
 			} catch { }
 		}
 				
-		public static bool TryConnect (string username, string password)
-		{
-			Twitter test = new Twitter (username, password);
-			try {
-				test.Friends ();
-				twitter = new Twitter (username, password);
-			} catch {
-				return false;
-			}
-			return true;
-		}
-		
-		private static void ClearFriends (object state)
-		{
-			lock (items) {
-				items.Clear ();
-			}
-		}
-		
 		private static void DownloadBuddyIcon (Uri imageUri, string location)
 		{
 			WebClient client = new WebClient ();
