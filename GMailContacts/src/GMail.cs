@@ -35,6 +35,7 @@ namespace GMailContacts
 	{
 		public const string GAppName = "alexLauni-gnomeDoGMailPlugin-1.2";
 		private static List<IItem> contacts;
+		private static object conts_lock;
 		private static DateTime last_updated;
 		private static ContactsService service;
 		
@@ -44,6 +45,7 @@ namespace GMailContacts
 			username = password = "";
 			ServicePointManager.CertificatePolicy = new CertHandler ();
 			contacts = new List<IItem> ();
+			conts_lock = new object ();
 			last_updated = new DateTime (1987, 11, 28);
 			GMailConfig.GetAccountData (out username, out password,
 				typeof (GMailConfig));
@@ -66,7 +68,8 @@ namespace GMailContacts
 		
 		public static void UpdateContacts ()
 		{
-			if (!Monitor.TryEnter (contacts)) return;
+			if (!Monitor.TryEnter (conts_lock)) return;
+			
 			ContactsQuery query = new ContactsQuery (
 				ContactsQuery.CreateContactsUri ("default"));
 			query.NumberToRetrieve = 1000;
@@ -132,7 +135,7 @@ namespace GMailContacts
 			} catch (Exception e) {
 				Console.Error.WriteLine ("GMailContacts Error: {0}",e.Message);
 			} finally {
-				Monitor.Exit (contacts);
+				Monitor.Exit (conts_lock);
 			}
 		}
 		
