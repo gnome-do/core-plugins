@@ -21,6 +21,7 @@
 
 using System;
 using System.Net;
+using System.Xml;
 using System.Threading;
 using System.Collections.Generic;
 
@@ -148,12 +149,12 @@ namespace GCalendar
 				         }
 					} catch (WebException e) {			
 						Console.Error.WriteLine (e.Message);
-					}
-					catch (GDataRequestException e) {
+					} catch (GDataRequestException e) {
 						Console.Error.WriteLine (e.Message);
-					}
-					catch (ArgumentException) { 
-					
+					} catch (ArgumentException e) { 
+						Console.Error.WriteLine (e.Message); 
+					} catch (XmlException e) {
+						Console.Error.WriteLine (e.Message);
 					}
 				}
 			}
