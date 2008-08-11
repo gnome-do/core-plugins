@@ -3,6 +3,7 @@ EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
 SUBDIRS = po BundledLibraries \
 	Archive \
+	del.icio.us \
 	DiskMounter \
 	Epiphany \
 	Evolution \

@@ -103,6 +103,7 @@ AC_CONFIG_FILES([
 Amarok/Makefile
 Archive/Makefile
 Banshee/Makefile
+del.icio.us/Makefile
 DiskMounter/Makefile
 Epiphany/Makefile
 Evolution/Makefile
