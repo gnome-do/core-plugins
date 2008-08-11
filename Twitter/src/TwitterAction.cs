@@ -102,9 +102,8 @@ namespace DoTwitter
 			
 			try {
 				friends = twitter.Friends (); 
-			
 				ContactItem tfriend;
-				
+				items.Clear ();
 				foreach (TwitterUser friend in friends) {
 					for (int i = 0; i <= 1; i++) {
 						if (i == 0)
