@@ -36,7 +36,7 @@ all: $(ASSEMBLY)
 FILES = \
 	src/CertHandler.cs \
 	src/Configuration.cs \
-	src/GCal.cs \
+	src/GCal2.cs \
 	src/GCalendarEventItem.cs \
 	src/GCalendarItem.cs \
 	src/GCalendarItemSource.cs \
