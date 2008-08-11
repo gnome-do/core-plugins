@@ -108,8 +108,10 @@ namespace DoTwitter
 					for (int i = 0; i <= 1; i++) {
 						if (i == 0)
 							tfriend = ContactItem.Create (friend.ScreenName);
-						else
+						else if (!friend.ScreenName.Equals (friend.UserName))
 							tfriend = ContactItem.Create (friend.UserName);
+						else
+							continue;
 						tfriend ["twitter.screenname"] = friend.ScreenName;
 						if (System.IO.File.Exists (photo_directory + friend.ID))
 							tfriend ["photo"] = photo_directory + friend.ID;
