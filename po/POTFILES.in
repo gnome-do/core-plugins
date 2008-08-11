@@ -4,6 +4,10 @@ Amarok/src/AmarokPlayAction.cs
 Amarok/src/MusicItems.cs
 Archive/src/CreateArchiveAction.cs
 Archive/src/ExtractArchiveAction.cs
+del.icio.us/src/BookmarksItemSource.cs
+del.icio.us/src/NewBookmarkAction.cs
+del.icio.us/src/TagItem.cs
+del.icio.us/src/TagsItemSource.cs
 DiskMounter/src/MountAction.cs
 DiskMounter/src/OpenVolumeAction.cs
 DiskMounter/src/UnmountAction.cs
@@ -63,6 +67,7 @@ Launchpad/src/LaunchpadTranslationsItem.cs
 LocateFiles/src/LocateFilesAction.cs
 OpenSearch/src/OpenSearchAction.cs
 OpenSearch/src/OpenSearchItemSource.cs
+Pastebin/gtk-gui/Pastebin.PastebinConfig.cs
 Pastebin/src/PastebinAction.cs
 Pidgin/src/PidginAccountActions.cs
 Pidgin/src/PidginAccountItemSource.cs
