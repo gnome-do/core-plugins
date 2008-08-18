@@ -24,6 +24,10 @@ using org.freedesktop.DBus;
 
 namespace Tomboy
 {
+
+	public delegate void DBusNoteAddedHandler (string note);
+	public delegate void DBusNoteRemovedHandler (string note);
+	
 	[Interface ("org.gnome.Tomboy.RemoteControl")]
 	public interface ITBoy
 	{
@@ -38,7 +42,12 @@ namespace Tomboy
 		void DisplaySearchWithText (string search_text);
 		string Version ();
 		bool SetNoteContents (string uri, string text_contents);
+		event DBusNoteAddedHandler NoteAdded;
+		event DBusNoteRemovedHandler NoteRemoved;
 	}
+		
+	public delegate void NoteAddedHandler (object o, EventArgs e);
+	public delegate void NoteRemovedHandler (object o, EventArgs e);
 	
 	class TomboyDBus	
 	{
@@ -82,15 +91,37 @@ namespace Tomboy
 		
 		#region Instance Constructor, Methods, and Properties
 		
+		public event NoteAddedHandler NoteAdded;
+		public event NoteRemovedHandler NoteRemoved;
+		
 		public TomboyDBus () {
 			
 			try {
 				BusG.Init ();
 				if (TomboyInstance == null)
 					FindInstance ();
+				TomboyInstance.NoteAdded += OnNoteAdded;
+				TomboyInstance.NoteRemoved += OnNoteRemoved;
+				
 			} catch (Exception) {
 				Console.Error.WriteLine ("Could not locate Tomboy on D-Bus. Perhaps it's not running?");
 			}
+		}
+		
+		private bool notes_updated = true;
+		public bool NotesUpdated {
+			get { return notes_updated; }
+			set { notes_updated = value; }
+		}
+		
+		protected virtual void OnNoteAdded (string note)
+		{
+			NotesUpdated = true;
+		}
+		
+		protected virtual void OnNoteRemoved (string note)
+		{
+			NotesUpdated = true;
 		}
 
 		private void FindInstance ()
@@ -197,8 +228,7 @@ namespace Tomboy
 		public void SearchNotes (string search_text) {
 			EnsureTomboyInstance ();
 			TomboyInstance.DisplaySearchWithText (search_text);
-		}
-		
+		}		
 		#endregion
 	}
 }

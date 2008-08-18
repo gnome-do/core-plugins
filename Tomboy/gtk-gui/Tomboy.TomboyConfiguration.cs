@@ -98,7 +98,7 @@ namespace Tomboy {
             this.vbox3.Name = "vbox3";
             this.vbox3.Spacing = 6;
             // Container child vbox3.Gtk.Box+BoxChild
-            this.contentFirstRadioButton = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("First text item is content, second text item is title."));
+            this.contentFirstRadioButton = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("First pane is content, second pane is title."));
             this.contentFirstRadioButton.CanFocus = true;
             this.contentFirstRadioButton.Name = "contentFirstRadioButton";
             this.contentFirstRadioButton.Active = true;
@@ -111,7 +111,7 @@ namespace Tomboy {
             w5.Expand = false;
             w5.Fill = false;
             // Container child vbox3.Gtk.Box+BoxChild
-            this.titleFirstRadioButton = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("First text item is title, second text item is content."));
+            this.titleFirstRadioButton = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("First pane is title, second pane is content."));
             this.titleFirstRadioButton.CanFocus = true;
             this.titleFirstRadioButton.Name = "titleFirstRadioButton";
             this.titleFirstRadioButton.DrawIndicator = true;

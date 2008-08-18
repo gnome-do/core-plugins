@@ -105,11 +105,13 @@ namespace Tomboy
 			TomboyDBus tb = new TomboyDBus();
 			// Only query Tomboy if it is already running.
 			// Do not start it prematurely.
-			if (!tb.Connected)
+			if (!tb.Connected && !tb.NotesUpdated)
 				return;
+				
+			notes.Clear ();
 			foreach(string title in tb.GetAllNoteTitles ())
 				notes.Add (new NoteItem (title));
+			tb.NotesUpdated = false;
 		}
 	}
-	
 }
