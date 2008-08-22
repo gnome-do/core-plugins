@@ -17,8 +17,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Web;
-
+using System.Text;
 using Do.Universe;
 
 namespace OpenSearch
@@ -65,7 +64,44 @@ namespace OpenSearch
 		/// </returns>
 		public string BuildSearchUrl (string searchTerm)
 		{
-			return UrlTemplate.Replace ("{searchTerms}",  HttpUtility.UrlEncode(searchTerm));
+			return UrlTemplate.Replace ("{searchTerms}",  EncodeUrl (searchTerm));
+		}
+		
+		private static string EncodeUrl (string input)
+		{
+			if (input == null) 
+				return null;
+			if (input.Length == 0)
+				return string.Empty;
+			
+			StringBuilder sb = new StringBuilder ();
+			
+			foreach(char ch in input) {
+				if ((((ch > '`') && (ch < '{')) || ((ch > '@') && (ch < '['))) || 
+				    (((ch > '/') && (ch < ':')) || (((ch == '.') || (ch == '-')) || (ch == '_')))) {
+					sb.Append (ch);
+				}
+				else if (ch > '\x007f') {
+					sb.Append ("%u" + TwoByteHex (ch));
+				}
+				else {
+					sb.Append ("%" + SingleByteHex (ch));
+				}
+			}
+	
+			return sb.ToString ();	
+		}
+		
+		private static string SingleByteHex (char c)
+		{
+			uint num = c;
+			return num.ToString("x").PadLeft(2,'0');
+		}
+		
+		private static string TwoByteHex (char c)
+		{
+			uint num = c;
+			return num.ToString("x").PadLeft(4,'0');
 		}
 	}
 }
