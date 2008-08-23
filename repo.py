@@ -18,7 +18,7 @@ from os import system
 from os.path import commonprefix, abspath
 from subprocess import Popen, PIPE
 
-REPO_VERSION = "0.5.99"
+REPO_VERSION = "0.6.0"
 REPO_NAME = "official"
 REPO_SCP = "gnomedo@do.davebsd.com:do.davebsd.com/repo/%s/%s" % \
 	(REPO_VERSION, REPO_NAME)
