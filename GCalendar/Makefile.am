@@ -57,6 +57,7 @@ BUNDLED_LIBS = \
 
 REFERENCES =  \
 	System \
+	System.Xml \
 	Mono.Posix \
 	$(DOADDINS_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
