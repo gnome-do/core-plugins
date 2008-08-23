@@ -38,6 +38,8 @@
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="InlineGoogleSearch" configuration="Debug" />
       <Entry build="True" name="del.icio.us" configuration="Debug" />
+      <Entry build="True" name="Pastebin" configuration="Debug" />
+      <Entry build="True" name="ImageShack" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -78,6 +80,8 @@
       <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="InlineGoogleSearch" configuration="Release" />
       <Entry build="True" name="del.icio.us" configuration="Release" />
+      <Entry build="True" name="Pastebin" configuration="Release" />
+      <Entry build="True" name="ImageShack" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -122,6 +126,8 @@
     <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="InlineGoogleSearch" />
     <Execute type="None" entry="del.icio.us" />
+    <Execute type="None" entry="Pastebin" />
+    <Execute type="None" entry="ImageShack" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -162,5 +168,6 @@
     <Entry filename="GCalendar/GCalendar.mdp" />
     <Entry filename="GoogleSearch/InlineGoogleSearch.mdp" />
     <Entry filename="del.icio.us/del.icio.us.mdp" />
+    <Entry filename="ImageShack/ImageShack.mdp" />
   </Entries>
 </Combine>
