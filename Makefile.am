@@ -19,6 +19,7 @@ SUBDIRS = po BundledLibraries \
 	GoogleCalculator \
 	GoogleMaps \
 	GoogleSearch \
+	ImageShack \
 	Launchpad \
 	LocateFiles \
 	OpenSearch \

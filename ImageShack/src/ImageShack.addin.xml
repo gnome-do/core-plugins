@@ -1,0 +1,23 @@
+<Addin
+	id="ImageShack"
+	namespace="Do"
+	version="1.0"
+	name="ImageShack"
+	description="Upload an image to ImageShack."
+	author="Jason Jones"
+>
+ 
+	<Runtime>
+		<Import assembly="ImageShack.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path= "/Do/Action">
+		<Action type="ImageShack.ImageShackAction" />
+	</Extension>
+</Addin>
