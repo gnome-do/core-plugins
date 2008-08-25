@@ -1,7 +1,7 @@
 <Addin
 	id="ImageShack"
 	namespace="Do"
-	version="1.0"
+	version="1.0.1"
 	name="ImageShack"
 	description="Upload an image to ImageShack."
 	author="Jason Jones"

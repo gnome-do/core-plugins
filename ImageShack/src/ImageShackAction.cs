@@ -70,17 +70,34 @@ namespace ImageShack
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{								
 			try {
+				string fileValidationError = ValidateFileForUpload ((items[0] as FileItem).Path);	
+				if (fileValidationError != null) {
+					return new IItem[] { new TextItem (fileValidationError) };
+				}
+					
 				string url = PostToImageShack ((items[0] as FileItem).Path, (items[0] as FileItem).MimeType);
 				return new IItem[] { new TextItem (url) };
 			}
 			catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
-				return new IItem[] { new TextItem ("An error occured while uploading to ImageShack.") };
+				return new IItem[] { new TextItem (Catalog.GetString ("An error occured while uploading to ImageShack.")) };
 			}					
 		}		
 			
-		public static string PostToImageShack (string file, string contentType)
+		public static string ValidateFileForUpload (string file)
 		{
+			FileInfo fi = new FileInfo(file);
+			long fileSize = fi.Length;	
+			// 1.5MB limit
+			if (fileSize > 1572864) {
+				return Catalog.GetString ("File size exceeds ImageShack's 1.5MB limit.");
+			}
+				
+			return null;
+		}
+			
+		public static string PostToImageShack (string file, string contentType)
+		{		
 			string boundary = "----------" + DateTime.Now.Ticks.ToString ("x");
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://www.imageshack.us/index.php");
 			request.Method = "POST";
