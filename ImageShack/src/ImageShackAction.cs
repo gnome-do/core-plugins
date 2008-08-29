@@ -18,6 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -70,21 +71,29 @@ namespace ImageShack
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{								
 			try {
-				string fileValidationError = ValidateFileForUpload ((items[0] as FileItem).Path);	
-				if (fileValidationError != null) {
-					return new IItem[] { new TextItem (fileValidationError) };
+				List<IItem> returnItems = new List<IItem> ();	
+				foreach (IItem item in items) {	
+					FileItem fileItem = item as FileItem;
+						
+					string fileValidationError = ValidateFileForUpload (fileItem.Path);	
+					if (fileValidationError != null) {
+						returnItems.Add (new TextItem (fileValidationError + " - " + fileItem.Path ));
+						continue;
+					}
+						
+					string url = PostToImageShack (fileItem.Path, fileItem.MimeType);
+					returnItems.Add (new TextItem (url));
 				}
 					
-				string url = PostToImageShack ((items[0] as FileItem).Path, (items[0] as FileItem).MimeType);
-				return new IItem[] { new TextItem (url) };
+				return returnItems.ToArray ();
 			}
 			catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
+				Console.Error.WriteLine (Catalog.GetString ("ImageShack exception: ") + e.Message);
 				return new IItem[] { new TextItem (Catalog.GetString ("An error occured while uploading to ImageShack.")) };
 			}					
 		}		
 			
-		public static string ValidateFileForUpload (string file)
+		private static string ValidateFileForUpload (string file)
 		{
 			FileInfo fi = new FileInfo(file);
 			long fileSize = fi.Length;	
@@ -96,7 +105,7 @@ namespace ImageShack
 			return null;
 		}
 			
-		public static string PostToImageShack (string file, string contentType)
+		private static string PostToImageShack (string file, string contentType)
 		{		
 			string boundary = "----------" + DateTime.Now.Ticks.ToString ("x");
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://www.imageshack.us/index.php");
@@ -144,11 +153,22 @@ namespace ImageShack
 					}
 				}
 			}
+						
+			return GetUrlFromResponseText (responseText);
+		}
 			
-			Regex directUrlPattern = new Regex ("<input type=\"text\" onClick=\"track\\('direct'\\).*? value=\"(.*?)\"/>");
+		private static string GetUrlFromResponseText (string responseText) 
+		{
+			Regex directUrlPattern = new Regex ("<input type=\"text\" .*? value=\"(http.*?my\\.php.*?)\"/>");
 			Match directUrl = directUrlPattern.Match (responseText);
-					
-			return directUrl.Groups[1].Value;
+				
+			string url = directUrl.Groups[1].Value;
+				
+			if (url == string.Empty) {
+				throw new Exception (Catalog.GetString ("Parsed url was empty. ImageShack has probably changed its format."));
+			}
+				
+			return url;
 		}
 	}
 }
