@@ -46,9 +46,7 @@ namespace GDocs
         {
             get {
                 return new Type[] {
-                    typeof (GDocsDocumentItem),
-                    typeof (GDocsSpreadsheetItem),
-                    typeof (GDocsPresentationItem),
+					typeof (GDocsItem),
                 };
             }
         }

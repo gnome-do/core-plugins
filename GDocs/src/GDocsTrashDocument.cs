@@ -48,10 +48,7 @@ namespace GDocs
 		public Type[] SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof (GDocsDocumentItem),
-					typeof (GDocsSpreadsheetItem),
-					typeof (GDocsPresentationItem),
-					typeof (GDocsPDFItem),
+					typeof (GDocsItem),	
 				};
 			}
 		}

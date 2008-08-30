@@ -38,6 +38,7 @@ namespace GDocs
 	{
 		private static DocumentsService service;
 		private static List<IItem> docs;
+		private static object docs_lock;
 		
 		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
 		private static string gAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
@@ -49,6 +50,7 @@ namespace GDocs
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			
 			docs = new List<IItem> ();
+			docs_lock = new object ();
 			
 			Configuration.GetAccountData (out username, out password,
 			                              typeof (Configuration));
@@ -111,7 +113,7 @@ namespace GDocs
 		{
 			DocumentEntry newDoc;
 			GDocsItem newDocItem;
-
+			
 			try {
 				newDoc = service.UploadDocument (fileName, documentName);
 			} catch (Exception e) {
@@ -119,8 +121,8 @@ namespace GDocs
 				Console.Error.WriteLine (e.Message);
 				Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Uploading failed."), 
 				    Catalog.GetString ("An error occurred when uploading file to Google Docs."));
-				return null;
-			}
+				return null; // currently it is problematic to return null, causing exception in Perform func.
+			}			
 			
 			string doc_url = newDoc.AlternateUri.Content;
 			string doc_title = newDoc.Title.Text;
@@ -140,12 +142,11 @@ namespace GDocs
 			return newDocItem;
 		}
 		
-		public static bool TrashDocument(GDocsItem docItem)
+		public static void TrashDocument(GDocsItem docItem)
 		{
 			string doc_title = docItem.Name;
 			string doc_url   = docItem.URL;
-			bool ret = false;
-
+			
 			// Search for document(s) having exactly the title,
 			// Delete the one with matching AlternateUri
 			DocumentsListQuery query = new DocumentsListQuery();
@@ -165,19 +166,16 @@ namespace GDocs
 							Console.Error.WriteLine (e.Message);
 							Do.Addins.NotificationBridge.ShowMessage(Catalog.GetString("Deleting failed"),
 							    Catalog.GetString("An error occurred when deleting the document at Google Docs."));
-							return false;
+							return;
 						}
 						
 						Do.Addins.NotificationBridge.ShowMessage(Catalog.GetString("Document deleted."),
 						    Catalog.GetString(String.Format("The document '{0}' has been successfully moved into Trash at Google Docs.", 
 						                                    doc_title)));
 						docs.Remove(docItem);
-						ret = true;
-						return ret;
 					}
 				}
 			}
-			return ret;
 		}
 	}
 }

@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Mono.Unix;
 
 using Do.Addins;
@@ -33,6 +34,8 @@ namespace GDocs
 {
 	public sealed class GDocsUploadDocument : IAction
 	{
+		const string ExtPattern = @"\.(txt|doc|html|htm|odt|rtf|xls|ods|csv|tsv|tsb|ppt|pps|sxw|pdf)$";
+				
 		public string Name {
 			get { return Catalog.GetString ("Upload Document"); }
 		}
@@ -95,15 +98,7 @@ namespace GDocs
 			// Detailed info: http://documents.google.com/support/presentations/bin/answer.py?answer=50092
 			//                http://documents.google.com/support/presentations/bin/answer.py?answer=37603
 			
-			return item.Path.EndsWith(".txt")  || item.Path.EndsWith (".doc") ||
-				    item.Path.EndsWith(".html") || item.Path.EndsWith (".htm") ||
-					item.Path.EndsWith(".odt")  || item.Path.EndsWith (".rtf") ||
-					item.Path.EndsWith(".xls")  || item.Path.EndsWith (".ods") ||
-					item.Path.EndsWith(".csv")  || item.Path.EndsWith (".tsv") ||
-					item.Path.EndsWith(".tsb")  || item.Path.EndsWith (".ppt") ||
-					item.Path.EndsWith(".sxw")  || item.Path.EndsWith (".pps") ||
-					item.Path.EndsWith(".pdf");
-                
+			return new Regex (ExtPattern, RegexOptions.Compiled).IsMatch(item.Path);                
 		}
 	}
 }
