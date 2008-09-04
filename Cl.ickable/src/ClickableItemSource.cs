@@ -37,7 +37,7 @@ namespace Cl.ickable
 		}
 		
 		public override string Icon {
-			get { return "www"; }
+			get { return "edit-cut"; }
 		}
 
 		public override Type[] SupportedItemTypes
