@@ -38,7 +38,6 @@ namespace GDocs
 	{
 		private static DocumentsService service;
 		private static List<IItem> docs;
-		private static object docs_lock;
 		
 		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
 		private static string gAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
@@ -50,7 +49,6 @@ namespace GDocs
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			
 			docs = new List<IItem> ();
-			docs_lock = new object ();
 			
 			Configuration.GetAccountData (out username, out password,
 			                              typeof (Configuration));
@@ -109,7 +107,7 @@ namespace GDocs
 			}
 		}
 		
-		public static GDocsItem UploadDocument (string fileName, string documentName)
+		public static IItem UploadDocument (string fileName, string documentName)
 		{
 			DocumentEntry newDoc;
 			GDocsItem newDocItem;
@@ -121,7 +119,13 @@ namespace GDocs
 				Console.Error.WriteLine (e.Message);
 				Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Uploading failed."), 
 				    Catalog.GetString ("An error occurred when uploading file to Google Docs."));
-				return null; // currently it is problematic to return null, causing exception in Perform func.
+
+				// currently it is problematic to return null, 
+				// causing an exception when construct IItem [] in Perform func.
+				// Temperary workaround is to return the unsuccefully uploaded file item
+				
+				//return null; 
+				return new FileItem(fileName);
 			}			
 			
 			string doc_url = newDoc.AlternateUri.Content;
