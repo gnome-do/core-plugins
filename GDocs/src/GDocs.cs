@@ -120,12 +120,7 @@ namespace GDocs
 				Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Uploading failed."), 
 				    Catalog.GetString ("An error occurred when uploading file to Google Docs."));
 
-				// currently it is problematic to return null, 
-				// causing an exception when construct IItem [] in Perform func.
-				// Temperary workaround is to return the unsuccefully uploaded file item
-				
-				//return null; 
-				return new FileItem(fileName);
+				return null; 
 			}			
 			
 			string doc_url = newDoc.AlternateUri.Content;

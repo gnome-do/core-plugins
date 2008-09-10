@@ -88,7 +88,13 @@ namespace GDocs
 			string fileName = (items[0] as IFileItem).Path;
 			string documentName = (modifierItems.Length > 0) ? (modifierItems[0] as ITextItem).Text : null;
 			
-            return new IItem [] { GDocs.UploadDocument (fileName, documentName), };
+			IItem returnItem;
+			returnItem = GDocs.UploadDocument (fileName, documentName);
+			
+			if (returnItem == null)
+				return null;
+			else
+				return new IItem [] { returnItem, };
         }
 		
 		private bool IsValidFormat (IFileItem item)
