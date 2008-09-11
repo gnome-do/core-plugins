@@ -22,6 +22,7 @@
 
 using System;
 using System.Net;
+using System.Web;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -50,7 +51,7 @@ namespace InlineGoogleSearch
 		}
 		
 		/// <summary>
-		/// Initializes Google Search with query as parameter
+		/// Initializes Google Search with a clean query as parameter
 		/// </summary>
 		/// <param name="inQuery">
 		/// string <see cref="System.String"/>
@@ -113,6 +114,7 @@ namespace InlineGoogleSearch
 		/// A <see cref="GoogleSearchResult"/>
 		/// </returns>
 		public GoogleSearchResult[] search(){
+			this.query = HttpUtility.UrlEncode(this.query);
 			string endpointURL =
 				"http://www.google.com/uds/GwebSearch?"
 					+ "callback=GwebSearch.RawCompletion"
