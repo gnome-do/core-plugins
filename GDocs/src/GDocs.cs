@@ -38,6 +38,7 @@ namespace GDocs
 	{
 		private static DocumentsService service;
 		private static List<IItem> docs;
+		private static object docs_lock;
 		
 		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
 		private static string gAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
@@ -49,6 +50,7 @@ namespace GDocs
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			
 			docs = new List<IItem> ();
+			docs_lock = new object();
 			
 			Configuration.GetAccountData (out username, out password,
 			                              typeof (Configuration));
@@ -80,6 +82,7 @@ namespace GDocs
 			DocumentsFeed docsFeed;
 			DocumentsListQuery query = new DocumentsListQuery ();
 			query.Uri = new Uri (FeedUri);
+			
 			try {
 				docsFeed = service.Query (query);
 			} catch (Exception e) {
@@ -88,22 +91,24 @@ namespace GDocs
 				return;
 			}
 			
-			docs.Clear ();
-			
-			foreach (DocumentEntry doc in docsFeed.Entries) {
-			
-				string doc_url = doc.AlternateUri.Content;
-				string doc_title = doc.Title.Text;
+			lock (docs_lock) {
 				
-				if (doc.IsDocument) 
-					docs.Add( new GDocsDocumentItem(doc_title, doc_url));
-				else if (doc.IsSpreadsheet) 
-					docs.Add( new GDocsSpreadsheetItem(doc_title, doc_url));
-				else if (doc.IsPresentation) 
-					docs.Add( new GDocsPresentationItem(doc_title, doc_url));
-				else if (doc.IsPDF)
-					docs.Add( new GDocsPDFItem(doc_title, doc_url));
-			
+				docs.Clear ();
+				
+				foreach (DocumentEntry doc in docsFeed.Entries) {
+					
+					string doc_url = doc.AlternateUri.Content;
+					string doc_title = doc.Title.Text;
+					
+					if (doc.IsDocument) 
+						docs.Add( new GDocsDocumentItem(doc_title, doc_url));
+					else if (doc.IsSpreadsheet) 
+						docs.Add( new GDocsSpreadsheetItem(doc_title, doc_url));
+					else if (doc.IsPresentation) 
+						docs.Add( new GDocsPresentationItem(doc_title, doc_url));
+					else if (doc.IsPDF)
+						docs.Add( new GDocsPDFItem(doc_title, doc_url));					
+				}
 			}
 		}
 		
@@ -121,7 +126,7 @@ namespace GDocs
 				    Catalog.GetString ("An error occurred when uploading file to Google Docs."));
 
 				return null; 
-			}			
+			}		
 			
 			string doc_url = newDoc.AlternateUri.Content;
 			string doc_title = newDoc.Title.Text;
@@ -137,7 +142,9 @@ namespace GDocs
 			else
 				return null;
 			
-			docs.Add (newDocItem);	
+			lock (docs_lock) {
+				docs.Add (newDocItem);
+			}
 			return newDocItem;
 		}
 		
@@ -171,7 +178,9 @@ namespace GDocs
 						Do.Addins.NotificationBridge.ShowMessage(Catalog.GetString("Document deleted."),
 						    Catalog.GetString(String.Format("The document '{0}' has been successfully moved into Trash at Google Docs.", 
 						                                    doc_title)));
-						docs.Remove(docItem);
+						lock(docs_lock) {						
+							docs.Remove(docItem);
+						}
 					}
 				}
 			}
