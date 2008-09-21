@@ -9,7 +9,7 @@
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
 //the Free Software Foundation, either version 3 of the License, or
-//(at your option) any later version.
+// (at your option) any later version.
 //
 //This program is distributed in the hope that it will be useful,
 //but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -28,13 +28,12 @@ using Do.Addins;
 /// Do plug-in that returns search results from google back to gnome-do for 
 /// further processing
 /// </summary>
-namespace InlineGoogleSearch
-{	
+namespace InlineGoogleSearch {	
+	
 	/// <summary>
 	/// Config Dialog for InlineGoogleSearch
 	/// </summary>
-	public partial class InlineGoogleSearchConfig : Gtk.Bin
-	{
+	public partial class InlineGoogleSearchConfig : Gtk.Bin {
 		/// <summary>
 		/// Do.Addins.Util Preferences
 		/// </summary>
@@ -47,9 +46,9 @@ namespace InlineGoogleSearch
 		/// <summary>
 		/// Initializes and calls InlineGoogleSearchConfig Widget
 		/// </summary>
-		public InlineGoogleSearchConfig()
+		public InlineGoogleSearchConfig () 
 		{
-			this.Build();
+			this.Build ();
 			
 			switch (SearchRestrictions) {
 			case noss:
@@ -64,17 +63,21 @@ namespace InlineGoogleSearch
 		/// <summary>
 		/// Initializes static preferences
 		/// </summary>
-		static InlineGoogleSearchConfig ()
+		static InlineGoogleSearchConfig () 
 		{
-			prefs = Do.Addins.Util.GetPreferences("InlineGoogleSearch");
+			prefs = Do.Addins.Util.GetPreferences (
+			        "InlineGoogleSearch");
 		}
 
 		/// <value>
 		/// Default Value: 1 "Moderate"
 		/// </value>
 		public static string SearchRestrictions {
-			get { return prefs.Get<string> ("SearchRestrictions", moderatess); }
-			set { prefs.Set<string> ("SearchRestrictions", value); }
+			get { 
+				return prefs.Get<string> ("SearchRestrictions", 
+				                          moderatess); 
+			}
+		 	set { prefs.Set<string> ("SearchRestrictions", value); }
 		}
 
 		/// <summary>
@@ -86,10 +89,12 @@ namespace InlineGoogleSearch
 		/// <param name="e">
 		/// A <see cref="System.EventArgs"/>
 		/// </param>
-        protected virtual void OnNosafeRbtnToggled (object sender, System.EventArgs e)
-        {
-        	SearchRestrictions = noss;
-        }
+		
+		protected virtual void OnNosafeRbtnToggled (object sender, 
+		                                            System.EventArgs e) 
+		{
+			SearchRestrictions = noss;
+		}
 
 		/// <summary>
 		/// What to do if safe_moderate is clicked
@@ -100,10 +105,12 @@ namespace InlineGoogleSearch
 		/// <param name="e">
 		/// A <see cref="System.EventArgs"/>
 		/// </param>
-        protected virtual void OnModerateRbtnToggled (object sender, System.EventArgs e)
-        {
-        	SearchRestrictions = moderatess;
-        }
+		protected virtual void OnModerateRbtnToggled (object sender, 
+		                                              System.EventArgs 
+		                                              e) 
+		{
+			SearchRestrictions = moderatess;
+		}
 
 		/// <summary>
 		/// What to do if safe_active is clicked
@@ -114,9 +121,10 @@ namespace InlineGoogleSearch
 		/// <param name="e">
 		/// A <see cref="System.EventArgs"/>
 		/// </param>
-        protected virtual void OnStrictRbtnToggled (object sender, System.EventArgs e)
-        {
-        	SearchRestrictions = activess;
-        }
+		protected virtual void OnStrictRbtnToggled (object sender, 
+		                                            System.EventArgs e) 
+		{
+			SearchRestrictions = activess;
+		}
 	}
 }

@@ -1,4 +1,4 @@
-//InlineGoogleSearch.cs created with MonoDevelop
+//ImFeelingLuckyAction.cs created with MonoDevelop
 //Brian Lucas (bcl1713@gmail.com)
 //sacul@irc.ubuntu.com/#gnome-do
 // 
@@ -27,29 +27,30 @@ using Do.Addins;
 using Mono.Unix;
 
 /// <summary>
-/// Do plug-in that returns search results from google back to gnome-do for 
-/// further processing
+/// Action that immediately takes you to the first result provided by Google
 /// </summary>
 namespace InlineGoogleSearch {
 	
 	/// <summary>
 	/// Class Definition
 	/// </summary>
-	public class InlineGoogleSearch : AbstractAction, IConfigurable {	
+	public class ImFeelingLucky : AbstractAction, IConfigurable {	
 		/// <value>
-		/// Search Google
+		/// I'm Feeling Lucky
 		/// </value>
 		public override string Name {
-			get { return Catalog.GetString ("Search Google"); }
+			get { return Catalog.GetString ("I'm Feeling Lucky!"); }
 		}
 		
 		/// <value>
-		/// Searches google and returns results to Do
+		/// Searches google and takes you to the first returned result
 		/// </value>
 		public override string Description {
 			get { return Catalog.GetString ("Searches google and " +
-				                        "returns results to " +
-				                        "Do"); }
+				                                "takes you to" +
+				                                " the first " +
+				                                "returned " +
+				                                "result"); }
 		}
 		
 		/// <value>
@@ -86,40 +87,31 @@ namespace InlineGoogleSearch {
 		/// <param name="modItems">
 		/// Modifier Items. None <see cref="IItem"/>
 		/// </param>
-		/// <returns>
-		/// Array of Bookmark Items. URLs to search results <see cref="IItem"/>
-		/// </returns>
 		public override IItem [] Perform (IItem [] items, 
 		                                  IItem [] modItems) 
 		{
-			List<IItem> retItems = new List<IItem> ();
-			
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel
 				 (InlineGoogleSearchConfig.SearchRestrictions);
 			googleSearch.setQuery ( (items [0] as ITextItem).Text);
 			GoogleSearchResult [] googleSearchResult = 
 				googleSearch.search ();
-
+			
 			if (googleSearchResult.Length == 0) {
 				Do.Addins.NotificationBridge.ShowMessage (
-				                            "Google Search",
-				                            "No Results Found");
+				                            "I'm Feeling Lucky", 
+				                            "No Resutls Found");
+			} else {
+				Util.Environment.Open 
+					(googleSearchResult [0].url);
 			}
-			
-			for (int i = 0; i < googleSearchResult.Length; i++) {
-				retItems.Add (new BookmarkItem 
-				      (googleSearchResult [i].titleNoFormatting,
-				       googleSearchResult [i].url));
-			}
-			
-			return retItems.ToArray ();	
+			return null;	
 		}
 
 		/// <summary>
-		/// Initializes InlineGoogleSearch
+		/// Initializes ImFeelingLucky
 		/// </summary>
-		public InlineGoogleSearch () 
+		public ImFeelingLucky () 
 		{
 		}
 		
@@ -133,5 +125,6 @@ namespace InlineGoogleSearch {
 		{
 			return new InlineGoogleSearchConfig ();
 		}
+
 	}
 }

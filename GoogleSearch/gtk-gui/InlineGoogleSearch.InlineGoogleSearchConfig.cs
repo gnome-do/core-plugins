@@ -54,7 +54,6 @@ namespace InlineGoogleSearch {
             this.nosafe_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Do not filter my search results."));
             this.nosafe_rbtn.CanFocus = true;
             this.nosafe_rbtn.Name = "nosafe_rbtn";
-            this.nosafe_rbtn.Active = true;
             this.nosafe_rbtn.DrawIndicator = true;
             this.nosafe_rbtn.UseUnderline = true;
             this.nosafe_rbtn.Group = new GLib.SList(System.IntPtr.Zero);

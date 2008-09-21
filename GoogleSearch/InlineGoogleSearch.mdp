@@ -24,6 +24,7 @@
     <File name="InlineGoogleSearch.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/GoogleSearchResult.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GoogleSearch.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ImFeelingLuckyAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.5.1.0, Culture=neutral" />

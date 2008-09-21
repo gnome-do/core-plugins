@@ -1,7 +1,7 @@
 <Addin
 	id="Google Search"
 	namespace="Do"
-	version="1.2"
+	version="1.3"
 	name="Search Google"
 	description="Searches google and returns results to Do"
 	author="Brian Lucas"
@@ -19,5 +19,6 @@
 	<!-- Sources -->
 	<Extension path = "/Do/Action">
 		<Action type="InlineGoogleSearch.InlineGoogleSearch" />
+		<Action type="InlineGoogleSearch.ImFeelingLucky" />
 	</Extension>
 </Addin>

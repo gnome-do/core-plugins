@@ -9,7 +9,7 @@
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
 //the Free Software Foundation, either version 3 of the License, or
-//(at your option) any later version.
+// (at your option) any later version.
 //
 //This program is distributed in the hope that it will be useful,
 //but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,12 +23,10 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace InlineGoogleSearch
-{
+namespace InlineGoogleSearch {
 	
 	
-	public class GoogleSearchResult
-	{
+	public class GoogleSearchResult {
 		public string unescapedUrl = "";
 		public string url = "";
 		public string visibleUrl = "";
@@ -37,35 +35,37 @@ namespace InlineGoogleSearch
 		public string titleNoFormatting = "";
 		public string content = "";
 		
-		public GoogleSearchResult(string inString)
+		public GoogleSearchResult (string inString) 
 		{
-			inString = inString.Remove(inString.LastIndexOf("\""));
+			inString = inString.Remove 
+				(inString.LastIndexOf ("\""));
 			
-			string[] array;
-			array = Regex.Split(inString, "\",\"");
+			string [] array;
+			array = Regex.Split (inString, "\",\"");
 			
-			int upperBound = array.GetLength(0);
-			for (int i = 0; i < upperBound; i++){
-				if (array[i].Contains("unescapedUrl\":\"")){
-					this.unescapedUrl = array[i].Remove(0,15);
-				}
-				else if (array[i].Contains("url\":\"")){
-					this.url = array[i].Remove(0,6);
-				}
-				else if (array[i].Contains("visibleUrl\":\"")){
-					this.visibleUrl = array[i].Remove(0,13);
-				}
-				else if (array[i].Contains("cacheUrl\":\"")){
-					this.cacheUrl = array[i].Remove(0,11);
-				}
-				else if (array[i].Contains("title\":\"")){
-					this.title = array[i].Remove(0,8);
-				}
-				else if (array[i].Contains("titleNoFormatting\":\"")){
-					this.titleNoFormatting = array[i].Remove(0,20);
-				}
-				else if (array[i].Contains("content\":\"")){
-					this.content = array[i].Remove(0,10);
+			int upperBound = array.GetLength (0);
+			for (int i = 0; i < upperBound; i++) {
+				if (array [i].Contains ("unescapedUrl\":\"")) {
+					this.unescapedUrl = array [i].Remove 
+						(0,15);
+				} else if (array [i].Contains ("url\":\"")) {
+					this.url = array [i].Remove (0,6);
+				} else if (array [i].Contains 
+				           ("visibleUrl\":\"")) {
+					this.visibleUrl = array [i].Remove 
+						(0,13);
+				} else if (array [i].Contains 
+				           ("cacheUrl\":\"")) {
+					this.cacheUrl = array [i].Remove (0,11);
+				} else if (array [i].Contains ("title\":\"")) {
+					this.title = array [i].Remove (0,8);
+				} else if (array [i].Contains 
+				           ("titleNoFormatting\":\"")) {
+					this.titleNoFormatting = 
+						array [i].Remove (0,20);
+				} else if (array [i].Contains 
+				           ("content\":\"")) {
+					this.content = array [i].Remove (0,10);
 				}
 			}
 		}
