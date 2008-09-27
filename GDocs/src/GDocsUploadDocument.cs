@@ -45,7 +45,8 @@ namespace GDocs
         }
 			
 		public string Icon {
-			get { return "gDocsUploadIcon.png@" + GetType ().Assembly.FullName; }
+			//get { return "gDocsUploadIcon.png@" + GetType ().Assembly.FullName; }
+			get { return "document-send"; }
 		}
 		
 		public Type[] SupportedItemTypes {
@@ -104,7 +105,7 @@ namespace GDocs
 			// Detailed info: http://documents.google.com/support/presentations/bin/answer.py?answer=50092
 			//                http://documents.google.com/support/presentations/bin/answer.py?answer=37603
 			
-			return new Regex (ExtPattern, RegexOptions.Compiled).IsMatch(item.Path);                
+			return new Regex (ExtPattern, RegexOptions.Compiled).IsMatch (item.Path);                
 		}
 	}
 }

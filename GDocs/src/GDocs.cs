@@ -32,10 +32,8 @@ using Google.GData.Extensions;
 
 using Do.Universe;
 
-namespace GDocs
-{
-	public static class GDocs
-	{
+namespace GDocs {
+	public static class GDocs {
 		private static DocumentsService service;
 		private static List<IItem> docs;
 		private static object docs_lock;
@@ -50,7 +48,7 @@ namespace GDocs
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			
 			docs = new List<IItem> ();
-			docs_lock = new object();
+			docs_lock = new object ();
 			
 			Configuration.GetAccountData (out username, out password,
 			                              typeof (Configuration));
@@ -91,23 +89,20 @@ namespace GDocs
 				return;
 			}
 			
-			lock (docs_lock) {
-				
-				docs.Clear ();
-				
-				foreach (DocumentEntry doc in docsFeed.Entries) {
-					
+			lock (docs_lock) {				
+				docs.Clear ();				
+				foreach (DocumentEntry doc in docsFeed.Entries) {					
 					string doc_url = doc.AlternateUri.Content;
 					string doc_title = doc.Title.Text;
 					
 					if (doc.IsDocument) 
-						docs.Add( new GDocsDocumentItem(doc_title, doc_url));
+						docs.Add (new GDocsDocumentItem (doc_title, doc_url));
 					else if (doc.IsSpreadsheet) 
-						docs.Add( new GDocsSpreadsheetItem(doc_title, doc_url));
+						docs.Add (new GDocsSpreadsheetItem (doc_title, doc_url));
 					else if (doc.IsPresentation) 
-						docs.Add( new GDocsPresentationItem(doc_title, doc_url));
+						docs.Add (new GDocsPresentationItem (doc_title, doc_url));
 					else if (doc.IsPDF)
-						docs.Add( new GDocsPDFItem(doc_title, doc_url));					
+						docs.Add (new GDocsPDFItem (doc_title, doc_url));					
 				}
 			}
 		}
@@ -132,13 +127,13 @@ namespace GDocs
 			string doc_title = newDoc.Title.Text;
 		
 			if (newDoc.IsDocument)
-				newDocItem = new GDocsDocumentItem(doc_title, doc_url);
-			else if ( newDoc.IsSpreadsheet)
-				newDocItem = new GDocsSpreadsheetItem(doc_title, doc_url);
-			else if ( newDoc.IsPresentation)
-				newDocItem = new GDocsPresentationItem(doc_title, doc_url);
-			else if ( newDoc.IsPDF)
-				newDocItem = new GDocsPDFItem(doc_title, doc_url);
+				newDocItem = new GDocsDocumentItem (doc_title, doc_url);
+			else if (newDoc.IsSpreadsheet)
+				newDocItem = new GDocsSpreadsheetItem (doc_title, doc_url);
+			else if (newDoc.IsPresentation)
+				newDocItem = new GDocsPresentationItem (doc_title, doc_url);
+			else if (newDoc.IsPDF)
+				newDocItem = new GDocsPDFItem (doc_title, doc_url);
 			else
 				return null;
 			
@@ -148,38 +143,35 @@ namespace GDocs
 			return newDocItem;
 		}
 		
-		public static void TrashDocument(GDocsItem docItem)
+		public static void TrashDocument (GDocsItem docItem)
 		{
 			string doc_title = docItem.Name;
 			string doc_url   = docItem.URL;
 			
 			// Search for document(s) having exactly the title,
 			// Delete the one with matching AlternateUri
-			DocumentsListQuery query = new DocumentsListQuery();
+			DocumentsListQuery query = new DocumentsListQuery ();
 			query.Title = doc_title;
 			query.TitleExact = true;
-			DocumentsFeed docFeed = service.Query(query);	
+			DocumentsFeed docFeed = service.Query (query);	
 
-			if (docFeed.Entries.Count >= 1)
-			{
-				foreach(DocumentEntry docEntry in docFeed.Entries)
-				{	
-					if ( docEntry.AlternateUri == doc_url )
-					{
+			if (docFeed.Entries.Count >= 1) {
+				foreach (DocumentEntry docEntry in docFeed.Entries) {	
+					if (docEntry.AlternateUri == doc_url) {
 						try {
-							docEntry.Delete();
+							docEntry.Delete ();
 						} catch (Exception e) {
 							Console.Error.WriteLine (e.Message);
-							Do.Addins.NotificationBridge.ShowMessage(Catalog.GetString("Deleting failed"),
-							    Catalog.GetString("An error occurred when deleting the document at Google Docs."));
+							Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Deleting failed"),
+							    Catalog.GetString ("An error occurred when deleting the document at Google Docs."));
 							return;
 						}
 						
-						Do.Addins.NotificationBridge.ShowMessage(Catalog.GetString("Document deleted."),
-						    Catalog.GetString(String.Format("The document '{0}' has been successfully moved into Trash at Google Docs.", 
-						                                    doc_title)));
-						lock(docs_lock) {						
-							docs.Remove(docItem);
+						Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Document deleted."),
+						    Catalog.GetString (String.Format ("The document '{0}' has been successfully moved into Trash at Google Docs.", 
+						                                      doc_title)));
+						lock (docs_lock) {						
+							docs.Remove (docItem);
 						}
 					}
 				}

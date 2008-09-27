@@ -42,8 +42,7 @@ namespace GDocs
             get { return "gDocsIcon.png@" + GetType ().Assembly.FullName; }
         }
 
-        public Type[] SupportedItemTypes
-        {
+        public Type[] SupportedItemTypes {
             get {
                 return new Type[] {
 					typeof (GDocsItem),
@@ -51,8 +50,7 @@ namespace GDocs
             }
         }
 
-        public ICollection<IItem> Items
-        {
+        public ICollection<IItem> Items {
             get { return GDocs.Docs; }
         }
 

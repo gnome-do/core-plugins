@@ -42,7 +42,8 @@ namespace GDocs
         }
 			
 		public string Icon {
-			get { return "gDocsTrashIcon.png@" + GetType ().Assembly.FullName; }
+			//get { return "gDocsTrashIcon.png@" + GetType ().Assembly.FullName; }
+			get { return "user-trash";}
 		}
 		
 		public Type[] SupportedItemTypes {
@@ -81,6 +82,5 @@ namespace GDocs
             GDocs.TrashDocument (items[0] as GDocsItem);
 			return null;
         }
-
 	}
 }

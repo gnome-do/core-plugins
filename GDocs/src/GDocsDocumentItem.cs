@@ -30,7 +30,7 @@ namespace GDocs
     public class GDocsDocumentItem : GDocsItem
     {
 
-        public GDocsDocumentItem (string name, string url) : base(name, url) {}
+        public GDocsDocumentItem (string name, string url) : base (name, url) {}
 		
 		public override string Description {
             get { return Catalog.GetString ("Google Docs Text Document"); }

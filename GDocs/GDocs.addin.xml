@@ -2,7 +2,7 @@
         id="GoogleDocs"
         namespace= "Do"
         version="1.0"
-        name="Google Docs"
+        name="Google Documents"
         description="Allows you to index documents, spreadsheets and presentations stored at Google Docs."
         author="Peng Deng"
         >
