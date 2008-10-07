@@ -63,7 +63,7 @@ def manifests (asm=None):
 	if asm:
 		ls = map (abspath, shsp ('ls'))
 		common = [(commonprefix ([p, asm]), p) for p in ls]
-		dir = abspath (max (common)[1])
+		dir = abspath (max (common)[0])
 		dir = escape (dir) 
 	find = 'find %s -name *.addin.xml' % dir
 	return map (abspath, shsp (find))

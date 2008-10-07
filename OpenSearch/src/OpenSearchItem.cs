@@ -76,13 +76,15 @@ namespace OpenSearch
 			
 			StringBuilder sb = new StringBuilder ();
 			
-			foreach(char ch in input) {
+			foreach (char ch in input) {
 				if ((((ch > '`') && (ch < '{')) || ((ch > '@') && (ch < '['))) || 
 				    (((ch > '/') && (ch < ':')) || (((ch == '.') || (ch == '-')) || (ch == '_')))) {
 					sb.Append (ch);
 				}
-				else if (ch > '\x007f') {
-					sb.Append ("%u" + TwoByteHex (ch));
+				else if (ch > '\x007f') {		
+					// We'd normally encode these characters, but that doesn't seem 
+					// to work with queries in the URL, so we just return the character.
+					sb.Append(ch);
 				}
 				else {
 					sb.Append ("%" + SingleByteHex (ch));
@@ -96,12 +98,6 @@ namespace OpenSearch
 		{
 			uint num = c;
 			return num.ToString("x").PadLeft(2,'0');
-		}
-		
-		private static string TwoByteHex (char c)
-		{
-			uint num = c;
-			return num.ToString("x").PadLeft(4,'0');
 		}
 	}
 }
