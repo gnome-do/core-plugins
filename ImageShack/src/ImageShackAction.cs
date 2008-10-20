@@ -72,6 +72,8 @@ namespace ImageShack
 		{								
 			try {
 				List<IItem> returnItems = new List<IItem> ();	
+				StringBuilder notificationUrlList = new StringBuilder();
+				notificationUrlList.AppendLine (Catalog.GetString ("Image urls: "));
 				foreach (IItem item in items) {	
 					FileItem fileItem = item as FileItem;
 						
@@ -80,10 +82,21 @@ namespace ImageShack
 						returnItems.Add (new TextItem (fileValidationError + " - " + fileItem.Path ));
 						continue;
 					}
-						
+					
+					NotificationBridge.ShowMessage (
+						    Catalog.GetString ("ImageShack"), 
+						    Catalog.GetString ("Do is uploading your image... Please wait a moment..."), 
+						    fileItem.Path);
 					string url = PostToImageShack (fileItem.Path, fileItem.MimeType);
+					notificationUrlList.AppendLine (url);
 					returnItems.Add (new TextItem (url));
 				}
+				
+				/*
+				NotificationBridge.ShowMessage (
+					Catalog.GetString ("ImageShack"), 
+					notificationUrlList.ToString ());                               
+				*/
 					
 				return returnItems.ToArray ();
 			}
@@ -159,7 +172,7 @@ namespace ImageShack
 			
 		private static string GetUrlFromResponseText (string responseText) 
 		{
-			Regex directUrlPattern = new Regex ("<input type=\"text\" .*? value=\"(http.*?my\\.php.*?)\"/>");
+			Regex directUrlPattern = new Regex ("<input type=\"text\" onClick=\"track\\('direct'\\).*? value=\"(.*?)\"/>"); 
 			Match directUrl = directUrlPattern.Match (responseText);
 				
 			string url = directUrl.Groups[1].Value;

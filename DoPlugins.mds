@@ -42,6 +42,7 @@
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
+      <Entry build="True" name="OpenSearch.Tests" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -86,6 +87,7 @@
       <Entry build="True" name="ImageShack" configuration="Release" />
       <Entry build="True" name="Cl.ickable" configuration="Release" />
       <Entry build="True" name="ManLookUp" configuration="Release" />
+      <Entry build="True" name="OpenSearch.Tests" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -134,6 +136,7 @@
     <Execute type="None" entry="ImageShack" />
     <Execute type="None" entry="Cl.ickable" />
     <Execute type="None" entry="ManLookUp" />
+    <Execute type="None" entry="OpenSearch.Tests" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -177,5 +180,6 @@
     <Entry filename="ImageShack/ImageShack.mdp" />
     <Entry filename="Cl.ickable/Cl.ickable.mdp" />
     <Entry filename="ManLookUp/ManLookUp.mdp" />
+    <Entry filename="OpenSearch.Tests/OpenSearch.Tests.mdp" />
   </Entries>
 </Combine>
