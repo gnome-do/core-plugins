@@ -41,6 +41,7 @@
       <Entry build="True" name="Pastebin" configuration="Debug" />
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
+      <Entry build="True" name="ManLookUp" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -84,6 +85,7 @@
       <Entry build="True" name="Pastebin" configuration="Release" />
       <Entry build="True" name="ImageShack" configuration="Release" />
       <Entry build="True" name="Cl.ickable" configuration="Release" />
+      <Entry build="True" name="ManLookUp" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -131,6 +133,7 @@
     <Execute type="None" entry="Pastebin" />
     <Execute type="None" entry="ImageShack" />
     <Execute type="None" entry="Cl.ickable" />
+    <Execute type="None" entry="ManLookUp" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -173,5 +176,6 @@
     <Entry filename="del.icio.us/del.icio.us.mdp" />
     <Entry filename="ImageShack/ImageShack.mdp" />
     <Entry filename="Cl.ickable/Cl.ickable.mdp" />
+    <Entry filename="ManLookUp/ManLookUp.mdp" />
   </Entries>
 </Combine>

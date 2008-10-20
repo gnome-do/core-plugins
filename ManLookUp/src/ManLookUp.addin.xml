@@ -1,0 +1,26 @@
+<Addin
+	id="ManLookUp"
+	namespace="Do"
+	version="1.0"
+	name="Read Help Documentation (man)"
+	description="Allows to search and view the system's manual pages."
+	author="J. Carlos Navea"
+>
+ 
+	<Runtime>
+		<Import assembly="ManLookUp.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="GnomeDoManLookUp.ManLookUpItemSource" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="GnomeDoManLookUp.ManLookUpAction" />
+	</Extension>
+</Addin>
