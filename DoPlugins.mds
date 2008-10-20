@@ -43,6 +43,7 @@
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
       <Entry build="True" name="OpenSearch.Tests" configuration="Debug" />
+      <Entry build="True" name="GDocs" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="" />
@@ -88,6 +89,7 @@
       <Entry build="True" name="Cl.ickable" configuration="Release" />
       <Entry build="True" name="ManLookUp" configuration="Release" />
       <Entry build="True" name="OpenSearch.Tests" configuration="Release" />
+      <Entry build="True" name="GDocs" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -137,6 +139,7 @@
     <Execute type="None" entry="Cl.ickable" />
     <Execute type="None" entry="ManLookUp" />
     <Execute type="None" entry="OpenSearch.Tests" />
+    <Execute type="None" entry="GDocs" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -181,5 +184,6 @@
     <Entry filename="Cl.ickable/Cl.ickable.mdp" />
     <Entry filename="ManLookUp/ManLookUp.mdp" />
     <Entry filename="OpenSearch.Tests/OpenSearch.Tests.mdp" />
+    <Entry filename="GDocs/GDocs.mdp" />
   </Entries>
 </Combine>

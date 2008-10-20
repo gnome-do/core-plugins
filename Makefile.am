@@ -11,6 +11,7 @@ SUBDIRS = po BundledLibraries \
 	Firefox \
 	Flickr \
 	GCalendar \
+	GDocs \
 	GMailContacts \
 	GNOME-Dictionary \
 	GNOME-Screenshot \

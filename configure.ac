@@ -111,6 +111,7 @@ File/Makefile
 Firefox/Makefile
 Flickr/Makefile
 GCalendar/Makefile
+GDocs/Makefile
 GMailContacts/Makefile
 GNOME-Dictionary/Makefile
 GNOME-Screenshot/Makefile
