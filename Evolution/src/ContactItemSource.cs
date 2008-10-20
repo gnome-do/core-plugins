@@ -28,6 +28,18 @@ using Mono.Unix;
 
 namespace Evolution
 {
+	public struct ContactAttribute
+	{
+		string detail, key;
+		public ContactAttribute(string k, string d)
+		{
+			this.key = k;
+			this.detail = d;
+		}
+		public string Detail { get { return detail; } }
+		public string Key { get { return key; } }
+	}
+	
 	public class ContactItemSource : IItemSource
 	{
 		List<IItem> contacts;
@@ -68,6 +80,8 @@ namespace Evolution
 					details.Add (new BookmarkItem ("Homepage", contact [detail]));
 				else if (detail.StartsWith ("url.blog"))
 					details.Add (new BookmarkItem ("Blog", contact [detail]));
+				else if (detail.StartsWith("address"))
+					details.Add (new AddressContactDetailItem (contact, detail));
 			}
 			return details;
 		}
@@ -89,7 +103,10 @@ namespace Evolution
 								try {
 									contacts.Add (
 										CreateEvolutionContactItem (c));
-								} catch { /* bad contact */ }
+								} catch (Exception e) {
+									/* bad contact */ 
+									Console.WriteLine(e.Message.ToString());
+								}
 							}
 						}
 					}
@@ -97,47 +114,49 @@ namespace Evolution
 			}
 		}
 	
-		ContactItem CreateEvolutionContactItem (Contact e_contact) {
+		ContactItem CreateEvolutionContactItem (Contact eContact) {
 			ContactItem contact;
-						
-			contact = ContactItem.Create (e_contact.FullName);
-			
-			MaybeAddDetail (contact, "email.home", e_contact.Email1);
-			MaybeAddDetail (contact, "email.work", e_contact.Email2);
-			MaybeAddDetail (contact, "email.other", e_contact.Email3);
-			
-			/*
-			for (int i = 0; i < e_contact.ImAim.Length; ++i)
-				contact["aim" + (i>0?i.ToString ():"") + ".evolution"] =
-					e_contact.ImAim[i];
-			for (int i = 0; i < e_contact.ImJabber.Length; ++i)
-				contact["jabber" + (i>0?i.ToString ():"") + ".evolution"] =
-					e_contact.ImJabber[i];
-			*/
-			
-			MaybeAddDetail (contact, "phone.mobile", e_contact.MobilePhone);
-			MaybeAddDetail (contact, "phone.home", e_contact.HomePhone);
-			MaybeAddDetail (contact, "phone.work", e_contact.CompanyPhone);
-			MaybeAddDetail (contact, "phone", e_contact.PrimaryPhone);
-			MaybeAddDetail (contact, "url.home", e_contact.HomepageUrl);
-			MaybeAddDetail (contact, "url.blog", e_contact.BlogUrl);
+			if (!(string.IsNullOrEmpty(eContact.FullName)))
+				contact = ContactItem.Create(eContact.FullName);
+			else //(!(string.IsNullOrEmpty(eContact.FileAs)))
+				contact = ContactItem.Create(eContact.FileAs);
+			List<ContactAttribute> ContactDetails = new List<ContactAttribute>();
+			ContactDetails.Add(new ContactAttribute("email.home", eContact.Email1));
+			ContactDetails.Add(new ContactAttribute("email.work", eContact.Email2));
+			ContactDetails.Add(new ContactAttribute("email.other", eContact.Email3));
+			ContactDetails.Add(new ContactAttribute("phone.mobile", eContact.MobilePhone));
+			ContactDetails.Add(new ContactAttribute("phone.home", eContact.HomePhone));
+			ContactDetails.Add(new ContactAttribute("phone.home2",eContact.HomePhone2));
+			ContactDetails.Add(new ContactAttribute("phone.work", eContact.CompanyPhone));
+			ContactDetails.Add(new ContactAttribute("phone.work2",eContact.BusinessPhone));
+			ContactDetails.Add(new ContactAttribute("phone.work3",eContact.BusinessPhone2));
+			ContactDetails.Add(new ContactAttribute("phone", eContact.PrimaryPhone));                                                                      
+			ContactDetails.Add(new ContactAttribute("url.home", eContact.HomepageUrl));
+			ContactDetails.Add(new ContactAttribute("url.blog", eContact.BlogUrl));
+			//for address, need to take out the \n characters, otherwise do is not happy
+			if (!string.IsNullOrEmpty(eContact.AddressLabelHome))
+				ContactDetails.Add(new ContactAttribute("address.home",eContact.AddressLabelHome.Replace('\n',' ')));
+			if (!string.IsNullOrEmpty(eContact.AddressLabelWork))
+				ContactDetails.Add(new ContactAttribute("address.work",eContact.AddressLabelWork.Replace('\n',' ')));
+			if (!string.IsNullOrEmpty(eContact.AddressLabelOther))
+				ContactDetails.Add(new ContactAttribute("address.other",eContact.AddressLabelOther.Replace('\n',' ')));
 			
 			// Been getting some exceptions from g_boxed_copy
 			// when I attempt to read contact photos...
 			if (string.IsNullOrEmpty (contact ["photo.evolution"])) try {
-				switch (e_contact.Photo.PhotoType) {
+				switch (eContact.Photo.PhotoType) {
 					case ContactPhotoType.Inlined:
 						string photo = Paths.GetTemporaryFilePath () + ".jpg";
 						try {
-							File.WriteAllBytes (photo, e_contact.Photo.Data);
+							File.WriteAllBytes (photo, eContact.Photo.Data);
 							contact["photo"] = contact["photo.evolution"] =
 								photo;
 						} catch { }
 						break;
 					case ContactPhotoType.Uri:
-						if (File.Exists (e_contact.Photo.Uri)) {
+						if (File.Exists (eContact.Photo.Uri)) {
 							contact["photo"] = contact["photo.evolution"] =
-								e_contact.Photo.Uri;
+								eContact.Photo.Uri;
 						}
 						break;
 				}
@@ -147,6 +166,11 @@ namespace Evolution
 					contact["name"], e.Message);
 				Console.Error.WriteLine (e.StackTrace);
 		   	}
+			//add the details to the contact
+			foreach (ContactAttribute c in ContactDetails)
+			{
+				MaybeAddDetail(contact,c.Key,c.Detail);
+			}
 			return contact;
 		}
 	
