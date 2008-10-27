@@ -50,7 +50,8 @@ FILES = \
 DATA_FILES = 
 
 RESOURCES = \
-	src/Pidgin.addin.xml 
+	src/Pidgin.addin.xml \
+	Resources/internet-group-chat.svg
 
 REFERENCES =  \
 	System \

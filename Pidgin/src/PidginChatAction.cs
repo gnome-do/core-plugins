@@ -43,7 +43,7 @@ namespace Do.Addins.Pidgin
 		
 		public override string Icon
 		{
-			get { return "internet-group-chat"; }
+			get { return "internet-group-chat.svg@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override Type[] SupportedItemTypes
