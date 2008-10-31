@@ -1,15 +1,2 @@
-<objects>
-  <object type="Do.Riptide.Configuration" palette-category="Riptide" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals />
-  </object>
-  <object type="Do.Riptide.TorrentDisplay" palette-category="Riptide" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals>
-      <itemgroup label="TorrentDisplay Signals">
-        <signal name="TorrentStopped" />
-        <signal name="TorrentPauseToggle" />
-      </itemgroup>
-    </signals>
-  </object>
+<objects attr-sync="on">
 </objects>

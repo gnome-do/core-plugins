@@ -1,6 +1,2 @@
-<objects>
-  <object type="Tomboy.TomboyConfiguration" palette-category="Tomboy" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals />
-  </object>
+<objects attr-sync="on">
 </objects>

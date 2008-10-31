@@ -1,6 +1,2 @@
-<objects>
-  <object type="Do.Plugins.Rss.Configuration" palette-category="RSS" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals />
-  </object>
+<objects attr-sync="on">
 </objects>

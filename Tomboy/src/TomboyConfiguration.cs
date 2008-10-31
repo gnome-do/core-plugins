@@ -32,6 +32,8 @@ namespace Tomboy
 {
 	
 	
+	[System.ComponentModel.Category("Tomboy")]
+	[System.ComponentModel.ToolboxItem(true)]
 	public partial class TomboyConfiguration : Gtk.Bin
 	{
 		private const string DeriveTitlePrefKey = "deriveTitle";

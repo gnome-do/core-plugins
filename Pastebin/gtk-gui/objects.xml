@@ -1,10 +1,2 @@
-<objects>
-  <object type="Pastebin.PastebinConfig" palette-category="Pastebin" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups>
-      <itemgroup label="PastebinConfig Properties">
-        <property name="SelectedProviderType" />
-      </itemgroup>
-    </itemgroups>
-    <signals />
-  </object>
+<objects attr-sync="on">
 </objects>

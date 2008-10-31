@@ -26,6 +26,8 @@ namespace Do.Riptide
 {
 	
 	
+	[System.ComponentModel.Category("Riptide")]
+	[System.ComponentModel.ToolboxItem(true)]
 	public partial class Configuration : Gtk.Bin
 	{
 		public Configuration()

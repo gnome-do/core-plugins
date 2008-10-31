@@ -100,7 +100,6 @@ namespace Do.Riptide {
             // Container child hbox4.Gtk.Box+BoxChild
             this.file_directory = new Gtk.FileChooserButton(Mono.Unix.Catalog.GetString("Select A Directory"), ((Gtk.FileChooserAction)(2)));
             this.file_directory.Name = "file_directory";
-            this.file_directory.ShowHidden = true;
             this.hbox4.Add(this.file_directory);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox4[this.file_directory]));
             w4.Position = 1;

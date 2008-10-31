@@ -11,6 +11,8 @@ using GConf;
 
 namespace FilePlugin
 {	
+	[System.ComponentModel.Category("File")]
+	[System.ComponentModel.ToolboxItem(true)]
 	public partial class Configuration : Gtk.Bin
 	{
 		PathNodeView nview;

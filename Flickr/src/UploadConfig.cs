@@ -24,6 +24,8 @@ using Gtk;
 
 namespace Flickr
 {
+	[System.ComponentModel.Category("Flickr")]
+	[System.ComponentModel.ToolboxItem(true)]
 	public partial class UploadConfig : Gtk.Bin
 	{		
 		public UploadConfig()

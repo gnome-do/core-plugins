@@ -38,8 +38,12 @@ namespace GNOME {
 
 		public string Description {
 			get {
-				return Catalog.GetPluralString ("Wait {0} second before taking the screenshot.",
-					"Wait {0} seconds before taking the screenshot.", seconds);
+				return string.Format (
+					Catalog.GetPluralString ("Wait {0} second before taking the screenshot.",
+											 "Wait {0} seconds before taking the screenshot.",
+											 seconds),
+					seconds
+				);
 			}
 		}
 
