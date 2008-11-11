@@ -1,0 +1,10 @@
+<objects>
+  <object type="ImageShack.ImageShackConfig" palette-category="ImageShack" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups>
+      <itemgroup label="ImageShackConfig Properties">
+        <property name="RegistrationCode" />
+      </itemgroup>
+    </itemgroups>
+    <signals />
+  </object>
+</objects>

@@ -32,13 +32,18 @@ SATELLITE_ASSEMBLY_NAME=.resources.dll
 all: $(ASSEMBLY)
 
 FILES = \
-	src/ImageShackAction.cs 
+	src/ImageShackAction.cs \
+	src/ImageShackConfig.cs \
+	gtk-gui/generated.cs \
+	gtk-gui/ImageShack.ImageShackConfig.cs
 
 DATA_FILES = 
 
 RESOURCES = \
 	src/ImageShack.addin.xml \
-	resources/imageshack.png 
+	resources/imageshack.png \
+	gtk-gui/gui.stetic \
+	gtk-gui/objects.xml 
 
 REFERENCES =  \
 	System \

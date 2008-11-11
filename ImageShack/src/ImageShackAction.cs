@@ -32,7 +32,7 @@ using Mono.Unix;
 
 namespace ImageShack
 {
-	public class ImageShackAction : AbstractAction
+	public class ImageShackAction : AbstractAction, IConfigurable
 	{
 		public override string Name
 		{
@@ -67,7 +67,12 @@ namespace ImageShack
 			}
 			return false;
 		}
-				
+			
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new ImageShackConfig();
+		}
+		
 		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
 		{								
 			try {
@@ -124,6 +129,12 @@ namespace ImageShack
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://www.imageshack.us/index.php");
 			request.Method = "POST";
 			request.ContentType = "multipart/form-data ; boundary=" + boundary;
+			
+			if (!String.IsNullOrEmpty (ImageShackConfig.RegistrationCode)) {
+				request.CookieContainer = new CookieContainer ();
+				Cookie imageshackCookie = new Cookie ("myimages", ImageShackConfig.RegistrationCode, "/", ".imageshack.us");
+				request.CookieContainer.Add (imageshackCookie);
+			}
 
             StringBuilder sb = new StringBuilder ();
             sb.Append ("--");
