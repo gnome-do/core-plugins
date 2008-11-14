@@ -34,6 +34,7 @@ SATELLITE_ASSEMBLY_NAME=.resources.dll
 all: $(ASSEMBLY)
 
 FILES = \
+	src/CoverArtSpec.cs \
 	src/MusicItems.cs \
 	src/Rhythmbox.cs \
 	src/RhythmboxEnqueueAction.cs \
