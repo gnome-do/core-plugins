@@ -34,6 +34,7 @@ SATELLITE_ASSEMBLY_NAME=.resources.dll
 all: $(ASSEMBLY)
 
 FILES = \
+	src/AddressContactDetailItem.cs \
 	src/ContactDetailItem.cs \
 	src/ContactItemSource.cs \
 	src/EmailContactDetailItem.cs \

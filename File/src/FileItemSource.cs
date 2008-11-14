@@ -193,11 +193,12 @@ namespace FilePlugin {
 		
 		public ICollection<IItem> ChildrenOfItem (IItem item)
 		{
-			IFileItem fi;
+			IFileItem fi = null;
 			List<IItem> children;
 			
 			if (item is ITextItem) {
 				string path = (item as ITextItem).Text;
+				if (string.IsNullOrEmpty (path)) return null;
 				path = path.Replace ("~", Do.Paths.UserHome);
 				if (!Directory.Exists (path)) return null;
 				fi = new FileItem (path);
