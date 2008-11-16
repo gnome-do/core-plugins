@@ -20,6 +20,7 @@
 using System;
 using System.Threading;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 using Do.Universe;
 using Mono.Unix;
@@ -48,9 +49,7 @@ namespace Do.Plugins.Amarok
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (MusicItem),
-				};
+				yield return typeof (MusicItem);
 			}
 		}
 

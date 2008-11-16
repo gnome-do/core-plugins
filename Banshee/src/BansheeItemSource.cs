@@ -59,7 +59,7 @@ namespace Do.Addins.Banshee {
                     get { return items; }
                 }
 
-                public ICollection<IItem> ChildrenOfItem (IItem parent)
+                public IEnumerable<IItem> ChildrenOfItem (IItem parent)
                 {
                         List<IItem> children;
 

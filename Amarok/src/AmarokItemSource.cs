@@ -38,7 +38,6 @@ namespace Do.Plugins.Amarok
 		public AmarokMusicItemSource ()
 		{
 			items = new List<IItem> ();
-			//UpdateItems ();
 		}
 
 		public string Name { get { return Catalog.GetString ("Amarok Music"); } }
@@ -59,7 +58,7 @@ namespace Do.Plugins.Amarok
 
 		public IEnumerable<IItem> Items { get { return items; } }
 
-		public ICollection<IItem> ChildrenOfItem (IItem parent) {
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent) {
 			List<IItem> children;
 
 			children = new List<IItem> ();
