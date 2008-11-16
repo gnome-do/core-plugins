@@ -33,7 +33,7 @@ namespace GNOME.Session
 		{
 		}
 
-		public Type[] SupportedItemTypes
+		public IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -52,7 +52,7 @@ namespace GNOME.Session
 		
 		public string Icon { get { return "system-log-out"; } }
 
-		public ICollection<IItem> Items
+		public IEnumerable<IItem> Items
 		{
 			get {
 				return new IItem[] {
@@ -96,7 +96,7 @@ namespace GNOME.Session
 			}
 		}
 
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

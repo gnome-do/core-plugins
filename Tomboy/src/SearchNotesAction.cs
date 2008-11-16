@@ -18,6 +18,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 
 using Do.Universe;
@@ -44,18 +46,18 @@ namespace Tomboy
 			get { return icon; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return supportedTypes;
 			}
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			TomboyDBus tb = new TomboyDBus ();
 			// This action will start Tomboy if it is not
 			// already running.
-			tb.SearchNotes ((items [0] as ITextItem).Text);
+			tb.SearchNotes ((items.First () as ITextItem).Text);
 			return null;
 		}
 	}

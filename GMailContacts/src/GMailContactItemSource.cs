@@ -44,7 +44,7 @@ namespace GMailContacts
 			get { return "gmail-logo.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ContactItem),
@@ -52,11 +52,11 @@ namespace GMailContacts
 			}
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return GMail.Contacts; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item) 
+		public IEnumerable<IItem> ChildrenOfItem (IItem item) 
 		{
 			ContactItem contact = item as ContactItem;
 			List<IItem> details = new List<IItem> ();

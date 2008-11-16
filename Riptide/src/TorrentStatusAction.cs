@@ -58,12 +58,12 @@ namespace Do.Riptide
 			return ((item as ITextItem).Text.Length == 0);
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {typeof (ITextItem)}; }
 		}
 
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			List<IItem> outitems = new List<IItem> ();
 			foreach (TorrentManager t in TorrentClientManager.Managers) {

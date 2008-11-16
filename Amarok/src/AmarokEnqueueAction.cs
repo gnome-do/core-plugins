@@ -45,7 +45,7 @@ namespace Do.Plugins.Amarok
 			get { return "amarok"; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (MusicItem),
@@ -53,7 +53,7 @@ namespace Do.Plugins.Amarok
 			}
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Amarok.StartIfNeccessary ();

@@ -17,6 +17,7 @@
 //
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Gnome.Vfs;
 using Mono.Unix;
@@ -39,7 +40,7 @@ namespace DiskMounter
 			get { return "harddrive"; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (DriveItem),
@@ -52,14 +53,14 @@ namespace DiskMounter
 			return !(item as DriveItem).IsMounted;
 		}
                 
-		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return false;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			(items[0] as DriveItem).Mount ();
+			(items.First () as DriveItem).Mount ();
 			return null;
 		}
 	}

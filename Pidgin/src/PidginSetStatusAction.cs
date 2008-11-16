@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Do.Universe;
 using Mono.Unix;
@@ -44,7 +45,7 @@ namespace Do.Addins.Pidgin
 		
 		public string Icon { get { return "pidgin"; } }
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginSavedStatusItem),
@@ -53,7 +54,7 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginStatusTypeItem),
@@ -70,32 +71,32 @@ namespace Do.Addins.Pidgin
 			get { return true; }
 		}
 		
-		public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
-			if (items [0] is ITextItem)
+			if (items.First () is ITextItem)
 				return true;
 			return false;
 		}
 		
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
         {
             return pidginStatuses;
         }
 		
-		public IItem [] Perform (IItem [] items, IItem [] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			int status;
 			string message;
 				try {
 				Pidgin.IPurpleObject prpl = Pidgin.GetPurpleObject ();
 				
-				if (items [0] is PidginSavedStatusItem) {
-					status = (items [0] as PidginSavedStatusItem).ID;
+				if (items.First () is PidginSavedStatusItem) {
+					status = (items.First () as PidginSavedStatusItem).ID;
 					prpl.PurpleSavedstatusActivate (status);
 				} else {
-					message = (items [0] as ITextItem).Text;
-					if (modItems.Length > 0)
-						status = (int) (modItems [0] as PidginStatusTypeItem).Status;
+					message = (items.First () as ITextItem).Text;
+					if (modItems.Any ())
+						status = (int) (modItems.First () as PidginStatusTypeItem).Status;
 					else
 						status = prpl.PurpleSavedstatusGetType (prpl.PurpleSavedstatusGetCurrent ());
 					Pidgin.PurpleSetAvailabilityStatus ((uint) status, message);

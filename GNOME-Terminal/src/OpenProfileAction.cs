@@ -19,7 +19,9 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Mono.Unix;
 using Do.Universe;
 
@@ -46,16 +48,16 @@ namespace GNOME.Terminal
 	      get { return "gnome-terminal"; }
 	    }
 
-	    public override Type[] SupportedItemTypes
+	    public override IEnumerable<Type> SupportedItemTypes
 		{
 	      get {
 	        return new Type[] { typeof ( ProfileItem ) };
 	      }
 	    }
 	    
-	    public override IItem[] Perform( IItem[] items, IItem[] modifierItems )
+	    public override IEnumerable<IItem> Perform( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
 	    {
-			string profileName = (items [0] as ProfileItem).Name;
+			string profileName = (items.First () as ProfileItem).Name;
 
 			try {
 				Process.Start ("gnome-terminal", "--window-with-profile=" + profileName);

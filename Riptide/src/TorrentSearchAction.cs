@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -54,12 +55,12 @@ namespace Do.Riptide
 			get { return "gnome-searchtool"; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] { typeof (ITextItem) }; }
 		}
 
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			List<IItem> outItems;
 			string search;
@@ -68,7 +69,7 @@ namespace Do.Riptide
 			
 			outItems = new List<IItem> ();
 			
-			search = HttpUtility.UrlEncode ((items[0] as ITextItem).Text);
+			search = HttpUtility.UrlEncode ((items.First () as ITextItem).Text);
 			search = "http://isohunt.com/js/rss/" + search;
 			
 			req = WebRequest.Create (search);
@@ -119,7 +120,7 @@ namespace Do.Riptide
 			
 			if (outItems.Count == 0) {
 				outItems.Add (new TextItem ("No Torrent Results Found For " + 
-				                            (items[0] as ITextItem).Text));
+				                            (items.First () as ITextItem).Text));
 			}
 			
 			return outItems.ToArray ();

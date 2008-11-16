@@ -51,14 +51,14 @@ namespace WindowManager
 			}
 		}
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (GenericWindowItem)};
 			}
 		}
 
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get {
 				return items;
 			}
@@ -86,7 +86,7 @@ namespace WindowManager
 			                                  GenericWindowType.PreviousApplication));
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

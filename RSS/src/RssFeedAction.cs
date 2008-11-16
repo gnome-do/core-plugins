@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -45,7 +46,7 @@ namespace Do.Plugins.Rss
 
 		public override string Icon { get { return "feed-icon.png@" + GetType ().Assembly.FullName; } }
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (RssFeedItem)
@@ -53,10 +54,10 @@ namespace Do.Plugins.Rss
 			}
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			List<IItem> rssItems = new List<IItem> ();
-			string url = (items[0] as RssFeedItem).URL;
+			string url = (items.First () as RssFeedItem).URL;
 			RssFeed feed;
 			if (cachedFeeds.ContainsKey (url)) {
 				CachedFeed cachedFeed = cachedFeeds[url];

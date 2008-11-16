@@ -19,6 +19,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 using Mono.Unix;
 using Do.Universe;
@@ -46,7 +48,7 @@ namespace GNOME.Terminal
 			get { return "gnome-terminal"; }
 		}
 
-	    public override Type[] SupportedItemTypes
+	    public override IEnumerable<Type> SupportedItemTypes
 		{
 	      get {
 	      	return new Type[] {
@@ -55,12 +57,12 @@ namespace GNOME.Terminal
 	      }
 	    }
 
-	    public override IItem[] Perform( IItem[] items, IItem[] modifierItems )
+	    public override IEnumerable<IItem> Perform( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
 	    {
 	    	Process term;
 	    	string dir;
 			
-			dir = (items [0] as IFileItem).Path;
+			dir = (items.First () as IFileItem).Path;
 			if (!System.IO.Directory.Exists (dir)) {
 				dir = System.IO.Path.GetDirectoryName (dir);
 			}

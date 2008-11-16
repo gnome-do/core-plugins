@@ -21,6 +21,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.IO;
 using Mono.Unix;
@@ -49,7 +50,7 @@ namespace FilePlugin {
 			}
 		}
 		
-		public override Type [] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ITextItem),
@@ -57,7 +58,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public override Type [] SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem), 
@@ -72,7 +73,7 @@ namespace FilePlugin {
 				!(item as ITextItem).Text.Equals ("..");
 		}
 
-		public override bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			// Check for archive types
 			FileItem fi = modItem as FileItem;
@@ -83,16 +84,16 @@ namespace FilePlugin {
 			get { return true; }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			string file, dir;
-			if (modItems.Length > 0) {
-				dir = (modItems [0] as FileItem).Path;
+			if (modItems.Any ()) {
+				dir = (modItems.First () as FileItem).Path;
 			} else {
 				dir = FileItemSource.Desktop;
 			}
 
-			file = (items [0] as ITextItem).Text;
+			file = (items.First () as ITextItem).Text;
 			file = Paths.Combine (dir, file);
 			try {
 				File.Create (file);

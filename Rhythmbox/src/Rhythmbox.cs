@@ -25,6 +25,8 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
+using Do;
+
 namespace Do.Rhythmbox
 {
 
@@ -35,18 +37,17 @@ namespace Do.Rhythmbox
 
 		static ICollection<SongMusicItem> songs;
 
-		static Timer clearSongsTimer;
+		static Timer clear_songs_timer;
 		const int SecondsSongsCached = 45;
 
 		static Rhythmbox ()
 		{
-			string home;
+			MusicLibraryFile = Paths.Combine (Paths.UserHome, ".gnome2/rhythmbox/rhythmdb.xml");
+			CoverArtDirectory = Paths.Combine (Paths.UserHome, ".gnome2/rhythmbox/covers");
 
-			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			MusicLibraryFile = "~/.gnome2/rhythmbox/rhythmdb.xml".Replace("~", home);
-			CoverArtDirectory = "~/.gnome2/rhythmbox/covers".Replace("~", home);
-
-			clearSongsTimer = new Timer (ClearSongs);
+			clear_songs_timer = new Timer (state =>
+				Gtk.Application.Invoke ((sender, args) => songs.Clear ())
+			);
 			songs = new List<SongMusicItem> ();
 		}
 
@@ -77,25 +78,26 @@ namespace Do.Rhythmbox
 		{
 			if (item is SongMusicItem)
 				return new SongMusicItem[] { item as SongMusicItem };
+			
 			else if (item is ArtistMusicItem)
-				return LoadAllSongs ().Where (song => song.Artist.Contains (item.Name));
+				return LoadAllSongs ()
+					.Where (song => song.Artist.Contains (item.Name))
+					.OrderBy (song => song.Album).ThenBy (song => song.Track);
+			
 			else if (item is AlbumMusicItem)
-				return LoadAllSongs ().Where (song => song.Album == item.Name);
+				return LoadAllSongs ()
+					.Where (song => song.Album == item.Name)
+					.OrderBy (song => song.Track);
+			
 			else
 				return Enumerable.Empty<SongMusicItem> ();
-		}
-
-		private static void ClearSongs (object state)
-		{
-			// This may not occur on the main thread. To avoid dealing with locks,
-			// we just create a new List instead of calling clear on the old songs list.
-			songs = new List<SongMusicItem> ();
 		}
 
 		public static IEnumerable<SongMusicItem> LoadAllSongs ()
 		{
 			// Begin a new timer to clear the songs SecondsSongsCached seconds from now.
-			clearSongsTimer.Change (SecondsSongsCached*1000, Timeout.Infinite);
+			clear_songs_timer.Change (SecondsSongsCached*1000, Timeout.Infinite);
+			
 			if (songs.Any ()) return songs;
 			
 			// Song list is not cached. Load songs from database.

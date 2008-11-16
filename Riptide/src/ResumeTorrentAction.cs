@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 using MonoTorrent.Client;
 using MonoTorrent.Common;
 
@@ -46,7 +47,7 @@ namespace Do.Riptide
 			get { return "gtk-media-play"; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] { typeof (ITorrentItem), }; }
 		}
 		
@@ -60,7 +61,7 @@ namespace Do.Riptide
 		}
 
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			foreach (IItem item in items) {
 				if (!(item is ITorrentItem)) continue;

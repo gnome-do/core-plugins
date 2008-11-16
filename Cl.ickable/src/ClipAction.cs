@@ -19,6 +19,7 @@
 using System;
 using System.Web;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Addins;
@@ -44,7 +45,7 @@ namespace Cl.ickable
 			get { return "edit-cut"; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -56,7 +57,7 @@ namespace Cl.ickable
 			get { return true; }
 		}
 		
-		public override Type[] SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -82,14 +83,14 @@ namespace Cl.ickable
 			;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			string text, title, url;
 			Dictionary<string, string> parameters;
 			
-			text = (items[0] as ITextItem).Text;
-			title = modItems.Length > 0 ?
-				(modItems[0] as ITextItem).Text :
+			text = (items.First () as ITextItem).Text;
+			title = modItems.Any () ?
+				(modItems.First () as ITextItem).Text :
 				text.Substring (0, Math.Min (text.Length, MaxTitleLength)) + "...";
 			
 			parameters = new Dictionary<string, string> ();

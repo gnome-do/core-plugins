@@ -66,7 +66,7 @@ namespace Delicious
 			get { return "delicious.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IURLItem),
@@ -75,7 +75,7 @@ namespace Delicious
 			}
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get { return new Type [] { typeof (ITextItem), }; }
 		}
 		
@@ -89,12 +89,12 @@ namespace Delicious
 			return false;
 		}
 		
-		public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return true;
 		}
 		
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
@@ -103,7 +103,7 @@ namespace Delicious
 			get { return true; }
 		}
 		
-		public IItem [] Perform (IItem [] items, IItem [] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			string url;
 			foreach (IItem item in items) {

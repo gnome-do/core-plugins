@@ -48,7 +48,7 @@ namespace Do.Addins.Pidgin
 			//UpdateItems ();
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ContactItem),
@@ -64,11 +64,11 @@ namespace Do.Addins.Pidgin
 		
 		public string Icon {get { return "pidgin"; } }
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return buddies; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			ContactItem buddy = item as ContactItem;
 			List<IItem> details;

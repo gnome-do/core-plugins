@@ -42,7 +42,7 @@ namespace GCalendar
 			get { return "calIcon.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public Type[] SupportedItemTypes
+		public IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -51,12 +51,12 @@ namespace GCalendar
 			}
 		}
 
-		public ICollection<IItem> Items
+		public IEnumerable<IItem> Items
 		{
 			get { return GCal2.Calendars; }
 		}
 
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
 		{
 			return GCal2.EventsForCalendar ((parent as GCalendarItem).Name);
 		}

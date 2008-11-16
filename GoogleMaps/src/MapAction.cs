@@ -18,6 +18,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
@@ -46,7 +48,7 @@ namespace Google
 			get { return "applications-internet"; }
 		}
 		
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -57,7 +59,7 @@ namespace Google
 			}
 		}
 
-		public override Type[] SupportedModifierItemTypes
+		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get {
 				return new Type[] {
@@ -80,7 +82,7 @@ namespace Google
 			return false;
 		}
 		
-		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return SupportsItem (modItem);
 		}
@@ -89,7 +91,7 @@ namespace Google
             get { return true; }
         }
 		
-		public override IItem [] Perform (IItem [] items, IItem [] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			string expression, url, start, end;
 			start = end = String.Empty;
@@ -97,8 +99,8 @@ namespace Google
 			foreach (IItem item in items) {
 				start = AddressFromItem (item);
 				
-				if (modifierItems.Length > 0)
-					end = AddressFromItem (modifierItems [0]);
+				if (modifierItems.Any ())
+					end = AddressFromItem (modifierItems.First ());
 							
 				expression = String.Format ("from: {0}", start);
 				if (!String.IsNullOrEmpty (end))

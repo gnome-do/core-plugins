@@ -49,7 +49,7 @@ namespace ImageShack
 			get { return "imageshack.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -73,7 +73,7 @@ namespace ImageShack
 			return new ImageShackConfig();
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{								
 			try {
 				List<IItem> returnItems = new List<IItem> ();	

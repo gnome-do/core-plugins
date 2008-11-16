@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 namespace Do.Universe
@@ -41,16 +42,16 @@ namespace Do.Universe
 			get { return "folder-saved-search"; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] { 
 					typeof (ShelfItem), 
 				}; 
 			}
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			return (items[0] as ShelfItem).Items.ToArray ();
+			return (items.First () as ShelfItem).Items.ToArray ();
 		}
 	}
 	
@@ -72,7 +73,7 @@ namespace Do.Universe
 			get { return true; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
 				typeof (IItem),
 				};
@@ -84,12 +85,12 @@ namespace Do.Universe
 			return ShelfItemSource.InShelf (item);
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			if (modItems.Length == 0)
-				ShelfItemSource.RemoveFromDefault (items[0]);
+			if (!modItems.Any ())
+				ShelfItemSource.RemoveFromDefault (items.First ());
 			else
-				(modItems[0] as ShelfItem).RemoveItem (items[0]);
+				(modItems.First () as ShelfItem).RemoveItem (items.First ());
 			
 			return null;
 		}
@@ -113,7 +114,7 @@ namespace Do.Universe
 			get { return true; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
 				typeof (IItem),
 				};
@@ -125,12 +126,12 @@ namespace Do.Universe
 			return (!(item is ShelfItem) && !ShelfItemSource.InShelf (item));
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			if (modItems.Length == 0) {
-				ShelfItemSource.AddToDefault (items[0]);
+			if (!modItems.Any ()) {
+				ShelfItemSource.AddToDefault (items.First ());
 			} else {
-				(modItems[0] as ShelfItem).AddItem (items[0]);
+				(modItems.First () as ShelfItem).AddItem (items.First ());
 			}
 			return null;
 		}

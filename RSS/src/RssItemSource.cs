@@ -44,18 +44,18 @@ namespace Do.Plugins.Rss
 		public string Description { get { return null; } }
 		public string Icon { get { return "feed-icon.png@" + GetType ().Assembly.FullName; } }
 		
-		public Type[] SupportedItemTypes
+		public IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] { typeof(RssFeedItem) };
 			}
 		}
 
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return items; }
 		}
 
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
 		{
 			return null;
 		}

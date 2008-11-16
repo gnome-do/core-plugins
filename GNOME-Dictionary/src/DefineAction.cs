@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using Mono.Unix;
@@ -60,7 +61,7 @@ namespace GNOME
 			get { return "accessories-dictionary"; }
 		}
 		
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -90,7 +91,7 @@ namespace GNOME
 			return !string.IsNullOrEmpty (word) && wordRegex.IsMatch (word);
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			string word, cmd;
 			foreach (IItem item in items) {

@@ -63,17 +63,17 @@ namespace GnomeDoSSH {
 		public string Description { get { return Catalog.GetString ("Parses ssh-config"); } }
 		public string Icon { get { return "network-server"; } }
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] { typeof (HostItem) };
 			}
 		}
 
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return items; }
 		}
 
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
 		{
 			return null;  
 		}

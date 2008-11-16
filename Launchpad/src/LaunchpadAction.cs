@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
@@ -46,7 +48,7 @@ namespace Do.Launchpad
 			get { return "Launchpad.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get
 			{
@@ -58,12 +60,12 @@ namespace Do.Launchpad
 
     public override bool ModifierItemsOptional { get { return false; } }
 
-		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
-			return (modItem as LaunchpadItem).SupportsItems(items);
+			return (modItem as LaunchpadItem).SupportsItems(items.ToArray ());
 		}
 
-		public override Type[] SupportedModifierItemTypes
+		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get
 			{
@@ -73,7 +75,7 @@ namespace Do.Launchpad
 			}
 		}
 
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return new IItem[] {
 				new LaunchpadAnswerSearchItem(),
@@ -100,9 +102,9 @@ namespace Do.Launchpad
         return true;
     }
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems) {
-			if (modItems.Length > 0) {
-				(modItems[0] as LaunchpadItem).Perform(items[0]);
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) {
+			if (modItems.Any ()) {
+				(modItems.First () as LaunchpadItem).Perform(items.First ());
 			}
 			return null;
 		}

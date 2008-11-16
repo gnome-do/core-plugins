@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Mono.Unix;
 
@@ -49,7 +50,7 @@ namespace GDocs
 			get { return "document-send"; }
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (IFileItem),
@@ -57,7 +58,7 @@ namespace GDocs
 			}
 		}
 		
-		public Type[] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 		    get {
 		        return new Type[] {
 		            typeof (ITextItem),
@@ -74,20 +75,20 @@ namespace GDocs
 			return IsValidFormat (item as IFileItem);
         }
         
-        public bool SupportsModifierItemForItems (IItem[] item, IItem modItem) 
+        public bool SupportsModifierItemForItems (IEnumerable<IItem> item, IItem modItem) 
         {        		
             return true;
         }
         
-        public IItem[] DynamicModifierItemsForItem (IItem item) 
+        public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item) 
         {
             return null;
         }
         
-        public IItem[] Perform (IItem[] items, IItem[] modifierItems) 
+        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems) 
         {			
-			string fileName = (items[0] as IFileItem).Path;
-			string documentName = (modifierItems.Length > 0) ? (modifierItems[0] as ITextItem).Text : null;
+			string fileName = (items.First () as IFileItem).Path;
+			string documentName = (modifierItems.Any ()) ? (modifierItems.First () as ITextItem).Text : null;
 			
 			IItem returnItem;
 			returnItem = GDocs.UploadDocument (fileName, documentName);

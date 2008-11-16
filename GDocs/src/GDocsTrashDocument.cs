@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Addins;
@@ -46,7 +47,7 @@ namespace GDocs
 			get { return "user-trash";}
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (GDocsItem),	
@@ -54,7 +55,7 @@ namespace GDocs
 			}
 		}
         
-		public Type[] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 		    get { return null; }
         }		
 		
@@ -63,7 +64,7 @@ namespace GDocs
 			return true;
         }
         
-        public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+        public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
         {
 			return false;
 		}        
@@ -72,14 +73,14 @@ namespace GDocs
             get { return true; }
         }
 		
-		public IItem[] DynamicModifierItemsForItem (IItem item) 
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item) 
         {
             return null;
         }
         
-        public IItem[] Perform (IItem[] items, IItem[] modifierItems) 
+        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems) 
         {						
-            GDocs.TrashDocument (items[0] as GDocsItem);
+            GDocs.TrashDocument (items.First () as GDocsItem);
 			return null;
         }
 	}

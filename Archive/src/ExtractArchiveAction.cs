@@ -22,6 +22,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 using Mono.Unix;
 using Do.Universe;
@@ -47,7 +48,7 @@ namespace Archive {
                         get { return "file-roller"; }
                 }
                 
-                public override Type[] SupportedItemTypes {
+                public override IEnumerable<Type> SupportedItemTypes {
                         get {
                                 return new Type[] {                             
                                         typeof (IFileItem),
@@ -60,12 +61,12 @@ namespace Archive {
                         return IsArchive (item as IFileItem);
                 }
                         
-                public override bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+                public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
                 {
                         return FileItem.IsDirectory (modItem as IFileItem);
                 }
 
-                public override Type[] SupportedModifierItemTypes {
+                public override IEnumerable<Type> SupportedModifierItemTypes {
                         get {
                                 return new Type[] {
                                         typeof(IFileItem),
@@ -77,14 +78,14 @@ namespace Archive {
                         get { return false; }
                 }
 
-                public override IItem[] DynamicModifierItemsForItem (IItem item)
+                public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
                 {
                         return null;       
                 }
                 
-                public override IItem[] Perform (IItem[] items, IItem[] modItems)
+                public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
                 {
-                        ExtractArchive ( (items[0] as IFileItem), (modItems[0] as IFileItem));
+                        ExtractArchive ( (items.First () as IFileItem), (modItems.First () as IFileItem));
                         return null;
                 }
 

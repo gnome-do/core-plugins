@@ -72,7 +72,7 @@ namespace Tomboy
 			}
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return supportedTypes;
 			}
@@ -87,11 +87,11 @@ namespace Tomboy
 		/// <returns>
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return notes; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

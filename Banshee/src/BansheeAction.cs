@@ -36,18 +36,18 @@ namespace Do.Addins.Banshee {
                         get { return "music-player-banshee"; }
                 }
 
-                public override Type[] SupportedItemTypes {
+                public override IEnumerable<Type> SupportedItemTypes {
                         get {
                                 return new Type[] { typeof (MusicItem), };
                         }
                 }
 
-                public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+                public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
                 {
                         return false;
                 }
 
-                public override IItem[] Perform (IItem[] items, IItem[] modItems)
+                public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
                 {
                         new Thread ((ThreadStart) delegate {
                                 BansheeDBus b = new BansheeDBus();

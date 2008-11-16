@@ -109,7 +109,7 @@ namespace Do.Universe
 			}
 		}
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ShelfItem),
@@ -117,7 +117,7 @@ namespace Do.Universe
 			}
 		}
 
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get {
 				List<IItem> items = new List<IItem> ();
 				if (shelf != null) {
@@ -129,7 +129,7 @@ namespace Do.Universe
 			}
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return (item as ShelfItem).Items;
 		}

@@ -21,6 +21,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
@@ -38,7 +39,7 @@ namespace FilePlugin {
 		
 		public string Icon { get { return "forward"; } }
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -46,7 +47,7 @@ namespace FilePlugin {
 			}
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (ITextItem),
@@ -63,22 +64,22 @@ namespace FilePlugin {
 			return true;
 		}
 		
-		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return true;
 		}
 		
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 		
-		public IItem [] Perform (IItem [] items, IItem [] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			string dest;
 			List<string> seenPaths;
 
-			dest = (modItems [0] as ITextItem).Text;
+			dest = (modItems.First () as ITextItem).Text;
 			seenPaths = new List<string> ();
 			if (dest.IndexOf('/') != -1) {
 				Console.Error.WriteLine ("If you want to move a file, please use move.");

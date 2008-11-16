@@ -42,7 +42,7 @@ namespace Delicious
 			get { return "delicious.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (BookmarkItem),
@@ -50,11 +50,11 @@ namespace Delicious
 			}
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return Delicious.BookmarksForTag ("all bookmarks"); }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

@@ -20,6 +20,8 @@
 
 using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 using Do.Universe;
 using Mono.Unix;
@@ -31,13 +33,13 @@ namespace Text {
 		public string Description { get { return Catalog.GetString ("Appends text to a selected file."); } }
 		public string Icon { get { return "text-editor"; } }
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] { typeof (ITextItem) };
 			}
 		}
 		
-		public Type[] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type[] { typeof (FileItem), typeof(ITextItem) };
 			}
@@ -53,7 +55,7 @@ namespace Text {
 			return true;
 		}
 		
-		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			if (modItem is FileItem) {
 				string mime = (modItem as FileItem).MimeType;
@@ -62,17 +64,17 @@ namespace Text {
 			return modItem is ITextItem;
 		}
 		
-		public IItem[] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 
-		public IItem[] Perform (IItem[] items, IItem[] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			if (modItems [0] is FileItem) {
-				string text = (items [0] as ITextItem).Text;
-				string mime = (modItems [0] as FileItem).MimeType;
-				string file = (modItems [0] as FileItem).Path;
+			if (modItems.First () is FileItem) {
+				string text = (items.First () as ITextItem).Text;
+				string mime = (modItems.First () as FileItem).MimeType;
+				string file = (modItems.First () as FileItem).Path;
 				
 				if (mime == "x-directory/normal") return null;
 				
@@ -84,8 +86,8 @@ namespace Text {
 				return null;
 			}
 			else {
-				string text = (items [0] as ITextItem).Text;
-				string text2 = (modItems [0] as ITextItem).Text;
+				string text = (items.First () as ITextItem).Text;
+				string text2 = (modItems.First () as ITextItem).Text;
 				return new IItem[] { new TextItem (text + text2) };
 			}
 		}

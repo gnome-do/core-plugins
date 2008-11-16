@@ -1,6 +1,6 @@
 Name: GNOME-Screenshot
 Description: GNOME-Screenshot
-Version: 0.1
+Version: 
 
 Requires: 
 Libs: -r:@expanded_libdir@/@PACKAGE@/GNOME-Screenshot.dll

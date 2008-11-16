@@ -79,7 +79,7 @@ namespace Do.Rhythmbox
 		}
 	}
 
-	public class SongMusicItem : MusicItem, IComparable
+	public class SongMusicItem : MusicItem, IComparable<SongMusicItem>
 	{
 		string file, album;
 		int track;
@@ -104,9 +104,8 @@ namespace Do.Rhythmbox
 		public virtual string Album { get { return album; } }
 		public virtual int Track { get { return track; } }
 		
-		public int CompareTo (object o)
+		public int CompareTo (SongMusicItem other)
 		{
-			SongMusicItem other = o as SongMusicItem;
 			if (album.CompareTo (other.Album) == 0)
 				return track - other.Track;
 			return album.CompareTo (other.Album);

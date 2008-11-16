@@ -22,6 +22,7 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
@@ -44,7 +45,7 @@ namespace DoTwitter
 			get { return "twitter-icon.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
             get {
                 return new Type [] {
                     typeof (ITextItem),
@@ -57,7 +58,7 @@ namespace DoTwitter
             return (item as ITextItem).Text.Length <= 140;
         }
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
             get { 
                 return new Type [] {
                     typeof (ContactItem),
@@ -69,24 +70,24 @@ namespace DoTwitter
             get { return true; }
         }
                         
-        public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+        public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
         {
         	//make sure we dont go over 140 chars with the contact screen name
             return (modItem as ContactItem) ["twitter.screenname"] != null &&
-            	((items [0] as ITextItem).Text.Length + ((modItem as ContactItem) 
+            	((items.First () as ITextItem).Text.Length + ((modItem as ContactItem) 
             	["twitter.screenname"]).Length < 140);
         }
         
-        public IItem [] DynamicModifierItemsForItem (IItem item)
+        public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
         {
             return null;
         }
 
-        public IItem[] Perform (IItem [] items, IItem [] modItems)
+        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
         {			
-			TwitterAction.Status = (items [0] as ITextItem).Text;
-			if (modItems.Length > 0)
-				TwitterAction.Status = BuildTweet (items [0], modItems);
+			TwitterAction.Status = (items.First () as ITextItem).Text;
+			if (modItems.Any ())
+				TwitterAction.Status = BuildTweet (items.First (), modItems.ToArray ());
 			
 			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.Tweet));
 			updateRunner.Start ();

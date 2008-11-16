@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Do.Universe;
 using Mono.Unix;
 
@@ -30,7 +31,7 @@ namespace Do.Addins.Pidgin
 		public string Description { get { return Catalog.GetString ("Enable pidgin account"); } }
 		public string Icon { get { return "pidgin"; } }
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginAccountItem),
@@ -38,7 +39,7 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get { return null; }
 		}
 		
@@ -58,22 +59,22 @@ namespace Do.Addins.Pidgin
 			get { return false; }
 		}
 		
-		public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return false;
 		}
 		
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 		
-		public IItem [] Perform (IItem [] items, IItem [] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountSetEnabled ((items [0] as PidginAccountItem).ID,
+				prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).ID,
 					"gtk-gaim", 1);
 			} catch { }
 			
@@ -87,7 +88,7 @@ namespace Do.Addins.Pidgin
 		public string Description { get { return Catalog.GetString ("Disble pidgin account"); } }
 		public string Icon { get { return "pidgin"; } }
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginAccountItem),
@@ -95,7 +96,7 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get { return null; }
 		}
 		
@@ -115,22 +116,22 @@ namespace Do.Addins.Pidgin
 			get { return false; }
 		}
 		
-		public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return false;
 		}
 		
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 		
-		public IItem [] Perform (IItem [] items, IItem [] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountSetEnabled ((items [0] as PidginAccountItem).ID,
+				prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).ID,
 					"gtk-gaim", 0);
 			} catch { }
 			

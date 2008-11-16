@@ -19,6 +19,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Do.Universe;
 using System.Diagnostics;
 
@@ -46,7 +48,7 @@ namespace GnomeDoSSH {
 			}
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
             get {
                 return new Type[] {
                     typeof(ITextItem),
@@ -59,7 +61,7 @@ namespace GnomeDoSSH {
 			return true;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems) {
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) {
 			GConf.Client client = new GConf.Client ();
 
 			string exec;
@@ -72,12 +74,12 @@ namespace GnomeDoSSH {
 			
             string hostname;
 
-            if (items [0] is ITextItem) {
-                ITextItem textitem = items [0] as ITextItem;
+            if (items.First () is ITextItem) {
+                ITextItem textitem = items.First () as ITextItem;
                 hostname = textitem.Text;
             }
             else {
-                HostItem hostitem = items [0] as HostItem;
+                HostItem hostitem = items.First () as HostItem;
                 hostname = hostitem.Text;
             }
 

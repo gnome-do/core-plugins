@@ -55,20 +55,20 @@ namespace OpenSearch
 			}
 		}
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IOpenSearchItem)};
 			}
 		}
 
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get {
 				return items;
 			}
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

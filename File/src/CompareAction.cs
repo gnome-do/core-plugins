@@ -20,7 +20,9 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Mono.Unix;
 using Do.Addins;
 using Do.Universe;
@@ -41,7 +43,7 @@ namespace FilePlugin
 			get { return "edit-copy"; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem),
@@ -49,7 +51,7 @@ namespace FilePlugin
 			}
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem),
@@ -67,18 +69,18 @@ namespace FilePlugin
 			return IsTextFile (item as FileItem);
 		}
 		
-		public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			if (!(modItem is FileItem)) return false;
 			return IsTextFile (modItem as FileItem);
 		}
 		
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 		
-		public IItem [] Perform (IItem [] items, IItem [] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			if (String.IsNullOrEmpty (CompareConfig.DiffTool)) {
 				Console.Error.WriteLine ("You must have a diff tool configured "
@@ -86,8 +88,8 @@ namespace FilePlugin
 				return null;
 			}
 			
-			string file1 = (items [0] as FileItem).Path;
-			string file2 = (modItems [0] as FileItem).Path;
+			string file1 = (items.First () as FileItem).Path;
+			string file2 = (modItems.First () as FileItem).Path;
 			
 			Process diff = new Process ();
 			if (CompareConfig.RunInTerminal) {

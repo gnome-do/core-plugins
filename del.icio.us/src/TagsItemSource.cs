@@ -41,7 +41,7 @@ namespace Delicious
 			get { return "delicious.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (TagItem),
@@ -49,7 +49,7 @@ namespace Delicious
 			}
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get {
 				List<IItem> tags = new List<IItem> ();
 				foreach (string tag in Delicious.Tags.Keys) {
@@ -59,7 +59,7 @@ namespace Delicious
 			}
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return Delicious.Tags [(item as TagItem).Name];
 		}

@@ -146,7 +146,7 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	What type of items do we support
 		/// </value>
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] { typeof (ManLookUpItem) };
 			}
@@ -155,7 +155,7 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	Our collection of items
 		/// </value>
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return items; }
 		}
 
@@ -169,7 +169,7 @@ namespace GnomeDoManLookUp {
 		/// <returns>
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
 		{
 			return null;  
 		}

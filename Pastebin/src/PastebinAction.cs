@@ -18,7 +18,9 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Collections.Generic;
@@ -48,7 +50,7 @@ namespace Pastebin
 			get { return "gtk-paste"; }
 		}
 		
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get 
 			{
@@ -64,7 +66,7 @@ namespace Pastebin
 			get { return true; }
 		}
 		
-		public override Type[] SupportedModifierItemTypes
+		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get 
 			{
@@ -85,7 +87,7 @@ namespace Pastebin
 			return false;
 		}
 			
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			IPastebinProvider pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences ();
 
@@ -98,7 +100,7 @@ namespace Pastebin
 			return items.ToArray ();
 		}
 				
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{		
 			string text = string.Empty;
 			ITextItem titem = null;
@@ -114,8 +116,8 @@ namespace Pastebin
 			
 			IPastebinProvider pastebinProvider = null;
 					
-			if (modifierItems.Length > 0) {
-				pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences (text, (modifierItems[0] as ITextSyntaxItem).Syntax);
+			if (modifierItems.Any ()) {
+				pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences (text, (modifierItems.First () as ITextSyntaxItem).Syntax);
 			}
 			else {
 				pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences (text);		
