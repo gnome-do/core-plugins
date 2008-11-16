@@ -25,7 +25,7 @@ using Do.Addins;
 using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Rhythmbox
+namespace Do.Rhythmbox
 {
 
 	class BrowseMusicItem: IItem

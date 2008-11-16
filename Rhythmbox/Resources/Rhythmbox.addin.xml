@@ -18,10 +18,10 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Addins.Rhythmbox.RhythmboxMusicItemSource" />
+		<ItemSource type="Do.Rhythmbox.MusicItemSource" />
 	</Extension>
 	<Extension path= "/Do/Action">
-		<Action type="Do.Addins.Rhythmbox.RhythmboxEnqueueAction" />
-		<Action type="Do.Addins.Rhythmbox.RhythmboxPlayAction" />
+		<Action type="Do.Rhythmbox.EnqueueAction" />
+		<Action type="Do.Rhythmbox.PlayAction" />
 	</Extension>
 </Addin>

@@ -20,17 +20,19 @@
 using System;
 using System.Threading;
 using System.Diagnostics;
+using System.Collections.Generic;
 
-using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Rhythmbox
+using Do.Universe;
+
+namespace Do.Rhythmbox
 {
 
-	public class RhythmboxPlayAction : AbstractAction
+	public class PlayAction : AbstractAction
 	{
 
-		public RhythmboxPlayAction ()
+		public PlayAction ()
 		{
 		}
 
@@ -46,15 +48,11 @@ namespace Do.Addins.Rhythmbox
 			get { return "rhythmbox"; }
 		}
 
-		public override Type[] SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (MusicItem),
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (MusicItem); }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Rhythmbox.StartIfNeccessary ();

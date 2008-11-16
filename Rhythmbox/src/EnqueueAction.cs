@@ -20,19 +20,17 @@
 using System;
 using System.Threading;
 using System.Diagnostics;
+using System.Collections.Generic;
 
-using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Rhythmbox
+using Do.Universe;
+
+namespace Do.Rhythmbox
 {
 
-	public class RhythmboxEnqueueAction : AbstractAction
+	public class EnqueueAction : AbstractAction
 	{
-
-		public RhythmboxEnqueueAction ()
-		{
-		}
 
 		public override string Name {
 			get { return Catalog.GetString ("Add to Play Queue"); }
@@ -46,15 +44,11 @@ namespace Do.Addins.Rhythmbox
 			get { return "add"; }
 		}
 
-		public override Type[] SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (MusicItem),
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (MusicItem); }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Rhythmbox.StartIfNeccessary ();

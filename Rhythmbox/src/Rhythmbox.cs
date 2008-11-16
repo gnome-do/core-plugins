@@ -20,11 +20,12 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Linq;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace Do.Addins.Rhythmbox
+namespace Do.Rhythmbox
 {
 
 	public static class Rhythmbox
@@ -32,7 +33,7 @@ namespace Do.Addins.Rhythmbox
 		static readonly string MusicLibraryFile;
 		static readonly string CoverArtDirectory;
 
-		static List<SongMusicItem> songs;
+		static ICollection<SongMusicItem> songs;
 
 		static Timer clearSongsTimer;
 		const int SecondsSongsCached = 45;
@@ -72,95 +73,75 @@ namespace Do.Addins.Rhythmbox
 			artists_out.AddRange (artists.Values);
 		}
 
-		public static List<SongMusicItem> LoadSongsFor (MusicItem item)
+		public static IEnumerable<SongMusicItem> LoadSongsFor (MusicItem item)
 		{
-			SortedList<SongMusicItem, SongMusicItem> songs;
-
-			if (item is SongMusicItem) {
-				List<SongMusicItem> single = new List<SongMusicItem> ();
-				single.Add (item as SongMusicItem);
-				return single;
-			}
-
-			songs = new SortedList<SongMusicItem, SongMusicItem> ();
-			foreach (SongMusicItem song in LoadAllSongs ()) {
-				switch (item.GetType ().Name) {
-					case "AlbumMusicItem":
-						if (item.Name != song.Album) continue;
-					break;
-					case "ArtistMusicItem":
-						if (item.Name != song.Artist) continue;
-					break;
-				}
-				try {
-					songs.Add (song, song);
-				} catch { }
-			}
-			return new List<SongMusicItem> (songs.Values);
+			if (item is SongMusicItem)
+				return new SongMusicItem[] { item as SongMusicItem };
+			else if (item is ArtistMusicItem)
+				return LoadAllSongs ().Where (song => song.Artist.Contains (item.Name));
+			else if (item is AlbumMusicItem)
+				return LoadAllSongs ().Where (song => song.Album == item.Name);
+			else
+				return Enumerable.Empty<SongMusicItem> ();
 		}
 
 		private static void ClearSongs (object state)
 		{
-			lock (songs) {
-				songs.Clear ();
-			}
+			// This may not occur on the main thread. To avoid dealing with locks,
+			// we just create a new List instead of calling clear on the old songs list.
+			songs = new List<SongMusicItem> ();
 		}
 
-		public static List<SongMusicItem> LoadAllSongs ()
+		public static IEnumerable<SongMusicItem> LoadAllSongs ()
 		{
-			List<SongMusicItem> songsCopy;
-
-			lock (songs) {
-				// Begin a new timer to clear the songs SecondsSongsCached seconds from now.
-				clearSongsTimer.Change (SecondsSongsCached*1000, Timeout.Infinite);
-				if (songs.Count == 0) {
-					// Song list is not cached. Load songs from database.
-					try {
-						using (XmlReader reader = XmlReader.Create (MusicLibraryFile)) {
-							while (reader.ReadToFollowing ("entry")) {
-								SongMusicItem song;
-								string song_file, song_name, album_name, artist_name, year, cover;
-								int song_track = 0; //set to 0 for default
-								
-								if (reader.GetAttribute ("type") != "song") {
-									reader.ReadToFollowing ("entry");
-									continue;
-								}
-
-								reader.ReadToFollowing ("title");
-								song_name = reader.ReadString ();						
-								
-								reader.ReadToFollowing ("artist");
-								artist_name = reader.ReadString ();	
-								
-								reader.ReadToFollowing ("album");
-								album_name = reader.ReadString ();
-								
-								reader.ReadToFollowing ("track-number");
-								if (!Int32.TryParse (reader.ReadString (), out song_track))
-								    song_track = 0;
-								    
-								reader.ReadToFollowing ("location");
-								song_file = reader.ReadString ();
-								
-								reader.ReadToFollowing ("date");
-								year = reader.ReadString ();
+			// Begin a new timer to clear the songs SecondsSongsCached seconds from now.
+			clearSongsTimer.Change (SecondsSongsCached*1000, Timeout.Infinite);
+			if (songs.Any ()) return songs;
+			
+			// Song list is not cached. Load songs from database.
+			try {
+				using (XmlReader reader = XmlReader.Create (MusicLibraryFile)) {
+					while (reader.ReadToFollowing ("entry")) {
+						SongMusicItem song;
+						string song_file, song_name, album_name, artist_name, year, cover;
+						int song_track = 0; //set to 0 for default
 						
-								cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
-								cover = Path.Combine (CoverArtDirectory, cover);
-								if (!File.Exists (cover)) cover = null;
-
-								song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
-								songs.Add (song);
-							}
+						if (reader.GetAttribute ("type") != "song") {
+							reader.ReadToFollowing ("entry");
+							continue;
 						}
-					} catch (Exception e) {
-						Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
+
+						reader.ReadToFollowing ("title");
+						song_name = reader.ReadString ();						
+						
+						reader.ReadToFollowing ("artist");
+						artist_name = reader.ReadString ();	
+						
+						reader.ReadToFollowing ("album");
+						album_name = reader.ReadString ();
+						
+						reader.ReadToFollowing ("track-number");
+						if (!Int32.TryParse (reader.ReadString (), out song_track))
+						    song_track = 0;
+						    
+						reader.ReadToFollowing ("location");
+						song_file = reader.ReadString ();
+						
+						reader.ReadToFollowing ("date");
+						year = reader.ReadString ();
+				
+						cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
+						cover = Path.Combine (CoverArtDirectory, cover);
+						if (!File.Exists (cover)) cover = null;
+
+						song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
+						songs.Add (song);
 					}
 				}
-				songsCopy = new List<SongMusicItem> (songs);
+			} catch (Exception e) {
+				Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
 			}
-			return songsCopy;
+			return songs;
 		}
 
 		public static void StartIfNeccessary ()
@@ -171,16 +152,14 @@ namespace Do.Addins.Rhythmbox
 			}
 		}
 
-		public static bool InstanceIsRunning
+		private static bool InstanceIsRunning
 		{
 			get {
-				Process pidof;
-
 				try {
 					// Use pidof command to look for Rhythmbox process. Exit
 					// status is 0 if at least one matching process is found.
 					// If there's any error, just assume some it's running.
-					pidof = Process.Start ("pidof", "rhythmbox");
+					Process pidof = Process.Start ("pidof", "rhythmbox");
 					pidof.WaitForExit ();
 					return pidof.ExitCode == 0;
 				} catch {
@@ -196,11 +175,9 @@ namespace Do.Addins.Rhythmbox
 
 		public static void Client (string command, bool wait)
 		{
-			Process client;
 			try {
-				client = Process.Start ("rhythmbox-client", command);
-				if (wait)
-					client.WaitForExit ();
+				Process client = Process.Start ("rhythmbox-client", command);
+				if (wait) client.WaitForExit ();
 			} catch {
 			}
 		}

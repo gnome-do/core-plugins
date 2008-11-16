@@ -20,35 +20,40 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Linq;
 using System.Collections.Generic;
 
 using Do.Addins;
 using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Rhythmbox
+namespace Do.Rhythmbox
 {
 
-	public class RhythmboxMusicItemSource : IItemSource
+	public class MusicItemSource : IItemSource
 	{
 		List<IItem> items;
 		List<AlbumMusicItem> albums;
 		List<ArtistMusicItem> artists;
 
-		public RhythmboxMusicItemSource ()
+		public MusicItemSource ()
 		{
 			items = new List<IItem> ();
-			//UpdateItems ();
 		}
 
-		public string Name { get { return Catalog.GetString ("Rhythmbox Music"); } }
+		public string Name {
+			get { return Catalog.GetString ("Rhythmbox Music"); }
+		}
+		
 		public string Description { 
 			get { return Catalog.GetString ("Provides access to artists and albums from Rhythmbox."); }
 		}
 		
-		public string Icon { get { return "rhythmbox"; } }
+		public string Icon {
+			get { return "rhythmbox"; }
+		}
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (MusicItem),
@@ -58,34 +63,30 @@ namespace Do.Addins.Rhythmbox
 			}
 		}
 
-		public ICollection<IItem> Items { get { return items; } }
+		public IEnumerable<IItem> Items { get { return items; } }
 
-		public ICollection<IItem> ChildrenOfItem (IItem parent) {
-			List<IItem> children;
-
-			children = new List<IItem> ();
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent) {
 			if (parent is ApplicationItem && parent.Name == "Rhythmbox Music Player") {
-				children.Add (new BrowseAlbumsMusicItem ());
-				children.Add (new BrowseArtistsMusicItem ());
-				children.AddRange (RhythmboxRunnableItem.DefaultItems);
+				yield return new BrowseAlbumsMusicItem ();
+				yield return new BrowseArtistsMusicItem ();
+				foreach (IItem item in RhythmboxRunnableItem.DefaultItems) yield return item;
 			}
 			else if (parent is ArtistMusicItem) {
-				foreach (AlbumMusicItem album in AllAlbumsBy (parent as ArtistMusicItem))
-					children.Add (album);
+				foreach (AlbumMusicItem album in albums.Where (album => album.Artist.Contains (parent.Name)))
+					yield return album;
 			}
 			else if (parent is AlbumMusicItem) {
 				foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (parent as AlbumMusicItem))
-					children.Add (song);
+					yield return song;
 			}
 			else if (parent is BrowseAlbumsMusicItem) {
 				foreach (AlbumMusicItem album in albums)
-					children.Add (album);
+					yield return album;
 			}
 			else if (parent is BrowseArtistsMusicItem) {
-				foreach (ArtistMusicItem album in artists)
-					children.Add (album);
+				foreach (ArtistMusicItem artist in artists)
+					yield return artist;
 			}
-			return children;
 		}
 
 		public void UpdateItems ()
@@ -103,13 +104,6 @@ namespace Do.Addins.Rhythmbox
 			Rhythmbox.LoadAlbumsAndArtists (out albums, out artists);
 			foreach (IItem album in albums) items.Add (album);
 			foreach (IItem artist in artists) items.Add (artist);
-		}
-
-		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)
-		{
-			return albums.FindAll (delegate (AlbumMusicItem album) {
-				return album.Artist == artist.Name;
-			});
 		}
 	}
 }

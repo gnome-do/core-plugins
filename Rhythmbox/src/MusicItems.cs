@@ -24,7 +24,7 @@ using Do.Addins;
 using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Rhythmbox
+namespace Do.Rhythmbox
 {
 
 	public abstract class MusicItem : IItem
