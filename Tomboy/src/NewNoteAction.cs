@@ -18,6 +18,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 
 using Do.Addins;
@@ -45,13 +47,13 @@ namespace Tomboy
 			get { return icon; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return textItemTypeArray;
 			}
 		}
 		
-		public override Type[] SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return textItemTypeArray;
 			}
@@ -61,13 +63,13 @@ namespace Tomboy
 			get { return true; }
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
-			ITextItem mainItem = items [0] as ITextItem;
+			ITextItem mainItem = items.First () as ITextItem;
 			
 			ITextItem modItem = null;
-			if (modifierItems.Length > 0) {
-				modItem = modifierItems [0] as ITextItem;
+			if (modifierItems.Any ()) {
+				modItem = modifierItems.First () as ITextItem;
 			}
 			
 			string title = null, content = null;

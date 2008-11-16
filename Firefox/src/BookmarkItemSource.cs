@@ -44,7 +44,7 @@ namespace Mozilla.Firefox {
 			items = LoadBookmarkItems ();
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (BookmarkItem),
@@ -64,11 +64,11 @@ namespace Mozilla.Firefox {
 			get { return "firefox-3.0"; }
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return items; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

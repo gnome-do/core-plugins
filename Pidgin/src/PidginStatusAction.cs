@@ -48,7 +48,7 @@ namespace Pidgin
 			}
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (PidginStatusItem),
@@ -71,7 +71,7 @@ namespace Pidgin
 			}
 		}
 		
-		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem) {
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem) {
 			return true;
 		}
 		

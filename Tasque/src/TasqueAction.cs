@@ -19,6 +19,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using GConf;
 
 using Do.Universe;
@@ -49,7 +50,7 @@ namespace Tasque
 			get { return "tasque"; } 
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -61,7 +62,7 @@ namespace Tasque
 			return true;
 		}
 		
-		public override Type[] SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type[] {
 					typeof(TasqueCategoryItem),
@@ -69,7 +70,7 @@ namespace Tasque
 			}
 		}
 			
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			List<IItem> items = new List<IItem> ();
 			
@@ -86,12 +87,12 @@ namespace Tasque
 			get { return true; }
 		}
 
-		public override IItem[] Perform ( IItem[] items, IItem[] modifierItems )
+		public override IEnumerable<IItem> Perform ( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
 		{
-			if ( modifierItems.Length > 0 )	
-				TextItemPerform (items[0] as ITextItem, modifierItems[0] as TasqueCategoryItem);
+			if ( modifierItems.Any ())	
+				TextItemPerform (items.First () as ITextItem, modifierItems.First () as TasqueCategoryItem);
 			else 
-				TextItemPerform (items[0] as ITextItem, new TasqueCategoryItem (""));
+				TextItemPerform (items.First () as ITextItem, new TasqueCategoryItem (""));
 			
 			return null;
 		}

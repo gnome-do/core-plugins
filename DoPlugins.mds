@@ -1,7 +1,7 @@
-<Combine releaseversion="0.4.9.9" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
+<Combine name="DoPlugins" fileversion="2.0" outputpath="build/bin/" releaseversion="0.4.9.9">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="Packages" configuration="" />
+      <Entry build="True" name="Packages" configuration="Debug" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
       <Entry build="False" name="Amarok" configuration="Debug" />
       <Entry build="False" name="Banshee" configuration="Debug" />
@@ -21,16 +21,16 @@
       <Entry build="True" name="Firefox" configuration="Debug" />
       <Entry build="True" name="Vinagre" configuration="Debug" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
-      <Entry build="True" name="GNOME-Dictionary" configuration="Debug" />
-      <Entry build="True" name="GNOME-Terminal" configuration="Debug" />
-      <Entry build="True" name="GoogleMaps" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
       <Entry build="True" name="Archive" configuration="Debug" />
       <Entry build="True" name="GMailContacts" configuration="Debug" />
       <Entry build="True" name="DiskMounter" configuration="Debug" />
       <Entry build="True" name="Text" configuration="Debug" />
+      <Entry build="True" name="GNOME-Terminal" configuration="Debug" />
+      <Entry build="True" name="GNOME-Dictionary" configuration="Debug" />
       <Entry build="True" name="Flickr" configuration="Debug" />
       <Entry build="True" name="RSS" configuration="Debug" />
+      <Entry build="True" name="GoogleMaps" configuration="Debug" />
       <Entry build="True" name="Riptide" configuration="Debug" />
       <Entry build="True" name="Shelf" configuration="Debug" />
       <Entry build="True" name="Twitter" configuration="Debug" />
@@ -38,15 +38,14 @@
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="InlineGoogleSearch" configuration="Debug" />
       <Entry build="True" name="del.icio.us" configuration="Debug" />
-      <Entry build="True" name="Pastebin" configuration="Debug" />
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
-      <Entry build="True" name="OpenSearch.Tests" configuration="Debug" />
+      <Entry build="False" name="OpenSearch.Tests" configuration="Debug" />
       <Entry build="True" name="GDocs" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="Packages" configuration="" />
+      <Entry build="True" name="Packages" configuration="Release" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
       <Entry build="True" name="Amarok" configuration="Release" />
       <Entry build="True" name="Banshee" configuration="Release" />
@@ -66,17 +65,16 @@
       <Entry build="True" name="Firefox" configuration="Release" />
       <Entry build="True" name="Vinagre" configuration="Release" />
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
-      <Entry build="True" name="GNOME-Dictionary" configuration="Release" />
-      <Entry build="True" name="GNOME-Terminal" configuration="Release" />
-      <Entry build="True" name="GoogleMaps" configuration="Release" />
       <Entry build="True" name="Tasque" configuration="Release" />
       <Entry build="True" name="Archive" configuration="Default" />
-      <Entry build="True" name="Archive" configuration="Release" />
       <Entry build="True" name="GMailContacts" configuration="Release" />
       <Entry build="True" name="DiskMounter" configuration="Release" />
       <Entry build="True" name="Text" configuration="Release" />
+      <Entry build="True" name="GNOME-Terminal" configuration="Release" />
+      <Entry build="True" name="GNOME-Dictionary" configuration="Release" />
       <Entry build="True" name="Flickr" configuration="Release" />
       <Entry build="True" name="RSS" configuration="Release" />
+      <Entry build="True" name="GoogleMaps" configuration="Release" />
       <Entry build="True" name="Riptide" configuration="Release" />
       <Entry build="True" name="Shelf" configuration="Release" />
       <Entry build="True" name="Twitter" configuration="Release" />
@@ -84,11 +82,10 @@
       <Entry build="True" name="GCalendar" configuration="Release" />
       <Entry build="True" name="InlineGoogleSearch" configuration="Release" />
       <Entry build="True" name="del.icio.us" configuration="Release" />
-      <Entry build="True" name="Pastebin" configuration="Release" />
       <Entry build="True" name="ImageShack" configuration="Release" />
       <Entry build="True" name="Cl.ickable" configuration="Release" />
       <Entry build="True" name="ManLookUp" configuration="Release" />
-      <Entry build="True" name="OpenSearch.Tests" configuration="Release" />
+      <Entry build="False" name="OpenSearch.Tests" configuration="Release" />
       <Entry build="True" name="GDocs" configuration="Release" />
     </Configuration>
   </Configurations>
@@ -111,13 +108,11 @@
     <Execute type="None" entry="Tomboy" />
     <Execute type="None" entry="WindowManager" />
     <Execute type="None" entry="Firefox" />
-    <Execute type="None" entry="Twitter" />
     <Execute type="None" entry="Vinagre" />
     <Execute type="None" entry="GNOME-Screenshot" />
     <Execute type="None" entry="Tasque" />
     <Execute type="None" entry="Archive" />
     <Execute type="None" entry="GMailContacts" />
-    <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="DiskMounter" />
     <Execute type="None" entry="Text" />
     <Execute type="None" entry="GNOME-Terminal" />
@@ -129,12 +124,9 @@
     <Execute type="None" entry="Shelf" />
     <Execute type="None" entry="Twitter" />
     <Execute type="None" entry="VolumeControl" />
-    <Execute type="None" entry="Do Music" />
-    <Execute type="None" entry="Do.Music" />
     <Execute type="None" entry="GCalendar" />
     <Execute type="None" entry="InlineGoogleSearch" />
     <Execute type="None" entry="del.icio.us" />
-    <Execute type="None" entry="Pastebin" />
     <Execute type="None" entry="ImageShack" />
     <Execute type="None" entry="Cl.ickable" />
     <Execute type="None" entry="ManLookUp" />

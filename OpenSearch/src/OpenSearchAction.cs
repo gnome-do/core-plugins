@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Mono.Unix;
 
@@ -44,7 +45,7 @@ namespace OpenSearch
 			get { return "web-browser"; }
 		}
 		
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -60,7 +61,7 @@ namespace OpenSearch
 			return false;
 		}
 		
-		public override Type[] SupportedModifierItemTypes
+		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get {
 				return new Type[] {
@@ -69,18 +70,18 @@ namespace OpenSearch
 			}
 		}			
 	
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{					
 			List<string> searchTerms;
 				
-			if (modifierItems.Length > 0) {
+			if (modifierItems.Any ()) {
 				searchTerms = new List<string> ();
 				foreach (IItem item in items) {
 					searchTerms.Add ((item as ITextItem).Text);
 				}
 				
 				foreach (string searchTerm in searchTerms) {
-					string url = (modifierItems[0] as IOpenSearchItem).BuildSearchUrl(searchTerm);
+					string url = (modifierItems.First () as IOpenSearchItem).BuildSearchUrl(searchTerm);
 					Util.Environment.Open (url);	
 				}
 			}

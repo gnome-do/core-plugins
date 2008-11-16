@@ -50,14 +50,14 @@ namespace WindowManager
 			}
 		}
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (IScreenItem) };
 			}
 		}
 
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get {
                 List<IItem> items;
 		
@@ -75,7 +75,7 @@ namespace WindowManager
 		{
 		}
 
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

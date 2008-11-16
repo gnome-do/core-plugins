@@ -47,7 +47,7 @@ namespace VinagreVNC {
             get { return "gnome-globe"; }
         }
 
-        public Type[] SupportedItemTypes {
+        public IEnumerable<Type> SupportedItemTypes {
             get {
                 return new Type[] {
                     typeof (VNCHostItem), 
@@ -56,11 +56,11 @@ namespace VinagreVNC {
             }
         }
 
-        public ICollection<IItem> Items {
+        public IEnumerable<IItem> Items {
             get { return items; }
         }
 
-        public ICollection<IItem> ChildrenOfItem (IItem parent)
+        public IEnumerable<IItem> ChildrenOfItem (IItem parent)
         {
             return null;  
         }

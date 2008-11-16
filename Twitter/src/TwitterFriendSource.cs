@@ -50,7 +50,7 @@ namespace DoTwitter
 			get { return "twitter_items.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ContactItem),
@@ -58,11 +58,11 @@ namespace DoTwitter
 			}
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return TwitterAction.Friends; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
 		{
 			return null;
 		}

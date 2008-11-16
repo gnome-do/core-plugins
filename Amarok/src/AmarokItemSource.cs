@@ -47,7 +47,7 @@ namespace Do.Plugins.Amarok
 		}
 		public string Icon { get { return "amarok"; } }
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (MusicItem),
@@ -57,7 +57,7 @@ namespace Do.Plugins.Amarok
 			}
 		}
 
-		public ICollection<IItem> Items { get { return items; } }
+		public IEnumerable<IItem> Items { get { return items; } }
 
 		public ICollection<IItem> ChildrenOfItem (IItem parent) {
 			List<IItem> children;

@@ -47,17 +47,17 @@ namespace GNOME.Terminal
 	    
 	    public string Icon { get { return "gnome-terminal"; } }
 
-	    public Type[] SupportedItemTypes {
+	    public IEnumerable<Type> SupportedItemTypes {
 	      get {
 	        return new Type[] { typeof (ProfileItem) };
 	      }
 	    }
 
-	    public ICollection<IItem> Items {
+	    public IEnumerable<IItem> Items {
 	      get { return items; }
 	    }
 
-	    public ICollection<IItem> ChildrenOfItem (IItem parent)
+	    public IEnumerable<IItem> ChildrenOfItem (IItem parent)
 	    {
 	      return null;  
 	    }

@@ -19,6 +19,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 
 using Gnome.Vfs;
 using Mono.Unix;
@@ -47,7 +48,7 @@ namespace DiskMounter
 			get { return "gtk-open"; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (DriveItem),
@@ -60,20 +61,20 @@ namespace DiskMounter
 			return true;
 		}
                 
-        public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+        public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
         {
 			return false;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			DriveItem drive = (DriveItem) items[0];
+			DriveItem drive = (DriveItem) items.First ();
 			try {
 				if (!drive.IsMounted)
 					drive.Mount ();
 				Do.Addins.Util.Environment.Open(drive.Path);
 			} catch (Exception e) {
-				Console.WriteLine("Error opening {0} - {1}", (items[0] as DriveItem).Path, e.Message);
+				Console.WriteLine("Error opening {0} - {1}", (items.First () as DriveItem).Path, e.Message);
 			}
 			return null;
 		}

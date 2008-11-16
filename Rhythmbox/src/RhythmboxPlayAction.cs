@@ -18,6 +18,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Diagnostics;
 
@@ -46,7 +47,7 @@ namespace Do.Addins.Rhythmbox
 			get { return "rhythmbox"; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (MusicItem),
@@ -54,7 +55,7 @@ namespace Do.Addins.Rhythmbox
 			}
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Rhythmbox.StartIfNeccessary ();

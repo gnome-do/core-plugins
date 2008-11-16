@@ -42,7 +42,7 @@ namespace FilePlugin
 			UpdateItems ();
 		}
 		
-		public Type[] SupportedItemTypes
+		public IEnumerable<Type> SupportedItemTypes
 		{
 			get { return new Type[] {
 					typeof (FileItem),
@@ -65,11 +65,11 @@ namespace FilePlugin
 			get { return "document"; }
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return files; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item) {
+		public IEnumerable<IItem> ChildrenOfItem (IItem item) {
 			return null;
 		}
 		

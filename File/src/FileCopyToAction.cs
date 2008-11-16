@@ -20,6 +20,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using Mono.Unix;
 
@@ -38,7 +39,7 @@ namespace FilePlugin {
 		
 		public string Icon { get { return "gtk-copy"; } } 
 
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem),
@@ -46,7 +47,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -63,22 +64,22 @@ namespace FilePlugin {
 			return true;
 		}
 
-		public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return FileItem.IsDirectory (modItem as IFileItem);
 		}
 
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 
-		public IItem [] Perform (IItem [] items, IItem [] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			IFileItem dest;
 			List<string> seenPaths;
 
-			dest = modItems [0] as IFileItem;
+			dest = modItems.First () as IFileItem;
 			seenPaths = new List<string> ();
 			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;

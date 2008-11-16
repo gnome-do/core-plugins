@@ -54,7 +54,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public override Type [] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem),
@@ -62,7 +62,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public override IItem [] Perform (IItem [] items, IItem [] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			List<string> seenPaths;
 

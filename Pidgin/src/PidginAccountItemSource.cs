@@ -37,7 +37,7 @@ namespace Do.Addins.Pidgin
 		public string Description { get { return Catalog.GetString ("Available Pidgin IM Accounts"); } }
 		public string Icon { get { return "pidgin"; } }
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginAccountItem),
@@ -45,11 +45,11 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return items; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

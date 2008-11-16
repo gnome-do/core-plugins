@@ -20,6 +20,7 @@
 
 using System;
 using System.IO; 
+using System.Linq;
 using System.Collections.Generic;
 using Mono.Unix;
 
@@ -46,7 +47,7 @@ namespace Do.Universe
 			get { return "search"; }
 		}
 		
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -55,14 +56,14 @@ namespace Do.Universe
 			}
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			List<IItem> files;
 			System.Diagnostics.Process locate;
 			string query;
 				
 			files = new List<IItem> ();
-			query = (items[0] as ITextItem).Text;
+			query = (items.First () as ITextItem).Text;
 			
 			locate = new System.Diagnostics.Process ();
 			locate.StartInfo.FileName = "locate";

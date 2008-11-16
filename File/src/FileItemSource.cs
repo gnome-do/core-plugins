@@ -164,7 +164,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -187,11 +187,11 @@ namespace FilePlugin {
 			get { return "folder"; }
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return items; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			IFileItem fi = null;
 			List<IItem> children;

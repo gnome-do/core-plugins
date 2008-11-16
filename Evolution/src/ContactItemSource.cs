@@ -49,7 +49,7 @@ namespace Evolution
 			contacts = new List<IItem> ();
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ContactItem),
@@ -61,11 +61,11 @@ namespace Evolution
 		public string Description { get { return Catalog.GetString ("Evolution Contacts"); } }
 		public string Icon { get { return "evolution"; } }
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return contacts; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			List<IItem> details = new List<IItem> ();
 			ContactItem contact = item as ContactItem;

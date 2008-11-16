@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Do.Universe;
 using Do.Addins;
 using Mono.Unix;
@@ -62,7 +63,7 @@ namespace InlineGoogleSearch {
 		/// <value>
 		/// ITextItem
 		/// </value>
-		public override Type [] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {                             
 					typeof (ITextItem),
@@ -89,15 +90,14 @@ namespace InlineGoogleSearch {
 		/// <returns>
 		/// Array of Bookmark Items. URLs to search results <see cref="IItem"/>
 		/// </returns>
-		public override IItem [] Perform (IItem [] items, 
-		                                  IItem [] modItems) 
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
 		{
 			List<IItem> retItems = new List<IItem> ();
 			
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel
 				 (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery ( (items [0] as ITextItem).Text);
+			googleSearch.setQuery ( (items.First () as ITextItem).Text);
 			GoogleSearchResult [] googleSearchResult = 
 				googleSearch.search ();
 

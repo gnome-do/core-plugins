@@ -41,9 +41,5 @@
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Contacts.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Extensions.dll" />
   </References>
-  <GtkDesignInfo gtkVersion="2.12.0">
-    <ExportedWidgets>
-      <Widget>GMailContacts.Configuration</Widget>
-    </ExportedWidgets>
-  </GtkDesignInfo>
+  <GtkDesignInfo />
 </Project>

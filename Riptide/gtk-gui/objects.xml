@@ -1,2 +1,6 @@
 <objects attr-sync="on">
+  <object type="Do.Riptide.Configuration" palette-category="Riptide" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
 </objects>

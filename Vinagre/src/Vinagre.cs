@@ -19,7 +19,9 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
@@ -38,7 +40,7 @@ namespace VinagreVNC {
             get { return "vinagre"; }
         }
 
-        public override Type[] SupportedItemTypes {
+        public override IEnumerable<Type> SupportedItemTypes {
             get { 
                 return new Type[] {
                     typeof(HostItem),
@@ -52,14 +54,14 @@ namespace VinagreVNC {
             return true;
         }
 
-        public override IItem[] Perform (IItem[] items, IItem[] modItems) {         
+        public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) {         
             string hostname;
-            if (items [0] is ITextItem) {
-                ITextItem textitem = items [0] as ITextItem;
+            if (items.First () is ITextItem) {
+                ITextItem textitem = items.First () as ITextItem;
                 hostname = textitem.Text;
             }
             else {
-                HostItem hostitem = items [0] as HostItem;
+                HostItem hostitem = items.First () as HostItem;
                 hostname = hostitem.Description + ":" + hostitem.Port;
             }
             Process vinagre = new Process ();

@@ -18,6 +18,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 using Do.Universe;
@@ -46,7 +48,7 @@ namespace Do.Addins.Pidgin
 			get { return "internet-group-chat.svg@" + GetType ().Assembly.FullName; }
 		}
 		
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -69,9 +71,9 @@ namespace Do.Addins.Pidgin
 			return false;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
-			IItem item = items[0];
+			IItem item = items.First ();
 			string name = null;
 
 			if (item is ContactItem) {

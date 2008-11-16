@@ -21,6 +21,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
@@ -41,7 +42,7 @@ namespace GNOME {
 			get { return "camera"; }
 		}
 
-		public override Type [] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ScreenshotItem),
@@ -49,7 +50,7 @@ namespace GNOME {
 			}
 		}
 
-		public override Type [] SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (ScreenshotDelayItem),
@@ -61,7 +62,7 @@ namespace GNOME {
 			get { return true; }
 		}
 
-		public override IItem [] DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			IItem [] items = new IItem [100];
 			for (int i = 0; i < items.Length; ++i)
@@ -69,7 +70,7 @@ namespace GNOME {
 			return items;
 		}
 
-		public override IItem [] Perform (IItem [] items, IItem [] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			int seconds;
 			string window;
@@ -77,11 +78,11 @@ namespace GNOME {
 			window = "";
 			seconds = 0;
 
-			if (items [0] is CurrentWindowScreenshotItem)
+			if (items.First () is CurrentWindowScreenshotItem)
 				window = "--window";
 
-			if (modItems.Length > 0)
-				seconds = (modItems [0] as ScreenshotDelayItem).Seconds;
+			if (modItems.Any ())
+				seconds = (modItems.First () as ScreenshotDelayItem).Seconds;
 				
 			Process.Start (string.Format ("gnome-screenshot {0} --delay={1}", window, seconds));
 			return null;

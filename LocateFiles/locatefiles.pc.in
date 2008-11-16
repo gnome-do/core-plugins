@@ -1,6 +1,6 @@
 Name: LocateFiles
 Description: LocateFiles
-Version: 0.1
+Version: 
 
 Requires: 
 Libs: -r:@expanded_libdir@/@PACKAGE@/LocateFiles.dll

@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using MonoTorrent.Common;
 using MonoTorrent.Client;
@@ -49,11 +50,11 @@ namespace Do.Riptide
 			get { return "stock_internet"; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] { typeof (TorrentResultItem) }; }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			string torrentFolder;
 			string filename;
@@ -68,7 +69,7 @@ namespace Do.Riptide
 			if (!System.IO.Directory.Exists (torrentFolder))
 				System.IO.Directory.CreateDirectory (torrentFolder);
 			
-			item = items[0] as TorrentResultItem;
+			item = items.First () as TorrentResultItem;
 			
 			string[] temp = item.URL.Split (new char[] {'/'});
 			filename = temp[temp.Length - 1];

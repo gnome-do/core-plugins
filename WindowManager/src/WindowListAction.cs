@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 using System.Threading;
 
@@ -72,7 +73,7 @@ namespace WindowManager
 			get { return "eog"; } //fixme
 		}
 		
-		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return true;
 		}
@@ -87,13 +88,13 @@ namespace WindowManager
 			WindowListItems.GetList (out procListDyn);
 		}
 		
-		public override Type[] SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { return new Type [] {
 				typeof (IWindowItem)};
 			}
 		}
 
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			IItem[] items;
 			
@@ -121,7 +122,7 @@ namespace WindowManager
 			return items;
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
 					typeof (ApplicationItem),
 					typeof (GenericWindowItem) };
@@ -148,7 +149,7 @@ namespace WindowManager
 			return true;
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			return null;
 		}
@@ -161,16 +162,16 @@ namespace WindowManager
 		public abstract void ToggleGroup (List<Window> windows);
 		public abstract void ToggleWindow (Window window);
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			if (modItems.Length > 0) { //user selected a mod item
-				Window w = (modItems[0] as WindowItem).Window;
+			if (modItems.Any ()) { //user selected a mod item
+				Window w = (modItems.First () as WindowItem).Window;
 				
 				ToggleWindow (w);
 			} else { //no mod item
-				if (items[0] is ApplicationItem) { //it was an application item
+				if (items.First () is ApplicationItem) { //it was an application item
 					string application;
-					ApplicationItem app = (items[0] as ApplicationItem);
+					ApplicationItem app = (items.First () as ApplicationItem);
 					
 					application = app.Exec;
 					application = application.Split (new char[] {' '})[0];
@@ -178,9 +179,9 @@ namespace WindowManager
 					List<Window> windowList = WindowListItems.GetApplication (application);
 
 					ToggleGroup (windowList);
-				} else if (items[0] is GenericWindowItem) {
+				} else if (items.First () is GenericWindowItem) {
 					GenericWindowItem generic;
-					generic = (items[0] as GenericWindowItem);
+					generic = (items.First () as GenericWindowItem);
 					
 					if (generic.WindowType == GenericWindowType.CurrentWindow) {
 						ToggleWindow (WindowListItems.CurrentWindow);
@@ -327,15 +328,15 @@ namespace WindowManager
 			get { return "gtk-close"; }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			if (modItems.Length > 0) {
-				Wnck.Window w = (modItems[0] as WindowItem).Window;
+			if (modItems.Any ()) {
+				Wnck.Window w = (modItems.First () as WindowItem).Window;
 				
 				w.Close (Gtk.Global.CurrentEventTime);
 			} else {
-				if (items[0] is ApplicationItem) {
-					string application = (items[0] as ApplicationItem).Exec;
+				if (items.First () is ApplicationItem) {
+					string application = (items.First () as ApplicationItem).Exec;
 					application = application.Split (new char[] {' '})[0];
 					
 					List<Window> windows = WindowListItems.GetApplication (application);
@@ -419,15 +420,15 @@ namespace WindowManager
 			w.Activate (Gtk.Global.CurrentEventTime);
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			if (modItems.Length > 0) {
-				Wnck.Window w = (modItems[0] as WindowItem).Window;
+			if (modItems.Any ()) {
+				Wnck.Window w = (modItems.First () as WindowItem).Window;
 				
 				FocusWindowViewport (w);
 			} else {
-				if (items[0] is ApplicationItem) {
-					string application = (items[0] as ApplicationItem).Exec;
+				if (items.First () is ApplicationItem) {
+					string application = (items.First () as ApplicationItem).Exec;
 					application = application.Split (new char[] {' '})[0];
 					
 					List<Window> windows = WindowListItems.GetApplication (application);
@@ -446,8 +447,8 @@ namespace WindowManager
 					//Only focus the top window, otherwise we end up in blinky hell (see above)
 					FocusWindowViewport (windows[windows.Count - 1]);
 					
-				} else if (items[0] is GenericWindowItem) {
-					GenericWindowItem generic = (items[0] as GenericWindowItem);
+				} else if (items.First () is GenericWindowItem) {
+					GenericWindowItem generic = (items.First () as GenericWindowItem);
 					
 					if (generic.WindowType == GenericWindowType.PreviousApplication ||
 					    generic.WindowType == GenericWindowType.PreviousWindow)

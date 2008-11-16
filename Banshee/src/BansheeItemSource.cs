@@ -45,7 +45,7 @@ namespace Do.Addins.Banshee {
                         get { return "music-player-banshee"; }
                 }
 
-                public Type[] SupportedItemTypes {
+                public IEnumerable<Type> SupportedItemTypes {
                         get {
                                 return new Type[] {
                                         typeof (MusicItem),
@@ -55,7 +55,7 @@ namespace Do.Addins.Banshee {
                         }
                 }
 
-                public ICollection<IItem> Items {
+                public IEnumerable<IItem> Items {
                     get { return items; }
                 }
 

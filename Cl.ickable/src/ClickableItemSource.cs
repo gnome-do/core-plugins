@@ -40,7 +40,7 @@ namespace Cl.ickable
 			get { return "edit-cut"; }
 		}
 
-		public override Type[] SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -49,7 +49,7 @@ namespace Cl.ickable
 			}
 		}
 
-		public override ICollection<IItem> Items
+		public override IEnumerable<IItem> Items
 		{
 			get {
 				return new IItem[] {

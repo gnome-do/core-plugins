@@ -23,6 +23,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
@@ -53,13 +54,13 @@ namespace Flickr
 			get { return "flickr.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type [] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get { 
 				return new Type [] { typeof (IFileItem) };
 			}
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] { typeof (ITextItem) };
 			}
@@ -75,22 +76,22 @@ namespace Flickr
 				FileIsPicture (item as FileItem);
 		}
 		
-		public bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return true;
 		}
 		
-		public IItem[] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 		
-		public IItem[] Perform (IItem[] items, IItem[] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			string tags;
 			tags = AccountConfig.Tags + " ";
 			
-			if (modItems.Length > 0) {
+			if (modItems.Any ()) {
 				foreach (IItem modItem in modItems) {
 					ITextItem tag = (modItem as ITextItem);
 					tags += tag.Text + " ";

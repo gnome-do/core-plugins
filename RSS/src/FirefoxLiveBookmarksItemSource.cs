@@ -48,7 +48,7 @@ namespace Do.Plugins.Rss
 			//UpdateItems ();
 		}
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (RssFeedItem),
@@ -68,11 +68,11 @@ namespace Do.Plugins.Rss
 			get { return "firefox"; }
 		}
 
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return bookmarks; }
 		}
 
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

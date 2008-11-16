@@ -48,7 +48,7 @@ namespace Do.Addins.Rhythmbox
 		
 		public string Icon { get { return "rhythmbox"; } }
 
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (MusicItem),
@@ -58,9 +58,9 @@ namespace Do.Addins.Rhythmbox
 			}
 		}
 
-		public ICollection<IItem> Items { get { return items; } }
+		public IEnumerable<IItem> Items { get { return items; } }
 
-		public ICollection<IItem> ChildrenOfItem (IItem parent) {
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent) {
 			List<IItem> children;
 
 			children = new List<IItem> ();

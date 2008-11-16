@@ -81,7 +81,6 @@ namespace Flickr {
             // Container child vbox2.Gtk.Box+BoxChild
             this.label4 = new Gtk.Label();
             this.label4.Name = "label4";
-            this.label4.LabelProp = "";
             this.vbox2.Add(this.label4);
             Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox2[this.label4]));
             w3.Position = 2;

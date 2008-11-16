@@ -1,6 +1,6 @@
 Name: Amarok
 Description: Amarok
-Version: 0.1
+Version: 
 
 Requires: 
 Libs: -r:@expanded_libdir@/@PACKAGE@/Amarok.dll

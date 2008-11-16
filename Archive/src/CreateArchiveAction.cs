@@ -22,6 +22,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 using Mono.Unix;
 using Do.Universe;
@@ -48,7 +49,7 @@ namespace Archive {
                         get { return "file-roller"; }
                 }
                 
-                public override Type[] SupportedItemTypes {
+                public override IEnumerable<Type> SupportedItemTypes {
                         get {
                                 return new Type[] {                             
                                         typeof (IFileItem),
@@ -61,7 +62,7 @@ namespace Archive {
                         return true;
                 }
                                 
-                public override Type[] SupportedModifierItemTypes {
+                public override IEnumerable<Type> SupportedModifierItemTypes {
                         get {
                                 return new Type[] {
                                         typeof(ArchiveTypeItem),
@@ -73,7 +74,7 @@ namespace Archive {
                         get { return true; }
                 }
                 
-                public override IItem[] DynamicModifierItemsForItem (IItem item)
+                public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
                 {
                         List<IItem> items = new List<IItem> ();
         
@@ -89,12 +90,12 @@ namespace Archive {
                         
                 }
                 
-                public override IItem[] Perform (IItem[] items, IItem[] modItems)
+                public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
                 {
-                        if ( modItems.Length > 0 )
-                                Archive ((items[0] as IFileItem), (modItems[0] as ArchiveTypeItem).ArchiveType);
+                        if ( modItems.Any ())
+                                Archive ((items.First () as IFileItem), (modItems.First () as ArchiveTypeItem).ArchiveType);
                         else
-                                Archive ((items[0] as IFileItem), 0);
+                                Archive ((items.First () as IFileItem), 0);
                         return null;
                 }
                 

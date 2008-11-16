@@ -25,7 +25,7 @@ namespace Do.Addins.Pidgin
 		public string Description { get { return Catalog.GetString ("Saved Pidgin statuses"); } }
 		public string Icon {get { return "pidgin"; } }
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (PidginSavedStatusItem),
@@ -33,11 +33,11 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public ICollection<IItem> Items {
+		public IEnumerable<IItem> Items {
 			get { return statuses; }
 		}
 		
-		public ICollection<IItem> ChildrenOfItem (IItem item)
+		public IEnumerable<IItem> ChildrenOfItem (IItem item)
 		{
 			return null;
 		}

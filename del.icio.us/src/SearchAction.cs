@@ -20,6 +20,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
@@ -59,7 +60,7 @@ namespace Delicious
 			}
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -71,9 +72,9 @@ namespace Delicious
 			return true;
 		}
 
-		public IItem[] Perform (IItem[] items, IItem[] modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			String tags = (items [0] as ITextItem).Text.Replace(" ","+");
+			String tags = (items.First () as ITextItem).Text.Replace(" ","+");
 
 			String url = "https://api.del.icio.us/v1/posts/recent?tag=" + tags;
 			//Console.WriteLine (url);
@@ -128,7 +129,7 @@ namespace Delicious
 			return hits.ToArray ();
 		}
 		
-		public Type [] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get { return new Type [] {}; }
 		}
 
@@ -136,12 +137,12 @@ namespace Delicious
 			get { return true; }
 		}
 				
-		public bool SupportsModifierItemForItems (IItem [] items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return true;
 		}
 		
-		public IItem [] DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}

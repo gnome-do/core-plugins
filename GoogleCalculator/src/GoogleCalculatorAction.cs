@@ -18,6 +18,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -51,7 +53,7 @@ namespace Do.Plugins.Google
 			get { return "accessories-calculator"; }
 		}
 
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -59,12 +61,12 @@ namespace Do.Plugins.Google
 			}
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 		{
 			string expression, url, page, reply;
 			int beginCalculator, beginReply, endReply;
 		 
-			expression = (items[0] as ITextItem).Text;
+			expression = (items.First () as ITextItem).Text;
 			url	= GoogleCalculatorURLWithExpression (expression);
 			try {
 				page = GetWebpageContents (url);

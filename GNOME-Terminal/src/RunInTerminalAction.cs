@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -50,7 +51,7 @@ namespace GNOME.Terminal
 	      get { return "gnome-terminal"; }
 	    }
 
-	    public override Type[] SupportedItemTypes
+	    public override IEnumerable<Type> SupportedItemTypes
 		{
 	      get {
 	      	return new Type[] {
@@ -70,7 +71,7 @@ namespace GNOME.Terminal
 			return false;
 		}
 
-	    public override IItem[] Perform (IItem[] items, IItem[] modifierItems)
+	    public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
 	    {
 			foreach (IItem item in items) {
 				string cmd = "";

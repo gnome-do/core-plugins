@@ -44,5 +44,7 @@
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Client.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Documents.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Extensions.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
+  <GtkDesignInfo />
 </Project>

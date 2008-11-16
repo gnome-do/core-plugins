@@ -46,7 +46,7 @@ namespace Epiphany
 		}
 		public string Icon { get { return "gnome-web-browser"; } }
 
-		public Type[] SupportedItemTypes
+		public IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -55,12 +55,12 @@ namespace Epiphany
 			}
 		}
 
-		public ICollection<IItem> Items
+		public IEnumerable<IItem> Items
 		{
 			get { return items; }
 		}
 
-		public ICollection<IItem> ChildrenOfItem (IItem parent)
+		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
 		{
 			return null;	
 		}

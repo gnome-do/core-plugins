@@ -1,4 +1,4 @@
-<Project name="File" fileversion="2.0" DefaultNamespace="FilePlugin" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="File" fileversion="2.0" language="C#" DefaultNamespace="FilePlugin" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="File" />
@@ -43,11 +43,7 @@
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <ProjectReference type="Gac" localcopy="True" refto="gconf-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <ProjectReference type="Gac" localcopy="True" refto="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
-  <GtkDesignInfo gtkVersion="2.12.0">
-    <ExportedWidgets>
-      <Widget>FilePlugin.Configuration</Widget>
-      <Widget>FilePlugin.CompareConfig</Widget>
-    </ExportedWidgets>
-  </GtkDesignInfo>
+  <GtkDesignInfo />
 </Project>

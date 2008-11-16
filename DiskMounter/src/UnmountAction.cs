@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Mono.Unix;
 using Do.Universe;
@@ -38,7 +39,7 @@ namespace DiskMounter
 			get { return "hdd_unmount"; }
 		}
 		
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (DriveItem),
@@ -51,14 +52,15 @@ namespace DiskMounter
 			return (item as DriveItem).IsMounted;
 		}
                 
-		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return false;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
-			(items[0] as DriveItem).Unmount ();
+			(items.First ()
+			 as DriveItem).Unmount ();
 			return null;
 		}
 	}

@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
 
 using Do.Addins;
@@ -45,7 +46,7 @@ namespace GCalendar
 			get { return "calIcon.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public Type[] SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -53,7 +54,7 @@ namespace GCalendar
 			}
 		}
 		
-		public Type[] SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 		    get {
 		        return new Type[] {
 		            typeof (GCalendarItem),
@@ -70,7 +71,7 @@ namespace GCalendar
             return true;
         }
         
-        public bool SupportsModifierItemForItems (IItem[] item, IItem modItem) 
+        public bool SupportsModifierItemForItems (IEnumerable<IItem> item, IItem modItem) 
         {
             if (modItem is GCalendarItem)
         		return !(modItem as GCalendarItem).Name.Equals ("All Events");
@@ -78,15 +79,15 @@ namespace GCalendar
             return true;
         }
         
-        public IItem[] DynamicModifierItemsForItem (IItem item) 
+        public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item) 
         {
             return null;
         }
         
-        public IItem[] Perform (IItem[] items, IItem[] modifierItems) 
+        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems) 
         {
-            string calUrl = (modifierItems[0] as GCalendarItem).URL;
-            string eventData = (items[0] as ITextItem).Text;
+            string calUrl = (modifierItems.First () as GCalendarItem).URL;
+            string eventData = (items.First () as ITextItem).Text;
             
             return new IItem [] { GCal2.NewEvent (calUrl, eventData), };
         }

@@ -181,7 +181,7 @@ namespace WindowManager
 	
 	public class ScreenActionAction : AbstractAction
 	{
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type [] {
 				typeof (IScreenItem), };
 			}
@@ -191,7 +191,7 @@ namespace WindowManager
 			get { return true; }
 		}
 
-		public override Type[] SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { return new Type [] {}; }
 		}
 		
@@ -200,17 +200,17 @@ namespace WindowManager
 			return true;
 		}
 		
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 
-		public override bool SupportsModifierItemForItems (IItem[] items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return false;
 		}
 		
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			throw new NotImplementedException ();
 		}
@@ -285,7 +285,7 @@ namespace WindowManager
 			get { return "preferences-system-windows"; }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			List<Window> windowList = VisibleViewportWindows;
 			Gdk.Rectangle screenGeo = DoModifyGeometry.GetScreenMinusPanelGeometry;
@@ -354,7 +354,7 @@ namespace WindowManager
 			get { return "preferences-system-windows"; }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			List<Window> windowList = VisibleViewportWindows;
 			
@@ -412,7 +412,7 @@ namespace WindowManager
 			get { return "preferences-system-windows"; }
 		}
 
-		public override IItem[] DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return base.DynamicModifierItemsForItem (item);
 		}
@@ -435,7 +435,7 @@ namespace WindowManager
 			return largest;
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			//magic goes here (a.k.a the code that was here is too embarassing to release even into
 			//a beta tree
@@ -460,7 +460,7 @@ namespace WindowManager
 			get { return "preferences-system-windows"; }
 		}
 
-		public override IItem[] Perform (IItem[] items, IItem[] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			List<Window> windowList = new List<Window> ();
 			

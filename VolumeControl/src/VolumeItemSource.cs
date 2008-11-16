@@ -47,7 +47,7 @@ namespace VolumeControl
 			get { return "audio-card"; }
 		}
 		
-		public override Type [] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type [] {
 				typeof (VolumeDownItem),
 				typeof (VolumeMuteItem),
@@ -56,7 +56,7 @@ namespace VolumeControl
 			}
 		}
 		
-		public override ICollection<IItem> Items {
+		public override IEnumerable<IItem> Items {
 			get { return items; }
 		}
 

@@ -38,7 +38,7 @@ namespace FilePlugin {
 		
 		public override string Icon { get { return "gtk-delete"; } } 
 
-		public override Type [] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -46,7 +46,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public override IItem [] Perform (IItem [] items, IItem [] modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			foreach (IFileItem src in items) {
 				try {

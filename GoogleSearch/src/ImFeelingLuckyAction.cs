@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Do.Universe;
 using Do.Addins;
 using Mono.Unix;
@@ -63,7 +64,7 @@ namespace InlineGoogleSearch {
 		/// <value>
 		/// ITextItem
 		/// </value>
-		public override Type [] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {                             
 					typeof (ITextItem),
@@ -87,17 +88,16 @@ namespace InlineGoogleSearch {
 		/// <param name="modItems">
 		/// Modifier Items. None <see cref="IItem"/>
 		/// </param>
-		public override IItem [] Perform (IItem [] items, 
-		                                  IItem [] modItems) 
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
 		{
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel
 				 (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery ( (items [0] as ITextItem).Text);
+			googleSearch.setQuery ( (items.First () as ITextItem).Text);
 			GoogleSearchResult [] googleSearchResult = 
 				googleSearch.search ();
 			
-			if (googleSearchResult.Length == 0) {
+			if (!googleSearchResult.Any ()) {
 				Do.Addins.NotificationBridge.ShowMessage (
 				                            "I'm Feeling Lucky", 
 				                            "No Resutls Found");

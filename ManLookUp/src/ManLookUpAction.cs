@@ -27,7 +27,9 @@
  */
 using System;
 using Do.Universe;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 using GConf;
@@ -67,7 +69,7 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	List of supported items (ITextItem , ManLookUpItem)
 		/// </value>
-		public override Type[] SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof(ITextItem),typeof(ManLookUpItem),typeof(ApplicationItem)
@@ -178,19 +180,19 @@ namespace GnomeDoManLookUp {
 		/// <returns>
 		/// List of <see cref="IItem"/>
 		/// </returns>
-		public override IItem[] Perform (IItem[] items, IItem[] modItems) 
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
 		{
 			
             		string keyword = null;
 
 			//ok, was it plain text, an application item, or one of our own?
-			if (items [0] is ApplicationItem) {
-				keyword = this.getExecutableName (items [0] as ApplicationItem);
-			} else if (items [0] is ManLookUpItem) {
-				ManLookUpItem keyworditem = items [0] as ManLookUpItem;
+			if (items.First () is ApplicationItem) {
+				keyword = this.getExecutableName (items.First () as ApplicationItem);
+			} else if (items.First () is ManLookUpItem) {
+				ManLookUpItem keyworditem = items.First () as ManLookUpItem;
 				keyword = keyworditem.Text;							
 			} else {
-				ITextItem textitem = items [0] as ITextItem;
+				ITextItem textitem = items.First () as ITextItem;
 				keyword = textitem.Text;				 
 			}
 			 

@@ -1,6 +1,6 @@
 Name: Epiphany
 Description: Epiphany
-Version: 0.1
+Version: 
 
 Requires: 
 Libs: -r:@expanded_libdir@/@PACKAGE@/Epiphany.dll
