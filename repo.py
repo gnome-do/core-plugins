@@ -26,6 +26,10 @@ REPO_SCP = "gnomedo@do.davebsd.com:do.davebsd.com/repo/%s/%s" % \
 REPO_DIR = abspath ("repo")
 REPO_CONFIG = "Debug"
 
+def my_system (cmd):
+	print cmd
+	system (cmd)
+
 def main (argv):
 	if "--clean" in argv or "--all" in argv:
 		clean ()
@@ -37,26 +41,26 @@ def main (argv):
 		publish ()
 
 def clean ():
-	system ("rm -rf repo */bin")
+	my_system ("rm -rf repo */bin")
 
 def make ():
-	system ("mdtool build")
+	my_system ("mdtool build")
 
 def build ():
 	repo = escape (REPO_DIR)
-	system ("rm -rf %s" % repo)
-	system ("mkdir -p %s" % repo)
+	my_system ("rm -rf %s" % repo)
+	my_system ("mkdir -p %s" % repo)
 	for asm in assemblies ():
-		system ("cp %s %s" % (escape (asm), repo))
+		my_system ("cp %s %s" % (escape (asm), repo))
 		for man in manifests (asm):
-			system ("cp %s %s" % (escape (man), repo))
-	system ("mdtool setup pack %s/*.addin.xml -d:%s" % (repo, repo))
-	system ("mdtool setup rep-build %s" % repo)
-	system ("rm -rf %s/*.dll %s/*.addin.xml" % (repo, repo))
+			my_system ("cp %s %s" % (escape (man), repo))
+	my_system ("mdtool setup pack %s/*.addin.xml -d:%s" % (repo, repo))
+	my_system ("mdtool setup rep-build %s" % repo)
+	#my_system ("rm -rf %s/*.dll %s/*.addin.xml" % (repo, repo))
 
 def publish ():
 	repo = escape (REPO_DIR)
-	system ("rsync -rve ssh --delete %s/* %s" % (repo, REPO_SCP))
+	my_system ("rsync -rve ssh --delete %s/* %s" % (repo, REPO_SCP))
 
 def manifests (asm=None):
 	dir = "."

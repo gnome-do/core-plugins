@@ -5,16 +5,16 @@
 	name="Window Manager"
 	description="Perform actions on your windows or groups of windows with Do.  Also provides the ability to tile windows"
 	author="Jason Smith"
->
- 
+	>
+
 	<Runtime>
 		<Import assembly="WindowManager.dll"/>
 	</Runtime>
-	
+
 	<Dependencies>
 		<Addin id="Core" version="1.0" />
 	</Dependencies>
-	
+
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/Action">
 		<Action type="WindowManager.WindowMinimizeAction" />
