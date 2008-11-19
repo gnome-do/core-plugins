@@ -25,6 +25,8 @@ namespace Pastebin {
         
         private Gtk.RadioButton PastebinCARadioButton;
         
+        private Gtk.RadioButton LodgeItRadioButton;
+        
         private Gtk.Label GtkLabel2;
         
         protected virtual void Build() {
@@ -73,6 +75,18 @@ namespace Pastebin {
             w2.Position = 1;
             w2.Expand = false;
             w2.Fill = false;
+            // Container child vbox2.Gtk.Box+BoxChild
+            this.LodgeItRadioButton = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("paste.pocoo.org"));
+            this.LodgeItRadioButton.CanFocus = true;
+            this.LodgeItRadioButton.Name = "LodgeItRadioButton";
+            this.LodgeItRadioButton.DrawIndicator = true;
+            this.LodgeItRadioButton.UseUnderline = true;
+            this.LodgeItRadioButton.Group = this.Paste2RadioButton.Group;
+            this.vbox2.Add(this.LodgeItRadioButton);
+            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox2[this.LodgeItRadioButton]));
+            w3.Position = 2;
+            w3.Expand = false;
+            w3.Fill = false;
             this.GtkAlignment.Add(this.vbox2);
             this.frame1.Add(this.GtkAlignment);
             this.GtkLabel2 = new Gtk.Label();
@@ -81,10 +95,10 @@ namespace Pastebin {
             this.GtkLabel2.UseMarkup = true;
             this.frame1.LabelWidget = this.GtkLabel2;
             this.vbox1.Add(this.frame1);
-            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox1[this.frame1]));
-            w5.Position = 0;
-            w5.Expand = false;
-            w5.Fill = false;
+            Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.vbox1[this.frame1]));
+            w6.Position = 0;
+            w6.Expand = false;
+            w6.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
@@ -92,6 +106,7 @@ namespace Pastebin {
             this.Show();
             this.Paste2RadioButton.Toggled += new System.EventHandler(this.OnPaste2Toggled);
             this.PastebinCARadioButton.Toggled += new System.EventHandler(this.OnPastebinCAToggled);
+            this.LodgeItRadioButton.Toggled += new System.EventHandler(this.OnPastebinCAToggled);
         }
     }
 }

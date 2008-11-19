@@ -2,10 +2,9 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.0</target-gtk-version>
+    <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.5.98.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Pastebin.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Pastebin.PastebinConfig" design-size="300 300">
@@ -33,6 +32,7 @@
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Paste2.org</property>
+                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -59,6 +59,24 @@
                       </widget>
                       <packing>
                         <property name="Position">1</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.RadioButton" id="LodgeItRadioButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">paste.pocoo.org</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                        <property name="Group">providers</property>
+                        <signal name="Toggled" handler="OnPastebinCAToggled" />
+                      </widget>
+                      <packing>
+                        <property name="Position">2</property>
                         <property name="AutoSize">True</property>
                         <property name="Expand">False</property>
                         <property name="Fill">False</property>

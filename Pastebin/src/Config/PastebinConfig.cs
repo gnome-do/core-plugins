@@ -35,7 +35,10 @@ namespace Pastebin
 				Paste2RadioButton.Active = true;
 				break;
 			case "Pastebin.PastebinCA":
-				PastebinCARadioButton.Active = true;
+				LodgeItRadioButton.Active = true;
+				break;
+			case "Pastebin.LodgeIt":
+				LodgeItRadioButton.Active = true;
 				break;
 			default:
 				Paste2RadioButton.Active = true;
@@ -61,6 +64,11 @@ namespace Pastebin
 		protected virtual void OnPastebinCAToggled (object sender, System.EventArgs e)
 		{
 			SelectedProviderType = typeof(PastebinCA).ToString();
+		}
+
+		protected virtual void OnLodgeItToggled (object sender, System.EventArgs e)
+		{
+			SelectedProviderType = typeof(LodgeIt).ToString();
 		}
 	}
 }
