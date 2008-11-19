@@ -35,7 +35,7 @@ namespace Pastebin
 				Paste2RadioButton.Active = true;
 				break;
 			case "Pastebin.PastebinCA":
-				LodgeItRadioButton.Active = true;
+				PastebinCARadioButton.Active = true;
 				break;
 			case "Pastebin.LodgeIt":
 				LodgeItRadioButton.Active = true;
