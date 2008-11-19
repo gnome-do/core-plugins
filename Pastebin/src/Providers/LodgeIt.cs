@@ -18,16 +18,18 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
-using System.Net;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
+using Mono.Unix;
 
 namespace Pastebin
 {
 	public class LodgeIt : IPastebinProvider
 	{		
-		private const string urlRoot = "http://paste.pocoo.org/";
+		private const string urlRoot = "http://paste.pocoo.org";
 	
 		private NameValueCollection parameters;
 		private List<TextSyntaxItem> supportedLanguages;
@@ -114,11 +116,21 @@ namespace Pastebin
 		{	
 			string responseText;
 			using (Stream responseStream = response.GetResponseStream ()) {
-               using (StreamReader reader = new StreamReader (responseStream)) {
-                   responseText = reader.ReadToEnd ();
-               }
+				using (StreamReader reader = new StreamReader (responseStream)) {
+					responseText = reader.ReadToEnd ();
+				}
 			}
-			return responseText;
+
+			Regex urlPattern = new Regex ("<a href=\"(.*?)\">"); 
+			Match urlMatch = urlPattern.Match (responseText);
+				
+			string url = urlMatch.Groups[1].Value;
+				
+			if (url == string.Empty) {
+				throw new Exception (Catalog.GetString ("Parsed url was empty. Lodge It has probably changed its format."));
+			}
+			
+			return urlRoot + url;
 		}
 		
 		public List<TextSyntaxItem> SupportedLanguages 

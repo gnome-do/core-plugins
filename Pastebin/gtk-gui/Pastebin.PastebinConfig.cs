@@ -27,7 +27,7 @@ namespace Pastebin {
         
         private Gtk.RadioButton LodgeItRadioButton;
         
-        private Gtk.Label GtkLabel2;
+        private Gtk.Label GtkLabel3;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -89,11 +89,11 @@ namespace Pastebin {
             w3.Fill = false;
             this.GtkAlignment.Add(this.vbox2);
             this.frame1.Add(this.GtkAlignment);
-            this.GtkLabel2 = new Gtk.Label();
-            this.GtkLabel2.Name = "GtkLabel2";
-            this.GtkLabel2.LabelProp = Mono.Unix.Catalog.GetString("<b>Pastebin Provider</b>");
-            this.GtkLabel2.UseMarkup = true;
-            this.frame1.LabelWidget = this.GtkLabel2;
+            this.GtkLabel3 = new Gtk.Label();
+            this.GtkLabel3.Name = "GtkLabel3";
+            this.GtkLabel3.LabelProp = Mono.Unix.Catalog.GetString("<b>Pastebin Provider</b>");
+            this.GtkLabel3.UseMarkup = true;
+            this.frame1.LabelWidget = this.GtkLabel3;
             this.vbox1.Add(this.frame1);
             Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.vbox1[this.frame1]));
             w6.Position = 0;
@@ -106,7 +106,7 @@ namespace Pastebin {
             this.Show();
             this.Paste2RadioButton.Toggled += new System.EventHandler(this.OnPaste2Toggled);
             this.PastebinCARadioButton.Toggled += new System.EventHandler(this.OnPastebinCAToggled);
-            this.LodgeItRadioButton.Toggled += new System.EventHandler(this.OnPastebinCAToggled);
+            this.LodgeItRadioButton.Toggled += new System.EventHandler(this.OnLodgeItToggled);
         }
     }
 }
