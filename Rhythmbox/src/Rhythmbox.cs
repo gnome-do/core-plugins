@@ -25,6 +25,8 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
+using Banshee.Base;
+
 using Do;
 
 namespace Do.Rhythmbox
@@ -33,7 +35,6 @@ namespace Do.Rhythmbox
 	public static class Rhythmbox
 	{
 		static readonly string MusicLibraryFile;
-		static readonly string CoverArtDirectory;
 
 		static ICollection<SongMusicItem> songs;
 
@@ -43,7 +44,6 @@ namespace Do.Rhythmbox
 		static Rhythmbox ()
 		{
 			MusicLibraryFile = Paths.Combine (Paths.UserHome, ".gnome2/rhythmbox/rhythmdb.xml");
-			CoverArtDirectory = Paths.Combine (Paths.UserHome, ".gnome2/rhythmbox/covers");
 
 			clear_songs_timer = new Timer (state =>
 				Gtk.Application.Invoke ((sender, args) => songs.Clear ())
@@ -131,10 +131,10 @@ namespace Do.Rhythmbox
 						
 						reader.ReadToFollowing ("date");
 						year = reader.ReadString ();
-				
-						cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
-						cover = Path.Combine (CoverArtDirectory, cover);
-						if (!File.Exists (cover)) cover = null;
+
+						cover = CoverArtSpec.CoverExists (artist_name, album_name)
+							? CoverArtSpec.GetPath (CoverArtSpec.CreateArtistAlbumId (artist_name, album_name))
+							: null;
 
 						song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
 						songs.Add (song);
