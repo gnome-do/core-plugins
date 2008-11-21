@@ -1,7 +1,7 @@
 <Addin
 	id="Rhythmbox"
 	namespace="Do"
-	version="1.0"
+	version="2.0"
 	name="Rhythmbox"
 	description="Searches and plays Rhythmbox music."
 	author="David Siegel"
