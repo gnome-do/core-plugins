@@ -135,7 +135,7 @@ namespace Banshee1
 			//Add albums and artists to the universe
 			Banshee.LoadAlbumsAndArtists  (out albums, out artists);
 			Banshee.LoadVideos (out videos);
-			Banshee.LoadPodcasts (out publishers);
+		 	Banshee.LoadPodcasts (out publishers);
 		
 			foreach (IItem album in albums) items.Add (album);
 			foreach (IItem artist in artists) items.Add (artist);
