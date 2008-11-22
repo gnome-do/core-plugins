@@ -1,0 +1,35 @@
+<Addin 
+	id="Banshee-1"
+	namespace= "Do"
+	version="1.0"
+	name="Banshee-1"
+	description="Searches and plays Banshee music"
+	author="Alex Launi"
+>
+ 
+	<Runtime>
+		<Import assembly="Banshee-1.dll"/>
+		<Import assembly="Banshee.CollectionIndexer.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Itemsources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type = "Banshee1.BansheeItemSource" />
+	</Extension>
+
+	<!-- Actions -->
+	<Extension path = "/Do/Action">
+		<Action type = "Banshee1.BansheePlayAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type = "Banshee1.BansheeEnqueueAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type = "Banshee1.BansheeSearchCollectionAction" />
+	</Extension>
+</Addin>

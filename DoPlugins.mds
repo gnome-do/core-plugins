@@ -1,4 +1,4 @@
-<Combine name="DoPlugins" fileversion="2.0" outputpath="build/bin/" releaseversion="0.4.9.9">
+<Combine releaseversion="0.4.9.9" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="Debug" />
@@ -43,6 +43,7 @@
       <Entry build="True" name="ManLookUp" configuration="Debug" />
       <Entry build="False" name="OpenSearch.Tests" configuration="Debug" />
       <Entry build="True" name="GDocs" configuration="Debug" />
+      <Entry build="True" name="Banshee-1" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="Release" />
@@ -87,6 +88,7 @@
       <Entry build="True" name="ManLookUp" configuration="Release" />
       <Entry build="False" name="OpenSearch.Tests" configuration="Release" />
       <Entry build="True" name="GDocs" configuration="Release" />
+      <Entry build="True" name="Banshee-1" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -132,6 +134,7 @@
     <Execute type="None" entry="ManLookUp" />
     <Execute type="None" entry="OpenSearch.Tests" />
     <Execute type="None" entry="GDocs" />
+    <Execute type="None" entry="Banshee-1" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -177,5 +180,6 @@
     <Entry filename="ManLookUp/ManLookUp.mdp" />
     <Entry filename="OpenSearch.Tests/OpenSearch.Tests.mdp" />
     <Entry filename="GDocs/GDocs.mdp" />
+    <Entry filename="Banshee-1/Banshee-1.mdp" />
   </Entries>
 </Combine>
