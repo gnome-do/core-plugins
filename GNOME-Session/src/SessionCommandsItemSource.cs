@@ -19,26 +19,21 @@
  */
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
 using Do.Universe;
 
-namespace GNOME.Session
+namespace GNOME
 {
 	public class SessionCommandsItemSource : IItemSource
 	{
-		public SessionCommandsItemSource ()
-		{
-		}
-
+	
 		public IEnumerable<Type> SupportedItemTypes
 		{
 			get {
-				return new Type[] {
-					typeof (SessionCommandItem),
-				};
+				yield return typeof (SessionCommandItem);
 			}
 		}
 
@@ -55,44 +50,41 @@ namespace GNOME.Session
 		public IEnumerable<IItem> Items
 		{
 			get {
-				return new IItem[] {
+				yield return new SessionCommandItem (
+					Catalog.GetString ("Log Out"),
+					Catalog.GetString ("Close your session and return to the login screen."),
+					"system-log-out",
+					PowerManagement.Logout);
 
-					new SessionCommandItem (
-						Catalog.GetString ("Log Out"),
-						Catalog.GetString ("Close your session and return to the login screen."),
-						"system-log-out",
-						PowerManagement.Logout),
+				yield return new SessionCommandItem (
+					Catalog.GetString ("Shutdown"),
+					Catalog.GetString ("Turn your computer off."),
+					"system-shutdown",
+					PowerManagement.Shutdown);
 
-					new SessionCommandItem (
-						Catalog.GetString ("Shutdown"),
-						Catalog.GetString ("Turn your computer off."),
-						"system-shutdown",
-						PowerManagement.Shutdown),
+				yield return new SessionCommandItem (
+					Catalog.GetString ("Hibernate"),
+					Catalog.GetString ("Put your computer into hibernation mode."),
+					"gnome-session-hibernate",
+					PowerManagement.Hibernate);
 
-					new SessionCommandItem (
-						Catalog.GetString ("Hibernate"),
-						Catalog.GetString ("Put your computer into hibernation mode."),
-						"gnome-session-hibernate",
-						PowerManagement.Hibernate),
+				yield return new SessionCommandItem (
+					Catalog.GetString ("Suspend"),
+					Catalog.GetString ("Put your computer into suspend mode."),
+					"gnome-session-suspend",
+					PowerManagement.Suspend);
 
-					new SessionCommandItem (
-						Catalog.GetString ("Suspend"),
-						Catalog.GetString ("Put your computer into suspend mode."),
-						"gnome-session-suspend",
-						PowerManagement.Suspend),
+				yield return new SessionCommandItem (
+					Catalog.GetString ("Restart"),
+					Catalog.GetString ("Restart your computer."),
+					"reload",
+					PowerManagement.Reboot);
 
-					new SessionCommandItem (
-						Catalog.GetString ("Restart"),
-						Catalog.GetString ("Restart your computer."),
-						"reload",
-						PowerManagement.Reboot),
-
-					new SessionCommandItem (
-						Catalog.GetString ("Lock Screen"),
-						Catalog.GetString ("Lock your screen."),
-						"system-lock-screen",
-						ScreenSaver.Lock),
-				};
+				yield return new SessionCommandItem (
+					Catalog.GetString ("Lock Screen"),
+					Catalog.GetString ("Lock your screen."),
+					"system-lock-screen",
+					ScreenSaver.Lock);
 			}
 		}
 

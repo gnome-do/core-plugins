@@ -24,7 +24,9 @@ using System.Diagnostics;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-namespace GNOME.Session
+using Do.Platform;
+
+namespace GNOME
 {
 
 	class PowerManagement
@@ -58,7 +60,7 @@ namespace GNOME.Session
 			try {
 				BusInstance.Shutdown ();
 			} catch {
-				Console.Error.WriteLine ("Could not find PowerManagement on D-Bus.");
+				Log.Error ("Could not find PowerManagement on D-Bus.");
 			}
 		}
 
@@ -67,7 +69,7 @@ namespace GNOME.Session
 			try {
 				BusInstance.Hibernate ();
 			} catch {
-				Console.Error.WriteLine ("Could not find PowerManagement on D-Bus.");
+				Log.Error ("Could not find PowerManagement on D-Bus.");
 			}
 		}
 
@@ -76,7 +78,7 @@ namespace GNOME.Session
 			try {
 				BusInstance.Reboot ();
 			} catch {
-				Console.Error.WriteLine ("Could not find PowerManagement on D-Bus.");
+				Log.Error ("Could not find PowerManagement on D-Bus.");
 			}
 		}
 
@@ -85,7 +87,7 @@ namespace GNOME.Session
 			try {
 				BusInstance.Suspend ();
 			} catch {
-				Console.Error.WriteLine ("Could not find PowerManagement on D-Bus.");
+				Log.Error ("Could not find PowerManagement on D-Bus.");
 			}
 		}
 
@@ -94,7 +96,7 @@ namespace GNOME.Session
 			try {
 				Process.Start ("gnome-session-save", "--kill --silent");
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not end GNOME session: " + e.Message);
+				Log.Error ("Could not end GNOME session: " + e.Message);
 			}
 		}
 	}
