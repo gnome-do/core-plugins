@@ -1,4 +1,4 @@
-/* TwitterPreferences.cs
+/* Preferences.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -20,12 +20,13 @@
 
 using System;
 using System.Collections.Generic;
+
 using Do.Platform;
 
-namespace Twitter
+namespace Microblogging
 {
 	
-	public class TwitterPreferences
+	public class MicroblogPreferences
 	{
 		#region contants and default values
 		
@@ -39,9 +40,9 @@ namespace Twitter
 	
 		IPreferences prefs;
 		
-		public TwitterPreferences()
+		public MicroblogPreferences()
 		{
-			prefs = Services.Preferences.Get <TwitterPreferences> ();
+			prefs = Services.Preferences.Get <MicroblogPreferences> ();
 		}
 		
 		public bool ShowNotifications {

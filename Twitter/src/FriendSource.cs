@@ -1,4 +1,4 @@
-// TwitterFriendSource.cs
+// FriendSource.cs
 // 
 // GNOME Do is the legal property of its developers, whose names are too
 // numerous to list here.  Please refer to the COPYRIGHT file distributed with
@@ -22,31 +22,33 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
 using Do.Platform;
-using Twitterizer.Framework;
 
-namespace Twitter
+namespace Microblogging
 {
-	public sealed class TwitterFriendSource : IItemSource, IConfigurable
+	public sealed class FriendSource : IItemSource, IConfigurable
 	{
 	
 		const int StatusUpdateTimeout = 30 * 1000;
+		string active_service;
 		
-		public TwitterFriendSource()
+		public FriendSource()
 		{
 			GLib.Timeout.Add (StatusUpdateTimeout, GetUpdates);
+			active_service = Microblog.Preferences.MicroblogService;
 		}
 		
 		public string Name {
-			get { return Catalog.GetString ("Twitter friends"); }
+			get { return string.Format (Catalog.GetString ("{0} friends"), active_service); }
 		}
 		
 		public string Description {
-			get { return Catalog.GetString ("Indexes your Twitter friends"); }
+			get { return string.Format (Catalog.GetString ("Indexes your {0} friends"), active_service); }
 		}
 		
 		public string Icon {
@@ -70,7 +72,7 @@ namespace Twitter
 		
 		public void UpdateItems ()
 		{	
-			Thread updateRunner = new Thread (new ThreadStart (Twitter.UpdateFriends));
+			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateFriends));
 			updateRunner.IsBackground = true;
 			updateRunner.Start ();
 		}
@@ -81,7 +83,7 @@ namespace Twitter
 		
 		public bool GetUpdates ()
 		{
-			Thread updateRunner = new Thread (new ThreadStart (Twitter.UpdateTweets));
+			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateTimeline));
 			updateRunner.Start ();
 			return true;
 		}

@@ -1,5 +1,5 @@
 /*
- * TwitterTweet.cs
+ * PostAction.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -23,21 +23,30 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
-using Do.Universe;
 using Do.Addins;
+using Do.Universe;
 
-namespace Twitter
+namespace Microblogging
 {		
-	public sealed class TweetAction : IAction, IConfigurable
+	public sealed class PostAction : IAction, IConfigurable
 	{
+		const int MaxLength = 140;
+		string active_service;
+		
+		public PostAction ()
+		{
+			active_service = Microblog.Preferences.MicroblogService;
+		}
+		
 		public string Name {
-			get { return Catalog.GetString ("Tweet"); }
+			get { return string.Format (Catalog.GetString ("Post to "), active_service); }
 		}
 		
 		public string Description {
-			get { return Catalog.GetString ("Update Twitter status"); }
+			get { return string.Format (Catalog.GetString ("Update {0} status"), active_service); }
 		}
 		
 		public string Icon {
@@ -54,7 +63,7 @@ namespace Twitter
 
         public bool SupportsItem (IItem item) 
         {
-            return (item as ITextItem).Text.Length <= 140;
+            return (item as ITextItem).Text.Length <= MaxLength;
         }
 		
 		public IEnumerable<Type> SupportedModifierItemTypes {
@@ -72,14 +81,14 @@ namespace Twitter
         public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
         {
         	//make sure we dont go over 140 chars with the contact screen name
-            return (modItem as ContactItem) ["twitter.screenname"] != null &&
+            return (modItem as ContactItem) [Microblog.ContactProperty] != null &&
             	((items.First () as ITextItem).Text.Length + ((modItem as ContactItem) 
-            	["twitter.screenname"]).Length < 140);
+            	[Microblog.ContactProperty]).Length < MaxLength);
         }
         
         public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
         {
-            return Twitter.Friends;
+            return Microblog.Friends;
         }
 
         public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
@@ -90,7 +99,7 @@ namespace Twitter
 			if (modItems.Any ())
 				status = BuildTweet (status, modItems.ToArray ());
 			
-			Thread updateRunner = new Thread (new ParameterizedThreadStart (Twitter.Tweet));
+			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.Tweet));
 			updateRunner.Start (status);
 			
 			return null;
@@ -110,12 +119,12 @@ namespace Twitter
 			
 			// Direct messaging
 			if (status.Substring (0,2).Equals ("d "))
-				tweet = "d " + (modItems.First () as ContactItem) ["twitter.screenname"] + " " +	status.Substring (2);
+				tweet = "d " + (modItems.First () as ContactItem) [Microblog.ContactProperty] + " " +	status.Substring (2);
 					
 			// Tweet replying
 			else {
 				foreach (ContactItem contact in modItems) {
-					tweet += "@" + contact ["twitter.screenname"] + " " ;
+					tweet += "@" + contact [Microblog.ContactProperty] + " " ;
 				}
 				
 				tweet += status;

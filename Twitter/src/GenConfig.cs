@@ -23,31 +23,32 @@ using System.Collections.Generic;
 
 using Gtk;
 
-namespace Twitter
+namespace Microblogging
 {
 	public partial class GenConfig : Gtk.Bin
 	{		
 		public GenConfig ()
 		{
 			this.Build();
-			show_updates_chk.Active = Twitter.Preferences.ShowNotifications;
+			show_updates_chk.Active = Microblog.Preferences.ShowNotifications;
 			
-			foreach (string key in Twitter.AvailableServices.Keys) {
-				service_combo.AppendText (key);
+			foreach (string service in Enum.GetNames (typeof (Twitterizer.Framework.Service))) {
+				service_combo.AppendText (service);
 			}
-			
-			service_combo.Active = Twitter.AvailableServices[Twitter.Preferences.MicroblogService];
+
+			service_combo.Active = (int) Microblog.ActiveService;
 		}
 		
 		protected virtual void OnShowUpdatesChkClicked (object sender, System.EventArgs e)
 		{
-			Twitter.Preferences.ShowNotifications = show_updates_chk.Active;
+			Microblog.Preferences.ShowNotifications = show_updates_chk.Active;
 		}
 
 		protected virtual void OnServiceComboChanged (object sender, System.EventArgs e)
 		{
-			Twitter.Preferences.MicroblogService = service_combo.ActiveText;
-			Twitter.ChangeService ();
+			//TODO: we need to make the account config regenerate when this gets changed
+			Microblog.Preferences.MicroblogService = service_combo.ActiveText;
+			Microblog.ChangeService ();
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * TwitterFriendsUpdater.cs
+ * Microblog.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -27,59 +27,64 @@ using System.Threading;
 using System.Collections.Generic;
 
 using Mono.Unix;
+
 using Do.Platform;
 using Do.Universe;
 
-using LibTwitter = Twitterizer.Framework;
+using Twitterizer.Framework;
 
-namespace Twitter
+namespace Microblogging
 {
-	public static class Twitter
+	public static class Microblog
 	{
+		const string NotifyFail = "Post failed";
+		const string NotifySuccess = "Post Successful";
+		const string ContentPosted = "'{0}' successfully posted.";
+		const string DownloadFailed = "Failed to fetch file from {0}";
+		const string NoUpdates = "No new microblog status updates found.";
+		const string GenericError = "Twitter encountered an error in {0}";
+		const string MissingCredentials = "Missing login credentials. Please set login information in plugin configuration.";
+		const string FailedPost = "Unable to post tweet. Check your login settings. If you are behind a proxy make sure that "
+			+ "the settings in /system/http_proxy are correct.";
+		
 		const string ErrorIcon = "dialog-warning";
 		
 		static List<IItem> friends;
 		static object friends_lock;
 		
-		static DateTime lastUpdated;
-		static TwitterPreferences prefs;
+		static DateTime last_updated;
+		static MicroblogPreferences prefs;
 		static string username, password;
-		static LibTwitter.Twitter twitter;
-		static Dictionary<string, int> availableServices;
+		static Twitter twitter;
 		
 		static readonly string  PhotoDirectory;
 		
-		static Twitter ()
+		static Microblog ()
 		{
 			friends = new List<IItem> ();
 			friends_lock = new object ();
-			prefs = new TwitterPreferences ();
+			prefs = new MicroblogPreferences ();
 			
-			// this will need updated when Secure preferences are implemented
+			// TODO: this will need updated when Secure preferences are implemented
 			Configuration.GetAccountData (out username, out password, typeof (Configuration));
 			
 			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
-				Log.Debug ("Twitter Username or password are invalid, please reset in configuration");
+				Log.Debug (MissingCredentials);
 				username = password = "";
 			}
-					
-			PhotoDirectory = new string[] {Paths.UserData, "Twitter", "photos"}.Aggregate (Path.Combine);
-			SetupAvailableServices ();
+			
+			PhotoDirectory = new [] {Paths.UserData, "Microblogging", "photos"}.Aggregate (Path.Combine);
 			
 			Connect (username, password);
-			lastUpdated = DateTime.UtcNow;
+			last_updated = DateTime.UtcNow;
 		}
-				
-		public static Dictionary<string, int> AvailableServices {
-			get { return availableServices; }
-		}
-				
+
 		public static bool Connect (string username, string password)
 		{
-			Twitter.username = username;
-			Twitter.password = password;
+			Microblog.username = username;
+			Microblog.password = password;
 			
-			twitter = new LibTwitter.Twitter (username, password, (LibTwitter.Service) availableServices[Preferences.MicroblogService]);	
+			twitter = new Twitter (username, password, ActiveService);
 			return true;
 		}
 		
@@ -92,8 +97,16 @@ namespace Twitter
 			get { return friends; }
 		}
 		
-		internal static TwitterPreferences Preferences {
-			get { return prefs ?? prefs = new TwitterPreferences (); }
+		internal static MicroblogPreferences Preferences {
+			get { return prefs; }
+		}
+		
+		public static Service ActiveService {
+			get { return (Service) Enum.Parse (typeof (Service), Preferences.MicroblogService, true); }
+		}
+		
+		public static string ContactProperty {
+			get { return "microblog.screenname"; }
 		}
 		
 		public static void Tweet (object status)
@@ -101,11 +114,9 @@ namespace Twitter
 			string content;
 			
 			if (twitter == null) {
-				Notifications.Notify (Catalog.GetString ("Tweet Failed"),
-					Catalog.GetString ("Missing Login Credentials. Please set login information in plugin configuration."), 
-					ErrorIcon);
-					
-				Log.Debug ("Missing login credentials in Twitter plugin");
+				Notifications.Notify (Catalog.GetString (NotifyFail), Catalog.GetString (MissingCredentials), ErrorIcon);					
+				Log.Debug (MissingCredentials);
+				
 				return;
 			}
 			
@@ -113,72 +124,69 @@ namespace Twitter
 					
 			try {
 				twitter.Status.Update (content);
-				Notifications.Notify (Catalog.GetString ("Tweet Successful"), 
-					Catalog.GetString (String.Format ("'{0}' successfully posted to Twitter.", content)));
-			} catch (LibTwitter.TwitterizerException e) {
-				Notifications.Notify (Catalog.GetString ("Tweet Failed"), 
-					Catalog.GetString ("Unable to post tweet. Check your login settings. If you are behind a proxy "
-						+ "make sure that the settings in /system/http_proxy are correct."), ErrorIcon);
+				Notifications.Notify (Catalog.GetString (NotifySuccess), Catalog.GetString (String.Format (ContentPosted, content)));
+			} catch (TwitterizerException e) {
+				Notifications.Notify (Catalog.GetString (NotifyFail), Catalog.GetString (FailedPost), ErrorIcon);
 					
-				Log.Debug ("Encountered an error in Tweet: ", e.Message);
+				Log.Debug (string.Format (GenericError, "Tweet"), e.Message, e.StackTrace);
 			}
 		}
 		
 		public static void UpdateFriends ()
 		{
+			ContactItem tfriend;
+			TwitterUserCollection myFriends;
+			
 			if (twitter == null) {
-				Log.Debug ("Twitter credentials invalid, please check configuration");
+				Log.Debug (MissingCredentials);
 				return;
 			}
-			
-			ContactItem tfriend;
-			LibTwitter.TwitterUserCollection myFriends;
 			
 			myFriends = null;
 			
 			try {
 				myFriends = twitter.User.Friends (); 
-			} catch (LibTwitter.TwitterizerException e) {
-				Log.Debug ("Encountered an error in UpdateFriends: ", e.Message);
+			} catch (TwitterizerException e) {
+				Log.Debug (string.Format (GenericError, "UpdateFriends"), e.Message, e.StackTrace);
 				return;
 			}
 			
-			foreach (LibTwitter.TwitterUser friend in myFriends) {
-				tfriend = ContactItem.Create (friend.ScreenName);
-				tfriend["twitter.screenname"] = friend.ScreenName;
-				
-				if (System.IO.File.Exists (Paths.Combine (PhotoDirectory, "" + friend.ID)))
-					tfriend ["photo"] = Paths.Combine (PhotoDirectory,  "" + friend.ID);
-				else
-					DownloadBuddyIcon (friend.ProfileImageUri, friend.ID);
-				
-				lock (friends_lock) {
+			lock (friends_lock) {
+				foreach (TwitterUser friend in myFriends) {
+					tfriend = ContactItem.Create (friend.ScreenName);
+					tfriend[ContactProperty] = friend.ScreenName;
+					
+					if (System.IO.File.Exists (Paths.Combine (PhotoDirectory, "" + friend.ID)))
+						tfriend ["photo"] = Paths.Combine (PhotoDirectory,  "" + friend.ID);
+					else
+						DownloadBuddyIcon (friend.ProfileImageUri, friend.ID);
+					
 					friends.Add (tfriend);
 				}
 			}
 		}
 		
-		public static void UpdateTweets ()
+		public static void UpdateTimeline ()
 		{
 			int userId;
 			Uri imageUri;
 			string text, screenname;
-			LibTwitter.TwitterStatus tweet;
+			TwitterStatus tweet;
 			
 			if (!Preferences.ShowNotifications) return;
 			
 			try {
 				 tweet = twitter.Status.FriendsTimeline () [0];
-			} catch (LibTwitter.TwitterizerException e) {
-				Log.Debug ("An error occurred while retrieving public timeline: ", e.Message);
+			} catch (TwitterizerException e) {
+				Log.Debug (string.Format (GenericError, "UpdateTweets"), e.Message, e.StackTrace);
 				return;
 			} catch (IndexOutOfRangeException) {
-				Log.Info ("No new status updates");
+				Log.Info (NoUpdates);
 				return;
 			}
 				
 			if (tweet.TwitterUser.ScreenName.Equals (username)) return;
-			if (DateTime.Compare (tweet.Created, lastUpdated) <= 0) return;
+			if (DateTime.Compare (tweet.Created, last_updated) <= 0) return;
 			
 			text = tweet.Text;
 			userId = tweet.TwitterUser.ID;
@@ -192,7 +200,7 @@ namespace Twitter
 				DownloadBuddyIcon (imageUri, userId);
 			}
 			
-			lastUpdated = tweet.Created;		
+			last_updated = tweet.Created;		
 		}
 				
 		static void DownloadBuddyIcon (Uri imageUri, int userId)
@@ -209,15 +217,8 @@ namespace Twitter
 			try {
 				client.DownloadFile (imageUri.AbsoluteUri, imageDestination);
 			} catch (Exception e) {
-				Log.Debug ("Failed to fetch file from {0}", imageUri.AbsoluteUri, e.Message);
+				Log.Debug (string.Format (DownloadFailed, imageUri.AbsoluteUri), e.Message, e.StackTrace);
 			}
-		}
-		
-		static void SetupAvailableServices ()
-		{
-			availableServices = new Dictionary<string, 	int> ();
-			availableServices.Add ("twitter", (int) LibTwitter.Service.Twitter);
-			availableServices.Add ("indentica", (int) LibTwitter.Service.Identica);
 		}
 	}
 }

@@ -2,12 +2,13 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.1</target-gtk-version>
+    <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
     <widget-library name="Do.Addins, Version=0.8.0.0, Culture=neutral" />
+    <widget-library name="../bin/Debug/Twitter.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="Twitter.GenConfig" design-size="300 300">
+  <widget class="Gtk.Bin" id="Microblogging.GenConfig" design-size="300 300">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox1">

@@ -19,16 +19,29 @@
 //
 
 using System;
+using System.Collections.Generic;
+
+using Twitterizer.Framework;
+
 using Do.UI;
 
-namespace Twitter
+namespace Microblogging
 {
 	public class Configuration : AbstractLoginWidget
 	{
-		public Configuration () : 
-			base ("Twitter")
+		static Dictionary<Service, string> register_links;
+
+		static Configuration ()
 		{
-			GetAccountButton.Uri = "https://twitter.com/signup";
+			register_links = new Dictionary<Service, string> ();
+			register_links.Add (Service.Twitter, "https://twitter.com/signup");
+			register_links.Add (Service.Identica, "http://identi.ca/main/register");
+		}
+			
+		public Configuration () : 
+			base (Microblog.Preferences.MicroblogService)
+		{
+			GetAccountButton.Uri = register_links[Microblog.ActiveService];
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -36,7 +49,7 @@ namespace Twitter
 			//return TwitterAction.TryConnect (username, password);
 			// we had too many problems with this failing for valid data,
 			// we're just going to return true until I find a better way
-			return Twitter.Connect (username, password);
+			return Microblog.Connect (username, password);
 		}
 	}
 }
