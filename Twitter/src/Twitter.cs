@@ -76,6 +76,9 @@ namespace Twitter
 				
 		public static bool Connect (string username, string password)
 		{
+			Twitter.username = username;
+			Twitter.password = password;
+			
 			twitter = new LibTwitter.Twitter (username, password, (LibTwitter.Service) availableServices[Preferences.MicroblogService]);	
 			return true;
 		}
@@ -163,7 +166,6 @@ namespace Twitter
 			LibTwitter.TwitterStatus tweet;
 			
 			if (!Preferences.ShowNotifications) return;
-			
 			
 			try {
 				 tweet = twitter.Status.FriendsTimeline () [0];

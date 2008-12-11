@@ -35,6 +35,8 @@ namespace Twitter
 			foreach (string key in Twitter.AvailableServices.Keys) {
 				service_combo.AppendText (key);
 			}
+			
+			service_combo.Active = Twitter.AvailableServices[Twitter.Preferences.MicroblogService];
 		}
 		
 		protected virtual void OnShowUpdatesChkClicked (object sender, System.EventArgs e)
