@@ -1,7 +1,7 @@
 <Addin
 	id="Twitter"
 	namespace="Do"
-	version="1.7"
+	version="2.0"
 	name="Twitter"
 	description=" Provides 'Tweet' action for updating Twitter status."
 	author="Jacob Andreas, Alex Launi"
@@ -17,10 +17,10 @@
 
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/Action">
-		<Action type="DoTwitter.TweetAction" />
+		<Action type="Twitter.TweetAction" />
 	</Extension>
 
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="DoTwitter.TwitterFriendSource" />
+		<ItemSource type="Twitter.TwitterFriendSource" />
 	</Extension>
 </Addin>
