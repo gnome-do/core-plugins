@@ -23,115 +23,75 @@ using System;
 namespace Twitterizer.Framework
 {
 	
-	internal interface IUrls
+	internal abstract class Urls
 	{
-		string UpdateUrl			 { get; }
-		string RepliesUrl			 { get; }
-		string DirectMessagesUrl 	 { get; }
-		string SentDirectMessagesUrl { get; }
+		string rootUrl;
 		
-		string FriendsUrl	{ get; }
-		string FollowersUrl { get; }
+		public Urls (string rootUrl)
+		{
+			this.rootUrl = rootUrl;
+		}
 		
-		string ShowStatusUrl	{ get; }
-		string DestroyStatusUrl { get; }
-		
-		string UserTimelineUrl		{ get; }
-		string PublicTimelineUrl	{ get; }
-		string FriendsTimelineUrl	{ get; }
-	}
-	
-	internal class TwitterUrls : IUrls
-	{
 		public string UpdateUrl {
-			get { return "http://twitter.com/statuses/update.xml?status={0}&source=Do&in_reply_to_status_id{1}"; }
+			get { return rootUrl + "statuses/update.xml?status={0}&source=Do&in_reply_to_status_id{1}"; }
 		}
 		
 		public string RepliesUrl { 
-			get { return "http://twitter.com/statuses/replies.xml"; }
+			get { return rootUrl + "statuses/replies.xml"; }
 		}
 		
 		public string DirectMessagesUrl { 
-			get { return "http://twitter.com/direct_messages.xml"; }
+			get { return rootUrl + "direct_messages.xml"; }
 		}
 		
 		public string SentDirectMessagesUrl { 
-			get { return "http://twitter.com/direct_messages/sent.xml"; }
+			get { return rootUrl + "direct_messages/sent.xml"; }
 		}
 		
 		public string FriendsUrl { 
-			get { return "http://twitter.com/statuses/friends.xml"; }
+			get { return rootUrl + "statuses/friends.xml"; }
 		}
 		
 		public string FollowersUrl { 
-			get { return "http://twitter.com/statuses/followers.xml"; }
+			get { return rootUrl + "statuses/followers.xml"; }
 		}
 		
 		public string ShowStatusUrl	{ 
-			get { return "http://twitter.com/users/show/{0}.xml"; }
+			get { return rootUrl + "users/show/{0}.xml"; }
 		}
 		
 		public string DestroyStatusUrl { 
-			get { return "http://twitter.com/statuses/destroy/{0}.xml"; }
+			get { return rootUrl + "statuses/destroy/{0}.xml"; }
 		}
 		
 		public string UserTimelineUrl { 
-			get { return "http://twitter.com/statuses/user_timeline.xml"; }
+			get { return rootUrl + "statuses/user_timeline.xml"; }
 		}
 		
 		public string PublicTimelineUrl	{
-			get { return "http://twitter.com/statuses/public_timeline.xml"; }
+			get { return rootUrl + "statuses/public_timeline.xml"; }
 		}
 		
 		public string FriendsTimelineUrl {
-			get { return "http://twitter.com/statuses/friends_timeline.xml"; }
+			get { return rootUrl + "statuses/friends_timeline.xml"; }
 		}
 	}
 	
-	internal class IdenticaUrls : IUrls
+	internal class TwitterUrls : Urls
 	{
-		public string UpdateUrl {
-			get { return ""; }
-		}
+		const string RootUrl = "http://twitter.com/";
 		
-		public string RepliesUrl { 
-			get { return ""; }
+		public TwitterUrls () : base (RootUrl)
+		{
 		}
+	}
+	
+	internal class IdenticaUrls : Urls
+	{
+		const string RootUrl = "http://identi.ca/api/";
 		
-		public string DirectMessagesUrl { 
-			get { return ""; }
-		}
-		
-		public string SentDirectMessagesUrl { 
-			get { return ""; }
-		}
-		
-		public string FriendsUrl { 
-			get { return ""; }
-		}
-		
-		public string FollowersUrl { 
-			get { return ""; }
-		}
-		
-		public string ShowStatusUrl	{ 
-			get { return ""; }
-		}
-		
-		public string DestroyStatusUrl { 
-			get { return ""; }
-		}
-		
-		public string UserTimelineUrl { 
-			get { return ""; }
-		}
-		
-		public string PublicTimelineUrl	{
-			get { return ""; }
-		}
-		
-		public string FriendsTimelineUrl {
-			get { return ""; }
+		public IdenticaUrls () : base (RootUrl)
+		{
 		}
 	}
 }

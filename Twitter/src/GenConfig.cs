@@ -45,7 +45,7 @@ namespace Twitter
 		protected virtual void OnServiceComboChanged (object sender, System.EventArgs e)
 		{
 			Twitter.Preferences.MicroblogService = service_combo.ActiveText;
-			Twitter.ChangeService (service_combo.ActiveText);
+			Twitter.ChangeService ();
 		}
 	}
 }

@@ -57,12 +57,17 @@ namespace Twitter
 			
 			// this will need updated when Secure preferences are implemented
 			Configuration.GetAccountData (out username, out password, typeof (Configuration));
-				
+			
+			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
+				Log.Debug ("Twitter Username or password are invalid, please reset in configuration");
+				username = password = "";
+			}
+					
+			PhotoDirectory = new string[] {Paths.UserData, "Twitter", "photos"}.Aggregate (Path.Combine);
+			SetupAvailableServices ();
+			
 			Connect (username, password);
 			lastUpdated = DateTime.UtcNow;
-			
-			PhotoDirectory = new string[] {"Twitter", "photos"}.Aggregate (Path.Combine);
-			SetupAvailableServices ();
 		}
 				
 		public static Dictionary<string, int> AvailableServices {
@@ -71,22 +76,13 @@ namespace Twitter
 				
 		public static bool Connect (string username, string password)
 		{
-			return Connect (username, password, Preferences.MicroblogService);
-		}
-		
-		public static bool Connect (string username, string password, string service)
-		{
-			int serv;
-			
-			serv = availableServices.TryGetValue (service, out serv) ? serv : availableServices[Preferences.MicroblogService];
-			
-			twitter = new LibTwitter.Twitter (username, password, (LibTwitter.Service) serv);
+			twitter = new LibTwitter.Twitter (username, password, (LibTwitter.Service) availableServices[Preferences.MicroblogService]);	
 			return true;
 		}
 		
-		public static void ChangeService (string service)
+		public static void ChangeService ()
 		{
-			Connect (username, password, service);
+			Connect (username, password);
 		}
 		
 		public static IEnumerable<IItem> Friends {
@@ -146,6 +142,7 @@ namespace Twitter
 			
 			foreach (LibTwitter.TwitterUser friend in myFriends) {
 				tfriend = ContactItem.Create (friend.ScreenName);
+				tfriend["twitter.screenname"] = friend.ScreenName;
 				
 				if (System.IO.File.Exists (Paths.Combine (PhotoDirectory, "" + friend.ID)))
 					tfriend ["photo"] = Paths.Combine (PhotoDirectory,  "" + friend.ID);
@@ -216,7 +213,7 @@ namespace Twitter
 		
 		static void SetupAvailableServices ()
 		{
-			availableServices = new Dictionary<string,int> ();
+			availableServices = new Dictionary<string, 	int> ();
 			availableServices.Add ("twitter", (int) LibTwitter.Service.Twitter);
 			availableServices.Add ("indentica", (int) LibTwitter.Service.Identica);
 		}

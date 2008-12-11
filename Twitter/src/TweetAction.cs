@@ -20,9 +20,9 @@
  */
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
-using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
@@ -101,20 +101,20 @@ namespace Twitter
 			return new GenConfig ();
 		}
 		
-		private string BuildTweet(string status, IItem [] c)
+		private string BuildTweet(string status, IEnumerable<IItem> modItems)
 		{
 			string tweet = "";
 			
 			//Handle situations without a contact
-			if (c.Length == 0) return status;
+			if (modItems.Count () == 0) return status;
 			
 			// Direct messaging
 			if (status.Substring (0,2).Equals ("d "))
-				tweet = "d " + (c [0] as ContactItem) ["twitter.screenname"] + " " +	status.Substring (2);
+				tweet = "d " + (modItems.First () as ContactItem) ["twitter.screenname"] + " " +	status.Substring (2);
 					
 			// Tweet replying
 			else {
-				foreach (ContactItem contact in c) {
+				foreach (ContactItem contact in modItems) {
 					tweet += "@" + contact ["twitter.screenname"] + " " ;
 				}
 				

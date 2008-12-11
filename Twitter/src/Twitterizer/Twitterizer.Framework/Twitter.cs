@@ -31,7 +31,7 @@
 namespace Twitterizer.Framework
 {
 	public enum Service {
-		Twitter,
+		Twitter = 0,
 		Identica,
 	}
 	
@@ -40,7 +40,7 @@ namespace Twitterizer.Framework
         public TwitterDirectMessageMethods DirectMessages;
         public TwitterStatusMethods Status;
         public TwitterUserMethods User;
-        internal static IUrls Urls;
+        internal static Urls Urls;
 
         public Twitter(string UserName, string Password) :			this (UserName, Password, Service.Twitter)
 		{
