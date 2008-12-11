@@ -1,14 +1,14 @@
 <Addin
-	id="Twitter"
+	id="Microblog"
 	namespace="Do"
-	version="2.0"
-	name="Twitter"
-	description=" Provides 'Tweet' action for updating Twitter status."
+	version="1.0"
+	name="Microblogging"
+	description="Allows you to update your microblog right from Do"
 	author="Jacob Andreas, Alex Launi"
 	>
 
 	<Runtime>
-		<Import assembly="Twitter.dll"/>
+		<Import assembly="Microblog.dll"/>
 	</Runtime>
 
 	<Dependencies>
@@ -18,10 +18,10 @@
 
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/Action">
-		<Action type="Twitter.TweetAction" />
+		<Action type="Microblogging.PostAction" />
 	</Extension>
 
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="Twitter.TwitterFriendSource" />
+		<ItemSource type="Microblogging.FriendSource" />
 	</Extension>
 </Addin>

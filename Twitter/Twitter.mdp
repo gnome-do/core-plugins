@@ -1,16 +1,17 @@
-<Project name="Microblogging" fileversion="2.0" DefaultNamespace="Microblogging" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Microblogging" fileversion="2.0" language="C#" DefaultNamespace="Microblogging" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Debug" assembly="Twitter" />
+      <Output directory="bin/Debug" assembly="Microblog" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+      <EnvironmentVariables />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assembly="Twitter" />
       <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
@@ -55,5 +56,5 @@
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=1.0.3260.35996, Culture=neutral, PublicKeyToken=null" />
   </References>
-  <GtkDesignInfo gtkVersion="2.12.1" />
+  <GtkDesignInfo />
 </Project>
