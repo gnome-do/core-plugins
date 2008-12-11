@@ -17,7 +17,6 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-
 using System;
 using System.Collections.Generic;
 
@@ -30,7 +29,7 @@ namespace Microblogging
 	public class Configuration : AbstractLoginWidget
 	{
 		static Dictionary<Service, string> register_links;
-
+		
 		static Configuration ()
 		{
 			register_links = new Dictionary<Service, string> ();
@@ -41,15 +40,23 @@ namespace Microblogging
 		public Configuration () : 
 			base (Microblog.Preferences.MicroblogService)
 		{
+			GenConfig.ServiceChanged += new ServiceChangedEventHandler (ServiceChanged);
 			GetAccountButton.Uri = register_links[Microblog.ActiveService];
 		}
 		
 		protected override bool Validate (string username, string password)
 		{
-			//return TwitterAction.TryConnect (username, password);
-			// we had too many problems with this failing for valid data,
-			// we're just going to return true until I find a better way
 			return Microblog.Connect (username, password);
+		}
+
+		protected void ServiceChanged (object o, EventArgs e)
+		{
+			// TODO: the AbstractLoginWidget has a shortcoming here with geting account data, this should
+			// be a job for secure preferences anyway. For now you just need to update the account data
+			// manually.
+			GetAccountLabel.Markup = string.Format ("<i>Don't have {0}?</i>", Microblog.ActiveService);
+			GetAccountButton.Label = string.Format ("Sign up for {0}", Microblog.ActiveService);
+			GetAccountButton.Uri = register_links[Microblog.ActiveService];
 		}
 	}
 }

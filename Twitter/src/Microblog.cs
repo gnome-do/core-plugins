@@ -64,6 +64,8 @@ namespace Microblogging
 			friends = new List<IItem> ();
 			friends_lock = new object ();
 			prefs = new MicroblogPreferences ();
+
+			GenConfig.ServiceChanged += new ServiceChangedEventHandler (ServiceChanged);
 			
 			// TODO: this will need updated when Secure preferences are implemented
 			Configuration.GetAccountData (out username, out password, typeof (Configuration));
@@ -87,12 +89,7 @@ namespace Microblogging
 			twitter = new Twitter (username, password, ActiveService);
 			return true;
 		}
-		
-		public static void ChangeService ()
-		{
-			Connect (username, password);
-		}
-		
+			
 		public static IEnumerable<IItem> Friends {
 			get { return friends; }
 		}
@@ -201,6 +198,11 @@ namespace Microblogging
 			}
 			
 			last_updated = tweet.Created;		
+		}
+
+		static void ServiceChanged (object o, EventArgs e)
+		{
+			Connect (username, password);
 		}
 				
 		static void DownloadBuddyIcon (Uri imageUri, int userId)

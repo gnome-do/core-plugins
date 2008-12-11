@@ -25,8 +25,12 @@ using Gtk;
 
 namespace Microblogging
 {
+	public delegate void ServiceChangedEventHandler(object sender, EventArgs e);
+	
 	public partial class GenConfig : Gtk.Bin
-	{		
+	{
+		public static event ServiceChangedEventHandler ServiceChanged;
+
 		public GenConfig ()
 		{
 			this.Build();
@@ -48,7 +52,13 @@ namespace Microblogging
 		{
 			//TODO: we need to make the account config regenerate when this gets changed
 			Microblog.Preferences.MicroblogService = service_combo.ActiveText;
-			Microblog.ChangeService ();
+			OnServiceChanged (e);
+		}
+
+		protected virtual void OnServiceChanged(EventArgs e)
+		{
+        	if (ServiceChanged != null)
+            	ServiceChanged(this, e);
 		}
 	}
 }
