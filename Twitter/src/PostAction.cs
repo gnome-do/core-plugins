@@ -39,6 +39,7 @@ namespace Microblogging
 		public PostAction ()
 		{
 			active_service = Microblog.Preferences.MicroblogService;
+			GenConfig.ServiceChanged += new ServiceChangedEventHandler (ServiceChanged);
 		}
 		
 		public string Name {
@@ -108,6 +109,11 @@ namespace Microblogging
 		public Gtk.Bin GetConfiguration ()
 		{
 			return new GenConfig ();
+		}
+
+		protected void ServiceChanged (object o, EventArgs e)
+		{
+			active_service = Microblog.Preferences.MicroblogService;
 		}
 		
 		private string BuildTweet(string status, IEnumerable<IItem> modItems)
