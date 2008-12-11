@@ -106,7 +106,7 @@ namespace Microblogging
 			get { return "microblog.screenname"; }
 		}
 		
-		public static void Tweet (object status)
+		public static void Post (object status)
 		{
 			string content;
 			
@@ -125,7 +125,7 @@ namespace Microblogging
 			} catch (TwitterizerException e) {
 				Notifications.Notify (Catalog.GetString (NotifyFail), Catalog.GetString (FailedPost), ErrorIcon);
 					
-				Log.Debug (string.Format (GenericError, "Tweet"), e.Message, e.StackTrace);
+				Log.Debug (string.Format (GenericError, "Post"), e.Message, e.StackTrace);
 			}
 		}
 		
@@ -175,7 +175,7 @@ namespace Microblogging
 			try {
 				 tweet = twitter.Status.FriendsTimeline () [0];
 			} catch (TwitterizerException e) {
-				Log.Debug (string.Format (GenericError, "UpdateTweets"), e.Message, e.StackTrace);
+				Log.Debug (string.Format (GenericError, "UpdateTimeline"), e.Message, e.StackTrace);
 				return;
 			} catch (IndexOutOfRangeException) {
 				Log.Info (NoUpdates);

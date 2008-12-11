@@ -99,7 +99,7 @@ namespace Microblogging
 			if (modItems.Any ())
 				status = BuildTweet (status, modItems.ToArray ());
 			
-			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.Tweet));
+			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.Post));
 			updateRunner.Start (status);
 			
 			return null;
