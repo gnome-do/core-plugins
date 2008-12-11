@@ -92,7 +92,7 @@ namespace Twitter
 			get { return friends; }
 		}
 		
-		public static TwitterPreferences Preferences {
+		internal static TwitterPreferences Preferences {
 			get { return prefs ?? prefs = new TwitterPreferences (); }
 		}
 		
