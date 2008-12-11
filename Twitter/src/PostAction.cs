@@ -42,7 +42,7 @@ namespace Microblogging
 		}
 		
 		public string Name {
-			get { return string.Format (Catalog.GetString ("Post to "), active_service); }
+			get { return string.Format (Catalog.GetString ("Post to {0}"), active_service); }
 		}
 		
 		public string Description {
