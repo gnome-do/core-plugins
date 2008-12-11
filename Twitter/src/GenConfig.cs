@@ -19,33 +19,33 @@
  */
  
 using System;
-using Do.Addins;
+using System.Collections.Generic;
+
 using Gtk;
 
-namespace DoTwitter
+namespace Twitter
 {
 	public partial class GenConfig : Gtk.Bin
-	{
-		static IPreferences prefs;
-		
+	{		
 		public GenConfig ()
 		{
 			this.Build();
+			show_updates_chk.Active = Twitter.Preferences.ShowNotifications;
+			
+			foreach (string key in Twitter.AvailableServices.Keys) {
+				service_combo.AppendText (key);
+			}
 		}
 		
-		static GenConfig ()
-		{
-			prefs = Do.Addins.Util.GetPreferences ("twitter");
-		}
-		
-		public static bool ShowFriendStatuses {
-			get { return prefs.Get<bool> ("ShowFriendUpdates", true); }
-			set { prefs.Set<bool> ("ShowFriendUpdates", value); }
-		}
-
 		protected virtual void OnShowUpdatesChkClicked (object sender, System.EventArgs e)
 		{
-			ShowFriendStatuses = show_updates_chk.Active;
+			Twitter.Preferences.ShowNotifications = show_updates_chk.Active;
+		}
+
+		protected virtual void OnServiceComboChanged (object sender, System.EventArgs e)
+		{
+			Twitter.Preferences.MicroblogService = service_combo.ActiveText;
+			Twitter.ChangeService (service_combo.ActiveText);
 		}
 	}
 }

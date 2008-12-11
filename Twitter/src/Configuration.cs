@@ -19,11 +19,9 @@
 //
 
 using System;
-
 using Do.UI;
-using Do.Addins;
 
-namespace DoTwitter
+namespace Twitter
 {
 	public class Configuration : AbstractLoginWidget
 	{
@@ -38,7 +36,7 @@ namespace DoTwitter
 			//return TwitterAction.TryConnect (username, password);
 			// we had too many problems with this failing for valid data,
 			// we're just going to return true until I find a better way
-			return TwitterAction.Connect (username, password);
+			return Twitter.Connect (username, password);
 		}
 	}
 }

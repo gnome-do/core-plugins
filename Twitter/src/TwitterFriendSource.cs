@@ -19,23 +19,26 @@
 //
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
+using Do.Platform;
 using Twitterizer.Framework;
 
-namespace DoTwitter
+namespace Twitter
 {
 	public sealed class TwitterFriendSource : IItemSource, IConfigurable
 	{
 	
-		private const int TwitterTimeout = 30;
+		const int StatusUpdateTimeout = 30 * 1000;
+		
 		public TwitterFriendSource()
 		{
-			GLib.Timeout.Add (TwitterTimeout * 1000, GetUpdates);
+			GLib.Timeout.Add (StatusUpdateTimeout, GetUpdates);
 		}
 		
 		public string Name {
@@ -52,14 +55,12 @@ namespace DoTwitter
 		
 		public IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type [] {
-					typeof (ContactItem),
-				};
+				return new Type [] { };
 			}
 		}
 		
 		public IEnumerable<IItem> Items {
-			get { return TwitterAction.Friends; }
+			get { return Enumerable.Empty<IItem> (); }
 		}
 		
 		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
@@ -69,7 +70,7 @@ namespace DoTwitter
 		
 		public void UpdateItems ()
 		{	
-			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateFriends));
+			Thread updateRunner = new Thread (new ThreadStart (Twitter.UpdateFriends));
 			updateRunner.IsBackground = true;
 			updateRunner.Start ();
 		}
@@ -80,7 +81,7 @@ namespace DoTwitter
 		
 		public bool GetUpdates ()
 		{
-			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateTweets));
+			Thread updateRunner = new Thread (new ThreadStart (Twitter.UpdateTweets));
 			updateRunner.Start ();
 			return true;
 		}

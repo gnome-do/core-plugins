@@ -27,9 +27,8 @@ using Mono.Unix;
 
 using Do.Universe;
 using Do.Addins;
-using Twitterizer.Framework;
 
-namespace DoTwitter
+namespace Twitter
 {		
 	public sealed class TweetAction : IAction, IConfigurable
 	{
@@ -80,17 +79,19 @@ namespace DoTwitter
         
         public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
         {
-            return null;
+            return Twitter.Friends;
         }
 
         public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
-        {			
-			TwitterAction.Status = (items.First () as ITextItem).Text;
+        {
+        	string status;
+        	
+        	status = (items.First () as ITextItem).Text;
 			if (modItems.Any ())
-				TwitterAction.Status = BuildTweet (items.First (), modItems.ToArray ());
+				status = BuildTweet (status, modItems.ToArray ());
 			
-			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.Tweet));
-			updateRunner.Start ();
+			Thread updateRunner = new Thread (new ParameterizedThreadStart (Twitter.Tweet));
+			updateRunner.Start (status);
 			
 			return null;
 		}
@@ -100,26 +101,24 @@ namespace DoTwitter
 			return new GenConfig ();
 		}
 		
-		private string BuildTweet(IItem t, IItem [] c)
+		private string BuildTweet(string status, IItem [] c)
 		{
 			string tweet = "";
-			ITextItem text = t as ITextItem;
-			//ContactItem contact = c as ContactItem;
-			
 			
 			//Handle situations without a contact
-			if (c.Length == 0) return text.Text;
+			if (c.Length == 0) return status;
 			
 			// Direct messaging
-			if (text.Text.Substring (0,2).Equals ("d "))
-				tweet = "d " + (c [0] as ContactItem) ["twitter.screenname"] +
-					" " +	text.Text.Substring (2);
+			if (status.Substring (0,2).Equals ("d "))
+				tweet = "d " + (c [0] as ContactItem) ["twitter.screenname"] + " " +	status.Substring (2);
+					
 			// Tweet replying
 			else {
 				foreach (ContactItem contact in c) {
 					tweet += "@" + contact ["twitter.screenname"] + " " ;
 				}
-				tweet+= text.Text;
+				
+				tweet += status;
 			}
 			return tweet;
 		}
