@@ -79,7 +79,7 @@ namespace Microblogging
         public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
         {
 			ITextItem message = items.First () as ITextItem;
-			ContactItem buddy = modItem as ContactItem;#
+			ContactItem buddy = modItem as ContactItem;
 			string buddyName = buddy [Microblog.ContactProperty] ?? "";
 
         	// make sure we dont go over 140 chars with the contact screen name

@@ -37,15 +37,16 @@ namespace Microblogging
 {
 	public static class Microblog
 	{
-		readonly string NotifyFail = Catalog.GetString ("Post failed");
-		readonly string NotifySuccess = Catalog.GetString ("Post Successful");
-		readonly string ContentPosted = Catlog.GetString ("'{0}' successfully posted.");
-		readonly string DownloadFailed = Catalog.Getstring ("Failed to fetch file from {0}");
-		readonly string NoUpdates = Catalog.GetString ("No new microblog status updates found.");
-		readonly string GenericError = Catalog.GetString ("Twitter encountered an error in {0}");
-		readonly string MissingCredentials = Catalog.GetString ("Missing login credentials. Please set login information in plugin configuration.");
-		readonly string FailedPost = Catalog.GetString ("Unable to post tweet. Check your login settings. If you are behind a proxy make sure that "
-			+ "the settings in /system/http_proxy are correct.");
+		static readonly string NotifyFail = Catalog.GetString ("Post failed");
+		static readonly string NotifySuccess = Catalog.GetString ("Post Successful");
+		static readonly string ContentPosted = Catlog.GetString ("'{0}' successfully posted.");
+		static readonly string DownloadFailed = Catalog.Getstring ("Failed to fetch file from {0}");
+		static readonly string NoUpdates = Catalog.GetString ("No new microblog status updates found.");
+		static readonly string GenericError = Catalog.GetString ("Twitter encountered an error in {0}");
+		static readonly string MissingCredentials = Catalog.GetString ("Missing login credentials. Please set login "
+			+ "information in plugin configuration.");
+		static readonly string FailedPost = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
+			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
 		
 		const string ErrorIcon = "dialog-warning";
 		
