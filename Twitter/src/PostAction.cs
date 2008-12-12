@@ -118,11 +118,11 @@ namespace Microblogging
 			if (modItems.Count () == 0) return status;
 			
 			// Direct messaging
-			if (status.Substring (0,2).Equals ("d "))
+			if (status.Substring (0,2).Equals ("d ")) {
 				tweet = "d " + (modItems.First () as ContactItem) [Microblog.ContactProperty] + " " +	status.Substring (2);
 					
 			// Tweet replying
-			else {
+			} else {
 				foreach (ContactItem contact in modItems) {
 					tweet += "@" + contact [Microblog.ContactProperty] + " " ;
 				}
