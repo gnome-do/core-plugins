@@ -141,8 +141,6 @@ namespace Microblogging
 
 		void UpdateTimeline ()
 		{
-			Log.Debug ("Microblogging: Checking for updated timeline");
-			
 			string icon = "";
 			TwitterStatus tweet;
 			
