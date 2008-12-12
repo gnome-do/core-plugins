@@ -143,10 +143,13 @@ namespace Microblogging
 		{
 			string icon = "";
 			TwitterStatus tweet;
+			TwitterParameters parameters;
 			
 			try {
 				// get the most recent update
-				tweet = blog.Status.FriendsTimeline () [0];
+				parameters = new TwitterParameters ();
+				parameters.Add (TwitterParameterNames.Count, 1);
+				tweet = blog.Status.FriendsTimeline (parameters) [0];
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "UpdateTimeline"), e.Message);
 				Log.Debug (e.StackTrace);
