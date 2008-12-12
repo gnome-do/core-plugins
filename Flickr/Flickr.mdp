@@ -1,4 +1,4 @@
-<Project name="Flickr" fileversion="2.0" DefaultNamespace="Flickr" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Flickr" fileversion="2.0" language="C#" DefaultNamespace="Flickr" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Flickr" />
