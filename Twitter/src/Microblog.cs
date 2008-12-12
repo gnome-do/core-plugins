@@ -39,8 +39,8 @@ namespace Microblogging
 	{
 		static readonly string NotifyFail = Catalog.GetString ("Post failed");
 		static readonly string NotifySuccess = Catalog.GetString ("Post Successful");
-		static readonly string ContentPosted = Catlog.GetString ("'{0}' successfully posted.");
-		static readonly string DownloadFailed = Catalog.Getstring ("Failed to fetch file from {0}");
+		static readonly string ContentPosted = Catalog.GetString ("'{0}' successfully posted.");
+		static readonly string DownloadFailed = Catalog.GetString ("Failed to fetch file from {0}");
 		static readonly string NoUpdates = Catalog.GetString ("No new microblog status updates found.");
 		static readonly string GenericError = Catalog.GetString ("Twitter encountered an error in {0}");
 		static readonly string MissingCredentials = Catalog.GetString ("Missing login credentials. Please set login "
