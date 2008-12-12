@@ -40,6 +40,7 @@ namespace Microblogging
 		public FriendSource()
 		{
 			//GLib.Timeout.Add (StatusUpdateTimeout, GetUpdates);
+			Microblog.Connect (Microblog.Preferences.Username, Microblog.Preferences.Password);
 			active_service = Microblog.Preferences.MicroblogService;
 		}
 		
@@ -57,7 +58,7 @@ namespace Microblogging
 		
 		public IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type [] { };
+				return Enumerable.Empty<Type> ();
 			}
 		}
 		

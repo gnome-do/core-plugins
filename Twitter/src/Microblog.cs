@@ -35,6 +35,8 @@ namespace Microblogging
 	{
 		static readonly string NotifyFailMsg = Catalog.GetString ("Post failed");
 		static readonly string NotifySuccessMsg = Catalog.GetString ("Post Successful");
+		static readonly string MissingCredentialsMsg = Catalog.GetString ("Missing login credentials. Please set login "
+			+ "information in plugin configuration.");
 		
 		static MicroblogClient client;
 		static MicroblogPreferences prefs;
@@ -47,6 +49,11 @@ namespace Microblogging
 
 		public static bool Connect (string username, string password)
 		{
+			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
+				Log.Error (MissingCredentialsMsg);
+				return false;
+			}
+			
 			client = new MicroblogClient (username, password, prefs.ActiveService);
 			client.StatusUpdated += OnStatusUpdated;
 			client.TimelineUpdated += OnTimelineUpdated;

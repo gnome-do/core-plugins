@@ -100,6 +100,7 @@ namespace Microblogging
 				status = BuildTweet (status, modItems);
 			
 			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.UpdateStatus));
+			updateRunner.IsBackground = true;
 			updateRunner.Start (status);
 			
 			return null;

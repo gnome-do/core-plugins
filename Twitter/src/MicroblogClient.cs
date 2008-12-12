@@ -22,6 +22,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Linq;
+using System.Threading;
 using System.Collections.Generic;
 
 using Mono.Unix;
@@ -42,8 +43,6 @@ namespace Microblogging
 		readonly string DownloadFailedMsg = Catalog.GetString ("Failed to fetch file from {0}");
 		readonly string NoUpdatesMsg = Catalog.GetString ("No new microblog status updates found.");
 		readonly string GenericErrorMsg = Catalog.GetString ("Twitter encountered an error in {0}");
-		readonly string MissingCredentialsMsg = Catalog.GetString ("Missing login credentials. Please set login "
-			+ "information in plugin configuration.");
 		
 		readonly string FailedPostMsg = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
 			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
@@ -63,13 +62,18 @@ namespace Microblogging
 		
 		public MicroblogClient (string username, string password, Service service)
 		{
+			this.username = username;
 			last_updated = DateTime.UtcNow;
 			Contacts = Enumerable.Empty<IItem> ();
 			blog = new Twitter (username, password, service);
 			PhotoDirectory = new [] {Paths.UserData, "Microblogging", "photos"}.Aggregate (Path.Combine);
-
-			GLib.Timeout.Add (UpdateContactsTimeout, UpdateContacts);
-			GLib.Timeout.Add (UpdateTimelineTimeout, UpdateTimeline);
+			
+			Thread updateRunner = new Thread (new ThreadStart (UpdateContacts));
+			updateRunner.IsBackground = true;
+			updateRunner.Start ();
+			
+			GLib.Timeout.Add (UpdateContactsTimeout, () => {UpdateContacts (); return true; });
+			GLib.Timeout.Add (UpdateTimelineTimeout, () => {UpdateTimeline (); return true; });
 		}
 
 		/// <value>
@@ -101,8 +105,10 @@ namespace Microblogging
 			OnStatusUpdated (status, errorMessage);
 		}
 
-		bool UpdateContacts ()
+		void UpdateContacts ()
 		{
+			Log.Debug ("Microblogging: Updating contacts");
+			
 			ContactItem newContact;
 			List<IItem> newContacts;
 			TwitterUserCollection friends;
@@ -113,7 +119,7 @@ namespace Microblogging
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "UpdateFriends"), e.Message);
 				Log.Debug (e.StackTrace);
-				return true;
+				return;
 			}
 				
 			foreach (TwitterUser friend in friends) {
@@ -129,11 +135,14 @@ namespace Microblogging
 			}
 
 			Contacts = newContacts;
-			return true;
+			Log.Debug (string.Format ("Microblogging: Found {0} contacts", Contacts.Count ()));
+			return;
 		}
 
-		bool UpdateTimeline ()
+		void UpdateTimeline ()
 		{
+			Log.Debug ("Microblogging: Checking for updated timeline");
+			
 			string icon = "";
 			TwitterStatus tweet;
 			
@@ -143,13 +152,13 @@ namespace Microblogging
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "UpdateTimeline"), e.Message);
 				Log.Debug (e.StackTrace);
-				return true;
+				return;
 			} catch (IndexOutOfRangeException) {
 				Log.Debug (NoUpdatesMsg);
-				return true;
+				return;
 			}
 				
-			if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= last_updated) return true;
+			if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= last_updated) return;
 			
 			if (File.Exists (Path.Combine (PhotoDirectory, "" + tweet.TwitterUser.ID)))
 				icon = Path.Combine (PhotoDirectory, "" + tweet.TwitterUser.ID);
@@ -159,7 +168,7 @@ namespace Microblogging
 			last_updated = tweet.Created;
 			
 			OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
-			return true;
+			return;
 		}
 
 		void DownloadBuddyIcon (Uri imageUri, int userId)
@@ -182,7 +191,7 @@ namespace Microblogging
 		protected virtual void OnStatusUpdated (string status, string errorMessage)
 		{
 			if (StatusUpdated != null)
-				StatusUpdated (this, new StatusUpdatedEventArgs (status, errorMessage));
+				StatusUpdated (this, new StatusUpdatedEventArgs (string.Format (StatusUpdatedMsg, status), errorMessage));
 		}
 
 		protected virtual void OnTimelineUpdated (string screenname, string status, string icon)
