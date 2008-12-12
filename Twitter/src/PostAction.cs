@@ -33,21 +33,18 @@ namespace Microblogging
 {		
 	public sealed class PostAction : IAction, IConfigurable
 	{
-		const int MaxLength = 140;
-		string active_service;
+		const int MaxMessageLength = 140;
 		
 		public PostAction ()
 		{
-			active_service = Microblog.Preferences.MicroblogService;
-			GenConfig.ServiceChanged += new ServiceChangedEventHandler (ServiceChanged);
 		}
 		
 		public string Name {
-			get { return string.Format (Catalog.GetString ("Post to {0}"), active_service); }
+			get { return string.Format (Catalog.GetString ("Post to {0}"), Microblog.Preferences.MicroblogService); }
 		}
 		
 		public string Description {
-			get { return string.Format (Catalog.GetString ("Update {0} status"), active_service); }
+			get { return string.Format (Catalog.GetString ("Update {0} status"), Microblog.Preferences.MicroblogService); }
 		}
 		
 		public string Icon {
@@ -64,7 +61,7 @@ namespace Microblogging
 
         public bool SupportsItem (IItem item) 
         {
-            return (item as ITextItem).Text.Length <= MaxLength;
+            return (item as ITextItem).Text.Length <= MaxMessageLength;
         }
 		
 		public IEnumerable<Type> SupportedModifierItemTypes {
@@ -81,10 +78,12 @@ namespace Microblogging
                         
         public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
         {
-        	//make sure we dont go over 140 chars with the contact screen name
-            return (modItem as ContactItem) [Microblog.ContactProperty] != null &&
-            	((items.First () as ITextItem).Text.Length + ((modItem as ContactItem) 
-            	[Microblog.ContactProperty]).Length < MaxLength);
+			ITextItem message = items.First () as ITextItem;
+			ContactItem buddy = modItem as ContactItem;#
+			string buddyName = buddy [Microblog.ContactProperty] ?? "";
+
+        	// make sure we dont go over 140 chars with the contact screen name
+        	return message.Text.Length + buddyName.Length < MaxMessageLength;
         }
         
         public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
@@ -98,7 +97,7 @@ namespace Microblogging
         	
         	status = (items.First () as ITextItem).Text;
 			if (modItems.Any ())
-				status = BuildTweet (status, modItems.ToArray ());
+				status = BuildTweet (status, modItems);
 			
 			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.Post));
 			updateRunner.Start (status);
@@ -111,11 +110,6 @@ namespace Microblogging
 			return new GenConfig ();
 		}
 
-		protected void ServiceChanged (object o, EventArgs e)
-		{
-			active_service = Microblog.Preferences.MicroblogService;
-		}
-		
 		private string BuildTweet(string status, IEnumerable<IItem> modItems)
 		{
 			string tweet = "";

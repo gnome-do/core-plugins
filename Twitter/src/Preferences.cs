@@ -39,7 +39,8 @@ namespace Microblogging
 		#endregion
 	
 		IPreferences prefs;
-		
+		string active_service;
+
 		public MicroblogPreferences()
 		{
 			prefs = Services.Preferences.Get <MicroblogPreferences> ();
@@ -51,8 +52,12 @@ namespace Microblogging
 		}
 		
 		public string MicroblogService {
-			get { return prefs.Get<string> (MicroblogServiceKey, MicroblogServiceDefault); }
-			set { prefs.Set<string> (MicroblogServiceKey, value); }
+			get { return active_service; }
+			set {
+				active_service = value; 
+				prefs.Set<string> (MicroblogServiceKey, value); 
+			}
 		}
+
 	}
 }
