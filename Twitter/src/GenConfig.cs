@@ -25,11 +25,9 @@ using Gtk;
 
 namespace Microblogging
 {
-	public delegate void ServiceChangedEventHandler(object sender, EventArgs e);
-	
 	public partial class GenConfig : Gtk.Bin
 	{
-		public static event ServiceChangedEventHandler ServiceChanged;
+		public static event EventHandler ServiceChanged;
 
 		public GenConfig ()
 		{
