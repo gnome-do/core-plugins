@@ -40,7 +40,7 @@ namespace Microblogging
 		public Configuration () : 
 			base (Microblog.Preferences.MicroblogService)
 		{
-			GenConfig.ServiceChanged += new ServiceChangedEventHandler (ServiceChanged);
+			GenConfig.ServiceChanged += ServiceChanged;
 			GetAccountButton.Uri = register_links[Microblog.ActiveService];
 		}
 		

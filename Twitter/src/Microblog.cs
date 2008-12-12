@@ -65,7 +65,7 @@ namespace Microblogging
 			friends_lock = new object ();
 			prefs = new MicroblogPreferences ();
 
-			GenConfig.ServiceChanged += new ServiceChangedEventHandler (ServiceChanged);
+			GenConfig.ServiceChanged += ServiceChanged;
 			
 			// TODO: this will need updated when Secure preferences are implemented
 			Configuration.GetAccountData (out username, out password, typeof (Configuration));
