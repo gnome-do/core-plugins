@@ -41,19 +41,19 @@ namespace Microblogging
 			service_combo.Active = (int) Microblog.ActiveService;
 		}
 		
-		protected virtual void OnShowUpdatesChkClicked (object sender, System.EventArgs e)
+		protected virtual void OnShowUpdatesChkClicked (object sender, EventArgs e)
 		{
 			Microblog.Preferences.ShowNotifications = show_updates_chk.Active;
 		}
 
-		protected virtual void OnServiceComboChanged (object sender, System.EventArgs e)
+		protected virtual void OnServiceComboChanged (object sender, EventArgs e)
 		{
-			//TODO: we need to make the account config regenerate when this gets changed
+			// TODO: we need to make the account config regenerate when this gets changed
 			Microblog.Preferences.MicroblogService = service_combo.ActiveText;
 			OnServiceChanged (e);
 		}
 
-		protected virtual void OnServiceChanged(EventArgs e)
+		protected virtual void OnServiceChanged (EventArgs e)
 		{
         	if (ServiceChanged != null)
             	ServiceChanged(this, e);

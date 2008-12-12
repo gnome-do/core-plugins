@@ -37,15 +37,15 @@ namespace Microblogging
 {
 	public static class Microblog
 	{
-		const string NotifyFail = "Post failed";
-		const string NotifySuccess = "Post Successful";
-		const string ContentPosted = "'{0}' successfully posted.";
-		const string DownloadFailed = "Failed to fetch file from {0}";
-		const string NoUpdates = "No new microblog status updates found.";
-		const string GenericError = "Twitter encountered an error in {0}";
-		const string MissingCredentials = "Missing login credentials. Please set login information in plugin configuration.";
-		const string FailedPost = "Unable to post tweet. Check your login settings. If you are behind a proxy make sure that "
-			+ "the settings in /system/http_proxy are correct.";
+		readonly string NotifyFail = Catalog.GetString ("Post failed");
+		readonly string NotifySuccess = Catalog.GetString ("Post Successful");
+		readonly string ContentPosted = Catlog.GetString ("'{0}' successfully posted.");
+		readonly string DownloadFailed = Catalog.Getstring ("Failed to fetch file from {0}");
+		readonly string NoUpdates = Catalog.GetString ("No new microblog status updates found.");
+		readonly string GenericError = Catalog.GetString ("Twitter encountered an error in {0}");
+		readonly string MissingCredentials = Catalog.GetString ("Missing login credentials. Please set login information in plugin configuration.");
+		readonly string FailedPost = Catalog.GetString ("Unable to post tweet. Check your login settings. If you are behind a proxy make sure that "
+			+ "the settings in /system/http_proxy are correct.");
 		
 		const string ErrorIcon = "dialog-warning";
 		
@@ -111,7 +111,7 @@ namespace Microblogging
 			string content;
 			
 			if (twitter == null) {
-				Notifications.Notify (Catalog.GetString (NotifyFail), Catalog.GetString (MissingCredentials), ErrorIcon);					
+				Notifications.Notify (NotifyFail, MissingCredentials, ErrorIcon);					
 				Log.Debug (MissingCredentials);
 				
 				return;
@@ -121,9 +121,9 @@ namespace Microblogging
 					
 			try {
 				twitter.Status.Update (content);
-				Notifications.Notify (Catalog.GetString (NotifySuccess), Catalog.GetString (String.Format (ContentPosted, content)));
+				Notifications.Notify (NotifySuccess, String.Format (ContentPosted, content));
 			} catch (TwitterizerException e) {
-				Notifications.Notify (Catalog.GetString (NotifyFail), Catalog.GetString (FailedPost), ErrorIcon);
+				Notifications.Notify (NotifyFail, FailedPost, ErrorIcon);
 					
 				Log.Debug (string.Format (GenericError, "Post"), e.Message, e.StackTrace);
 			}
