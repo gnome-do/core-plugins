@@ -1,4 +1,4 @@
-// TwitterFriendSource.cs
+// FriendSource.cs
 // 
 // GNOME Do is the legal property of its developers, whose names are too
 // numerous to list here.  Please refer to the COPYRIGHT file distributed with
@@ -19,31 +19,37 @@
 //
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
 using Do.Addins;
 using Do.Universe;
-using Twitterizer.Framework;
+using Do.Platform;
 
-namespace DoTwitter
+namespace Microblogging
 {
-	public sealed class TwitterFriendSource : IItemSource, IConfigurable
+	public sealed class FriendSource : IItemSource, IConfigurable
 	{
 	
-		private const int TwitterTimeout = 30;
-		public TwitterFriendSource()
+		const int StatusUpdateTimeout = 30 * 1000;
+		string active_service;
+		
+		public FriendSource()
 		{
-			GLib.Timeout.Add (TwitterTimeout * 1000, GetUpdates);
+			//GLib.Timeout.Add (StatusUpdateTimeout, GetUpdates);
+			Microblog.Connect (Microblog.Preferences.Username, Microblog.Preferences.Password);
+			active_service = Microblog.Preferences.MicroblogService;
 		}
 		
 		public string Name {
-			get { return Catalog.GetString ("Twitter friends"); }
+			get { return string.Format (Catalog.GetString ("{0} friends"), active_service); }
 		}
 		
 		public string Description {
-			get { return Catalog.GetString ("Indexes your Twitter friends"); }
+			get { return string.Format (Catalog.GetString ("Indexes your {0} friends"), active_service); }
 		}
 		
 		public string Icon {
@@ -52,14 +58,12 @@ namespace DoTwitter
 		
 		public IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type [] {
-					typeof (ContactItem),
-				};
+				return Enumerable.Empty<Type> ();
 			}
 		}
 		
 		public IEnumerable<IItem> Items {
-			get { return TwitterAction.Friends; }
+			get { return Enumerable.Empty<IItem> (); }
 		}
 		
 		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
@@ -68,10 +72,12 @@ namespace DoTwitter
 		}
 		
 		public void UpdateItems ()
-		{	
-			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateFriends));
+		{
+			/*
+			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateFriends));
 			updateRunner.IsBackground = true;
 			updateRunner.Start ();
+			*/
 		}
 		
 		public Gtk.Bin GetConfiguration () {
@@ -80,9 +86,12 @@ namespace DoTwitter
 		
 		public bool GetUpdates ()
 		{
-			Thread updateRunner = new Thread (new ThreadStart (TwitterAction.UpdateTweets));
+			/*
+			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateTimeline));
 			updateRunner.Start ();
+			*/
 			return true;
+			
 		}
 	}
 }

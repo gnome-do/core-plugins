@@ -1,25 +1,33 @@
 /*
- * TwitterRequest.cs
+ * This file is part of the Twitterizer library <http://code.google.com/p/twitterizer/>
  *
- * Copyright © 2008 digitallyborn <digitallyborn@gmail.com>
- * Copyright © 2008 jmargolese  <jmargolese@gmail.com>
+ * Copyright (c) 2008, Patrick "Ricky" Smith <ricky@digitally-born.com>
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, are 
+ * permitted provided that the following conditions are met:
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * - Redistributions of source code must retain the above copyright notice, this list 
+ *   of conditions and the following disclaimer.
+ * - Redistributions in binary form must reproduce the above copyright notice, this list 
+ *   of conditions and the following disclaimer in the documentation and/or other 
+ *   materials provided with the distribution.
+ * - Neither the name of the Twitterizer nor the names of its contributors may be 
+ *   used to endorse or promote products derived from this software without specific 
+ *   prior written permission.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+ * IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * POSSIBILITY OF SUCH DAMAGE.
  */
-
 using System;
-using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Net;
@@ -35,6 +43,7 @@ namespace Twitterizer.Framework
             PerformWebRequest(Data, "POST");
             
             return (Data);
+
         }
 
         public TwitterRequestData PerformWebRequest(TwitterRequestData Data, string HTTPMethod)
@@ -44,17 +53,17 @@ namespace Twitterizer.Framework
 
             Request.Method = HTTPMethod;
 
-            Stream receiveStream;
             StreamReader readStream;
 
             // Some limitations
             Request.MaximumAutomaticRedirections = 4;
             Request.MaximumResponseHeadersLength = 4;
+            Request.ContentLength = 0;
 
             // Set our credentials
             Request.Credentials = new NetworkCredential(Data.UserName, Data.Password);
 
-            HttpWebResponse Response = null;
+            HttpWebResponse Response;
 
             // Get the respon
             try
@@ -62,7 +71,7 @@ namespace Twitterizer.Framework
                 Response = (HttpWebResponse)Request.GetResponse();
 
                 // Get the stream associated with the response.
-                receiveStream = Response.GetResponseStream();
+                Stream receiveStream = Response.GetResponseStream();
 
                 // Pipes the stream to a higher level stream reader with the required encoding format. 
                 readStream = new StreamReader(receiveStream, Encoding.UTF8);
@@ -90,39 +99,39 @@ namespace Twitterizer.Framework
             {
                 XmlDocument ResultXmlDocument = new XmlDocument();
                 ResultXmlDocument.LoadXml(Data.Response);
-				
-                switch (ResultXmlDocument.DocumentElement.Name.ToLower())
-                {
-                    case "status":
-                        Data.Statuses = new TwitterStatusCollection();
-                        Data.Statuses.Add(ParseStatusNode(ResultXmlDocument.DocumentElement));
-                        break;
-                    case "statuses":
-                        Data.Statuses = ParseStatuses(ResultXmlDocument.DocumentElement);
-                        break;
-                    case "users":
-                        Data.Users = ParseUsers(ResultXmlDocument.DocumentElement);
-                        break;
-                    case "user":
-                        Data.Users = new TwitterUserCollection();
-                        Data.Users.Add(ParseUserNode(ResultXmlDocument.DocumentElement));
-                        break;
-                    case "direct-messages":
-                        Data.Statuses = new TwitterStatusCollection();
-                        Data.Statuses = ParseDirectMessages(ResultXmlDocument.DocumentElement);
-                        break;
 
-                    case "nil-classes":
-                        // do nothing, this seems to be a null response i.e. no messages since
-                        break;
+                if (ResultXmlDocument.DocumentElement != null)
+                    switch (ResultXmlDocument.DocumentElement.Name.ToLower())
+                    {
+                        case "status":
+                            Data.Statuses = new TwitterStatusCollection();
+                            Data.Statuses.Add(ParseStatusNode(ResultXmlDocument.DocumentElement));
+                            break;
+                        case "statuses":
+                            Data.Statuses = ParseStatuses(ResultXmlDocument.DocumentElement);
+                            break;
+                        case "users":
+                            Data.Users = ParseUsers(ResultXmlDocument.DocumentElement);
+                            break;
+                        case "user":
+                            Data.Users = new TwitterUserCollection();
+                            Data.Users.Add(ParseUserNode(ResultXmlDocument.DocumentElement));
+                            break;
+                        case "direct-messages":
+                            Data.Statuses = new TwitterStatusCollection();
+                            Data.Statuses = ParseDirectMessages(ResultXmlDocument.DocumentElement);
+                            break;
 
-                    case "error":
-                        throw new Exception("Error response from Twitter: " + ResultXmlDocument.DocumentElement.InnerText);
-                    default:
+                        case "nil-classes":
+                            // do nothing, this seems to be a null response i.e. no messages since
+                            break;
+
+                        case "error":
+                            throw new Exception("Error response from Twitter: " + ResultXmlDocument.DocumentElement.InnerText);
+                        default:
                         
-                        throw new Exception("Invalid response from Twitter");
-                }
-
+                            throw new Exception("Invalid response from Twitter");
+                    }
             }
             catch (Exception ex)
             {
@@ -144,40 +153,36 @@ namespace Twitterizer.Framework
             return Collection;
         }
 
-        private TwitterStatus ParseStatusNode(XmlElement Element)
+        private TwitterStatus ParseStatusNode(XmlNode Element)
         {
             TwitterStatus Status = new TwitterStatus();
+
+            if (Element == null) return null;
+
             //Mon May 12 15:56:07 +0000 2008
             Status.ID = int.Parse(Element["id"].InnerText);
-            //Console.Error.WriteLine ("ID {0}: ", Element["id"].InnerText);
             Status.Created = ParseDateString(Element["created_at"].InnerText);
-            //Console.Error.WriteLine ("Created At {0}: ", Element["created_at"].InnerText);
             Status.Text = Element["text"].InnerText;
-            //Console.Error.WriteLine ("Text {0}: ", Element["text"].InnerText);
             Status.Source = Element["source"].InnerText;
-            //Console.Error.WriteLine ("Source {0}: ", Element["source"].InnerText);
             Status.IsTruncated = bool.Parse(Element["truncated"].InnerText);
-            //Console.Error.WriteLine ("Truncated {0}: ", bool.Parse(Element["truncated"].InnerText));
-            if (Element["in_reply_to_status_id"].InnerText != string.Empty) {
+            if (Element["in_reply_to_status_id"].InnerText != string.Empty)
                 Status.InReplyToStatusID = int.Parse(Element["in_reply_to_status_id"].InnerText);
-                //Console.Error.WriteLine ("In reply to: {0}", int.Parse(Element["in_reply_to_status_id"].InnerText));
-            }
-            if (Element["in_reply_to_user_id"].InnerText != string.Empty) {
+            if (Element["in_reply_to_user_id"].InnerText != string.Empty) 
                 Status.InReplyToUserID = int.Parse(Element["in_reply_to_user_id"].InnerText);
-                //Console.Error.WriteLine ("In reply to: {0}", int.Parse(Element["in_reply_to_user_id"].InnerText));
-            }
-            try {
-            	//Console.Error.WriteLine ("Favourited {0}: ", Element["favorited"].InnerText);
-            	Status.IsFavorited = bool.Parse(Element["favorited"].InnerText);
-            } catch { }
+            
+            // Fix for Issued #4
+            bool isFavorited;
+            bool.TryParse(Element["favorited"].InnerText, out isFavorited);
+            Status.IsFavorited = isFavorited;
+
             Status.TwitterUser = ParseUserNode(Element["user"]);
- 
+
             return Status;
         }
         #endregion
 
         #region Parse DirectMessages
-        private TwitterStatusCollection ParseDirectMessages(XmlElement Element)
+        private static TwitterStatusCollection ParseDirectMessages(XmlElement Element)
         {
             TwitterStatusCollection Collection = new TwitterStatusCollection();
             foreach (XmlElement Child in Element.GetElementsByTagName("direct_message"))
@@ -188,25 +193,20 @@ namespace Twitterizer.Framework
             return Collection;
         }
 
-        private TwitterStatus ParseDirectMessageNode(XmlElement Element)
+        private static TwitterStatus ParseDirectMessageNode(XmlNode Element)
         {
+            if (Element == null) return null;
+
             TwitterStatus Status = new TwitterStatus();
 
-            //Mon May 12 15:56:07 +0000 2008
             Status.ID = int.Parse(Element["id"].InnerText);
             Status.Created = ParseDateString(Element["created_at"].InnerText);
             Status.Text = Element["text"].InnerText;
             
-            //if (Element["in_reply_to_status_id"].InnerText != string.Empty)
-            //    Status.InReplyToStatusID = int.Parse(Element["in_reply_to_status_id"].InnerText);
-            //if (Element["in_reply_to_user_id"].InnerText != string.Empty)
-            //    Status.InReplyToUserID = int.Parse(Element["in_reply_to_user_id"].InnerText);
-           
-           if (Element["favorited"] != null && (Element["in_reply_to_status_id"].InnerText != string.Empty))
+            if (Element["favorited"] != null && (Element["in_reply_to_status_id"].InnerText != string.Empty))
                 Status.IsFavorited = bool.Parse(Element["favorited"].InnerText);
 
             Status.TwitterUser = new TwitterUser();
-           // Status.TwitterUser = ParseUserNode(Element["user"]);
             Status.TwitterUser.ScreenName = Element["sender_screen_name"].InnerText;
             Status.TwitterUser.ID = int.Parse(Element["sender_id"].InnerText);
             Status.RecipientID = int.Parse(Element["recipient_id"].InnerText);
@@ -221,6 +221,8 @@ namespace Twitterizer.Framework
         #region Parse Users
         private TwitterUserCollection ParseUsers(XmlElement Element)
         {
+            if (Element == null) return null;
+
             TwitterUserCollection Collection = new TwitterUserCollection();
             foreach (XmlElement Child in Element.GetElementsByTagName("user"))
             {
@@ -230,7 +232,7 @@ namespace Twitterizer.Framework
             return Collection;
         }
 
-        private TwitterUser ParseUserNode(XmlElement Element)
+        private TwitterUser ParseUserNode(XmlNode Element)
         {
             if (Element == null)
                 return null;
@@ -254,18 +256,17 @@ namespace Twitterizer.Framework
                 User.Friends_count = -1;        // flag that we don't know, which is different than having zero friends
 
             if (Element["status"] != null)
-                User.Status = ParseStatusNode(Element["status"]);			
+                User.Status = ParseStatusNode(Element["status"]);
+
             return User;
         }
         #endregion
 
-        private DateTime ParseDateString(string DateString)
+        private static DateTime ParseDateString(string DateString)
         {
-            DateTime parsedDate = DateTime.Now;
-
             Regex re = new Regex(@"(?<DayName>[^ ]+) (?<MonthName>[^ ]+) (?<Day>[^ ]{1,2}) (?<Hour>[0-9]{1,2}):(?<Minute>[0-9]{1,2}):(?<Second>[0-9]{1,2}) (?<TimeZone>[+-][0-9]{4}) (?<Year>[0-9]{4})");
             Match CreatedAt = re.Match(DateString);
-            parsedDate = DateTime.Parse(
+            DateTime parsedDate = DateTime.Parse(
                 string.Format(
                     "{0} {1} {2} {3}:{4}:{5}",
                     CreatedAt.Groups["MonthName"].Value,

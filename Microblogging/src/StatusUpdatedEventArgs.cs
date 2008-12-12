@@ -1,4 +1,4 @@
-/* GenConfig.cs
+/* StatusUpdatedEventArgs.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -17,35 +17,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 using System;
-using Do.Addins;
-using Gtk;
 
-namespace DoTwitter
+namespace Microblogging
 {
-	public partial class GenConfig : Gtk.Bin
+	
+	public class StatusUpdatedEventArgs : EventArgs
 	{
-		static IPreferences prefs;
+		public string Status { get; private set; }
+		public string ErrorMessage { get; private set; }
 		
-		public GenConfig ()
+		public StatusUpdatedEventArgs (string status) : 
+			this (status, "")
 		{
-			this.Build();
-		}
-		
-		static GenConfig ()
-		{
-			prefs = Do.Addins.Util.GetPreferences ("twitter");
-		}
-		
-		public static bool ShowFriendStatuses {
-			get { return prefs.Get<bool> ("ShowFriendUpdates", true); }
-			set { prefs.Set<bool> ("ShowFriendUpdates", value); }
 		}
 
-		protected virtual void OnShowUpdatesChkClicked (object sender, System.EventArgs e)
+		public StatusUpdatedEventArgs (string status, string errorMessage)
 		{
-			ShowFriendStatuses = show_updates_chk.Active;
+			Status = status;
+			ErrorMessage = errorMessage;
 		}
 	}
 }

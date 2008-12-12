@@ -1,0 +1,63 @@
+<Project name="Microblogging" fileversion="2.0" language="C#" DefaultNamespace="Microblogging" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Microblog" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <EnvironmentVariables />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Twitter" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Microblog.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/FriendSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PostAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="Microblogging.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="twitter-icon.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="twitter_items.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/GenConfig.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Preferences.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Twitter.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/TwitterizerException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/TwitterRequest.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterParameters.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterRequestData.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterStatus.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterStatusCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterUser.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterUserCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Method Classes/TwitterDirectMessageMethods.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Method Classes/TwitterStatusMethods.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Method Classes/TwitterUserMethods.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/Urls.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/Microblogging.GenConfig.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/MicroblogClient.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/StatusUpdatedEventArgs.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TimelineUpdatedEventArgs.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=1.0.3260.35996, Culture=neutral, PublicKeyToken=null" />
+  </References>
+  <GtkDesignInfo />
+</Project>
