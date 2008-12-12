@@ -80,7 +80,7 @@ namespace Microblogging
         {
 			ITextItem message = items.First () as ITextItem;
 			ContactItem buddy = modItem as ContactItem;
-			string buddyName = buddy [Microblog.ContactProperty] ?? "";
+			string buddyName = buddy [MicroblogClient.ContactKeyName] ?? "";
 
         	// make sure we dont go over 140 chars with the contact screen name
         	return message.Text.Length + buddyName.Length < MaxMessageLength;
@@ -99,7 +99,7 @@ namespace Microblogging
 			if (modItems.Any ())
 				status = BuildTweet (status, modItems);
 			
-			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.Post));
+			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.UpdateStatus));
 			updateRunner.Start (status);
 			
 			return null;
@@ -119,12 +119,12 @@ namespace Microblogging
 			
 			// Direct messaging
 			if (status.Substring (0,2).Equals ("d ")) {
-				tweet = "d " + (modItems.First () as ContactItem) [Microblog.ContactProperty] + " " +	status.Substring (2);
+				tweet = "d " + (modItems.First () as ContactItem) [MicroblogClient.ContactKeyName] + " " +	status.Substring (2);
 					
 			// Tweet replying
 			} else {
 				foreach (ContactItem contact in modItems) {
-					tweet += "@" + contact [Microblog.ContactProperty] + " " ;
+					tweet += "@" + contact [MicroblogClient.ContactKeyName] + " " ;
 				}
 				
 				tweet += status;

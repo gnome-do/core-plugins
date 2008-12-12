@@ -20,8 +20,6 @@
  */
 
 using System;
-using System.IO;
-using System.Net;
 using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
@@ -31,197 +29,60 @@ using Mono.Unix;
 using Do.Platform;
 using Do.Universe;
 
-using Twitterizer.Framework;
-
 namespace Microblogging
 {
 	public static class Microblog
 	{
-		static readonly string NotifyFail = Catalog.GetString ("Post failed");
-		static readonly string NotifySuccess = Catalog.GetString ("Post Successful");
-		static readonly string ContentPosted = Catalog.GetString ("'{0}' successfully posted.");
-		static readonly string DownloadFailed = Catalog.GetString ("Failed to fetch file from {0}");
-		static readonly string NoUpdates = Catalog.GetString ("No new microblog status updates found.");
-		static readonly string GenericError = Catalog.GetString ("Twitter encountered an error in {0}");
-		static readonly string MissingCredentials = Catalog.GetString ("Missing login credentials. Please set login "
-			+ "information in plugin configuration.");
-		static readonly string FailedPost = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
-			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
+		static readonly string NotifyFailMsg = Catalog.GetString ("Post failed");
+		static readonly string NotifySuccessMsg = Catalog.GetString ("Post Successful");
 		
-		const string ErrorIcon = "dialog-warning";
-		
-		static List<IItem> friends;
-		static object friends_lock;
-		
-		static DateTime last_updated;
+		static MicroblogClient client;
 		static MicroblogPreferences prefs;
-		static string username, password;
-		static Twitter twitter;
-		
-		static readonly string  PhotoDirectory;
 		
 		static Microblog ()
 		{
-			friends = new List<IItem> ();
-			friends_lock = new object ();
 			prefs = new MicroblogPreferences ();
-
 			GenConfig.ServiceChanged += ServiceChanged;
-			
-			// TODO: this will need updated when Secure preferences are implemented
-			Configuration.GetAccountData (out username, out password, typeof (Configuration));
-			
-			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
-				Log.Debug (MissingCredentials);
-				username = password = "";
-			}
-			
-			PhotoDirectory = new [] {Paths.UserData, "Microblogging", "photos"}.Aggregate (Path.Combine);
-			
-			Connect (username, password);
-			last_updated = DateTime.UtcNow;
 		}
 
 		public static bool Connect (string username, string password)
 		{
-			Microblog.username = username;
-			Microblog.password = password;
+			client = new MicroblogClient (username, password, prefs.ActiveService);
+			client.StatusUpdated += OnStatusUpdated;
+			client.TimelineUpdated += OnTimelineUpdated;
 			
-			twitter = new Twitter (username, password, ActiveService);
 			return true;
 		}
 			
 		public static IEnumerable<IItem> Friends {
-			get { return friends; }
+			get { return client.Contacts; }
+		}
+
+		public static void UpdateStatus (object status)
+		{
+			client.UpdateStatus (status.ToString ());
 		}
 		
 		internal static MicroblogPreferences Preferences {
 			get { return prefs; }
 		}
-		
-		public static Service ActiveService {
-			get { return (Service) Enum.Parse (typeof (Service), Preferences.MicroblogService, true); }
-		}
-		
-		public static string ContactProperty {
-			get { return "microblog.screenname"; }
-		}
-		
-		public static void Post (object status)
+
+		static void OnStatusUpdated (object sender, StatusUpdatedEventArgs args)
 		{
-			string content;
-			
-			if (twitter == null) {
-				Notifications.Notify (NotifyFail, MissingCredentials, ErrorIcon);					
-				Log.Debug (MissingCredentials);
-				
-				return;
-			}
-			
-			content = status.ToString ();
-					
-			try {
-				twitter.Status.Update (content);
-				Notifications.Notify (NotifySuccess, String.Format (ContentPosted, content));
-			} catch (TwitterizerException e) {
-				Notifications.Notify (NotifyFail, FailedPost, ErrorIcon);
-					
-				Log.Debug (string.Format (GenericError, "Post"), e.Message, e.StackTrace);
-			}
-		}
-		
-		public static void UpdateFriends ()
-		{
-			ContactItem tfriend;
-			TwitterUserCollection myFriends;
-			
-			if (twitter == null) {
-				Log.Debug (MissingCredentials);
-				return;
-			}
-			
-			myFriends = null;
-			
-			try {
-				myFriends = twitter.User.Friends (); 
-			} catch (TwitterizerException e) {
-				Log.Debug (string.Format (GenericError, "UpdateFriends"), e.Message, e.StackTrace);
-				return;
-			}
-			
-			lock (friends_lock) {
-				foreach (TwitterUser friend in myFriends) {
-					tfriend = ContactItem.Create (friend.ScreenName);
-					tfriend[ContactProperty] = friend.ScreenName;
-					
-					if (System.IO.File.Exists (Paths.Combine (PhotoDirectory, "" + friend.ID)))
-						tfriend ["photo"] = Paths.Combine (PhotoDirectory,  "" + friend.ID);
-					else
-						DownloadBuddyIcon (friend.ProfileImageUri, friend.ID);
-					
-					friends.Add (tfriend);
-				}
-			}
-		}
-		
-		public static void UpdateTimeline ()
-		{
-			int userId;
-			Uri imageUri;
-			string text, screenname;
-			TwitterStatus tweet;
-			
-			if (!Preferences.ShowNotifications) return;
-			
-			try {
-				 tweet = twitter.Status.FriendsTimeline () [0];
-			} catch (TwitterizerException e) {
-				Log.Debug (string.Format (GenericError, "UpdateTimeline"), e.Message, e.StackTrace);
-				return;
-			} catch (IndexOutOfRangeException) {
-				Log.Info (NoUpdates);
-				return;
-			}
-				
-			if (tweet.TwitterUser.ScreenName.Equals (username)) return;
-			if (DateTime.Compare (tweet.Created, last_updated) <= 0) return;
-			
-			text = tweet.Text;
-			userId = tweet.TwitterUser.ID;
-			imageUri = tweet.TwitterUser.ProfileImageUri;
-			screenname = tweet.TwitterUser.ScreenName;
-			
-			if (System.IO.File.Exists (Path.Combine (PhotoDirectory, "" + userId)))
-				Notifications.Notify (screenname, text, Path.Combine (PhotoDirectory, "" + userId));
-			else {
-				Notifications.Notify (screenname, text);
-				DownloadBuddyIcon (imageUri, userId);
-			}
-			
-			last_updated = tweet.Created;		
+			string title;
+
+			title = string.IsNullOrEmpty (args.ErrorMessage) ? NotifySuccessMsg : NotifyFailMsg;
+			Gtk.Application.Invoke ((o, e) => Notifications.Notify (title, args.Status));
 		}
 
-		static void ServiceChanged (object o, EventArgs e)
+		static void OnTimelineUpdated (object sender, TimelineUpdatedEventArgs args)
 		{
-			Connect (username, password);
+			Gtk.Application.Invoke ((o, e) => Notifications.Notify (args.Screenname, args.Status, args.Icon));
 		}
-				
-		static void DownloadBuddyIcon (Uri imageUri, int userId)
+		
+		static void ServiceChanged (object sender, EventArgs args)
 		{
-			WebClient client;
-			string imageDestination;
-			
-			client = new WebClient ();
-			imageDestination = Path.Combine (PhotoDirectory, "" + userId);
-			
-			if (!System.IO.Directory.Exists (PhotoDirectory))
-				System.IO.Directory.CreateDirectory (PhotoDirectory);
-				
-			try {
-				client.DownloadFile (imageUri.AbsoluteUri, imageDestination);
-			} catch (Exception e) {
-				Log.Debug (string.Format (DownloadFailed, imageUri.AbsoluteUri), e.Message, e.StackTrace);
-			}
+			Connect (prefs.Username, prefs.Password);
 		}
 	}
 }

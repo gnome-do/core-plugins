@@ -39,7 +39,7 @@ namespace Microblogging
 		
 		public FriendSource()
 		{
-			GLib.Timeout.Add (StatusUpdateTimeout, GetUpdates);
+			//GLib.Timeout.Add (StatusUpdateTimeout, GetUpdates);
 			active_service = Microblog.Preferences.MicroblogService;
 		}
 		
@@ -71,10 +71,12 @@ namespace Microblogging
 		}
 		
 		public void UpdateItems ()
-		{	
+		{
+			/*
 			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateFriends));
 			updateRunner.IsBackground = true;
 			updateRunner.Start ();
+			*/
 		}
 		
 		public Gtk.Bin GetConfiguration () {
@@ -83,9 +85,12 @@ namespace Microblogging
 		
 		public bool GetUpdates ()
 		{
+			/*
 			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateTimeline));
 			updateRunner.Start ();
+			*/
 			return true;
+			
 		}
 	}
 }

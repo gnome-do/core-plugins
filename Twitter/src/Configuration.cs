@@ -28,20 +28,15 @@ namespace Microblogging
 {
 	public class Configuration : AbstractLoginWidget
 	{
-		static Dictionary<Service, string> register_links;
+		Dictionary<Service, string> register_links;
 		
-		static Configuration ()
-		{
-			register_links = new Dictionary<Service, string> ();
-			register_links.Add (Service.Twitter, "https://twitter.com/signup");
-			register_links.Add (Service.Identica, "http://identi.ca/main/register");
-		}
-			
 		public Configuration () : 
 			base (Microblog.Preferences.MicroblogService)
 		{
+			SetupServiceLinks ();
+			
 			GenConfig.ServiceChanged += ServiceChanged;
-			GetAccountButton.Uri = register_links[Microblog.ActiveService];
+			GetAccountButton.Uri = register_links[Microblog.Preferences.ActiveService];
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -54,9 +49,16 @@ namespace Microblogging
 			// TODO: the AbstractLoginWidget has a shortcoming here with geting account data, this should
 			// be a job for secure preferences anyway. For now you just need to update the account data
 			// manually.
-			GetAccountLabel.Markup = string.Format ("<i>Don't have {0}?</i>", Microblog.ActiveService);
-			GetAccountButton.Label = string.Format ("Sign up for {0}", Microblog.ActiveService);
-			GetAccountButton.Uri = register_links[Microblog.ActiveService];
+			GetAccountLabel.Markup = string.Format ("<i>Don't have {0}?</i>", Microblog.Preferences.ActiveService);
+			GetAccountButton.Label = string.Format ("Sign up for {0}", Microblog.Preferences.ActiveService);
+			GetAccountButton.Uri = register_links[Microblog.Preferences.ActiveService];
+		}
+
+		void SetupServiceLinks ()
+		{
+			register_links = new Dictionary<Service, string> ();
+			register_links.Add (Service.Twitter, "https://twitter.com/signup");
+			register_links.Add (Service.Identica, "http://identi.ca/main/register");
 		}
 	}
 }

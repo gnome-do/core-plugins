@@ -21,6 +21,8 @@
 using System;
 using System.Collections.Generic;
 
+using Twitterizer.Framework;
+
 using Do.Platform;
 
 namespace Microblogging
@@ -39,11 +41,23 @@ namespace Microblogging
 		#endregion
 	
 		IPreferences prefs;
-		string active_service;
+		string active_service, username, password;
 
 		public MicroblogPreferences()
 		{
 			prefs = Services.Preferences.Get <MicroblogPreferences> ();
+			active_service = prefs.Get<string> (MicroblogServiceKey, MicroblogServiceDefault);
+			Configuration.GetAccountData (out username, out password, typeof (Configuration));
+		}
+
+		public string Username { 
+			get { return username; }
+			private set { username = value; }
+		}
+		
+		public string Password { 
+			get { return password; }
+			private set { password = value; }
 		}
 		
 		public bool ShowNotifications {
@@ -59,5 +73,17 @@ namespace Microblogging
 			}
 		}
 
+		public Service ActiveService {
+			get { return (Service) Enum.Parse (typeof (Service), MicroblogService, true); }
+		}
+
+		public string GetServiceName (Service service)
+		{
+			return Enum.GetName (typeof (Service), service);
+		}
+
+		public IEnumerable<string> AvailableServices {
+			get { return Enum.GetNames (typeof (Service)); }
+		}
 	}
 }
