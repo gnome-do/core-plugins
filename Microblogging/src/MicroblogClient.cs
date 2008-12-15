@@ -55,7 +55,8 @@ namespace Microblogging
 
 		Twitter blog;
 		string username;
-		DateTime last_updated;
+		DateTime timeline_last_updated, messages_last_updated;
+
 		readonly string PhotoDirectory;
 
 		public IEnumerable<IItem> Contacts { get; private set; }
@@ -63,9 +64,9 @@ namespace Microblogging
 		public MicroblogClient (string username, string password, Service service)
 		{
 			this.username = username;
-			last_updated = DateTime.UtcNow;
 			Contacts = Enumerable.Empty<IItem> ();
 			blog = new Twitter (username, password, service);
+			timeline_last_updated = messages_last_updated = DateTime.UtcNow;
 			PhotoDirectory = new [] {Paths.UserData, "Microblogging", "photos"}.Aggregate (Path.Combine);
 			
 			Thread updateRunner = new Thread (new ThreadStart (UpdateContacts));
@@ -143,6 +144,7 @@ namespace Microblogging
 		{
 			string icon = "";
 			TwitterStatus tweet;
+			TwitterStatus message;
 			TwitterParameters parameters;
 			
 			try {
@@ -150,6 +152,7 @@ namespace Microblogging
 				parameters = new TwitterParameters ();
 				parameters.Add (TwitterParameterNames.Count, 1);
 				tweet = blog.Status.FriendsTimeline (parameters) [0];
+				message = blog.DirectMessages.DirectMessages (parameters) [0];
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "UpdateTimeline"), e.Message);
 				Log.Debug (e.StackTrace);
@@ -158,18 +161,42 @@ namespace Microblogging
 				Log.Debug (NoUpdatesMsg);
 				return;
 			}
-				
-			if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= last_updated) return;
+
+			HandleFoundTweet (tweet);
+			HandleFoundMessage (message);
+		}
+
+		void HandleFoundTweet (TwitterStatus tweet)
+		{
+			string icon;
 			
-			if (File.Exists (Path.Combine (PhotoDirectory, "" + tweet.TwitterUser.ID)))
-				icon = Path.Combine (PhotoDirectory, "" + tweet.TwitterUser.ID);
-			else
-				DownloadBuddyIcon (tweet.TwitterUser.ProfileImageUri, tweet.TwitterUser.ID);
-			
-			last_updated = tweet.Created;
-			
+			if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= timeline_last_updated) return;
+			icon = FindIconForUser (tweet.TwitterUser.ProfileImageUri, tweet.TwitterUser.ID);
+			timeline_last_updated = tweet.Created;
 			OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
-			return;
+		}
+
+		void HandleFoundMessage (TwitterStatus message)
+		{
+			string icon;
+			
+			if (message.Created <= messages_last_updated) return;
+			icon = FindIconForUser (message.TwitterUser.ProfileImageUri, message.TwitterUser.ID);
+			messages_last_updated = message.Created;
+
+			OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
+		}
+
+		string FindIconForUser (Uri profileUri, int userId)
+		{
+			string icon = "";			
+			
+			if (File.Exists (Path.Combine (PhotoDirectory, "" + userId)))
+				icon = Path.Combine (PhotoDirectory, "" + userId);
+			else
+				DownloadBuddyIcon (profileUri, userId);
+
+			return icon;
 		}
 
 		void DownloadBuddyIcon (Uri imageUri, int userId)
@@ -201,8 +228,15 @@ namespace Microblogging
 				TimelineUpdated (this, new TimelineUpdatedEventArgs (screenname, status, icon));
 		}
 
+		protected virtual void OnMessageFound (string screenname, string status, string icon)
+		{
+			if (MessageFound != null)
+				MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon));
+		}
+		
 		public event StatusUpdatedDelegate StatusUpdated;
 		public event TimelineUpdatedDelegate TimelineUpdated;
+		public event TimelineUpdatedDelegate MessageFound;
 		
 		public delegate void StatusUpdatedDelegate (object sender, StatusUpdatedEventArgs args);
 		public delegate void TimelineUpdatedDelegate (object sender, TimelineUpdatedEventArgs args);

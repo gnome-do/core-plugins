@@ -35,6 +35,7 @@ namespace Microblogging
 	{
 		static readonly string NotifyFailMsg = Catalog.GetString ("Post failed");
 		static readonly string NotifySuccessMsg = Catalog.GetString ("Post Successful");
+		static readonly string MessageFoundMsg = Catalog.GetString ("New direct message from {0}");
 		static readonly string MissingCredentialsMsg = Catalog.GetString ("Missing login credentials. Please set login "
 			+ "information in plugin configuration.");
 		
@@ -57,6 +58,7 @@ namespace Microblogging
 			client = new MicroblogClient (username, password, prefs.ActiveService);
 			client.StatusUpdated += OnStatusUpdated;
 			client.TimelineUpdated += OnTimelineUpdated;
+			client.MessageFound += DirectMessageFound;
 			
 			return true;
 		}
@@ -85,6 +87,12 @@ namespace Microblogging
 		static void OnTimelineUpdated (object sender, TimelineUpdatedEventArgs args)
 		{
 			Gtk.Application.Invoke ((o, e) => Notifications.Notify (args.Screenname, args.Status, args.Icon));
+		}
+
+		static void DirectMessageFound (object sender, TimelineUpdatedEventArgs args)
+		{
+			Gtk.Application.Invoke ((o, e) => Notifications.Notify (string.Format (MessageFoundMsg, args.Screenname),
+				args.Status, args.Icon));
 		}
 		
 		static void ServiceChanged (object sender, EventArgs args)

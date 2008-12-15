@@ -47,7 +47,7 @@ namespace Microblogging
 		{
 			prefs = Services.Preferences.Get <MicroblogPreferences> ();
 			active_service = prefs.Get<string> (MicroblogServiceKey, MicroblogServiceDefault);
-			Configuration.GetAccountData (out username, out password, typeof (Configuration));
+			Configuration.GetAccountData (out username, out password, typeof (Configuration));		
 		}
 
 		public string Username { 
