@@ -50,6 +50,7 @@ namespace Microblogging
 		const string ErrorIcon = "dialog-warning";
 		const int UpdateTimelineTimeout = 30 * 1000;
 		const int UpdateContactsTimeout = 10 * 60 * 1000;
+		const int CheckForMessagesTimeout = 60 * 1000;
 
 		#endregion
 
@@ -75,6 +76,7 @@ namespace Microblogging
 			
 			GLib.Timeout.Add (UpdateContactsTimeout, () => {UpdateContacts (); return true; });
 			GLib.Timeout.Add (UpdateTimelineTimeout, () => {UpdateTimeline (); return true; });
+			GLib.Timeout.Add (CheckForMessagesTimeout, () => {CheckForMessages (); return true; });
 		}
 
 		/// <value>
@@ -144,7 +146,6 @@ namespace Microblogging
 		{
 			string icon = "";
 			TwitterStatus tweet;
-			TwitterStatus message;
 			TwitterParameters parameters;
 			
 			try {
@@ -152,41 +153,49 @@ namespace Microblogging
 				parameters = new TwitterParameters ();
 				parameters.Add (TwitterParameterNames.Count, 1);
 				tweet = blog.Status.FriendsTimeline (parameters) [0];
-				message = blog.DirectMessages.DirectMessages (parameters) [0];
+
+				if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= timeline_last_updated) return;
+			
+				icon = FindIconForUser (tweet.TwitterUser.ProfileImageUri, tweet.TwitterUser.ID);
+				timeline_last_updated = tweet.Created;
+			
+				OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "UpdateTimeline"), e.Message);
 				Log.Debug (e.StackTrace);
-				return;
 			} catch (IndexOutOfRangeException) {
 				Log.Debug (NoUpdatesMsg);
 				return;
 			}
-
-			HandleFoundTweet (tweet);
-			HandleFoundMessage (message);
 		}
 
-		void HandleFoundTweet (TwitterStatus tweet)
+		void CheckForMessages ()
 		{
-			string icon;
-			
-			if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= timeline_last_updated) return;
-			icon = FindIconForUser (tweet.TwitterUser.ProfileImageUri, tweet.TwitterUser.ID);
-			timeline_last_updated = tweet.Created;
-			OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
+			string icon = "";
+			TwitterStatus message;
+			TwitterParameters parameters;
+		
+			try {
+				// get the most recent update
+				parameters = new TwitterParameters ();
+				parameters.Add (TwitterParameterNames.Count, 1);
+				message = blog.DirectMessages.DirectMessages (parameters) [0];
+				
+				if (message.Created <= messages_last_updated) return;
+
+				icon = FindIconForUser (message.TwitterUser.ProfileImageUri, message.TwitterUser.ID);
+				messages_last_updated = message.Created;
+
+				OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
+			} catch (TwitterizerException e) {
+				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
+				Log.Debug (e.StackTrace);
+			} catch (IndexOutOfRangeException) {
+				Log.Debug (NoUpdatesMsg);
+				return;
+			}
 		}
-
-		void HandleFoundMessage (TwitterStatus message)
-		{
-			string icon;
-			
-			if (message.Created <= messages_last_updated) return;
-			icon = FindIconForUser (message.TwitterUser.ProfileImageUri, message.TwitterUser.ID);
-			messages_last_updated = message.Created;
-
-			OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
-		}
-
+		
 		string FindIconForUser (Uri profileUri, int userId)
 		{
 			string icon = "";			
