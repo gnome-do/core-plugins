@@ -31,7 +31,9 @@ namespace Microblogging
 	public class MicroblogPreferences
 	{
 		#region contants and default values
-		
+
+		const string UsernameKey = "Username";
+		const string PasswordKey = "Password";
 		const string MicroblogServiceKey = "Service";
 		const string ShowNotificationsKey = "ShowFriendUpdates";
 		
@@ -41,23 +43,22 @@ namespace Microblogging
 		#endregion
 	
 		IPreferences prefs;
-		string active_service, username, password;
+		string active_service;
 
 		public MicroblogPreferences()
 		{
 			prefs = Services.Preferences.Get <MicroblogPreferences> ();
 			active_service = prefs.Get<string> (MicroblogServiceKey, MicroblogServiceDefault);
-			Configuration.GetAccountData (out username, out password, typeof (Configuration));		
 		}
 
 		public string Username { 
-			get { return username; }
-			private set { username = value; }
+			get { return prefs [UsernameKey]; }
+			set { prefs [UsernameKey] = value; }
 		}
 		
 		public string Password { 
-			get { return password; }
-			private set { password = value; }
+			get { return prefs.SecureGet (PasswordKey, ""); }
+			set { prefs.SecureSet (PasswordKey, value); }
 		}
 		
 		public bool ShowNotifications {

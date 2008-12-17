@@ -39,7 +39,6 @@ namespace Microblogging
 	{
 		#region Class constants, error messages
 		
-		readonly string StatusUpdatedMsg = Catalog.GetString ("'{0}' successfully posted.");
 		readonly string DownloadFailedMsg = Catalog.GetString ("Failed to fetch file from {0}");
 		readonly string NoUpdatesMsg = Catalog.GetString ("No new microblog status updates found.");
 		readonly string GenericErrorMsg = Catalog.GetString ("Twitter encountered an error in {0}");
@@ -68,7 +67,7 @@ namespace Microblogging
 			Contacts = Enumerable.Empty<IItem> ();
 			blog = new Twitter (username, password, service);
 			timeline_last_updated = messages_last_updated = DateTime.UtcNow;
-			PhotoDirectory = new [] {Paths.UserData, "Microblogging", "photos"}.Aggregate (Path.Combine);
+			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
 			
 			Thread updateRunner = new Thread (new ThreadStart (UpdateContacts));
 			updateRunner.IsBackground = true;
@@ -129,8 +128,8 @@ namespace Microblogging
 				newContact = ContactItem.Create (friend.ScreenName);
 				newContact[ContactKeyName] = friend.ScreenName;
 				
-				if (File.Exists (Paths.Combine (PhotoDirectory, "" + friend.ID)))
-					newContact["photo"] = Paths.Combine (PhotoDirectory,  "" + friend.ID);
+				if (File.Exists (Path.Combine (PhotoDirectory, "" + friend.ID)))
+					newContact["photo"] = Path.Combine (PhotoDirectory,  "" + friend.ID);
 				else
 					DownloadBuddyIcon (friend.ProfileImageUri, friend.ID);
 				
@@ -228,7 +227,7 @@ namespace Microblogging
 		protected virtual void OnStatusUpdated (string status, string errorMessage)
 		{
 			if (StatusUpdated != null)
-				StatusUpdated (this, new StatusUpdatedEventArgs (string.Format (StatusUpdatedMsg, status), errorMessage));
+				StatusUpdated (this, new StatusUpdatedEventArgs (status, errorMessage));
 		}
 
 		protected virtual void OnTimelineUpdated (string screenname, string status, string icon)

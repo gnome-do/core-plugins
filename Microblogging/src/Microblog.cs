@@ -33,18 +33,17 @@ namespace Microblogging
 {
 	public static class Microblog
 	{
-		static readonly string NotifyFailMsg = Catalog.GetString ("Post failed");
-		static readonly string NotifySuccessMsg = Catalog.GetString ("Post Successful");
-		static readonly string MessageFoundMsg = Catalog.GetString ("New direct message from {0}");
 		static readonly string MissingCredentialsMsg = Catalog.GetString ("Missing login credentials. Please set login "
 			+ "information in plugin configuration.");
 		
 		static MicroblogClient client;
 		static MicroblogPreferences prefs;
+		static Notifications notifications;
 		
 		static Microblog ()
 		{
 			prefs = new MicroblogPreferences ();
+			notifications = new Notifications ();
 			GenConfig.ServiceChanged += ServiceChanged;
 		}
 
@@ -78,21 +77,21 @@ namespace Microblogging
 
 		static void OnStatusUpdated (object sender, StatusUpdatedEventArgs args)
 		{
-			string title;
-
-			title = string.IsNullOrEmpty (args.ErrorMessage) ? NotifySuccessMsg : NotifyFailMsg;
-			Gtk.Application.Invoke ((o, e) => Notifications.Notify (title, args.Status));
+			bool success = string.IsNullOrEmpty (args.ErrorMessage);
+			
+			notifications.Notify (new StatusUpdatedNotification (success, args.Status));
+			
+			if (!success) Log.Error (args.ErrorMessage);
 		}
 
 		static void OnTimelineUpdated (object sender, TimelineUpdatedEventArgs args)
 		{
-			Gtk.Application.Invoke ((o, e) => Notifications.Notify (args.Screenname, args.Status, args.Icon));
+			notifications.Notify (new TimelineNotification (args.Screenname, args.Status, args.Icon));
 		}
 
 		static void DirectMessageFound (object sender, TimelineUpdatedEventArgs args)
 		{
-			Gtk.Application.Invoke ((o, e) => Notifications.Notify (string.Format (MessageFoundMsg, args.Screenname),
-				args.Status, args.Icon));
+			notifications.Notify (new DirectMessageNotification (args.Screenname, args.Screenname, args.Icon));
 		}
 		
 		static void ServiceChanged (object sender, EventArgs args)

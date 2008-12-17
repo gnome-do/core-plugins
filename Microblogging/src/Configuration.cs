@@ -22,21 +22,26 @@ using System.Collections.Generic;
 
 using Twitterizer.Framework;
 
-using Do.UI;
+using Do.Platform.Linux;
 
 namespace Microblogging
 {
 	public class Configuration : AbstractLoginWidget
 	{
-		Dictionary<Service, string> register_links;
-		
-		public Configuration () : 
-			base (Microblog.Preferences.MicroblogService)
+		static Dictionary<Service, string> register_links;
+
+		static Configuration ()
 		{
 			SetupServiceLinks ();
+		}
+		
+		public Configuration () : 
+			base (Microblog.Preferences.MicroblogService, register_links[Microblog.Preferences.ActiveService])
+		{	
+			UsernameEntry.Text = Microblog.Preferences.Username;
+			PasswordEntry.Text = Microblog.Preferences.Password;
 			
 			GenConfig.ServiceChanged += ServiceChanged;
-			GetAccountButton.Uri = register_links[Microblog.Preferences.ActiveService];
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -44,19 +49,24 @@ namespace Microblogging
 			return Microblog.Connect (username, password);
 		}
 
+		protected override void SaveAccountData (string username, string password)
+		{
+			Microblog.Preferences.Username = username;
+			Microblog.Preferences.Password = password;
+		}
+
 		protected void ServiceChanged (object o, EventArgs e)
 		{
 			// TODO: the AbstractLoginWidget has a shortcoming here with geting account data, this should
 			// be a job for secure preferences anyway. For now you just need to update the account data
 			// manually.
-			GetAccountLabel.Markup = string.Format ("<i>Don't have {0}?</i>", Microblog.Preferences.ActiveService);
-			GetAccountButton.Label = string.Format ("Sign up for {0}", Microblog.Preferences.ActiveService);
-			GetAccountButton.Uri = register_links[Microblog.Preferences.ActiveService];
+			NewAccountLabel.Markup = string.Format (NewAccountLabelFormat, Microblog.Preferences.ActiveService);
+			NewAccountButton.Label = string.Format (NewAccountButtonFormat, Microblog.Preferences.ActiveService);
+			NewAccountButton.Uri = register_links[Microblog.Preferences.ActiveService];
 		}
-
-		void SetupServiceLinks ()
+		
+		static void SetupServiceLinks ()
 		{
-			register_links = new Dictionary<Service, string> ();
 			register_links.Add (Service.Twitter, "https://twitter.com/signup");
 			register_links.Add (Service.Identica, "http://identi.ca/main/register");
 		}
