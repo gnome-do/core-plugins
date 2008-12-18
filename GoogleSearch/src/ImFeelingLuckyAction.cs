@@ -35,7 +35,7 @@ namespace InlineGoogleSearch {
 	/// <summary>
 	/// Class Definition
 	/// </summary>
-	public class ImFeelingLucky : AbstractAction, IConfigurable {	
+	public class ImFeelingLucky : AbstractAction {	
 		/// <value>
 		/// I'm Feeling Lucky
 		/// </value>
@@ -115,16 +115,5 @@ namespace InlineGoogleSearch {
 		{
 		}
 		
-		/// <summary>
-		/// Calls config dialog
-		/// </summary>
-		/// <returns>
-		/// InlineGoogleSearchConfig Widget <see cref="Gtk.Bin"/>
-		/// </returns>
-		public Gtk.Bin GetConfiguration () 
-		{
-			return new InlineGoogleSearchConfig ();
-		}
-
 	}
 }

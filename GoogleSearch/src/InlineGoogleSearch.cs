@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
@@ -94,10 +95,22 @@ namespace InlineGoogleSearch {
 		{
 			List<IItem> retItems = new List<IItem> ();
 			
+			string query = (items.First () as ITextItem).Text;
+			
+			if (InlineGoogleSearchConfig.ShowSearchFirst) {
+				string searchURL = "http://google.com/search?q=" + HttpUtility.UrlEncode (query);
+				
+				if (InlineGoogleSearchConfig.InheritSSL) {
+					searchURL += "&safe=" + InlineGoogleSearchConfig.SearchRestrictions;
+				}	
+				retItems.Add( new BookmarkItem(query + " - Google Search",
+				                               searchURL));
+			}
+			
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel
 				 (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery ( (items.First () as ITextItem).Text);
+			googleSearch.setQuery ( query );
 			GoogleSearchResult [] googleSearchResult = 
 				googleSearch.search ();
 

@@ -1,4 +1,4 @@
-<Project name="Twitter" fileversion="2.0" language="C#" DefaultNamespace="DoTwitter" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Twitter" fileversion="2.0" DefaultNamespace="DoTwitter" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Twitter" />

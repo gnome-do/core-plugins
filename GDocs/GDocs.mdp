@@ -33,6 +33,8 @@
     <File name="../BundledLibraries/Google.GData.Client.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Documents.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
+    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -45,6 +47,7 @@
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Documents.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Extensions.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </References>
   <GtkDesignInfo />
 </Project>

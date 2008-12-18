@@ -53,11 +53,27 @@ namespace InlineGoogleSearch {
 			switch (SearchRestrictions) {
 			case noss:
 				nosafe_rbtn.Active = true; break;
-			case activess:
+			case moderatess:
 				moderate_rbtn.Active = true; break;
 			default:
 				strict_rbtn.Active = true; break;
 			}
+			
+			if (ShowSearchFirst) {
+				showFirstCheck.Active = true;
+			}
+			else {
+				showFirstCheck.Active = false;
+			}
+
+			if (InheritSSL) {
+				applySSL.Active = true;
+			}
+			else {
+				applySSL.Active = false;
+			}
+			
+			
 		}
 		
 		/// <summary>
@@ -79,7 +95,21 @@ namespace InlineGoogleSearch {
 			}
 		 	set { prefs.Set<string> ("SearchRestrictions", value); }
 		}
+		
+		public static bool ShowSearchFirst {
+			get {
+				return prefs.Get<bool> ("ShowSearchFirst", false);
+			}
+			set {prefs.Set<bool> ("ShowSearchFirst", value); }
+		}
 
+		public static bool InheritSSL {
+			get {
+				return prefs.Get<bool> ("InheritSSL", false);
+			}
+			set {prefs.Set<bool> ("InheritSSL", value);}
+		}
+		
 		/// <summary>
 		/// What to do If safe_off is clicked
 		/// </summary>
@@ -93,7 +123,7 @@ namespace InlineGoogleSearch {
 		protected virtual void OnNosafeRbtnToggled (object sender, 
 		                                            System.EventArgs e) 
 		{
-			SearchRestrictions = noss;
+			prefs.Set("SearchRestrictions",noss);			
 		}
 
 		/// <summary>
@@ -109,7 +139,7 @@ namespace InlineGoogleSearch {
 		                                              System.EventArgs 
 		                                              e) 
 		{
-			SearchRestrictions = moderatess;
+			prefs.Set("SearchRestrictions",moderatess);
 		}
 
 		/// <summary>
@@ -124,7 +154,23 @@ namespace InlineGoogleSearch {
 		protected virtual void OnStrictRbtnToggled (object sender, 
 		                                            System.EventArgs e) 
 		{
-			SearchRestrictions = activess;
+			prefs.Set("SearchRestrictions",activess);
 		}
+
+		                                            
+		
+		protected virtual void OnShowFirstCheckClicked (object sender, System.EventArgs e)
+		{
+			prefs.Set("ShowSearchFirst", showFirstCheck.Active);
+			if (!showFirstCheck.Active) {
+				applySSL.Sensitive = false;
+			}
+		}
+
+		protected virtual void OnCheckbutton18Clicked (object sender, System.EventArgs e)
+		{
+			prefs.Set("InheritSSL", applySSL.Active);
+		}
+		
 	}
 }

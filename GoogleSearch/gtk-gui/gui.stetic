@@ -2,13 +2,13 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.0</target-gtk-version>
+    <target-gtk-version>2.12.1</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.6.0.0, Culture=neutral" />
+    <widget-library name="Do.Addins, Version=0.7.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/InlineGoogleSearch.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="InlineGoogleSearch.InlineGoogleSearchConfig" design-size="661 300">
+  <widget class="Gtk.Bin" id="InlineGoogleSearch.InlineGoogleSearchConfig" design-size="357 612">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox5">
@@ -88,7 +88,7 @@
               </widget>
             </child>
             <child>
-              <widget class="Gtk.Label" id="GtkLabel1">
+              <widget class="Gtk.Label" id="GtkLabel3">
                 <property name="MemberName" />
                 <property name="LabelProp" translatable="yes">&lt;b&gt;SafeSearch Preferences&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
@@ -106,7 +106,98 @@
           </packing>
         </child>
         <child>
-          <placeholder />
+          <widget class="Gtk.Frame" id="frame8">
+            <property name="MemberName" />
+            <property name="ShadowType">None</property>
+            <child>
+              <widget class="Gtk.Alignment" id="GtkAlignment1">
+                <property name="MemberName" />
+                <property name="Xalign">0</property>
+                <property name="Yalign">0</property>
+                <property name="LeftPadding">12</property>
+                <child>
+                  <widget class="Gtk.VBox" id="vbox4">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="showFirstCheck">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Show the Google Search page as the 
+first row in the search results</property>
+                        <property name="Active">True</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="OnShowFirstCheckClicked" />
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.HBox" id="hbox1">
+                        <property name="MemberName" />
+                        <property name="Spacing">6</property>
+                        <child>
+                          <widget class="Gtk.Label" id="label1">
+                            <property name="MemberName" />
+                          </widget>
+                          <packing>
+                            <property name="Position">0</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.CheckButton" id="applySSL">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Label" translatable="yes">Inherit SafeSearch Preferences</property>
+                            <property name="Active">True</property>
+                            <property name="DrawIndicator">True</property>
+                            <property name="HasLabel">True</property>
+                            <property name="UseUnderline">True</property>
+                            <signal name="Clicked" handler="OnCheckbutton18Clicked" />
+                          </widget>
+                          <packing>
+                            <property name="Position">1</property>
+                            <property name="AutoSize">True</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="GtkLabel10">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;b&gt;Google Search page&lt;/b&gt;</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+              <packing>
+                <property name="type">label_item</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
         </child>
         <child>
           <placeholder />
