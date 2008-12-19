@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Addins;
+using Do.Platform;
 using Do.Universe;
 
 namespace Microblogging
@@ -52,27 +53,23 @@ namespace Microblogging
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-            get {
-                return new Type [] {
-                    typeof (ITextItem),
-                };
-            }
+            get { yield return typeof (ITextItem); }
         }
 
-        public bool SupportsItem (IItem item) 
+        public override bool SupportsItem (Item item) 
         {
             return (item as ITextItem).Text.Length <= MaxMessageLength;
         }
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
             get { yield return typeof (ContactItem); }
         }
 
-        public bool ModifierItemsOptional {
+        public override bool ModifierItemsOptional {
             get { return true; }
         }
                         
-        public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+        public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
         {
 			ITextItem message = items.First () as ITextItem;
 			ContactItem buddy = modItem as ContactItem;
@@ -82,7 +79,7 @@ namespace Microblogging
         	return message.Text.Length + buddyName.Length < MaxMessageLength;
         }
         
-        public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
         {
             return Microblog.Friends;
         }
@@ -107,7 +104,7 @@ namespace Microblogging
 			return new GenConfig ();
 		}
 
-		private string BuildTweet(string status, IEnumerable<Item> modItems)
+		string BuildTweet(string status, IEnumerable<Item> modItems)
 		{
 			string tweet = "";
 			

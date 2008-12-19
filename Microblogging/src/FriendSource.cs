@@ -31,25 +31,24 @@ using Do.Platform;
 
 namespace Microblogging
 {
+	/// <summary>
+	/// This is a dummy class, all it does is set up the Miroblog class on Do load
+	/// and return a configuration page.
+	/// </summary>
 	public sealed class FriendSource : ItemSource, IConfigurable
 	{
 	
-		const int StatusUpdateTimeout = 30 * 1000;
-		string active_service;
-		
 		public FriendSource()
 		{
-			//GLib.Timeout.Add (StatusUpdateTimeout, GetUpdates);
 			Microblog.Connect (Microblog.Preferences.Username, Microblog.Preferences.Password);
-			active_service = Microblog.Preferences.MicroblogService;
 		}
 		
 		public override string Name {
-			get { return string.Format (Catalog.GetString ("{0} friends"), active_service); }
+			get { return Catalog.GetString ("Microblog friends"); }
 		}
 		
 		public override string Description {
-			get { return string.Format (Catalog.GetString ("Indexes your {0} friends"), active_service); }
+			get { return Catalog.GetString ("Indexes your microblog friends"); }
 		}
 		
 		public override string Icon {
@@ -57,41 +56,12 @@ namespace Microblogging
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return Enumerable.Empty<Type> ();
-			}
+			get { yield return typeof (ContactItem); }
 		}
-		
-		public IEnumerable<IItem> Items {
-			get { return Enumerable.Empty<IItem> (); }
-		}
-		
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+
+		public Gtk.Bin GetConfiguration () 
 		{
-			return null;
-		}
-		
-		public void UpdateItems ()
-		{
-			/*
-			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateFriends));
-			updateRunner.IsBackground = true;
-			updateRunner.Start ();
-			*/
-		}
-		
-		public Gtk.Bin GetConfiguration () {
 			return new Configuration ();
-		}
-		
-		public bool GetUpdates ()
-		{
-			/*
-			Thread updateRunner = new Thread (new ThreadStart (Microblog.UpdateTimeline));
-			updateRunner.Start ();
-			*/
-			return true;
-			
 		}
 	}
 }

@@ -62,7 +62,7 @@ namespace Microblogging
 			return true;
 		}
 			
-		public static IEnumerable<IItem> Friends {
+		public static IEnumerable<Item> Friends {
 			get { return client.Contacts; }
 		}
 

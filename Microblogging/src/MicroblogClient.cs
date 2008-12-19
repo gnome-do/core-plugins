@@ -46,7 +46,6 @@ namespace Microblogging
 		readonly string FailedPostMsg = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
 			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
 
-		const string ErrorIcon = "dialog-warning";
 		const int UpdateTimelineTimeout = 30 * 1000;
 		const int UpdateContactsTimeout = 10 * 60 * 1000;
 		const int CheckForMessagesTimeout = 60 * 1000;
@@ -59,12 +58,12 @@ namespace Microblogging
 
 		readonly string PhotoDirectory;
 
-		public IEnumerable<IItem> Contacts { get; private set; }
+		public IEnumerable<Item> Contacts { get; private set; }
 		
 		public MicroblogClient (string username, string password, Service service)
 		{
 			this.username = username;
-			Contacts = Enumerable.Empty<IItem> ();
+			Contacts = Enumerable.Empty<Item> ();
 			blog = new Twitter (username, password, service);
 			timeline_last_updated = messages_last_updated = DateTime.UtcNow;
 			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
@@ -112,11 +111,11 @@ namespace Microblogging
 			Log.Debug ("Microblogging: Updating contacts");
 			
 			ContactItem newContact;
-			List<IItem> newContacts;
+			List<Item> newContacts;
 			TwitterUserCollection friends;
 			
 			try {
-				newContacts = new List<IItem> ();
+				newContacts = new List<Item> ();
 				friends = blog.User.Friends ();
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "UpdateFriends"), e.Message);
@@ -224,19 +223,19 @@ namespace Microblogging
 			}
 		}
 
-		protected virtual void OnStatusUpdated (string status, string errorMessage)
+		void OnStatusUpdated (string status, string errorMessage)
 		{
 			if (StatusUpdated != null)
 				StatusUpdated (this, new StatusUpdatedEventArgs (status, errorMessage));
 		}
 
-		protected virtual void OnTimelineUpdated (string screenname, string status, string icon)
+		void OnTimelineUpdated (string screenname, string status, string icon)
 		{
 			if (TimelineUpdated != null)
 				TimelineUpdated (this, new TimelineUpdatedEventArgs (screenname, status, icon));
 		}
 
-		protected virtual void OnMessageFound (string screenname, string status, string icon)
+		void OnMessageFound (string screenname, string status, string icon)
 		{
 			if (MessageFound != null)
 				MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon));
