@@ -41,8 +41,8 @@ namespace Do.Addins.Banshee {
                         string home;
 
                         home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-                        kMusicLibraryFile = "~/.config/banshee-1/banshee.db".Replace("~", home);
-                        kCoverArtDirectory = "~/.config/banshee-1/covers".Replace("~", home);
+                        kMusicLibraryFile = "~/.config/banshee/banshee.db".Replace("~", home);
+                        kCoverArtDirectory = "~/.config/banshee/covers".Replace("~", home);
 
                         clearSongsTimer = new Timer (ClearSongs);
                         songs = new List<SongMusicItem> ();
@@ -145,7 +145,7 @@ namespace Do.Addins.Banshee {
                                         try {
                                                 conn.Open();
                                                 IDbCommand query = conn.CreateCommand();
-                                                query.CommandText = "SELECT CoreTracks.Title,CoreAlbums.Title,CoreArtists.Name,CoreTracks.Uri FROM CoreTracks, CoreAlbums, CoreArtists WHERE CoreAlbums.AlbumID = CoreTracks.AlbumID AND CoreArtists.ArtistID = CoreTracks.ArtistID";
+                                                query.CommandText = "SELECT Title,AlbumTitle,Artist,Uri FROM Tracks";
                                                 IDataReader reader = query.ExecuteReader();
                                                 while (reader.Read()) {
                                                         try {

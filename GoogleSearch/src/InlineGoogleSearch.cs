@@ -96,13 +96,18 @@ namespace InlineGoogleSearch {
 			List<IItem> retItems = new List<IItem> ();
 			
 			string query = (items.First () as ITextItem).Text;
+			string searchURL = "http://google.com/search?q=" + HttpUtility.UrlEncode (query);
 			
+			if (InlineGoogleSearchConfig.InheritSSL) {
+				searchURL += "&safe=" + InlineGoogleSearchConfig.SearchRestrictions;
+			}
+			
+			if (!InlineGoogleSearchConfig.ReturnResults) {
+				Util.Environment.Open(searchURL);
+				return null;
+			}
+
 			if (InlineGoogleSearchConfig.ShowSearchFirst) {
-				string searchURL = "http://google.com/search?q=" + HttpUtility.UrlEncode (query);
-				
-				if (InlineGoogleSearchConfig.InheritSSL) {
-					searchURL += "&safe=" + InlineGoogleSearchConfig.SearchRestrictions;
-				}	
 				retItems.Add( new BookmarkItem(query + " - Google Search",
 				                               searchURL));
 			}

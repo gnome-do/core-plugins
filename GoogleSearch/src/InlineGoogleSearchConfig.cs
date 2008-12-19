@@ -59,35 +59,21 @@ namespace InlineGoogleSearch {
 				strict_rbtn.Active = true; break;
 			}
 			
-			if (ShowSearchFirst) {
-				showFirstCheck.Active = true;
-			}
-			else {
-				showFirstCheck.Active = false;
-			}
-
-			if (InheritSSL) {
-				applySSL.Active = true;
-			}
-			else {
-				applySSL.Active = false;
-			}
+			returnResults_rbtn.Active = ReturnResults;
+			goToSearch_rbtn.Active = !ReturnResults;
 			
+			showFirstCheck.Active = ShowSearchFirst;
+			applySSL.Active = InheritSSL;
 			
+			updateSensitivities();
 		}
 		
-		/// <summary>
-		/// Initializes static preferences
-		/// </summary>
 		static InlineGoogleSearchConfig () 
 		{
 			prefs = Do.Addins.Util.GetPreferences (
 			        "InlineGoogleSearch");
 		}
 
-		/// <value>
-		/// Default Value: 1 "Moderate"
-		/// </value>
 		public static string SearchRestrictions {
 			get { 
 				return prefs.Get<string> ("SearchRestrictions", 
@@ -110,15 +96,12 @@ namespace InlineGoogleSearch {
 			set {prefs.Set<bool> ("InheritSSL", value);}
 		}
 		
-		/// <summary>
-		/// What to do If safe_off is clicked
-		/// </summary>
-		/// <param name="sender">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="e">
-		/// A <see cref="System.EventArgs"/>
-		/// </param>
+		public static bool ReturnResults {
+			get {
+				return prefs.Get<bool> ("ReturnResults", true);
+			}
+			set {prefs.Set<bool> ("ReturnResults", value);}
+		}
 		
 		protected virtual void OnNosafeRbtnToggled (object sender, 
 		                                            System.EventArgs e) 
@@ -126,15 +109,7 @@ namespace InlineGoogleSearch {
 			prefs.Set("SearchRestrictions",noss);			
 		}
 
-		/// <summary>
-		/// What to do if safe_moderate is clicked
-		/// </summary>
-		/// <param name="sender">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="e">
-		/// A <see cref="System.EventArgs"/>
-		/// </param>
+		
 		protected virtual void OnModerateRbtnToggled (object sender, 
 		                                              System.EventArgs 
 		                                              e) 
@@ -142,34 +117,39 @@ namespace InlineGoogleSearch {
 			prefs.Set("SearchRestrictions",moderatess);
 		}
 
-		/// <summary>
-		/// What to do if safe_active is clicked
-		/// </summary>
-		/// <param name="sender">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="e">
-		/// A <see cref="System.EventArgs"/>
-		/// </param>
 		protected virtual void OnStrictRbtnToggled (object sender, 
 		                                            System.EventArgs e) 
 		{
 			prefs.Set("SearchRestrictions",activess);
 		}
 
-		                                            
-		
 		protected virtual void OnShowFirstCheckClicked (object sender, System.EventArgs e)
 		{
 			prefs.Set("ShowSearchFirst", showFirstCheck.Active);
-			if (!showFirstCheck.Active) {
-				applySSL.Sensitive = false;
-			}
+			updateSensitivities();
 		}
 
-		protected virtual void OnCheckbutton18Clicked (object sender, System.EventArgs e)
+		protected virtual void OnApplySSLClicked (object sender, System.EventArgs e)
 		{
 			prefs.Set("InheritSSL", applySSL.Active);
+			updateSensitivities();
+		}
+		
+		protected virtual void OnReturnResultsRbtnToggled (object sender, System.EventArgs e)
+		{
+			prefs.Set("ReturnResults", true);
+			updateSensitivities();
+		}
+
+		protected virtual void OnGoToSearchRbtnToggled (object sender, System.EventArgs e)
+		{
+			prefs.Set("ReturnResults", false);
+			updateSensitivities();
+		}
+
+		private void updateSensitivities() {
+			showFirstCheck.Sensitive = ReturnResults;
+			safeSearchBox.Sensitive = ReturnResults || InheritSSL;
 		}
 		
 	}

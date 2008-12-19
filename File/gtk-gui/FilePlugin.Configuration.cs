@@ -109,9 +109,10 @@ namespace FilePlugin {
             w6.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.vbox3 = new Gtk.VBox();
+            this.vbox3.Name = "vbox3";
             this.vbox3.Spacing = 6;
             // Container child vbox3.Gtk.Box+BoxChild
-            this.table2 = new Gtk.Table(((uint)(3)), ((uint)(3)), false);
+            this.table2 = new Gtk.Table(((uint)(1)), ((uint)(3)), false);
             this.table2.Name = "table2";
             this.table2.RowSpacing = ((uint)(6));
             this.table2.ColumnSpacing = ((uint)(6));
@@ -144,6 +145,8 @@ namespace FilePlugin {
             this.vbox3.Add(this.table2);
             Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.vbox3[this.table2]));
             w10.Position = 0;
+            w10.Expand = false;
+            w10.Fill = false;
             // Container child vbox3.Gtk.Box+BoxChild
             this.show_hidden_chk = new Gtk.CheckButton();
             this.show_hidden_chk.CanFocus = true;
@@ -160,9 +163,13 @@ namespace FilePlugin {
             this.vbox1.Add(this.vbox3);
             Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox1[this.vbox3]));
             w12.Position = 1;
+            w12.Expand = false;
+            w12.Fill = false;
             this.vbox2.Add(this.vbox1);
             Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox2[this.vbox1]));
             w13.Position = 1;
+            w13.Expand = false;
+            w13.Fill = false;
             this.alignment1.Add(this.vbox2);
             this.Add(this.alignment1);
             if ((this.Child != null)) {

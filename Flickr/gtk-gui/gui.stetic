@@ -2,10 +2,11 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.1</target-gtk-version>
+    <target-gtk-version>2.12.0</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.7.0.0, Culture=neutral" />
+    <widget-library name="Do.Addins, Version=0.5.1.0, Culture=neutral" />
+    <widget-library name="../bin/Debug/Flickr.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Flickr.AccountConfig" design-size="401 347">
     <property name="MemberName" />

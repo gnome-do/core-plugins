@@ -2,10 +2,11 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.1</target-gtk-version>
+    <target-gtk-version>2.12.0</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.7.0.0, Culture=neutral" />
+    <widget-library name="Do.Addins, Version=0.5.97.1, Culture=neutral" />
+    <widget-library name="../bin/Debug/File.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="FilePlugin.Configuration" design-size="330 354">
     <property name="MemberName" />
@@ -99,28 +100,10 @@
                     <child>
                       <widget class="Gtk.Table" id="table2">
                         <property name="MemberName" />
-                        <property name="NRows">3</property>
+                        <property name="NRows">1</property>
                         <property name="NColumns">3</property>
                         <property name="RowSpacing">6</property>
                         <property name="ColumnSpacing">6</property>
-                        <child>
-                          <placeholder />
-                        </child>
-                        <child>
-                          <placeholder />
-                        </child>
-                        <child>
-                          <placeholder />
-                        </child>
-                        <child>
-                          <placeholder />
-                        </child>
-                        <child>
-                          <placeholder />
-                        </child>
-                        <child>
-                          <placeholder />
-                        </child>
                         <child>
                           <widget class="Gtk.Fixed" id="fixed2">
                             <property name="MemberName" />
@@ -178,6 +161,8 @@
                       <packing>
                         <property name="Position">0</property>
                         <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
                       </packing>
                     </child>
                     <child>
@@ -202,12 +187,16 @@
                   <packing>
                     <property name="Position">1</property>
                     <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
                   </packing>
                 </child>
               </widget>
               <packing>
                 <property name="Position">1</property>
                 <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
               </packing>
             </child>
           </widget>

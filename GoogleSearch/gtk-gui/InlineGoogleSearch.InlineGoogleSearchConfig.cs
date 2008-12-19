@@ -15,11 +15,31 @@ namespace InlineGoogleSearch {
         
         private Gtk.VBox vbox5;
         
+        private Gtk.Frame frame8;
+        
+        private Gtk.Alignment GtkAlignment1;
+        
+        private Gtk.VBox vbox4;
+        
+        private Gtk.RadioButton goToSearch_rbtn;
+        
+        private Gtk.RadioButton returnResults_rbtn;
+        
+        private Gtk.Alignment GtkAlignment2;
+        
+        private Gtk.CheckButton showFirstCheck;
+        
+        private Gtk.Label GtkLabel10;
+        
         private Gtk.Frame frame3;
         
         private Gtk.Alignment GtkAlignment;
         
-        private Gtk.VBox vbox6;
+        private Gtk.VBox vbox7;
+        
+        private Gtk.CheckButton applySSL;
+        
+        private Gtk.VBox safeSearchBox;
         
         private Gtk.RadioButton nosafe_rbtn;
         
@@ -27,23 +47,7 @@ namespace InlineGoogleSearch {
         
         private Gtk.RadioButton strict_rbtn;
         
-        private Gtk.Label GtkLabel3;
-        
-        private Gtk.Frame frame8;
-        
-        private Gtk.Alignment GtkAlignment1;
-        
-        private Gtk.VBox vbox4;
-        
-        private Gtk.CheckButton showFirstCheck;
-        
-        private Gtk.HBox hbox1;
-        
-        private Gtk.Label label1;
-        
-        private Gtk.CheckButton applySSL;
-        
-        private Gtk.Label GtkLabel10;
+        private Gtk.Label GtkLabel12;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -54,66 +58,6 @@ namespace InlineGoogleSearch {
             this.vbox5 = new Gtk.VBox();
             this.vbox5.Name = "vbox5";
             this.vbox5.Spacing = 6;
-            // Container child vbox5.Gtk.Box+BoxChild
-            this.frame3 = new Gtk.Frame();
-            this.frame3.Name = "frame3";
-            this.frame3.ShadowType = ((Gtk.ShadowType)(0));
-            // Container child frame3.Gtk.Container+ContainerChild
-            this.GtkAlignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
-            this.GtkAlignment.Name = "GtkAlignment";
-            this.GtkAlignment.LeftPadding = ((uint)(12));
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
-            this.vbox6 = new Gtk.VBox();
-            this.vbox6.Name = "vbox6";
-            this.vbox6.Spacing = 6;
-            // Container child vbox6.Gtk.Box+BoxChild
-            this.nosafe_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Do not filter my search results."));
-            this.nosafe_rbtn.CanFocus = true;
-            this.nosafe_rbtn.Name = "nosafe_rbtn";
-            this.nosafe_rbtn.DrawIndicator = true;
-            this.nosafe_rbtn.UseUnderline = true;
-            this.nosafe_rbtn.Group = new GLib.SList(System.IntPtr.Zero);
-            this.vbox6.Add(this.nosafe_rbtn);
-            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox6[this.nosafe_rbtn]));
-            w1.Position = 0;
-            w1.Expand = false;
-            w1.Fill = false;
-            // Container child vbox6.Gtk.Box+BoxChild
-            this.moderate_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Use moderate filtering"));
-            this.moderate_rbtn.CanFocus = true;
-            this.moderate_rbtn.Name = "moderate_rbtn";
-            this.moderate_rbtn.DrawIndicator = true;
-            this.moderate_rbtn.UseUnderline = true;
-            this.moderate_rbtn.Group = this.nosafe_rbtn.Group;
-            this.vbox6.Add(this.moderate_rbtn);
-            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox6[this.moderate_rbtn]));
-            w2.Position = 1;
-            w2.Expand = false;
-            w2.Fill = false;
-            // Container child vbox6.Gtk.Box+BoxChild
-            this.strict_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Use strict filtering"));
-            this.strict_rbtn.CanFocus = true;
-            this.strict_rbtn.Name = "strict_rbtn";
-            this.strict_rbtn.DrawIndicator = true;
-            this.strict_rbtn.UseUnderline = true;
-            this.strict_rbtn.Group = this.nosafe_rbtn.Group;
-            this.vbox6.Add(this.strict_rbtn);
-            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox6[this.strict_rbtn]));
-            w3.Position = 2;
-            w3.Expand = false;
-            w3.Fill = false;
-            this.GtkAlignment.Add(this.vbox6);
-            this.frame3.Add(this.GtkAlignment);
-            this.GtkLabel3 = new Gtk.Label();
-            this.GtkLabel3.Name = "GtkLabel3";
-            this.GtkLabel3.LabelProp = Mono.Unix.Catalog.GetString("<b>SafeSearch Preferences</b>");
-            this.GtkLabel3.UseMarkup = true;
-            this.frame3.LabelWidget = this.GtkLabel3;
-            this.vbox5.Add(this.frame3);
-            Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.vbox5[this.frame3]));
-            w6.Position = 0;
-            w6.Expand = false;
-            w6.Fill = false;
             // Container child vbox5.Gtk.Box+BoxChild
             this.frame8 = new Gtk.Frame();
             this.frame8.Name = "frame8";
@@ -127,68 +71,153 @@ namespace InlineGoogleSearch {
             this.vbox4.Name = "vbox4";
             this.vbox4.Spacing = 6;
             // Container child vbox4.Gtk.Box+BoxChild
+            this.goToSearch_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Go directly to Google Search page"));
+            this.goToSearch_rbtn.CanFocus = true;
+            this.goToSearch_rbtn.Name = "goToSearch_rbtn";
+            this.goToSearch_rbtn.DrawIndicator = true;
+            this.goToSearch_rbtn.UseUnderline = true;
+            this.goToSearch_rbtn.Group = new GLib.SList(System.IntPtr.Zero);
+            this.vbox4.Add(this.goToSearch_rbtn);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox4[this.goToSearch_rbtn]));
+            w1.Position = 0;
+            w1.Expand = false;
+            w1.Fill = false;
+            // Container child vbox4.Gtk.Box+BoxChild
+            this.returnResults_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Show search results in Do"));
+            this.returnResults_rbtn.CanFocus = true;
+            this.returnResults_rbtn.Name = "returnResults_rbtn";
+            this.returnResults_rbtn.DrawIndicator = true;
+            this.returnResults_rbtn.UseUnderline = true;
+            this.returnResults_rbtn.Group = this.goToSearch_rbtn.Group;
+            this.vbox4.Add(this.returnResults_rbtn);
+            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox4[this.returnResults_rbtn]));
+            w2.Position = 1;
+            w2.Expand = false;
+            w2.Fill = false;
+            // Container child vbox4.Gtk.Box+BoxChild
+            this.GtkAlignment2 = new Gtk.Alignment(0F, 0F, 1F, 1F);
+            this.GtkAlignment2.Name = "GtkAlignment2";
+            this.GtkAlignment2.LeftPadding = ((uint)(12));
+            // Container child GtkAlignment2.Gtk.Container+ContainerChild
             this.showFirstCheck = new Gtk.CheckButton();
             this.showFirstCheck.CanFocus = true;
             this.showFirstCheck.Name = "showFirstCheck";
-            this.showFirstCheck.Label = Mono.Unix.Catalog.GetString("Show the Google Search page as the \nfirst row in the search results");
+            this.showFirstCheck.Label = Mono.Unix.Catalog.GetString("Show Search page link as first result");
             this.showFirstCheck.Active = true;
             this.showFirstCheck.DrawIndicator = true;
             this.showFirstCheck.UseUnderline = true;
-            this.vbox4.Add(this.showFirstCheck);
-            Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.vbox4[this.showFirstCheck]));
-            w7.Position = 0;
-            w7.Expand = false;
-            w7.Fill = false;
-            // Container child vbox4.Gtk.Box+BoxChild
-            this.hbox1 = new Gtk.HBox();
-            this.hbox1.Name = "hbox1";
-            this.hbox1.Spacing = 6;
-            // Container child hbox1.Gtk.Box+BoxChild
-            this.label1 = new Gtk.Label();
-            this.label1.Name = "label1";
-            this.hbox1.Add(this.label1);
-            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.hbox1[this.label1]));
-            w8.Position = 0;
-            w8.Expand = false;
-            w8.Fill = false;
-            // Container child hbox1.Gtk.Box+BoxChild
-            this.applySSL = new Gtk.CheckButton();
-            this.applySSL.CanFocus = true;
-            this.applySSL.Name = "applySSL";
-            this.applySSL.Label = Mono.Unix.Catalog.GetString("Inherit SafeSearch Preferences");
-            this.applySSL.Active = true;
-            this.applySSL.DrawIndicator = true;
-            this.applySSL.UseUnderline = true;
-            this.hbox1.Add(this.applySSL);
-            Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(this.hbox1[this.applySSL]));
-            w9.Position = 1;
-            this.vbox4.Add(this.hbox1);
-            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.vbox4[this.hbox1]));
-            w10.Position = 1;
-            w10.Expand = false;
-            w10.Fill = false;
+            this.GtkAlignment2.Add(this.showFirstCheck);
+            this.vbox4.Add(this.GtkAlignment2);
+            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox4[this.GtkAlignment2]));
+            w4.Position = 2;
+            w4.Expand = false;
+            w4.Fill = false;
             this.GtkAlignment1.Add(this.vbox4);
             this.frame8.Add(this.GtkAlignment1);
             this.GtkLabel10 = new Gtk.Label();
             this.GtkLabel10.Name = "GtkLabel10";
-            this.GtkLabel10.LabelProp = Mono.Unix.Catalog.GetString("<b>Google Search page</b>");
+            this.GtkLabel10.LabelProp = Mono.Unix.Catalog.GetString("<b>Google Search</b>");
             this.GtkLabel10.UseMarkup = true;
             this.frame8.LabelWidget = this.GtkLabel10;
             this.vbox5.Add(this.frame8);
-            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox5[this.frame8]));
-            w13.Position = 1;
-            w13.Expand = false;
-            w13.Fill = false;
+            Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.vbox5[this.frame8]));
+            w7.Position = 0;
+            w7.Expand = false;
+            w7.Fill = false;
+            // Container child vbox5.Gtk.Box+BoxChild
+            this.frame3 = new Gtk.Frame();
+            this.frame3.Name = "frame3";
+            this.frame3.ShadowType = ((Gtk.ShadowType)(0));
+            // Container child frame3.Gtk.Container+ContainerChild
+            this.GtkAlignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
+            this.GtkAlignment.Name = "GtkAlignment";
+            this.GtkAlignment.LeftPadding = ((uint)(12));
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            this.vbox7 = new Gtk.VBox();
+            this.vbox7.Name = "vbox7";
+            this.vbox7.Spacing = 6;
+            // Container child vbox7.Gtk.Box+BoxChild
+            this.applySSL = new Gtk.CheckButton();
+            this.applySSL.CanFocus = true;
+            this.applySSL.Name = "applySSL";
+            this.applySSL.Label = Mono.Unix.Catalog.GetString("Apply to Google Search page link");
+            this.applySSL.DrawIndicator = true;
+            this.applySSL.UseUnderline = true;
+            this.vbox7.Add(this.applySSL);
+            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.vbox7[this.applySSL]));
+            w8.Position = 0;
+            w8.Expand = false;
+            w8.Fill = false;
+            // Container child vbox7.Gtk.Box+BoxChild
+            this.safeSearchBox = new Gtk.VBox();
+            this.safeSearchBox.Name = "safeSearchBox";
+            this.safeSearchBox.Spacing = 6;
+            // Container child safeSearchBox.Gtk.Box+BoxChild
+            this.nosafe_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Do not filter my search results."));
+            this.nosafe_rbtn.CanFocus = true;
+            this.nosafe_rbtn.Name = "nosafe_rbtn";
+            this.nosafe_rbtn.DrawIndicator = true;
+            this.nosafe_rbtn.UseUnderline = true;
+            this.nosafe_rbtn.Group = new GLib.SList(System.IntPtr.Zero);
+            this.safeSearchBox.Add(this.nosafe_rbtn);
+            Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(this.safeSearchBox[this.nosafe_rbtn]));
+            w9.Position = 0;
+            w9.Expand = false;
+            w9.Fill = false;
+            // Container child safeSearchBox.Gtk.Box+BoxChild
+            this.moderate_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Use moderate filtering"));
+            this.moderate_rbtn.CanFocus = true;
+            this.moderate_rbtn.Name = "moderate_rbtn";
+            this.moderate_rbtn.DrawIndicator = true;
+            this.moderate_rbtn.UseUnderline = true;
+            this.moderate_rbtn.Group = this.nosafe_rbtn.Group;
+            this.safeSearchBox.Add(this.moderate_rbtn);
+            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.safeSearchBox[this.moderate_rbtn]));
+            w10.Position = 1;
+            w10.Expand = false;
+            w10.Fill = false;
+            // Container child safeSearchBox.Gtk.Box+BoxChild
+            this.strict_rbtn = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Use strict filtering"));
+            this.strict_rbtn.CanFocus = true;
+            this.strict_rbtn.Name = "strict_rbtn";
+            this.strict_rbtn.DrawIndicator = true;
+            this.strict_rbtn.UseUnderline = true;
+            this.strict_rbtn.Group = this.nosafe_rbtn.Group;
+            this.safeSearchBox.Add(this.strict_rbtn);
+            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.safeSearchBox[this.strict_rbtn]));
+            w11.Position = 2;
+            w11.Expand = false;
+            w11.Fill = false;
+            this.vbox7.Add(this.safeSearchBox);
+            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox7[this.safeSearchBox]));
+            w12.PackType = ((Gtk.PackType)(1));
+            w12.Position = 1;
+            w12.Expand = false;
+            w12.Fill = false;
+            this.GtkAlignment.Add(this.vbox7);
+            this.frame3.Add(this.GtkAlignment);
+            this.GtkLabel12 = new Gtk.Label();
+            this.GtkLabel12.Name = "GtkLabel12";
+            this.GtkLabel12.LabelProp = Mono.Unix.Catalog.GetString("<b>SafeSearch Preferences</b>");
+            this.GtkLabel12.UseMarkup = true;
+            this.frame3.LabelWidget = this.GtkLabel12;
+            this.vbox5.Add(this.frame3);
+            Gtk.Box.BoxChild w15 = ((Gtk.Box.BoxChild)(this.vbox5[this.frame3]));
+            w15.Position = 1;
+            w15.Expand = false;
+            w15.Fill = false;
             this.Add(this.vbox5);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.Show();
+            this.goToSearch_rbtn.Toggled += new System.EventHandler(this.OnGoToSearchRbtnToggled);
+            this.returnResults_rbtn.Toggled += new System.EventHandler(this.OnReturnResultsRbtnToggled);
+            this.showFirstCheck.Clicked += new System.EventHandler(this.OnShowFirstCheckClicked);
+            this.applySSL.Clicked += new System.EventHandler(this.OnApplySSLClicked);
             this.nosafe_rbtn.Toggled += new System.EventHandler(this.OnNosafeRbtnToggled);
             this.moderate_rbtn.Toggled += new System.EventHandler(this.OnModerateRbtnToggled);
             this.strict_rbtn.Toggled += new System.EventHandler(this.OnStrictRbtnToggled);
-            this.showFirstCheck.Clicked += new System.EventHandler(this.OnShowFirstCheckClicked);
-            this.applySSL.Clicked += new System.EventHandler(this.OnCheckbutton18Clicked);
         }
     }
 }
