@@ -18,7 +18,10 @@
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 using System;
+using System.Linq;
 using System.Collections.Generic;
+
+using Gtk;
 
 using Twitterizer.Framework;
 
@@ -29,19 +32,28 @@ namespace Microblogging
 	public class Configuration : AbstractLoginWidget
 	{
 		static Dictionary<Service, string> register_links;
+		public static event EventHandler ServiceChanged;
 
+		ComboBox services_combo;
+		
 		static Configuration ()
 		{
+			register_links = new Dictionary<Service, string> ();
 			SetupServiceLinks ();
 		}
 		
 		public Configuration () : 
 			base (Microblog.Preferences.MicroblogService, register_links[Microblog.Preferences.ActiveService])
-		{	
-			UsernameEntry.Text = Microblog.Preferences.Username;
-			PasswordEntry.Text = Microblog.Preferences.Password;
+		{
+			//insert service combobox at top of page	
+			services_combo = new ComboBox (register_links.Keys.Select (item => Microblog.Preferences.GetServiceName (item)).ToArray ());
+			services_combo.Active = (int) Microblog.Preferences.ActiveService;
+			services_combo.Changed += OnServiceComboChanged;
+			InsertWidgetAtTop (services_combo);
+
+			Username = Microblog.Preferences.Username;
+			Password = Microblog.Preferences.Password;
 			
-			GenConfig.ServiceChanged += ServiceChanged;
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -54,17 +66,20 @@ namespace Microblogging
 			Microblog.Preferences.Username = username;
 			Microblog.Preferences.Password = password;
 		}
-
-		protected void ServiceChanged (object o, EventArgs e)
-		{
-			// TODO: the AbstractLoginWidget has a shortcoming here with geting account data, this should
-			// be a job for secure preferences anyway. For now you just need to update the account data
-			// manually.
-			NewAccountLabel.Markup = string.Format (NewAccountLabelFormat, Microblog.Preferences.ActiveService);
-			NewAccountButton.Label = string.Format (NewAccountButtonFormat, Microblog.Preferences.ActiveService);
-			NewAccountButton.Uri = register_links[Microblog.Preferences.ActiveService];
-		}
 		
+		protected virtual void OnServiceComboChanged (object sender, EventArgs e)
+		{
+			// update current service
+			Microblog.Preferences.MicroblogService = services_combo.ActiveText;
+			
+			Username = Microblog.Preferences.Username;
+			Password = Microblog.Preferences.Password;
+			ChangeService (Microblog.Preferences.MicroblogService, register_links [Microblog.Preferences.ActiveService]);
+			
+			if (ServiceChanged != null)
+            	ServiceChanged(this, e);
+		}
+
 		static void SetupServiceLinks ()
 		{
 			register_links.Add (Service.Twitter, "https://twitter.com/signup");

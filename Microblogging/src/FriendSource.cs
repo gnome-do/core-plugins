@@ -31,7 +31,7 @@ using Do.Platform;
 
 namespace Microblogging
 {
-	public sealed class FriendSource : IItemSource, IConfigurable
+	public sealed class FriendSource : ItemSource, IConfigurable
 	{
 	
 		const int StatusUpdateTimeout = 30 * 1000;
@@ -44,19 +44,19 @@ namespace Microblogging
 			active_service = Microblog.Preferences.MicroblogService;
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return string.Format (Catalog.GetString ("{0} friends"), active_service); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return string.Format (Catalog.GetString ("Indexes your {0} friends"), active_service); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "twitter_items.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return Enumerable.Empty<Type> ();
 			}

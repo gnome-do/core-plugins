@@ -44,7 +44,7 @@ namespace Microblogging
 		{
 			prefs = new MicroblogPreferences ();
 			notifications = new Notifications ();
-			GenConfig.ServiceChanged += ServiceChanged;
+			Configuration.ServiceChanged += ServiceChanged;
 		}
 
 		public static bool Connect (string username, string password)

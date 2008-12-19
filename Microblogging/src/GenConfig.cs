@@ -27,7 +27,7 @@ namespace Microblogging
 {
 	public partial class GenConfig : Gtk.Bin
 	{
-		public static event EventHandler ServiceChanged;
+		
 
 		public GenConfig ()
 		{
@@ -46,17 +46,6 @@ namespace Microblogging
 			Microblog.Preferences.ShowNotifications = show_updates_chk.Active;
 		}
 
-		protected virtual void OnServiceComboChanged (object sender, EventArgs e)
-		{
-			// TODO: we need to make the account config regenerate when this gets changed
-			Microblog.Preferences.MicroblogService = service_combo.ActiveText;
-			OnServiceChanged (e);
-		}
-
-		protected virtual void OnServiceChanged (EventArgs e)
-		{
-        	if (ServiceChanged != null)
-            	ServiceChanged(this, e);
-		}
+		
 	}
 }

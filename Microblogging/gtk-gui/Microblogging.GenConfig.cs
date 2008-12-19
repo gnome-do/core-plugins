@@ -107,7 +107,6 @@ namespace Microblogging {
                 this.Child.ShowAll();
             }
             this.Show();
-            this.service_combo.Changed += new System.EventHandler(this.OnServiceComboChanged);
             this.show_updates_chk.Clicked += new System.EventHandler(this.OnShowUpdatesChkClicked);
         }
     }

@@ -31,7 +31,7 @@ using Do.Universe;
 
 namespace Microblogging
 {		
-	public sealed class PostAction : IAction, IConfigurable
+	public sealed class PostAction : Act, IConfigurable
 	{
 		const int MaxMessageLength = 140;
 		
@@ -39,19 +39,19 @@ namespace Microblogging
 		{
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return string.Format (Catalog.GetString ("Post to {0}"), Microblog.Preferences.MicroblogService); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return string.Format (Catalog.GetString ("Update {0} status"), Microblog.Preferences.MicroblogService); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "twitter-icon.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
             get {
                 return new Type [] {
                     typeof (ITextItem),
@@ -65,11 +65,7 @@ namespace Microblogging
         }
 		
 		public IEnumerable<Type> SupportedModifierItemTypes {
-            get { 
-                return new Type [] {
-                    typeof (ContactItem),
-                };
-            }
+            get { yield return typeof (ContactItem); }
         }
 
         public bool ModifierItemsOptional {
@@ -91,7 +87,7 @@ namespace Microblogging
             return Microblog.Friends;
         }
 
-        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
         {
         	string status;
         	
@@ -111,7 +107,7 @@ namespace Microblogging
 			return new GenConfig ();
 		}
 
-		private string BuildTweet(string status, IEnumerable<IItem> modItems)
+		private string BuildTweet(string status, IEnumerable<Item> modItems)
 		{
 			string tweet = "";
 			
