@@ -29,7 +29,7 @@ using Mono.Unix;
 
 namespace Mozilla.Firefox {
 
-	public class BookmarkItemSource : IItemSource {
+	public class BookmarkItemSource : ItemSource {
 		const string BeginProfileName = "Path=";
         const string BeginDefaultProfile = "Default=1";
         
@@ -37,14 +37,14 @@ namespace Mozilla.Firefox {
         const string BeginUri = "\"uri\":\"";
         const string BeginChildren = "\"children\":[";
 		
-		ICollection<IItem> items;
+		ICollection<Item> items;
 		
 		public BookmarkItemSource ()
 		{
 			items = LoadBookmarkItems ();
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (BookmarkItem),
@@ -52,28 +52,28 @@ namespace Mozilla.Firefox {
 			}
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Firefox Bookmarks"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Finds Firefox bookmarks in your default profile."); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "firefox-3.0"; }
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			// No updating for now -- Firefox only dumps JSON bookmarks
 			// data once each day.
@@ -125,9 +125,9 @@ namespace Mozilla.Firefox {
 			}
 		}
 		
-		protected ICollection<IItem> LoadBookmarkItems () {
+		protected ICollection<Item> LoadBookmarkItems () {
 			int iTitle, iUri, iChildren;
-			List<IItem> bookmarks = new List<IItem> ();
+			List<Item> bookmarks = new List<Item> ();
 			string json = File.ReadAllText (BookmarkJSONPath);
 			
 			iTitle = iUri = iChildren = 0;

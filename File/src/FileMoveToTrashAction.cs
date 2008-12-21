@@ -26,7 +26,7 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	class MoveToTrashAction : AbstractAction {
+	class MoveToTrashAction : Act {
 
 		public override string Name {
 			get {
@@ -62,7 +62,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			List<string> seenPaths;
 

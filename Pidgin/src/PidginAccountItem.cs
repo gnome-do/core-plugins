@@ -21,7 +21,7 @@ using Do.Universe;
 
 namespace Do.Addins.Pidgin
 {
-	public class PidginAccountItem : IItem
+	public class PidginAccountItem : Item
 	{
 		string name, proto;
 		int id;
@@ -34,19 +34,19 @@ namespace Do.Addins.Pidgin
 			this.id = id;
 		}
 		
-		public string Name {
+		public override string Name {
 			get {
 				return name;
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get {
 				return proto;
 			}
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get {
 				string icon_base = "/usr/share/pixmaps/pidgin/protocols/48/";
 				string proto_icon = proto;

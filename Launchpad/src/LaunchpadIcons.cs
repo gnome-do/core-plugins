@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace Do.Launchpad

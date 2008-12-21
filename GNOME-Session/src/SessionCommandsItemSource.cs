@@ -27,27 +27,27 @@ using Do.Universe;
 
 namespace GNOME
 {
-	public class SessionCommandsItemSource : IItemSource
+	public class SessionCommandsItemSource : ItemSource
 	{
 	
-		public IEnumerable<Type> SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				yield return typeof (SessionCommandItem);
 			}
 		}
 
-		public string Name { 
+		public override string Name { 
 			get { return Catalog.GetString ("GNOME Session Commands"); } 
 		}
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Log out, Shutdown, Restart, etc."); }
 		}
 		
-		public string Icon { get { return "system-log-out"; } }
+		public override string Icon { get { return "system-log-out"; } }
 
-		public IEnumerable<IItem> Items
+		public override IEnumerable<Item> Items
 		{
 			get {
 				yield return new SessionCommandItem (
@@ -88,12 +88,12 @@ namespace GNOME
 			}
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 		}
 	}

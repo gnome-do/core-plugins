@@ -31,15 +31,15 @@ using Mono.Unix;
 
 namespace Do.Universe
 {	
-	public class ShelfItem : IItem
+	public class ShelfItem : Item
 	{
 		private string name;
 		
-		private List<IItem> items = new List<IItem> ();
+		private List<Item> items = new List<Item> ();
 		
-		public List<IItem> Items {
+		public List<Item> Items {
 			get {
-				return items ?? items = new List<IItem> ();
+				return items ?? items = new List<Item> ();
 			}
 		}
 		
@@ -54,62 +54,62 @@ namespace Do.Universe
 			}
 		}
 		
-		public string Name {
+		public override string Name {
 			get {
 				return name + Catalog.GetString (" Shelf");
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get {
 				return Catalog.GetString ("Your ") + name + Catalog.GetString (" Shelf Items");
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return "folder-saved-search";
 			}
 		}
 		
-		public void AddItem (IItem item)
+		public void AddItem (Item item)
 		{
 			if (Items.Contains (item)) return;
 		
 			Items.Add (item); //temp items
 		}
 		
-		public void RemoveItem (IItem item)
+		public void RemoveItem (Item item)
 		{
 			Items.Remove (item);
 		}
 	}
 	
-	public class ShelfItemSource : IItemSource
+	public class ShelfItemSource : ItemSource
 	{	
 		
 		static Dictionary<string,ShelfItem> shelf;
 		static string defaultName;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return Catalog.GetString ("Shelf Item Source");
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return Catalog.GetString ("Your Shelf Items");
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return "folder-saved-search";
 			}
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ShelfItem),
@@ -117,11 +117,11 @@ namespace Do.Universe
 			}
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get {
-				List<IItem> items = new List<IItem> ();
+				List<Item> items = new List<Item> ();
 				if (shelf != null) {
-					foreach (IItem item in shelf.Values)
+					foreach (Item item in shelf.Values)
 						items.Add (item);
 				}
 				
@@ -129,7 +129,7 @@ namespace Do.Universe
 			}
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return (item as ShelfItem).Items;
 		}
@@ -148,21 +148,21 @@ namespace Do.Universe
 			}
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 		}
 		
-		static public void AddToDefault (IItem item)
+		static public void AddToDefault (Item item)
 		{
 			shelf[defaultName].AddItem (item);
 		}
 		
-		static public void RemoveFromDefault (IItem item)
+		static public void RemoveFromDefault (Item item)
 		{
 			shelf[defaultName].RemoveItem (item);
 		}
 		
-		static public bool InShelf (IItem item)
+		static public bool InShelf (Item item)
 		{
 			return shelf[defaultName].Items.Contains (item);
 		}

@@ -36,7 +36,7 @@ namespace GMailContacts
 			this.detail = detail;
 		}		
 		
-		public string Name {
+		public override string Name {
 			get {
 				switch (type.ToLower ()) {
 				case "email.gmail": return Catalog.GetString ("Primary Email");
@@ -54,11 +54,11 @@ namespace GMailContacts
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return detail; }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get {
 				switch (type.Substring (0,type.IndexOf ("."))) {
 				case "email": return "gmail-logo.png@" + GetType ().Assembly.FullName;

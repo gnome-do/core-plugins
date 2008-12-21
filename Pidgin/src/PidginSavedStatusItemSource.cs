@@ -12,20 +12,20 @@ using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public class PidginSavedStatusItemSource : IItemSource
+	public class PidginSavedStatusItemSource : ItemSource
 	{
-		private List<IItem> statuses;
+		private List<Item> statuses;
 		
 		public PidginSavedStatusItemSource() {
-			statuses = new List<IItem> ();
+			statuses = new List<Item> ();
 			//UpdateItems();
 		}
 		
-		public string Name { get { return Catalog.GetString ("Pidgin Statuses"); } }
-		public string Description { get { return Catalog.GetString ("Saved Pidgin statuses"); } }
-		public string Icon {get { return "pidgin"; } }
+		public override string Name { get { return Catalog.GetString ("Pidgin Statuses"); } }
+		public override string Description { get { return Catalog.GetString ("Saved Pidgin statuses"); } }
+		public override string Icon {get { return "pidgin"; } }
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (PidginSavedStatusItem),
@@ -33,16 +33,16 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return statuses; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 		
-		public void UpdateItems () 
+		public override void UpdateItems () 
 		{			
 			Pidgin.IPurpleObject prpl;
 			int [] rawStatuses;

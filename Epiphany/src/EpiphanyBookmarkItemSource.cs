@@ -24,29 +24,29 @@ using System.Xml;
 using System.Collections.Generic;
 
 using Mono.Unix;
-using Do.Addins;
+
 using Do.Universe;
 
 namespace Epiphany
 {
 
-	public class EpiphanyBookmarkItemSource : IItemSource
+	public class EpiphanyBookmarkItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 
 		public EpiphanyBookmarkItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 
-		public string Name { get { return Catalog.GetString ("Epiphany Bookmarks"); } }
+		public override string Name { get { return Catalog.GetString ("Epiphany Bookmarks"); } }
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Indexes your Epiphany bookmarks."); }
 		}
-		public string Icon { get { return "gnome-web-browser"; } }
+		public override string Icon { get { return "gnome-web-browser"; } }
 
-		public IEnumerable<Type> SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -55,17 +55,17 @@ namespace Epiphany
 			}
 		}
 
-		public IEnumerable<IItem> Items
+		public override IEnumerable<Item> Items
 		{
 			get { return items; }
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
 			return null;	
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			string bookmarks_file = "~/.gnome2/epiphany/bookmarks.rdf".Replace ("~", home);

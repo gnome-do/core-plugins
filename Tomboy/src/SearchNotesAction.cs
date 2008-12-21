@@ -26,7 +26,7 @@ using Do.Universe;
 
 namespace Tomboy
 {
-	public class SearchNotesAction : AbstractAction
+	public class SearchNotesAction : Act
 	{
 		private const string name = "Search Tomboy Notes";
 		private const string desc = "Searches contents of Tomboy notes";
@@ -52,7 +52,7 @@ namespace Tomboy
 			}
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			TomboyDBus tb = new TomboyDBus ();
 			// This action will start Tomboy if it is not

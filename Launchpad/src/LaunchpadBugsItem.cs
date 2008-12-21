@@ -20,25 +20,25 @@ using System;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
-using Do.Addins;
+
 using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadBugNumberItem : LaunchpadItem
 	{
-		public string Name { get { return Catalog.GetString ("Bug Number"); } }
+		public override string Name { get { return Catalog.GetString ("Bug Number"); } }
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Find bug by number"); }
 		}
 		
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadBugs.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
             if (items == null) { return false; }
 			//Numbers only.
@@ -46,7 +46,7 @@ namespace Do.Launchpad
 			return numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format("https://bugs.launchpad.net/bugs/{0}", (item as ITextItem).Text));
 		}
@@ -55,22 +55,22 @@ namespace Do.Launchpad
 	public class LaunchpadBugReportItem : LaunchpadItem
 	{
 		public LaunchpadBugReportItem() { }
-		public string Name { get { return Catalog.GetString ("Bug Report"); } }
-		public string Description { 
+		public override string Name { get { return Catalog.GetString ("Bug Report"); } }
+		public override string Description { 
 			get { return Catalog.GetString ("Report a bug at Launchpad"); }
 		}
 		
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadBugs.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
 			return true;
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format("https://bugs.launchpad.net/bugs/+filebug", (item as ITextItem).Text));
 		}
@@ -79,17 +79,17 @@ namespace Do.Launchpad
 	public class LaunchpadPackageBugsItem : LaunchpadItem
 	{
 		public LaunchpadPackageBugsItem() { }
-		public string Name { get { return Catalog.GetString ("Project Bugs"); } }
-		public string Description { 
+		public override string Name { get { return Catalog.GetString ("Project Bugs"); } }
+		public override string Description { 
 			get { return Catalog.GetString ("Show open bugs in a project at Launchpad"); } 
 		}
 		
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadBugs.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
             if (items == null) { return false; }
 			//Package name can't have a space
@@ -97,7 +97,7 @@ namespace Do.Launchpad
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format("https://bugs.launchpad.net/{0}", (item as ITextItem).Text));
 		}
@@ -106,19 +106,19 @@ namespace Do.Launchpad
 	public class LaunchpadBugSearchItem : LaunchpadItem
 	{
 		public LaunchpadBugSearchItem() { }
-		public string Name { get { return "Bug Search"; } }
-		public string Description { get { return "Search for bugs at Launchpad"; } }
-		public string Icon
+		public override string Name { get { return "Bug Search"; } }
+		public override string Description { get { return "Search for bugs at Launchpad"; } }
+		public override string Icon
 		{ 
 			get { return "LaunchpadBugs.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
 			return true;
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Regex spaces = new Regex(@"\s+");
 			string query = (item as ITextItem).Text;

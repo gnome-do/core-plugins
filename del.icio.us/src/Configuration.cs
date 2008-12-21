@@ -20,7 +20,6 @@
 
 
 using System;
-using Do.UI;
 
 namespace Delicious
 {	

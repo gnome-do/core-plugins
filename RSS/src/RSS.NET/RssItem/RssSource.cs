@@ -2,7 +2,7 @@
  * ============
  * 
  * RSS.NET (http://rss-net.sf.net/)
- * Copyright © 2002 - 2005 George Tsiokos. All Rights Reserved.
+ * Copyright ï¿½ 2002 - 2005 George Tsiokos. All Rights Reserved.
  * 
  * RSS 2.0 (http://blogs.law.harvard.edu/tech/rss)
  * RSS 2.0 is offered by the Berkman Center for Internet & Society at 
@@ -51,7 +51,7 @@ namespace Rss
 		}
 
 		/// <summary>Name of the RSS channel that the item came from</summary>
-		public string Name
+		public override string Name
 		{
 			get { return name; }
 			set { name = RssDefault.Check(value); }

@@ -27,19 +27,19 @@ using Do.Universe;
 using Mono.Unix;
 
 namespace Text {	
-	public class AppendTextAction : IAction {
+	public class AppendTextAction : Act {
 
-		public string Name { get { return Catalog.GetString ("Append to..."); } }
-		public string Description { get { return Catalog.GetString ("Appends text to a selected file."); } }
-		public string Icon { get { return "text-editor"; } }
+		public override string Name { get { return Catalog.GetString ("Append to..."); } }
+		public override string Description { get { return Catalog.GetString ("Appends text to a selected file."); } }
+		public override string Icon { get { return "text-editor"; } }
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] { typeof (ITextItem) };
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type[] { typeof (FileItem), typeof(ITextItem) };
 			}
@@ -50,12 +50,12 @@ namespace Text {
 		}
 		
 
-		public bool SupportsItem (IItem item)
+		public bool SupportsItem (Item item)
 		{
 			return true;
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			if (modItem is FileItem) {
 				string mime = (modItem as FileItem).MimeType;
@@ -64,12 +64,12 @@ namespace Text {
 			return modItem is ITextItem;
 		}
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
 
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (modItems.First () is FileItem) {
 				string text = (items.First () as ITextItem).Text;
@@ -88,7 +88,7 @@ namespace Text {
 			else {
 				string text = (items.First () as ITextItem).Text;
 				string text2 = (modItems.First () as ITextItem).Text;
-				return new IItem[] { new TextItem (text + text2) };
+				return new Item[] { new TextItem (text + text2) };
 			}
 		}
 	}

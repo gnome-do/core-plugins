@@ -1,4 +1,4 @@
-<Project name="Banshee" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Banshee" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Banshee" />
@@ -32,4 +32,5 @@
     <ProjectReference type="Gac" localcopy="True" refto="NDesk.DBus.GLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.4.0.1, Culture=neutral" />
   </References>
+  <GtkDesignInfo />
 </Project>

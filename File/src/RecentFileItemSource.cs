@@ -25,13 +25,13 @@ using Do.Universe;
 
 namespace FilePlugin
 {
-	public class RecentFileItemSource : IItemSource
+	public class RecentFileItemSource : ItemSource
 	{
-		List<IItem> files;
+		List<Item> files;
 		
 		public RecentFileItemSource()
 		{
-			files = new List<IItem> ();
+			files = new List<Item> ();
 			Gtk.RecentManager.Default.Changed += OnRecentChanged;
 
 			//UpdateItems ();
@@ -42,7 +42,7 @@ namespace FilePlugin
 			UpdateItems ();
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get { return new Type[] {
 					typeof (FileItem),
@@ -50,30 +50,30 @@ namespace FilePlugin
 			}
 		}
 		
-		public string Name
+		public override string Name
 		{
 			get { return Catalog.GetString ("Recent Files"); }
 		}
 		
-		public string Description
+		public override string Description
 		{
 			get { return Catalog.GetString ("Finds recently-opened files."); }
 		}
 		
-		public string Icon
+		public override string Icon
 		{
 			get { return "document"; }
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return files; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item) {
+		public override IEnumerable<Item> ChildrenOfItem (Item item) {
 			return null;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			/*
 			files.Clear ();

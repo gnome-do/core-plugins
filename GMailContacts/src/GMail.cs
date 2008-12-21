@@ -34,7 +34,7 @@ namespace GMailContacts
 	public static class GMail
 	{
 		public const string GAppName = "alexLauni-gnomeDoGMailPlugin-1.2";
-		private static List<IItem> contacts;
+		private static List<Item> contacts;
 		private static object conts_lock;
 		private static DateTime last_updated;
 		private static ContactsService service;
@@ -44,7 +44,7 @@ namespace GMailContacts
 			string username, password;
 			username = password = "";
 			ServicePointManager.CertificatePolicy = new CertHandler ();
-			contacts = new List<IItem> ();
+			contacts = new List<Item> ();
 			conts_lock = new object ();
 			last_updated = new DateTime (1987, 11, 28);
 			GMailConfig.GetAccountData (out username, out password,
@@ -52,7 +52,7 @@ namespace GMailContacts
 			Connect (username, password);
 		}
 		
-		public static List<IItem> Contacts {
+		public static List<Item> Contacts {
 			get { return contacts; }
 		}
 		

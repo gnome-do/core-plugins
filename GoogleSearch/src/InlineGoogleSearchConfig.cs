@@ -22,7 +22,7 @@
 
 
 using System;
-using Do.Addins;
+
 
 /// <summary>
 /// Do plug-in that returns search results from google back to gnome-do for 

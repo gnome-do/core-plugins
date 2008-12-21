@@ -43,7 +43,7 @@ namespace GnomeDoManLookUp {
 	///		Allows us to hook up to Gnome-Do as a command
 	///		that can be applied to raw text or our own man page items. 
 	/// </summary>
-	public class ManLookUpAction : AbstractAction {
+	public class ManLookUpAction : Act {
 		
 		/// <value>
 		/// 	The name of the action
@@ -82,12 +82,12 @@ namespace GnomeDoManLookUp {
 		/// 	Do we support the item?
 		/// </summary>
 		/// <param name="item">
-		/// A <see cref="IItem"/>
+		/// A <see cref="Item"/>
 		/// </param>
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		public override bool SupportsItem (IItem item) 
+		public override bool SupportsItem (Item item) 
 		{
 			
 			bool rc  = false;
@@ -172,15 +172,15 @@ namespace GnomeDoManLookUp {
 		/// 	Called by Gnome-Do in order to perform our action.
 		/// </summary>
 		/// <param name="items">
-		/// List of <see cref="IItem"/> objects, either raw text or custom look up items
+		/// List of <see cref="Item"/> objects, either raw text or custom look up items
 		/// </param>
 		/// <param name="modItems">
-		/// List of <see cref="IItem"/> objects, action modifiers
+		/// List of <see cref="Item"/> objects, action modifiers
 		/// </param>
 		/// <returns>
-		/// List of <see cref="IItem"/>
+		/// List of <see cref="Item"/>
 		/// </returns>
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
 			
             		string keyword = null;

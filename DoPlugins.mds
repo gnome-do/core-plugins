@@ -3,8 +3,6 @@
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="Debug" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
-      <Entry build="False" name="Amarok" configuration="Debug" />
-      <Entry build="False" name="Banshee" configuration="Debug" />
       <Entry build="True" name="Epiphany" configuration="Debug" />
       <Entry build="True" name="Evolution" configuration="Debug" />
       <Entry build="True" name="File" configuration="Debug" />
@@ -47,8 +45,6 @@
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="Release" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
-      <Entry build="True" name="Amarok" configuration="Release" />
-      <Entry build="True" name="Banshee" configuration="Release" />
       <Entry build="True" name="Epiphany" configuration="Release" />
       <Entry build="True" name="Evolution" configuration="Release" />
       <Entry build="True" name="File" configuration="Release" />
@@ -92,8 +88,6 @@
   <StartMode startupentry="Packages" single="True">
     <Execute type="None" entry="Packages" />
     <Execute type="None" entry="Rhythmbox" />
-    <Execute type="None" entry="Amarok" />
-    <Execute type="None" entry="Banshee" />
     <Execute type="None" entry="Epiphany" />
     <Execute type="None" entry="Evolution" />
     <Execute type="None" entry="File" />
@@ -137,8 +131,6 @@
   <Entries>
     <Entry filename="Packages.mdse" />
     <Entry filename="Rhythmbox/Rhythmbox.mdp" />
-    <Entry filename="Amarok/Amarok.mdp" />
-    <Entry filename="Banshee/Banshee.mdp" />
     <Entry filename="Epiphany/Epiphany.mdp" />
     <Entry filename="Evolution/Evolution.mdp" />
     <Entry filename="File/File.mdp" />

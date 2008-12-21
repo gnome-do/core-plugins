@@ -23,7 +23,7 @@ using System.Text.RegularExpressions;
 
 using Gtk;
 using Do.UI;
-using Do.Addins;
+
 
 namespace GDocs
 {

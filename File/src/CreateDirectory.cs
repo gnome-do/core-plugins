@@ -26,7 +26,7 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	public class CreateDirectory : AbstractAction {
+	public class CreateDirectory : Act {
 
 		public override string Name {
 			get {
@@ -62,14 +62,14 @@ namespace FilePlugin {
 			}
 		}
 		
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			return !(item as ITextItem).Text.Contains ("/") &&
 				!(item as ITextItem).Text.Equals (".") &&
 				!(item as ITextItem).Text.Equals ("..");
 		}
 
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			// Check for archive types
 			FileItem fi = modItem as FileItem;
@@ -80,7 +80,7 @@ namespace FilePlugin {
 			get { return true; }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			FileItem directory;
 			if (modItems.Any ())
@@ -96,7 +96,7 @@ namespace FilePlugin {
 			Directory.CreateDirectory (filePath);
 			
 			// Return the new file, so new actions can be used on it
-			return new IItem [] { 
+			return new Item [] { 
 				new FileItem(filePath), 
 			};
 		}

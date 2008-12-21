@@ -26,13 +26,13 @@ using System.Collections.Generic;
 using MonoTorrent.Client;
 
 using Do.Universe;
-using Do.Addins;
+
 
 namespace Do.Riptide
 {
 	
 	
-	public class TorrentStatusAction : AbstractAction
+	public class TorrentStatusAction : Act
 	{
 		
 		public override string Name {
@@ -53,7 +53,7 @@ namespace Do.Riptide
 			}
 		}
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			return ((item as ITextItem).Text.Length == 0);
 		}
@@ -63,9 +63,9 @@ namespace Do.Riptide
 		}
 
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			List<IItem> outitems = new List<IItem> ();
+			List<Item> outitems = new List<Item> ();
 			foreach (TorrentManager t in TorrentClientManager.Managers) {
 				outitems.Add (new ActiveTorrentItem (t));
 			}

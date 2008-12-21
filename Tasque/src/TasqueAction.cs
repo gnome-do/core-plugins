@@ -31,7 +31,7 @@ using Mono.Unix;
 namespace Tasque
 {
 	
-        public class TasqueCreateTask : AbstractAction
+        public class TasqueCreateTask : Act
         {
 		
                 public TasqueCreateTask ()
@@ -58,7 +58,7 @@ namespace Tasque
 			}
 		}
 			
-		public override bool SupportsItem (IItem item) {
+		public override bool SupportsItem (Item item) {
 			return true;
 		}
 		
@@ -70,9 +70,9 @@ namespace Tasque
 			}
 		}
 			
-		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			List<IItem> items = new List<IItem> ();
+			List<Item> items = new List<Item> ();
 			
 			try {
 				items = Tasque.GetCategoryItems ();
@@ -87,7 +87,7 @@ namespace Tasque
 			get { return true; }
 		}
 
-		public override IEnumerable<IItem> Perform ( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
+		public override IEnumerable<Item> Perform ( IEnumerable<Item> items, IEnumerable<Item> modifierItems )
 		{
 			if ( modifierItems.Any ())	
 				TextItemPerform (items.First () as ITextItem, modifierItems.First () as TasqueCategoryItem);
@@ -97,7 +97,7 @@ namespace Tasque
 			return null;
 		}
 		
-		protected IItem[] TextItemPerform (ITextItem item, TasqueCategoryItem category)
+		protected Item[] TextItemPerform (ITextItem item, TasqueCategoryItem category)
 		{
 			string defaultCategory;
 

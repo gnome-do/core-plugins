@@ -34,7 +34,7 @@ namespace WindowManager
 		PreviousApplication = 3,
 	}
 	
-	public class GenericWindowItem : IItem
+	public class GenericWindowItem : Item
 	{
 		string name, description, icon;
 		GenericWindowType windowType;
@@ -48,19 +48,19 @@ namespace WindowManager
 			this.windowType = windowType;
 		}
 		
-		public string Name {
+		public override string Name {
 			get {
 				return name;
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return description;
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return icon;
 			}

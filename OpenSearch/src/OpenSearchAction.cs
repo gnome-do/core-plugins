@@ -23,12 +23,12 @@ using System.Linq;
 
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace OpenSearch
 {
-	public class OpenSearchAction : AbstractAction
+	public class OpenSearchAction : Act
 	{		
 		public override string Name
 		{
@@ -54,7 +54,7 @@ namespace OpenSearch
 			}
 		}
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (item is ITextItem) 
 				return true;
@@ -70,13 +70,13 @@ namespace OpenSearch
 			}
 		}			
 	
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{					
 			List<string> searchTerms;
 				
 			if (modifierItems.Any ()) {
 				searchTerms = new List<string> ();
-				foreach (IItem item in items) {
+				foreach (Item item in items) {
 					searchTerms.Add ((item as ITextItem).Text);
 				}
 				

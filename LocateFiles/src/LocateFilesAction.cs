@@ -26,7 +26,7 @@ using Mono.Unix;
 
 namespace Do.Universe
 {
-	public class LocateFilesAction : AbstractAction
+	public class LocateFilesAction : Act
 	{
 		
 		bool allowHidden = false;
@@ -56,13 +56,13 @@ namespace Do.Universe
 			}
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
-			List<IItem> files;
+			List<Item> files;
 			System.Diagnostics.Process locate;
 			string query;
 				
-			files = new List<IItem> ();
+			files = new List<Item> ();
 			query = (items.First () as ITextItem).Text;
 			
 			locate = new System.Diagnostics.Process ();
@@ -97,7 +97,7 @@ namespace Do.Universe
 
 		// Order files by (A) position of query in the file name and
 		// (B) by name length.
-		private class FileItemNameComparer : IComparer<IItem>
+		private class FileItemNameComparer : IComparer<Item>
 		{
 			string query;
 
@@ -106,7 +106,7 @@ namespace Do.Universe
 				this.query = query.ToLower ();
 			}
 
-			public int Compare (IItem a, IItem b)
+			public int Compare (Item a, Item b)
 			{
 				string a_name_lower, b_name_lower;
 				int a_score, b_score;

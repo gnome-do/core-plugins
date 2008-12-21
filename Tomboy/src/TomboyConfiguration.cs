@@ -26,7 +26,7 @@
 
 using System;
 
-using Do.Addins;
+
 
 namespace Tomboy
 {

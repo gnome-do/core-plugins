@@ -35,7 +35,7 @@ using Do.Universe;
 namespace GDocs {
 	public static class GDocs {
 		private static DocumentsService service;
-		private static List<IItem> docs;
+		private static List<Item> docs;
 		private static object docs_lock;
 		
 		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
@@ -47,7 +47,7 @@ namespace GDocs {
 			//Google works over SSL, we need accept the cert.
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			
-			docs = new List<IItem> ();
+			docs = new List<Item> ();
 			docs_lock = new object ();
 			
 			Configuration.GetAccountData (out username, out password,
@@ -71,7 +71,7 @@ namespace GDocs {
 			return true;
 		}
 		
-		public static List<IItem> Docs {
+		public static List<Item> Docs {
 			get { return docs; }
 		}
 		
@@ -107,7 +107,7 @@ namespace GDocs {
 			}
 		}
 		
-		public static IItem UploadDocument (string fileName, string documentName)
+		public static Item UploadDocument (string fileName, string documentName)
 		{
 			DocumentEntry newDoc;
 			GDocsItem newDocItem;

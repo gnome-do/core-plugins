@@ -26,7 +26,7 @@ using GConf;
 
 namespace GNOME.Terminal 
 {
-	public class ProfileItem : IItem
+	public class ProfileItem : Item
 	{
 		private string name;
 		private string description;
@@ -47,15 +47,15 @@ namespace GNOME.Terminal
 				description = "GNOME Terminal Profile";
         }
 
-        public string Name {
+        public override string Name {
             get { return name; }
         }
        
-        public string Description {
+        public override string Description {
             get { return description; }
         }
        
-        public string Icon {
+        public override string Icon {
             get { return "gnome-terminal"; }
         }
 	}

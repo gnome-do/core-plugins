@@ -22,7 +22,7 @@ using System;
 using System.Text;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace GDocs
@@ -37,7 +37,7 @@ namespace GDocs
             this.url = url;
         }
 
-        public string Name {
+        public override string Name {
             get { return name; }
         }
 

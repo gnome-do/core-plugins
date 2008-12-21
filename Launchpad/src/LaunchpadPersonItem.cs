@@ -20,7 +20,7 @@ using System;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
-using Do.Addins;
+
 using Mono.Unix;
 
 namespace Do.Launchpad
@@ -28,17 +28,17 @@ namespace Do.Launchpad
 	public class LaunchpadUserPageItem : LaunchpadItem
 	{
 		public LaunchpadUserPageItem() { }
-		public string Name { get { return Catalog.GetString ("User Page"); } }
-		public string Description { 
+		public override string Name { get { return Catalog.GetString ("User Page"); } }
+		public override string Description { 
 			get { return Catalog.GetString ("Go to user's page in Launchpad"); }
 		}
 		
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadUser.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
             if (items == null) { return false; }
 			//Project name can't have a space
@@ -46,7 +46,7 @@ namespace Do.Launchpad
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format("https://launchpad.net/~{0}", (item as ITextItem).Text));
 		}
@@ -55,20 +55,20 @@ namespace Do.Launchpad
 	public class LaunchpadUserSearchItem : LaunchpadItem
 	{
 		public LaunchpadUserSearchItem() { }
-		public string Name { get { return "User Search"; } }
-		public string Description { get { return "Search for a user in Launchpad"; } }
+		public override string Name { get { return "User Search"; } }
+		public override string Description { get { return "Search for a user in Launchpad"; } }
 		
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadUser.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
 			return true;
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Regex spaces = new Regex(@"\s+");
 			string query = (item as ITextItem).Text;

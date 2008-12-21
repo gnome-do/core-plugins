@@ -22,7 +22,7 @@ using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public class PidginStatusTypeItem : IItem
+	public class PidginStatusTypeItem : Item
 	{
 		string iconBase;
 		uint status;
@@ -33,7 +33,7 @@ namespace Do.Addins.Pidgin
 			this.iconBase = "/usr/share/pixmaps/pidgin/status/48/";
 		}
 		
-		public string Name {
+		public override string Name {
 			get {
 				switch (status) {
 				case 1: return Catalog.GetString ("Offline");
@@ -46,11 +46,11 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Name; }
 		}
 		
-		public string Icon { 
+		public override string Icon { 
 			get  { 
 				switch (status) {
 				case 1: return iconBase + "offline.png";

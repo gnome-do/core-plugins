@@ -28,7 +28,7 @@ using Mono.Unix;
 namespace Do.Plugins.Amarok
 {
 
-	public abstract class MusicItem : IItem
+	public abstract class MusicItem : Item
 	{
 		protected string name, artist, year, cover;
 

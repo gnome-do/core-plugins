@@ -32,13 +32,13 @@ namespace WindowManager
 		Wnck.Window window;
 		string icon;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return window.Name;
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return window.Name;
 			}
@@ -50,7 +50,7 @@ namespace WindowManager
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return icon;
 			}
@@ -68,19 +68,19 @@ namespace WindowManager
 	{
 		string name, description, icon;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return name;
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return description;
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return icon;
 			}

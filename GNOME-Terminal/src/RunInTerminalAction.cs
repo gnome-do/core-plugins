@@ -28,7 +28,7 @@ using Do.Universe;
 
 namespace GNOME.Terminal
 {
-	public class RunInTerminalAction : AbstractAction
+	public class RunInTerminalAction : Act
 	{
 		static string last_command_found;
 		
@@ -61,7 +61,7 @@ namespace GNOME.Terminal
 	      }
 	    }
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (item is ITextItem) {
 				return CommandLineFoundOnPath ((item as ITextItem).Text);
@@ -71,9 +71,9 @@ namespace GNOME.Terminal
 			return false;
 		}
 
-	    public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+	    public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 	    {
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				string cmd = "";
 				if (item is ITextItem) {
 					cmd = (item as ITextItem).Text;

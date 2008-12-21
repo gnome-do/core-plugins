@@ -40,16 +40,16 @@ namespace Evolution
 		public string Key { get { return key; } }
 	}
 	
-	public class ContactItemSource : IItemSource
+	public class ContactItemSource : ItemSource
 	{
-		List<IItem> contacts;
+		List<Item> contacts;
 		
 		public ContactItemSource ()
 		{
-			contacts = new List<IItem> ();
+			contacts = new List<Item> ();
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ContactItem),
@@ -57,17 +57,17 @@ namespace Evolution
 			}
 		}
 		
-		public string Name { get { return Catalog.GetString ("Evolution Contacts"); } }
-		public string Description { get { return Catalog.GetString ("Evolution Contacts"); } }
-		public string Icon { get { return "evolution"; } }
+		public override string Name { get { return Catalog.GetString ("Evolution Contacts"); } }
+		public override string Description { get { return Catalog.GetString ("Evolution Contacts"); } }
+		public override string Icon { get { return "evolution"; } }
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return contacts; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			List<IItem> details = new List<IItem> ();
+			List<Item> details = new List<Item> ();
 			ContactItem contact = item as ContactItem;
 			foreach (string detail in contact.Details) {
 				if (!detail.EndsWith (".evolution")) continue;
@@ -86,7 +86,7 @@ namespace Evolution
 			return details;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			// Disallow updating due to memory leak.
 			if (contacts.Count > 0) return;

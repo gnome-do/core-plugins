@@ -40,27 +40,27 @@ namespace Delicious
 		}
 	}
 
-	public class SearchAction : IAction
+	public class SearchAction : Act
 	{
-		public string Name {
+		public override string Name {
 			get {
 				return "Search del.icio.us";
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get {
 				return "del.icio.us tag search";
 			}
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get {
 				return "bookmark-new";
 			}
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -68,11 +68,11 @@ namespace Delicious
 			}
 		}
 
-		public bool SupportsItem (IItem item) {
+		public bool SupportsItem (Item item) {
 			return true;
 		}
 
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			String tags = (items.First () as ITextItem).Text.Replace(" ","+");
 
@@ -108,7 +108,7 @@ namespace Delicious
 
 			XmlTextReader reader;
 
-			List<IItem> hits = new List<IItem> ();
+			List<Item> hits = new List<Item> ();
 			try {
 				HttpWebResponse response = request.GetResponse () as HttpWebResponse;
 				reader = new XmlTextReader (response.GetResponseStream ());
@@ -129,7 +129,7 @@ namespace Delicious
 			return hits.ToArray ();
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { return new Type [] {}; }
 		}
 
@@ -137,12 +137,12 @@ namespace Delicious
 			get { return true; }
 		}
 				
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return true;
 		}
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
