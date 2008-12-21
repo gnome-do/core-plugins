@@ -23,7 +23,7 @@ using System.Threading;
 
 using Do.Universe;
 
-namespace GNOME.Session
+namespace GNOME
 {
 	class SessionCommandItem : IRunnableItem
 	{
