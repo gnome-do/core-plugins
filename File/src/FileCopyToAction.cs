@@ -27,19 +27,19 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	class CopyToAction : IAction {
+	class CopyToAction : Act {
 
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Copy to..."); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Copies a file or folder to another location."); }
 		}
 		
-		public string Icon { get { return "gtk-copy"; } } 
+		public override string Icon { get { return "gtk-copy"; } } 
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem),
@@ -47,7 +47,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -59,22 +59,22 @@ namespace FilePlugin {
 			get { return false; }
 		}
 
-		public bool SupportsItem (IItem item)
+		public bool SupportsItem (Item item)
 		{
 			return true;
 		}
 
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return FileItem.IsDirectory (modItem as IFileItem);
 		}
 
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
 
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			IFileItem dest;
 			List<string> seenPaths;

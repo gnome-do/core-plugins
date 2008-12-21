@@ -23,26 +23,26 @@ using System.Threading;
 using System.Collections.Generic;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace GDocs
 {
-    public sealed class GDocsItemSource : IItemSource, IConfigurable
+    public sealed class GDocsItemSource : ItemSource, IConfigurable
     {
-        public string Name {
+        public override string Name {
             get { return Catalog.GetString ("Google Docs"); }
         }
 
-        public string Description {
+        public override string Description {
             get { return Catalog.GetString ("Indexes your documents stored at Google Docs"); }
         }
 
-        public string Icon {
+        public override string Icon {
             get { return "gDocsIcon.png@" + GetType ().Assembly.FullName; }
         }
 
-        public IEnumerable<Type> SupportedItemTypes {
+        public override IEnumerable<Type> SupportedItemTypes {
             get {
                 return new Type[] {
 					typeof (GDocsItem),
@@ -50,16 +50,16 @@ namespace GDocs
             }
         }
 
-        public IEnumerable<IItem> Items {
+        public override IEnumerable<Item> Items {
             get { return GDocs.Docs; }
         }
 
-        public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+        public override IEnumerable<Item> ChildrenOfItem (Item parent)
         {
             return null;
         }
 
-        public void UpdateItems ()
+        public override void UpdateItems ()
         {
             Thread updateDocs = new Thread (new ThreadStart (GDocs.UpdateDocs));
             updateDocs.IsBackground = true;

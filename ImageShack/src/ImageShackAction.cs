@@ -25,14 +25,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
-using Do.Addins;
+
 using Do.Universe;
 
 using Mono.Unix;
 
 namespace ImageShack
 {
-	public class ImageShackAction : AbstractAction, IConfigurable
+	public class ImageShackAction : Act, IConfigurable
 	{
 		public override string Name
 		{
@@ -58,7 +58,7 @@ namespace ImageShack
 			}
 		}
 			
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{	
 			if (item is FileItem) {	
 				if ((item as FileItem).MimeType.StartsWith ("image/")) {
@@ -73,13 +73,13 @@ namespace ImageShack
 			return new ImageShackConfig();
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{								
 			try {
-				List<IItem> returnItems = new List<IItem> ();	
+				List<Item> returnItems = new List<Item> ();	
 				StringBuilder notificationUrlList = new StringBuilder();
 				notificationUrlList.AppendLine (Catalog.GetString ("Image urls: "));
-				foreach (IItem item in items) {	
+				foreach (Item item in items) {	
 					FileItem fileItem = item as FileItem;
 						
 					string fileValidationError = ValidateFileForUpload (fileItem.Path);	
@@ -107,7 +107,7 @@ namespace ImageShack
 			}
 			catch (Exception e) {
 				Console.Error.WriteLine (Catalog.GetString ("ImageShack exception: ") + e.Message);
-				return new IItem[] { new TextItem (Catalog.GetString ("An error occured while uploading to ImageShack.")) };
+				return new Item[] { new TextItem (Catalog.GetString ("An error occured while uploading to ImageShack.")) };
 			}					
 		}		
 			

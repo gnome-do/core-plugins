@@ -21,7 +21,7 @@
 using System;
 using System.Text;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace GCalendar {
@@ -34,15 +34,15 @@ namespace GCalendar {
 			this.desc = desc;
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return name; }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return desc; }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "date"; }
 		}
 		

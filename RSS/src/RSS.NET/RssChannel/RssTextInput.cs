@@ -2,7 +2,7 @@
  * ===============
  * 
  * RSS.NET (http://rss-net.sf.net/)
- * Copyright © 2002 - 2005 George Tsiokos. All Rights Reserved.
+ * Copyright ï¿½ 2002 - 2005 George Tsiokos. All Rights Reserved.
  * 
  * RSS 2.0 (http://blogs.law.harvard.edu/tech/rss)
  * RSS 2.0 is offered by the Berkman Center for Internet & Society at 
@@ -75,14 +75,14 @@ namespace Rss
 		}
 		/// <summary>Explains the text input area</summary>
 		/// <remarks>Maximum length is 500 (For RSS 0.91)</remarks>
-		public string Description
+		public override string Description
 		{
 			get { return description; }
 			set { description = RssDefault.Check(value); }
 		}
 		/// <summary>The name of the text object in the text input area</summary>
 		/// <remarks>Maximum length is 20 (For RSS 0.91).</remarks>
-		public string Name
+		public override string Name
 		{
 			get { return name; }
 			set { name = RssDefault.Check(value); }

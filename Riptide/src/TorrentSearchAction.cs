@@ -35,7 +35,7 @@ namespace Do.Riptide
 {
 	
 	
-	public class TorrentSearchAction : AbstractAction
+	public class TorrentSearchAction : Act
 	{
 		
 		public TorrentSearchAction()
@@ -60,14 +60,14 @@ namespace Do.Riptide
 		}
 
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			List<IItem> outItems;
+			List<Item> outItems;
 			string search;
 			WebRequest req = null;
 			WebResponse res = null;
 			
-			outItems = new List<IItem> ();
+			outItems = new List<Item> ();
 			
 			search = HttpUtility.UrlEncode ((items.First () as ITextItem).Text);
 			search = "http://isohunt.com/js/rss/" + search;

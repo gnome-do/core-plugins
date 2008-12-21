@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using Do.Universe;
 
 namespace VinagreVNC {  
-    public class HostItem : IItem  {
+    public class HostItem : Item  {
         string bookmark, hostname, port;
 
         public HostItem (string bookmark, string hostname, string port  )
@@ -35,15 +35,15 @@ namespace VinagreVNC {
             this.port = port;
         }
 
-        public string Name { 
+        public override string Name { 
             get { return bookmark; }
         }
 
-        public string Description { 
+        public override string Description { 
             get { return hostname; }
         }
 
-        public string Icon { 
+        public override string Icon { 
             get { return "gnome-globe"; } 
         }
 

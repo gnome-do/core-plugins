@@ -19,7 +19,7 @@
  */
 
 using System;
-using Do.Addins;
+
 using Do.Universe;
 using Mono.Unix;
 
@@ -27,15 +27,15 @@ namespace VolumeControl
 {
 	public class VolumeDownItem : IRunnableItem
 	{
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Volume Down"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Decrease system volume"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "audio-volume-low"; }
 		}
 		

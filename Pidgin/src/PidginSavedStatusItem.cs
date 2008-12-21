@@ -10,7 +10,7 @@ using Do.Universe;
 
 namespace Do.Addins.Pidgin
 {
-	public sealed class PidginSavedStatusItem : IItem
+	public sealed class PidginSavedStatusItem : Item
 	{
 		private string name, message, iconBase;
 		private int status, id;
@@ -24,11 +24,11 @@ namespace Do.Addins.Pidgin
 			this.iconBase = "/usr/share/pixmaps/pidgin/status/48/";
 		}
 		
-		public string Name { get { return name; } }
-		public string Description { get { return StripHTML (message); } }
+		public override string Name { get { return name; } }
+		public override string Description { get { return StripHTML (message); } }
 		public int Status { get { return status; } }
 		public int ID { get { return id; } }
-		public string Icon { 
+		public override string Icon { 
 			get  { 
 				switch (status) {
 				case 2: return iconBase + "available.png";

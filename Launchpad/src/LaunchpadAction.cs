@@ -22,7 +22,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
-using Do.Addins;
+
 using Mono.Unix;
 
 namespace Do.Launchpad
@@ -31,7 +31,7 @@ namespace Do.Launchpad
 	/// Given an ITextItem, GoogleSearchAction will search google for the
 	/// text contents of the ITextItem.
 	/// </summary>
-	class LaunchpadAction : AbstractAction
+	class LaunchpadAction : Act
 	{
 		public override string Name
 		{
@@ -60,7 +60,7 @@ namespace Do.Launchpad
 
     public override bool ModifierItemsOptional { get { return false; } }
 
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return (modItem as LaunchpadItem).SupportsItems(items.ToArray ());
 		}
@@ -75,9 +75,9 @@ namespace Do.Launchpad
 			}
 		}
 
-		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return new IItem[] {
+			return new Item[] {
 				new LaunchpadAnswerSearchItem(),
 					new LaunchpadProjectAnswersItem(),
 					new LaunchpadBlueprintsItem(),
@@ -97,12 +97,12 @@ namespace Do.Launchpad
 			};
 		}
 
-    public override bool SupportsItem (IItem item)
+    public override bool SupportsItem (Item item)
     {
         return true;
     }
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) {
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
 			if (modItems.Any ()) {
 				(modItems.First () as LaunchpadItem).Perform(items.First ());
 			}
@@ -118,9 +118,9 @@ namespace Do.Launchpad
 	/// They are meant to behave just like Actions, but they need to be Items
 	/// to be listed in the right-hand box.
 	/// </summary>
-	interface LaunchpadItem : IItem
+	interface LaunchpadItem : Item
 	{
-		bool SupportsItems(IItem[] items);
-		void Perform (IItem item);
+		bool SupportsItems(Item[] items);
+		void Perform (Item item);
 	}
 }

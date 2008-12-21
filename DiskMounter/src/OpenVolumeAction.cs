@@ -25,11 +25,11 @@ using Gnome.Vfs;
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Addins;
+
 
 namespace DiskMounter
 {
-	public class OpenVolume : AbstractAction
+	public class OpenVolume : Act
 	{
 	
 		public OpenVolume ()
@@ -56,17 +56,17 @@ namespace DiskMounter
 			}
 		}
                 
-		public override bool SupportsItem (IItem item) 
+		public override bool SupportsItem (Item item) 
         {
 			return true;
 		}
                 
-        public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+        public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
         {
 			return false;
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			DriveItem drive = (DriveItem) items.First ();
 			try {

@@ -27,21 +27,21 @@ using Mono.Unix;
 
 namespace Delicious
 {
-	public class TagsItemSource : IItemSource
+	public class TagsItemSource : ItemSource
 	{
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Del.icio.us Tags"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Organizes your del.icio.bookmarks by tag"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "delicious.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (TagItem),
@@ -49,9 +49,9 @@ namespace Delicious
 			}
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get {
-				List<IItem> tags = new List<IItem> ();
+				List<Item> tags = new List<Item> ();
 				foreach (string tag in Delicious.Tags.Keys) {
 					tags.Add (new TagItem (tag));
 				}
@@ -59,12 +59,12 @@ namespace Delicious
 			}
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return Delicious.Tags [(item as TagItem).Name];
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 		}
 	}

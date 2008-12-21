@@ -19,30 +19,30 @@
 using System;
 using Mono.Unix;
 
-using Do.Addins;
+using Do.Platform;
 using Do.Universe;
 
 namespace Cl.ickable
 {
-	public class WebClipsItem : IOpenableItem
+	public class WebClipsItem : Item, IOpenableItem
 	{
 		const string WebClipsURL = "http://cl.ickable.com/clips/";
 		
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Cl.ickable Clips"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Opens your cl.ickable clips"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "edit-cut"; }
 		}
 		
 		public void Open ()
-		{
-			Util.Environment.Open (WebClipsURL);
+		{	
+			Services.Environment.OpenUrl (WebClipsURL);
 		}
 	}
 }

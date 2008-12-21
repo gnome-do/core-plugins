@@ -27,19 +27,19 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	class RenameToAction : IAction {
+	class RenameToAction : Act {
 		
-		public string Name { 
+		public override string Name { 
 			get { return Catalog.GetString ("Rename to..."); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Renames a file"); }
 		}
 		
-		public string Icon { get { return "forward"; } }
+		public override string Icon { get { return "forward"; } }
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -47,7 +47,7 @@ namespace FilePlugin {
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (ITextItem),
@@ -59,22 +59,22 @@ namespace FilePlugin {
 			get { return false; }
 		}
 		
-		public bool SupportsItem (IItem item)
+		public bool SupportsItem (Item item)
 		{
 			return true;
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return true;
 		}
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
 		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string dest;
 			List<string> seenPaths;

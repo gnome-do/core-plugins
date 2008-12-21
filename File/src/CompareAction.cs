@@ -24,26 +24,26 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Mono.Unix;
-using Do.Addins;
+
 using Do.Universe;
 
 namespace FilePlugin
 {
-	public class CompareAction : IAction, IConfigurable
+	public class CompareAction : Act, IConfigurable
 	{	
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Compare with"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("See the differences between two text files"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "edit-copy"; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem),
@@ -51,7 +51,7 @@ namespace FilePlugin
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (FileItem),
@@ -63,24 +63,24 @@ namespace FilePlugin
 			get { return false; }
 		}
 		
-		public bool SupportsItem (IItem item)
+		public bool SupportsItem (Item item)
 		{
 			if (!(item is FileItem)) return false;
 			return IsTextFile (item as FileItem);
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			if (!(modItem is FileItem)) return false;
 			return IsTextFile (modItem as FileItem);
 		}
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
 		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (String.IsNullOrEmpty (CompareConfig.DiffTool)) {
 				Console.Error.WriteLine ("You must have a diff tool configured "

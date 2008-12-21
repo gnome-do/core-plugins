@@ -21,7 +21,7 @@ using System;
 using System.Collections;
 using NDesk.DBus;
 using org.freedesktop.DBus;
-using Do.Addins;
+
 
 namespace Do.Addins.Banshee {
 

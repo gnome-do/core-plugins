@@ -31,7 +31,7 @@ namespace Archive {
         
         public enum ArchiveType { GZIP, BZIP2, TAR, ZIP };
         
-        public class ArchiveAction : AbstractAction {
+        public class ArchiveAction : Act {
                 
                 public ArchiveAction()
                 {
@@ -57,7 +57,7 @@ namespace Archive {
                         }
                 }
                 
-                public override bool SupportsItem (IItem item) 
+                public override bool SupportsItem (Item item) 
                 {
                         return true;
                 }
@@ -74,9 +74,9 @@ namespace Archive {
                         get { return true; }
                 }
                 
-                public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+                public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
                 {
-                        List<IItem> items = new List<IItem> ();
+                        List<Item> items = new List<Item> ();
         
                         try {
                                 items.Add(new ArchiveTypeItem (ArchiveType.GZIP));
@@ -90,7 +90,7 @@ namespace Archive {
                         
                 }
                 
-                public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+                public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
                 {
                         if ( modItems.Any ())
                                 Archive ((items.First () as IFileItem), (modItems.First () as ArchiveTypeItem).ArchiveType);

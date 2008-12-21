@@ -27,7 +27,7 @@ using Do.Universe;
 
 namespace GNOME.Terminal
 {
-	public class OpenTerminalHereAction : AbstractAction
+	public class OpenTerminalHereAction : Act
 	{	
 		public OpenTerminalHereAction()
 		{
@@ -57,7 +57,7 @@ namespace GNOME.Terminal
 	      }
 	    }
 
-	    public override IEnumerable<IItem> Perform( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
+	    public override IEnumerable<Item> Perform( IEnumerable<Item> items, IEnumerable<Item> modifierItems )
 	    {
 	    	Process term;
 	    	string dir;

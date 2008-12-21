@@ -23,7 +23,7 @@ using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Addins;
+
 
 namespace Google
 {
@@ -32,7 +32,7 @@ namespace Google
 	/// with a modifier item it will plot the route from the item location
 	/// to the modifier location
 	/// </summary>
-	public class MapAction : AbstractAction
+	public class MapAction : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Map"); }
@@ -70,7 +70,7 @@ namespace Google
 			}		
 		}
 				
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (item is ContactItem)
 				return ContactSupportsAddress (item as ContactItem);
@@ -82,7 +82,7 @@ namespace Google
 			return false;
 		}
 		
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return SupportsItem (modItem);
 		}
@@ -91,12 +91,12 @@ namespace Google
             get { return true; }
         }
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			string expression, url, start, end;
 			start = end = String.Empty;
 			
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				start = AddressFromItem (item);
 				
 				if (modifierItems.Any ())
@@ -113,7 +113,7 @@ namespace Google
 			return null;
 		}
 		
-		string AddressFromItem (IItem item)
+		string AddressFromItem (Item item)
 		{
 			if (item is IContactDetailItem)
 				return (item as IContactDetailItem).Value;

@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
-using Do.Addins;
+
 using Mono.Unix;
 
 /// <summary>
@@ -35,7 +35,7 @@ namespace InlineGoogleSearch {
 	/// <summary>
 	/// Class Definition
 	/// </summary>
-	public class ImFeelingLucky : AbstractAction, IConfigurable {	
+	public class ImFeelingLucky : Act, IConfigurable {	
 		/// <value>
 		/// I'm Feeling Lucky
 		/// </value>
@@ -83,12 +83,12 @@ namespace InlineGoogleSearch {
 		/// Actual code performed when action is executed in Do
 		/// </summary>
 		/// <param name="items">
-		/// Items. ITextItem <see cref="IItem"/>
+		/// Items. ITextItem <see cref="Item"/>
 		/// </param>
 		/// <param name="modItems">
-		/// Modifier Items. None <see cref="IItem"/>
+		/// Modifier Items. None <see cref="Item"/>
 		/// </param>
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel

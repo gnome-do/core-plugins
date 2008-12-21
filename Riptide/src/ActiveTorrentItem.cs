@@ -34,19 +34,19 @@ namespace Do.Riptide
 		private string name, description;
 		private TorrentManager torrent;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return name;
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return description;
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return "stock_internet";
 			}

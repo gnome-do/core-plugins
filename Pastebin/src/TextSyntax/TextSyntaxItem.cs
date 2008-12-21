@@ -33,17 +33,17 @@ namespace Pastebin
 			this.syntax = syntax;
 		}
 		
-		public string Name
+		public override string Name
 		{
 			get { return name; }
 		}
 		
-		public string Description
+		public override string Description
 		{
 			get { return description; }
 		}
 		
-		public string Icon
+		public override string Icon
 		{
 			get { return icon; }
 		}

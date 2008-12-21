@@ -29,7 +29,7 @@ using Do.Universe;
 namespace Do.Rhythmbox
 {
 
-	public class EnqueueAction : AbstractAction
+	public class EnqueueAction : Act
 	{
 
 		public override string Name {
@@ -48,12 +48,12 @@ namespace Do.Rhythmbox
 			get { yield return typeof (MusicItem); }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Rhythmbox.StartIfNeccessary ();
 
-				foreach (IItem item in items) {
+				foreach (Item item in items) {
 					string enqueue;
 
 					enqueue = "--no-present ";

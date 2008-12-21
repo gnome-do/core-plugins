@@ -25,7 +25,7 @@ using Mono.Unix;
 
 namespace Delicious
 {
-	public class TagItem : IItem
+	public class TagItem : Item
 	{
 		string tag;
 		public TagItem (string tag)
@@ -33,13 +33,13 @@ namespace Delicious
 			this.tag = tag;
 		}
 		
-		public string Name {
+		public override string Name {
 			get {
 				return tag;
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get { 
 				if (tag.Equals ("Untagged"))
 					return Catalog.GetString ("Untagged del.ico.us bookmarks");				
@@ -48,7 +48,7 @@ namespace Delicious
 			}
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "delicious.png@" + GetType ().Assembly.FullName; }
 		}
 	}

@@ -20,31 +20,31 @@ using System;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
-using Do.Addins;
+
 using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadRegisterItem : LaunchpadItem
 	{
-		public string Name { 
+		public override string Name { 
 			get { return Catalog.GetString ("Register Project"); }
 		}
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Register a new project at Launchpad"); }
 		}
 
-		public string Icon { 
+		public override string Icon { 
 			get { return "LaunchpadRegister.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
 			return true;
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open("https://launchpad.net/projects/+new");
 		}

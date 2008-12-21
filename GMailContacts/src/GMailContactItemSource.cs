@@ -25,26 +25,26 @@ using Mono.Unix;
 
 using Gtk;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace GMailContacts
 {	
-	public sealed class GMailContactsItemSource : IItemSource, IConfigurable
+	public sealed class GMailContactsItemSource : ItemSource, IConfigurable
 	{
-		public string Name { 
+		public override string Name { 
 			get { return Catalog.GetString ("GMail Contacts"); }
 		}
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Indexes your GMail contacts"); }
 		}
 		
-		public string Icon { 
+		public override string Icon { 
 			get { return "gmail-logo.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ContactItem),
@@ -52,14 +52,14 @@ namespace GMailContacts
 			}
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return GMail.Contacts; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item) 
+		public override IEnumerable<Item> ChildrenOfItem (Item item) 
 		{
 			ContactItem contact = item as ContactItem;
-			List<IItem> details = new List<IItem> ();
+			List<Item> details = new List<Item> ();
 			foreach (string detail in contact.Details) {
 				if (detail.Contains (".gmail"))
 					details.Add (
@@ -68,7 +68,7 @@ namespace GMailContacts
 			return details;
 		}
 		
-		public void UpdateItems () 
+		public override void UpdateItems () 
 		{
 			try {
 				Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));

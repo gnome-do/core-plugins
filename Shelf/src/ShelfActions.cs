@@ -28,7 +28,7 @@ using Mono.Unix;
 namespace Do.Universe
 {
 	
-	public class ShelfExploreAction : AbstractAction
+	public class ShelfExploreAction : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Explore Shelf"); }
@@ -49,13 +49,13 @@ namespace Do.Universe
 			}
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			return (items.First () as ShelfItem).Items.ToArray ();
 		}
 	}
 	
-	public class ShelfRemoveAction : AbstractAction
+	public class ShelfRemoveAction : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Remove From Shelf"); }
@@ -75,17 +75,17 @@ namespace Do.Universe
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
-				typeof (IItem),
+				typeof (Item),
 				};
 			}
 		}
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			return ShelfItemSource.InShelf (item);
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (!modItems.Any ())
 				ShelfItemSource.RemoveFromDefault (items.First ());
@@ -96,7 +96,7 @@ namespace Do.Universe
 		}
 	}
 	
-	public class ShelfAddAction : AbstractAction
+	public class ShelfAddAction : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Add To Shelf"); }
@@ -116,17 +116,17 @@ namespace Do.Universe
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
-				typeof (IItem),
+				typeof (Item),
 				};
 			}
 		}
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			return (!(item is ShelfItem) && !ShelfItemSource.InShelf (item));
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (!modItems.Any ()) {
 				ShelfItemSource.AddToDefault (items.First ());

@@ -21,7 +21,7 @@ using Do.Universe;
 
 namespace OpenSearch
 {
-	public interface IOpenSearchItem : IItem
+	public interface IOpenSearchItem : Item
 	{
 		
 		string UrlTemplate { get; }

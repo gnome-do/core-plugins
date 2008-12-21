@@ -26,28 +26,28 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace VinagreVNC {  
-    public class VNCHostItem : IItemSource {
-        List<IItem> items;
+    public class VNCHostItem : ItemSource {
+        List<Item> items;
 
         public VNCHostItem ()
         {
-            items = new List<IItem> ();
+            items = new List<Item> ();
             //UpdateItems ();
         }
 
-        public string Name { 
+        public override string Name { 
             get { return Catalog.GetString ("Vinagre Bookmarks"); }
         }
 
-        public string Description { 
+        public override string Description { 
             get { return Catalog.GetString ("Indexes your Vinagre Bookmarks"); }
         }
 
-        public string Icon {
+        public override string Icon {
             get { return "gnome-globe"; }
         }
 
-        public IEnumerable<Type> SupportedItemTypes {
+        public override IEnumerable<Type> SupportedItemTypes {
             get {
                 return new Type[] {
                     typeof (VNCHostItem), 
@@ -56,16 +56,16 @@ namespace VinagreVNC {
             }
         }
 
-        public IEnumerable<IItem> Items {
+        public override IEnumerable<Item> Items {
             get { return items; }
         }
 
-        public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+        public override IEnumerable<Item> ChildrenOfItem (Item parent)
         {
             return null;  
         }
 
-        public void UpdateItems ()
+        public override void UpdateItems ()
         {
             items.Clear ();
             string bookmarks_file = Environment.GetEnvironmentVariable ("HOME") + "/.gnome2/vinagre.bookmarks";

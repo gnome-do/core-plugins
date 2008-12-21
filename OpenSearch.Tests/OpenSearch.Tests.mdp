@@ -1,4 +1,4 @@
-<Project name="OpenSearch.Tests" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="OpenSearch.Tests" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="OpenSearch.Tests" />
@@ -23,4 +23,5 @@
     <ProjectReference type="Project" localcopy="True" refto="OpenSearch" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.6.0.0, Culture=neutral" />
   </References>
+  <GtkDesignInfo />
 </Project>

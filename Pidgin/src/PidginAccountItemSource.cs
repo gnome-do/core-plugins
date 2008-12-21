@@ -24,20 +24,20 @@ using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public class PidginAccountItemSource : IItemSource
+	public class PidginAccountItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 		public PidginAccountItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 			//UpdateItems ();
 		}
 		
-		public string Name { get { return Catalog.GetString ("Pidgin Accounts"); } }
-		public string Description { get { return Catalog.GetString ("Available Pidgin IM Accounts"); } }
-		public string Icon { get { return "pidgin"; } }
+		public override string Name { get { return Catalog.GetString ("Pidgin Accounts"); } }
+		public override string Description { get { return Catalog.GetString ("Available Pidgin IM Accounts"); } }
+		public override string Icon { get { return "pidgin"; } }
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginAccountItem),
@@ -45,16 +45,16 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			Pidgin.IPurpleObject prpl;
 			prpl = Pidgin.GetPurpleObject ();
