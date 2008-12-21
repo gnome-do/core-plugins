@@ -78,12 +78,13 @@ namespace Microblogging
         	// make sure we dont go over 140 chars with the contact screen name
         	return message.Text.Length + buddyName.Length < MaxMessageLength;
         }
-        
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-        {
-            return Microblog.Friends;
-        }
 
+		public override IEnumerable<Item> DynamicModifierItemsForItem(Item item)
+		{
+			return Microblog.Friends;
+		}
+
+        
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
         {
         	string status;
