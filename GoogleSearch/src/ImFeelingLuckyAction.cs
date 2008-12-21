@@ -35,7 +35,7 @@ namespace InlineGoogleSearch {
 	/// <summary>
 	/// Class Definition
 	/// </summary>
-	public class ImFeelingLucky : AbstractAction {	
+	public class ImFeelingLucky : Act {	
 		/// <value>
 		/// I'm Feeling Lucky
 		/// </value>
@@ -83,12 +83,12 @@ namespace InlineGoogleSearch {
 		/// Actual code performed when action is executed in Do
 		/// </summary>
 		/// <param name="items">
-		/// Items. ITextItem <see cref="IItem"/>
+		/// Items. ITextItem <see cref="Item"/>
 		/// </param>
 		/// <param name="modItems">
-		/// Modifier Items. None <see cref="IItem"/>
+		/// Modifier Items. None <see cref="Item"/>
 		/// </param>
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel
@@ -98,12 +98,11 @@ namespace InlineGoogleSearch {
 				googleSearch.search ();
 			
 			if (!googleSearchResult.Any ()) {
-				Do.Addins.NotificationBridge.ShowMessage (
-				                            "I'm Feeling Lucky", 
-				                            "No Resutls Found");
+				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification("I'm Feeling Lucky",
+				                                                                        "No Results Found",
+				                                                                        "www"));
 			} else {
-				Util.Environment.Open 
-					(googleSearchResult [0].url);
+				Do.Platform.Services.Environment.OpenUrl(googleSearchResult[0].url);
 			}
 			return null;	
 		}

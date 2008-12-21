@@ -22,7 +22,8 @@
 
 
 using System;
-using Do.Addins;
+using Do.Platform;
+
 
 /// <summary>
 /// Do plug-in that returns search results from google back to gnome-do for 
@@ -70,8 +71,7 @@ namespace InlineGoogleSearch {
 		
 		static InlineGoogleSearchConfig () 
 		{
-			prefs = Do.Addins.Util.GetPreferences (
-			        "InlineGoogleSearch");
+			prefs = Do.Platform.Services.Preferences.Get<InlineGoogleSearchConfig>();
 		}
 
 		public static string SearchRestrictions {

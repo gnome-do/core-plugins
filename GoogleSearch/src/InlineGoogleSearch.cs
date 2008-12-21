@@ -25,7 +25,6 @@ using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
-using Do.Addins;
 using Mono.Unix;
 
 /// <summary>
@@ -34,10 +33,40 @@ using Mono.Unix;
 /// </summary>
 namespace InlineGoogleSearch {
 	
+	// No longer in Do, have to subclass 
+	public class BookmarkItem : Item, IBookmarkItem 
+	{
+		protected string name, url;
+		public BookmarkItem (string name, string url)
+		{
+			this.name = name;
+			this.url = url;
+		}
+		public override string Name
+		{
+			get { return name; }
+		}
+		public override string Description
+		{
+			get { return url; }
+		}
+
+		public override string Icon
+		{
+			get { return "www"; }
+		}
+
+		public string Url
+		{
+			get { return url; }
+		}
+	} 
+	
 	/// <summary>
 	/// Class Definition
 	/// </summary>
-	public class InlineGoogleSearch : AbstractAction, IConfigurable {	
+	public class InlineGoogleSearch : Act, Do.Interface.Linux.IConfigurable {	
+		
 		/// <value>
 		/// Search Google
 		/// </value>
@@ -83,17 +112,17 @@ namespace InlineGoogleSearch {
 		/// Actual code performed when action is executed in Do
 		/// </summary>
 		/// <param name="items">
-		/// Items. ITextItem <see cref="IItem"/>
+		/// Items. ITextItem <see cref="Item"/>
 		/// </param>
 		/// <param name="modItems">
-		/// Modifier Items. None <see cref="IItem"/>
+		/// Modifier Items. None <see cref="Item"/>
 		/// </param>
 		/// <returns>
-		/// Array of Bookmark Items. URLs to search results <see cref="IItem"/>
+		/// Array of Bookmark Items. URLs to search results <see cref="Item"/>
 		/// </returns>
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
-			List<IItem> retItems = new List<IItem> ();
+			List<Item> retItems = new List<Item> ();
 			
 			string query = (items.First () as ITextItem).Text;
 			string searchURL = "http://google.com/search?q=" + HttpUtility.UrlEncode (query);
@@ -103,7 +132,7 @@ namespace InlineGoogleSearch {
 			}
 			
 			if (!InlineGoogleSearchConfig.ReturnResults) {
-				Util.Environment.Open(searchURL);
+				Do.Platform.Services.Environment.OpenUrl(searchURL);
 				return null;
 			}
 
@@ -120,9 +149,9 @@ namespace InlineGoogleSearch {
 				googleSearch.search ();
 
 			if (googleSearchResult.Length == 0) {
-				Do.Addins.NotificationBridge.ShowMessage (
-				                            "Google Search",
-				                            "No Results Found");
+				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification("Google Search",
+				                                                                        "No Results Found",
+				                                                                        "www") );
 			}
 			
 			for (int i = 0; i < googleSearchResult.Length; i++) {
