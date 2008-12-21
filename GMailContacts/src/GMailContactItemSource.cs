@@ -23,15 +23,17 @@ using System.Threading;
 using System.Collections.Generic;
 using Mono.Unix;
 
-using Gtk;
-
 
 using Do.Universe;
+using Do.Interface;
 
 namespace GMailContacts
 {	
 	public sealed class GMailContactsItemSource : ItemSource, IConfigurable
 	{
+		public GMailContactsItemSource() 
+		{
+		}
 		public override string Name { 
 			get { return Catalog.GetString ("GMail Contacts"); }
 		}

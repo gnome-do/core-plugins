@@ -23,22 +23,30 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Do.UI;
-
+using Do.Universe;
+using Do.Platform.Linux;
+using Do.Platform;
 
 namespace GMailContacts
 {	
-	public class GMailConfig : AbstractLoginWidget
+	public class GMailConfig : AbstractLoginWidget   
 	{
+		static IPreferences prefs;
 		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
             + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
             + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
             
         const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
         
-		public GMailConfig() : base ("GMail")
+		public GMailConfig() : base ("GMail", Uri)
 		{
-			GetAccountButton.Uri = Uri;
+			Username = username;
+			Password = password;
+		}
+
+		static GMailConfig()
+		{
+			prefs = Do.Platform.Services.Preferences.Get<GMailConfig>();
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -53,5 +61,20 @@ namespace GMailContacts
 			return new Regex (EmailPattern, 
 				RegexOptions.Compiled).IsMatch (username);
 		}
+		
+		protected override void SaveAccountData (string username, string password)
+		{
+			prefs.SecureSet("username", username);
+			prefs.SecureSet("password", password); 
+		}
+		
+		public static string username { 
+			get { return prefs.SecureGet<string> ("username", "" ); } 
+		}
+
+		public static string password { 
+			get { return prefs.SecureGet<string> ("password", "" ); } 
+		}
+
 	}
 }
