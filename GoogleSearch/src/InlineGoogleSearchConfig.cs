@@ -84,7 +84,7 @@ namespace InlineGoogleSearch {
 		
 		public static bool ShowSearchFirst {
 			get {
-				return prefs.Get<bool> ("ShowSearchFirst", false);
+				return prefs.Get<bool> ("ShowSearchFirst", true);
 			}
 			set {prefs.Set<bool> ("ShowSearchFirst", value); }
 		}
@@ -98,7 +98,7 @@ namespace InlineGoogleSearch {
 		
 		public static bool ReturnResults {
 			get {
-				return prefs.Get<bool> ("ReturnResults", true);
+				return prefs.Get<bool> ("ReturnResults", false);
 			}
 			set {prefs.Set<bool> ("ReturnResults", value);}
 		}

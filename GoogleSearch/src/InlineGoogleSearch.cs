@@ -26,12 +26,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
 using Mono.Unix;
+using Do.Interface;
 
 /// <summary>
 /// Do plug-in that returns search results from google back to gnome-do for 
 /// further processing
 /// </summary>
 namespace InlineGoogleSearch {
+
 	
 	// No longer in Do, have to subclass 
 	public class BookmarkItem : Item, IBookmarkItem 
@@ -65,7 +67,7 @@ namespace InlineGoogleSearch {
 	/// <summary>
 	/// Class Definition
 	/// </summary>
-	public class InlineGoogleSearch : Act, Do.Interface.Linux.IConfigurable {	
+	public class InlineGoogleSearch : Act, IConfigurable {	
 		
 		/// <value>
 		/// Search Google
