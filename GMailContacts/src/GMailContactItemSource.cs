@@ -23,9 +23,8 @@ using System.Threading;
 using System.Collections.Generic;
 using Mono.Unix;
 
-
 using Do.Universe;
-using Do.Interface;
+using Do.Platform.Linux;
 
 namespace GMailContacts
 {	
