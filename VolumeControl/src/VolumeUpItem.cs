@@ -25,7 +25,7 @@ using Mono.Unix;
 
 namespace VolumeControl
 {
-	public class VolumeUpItem : IRunnableItem
+	public class VolumeUpItem : Item, IRunnableItem
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Volume Up"); }
