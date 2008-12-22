@@ -192,7 +192,7 @@ namespace Microblogging
 				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
 				Log.Debug (e.StackTrace);
 			} catch (ArgumentOutOfRangeException e) {
-				Log.Error (genericError, e.Message);
+				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
 				Log.Debug (e.StackTrace);
 			} catch (IndexOutOfRangeException) {
 				Log.Debug (NoUpdatesMsg);

@@ -69,7 +69,7 @@ namespace Twitterizer.Framework
         }
 
         private string description = "";
-        public override string Description
+        public string Description
         {
             get { return description; }
             set { description = value; }
