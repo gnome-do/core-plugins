@@ -63,8 +63,9 @@ namespace GMail
 
 			try {
 				test = new GMailClient (username, password);
+				test.UpdateContacts ();
 				Connect (username, password);
-			} catch (Exception e) {
+			} catch (Exception) {
 				Log.Error (ConnectionErrorMessage);
 				return false;
 			}
@@ -81,7 +82,7 @@ namespace GMail
 
 			try {
 				client = new GMailClient (username, password);
-			} catch (Exception e) {
+			} catch (Exception) {
 				Log.Error (ConnectionErrorMessage);
 			}
 		}

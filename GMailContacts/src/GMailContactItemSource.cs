@@ -29,7 +29,7 @@ using Do.Platform.Linux;
 
 namespace GMail
 {	
-	public sealed class GMailContactsItemSource : ItemSource, IConfigurable
+	public sealed class GMailItemSource : ItemSource, IConfigurable
 	{
 		public override string Name { 
 			get { return Catalog.GetString ("GMail Contacts"); }
