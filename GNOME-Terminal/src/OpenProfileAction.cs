@@ -27,7 +27,7 @@ using Do.Universe;
 
 namespace GNOME.Terminal
 {	
-	public class OpenProfileAction : AbstractAction
+	public class OpenProfileAction : Act
 	{	
 		public OpenProfileAction ()
 		{
@@ -55,7 +55,7 @@ namespace GNOME.Terminal
 	      }
 	    }
 	    
-	    public override IEnumerable<IItem> Perform( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
+	    public override IEnumerable<Item> Perform( IEnumerable<Item> items, IEnumerable<Item> modifierItems )
 	    {
 			string profileName = (items.First () as ProfileItem).Name;
 

@@ -30,7 +30,7 @@ using Mono.Unix;
 namespace Do.Plugins.Google
 {
 
-	public class GoogleCalculatorAction : AbstractAction
+	public class GoogleCalculatorAction : Act
 	{
 
 		const string BeginCalculator = "<img src=/images/calc_img.gif";
@@ -61,7 +61,7 @@ namespace Do.Plugins.Google
 			}
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			string expression, url, page, reply;
 			int beginCalculator, beginReply, endReply;
@@ -93,7 +93,7 @@ namespace Do.Plugins.Google
 				reply = Catalog.GetString ("Google Calculator could not evaluate the expression.");
 			}
 
-			return new IItem[] { new TextItem (reply) };
+			return new Item[] { new TextItem (reply) };
 		}
 
 		string GoogleCalculatorURLWithExpression (string e)

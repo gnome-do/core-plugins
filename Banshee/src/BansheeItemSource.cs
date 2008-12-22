@@ -20,32 +20,32 @@ using System;
 using System.Collections.Generic;
 
 using Do.Universe;
-using Do.Addins;
+
 
 namespace Do.Addins.Banshee {
 
-        public class BansheeItemSource : IItemSource {
-                List<IItem> items;
+        public class BansheeItemSource : ItemSource {
+                List<Item> items;
                 List<AlbumMusicItem> albums;
                 List<ArtistMusicItem> artists;
 
                 public BansheeItemSource()
                 {
-                        items = new List<IItem> ();
+                        items = new List<Item> ();
                         //UpdateItems();
                 }
 
-                public string Name {
+                public override string Name {
                         get { return "Banshee Music"; }
                 }
-                public string Description {
+                public override string Description {
                         get { return "Provides access to artists and albums from Banshee."; }
                 }
-                public string Icon {
+                public override string Icon {
                         get { return "music-player-banshee"; }
                 }
 
-                public IEnumerable<Type> SupportedItemTypes {
+                public override IEnumerable<Type> SupportedItemTypes {
                         get {
                                 return new Type[] {
                                         typeof (MusicItem),
@@ -55,15 +55,15 @@ namespace Do.Addins.Banshee {
                         }
                 }
 
-                public IEnumerable<IItem> Items {
+                public override IEnumerable<Item> Items {
                     get { return items; }
                 }
 
-                public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+                public override IEnumerable<Item> ChildrenOfItem (Item parent)
                 {
-                        List<IItem> children;
+                        List<Item> children;
 
-                        children = new List<IItem> ();
+                        children = new List<Item> ();
                         if (parent is ApplicationItem && parent.Name == "Banshee") {
                                 children.Add (new BrowseAlbumsMusicItem ());
                                 children.Add (new BrowseArtistsMusicItem ());
@@ -95,7 +95,7 @@ namespace Do.Addins.Banshee {
                         });
                 }
 
-                public void UpdateItems ()
+                public override void UpdateItems ()
                 {
                     items.Clear ();
 
@@ -105,8 +105,8 @@ namespace Do.Addins.Banshee {
 
                     // Add albums and artists
                     Banshee.LoadAlbumsAndArtists (out albums, out artists);
-                    foreach (IItem album in albums) items.Add (album);
-                    foreach (IItem artist in artists) items.Add (artist);
+                    foreach (Item album in albums) items.Add (album);
+                    foreach (Item artist in artists) items.Add (artist);
                 }
         }
 }

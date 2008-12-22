@@ -5,7 +5,6 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.8.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Microblog.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Microblogging.GenConfig" design-size="300 300">
@@ -30,43 +29,6 @@
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
-                      <widget class="Gtk.HBox" id="hbox1">
-                        <property name="MemberName" />
-                        <property name="Spacing">6</property>
-                        <child>
-                          <widget class="Gtk.Label" id="service_label">
-                            <property name="MemberName" />
-                            <property name="Xalign">0</property>
-                            <property name="LabelProp" translatable="yes">Service:</property>
-                          </widget>
-                          <packing>
-                            <property name="Position">0</property>
-                            <property name="AutoSize">False</property>
-                            <property name="Expand">False</property>
-                            <property name="Fill">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="Gtk.ComboBox" id="service_combo">
-                            <property name="MemberName" />
-                            <property name="IsTextCombo">True</property>
-                            <property name="Items" translatable="yes" />
-                          </widget>
-                          <packing>
-                            <property name="Position">1</property>
-                            <property name="AutoSize">False</property>
-                          </packing>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="Position">0</property>
-                        <property name="AutoSize">True</property>
-                        <property name="Expand">False</property>
-                        <property name="Fill">False</property>
-                        <property name="Padding">5</property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="Gtk.CheckButton" id="show_updates_chk">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
@@ -78,11 +40,15 @@
                         <signal name="Clicked" handler="OnShowUpdatesChkClicked" />
                       </widget>
                       <packing>
-                        <property name="Position">1</property>
+                        <property name="Position">0</property>
                         <property name="AutoSize">True</property>
                         <property name="Expand">False</property>
                         <property name="Fill">False</property>
+                        <property name="Padding">5</property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder />
                     </child>
                     <child>
                       <placeholder />

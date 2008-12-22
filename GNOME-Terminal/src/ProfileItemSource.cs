@@ -28,41 +28,41 @@ using Do.Universe;
 namespace GNOME.Terminal
 {
 
-	public class ProfileItemSource : IItemSource
+	public class ProfileItemSource : ItemSource
 	{
 		private static string GCONF_TERMINAL = "/apps/gnome-terminal/profiles";
 
-		List<IItem> items;
+		List<Item> items;
 
 		public ProfileItemSource()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 
-	    public string Name { get { return Catalog.GetString ("Gnome Terminal Profiles"); } }
+	    public override string Name { get { return Catalog.GetString ("Gnome Terminal Profiles"); } }
 	    
-	    public string Description {
+	    public override string Description {
 	    	get { return Catalog.GetString ("Indexes your Gnome Terminal profiles."); } 
 	    }
 	    
-	    public string Icon { get { return "gnome-terminal"; } }
+	    public override string Icon { get { return "gnome-terminal"; } }
 
-	    public IEnumerable<Type> SupportedItemTypes {
+	    public override IEnumerable<Type> SupportedItemTypes {
 	      get {
 	        return new Type[] { typeof (ProfileItem) };
 	      }
 	    }
 
-	    public IEnumerable<IItem> Items {
+	    public override IEnumerable<Item> Items {
 	      get { return items; }
 	    }
 
-	    public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+	    public override IEnumerable<Item> ChildrenOfItem (Item parent)
 	    {
 	      return null;  
 	    }
 
-	    public void UpdateItems ()
+	    public override void UpdateItems ()
 	    {
 			items.Clear ();
 

@@ -24,56 +24,46 @@ using System.Xml;
 using System.Collections.Generic;
 
 using Mono.Unix;
-using Do.Addins;
+
 using Do.Universe;
+using Do.Platform;
 
 namespace Epiphany
 {
 
-	public class EpiphanyBookmarkItemSource : IItemSource
+	public class EpiphanyBookmarkItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 
 		public EpiphanyBookmarkItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 
-		public string Name { get { return Catalog.GetString ("Epiphany Bookmarks"); } }
+		public override string Name { get { return Catalog.GetString ("Epiphany Bookmarks"); } }
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Indexes your Epiphany bookmarks."); }
 		}
-		public string Icon { get { return "gnome-web-browser"; } }
+		
+		public override string Icon { get { return "gnome-web-browser"; } }
 
-		public IEnumerable<Type> SupportedItemTypes
-		{
-			get {
-				return new Type[] {
-					typeof (BookmarkItem),
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (EpiphanyBookmarkItem); }
 		}
 
-		public IEnumerable<IItem> Items
-		{
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
-		{
-			return null;	
-		}
-
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			string bookmarks_file = "~/.gnome2/epiphany/bookmarks.rdf".Replace ("~", home);
-
+			string bookmarksFile = "~/.gnome2/epiphany/bookmarks.rdf".Replace ("~", home);
 
 			items.Clear ();
 			try {
-				using (XmlReader reader = XmlReader.Create (bookmarks_file)) {
+				using (XmlReader reader = XmlReader.Create (bookmarksFile)) {
 					while (reader.ReadToFollowing ("item")) {
 						string title, link;
 						
@@ -82,12 +72,12 @@ namespace Epiphany
 						reader.ReadToFollowing ("link");
 						link = reader.ReadString ();
 
-						items.Add (new BookmarkItem (title, link));
+						items.Add (new EpiphanyBookmarkItem (title, link));
 					}
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not read Epiphany Bookmarks file {0}: {1}",
-						bookmarks_file, e.Message);
+				Log.Error ("Could not read Epiphany Bookmarks file {0}: {1}", bookmarksFile, e.Message);
+				Log.Debug (e.StackTrace);
 			}
 		}
 

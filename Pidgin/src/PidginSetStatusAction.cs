@@ -26,26 +26,26 @@ using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public sealed class PidginSetStatusAction : IAction
+	public sealed class PidginSetStatusAction : Act
 	{
-		private IItem [] pidginStatuses;
+		private Item [] pidginStatuses;
 		
 		public PidginSetStatusAction ()
 		{
-			pidginStatuses = new IItem [] {new PidginStatusTypeItem (1), 
+			pidginStatuses = new Item [] {new PidginStatusTypeItem (1), 
 				new PidginStatusTypeItem (2), new PidginStatusTypeItem (3),
 				new PidginStatusTypeItem (4), new PidginStatusTypeItem (5)};
 		}
 		
-		public string Name { get { return Catalog.GetString ("Set status"); } }
+		public override string Name { get { return Catalog.GetString ("Set status"); } }
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Set pidgin status message"); }
 		}
 		
-		public string Icon { get { return "pidgin"; } }
+		public override string Icon { get { return "pidgin"; } }
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginSavedStatusItem),
@@ -54,7 +54,7 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (PidginStatusTypeItem),
@@ -62,7 +62,7 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public bool SupportsItem (IItem item)
+		public bool SupportsItem (Item item)
 		{
 			return true;
 		}
@@ -71,19 +71,19 @@ namespace Do.Addins.Pidgin
 			get { return true; }
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			if (items.First () is ITextItem)
 				return true;
 			return false;
 		}
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
         {
             return pidginStatuses;
         }
 		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			int status;
 			string message;

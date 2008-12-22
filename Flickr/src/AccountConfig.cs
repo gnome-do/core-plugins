@@ -23,7 +23,7 @@ using Mono.Unix;
 
 using Gtk;
 using FlickrNet;
-using Do.Addins;
+
 
 namespace Flickr
 {	

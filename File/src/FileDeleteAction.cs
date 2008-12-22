@@ -26,7 +26,7 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	abstract class DeleteAction : AbstractAction {
+	abstract class DeleteAction : Act {
 
 		public override string Name {
 			get { return Catalog.GetString ("Delete File"); }
@@ -46,7 +46,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			foreach (IFileItem src in items) {
 				try {

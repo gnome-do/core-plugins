@@ -20,25 +20,25 @@ using System;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
-using Do.Addins;
+
 using Mono.Unix;
 
 namespace Do.Launchpad
 {
 	public class LaunchpadProjectPageItem : LaunchpadItem
 	{
-		public string Name { get { return Catalog.GetString ("Project Page"); } }
+		public override string Name { get { return Catalog.GetString ("Project Page"); } }
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Go to project's page in launchpad"); } 
 		}
 		
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadRegister.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
             if (items == null) { return false; }
 			//Project name can't have a space
@@ -46,7 +46,7 @@ namespace Do.Launchpad
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format("https://launchpad.net/{0}", (item as ITextItem).Text));
 		}

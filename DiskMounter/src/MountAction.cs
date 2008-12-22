@@ -26,7 +26,7 @@ using Do.Universe;
 
 namespace DiskMounter
 {
-	public class MountAction : AbstractAction
+	public class MountAction : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Mount"); }
@@ -48,17 +48,17 @@ namespace DiskMounter
 			}
 		}
                 
-		public override bool SupportsItem (IItem item) 
+		public override bool SupportsItem (Item item) 
 		{
 			return !(item as DriveItem).IsMounted;
 		}
                 
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return false;
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			(items.First () as DriveItem).Mount ();
 			return null;

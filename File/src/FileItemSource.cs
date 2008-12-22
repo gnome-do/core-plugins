@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Addins;
+
 
 using GConf;
 
@@ -33,9 +33,9 @@ namespace FilePlugin {
 	/// <summary>
 	/// Indexes files recursively starting in a specific directory.
 	/// </summary>
-	public class FileItemSource : IItemSource, IConfigurable {
+	public class FileItemSource : ItemSource, IConfigurable {
 
-		List<IItem> items;
+		List<Item> items;
 		bool include_hidden;
 		IEnumerable<DirectoryLevelPair> dirs;
 
@@ -68,14 +68,14 @@ namespace FilePlugin {
 			}
 		}
 
-		static IEnumerable<IItem> GtkBookmarkItems {
+		static IEnumerable<Item> GtkBookmarkItems {
 			get {
 				string line;
 				StreamReader reader;
-				List<IItem> bookmarks;
+				List<Item> bookmarks;
 
 				reader = null;
-				bookmarks = new List<IItem> ();
+				bookmarks = new List<Item> ();
 				try {
 					reader = File.OpenText (
 						Do.Paths.Combine (Do.Paths.UserHome, ".gtk-bookmarks"));
@@ -98,7 +98,7 @@ namespace FilePlugin {
 		{
 			gconf = new GConf.Client ();
 			dirs = Deserialize ();
-			items = new List<IItem> ();
+			items = new List<Item> ();
 			try {
 				include_hidden = (bool) gconf.Get (GConfKeyBase + "include_hidden");
 			} catch {
@@ -164,7 +164,7 @@ namespace FilePlugin {
 			}
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -173,28 +173,28 @@ namespace FilePlugin {
 			}
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("File Indexer"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get {
 				return Catalog.GetString ("Frequently used files and folders.");
 			}
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "folder"; }
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			IFileItem fi = null;
-			List<IItem> children;
+			List<Item> children;
 			
 			if (item is ITextItem) {
 				string path = (item as ITextItem).Text;
@@ -205,7 +205,7 @@ namespace FilePlugin {
 			} else {
 				fi = item as IFileItem;
 			}
-			children = new List<IItem> ();
+			children = new List<Item> ();
 			if (FileItem.IsDirectory (fi)) {
 				foreach (string path in
 					Directory.GetFileSystemEntries (fi.Path)) {
@@ -215,7 +215,7 @@ namespace FilePlugin {
 			return children;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			items.Clear ();
 			items.AddRange (GtkBookmarkItems);

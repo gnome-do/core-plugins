@@ -20,7 +20,7 @@ using System;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
-using Do.Addins;
+
 using Mono.Unix;
 
 namespace Do.Launchpad
@@ -28,22 +28,22 @@ namespace Do.Launchpad
 	public class LaunchpadTranslationSearchItem : LaunchpadItem
 	{
 		public LaunchpadTranslationSearchItem() { }
-		public string Name { get { return Catalog.GetString ("Translation Search"); } }
-		public string Description { 
+		public override string Name { get { return Catalog.GetString ("Translation Search"); } }
+		public override string Description { 
 			get { return Catalog.GetString ("Search for Translations in Launchpad"); } 
 		}
 
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadTranslations.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
 			return true;
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Regex spaces = new Regex(@"\s+");
 			string query = (item as ITextItem).Text;
@@ -56,17 +56,17 @@ namespace Do.Launchpad
 	public class LaunchpadTranslationReleaseItem : LaunchpadItem
 	{
 		public LaunchpadTranslationReleaseItem() { }
-		public string Name { get { return Catalog.GetString ("Release Translations"); } }
-		public string Description { 
+		public override string Name { get { return Catalog.GetString ("Release Translations"); } }
+		public override string Description { 
 			get { return Catalog.GetString ("Translations for Ubuntu Release Name"); }
 		}
 
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadTranslations.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
             if (items == null) { return false; }
 			//Package name can't have a space
@@ -74,7 +74,7 @@ namespace Do.Launchpad
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format(
 						"https://translations.lauchpad.net/ubuntu/{0}/+translations",

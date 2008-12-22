@@ -30,7 +30,7 @@ using Do.Universe;
 namespace Archive {
         
         
-        public class ExtractAction : AbstractAction {
+        public class ExtractAction : Act {
                 
                 public ExtractAction()
                 {
@@ -56,34 +56,25 @@ namespace Archive {
                         }
                 }
                 
-                public override bool SupportsItem (IItem item) 
+                public override bool SupportsItem (Item item) 
                 {
                         return IsArchive (item as IFileItem);
                 }
                         
-                public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+                public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
                 {
-                        return FileItem.IsDirectory (modItem as IFileItem);
+                        return Directory.Exists ((modItem as IFileItem).Path);
                 }
 
                 public override IEnumerable<Type> SupportedModifierItemTypes {
-                        get {
-                                return new Type[] {
-                                        typeof(IFileItem),
-                                };
-                        }
+                        get { yield return typeof (IFileItem); }
                 }
                 
                 public override bool ModifierItemsOptional {
                         get { return false; }
                 }
-
-                public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
-                {
-                        return null;       
-                }
                 
-                public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+                public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
                 {
                         ExtractArchive ( (items.First () as IFileItem), (modItems.First () as IFileItem));
                         return null;

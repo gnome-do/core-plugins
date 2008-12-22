@@ -20,7 +20,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-using Do.Addins;
+
 
 namespace ImageShack
 {

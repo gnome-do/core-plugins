@@ -25,14 +25,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace Do.Riptide
 {
 	
 	
-	public class TorrentDownloadClientAction : AbstractAction
+	public class TorrentDownloadClientAction : Act
 	{
 		
 		public override string Name {
@@ -51,7 +51,7 @@ namespace Do.Riptide
 			get { return new Type[] { typeof (TorrentResultItem) }; }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string torrentFolder;
 			string filename;

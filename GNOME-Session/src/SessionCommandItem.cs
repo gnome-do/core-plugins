@@ -43,9 +43,9 @@ namespace GNOME
 			this.run = run;
 		}
 
-		public string Name { get { return name; } }
-		public string Description { get { return description; } }
-		public string Icon { get { return icon; } }
+		public override string Name { get { return name; } }
+		public override string Description { get { return description; } }
+		public override string Icon { get { return icon; } }
 
 		public virtual void Run ()
 		{

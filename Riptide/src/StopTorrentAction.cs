@@ -25,14 +25,14 @@ using System.Collections.Generic;
 using MonoTorrent.Client;
 using MonoTorrent.Common;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace Do.Riptide
 {
 	
 	
-	public class StopTorrentAction : AbstractAction
+	public class StopTorrentAction : Act
 	{
 		
 		public override string Name {
@@ -51,7 +51,7 @@ namespace Do.Riptide
 			get { return new Type[] { typeof (ITorrentItem), }; }
 		}
 		
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (!(item is ITorrentItem)) return false;
 			
@@ -61,9 +61,9 @@ namespace Do.Riptide
 		}
 
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				if (!(item is ITorrentItem)) continue;
 				(item as ITorrentItem).ActiveTorrent.Stop ();
 			}

@@ -25,7 +25,7 @@ using Do.Universe;
 
 namespace Tomboy
 {	
-	public class NotesItemSource : IItemSource
+	public class NotesItemSource : ItemSource
 	{
 		private const string name = "Tomboy Note Indexer";
 		private const string desc = "Loads up Tomboy notes for searching";
@@ -33,7 +33,7 @@ namespace Tomboy
 		private static Type [] supportedTypes = new Type [] {
 			typeof (NoteItem) };
 		
-		private List<IItem> notes;
+		private List<Item> notes;
 
 		/// <summary>
 		/// When creating an instance of this item source get the initial
@@ -41,7 +41,7 @@ namespace Tomboy
 		/// </summary>
 		public NotesItemSource ()
 		{
-			notes = new List<IItem> ();			
+			notes = new List<Item> ();			
 		}
 		
 		/// <summary>
@@ -49,30 +49,30 @@ namespace Tomboy
 		/// of this item source parser
 		/// </summary>
 		/// <param name="item">
-		/// A <see cref="IItem"/>
+		/// A <see cref="Item"/>
 		/// </param>
 		/// <returns>
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
-		public string Name {
+		public override string Name {
 			get {
 				return name;
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get {
 				return desc;
 			}
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get {
 				return icon;
 			}
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return supportedTypes;
 			}
@@ -82,16 +82,16 @@ namespace Tomboy
 		/// The Items in this case is the list of notes we've loaded
 		/// </summary>
 		/// <param name="item">
-		/// A <see cref="IItem"/>
+		/// A <see cref="Item"/>
 		/// </param>
 		/// <returns>
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return notes; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
@@ -100,7 +100,7 @@ namespace Tomboy
 		/// This method run in the constructor to find the notes we can get
 		/// ahold of.
 		/// </summary>
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			TomboyDBus tb = new TomboyDBus();
 			// Only query Tomboy if it is already running.

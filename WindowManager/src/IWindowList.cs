@@ -27,16 +27,16 @@ using Do.Universe;
 
 namespace WindowManager
 {
-//	public interface IWindowActionItem : IItem
+//	public interface IWindowActionItem : Item
 //	{
 //	}
 	
-	public interface IWindowItem : IItem
+	public interface IWindowItem : Item
 	{
 		Wnck.Window Window { get; }
 	}
 	
-	public interface IScreenItem : IItem
+	public interface IScreenItem : Item
 	{
 	}
 }

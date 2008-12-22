@@ -27,18 +27,11 @@ namespace Microblogging
 {
 	public partial class GenConfig : Gtk.Bin
 	{
-		
 
 		public GenConfig ()
 		{
 			this.Build();
 			show_updates_chk.Active = Microblog.Preferences.ShowNotifications;
-			
-			foreach (string service in Microblog.Preferences.AvailableServices) {
-				service_combo.AppendText (service);
-			}
-
-			service_combo.Active = (int) Microblog.Preferences.ActiveService;
 		}
 		
 		protected virtual void OnShowUpdatesChkClicked (object sender, EventArgs e)

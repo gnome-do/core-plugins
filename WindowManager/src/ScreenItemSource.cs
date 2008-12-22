@@ -30,38 +30,38 @@ using Mono.Unix;
 namespace WindowManager
 {
 	
-	public class ScreenItemSource : IItemSource
+	public class ScreenItemSource : ItemSource
 	{
-		public string Name {
+		public override string Name {
 			get {
 				return Catalog.GetString ("Window Screen Items");
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return Catalog.GetString ("Actions you can do to your screens.");
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return "desktop"; //fixme
 			}
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (IScreenItem) };
 			}
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get {
-                List<IItem> items;
+                List<Item> items;
 		
-                items = new List<IItem> ();
+                items = new List<Item> ();
 				items.Add (new ScreenItem (Catalog.GetString ("Current Desktop"), 
                    Catalog.GetString ("Everything on the Current Desktop"),
                    "desktop"));
@@ -75,12 +75,12 @@ namespace WindowManager
 		{
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 		}
 	}

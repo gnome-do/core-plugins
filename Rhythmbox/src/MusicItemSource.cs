@@ -23,37 +23,37 @@ using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 
-using Do.Addins;
+
 using Do.Universe;
 using Mono.Unix;
 
 namespace Do.Rhythmbox
 {
 
-	public class MusicItemSource : IItemSource
+	public class MusicItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 		List<AlbumMusicItem> albums;
 		List<ArtistMusicItem> artists;
 
 		public MusicItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Rhythmbox Music"); }
 		}
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Provides access to artists and albums from Rhythmbox."); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "rhythmbox"; }
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (MusicItem),
@@ -63,13 +63,13 @@ namespace Do.Rhythmbox
 			}
 		}
 
-		public IEnumerable<IItem> Items { get { return items; } }
+		public override IEnumerable<Item> Items { get { return items; } }
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent) {
+		public override IEnumerable<Item> ChildrenOfItem (Item parent) {
 			if (parent is ApplicationItem && parent.Name == "Rhythmbox Music Player") {
 				yield return new BrowseAlbumsMusicItem ();
 				yield return new BrowseArtistsMusicItem ();
-				foreach (IItem item in RhythmboxRunnableItem.DefaultItems) yield return item;
+				foreach (Item item in RhythmboxRunnableItem.DefaultItems) yield return item;
 			}
 			else if (parent is ArtistMusicItem) {
 				foreach (AlbumMusicItem album in albums.Where (album => album.Artist.Contains (parent.Name)))
@@ -89,7 +89,7 @@ namespace Do.Rhythmbox
 			}
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			items.Clear ();
 
@@ -102,8 +102,8 @@ namespace Do.Rhythmbox
 
 			// Add albums and artists.
 			Rhythmbox.LoadAlbumsAndArtists (out albums, out artists);
-			foreach (IItem album in albums) items.Add (album);
-			foreach (IItem artist in artists) items.Add (artist);
+			foreach (Item album in albums) items.Add (album);
+			foreach (Item artist in artists) items.Add (artist);
 		}
 	}
 }

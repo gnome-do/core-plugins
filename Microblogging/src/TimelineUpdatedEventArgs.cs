@@ -27,7 +27,7 @@ namespace Microblogging
 	{
 		public string Screenname { get ; private set; }
 		public string Status { get; private set; }
-		public string Icon { get; private set; }
+		public override string Icon { get; private set; }
 		
 		public TimelineUpdatedEventArgs (string screenname, string status, string icon)
 		{

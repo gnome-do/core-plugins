@@ -32,7 +32,7 @@ namespace Delicious
 {	
 	public class Delicious
 	{
-		private static Dictionary<string,List<IItem>> bookmarks; 
+		private static Dictionary<string,List<Item>> bookmarks; 
 		private static object book_lock;
 		
 		private static string username;
@@ -43,7 +43,7 @@ namespace Delicious
 		{	
 			username = password = "";
 			
-			bookmarks = new Dictionary<string,List<IItem>> ();
+			bookmarks = new Dictionary<string,List<Item>> ();
 			book_lock = new object ();
 			
 			Connect ();
@@ -54,13 +54,13 @@ namespace Delicious
 			Configuration.GetAccountData (out username, out password, typeof (Configuration));
 		}
 		
-		public static Dictionary<string, List<IItem>> Tags {
+		public static Dictionary<string, List<Item>> Tags {
 			get { return bookmarks; }
 		}
 		
-		public static List<IItem> BookmarksForTag (string tag)
+		public static List<Item> BookmarksForTag (string tag)
 		{
-			List<IItem> list = null;
+			List<Item> list = null;
 			bookmarks.TryGetValue (tag.ToLower (), out list);
 			return list;
 		}
@@ -77,7 +77,7 @@ namespace Delicious
 			if (!Monitor.TryEnter (book_lock)) return;
 			
 			bookmarks.Clear ();
-			bookmarks ["all bookmarks"] = new List<IItem> ();
+			bookmarks ["all bookmarks"] = new List<Item> ();
 			try {
 				while (reader.Read ()) {
 					if (reader.Name == "post") {
@@ -91,7 +91,7 @@ namespace Delicious
 							if (string.IsNullOrEmpty (tag))
 								t = "untagged";
 							if (!bookmarks.ContainsKey (tag))
-								bookmarks [t] = new List<IItem> ();
+								bookmarks [t] = new List<Item> ();
 							bookmarks [t].Add (bookmark);
 						}
 					}

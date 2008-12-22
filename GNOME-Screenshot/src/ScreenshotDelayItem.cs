@@ -24,7 +24,7 @@ using Do.Universe;
 
 namespace GNOME {
 
-	class ScreenshotDelayItem : IItem {
+	class ScreenshotDelayItem : Item {
 
 		int seconds;
 
@@ -32,11 +32,11 @@ namespace GNOME {
 			this.seconds = seconds;
 		}
 
-		public string Name {
+		public override string Name {
 			get { return string.Format (Catalog.GetString ("{0}-second delay"), seconds); }
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return string.Format (
 					Catalog.GetPluralString ("Wait {0} second before taking the screenshot.",
@@ -47,7 +47,7 @@ namespace GNOME {
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get { return "gnome-panel-clock"; }
 		}
 

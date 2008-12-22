@@ -20,11 +20,11 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 using Do.Universe;
-using Do.Addins;
+
 
 namespace Do.Addins.Banshee {
 
-        public class BansheePlayAction : AbstractAction {
+        public class BansheePlayAction : Act {
 
                 public override string Name {
                         get { return "Play"; }
@@ -42,17 +42,17 @@ namespace Do.Addins.Banshee {
                         }
                 }
 
-                public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+                public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
                 {
                         return false;
                 }
 
-                public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+                public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
                 {
                         new Thread ((ThreadStart) delegate {
                                 BansheeDBus b = new BansheeDBus();
                                 List<string> filenames = new List<string>();
-                                foreach (IItem item in items) {
+                                foreach (Item item in items) {
                                         foreach (SongMusicItem song in Banshee.LoadSongsFor (item as MusicItem))
                                                 filenames.Add(song.File);
                                 }

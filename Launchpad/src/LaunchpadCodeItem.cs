@@ -20,7 +20,7 @@ using System;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
-using Do.Addins;
+
 using Mono.Unix;
 
 namespace Do.Launchpad
@@ -31,18 +31,18 @@ namespace Do.Launchpad
 #if false
 	public class LaunchpadCodeBrowseItem : LaunchpadItem
 	{
-		public string Name { get { return Catalog.GetString ("Code Browse"); } }
+		public override string Name { get { return Catalog.GetString ("Code Browse"); } }
 		
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Browse Code For Launchpad Project"); } 
 		}
 
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadCode.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
             if (items == null) { return false; }
 			//Project name can't have a space
@@ -50,7 +50,7 @@ namespace Do.Launchpad
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format("https://codebrowse.launchpad.net/~vcs-imports/{0}/main/files", (item as ITextItem).Text));
 		}
@@ -59,18 +59,18 @@ namespace Do.Launchpad
 
 	public class LaunchpadCodeOverviewItem : LaunchpadItem
 	{
-		public string Name { get { return Catalog.GetString ("Code Overview"); } }
+		public override string Name { get { return Catalog.GetString ("Code Overview"); } }
 	
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Browse project code at Launchpad"); }
 		}
 		
-		public string Icon
+		public override string Icon
 		{ 
 			get { return "LaunchpadCode.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(IItem[] items)
+		public bool SupportsItems(Item[] items)
 		{
             if (items == null) { return false; }
 			//Project name can't have a space
@@ -78,7 +78,7 @@ namespace Do.Launchpad
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (IItem item)
+		public void Perform (Item item)
 		{
 			Util.Environment.Open(string.Format("https://code.launchpad.net/{0}", (item as ITextItem).Text));
 		}

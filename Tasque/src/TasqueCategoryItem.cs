@@ -27,7 +27,7 @@ using Mono.Unix;
 
 namespace Tasque.Category.Item
 {
-	public class TasqueCategoryItem : IItem
+	public class TasqueCategoryItem : Item
 	{
 		private string categoryName;
 		
@@ -36,19 +36,19 @@ namespace Tasque.Category.Item
 			this.categoryName = categoryName;
 		}
 		
-		public string Name {
+		public override string Name {
 			get {
 				return categoryName;
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get {
 				return Catalog.GetString ("Category");
 			}
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get {
 				return "tasque";
 			}

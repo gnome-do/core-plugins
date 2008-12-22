@@ -40,17 +40,17 @@ namespace Tomboy
 			this.title = title;
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return title; }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { 
 				return desc; 
 			} 
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get {
 				return icon;
 			}

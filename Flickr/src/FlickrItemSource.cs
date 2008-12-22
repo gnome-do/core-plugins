@@ -23,42 +23,42 @@ using System;
 using System.Collections.Generic;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace Flickr
 {	
-	public class FlickrItemSource : IItemSource, IConfigurable
+	public class FlickrItemSource : ItemSource, IConfigurable
 	{	
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Account"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return ""; }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "flickr.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] { };
 			}
 		}
 		
-		public IEnumerable<IItem> Items
+		public override IEnumerable<Item> Items
 		{
 			get { return null; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
 			return null;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 		}
 		

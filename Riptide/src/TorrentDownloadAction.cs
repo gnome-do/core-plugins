@@ -28,14 +28,14 @@ using System.Net;
 using MonoTorrent.Common;
 using MonoTorrent.Client;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace Do.Riptide
 {
 	
 	
-	public class TorrentDownloadAction : AbstractAction, IConfigurable
+	public class TorrentDownloadAction : Act, IConfigurable
 	{
 		
 		public override string Name {
@@ -54,7 +54,7 @@ namespace Do.Riptide
 			get { return new Type[] { typeof (TorrentResultItem) }; }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string torrentFolder;
 			string filename;

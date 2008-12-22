@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 
-using Do.Addins;
+
 using GConf;
 
 namespace FilePlugin

@@ -27,22 +27,22 @@ using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Addins;
+
 
 using FlickrNet;
 
 namespace Flickr
 {	
-	public class UploadAction : IAction, IConfigurable
+	public class UploadAction : Act, IConfigurable
 	{
 		static object count_lock = new object ();
 		static int upload_num;
 		
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Upload photo"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Upload one or more photos to Flickr"); }
 		}
 		
@@ -50,17 +50,17 @@ namespace Flickr
 		 * Thank you Jeremy Roux for the great icon
 		 * http://www.soulvisual.com/blog/
 		 */
-		public string Icon {
+		public override string Icon {
 			get { return "flickr.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { 
 				return new Type [] { typeof (IFileItem) };
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] { typeof (ITextItem) };
 			}
@@ -70,29 +70,29 @@ namespace Flickr
 			get { return true; }
 		}
 		
-		public bool SupportsItem (IItem item)
+		public bool SupportsItem (Item item)
 		{
 			return FileItem.IsDirectory (item as FileItem) || 
 				FileIsPicture (item as FileItem);
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return true;
 		}
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
 		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string tags;
 			tags = AccountConfig.Tags + " ";
 			
 			if (modItems.Any ()) {
-				foreach (IItem modItem in modItems) {
+				foreach (Item modItem in modItems) {
 					ITextItem tag = (modItem as ITextItem);
 					tags += tag.Text + " ";
 				}
@@ -100,7 +100,7 @@ namespace Flickr
 			
 			//Build a list of all of the files to upload.
 			List<FileItem> uploads = new List<FileItem> ();
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				FileItem file = item as FileItem;
 				if (FileItem.IsDirectory (file)) {
 					DirectoryInfo dinfo = new DirectoryInfo (file.Path);

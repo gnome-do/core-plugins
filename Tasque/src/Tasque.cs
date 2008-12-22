@@ -28,9 +28,9 @@ namespace Tasque
 {
 	public static class Tasque
 	{		
-		public static List<IItem> GetCategoryItems ()
+		public static List<Item> GetCategoryItems ()
 		{
-			List<IItem> items =  new List<IItem> ();
+			List<Item> items =  new List<Item> ();
 			TasqueDBus tasque = new TasqueDBus ();
 			ArrayList categories = new ArrayList ();
 			

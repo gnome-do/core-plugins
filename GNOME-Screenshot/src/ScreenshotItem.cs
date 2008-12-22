@@ -23,7 +23,7 @@ using System;
 using Do.Universe;
 
 namespace GNOME {
-	abstract class ScreenshotItem : IItem {
+	abstract class ScreenshotItem : Item {
 		public abstract string Name { get; }
 		public abstract string Description { get; }
 		public abstract string Icon { get; }

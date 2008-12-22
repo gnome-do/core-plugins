@@ -28,7 +28,7 @@ namespace Do.Riptide
 {
 	
 	
-	public interface ITorrentItem : IItem
+	public interface ITorrentItem : Item
 	{
 		TorrentManager ActiveTorrent { get; }
 	}

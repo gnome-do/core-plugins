@@ -22,7 +22,7 @@ using Do.Universe;
 
 namespace Pastebin
 {
-	public interface ITextSyntaxItem : IItem
+	public interface ITextSyntaxItem : Item
 	{
 		string Syntax { get; }
 	}

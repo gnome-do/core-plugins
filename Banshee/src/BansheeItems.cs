@@ -20,12 +20,12 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
-using Do.Addins;
+
 using Do.Universe;
 
 namespace Do.Addins.Banshee {
 
-        public abstract class MusicItem : IItem {
+        public abstract class MusicItem : Item {
                 protected string name, artist, year, cover;
 
                 public MusicItem ()
@@ -133,7 +133,7 @@ namespace Do.Addins.Banshee {
                 }
         }
 
-        public class BrowseMusicItem: IItem {
+        public class BrowseMusicItem: Item {
                 string name, description;
 
                 public BrowseMusicItem (string name, string description)
@@ -142,10 +142,10 @@ namespace Do.Addins.Banshee {
                         this.description = description;
                 }
 
-                public string Name {
+                public override string Name {
                         get { return name; }
                 }
-                public string Description {
+                public override string Description {
                         get { return description; }
                 }
                 public virtual string Icon {
@@ -211,13 +211,13 @@ namespace Do.Addins.Banshee {
                         this.command = command;
                 }
 
-                public string Name {
+                public override string Name {
                         get { return name; }
                 }
-                public string Description {
+                public override string Description {
                         get { return description; }
                 }
-                public string Icon {
+                public override string Icon {
                         get { return icon; }
                 }
 
