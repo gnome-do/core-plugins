@@ -21,12 +21,6 @@ namespace Microblogging {
         
         private Gtk.VBox vbox2;
         
-        private Gtk.HBox hbox1;
-        
-        private Gtk.Label service_label;
-        
-        private Gtk.ComboBox service_combo;
-        
         private Gtk.CheckButton show_updates_chk;
         
         private Gtk.Label GtkLabel1;
@@ -54,32 +48,6 @@ namespace Microblogging {
             this.vbox2.Name = "vbox2";
             this.vbox2.Spacing = 6;
             // Container child vbox2.Gtk.Box+BoxChild
-            this.hbox1 = new Gtk.HBox();
-            this.hbox1.Name = "hbox1";
-            this.hbox1.Spacing = 6;
-            // Container child hbox1.Gtk.Box+BoxChild
-            this.service_label = new Gtk.Label();
-            this.service_label.Name = "service_label";
-            this.service_label.Xalign = 0F;
-            this.service_label.LabelProp = Mono.Unix.Catalog.GetString("Service:");
-            this.hbox1.Add(this.service_label);
-            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox1[this.service_label]));
-            w1.Position = 0;
-            w1.Expand = false;
-            w1.Fill = false;
-            // Container child hbox1.Gtk.Box+BoxChild
-            this.service_combo = Gtk.ComboBox.NewText();
-            this.service_combo.Name = "service_combo";
-            this.hbox1.Add(this.service_combo);
-            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox1[this.service_combo]));
-            w2.Position = 1;
-            this.vbox2.Add(this.hbox1);
-            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox2[this.hbox1]));
-            w3.Position = 0;
-            w3.Expand = false;
-            w3.Fill = false;
-            w3.Padding = ((uint)(5));
-            // Container child vbox2.Gtk.Box+BoxChild
             this.show_updates_chk = new Gtk.CheckButton();
             this.show_updates_chk.CanFocus = true;
             this.show_updates_chk.Name = "show_updates_chk";
@@ -88,10 +56,11 @@ namespace Microblogging {
             this.show_updates_chk.DrawIndicator = true;
             this.show_updates_chk.UseUnderline = true;
             this.vbox2.Add(this.show_updates_chk);
-            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox2[this.show_updates_chk]));
-            w4.Position = 1;
-            w4.Expand = false;
-            w4.Fill = false;
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox2[this.show_updates_chk]));
+            w1.Position = 0;
+            w1.Expand = false;
+            w1.Fill = false;
+            w1.Padding = ((uint)(5));
             this.GtkAlignment.Add(this.vbox2);
             this.frame1.Add(this.GtkAlignment);
             this.GtkLabel1 = new Gtk.Label();
@@ -100,8 +69,8 @@ namespace Microblogging {
             this.GtkLabel1.UseMarkup = true;
             this.frame1.LabelWidget = this.GtkLabel1;
             this.vbox1.Add(this.frame1);
-            Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.vbox1[this.frame1]));
-            w7.Position = 0;
+            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox1[this.frame1]));
+            w4.Position = 0;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

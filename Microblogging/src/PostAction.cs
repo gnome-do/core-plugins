@@ -26,9 +26,9 @@ using System.Collections.Generic;
 
 using Mono.Unix;
 
-
 using Do.Platform;
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace Microblogging
 {		
