@@ -71,10 +71,10 @@ namespace FilePlugin
 		{
 			// sets the corresponding value in gconf
 			try {
-				show_hidden_chk.Active = (bool) gconf.Get (FileItemSource.GConfKeyBase
+				show_hidden_chk.Active = (bool) gconf.Get (IFileItemSource.GConfKeyBase
 					+ "include_hidden");
 			} catch (GConf.NoSuchKeyException) {
-				gconf.Set (FileItemSource.GConfKeyBase + "include_hidden", false);
+				gconf.Set (IFileItemSource.GConfKeyBase + "include_hidden", false);
 				show_hidden_chk.Active = false;
 			}
 		}
@@ -82,10 +82,10 @@ namespace FilePlugin
 		protected virtual void OnShowHiddenChkClicked (object sender, System.EventArgs e)
 		{
 			try {
-				gconf.Set (FileItemSource.GConfKeyBase + "include_hidden",
+				gconf.Set (IFileItemSource.GConfKeyBase + "include_hidden",
 					show_hidden_chk.Active);
 			} catch (GConf.NoSuchKeyException) {
-				gconf.Set (FileItemSource.GConfKeyBase + "include_hidden",
+				gconf.Set (IFileItemSource.GConfKeyBase + "include_hidden",
 					false);
 			}
 		}

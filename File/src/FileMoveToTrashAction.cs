@@ -1,4 +1,4 @@
-/* FileItemActions.cs
+/* IFileItemActions.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -57,7 +57,7 @@ namespace FilePlugin {
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
-					typeof (FileItem),
+					typeof (IFileItem),
 				};
 			}
 		}
@@ -67,7 +67,7 @@ namespace FilePlugin {
 			List<string> seenPaths;
 
 			seenPaths = new List<string> ();
-			foreach (FileItem src in items) {
+			foreach (IFileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
 					File.Move (src.Path, Trash + "/" + src.Name);

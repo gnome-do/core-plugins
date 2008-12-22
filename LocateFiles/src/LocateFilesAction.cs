@@ -88,20 +88,20 @@ namespace Do.Universe
 				// tested this and it seems prety snappy.
 				if (Path.GetFileName (path).ToLower().Contains (query)) {
 					results++;
-					files.Add (new FileItem (path));
+					files.Add (new IFileItem (path));
 				}
 			}
-			files.Sort (new FileItemNameComparer (query));
+			files.Sort (new IFileItemNameComparer (query));
 			return files.ToArray ();
 		}
 
 		// Order files by (A) position of query in the file name and
 		// (B) by name length.
-		private class FileItemNameComparer : IComparer<Item>
+		private class IFileItemNameComparer : IComparer<Item>
 		{
 			string query;
 
-			public FileItemNameComparer (string query)
+			public IFileItemNameComparer (string query)
 			{
 				this.query = query.ToLower ();
 			}
@@ -111,9 +111,9 @@ namespace Do.Universe
 				string a_name_lower, b_name_lower;
 				int a_score, b_score;
 
-				a_name_lower = (a as FileItem).Path;
+				a_name_lower = (a as IFileItem).Path;
 				a_name_lower = Path.GetFileName (a_name_lower).ToLower (); 
-				b_name_lower = (b as FileItem).Path;
+				b_name_lower = (b as IFileItem).Path;
 				b_name_lower = Path.GetFileName (b_name_lower).ToLower (); 
 
 				a_score = a_name_lower.IndexOf (query);

@@ -23,8 +23,10 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
-using Do.Universe;
 using Mono.Unix;
+
+using Do.Universe;
+using Do.Universe.Common;
 
 namespace Text {	
 	public class AppendTextAction : Act {
@@ -35,46 +37,35 @@ namespace Text {
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] { typeof (ITextItem) };
+				yield return typeof (ITextItem);
 			}
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
-				return new Type[] { typeof (FileItem), typeof(ITextItem) };
+				//yield return typeof (IFileItem);
+				yield return typeof (ITextItem);
 			}
 		}
 		
-		public bool ModifierItemsOptional {
-			get { return false; }
-		}
-		
-
-		public bool SupportsItem (Item item)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			return true;
-		}
-		
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			if (modItem is FileItem) {
-				string mime = (modItem as FileItem).MimeType;
+			/*
+			if (modItem is IFileItem) {
+				string mime = (modItem as IFileItem).MimeType;
 				return mime == "x-directory/normal" || mime.StartsWith ("text/");
 			}
+			*/
 			return modItem is ITextItem;
 		}
-		
-		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			return null;
-		}
 
-		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (modItems.First () is FileItem) {
+			/*
+			if (modItems.First () is IFileItem) {
 				string text = (items.First () as ITextItem).Text;
-				string mime = (modItems.First () as FileItem).MimeType;
-				string file = (modItems.First () as FileItem).Path;
+				string mime = (modItems.First () as IFileItem).MimeType;
+				string file = (modItems.First () as IFileItem).Path;
 				
 				if (mime == "x-directory/normal") return null;
 				
@@ -83,13 +74,13 @@ namespace Text {
 					w.Close ();
 				}
 
-				return null;
-			}
-			else {
+				yield break;
+			} else {
+			*/
 				string text = (items.First () as ITextItem).Text;
 				string text2 = (modItems.First () as ITextItem).Text;
-				return new Item[] { new TextItem (text + text2) };
-			}
+				yield return new TextItem (text + text2);
+			//}
 		}
 	}
 }

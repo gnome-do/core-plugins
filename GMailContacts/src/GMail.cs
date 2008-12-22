@@ -41,15 +41,12 @@ namespace GMailContacts
 		
 		static GMail()
 		{
-			string username, password;
-			username = password = "";
 			ServicePointManager.CertificatePolicy = new CertHandler ();
 			contacts = new List<Item> ();
 			conts_lock = new object ();
 			last_updated = new DateTime (1987, 11, 28);
-			GMailConfig.GetAccountData (out username, out password,
-				typeof (GMailConfig));
-			Connect (username, password);
+			
+			Connect ( GMailConfig.username, GMailConfig.password);
 		}
 		
 		public static List<Item> Contacts {

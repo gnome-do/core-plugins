@@ -24,6 +24,7 @@ using System.Diagnostics;
 
 
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace Tomboy
 {	

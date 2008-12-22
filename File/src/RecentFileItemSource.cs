@@ -1,4 +1,4 @@
-/* RecentFileItemSource.cs
+/* RecentIFileItemSource.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -25,11 +25,11 @@ using Do.Universe;
 
 namespace FilePlugin
 {
-	public class RecentFileItemSource : ItemSource
+	public class RecentIFileItemSource : ItemSource
 	{
 		List<Item> files;
 		
-		public RecentFileItemSource()
+		public RecentIFileItemSource()
 		{
 			files = new List<Item> ();
 			Gtk.RecentManager.Default.Changed += OnRecentChanged;
@@ -45,7 +45,7 @@ namespace FilePlugin
 		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get { return new Type[] {
-					typeof (FileItem),
+					typeof (IFileItem),
 				};
 			}
 		}
@@ -79,7 +79,7 @@ namespace FilePlugin
 			files.Clear ();
 			foreach (Gtk.RecentInfo info in Gtk.RecentManager.Default.Items) {
 				Console.WriteLine ("Recent items source adding item: {0}", info);
-				files.Add (new FileItem (info.Uri));
+				files.Add (new IFileItem (info.Uri));
 			}
 			*/
 		}

@@ -73,7 +73,7 @@ namespace GCalendar {
             return true;
         }
         
-        public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+        public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
         {
             return true;
         }

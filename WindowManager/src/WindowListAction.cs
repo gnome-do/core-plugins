@@ -98,8 +98,8 @@ namespace WindowManager
 		{
 			Item[] items;
 			
-			if (item is ApplicationItem) {
-				string application = (item as ApplicationItem).Exec;
+			if (item is IApplicationItem) {
+				string application = (item as IApplicationItem).Exec;
 				application = application.Split (new char[] {' '})[0];
 				
 				if (!procList.ContainsKey (application)) return null;
@@ -124,7 +124,7 @@ namespace WindowManager
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
-					typeof (ApplicationItem),
+					typeof (IApplicationItem),
 					typeof (GenericWindowItem) };
 			}
 		}
@@ -132,7 +132,7 @@ namespace WindowManager
 		public override bool SupportsItem (Item item)
 		{
 			if (item is GenericWindowItem) return true;
-			string application = (item as ApplicationItem).Exec;
+			string application = (item as IApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
 			if (matchList.ContainsKey (application)) {
@@ -169,9 +169,9 @@ namespace WindowManager
 				
 				ToggleWindow (w);
 			} else { //no mod item
-				if (items.First () is ApplicationItem) { //it was an application item
+				if (items.First () is IApplicationItem) { //it was an application item
 					string application;
-					ApplicationItem app = (items.First () as ApplicationItem);
+					IApplicationItem app = (items.First () as IApplicationItem);
 					
 					application = app.Exec;
 					application = application.Split (new char[] {' '})[0];
@@ -335,8 +335,8 @@ namespace WindowManager
 				
 				w.Close (Gtk.Global.CurrentEventTime);
 			} else {
-				if (items.First () is ApplicationItem) {
-					string application = (items.First () as ApplicationItem).Exec;
+				if (items.First () is IApplicationItem) {
+					string application = (items.First () as IApplicationItem).Exec;
 					application = application.Split (new char[] {' '})[0];
 					
 					List<Window> windows = WindowListItems.GetApplication (application);
@@ -427,8 +427,8 @@ namespace WindowManager
 				
 				FocusWindowViewport (w);
 			} else {
-				if (items.First () is ApplicationItem) {
-					string application = (items.First () as ApplicationItem).Exec;
+				if (items.First () is IApplicationItem) {
+					string application = (items.First () as IApplicationItem).Exec;
 					application = application.Split (new char[] {' '})[0];
 					
 					List<Window> windows = WindowListItems.GetApplication (application);

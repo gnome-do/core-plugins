@@ -25,7 +25,7 @@ using Mono.Unix;
 
 namespace GMailContacts
 {
-	public class GMailContactDetailItem : IContactDetailItem 
+	public class GMailContactDetailItem : Item, IContactDetailItem 
 	{
 		private string type, detail;
 		

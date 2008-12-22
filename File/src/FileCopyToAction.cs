@@ -1,4 +1,4 @@
-/* FileItemActions.cs
+/* IFileItemActions.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -42,7 +42,7 @@ namespace FilePlugin {
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
-					typeof (FileItem),
+					typeof (IFileItem),
 				};
 			}
 		}
@@ -64,9 +64,9 @@ namespace FilePlugin {
 			return true;
 		}
 
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			return FileItem.IsDirectory (modItem as IFileItem);
+			return IFileItem.IsDirectory (modItem as IFileItem);
 		}
 
 		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
@@ -81,13 +81,13 @@ namespace FilePlugin {
 
 			dest = modItems.First () as IFileItem;
 			seenPaths = new List<string> ();
-			foreach (FileItem src in items) {
+			foreach (IFileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
 					//File.Copy doesn't work on directories, WHY!?
 					System.Diagnostics.Process.Start ("cp", "-a " +
-						FileItem.EscapedPath (src.Path) + " " +
-						FileItem.EscapedPath (dest.Path + "/" + src.Name));
+						IFileItem.EscapedPath (src.Path) + " " +
+						IFileItem.EscapedPath (dest.Path + "/" + src.Name));
 						
 					seenPaths.Add (src.Path);
 					src.Path = Path.Combine (dest.Path, Path.GetFileName (src.Path));

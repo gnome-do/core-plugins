@@ -64,7 +64,7 @@ namespace FilePlugin {
 			return true;
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return true;
 		}
@@ -85,7 +85,7 @@ namespace FilePlugin {
 				Console.Error.WriteLine ("If you want to move a file, please use move.");
 				return null;
 			}
-			foreach (FileItem src in items) {
+			foreach (IFileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
 					dest = src.Path.Substring(0,src.Path.LastIndexOf("/")) + "/" + dest;

@@ -60,8 +60,8 @@ namespace ImageShack
 			
 		public override bool SupportsItem (Item item)
 		{	
-			if (item is FileItem) {	
-				if ((item as FileItem).MimeType.StartsWith ("image/")) {
+			if (item is IFileItem) {	
+				if ((item as IFileItem).MimeType.StartsWith ("image/")) {
 					return true;
 				}
 			}
@@ -80,19 +80,19 @@ namespace ImageShack
 				StringBuilder notificationUrlList = new StringBuilder();
 				notificationUrlList.AppendLine (Catalog.GetString ("Image urls: "));
 				foreach (Item item in items) {	
-					FileItem fileItem = item as FileItem;
+					IFileItem IFileItem = item as IFileItem;
 						
-					string fileValidationError = ValidateFileForUpload (fileItem.Path);	
+					string fileValidationError = ValidateFileForUpload (IFileItem.Path);	
 					if (fileValidationError != null) {
-						returnItems.Add (new TextItem (fileValidationError + " - " + fileItem.Path ));
+						returnItems.Add (new TextItem (fileValidationError + " - " + IFileItem.Path ));
 						continue;
 					}
 					
 					NotificationBridge.ShowMessage (
 						    Catalog.GetString ("ImageShack"), 
 						    Catalog.GetString ("Do is uploading your image... Please wait a moment..."), 
-						    fileItem.Path);
-					string url = PostToImageShack (fileItem.Path, fileItem.MimeType);
+						    IFileItem.Path);
+					string url = PostToImageShack (IFileItem.Path, IFileItem.MimeType);
 					notificationUrlList.AppendLine (url);
 					returnItems.Add (new TextItem (url));
 				}

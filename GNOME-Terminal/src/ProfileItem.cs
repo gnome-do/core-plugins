@@ -1,4 +1,4 @@
-/* ProfileItem.cs
+/* ProIFileItem.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -26,12 +26,12 @@ using GConf;
 
 namespace GNOME.Terminal 
 {
-	public class ProfileItem : Item
+	public class ProIFileItem : Item
 	{
 		private string name;
 		private string description;
 
-        public ProfileItem (string profilePath)
+        public ProIFileItem (string profilePath)
         {
 			Client gcClient = new Client ();
 			try {

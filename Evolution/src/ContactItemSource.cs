@@ -23,6 +23,7 @@ using System.Collections.Generic;
 
 using Do;
 using Do.Universe;
+using Do.Platform;
 
 using Mono.Unix;
 
@@ -146,7 +147,7 @@ namespace Evolution
 			if (string.IsNullOrEmpty (contact ["photo.evolution"])) try {
 				switch (eContact.Photo.PhotoType) {
 					case ContactPhotoType.Inlined:
-						string photo = Paths.GetTemporaryFilePath () + ".jpg";
+						string photo = Services.Paths.GetTemporaryFilePath () + ".jpg";
 						try {
 							File.WriteAllBytes (photo, eContact.Photo.Data);
 							contact["photo"] = contact["photo.evolution"] =
@@ -167,8 +168,7 @@ namespace Evolution
 				Console.Error.WriteLine (e.StackTrace);
 		   	}
 			//add the details to the contact
-			foreach (ContactAttribute c in ContactDetails)
-			{
+			foreach (ContactAttribute c in ContactDetails) {
 				MaybeAddDetail(contact,c.Key,c.Detail);
 			}
 			return contact;

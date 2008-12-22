@@ -49,7 +49,7 @@ namespace Epiphany
 		public override string Icon { get { return "gnome-web-browser"; } }
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (EpiphanyBookmarkItem); }
+			get { yield return typeof (BookmarkItem); }
 		}
 
 		public override IEnumerable<Item> Items {
@@ -72,7 +72,7 @@ namespace Epiphany
 						reader.ReadToFollowing ("link");
 						link = reader.ReadString ();
 
-						items.Add (new EpiphanyBookmarkItem (title, link));
+						items.Add (new BookmarkItem (title, link));
 					}
 				}
 			} catch (Exception e) {

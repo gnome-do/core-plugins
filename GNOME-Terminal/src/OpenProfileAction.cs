@@ -51,13 +51,13 @@ namespace GNOME.Terminal
 	    public override IEnumerable<Type> SupportedItemTypes
 		{
 	      get {
-	        return new Type[] { typeof ( ProfileItem ) };
+	        return new Type[] { typeof ( ProIFileItem ) };
 	      }
 	    }
 	    
 	    public override IEnumerable<Item> Perform( IEnumerable<Item> items, IEnumerable<Item> modifierItems )
 	    {
-			string profileName = (items.First () as ProfileItem).Name;
+			string profileName = (items.First () as ProIFileItem).Name;
 
 			try {
 				Process.Start ("gnome-terminal", "--window-with-profile=" + profileName);

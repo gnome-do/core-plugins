@@ -66,7 +66,7 @@ namespace GNOME.Terminal
 			if (item is ITextItem) {
 				return CommandLineFoundOnPath ((item as ITextItem).Text);
 			} else if (item is IFileItem) {
-				return FileItem.IsExecutable (item as IFileItem);
+				return IFileItem.IsExecutable (item as IFileItem);
 			}
 			return false;
 		}
