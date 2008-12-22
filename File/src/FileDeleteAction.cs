@@ -1,4 +1,4 @@
-/* FileItemActions.cs
+/* IFileItemActions.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -50,7 +50,7 @@ namespace FilePlugin {
 		{
 			foreach (IFileItem src in items) {
 				try {
-					File.Delete (FileItem.EscapedPath (src));
+					File.Delete (IFileItem.EscapedPath (src));
 				} catch (Exception e) {
 					Console.Error.WriteLine ("DeleteFileAction could not delete "+
 							src.Path + ": " + e.Message);

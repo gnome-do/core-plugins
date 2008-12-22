@@ -57,7 +57,7 @@ namespace FilePlugin {
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] { 
-					typeof (FileItem), 
+					typeof (IFileItem), 
 				};
 			}
 		}
@@ -72,7 +72,7 @@ namespace FilePlugin {
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			// Check for archive types
-			FileItem fi = modItem as FileItem;
+			IFileItem fi = modItem as IFileItem;
 			return fi.MimeType == "x-directory/normal";
 		}
 		
@@ -82,11 +82,11 @@ namespace FilePlugin {
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			FileItem directory;
+			IFileItem directory;
 			if (modItems.Any ())
-				directory = modItems.First () as FileItem;
+				directory = modItems.First () as IFileItem;
 			else
-				directory = new FileItem (Environment.GetEnvironmentVariable ("HOME")
+				directory = new IFileItem (Environment.GetEnvironmentVariable ("HOME")
 				                          + "/Desktop");
 
 			ITextItem ti = items.First () as ITextItem;
@@ -97,7 +97,7 @@ namespace FilePlugin {
 			
 			// Return the new file, so new actions can be used on it
 			return new Item [] { 
-				new FileItem(filePath), 
+				new IFileItem(filePath), 
 			};
 		}
 	}

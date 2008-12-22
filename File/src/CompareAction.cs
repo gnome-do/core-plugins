@@ -46,7 +46,7 @@ namespace FilePlugin
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
-					typeof (FileItem),
+					typeof (IFileItem),
 				};
 			}
 		}
@@ -54,7 +54,7 @@ namespace FilePlugin
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
-					typeof (FileItem),
+					typeof (IFileItem),
 				};
 			}
 		}
@@ -65,14 +65,14 @@ namespace FilePlugin
 		
 		public bool SupportsItem (Item item)
 		{
-			if (!(item is FileItem)) return false;
-			return IsTextFile (item as FileItem);
+			if (!(item is IFileItem)) return false;
+			return IsTextFile (item as IFileItem);
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			if (!(modItem is FileItem)) return false;
-			return IsTextFile (modItem as FileItem);
+			if (!(modItem is IFileItem)) return false;
+			return IsTextFile (modItem as IFileItem);
 		}
 		
 		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
@@ -88,8 +88,8 @@ namespace FilePlugin
 				return null;
 			}
 			
-			string file1 = (items.First () as FileItem).Path;
-			string file2 = (modItems.First () as FileItem).Path;
+			string file1 = (items.First () as IFileItem).Path;
+			string file2 = (modItems.First () as IFileItem).Path;
 			
 			Process diff = new Process ();
 			if (CompareConfig.RunInTerminal) {
@@ -110,7 +110,7 @@ namespace FilePlugin
 			return new CompareConfig ();
 		}
 		
-		bool IsTextFile (FileItem file)
+		bool IsTextFile (IFileItem file)
 		{
 			return file.MimeType.StartsWith ("text/");
 		}

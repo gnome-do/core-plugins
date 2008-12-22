@@ -59,7 +59,7 @@ namespace Do.Addins.Pidgin
 			get { return false; }
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return false;
 		}
@@ -116,7 +116,7 @@ namespace Do.Addins.Pidgin
 			get { return false; }
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return false;
 		}
