@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
 using Mono.Unix;
-using Do.Interface;
+using Do.Platform.Linux;
 
 /// <summary>
 /// Do plug-in that returns search results from google back to gnome-do for 
