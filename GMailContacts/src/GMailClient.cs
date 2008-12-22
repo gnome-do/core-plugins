@@ -101,7 +101,7 @@ namespace GMail
 
 			i = 0;
 			foreach (T element in extensions) {
-				detailBase = PrefixForExtension (typeof (T));
+				detailBase = RootDetailForExtension (typeof (T));
 
 				if (element.Primary)
 					detail = detailBase;
@@ -120,7 +120,7 @@ namespace GMail
 			}
 		}
 
-		string PrefixForExtension (Type extensionType)
+		string RootDetailForExtension (Type extensionType)
 		{			
 			if (extensionType == typeof (EMail))
 				return "email.gmail";
