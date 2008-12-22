@@ -145,7 +145,8 @@ namespace Microblogging
 			string icon = "";
 			TwitterStatus tweet;
 			TwitterParameters parameters;
-			
+			string genericError = string.Format (GenericErrorMsg, "UpdateTimeline");
+
 			try {
 				// get the most recent update
 				parameters = new TwitterParameters ();
@@ -159,11 +160,13 @@ namespace Microblogging
 			
 				OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
 			} catch (TwitterizerException e) {
-				Log.Error (string.Format (GenericErrorMsg, "UpdateTimeline"), e.Message);
+				Log.Error (genericError, e.Message);
+				Log.Debug (e.StackTrace);
+			} catch (ArgumentOutOfRangeException e) {
+				Log.Error (genericError, e.Message);
 				Log.Debug (e.StackTrace);
 			} catch (IndexOutOfRangeException) {
 				Log.Debug (NoUpdatesMsg);
-				return;
 			}
 		}
 
@@ -187,6 +190,9 @@ namespace Microblogging
 				OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
+				Log.Debug (e.StackTrace);
+			} catch (ArgumentOutOfRangeException e) {
+				Log.Error (genericError, e.Message);
 				Log.Debug (e.StackTrace);
 			} catch (IndexOutOfRangeException) {
 				Log.Debug (NoUpdatesMsg);
