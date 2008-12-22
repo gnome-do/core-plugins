@@ -23,10 +23,10 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Do.UI;
 
+using Do.Platform.Linux;
 
-namespace GMailContacts
+namespace GMail
 {	
 	public class GMailConfig : AbstractLoginWidget
 	{
@@ -36,22 +36,28 @@ namespace GMailContacts
             
         const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
         
-		public GMailConfig() : base ("GMail")
+		public GMailConfig() : base ("GMail", Uri)
 		{
-			GetAccountButton.Uri = Uri;
+			Username = GMail.Preferences.Username;
+			Password = GMail.Preferences.Password;
 		}
-		
+
+		protected override void SaveAccountData(string username, string password)
+		{
+			GMail.Preferences.Username = username;
+			GMail.Preferences.Password = password;
+		}
+
 		protected override bool Validate (string username, string password)
 		{
-			if (ValidateUsername (username) && password.Length > 0)
+			if (ValidateUsername (username))
 				return GMail.TryConnect (username, password);
 			return false;
 		}
 		
-		private bool ValidateUsername (string username)
+		bool ValidateUsername (string username)
 		{			
-			return new Regex (EmailPattern, 
-				RegexOptions.Compiled).IsMatch (username);
+			return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
 		}
 	}
 }

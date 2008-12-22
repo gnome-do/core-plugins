@@ -20,15 +20,14 @@
  */
 
 using System;
-using Do.Universe;
 using Mono.Unix;
+using Do.Universe;
 
-namespace GMailContacts
+namespace GMail
 {
-	public class GMailContactDetailItem : IContactDetailItem 
+	public class GMailContactDetailItem : Item, IContactDetailItem
 	{
-		private string type, detail;
-		
+		string type, detail;
 		
 		public GMailContactDetailItem (string type, string detail)
 		{
@@ -60,7 +59,7 @@ namespace GMailContacts
 		
 		public override string Icon {
 			get {
-				switch (type.Substring (0,type.IndexOf ("."))) {
+				switch (type.Substring (0, type.IndexOf ("."))) {
 				case "email": return "gmail-logo.png@" + GetType ().Assembly.FullName;
 				case "address": return "go-home";
 				case "phone": return "phone.png@" + GetType ().Assembly.FullName;
@@ -70,15 +69,11 @@ namespace GMailContacts
 		}
 		
 		public string Key {
-			get {
-				return type;
-			}
+			get { return type; }
 		}
 		
 		public string Value {
-			get { 
-				return detail;
-			}
+			get { return detail; }
 		}
 	}
 }

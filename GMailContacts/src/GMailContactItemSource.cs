@@ -21,14 +21,13 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
-using Gtk;
-
-
 using Do.Universe;
+using Do.Platform.Linux;
 
-namespace GMailContacts
+namespace GMail
 {	
 	public sealed class GMailContactsItemSource : ItemSource, IConfigurable
 	{
@@ -37,7 +36,7 @@ namespace GMailContacts
 		}
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Indexes your GMail contacts"); }
+			get { return Catalog.GetString ("Index your GMail contacts"); }
 		}
 		
 		public override string Icon { 
@@ -45,13 +44,9 @@ namespace GMailContacts
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (ContactItem),
-				};
-			}
+			get { yield return typeof (ContactItem); }
 		}
-		
+				
 		public override IEnumerable<Item> Items {
 			get { return GMail.Contacts; }
 		}
@@ -59,24 +54,18 @@ namespace GMailContacts
 		public override IEnumerable<Item> ChildrenOfItem (Item item) 
 		{
 			ContactItem contact = item as ContactItem;
-			List<Item> details = new List<Item> ();
+			
 			foreach (string detail in contact.Details) {
 				if (detail.Contains (".gmail"))
-					details.Add (
-						new GMailContactDetailItem (detail, contact [detail]));
+					yield return new GMailContactDetailItem (detail, contact [detail]) as Item;
 			}
-			return details;
 		}
 		
 		public override void UpdateItems () 
 		{
-			try {
-				Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));
-				thread.IsBackground = true;
-				thread.Start ();
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-			}
+			Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 		
 		public Gtk.Bin GetConfiguration ()

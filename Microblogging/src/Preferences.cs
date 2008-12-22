@@ -57,8 +57,8 @@ namespace Microblogging
 		}
 		
 		public string Password { 
-			get { return prefs.SecureGet (string.Format (PasswordKey, Microblog.Preferences.MicroblogService), ""); }
-			set { prefs.SecureSet (string.Format (PasswordKey, Microblog.Preferences.MicroblogService), value); }
+			get { return prefs.GetSecure (string.Format (PasswordKey, Microblog.Preferences.MicroblogService), ""); }
+			set { prefs.SetSecure (string.Format (PasswordKey, Microblog.Preferences.MicroblogService), value); }
 		}
 		
 		public bool ShowNotifications {
