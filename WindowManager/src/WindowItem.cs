@@ -27,7 +27,7 @@ using Do.Universe;
 
 namespace WindowManager
 {	
-	public class WindowItem : IWindowItem
+	public class WindowItem : Item, IWindowItem
 	{
 		Wnck.Window window;
 		string icon;
@@ -64,7 +64,7 @@ namespace WindowManager
 		
 	}
 	
-	public class ScreenItem : IScreenItem
+	public class ScreenItem : Item, IScreenItem
 	{
 		string name, description, icon;
 		
