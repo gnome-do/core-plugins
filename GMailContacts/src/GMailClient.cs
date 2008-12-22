@@ -79,10 +79,6 @@ namespace GMail
 					AddDetails (buddy, entry.Phonenumbers);
 					AddDetails (buddy, entry.PostalAddresses);
 					
-					try {
-						Log.Debug (entry.PhotoUri.AbsoluteUri);
-					} catch (Exception) { ; }
-					
 					contacts.Add (buddy);
 				}
 				
