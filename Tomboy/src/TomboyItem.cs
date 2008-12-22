@@ -22,7 +22,7 @@ using Do.Universe;
 
 namespace Tomboy
 {
-	public class NoteItem : IOpenableItem
+	public class NoteItem : Item, IOpenableItem
 	{
 		private const string desc = "Tomboy note";
 		private const string icon = "tomboy";
