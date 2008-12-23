@@ -69,12 +69,12 @@ namespace FilePlugin {
 				IFileItem.IsDirectory (modItem as IFileItem);
 		}
 
-		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
 
-		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			IFileItem dest;
 			List<string> seenPaths;

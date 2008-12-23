@@ -72,7 +72,7 @@ namespace Delicious
 			return true;
 		}
 
-		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			String tags = (items.First () as ITextItem).Text.Replace(" ","+");
 
@@ -142,7 +142,7 @@ namespace Delicious
 			return true;
 		}
 		
-		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}

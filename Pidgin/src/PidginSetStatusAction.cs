@@ -62,32 +62,25 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public bool SupportsItem (Item item)
-		{
-			return true;
-		}
-		
 		public bool ModifierItemsOptional {
 			get { return true; }
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			if (items.First () is ITextItem)
-				return true;
-			return false;
+			return items.First () is ITextItem;
 		}
 		
-		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
         {
             return pidginStatuses;
         }
 		
-		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			int status;
 			string message;
-				try {
+			try {
 				Pidgin.IPurpleObject prpl = Pidgin.GetPurpleObject ();
 				
 				if (items.First () is PidginSavedStatusItem) {
@@ -102,7 +95,7 @@ namespace Do.Addins.Pidgin
 					Pidgin.PurpleSetAvailabilityStatus ((uint) status, message);
 				}
 			} catch { }
-			return null;
+			yield break;
 		}
 	}
 }

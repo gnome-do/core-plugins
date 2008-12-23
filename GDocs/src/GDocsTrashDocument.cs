@@ -73,7 +73,7 @@ namespace GDocs
             get { return true; }
         }
 		
-		public IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
         {
             return null;
         }
