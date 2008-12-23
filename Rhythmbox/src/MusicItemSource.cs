@@ -58,7 +58,7 @@ namespace Do.Rhythmbox
 				return new Type[] {
 					typeof (MusicItem),
 					typeof (BrowseMusicItem),
-					typeof (ApplicationItem),
+					typeof (IApplicationItem),
 				};
 			}
 		}
@@ -66,7 +66,7 @@ namespace Do.Rhythmbox
 		public override IEnumerable<Item> Items { get { return items; } }
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent) {
-			if (parent is ApplicationItem && parent.Name == "Rhythmbox Music Player") {
+			if (parent is IApplicationItem && parent.Name == "Rhythmbox Music Player") {
 				yield return new BrowseAlbumsMusicItem ();
 				yield return new BrowseArtistsMusicItem ();
 				foreach (Item item in RhythmboxRunnableItem.DefaultItems) yield return item;
