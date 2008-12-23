@@ -76,7 +76,7 @@ namespace Rss
 		}
 		/// <summary>Item synopsis</summary>
 		/// <remarks>Maximum length is 500 (For RSS 0.91)</remarks>
-		public override string Description
+		public string Description
 		{
 			get { return description; }
 			set { description = RssDefault.Check(value); }

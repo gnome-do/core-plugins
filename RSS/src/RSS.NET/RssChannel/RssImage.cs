@@ -84,7 +84,7 @@ namespace Rss
 			set { link = RssDefault.Check(value); }
 		}
 		/// <summary>Contains text that is included in the TITLE attribute of the link formed around the image in the HTML rendering.</summary>
-		public override string Description
+		public string Description
 		{
 			get { return description; }
 			set { description = RssDefault.Check(value); }

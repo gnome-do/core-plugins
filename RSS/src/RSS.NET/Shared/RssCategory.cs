@@ -42,7 +42,7 @@ namespace Rss
 		public RssCategory() {}
 
 		/// <summary>Actual categorization given for this item, within the chosen taxonomy</summary>
-		public override string Name
+		public string Name
 		{
 			get { return name; }
 			set { name = RssDefault.Check(value); }
