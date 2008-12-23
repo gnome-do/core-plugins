@@ -38,7 +38,6 @@
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
-      <Entry build="False" name="OpenSearch.Tests" configuration="Debug" />
       <Entry build="True" name="GDocs" configuration="Debug" />
       <Entry build="True" name="Microblogging" configuration="Debug" />
     </Configuration>
@@ -80,7 +79,6 @@
       <Entry build="True" name="ImageShack" configuration="Release" />
       <Entry build="True" name="Cl.ickable" configuration="Release" />
       <Entry build="True" name="ManLookUp" configuration="Release" />
-      <Entry build="False" name="OpenSearch.Tests" configuration="Release" />
       <Entry build="True" name="GDocs" configuration="Release" />
       <Entry build="True" name="Microblogging" configuration="Release" />
     </Configuration>
@@ -123,7 +121,6 @@
     <Execute type="None" entry="ImageShack" />
     <Execute type="None" entry="Cl.ickable" />
     <Execute type="None" entry="ManLookUp" />
-    <Execute type="None" entry="OpenSearch.Tests" />
     <Execute type="None" entry="GDocs" />
     <Execute type="None" entry="Microblogging" />
   </StartMode>
@@ -166,7 +163,6 @@
     <Entry filename="ImageShack/ImageShack.mdp" />
     <Entry filename="Cl.ickable/Cl.ickable.mdp" />
     <Entry filename="ManLookUp/ManLookUp.mdp" />
-    <Entry filename="OpenSearch.Tests/OpenSearch.Tests.mdp" />
     <Entry filename="GDocs/GDocs.mdp" />
     <Entry filename="Microblogging/Microblogging.mdp" />
   </Entries>
