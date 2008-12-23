@@ -23,7 +23,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Do.Universe;
+using Do.Universe.Common;
+using Do.Platform;
+using Do.Platform.Linux;
 
 using Mono.Unix;
 
@@ -92,28 +96,18 @@ namespace InlineGoogleSearch {
 		/// </returns>
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
-			List<Item> retItems = new List<Item> ();
-			
 			GoogleSearch googleSearch = new GoogleSearch ();
-			googleSearch.setSafeSearchLevel
-				 (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery ( (items.First () as ITextItem).Text);
-			GoogleSearchResult [] googleSearchResult = 
-				googleSearch.search ();
+			googleSearch.setSafeSearchLevel (InlineGoogleSearchConfig.SearchRestrictions);
+			googleSearch.setQuery ((items.First () as ITextItem).Text);
+			GoogleSearchResult [] results = googleSearch.search ();
 
-			if (googleSearchResult.Length == 0) {
-				Do.Addins.NotificationBridge.ShowMessage (
-				                            "Google Search",
-				                            "No Results Found");
+			if (results.Length == 0) {
+				Services.Notifications.Notify ("Google Search", "No Results Found");
 			}
 			
-			for (int i = 0; i < googleSearchResult.Length; i++) {
-				retItems.Add (new BookmarkItem 
-				      (googleSearchResult [i].titleNoFormatting,
-				       googleSearchResult [i].url));
-			}
-			
-			return retItems.ToArray ();	
+			foreach (GoogleSearchResult result in results) {
+				yield return new BookmarkItem (result.titleNoFormatting, result.url);
+			}	
 		}
 
 		/// <summary>

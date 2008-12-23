@@ -23,7 +23,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Do.Universe;
+using Do.Platform;
+using Do.Platform.Linux;
 
 using Mono.Unix;
 
@@ -94,18 +97,14 @@ namespace InlineGoogleSearch {
 			googleSearch.setSafeSearchLevel
 				 (InlineGoogleSearchConfig.SearchRestrictions);
 			googleSearch.setQuery ( (items.First () as ITextItem).Text);
-			GoogleSearchResult [] googleSearchResult = 
-				googleSearch.search ();
+			GoogleSearchResult [] results =  googleSearch.search ();
 			
-			if (!googleSearchResult.Any ()) {
-				Do.Addins.NotificationBridge.ShowMessage (
-				                            "I'm Feeling Lucky", 
-				                            "No Resutls Found");
+			if (!results.Any ()) {
+				Services.Notifications.Notify ("I'm Feeling Lucky", "No Resutls Found");
 			} else {
-				Util.Environment.Open 
-					(googleSearchResult [0].url);
+				Services.Environment.OpenUrl (results.First ().url);
 			}
-			return null;	
+			yield break;	
 		}
 
 		/// <summary>

@@ -26,7 +26,8 @@ using System.Text.RegularExpressions;
 namespace InlineGoogleSearch {
 	
 	
-	public class GoogleSearchResult {
+	public class GoogleSearchResult
+	{
 		public string unescapedUrl = "";
 		public string url = "";
 		public string visibleUrl = "";
