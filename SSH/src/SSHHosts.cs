@@ -24,12 +24,14 @@ using System.Xml;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using Do.Platform;
 using Do.Universe;
+
 using Mono.Unix;
 
 namespace GnomeDoSSH {
 
-	public class HostItem : IOpenableItem {
+	public class HostItem : Item, IOpenableItem {
 		string name;
 
 		public HostItem (string hostname)
@@ -45,8 +47,7 @@ namespace GnomeDoSSH {
 
 		public void Open ()
 		{
-			string uri = "ssh://" + name;
-			Do.Addins.Util.Environment.Open (uri);
+			Services.Environment.OpenUrl ("ssh://" + name);
 		}
 	}
 
