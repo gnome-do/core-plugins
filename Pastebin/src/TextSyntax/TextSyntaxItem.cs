@@ -18,10 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using Do.Universe;
 
 namespace Pastebin
 {
-	public class TextSyntaxItem : ITextSyntaxItem
+	public class TextSyntaxItem : Item, ITextSyntaxItem
 	{	
 		private string name, description, icon, syntax;		
 		
