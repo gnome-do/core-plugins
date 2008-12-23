@@ -1,7 +1,7 @@
 <Addin 
 	id="File"
 	namespace="Do"
-	version="1.4"
+	version="2.0"
 	name="Files and Folders"
 	description="Indexes files in user-specified directories. Allows you to move, copy, delete, and browse files."
 	author="David Siegel, Alex Launi, Ankit Solanki"
@@ -17,18 +17,13 @@
 
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="FilePlugin.IFileItemSource" />
-		<ItemSource type="FilePlugin.RecentIFileItemSource" />
+		<ItemSource type="Do.FilesAndFolders.FileItemSource" />
+		<ItemSource type="Do.FilesAndFolders.RecentFileItemSource" />
 	</Extension>
 
 	<!--- Actions -->
 	<Extension path="/Do/Action">
-		<Action type="FilePlugin.MoveToAction" />
-		<Action type="FilePlugin.RenameToAction" />
-		<Action type="FilePlugin.CopyToAction" />
-		<Action type="FilePlugin.MoveToTrashAction" />
-		<Action type="FilePlugin.CreateEmptyFileAction" />
-		<Action type="FilePlugin.CreateDirectory" />
-		<Action type="FilePlugin.CompareAction" />
+		<Action type="Do.FilesAndFolders.NewFileAction" />
+		<Action type="Do.FilesAndFolders.NewFolderAction" />
 	</Extension>
 </Addin>

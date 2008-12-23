@@ -5,7 +5,6 @@
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
       <Entry build="True" name="Epiphany" configuration="Debug" />
       <Entry build="True" name="Evolution" configuration="Debug" />
-      <Entry build="True" name="File" configuration="Debug" />
       <Entry build="True" name="GNOME-Session" configuration="Debug" />
       <Entry build="True" name="GoogleCalculator" configuration="Debug" />
       <Entry build="False" name="Launchpad" configuration="Debug" />
@@ -40,13 +39,13 @@
       <Entry build="True" name="ManLookUp" configuration="Debug" />
       <Entry build="True" name="GDocs" configuration="Debug" />
       <Entry build="True" name="Microblogging" configuration="Debug" />
+      <Entry build="True" name="File" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="Release" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
       <Entry build="True" name="Epiphany" configuration="Release" />
       <Entry build="True" name="Evolution" configuration="Release" />
-      <Entry build="True" name="File" configuration="Release" />
       <Entry build="True" name="GNOME-Session" configuration="Release" />
       <Entry build="True" name="GoogleCalculator" configuration="Release" />
       <Entry build="False" name="Launchpad" configuration="Release" />
@@ -81,6 +80,7 @@
       <Entry build="True" name="ManLookUp" configuration="Release" />
       <Entry build="True" name="GDocs" configuration="Release" />
       <Entry build="True" name="Microblogging" configuration="Release" />
+      <Entry build="True" name="File" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -88,7 +88,6 @@
     <Execute type="None" entry="Rhythmbox" />
     <Execute type="None" entry="Epiphany" />
     <Execute type="None" entry="Evolution" />
-    <Execute type="None" entry="File" />
     <Execute type="None" entry="GNOME-Session" />
     <Execute type="None" entry="GoogleCalculator" />
     <Execute type="None" entry="Launchpad" />
@@ -123,6 +122,7 @@
     <Execute type="None" entry="ManLookUp" />
     <Execute type="None" entry="GDocs" />
     <Execute type="None" entry="Microblogging" />
+    <Execute type="None" entry="File" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -130,7 +130,6 @@
     <Entry filename="Rhythmbox/Rhythmbox.mdp" />
     <Entry filename="Epiphany/Epiphany.mdp" />
     <Entry filename="Evolution/Evolution.mdp" />
-    <Entry filename="File/File.mdp" />
     <Entry filename="GNOME-Session/GNOME-Session.mdp" />
     <Entry filename="GoogleCalculator/GoogleCalculator.mdp" />
     <Entry filename="Launchpad/Launchpad.mdp" />
@@ -165,5 +164,6 @@
     <Entry filename="ManLookUp/ManLookUp.mdp" />
     <Entry filename="GDocs/GDocs.mdp" />
     <Entry filename="Microblogging/Microblogging.mdp" />
+    <Entry filename="../future-djsiegel/File/File.mdp" />
   </Entries>
 </Combine>

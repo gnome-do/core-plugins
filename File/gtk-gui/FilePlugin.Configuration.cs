@@ -112,7 +112,7 @@ namespace FilePlugin {
             this.vbox3.Name = "vbox3";
             this.vbox3.Spacing = 6;
             // Container child vbox3.Gtk.Box+BoxChild
-            this.table2 = new Gtk.Table(((uint)(1)), ((uint)(3)), false);
+            this.table2 = new Gtk.Table(((uint)(3)), ((uint)(3)), false);
             this.table2.Name = "table2";
             this.table2.RowSpacing = ((uint)(6));
             this.table2.ColumnSpacing = ((uint)(6));
