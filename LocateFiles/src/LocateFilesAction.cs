@@ -24,6 +24,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Mono.Unix;
 
+using Do.Platform;
+
 namespace Do.Universe
 {
 	public class LocateFilesAction : Act
@@ -88,11 +90,11 @@ namespace Do.Universe
 				// tested this and it seems prety snappy.
 				if (Path.GetFileName (path).ToLower().Contains (query)) {
 					results++;
-					files.Add (new IFileItem (path));
+					files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
 				}
 			}
 			files.Sort (new IFileItemNameComparer (query));
-			return files.ToArray ();
+			return files;
 		}
 
 		// Order files by (A) position of query in the file name and
