@@ -29,6 +29,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Do.Riptide
@@ -78,7 +79,7 @@ namespace Do.Riptide
 			try {
 				res = req.GetResponse ();
 			} catch {
-				Do.Addins.NotificationBridge.ShowMessage ("Riptide:", "Torrent Search could not be performed");
+				Services.Notifications.Notify (new Notification ("Riptide Error", "Could not perform torrent search", "gnome-do"));
 				return null;
 			}
 			
@@ -119,7 +120,7 @@ namespace Do.Riptide
 			outItems.Sort ();
 			
 			if (outItems.Count == 0) {
-				outItems.Add (new TextItem ("No Torrent Results Found For " + 
+				outItems.Add (new Universe.Common.TextItem ("No Torrent Results Found For " + 
 				                            (items.First () as ITextItem).Text));
 			}
 			
