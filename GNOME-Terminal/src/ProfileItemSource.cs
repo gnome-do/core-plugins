@@ -1,4 +1,4 @@
-/* ProfileItemSource.cs
+/* ProIFileItemSource.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -28,13 +28,13 @@ using Do.Universe;
 namespace GNOME.Terminal
 {
 
-	public class ProfileItemSource : ItemSource
+	public class ProIFileItemSource : ItemSource
 	{
 		private static string GCONF_TERMINAL = "/apps/gnome-terminal/profiles";
 
 		List<Item> items;
 
-		public ProfileItemSource()
+		public ProIFileItemSource()
 		{
 			items = new List<Item> ();
 		}
@@ -49,7 +49,7 @@ namespace GNOME.Terminal
 
 	    public override IEnumerable<Type> SupportedItemTypes {
 	      get {
-	        return new Type[] { typeof (ProfileItem) };
+	        return new Type[] { typeof (ProIFileItem) };
 	      }
 	    }
 
@@ -72,7 +72,7 @@ namespace GNOME.Terminal
 				string profile = Regex.Replace (_profile, gconfBase, "");
 				if (profile.EndsWith ("template", StringComparison.CurrentCultureIgnoreCase))
 					continue;
-				items.Add (new ProfileItem (profile));
+				items.Add (new ProIFileItem (profile));
 			}
 		}
 	}

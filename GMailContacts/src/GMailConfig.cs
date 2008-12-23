@@ -28,8 +28,9 @@ using Do.Platform.Linux;
 
 namespace GMail
 {	
-	public class GMailConfig : AbstractLoginWidget
+	public class GMailConfig : AbstractLoginWidget   
 	{
+		static IPreferences prefs;
 		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
             + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
             + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
@@ -47,7 +48,7 @@ namespace GMail
 			GMail.Preferences.Username = username;
 			GMail.Preferences.Password = password;
 		}
-
+		
 		protected override bool Validate (string username, string password)
 		{
 			if (ValidateUsername (username))
@@ -58,6 +59,20 @@ namespace GMail
 		bool ValidateUsername (string username)
 		{			
 			return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
+		}
+		
+		protected override void SaveAccountData (string username, string password)
+		{
+			prefs.SecureSet("username", username);
+			prefs.SecureSet("password", password); 
+		}
+		
+		public static string username { 
+			get { return prefs.SecureGet<string> ("username", "" ); } 
+		}
+
+		public static string password { 
+			get { return prefs.SecureGet<string> ("password", "" ); } 
 		}
 	}
 }

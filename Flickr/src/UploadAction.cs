@@ -72,11 +72,11 @@ namespace Flickr
 		
 		public bool SupportsItem (Item item)
 		{
-			return FileItem.IsDirectory (item as FileItem) || 
-				FileIsPicture (item as FileItem);
+			return IFileItem.IsDirectory (item as IFileItem) || 
+				FileIsPicture (item as IFileItem);
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return true;
 		}
@@ -99,14 +99,14 @@ namespace Flickr
 			}
 			
 			//Build a list of all of the files to upload.
-			List<FileItem> uploads = new List<FileItem> ();
+			List<IFileItem> uploads = new List<IFileItem> ();
 			foreach (Item item in items) {
-				FileItem file = item as FileItem;
-				if (FileItem.IsDirectory (file)) {
+				IFileItem file = item as IFileItem;
+				if (IFileItem.IsDirectory (file)) {
 					DirectoryInfo dinfo = new DirectoryInfo (file.Path);
 					FileInfo [] finfo = dinfo.GetFiles ();
 					foreach (FileInfo f in finfo) {
-						FileItem fi = new FileItem (f.FullName);
+						IFileItem fi = new IFileItem (f.FullName);
 						if (FileIsPicture (fi))
 							uploads.Add (fi);
 					}
@@ -114,7 +114,7 @@ namespace Flickr
 					uploads.Add (file);
 				}
 				upload_num = 1;
-				foreach (FileItem photo in uploads) {
+				foreach (IFileItem photo in uploads) {
 					AsyncUploadToFlickr (photo, tags, uploads.Count);
 				}
 			}
@@ -122,7 +122,7 @@ namespace Flickr
 			return null;
 		}
 		
-		public static void AsyncUploadToFlickr (FileItem photo, string tags, int num)
+		public static void AsyncUploadToFlickr (IFileItem photo, string tags, int num)
 		{			
 			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
 				AccountConfig.ApiSecret, AccountConfig.AuthToken);
@@ -154,7 +154,7 @@ namespace Flickr
 			return new UploadConfig ();
 		}
 		
-		private bool FileIsPicture (FileItem item)
+		private bool FileIsPicture (IFileItem item)
 		{
 			return item.MimeType.StartsWith ("image/");
 		}

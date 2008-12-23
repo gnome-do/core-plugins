@@ -17,8 +17,8 @@
 
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="FilePlugin.FileItemSource" />
-		<ItemSource type="FilePlugin.RecentFileItemSource" />
+		<ItemSource type="FilePlugin.IFileItemSource" />
+		<ItemSource type="FilePlugin.RecentIFileItemSource" />
 	</Extension>
 
 	<!--- Actions -->

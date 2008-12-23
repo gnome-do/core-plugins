@@ -31,6 +31,9 @@ namespace GMail
 {	
 	public sealed class GMailItemSource : ItemSource, IConfigurable
 	{
+		public GMailContactsItemSource() 
+		{
+		}
 		public override string Name { 
 			get { return Catalog.GetString ("GMail Contacts"); }
 		}

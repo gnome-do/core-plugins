@@ -91,7 +91,7 @@ namespace FilePlugin
 			try {
 				string s;
 				//SpinButton spin = new SpinButton (-1, 255, 1);
-				StreamReader reader = File.OpenText(FileItemSource.ConfigFile);
+				StreamReader reader = File.OpenText(IFileItemSource.ConfigFile);
 				while ((s = reader.ReadLine ()) != null) {
 					string path = s.Substring (0, s.LastIndexOf (":")).Trim ();
 					string depth = s.Substring (s.LastIndexOf (":") + 2).Trim ();
@@ -157,11 +157,11 @@ namespace FilePlugin
 		
 		public void WriteConfig ()
 		{
-			writer = new StreamWriter (FileItemSource.ConfigFile + ".copy", false);
+			writer = new StreamWriter (IFileItemSource.ConfigFile + ".copy", false);
 			this.Model.Foreach (WriteConfigForeachFunc);
 			writer.Close ();
-			File.Delete (FileItemSource.ConfigFile);
-			File.Move (FileItemSource.ConfigFile + ".copy", FileItemSource.ConfigFile);
+			File.Delete (IFileItemSource.ConfigFile);
+			File.Move (IFileItemSource.ConfigFile + ".copy", IFileItemSource.ConfigFile);
 		}
 		
 		public bool WriteConfigForeachFunc (TreeModel model, TreePath path, TreeIter iter)

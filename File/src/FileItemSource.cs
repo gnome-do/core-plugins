@@ -1,4 +1,4 @@
-/* FileItemSource.cs
+/* IFileItemSource.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -33,7 +33,7 @@ namespace FilePlugin {
 	/// <summary>
 	/// Indexes files recursively starting in a specific directory.
 	/// </summary>
-	public class FileItemSource : ItemSource, IConfigurable {
+	public class IFileItemSource : ItemSource, IConfigurable {
 
 		List<Item> items;
 		bool include_hidden;
@@ -53,7 +53,7 @@ namespace FilePlugin {
 		public static string ConfigFile {
 			get {
 				return Do.Paths.Combine (Do.Paths.ApplicationData,
-					"FileItemSource.config");
+					"IFileItemSource.config");
 			}
 		}
 
@@ -87,14 +87,14 @@ namespace FilePlugin {
 					if (!line.StartsWith ("file://")) continue;
 					line = line.Substring ("file://".Length);
 					if (File.Exists (line) || Directory.Exists (line))
-						bookmarks.Add (new FileItem (line));
+						bookmarks.Add (new IFileItem (line));
 				}
 				return bookmarks;
 			}
 		}
 		
 		private GConf.Client gconf;
-		public FileItemSource ()
+		public IFileItemSource ()
 		{
 			gconf = new GConf.Client ();
 			dirs = Deserialize ();
@@ -139,7 +139,7 @@ namespace FilePlugin {
 					}
 				} catch (Exception e) {
 					Console.Error.WriteLine (
-						"Error reading FileItemSource config file {0}: {1}",
+						"Error reading IFileItemSource config file {0}: {1}",
 						ConfigFile, e.Message);
 				}
 			} 
@@ -159,7 +159,7 @@ namespace FilePlugin {
 				}
 			} catch (Exception e) {
 				Console.Error.WriteLine (
-					"Error saving FileItemSource config file {0}: {1}",
+					"Error saving IFileItemSource config file {0}: {1}",
 					ConfigFile, e.Message);
 			}
 		}
@@ -201,15 +201,15 @@ namespace FilePlugin {
 				if (string.IsNullOrEmpty (path)) return null;
 				path = path.Replace ("~", Do.Paths.UserHome);
 				if (!Directory.Exists (path)) return null;
-				fi = new FileItem (path);
+				fi = new IFileItem (path);
 			} else {
 				fi = item as IFileItem;
 			}
 			children = new List<Item> ();
-			if (FileItem.IsDirectory (fi)) {
+			if (IFileItem.IsDirectory (fi)) {
 				foreach (string path in
 					Directory.GetFileSystemEntries (fi.Path)) {
-					children.Add (new FileItem (path));
+					children.Add (new IFileItem (path));
 				}
 			}
 			return children;
@@ -230,7 +230,7 @@ namespace FilePlugin {
 		/// </summary>
 		/// <param name="dir">
 		/// A <see cref="System.String"/> containing the absolute path
-		/// to the directory to read FileItems from.
+		/// to the directory to read IFileItems from.
 		/// </param>
 		/// <param name="levels">
 		/// A <see cref="System.Int32"/> specifying the number of levels
@@ -238,7 +238,7 @@ namespace FilePlugin {
 		/// </param>
 		protected virtual void ReadItems (string dir, int levels)
 		{
-			FileItem item;
+			IFileItem item;
 			string [] files;
 			string [] directories;
 			
@@ -252,15 +252,15 @@ namespace FilePlugin {
 			}
 			foreach (string file in files) {
 				// Ignore system/hidden files.
-				if (!include_hidden && FileItem.IsHidden (file)) continue;
+				if (!include_hidden && IFileItem.IsHidden (file)) continue;
 
-				item = new FileItem (file);
+				item = new IFileItem (file);
 				items.Add (item);
 			}
 			foreach (string directory in directories) {
-				if (!include_hidden && FileItem.IsHidden (directory)) continue;
+				if (!include_hidden && IFileItem.IsHidden (directory)) continue;
 
-				item = new FileItem (directory);
+				item = new IFileItem (directory);
 				items.Add (item);
 				ReadItems (directory, levels - 1);
 			}

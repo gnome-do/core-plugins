@@ -71,7 +71,7 @@ namespace Do.Addins.Pidgin
 			get { return true; }
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			if (items.First () is ITextItem)
 				return true;

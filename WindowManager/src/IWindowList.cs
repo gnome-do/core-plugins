@@ -31,12 +31,12 @@ namespace WindowManager
 //	{
 //	}
 	
-	public interface IWindowItem : Item
+	public interface IWindowItem : IItem
 	{
 		Wnck.Window Window { get; }
 	}
 	
-	public interface IScreenItem : Item
+	public interface IScreenItem : IItem
 	{
 	}
 }
