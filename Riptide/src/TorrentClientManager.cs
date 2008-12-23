@@ -27,8 +27,8 @@ using MonoTorrent;
 using MonoTorrent.Client;
 using MonoTorrent.Common;
 
-
 using Do.Universe;
+using Do.Platform;
 
 namespace Do.Riptide
 {

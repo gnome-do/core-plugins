@@ -28,8 +28,9 @@ using System.Net;
 using MonoTorrent.Common;
 using MonoTorrent.Client;
 
-
 using Do.Universe;
+using Do.Platform;
+using Do.Platform.Linux;
 
 namespace Do.Riptide
 {
@@ -51,7 +52,7 @@ namespace Do.Riptide
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] { typeof (TorrentResultItem) }; }
+			get { yield return typeof (TorrentResultItem); }
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)

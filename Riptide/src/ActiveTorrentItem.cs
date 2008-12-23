@@ -29,7 +29,7 @@ namespace Do.Riptide
 {
 	
 	
-	public class ActiveTorrentItem : ITorrentItem
+	public class ActiveTorrentItem : Item, ITorrentItem
 	{
 		private string name, description;
 		private TorrentManager torrent;
