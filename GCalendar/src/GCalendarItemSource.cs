@@ -19,17 +19,36 @@
  */
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
-
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace GCalendar
 {	
 	public sealed class GCalendarItemSource : ItemSource, IConfigurable
 	{
+		public GCalendarItemSource ()
+		{
+			GCalClient client = new GCalClient ();
+			client.UpdateCalendars ();
+			foreach (GCalendarItem cal in client.Calendars) {
+				Console.Error.WriteLine (cal.Name);
+				foreach (GCalendarEventItem even in client.EventsForCalendar (cal)) {
+					Console.Error.WriteLine (even.Name);
+				}
+			}			
+		}
+
+		void PrintCalendar (GCalendarItem item)
+		{
+			Console.Error.WriteLine (item.Name);
+		}
+		
 		public override string Name {
 			get { return Catalog.GetString ("Google Calendars"); }
 		}

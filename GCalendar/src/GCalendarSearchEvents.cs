@@ -83,13 +83,13 @@ namespace GCalendar {
             return null;
         }
         
-        public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
         {
             string search_text = "";
             foreach (Item item in items) {
                 search_text += (item as ITextItem).Text;
             }
-            return GCal2.SearchEvents ((modifierItems.First () as GCalendarItem).URL, search_text);
+            return GCal2.SearchEvents ((modifierItems.First () as GCalendarItem).Url, search_text);
         }
     }
 }

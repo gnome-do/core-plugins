@@ -58,9 +58,6 @@ namespace GCalendar
 			events = new Dictionary<string,List<Item>> ();
 			events_lock = new object ();
 			
-			Configuration.GetAccountData (out username, out password,
-				typeof (Configuration));
-			Connect (username, password);
 		}
 		
 		public static string GAppName {
@@ -116,7 +113,7 @@ namespace GCalendar
 			lock (cal_lock) {
 				try {
 					foreach (GCalendarItem cal in calendars) {	
-						cals.Add (cal.Name, cal.URL);
+						cals.Add (cal.Name, cal.Url);
 					}
 					cals.Add ("All Events", "");
 				} catch (ArgumentException) { }

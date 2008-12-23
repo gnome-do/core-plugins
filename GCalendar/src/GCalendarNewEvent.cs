@@ -84,9 +84,9 @@ namespace GCalendar
             return null;
         }
         
-        public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {
-            string calUrl = (modifierItems.First () as GCalendarItem).URL;
+            string calUrl = (modifierItems.First () as GCalendarItem).Url;
             string eventData = (items.First () as ITextItem).Text;
             
             return new Item [] { GCal2.NewEvent (calUrl, eventData), };

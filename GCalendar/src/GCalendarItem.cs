@@ -22,12 +22,12 @@ using System;
 using System.Text;
 using Mono.Unix;
 
-
+using Do.Platform;
 using Do.Universe;
 
 namespace GCalendar
 {
-    public class GCalendarItem : IURLItem
+    public class GCalendarItem : Item, IUrlItem
     {
         string name, url;
 		
@@ -49,7 +49,7 @@ namespace GCalendar
 			get { return "date"; }
 		}
 		
-		public string URL {
+		public string Url {
 			get { return url; }
 		}
 	}
