@@ -2,10 +2,10 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.0</target-gtk-version>
+    <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.5.97.1, Culture=neutral" />
+    <widget-library name="Do.Addins, Version=0.8.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/File.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="FilePlugin.Configuration" design-size="330 354">

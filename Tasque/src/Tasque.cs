@@ -17,32 +17,30 @@
 //
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
-using System.Collections;
 
 using Do.Universe;
+using Do.Platform;
+
 using Tasque.DBus;
-using Tasque.Category.Item;
 
 namespace Tasque
 {
 	public static class Tasque
 	{		
-		public static List<Item> GetCategoryItems ()
+		public static IEnumerable<TasqueCategoryItem> GetCategoryItems ()
 		{
-			List<Item> items =  new List<Item> ();
-			TasqueDBus tasque = new TasqueDBus ();
-			ArrayList categories = new ArrayList ();
+			IEnumerable<string> categories;
 			
 			try {
+				TasqueDBus tasque = new TasqueDBus ();
 				categories = tasque.GetCategoryNames ();
-				
-				foreach (string category in categories) 
-					items.Add (new TasqueCategoryItem (category));
-			} catch (Exception) {
-				Console.Error.WriteLine ("Could not read Tasque's category");
+			} catch (Exception e) {
+				Log.Error ("Could not read Tasque's category: {0}", e.Message);
+				Log.Debug (e.StackTrace);
 			}
-			return items;
+			return categories.Select (category => new TasqueCategoryItem (category));
 		}
 	}
 }

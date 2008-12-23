@@ -25,7 +25,7 @@ using Tasque.DBus;
 using Mono.Unix;
 
 
-namespace Tasque.Category.Item
+namespace Tasque
 {
 	public class TasqueCategoryItem : Item
 	{
