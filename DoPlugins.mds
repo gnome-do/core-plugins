@@ -164,6 +164,6 @@
     <Entry filename="ManLookUp/ManLookUp.mdp" />
     <Entry filename="GDocs/GDocs.mdp" />
     <Entry filename="Microblogging/Microblogging.mdp" />
-    <Entry filename="../future-djsiegel/File/File.mdp" />
+    <Entry filename="File/File.mdp" />
   </Entries>
 </Combine>
