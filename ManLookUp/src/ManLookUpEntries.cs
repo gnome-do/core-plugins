@@ -41,7 +41,7 @@ namespace GnomeDoManLookUp {
 	/// <summary>
 	/// 	ManLookUpItem - Our custom manual page entries
 	/// </summary>
-	public class ManLookUpItem : IOpenableItem {
+	public class ManLookUpItem : Item, IOpenableItem {
 		
 		private string name;
 		private string description;
