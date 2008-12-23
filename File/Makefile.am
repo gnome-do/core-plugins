@@ -45,27 +45,31 @@ RESGEN=resgen2
 all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
 
 FILES = \
-	src/CreateEmptyFileAction.cs \
-	src/CreateDirectory.cs \
-	src/FileItemSource.cs \
-	src/RecentFileItemSource.cs \
+	gtk-gui/Do.FilesAndFolders.Configuration.cs \
+	gtk-gui/FilePlugin.Configuration.cs \
+	gtk-gui/generated.cs \
+	src/CompareConfig.cs \
+	src/Do.FilesAndFolders/Configuration.cs \
+	src/Do.FilesAndFolders/FileItemSource.cs \
+	src/Do.FilesAndFolders/FolderIndex.cs \
+	src/Do.FilesAndFolders/ImportantFolders.cs \
+	src/Do.FilesAndFolders/IndexedFolder.cs \
+	src/Do.FilesAndFolders/NewFolderAction.cs \
+	src/Do.FilesAndFolders/Plugin.cs \
+	src/Do.FilesAndFolders/Preferences.cs \
+	src/Do.FilesAndFolders/RecentFileItemSource.cs \
+	src/FileChooserParent.cs \
 	src/FileCopyToAction.cs \
-	src/FileRenameToAction.cs \
+	src/FileDeleteAction.cs \
 	src/FileMoveToAction.cs \
 	src/FileMoveToTrashAction.cs \
-	src/FileDeleteAction.cs \
-	gtk-gui/generated.cs \
-	src/Configuration.cs \
-	gtk-gui/FilePlugin.Configuration.cs \
-	src/PathNodeView.cs \
-	src/CompareAction.cs \
-	gtk-gui/FilePlugin.CompareConfig.cs \
-	src/CompareConfig.cs 
+	src/FileRenameToAction.cs \
+	src/PathNodeView.cs
 
 DATA_FILES = 
 
 RESOURCES = \
-	src/File.addin.xml \
+	Resources/File.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml 
 
@@ -77,7 +81,6 @@ REFERENCES =  \
 	Do.Addins \
 	$(GTK_SHARP_20_LIBS) \
 	Mono.Posix \
-	$(GCONF_SHARP_20_LIBS) \
 	$(GLIB_SHARP_20_LIBS)
 
 DLL_REFERENCES = 
