@@ -17,8 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+
 using Do.Universe;
+using Do.Platform;
 
 
 using Mono.Unix;
@@ -37,17 +41,19 @@ namespace Do.Launchpad
 			get { return "LaunchpadAnswers.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(Item[] items)
+		public override bool SupportsItems (IEnumerable<ITextItem> items)
 		{
 			return true;
 		}
 
-		public void Perform (Item item)
+		public override void Perform (IEnumerable<ITextItem> items)
 		{
-			Regex spaces = new Regex(@"\s+");
-			string query = (item as ITextItem).Text;
-			string[] qwords = spaces.Split(query);
-			Util.Environment.Open("https://answers.launchpad.net/questions/+questions?field.search_text=" + string.Join("+", qwords));
+			Regex spaces = new Regex (@"\s+");
+			foreach (ITextItem item in items) {
+				string query = item.Text.Replace (" ", "+");
+				string url = "https://answers.launchpad.net/questions/+questions?field.search_text=" + query;
+				Services.Environment.OpenUrl (url);
+			}
 		}
 	}
 
@@ -61,17 +67,19 @@ namespace Do.Launchpad
 			get { return "LaunchpadAnswers.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public bool SupportsItems(Item[] items)
+		public override bool SupportsItems (IEnumerable<ITextItem> items)
 		{
-            if (items == null) { return false; }
 			//Package name can't have a space
-			Regex numbers = new Regex(@"\s+");
-			return !numbers.IsMatch((items[0] as ITextItem).Text);
+			Regex numbers = new Regex (@"\s+");
+			return !items.Any (item => numbers.IsMatch (item.Text));
 		}
 
-		public void Perform (Item item)
+		public override void Perform (IEnumerable<ITextItem> items)
 		{
-			Util.Environment.Open(string.Format("https://answers.launchpad.net/{0}", (item as ITextItem).Text));
+			foreach (ITextItem item in items) {
+				string url = "https://answers.launchpad.net/" + item.Text;
+				Services.Environment.OpenUrl (url);
+			}
 		}
 	}
 }

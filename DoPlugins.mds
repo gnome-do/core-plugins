@@ -8,7 +8,7 @@
       <Entry build="True" name="File" configuration="Debug" />
       <Entry build="True" name="GNOME-Session" configuration="Debug" />
       <Entry build="True" name="GoogleCalculator" configuration="Debug" />
-      <Entry build="True" name="Launchpad" configuration="Debug" />
+      <Entry build="False" name="Launchpad" configuration="Debug" />
       <Entry build="True" name="LocateFiles" configuration="Debug" />
       <Entry build="True" name="OpenSearch" configuration="Debug" />
       <Entry build="True" name="Pastebin" configuration="Debug" />
@@ -49,7 +49,7 @@
       <Entry build="True" name="File" configuration="Release" />
       <Entry build="True" name="GNOME-Session" configuration="Release" />
       <Entry build="True" name="GoogleCalculator" configuration="Release" />
-      <Entry build="True" name="Launchpad" configuration="Release" />
+      <Entry build="False" name="Launchpad" configuration="Release" />
       <Entry build="True" name="LocateFiles" configuration="Release" />
       <Entry build="True" name="OpenSearch" configuration="Release" />
       <Entry build="True" name="Pastebin" configuration="Release" />

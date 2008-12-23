@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
@@ -43,7 +45,7 @@ namespace Do.Launchpad
 			return true;
 		}
 
-		public void Perform (Item item)
+		public override void Perform (IEnumerable<ITextItem> items)
 		{
 			Regex spaces = new Regex(@"\s+");
 			string query = (item as ITextItem).Text;
@@ -74,7 +76,7 @@ namespace Do.Launchpad
 			return !numbers.IsMatch((items[0] as ITextItem).Text);
 		}
 
-		public void Perform (Item item)
+		public override void Perform (IEnumerable<ITextItem> items))
 		{
 			Util.Environment.Open(string.Format(
 						"https://translations.lauchpad.net/ubuntu/{0}/+translations",

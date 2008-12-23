@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Do.Universe;
 
@@ -44,7 +46,7 @@ namespace Do.Launchpad
 			return true;
 		}
 
-		public void Perform (Item item)
+		public override void Perform (IEnumerable<ITextItem> items)
 		{
 			Util.Environment.Open("https://launchpad.net/projects/+new");
 		}

@@ -33,6 +33,26 @@ namespace Do.Launchpad
 	/// </summary>
 	class LaunchpadAction : Act
 	{
+
+		static readonly IEnumerable<LaunchpadItem> LaunchpadItems = new LaunchpadItem [] {
+			new LaunchpadAnswerSearchItem(),
+			new LaunchpadProjectAnswersItem(),
+			new LaunchpadBlueprintsItem(),
+			new LaunchpadBlueprintSearchItem(),
+			new LaunchpadBlueprintsRegisterItem(),
+			new LaunchpadBugNumberItem(),
+			new LaunchpadBugReportItem(),
+			new LaunchpadPackageBugsItem(),
+			new LaunchpadBugSearchItem(),
+			new LaunchpadCodeOverviewItem(),
+			new LaunchpadRegisterItem(),
+			new LaunchpadTranslationSearchItem(),
+			new LaunchpadTranslationReleaseItem(),
+			new LaunchpadProjectPageItem(),
+			new LaunchpadUserPageItem(),
+			new LaunchpadUserSearchItem()
+		};
+			
 		public override string Name
 		{
 			get { return Catalog.GetString ("Launchpad"); }
@@ -48,65 +68,30 @@ namespace Do.Launchpad
 			get { return "Launchpad.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes
-		{
-			get
-			{
-				return new Type[] {
-					typeof (ITextItem)
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ITextItem); }
 		}
-
-    public override bool ModifierItemsOptional { get { return false; } }
 
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			return (modItem as LaunchpadItem).SupportsItems(items.ToArray ());
+			return (modItem as LaunchpadItem).SupportsItems (items.OfType<ITextItem> ());
 		}
 
-		public override IEnumerable<Type> SupportedModifierItemTypes
-		{
-			get
-			{
-				return new Type[] {
-					typeof(LaunchpadItem)
-				};
-			}
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield return typeof (LaunchpadItem);}
 		}
 
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return new Item[] {
-				new LaunchpadAnswerSearchItem(),
-					new LaunchpadProjectAnswersItem(),
-					new LaunchpadBlueprintsItem(),
-					new LaunchpadBlueprintSearchItem(),
-					new LaunchpadBlueprintsRegisterItem(),
-					new LaunchpadBugNumberItem(),
-					new LaunchpadBugReportItem(),
-					new LaunchpadPackageBugsItem(),
-					new LaunchpadBugSearchItem(),
-					new LaunchpadCodeOverviewItem(),
-					new LaunchpadRegisterItem(),
-					new LaunchpadTranslationSearchItem(),
-					new LaunchpadTranslationReleaseItem(),
-					new LaunchpadProjectPageItem(),
-					new LaunchpadUserPageItem(),
-					new LaunchpadUserSearchItem()
-			};
+			return LaunchpadItems.OfType<Item> ();
 		}
 
-    public override bool SupportsItem (Item item)
-    {
-        return true;
-    }
-
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
-			if (modItems.Any ()) {
-				(modItems.First () as LaunchpadItem).Perform(items.First ());
-			}
-			return null;
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			foreach (LaunchpadItem lp in modItems)
+				lp.Perform (items.OfType<ITextItem> ());
+			
+			yield break;
 		}
 	}
 
@@ -118,9 +103,9 @@ namespace Do.Launchpad
 	/// They are meant to behave just like Actions, but they need to be Items
 	/// to be listed in the right-hand box.
 	/// </summary>
-	interface LaunchpadItem : Item
+	public abstract class LaunchpadItem : Item
 	{
-		bool SupportsItems(Item[] items);
-		void Perform (Item item);
+		public abstract bool SupportsItems (IEnumerable<ITextItem> items);
+		public abstract void Perform (IEnumerable<ITextItem> items);
 	}
 }
