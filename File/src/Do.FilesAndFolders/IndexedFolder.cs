@@ -30,16 +30,20 @@ namespace Do.FilesAndFolders
 	[Serializable]
 	struct IndexedFolder : IEquatable<IndexedFolder>
 	{
-
 		public string Path { get; private set; }
-		public int Level { get; private set; }
+		public uint Level { get; private set; }
 		
-		public IndexedFolder (string path, int level)
+		public IndexedFolder (string path, uint level)
 		{
 			if (path == null) throw new ArgumentNullException ("path");
 			
-			Path = path.Replace ("~", Paths.UserHome);
+			Path = path.Replace ("~", Plugin.ImportantFolders.UserHome);
 			Level = level;
+		}
+
+		public override string ToString ()
+		{
+			return string.Format ("{0} {2} {1}", GetType ().Name, Path, Level);
 		}
 
 		public override bool Equals (object other)

@@ -20,25 +20,40 @@
 using System;
 
 using Do.Platform;
+using Do.Universe;
+using Do.Universe.Common;
 
 namespace Do.FilesAndFolders
 {
 
 	static class Plugin
 	{
-		public static FolderIndex FolderIndex { get; private set; }
+		public static IndexedFolderCollection FolderIndex { get; private set; }
 		public static FilesAndFoldersPreferences Preferences { get; private set; }
 		public static ImportantFolders ImportantFolders { get; private set; }
 		
 		static Plugin ()
 		{
-			try {
-				FolderIndex = new FolderIndex ();
-				Preferences = new FilesAndFoldersPreferences ();
-				ImportantFolders = new ImportantFolders ();
-			} catch (Exception e) {
-				Log.Error (e.Message); Log.Debug (e.StackTrace);
-			}
+			Preferences = new FilesAndFoldersPreferences ();
+			ImportantFolders = new ImportantFolders ();
+			FolderIndex = new IndexedFolderCollection ();
+
+			FolderIndex.Initialize ();
+		}
+
+		public static IFileItem NewFileItem (string path)
+		{
+			return Services.UniverseFactory.NewFileItem (path);
+		}
+
+		public static IApplicationItem NewApplicationItem (string path)
+		{
+			return Services.UniverseFactory.NewApplicationItem (path);
+		}
+
+		public static ITextItem NewTextItem (string text)
+		{
+			return new TextItem (text);
 		}
 	}
 }

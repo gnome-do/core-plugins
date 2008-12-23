@@ -33,9 +33,11 @@ namespace Do.FilesAndFolders
 
 		#region Preference keys and default values.
 		const string IncludeHiddenFilesKey = "IncludeHiddenFiles";
+		const string IncludeHiddenFilesWhenBrowsingKey = "IncludeHiddenFilesWhenBrowsing";
 		const string MaximumFilesIndexedKey = "MaximumFilesIndexed";
 
 		const bool IncludeHiddenFilesDefaultValue = false;
+		const bool IncludeHiddenFilesWhenBrowsingDefaultValue = true;
 		const int MaximumFilesIndexedDefaultValue = 3000;
 		#endregion
 
@@ -44,6 +46,11 @@ namespace Do.FilesAndFolders
 		public bool IncludeHiddenFiles {
 			get { return Prefs.Get (IncludeHiddenFilesKey, IncludeHiddenFilesDefaultValue); }
 			set { Prefs.Set (IncludeHiddenFilesKey, value); }
+		}
+
+		public bool IncludeHiddenFilesWhenBrowsing {
+			get { return Prefs.Get (IncludeHiddenFilesWhenBrowsingKey, IncludeHiddenFilesWhenBrowsingDefaultValue); }
+			set { Prefs.Set (IncludeHiddenFilesWhenBrowsingKey, value); }
 		}
 
 		public int MaximumFilesIndexed {

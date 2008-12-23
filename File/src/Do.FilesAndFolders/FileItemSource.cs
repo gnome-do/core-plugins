@@ -27,6 +27,7 @@ using Mono.Unix;
 
 using Do.Universe;
 using Do.Platform;
+using Do.Platform.Linux;
 
 namespace Do.FilesAndFolders {
 
@@ -35,11 +36,30 @@ namespace Do.FilesAndFolders {
 	/// </summary>
 	public class FileItemSource : ItemSource, IConfigurable {
 
-		public IEnumerable<IItem> Items { get; protected set; }
+		IEnumerable<Item> items;
+		bool maximum_files_warned;
+
+		string MaximumFilesIndexedWarning {
+			get {
+				return string.Format (
+					"{0} has indexed over {1} files, which is the maximum number of files it will index. "+
+				    "This usually means that you are indexing more files that are useful to you. " +
+				    "Do you really require instant access to all of these files? " +
+				    "Consider indexing fewer files; a good rule of thumb is to only index the files you open at least once a month, " +
+				    "and browse for files that you open less often."
+
+				    , Name, Plugin.Preferences.MaximumFilesIndexed
+				);
+			}
+		}
 
 		public FileItemSource ()
 		{
-			Items = Enumerable.Empty<IItem> ();
+			items = Enumerable.Empty<Item> ();
+		}
+
+		public override IEnumerable<Item> Items {
+			get { return items; }
 		}
 		
 		public Gtk.Bin GetConfiguration ()
@@ -56,12 +76,12 @@ namespace Do.FilesAndFolders {
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("File Indexer"); }
+			get { return Catalog.GetString ("Files and Folders"); }
 		}
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Frequently used files and folders.");
+				return Catalog.GetString ("Catalogs important files and folders for quick access.");
 			}
 		}
 		
@@ -69,49 +89,91 @@ namespace Do.FilesAndFolders {
 			get { return "folder"; }
 		}
 		
-		public override IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			IFileItem file = null;
 
 			if (item is ITextItem)
-				file = Services.UniverseFactory.NewFileItem ((item as ITextItem).Text);
+				file = Plugin.NewFileItem ((item as ITextItem).Text);
 			else if (item is IFileItem)
 				file = item as IFileItem;
 			else if (item is IApplicationItem)
-				return Enumerable.Empty<IItem> ();
+				return Enumerable.Empty<Item> ();
 			
-			return RecursiveGetFileItems (file.Path, 0).Cast<IItem> ();
+			return RecursiveGetItems (file.Path, 1, Plugin.Preferences.IncludeHiddenFilesWhenBrowsing);
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
-			Items = Plugin.FolderIndex
-				.SelectMany (folder => RecursiveGetFileItems (folder.Path, folder.Level))
+			items = Plugin.FolderIndex
+				.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles))
 				.Take (Plugin.Preferences.MaximumFilesIndexed)
 				.ToArray ();
+
+			if (!maximum_files_warned && items.Count () == Plugin.Preferences.MaximumFilesIndexed) {
+				Log.Warn (MaximumFilesIndexedWarning);
+				Services.Notifications.Notify ("Do is indexing too many files.", MaximumFilesIndexedWarning);
+				maximum_files_warned = true;
+			}
 		}
 
-		static IEnumerable<IFileItem> RecursiveGetFileItems (string path, int levels)
+		/// <summary>
+		/// Recursively scan files in path to the given level, creating IFileItems
+		/// and IApplicationItems from the files found.
+		/// </summary>
+		/// <remarks>
+		/// This should remain lazy.
+		/// </remarks>
+		/// <param name="path">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <param name="levels">
+		/// A <see cref="System.UInt32"/>
+		/// </param>
+		/// <param name="includeHidden">
+		/// A <see cref="System.Boolean"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="IEnumerable"/>
+		/// </returns>
+		static IEnumerable<Item> RecursiveGetItems (string path, uint levels, bool includeHidden)
 		{
-			return RecursiveListFiles (path, levels)
-				.Select (filepath => Services.UniverseFactory.NewFileItem (filepath));
+			IEnumerable<string> files;
+			IEnumerable<Item> fileItems, applicationItems;
+			
+			files = RecursiveListFiles (path, levels, includeHidden);
+
+			fileItems = files
+				.Select (filepath => Plugin.NewFileItem (filepath))
+				.OfType<Item> ();
+
+			applicationItems = files
+				.Where (filepath => filepath.EndsWith (".desktop"))
+				.Select (filepath => Plugin.NewApplicationItem (filepath))
+				.OfType<Item> ();
+
+			return applicationItems.Concat (fileItems);
 		}
 		
-		static IEnumerable<string> RecursiveListFiles (string path, int levels)
+		static IEnumerable<string> RecursiveListFiles (string path, uint levels, bool includeHidden)
 		{
 			IEnumerable<string> results = null;
 
 			if (path == null) throw new ArgumentNullException ("path");
 			
-			if (levels < 0 || !Directory.Exists (path))
+			if (levels == 0 || !Directory.Exists (path))
 				return Enumerable.Empty<string> ();
 			
 			try {
 				IEnumerable<string> files, directories, recursiveFiles;
 				
-				files = Directory.GetFiles (path).Where (ShouldIndexFile);
-				directories = Directory.GetDirectories (path).Where (ShouldIndexFile);
-				recursiveFiles = directories.SelectMany (dir => RecursiveListFiles (dir, levels - 1));
+				files = Directory.GetFiles (path)
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden));
+				directories = Directory.GetDirectories (path)
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden));
+				recursiveFiles = directories
+					.SelectMany (dir => RecursiveListFiles (dir, levels - 1, includeHidden));
+				
 				results = files.Concat (directories).Concat (recursiveFiles);
 			} catch (Exception e) {
 				Log.Error ("Encountered an error while attempting to index {0}: {1}", path, e.Message);
@@ -121,11 +183,12 @@ namespace Do.FilesAndFolders {
 			return results;
 		}
 
-		static bool ShouldIndexFile (string path)
+		static bool ShouldIndexPath (string path, bool includeHidden)
 		{
 			string filename = Path.GetFileName (path);
-			return filename != "." && filename != ".." &&
-				(Plugin.Preferences.IncludeHiddenFiles || !filename.StartsWith ("."));
+			bool isForbidden = filename == "." || filename == ".." || filename.EndsWith ("~");
+			bool isHidden = filename.StartsWith (".");
+			return !isForbidden && (includeHidden || !isHidden);
 		}
 		
 	}

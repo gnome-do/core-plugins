@@ -7,7 +7,7 @@
   <import>
     <widget-library name="../bin/Debug/File.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="FilePlugin.Configuration" design-size="330 354">
+  <widget class="Gtk.Bin" id="Do.FilesAndFolders.Configuration" design-size="330 354">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.Alignment" id="alignment1">
@@ -99,9 +99,28 @@
                     <child>
                       <widget class="Gtk.Table" id="table2">
                         <property name="MemberName" />
+                        <property name="NRows">3</property>
                         <property name="NColumns">3</property>
                         <property name="RowSpacing">6</property>
                         <property name="ColumnSpacing">6</property>
+                        <child>
+                          <placeholder />
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
                         <child>
                           <widget class="Gtk.Fixed" id="fixed2">
                             <property name="MemberName" />

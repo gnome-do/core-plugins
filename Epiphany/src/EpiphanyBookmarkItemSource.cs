@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Universe;
+using Do.Universe.Common;
 using Do.Platform;
 
 namespace Epiphany

@@ -1,4 +1,4 @@
-/* FolderIndex.cs
+/* IndexedFolderCollection.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -31,29 +31,44 @@ using Do.Platform;
 namespace Do.FilesAndFolders
 {
 	
- 	class FolderIndex : ICollection<IndexedFolder>
+ 	class IndexedFolderCollection : ICollection<IndexedFolder>
 	{
+
+		const uint LargeIndexLevel = 5;
+		const string LargeIndexLevelWarning =
+			"An IndexedFolder has been created that will index folder {0} {1} folders deep. " +
+			"This may result in excessive memory consumption and poor performance. " +
+			"Please make sure that you only index the files you open frequently.";
 
 		IDictionary<string, IndexedFolder> Folders { get; set; }
 
 		string SavedStateFile {
 			get {
-				return Path.Combine (Paths.ApplicationData, "FileItemSourceState");
+				return Path.Combine (Services.Paths.UserDataDirectory, GetType ().FullName);
 			}
 		}
 
 		IEnumerable<IndexedFolder> DefaultFolders {
 			get	{
-				yield return new IndexedFolder (Path.GetDirectoryName (Paths.UserHome), 0);
-				yield return new IndexedFolder (Paths.UserHome, 0);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 0);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 1);
+				yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 0);
+				yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
+				yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
+				yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
 			}
 		}
 		
-		public FolderIndex ()
+		public IndexedFolderCollection ()
+		{
+		}
+
+		public void Initialize ()
 		{
 			Deserialize ();
+
+			foreach (IndexedFolder folder in Folders.Values) {
+				if (folder.Level < LargeIndexLevel) continue;
+				Log.Warn (LargeIndexLevelWarning, folder.Path, folder.Level);
+			}
 		}
 
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
@@ -83,9 +98,11 @@ namespace Do.FilesAndFolders
 
 		public bool Remove (IndexedFolder pair)
 		{
-			bool removed = Folders.Remove (pair.Path);
-			Serialize ();
-			return removed;
+			if (Folders.Remove (pair.Path)) {
+				Serialize ();
+				return true;
+			}
+			return false;
 		}
 
 		public void Clear ()
@@ -126,8 +143,10 @@ namespace Do.FilesAndFolders
 				Log.Debug (e.StackTrace);
 			} finally {
 				// Some sort of error occurred, so load the default data set and save it.
-				Folders = Folders ?? DefaultFolders.ToDictionary (pair => pair.Path);
-				Serialize ();
+				if (Folders == null) {
+					Folders = DefaultFolders.ToDictionary (pair => pair.Path);
+					Serialize ();
+				}
 			}
 		}
 

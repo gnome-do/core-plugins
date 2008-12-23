@@ -22,7 +22,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Gtk;
 using Mono.Unix;
 
 using Do.Universe;
@@ -30,22 +29,26 @@ using Do.Platform;
 
 namespace Do.FilesAndFolders
 {
-	public class RecentFileItemSource : IItemSource
+	public class RecentFileItemSource : ItemSource
 	{
-		public IEnumerable<IItem> Items { get; private set; }
+		IEnumerable<Item> items;
+		
+		public override IEnumerable<Item> Items {
+			get { return items; }
+		}
 		
 		public RecentFileItemSource ()
 		{
-			Items = Enumerable.Empty<IItem> ();
+			items = Enumerable.Empty<Item> ();
 			OnRecentChanged (this, EventArgs.Empty);
-			RecentManager.Default.Changed += OnRecentChanged;
+			Gtk.RecentManager.Default.Changed += OnRecentChanged;
 		}
 		
 		void OnRecentChanged (object sender, EventArgs e)
 		{
 			// We update Files here because this is called on the main thread.
 			// We call ToArray to that Files is immutable and safe to enumerate.
-			Items = GetRecentFiles ().OfType<IItem> ().ToArray ();
+			items = GetRecentFiles ().OfType<Item> ().ToArray ();
 		}
 
 		IEnumerable<IFileItem> GetRecentFiles ()
@@ -57,30 +60,22 @@ namespace Do.FilesAndFolders
 			return Enumerable.Empty<IFileItem> ();
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (IFileItem); }
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Recent Files"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Finds recently-opened files."); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "document"; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
-		{
-			return Enumerable.Empty<IItem> ();
-		}
-		
-		public void UpdateItems ()
-		{
-		}
 	}
 
 }

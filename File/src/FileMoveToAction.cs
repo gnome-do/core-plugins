@@ -1,4 +1,4 @@
-/* IFileItemActions.cs
+/* FileItemActions.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -27,26 +27,26 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	class MoveToAction : Act {
-		public override string Name {
+	class MoveToAction : IAction {
+		public string Name {
 			get { return Catalog.GetString ("Move to..."); }
 		}
 		
-		public override string Description { 
+		public string Description { 
 			get { return Catalog.GetString ("Moves a file or folder to another location."); }
 		}
 		
-		public override string Icon { get { return "forward"; } } 
+		public string Icon { get { return "forward"; } } 
 
-		public override IEnumerable<Type> SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
-					typeof (IFileItem),
+					typeof (FileItem),
 				};
 			}
 		}
 
-		public override IEnumerable<Type> SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -58,36 +58,36 @@ namespace FilePlugin {
 			get { return false; }
 		}
 
-		public bool SupportsItem (Item item)
+		public bool SupportsItem (IItem item)
 		{
 			return true;
 		}
 
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return items.Count () == 1 ||
-				IFileItem.IsDirectory (modItem as IFileItem);
+				FileItem.IsDirectory (modItem as IFileItem);
 		}
 
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			IFileItem dest;
 			List<string> seenPaths;
 
 			dest = modItems.First () as IFileItem;
 			seenPaths = new List<string> ();
-			foreach (IFileItem src in items) {
+			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
 					File.Move (src.Path, Path.Combine (dest.Path, Path.GetFileName (src.Path)));
 					seenPaths.Add (src.Path);
 
-					if (IFileItem.IsDirectory (dest)) {
+					if (FileItem.IsDirectory (dest)) {
 						src.Path = Path.Combine (dest.Path,
 								Path.GetFileName (src.Path));
 					} else {

@@ -1,5 +1,8 @@
 // NewFolderAction.cs
 //
+// GNOME Do is the legal property of its developers. Please refer to the
+// COPYRIGHT file distributed with this source distribution.
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -29,54 +32,23 @@ using Do.Platform;
 namespace Do.FilesAndFolders
 {
 	
-	public class NewFolderAction : AbstractAction
+	public class NewFolderAction : NewFileAction
 	{
-
 		public override string Name {
-			get { return Catalog.GetString ("New Folder"); }
+			get { return Catalog.GetString ("Create New Folder"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Creates an new, empty folder."); }
+			get { return Catalog.GetString ("Creates an new folder."); }
 		}
 		
 		public override string Icon {
 			get { return "folder-new"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (ITextItem); }
-		}
-
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (IFileItem); }
-		}
-		
-		public override bool SupportsItem (IItem item)
+		protected override void CreateFile (string path)
 		{
-			string path = (item as ITextItem).Text.Replace ("~", Paths.UserHome);
-			return !File.Exists (path) && !Directory.Exists (path);
-		}
-
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
-		{
-			return Directory.Exists ((modItem as IFileItem).Path);
-		}
-		
-		public override bool ModifierItemsOptional {
-			get { return true; }
-		}
-
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
-		{
-			ITextItem text = items.First () as ITextItem;
-			IFileItem parent = modItems.Any ()
-				? modItems.First () as IFileItem
-				: UniverseFactory.NewFileItem (Plugin.ImportantFolders.Desktop);
-			string dir = Path.Combine (parent.Path, text.Text);
-
-			Directory.CreateDirectory (dir);
-			yield return UniverseFactory.NewFileItem (dir);
+			Directory.CreateDirectory (path);
 		}
 	}
 }

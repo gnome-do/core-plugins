@@ -1,4 +1,4 @@
-/* IFileItemActions.cs
+/* FileItemActions.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -26,7 +26,7 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	class MoveToTrashAction : Act {
+	class MoveToTrashAction : AbstractAction {
 
 		public override string Name {
 			get {
@@ -57,17 +57,17 @@ namespace FilePlugin {
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
-					typeof (IFileItem),
+					typeof (FileItem),
 				};
 			}
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			List<string> seenPaths;
 
 			seenPaths = new List<string> ();
-			foreach (IFileItem src in items) {
+			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
 					File.Move (src.Path, Trash + "/" + src.Name);
