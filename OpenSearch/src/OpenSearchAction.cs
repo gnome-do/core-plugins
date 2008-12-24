@@ -55,13 +55,9 @@ namespace OpenSearch
 	
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{					
-			List<string> searchTerms = new List<string> ();
 			foreach (Item item in items) {
-				searchTerms.Add ((item as ITextItem).Text);
-			}
-			
-			foreach (string term in searchTerms) {
-				string url = (modItems.First () as IOpenSearchItem).BuildSearchUrl (term);
+				string searchTerm = (item as ITextItem).Text;
+				string url = (modItems.First () as IOpenSearchItem).BuildSearchUrl (searchTerm);
 				Services.Environment.OpenUrl (url);
 			}
 
