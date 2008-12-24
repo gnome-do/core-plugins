@@ -19,9 +19,9 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
-using Do;
 using Do.Universe;
 using Do.Universe.Common;
 using Do.Platform;
@@ -32,31 +32,27 @@ namespace Evolution
 {
 	public struct ContactAttribute
 	{
-		string detail, key;
-		public ContactAttribute(string k, string d)
+		public string Detail { get; protected set; }
+		public string Key { get; protected set; }
+		
+		public ContactAttribute (string key, string detail)
 		{
-			this.key = k;
-			this.detail = d;
+			Key = key;
+			Detail = detail;
 		}
-		public string Detail { get { return detail; } }
-		public string Key { get { return key; } }
 	}
 	
 	public class ContactItemSource : ItemSource
 	{
-		List<Item> contacts;
+		IEnumerable<ContactItem> contacts;
 		
 		public ContactItemSource ()
 		{
-			contacts = new List<Item> ();
+			contacts = Enumerable.Empty<ContactItem> ();
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ContactItem),
-				};
-			}
+			get { yield return typeof (ContactItem); }
 		}
 		
 		public override string Name { get { return Catalog.GetString ("Evolution Contacts"); } }
@@ -64,59 +60,78 @@ namespace Evolution
 		public override string Icon { get { return "evolution"; } }
 		
 		public override IEnumerable<Item> Items {
-			get { return contacts; }
+			get { return contacts.OfType<Item> (); }
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			List<Item> details = new List<Item> ();
 			ContactItem contact = item as ContactItem;
 			foreach (string detail in contact.Details) {
 				if (!detail.EndsWith (".evolution")) continue;
 				
 				if (detail.StartsWith ("email"))
-					details.Add (new EmailContactDetailItem (contact, detail));
+					yield return new EmailContactDetailItem (contact, detail);
 				else if (detail.StartsWith ("phone"))
-					details.Add (new PhoneContactDetailItem (contact, detail));
+					yield return new PhoneContactDetailItem (contact, detail);
 				else if (detail.StartsWith ("url.home"))
-					details.Add (new BookmarkItem ("Homepage", contact [detail]));
+					yield return new BookmarkItem ("Homepage", contact [detail]);
 				else if (detail.StartsWith ("url.blog"))
-					details.Add (new BookmarkItem ("Blog", contact [detail]));
+					yield return new BookmarkItem ("Blog", contact [detail]);
 				else if (detail.StartsWith("address"))
-					details.Add (new AddressContactDetailItem (contact, detail));
+					yield return new AddressContactDetailItem (contact, detail);
 			}
-			return details;
 		}
 		
 		public override void UpdateItems ()
 		{
 			// Disallow updating due to memory leak.
-			if (contacts.Count > 0) return;
-			using (SourceList sources =
-				new SourceList ("/apps/evolution/addressbook/sources")) {
-				foreach (SourceGroup group in sources.Groups) {
-					foreach (Source source in group.Sources) {
-						// Only index local address books
-						if (!source.IsLocal ()) continue;
-						using (Book book = new Book (source)) {
-							book.Open (true);
-							foreach (Contact c in book.GetContacts (
-								BookQuery.AnyFieldContains (""))) {
-								try {
-									contacts.Add (
-										CreateEvolutionContactItem (c));
-								} catch (Exception e) {
-									/* bad contact */ 
-									Console.WriteLine(e.Message.ToString());
-								}
-							}
-						}
-					}
+			if (contacts.Any ()) return;
+			
+			using (SourceList sources = new SourceList ("/apps/evolution/addressbook/sources")) {
+				contacts = GetContactItems (sources).ToArray ();
+			}
+		}
+
+		IEnumerable<ContactItem> GetContactItems (SourceList sources)
+		{
+			foreach (SourceGroup group in sources.Groups)
+				foreach (ContactItem item in GetContactItems (group))
+					yield return item;
+		}
+		
+		IEnumerable<ContactItem> GetContactItems (SourceGroup group)
+		{
+			foreach (Source source in group.Sources)
+				foreach (ContactItem item in GetContactItems (source))
+					yield return item;
+		}
+		
+		IEnumerable<ContactItem> GetContactItems (Source source)
+		{
+			if (!source.IsLocal ())
+				return Enumerable.Empty<ContactItem> ();
+			
+			using (Book book = new Book (source)) {
+				return GetContactItems (book);
+			}
+		}
+
+		IEnumerable<ContactItem> GetContactItems (Book book)
+		{
+			foreach (Contact contact in book.GetContacts (BookQuery.AnyFieldContains (""))) {
+				ContactItem item;
+				try {
+					item = GetContactItem (contact);
+				} catch (Exception e) {
+					Log.Error ("Error reading Evolution contact: {0}", e.Message);
+					Log.Debug (e.StackTrace);
+					continue;
 				}
+				yield return item;
 			}
 		}
 	
-		ContactItem CreateEvolutionContactItem (Contact eContact) {
+		ContactItem GetContactItem (Contact eContact) {
 			ContactItem contact;
 			if (!(string.IsNullOrEmpty(eContact.FullName)))
 				contact = ContactItem.Create(eContact.FullName);
