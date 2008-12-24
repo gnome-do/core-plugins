@@ -31,7 +31,7 @@ namespace GMail
 {	
 	public sealed class GMailItemSource : ItemSource, IConfigurable
 	{
-		public GMailContactsItemSource() 
+		public GMailItemSource() 
 		{
 		}
 		public override string Name { 
