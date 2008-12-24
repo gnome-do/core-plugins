@@ -1,0 +1,23 @@
+<Addin 
+	id="Confluence" 
+	namespace="Do"
+	version="1.0"
+	name="Confluence"
+	description="Allows you to interact with a Confluence wiki via Do."
+	author="John Wood"
+	>
+
+	<Runtime>
+		<Import assembly="Confluence.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path = "/Do/Action">
+		<Action type="Confluence.ConfluenceSearchAction" />
+	</Extension>
+
+</Addin>

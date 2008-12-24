@@ -1,0 +1,23 @@
+<Addin 
+	id="MPD" 
+	namespace="Do"
+	version="1.0"
+	name="Music Player Daemon"
+	description="Provides support to play music from MPD"
+	author="Zachary Goldberg"
+	>
+
+	<Runtime>
+		<Import assembly="MPD.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="MPD.MPDMusicItemSource" />
+	</Extension>
+
+</Addin>

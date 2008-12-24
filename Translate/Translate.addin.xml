@@ -1,0 +1,22 @@
+<Addin 
+	id="Translate" 
+	namespace="Do"
+	version="1.0"
+	name="Translate"
+	description="Translate text and websites"
+	author="Chris Szikszoy"
+>
+ 
+	<Runtime>
+		<Import assembly="Translate.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/Action">
+		<Action type="Translate.TranslateAction"/>
+	</Extension>
+</Addin>
