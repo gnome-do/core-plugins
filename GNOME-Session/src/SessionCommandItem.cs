@@ -25,17 +25,14 @@ using Do.Universe;
 
 namespace GNOME
 {
-	class SessionCommandItem : IRunnableItem
+	class SessionCommandItem : Item, IRunnableItem
 	{
-		public delegate void RunDelegate ();
-
 		const int SessionItemRunDelay = 500;
 
-		RunDelegate run;
+		Action run;
 		string name, description, icon;
 
-		public SessionCommandItem (string name, string description, string icon,
-			RunDelegate run)
+		public SessionCommandItem (string name, string description, string icon, Action run)
 		{
 			this.name = name;
 			this.description = description;
@@ -49,12 +46,10 @@ namespace GNOME
 
 		public virtual void Run ()
 		{
-			new Thread ((ThreadStart)
-				delegate {
-					Thread.Sleep (SessionItemRunDelay);
-					run ();
-				}
-			).Start ();
+			new Thread ((ThreadStart) delegate {
+				Thread.Sleep (SessionItemRunDelay);
+				run ();
+			}).Start ();
 		}
 	}
 }
