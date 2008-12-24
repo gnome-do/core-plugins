@@ -22,7 +22,8 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Do.UI;
+using Do.Platform;
+using Do.Platform.Linux;
 
 
 namespace GCalendar
@@ -32,10 +33,8 @@ namespace GCalendar
 		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
             + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
             + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
-        const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
-		public Configuration()
+		public Configuration() : base ("Google Calendar", "https://www.google.com/accounts/NewAccount?service=cl")
 		{
-			GetAccountButton.Uri = Uri;
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -49,6 +48,16 @@ namespace GCalendar
 		private bool ValidateUsername (string username)
 		{	
 			return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
+		}
+		
+		protected override void SaveAccountData (string username, string password)
+		{
+			Log.Error ("Account data not saved");
+		}
+
+		public static void GetAccountData (out string username, out string password, Type t)
+		{
+			username = password = "fixme";
 		}
 	}
 }

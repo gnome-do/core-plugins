@@ -25,7 +25,7 @@ using System.Text;
 using Do.Universe;
 
 namespace GCalendar {
-	public sealed class GCalendarEventItem : IURLItem {
+	public sealed class GCalendarEventItem : Item, IUrlItem {
 		string name, url, desc;
 		public GCalendarEventItem (string name, string url, string desc)
 		{
@@ -46,7 +46,7 @@ namespace GCalendar {
 			get { return "date"; }
 		}
 		
-		public string URL {
+		public string Url {
 			get { return url; }
 		}
 	}

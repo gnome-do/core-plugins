@@ -116,7 +116,7 @@ namespace GCalendar
 			lock (cal_lock) {
 				try {
 					foreach (GCalendarItem cal in calendars) {	
-						cals.Add (cal.Name, cal.URL);
+						cals.Add (cal.Name, cal.Url);
 					}
 					cals.Add ("All Events", "");
 				} catch (ArgumentException) { }

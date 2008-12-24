@@ -25,6 +25,7 @@ using Mono.Unix;
 
 
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace GCalendar
 {	
