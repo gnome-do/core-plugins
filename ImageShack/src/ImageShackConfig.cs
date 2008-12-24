@@ -20,7 +20,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-
+using Do.Platform;
 
 namespace ImageShack
 {
@@ -39,7 +39,7 @@ namespace ImageShack
 		
 		static ImageShackConfig()
 		{
-			prefs = Do.Addins.Util.GetPreferences ("ImageShack");
+			prefs = Services.Preferences.Get<ImageShackConfig> ();
 		}
 		
 		public static string RegistrationCode {
@@ -49,7 +49,7 @@ namespace ImageShack
 
 		protected virtual void OnRegistrationButtonClicked (object sender, System.EventArgs e)
 		{
-			Do.Addins.Util.Environment.Open (RegistrationUrl);
+			Services.Environment.OpenUrl (RegistrationUrl);
 		}
 
 		protected virtual void OnRegistrationCodeEntryChanged (object sender, System.EventArgs e)

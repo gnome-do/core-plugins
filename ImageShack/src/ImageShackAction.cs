@@ -18,6 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -25,45 +26,53 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
-
-using Do.Universe;
-
 using Mono.Unix;
+
+using Do.Platform;
+using Do.Platform.Linux;
+using Do.Universe;
+using Do.Universe.Common;
 
 namespace ImageShack
 {
 	public class ImageShackAction : Act, IConfigurable
 	{
-		public override string Name
+		Dictionary<string, string> image_mime_type_mapping;
+			
+		public ImageShackAction()
 		{
+			image_mime_type_mapping = new Dictionary<string,string>
+			{
+				{".jpg", "image/jpeg"},
+				{".jpeg", "image/jpeg"},
+				{".png", "image/png"}, 
+				{".gif", "image/gif"}, 
+				{".bmp", "image/bmp"}, 
+				{".tif", "image/tiff"}, 
+				{".tiff", "image/tiff"}
+			};
+		}
+		
+		public override string Name {
 			get { return Catalog.GetString ("Upload to ImageShack"); }
 		}
 		
-		public override string Description
-		{
+		public override string Description {
 			get { return Catalog.GetString ("Uploads the image to ImageShack."); }
 		}
 		
-		public override string Icon 
-		{
+		public override string Icon {
 			get { return "imageshack.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes
-		{
-			get {
-				return new Type[] {
-					typeof (IFileItem)
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (IFileItem); }
 		}
 			
 		public override bool SupportsItem (Item item)
 		{	
-			if (item is IFileItem) {	
-				if ((item as IFileItem).MimeType.StartsWith ("image/")) {
-					return true;
-				}
+			if (item is IFileItem) {
+				return IsImageFile((item as IFileItem));
 			}
 			return false;
 		}
@@ -76,51 +85,46 @@ namespace ImageShack
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{								
 			try {
-				List<Item> returnItems = new List<Item> ();	
-				StringBuilder notificationUrlList = new StringBuilder();
-				notificationUrlList.AppendLine (Catalog.GetString ("Image urls: "));
+				List<Item> imageUrls = new List<Item> ();	
+
 				foreach (Item item in items) {	
-					IFileItem IFileItem = item as IFileItem;
+					IFileItem imageFile = item as IFileItem;
 						
-					string fileValidationError = ValidateFileForUpload (IFileItem.Path);	
-					if (fileValidationError != null) {
-						returnItems.Add (new TextItem (fileValidationError + " - " + IFileItem.Path ));
-						continue;
-					}
+					if (!FileIsValidForUpload (imageFile.Path)) continue;
+					    
+					UploadNotification notification = new UploadNotification(imageFile.Path);
+					Services.Notifications.Notify (notification);
 					
-					NotificationBridge.ShowMessage (
-						    Catalog.GetString ("ImageShack"), 
-						    Catalog.GetString ("Do is uploading your image... Please wait a moment..."), 
-						    IFileItem.Path);
-					string url = PostToImageShack (IFileItem.Path, IFileItem.MimeType);
-					notificationUrlList.AppendLine (url);
-					returnItems.Add (new TextItem (url));
+					string mimeType = image_mime_type_mapping[Path.GetExtension (imageFile.Path)];
+					string url = PostToImageShack (imageFile.Path, mimeType);
+					imageUrls.Add (new TextItem (url));
 				}
 				
-				/*
-				NotificationBridge.ShowMessage (
-					Catalog.GetString ("ImageShack"), 
-					notificationUrlList.ToString ());                               
-				*/
-					
-				return returnItems.ToArray ();
+				return imageUrls;
 			}
 			catch (Exception e) {
-				Console.Error.WriteLine (Catalog.GetString ("ImageShack exception: ") + e.Message);
-				return new Item[] { new TextItem (Catalog.GetString ("An error occured while uploading to ImageShack.")) };
-			}					
+				Console.Error.WriteLine (Catalog.GetString ("ImageShack exception: ") + e.Message);			
+				GeneralErrorNotification notification = new GeneralErrorNotification();
+				Services.Notifications.Notify (notification);				
+			}				
+			
+			return null;
 		}		
 			
-		private static string ValidateFileForUpload (string file)
+		private static bool FileIsValidForUpload (string file)
 		{
+			string fileSizeError = Catalog.GetString ("File size exceeds ImageShack's 1.5MB limit.");
+			
 			FileInfo fi = new FileInfo(file);
 			long fileSize = fi.Length;	
 			// 1.5MB limit
 			if (fileSize > 1572864) {
-				return Catalog.GetString ("File size exceeds ImageShack's 1.5MB limit.");
+				InvalidFileNotification notification = new InvalidFileNotification (fileSizeError);
+				Services.Notifications.Notify (notification);			
+				return false;
 			}
 				
-			return null;
+			return true;
 		}
 			
 		private static string PostToImageShack (string file, string contentType)
@@ -193,6 +197,11 @@ namespace ImageShack
 			}
 				
 			return url;
+		}
+		
+		private bool IsImageFile (IFileItem file)
+		{
+			return image_mime_type_mapping.ContainsKey (Path.GetExtension (file.Path));
 		}
 	}
 }
