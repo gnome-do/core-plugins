@@ -18,14 +18,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
 using System.Net;
+using System.Linq;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Do.Universe;
 using Mono.Unix;
+
+using Do.Platform;
+using Do.Universe;
+using Do.Universe.Common;
 
 namespace Do.Plugins.Google
 {
@@ -54,11 +57,7 @@ namespace Do.Plugins.Google
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
+			get { yield return typeof (ITextItem); }
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
@@ -93,7 +92,7 @@ namespace Do.Plugins.Google
 				reply = Catalog.GetString ("Google Calculator could not evaluate the expression.");
 			}
 
-			return new Item[] { new TextItem (reply) };
+			yield return new TextItem (reply);
 		}
 
 		string GoogleCalculatorURLWithExpression (string e)

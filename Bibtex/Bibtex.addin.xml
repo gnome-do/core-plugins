@@ -1,0 +1,26 @@
+<Addin
+	id="Bibtex"
+	namespace="Do"
+	version="1.7"
+	name="Bibtex"
+	description="Quickly open documents linked from a BibTeX file."
+	author="Niall Murphy"
+	>
+
+	<Runtime>
+		<Import assembly="BibtexItemSource.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Core" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/Action">
+		<Action type="Do.Addins.Bibtex.BibtexCiteAction" />
+	</Extension>
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Addins.Bibtex.BibtexItemSource" />
+	</Extension>
+</Addin>

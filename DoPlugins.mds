@@ -40,6 +40,24 @@
       <Entry build="True" name="GDocs" configuration="Debug" />
       <Entry build="True" name="Microblogging" configuration="Debug" />
       <Entry build="True" name="File" configuration="Debug" />
+      <Entry build="True" name="AptURL" configuration="Debug" />
+      <Entry build="True" name="Bibtex" configuration="Debug" />
+      <Entry build="True" name="Confluence" configuration="Debug" />
+      <Entry build="True" name="EOG Slideshow" configuration="Debug" />
+      <Entry build="True" name="JIRA" configuration="Debug" />
+      <Entry build="True" name="MPD" configuration="Debug" />
+      <Entry build="True" name="PingFM" configuration="Debug" />
+      <Entry build="True" name="RememberTheMilk" configuration="Debug" />
+      <Entry build="True" name="SqueezeCenterPlugin" configuration="Debug" />
+      <Entry build="True" name="Woof" configuration="Debug" />
+      <Entry build="True" name="Wordnet" configuration="Debug" />
+      <Entry build="True" name="xmms2" configuration="Debug" />
+      <Entry build="True" name="VirtualBox" configuration="Debug" />
+      <Entry build="True" name="Translate" configuration="Debug" />
+      <Entry build="True" name="Stock Quote" configuration="Debug" />
+      <Entry build="True" name="Terminal Server Client" configuration="Debug" />
+      <Entry build="True" name="Thunderbird" configuration="Debug" />
+      <Entry build="True" name="Skype" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Packages" configuration="Release" />
@@ -81,6 +99,24 @@
       <Entry build="True" name="GDocs" configuration="Release" />
       <Entry build="True" name="Microblogging" configuration="Release" />
       <Entry build="True" name="File" configuration="Release" />
+      <Entry build="True" name="AptURL" configuration="Release" />
+      <Entry build="True" name="Bibtex" configuration="Release" />
+      <Entry build="True" name="Confluence" configuration="Release" />
+      <Entry build="True" name="EOG Slideshow" configuration="Release" />
+      <Entry build="True" name="JIRA" configuration="Release" />
+      <Entry build="True" name="MPD" configuration="Release" />
+      <Entry build="True" name="PingFM" configuration="Release" />
+      <Entry build="True" name="RememberTheMilk" configuration="Release" />
+      <Entry build="True" name="SqueezeCenterPlugin" configuration="Release" />
+      <Entry build="True" name="Woof" configuration="Release" />
+      <Entry build="True" name="Wordnet" configuration="Release" />
+      <Entry build="True" name="xmms2" configuration="Release" />
+      <Entry build="True" name="VirtualBox" configuration="Release" />
+      <Entry build="True" name="Translate" configuration="Release" />
+      <Entry build="True" name="Stock Quote" configuration="Release" />
+      <Entry build="True" name="Terminal Server Client" configuration="Release" />
+      <Entry build="True" name="Thunderbird" configuration="Release" />
+      <Entry build="True" name="Skype" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Packages" single="True">
@@ -123,6 +159,24 @@
     <Execute type="None" entry="GDocs" />
     <Execute type="None" entry="Microblogging" />
     <Execute type="None" entry="File" />
+    <Execute type="None" entry="AptURL" />
+    <Execute type="None" entry="Bibtex" />
+    <Execute type="None" entry="Confluence" />
+    <Execute type="None" entry="EOG Slideshow" />
+    <Execute type="None" entry="JIRA" />
+    <Execute type="None" entry="MPD" />
+    <Execute type="None" entry="PingFM" />
+    <Execute type="None" entry="RememberTheMilk" />
+    <Execute type="None" entry="SqueezeCenterPlugin" />
+    <Execute type="None" entry="Woof" />
+    <Execute type="None" entry="Wordnet" />
+    <Execute type="None" entry="xmms2" />
+    <Execute type="None" entry="VirtualBox" />
+    <Execute type="None" entry="Translate" />
+    <Execute type="None" entry="Stock Quote" />
+    <Execute type="None" entry="Terminal Server Client" />
+    <Execute type="None" entry="Thunderbird" />
+    <Execute type="None" entry="Skype" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -165,5 +219,23 @@
     <Entry filename="GDocs/GDocs.mdp" />
     <Entry filename="Microblogging/Microblogging.mdp" />
     <Entry filename="File/File.mdp" />
+    <Entry filename="AptURL/AptURL.mdp" />
+    <Entry filename="Bibtex/Bibtex.mdp" />
+    <Entry filename="Confluence/Confluence.mdp" />
+    <Entry filename="EOG Slideshow/EOG Slideshow.mdp" />
+    <Entry filename="JIRA/JIRA.mdp" />
+    <Entry filename="MPD/MPD.mdp" />
+    <Entry filename="PingFM/PingFM.mdp" />
+    <Entry filename="RememberTheMilk/RTM.mdp" />
+    <Entry filename="SqueezeCenter/SqueezeCenterPlugin.mdp" />
+    <Entry filename="Woof/Woof.mdp" />
+    <Entry filename="Wordnet/Wordnet.mdp" />
+    <Entry filename="xmms2/xmms2.mdp" />
+    <Entry filename="VirtualBox/VirtualBox.mdp" />
+    <Entry filename="Translate/Translate.mdp" />
+    <Entry filename="Stock Quote/Stock Quote.mdp" />
+    <Entry filename="Terminal Server Client/Terminal Server Client.mdp" />
+    <Entry filename="Thunderbird/Thunderbird.mdp" />
+    <Entry filename="Skype/Skype.mdp" />
   </Entries>
 </Combine>

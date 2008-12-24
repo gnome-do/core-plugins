@@ -108,7 +108,7 @@ namespace Flickr {
             this.auth_btn.UseUnderline = true;
             // Container child auth_btn.Gtk.Container+ContainerChild
             Gtk.Alignment w8 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            // Container child GtkAlignment1.Gtk.Container+ContainerChild
             Gtk.HBox w9 = new Gtk.HBox();
             w9.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild

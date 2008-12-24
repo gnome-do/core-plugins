@@ -54,6 +54,7 @@ namespace Pastebin {
             this.Paste2RadioButton = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("Paste2.org"));
             this.Paste2RadioButton.CanFocus = true;
             this.Paste2RadioButton.Name = "Paste2RadioButton";
+            this.Paste2RadioButton.Active = true;
             this.Paste2RadioButton.DrawIndicator = true;
             this.Paste2RadioButton.UseUnderline = true;
             this.Paste2RadioButton.Group = new GLib.SList(System.IntPtr.Zero);
