@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 
 using Gtk;
 
+using Do.Platform;
 using Do.Platform.Linux;
 
 namespace GMail
@@ -61,18 +62,12 @@ namespace GMail
 			return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
 		}
 		
-		protected override void SaveAccountData (string username, string password)
-		{
-			prefs.SecureSet("username", username);
-			prefs.SecureSet("password", password); 
-		}
-		
 		public static string username { 
-			get { return prefs.SecureGet<string> ("username", "" ); } 
+			get { return prefs.GetSecure<string> ("username", "" ); } 
 		}
 
 		public static string password { 
-			get { return prefs.SecureGet<string> ("password", "" ); } 
+			get { return prefs.GetSecure<string> ("password", "" ); } 
 		}
 	}
 }
