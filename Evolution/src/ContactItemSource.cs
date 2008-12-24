@@ -137,6 +137,7 @@ namespace Evolution
 				contact = ContactItem.Create(eContact.FullName);
 			else //(!(string.IsNullOrEmpty(eContact.FileAs)))
 				contact = ContactItem.Create(eContact.FileAs);
+
 			List<ContactAttribute> ContactDetails = new List<ContactAttribute>();
 			ContactDetails.Add(new ContactAttribute("email.home", eContact.Email1));
 			ContactDetails.Add(new ContactAttribute("email.work", eContact.Email2));
