@@ -27,7 +27,8 @@ using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
-
+using Do.Platform;
+using Do.Platform.Linux;
 
 using FlickrNet;
 
@@ -37,6 +38,8 @@ namespace Flickr
 	{
 		static object count_lock = new object ();
 		static int upload_num;
+		
+		const string ImageExtensions = ".jpg .jpef .gif .png .tiff";
 		
 		public override string Name {
 			get { return Catalog.GetString ("Upload photo"); }
@@ -66,24 +69,14 @@ namespace Flickr
 			}
 		}
 		
-		public bool ModifierItemsOptional {
+		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
 		
-		public bool SupportsItem (Item item)
+		public override bool SupportsItem (Item item)
 		{
-			return IFileItem.IsDirectory (item as IFileItem) || 
-				FileIsPicture (item as IFileItem);
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return true;
-		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			return null;
+			IFileItem file = item as IFileItem;
+			return Directory.Exists (file.Path) || FileIsPicture (file);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -102,13 +95,12 @@ namespace Flickr
 			List<IFileItem> uploads = new List<IFileItem> ();
 			foreach (Item item in items) {
 				IFileItem file = item as IFileItem;
-				if (IFileItem.IsDirectory (file)) {
+				if (Directory.Exists (file.Path)) {
 					DirectoryInfo dinfo = new DirectoryInfo (file.Path);
 					FileInfo [] finfo = dinfo.GetFiles ();
 					foreach (FileInfo f in finfo) {
-						IFileItem fi = new IFileItem (f.FullName);
-						if (FileIsPicture (fi))
-							uploads.Add (fi);
+						if (FileIsPicture (f.FullName))
+							uploads.Add (Services.UniverseFactory.NewFileItem (f.FullName));
 					}
 				} else {
 					uploads.Add (file);
@@ -140,7 +132,7 @@ namespace Flickr
 						upload_num++;
 					}
 					
-					Do.Addins.NotificationBridge.ShowMessage ("Flickr",
+					Services.Notifications.Notify ("Flickr",
 						String.Format ("Uploaded {0}. ({1} of {2})", photo.Name,
 						thisUpload, num), photo.Path); 
 				} catch (FlickrNet.FlickrException e) {
@@ -154,9 +146,14 @@ namespace Flickr
 			return new UploadConfig ();
 		}
 		
-		private bool FileIsPicture (IFileItem item)
+		bool FileIsPicture (IFileItem item)
 		{
-			return item.MimeType.StartsWith ("image/");
+			return FileIsPicture (item.Path);
+		}
+		
+		bool FileIsPicture (string path)
+		{
+			return ImageExtensions.Contains (Path.GetExtension (path).ToLower ());
 		}
 	}
 }

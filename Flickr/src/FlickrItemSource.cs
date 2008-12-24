@@ -23,8 +23,8 @@ using System;
 using System.Collections.Generic;
 using Mono.Unix;
 
-
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace Flickr
 {	
@@ -43,23 +43,7 @@ namespace Flickr
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] { };
-			}
-		}
-		
-		public override IEnumerable<Item> Items
-		{
-			get { return null; }
-		}
-		
-		public override IEnumerable<Item> ChildrenOfItem (Item parent)
-		{
-			return null;
-		}
-		
-		public override void UpdateItems ()
-		{
+			get { yield break; }
 		}
 		
 		public Gtk.Bin GetConfiguration ()
