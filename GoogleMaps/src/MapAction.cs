@@ -23,6 +23,7 @@ using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
+using Do.Platform;
 
 
 namespace Google
@@ -108,7 +109,7 @@ namespace Google
 
 				url = GoogleMapsURLWithExpression (expression);
 				
-				Util.Environment.Open (url);
+				Services.Environment.Execute (url);
 			}
 			return null;
 		}
