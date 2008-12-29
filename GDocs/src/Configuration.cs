@@ -22,8 +22,10 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Do.UI;
+using Mono.Unix;
 
+using Do.Platform;
+using Do.Platform.Linux;
 
 namespace GDocs
 {
@@ -33,7 +35,8 @@ namespace GDocs
             + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
             + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
         const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
-        public Configuration()
+		
+        public Configuration () : base (Catalog.GetString ("Google Documents"))
         {
             GetAccountButton.Uri = Uri;
         }

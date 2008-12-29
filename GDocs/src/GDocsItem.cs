@@ -20,14 +20,15 @@
 
 using System;
 using System.Text;
+
 using Mono.Unix;
 
-
 using Do.Universe;
+using Do.Platform;
 
 namespace GDocs
 {
-    public class GDocsItem : IOpenableItem
+    public class GDocsItem : Item, IOpenableItem
     {
         string name, url;
 		
@@ -40,10 +41,6 @@ namespace GDocs
         public override string Name {
             get { return name; }
         }
-
-        public string URL {
-            get { return url; }
-        }
 				
         public virtual string Description {
             get { return Catalog.GetString ("Google Docs Generic Document"); }
@@ -53,9 +50,9 @@ namespace GDocs
             get { return "x-office-document"; }
 		}
 		
-		public void Open()
+		public void Open ()
 		{
-			Do.Addins.Util.Environment.Open (url);
+			Services.Environment.OpenUrl (url);
 		}
 	}	
 }

@@ -1,2 +1,6 @@
 <objects attr-sync="on">
+  <object type="Confluence.ConfluenceConfigWidget" palette-category="Confluence" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
 </objects>
