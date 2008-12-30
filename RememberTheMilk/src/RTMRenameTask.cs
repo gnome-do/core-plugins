@@ -71,11 +71,6 @@ namespace Do.Addins.RTM
 			return true;
         }
         
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
-        }
-        
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {
 			RTM.RenameTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,

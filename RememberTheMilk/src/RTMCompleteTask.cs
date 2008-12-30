@@ -50,28 +50,10 @@ namespace Do.Addins.RTM
 				};
 			}
 		}
-		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { return null; }
-        }
-        
-        public override bool ModifierItemsOptional {
-            get {return true; }
-        }
         
         public override bool SupportsItem (Item item) 
         {
             return (item as RTMTaskItem).Completed == DateTime.MinValue;
-        }
-        
-        public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-        {
-			return false;
-        }
-        
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
         }
         
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
