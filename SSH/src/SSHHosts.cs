@@ -24,12 +24,14 @@ using System.Xml;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using Do.Platform;
 using Do.Universe;
+
 using Mono.Unix;
 
 namespace GnomeDoSSH {
 
-	public class HostItem : IOpenableItem {
+	public class HostItem : Item, IOpenableItem {
 		string name;
 
 		public HostItem (string hostname)
@@ -37,48 +39,47 @@ namespace GnomeDoSSH {
 			name = hostname;
 		}
 
-		public string Name { get { return name; } }
-		public string Description { get { return Catalog.GetString ("SSH Host"); } }
-		public string Icon { get { return "gnome-globe"; } }
+		public override string Name { get { return name; } }
+		public override string Description { get { return Catalog.GetString ("SSH Host"); } }
+		public override string Icon { get { return "gnome-globe"; } }
 
 		public string Text { get { return name; } }
 
 		public void Open ()
 		{
-			string uri = "ssh://" + name;
-			Do.Addins.Util.Environment.Open (uri);
+			Services.Environment.OpenUrl ("ssh://" + name);
 		}
 	}
 
-	public class SSHHostItemSource : IItemSource {
-		List<IItem> items;
+	public class SSHHostItemSource : ItemSource {
+		List<Item> items;
 
 		public SSHHostItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 			UpdateItems ();
 		}
 
-		public string Name { get { return Catalog.GetString ("SSH Hosts"); } }
-		public string Description { get { return Catalog.GetString ("Parses ssh-config"); } }
-		public string Icon { get { return "network-server"; } }
+		public override string Name { get { return Catalog.GetString ("SSH Hosts"); } }
+		public override string Description { get { return Catalog.GetString ("Parses ssh-config"); } }
+		public override string Icon { get { return "network-server"; } }
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] { typeof (HostItem) };
 			}
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
 			return null;  
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			items.Clear ();
 			try {

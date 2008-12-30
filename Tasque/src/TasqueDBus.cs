@@ -18,9 +18,12 @@
 
 
 using System;
-using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 using NDesk.DBus;
 using org.freedesktop.DBus;
+
+using Do.Platform;
 
 using Do.Universe;
 
@@ -30,59 +33,52 @@ namespace Tasque.DBus
 	[Interface("org.gnome.Tasque.RemoteControl")]
 	public interface ITasque
 	{
-	        string CreateTask (string categoryName, string taskName, bool enterEditMode);
-		string[] GetCategoryNames ();
+	    string CreateTask (string categoryName, string taskName, bool enterEditMode);
+		string [] GetCategoryNames ();
 		void ShowTasks ();
 	}
 
 	public class TasqueDBus
 	{
 		
-		private const string OBJECT_PATH = "/org/gnome/Tasque/RemoteControl";
-		private const string BUS_NAME = "org.gnome.Tasque";
-		private static ITasque Tasque;
+		const string OBJECT_PATH = "/org/gnome/Tasque/RemoteControl";
+		const string BUS_NAME = "org.gnome.Tasque";
+		static ITasque Tasque;
 
 		public TasqueDBus ()
 		{
 			try {
-			        Tasque = FindInstance ();
-	                } catch (Exception) {
-	                        Console.Error.WriteLine ("Could not locate Tasque on D-Bus. Make sure Tasque is running");
-	                }
+				Tasque = FindInstance ();
+            } catch (Exception) {
+            	Log.Error ("Could not locate Tasque on D-Bus. Make sure Tasque is running");
+            }
 	        
-	                BusG.Init();
+			BusG.Init();
 		}
 	
 		static private ITasque FindInstance () 
-	        {
-	                if (!Bus.Session.NameHasOwner (BUS_NAME)) 
-	                        throw new Exception (String.Format("Name {0} has no owner", BUS_NAME));
-	    
-	                return Bus.Session.GetObject<ITasque> (BUS_NAME, new ObjectPath (OBJECT_PATH));
-	        }
+        {
+                if (!Bus.Session.NameHasOwner (BUS_NAME)) 
+                        throw new Exception (String.Format("Name {0} has no owner", BUS_NAME));
+    
+                return Bus.Session.GetObject<ITasque> (BUS_NAME, new ObjectPath (OBJECT_PATH));
+        }
 		
 		
-		public ArrayList GetCategoryNames () 
+		public IEnumerable<string> GetCategoryNames () 
 		{
-			string[] categories = null;
-			categories = Tasque.GetCategoryNames ();
-			ArrayList CategoryNames = new ArrayList ();
-			
-			foreach (string category in categories) 
-				CategoryNames.Add (category);
-			
-			return CategoryNames;
+			return Tasque.GetCategoryNames ();
 		}
 
 		
 		public string CreateTask (string category, string task) 
 		{
-			ArrayList list = GetCategoryNames ();
+			IEnumerable<string> categories = GetCategoryNames ();
 			
-			if (list.Contains (category)) 
-				return Tasque.CreateTask (category, task,false);
+			if (categories.Contains (category)) 
+				return Tasque.CreateTask (category, task, false);
 			else 
-				return Tasque.CreateTask (list[0].ToString(), task, false);
+				return Tasque.CreateTask (categories.First (), task, false);
 			
 		}
 		

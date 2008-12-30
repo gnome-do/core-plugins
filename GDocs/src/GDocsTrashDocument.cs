@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 using Google.GData.Client;
@@ -32,22 +32,22 @@ using Google.GData.Documents;
 
 namespace GDocs
 {
-	public sealed class GDocsTrashDocument : IAction
+	public sealed class GDocsTrashDocument : Act
 	{
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Delete Document"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Move a document into Trash at Google Docs"); }
         }
 			
-		public string Icon {
+		public override string Icon {
 			//get { return "gDocsTrashIcon.png@" + GetType ().Assembly.FullName; }
 			get { return "user-trash";}
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (GDocsItem),	
@@ -55,16 +55,16 @@ namespace GDocs
 			}
 		}
         
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 		    get { return null; }
         }		
 		
-        public bool SupportsItem (IItem item) 
+        public bool SupportsItem (Item item) 
         {
 			return true;
         }
         
-        public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+        public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
         {
 			return false;
 		}        
@@ -73,12 +73,12 @@ namespace GDocs
             get { return true; }
         }
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item) 
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
         {
             return null;
         }
         
-        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems) 
+        public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {						
             GDocs.TrashDocument (items.First () as GDocsItem);
 			return null;

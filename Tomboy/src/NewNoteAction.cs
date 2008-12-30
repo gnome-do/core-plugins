@@ -22,12 +22,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 
-using Do.Addins;
+
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace Tomboy
 {	
-	public class NewNoteAction : AbstractAction, IConfigurable
+	public class NewNoteAction : Act, IConfigurable
 	{
 		private const string name = "New Tomboy Note";
 		private const string desc = "Create a new Tomboy note";
@@ -63,7 +64,7 @@ namespace Tomboy
 			get { return true; }
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			ITextItem mainItem = items.First () as ITextItem;
 			

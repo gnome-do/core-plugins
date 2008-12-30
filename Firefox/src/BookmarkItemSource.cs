@@ -20,16 +20,17 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
-using Do;
 using Do.Universe;
+using Do.Universe.Common;
 
 using Mono.Unix;
 
 namespace Mozilla.Firefox {
 
-	public class BookmarkItemSource : IItemSource {
+	public class BookmarkItemSource : ItemSource {
 		const string BeginProfileName = "Path=";
         const string BeginDefaultProfile = "Default=1";
         
@@ -37,46 +38,39 @@ namespace Mozilla.Firefox {
         const string BeginUri = "\"uri\":\"";
         const string BeginChildren = "\"children\":[";
 		
-		ICollection<IItem> items;
+		IEnumerable<BookmarkItem> bookmarks;
 		
 		public BookmarkItemSource ()
 		{
-			items = LoadBookmarkItems ();
+			bookmarks = Enumerable.Empty<BookmarkItem> ();
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (BookmarkItem),
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (BookmarkItem); }
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Firefox Bookmarks"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Finds Firefox bookmarks in your default profile."); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "firefox-3.0"; }
 		}
 		
-		public IEnumerable<IItem> Items {
-			get { return items; }
+		public override IEnumerable<Item> Items {
+			get { return bookmarks.OfType<Item> (); }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
-		{
-			return null;
-		}
-		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			// No updating for now -- Firefox only dumps JSON bookmarks
 			// data once each day.
+			if (bookmarks.Any ()) return;
+			bookmarks = LoadBookmarkItems ().ToArray ();
 		}
 		
 		/// <summary>
@@ -92,12 +86,13 @@ namespace Mozilla.Firefox {
 		static string profile_path;
 		static string ProfilePath {
 			get {
-				string line, profile, path;
+				string line, profile, path, home;
 				
 				if (null != profile_path) return profile_path;
 
+				home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 				profile = null;
-				path = Path.Combine (Paths.UserHome, ".mozilla/firefox/profiles.ini");
+				path = Path.Combine (home, ".mozilla/firefox/profiles.ini");
 				using (StreamReader r = File.OpenText (path)) {
 					while (null != (line = r.ReadLine ())) {
 						if (line.StartsWith (BeginDefaultProfile)) break;
@@ -108,8 +103,8 @@ namespace Mozilla.Firefox {
 						}
 					}
 				}
-				return profile_path = Paths.Combine (
-					Paths.UserHome, ".mozilla/firefox", profile);
+				return profile_path =
+					Path.Combine (Path.Combine (home, ".mozilla/firefox"), profile);
 			}
 		}
 				
@@ -118,16 +113,15 @@ namespace Mozilla.Firefox {
 				string dir;
 				string[] backups;
 				
-				dir = Paths.Combine (ProfilePath, "bookmarkbackups");
+				dir = Path.Combine (ProfilePath, "bookmarkbackups");
 				backups = Directory.GetFiles (dir, "*.json");
-				System.Array.Sort (backups);
-				return Paths.Combine (dir, backups [backups.Length-1]);
+				Array.Sort (backups);
+				return Path.Combine (dir, backups [backups.Length-1]);
 			}
 		}
 		
-		protected ICollection<IItem> LoadBookmarkItems () {
+		IEnumerable<BookmarkItem> LoadBookmarkItems () {
 			int iTitle, iUri, iChildren;
-			List<IItem> bookmarks = new List<IItem> ();
 			string json = File.ReadAllText (BookmarkJSONPath);
 			
 			iTitle = iUri = iChildren = 0;
@@ -150,10 +144,9 @@ namespace Mozilla.Firefox {
 						json.IndexOf ("\"", iUri) - iUri);
 					if (string.IsNullOrEmpty (title) ||
 						uri.StartsWith ("place:")) continue;
-					bookmarks.Add (new BookmarkItem (title, uri));
+					yield return new BookmarkItem (title, uri);
 				}
 			}
-			return bookmarks;
 		}
 	}
 }

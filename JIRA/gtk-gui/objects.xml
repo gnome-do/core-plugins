@@ -1,0 +1,6 @@
+<objects attr-sync="on">
+  <object type="JIRA.ConfigWidget" palette-category="JIRA" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+</objects>

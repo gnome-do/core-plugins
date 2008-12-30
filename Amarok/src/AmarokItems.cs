@@ -27,7 +27,7 @@ using Do.Universe;
 namespace Do.Plugins.Amarok
 {
 
-	class BrowseMusicItem: IItem
+	class BrowseMusicItem: Item
 	{
 		string name, description;
 
@@ -37,9 +37,9 @@ namespace Do.Plugins.Amarok
 			this.description = description;
 		}
 
-		public string Name { get { return name; } }
-		public string Description { get { return description; } }
-		public string Icon { get { return "gtk-cdrom"; } }
+		public override string Name { get { return name; } }
+		public override string Description { get { return description; } }
+		public override string Icon { get { return "gtk-cdrom"; } }
 	}
 
 	class BrowseArtistsMusicItem : BrowseMusicItem
@@ -58,7 +58,7 @@ namespace Do.Plugins.Amarok
 		}
 	}
 
-	public class AmarokRunnableItem : IRunnableItem
+	public class AmarokRunnableItem : Item, IRunnableItem
 	{
 		public static readonly AmarokRunnableItem[] DefaultItems =
 			new AmarokRunnableItem[] {
@@ -94,9 +94,9 @@ namespace Do.Plugins.Amarok
 			this.command = command;
 		}
 
-		public string Name { get { return name; } }
-		public string Description { get { return description; } }
-		public string Icon { get { return icon; } }
+		public override string Name { get { return name; } }
+		public override string Description { get { return description; } }
+		public override string Icon { get { return icon; } }
 
 		public void Run ()
 		{

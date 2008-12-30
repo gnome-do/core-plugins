@@ -23,26 +23,27 @@ using System.Threading;
 using System.Collections.Generic;
 
 using Do.Universe;
-using Do.Addins;
+using Do.Platform.Linux;
+
 using Mono.Unix;
 
 namespace Delicious
 {	
-	public class BookmarksItemSource : IItemSource, IConfigurable
+	public class BookmarksItemSource : ItemSource, IConfigurable
 	{
-		public string Name  {
+		public override string Name  {
 			get { return Catalog.GetString ("Del.icio.us bookmarks"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Indexes your del.icio.us bookmarks"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "delicious.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (BookmarkItem),
@@ -50,16 +51,16 @@ namespace Delicious
 			}
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return Delicious.BookmarksForTag ("all bookmarks"); }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			Thread updateBookmarks = new Thread (new ThreadStart (Delicious.UpdateBookmarks));
 			updateBookmarks.IsBackground = true;

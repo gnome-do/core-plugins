@@ -5,6 +5,7 @@
 	name="Google Calendar"
 	description="Allows you to create, search, and browse your Google calendar events."
 	author="Alex Launi"
+	category="Official"
 	>
 
 	<Runtime>
@@ -16,7 +17,7 @@
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
 	<!-- Extensions included in this assembly -->

@@ -29,23 +29,23 @@ namespace Do.Plugins.Rss
 	/// Simple base class for representing bookmarks.
 	/// A bookmark is any item with a name and URL.
 	/// </summary>
-	public class RssFeedLinkItem : IURLItem
+	public class RssFeedLinkItem : Item, IUrlItem
 	{
 		protected string name, url, description;
 
-		public string Name {
+		public override string Name {
 			get { return name; }
 		}
 
-		public string Description {
+		public override string Description {
 			get { return description; }
 		}
 
-		public string Icon {
+		public override string Icon {
 			get { return "www"; }
 		}
 
-		public string URL {
+		public string Url {
 			get { return url; }
 		}
 

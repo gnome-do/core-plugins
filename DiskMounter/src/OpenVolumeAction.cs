@@ -25,11 +25,11 @@ using Gnome.Vfs;
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Addins;
+using Do.Platform;
 
 namespace DiskMounter
 {
-	public class OpenVolume : AbstractAction
+	public class OpenVolume : Act
 	{
 	
 		public OpenVolume ()
@@ -49,34 +49,21 @@ namespace DiskMounter
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (DriveItem),
-				};
-			}
-		}
-                
-		public override bool SupportsItem (IItem item) 
-        {
-			return true;
-		}
-                
-        public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
-        {
-			return false;
+			get { yield return typeof (DriveItem); }
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			DriveItem drive = (DriveItem) items.First ();
 			try {
 				if (!drive.IsMounted)
 					drive.Mount ();
-				Do.Addins.Util.Environment.Open(drive.Path);
+				Services.Environment.OpenPath (drive.Path);
 			} catch (Exception e) {
-				Console.WriteLine("Error opening {0} - {1}", (items.First () as DriveItem).Path, e.Message);
+				Log.Error ("Error opening {0} - {1}", drive.Path, e.Message);
+				Log.Debug (e.StackTrace);
 			}
-			return null;
+			yield break;
 		}
 	}
 }

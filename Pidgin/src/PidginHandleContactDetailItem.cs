@@ -25,7 +25,7 @@ using Do.Universe;
 
 namespace Do.Addins.Pidgin
 {
-	class PidginHandleContactDetailItem : IContactDetailItem
+	class PidginHandleContactDetailItem : Item, IContactDetailItem
 	{
 		string proto, handle;
 
@@ -35,21 +35,21 @@ namespace Do.Addins.Pidgin
 			this.handle = handle;
 		}
 
-		public string Name
+		public override string Name
 		{
 			get {
 				return string.Format ("{0} ({1})", handle, ReadableProto (proto));
 			}
 		}
 
-		public string Description
+		public override string Description
 		{
 			get {
 				return ReadableProto (proto) + " " + "Handle" ;
 			}
 		}
 
-		public string Icon
+		public override string Icon
 		{
 			get {
 				string icon_base = "/usr/share/pixmaps/pidgin/protocols/48/";

@@ -43,7 +43,7 @@ namespace GnomeDoManLookUp {
 	///		Allows us to hook up to Gnome-Do as a command
 	///		that can be applied to raw text or our own man page items. 
 	/// </summary>
-	public class ManLookUpAction : AbstractAction {
+	public class ManLookUpAction : Act {
 		
 		/// <value>
 		/// 	The name of the action
@@ -72,7 +72,7 @@ namespace GnomeDoManLookUp {
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof(ITextItem),typeof(ManLookUpItem),typeof(ApplicationItem)
+					typeof(ITextItem),typeof(ManLookUpItem),typeof(IApplicationItem)
 				};
 			}
            
@@ -82,22 +82,22 @@ namespace GnomeDoManLookUp {
 		/// 	Do we support the item?
 		/// </summary>
 		/// <param name="item">
-		/// A <see cref="IItem"/>
+		/// A <see cref="Item"/>
 		/// </param>
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		public override bool SupportsItem (IItem item) 
+		public override bool SupportsItem (Item item) 
 		{
 			
 			bool rc  = false;
 			string execStr;
 
-			if (!(item is ApplicationItem)) {			
+			if (!(item is IApplicationItem)) {			
 				rc = true;				
 			} else {
 				
-				ApplicationItem appItem = item as ApplicationItem;
+				IApplicationItem appItem = item as IApplicationItem;
 
 				//grab the parameter we'll be using for whatis command from the Exec string
 				//note, we use whatis becuase redirecting its output is a lot more efficient
@@ -141,7 +141,7 @@ namespace GnomeDoManLookUp {
 		/// <returns>
 		/// A <see cref="System.String"/>
 		/// </returns>
-		private static string getExecutableName (ApplicationItem appItem) 
+		private static string getExecutableName (IApplicationItem appItem) 
 		{			
 			string execStr;
 			Match m;
@@ -172,22 +172,22 @@ namespace GnomeDoManLookUp {
 		/// 	Called by Gnome-Do in order to perform our action.
 		/// </summary>
 		/// <param name="items">
-		/// List of <see cref="IItem"/> objects, either raw text or custom look up items
+		/// List of <see cref="Item"/> objects, either raw text or custom look up items
 		/// </param>
 		/// <param name="modItems">
-		/// List of <see cref="IItem"/> objects, action modifiers
+		/// List of <see cref="Item"/> objects, action modifiers
 		/// </param>
 		/// <returns>
-		/// List of <see cref="IItem"/>
+		/// List of <see cref="Item"/>
 		/// </returns>
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
 			
             		string keyword = null;
 
 			//ok, was it plain text, an application item, or one of our own?
-			if (items.First () is ApplicationItem) {
-				keyword = this.getExecutableName (items.First () as ApplicationItem);
+			if (items.First () is IApplicationItem) {
+				keyword = this.getExecutableName (items.First () as IApplicationItem);
 			} else if (items.First () is ManLookUpItem) {
 				ManLookUpItem keyworditem = items.First () as ManLookUpItem;
 				keyword = keyworditem.Text;							

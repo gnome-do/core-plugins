@@ -5,6 +5,7 @@
 	name="Pidgin"
 	description="Indexes your buddy list and initiate chats with Pidgin buddies."
 	author="David Siegel, Alex Launi"
+	category="Official"
 >
  
 	<Runtime>
@@ -12,7 +13,7 @@
 	</Runtime>
 	
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->

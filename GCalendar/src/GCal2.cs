@@ -36,10 +36,10 @@ namespace GCalendar
 	public static class GCal2
 	{
 		private static CalendarService service;
-		private static List<IItem> calendars;
+		private static List<Item> calendars;
 		private static object cal_lock;
 		
-		private static Dictionary<string,List<IItem>> events;
+		private static Dictionary<string,List<Item>> events;
 		private static object events_lock;
 		
 		const string FeedUri = "http://www.google.com/calendar/feeds/default";
@@ -52,10 +52,10 @@ namespace GCalendar
 			//Google works over SSL, we need accept the cert.
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			
-			calendars = new List<IItem> ();
+			calendars = new List<Item> ();
 			cal_lock = new object ();
 			
-			events = new Dictionary<string,List<IItem>> ();
+			events = new Dictionary<string,List<Item>> ();
 			events_lock = new object ();
 			
 			Configuration.GetAccountData (out username, out password,
@@ -79,7 +79,7 @@ namespace GCalendar
 			return true;
 		}
 		
-		public static List<IItem> Calendars {
+		public static List<Item> Calendars {
 			get { return calendars; }
 		}
 		
@@ -104,7 +104,7 @@ namespace GCalendar
 			}
 		}
 		
-		public static List<IItem> EventsForCalendar (string calendarName)
+		public static List<Item> EventsForCalendar (string calendarName)
 		{
 			return events [calendarName];
 		}
@@ -116,7 +116,7 @@ namespace GCalendar
 			lock (cal_lock) {
 				try {
 					foreach (GCalendarItem cal in calendars) {	
-						cals.Add (cal.Name, cal.URL);
+						cals.Add (cal.Name, cal.Url);
 					}
 					cals.Add ("All Events", "");
 				} catch (ArgumentException) { }
@@ -125,10 +125,10 @@ namespace GCalendar
 			
 			lock (events_lock) {
 				events.Clear ();
-				events ["All Events"] = new List<IItem> ();
+				events ["All Events"] = new List<Item> ();
 				foreach (string cal in cals.Keys) {
 					if (!events.ContainsKey (cal))
-						events [cal] = new List<IItem> ();
+						events [cal] = new List<Item> ();
 					
 					EventQuery query = new EventQuery (cals [cal]);
 					query.StartTime = DateTime.Now;
@@ -184,9 +184,9 @@ namespace GCalendar
             return new GCalendarEventItem (nevent.Title.Text, eventUrl, eventDesc);
         }
         
-        public static IItem [] SearchEvents (string calUrl, string needle)
+        public static Item [] SearchEvents (string calUrl, string needle)
         {
-        	List<IItem> events = new List<IItem> ();
+        	List<Item> events = new List<Item> ();
         	string [] keywords = {"from ","until ","in ", "after ", "before ", "on "};
         	string eventUrl, eventDesc, start;
        		EventQuery query = new EventQuery(calUrl);

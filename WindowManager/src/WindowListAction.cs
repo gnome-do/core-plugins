@@ -27,7 +27,7 @@ using System.Diagnostics;
 using System.Threading;
 
 using Do.Universe;
-using Do.Addins;
+
 using Wnck;
 using Mono.Unix;
 
@@ -41,7 +41,7 @@ namespace WindowManager
 	//have even showed interest from time to time.  I love you baby girl.
 	//Without you I never would have gotten this far.
 	
-	public class WindowActionAction : AbstractAction
+	public class WindowActionAction : Act
 	{
 		protected Dictionary<string, List<Window>> procList;
 		protected Dictionary<string, List<Window>> procListDyn;
@@ -73,7 +73,7 @@ namespace WindowManager
 			get { return "eog"; } //fixme
 		}
 		
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return true;
 		}
@@ -94,12 +94,12 @@ namespace WindowManager
 			}
 		}
 
-		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			IItem[] items;
+			Item[] items;
 			
-			if (item is ApplicationItem) {
-				string application = (item as ApplicationItem).Exec;
+			if (item is IApplicationItem) {
+				string application = (item as IApplicationItem).Exec;
 				application = application.Split (new char[] {' '})[0];
 				
 				if (!procList.ContainsKey (application)) return null;
@@ -107,12 +107,12 @@ namespace WindowManager
 				List<Window> winList;
 				procList.TryGetValue(application, out winList);
 				
-				items = new IItem[winList.Count];
+				items = new Item[winList.Count];
 				for (int i = 0; i < winList.Count; i++) {
 					items[i] = new WindowItem (winList[i], item.Icon);
 				}
 			} else if (item.GetType () == typeof (GenericWindowItem)) {
-				items = new IItem [1];
+				items = new Item [1];
 				
 				items[0] = new WindowItem (WindowListItems.CurrentWindow, 
 				                           "gnome-window-manager");
@@ -124,15 +124,15 @@ namespace WindowManager
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
-					typeof (ApplicationItem),
+					typeof (IApplicationItem),
 					typeof (GenericWindowItem) };
 			}
 		}
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (item is GenericWindowItem) return true;
-			string application = (item as ApplicationItem).Exec;
+			string application = (item as IApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
 			if (matchList.ContainsKey (application)) {
@@ -149,7 +149,7 @@ namespace WindowManager
 			return true;
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			return null;
 		}
@@ -162,16 +162,16 @@ namespace WindowManager
 		public abstract void ToggleGroup (List<Window> windows);
 		public abstract void ToggleWindow (Window window);
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (modItems.Any ()) { //user selected a mod item
 				Window w = (modItems.First () as WindowItem).Window;
 				
 				ToggleWindow (w);
 			} else { //no mod item
-				if (items.First () is ApplicationItem) { //it was an application item
+				if (items.First () is IApplicationItem) { //it was an application item
 					string application;
-					ApplicationItem app = (items.First () as ApplicationItem);
+					IApplicationItem app = (items.First () as IApplicationItem);
 					
 					application = app.Exec;
 					application = application.Split (new char[] {' '})[0];
@@ -328,15 +328,15 @@ namespace WindowManager
 			get { return "gtk-close"; }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (modItems.Any ()) {
 				Wnck.Window w = (modItems.First () as WindowItem).Window;
 				
 				w.Close (Gtk.Global.CurrentEventTime);
 			} else {
-				if (items.First () is ApplicationItem) {
-					string application = (items.First () as ApplicationItem).Exec;
+				if (items.First () is IApplicationItem) {
+					string application = (items.First () as IApplicationItem).Exec;
 					application = application.Split (new char[] {' '})[0];
 					
 					List<Window> windows = WindowListItems.GetApplication (application);
@@ -420,15 +420,15 @@ namespace WindowManager
 			w.Activate (Gtk.Global.CurrentEventTime);
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (modItems.Any ()) {
 				Wnck.Window w = (modItems.First () as WindowItem).Window;
 				
 				FocusWindowViewport (w);
 			} else {
-				if (items.First () is ApplicationItem) {
-					string application = (items.First () as ApplicationItem).Exec;
+				if (items.First () is IApplicationItem) {
+					string application = (items.First () as IApplicationItem).Exec;
 					application = application.Split (new char[] {' '})[0];
 					
 					List<Window> windows = WindowListItems.GetApplication (application);

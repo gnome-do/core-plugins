@@ -26,22 +26,22 @@ using Do.Universe;
 
 namespace Do.Riptide
 {
-	public class TorrentResultItem : IItem, IComparable
+	public class TorrentResultItem : Item, IComparable
 	{
 		private string name, url, size;
 		private int seeds, leechers;
 		
-		public string Name {
+		public override string Name {
 			get { return name; }
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return "Seeds: " + Seeds + ", Leechers: " + Leechers + ", Size: " + Size;
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get { return "gtk-save-as"; }
 		}
 		

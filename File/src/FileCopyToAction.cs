@@ -26,7 +26,9 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace FilePlugin {
+namespace FilePlugin
+{
+	
 	class CopyToAction : IAction {
 
 		public string Name {

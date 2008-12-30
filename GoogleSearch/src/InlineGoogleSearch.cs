@@ -23,8 +23,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Do.Universe;
-using Do.Addins;
+using Do.Universe.Common;
+using Do.Platform;
+using Do.Platform.Linux;
+
 using Mono.Unix;
 
 /// <summary>
@@ -36,7 +40,7 @@ namespace InlineGoogleSearch {
 	/// <summary>
 	/// Class Definition
 	/// </summary>
-	public class InlineGoogleSearch : AbstractAction, IConfigurable {	
+	public class InlineGoogleSearch : Act, IConfigurable {	
 		/// <value>
 		/// Search Google
 		/// </value>
@@ -82,38 +86,28 @@ namespace InlineGoogleSearch {
 		/// Actual code performed when action is executed in Do
 		/// </summary>
 		/// <param name="items">
-		/// Items. ITextItem <see cref="IItem"/>
+		/// Items. ITextItem <see cref="Item"/>
 		/// </param>
 		/// <param name="modItems">
-		/// Modifier Items. None <see cref="IItem"/>
+		/// Modifier Items. None <see cref="Item"/>
 		/// </param>
 		/// <returns>
-		/// Array of Bookmark Items. URLs to search results <see cref="IItem"/>
+		/// Array of Bookmark Items. URLs to search results <see cref="Item"/>
 		/// </returns>
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) 
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
-			List<IItem> retItems = new List<IItem> ();
-			
 			GoogleSearch googleSearch = new GoogleSearch ();
-			googleSearch.setSafeSearchLevel
-				 (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery ( (items.First () as ITextItem).Text);
-			GoogleSearchResult [] googleSearchResult = 
-				googleSearch.search ();
+			googleSearch.setSafeSearchLevel (InlineGoogleSearchConfig.SearchRestrictions);
+			googleSearch.setQuery ((items.First () as ITextItem).Text);
+			GoogleSearchResult [] results = googleSearch.search ();
 
-			if (googleSearchResult.Length == 0) {
-				Do.Addins.NotificationBridge.ShowMessage (
-				                            "Google Search",
-				                            "No Results Found");
+			if (results.Length == 0) {
+				Services.Notifications.Notify ("Google Search", "No Results Found");
 			}
 			
-			for (int i = 0; i < googleSearchResult.Length; i++) {
-				retItems.Add (new BookmarkItem 
-				      (googleSearchResult [i].titleNoFormatting,
-				       googleSearchResult [i].url));
-			}
-			
-			return retItems.ToArray ();	
+			foreach (GoogleSearchResult result in results) {
+				yield return new BookmarkItem (result.titleNoFormatting, result.url);
+			}	
 		}
 
 		/// <summary>

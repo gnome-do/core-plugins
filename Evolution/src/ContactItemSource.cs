@@ -19,10 +19,12 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
-using Do;
 using Do.Universe;
+using Do.Universe.Common;
+using Do.Platform;
 
 using Mono.Unix;
 
@@ -30,96 +32,112 @@ namespace Evolution
 {
 	public struct ContactAttribute
 	{
-		string detail, key;
-		public ContactAttribute(string k, string d)
+		public string Detail { get; protected set; }
+		public string Key { get; protected set; }
+		
+		public ContactAttribute (string key, string detail)
 		{
-			this.key = k;
-			this.detail = d;
+			Key = key;
+			Detail = detail;
 		}
-		public string Detail { get { return detail; } }
-		public string Key { get { return key; } }
 	}
 	
-	public class ContactItemSource : IItemSource
+	public class ContactItemSource : ItemSource
 	{
-		List<IItem> contacts;
+		IEnumerable<ContactItem> contacts;
 		
 		public ContactItemSource ()
 		{
-			contacts = new List<IItem> ();
+			contacts = Enumerable.Empty<ContactItem> ();
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ContactItem),
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ContactItem); }
 		}
 		
-		public string Name { get { return Catalog.GetString ("Evolution Contacts"); } }
-		public string Description { get { return Catalog.GetString ("Evolution Contacts"); } }
-		public string Icon { get { return "evolution"; } }
+		public override string Name { get { return Catalog.GetString ("Evolution Contacts"); } }
+		public override string Description { get { return Catalog.GetString ("Evolution Contacts"); } }
+		public override string Icon { get { return "evolution"; } }
 		
-		public IEnumerable<IItem> Items {
-			get { return contacts; }
+		public override IEnumerable<Item> Items {
+			get { return contacts.OfType<Item> (); }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			List<IItem> details = new List<IItem> ();
 			ContactItem contact = item as ContactItem;
 			foreach (string detail in contact.Details) {
 				if (!detail.EndsWith (".evolution")) continue;
 				
 				if (detail.StartsWith ("email"))
-					details.Add (new EmailContactDetailItem (contact, detail));
+					yield return new EmailContactDetailItem (contact, detail);
 				else if (detail.StartsWith ("phone"))
-					details.Add (new PhoneContactDetailItem (contact, detail));
+					yield return new PhoneContactDetailItem (contact, detail);
 				else if (detail.StartsWith ("url.home"))
-					details.Add (new BookmarkItem ("Homepage", contact [detail]));
+					yield return new BookmarkItem ("Homepage", contact [detail]);
 				else if (detail.StartsWith ("url.blog"))
-					details.Add (new BookmarkItem ("Blog", contact [detail]));
+					yield return new BookmarkItem ("Blog", contact [detail]);
 				else if (detail.StartsWith("address"))
-					details.Add (new AddressContactDetailItem (contact, detail));
+					yield return new AddressContactDetailItem (contact, detail);
 			}
-			return details;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			// Disallow updating due to memory leak.
-			if (contacts.Count > 0) return;
-			using (SourceList sources =
-				new SourceList ("/apps/evolution/addressbook/sources")) {
-				foreach (SourceGroup group in sources.Groups) {
-					foreach (Source source in group.Sources) {
-						// Only index local address books
-						if (!source.IsLocal ()) continue;
-						using (Book book = new Book (source)) {
-							book.Open (true);
-							foreach (Contact c in book.GetContacts (
-								BookQuery.AnyFieldContains (""))) {
-								try {
-									contacts.Add (
-										CreateEvolutionContactItem (c));
-								} catch (Exception e) {
-									/* bad contact */ 
-									Console.WriteLine(e.Message.ToString());
-								}
-							}
-						}
-					}
+			if (contacts.Any ()) return;
+			
+			using (SourceList sources = new SourceList ("/apps/evolution/addressbook/sources")) {
+				contacts = GetContactItems (sources).ToArray ();
+			}
+		}
+
+		IEnumerable<ContactItem> GetContactItems (SourceList sources)
+		{
+			foreach (SourceGroup group in sources.Groups)
+				foreach (ContactItem item in GetContactItems (group))
+					yield return item;
+		}
+		
+		IEnumerable<ContactItem> GetContactItems (SourceGroup group)
+		{
+			foreach (Source source in group.Sources)
+				foreach (ContactItem item in GetContactItems (source))
+					yield return item;
+		}
+		
+		IEnumerable<ContactItem> GetContactItems (Source source)
+		{
+			if (!source.IsLocal ())
+				return Enumerable.Empty<ContactItem> ();
+			
+			using (Book book = new Book (source)) {
+				return GetContactItems (book);
+			}
+		}
+
+		IEnumerable<ContactItem> GetContactItems (Book book)
+		{
+			foreach (Contact contact in book.GetContacts (BookQuery.AnyFieldContains (""))) {
+				ContactItem item;
+				try {
+					item = GetContactItem (contact);
+				} catch (Exception e) {
+					Log.Error ("Error reading Evolution contact: {0}", e.Message);
+					Log.Debug (e.StackTrace);
+					continue;
 				}
+				yield return item;
 			}
 		}
 	
-		ContactItem CreateEvolutionContactItem (Contact eContact) {
+		ContactItem GetContactItem (Contact eContact) {
 			ContactItem contact;
 			if (!(string.IsNullOrEmpty(eContact.FullName)))
 				contact = ContactItem.Create(eContact.FullName);
 			else //(!(string.IsNullOrEmpty(eContact.FileAs)))
 				contact = ContactItem.Create(eContact.FileAs);
+
 			List<ContactAttribute> ContactDetails = new List<ContactAttribute>();
 			ContactDetails.Add(new ContactAttribute("email.home", eContact.Email1));
 			ContactDetails.Add(new ContactAttribute("email.work", eContact.Email2));
@@ -146,7 +164,7 @@ namespace Evolution
 			if (string.IsNullOrEmpty (contact ["photo.evolution"])) try {
 				switch (eContact.Photo.PhotoType) {
 					case ContactPhotoType.Inlined:
-						string photo = Paths.GetTemporaryFilePath () + ".jpg";
+						string photo = Services.Paths.GetTemporaryFilePath () + ".jpg";
 						try {
 							File.WriteAllBytes (photo, eContact.Photo.Data);
 							contact["photo"] = contact["photo.evolution"] =
@@ -167,8 +185,7 @@ namespace Evolution
 				Console.Error.WriteLine (e.StackTrace);
 		   	}
 			//add the details to the contact
-			foreach (ContactAttribute c in ContactDetails)
-			{
+			foreach (ContactAttribute c in ContactDetails) {
 				MaybeAddDetail(contact,c.Key,c.Detail);
 			}
 			return contact;

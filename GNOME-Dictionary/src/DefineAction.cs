@@ -30,7 +30,7 @@ namespace GNOME
 	/// Given an ITextItem, DefineWordAction will look up the Text
 	/// contents of the ITextItem using the gnome-dictionary.
 	/// </summary>
-	public class DefineAction : AbstractAction
+	public class DefineAction : Act
 	{
 		/// <summary>
 		/// Should match those and only those strings that can be
@@ -74,13 +74,13 @@ namespace GNOME
 		/// Use wordRegex to determine whether item is definable.
 		/// </summary>
 		/// <param name="item">
-		/// A <see cref="IItem"/> to define.
+		/// A <see cref="Item"/> to define.
 		/// </param>
 		/// <returns>
-		/// A <see cref="System.Boolean"/> indicating whether or not IITem
+		/// A <see cref="System.Boolean"/> indicating whether or not Item
 		/// can be defined.
 		/// </returns>
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			string word;
 
@@ -91,10 +91,10 @@ namespace GNOME
 			return !string.IsNullOrEmpty (word) && wordRegex.IsMatch (word);
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			string word, cmd;
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				if (item is ITextItem) {
 					word = (item as ITextItem).Text;
 				} else {

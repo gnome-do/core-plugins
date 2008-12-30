@@ -33,7 +33,7 @@ using Do.Universe;
 /*
 namespace Delicious
 {
-	public class NewBookmarkAction : IAction
+	public class NewBookmarkAction : Act
 	{
 		// URL regex taken from http://www.osix.net/modules/article/?id=586
 		const string UrlPattern = "^(https?://)"
@@ -54,19 +54,19 @@ namespace Delicious
 			UrlRegex = new Regex (UrlPattern, RegexOptions.Compiled);
 		}
         
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("New del.icio.us bookmark"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Create a new bookmark at del.icio.us"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "delicious.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IURLItem),
@@ -75,11 +75,11 @@ namespace Delicious
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { return new Type [] { typeof (ITextItem), }; }
 		}
 		
-		public bool SupportsItem (IItem item)
+		public bool SupportsItem (Item item)
 		{
 			if (item is ITextItem)
 				return UrlRegex.IsMatch ((item as ITextItem).Text);
@@ -89,12 +89,12 @@ namespace Delicious
 			return false;
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return true;
 		}
 		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			return null;
 		}
@@ -103,10 +103,10 @@ namespace Delicious
 			get { return true; }
 		}
 		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string url;
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				if (item is ITextItem)
 					url = (item as ITextItem).Text;
 				else

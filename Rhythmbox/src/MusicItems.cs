@@ -20,14 +20,14 @@
 using System;
 using System.Collections.Generic;
 
-using Do.Addins;
+
 using Do.Universe;
 using Mono.Unix;
 
 namespace Do.Rhythmbox
 {
 
-	public abstract class MusicItem : IItem
+	public abstract class MusicItem : Item
 	{
 		protected string name, artist, year, cover;
 

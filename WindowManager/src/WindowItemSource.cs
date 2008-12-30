@@ -29,36 +29,36 @@ using Mono.Unix;
 
 namespace WindowManager
 {
-	public class WindowItemSource : IItemSource
+	public class WindowItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return Catalog.GetString ("Generic Window Items");
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return Catalog.GetString ("Useful Generically Understood Window Items");
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return "gnome-window-manager";
 			}
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (GenericWindowItem)};
 			}
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get {
 				return items;
 			}
@@ -66,7 +66,7 @@ namespace WindowManager
 
 		public WindowItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 			
 			items.Add (new GenericWindowItem (Catalog.GetString ("Current Window"),
 			                                  Catalog.GetString ("The Currently Active Window"),
@@ -86,12 +86,12 @@ namespace WindowManager
 			                                  GenericWindowType.PreviousApplication));
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			return;
 		}		

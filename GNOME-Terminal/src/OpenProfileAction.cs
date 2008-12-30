@@ -23,49 +23,45 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Mono.Unix;
+
 using Do.Universe;
+using Do.Platform;
 
 namespace GNOME.Terminal
 {	
-	public class OpenProfileAction : AbstractAction
+	public class OpenProfileAction : Act
 	{	
 		public OpenProfileAction ()
 		{
 		}
 
-	    public override string Name
-		{
+	    public override string Name {
 	      get { return Catalog.GetString ("Open Profile"); }
 	    }
 
-	    public override string Description
-		{
+	    public override string Description {
 	      get { return Catalog.GetString ("Opens a GNOME Terminal with the selected profile."); }
 	    }
 
-	    public override string Icon
-		{
+	    public override string Icon {
 	      get { return "gnome-terminal"; }
 	    }
 
-	    public override IEnumerable<Type> SupportedItemTypes
-		{
-	      get {
-	        return new Type[] { typeof ( ProfileItem ) };
-	      }
+	    public override IEnumerable<Type> SupportedItemTypes {
+	      get { yield return typeof (ProfileItem); }
 	    }
 	    
-	    public override IEnumerable<IItem> Perform( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
+	    public override IEnumerable<Item> Perform( IEnumerable<Item> items, IEnumerable<Item> modifierItems )
 	    {
 			string profileName = (items.First () as ProfileItem).Name;
 
 			try {
 				Process.Start ("gnome-terminal", "--window-with-profile=" + profileName);
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not open gnome-terminal for {0}: {1}",
-					profileName, e.Message );
+				Log.Error ("Could not open gnome-terminal for {0}: {1}", profileName, e.Message );
+				Log.Debug (e.StackTrace);
 			}
-			return null;
+			yield break;
 	    }
 	}
 }

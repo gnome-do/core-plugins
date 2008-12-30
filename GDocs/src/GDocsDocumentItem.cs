@@ -22,7 +22,7 @@ using System;
 using System.Text;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace GDocs

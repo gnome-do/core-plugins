@@ -20,7 +20,7 @@
 
 
 using System;
-using Do.UI;
+using Do.Platform.Linux;
 
 namespace Delicious
 {	

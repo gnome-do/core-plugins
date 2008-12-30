@@ -29,13 +29,14 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Do.Riptide
 {
 	
 	
-	public class TorrentSearchAction : AbstractAction
+	public class TorrentSearchAction : Act
 	{
 		
 		public TorrentSearchAction()
@@ -60,14 +61,14 @@ namespace Do.Riptide
 		}
 
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			List<IItem> outItems;
+			List<Item> outItems;
 			string search;
 			WebRequest req = null;
 			WebResponse res = null;
 			
-			outItems = new List<IItem> ();
+			outItems = new List<Item> ();
 			
 			search = HttpUtility.UrlEncode ((items.First () as ITextItem).Text);
 			search = "http://isohunt.com/js/rss/" + search;
@@ -78,7 +79,7 @@ namespace Do.Riptide
 			try {
 				res = req.GetResponse ();
 			} catch {
-				Do.Addins.NotificationBridge.ShowMessage ("Riptide:", "Torrent Search could not be performed");
+				Services.Notifications.Notify (new Notification ("Riptide Error", "Could not perform torrent search", "gnome-do"));
 				return null;
 			}
 			
@@ -119,7 +120,7 @@ namespace Do.Riptide
 			outItems.Sort ();
 			
 			if (outItems.Count == 0) {
-				outItems.Add (new TextItem ("No Torrent Results Found For " + 
+				outItems.Add (new Universe.Common.TextItem ("No Torrent Results Found For " + 
 				                            (items.First () as ITextItem).Text));
 			}
 			

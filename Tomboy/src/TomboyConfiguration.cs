@@ -26,7 +26,7 @@
 
 using System;
 
-using Do.Addins;
+using Do.Platform;
 
 namespace Tomboy
 {
@@ -43,7 +43,7 @@ namespace Tomboy
 		
 		static TomboyConfiguration ()
 		{
-			prefs = Do.Addins.Util.GetPreferences ("Tomboy");
+			prefs = Services.Preferences.Get<TomboyConfiguration> ();
 		}
 		
 		public static bool DeriveTitle

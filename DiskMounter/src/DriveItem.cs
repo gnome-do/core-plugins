@@ -23,7 +23,7 @@ using Gnome.Vfs;
 
 namespace DiskMounter
 {
-	public class DriveItem : IItem
+	public class DriveItem : Item
 	{
 		private Drive drive;
 		
@@ -32,15 +32,15 @@ namespace DiskMounter
 			this.drive = drive;
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return drive.DisplayName; }		
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return String.Format("{0}",drive.DeviceType); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return drive.Icon; }
 		}
 		

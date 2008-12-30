@@ -24,31 +24,31 @@ using Do.Universe;
 
 namespace DiskMounter {
 
-	public class DriveItemSource : IItemSource {
+	public class DriveItemSource : ItemSource {
 
-		List<IItem> items;
+		List<Item> items;
 		private static Gnome.Vfs.VolumeMonitor monitor;
 
 		public DriveItemSource ()
 		{
 			Vfs.Initialize ();
 			monitor = Gnome.Vfs.VolumeMonitor.Get ();
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 
-		public string Name {
+		public override string Name {
 			get { return "Drives"; }
 		}
 
-		public string Description {
+		public override string Description {
 			get { return "Available mounted and unmounted drives."; }
 		}
 
-		public string Icon {
+		public override string Icon {
 			get { return "harddrive"; }
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (DriveItem),
@@ -56,16 +56,16 @@ namespace DiskMounter {
 			}
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			items.Clear ();
 

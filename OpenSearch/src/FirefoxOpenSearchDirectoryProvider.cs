@@ -122,7 +122,7 @@ namespace OpenSearch
 				
 				profile = null;				
 				
-				profilePath = Path.Combine (Paths.UserHome, ".mozilla/firefox/profiles.ini");
+				profilePath = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".mozilla/firefox/profiles.ini");
 				using (StreamReader r = File.OpenText (profilePath)) {
 					while (null != (line = r.ReadLine ())) {
 						if (line.StartsWith (beginDefaultProfile)) break;
@@ -135,14 +135,13 @@ namespace OpenSearch
 				}
 							
 				if(profile != null) {
-					string path = Path.Combine (Paths.UserHome, ".mozilla/firefox");
+					string path = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".mozilla/firefox");
 					path = Path.Combine (path, profile);
 					path = Path.Combine (path, "searchplugins");
 				
 					return path;
 				}
-			}
-			catch {
+			} catch {
 				// just return null if we've got problems
 			}
 				

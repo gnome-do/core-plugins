@@ -1,4 +1,4 @@
-<Project name="Launchpad" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Launchpad" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Launchpad" />
@@ -18,15 +18,6 @@
     <File name="../Launchpad.old/Resources/Launchpad.png" subtype="Code" buildaction="Nothing" />
     <File name="src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="src/LaunchpadAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadAnswersItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadBlueprintsItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadBugsItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadCodeItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadIcons.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadPersonItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadProjectItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadRegisterItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/LaunchpadTranslationsItem.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Launchpad.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadAnswers.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadBlueprints.png" subtype="Code" buildaction="EmbedAsResource" />
@@ -36,12 +27,15 @@
     <File name="Resources/LaunchpadTranslations.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadUser.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Launchpad.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/LaunchpadItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/LaunchpadItems.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Addins, Version=0.4.0.1, Culture=neutral" />
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=1.0.3278.20266, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </References>
   <GtkDesignInfo />
 </Project>

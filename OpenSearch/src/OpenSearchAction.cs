@@ -23,12 +23,12 @@ using System.Linq;
 
 using Mono.Unix;
 
-using Do.Addins;
 using Do.Universe;
+using Do.Platform;
 
 namespace OpenSearch
 {
-	public class OpenSearchAction : AbstractAction
+	public class OpenSearchAction : Act
 	{		
 		public override string Name
 		{
@@ -45,47 +45,23 @@ namespace OpenSearch
 			get { return "web-browser"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes
-		{
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
-		}
-
-		public override bool SupportsItem (IItem item)
-		{
-			if (item is ITextItem) 
-				return true;
-			return false;
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ITextItem); }
 		}
 		
-		public override IEnumerable<Type> SupportedModifierItemTypes
-		{
-			get {
-				return new Type[] {
-					typeof (IOpenSearchItem),
-				};
-			}
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield return typeof (IOpenSearchItem); }
 		}			
 	
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{					
-			List<string> searchTerms;
-				
-			if (modifierItems.Any ()) {
-				searchTerms = new List<string> ();
-				foreach (IItem item in items) {
-					searchTerms.Add ((item as ITextItem).Text);
-				}
-				
-				foreach (string searchTerm in searchTerms) {
-					string url = (modifierItems.First () as IOpenSearchItem).BuildSearchUrl(searchTerm);
-					Util.Environment.Open (url);	
-				}
+			foreach (Item item in items) {
+				string searchTerm = (item as ITextItem).Text;
+				string url = (modItems.First () as IOpenSearchItem).BuildSearchUrl (searchTerm);
+				Services.Environment.OpenUrl (url);
 			}
-			return null;
+
+			yield break;
 		}
 	}
 }

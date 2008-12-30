@@ -24,9 +24,11 @@ using System.Linq;
 using System.Collections.Generic;
 using Mono.Unix;
 
+using Do.Platform;
+
 namespace Do.Universe
 {
-	public class LocateFilesAction : AbstractAction
+	public class LocateFilesAction : Act
 	{
 		
 		bool allowHidden = false;
@@ -56,13 +58,13 @@ namespace Do.Universe
 			}
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
-			List<IItem> files;
+			List<Item> files;
 			System.Diagnostics.Process locate;
 			string query;
 				
-			files = new List<IItem> ();
+			files = new List<Item> ();
 			query = (items.First () as ITextItem).Text;
 			
 			locate = new System.Diagnostics.Process ();
@@ -88,32 +90,32 @@ namespace Do.Universe
 				// tested this and it seems prety snappy.
 				if (Path.GetFileName (path).ToLower().Contains (query)) {
 					results++;
-					files.Add (new FileItem (path));
+					files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
 				}
 			}
-			files.Sort (new FileItemNameComparer (query));
-			return files.ToArray ();
+			files.Sort (new IFileItemNameComparer (query));
+			return files;
 		}
 
 		// Order files by (A) position of query in the file name and
 		// (B) by name length.
-		private class FileItemNameComparer : IComparer<IItem>
+		private class IFileItemNameComparer : IComparer<Item>
 		{
 			string query;
 
-			public FileItemNameComparer (string query)
+			public IFileItemNameComparer (string query)
 			{
 				this.query = query.ToLower ();
 			}
 
-			public int Compare (IItem a, IItem b)
+			public int Compare (Item a, Item b)
 			{
 				string a_name_lower, b_name_lower;
 				int a_score, b_score;
 
-				a_name_lower = (a as FileItem).Path;
+				a_name_lower = (a as IFileItem).Path;
 				a_name_lower = Path.GetFileName (a_name_lower).ToLower (); 
-				b_name_lower = (b as FileItem).Path;
+				b_name_lower = (b as IFileItem).Path;
 				b_name_lower = Path.GetFileName (b_name_lower).ToLower (); 
 
 				a_score = a_name_lower.IndexOf (query);

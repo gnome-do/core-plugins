@@ -5,6 +5,7 @@
 	name="Banshee"
 	description="Searches and plays Banshee music"
 	author="Mathieu Cadet"
+	category="Community"
 >
  
 	<Runtime>

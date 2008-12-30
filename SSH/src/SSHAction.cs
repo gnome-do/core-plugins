@@ -22,13 +22,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
+using Do.Platform;
 using System.Diagnostics;
 
 using GConf;
 using Mono.Unix;
 
 namespace GnomeDoSSH {
-	public class SSHAction : AbstractAction {
+	public class SSHAction : Act {
 		
 		public override string Name {
 			get {
@@ -57,11 +58,11 @@ namespace GnomeDoSSH {
             }
 		}
 		
-		public override bool SupportsItem (IItem item) {
+		public override bool SupportsItem (Item item) {
 			return true;
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) {
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
 			GConf.Client client = new GConf.Client ();
 
 			string exec;

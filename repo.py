@@ -56,7 +56,7 @@ def build ():
 			my_system ("cp %s %s" % (escape (man), repo))
 	my_system ("mdtool setup pack %s/*.addin.xml -d:%s" % (repo, repo))
 	my_system ("mdtool setup rep-build %s" % repo)
-	#my_system ("rm -rf %s/*.dll %s/*.addin.xml" % (repo, repo))
+	my_system ("rm -rf %s/*.dll %s/*.addin.xml" % (repo, repo))
 
 def publish ():
 	repo = escape (REPO_DIR)

@@ -20,12 +20,11 @@ using System;
 using System.Collections.Generic;
 using Mono.Unix;
 
-using Do.Addins;
 using Do.Universe;
 
 namespace Cl.ickable
 {
-	public class ClickableItemSource : AbstractItemSource
+	public class ClickableItemSource : ItemSource
 	{
 		
 		public override string Name {
@@ -44,15 +43,15 @@ namespace Cl.ickable
 		{
 			get {
 				return new Type[] {
-					typeof (IItem),
+					typeof (Item),
 				};
 			}
 		}
 
-		public override IEnumerable<IItem> Items
+		public override IEnumerable<Item> Items
 		{
 			get {
-				return new IItem[] {
+				return new Item[] {
 					new WebClipsItem (),
 				};
 			}

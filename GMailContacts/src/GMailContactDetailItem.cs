@@ -20,15 +20,14 @@
  */
 
 using System;
-using Do.Universe;
 using Mono.Unix;
+using Do.Universe;
 
-namespace GMailContacts
+namespace GMail
 {
-	public class GMailContactDetailItem : IContactDetailItem 
+	public class GMailContactDetailItem : Item, IContactDetailItem
 	{
-		private string type, detail;
-		
+		string type, detail;
 		
 		public GMailContactDetailItem (string type, string detail)
 		{
@@ -36,31 +35,30 @@ namespace GMailContacts
 			this.detail = detail;
 		}		
 		
-		public string Name {
+		public override string Name {
 			get {
 				switch (type.ToLower ()) {
 				case "email.gmail": return Catalog.GetString ("Primary Email");
+				case "phone.gmail": return Catalog.GetString ("Primary Phone");
 				case "email.gmail.home": return Catalog.GetString ("Home Email");
 				case "email.gmail.work": return Catalog.GetString ("Work Email");
+				case "phone.gmail.home": return Catalog.GetString ("Home Phone");
+				case "phone.gmail.work": return Catalog.GetString ("Work Phone");
 				case "address.gmail": return Catalog.GetString ("Primary Address");
 				case "address.gmail.home": return Catalog.GetString ("Home Address");
 				case "address.gmail.work": return Catalog.GetString ("Work Address");
-				case "phone.gmail": return Catalog.GetString ("Primary Phone");
-				case "phone.gmail.home": return Catalog.GetString ("Home Phone");
-				case "phone.gmail.work": return Catalog.GetString ("Work Phone");
-				default:
-					return "Other " + type.Substring (0, type.IndexOf ("."));
+				default: return "Other " + DetailRoot (type);
 				}
 			}
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return detail; }
 		}
 		
-		public string Icon {
-			get {
-				switch (type.Substring (0,type.IndexOf ("."))) {
+		public override string Icon {
+			get {			
+				switch (DetailRoot (type)) {
 				case "email": return "gmail-logo.png@" + GetType ().Assembly.FullName;
 				case "address": return "go-home";
 				case "phone": return "phone.png@" + GetType ().Assembly.FullName;
@@ -70,15 +68,17 @@ namespace GMailContacts
 		}
 		
 		public string Key {
-			get {
-				return type;
-			}
+			get { return type; }
 		}
 		
 		public string Value {
-			get { 
-				return detail;
-			}
+			get { return detail; }
+		}
+
+		string DetailRoot (string detail)
+		{
+			// details are strings like detail.provider.extra, this chops off .provider.extra
+			return detail.Substring (0, type.IndexOf ("."));
 		}
 	}
 }

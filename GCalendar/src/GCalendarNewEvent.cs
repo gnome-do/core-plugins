@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 using Google.GData.Client;
@@ -32,21 +32,21 @@ using Google.GData.Calendar;
 
 namespace GCalendar
 {
-	public sealed class GCalendarNewEvent : IAction
+	public sealed class GCalendarNewEvent : Act
 	{
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("New Event"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Create a new event in Google Calendar"); }
         }
 			
-		public string Icon {
+		public override string Icon {
 			get { return "calIcon.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ITextItem),
@@ -54,7 +54,7 @@ namespace GCalendar
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 		    get {
 		        return new Type[] {
 		            typeof (GCalendarItem),
@@ -66,12 +66,12 @@ namespace GCalendar
             get {return false; }
         }
         
-        public bool SupportsItem (IItem item) 
+        public bool SupportsItem (Item item) 
         {
             return true;
         }
         
-        public bool SupportsModifierItemForItems (IEnumerable<IItem> item, IItem modItem) 
+        public bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
         {
             if (modItem is GCalendarItem)
         		return !(modItem as GCalendarItem).Name.Equals ("All Events");
@@ -79,17 +79,17 @@ namespace GCalendar
             return true;
         }
         
-        public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item) 
+        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
         {
             return null;
         }
         
-        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems) 
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {
-            string calUrl = (modifierItems.First () as GCalendarItem).URL;
+            string calUrl = (modifierItems.First () as GCalendarItem).Url;
             string eventData = (items.First () as ITextItem).Text;
             
-            return new IItem [] { GCal2.NewEvent (calUrl, eventData), };
+            return new Item [] { GCal2.NewEvent (calUrl, eventData), };
         }
 	}
 }

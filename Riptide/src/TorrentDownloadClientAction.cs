@@ -24,15 +24,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.IO;
 
-using Do.Addins;
+
 using Do.Universe;
+using Do.Platform;
 
 namespace Do.Riptide
 {
 	
 	
-	public class TorrentDownloadClientAction : AbstractAction
+	public class TorrentDownloadClientAction : Act
 	{
 		
 		public override string Name {
@@ -51,7 +53,7 @@ namespace Do.Riptide
 			get { return new Type[] { typeof (TorrentResultItem) }; }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string torrentFolder;
 			string filename;
@@ -59,7 +61,7 @@ namespace Do.Riptide
 			WebClient client;
 			
 			//We need a place to store our torrents
-			torrentFolder = Paths.Combine (Paths.UserData, "torrents/");
+			torrentFolder = Path.Combine (Services.Paths.UserDataDirectory, "torrents/");
 			if (!System.IO.Directory.Exists (torrentFolder))
 				System.IO.Directory.CreateDirectory (torrentFolder);
 			
@@ -71,7 +73,7 @@ namespace Do.Riptide
 			client = new WebClient ();
 			//client.DownloadFile (item.URL, Paths.Combine (torrentFolder, filename));
 			client.DownloadFileCompleted += OnFileDownloaded;
-			client.DownloadFileAsync (new System.Uri (item.URL), Paths.Combine (torrentFolder, filename), filename);
+			client.DownloadFileAsync (new System.Uri (item.URL), Path.Combine (torrentFolder, filename), filename);
 			
 			return null;
 		}
@@ -81,13 +83,13 @@ namespace Do.Riptide
 			string torrentFolder;
 			string filename = args.UserState as string;
 			
-			torrentFolder = Paths.Combine (Paths.UserData, "torrents/");
+			torrentFolder = Path.Combine (Services.Paths.UserDataDirectory, "torrents/");
 			if (!System.IO.Directory.Exists (torrentFolder))
 				System.IO.Directory.CreateDirectory (torrentFolder);
 			
 			System.Diagnostics.Process proc = new System.Diagnostics.Process ();
 			proc.StartInfo.FileName = "xdg-open";
-			proc.StartInfo.Arguments = Paths.Combine (torrentFolder, filename);
+			proc.StartInfo.Arguments = Path.Combine (torrentFolder, filename);
 			
 			proc.Start ();
 		}

@@ -22,7 +22,7 @@ using Do.Universe;
 
 namespace Evolution
 {
-	class ContactDetailItem : IContactDetailItem {
+	class ContactDetailItem : Item, IContactDetailItem {
 		public readonly ContactItem Owner;
 		string detail;
 
@@ -32,9 +32,9 @@ namespace Evolution
 			this.detail = detail;
 		}
 
-		public virtual string Name { get { return Key; } }
-		public virtual string Description { get { return Value; } }
-		public virtual string Icon { get { return "stock_person"; } }
+		public override string Name { get { return Key; } }
+		public override string Description { get { return Value; } }
+		public override string Icon { get { return "stock_person"; } }
 
 		public virtual string Key { get { return detail; } }
 		public virtual string Value { get { return Owner [detail]; } }

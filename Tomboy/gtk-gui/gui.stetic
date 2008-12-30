@@ -2,10 +2,9 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.2</target-gtk-version>
+    <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.5.99.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Tomboy.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Tomboy.TomboyConfiguration" design-size="413 300">
@@ -89,7 +88,6 @@
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">First pane is content, second pane is title.</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>

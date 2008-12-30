@@ -27,7 +27,7 @@ using Do.Universe;
 namespace Do.Plugins.Amarok
 {
 
-	public class AmarokEnqueueAction : AbstractAction
+	public class AmarokEnqueueAction : Act
 	{
 
 		public AmarokEnqueueAction ()
@@ -47,19 +47,15 @@ namespace Do.Plugins.Amarok
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (MusicItem),
-				};
-			}
+			get { yield return typeof (MusicItem); }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Amarok.StartIfNeccessary ();
 
-				foreach (IItem item in items) {
+				foreach (Item item in items) {
 					string enqueue;
 
 					enqueue = "-e ";

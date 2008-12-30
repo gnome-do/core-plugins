@@ -31,7 +31,7 @@ using Rss;
 
 namespace Do.Plugins.Rss
 {
-	public class RssFeedAction : AbstractAction
+	public class RssFeedAction : Act
 	{
 		private Dictionary<string, CachedFeed> cachedFeeds 
 			= new Dictionary<string, CachedFeed>();
@@ -54,9 +54,9 @@ namespace Do.Plugins.Rss
 			}
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
-			List<IItem> rssItems = new List<IItem> ();
+			List<Item> rssItems = new List<Item> ();
 			string url = (items.First () as RssFeedItem).URL;
 			RssFeed feed;
 			if (cachedFeeds.ContainsKey (url)) {
