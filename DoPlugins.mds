@@ -1,13 +1,12 @@
 <Combine name="DoPlugins" fileversion="2.0" outputpath="build/bin/" releaseversion="0.4.9.9">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="Packages" configuration="Debug" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
       <Entry build="True" name="Epiphany" configuration="Debug" />
       <Entry build="True" name="Evolution" configuration="Debug" />
       <Entry build="True" name="GNOME-Session" configuration="Debug" />
       <Entry build="True" name="GoogleCalculator" configuration="Debug" />
-      <Entry build="False" name="Launchpad" configuration="Debug" />
+      <Entry build="True" name="Launchpad" configuration="Debug" />
       <Entry build="True" name="LocateFiles" configuration="Debug" />
       <Entry build="True" name="OpenSearch" configuration="Debug" />
       <Entry build="True" name="Pastebin" configuration="Debug" />
@@ -33,11 +32,11 @@
       <Entry build="True" name="VolumeControl" configuration="Debug" />
       <Entry build="True" name="GCalendar" configuration="Debug" />
       <Entry build="True" name="InlineGoogleSearch" configuration="Debug" />
-      <Entry build="True" name="del.icio.us" configuration="Debug" />
+      <Entry build="False" name="del.icio.us" configuration="Debug" />
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
-      <Entry build="True" name="GDocs" configuration="Debug" />
+      <Entry build="False" name="GDocs" configuration="Debug" />
       <Entry build="True" name="Microblogging" configuration="Debug" />
       <Entry build="True" name="File" configuration="Debug" />
       <Entry build="True" name="AptURL" configuration="Debug" />
@@ -60,7 +59,6 @@
       <Entry build="True" name="Skype" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="Packages" configuration="Release" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
       <Entry build="True" name="Epiphany" configuration="Release" />
       <Entry build="True" name="Evolution" configuration="Release" />
@@ -119,8 +117,7 @@
       <Entry build="True" name="Skype" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="Packages" single="True">
-    <Execute type="None" entry="Packages" />
+  <StartMode startupentry="Rhythmbox" single="True">
     <Execute type="None" entry="Rhythmbox" />
     <Execute type="None" entry="Epiphany" />
     <Execute type="None" entry="Evolution" />
@@ -180,7 +177,6 @@
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
-    <Entry filename="Packages.mdse" />
     <Entry filename="Rhythmbox/Rhythmbox.mdp" />
     <Entry filename="Epiphany/Epiphany.mdp" />
     <Entry filename="Evolution/Evolution.mdp" />

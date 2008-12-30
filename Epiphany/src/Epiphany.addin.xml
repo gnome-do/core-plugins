@@ -5,6 +5,7 @@
 	name="Epiphany"
 	description="Indexes your Epiphany bookmarks"
 	author="David Siegel"
+	category="Official"
 >
  
 	<Runtime>

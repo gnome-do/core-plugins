@@ -5,14 +5,15 @@
 	name="Ping.FM"
 	description="Allows you to post text message as status or micro-blog via Ping.FM"
 	author="Peng Deng"
-	>
+	category="Community"
+>
 
 	<Runtime>
 		<Import assembly="PingFM.dll"/>
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
 	<!-- Extensions included in this assembly -->

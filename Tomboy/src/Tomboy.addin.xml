@@ -5,6 +5,7 @@
 	name="Tomboy"
 	description="Indexes, and allows for creating and searching Tomboy notes"
 	author="Rick Harding"
+	category="Official"
 	>
 
 	<Runtime>

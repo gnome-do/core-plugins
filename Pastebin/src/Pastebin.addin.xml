@@ -5,6 +5,7 @@
 	name="Pastebin"
 	description="Paste text to an online pastebin."
 	author="Jason Jones"
+	category="Official"
 >
  
 	<Runtime>

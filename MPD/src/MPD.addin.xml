@@ -5,6 +5,7 @@
 	name="Music Player Daemon"
 	description="Provides support to play music from MPD"
 	author="Zachary Goldberg"
+	category="Community"
 	>
 
 	<Runtime>
@@ -12,7 +13,7 @@
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
 	<!-- Extensions included in this assembly -->

@@ -5,6 +5,7 @@
 	name="GNOME Terminal"
 	description="Run commands and open new terminals."
 	author="David Siegel, Tim McLaughlin"
+	category="Official"
 >
  
 	<Runtime>

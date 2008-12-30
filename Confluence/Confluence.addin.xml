@@ -5,6 +5,7 @@
 	name="Confluence"
 	description="Allows you to interact with a Confluence wiki via Do."
 	author="John Wood"
+	category="Community"
 	>
 
 	<Runtime>
@@ -12,7 +13,7 @@
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
 	<!-- Extensions included in this assembly -->

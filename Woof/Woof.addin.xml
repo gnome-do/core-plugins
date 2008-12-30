@@ -5,6 +5,7 @@
 	name="Woof! (Web Offer One File)"
 	description="Allows you to send a file or a whole directory at blazing speed to a Pidgin contact on the same network (LAN) as you."
 	author="Mathieu Cadet"
+	category="Community"
 	>
 
 	<Runtime>
@@ -12,7 +13,7 @@
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
 	<!-- Extensions included in this assembly -->

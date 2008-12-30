@@ -5,6 +5,7 @@
 	name="GNOME Dictionary"
 	description="Provides a 'Define' action for looking up definitions."
 	author="David Siegel"
+	category="Official"
 >
  
 	<Runtime>

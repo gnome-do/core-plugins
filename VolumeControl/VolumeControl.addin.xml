@@ -5,6 +5,7 @@
 	name="Volume Control"
 	description="Control your system volume"
 	author="Alex Launi"
+	category="Official"
 	>
 
 	<Runtime>

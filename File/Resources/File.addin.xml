@@ -5,6 +5,7 @@
 	name="Files and Folders"
 	description="Indexes files in user-specified directories. Allows you to move, copy, delete, and browse files."
 	author="David Siegel, Alex Launi, Ankit Solanki"
+	category="Official"
 	>
 
 	<Runtime>

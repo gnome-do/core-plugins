@@ -5,6 +5,7 @@
 	name="Disk Mounter"
 	description="Mount and Unmount drive volumes in GNOME."
 	author="Guillaume Béland"
+	category="Community"
 >
  
 	<Runtime>

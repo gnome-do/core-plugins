@@ -5,6 +5,7 @@
 	name="Evolution"
 	description="Indexes your Evolution contacts."
 	author="David Siegel"
+	category="Official"
 >
  
 	<Runtime>

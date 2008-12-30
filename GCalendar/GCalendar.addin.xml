@@ -5,6 +5,7 @@
 	name="Google Calendar"
 	description="Allows you to create, search, and browse your Google calendar events."
 	author="Alex Launi"
+	category="Official"
 	>
 
 	<Runtime>

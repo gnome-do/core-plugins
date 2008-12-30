@@ -5,6 +5,7 @@
 	name="Window Manager"
 	description="Perform actions on your windows or groups of windows with Do.  Also provides the ability to tile windows"
 	author="Jason Smith"
+	category="Official"
 	>
 
 	<Runtime>
