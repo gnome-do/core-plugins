@@ -5,6 +5,7 @@
 	name="Google Documents"
 	description="Allows you to index documents, spreadsheets and presentations stored at Google Docs."
 	author="Peng Deng"
+	category="Official"
 	>
 
 	<Runtime>
