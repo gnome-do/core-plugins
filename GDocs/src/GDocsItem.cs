@@ -42,11 +42,15 @@ namespace GDocs
             get { return name; }
         }
 				
-        public virtual string Description {
+        public override string Description {
             get { return Catalog.GetString ("Google Docs Generic Document"); }
         }
+		
+		public virtual string URL {
+			get { return url; }
+		}
 
-        public virtual string Icon {
+        public override string Icon {
             get { return "x-office-document"; }
 		}
 		

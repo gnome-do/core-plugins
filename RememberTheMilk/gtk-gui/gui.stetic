@@ -4,9 +4,6 @@
     <images-root-path>..</images-root-path>
     <target-gtk-version>2.12.1</target-gtk-version>
   </configuration>
-  <import>
-    <widget-library name="../bin/Debug/RTM.dll" internal="true" />
-  </import>
   <widget class="Gtk.Bin" id="Do.Addins.RTM.Configuration" design-size="374 367">
     <property name="MemberName" />
     <child>

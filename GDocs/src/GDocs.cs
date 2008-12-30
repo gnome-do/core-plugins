@@ -31,6 +31,7 @@ using Google.GData.Documents;
 using Google.GData.Extensions;
 
 using Do.Universe;
+using Do.Platform;
 
 namespace GDocs {
 	public static class GDocs {
@@ -117,9 +118,10 @@ namespace GDocs {
 			} catch (Exception e) {
 				newDoc = null;
 				Console.Error.WriteLine (e.Message);
-				Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Uploading failed."), 
-				    Catalog.GetString ("An error occurred when uploading file to Google Docs."));
-
+				Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification 
+				                                           (Catalog.GetString ("Uploading failed."), 
+				                                            Catalog.GetString ("An error occurred when uploading file to Google Docs."), 
+				                                            "gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName));
 				return null; 
 			}		
 			
@@ -162,14 +164,18 @@ namespace GDocs {
 							docEntry.Delete ();
 						} catch (Exception e) {
 							Console.Error.WriteLine (e.Message);
-							Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Deleting failed"),
-							    Catalog.GetString ("An error occurred when deleting the document at Google Docs."));
+							Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification 
+							                                           (Catalog.GetString ("Deleting failed."), 
+							                                            Catalog.GetString ("An error occurred when deleting the document at Google Docs."), 
+							                                            "gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName));
 							return;
 						}
 						
-						Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Document deleted."),
-						    Catalog.GetString (String.Format ("The document '{0}' has been successfully moved into Trash at Google Docs.", 
-						                                      doc_title)));
+						Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification 
+						                                           (Catalog.GetString ("Document deleted."), 
+						                                            Catalog.GetString (String.Format ("The document '{0}' has been successfully moved into Trash at Google Docs.",
+						                                                                              doc_title)), 
+						                                            "gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName));						
 						lock (docs_lock) {						
 							docs.Remove (docItem);
 						}

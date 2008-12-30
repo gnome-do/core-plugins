@@ -36,9 +36,8 @@ namespace GDocs
             + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
         const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 		
-        public Configuration () : base (Catalog.GetString ("Google Documents"))
+        public Configuration () : base ("Google Documents", "https://www.google.com/accounts/NewAccount?service=writely") //base (Catalog.GetString ("Google Documents"))
         {
-            GetAccountButton.Uri = Uri;
         }
 
         protected override bool Validate (string username, string password)
@@ -53,5 +52,15 @@ namespace GDocs
         {
             return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
         }
+		
+		protected override void SaveAccountData (string username, string password)
+		{
+			Log.Error ("Account data not saved");
+		}
+
+		public static void GetAccountData (out string username, out string password, Type t)
+		{
+			username = password = "fixme";
+		}
     }
 }
