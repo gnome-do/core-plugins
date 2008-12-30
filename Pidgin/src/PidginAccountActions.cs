@@ -27,23 +27,23 @@ namespace Do.Addins.Pidgin
 {
 	public class PidginEnableAccount : Act
 	{
-		public override string Name { get { return Catalog.GetString ("Sign on"); } }
-		public override string Description { get { return Catalog.GetString ("Enable pidgin account"); } }
-		public override string Icon { get { return "pidgin"; } }
+		public override string Name {
+			get { return Catalog.GetString ("Sign on"); }
+		}
+
+		public override string Description {
+			get { return Catalog.GetString ("Enable pidgin account"); }
+		}
+
+		public override string Icon {
+			get { return "pidgin"; }
+		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (PidginAccountItem),
-				};
-			}
+			get { yield return	typeof (PidginAccountItem); }
 		}
 		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { return null; }
-		}
-		
-		public bool SupportsItem (Item item)
+		public override bool SupportsItem (Item item)
 		{
 			Pidgin.IPurpleObject prpl;
 			 try {
@@ -55,20 +55,6 @@ namespace Do.Addins.Pidgin
 			return false;
 		}
 		
-		public bool ModifierItemsOptional {
-			get { return false; }
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return false;
-		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			return null;
-		}
-		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
@@ -78,29 +64,29 @@ namespace Do.Addins.Pidgin
 					"gtk-gaim", 1);
 			} catch { }
 			
-			return null;
+			yield break;
 		}		
 	}
 	
 	public class PidginDisableAccount : Act
 	{
-		public override string Name { get { return Catalog.GetString ("Sign off"); } }
-		public override string Description { get { return Catalog.GetString ("Disble pidgin account"); } }
-		public override string Icon { get { return "pidgin"; } }
+		public override string Name {
+			get { return Catalog.GetString ("Sign off"); }
+		}
+
+		public override string Description {
+			get { return Catalog.GetString ("Disble pidgin account"); }
+		}
+
+		public override string Icon {
+			get { return "pidgin"; }
+		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (PidginAccountItem),
-				};
-			}
+			get { yield return typeof (PidginAccountItem); }
 		}
 		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { return null; }
-		}
-		
-		public bool SupportsItem (Item item)
+		public override bool SupportsItem (Item item)
 		{
 			 Pidgin.IPurpleObject prpl;
 			 try {
@@ -112,20 +98,6 @@ namespace Do.Addins.Pidgin
 			return false;
 		}
 		
-		public bool ModifierItemsOptional {
-			get { return false; }
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return false;
-		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			return null;
-		}
-		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
@@ -135,7 +107,7 @@ namespace Do.Addins.Pidgin
 					"gtk-gaim", 0);
 			} catch { }
 			
-			return null;
+			yield break;
 		}
 	}
 }
