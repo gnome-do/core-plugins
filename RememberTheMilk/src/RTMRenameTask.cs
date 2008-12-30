@@ -25,7 +25,7 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 	public class RTMRenameTask : Act
 	{
