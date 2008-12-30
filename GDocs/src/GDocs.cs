@@ -41,12 +41,15 @@ namespace GDocs {
 		
 		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
 		private static string gAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
+
+		static GDocsPreferences prefs;
 		
 		static GDocs ()
 		{
 			string username, password;
 			//Google works over SSL, we need accept the cert.
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
+			prefs = new GDocsPreferences ();
 			
 			docs = new List<Item> ();
 			docs_lock = new object ();
@@ -70,6 +73,10 @@ namespace GDocs {
 				return false;
 			}
 			return true;
+		}
+
+		internal static GDocsPreferences Preferences {
+			get { return prefs; }
 		}
 		
 		public static List<Item> Docs {

@@ -55,12 +55,15 @@ namespace GDocs
 		
 		protected override void SaveAccountData (string username, string password)
 		{
-			Log.Error ("Account data not saved");
+			//Log.Error ("Account data not saved");
+			GDocs.Preferences.Username = username;
+			GDocs.Preferences.Password = password;
 		}
 
 		public static void GetAccountData (out string username, out string password, Type t)
 		{
-			username = password = "fixme";
+			username = GDocs.Preferences.Username;
+			password = GDocs.Preferences.Password;
 		}
     }
 }
