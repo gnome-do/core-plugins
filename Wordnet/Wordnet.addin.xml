@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Wordnet"
-	description="Looks up definitions on Wordnet."
+	description="Define words on Wordnet."
 	author="Ankit Solanki"
 	category="Community"
 	>

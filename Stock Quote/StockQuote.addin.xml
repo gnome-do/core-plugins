@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Stock Quote"
-	description="Gets stock quotes from Google Finance."
+	description="Get live stock quotes from Google Finance."
 	author="DR Colkitt"
 	category="Community"
 	>

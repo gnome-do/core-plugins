@@ -1,8 +1,7 @@
-/* GDocsItem.cs
+/* Preferences.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,44 +18,31 @@
  */
 
 using System;
-using System.Text;
-
 using Mono.Unix;
-
-using Do.Universe;
 using Do.Platform;
 
 namespace GDocs
 {
-    public class GDocsItem : Item, IOpenableItem
-    {
-        string name, url;
+	public class GDocsPreferences
+	{
+		const string UsernameKey = "Username";
+		const string PasswordKey = "Password";
 		
-		public GDocsItem (string name, string url)
-        {
-            this.name = name;
-            this.url = url;
-        }
-
-        public override string Name {
-            get { return name; }
-        }
-				
-        public override string Description {
-            get { return Catalog.GetString ("Google Docs Generic Document"); }
-        }
+		IPreferences prefs;
 		
-		public virtual string URL {
-			get { return url; }
-		}
-
-        public override string Icon {
-            get { return "x-office-document"; }
-		}
-		
-		public void Open ()
+		public GDocsPreferences ()
 		{
-			Services.Environment.OpenUrl (url);
+			prefs = Services.Preferences.Get <GDocsPreferences> ();
 		}
-	}	
+		
+		public string Username {
+			get { return prefs.Get <string> (UsernameKey, ""); }
+			set { prefs.Set <string> (UsernameKey, value); }
+		}
+		
+		public string Password {
+			get { return prefs.GetSecure <string> (PasswordKey, ""); }
+			set { prefs.SetSecure <string> (PasswordKey, value); }
+		}
+	}
 }

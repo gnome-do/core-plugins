@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.3"
 	name="Tomboy"
-	description="Indexes, and allows for creating and searching Tomboy notes"
+	description="Search and create new Tomboy notes."
 	author="Rick Harding"
 	category="Official"
 	>
@@ -16,8 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="Tomboy.NotesItemSource" />
 	</Extension>

@@ -36,7 +36,7 @@
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
-      <Entry build="False" name="GDocs" configuration="Debug" />
+      <Entry build="True" name="GDocs" configuration="Debug" />
       <Entry build="True" name="Microblogging" configuration="Debug" />
       <Entry build="True" name="File" configuration="Debug" />
       <Entry build="True" name="AptURL" configuration="Debug" />
