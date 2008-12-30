@@ -5,6 +5,7 @@
 	name="ImageShack"
 	description="Upload an image to ImageShack."
 	author="Jason Jones"
+	category="Official"
 >
  
 	<Runtime>

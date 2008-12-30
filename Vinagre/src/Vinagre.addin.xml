@@ -5,6 +5,7 @@
 	name="Vinagre VNC"
 	description="Browse your VNC Viewer Bookmarks and connect to remote servers."
 	author="Alex Launi"
+	category="Official"
 	>
 
 	<Runtime>

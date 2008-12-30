@@ -5,6 +5,7 @@
 	name="Translate"
 	description="Translate text and websites"
 	author="Chris Szikszoy"
+	category="Community"
 >
  
 	<Runtime>

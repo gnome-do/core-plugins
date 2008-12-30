@@ -5,6 +5,7 @@
 	name="Music Player Daemon"
 	description="Provides support to play music from MPD"
 	author="Zachary Goldberg"
+	category="Community"
 	>
 
 	<Runtime>

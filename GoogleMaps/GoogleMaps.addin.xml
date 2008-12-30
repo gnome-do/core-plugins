@@ -5,6 +5,7 @@
 	name="Google Maps"
 	description="Map a location or route in Google maps."
 	author="DR Colkitt"
+	category="Community"
 >
  
 	<Runtime>

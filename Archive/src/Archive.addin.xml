@@ -5,6 +5,7 @@
 	name="Archive"
 	description="Create and extract archive files"
 	author="Guillaume Beland"
+	category="Community"
 >
  
 	<Runtime>

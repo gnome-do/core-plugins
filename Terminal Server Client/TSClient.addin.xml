@@ -5,6 +5,7 @@
 	name="Terminal Server Client"
 	description="Saved Terminal Server Client connections."
 	author="Ankit Solanki"
+	category="Community"
 	>
 
 	<Runtime>

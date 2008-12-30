@@ -5,6 +5,7 @@
 	name="Cli.ickable WebClips"
 	description="Create WebClips with Cl.ickable."
 	author="Idealab"
+	category="Community"
 >
  
 	<Runtime>

@@ -5,6 +5,7 @@
 	name="Eye of GNOME Slideshow"
 	description="Plays a slideshow of a folder of images in Eye of GNOME."
 	author="David Siegel"
+	category="Official"
 	>
 
 	<Runtime>

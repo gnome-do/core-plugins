@@ -5,6 +5,7 @@
 	name="Firefox"
 	description="Indexes Firefox 3 bookmarks."
 	author="David Siegel"
+	category="Official"
 	>
 
 	<Runtime>

@@ -5,6 +5,7 @@
 	name="Skype"
 	description="Make calls, browse and initiate chats, change your status, and more."
 	author="kiwanami"
+	category="Community"
 	>
 
 	<Runtime>

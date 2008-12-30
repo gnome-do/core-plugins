@@ -5,6 +5,7 @@
 	name="Thunderbird"
 	description="Indexes your Thunderbird contacts"
 	author="David Siegel"
+	category="Community"
 	>
 
 	<Runtime>

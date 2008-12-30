@@ -5,6 +5,7 @@
 	name="GMail Contacts"
 	description="Indexes your GMail contacts"
 	author="Alex Launi"
+	category="Official"
 	>
 
 	<Runtime>

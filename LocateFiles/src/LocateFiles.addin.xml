@@ -5,6 +5,7 @@
 	name="Locate Files"
 	description="Allows you to quickly find files on your computer using the GNU locate command."
 	author="David Siegel"
+	category="Official"
 >
  
 	<Runtime>

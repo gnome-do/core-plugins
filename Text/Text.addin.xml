@@ -5,6 +5,7 @@
 	name="Text"
 	description="Play with text! What could be more fun?"
 	author="David Siegel"
+	category="Community"
 	>
 
 	<Runtime>

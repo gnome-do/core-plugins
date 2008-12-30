@@ -5,6 +5,7 @@
 	name="Amarok"
 	description="Searches and plays Amarok music"
 	author="David Siegel"
+	category="Community"
 >
  
 	<Runtime>

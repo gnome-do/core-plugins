@@ -5,6 +5,7 @@
 	name="Launchpad"
 	description="Provides integration with Launchpad.net."
 	author="Ken Simon, David Siegel"
+	category="Official"
 >
  
 	<Runtime>

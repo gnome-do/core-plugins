@@ -5,6 +5,7 @@
 	name="Confluence"
 	description="Allows you to interact with a Confluence wiki via Do."
 	author="John Wood"
+	category="Community"
 	>
 
 	<Runtime>

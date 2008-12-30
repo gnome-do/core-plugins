@@ -5,6 +5,7 @@
 	name="SqueezeCenter"
 	description="Controls Logitech Squeezebox and Transport audio players."
 	author="Anders Thomsen"
+	category="Community"
 	>
 
 	<Runtime>

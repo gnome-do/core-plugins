@@ -5,6 +5,7 @@
 	name="Stock Quote"
 	description="Gets stock quotes from Google Finance."
 	author="DR Colkitt"
+	category="Community"
 	>
 
 	<Runtime>

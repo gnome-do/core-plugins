@@ -5,6 +5,7 @@
 	name="Rhythmbox"
 	description="Searches and plays Rhythmbox music."
 	author="David Siegel"
+	category="Official"
 	>
 
 	<Runtime>

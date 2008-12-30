@@ -5,6 +5,7 @@
 	name="Microblogging"
 	description="Allows you to update your microblog right from Do"
 	author="Jacob Andreas, Alex Launi"
+	category="Official"
 >
 
 	<Runtime>
