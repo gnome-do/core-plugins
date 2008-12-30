@@ -2,8 +2,8 @@
 	id="GoogleDocs"
 	namespace= "Do"
 	version="1.0"
-	name="Google Documents"
-	description="Searches documents, spreadsheets and presentations on Google Docs."
+	name="Google Docs"
+	description="Search documents, spreadsheets, and presentations on Google Docs."
 	author="Peng Deng"
 	category="Official"
 	>
