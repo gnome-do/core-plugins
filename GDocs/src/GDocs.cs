@@ -42,7 +42,7 @@ namespace GDocs
 
 		const string FeedUri =
 			"http://docs.google.com/feeds/documents/private/full";
-		const string gAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
+		public const string GAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
 		
 		static List<Item> docs;
 		static GDocsPreferences prefs;
@@ -61,14 +61,10 @@ namespace GDocs
 			Connect (username, password);
 		}
 		
-		public static string GAppName {
-			get { return gAppName; }
-		}
-		
 		public static bool Connect (string username, string password)
 		{
 			try {
-				service = new DocumentsService (gAppName);
+				service = new DocumentsService (GAppName);
 				service.setUserCredentials (username, password);
 			} catch (Exception e) {
 				Log.Error (e.Message);
