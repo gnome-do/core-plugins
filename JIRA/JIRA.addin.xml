@@ -5,6 +5,7 @@
 	name="JIRA Integration"
 	description="Creates fast lookup links for JIRA issues based on currently open issues."
 	author="Andrew Franklin"
+	category="Community"
 	>
 
 	<Runtime>

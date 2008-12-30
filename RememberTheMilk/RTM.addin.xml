@@ -5,6 +5,7 @@
     name="Remember The Milk"
     description="Allows you to manage tasks in your Remember The Milk account"
     author="Peng Deng"
+		category="Community"
     >
 
     <Runtime>

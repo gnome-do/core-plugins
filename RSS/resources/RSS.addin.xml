@@ -5,6 +5,7 @@
 	name="Simple RSS Reader"
 	description="A simple RSS feed reader."
 	author="Jason Imison"
+	category="Community"
 	>
 
 	<Runtime>

@@ -5,6 +5,7 @@
 	name="VirtualBox"
 	description="Control VirtualBox VMs"
 	author="Chris Szikszoy"
+	category="Community"
 	>
 
 	<Runtime>

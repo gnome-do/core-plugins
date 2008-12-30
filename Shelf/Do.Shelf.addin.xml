@@ -5,6 +5,7 @@
 	name="Shelf"
 	description="Store your most used items with Shelf."
 	author="Jason Smith"
+	category="Community"
 	>
 
 	<Runtime>

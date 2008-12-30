@@ -5,6 +5,7 @@
 	name="SSH"
 	description="Indexes ssh hosts and provides 'Connect with SSH' action"
 	author="Peter Stuifzand"
+	category="Community"
 	>
 
 	<Runtime>

@@ -5,6 +5,7 @@
 	name="xmms2"
 	description="Searches and plays xmms2 music."
 	author="Scott Albertine"
+	category="Community"
 	>
 
 	<Runtime>

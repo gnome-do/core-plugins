@@ -5,6 +5,7 @@
 	name="Wordnet"
 	description="Looks up definitions on Wordnet."
 	author="Ankit Solanki"
+	category="Community"
 	>
 
 	<Runtime>

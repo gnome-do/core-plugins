@@ -5,6 +5,7 @@
 	name="Search Google"
 	description="Searches google and returns results to Do"
 	author="Brian Lucas"
+	category="Official"
 >
  
 	<Runtime>

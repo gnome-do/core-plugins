@@ -5,6 +5,7 @@
 	name="Riptide"
 	description="Do Away with Torrent Sites"
 	author="Jason Smith"
+	category="Community"
 	>
 
 	<Runtime>

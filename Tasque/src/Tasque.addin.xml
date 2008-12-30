@@ -5,6 +5,7 @@
 	name="Tasque"
 	description="Plugin for creating new task in Tasque."
 	author="Guillaume Béland"
+	category="Community"
 	>
 
 	<Runtime>

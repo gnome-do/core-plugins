@@ -5,6 +5,7 @@
 	name="Bibtex"
 	description="Quickly open documents linked from a BibTeX file."
 	author="Niall Murphy"
+	category="Community"
 	>
 
 	<Runtime>
