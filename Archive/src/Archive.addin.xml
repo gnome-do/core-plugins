@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Archive"
-	description="Create and extract archive files"
+	description="Create and extract archive files."
 	author="Guillaume Beland"
 	category="Community"
 >
@@ -16,8 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path = "/Do/Action">
 		<Action type="Archive.ArchiveAction" />
 		<Action type="Archive.ExtractAction" />

@@ -3,7 +3,7 @@
     namespace= "Do"
     version="1.0"
     name="Remember The Milk"
-    description="Allows you to manage tasks in your Remember The Milk account"
+    description="Manage tasks with Remember The Milk."
     author="Peng Deng"
 		category="Community"
     >

@@ -3,7 +3,7 @@
 	namespace= "Do"
 	version="1.0"
 	name="Google Documents"
-	description="Allows you to index documents, spreadsheets and presentations stored at Google Docs."
+	description="Searches documents, spreadsheets and presentations on Google Docs."
 	author="Peng Deng"
 	category="Official"
 	>
@@ -20,15 +20,12 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="GDocs.GDocsItemSource" />
 	</Extension>
 
 	<Extension path="/Do/Action">
 		<Action type="GDocs.GDocsUploadDocument" />
-	</Extension>
-	<Extension path="/Do/Action">
 		<Action type="GDocs.GDocsTrashDocument" />
 	</Extension>
 </Addin>

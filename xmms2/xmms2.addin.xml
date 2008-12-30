@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="xmms2"
-	description="Searches and plays xmms2 music."
+	description="Search and play xmms2 music."
 	author="Scott Albertine"
 	category="Community"
 	>

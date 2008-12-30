@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Eye of GNOME Slideshow"
-	description="Plays a slideshow of a folder of images in Eye of GNOME."
+	description="Play slideshows in Eye of GNOME."
 	author="David Siegel"
 	category="Official"
 	>
@@ -16,7 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/Action">
 		<Action type="EOG.PlaySlideshowAction" />
 	</Extension>

@@ -3,7 +3,7 @@
 	namespace= "Do"
 	version="1.0"
 	name="Banshee"
-	description="Searches and plays Banshee music"
+	description="Search and play Banshee music."
 	author="Mathieu Cadet"
 	category="Community"
 >
@@ -16,7 +16,6 @@
 		<Addin id="Core" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Do.Addins.Banshee.BansheeItemSource" />
 	</Extension>

@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Riptide"
-	description="Do Away with Torrent Sites"
+	description="'Do' away with torrent sites!"
 	author="Jason Smith"
 	category="Community"
 	>
@@ -16,9 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-
-	<!--- Actions -->
 	<Extension path= "/Do/Action">
 		<Action type="Do.Riptide.TorrentSearchAction" />
 		<Action type="Do.Riptide.TorrentDownloadClientAction" />
