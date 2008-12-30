@@ -22,6 +22,6 @@
 		<Action type="GNOME.Terminal.OpenTerminalHereAction" />
 	</Extension>
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="GNOME.Terminal.ProIFileItemSource" />
+		<ItemSource type="GNOME.Terminal.ProfileItemSource" />
 	</Extension>
 </Addin>
