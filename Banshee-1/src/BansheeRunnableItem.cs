@@ -30,32 +30,28 @@ namespace Banshee
 {
 	public class BansheeRunnableItem : Item, IRunnableItem
 	{	
-		string name, description, icon, command;
+		string name, description, icon;
 		
 		public static readonly BansheeRunnableItem [] DefaultItems =
 			new [] {
                 new BansheeRunnableItem (Catalog.GetString ("Pause/Play"),
 					Catalog.GetString ("Toggle Banshee Playback"),
-					"media-playback-pause",
-					"play-pause"),
+					"media-playback-pause"),
 
 				new BansheeRunnableItem (Catalog.GetString ("Next"),
 					Catalog.GetString ("Play Next Track in Banshee"),
-					"media-skip-forward",
-					"next"),
+					"media-skip-forward"),
 
 				new BansheeRunnableItem (Catalog.GetString ("Previous"),
 					Catalog.GetString ("Play Previous Track in Banshee"),
-					"media-skip-backward",
-					"previous"),
+					"media-skip-backward"),
 			};
 			
-		public BansheeRunnableItem (string name, string description, string icon, string command)
+		public BansheeRunnableItem (string name, string description, string icon)
 		{
 			this.name = name;
 			this.description = description;
 			this.icon = icon;
-			this.command = command;
 		}
 		
 		public override string Name {
@@ -72,6 +68,17 @@ namespace Banshee
 		
 		public void Run ()
 		{
+			switch (Name) {
+			case "Play/Pause": 
+				Banshee.TogglePlaying ();
+				break;
+			case "Next":
+				Banshee.Next ();
+				break;
+			case "Previous":
+				Banshee.Previous ();
+				break;
+			}
 		}
 	}
 }

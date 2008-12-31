@@ -67,8 +67,8 @@ namespace Banshee
 
 		public IEnumerable<VideoItem> Videos { get; private set; }
 		public IEnumerable<SongMusicItem> Songs { get; private set; }
-		public IEnumerable<PodcastItem> Podcasts { get; private set; }		
-
+		public IEnumerable<PodcastItem> Podcasts { get; private set; }
+		
 		/// <summary>
 		/// This gets called on a thread from SimpleIndexerClient so we need to be careful with our lists.
 		/// </summary>
@@ -92,7 +92,7 @@ namespace Banshee
 			mediaType = exports ["media-attributes"];
 
 			// some items dont have a local-path, we need to use the URI in this case.
-			path = string.IsNullOrEmpty (exports ["local-path"]) ? exports ["local-path"] : exports ["URI"];
+			path = string.IsNullOrEmpty (exports ["local-path"]) ? exports ["URI"] : exports ["local-path"];
 			artPath = string.IsNullOrEmpty (exports ["artwork-id"]) ? "" : Path.Combine (artwork_directory, exports ["artwork-id"] + ".jpg");
 			Console.Error.WriteLine (path);
 			lock (indexing_mutex) {
@@ -134,8 +134,12 @@ namespace Banshee
 
 		protected override void OnEndUpdateIndex()
 		{
+			last_index = DateTime.Now;
+		
 			CopyLists ();
+			
 			Log.Debug (Catalog.GetString ("Finished indexing Banshee library"));
+			Log.Debug ("" + CollectionCount);
 		}
 
 		protected override void OnShutdownWhileIndexing ()

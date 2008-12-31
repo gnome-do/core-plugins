@@ -90,6 +90,62 @@ namespace Banshee
 			set { bus.ShuffleMode = value; }
 		}
 
+		public static void LoadVideos (out List<VideoItem> videos)
+		{
+			videos = new List<VideoItem> (indexer.Videos);
+		}
+		
+		public static List<IMediaFile> SearchMedia (string pattern)
+		{
+			List<IMediaFile> results = new List<IMediaFile> ();
+			
+			results.AddRange (indexer.Songs.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
+			results.AddRange (indexer.Videos.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
+			results.AddRange (indexer.Podcasts.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
+
+			return results;
+		}
+
+		public static void LoadPodcasts (out List<PodcastItem> podcastsOut)
+		{
+			Dictionary<string, PodcastItem> publishers;
+			
+			podcastsOut = new List<PodcastItem> ();
+			publishers = new Dictionary<string, PodcastItem> ();
+		
+			foreach (PodcastPodcastItem podcast in indexer.Podcasts) {
+				if (!publishers.ContainsKey (podcast.Artist))
+					publishers[podcast.Artist] = new PodcastPublisherItem (
+						podcast.Artist, podcast.Year, podcast.Cover);
+			}
+			
+			podcastsOut.AddRange (publishers.Values);
+		}
+		
+		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albumsOut, out List<ArtistMusicItem> artistsOut)
+		{
+			Dictionary<string, AlbumMusicItem>  albums;
+			Dictionary<string, ArtistMusicItem> artists;
+			
+			albumsOut = new List<AlbumMusicItem> ();
+			artistsOut = new List<ArtistMusicItem> ();
+			
+			albums = new Dictionary<string, AlbumMusicItem> ();
+			artists = new Dictionary<string,ArtistMusicItem> ();
+			
+			foreach (SongMusicItem song in indexer.Songs) {
+				if (!artists.ContainsKey (song.Artist))
+					artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
+					
+				if (!albums.ContainsKey (song.Album))
+					albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year,
+						song.Cover);
+			}
+			
+			albumsOut.AddRange (albums.Values);
+			artistsOut.AddRange (artists.Values);
+		}
+
 		static List<IMediaFile> LoadSongsFor (MusicItem item)
 		{
 			SortedList<string, IMediaFile> albumSongs;
@@ -137,61 +193,6 @@ namespace Banshee
 			}
 		}
 
-		public static void LoadPodcasts (out List<PodcastItem> podcastsOut)
-		{
-			Dictionary<string, PodcastItem> publishers;
-			
-			podcastsOut = new List<PodcastItem> ();
-			publishers = new Dictionary<string, PodcastItem> ();
-		
-			foreach (PodcastPodcastItem podcast in indexer.Podcasts) {
-				if (!publishers.ContainsKey (podcast.Artist))
-					publishers[podcast.Artist] = new PodcastPublisherItem (
-						podcast.Artist, podcast.Year, podcast.Cover);
-			}
-			
-			podcastsOut.AddRange (publishers.Values);
-		}
-		
-		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albumsOut, out List<ArtistMusicItem> artistsOut)
-		{
-			Dictionary<string, AlbumMusicItem>  albums;
-			Dictionary<string, ArtistMusicItem> artists;
-			
-			albumsOut = new List<AlbumMusicItem> ();
-			artistsOut = new List<ArtistMusicItem> ();
-			
-			albums = new Dictionary<string, AlbumMusicItem> ();
-			artists = new Dictionary<string,ArtistMusicItem> ();
-			
-			foreach (SongMusicItem song in indexer.Songs) {
-				if (!artists.ContainsKey (song.Artist))
-					artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
-					
-				if (!albums.ContainsKey (song.Album))
-					albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year,
-						song.Cover);
-			}
-			
-			albumsOut.AddRange (albums.Values);
-			artistsOut.AddRange (artists.Values);
-		}
-
-		public static void LoadVideos (out List<VideoItem> videos)
-		{
-			videos = new List<VideoItem> (indexer.Videos);
-		}
-		
-		public static List<IMediaFile> SearchMedia (string pattern)
-		{
-			List<IMediaFile> results = new List<IMediaFile> ();
-			
-			results.AddRange (indexer.Songs.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
-			results.AddRange (indexer.Videos.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
-			results.AddRange (indexer.Podcasts.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
-
-			return results;
-		}
 
 		static bool ContainsMatch (MediaItem item, string pattern)
 		{

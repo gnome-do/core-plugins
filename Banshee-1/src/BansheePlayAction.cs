@@ -59,6 +59,7 @@ namespace Banshee
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
+			Banshee.Play (items.Cast<MediaItem> ().First ());
 			return Enumerable.Empty<Item> ();
 		}
 	}

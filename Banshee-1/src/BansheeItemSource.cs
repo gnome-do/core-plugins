@@ -117,7 +117,7 @@ namespace Banshee
 		}
 		
 		public override void UpdateItems ()
-		{			
+		{
 			items.Clear ();
 			
 			//Add browser features
