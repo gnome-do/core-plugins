@@ -70,7 +70,13 @@ namespace SystemServices {
 	/// </summary>
 	public class ServiceRestartAction: BaseServiceAction	{
 		public ServiceRestartAction () :
-			base ("Restart", "Restart service", ServiceActionType.Restart) {
+			base ("Restart Service", "Restarts a system service.", ServiceActionType.Restart) {
+		}
+
+		public override bool SupportsItem (Item item)
+		{
+			int status = (item as Service).GetStatus ();
+			return status == 0 || status == Service.UnknownStatusExitCode;
 		}
 	}
 
@@ -79,7 +85,12 @@ namespace SystemServices {
 	/// </summary>
 	public class ServiceStartAction : BaseServiceAction	{
 		public ServiceStartAction () :
-			base ("Start", "Start service", ServiceActionType.Start) {
+			base ("Start Service", "Starts a system service.", ServiceActionType.Start) {
+		}
+
+		public override bool SupportsItem (Item item)
+		{
+			return (item as Service).GetStatus () != 0;
 		}
 	}
 
@@ -88,7 +99,13 @@ namespace SystemServices {
 	/// </summary>
 	public class ServiceStopAction: BaseServiceAction {
 		public ServiceStopAction () :
-			base ("Stop", "Stop service", ServiceActionType.Stop) {
+			base ("Stop Service", "Stops a system service.", ServiceActionType.Stop) {
+		}
+
+		public override bool SupportsItem (Item item)
+		{
+			int status = (item as Service).GetStatus ();
+			return status == 0 || status == Service.UnknownStatusExitCode;
 		}
 	}
 }

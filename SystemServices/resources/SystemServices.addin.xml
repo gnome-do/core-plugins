@@ -4,7 +4,7 @@
 	version="1.0"
 	name="System Services"
 	description="Start, stop, and restart system services."
-	author="Karol Będkowski"
+	author="Karol Będkowski, David Siegel"
 	category="Community"
 	>
 

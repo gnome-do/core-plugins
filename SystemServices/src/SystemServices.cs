@@ -115,8 +115,9 @@ namespace SystemServices {
 
 			foreach (string service in userServices) {
 				// is selected script exists?
-				if (File.Exists (Path.Combine (servicesDirectory, service))) {
-					items.Add (new Service (service));
+				string script = Path.Combine (servicesDirectory, service);
+				if (File.Exists (script)) {
+					items.Add (new Service (service, script));
 				}
 			}
 
@@ -152,9 +153,9 @@ namespace SystemServices {
 		public static string GetIconForActionType (ServiceActionType action)
 		{
 			switch (action) {
-			case ServiceActionType.Start: return "start";
+			case ServiceActionType.Start: return "player_play";
 			case ServiceActionType.Stop: return "stop";
-			case ServiceActionType.Restart: return "restart";
+			case ServiceActionType.Restart: return "reload";
 			default: return "applications-system";
 			}
 		}
@@ -206,7 +207,6 @@ namespace SystemServices {
 			return result;
 		}
 
-		
 		/// <summary>
 		/// Add service do user list and save list.
 		/// </summary>

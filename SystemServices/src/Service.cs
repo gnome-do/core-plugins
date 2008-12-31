@@ -29,15 +29,17 @@ namespace SystemServices {
 	public class Service : Item {
 		
 		string name;
-		string scriptName;
+		string script;
 
-		public Service (string name) {
-			this.scriptName = name;
-			if (name.Contains (".")) {
+		public const int UnknownStatusExitCode = 42;
+
+		public Service (string name, string script) {
+			this.script = script;
+
+			if (name.Contains ("."))
 				this.name = name.Substring (0, name.IndexOf ("."));
-			} else {
+			else
 				this.name = name;
-			}
 		}
 		
 		public override string Name {
@@ -52,8 +54,26 @@ namespace SystemServices {
 			get { return "applications-system";	}
 		}
 
-		public string ScriptName {
-			get { return scriptName; }
+		public string Script {
+			get { return script; }
+		}
+
+		public int GetStatus ()
+		{
+			try {
+				Process status = new Process ();			
+
+				status.StartInfo.FileName = Script;
+				status.StartInfo.Arguments = "status";
+				status.Start ();
+				status.WaitForExit ();
+
+				return status.ExitCode;
+			} catch (Exception e) {
+				Log.Error ("System service {0}: {1}", Script, e.Message);
+				Log.Debug (e.StackTrace);
+			}
+			return UnknownStatusExitCode;
 		}
 
 		public string Perform (ServiceActionType action)
@@ -61,7 +81,7 @@ namespace SystemServices {
 			Process process = new Process ();			
 			
 			process.StartInfo.FileName = SystemServices.SudoCommand;	
-			process.StartInfo.Arguments = SystemServices.GetArgsForService (ScriptName, action);
+			process.StartInfo.Arguments = SystemServices.GetArgsForService (Script, action);
 			process.StartInfo.CreateNoWindow = true;
 			process.StartInfo.UseShellExecute = false;
 			process.StartInfo.RedirectStandardOutput = true;
