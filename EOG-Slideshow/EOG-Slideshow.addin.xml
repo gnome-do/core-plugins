@@ -9,7 +9,7 @@
 	>
 
 	<Runtime>
-		<Import assembly="EOG Slideshow.dll"/>
+		<Import assembly="EOG-Slideshow.dll"/>
 	</Runtime>
 
 	<Dependencies>

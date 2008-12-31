@@ -114,6 +114,7 @@ Cl.ickable/Makefile
 Confluence/Makefile
 del.icio.us/Makefile
 DiskMounter/Makefile
+EOG-Slideshow/Makefile
 Epiphany/Makefile
 Evolution/Makefile
 File/Makefile

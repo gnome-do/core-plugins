@@ -9,6 +9,7 @@ SUBDIRS = po BundledLibraries \
 	Confluence \
 	del.icio.us \
 	DiskMounter \
+	EOG-Slideshow \
 	Epiphany \
 	Evolution \
 	File \
