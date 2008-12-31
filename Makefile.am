@@ -2,6 +2,7 @@ ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
 SUBDIRS = po BundledLibraries \
+	AptURL \
 	Archive \
 	del.icio.us \
 	DiskMounter \

@@ -106,6 +106,7 @@ AM_CONDITIONAL(BUILD_AMAROK, false)
 
 AC_CONFIG_FILES([
 Amarok/Makefile
+AptURL/Makefile
 Archive/Makefile
 Banshee/Makefile
 del.icio.us/Makefile
