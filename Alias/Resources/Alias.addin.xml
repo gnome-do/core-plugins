@@ -1,7 +1,7 @@
 <Addin
 	id="Alias"
 	namespace="Do"
-	version="2.1"
+	version="1.0"
 	name="Alias"
 	description="Assign alternate names to items."
 	author="David Siegel"
