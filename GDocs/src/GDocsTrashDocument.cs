@@ -54,31 +54,13 @@ namespace GDocs
 				};
 			}
 		}
-        
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { return null; }
-        }		
 		
-        public bool SupportsItem (Item item) 
+        public override bool SupportsItem (Item item) 
         {
 			return true;
         }
-        
-        public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-        {
-			return false;
-		}        
-		
-        public bool ModifierItemsOptional {
-            get { return true; }
-        }
-		
-		public IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
-        }
-        
-        public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {						
             GDocs.TrashDocument (items.First () as GDocsItem);
 			return null;

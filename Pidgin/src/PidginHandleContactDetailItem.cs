@@ -25,7 +25,7 @@ using Do.Universe;
 
 namespace Do.Addins.Pidgin
 {
-	class PidginHandleContactDetailItem : IContactDetailItem
+	class PidginHandleContactDetailItem : Item, IContactDetailItem
 	{
 		string proto, handle;
 

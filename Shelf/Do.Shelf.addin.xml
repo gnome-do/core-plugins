@@ -3,8 +3,9 @@
 	namespace="Do"
 	version="1.0"
 	name="Shelf"
-	description="Store your most used items with Shelf."
+	description="Store items on a 'shelf' for quick access."
 	author="Jason Smith"
+	category="Community"
 	>
 
 	<Runtime>
@@ -15,13 +16,10 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="Do.Universe.ShelfItemSource" />
 	</Extension>
 
-	<!-- Actions -->
 	<Extension path="/Do/Action">
 		<Action type="Do.Universe.ShelfAddAction" />
 		<Action type="Do.Universe.ShelfExploreAction" />

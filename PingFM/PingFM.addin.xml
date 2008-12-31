@@ -1,0 +1,26 @@
+<Addin 
+	id="PingFM" 
+	namespace= "Do" 
+	version="1.0"
+	name="Ping.FM"
+	description="Post status updates via Ping.FM"
+	author="Peng Deng"
+	category="Community"
+>
+
+	<Runtime>
+		<Import assembly="PingFM.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Do.Addins.PingFM.PingFMServiceItemSource" />
+	</Extension>
+
+	<Extension path="/Do/Action">
+		<Action type="Do.Addins.PingFM.PingFMPost" />
+	</Extension>
+</Addin>

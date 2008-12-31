@@ -4,9 +4,6 @@
     <images-root-path>..</images-root-path>
     <target-gtk-version>2.12.1</target-gtk-version>
   </configuration>
-  <import>
-    <widget-library name="Do.Addins, Version=0.7.0.0, Culture=neutral" />
-  </import>
   <widget class="Gtk.Bin" id="Pastebin.PastebinConfig" design-size="300 300">
     <property name="MemberName" />
     <child>
@@ -32,7 +29,6 @@
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Paste2.org</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>

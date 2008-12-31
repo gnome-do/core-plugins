@@ -60,7 +60,7 @@ namespace Do.Rhythmbox
 		}
 	}
 
-	public class RhythmboxRunnableItem : IRunnableItem
+	public class RhythmboxRunnableItem : Item, IRunnableItem
 	{
 		public static readonly RhythmboxRunnableItem[] DefaultItems =
 			new RhythmboxRunnableItem[] {

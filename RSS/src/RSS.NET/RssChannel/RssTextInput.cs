@@ -75,14 +75,14 @@ namespace Rss
 		}
 		/// <summary>Explains the text input area</summary>
 		/// <remarks>Maximum length is 500 (For RSS 0.91)</remarks>
-		public override string Description
+		public string Description
 		{
 			get { return description; }
 			set { description = RssDefault.Check(value); }
 		}
 		/// <summary>The name of the text object in the text input area</summary>
 		/// <remarks>Maximum length is 20 (For RSS 0.91).</remarks>
-		public override string Name
+		public string Name
 		{
 			get { return name; }
 			set { name = RssDefault.Check(value); }

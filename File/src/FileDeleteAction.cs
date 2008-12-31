@@ -1,4 +1,4 @@
-/* IFileItemActions.cs
+/* FileItemActions.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -26,7 +26,7 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	abstract class DeleteAction : Act {
+	abstract class DeleteAction : AbstractAction {
 
 		public override string Name {
 			get { return Catalog.GetString ("Delete File"); }
@@ -46,11 +46,11 @@ namespace FilePlugin {
 			}
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			foreach (IFileItem src in items) {
 				try {
-					File.Delete (IFileItem.EscapedPath (src));
+					File.Delete (FileItem.EscapedPath (src));
 				} catch (Exception e) {
 					Console.Error.WriteLine ("DeleteFileAction could not delete "+
 							src.Path + ": " + e.Message);

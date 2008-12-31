@@ -1,6 +1,0 @@
-Name: Pastebin
-Description: Pastebin
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Pastebin.dll

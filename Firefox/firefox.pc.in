@@ -1,6 +1,0 @@
-Name: Firefox
-Description: Firefox
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Firefox.dll

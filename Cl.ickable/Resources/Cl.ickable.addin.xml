@@ -5,6 +5,7 @@
 	name="Cli.ickable WebClips"
 	description="Create WebClips with Cl.ickable."
 	author="Idealab"
+	category="Community"
 >
  
 	<Runtime>
@@ -15,8 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path="/Do/Action">
 		<Action type="Cl.ickable.ClipAction" />
 	</Extension>

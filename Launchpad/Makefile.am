@@ -47,15 +47,8 @@ all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG)
 FILES = \
 	src/AssemblyInfo.cs \
 	src/LaunchpadAction.cs \
-	src/LaunchpadAnswersItem.cs \
-	src/LaunchpadBlueprintsItem.cs \
-	src/LaunchpadBugsItem.cs \
-	src/LaunchpadCodeItem.cs \
-	src/LaunchpadIcons.cs \
-	src/LaunchpadPersonItem.cs \
-	src/LaunchpadProjectItem.cs \
-	src/LaunchpadRegisterItem.cs \
-	src/LaunchpadTranslationsItem.cs 
+	src/LaunchpadItem.cs \
+	src/LaunchpadItems.cs
 
 DATA_FILES = 
 

@@ -3,30 +3,22 @@
 	namespace="Do"
 	version="1.0"
 	name="Riptide"
-	description="Do Away with Torrent Sites"
+	description="'Do' away with torrent sites!"
 	author="Jason Smith"
+	category="Community"
 	>
 
 	<Runtime>
 		<Import assembly="Riptide.dll"/>
-		<Import assembly="MonoTorrent.dll"/>
 	</Runtime>
 
 	<Dependencies>
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-
-	<!--- Actions -->
 	<Extension path= "/Do/Action">
 		<Action type="Do.Riptide.TorrentSearchAction" />
-		<Action type="Do.Riptide.TorrentDownloadAction" />
 		<Action type="Do.Riptide.TorrentDownloadClientAction" />
-		<Action type="Do.Riptide.TorrentStatusAction" />
-		<Action type="Do.Riptide.StopTorrentAction" />
-		<Action type="Do.Riptide.PauseTorrentAction" />
-		<Action type="Do.Riptide.ResumeTorrentAction" />
 	</Extension>
 
 </Addin>

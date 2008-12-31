@@ -26,12 +26,12 @@ using GConf;
 
 namespace GNOME.Terminal 
 {
-	public class ProIFileItem : Item
+	public class ProfileItem : Item
 	{
 		private string name;
 		private string description;
 
-        public ProIFileItem (string profilePath)
+        public ProfileItem (string profilePath)
         {
 			Client gcClient = new Client ();
 			try {

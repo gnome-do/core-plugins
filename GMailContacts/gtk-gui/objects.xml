@@ -1,5 +1,5 @@
 <objects attr-sync="on">
-  <object type="GMailContacts.GMailConfig" palette-category="General" allow-children="false" base-type="Gtk.Bin">
+  <object type="GMail.GMailConfig" palette-category="General" allow-children="false" base-type="Gtk.Bin">
     <itemgroups />
     <signals />
   </object>

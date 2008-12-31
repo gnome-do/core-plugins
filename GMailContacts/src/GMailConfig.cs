@@ -23,11 +23,11 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Do.Universe;
-using Do.Platform.Linux;
-using Do.Platform;
 
-namespace GMailContacts
+using Do.Platform;
+using Do.Platform.Linux;
+
+namespace GMail
 {	
 	public class GMailConfig : AbstractLoginWidget   
 	{
@@ -40,41 +40,34 @@ namespace GMailContacts
         
 		public GMailConfig() : base ("GMail", Uri)
 		{
-			Username = username;
-			Password = password;
+			Username = GMail.Preferences.Username;
+			Password = GMail.Preferences.Password;
 		}
 
-		static GMailConfig()
+		protected override void SaveAccountData(string username, string password)
 		{
-			prefs = Do.Platform.Services.Preferences.Get<GMailConfig>();
+			GMail.Preferences.Username = username;
+			GMail.Preferences.Password = password;
 		}
 		
 		protected override bool Validate (string username, string password)
 		{
-			if (ValidateUsername (username) && password.Length > 0)
+			if (ValidateUsername (username))
 				return GMail.TryConnect (username, password);
 			return false;
 		}
 		
-		private bool ValidateUsername (string username)
+		bool ValidateUsername (string username)
 		{			
-			return new Regex (EmailPattern, 
-				RegexOptions.Compiled).IsMatch (username);
-		}
-		
-		protected override void SaveAccountData (string username, string password)
-		{
-			prefs.SecureSet("username", username);
-			prefs.SecureSet("password", password); 
+			return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
 		}
 		
 		public static string username { 
-			get { return prefs.SecureGet<string> ("username", "" ); } 
+			get { return prefs.GetSecure<string> ("username", "" ); } 
 		}
 
 		public static string password { 
-			get { return prefs.SecureGet<string> ("password", "" ); } 
+			get { return prefs.GetSecure<string> ("password", "" ); } 
 		}
-
 	}
 }

@@ -19,6 +19,7 @@
 
 using System;
 
+using Do.Platform;
 
 namespace Pastebin
 {	
@@ -53,7 +54,7 @@ namespace Pastebin
 		
 		static PastebinConfig ()
 		{
-			prefs = Do.Addins.Util.GetPreferences ("Pastebin");
+			prefs = Services.Preferences.Get<PastebinConfig> ();
 		}
 
 		protected virtual void OnPaste2Toggled (object sender, System.EventArgs e)

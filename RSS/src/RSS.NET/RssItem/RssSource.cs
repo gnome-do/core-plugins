@@ -51,7 +51,7 @@ namespace Rss
 		}
 
 		/// <summary>Name of the RSS channel that the item came from</summary>
-		public override string Name
+		public string Name
 		{
 			get { return name; }
 			set { name = RssDefault.Check(value); }

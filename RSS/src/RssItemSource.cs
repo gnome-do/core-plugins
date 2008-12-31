@@ -26,6 +26,7 @@ using GConf;
 
 
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace Do.Plugins.Rss
 {

@@ -99,7 +99,7 @@ namespace Rss
 		}
 		/// <summary>Description of the channel</summary>
 		/// <remarks>Maximum length is 500 characters (For RSS 0.91)</remarks>
-		public override string Description
+		public string Description
 		{
 			get { return description; }
 			set { description = RssDefault.Check(value); }

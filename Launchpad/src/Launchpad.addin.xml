@@ -1,10 +1,11 @@
 <Addin
 	id="Launchpad"
 	namespace="Do"
-	version="1.0"
+	version="1.1"
 	name="Launchpad"
-	description="Provides integration with launchpad.net"
-	author="Ken Simon"
+	description="Search various Launchpad properties (e.g. code, bugs, people)."
+	author="Ken Simon, David Siegel"
+	category="Official"
 >
  
 	<Runtime>
@@ -15,9 +16,7 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path= "/Do/Action">
-		<Action type="Do.Launchpad.LaunchpadAction" />
+		<Action type="Launchpad.LaunchpadAction" />
 	</Extension>
 </Addin>

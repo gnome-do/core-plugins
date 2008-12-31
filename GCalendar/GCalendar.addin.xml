@@ -3,8 +3,9 @@
 	namespace= "Do" 
 	version="1.5"
 	name="Google Calendar"
-	description="Allows you to create, search, and browse your Google calendar events."
+	description="Create, search, and browse Google calendar events."
 	author="Alex Launi"
+	category="Official"
 	>
 
 	<Runtime>
@@ -19,7 +20,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="GCalendar.GCalendarItemSource" />
 	</Extension>

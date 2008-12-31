@@ -72,7 +72,7 @@ namespace GnomeDoManLookUp {
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
-					typeof(ITextItem),typeof(ManLookUpItem),typeof(ApplicationItem)
+					typeof(ITextItem),typeof(ManLookUpItem),typeof(IApplicationItem)
 				};
 			}
            
@@ -93,11 +93,11 @@ namespace GnomeDoManLookUp {
 			bool rc  = false;
 			string execStr;
 
-			if (!(item is ApplicationItem)) {			
+			if (!(item is IApplicationItem)) {			
 				rc = true;				
 			} else {
 				
-				ApplicationItem appItem = item as ApplicationItem;
+				IApplicationItem appItem = item as IApplicationItem;
 
 				//grab the parameter we'll be using for whatis command from the Exec string
 				//note, we use whatis becuase redirecting its output is a lot more efficient
@@ -141,7 +141,7 @@ namespace GnomeDoManLookUp {
 		/// <returns>
 		/// A <see cref="System.String"/>
 		/// </returns>
-		private static string getExecutableName (ApplicationItem appItem) 
+		private static string getExecutableName (IApplicationItem appItem) 
 		{			
 			string execStr;
 			Match m;
@@ -186,8 +186,8 @@ namespace GnomeDoManLookUp {
             		string keyword = null;
 
 			//ok, was it plain text, an application item, or one of our own?
-			if (items.First () is ApplicationItem) {
-				keyword = this.getExecutableName (items.First () as ApplicationItem);
+			if (items.First () is IApplicationItem) {
+				keyword = this.getExecutableName (items.First () as IApplicationItem);
 			} else if (items.First () is ManLookUpItem) {
 				ManLookUpItem keyworditem = items.First () as ManLookUpItem;
 				keyword = keyworditem.Text;							

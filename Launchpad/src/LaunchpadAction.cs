@@ -16,111 +16,54 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Do.Universe;
 
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+using Do.Universe;
+using Do.Platform;
 
 using Mono.Unix;
 
-namespace Do.Launchpad
+namespace Launchpad
 {
-	/// <summary>
-	/// Given an ITextItem, GoogleSearchAction will search google for the
-	/// text contents of the ITextItem.
-	/// </summary>
+
 	class LaunchpadAction : Act
 	{
-		public override string Name
-		{
-			get { return Catalog.GetString ("Launchpad"); }
+
+		public override string Name {
+			get { return Catalog.GetString ("Search Launchpad"); }
 		}
 
-		public override string Description
-		{
-			get { return Catalog.GetString ("Launchpad Shortcuts"); }
+		public override string Description {
+			get { return Catalog.GetString ("Search Launchpad properties."); }
 		}
 
-		public override string Icon
-		{ 
+		public override string Icon { 
 			get { return "Launchpad.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes
-		{
-			get
-			{
-				return new Type[] {
-					typeof (ITextItem)
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ITextItem); }
 		}
 
-    public override bool ModifierItemsOptional { get { return false; } }
-
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return (modItem as LaunchpadItem).SupportsItems(items.ToArray ());
-		}
-
-		public override IEnumerable<Type> SupportedModifierItemTypes
-		{
-			get
-			{
-				return new Type[] {
-					typeof(LaunchpadItem)
-				};
-			}
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield return typeof (LaunchpadItem);}
 		}
 
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return new Item[] {
-				new LaunchpadAnswerSearchItem(),
-					new LaunchpadProjectAnswersItem(),
-					new LaunchpadBlueprintsItem(),
-					new LaunchpadBlueprintSearchItem(),
-					new LaunchpadBlueprintsRegisterItem(),
-					new LaunchpadBugNumberItem(),
-					new LaunchpadBugReportItem(),
-					new LaunchpadPackageBugsItem(),
-					new LaunchpadBugSearchItem(),
-					new LaunchpadCodeOverviewItem(),
-					new LaunchpadRegisterItem(),
-					new LaunchpadTranslationSearchItem(),
-					new LaunchpadTranslationReleaseItem(),
-					new LaunchpadProjectPageItem(),
-					new LaunchpadUserPageItem(),
-					new LaunchpadUserSearchItem()
-			};
+			return LaunchpadItems.Items.OfType<Item> ();
 		}
 
-    public override bool SupportsItem (Item item)
-    {
-        return true;
-    }
-
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
-			if (modItems.Any ()) {
-				(modItems.First () as LaunchpadItem).Perform(items.First ());
-			}
-			return null;
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			foreach (LaunchpadItem lp in modItems)
+				lp.Perform (items.OfType<ITextItem> ());
+			
+			yield break;
 		}
 	}
 
-	/// <summary>
-	/// LaunchpadItems are used as modifier items to LaunchpadAction, and they
-	/// are responsible for telling LaunchpadAction whether they support a
-	/// given Item, as well as implementing the actual action on a given Item.
-	///
-	/// They are meant to behave just like Actions, but they need to be Items
-	/// to be listed in the right-hand box.
-	/// </summary>
-	interface LaunchpadItem : Item
-	{
-		bool SupportsItems(Item[] items);
-		void Perform (Item item);
-	}
 }

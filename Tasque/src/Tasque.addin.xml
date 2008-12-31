@@ -3,8 +3,9 @@
 	namespace="Do"
 	version="1.0"
 	name="Tasque"
-	description="Plugin for creating new task in Tasque."
+	description="Create new tasks in Tasque."
 	author="Guillaume Béland"
+	category="Community"
 	>
 
 	<Runtime>

@@ -4,10 +4,6 @@
     <images-root-path>..</images-root-path>
     <target-gtk-version>2.12.1</target-gtk-version>
   </configuration>
-  <import>
-    <widget-library name="Do.Addins, Version=0.7.0.0, Culture=neutral" />
-    <widget-library name="../bin/Debug/ImageShack.dll" internal="true" />
-  </import>
   <widget class="Gtk.Bin" id="ImageShack.ImageShackConfig" design-size="550 520">
     <property name="MemberName" />
     <child>

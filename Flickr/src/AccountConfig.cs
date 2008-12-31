@@ -24,6 +24,7 @@ using Mono.Unix;
 using Gtk;
 using FlickrNet;
 
+using Do.Platform;
 
 namespace Flickr
 {	
@@ -48,44 +49,44 @@ namespace Flickr
 		
 		static AccountConfig ()
 		{
-			prefs = Do.Addins.Util.GetPreferences ("flickr");
+			prefs = Services.Preferences.Get<AccountConfig> ();
 		}
 		
 		public static string AuthToken {
-			get { return prefs ["token"]; }
-			set { prefs ["token"] = value; }
+			get { return prefs.Get ("token", ""); }
+			set { prefs.Set ("token", value); }
 		}
 		
 		public static string Username {
-			get { return prefs ["username"]; }
-			set { prefs ["username"] = value; }
+			get { return prefs.Get ("username", ""); }
+			set { prefs.Set ("username", value);; }
 		}
 		
 		public static string Tags {
-			get { return prefs ["tags"]; }
-			set { prefs ["tags"] = value; }
+			get { return prefs.Get ("tags", ""); }
+			set { prefs.Set ("tags", value); }
 		}
 		
 		public static bool IsPublic {
-			get { return prefs.Get<bool> ("is_public", false); }
-			set { prefs.Set<bool> ("is_public", value); }
+			get { return prefs.Get ("is_public", false); }
+			set { prefs.Set ("is_public", value); }
 		}
 		
 		public static bool FamilyAllowed {
-			get { return prefs.Get<bool> ("allow_family", false); }
-			set { prefs.Set<bool> ("allow_family", value); }
+			get { return prefs.Get ("allow_family", false); }
+			set { prefs.Set ("allow_family", value); }
 		}
 		
 		public static bool FriendsAllowed {
-			get { return prefs.Get<bool> ("allow_friends", false); }
-			set { prefs.Set<bool> ("allow_friends", value); }
+			get { return prefs.Get ("allow_friends", false); }
+			set { prefs.Set ("allow_friends", value); }
 		}
 		
 		protected virtual void OnAuthBtnClicked (object sender, EventArgs e)
 		{
 			flickr = new FlickrNet.Flickr (ApiKey, ApiSecret);
 			Frob = flickr.AuthGetFrob ();
-			Do.Addins.Util.Environment.Open (flickr.AuthCalcUrl (Frob, AuthLevel.Write));
+			Services.Environment.OpenUrl (flickr.AuthCalcUrl (Frob, AuthLevel.Write));
 			Widget image = auth_btn.Image;
 			auth_btn.Label = Catalog.GetString ("Click to compete authorization");
 			auth_btn.Image = image; 

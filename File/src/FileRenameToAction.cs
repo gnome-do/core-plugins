@@ -27,19 +27,19 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace FilePlugin {
-	class RenameToAction : Act {
+	class RenameToAction : IAction {
 		
-		public override string Name { 
+		public string Name { 
 			get { return Catalog.GetString ("Rename to..."); }
 		}
 		
-		public override string Description {
+		public string Description {
 			get { return Catalog.GetString ("Renames a file"); }
 		}
 		
-		public override string Icon { get { return "forward"; } }
+		public string Icon { get { return "forward"; } }
 		
-		public override IEnumerable<Type> SupportedItemTypes {
+		public IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IFileItem),
@@ -47,7 +47,7 @@ namespace FilePlugin {
 			}
 		}
 		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
+		public IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] {
 					typeof (ITextItem),
@@ -59,22 +59,22 @@ namespace FilePlugin {
 			get { return false; }
 		}
 		
-		public bool SupportsItem (Item item)
+		public bool SupportsItem (IItem item)
 		{
 			return true;
 		}
 		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
 		{
 			return true;
 		}
 		
-		public IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
 		{
 			return null;
 		}
 		
-		public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
 		{
 			string dest;
 			List<string> seenPaths;
@@ -85,7 +85,7 @@ namespace FilePlugin {
 				Console.Error.WriteLine ("If you want to move a file, please use move.");
 				return null;
 			}
-			foreach (IFileItem src in items) {
+			foreach (FileItem src in items) {
 				if (seenPaths.Contains (src.Path)) continue;
 				try {
 					dest = src.Path.Substring(0,src.Path.LastIndexOf("/")) + "/" + dest;

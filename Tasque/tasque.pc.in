@@ -1,6 +1,0 @@
-Name: Tasque
-Description: Tasque
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Tasque.dll

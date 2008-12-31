@@ -1,4 +1,4 @@
-<Project name="GMailContacts" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="GMailContacts" fileversion="2.0" language="C#" DefaultNamespace="GMail" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="GMailContacts" />
@@ -29,6 +29,8 @@
     <File name="../BundledLibraries/Google.GData.Client.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Contacts.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
+    <File name="src/Preferences.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/GMailClient.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -39,10 +41,10 @@
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Client.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Contacts.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Extensions.dll" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Interface.Linux, Version=1.0.3277.3105, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=1.0.3277.3104, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=1.0.3277.3107, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </References>
   <GtkDesignInfo />
 </Project>

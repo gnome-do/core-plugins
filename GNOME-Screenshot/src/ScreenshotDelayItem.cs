@@ -22,28 +22,27 @@ using System;
 using Mono.Unix;
 using Do.Universe;
 
-namespace GNOME {
+namespace GNOME
+{
 
-	class ScreenshotDelayItem : Item {
+	class ScreenshotDelayItem : Item
+	{
 
-		int seconds;
-
-		public ScreenshotDelayItem (int seconds) {
-			this.seconds = seconds;
+		public ScreenshotDelayItem (int seconds)
+		{
+			Seconds = seconds;
 		}
 
 		public override string Name {
-			get { return string.Format (Catalog.GetString ("{0}-second delay"), seconds); }
+			get { return string.Format (Catalog.GetString ("{0}-second delay"), Seconds); }
 		}
 
 		public override string Description {
 			get {
-				return string.Format (
-					Catalog.GetPluralString ("Wait {0} second before taking the screenshot.",
-											 "Wait {0} seconds before taking the screenshot.",
-											 seconds),
-					seconds
-				);
+				string waitString = Catalog.GetPluralString (
+				    "Wait {0} second before taking the screenshot.",
+				    "Wait {0} seconds before taking the screenshot.", Seconds);
+				return string.Format (waitString, Seconds);
 			}
 		}
 
@@ -51,8 +50,6 @@ namespace GNOME {
 			get { return "gnome-panel-clock"; }
 		}
 
-		public int Seconds {
-			get { return seconds; }
-		}
+		public int Seconds { get; protected set;}
 	}
 }

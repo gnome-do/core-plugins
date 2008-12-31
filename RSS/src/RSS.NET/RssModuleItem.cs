@@ -112,7 +112,7 @@ namespace Rss
 		/// <summary>
 		/// The name of this RssModuleItem.
 		/// </summary>
-		public override string Name
+		public string Name
 		{
 			get { return this._sElementName; }
 			set { this._sElementName = RssDefault.Check(value); }

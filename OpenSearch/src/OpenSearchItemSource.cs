@@ -90,9 +90,9 @@ namespace OpenSearch
 						if (!Regex.IsMatch (filePath, validFilePattern))
 							continue;
 						
-						IOpenSearchItem item = OpenSearchParser.Create (filePath);
+						OpenSearchItem item = OpenSearchParser.Create (filePath);
 						if (item != null) {
-							openSearchItems.Add ( item );
+							openSearchItems.Add (item);
 						}
 					}
 				} catch {

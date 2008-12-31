@@ -66,26 +66,21 @@ namespace GDocs
             }
         }
         
-        public bool ModifierItemsOptional {
+        public override bool ModifierItemsOptional {
             get {return true; }
         }
         
-        public bool SupportsItem (Item item) 
+        public override bool SupportsItem (Item item) 
         {
 			return IsValidFormat (item as IFileItem);
         }
         
-        public bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
+        public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
         {        		
             return true;
         }
         
-        public IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
-        }
-        
-        public IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {			
 			string fileName = (items.First () as IFileItem).Path;
 			string documentName = (modifierItems.Any ()) ? (modifierItems.First () as ITextItem).Text : null;

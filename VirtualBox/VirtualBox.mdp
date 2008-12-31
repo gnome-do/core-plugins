@@ -1,0 +1,83 @@
+<Project name="VirtualBox" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="VirtualBox" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="VirtualBox" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="src" subtype="Directory" buildaction="Compile" />
+    <File name="src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/VMItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/VMItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="VirtualBox.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_dos.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_ecs.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_fedoracore.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_freebsd.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_gentoo.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_l4.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_linux.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_linux22.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_linux24.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_linux26.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_mandriva.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_netbsd.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_netware.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_openbsd.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_opensolaris.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_opensuse.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_os2warp3.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_os2warp4.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_os2warp45.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_redhat.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_solaris.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_ubuntu.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_unknown.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_win2k.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_win2k3.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_win2k8.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_win31.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_win95.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_win98.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_winme.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_winnt4.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_winvista.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_winxp.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/os_xandros.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/VirtualBox_64px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/state_saved_16px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/vm_delete_32px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/vm_pause_32px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/vm_start_32px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/vrdp_16px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/VMThread.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/VMDynItm.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/vm_discard_32px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/take_snapshot_22px.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/StartAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PauseAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ResumeAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/SaveAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/OffAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/SaveStateAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RestoreStateAction.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+  </References>
+  <GtkDesignInfo />
+</Project>

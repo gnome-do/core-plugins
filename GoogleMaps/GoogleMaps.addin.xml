@@ -5,6 +5,7 @@
 	name="Google Maps"
 	description="Map a location or route in Google maps."
 	author="DR Colkitt"
+	category="Community"
 >
  
 	<Runtime>
@@ -15,7 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/Action">
 		<Action type="Google.MapAction" />
 	</Extension>

@@ -46,7 +46,7 @@ namespace Rss
 			set { permaLink = value; }
 		}
 		/// <summary>Globally unique identifier value</summary>
-		public override string Name
+		public string Name
 		{
 			get { return name; }
 			set { name = RssDefault.Check(value); }

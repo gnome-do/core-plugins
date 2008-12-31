@@ -47,12 +47,12 @@ namespace Evolution
 		}
 		
 		public override string Description {
-			get { return Value.Replace('\n',' '); }
+			get { return Value.Replace ('\n', ' '); }
 		}
 
 
 		public override string Icon {
-			get { return "house.png@" + GetType ().Assembly.FullName;; }
+			get { return "house.png@" + GetType ().Assembly.FullName; }
 		}
 	}
 }

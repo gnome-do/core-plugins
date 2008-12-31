@@ -22,7 +22,7 @@ using Do.Universe;
 
 namespace OpenSearch
 {
-	public class OpenSearchItem	: IOpenSearchItem
+	public class OpenSearchItem	: Item, IOpenSearchItem
 	{
 		private string name, description, urlTemplate;
 		

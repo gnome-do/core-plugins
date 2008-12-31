@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 using Do.Universe;
+using Do.Universe.Common;
 
 namespace Delicious
 {	

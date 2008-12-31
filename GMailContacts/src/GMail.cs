@@ -23,152 +23,68 @@ using System.Net;
 using System.Threading;
 using System.Collections.Generic;
 
+using Mono.Unix;
+
 using Do.Universe;
+using Do.Platform;
 
-using Google.GData.Client;
-using Google.GData.Contacts;
-using Google.GData.Extensions;
-
-namespace GMailContacts
+namespace GMail
 {
 	public static class GMail
 	{
-		public const string GAppName = "alexLauni-gnomeDoGMailPlugin-1.2";
-		private static List<Item> contacts;
-		private static object conts_lock;
-		private static DateTime last_updated;
-		private static ContactsService service;
+		static readonly string ConnectionErrorMessage = Catalog.GetString ("An error occurred connecting to google, "
+			+ "are your credentials valid?");
+			
+		static readonly string MissingCredentialsMessage = Catalog.GetString ("Missing login credentials. Please set "
+			+ "login information in plugin configuration.");
+			
+		static GMailClient client;
 		
 		static GMail()
 		{
-			ServicePointManager.CertificatePolicy = new CertHandler ();
-			contacts = new List<Item> ();
-			conts_lock = new object ();
-			last_updated = new DateTime (1987, 11, 28);
-			
-			Connect ( GMailConfig.username, GMailConfig.password);
+			Preferences = new Preferences ();
+			client = new GMailClient (Preferences.Username, Preferences.Password);
 		}
 		
-		public static List<Item> Contacts {
-			get { return contacts; }
+		public static IEnumerable<Item> Contacts { 
+			get { return client.Contacts; }
 		}
 		
-		private static void Connect (string username, string password) 
-		{
-			try {
-				service = new ContactsService (GAppName);
-				service.setUserCredentials (username, password);
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-			}
-		}
-		
+		public static Preferences Preferences { get; private set; }
+
 		public static void UpdateContacts ()
 		{
-			if (!Monitor.TryEnter (conts_lock)) return;
-			
-			ContactsQuery query = new ContactsQuery (
-				ContactsQuery.CreateContactsUri ("default"));
-			query.NumberToRetrieve = 1000;
-			query.StartDate = last_updated;
-			query.ShowDeleted = true;
-			
-			try {
-				ContactsFeed feed = service.Query(query);
-				last_updated = feed.Updated;
-				
-				ContactItem buddy;
-				foreach (ContactEntry entry in feed.Entries)
-				{
-					if (String.IsNullOrEmpty (entry.Title.Text)) continue;
-					
-					if (entry.Deleted) {
-						ContactItem enemy = ContactItem.Create
-							(entry.Title.Text);
-						contacts.Remove (enemy);
-						continue;
-					}
-					
-					buddy = ContactItem.CreateWithName (entry.Title.Text);
-					int i = 0;
-					foreach (PostalAddress address in entry.PostalAddresses) {
-						string detail = "address.gmail." + i;
-						if (address.Primary)
-							detail = "address.gmail";
-						else if (address.Home)
-							detail = "address.gmail.home";
-						else if (address.Work)
-							detail = "address.gmail.work";
-						buddy [detail] = address.Value.Replace ('\n',' ');
-						i++;
-					}
-					i = 0;
-					foreach (PhoneNumber phone in entry.Phonenumbers) {
-						string detail = "phone.gmail." + i;
-						if (phone.Primary)
-							detail = "phone.gmail";
-						else if (phone.Home)
-							detail = "phone.gmail.home";
-						else if (phone.Work)
-							detail = "phone.gmail.work";
-						buddy [detail] = phone.Value.Replace ('\n',' ');
-						i++;
-					}
-					i = 0;
-					foreach (EMail email in entry.Emails)
-					{	
-						string detail = "email.gmail." + i;
-						if (email.Primary)
-							detail = "email.gmail";
-						else if (email.Home)
-							detail = "email.gmail.home";
-						else if (email.Work)
-							detail = "email.gmail.work";
-						
-						buddy [detail] = email.Address;
-					}
-					contacts.Add (buddy);
-				}
-			} catch (Exception e) {
-				Console.Error.WriteLine ("GMailContacts Error: {0}",e.Message);
-			} finally {
-				Monitor.Exit (conts_lock);
-			}
+			client.UpdateContacts ();
 		}
-		
-		/* 
-		 * `NOT IMPLEMENTED IN GDATA API YET
-		private static string GetBuddyPhotoFileLocation (string url)
-		{
-			string buddyIconDir;
-			buddyIconDir = "~/.config/gnome-do/plugins/GCalendar/icons";
-			buddyIconDir.Replace ("~", Environment.GetEnvironmentVariable("HOME"));
-			
-			//WebClient client = new WebClient ();
-			//Client.DownloadFile(url, buddyIconDir + );
-			return null;
-		}
-		*/
-		
+	
 		public static bool TryConnect (string username, string password)
 		{
-			ContactsService test;
-			ContactsQuery query; 
-			
-			test = new ContactsService (GAppName);
-			test.setUserCredentials (username, password);
-			query = new ContactsQuery(
-				ContactsQuery.CreateContactsUri ("default"));
-			query.StartDate = DateTime.Now;
-			
+			GMailClient test;
+
 			try {
-				test.Query (query);
+				test = new GMailClient (username, password);
+				test.UpdateContacts ();
 				Connect (username, password);
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
+			} catch (Exception) {
+				Log.Error (ConnectionErrorMessage);
 				return false;
 			}
+			
 			return true;
+		}
+
+		static void Connect (string username, string password) 
+		{
+			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
+				Log.Error (MissingCredentialsMessage);
+				return;
+			}
+
+			try {
+				client = new GMailClient (username, password);
+			} catch (Exception) {
+				Log.Error (ConnectionErrorMessage);
+			}
 		}
 	}
 }
