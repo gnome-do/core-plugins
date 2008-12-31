@@ -1,8 +1,8 @@
 //  MusicItems.cs
 //
-//  GNOME Do is the legal property of its developers, whose names are too numerous
-//  to list here.  Please refer to the COPYRIGHT file distributed with this
-//  source distribution.
+//  GNOME Do is the legal property of its developers, whose names are too
+//  numerous to list here.  Please refer to the COPYRIGHT file distributed with
+//  this source distribution.
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,14 +20,14 @@
 using System;
 using System.Collections.Generic;
 
-using Do.Addins;
-using Do.Universe;
 using Mono.Unix;
+
+using Do.Universe;
 
 namespace Do.Rhythmbox
 {
 
-	public abstract class MusicItem : IItem
+	public abstract class MusicItem : Item
 	{
 		protected string name, artist, year, cover;
 
@@ -44,9 +44,9 @@ namespace Do.Rhythmbox
 			this.cover = cover;
 		}
 
-		public virtual string Name { get { return name; } }
-		public virtual string Description { get { return artist; } }
-		public virtual string Icon { get { return Cover ?? "gtk-cdrom"; } }
+		public override string Name { get { return name; } }
+		public override string Description { get { return artist; } }
+		public override string Icon { get { return Cover ?? "gtk-cdrom"; } }
 
 		public virtual string Artist { get { return artist; } }
 		public virtual string Year { get { return year; } }

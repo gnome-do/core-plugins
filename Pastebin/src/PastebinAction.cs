@@ -25,86 +25,69 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using Do.Addins;
+
 using Do.Universe;
+using Do.Universe.Common;
+using Do.Platform.Linux;
 
 using Mono.Unix;
 
 namespace Pastebin
 {
-	public class PastebinAction : AbstractAction, IConfigurable
+	public class PastebinAction : Act, IConfigurable
 	{
-		public override string Name
-		{
+		public override string Name {
 			get { return Catalog.GetString ("Send to Pastebin"); }
 		}
 		
-		public override string Description
-		{
+		public override string Description {
 			get { return Catalog.GetString ("Sends the text to Pastebin."); }
 		}
 		
-		public override string Icon
-		{
+		public override string Icon {
 			get { return "gtk-paste"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes
-		{
-			get 
-			{
-				return new Type[] {
-					typeof (ITextItem),
-					typeof (IFileItem)
-				};
+		public override IEnumerable<Type> SupportedItemTypes {
+			get {
+				yield return typeof (ITextItem);
+				yield return typeof (IFileItem);
 			}
 		}
 			
-		public override bool ModifierItemsOptional
-		{
+		public override bool ModifierItemsOptional  {
 			get { return true; }
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
-			get 
-			{
-				return new Type[] {
-					typeof (ITextSyntaxItem)
-				};
-			}
+			get { yield return typeof (ITextSyntaxItem); }
 		}
 		
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (item is ITextItem) return true;
-			if (item is FileItem) {	
-				if ((item as FileItem).MimeType.StartsWith ("text/") || 
-				(item as FileItem).MimeType.EndsWith ("/x-perl"))
-				return true;
+			if (item is IFileItem) {
+				IFileItem file = item as IFileItem;
+				if (Directory.Exists (file.Path)) return false;
+				long kbSize = new FileInfo (file.Path).Length / 1024;
+				return kbSize < 100;
 			}
 			return false;
 		}
 			
-		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
 			IPastebinProvider pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences ();
-
-			List<IItem> items = new List<IItem> ();
-
-			foreach (IItem languageItem in pastebinProvider.SupportedLanguages) {
-				items.Add (languageItem);
-			}
-										
-			return items.ToArray ();
+			return pastebinProvider.SupportedLanguages.OfType<Item> ();
 		}
 				
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{		
 			string text = string.Empty;
 			ITextItem titem = null;
 			
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				if (item is IFileItem)
 					titem = new TextItem (File.ReadAllText (
 						(item as IFileItem).Path));
@@ -124,7 +107,7 @@ namespace Pastebin
 					
 			string url = Pastebin.PostUsing (pastebinProvider);	
 					
-			return new IItem[] { new TextItem (url) };
+			yield return new TextItem (url);
 		}
 				
 		public Gtk.Bin GetConfiguration ()

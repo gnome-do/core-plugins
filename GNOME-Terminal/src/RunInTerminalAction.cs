@@ -24,56 +24,51 @@ using System.Diagnostics;
 using System.IO;
 
 using Mono.Unix;
+
 using Do.Universe;
+using Do.Platform;
 
 namespace GNOME.Terminal
 {
-	public class RunInTerminalAction : AbstractAction
+	public class RunInTerminalAction : Act
 	{
-		static string last_command_found;
-		
+
 		public RunInTerminalAction()
 		{
 		}
 
-		public override string Name
-		{
+		public override string Name {
 	      get { return Catalog.GetString ("Run in Terminal"); }
 	    }
 
-	    public override string Description
-		{
+	    public override string Description {
 	      get { return Catalog.GetString ("Runs a command in GNOME Terminal."); }
 	    }
 
-	    public override string Icon
-		{
+	    public override string Icon {
 	      get { return "gnome-terminal"; }
 	    }
 
-	    public override IEnumerable<Type> SupportedItemTypes
-		{
+	    public override IEnumerable<Type> SupportedItemTypes {
 	      get {
-	      	return new Type[] {
-	      		typeof (ITextItem),
-	      		typeof (IFileItem),
-	      	};
+	      	yield return typeof (ITextItem);
+	      	yield return typeof (IFileItem);
 	      }
 	    }
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (item is ITextItem) {
-				return CommandLineFoundOnPath ((item as ITextItem).Text);
+				return Services.Environment.IsExecutable ((item as ITextItem).Text);
 			} else if (item is IFileItem) {
-				return FileItem.IsExecutable (item as IFileItem);
+				return Services.Environment.IsExecutable ((item as IFileItem).Path);
 			}
 			return false;
 		}
 
-	    public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+	    public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 	    {
-			foreach (IItem item in items) {
+			foreach (Item item in items) {
 				string cmd = "";
 				if (item is ITextItem) {
 					cmd = (item as ITextItem).Text;
@@ -82,49 +77,13 @@ namespace GNOME.Terminal
 				}
 
 				try {
-					Process.Start ("gnome-terminal", "-x " + cmd );
+					Process.Start ("gnome-terminal", "-x " + cmd);
 				} catch (Exception e) {
-					Console.Error.WriteLine ("Could not open gnome-terminal with command {0}: {1}",
-						cmd, e.Message );
+					Log.Error ("Could not open gnome-terminal with command {0}: {1}", cmd, e.Message );
+					Log.Debug (e.StackTrace);
 				}
 			}
-			return null;
+			yield break;
 	    }
-
-		public static bool CommandLineFoundOnPath (string command_line)
-		{
-			string path, command, command_file;
-			int space_position;
-			
-			if (command_line == null) return false;
-			
-			command = command_line.Trim ();			
-			space_position = command.IndexOf (" ");
-			if (space_position > 0) {
-				command = command.Substring (0, space_position);
-			}
-
-			// If this command is the same as the last, yes.
-			if (command == last_command_found) return true;
-			
-			// If the command is found, fine.
-			if (System.IO.File.Exists (command)) {
-				last_command_found = command;
-				return true;
-			}
-			
-			// Otherwise, try to find the command file in path.
-			path = System.Environment.GetEnvironmentVariable ("PATH");
-			if (path != null) {
-				foreach (string part in path.Split (':')) {
-					command_file = System.IO.Path.Combine (part, command);
-					if (System.IO.File.Exists (command_file)) {
-						last_command_found = command;
-						return true;
-					}
-				}
-			}
-			return false;
-		}
 	}
 }

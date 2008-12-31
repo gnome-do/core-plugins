@@ -1,0 +1,27 @@
+<Addin 
+	id="JIRA" 
+	namespace="Do"
+	version="2.3"
+	name="JIRA Integration"
+	description="Creates fast lookup links for JIRA issues."
+	author="Andrew Franklin"
+	category="Community"
+	>
+
+	<Runtime>
+		<Import assembly="JIRA.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path="/Do/Action">
+		<Action type="JIRA.JIRAIssueAction" />
+	</Extension>
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="JIRA.JIRAIssueSource" />
+	</Extension>
+
+
+</Addin>

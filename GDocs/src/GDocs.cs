@@ -1,29 +1,30 @@
-/* GDocs.cs
- *
- * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// GDocs.cs
+//
+// GNOME Do is the legal property of its developers. Please refer to the
+// COPYRIGHT file distributed with this source distribution.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
 
 
 using System;
 using System.Net;
 using System.Xml;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
 using Google.GData.Client;
@@ -31,47 +32,52 @@ using Google.GData.Documents;
 using Google.GData.Extensions;
 
 using Do.Universe;
+using Do.Platform;
 
-namespace GDocs {
-	public static class GDocs {
-		private static DocumentsService service;
-		private static List<IItem> docs;
-		private static object docs_lock;
+namespace GDocs
+{
+
+	public static class GDocs
+	{
+
+		const string FeedUri =
+			"http://docs.google.com/feeds/documents/private/full";
+		public const string GAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
 		
-		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
-		private static string gAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
+		static List<Item> docs;
+		static GDocsPreferences prefs;
+		static DocumentsService service;
 		
 		static GDocs ()
 		{
-			string username, password;
-			//Google works over SSL, we need accept the cert.
+			docs = new List<Item> ();
+			prefs = new GDocsPreferences ();
+
+			// Google works over SSL, we need accept the cert.
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 			
-			docs = new List<IItem> ();
-			docs_lock = new object ();
-			
-			Configuration.GetAccountData (out username, out password,
-			                              typeof (Configuration));
+			string username, password;
+			Configuration.GetAccountData (out username, out password, typeof (Configuration));
 			Connect (username, password);
-		}
-		
-		public static string GAppName {
-			get { return gAppName; }
 		}
 		
 		public static bool Connect (string username, string password)
 		{
 			try {
-				service = new DocumentsService (gAppName);
+				service = new DocumentsService (GAppName);
 				service.setUserCredentials (username, password);
 			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
+				Log.Error (e.Message);
 				return false;
 			}
 			return true;
 		}
+
+		internal static GDocsPreferences Preferences {
+			get { return prefs; }
+		}
 		
-		public static List<IItem> Docs {
+		public static List<Item> Docs {
 			get { return docs; }
 		}
 		
@@ -85,29 +91,38 @@ namespace GDocs {
 				docsFeed = service.Query (query);
 			} catch (Exception e) {
 				docsFeed = null;
-				Console.Error.WriteLine (e.Message);
+				Log.Error (e.Message);
 				return;
 			}
 			
-			lock (docs_lock) {				
+			lock (docs) {				
 				docs.Clear ();				
 				foreach (DocumentEntry doc in docsFeed.Entries) {					
-					string doc_url = doc.AlternateUri.Content;
-					string doc_title = doc.Title.Text;
-					
-					if (doc.IsDocument) 
-						docs.Add (new GDocsDocumentItem (doc_title, doc_url));
-					else if (doc.IsSpreadsheet) 
-						docs.Add (new GDocsSpreadsheetItem (doc_title, doc_url));
-					else if (doc.IsPresentation) 
-						docs.Add (new GDocsPresentationItem (doc_title, doc_url));
-					else if (doc.IsPDF)
-						docs.Add (new GDocsPDFItem (doc_title, doc_url));					
+					GDocsItem item = MaybeItemFromEntry (doc);
+					if (item != null)
+						docs.Add (item);					
 				}
 			}
 		}
+
+		static GDocsItem MaybeItemFromEntry (DocumentEntry doc)
+		{
+				string url = doc.AlternateUri.Content;
+				string title = doc.Title.Text;
+
+				if (doc.IsDocument) 
+					return new GDocsDocumentItem (title, url);
+				else if (doc.IsSpreadsheet) 
+					return new GDocsSpreadsheetItem (title, url);
+				else if (doc.IsPresentation) 
+					return new GDocsPresentationItem (title, url);
+				else if (doc.IsPDF)
+					return new GDocsPDFItem (title, url);					
+				else
+					return null;
+		}
 		
-		public static IItem UploadDocument (string fileName, string documentName)
+		public static Item UploadDocument (string fileName, string documentName)
 		{
 			DocumentEntry newDoc;
 			GDocsItem newDocItem;
@@ -116,66 +131,70 @@ namespace GDocs {
 				newDoc = service.UploadDocument (fileName, documentName);
 			} catch (Exception e) {
 				newDoc = null;
-				Console.Error.WriteLine (e.Message);
-				Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Uploading failed."), 
-				    Catalog.GetString ("An error occurred when uploading file to Google Docs."));
-
+				Log.Error (e.Message);
+				Services.Notifications.Notify (GetUploadFailedNotification ());
 				return null; 
 			}		
 			
-			string doc_url = newDoc.AlternateUri.Content;
-			string doc_title = newDoc.Title.Text;
-		
-			if (newDoc.IsDocument)
-				newDocItem = new GDocsDocumentItem (doc_title, doc_url);
-			else if (newDoc.IsSpreadsheet)
-				newDocItem = new GDocsSpreadsheetItem (doc_title, doc_url);
-			else if (newDoc.IsPresentation)
-				newDocItem = new GDocsPresentationItem (doc_title, doc_url);
-			else if (newDoc.IsPDF)
-				newDocItem = new GDocsPDFItem (doc_title, doc_url);
-			else
-				return null;
-			
-			lock (docs_lock) {
-				docs.Add (newDocItem);
+			newDocItem = MaybeItemFromEntry (newDoc);
+			if (newDocItem != null) {
+				lock (docs) {
+					docs.Add (newDocItem);
+				}
 			}
 			return newDocItem;
 		}
-		
-		public static void TrashDocument (GDocsItem docItem)
+
+		static Notification GetUploadFailedNotification ()
 		{
-			string doc_title = docItem.Name;
-			string doc_url   = docItem.URL;
-			
+			return new Notification (
+				Catalog.GetString ("Uploading failed."), 
+				Catalog.GetString ("An error occurred when uploading files to Google Docs."), 
+				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
+		}
+
+		static Notification GetDeleteDocumentFailedNotification ()
+		{
+			return new Notification (
+				Catalog.GetString ("Deleting failed."), 
+				Catalog.GetString ("An error occurred when deleting the document at Google Docs."), 
+				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
+		}
+
+		static Notification GetDocumentDeletedNotification (string documentTitle)
+		{
+			return new Notification (
+				Catalog.GetString ("Document deleted."), 
+				string.Format (Catalog.GetString ("The document '{0}' has been successfully moved into Trash at Google Docs."), documentTitle), 
+				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
+		}
+		
+		public static void TrashDocument (GDocsItem item)
+		{
 			// Search for document(s) having exactly the title,
 			// Delete the one with matching AlternateUri
 			DocumentsListQuery query = new DocumentsListQuery ();
-			query.Title = doc_title;
+			query.Title = item.Name;
 			query.TitleExact = true;
 			DocumentsFeed docFeed = service.Query (query);	
+			DocumentEntry document =
+				docFeed.Entries.FirstOrDefault (e => e.AlternateUri == item.URL) as DocumentEntry;
 
-			if (docFeed.Entries.Count >= 1) {
-				foreach (DocumentEntry docEntry in docFeed.Entries) {	
-					if (docEntry.AlternateUri == doc_url) {
-						try {
-							docEntry.Delete ();
-						} catch (Exception e) {
-							Console.Error.WriteLine (e.Message);
-							Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Deleting failed"),
-							    Catalog.GetString ("An error occurred when deleting the document at Google Docs."));
-							return;
-						}
-						
-						Do.Addins.NotificationBridge.ShowMessage (Catalog.GetString ("Document deleted."),
-						    Catalog.GetString (String.Format ("The document '{0}' has been successfully moved into Trash at Google Docs.", 
-						                                      doc_title)));
-						lock (docs_lock) {						
-							docs.Remove (docItem);
-						}
-					}
-				}
+			if (document == null) return;
+
+			try {
+				document.Delete ();
+			} catch (Exception e) {
+				Log.Error (e.Message);
+				Services.Notifications.Notify (GetDeleteDocumentFailedNotification ());
+				return;
+			}
+
+			Services.Notifications.Notify (GetDocumentDeletedNotification (item.Name));
+			lock (docs) {						
+				docs.Remove (item);
 			}
 		}
+
 	}
 }

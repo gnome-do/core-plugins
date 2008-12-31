@@ -27,18 +27,18 @@ using Do.Universe;
 
 namespace WindowManager
 {	
-	public class WindowItem : IWindowItem
+	public class WindowItem : Item, IWindowItem
 	{
 		Wnck.Window window;
 		string icon;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return window.Name;
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return window.Name;
 			}
@@ -50,7 +50,7 @@ namespace WindowManager
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return icon;
 			}
@@ -64,23 +64,23 @@ namespace WindowManager
 		
 	}
 	
-	public class ScreenItem : IScreenItem
+	public class ScreenItem : Item, IScreenItem
 	{
 		string name, description, icon;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return name;
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return description;
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return icon;
 			}

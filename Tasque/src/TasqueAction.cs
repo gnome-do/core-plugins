@@ -25,25 +25,24 @@ using GConf;
 using Do.Universe;
 using Tasque;
 using Tasque.DBus;
-using Tasque.Category.Item;
 using Mono.Unix;
 
 namespace Tasque
 {
 	
-        public class TasqueCreateTask : AbstractAction
+	public class TasqueCreateTask : Act
+    {
+		
+        public TasqueCreateTask ()
         {
-		
-                public TasqueCreateTask ()
-                {
-                }
-		
-                public override string Name {
-                        get { return Catalog.GetString ("Create a new task"); }
-                }
-		
-                public override string Description {
-                        get { return Catalog.GetString ("Create a new task in Tasque"); }
+        }
+
+        public override string Name {
+                get { return Catalog.GetString ("Create a new task"); }
+        }
+
+        public override string Description {
+                get { return Catalog.GetString ("Create a new task in Tasque"); }
 		}
 		
 		public override string Icon {
@@ -51,57 +50,35 @@ namespace Tasque
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
-		}
-			
-		public override bool SupportsItem (IItem item) {
-			return true;
+			get { yield return typeof (ITextItem); }
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get {
-				return new Type[] {
-					typeof(TasqueCategoryItem),
-				};
-			}
+			get { yield return typeof(TasqueCategoryItem); }
 		}
 			
-		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			List<IItem> items = new List<IItem> ();
-			
-			try {
-				items = Tasque.GetCategoryItems ();
-				return items.ToArray();
-			} catch {
-				return null;
-			}
-			
+			return Tasque.GetCategoryItems ().OfType<Item> ();
 		}
 		
 		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
 
-		public override IEnumerable<IItem> Perform ( IEnumerable<IItem> items, IEnumerable<IItem> modifierItems )
+		public override IEnumerable<Item> Perform ( IEnumerable<Item> items, IEnumerable<Item> modItems )
 		{
-			if ( modifierItems.Any ())	
-				TextItemPerform (items.First () as ITextItem, modifierItems.First () as TasqueCategoryItem);
+			if (modItems.Any ())	
+				TextItemPerform (items.First () as ITextItem, modItems.First () as TasqueCategoryItem);
 			else 
 				TextItemPerform (items.First () as ITextItem, new TasqueCategoryItem (""));
 			
-			return null;
+			yield break;
 		}
 		
-		protected IItem[] TextItemPerform (ITextItem item, TasqueCategoryItem category)
+		protected Item[] TextItemPerform (ITextItem item, TasqueCategoryItem category)
 		{
 			string defaultCategory;
-
-			ArrayList list = new ArrayList ();
 			GConf.Client conf = new GConf.Client ();
 			TasqueDBus tasque = new TasqueDBus ();
 			
@@ -114,26 +91,23 @@ namespace Tasque
 			
 			if (category.Name != "" ) {
 				tasque.CreateTask(category.Name, item.Text);
-			}
-			else if (defaultCategory == String.Empty) {
+			} else if (defaultCategory == String.Empty) {
 				
 				string[] split = item.Text.Split (':');
-				if (split.GetValue(0).ToString() == item.Text) {
-					list = tasque.GetCategoryNames ();
-					tasque.CreateTask (list[0].ToString(), item.Text);
+				if (split [0] == item.Text) {
+					IEnumerable<string> categories = tasque.GetCategoryNames ();
+					tasque.CreateTask (categories.First (), item.Text);
+				} else {
+					tasque.CreateTask (split [0], split [1]);
 				}
-				else {
-					tasque.CreateTask (split.GetValue(0).ToString(), split.GetValue(1).ToString());
-				}
-			}
-			else {
+			} else {
 				
 				string[] split = item.Text.Split (':');
 				
-				if (split.GetValue(0).ToString() == item.Text)
+				if (split [0] == item.Text)
 					tasque.CreateTask (defaultCategory, item.Text);
 				else 
-					tasque.CreateTask (split.GetValue(0).ToString(), split.GetValue(1).ToString());
+					tasque.CreateTask (split [0], split [1]);
 			}
 			return null;
 		}

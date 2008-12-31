@@ -41,7 +41,7 @@ namespace GnomeDoManLookUp {
 	/// <summary>
 	/// 	ManLookUpItem - Our custom manual page entries
 	/// </summary>
-	public class ManLookUpItem : IOpenableItem {
+	public class ManLookUpItem : Item, IOpenableItem {
 		
 		private string name;
 		private string description;
@@ -64,14 +64,14 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	The entry's name. Usually the actual man page name. 
 		/// </value>
-		public string Name {
+		public override string Name {
 			get { return name; }
 		}
 		
 		/// <value>
 		/// 	The entry's description
 		/// </value>
-		public string Description { 
+		public override string Description { 
 			get { return description; }
 		}
 		
@@ -79,7 +79,7 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	Our pretty icon
 		/// </value>
-		public string Icon { 
+		public override string Icon { 
 			get { return "help-browser"; }
 		}
 
@@ -107,16 +107,16 @@ namespace GnomeDoManLookUp {
 	/// <summary>
 	/// 	ManItemSource - Our "indexer" or data source of man items.. 
 	/// </summary>
-	public class ManLookUpItemSource : IItemSource { 
+	public class ManLookUpItemSource : ItemSource { 
 	
-		List<IItem> items;
+		List<Item> items;
 		
 		/// <summary>
 		/// 	Initialize the object and update the list of items
 		/// </summary>
 		public ManLookUpItemSource () 
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 			UpdateItems ();
 		}
 
@@ -124,14 +124,14 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	Name of data source
 		/// </value>
-		public string Name { 
+		public override string Name { 
 			get { return Catalog.GetString ("Documentation help entries (man)"); }
 		}
 
 		/// <value>
 		/// 	Description of data source
 		/// </value>	
-		public string Description { 
+		public override string Description { 
 			get { return Catalog.GetString ("Search and read help documentation (man)"); }
 		}
 		
@@ -139,14 +139,14 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	Our pretty icon
 		/// </value>
-		public string Icon { 
+		public override string Icon { 
 			get { return "applications-office"; }
 		}
 
 		/// <value>
 		/// 	What type of items do we support
 		/// </value>
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] { typeof (ManLookUpItem) };
 			}
@@ -155,7 +155,7 @@ namespace GnomeDoManLookUp {
 		/// <value>
 		/// 	Our collection of items
 		/// </value>
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 
@@ -164,12 +164,12 @@ namespace GnomeDoManLookUp {
 		/// 
 		/// </summary>
 		/// <param name="parent">
-		/// A <see cref="IItem"/>
+		/// A <see cref="Item"/>
 		/// </param>
 		/// <returns>
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
 			return null;  
 		}
@@ -178,7 +178,7 @@ namespace GnomeDoManLookUp {
 		/// <summary>
 		/// 	Update the items we are keeping track of
 		/// </summary>
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			items.Clear ();
 

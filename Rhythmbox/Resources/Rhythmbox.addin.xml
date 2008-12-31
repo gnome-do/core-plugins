@@ -3,8 +3,9 @@
 	namespace="Do"
 	version="2.0"
 	name="Rhythmbox"
-	description="Searches and plays Rhythmbox music."
+	description="Search and play music in Rhythmbox."
 	author="David Siegel"
+	category="Official"
 	>
 
 	<Runtime>
@@ -12,11 +13,9 @@
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Do.Rhythmbox.MusicItemSource" />
 	</Extension>

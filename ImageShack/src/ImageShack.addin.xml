@@ -3,8 +3,9 @@
 	namespace="Do"
 	version="1.1"
 	name="ImageShack"
-	description="Upload an image to ImageShack."
+	description="Upload images to ImageShack."
 	author="Jason Jones"
+	category="Official"
 >
  
 	<Runtime>
@@ -12,11 +13,9 @@
 	</Runtime>
 	
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path= "/Do/Action">
 		<Action type="ImageShack.ImageShackAction" />
 	</Extension>

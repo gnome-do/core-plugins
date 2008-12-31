@@ -27,7 +27,7 @@ using Do.Universe;
 
 namespace WindowManager
 {
-//	public interface IWindowActionItem : IItem
+//	public interface IWindowActionItem : Item
 //	{
 //	}
 	

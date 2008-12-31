@@ -22,7 +22,7 @@ using Archive;
 
 namespace Archive {
    
-        public class ArchiveTypeItem : IItem
+        public class ArchiveTypeItem : Item
         {
                 private string archiveName;
                 private string archiveDescription;
@@ -66,15 +66,15 @@ namespace Archive {
                         get { return archiveId; }
                 }
                 
-                public string Name {
+                public override string Name {
                         get { return archiveName; }
                 }
                 
-                public string Description {
+                public override string Description {
                         get { return archiveDescription; }
                 }
                 
-                public string Icon {
+                public override string Icon {
                         get { return archiveIcon; }
                 }
                 

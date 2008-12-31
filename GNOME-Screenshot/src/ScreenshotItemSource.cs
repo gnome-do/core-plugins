@@ -26,9 +26,9 @@ using Do.Universe;
 
 namespace GNOME {
 
-	public class ScreenshotItemSource : IItemSource {
+	public class ScreenshotItemSource : ItemSource {
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (ScreenshotItem),
@@ -36,33 +36,33 @@ namespace GNOME {
 			}
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("GNOME Screenshot Items"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Whole screen or current window."); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "camera"; }
 		}
 		
-		public IEnumerable<IItem> Items
+		public override IEnumerable<Item> Items
 		{
 			get {
-				return new IItem [] {
+				return new Item [] {
 					new WholeScreenScreenshotItem (),
 					new CurrentWindowScreenshotItem (),
 				};
 			}
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}

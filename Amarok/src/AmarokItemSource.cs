@@ -29,40 +29,38 @@ using Mono.Unix;
 namespace Do.Plugins.Amarok
 {
 
-	public class AmarokMusicItemSource : IItemSource
+	public class AmarokMusicItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 		List<AlbumMusicItem> albums;
 		List<ArtistMusicItem> artists;
 
 		public AmarokMusicItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 
-		public string Name { get { return Catalog.GetString ("Amarok Music"); } }
-		public string Description { 
+		public override string Name { get { return Catalog.GetString ("Amarok Music"); } }
+		public override string Description { 
 			get { return Catalog.GetString ("Provides access to artists and albums from Amarok."); } 
 		}
-		public string Icon { get { return "amarok"; } }
+		public override string Icon { get { return "amarok"; } }
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (MusicItem),
-					typeof (BrowseMusicItem),
-					typeof (ApplicationItem),
-				};
+				yield return typeof (MusicItem);
+				yield return typeof (BrowseMusicItem);
+				yield return typeof (IApplicationItem);
 			}
 		}
 
-		public IEnumerable<IItem> Items { get { return items; } }
+		public override IEnumerable<Item> Items { get { return items; } }
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent) {
-			List<IItem> children;
+		public override IEnumerable<Item> ChildrenOfItem (Item parent) {
+			List<Item> children;
 
-			children = new List<IItem> ();
-			if (parent is ApplicationItem && parent.Name == "Amarok Music Player") {
+			children = new List<Item> ();
+			if (parent is IApplicationItem && parent.Name.Contains ("Amarok")) {
 				children.Add (new BrowseAlbumsMusicItem ());
 				children.Add (new BrowseArtistsMusicItem ());
 				children.AddRange (AmarokRunnableItem.DefaultItems);
@@ -99,8 +97,8 @@ namespace Do.Plugins.Amarok
 
 			// Add albums and artists.
 			Amarok.LoadAlbumsAndArtists (out albums, out artists);
-			foreach (IItem album in albums) items.Add (album);
-			foreach (IItem artist in artists) items.Add (artist);
+			foreach (Item album in albums) items.Add (album);
+			foreach (Item artist in artists) items.Add (artist);
 		}
 
 		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)

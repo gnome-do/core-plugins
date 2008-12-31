@@ -27,7 +27,7 @@ using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public class PidginChatAction : AbstractAction
+	public class PidginChatAction : Act
 	{
 		public PidginChatAction ()
 		{
@@ -58,7 +58,7 @@ namespace Do.Addins.Pidgin
 			}
 		}
 
-		public override bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			if (item is ContactItem) {
 				foreach (string detail in (item as ContactItem).Details) {
@@ -71,9 +71,9 @@ namespace Do.Addins.Pidgin
 			return false;
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
-			IItem item = items.First ();
+			Item item = items.First ();
 			string name = null;
 
 			if (item is ContactItem) {

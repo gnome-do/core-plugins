@@ -21,62 +21,54 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
-using Gtk;
-
-using Do.Addins;
 using Do.Universe;
+using Do.Platform.Linux;
 
-namespace GMailContacts
+namespace GMail
 {	
-	public sealed class GMailContactsItemSource : IItemSource, IConfigurable
+	public sealed class GMailItemSource : ItemSource, IConfigurable
 	{
-		public string Name { 
+		public GMailItemSource() 
+		{
+		}
+		public override string Name { 
 			get { return Catalog.GetString ("GMail Contacts"); }
 		}
 		
-		public string Description { 
-			get { return Catalog.GetString ("Indexes your GMail contacts"); }
+		public override string Description { 
+			get { return Catalog.GetString ("Index your GMail contacts"); }
 		}
 		
-		public string Icon { 
+		public override string Icon { 
 			get { return "gmail-logo.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (ContactItem),
-				};
-			}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ContactItem); }
 		}
-		
-		public IEnumerable<IItem> Items {
+				
+		public override IEnumerable<Item> Items {
 			get { return GMail.Contacts; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item) 
+		public override IEnumerable<Item> ChildrenOfItem (Item item) 
 		{
 			ContactItem contact = item as ContactItem;
-			List<IItem> details = new List<IItem> ();
+			
 			foreach (string detail in contact.Details) {
 				if (detail.Contains (".gmail"))
-					details.Add (
-						new GMailContactDetailItem (detail, contact [detail]));
+					yield return new GMailContactDetailItem (detail, contact [detail]) as Item;
 			}
-			return details;
 		}
 		
-		public void UpdateItems () 
+		public override void UpdateItems () 
 		{
-			try {
-				Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));
-				thread.IsBackground = true;
-				thread.Start ();
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-			}
+			Thread thread = new Thread ((ThreadStart) (GMail.UpdateContacts));
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 		
 		public Gtk.Bin GetConfiguration ()

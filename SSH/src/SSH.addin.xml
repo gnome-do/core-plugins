@@ -3,8 +3,9 @@
 	namespace="Do"
 	version="1.0"
 	name="SSH"
-	description="Indexes ssh hosts and provides 'Connect with SSH' action"
+	description="Search and connect to SSH hosts."
 	author="Peter Stuifzand"
+	category="Community"
 	>
 
 	<Runtime>
@@ -12,11 +13,9 @@
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="GnomeDoSSH.SSHHostItemSource" />
 	</Extension>

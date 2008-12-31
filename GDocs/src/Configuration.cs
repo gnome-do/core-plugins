@@ -22,33 +22,50 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Do.UI;
-using Do.Addins;
+using Mono.Unix;
+
+using Do.Platform;
+using Do.Platform.Linux;
 
 namespace GDocs
 {
-    public class Configuration : AbstractLoginWidget
-    {
-        const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
-            + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
-            + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
-        const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
-        public Configuration()
-        {
-            GetAccountButton.Uri = Uri;
-        }
+	public class Configuration : AbstractLoginWidget
+	{
+		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
+			+ @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
+			+ @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
+		const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
 
-        protected override bool Validate (string username, string password)
-        {
-            if (ValidateUsername (username) && password.Length > 0)
-                return GDocs.Connect (username, password);
+		public Configuration () :
+			base (Catalog.GetString ("Google Documents"),
+					"https://www.google.com/accounts/NewAccount?service=writely")
+		{
+		}
 
-            return false;
-        }
+		protected override bool Validate (string username, string password)
+		{
+			return ValidateUsername (username) &&
+				0 < password.Length &&
+				GDocs.Connect (username, password);
+		}
 
-        private bool ValidateUsername (string username)
-        {
-            return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
-        }
-    }
+		private bool ValidateUsername (string username)
+		{
+			return new Regex (EmailPattern, RegexOptions.Compiled)
+				.IsMatch (username);
+		}
+
+		protected override void SaveAccountData (string username, string password)
+		{
+			//Log.Error ("Account data not saved");
+			GDocs.Preferences.Username = username;
+			GDocs.Preferences.Password = password;
+		}
+
+		public static void GetAccountData (out string username, out string password, Type t)
+		{
+			username = GDocs.Preferences.Username;
+			password = GDocs.Preferences.Password;
+		}
+	}
 }

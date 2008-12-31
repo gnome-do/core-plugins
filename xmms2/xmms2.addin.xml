@@ -1,0 +1,34 @@
+<Addin
+	id="xmms2"
+	namespace="Do"
+	version="1.0"
+	name="xmms2"
+	description="Search and play xmms2 music."
+	author="Scott Albertine"
+	category="Community"
+	>
+
+	<Runtime>
+		<Import assembly="xmms2.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Addins.xmms2.xmms2MusicItemSource" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="Do.Addins.xmms2.xmms2PlayAction" />
+		<Action type="Do.Addins.xmms2.xmms2LoadAction" />
+		<Action type="Do.Addins.xmms2.xmms2QueueAction" />
+		<Action type="Do.Addins.xmms2.xmms2ClearAction" />
+		<Action type="Do.Addins.xmms2.xmms2ShuffleAction" />
+		<Action type="Do.Addins.xmms2.xmms2RepeatAction" />
+		<Action type="Do.Addins.xmms2.xmms2CreatePlaylistAction" />
+		<Action type="Do.Addins.xmms2.xmms2RemovePlaylistAction" />
+	</Extension>
+</Addin>

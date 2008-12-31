@@ -26,13 +26,13 @@ using Do.Universe;
 
 namespace VolumeControl
 {
-	public class VolumeItemSource : AbstractItemSource
+	public class VolumeItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 		
 		public VolumeItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 			
 		public override string Name {
@@ -56,7 +56,7 @@ namespace VolumeControl
 			}
 		}
 		
-		public override IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 
@@ -64,12 +64,12 @@ namespace VolumeControl
 		public override void UpdateItems ()
 		{
 			items.Clear ();
-			foreach (IItem vitem in VolumeItems)
+			foreach (Item vitem in VolumeItems)
 				items.Add (vitem);
 		}
 		
-		private IItem [] VolumeItems {
-			get { return new IItem [] {
+		private Item [] VolumeItems {
+			get { return new Item [] {
 				new VolumeDownItem (),
 				new VolumeMuteItem (),
 				new VolumeUnmuteItem (),

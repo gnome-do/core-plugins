@@ -25,25 +25,25 @@ using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public class PidginEnableAccount : IAction
+	public class PidginEnableAccount : Act
 	{
-		public string Name { get { return Catalog.GetString ("Sign on"); } }
-		public string Description { get { return Catalog.GetString ("Enable pidgin account"); } }
-		public string Icon { get { return "pidgin"; } }
-		
-		public IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (PidginAccountItem),
-				};
-			}
+		public override string Name {
+			get { return Catalog.GetString ("Sign on"); }
+		}
+
+		public override string Description {
+			get { return Catalog.GetString ("Enable pidgin account"); }
+		}
+
+		public override string Icon {
+			get { return "pidgin"; }
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
-			get { return null; }
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return	typeof (PidginAccountItem); }
 		}
 		
-		public bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			Pidgin.IPurpleObject prpl;
 			 try {
@@ -55,21 +55,7 @@ namespace Do.Addins.Pidgin
 			return false;
 		}
 		
-		public bool ModifierItemsOptional {
-			get { return false; }
-		}
-		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
-		{
-			return false;
-		}
-		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
-		{
-			return null;
-		}
-		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
 			try {
@@ -78,29 +64,29 @@ namespace Do.Addins.Pidgin
 					"gtk-gaim", 1);
 			} catch { }
 			
-			return null;
+			yield break;
 		}		
 	}
 	
-	public class PidginDisableAccount : IAction
+	public class PidginDisableAccount : Act
 	{
-		public string Name { get { return Catalog.GetString ("Sign off"); } }
-		public string Description { get { return Catalog.GetString ("Disble pidgin account"); } }
-		public string Icon { get { return "pidgin"; } }
-		
-		public IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (PidginAccountItem),
-				};
-			}
+		public override string Name {
+			get { return Catalog.GetString ("Sign off"); }
+		}
+
+		public override string Description {
+			get { return Catalog.GetString ("Disble pidgin account"); }
+		}
+
+		public override string Icon {
+			get { return "pidgin"; }
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
-			get { return null; }
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (PidginAccountItem); }
 		}
 		
-		public bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
 			 Pidgin.IPurpleObject prpl;
 			 try {
@@ -112,21 +98,7 @@ namespace Do.Addins.Pidgin
 			return false;
 		}
 		
-		public bool ModifierItemsOptional {
-			get { return false; }
-		}
-		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
-		{
-			return false;
-		}
-		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
-		{
-			return null;
-		}
-		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
 			try {
@@ -135,7 +107,7 @@ namespace Do.Addins.Pidgin
 					"gtk-gaim", 0);
 			} catch { }
 			
-			return null;
+			yield break;
 		}
 	}
 }

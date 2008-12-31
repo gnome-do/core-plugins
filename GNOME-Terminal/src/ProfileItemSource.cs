@@ -1,4 +1,4 @@
-/* ProfileItemSource.cs
+/* ProIFileItemSource.cs
  * 
  * GNOME Do is the legal property of its developers, whose names are too numerous
  * to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -19,55 +19,56 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+
 using Mono.Unix;
+
 using Do.Universe;
+
 
 namespace GNOME.Terminal
 {
 
-	public class ProfileItemSource : IItemSource
+	public class ProfileItemSource : ItemSource
 	{
-		private static string GCONF_TERMINAL = "/apps/gnome-terminal/profiles";
+		const string GCONF_TERMINAL = "/apps/gnome-terminal/profiles";
 
-		List<IItem> items;
+		List<Item> items;
 
 		public ProfileItemSource()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 		}
 
-	    public string Name { get { return Catalog.GetString ("Gnome Terminal Profiles"); } }
+	    public override string Name {
+			get { return Catalog.GetString ("Gnome Terminal Profiles"); }
+		}
 	    
-	    public string Description {
+	    public override string Description {
 	    	get { return Catalog.GetString ("Indexes your Gnome Terminal profiles."); } 
 	    }
 	    
-	    public string Icon { get { return "gnome-terminal"; } }
+	    public override string Icon {
+			get { return "gnome-terminal"; }
+		}
 
-	    public IEnumerable<Type> SupportedItemTypes {
-	      get {
-	        return new Type[] { typeof (ProfileItem) };
-	      }
+	    public override IEnumerable<Type> SupportedItemTypes {
+	      get { yield return typeof (ProfileItem);  }
 	    }
 
-	    public IEnumerable<IItem> Items {
+	    public override IEnumerable<Item> Items {
 	      get { return items; }
 	    }
 
-	    public IEnumerable<IItem> ChildrenOfItem (IItem parent)
-	    {
-	      return null;  
-	    }
-
-	    public void UpdateItems ()
+	    public override void UpdateItems ()
 	    {
 			items.Clear ();
 
-			string gconfBase = Do.Paths.Combine (Do.Paths.UserHome, ".gconf");
-			string[] profiles = Directory.GetDirectories (gconfBase + GCONF_TERMINAL);
+			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			string gconfBase = Path.Combine (home, ".gconf");
+			string[] profiles = Directory.GetDirectories (Path.Combine (gconfBase, GCONF_TERMINAL));
 			foreach (string _profile in profiles) {
 				string profile = Regex.Replace (_profile, gconfBase, "");
 				if (profile.EndsWith ("template", StringComparison.CurrentCultureIgnoreCase))

@@ -25,7 +25,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
 
 using Google.GData.Client;
@@ -33,24 +33,24 @@ using Google.GData.Documents;
 
 namespace GDocs
 {
-	public sealed class GDocsUploadDocument : IAction
+	public sealed class GDocsUploadDocument : Act
 	{
 		const string ExtPattern = @"\.(txt|doc|html|htm|odt|rtf|xls|ods|csv|tsv|tsb|ppt|pps|sxw|pdf)$";
 				
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Upload Document"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Upload a document to Google Docs"); }
         }
 			
-		public string Icon {
+		public override string Icon {
 			//get { return "gDocsUploadIcon.png@" + GetType ().Assembly.FullName; }
 			get { return "document-send"; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (IFileItem),
@@ -58,7 +58,7 @@ namespace GDocs
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 		    get {
 		        return new Type[] {
 		            typeof (ITextItem),
@@ -66,37 +66,32 @@ namespace GDocs
             }
         }
         
-        public bool ModifierItemsOptional {
+        public override bool ModifierItemsOptional {
             get {return true; }
         }
         
-        public bool SupportsItem (IItem item) 
+        public override bool SupportsItem (Item item) 
         {
 			return IsValidFormat (item as IFileItem);
         }
         
-        public bool SupportsModifierItemForItems (IEnumerable<IItem> item, IItem modItem) 
+        public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
         {        		
             return true;
         }
         
-        public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item) 
-        {
-            return null;
-        }
-        
-        public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems) 
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {			
 			string fileName = (items.First () as IFileItem).Path;
 			string documentName = (modifierItems.Any ()) ? (modifierItems.First () as ITextItem).Text : null;
 			
-			IItem returnItem;
+			Item returnItem;
 			returnItem = GDocs.UploadDocument (fileName, documentName);
 			
 			if (returnItem == null)
 				return null;
 			else
-				return new IItem [] { returnItem, };
+				return new Item [] { returnItem, };
         }
 		
 		private bool IsValidFormat (IFileItem item)

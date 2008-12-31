@@ -1,0 +1,24 @@
+<Addin 
+	id="StockQuote" 
+	namespace="Do"
+	version="1.0"
+	name="Stock Quote"
+	description="Get live stock quotes from Google Finance."
+	author="DR Colkitt"
+	category="Community"
+	>
+
+	<Runtime>
+		<Import assembly="Stock Quote.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/Action">
+		<Action type="StockQuote.QuoteAction" />
+	</Extension>
+
+</Addin>

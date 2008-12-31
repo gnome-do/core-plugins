@@ -27,22 +27,25 @@ using System.Linq;
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Addins;
+using Do.Platform;
+using Do.Platform.Linux;
 
 using FlickrNet;
 
 namespace Flickr
 {	
-	public class UploadAction : IAction, IConfigurable
+	public class UploadAction : Act, IConfigurable
 	{
 		static object count_lock = new object ();
 		static int upload_num;
 		
-		public string Name {
+		const string ImageExtensions = ".jpg .jpef .gif .png .tiff";
+		
+		public override string Name {
 			get { return Catalog.GetString ("Upload photo"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Upload one or more photos to Flickr"); }
 		}
 		
@@ -50,71 +53,60 @@ namespace Flickr
 		 * Thank you Jeremy Roux for the great icon
 		 * http://www.soulvisual.com/blog/
 		 */
-		public string Icon {
+		public override string Icon {
 			get { return "flickr.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { 
 				return new Type [] { typeof (IFileItem) };
 			}
 		}
 		
-		public IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
 				return new Type [] { typeof (ITextItem) };
 			}
 		}
 		
-		public bool ModifierItemsOptional {
+		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
 		
-		public bool SupportsItem (IItem item)
+		public override bool SupportsItem (Item item)
 		{
-			return FileItem.IsDirectory (item as FileItem) || 
-				FileIsPicture (item as FileItem);
+			IFileItem file = item as IFileItem;
+			return Directory.Exists (file.Path) || FileIsPicture (file);
 		}
 		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
-		{
-			return true;
-		}
-		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
-		{
-			return null;
-		}
-		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string tags;
 			tags = AccountConfig.Tags + " ";
 			
 			if (modItems.Any ()) {
-				foreach (IItem modItem in modItems) {
+				foreach (Item modItem in modItems) {
 					ITextItem tag = (modItem as ITextItem);
 					tags += tag.Text + " ";
 				}
 			}
 			
 			//Build a list of all of the files to upload.
-			List<FileItem> uploads = new List<FileItem> ();
-			foreach (IItem item in items) {
-				FileItem file = item as FileItem;
-				if (FileItem.IsDirectory (file)) {
+			List<IFileItem> uploads = new List<IFileItem> ();
+			foreach (Item item in items) {
+				IFileItem file = item as IFileItem;
+				if (Directory.Exists (file.Path)) {
 					DirectoryInfo dinfo = new DirectoryInfo (file.Path);
 					FileInfo [] finfo = dinfo.GetFiles ();
 					foreach (FileInfo f in finfo) {
-						FileItem fi = new FileItem (f.FullName);
-						if (FileIsPicture (fi))
-							uploads.Add (fi);
+						if (FileIsPicture (f.FullName))
+							uploads.Add (Services.UniverseFactory.NewFileItem (f.FullName));
 					}
 				} else {
 					uploads.Add (file);
 				}
 				upload_num = 1;
-				foreach (FileItem photo in uploads) {
+				foreach (IFileItem photo in uploads) {
 					AsyncUploadToFlickr (photo, tags, uploads.Count);
 				}
 			}
@@ -122,7 +114,7 @@ namespace Flickr
 			return null;
 		}
 		
-		public static void AsyncUploadToFlickr (FileItem photo, string tags, int num)
+		public static void AsyncUploadToFlickr (IFileItem photo, string tags, int num)
 		{			
 			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
 				AccountConfig.ApiSecret, AccountConfig.AuthToken);
@@ -140,7 +132,7 @@ namespace Flickr
 						upload_num++;
 					}
 					
-					Do.Addins.NotificationBridge.ShowMessage ("Flickr",
+					Services.Notifications.Notify ("Flickr",
 						String.Format ("Uploaded {0}. ({1} of {2})", photo.Name,
 						thisUpload, num), photo.Path); 
 				} catch (FlickrNet.FlickrException e) {
@@ -154,9 +146,14 @@ namespace Flickr
 			return new UploadConfig ();
 		}
 		
-		private bool FileIsPicture (FileItem item)
+		bool FileIsPicture (IFileItem item)
 		{
-			return item.MimeType.StartsWith ("image/");
+			return FileIsPicture (item.Path);
+		}
+		
+		bool FileIsPicture (string path)
+		{
+			return ImageExtensions.Contains (Path.GetExtension (path).ToLower ());
 		}
 	}
 }

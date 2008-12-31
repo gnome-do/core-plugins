@@ -23,7 +23,7 @@ using System.Net;
 using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 
-namespace GMailContacts
+namespace GMail
 {	
 	
 	public class CertHandler : ICertificatePolicy

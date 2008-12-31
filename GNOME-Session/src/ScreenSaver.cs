@@ -24,7 +24,9 @@ using System.Diagnostics;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-namespace GNOME.Session
+using Do.Platform;
+
+namespace GNOME
 {
 
 	class ScreenSaver
@@ -61,7 +63,7 @@ namespace GNOME.Session
 				// BusInstance.Lock ();
 				System.Diagnostics.Process.Start ("gnome-screensaver-command", "--lock");
 			} catch {
-				Console.Error.WriteLine ("Could not find ScreenSaver on D-Bus.");
+				Log.Error ("Could not find ScreenSaver on D-Bus.");
 			}
 		}
 
@@ -70,7 +72,7 @@ namespace GNOME.Session
 			try {
 				BusInstance.SetActive (value);
 			} catch {
-				Console.Error.WriteLine ("Could not find ScreenSaver on D-Bus.");
+				Log.Error ("Could not find ScreenSaver on D-Bus.");
 			}
 		}
 	}

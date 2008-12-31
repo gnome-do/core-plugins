@@ -22,13 +22,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Mono.Unix;
 
-using Do.Addins;
+using Do.Platform;
 using Do.Universe;
 
 namespace Cl.ickable
 {
 	
-	public class ClipAction : AbstractAction
+	public class ClipAction : Act
 	{
 		const int MaxTitleLength = 80;
 		const string ClipPostURL = "http://cl.ickable.com/cgi-bin/SaveClip.cgi";
@@ -76,14 +76,7 @@ namespace Cl.ickable
 			return s;
 		}
 		
-		protected static string MakeOpenSafe (string s)
-		{
-			return s
-				.Replace ("'", "")        // causes a heinous crash when passed to Util.Environment.Open
-			;
-		}
-		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string text, title, url;
 			Dictionary<string, string> parameters;
@@ -104,8 +97,8 @@ namespace Cl.ickable
 			parameters ["base"] = "";
 			
 			url = ClipPostURL + AsParameterString (parameters);
-			Util.Environment.Open (MakeOpenSafe (url));
-			return null;
+			Services.Environment.OpenUrl (url);
+			yield break;
 		}
 	}
 }

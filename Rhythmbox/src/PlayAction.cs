@@ -29,7 +29,7 @@ using Do.Universe;
 namespace Do.Rhythmbox
 {
 
-	public class PlayAction : AbstractAction
+	public class PlayAction : Act
 	{
 
 		public PlayAction ()
@@ -52,14 +52,14 @@ namespace Do.Rhythmbox
 			get { yield return typeof (MusicItem); }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				Rhythmbox.StartIfNeccessary ();
 
 				Rhythmbox.Client ("--pause --no-present");
 				Rhythmbox.Client ("--clear-queue --no-present", true);
-				foreach (IItem item in items) {
+				foreach (Item item in items) {
 					string enqueue = "--no-present ";
 					foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
 						enqueue = string.Format ("{0} --enqueue \"{1}\" ", enqueue, song.File);

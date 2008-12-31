@@ -28,7 +28,7 @@ using Do.Universe;
 
 namespace GNOME {
 
-	public class TakeScreenshotAction : AbstractAction {
+	public class TakeScreenshotAction : Act {
 
 		public override string Name {
 			get { return Catalog.GetString ("Take screenshot"); }
@@ -62,15 +62,15 @@ namespace GNOME {
 			get { return true; }
 		}
 
-		public override IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			IItem [] items = new IItem [100];
+			Item [] items = new Item [100];
 			for (int i = 0; i < items.Length; ++i)
 				items [i] = new ScreenshotDelayItem (i+1);
 			return items;
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			int seconds;
 			string window;

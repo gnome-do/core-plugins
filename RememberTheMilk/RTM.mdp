@@ -1,0 +1,101 @@
+<Project name="RememberTheMilk" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="RTM" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="RTM" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="RTM.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/rtm.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-add.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-complete.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-delete.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-high.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-high-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-low.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-low-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-medium.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-medium-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-priority.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-setdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-high-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-low-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-medium-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-priority-down.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-priority-up.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="resources/task-rename.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src" subtype="Directory" buildaction="Compile" />
+    <File name="src/RTMCompleteTask.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTM.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMDeleteTask.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMListItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMListItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMMoveTask.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMNewTask.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMPriorityItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMRenameTask.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMSetDue.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMSetPriority.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMTaskItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet" subtype="Directory" buildaction="Compile" />
+    <File name="src/RtmNet/ApiKeyRequiredException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Auth.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/AuthenticationRequiredException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Categories.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Contacts.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/DateGranularity.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Enums.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Groups.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/GroupSearchResults.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/List.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Methods.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Note.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Response.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/ResponseXmlException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Rtm.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/RtmApiException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/RtmException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/RtmWebException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/SignatureRequiredException.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Tags.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Task.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/User.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/Utils.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RtmNet/License.txt" subtype="Code" buildaction="Nothing" />
+    <File name="resources/task-postpone.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/RTMPostponeTask.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMSetRecurrence.cs" subtype="Code" buildaction="Compile" />
+    <File name="resources/task-repeat.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/Do.Addins.RTM.Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMUncompleteTask.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+  </References>
+  <GtkDesignInfo />
+</Project>

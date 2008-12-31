@@ -1,5 +1,5 @@
 <objects attr-sync="on">
-  <object type="FilePlugin.Configuration" palette-category="File" allow-children="false" base-type="Gtk.Bin">
+  <object type="Do.FilesAndFolders.Configuration" palette-category="File" allow-children="false" base-type="Gtk.Bin">
     <itemgroups />
     <signals />
   </object>

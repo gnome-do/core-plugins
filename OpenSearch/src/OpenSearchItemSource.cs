@@ -27,55 +27,55 @@ using Mono.Unix;
 
 namespace OpenSearch
 {
-	public class OpenSearchItemSource : IItemSource
+	public class OpenSearchItemSource : ItemSource
 	{	
-		List<IItem> items;
+		List<Item> items;
 		
 		public OpenSearchItemSource ()
 		{
-			items = new List<IItem> ();
+			items = new List<Item> ();
 			UpdateItems();
 		}		
 		
-		public string Name {
+		public override string Name {
 			get {
 				return Catalog.GetString ("Open Search Items");
 			}
 		}
 
-		public string Description {
+		public override string Description {
 			get {
 				return Catalog.GetString ("Installed Open Search Items");
 			}
 		}
 
-		public string Icon {
+		public override string Icon {
 			get {
 				return "www";
 			}
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
 					typeof (IOpenSearchItem)};
 			}
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get {
 				return items;
 			}
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
-			List<IItem> openSearchItems = new List<IItem> ();
+			List<Item> openSearchItems = new List<Item> ();
 			
 			FirefoxOpenSearchDirectoryProvider firefoxProvider = new FirefoxOpenSearchDirectoryProvider ();
 			string validFilePattern = @"^.*\.xml$";			
@@ -90,9 +90,9 @@ namespace OpenSearch
 						if (!Regex.IsMatch (filePath, validFilePattern))
 							continue;
 						
-						IOpenSearchItem item = OpenSearchParser.Create (filePath);
+						OpenSearchItem item = OpenSearchParser.Create (filePath);
 						if (item != null) {
-							openSearchItems.Add ( item );
+							openSearchItems.Add (item);
 						}
 					}
 				} catch {

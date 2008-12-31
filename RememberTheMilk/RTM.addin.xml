@@ -1,0 +1,36 @@
+<Addin
+    id="RememberTheMilk"
+    namespace= "Do"
+    version="1.0"
+    name="Remember The Milk"
+    description="Manage tasks with Remember The Milk."
+    author="Peng Deng"
+		category="Community"
+    >
+
+    <Runtime>
+        <Import assembly="RTM.dll"/>
+    </Runtime>
+
+    <Dependencies>
+        <Addin id="Universe" version="1.0" />
+    </Dependencies>
+
+    <!-- Extensions included in this assembly -->
+    <Extension path="/Do/ItemSource">
+        <ItemSource type="Do.Addins.RTM.RTMListItemSource" />
+    </Extension>
+
+    <Extension path="/Do/Action">
+        <Action type="Do.Addins.RTM.RTMNewTask" />
+        <Action type="Do.Addins.RTM.RTMDeleteTask" />
+        <Action type="Do.Addins.RTM.RTMCompleteTask" />
+        <Action type="Do.Addins.RTM.RTMSetPriority" />
+        <Action type="Do.Addins.RTM.RTMSetDue" />
+        <Action type="Do.Addins.RTM.RTMMoveTask" />
+        <Action type="Do.Addins.RTM.RTMRenameTask" />
+        <Action type="Do.Addins.RTM.RTMPostponeTask" />
+        <Action type="Do.Addins.RTM.RTMSetRecurrence" />
+        <Action type="Do.Addins.RTM.RTMUncompleteTask" />
+    </Extension>
+</Addin>

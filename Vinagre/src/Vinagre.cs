@@ -27,7 +27,7 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace VinagreVNC {
-    public class VNCAction : AbstractAction {
+    public class VNCAction : Act {
         public override string Name { 
             get { return Catalog.GetString ("Connect with VNC"); }
         }
@@ -50,11 +50,11 @@ namespace VinagreVNC {
             }
         }
 
-        public override bool SupportsItem (IItem item) {
+        public override bool SupportsItem (Item item) {
             return true;
         }
 
-        public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems) {         
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {         
             string hostname;
             if (items.First () is ITextItem) {
                 ITextItem textitem = items.First () as ITextItem;

@@ -1,8 +1,8 @@
 //  PidginSetStatusAction.cs
 //
-//  GNOME Do is the legal property of its developers, whose names are too numerous
-//  to list here.  Please refer to the COPYRIGHT file distributed with this
-//  source distribution.
+//  GNOME Do is the legal property of its developers, whose names are too
+//  numerous to list here.  Please refer to the COPYRIGHT file distributed with
+//  this source distribution.
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,78 +18,75 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+
+using Mono.Unix;
 
 using Do.Universe;
-using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public sealed class PidginSetStatusAction : IAction
+
+	public class PidginSetStatusAction : Act
 	{
-		private IItem [] pidginStatuses;
-		
+		IEnumerable<Item> statuses;
+
 		public PidginSetStatusAction ()
 		{
-			pidginStatuses = new IItem [] {new PidginStatusTypeItem (1), 
-				new PidginStatusTypeItem (2), new PidginStatusTypeItem (3),
-				new PidginStatusTypeItem (4), new PidginStatusTypeItem (5)};
+			statuses = new Item [] {
+				new PidginStatusTypeItem (1), 
+				new PidginStatusTypeItem (2),
+				new PidginStatusTypeItem (3),
+				new PidginStatusTypeItem (4),
+				new PidginStatusTypeItem (5)
+			};
 		}
-		
-		public string Name { get { return Catalog.GetString ("Set status"); } }
-		
-		public string Description {
+
+		public override string Name {
+			get { return Catalog.GetString ("Set status"); }
+		}
+
+		public override string Description {
 			get { return Catalog.GetString ("Set pidgin status message"); }
 		}
-		
-		public string Icon { get { return "pidgin"; } }
-		
-		public IEnumerable<Type> SupportedItemTypes {
+
+		public override string Icon {
+			get { return "pidgin"; }
+		}
+
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type [] {
-					typeof (PidginSavedStatusItem),
-					typeof (ITextItem),
-				};
+				yield return typeof (PidginSavedStatusItem);
+				yield return typeof (ITextItem);
 			}
 		}
-		
-		public IEnumerable<Type> SupportedModifierItemTypes {
-			get {
-				return new Type [] {
-					typeof (PidginStatusTypeItem),
-				};
-			}
+
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield return typeof (PidginStatusTypeItem); }
 		}
-		
-		public bool SupportsItem (IItem item)
-		{
-			return true;
-		}
-		
-		public bool ModifierItemsOptional {
+
+		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
-		
-		public bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			if (items.First () is ITextItem)
-				return true;
-			return false;
+			return items.First () is ITextItem;
 		}
-		
-		public IEnumerable<IItem> DynamicModifierItemsForItem (IItem item)
-        {
-            return pidginStatuses;
-        }
-		
-		public IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		{
+			return statuses;
+		}
+
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			int status;
 			string message;
-				try {
+			try {
 				Pidgin.IPurpleObject prpl = Pidgin.GetPurpleObject ();
-				
+
 				if (items.First () is PidginSavedStatusItem) {
 					status = (items.First () as PidginSavedStatusItem).ID;
 					prpl.PurpleSavedstatusActivate (status);
@@ -102,7 +99,7 @@ namespace Do.Addins.Pidgin
 					Pidgin.PurpleSetAvailabilityStatus ((uint) status, message);
 				}
 			} catch { }
-			return null;
+			yield break;
 		}
 	}
 }

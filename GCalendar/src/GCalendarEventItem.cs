@@ -21,11 +21,11 @@
 using System;
 using System.Text;
 
-using Do.Addins;
+
 using Do.Universe;
 
 namespace GCalendar {
-	public sealed class GCalendarEventItem : IURLItem {
+	public sealed class GCalendarEventItem : Item, IUrlItem {
 		string name, url, desc;
 		public GCalendarEventItem (string name, string url, string desc)
 		{
@@ -34,19 +34,19 @@ namespace GCalendar {
 			this.desc = desc;
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return name; }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return desc; }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "date"; }
 		}
 		
-		public string URL {
+		public string Url {
 			get { return url; }
 		}
 	}

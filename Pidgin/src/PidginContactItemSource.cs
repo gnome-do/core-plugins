@@ -27,7 +27,7 @@ using Mono.Unix;
 
 namespace Do.Addins.Pidgin
 {
-	public class PidginContactItemSource : IItemSource
+	public class PidginContactItemSource : ItemSource
 	{
 		static readonly string kBuddyListFile;
 		static readonly string kBuddyIconDirectory;
@@ -40,15 +40,15 @@ namespace Do.Addins.Pidgin
 			kBuddyIconDirectory = "~/.purple/icons".Replace("~", home);
 		}
 		
-		List<IItem> buddies;
+		List<Item> buddies;
 		
 		public PidginContactItemSource ()
 		{
-			buddies = new List<IItem> ();
+			buddies = new List<Item> ();
 			//UpdateItems ();
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (ContactItem),
@@ -56,24 +56,24 @@ namespace Do.Addins.Pidgin
 			}
 		}
 		
-		public string Name { get { return Catalog.GetString ("Pidgin Buddies"); } }
+		public override string Name { get { return Catalog.GetString ("Pidgin Buddies"); } }
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Buddies on your Pidgin buddy list."); } 
 		}
 		
-		public string Icon {get { return "pidgin"; } }
+		public override string Icon {get { return "pidgin"; } }
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return buddies; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			ContactItem buddy = item as ContactItem;
-			List<IItem> details;
+			List<Item> details;
 
-			details = new List<IItem> ();
+			details = new List<Item> ();
 			foreach (string detail in buddy.Details) {
 				if (detail.StartsWith ("prpl-")) {
 					details.Add (new PidginHandleContactDetailItem (detail, buddy[detail]));
@@ -82,7 +82,7 @@ namespace Do.Addins.Pidgin
 			return details;
 		}
 		
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			XmlDocument blist;
 			// Add buddies as they are encountered to this hash so we don't create duplicates.

@@ -24,38 +24,39 @@ using System.Xml;
 
 using GConf;
 
-using Do.Addins;
+
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace Do.Plugins.Rss
 {
-	public class RssItemSource : IItemSource, IConfigurable
+	public class RssItemSource : ItemSource, IConfigurable
 	{
-		private static List<IItem> items;        
+		private static List<Item> items;        
 		private static GConf.Client gconfClient;
 
 		public RssItemSource()
 		{
-			items = new List<IItem>();
+			items = new List<Item>();
 			//UpdateItems ();  
 		}
 
-		public string Name { get { return null; } }
-		public string Description { get { return null; } }
-		public string Icon { get { return "feed-icon.png@" + GetType ().Assembly.FullName; } }
+		public override string Name { get { return null; } }
+		public override string Description { get { return null; } }
+		public override string Icon { get { return "feed-icon.png@" + GetType ().Assembly.FullName; } }
 		
-		public IEnumerable<Type> SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] { typeof(RssFeedItem) };
 			}
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
 			return null;
 		}
@@ -131,7 +132,7 @@ namespace Do.Plugins.Rss
 			get { return "/apps/gnome-do/plugins/rss/"; }
 		}
 
-		public void UpdateItems () {
+		public override void UpdateItems () {
 			// Assemble the path to the bookmarks xml file.
 			string opmlFile = OpmlFile.Replace ("file://", "");
 

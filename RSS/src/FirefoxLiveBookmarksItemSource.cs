@@ -27,7 +27,7 @@ using Do.Universe;
 
 namespace Do.Plugins.Rss
 {
-	public class FirefoxLiveBookmarksItemSource : IItemSource
+	public class FirefoxLiveBookmarksItemSource : ItemSource
 	{
 		const string BeginProfileName = "Path=";
 		const string BeginDefaultProfile = "Default=1";
@@ -37,18 +37,18 @@ namespace Do.Plugins.Rss
 		const string EndShortcut = "\"";
 		const string BeginName = "\">";
 		const string EndName = "</A>";
-		List<IItem> bookmarks;
+		List<Item> bookmarks;
 
 		/// <summary>
 		/// Initialize the item source.
 		/// </summary>
 		public FirefoxLiveBookmarksItemSource ()
 		{
-			bookmarks = new List<IItem> ();
+			bookmarks = new List<Item> ();
 			//UpdateItems ();
 		}
 
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
 					typeof (RssFeedItem),
@@ -56,38 +56,38 @@ namespace Do.Plugins.Rss
 			}
 		}
 
-		public string Name {
+		public override string Name {
 			get { return "Firefox Live Bookmarks"; }
 		}
 
-		public string Description {
+		public override string Description {
 			get { return "Finds Firefox Live bookmarks in your default profile."; }
 		}
 
-		public string Icon {
+		public override string Icon {
 			get { return "firefox"; }
 		}
 
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return bookmarks; }
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem item)
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return null;
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			bookmarks.Clear ();
 			string path = GetFirefoxBookmarkFilePath ();
 			string firefox3Path = Path.Combine (path, "bookmarks.postplaces.html");
 			string firefox2Path = Path.Combine (path, "bookmarks.html");
 			// Get Firefox 3 live bookmarks 
-			foreach (IItem item in ReadBookmarksFromFile (firefox3Path))
+			foreach (Item item in ReadBookmarksFromFile (firefox3Path))
 				bookmarks.Add (item);
 			// Get Firefox 2 live bookmarks
-			foreach (IItem item in ReadBookmarksFromFile (firefox2Path))
+			foreach (Item item in ReadBookmarksFromFile (firefox2Path))
 				bookmarks.Add (item);
 		}
 

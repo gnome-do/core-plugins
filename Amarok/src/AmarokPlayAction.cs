@@ -28,7 +28,7 @@ using Mono.Unix;
 namespace Do.Plugins.Amarok
 {
 
-	public class AmarokPlayAction : AbstractAction
+	public class AmarokPlayAction : Act
 	{
 
 		public AmarokPlayAction ()
@@ -53,14 +53,14 @@ namespace Do.Plugins.Amarok
 			}
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				string songs = "";
 				Amarok.StartIfNeccessary ();
 
 				Amarok.Client ("--pause");
-				foreach (IItem item in items) {
+				foreach (Item item in items) {
 					foreach (SongMusicItem song in Amarok.LoadSongsFor (item as MusicItem))
 						songs = string.Format ("{0} \"{1}\"", songs, song.File);
 					Amarok.Client ("--load " + songs, true);

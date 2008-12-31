@@ -35,6 +35,6 @@ namespace OpenSearch
 		/// <returns>
 		/// A formatted search URL, using the provided search terms.
 		/// </returns>
-		string BuildSearchUrl(string searchTerms);
+		string BuildSearchUrl (string searchTerms);
 	}
 }

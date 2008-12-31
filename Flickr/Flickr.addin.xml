@@ -3,8 +3,9 @@
 	namespace="Do"
 	version="1.4"
 	name="Flickr"
-	description="Upload photos to Flickr"
+	description="Upload photos to Flickr."
 	author="Alex Launi"
+	category="Official"
 >
  
 	<Runtime>
@@ -12,10 +13,9 @@
 	</Runtime>
 	
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
 	<Extension path= "/Do/Action">
 		<Action type="Flickr.UploadAction"/>
 	</Extension>

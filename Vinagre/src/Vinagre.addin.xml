@@ -3,8 +3,9 @@
 	namespace= "Do" 
 	version="1.0"
 	name="Vinagre VNC"
-	description="Browse your VNC Viewer Bookmarks and connect to remote servers."
+	description="Browse your VNC Viewer bookmarks and connect to remote servers."
 	author="Alex Launi"
+	category="Official"
 	>
 
 	<Runtime>
@@ -12,10 +13,9 @@
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Core" version="1.0" />
+		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
 	<Extension path = "/Do/Action">
 		<Action type="VinagreVNC.VNCAction" />
 	</Extension>

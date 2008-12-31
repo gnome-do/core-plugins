@@ -23,19 +23,16 @@ using System.Threading;
 
 using Do.Universe;
 
-namespace GNOME.Session
+namespace GNOME
 {
-	class SessionCommandItem : IRunnableItem
+	class SessionCommandItem : Item, IRunnableItem
 	{
-		public delegate void RunDelegate ();
-
 		const int SessionItemRunDelay = 500;
 
-		RunDelegate run;
+		Action run;
 		string name, description, icon;
 
-		public SessionCommandItem (string name, string description, string icon,
-			RunDelegate run)
+		public SessionCommandItem (string name, string description, string icon, Action run)
 		{
 			this.name = name;
 			this.description = description;
@@ -43,18 +40,16 @@ namespace GNOME.Session
 			this.run = run;
 		}
 
-		public string Name { get { return name; } }
-		public string Description { get { return description; } }
-		public string Icon { get { return icon; } }
+		public override string Name { get { return name; } }
+		public override string Description { get { return description; } }
+		public override string Icon { get { return icon; } }
 
 		public virtual void Run ()
 		{
-			new Thread ((ThreadStart)
-				delegate {
-					Thread.Sleep (SessionItemRunDelay);
-					run ();
-				}
-			).Start ();
+			new Thread ((ThreadStart) delegate {
+				Thread.Sleep (SessionItemRunDelay);
+				run ();
+			}).Start ();
 		}
 	}
 }

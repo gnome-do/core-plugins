@@ -23,26 +23,27 @@ using System.Threading;
 using System.Collections.Generic;
 using Mono.Unix;
 
-using Do.Addins;
+
 using Do.Universe;
+using Do.Platform.Linux;
 
 namespace GCalendar
 {	
-	public sealed class GCalendarItemSource : IItemSource, IConfigurable
+	public sealed class GCalendarItemSource : ItemSource, IConfigurable
 	{
-		public string Name {
+		public override string Name {
 			get { return Catalog.GetString ("Google Calendars"); }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return Catalog.GetString ("Indexes your Google Calendars"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "calIcon.png@" + GetType ().Assembly.FullName; }
 		}
 
-		public IEnumerable<Type> SupportedItemTypes
+		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
 				return new Type[] {
@@ -51,17 +52,17 @@ namespace GCalendar
 			}
 		}
 
-		public IEnumerable<IItem> Items
+		public override IEnumerable<Item> Items
 		{
 			get { return GCal2.Calendars; }
 		}
 
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
 			return GCal2.EventsForCalendar ((parent as GCalendarItem).Name);
 		}
 
-		public void UpdateItems ()
+		public override void UpdateItems ()
 		{
 			Thread updateCalendars = new Thread (new ThreadStart (GCal2.UpdateCalendars));
 			updateCalendars.IsBackground = true;
