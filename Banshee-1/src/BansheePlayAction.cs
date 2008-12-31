@@ -24,14 +24,13 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Do.Universe;
-using Do.Addins;
-
 using Mono.Unix;
 
-namespace Banshee1
+using Do.Universe;
+
+namespace Banshee
 {	
-	public class BansheePlayAction : AbstractAction
+	public class BansheePlayAction : Act
 	{		
 		public override string Name {
 			get { return Catalog.GetString ("Play"); }
@@ -53,18 +52,18 @@ namespace Banshee1
 			}
 		}
 		
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			return false;
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			new Thread ((ThreadStart) delegate {
 				List<string> files = new List<string> ();
 				BansheeDBus bd = new BansheeDBus ();
 			
-				foreach (IItem item in items) {
+				foreach (Item item in items) {
 					if (item == null) continue;
 					foreach (SongMusicItem song in Banshee.LoadSongsFor ((item as MusicItem))) {
 						files.Add (song.File);

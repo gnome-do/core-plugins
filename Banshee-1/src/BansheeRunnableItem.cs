@@ -21,10 +21,12 @@
 
 using System;
 using System.Threading;
-using Do.Universe;
+
 using Mono.Unix;
 
-namespace Banshee1
+using Do.Universe;
+
+namespace Banshee
 {
 	public class BansheeRunnableItem : IRunnableItem
 	{	

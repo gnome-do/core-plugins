@@ -1,4 +1,4 @@
-/* BansheeIndexer.cs
+/* Banshee.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -16,70 +16,153 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * THE PHILLIES WON TONIGHT! WE'RE GOING TO THE WORLD SERIES!!!!!
  */
 
 
 using System;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
-using Do.Universe;
-using Do.Addins;
 using Banshee.Collection.Indexer.RemoteHelper;
 
-namespace Banshee1
+using Mono.Unix;
+
+using Do.Platform;
+using Do.Universe;
+
+namespace Banshee
 {
 	public class BansheeIndexer : SimpleIndexerClient
 	{
-		static List<IItem> songs;
-		static object songs_mutex;
+		List<VideoItem> videos;
+		List<SongMusicItem> songs;
+		List<PodcastItem> podcasts;
+		DateTime last_index;
+		object indexing_mutex;
+		string artwork_directory;
 		
-		static DateTime last_index;
-		readonly string[] export_fields = new string[] {"name", "artist", "year", "album", "URI"};
+		readonly string[] export_fields = new [] {"name", "artist", "year", "album", "local-path", "URI", "media-attributes", "artwork-id", "track-number"};
 		
-		static BansheeIndexer ()
-		{
-			songs = new List<IItem> ();
-			songs_mutex = new object (); 
-			last_index = DateTime.MinValue;
-		}
-			
 		public BansheeIndexer ()
 		{
+			indexing_mutex = new object ();
+			videos = new List<VideoItem> ();
+			songs = new List<SongMusicItem> ();
+			podcasts = new List<PodcastItem> ();
+
+			Videos = Enumerable.Empty<VideoItem> ();
+			Songs = Enumerable.Empty<SongMusicItem> ();
+			Podcasts = Enumerable.Empty<PodcastItem> ();
+
+			last_index = DateTime.MinValue;
+
 			AddExportField (export_fields);
+			//artwork_directory = Path.Combine (Paths.ReadXdgUserDir ("XDG_CACHE_DIR", ".cache"), "album-art");
+			artwork_directory = "/home/alex/.cache/album-art";
 		}
-		
-		public static List<IItem> Songs {
-			get { lock (songs_mutex) { return songs; } }
-		}
-		
+
+		public IEnumerable<VideoItem> Videos { get; private set; }
+		public IEnumerable<SongMusicItem> Songs { get; private set; }
+		public IEnumerable<PodcastItem> Podcasts { get; private set; }		
+
+		/// <summary>
+		/// This gets called on a thread from SimpleIndexerClient so we need to be careful with our lists.
+		/// </summary>
+		/// <param name="result">
+		/// A <see cref="IDictionary"/>
+		/// </param>
 		protected override void IndexResult (IDictionary<string, object> result)
 		{
-			try {
-				SongMusicItem song = new SongMusicItem ((string) result["name"], (string) result["artist"],
-					(string) result["album"], "YEAR", null, (string) result["URI"]);
-				//Console.Error.WriteLine (((DateTime) result["year"]).Year);
+			MediaItem item;
+			string path, artpath, mediaType;
+			Dictionary<string, string> exports;
+			
+			artpath = "";
+			
+			exports = SetupExports ();
+			foreach (string export in exports.Keys) {
+				result.TryGetValue (export, out (exports [export]));
+			}
+			
+			mediaType = exports ["media-attributes"];
+
+			// some items dont have a local-path, we need to use the URI in this case.
+			path = string.IsNullOrEmpty (export ["local-path"]) ? export ["local-path"] : export ["URI"];
+			artpath = string.IsNullOrEmpty (exports ["artwork-id"]) ? "" : Path.Combine (artwork_directory, exports ["artwork-id"] + ".jpg");
+
+			lock (indexing_mutex) {
+			
+				//Handle videos in the collection
+				if (mediaType.Contains ("VideoStream")) {		
+					item = new VideoItem (exports ["name"], exports ["artist"], exports ["year"], artPath, path);
+	
+					videos.Add (item);
 				
-				if (!songs.Contains (song)) {
-					lock (songs_mutex) {
-						songs.Add (song);
-					}
+				//Handle the podcasts in collection
+				} else if (mediaType.Contains ("Podcast")) {
+					item = new PodcastPodcastItem (exports ["name"], exports ["album"], exports ["year"], artPath, path);
+					
+					podcasts.Add (item);
+				
+				//everything else should be Music
+				} else {
+					item = new SongMusicItem (exports ["name"], exports ["artist"], exports , exports ["album"], exports ["year"], 
+						artPath, exports ["track-number"], path);
+					
+					songs.Add (item);
 				}
-			} catch (KeyNotFoundException e) {
-				Log.Error ("{0}", e);
 			}
 		}
 		
 		protected override int CollectionCount {
-			get { lock (songs_mutex) { return songs.Count; } }
+			get { return Songs.Count () + Videos.Count () + Podcasts.Count (); }
 		}
 		
 		protected override DateTime CollectionLastModified {
 			get { return last_index; }
 		}
 		
+		protected override void OnStarted ()
+		{
+			Log.Debug (Catalog.GetString ("Starting Banshee indexer"));
+		}
+
+		protected override void OnEndUpdateIndex()
+		{
+			CopyLists ();
+			Log.Debug (Catalog.GetString ("Finished indexing Banshee library"));
+		}
+
 		protected override void OnShutdownWhileIndexing ()
 		{
-			Log.Info ("Banshee requested a shutdown. Stopping indexing");
+			CopyLists ();
+			Log.Info (Catalog.GetString ("Banshee requested a shutdown. Stopping indexer"));
+		}
+		
+		void CopyLists ()
+		{
+			lock (indexing_mutex) {
+				Videos = new List<VideoItem> (videos);
+				Songs = new List<SongMusicItem> (songs);
+				Podcasts = new List<PodcastItem> (podcasts);
+	
+				songs.Clear ();
+				videos.Clear ();
+				podcasts.Clear ();
+			}
+		}
+		
+		Dictionary<string, string> SetupExports ()
+		{
+			Dictionary<string, string> exports = new Dictionary<string, string> ();
+			foreach (string export in export_fields) {
+				exports.Add (export, "");
+			}
+
+			return exports;
 		}
 	}
 }

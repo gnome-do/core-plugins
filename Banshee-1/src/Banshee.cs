@@ -1,4 +1,4 @@
-/* Banshee.cs
+/* Banshee.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -16,148 +16,39 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * THE PHILLIES WON TONIGHT! WE'RE GOING TO THE WORLD SERIES!!!!!
  */
 
-
 using System;
-using System.Reflection;
-using System.Threading;
+using System.Linq;
 using System.Collections.Generic;
-using Banshee.Collection.Indexer.RemoteHelper;
 
-using Do.Addins;
-using Do.Universe;
-using Mono.Unix;
-
-namespace Banshee1
+namespace Banshee
 {
-	public class Banshee : SimpleIndexerClient
+	public enum PlaybackShuffleMode
+    {
+        Linear,
+        Song,
+        Artist,
+        Album
+    }
+	
+	public static class Banshee
 	{
-		static List<IItem> songs;
-		static List<IItem> videos;
-		static List<IItem> podcasts;
-		static object indexer_mutex;
+		static BansheeDbus bus;
+		static BansheeIndexer indexer;
 		
-		static DateTime last_index;
-		static string artwork_directory;
-		static bool reindex;
-		
-		readonly string[] export_fields = new string[] {"name", "artist", "year", "album", "local-path", "URI",
-			"media-attributes", "artwork-id", "track-number"};
-		
-		static Banshee ()
+		static Banshee()
 		{
-			songs = new List<IItem> ();
-			videos = new List<IItem> ();
-			podcasts = new List<IItem> ();
-			indexer_mutex = new object ();
-			last_index = DateTime.MinValue;
-			reindex = true;
-			
-			artwork_directory = Do.Paths.Combine (
-				Do.Paths.ReadXdgUserDir ("XDG_CACHE_DIR", ".cache"), "album-art");
-		}
-		
-		public Banshee ()
-		{
-			AddExportField (export_fields);
-		}
-		
-		public static bool HasCollectionChanged {
-			get { return reindex; }
-			set { reindex = value; }
-		}
-		protected override void IndexResult (IDictionary<string, object> result)
-		{
-			try {
-				MediaItem item;
-				object path;
-				object artwork;
-				string artPath;
-				object year;
-				object trackNum;
-								
-				//we should always use local-path first, if that does not exist,
-				//then we should use the URI value.
-				if (!result.TryGetValue ("local-path", out path))
-					path = result["URI"];
-
-				if (result.TryGetValue ("year", out year))
-					year = year.ToString ();
-					
-				if (result.TryGetValue ("track-number", out trackNum))
-					trackNum = trackNum.ToString (); 
-				
-				//Videos do not have artwork ids, so we need to handle them specially.
-				artPath = null;
-				if (result.TryGetValue ("artwork-id", out artwork))
-					artPath = Do.Paths.Combine (artwork_directory, result["artwork-id"].ToString () + ".jpg");
-				
-				//We create a type for each type of media and stick it into our
-				//list of media items. The list shouldn't be so big that this makes
-				//all other actions slow
-				
-				//Handle videos in the collection
-				if (result["media-attributes"].ToString ().Contains ("VideoStream")) {		
-					item = new VideoItem (result["name"].ToString (), result["artist"].ToString (),
-						((string) year ?? null), artPath, path.ToString ());
-
-					lock (indexer_mutex)
-						videos.Add (item);
-					
-				//Handle the podcasts in collection
-				} else if (result["media-attributes"].ToString ().Contains ("Podcast")) {
-					item = new PodcastPodcastItem (result["name"].ToString (),
-						result["album"].ToString (), ((string) year ?? null), artPath, path.ToString ());
-					
-					lock (indexer_mutex)
-						podcasts.Add (item);
-				
-				//everything else should be Music, so we index it!
-				} else {
-					item = new SongMusicItem (result["name"].ToString (),
-						result["artist"].ToString (), result["album"].ToString (),
-						((string) year ?? null), artPath, ((string) trackNum ?? null), path.ToString ());
-					
-					lock (indexer_mutex)
-						songs.Add (item);
-				}
-			} catch (KeyNotFoundException e) {
-				Log.Error ("{0}", e.Message);
-			}
-		}
-		
-		protected override int CollectionCount {
-			get { 
-				lock (indexer_mutex) {
-					return songs.Count + videos.Count + podcasts.Count;
-				}
-			}
-		}
-		
-		protected override DateTime CollectionLastModified {
-			get { return last_index; }
-		}
-		
-		protected override void OnStarted ()
-		{
-			lock (indexer_mutex) {
-				songs.Clear ();
-				podcasts.Clear ();
-				videos.Clear ();
-			}
-			
-			reindex = true;
+			bus = new BansheeDbus ();
+			indexer = new BansheeIndexer ();
 		}
 
-		protected override void OnShutdownWhileIndexing ()
+		public static IEnumerable<T> LoadMedia (MediaItem item)
 		{
-			Log.Info ("Banshee requested a shutdown. Stopping indexing");
+			return Enumerable.Empty<MediaItem> ();
 		}
 		
-		public static void LoadVideos (out List<VideoItem> videosOut)
+		public void LoadVideos (out List<VideoItem> videosOut)
 		{
 			videosOut = new List<VideoItem> ();
 			lock (indexer_mutex) {
@@ -167,7 +58,7 @@ namespace Banshee1
 			}
 		}
 		
-		public static void LoadPodcasts (out List<PodcastItem> podcastsOut)
+		public void LoadPodcasts (out List<PodcastItem> podcastsOut)
 		{
 			Dictionary<string, PodcastItem> publishers;
 			
@@ -185,7 +76,7 @@ namespace Banshee1
 			podcastsOut.AddRange (publishers.Values);
 		}
 		
-		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albumsOut,
+		public void LoadAlbumsAndArtists (out List<AlbumMusicItem> albumsOut,
 			out List<ArtistMusicItem> artistsOut)
 		{
 			Dictionary<string, AlbumMusicItem>  albums;
@@ -212,7 +103,7 @@ namespace Banshee1
 			artistsOut.AddRange (artists.Values);
 		}
 		
-		public static List<PodcastPodcastItem> LoadPodcastsFor (PodcastItem item)
+		public List<PodcastPodcastItem> LoadPodcastsFor (PodcastItem item)
 		{
 			List<PodcastPodcastItem> feedItems;
 			
@@ -239,7 +130,7 @@ namespace Banshee1
 			return feedItems;
 		}
 		
-		public static List<SongMusicItem> LoadSongsFor (MusicItem item)
+		public List<SongMusicItem> LoadSongsFor (MusicItem item)
 		{
 			SortedList<string, SongMusicItem> albumSongs;
 			string key;
@@ -275,7 +166,7 @@ namespace Banshee1
 			return new List<SongMusicItem> (albumSongs.Values);
 		}
 		
-		public static List<IItem> SearchMedia (string pattern)
+		public List<IItem> SearchMedia (string pattern)
 		{
 			Console.Error.WriteLine ("Into SM");
 			List<IItem> results = new List<IItem> ();
@@ -303,8 +194,8 @@ namespace Banshee1
 			Console.Error.WriteLine ("OUT");
 			return results;
 		}
-		
-		static bool ContainsMatch (IItem item, string pattern)
+
+		bool ContainsMatch (IItem item, string pattern)
 		{
 			foreach (PropertyInfo p in item.GetType ().GetProperties ()) {
 				try {

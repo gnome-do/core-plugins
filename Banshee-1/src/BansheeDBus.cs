@@ -20,41 +20,50 @@
 
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
-
-using Do.Addins;
-using Do.Universe;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-namespace Banshee1
+using Do.Universe;
+
+namespace Banshee
 {
 	[Interface ("org.bansheeproject.Banshee.PlayerEngine")]
-	public interface IBansheePlayer {
+	interface IBansheePlayer {
 		void TogglePlaying ();
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlayQueue")]
-	public interface IBansheePlayQueue {
+	interface IBansheePlayQueue {
 		void EnqueueUri (string uri);
 		void EnqueueUri (string uri, bool prepend);
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlaybackController")]
-	public interface IBansheeController {
+	interface IBansheeController {
 		void Next (bool restart);
 		void Previous (bool restart);
+		int ShuffleMode { get; set; }
 	}
 	
-	public class BansheeDBus
+	public class BansheeDbus
 	{
-		const string BUS_NAME = "org.bansheeproject.Banshee";
-		static Dictionary<string, string> object_paths;
+		const string BusName = "org.bansheeproject.Banshee";
+
+		# region static Banshee d-bus members
+		
+		static Dictionary<Type, string> object_paths;
 		
 		static IBansheePlayer player;
 		static IBansheePlayQueue queue;
 		static IBansheeController controller;
+
+		static BansheeDBus ()
+		{
+			BuildObjectPathsDict ();
+		}
 		
 		static T GetIBansheeObject<T> (string object_path)
 		{
@@ -71,27 +80,29 @@ namespace Banshee1
 		static IBansheePlayer Player {
 			get {
 				return player ?? 
-					player = GetIBansheeObject<IBansheePlayer> (object_paths["player"]);
+					player = GetIBansheeObject<IBansheePlayer> (object_paths [typeof (IBansheePlayer)]);
 			}
 		}
 		
 		static IBansheePlayQueue PlayQueue {
 			get {
 				return queue ?? 
-					queue = GetIBansheeObject<IBansheePlayQueue> (object_paths["queue"]);
+					queue = GetIBansheeObject<IBansheePlayQueue> (object_paths  [typeof (IBansheePlayQueue)]);
 			}
 		}	
 		
 		static IBansheeController Controller {
 			get {
 				return controller ??
-					controller = GetIBansheeObject<IBansheeController> (object_paths["controller"]);
+					controller = GetIBansheeObject<IBansheeController> (object_paths [typeof (IBansheeController)]);
 			}
 		}
-				
-		static BansheeDBus ()
-		{
-			BuildObjectPathsDict ();
+
+		#endregion
+
+		public PlaybackShuffleMode ShuffleMode { 
+			get { return (PlaybackShuffleMode) Controller.ShuffleMode; }
+			set { Controller.ShuffleMode = (int) value; }
 		}
 		
 		public void TogglePlaying ()
@@ -103,19 +114,24 @@ namespace Banshee1
 			}
 		}
 
-		public void Enqueue (string[] uris)
+		public void Play (IEnumerable<IMediaFile> media)
 		{
-			Enqueue (uris, false);
+			Enqueue (media, true);
+			Next ();
+		}			
+
+		public void Enqueue (IEnumerable<IMediaFile> media)
+		{
+			Enqueue (media, false);
 		}
 		
-		public void Enqueue (string[] uris, bool prepend)
+		public void Enqueue (IEnumerable<IMediaFile> media, bool prepend)
 		{
 			try {
-				if (prepend)
-					Array.Reverse (uris);
+				// if we're prepending to the queue we need to queue in the uris in reverse order
+				if (prepend) media = media.Reverse ();
 				
-				foreach (string uri in uris)
-					PlayQueue.EnqueueUri (uri,prepend);
+				media.Select (item => PlayQueue.EnqueueUri (item.Path, prepend));
 				
 			} catch (Exception e) {
 				Log.Error ("Encountered a problem in Enqueue. {0}.", e.Message);
@@ -136,16 +152,16 @@ namespace Banshee1
 			try {
 				Controller.Previous (false);
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Next. {0}.", e.Message);
+				Log.Error ("Encountered a problem in Previous. {0}.", e.Message);
 			}
 		}
 		
 		static void BuildObjectPathsDict ()
 		{
-			object_paths = new Dictionary<string,string> ();
-			object_paths.Add ("player", "/org/bansheeproject/Banshee/PlayerEngine");
-			object_paths.Add ("queue", "/org/bansheeproject/Banshee/SourceManager/PlayQueue");
-			object_paths.Add ("controller", "/org/bansheeproject/Banshee/PlaybackController");
+			object_paths = new Dictionary<Type, string> ();
+			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
+			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");
+			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
 		}
 	}
 }
