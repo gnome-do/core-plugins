@@ -27,16 +27,16 @@ using Do.Platform;
 namespace GMail
 {
 	
-	public class Preferences
+	public class GMailPreferences
 	{
 		readonly string UsernameKey = Catalog.GetString ("Username");
 		readonly string PasswordKey = Catalog.GetString ("Password");
 		
 		IPreferences prefs;
 		
-		public Preferences()
+		public GMailPreferences()
 		{
-			prefs = Services.Preferences.Get<Preferences> ();
+			prefs = Services.Preferences.Get<GMailPreferences> ();
 		}
 
 		public string Username {

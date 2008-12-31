@@ -87,8 +87,6 @@ namespace GMail
 			} catch (Exception e) {
 				Log.Error ("GMailContacts Error: {0}",e.Message);
 				Log.Debug (e.StackTrace);
-				Log.Debug (e.InnerException.Message);
-				Log.Debug (e.InnerException.StackTrace);
 			}
 		}
 
