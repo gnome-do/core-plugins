@@ -24,9 +24,13 @@ using System;
 using System.Web;
 using System.Collections.Generic;
 using System.Linq;
+
 using Do.Universe;
-using Mono.Unix;
+using Do.Universe.Common;
+using Do.Platform;
 using Do.Platform.Linux;
+
+using Mono.Unix;
 
 /// <summary>
 /// Do plug-in that returns search results from google back to gnome-do for 
@@ -73,16 +77,14 @@ namespace InlineGoogleSearch {
 		/// Search Google
 		/// </value>
 		public override string Name {
-			get { return Catalog.GetString ("Search Google"); }
+			get { return Catalog.GetString ("Google Search"); }
 		}
 		
 		/// <value>
 		/// Searches google and returns results to Do
 		/// </value>
 		public override string Description {
-			get { return Catalog.GetString ("Searches google and " +
-				                        "returns results to " +
-				                        "Do"); }
+			get { return Catalog.GetString ("Provides an interface to Google Search"); }
 		}
 		
 		/// <value>
@@ -124,8 +126,6 @@ namespace InlineGoogleSearch {
 		/// </returns>
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
-			List<Item> retItems = new List<Item> ();
-			
 			string query = (items.First () as ITextItem).Text;
 			string searchURL = "http://google.com/search?q=" + HttpUtility.UrlEncode (query);
 			
@@ -134,35 +134,27 @@ namespace InlineGoogleSearch {
 			}
 			
 			if (!InlineGoogleSearchConfig.ReturnResults) {
-				Do.Platform.Services.Environment.OpenUrl(searchURL);
-				return null;
+				Services.Environment.OpenUrl(searchURL);
+				yield break;
 			}
 
 			if (InlineGoogleSearchConfig.ShowSearchFirst) {
-				retItems.Add( new BookmarkItem(query + " - Google Search",
-				                               searchURL));
+				yield return new BookmarkItem( query + " - Google Search",
+				                              searchURL );
 			}
 			
 			GoogleSearch googleSearch = new GoogleSearch ();
-			googleSearch.setSafeSearchLevel
-				 (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery ( query );
-			GoogleSearchResult [] googleSearchResult = 
-				googleSearch.search ();
+			googleSearch.setSafeSearchLevel (InlineGoogleSearchConfig.SearchRestrictions);
+			googleSearch.setQuery( query );
+			GoogleSearchResult [] results = googleSearch.search ();
 
-			if (googleSearchResult.Length == 0) {
-				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification("Google Search",
-				                                                                        "No Results Found",
-				                                                                        "www") );
+			if (results.Length == 0) {
+				Services.Notifications.Notify("Google Search", "No Results Found");
 			}
 			
-			for (int i = 0; i < googleSearchResult.Length; i++) {
-				retItems.Add (new BookmarkItem 
-				      (googleSearchResult [i].titleNoFormatting,
-				       googleSearchResult [i].url));
+			foreach (GoogleSearchResult result in results) {
+				yield return new BookmarkItem (result.titleNoFormatting, result.url);
 			}
-			
-			return retItems.ToArray ();	
 		}
 
 		/// <summary>

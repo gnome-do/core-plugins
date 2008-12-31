@@ -69,11 +69,17 @@ namespace InlineGoogleSearch {
 			updateSensitivities();
 		}
 		
+		/// <summary>
+		/// Initializes static preferences
+		/// </summary>		
 		static InlineGoogleSearchConfig () 
 		{
 			prefs = Do.Platform.Services.Preferences.Get<InlineGoogleSearchConfig>();
 		}
-
+		
+		/// <value>
+		/// Default Value: "moderate"
+		/// </value>
 		public static string SearchRestrictions {
 			get { 
 				return prefs.Get<string> ("SearchRestrictions", 

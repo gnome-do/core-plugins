@@ -46,11 +46,7 @@ namespace InlineGoogleSearch {
 		/// Searches google and takes you to the first returned result
 		/// </value>
 		public override string Description {
-			get { return Catalog.GetString ("Searches google and " +
-				                                "takes you to" +
-				                                " the first " +
-				                                "returned " +
-				                                "result"); }
+			get { return Catalog.GetString ("Searches google and takes you to the first returned result"); }
 		}
 		
 		/// <value>
@@ -93,17 +89,14 @@ namespace InlineGoogleSearch {
 			googleSearch.setSafeSearchLevel
 				 (InlineGoogleSearchConfig.SearchRestrictions);
 			googleSearch.setQuery ( (items.First () as ITextItem).Text);
-			GoogleSearchResult [] googleSearchResult = 
-				googleSearch.search ();
+			GoogleSearchResult [] results = googleSearch.search ();
 			
-			if (!googleSearchResult.Any ()) {
-				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification("I'm Feeling Lucky",
-				                                                                        "No Results Found",
-				                                                                        "www"));
+			if (!results.Any ()) {
+				Services.Notifications.Notify("I'm Feeling Lucky", "No Results Found");
 			} else {
-				Do.Platform.Services.Environment.OpenUrl(googleSearchResult[0].url);
+				Services.Environment.OpenUrl(results.First().url);
 			}
-			return null;	
+			yield break;
 		}
 
 		/// <summary>
