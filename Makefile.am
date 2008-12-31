@@ -6,6 +6,7 @@ SUBDIRS = po BundledLibraries \
 	Archive \
 	Bibtex \
 	Cl.ickable \
+	Confluence \
 	del.icio.us \
 	DiskMounter \
 	Epiphany \

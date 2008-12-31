@@ -111,6 +111,7 @@ Archive/Makefile
 Banshee/Makefile
 Bibtex/Makefile
 Cl.ickable/Makefile
+Confluence/Makefile
 del.icio.us/Makefile
 DiskMounter/Makefile
 Epiphany/Makefile
