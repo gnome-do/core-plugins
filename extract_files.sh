@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILES=$(egrep "subtype=\"Code\" buildaction=\"Compile\"" $1 | \
+FILES=$(egrep "subtype=\"Code\" buildaction=\"Compile\"" "$1" | \
         egrep -o "\".*\.cs" | \
         sed s/\"// | sort)
 

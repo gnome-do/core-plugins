@@ -1,6 +1,6 @@
 #!/bin/sh
 
-RESOURCES=$(egrep "EmbedAsResource" $1 | \
+RESOURCES=$(egrep "EmbedAsResource" "$1" | \
             egrep -o "\".*\.(xml|png|stetic)\"" | \
             sed s/\"// | sed s/\"// | sort)
 

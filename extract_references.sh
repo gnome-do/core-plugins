@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REFERENCES=$(egrep "ProjectReference" $1 | \
+REFERENCES=$(egrep "ProjectReference" "$1" | \
             egrep -o "refto=\"[[:alnum:].]+," | \
             sed s/refto=\"// | sed s/,// | sort)
 
