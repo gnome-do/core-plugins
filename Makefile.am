@@ -1,10 +1,60 @@
+ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
+EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
-EXTRA_DIST =  expansions.m4 BundledLibraries/Google.GData.Extensions.dll BundledLibraries/Google.GData.Client.dll BundledLibraries/Google.GData.Documents.dll BundledLibraries/Google.GData.AccessControl.dll BundledLibraries/Google.GData.Calendar.dll BundledLibraries/MonoTorrent.dll BundledLibraries/Google.GData.Contacts.dll
+SUBDIRS = po BundledLibraries \
+	Archive \
+	del.icio.us \
+	DiskMounter \
+	Epiphany \
+	Evolution \
+	File \
+	Firefox \
+	Flickr \
+	GCalendar \
+	GDocs \
+	GMailContacts \
+	GNOME-Dictionary \
+	GNOME-Screenshot \
+	GNOME-Session \
+	GNOME-Terminal \
+	GoogleCalculator \
+	GoogleMaps \
+	GoogleSearch \
+	ImageShack \
+	Launchpad \
+	LocateFiles \
+	OpenSearch \
+	Pastebin \
+	Pidgin \
+	Rhythmbox \
+	Riptide \
+	RSS \
+	Shelf \
+	SSH \
+	Tasque \
+	Text \
+	Tomboy \
+	Twitter \
+	Vinagre \
+	VolumeControl \
+	WindowManager
 
-#Warning: This is an automatically generated file, do not edit!
-if ENABLE_DEBUG
- SUBDIRS =  Rhythmbox Epiphany Evolution File GNOME-Session GoogleCalculator Launchpad LocateFiles OpenSearch Pastebin Pidgin SSH Tomboy WindowManager Firefox Vinagre GNOME-Screenshot Tasque Archive GMailContacts DiskMounter Text GNOME-Terminal GNOME-Dictionary Flickr RSS GoogleMaps Riptide Shelf Twitter VolumeControl GCalendar GoogleSearch del.icio.us ImageShack Cl.ickable ManLookUp GDocs
+if BUILD_AMAROK
+SUBDIRS += Amarok 
 endif
-if ENABLE_RELEASE
- SUBDIRS =  Rhythmbox Amarok Banshee Epiphany Evolution File GNOME-Session GoogleCalculator Launchpad LocateFiles OpenSearch Pastebin Pidgin SSH Tomboy WindowManager Firefox Vinagre GNOME-Screenshot Tasque Archive GMailContacts DiskMounter Text GNOME-Terminal GNOME-Dictionary Flickr RSS GoogleMaps Riptide Shelf Twitter VolumeControl GCalendar GoogleSearch del.icio.us ImageShack Cl.ickable ManLookUp GDocs
+if BUILD_BANSHEE
+SUBDIRS += Banshee
 endif
+
+# Current dir _must_ be processed last; this ensures our repo is built with all the plugins
+SUBDIRS += .
+
+ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
+PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
+install-data-hook:
+	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
+	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
+
+uninstall-hook:
+	rm $(ASSEMBLY_INSTALL_DIR)/*.mpack
+	rm $(ASSEMBLY_INSTALL_DIR)/*.mrep
