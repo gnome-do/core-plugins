@@ -43,15 +43,16 @@ namespace GCalendar
 		const int MonthsToIndex = 1;
 		const string GAppName = "alexLauni-gnomeDoGCalPlugin-1.5";
 		const string CalendarUiUrl = "http://www.google.com/calendar/render";
+		readonly string [] keywords = {"from", "until", "in", "after", "before", "on"};
 		const string FeedUri = "http://www.google.com/calendar/feeds/default/allcalendars/full";
 		
 		CalendarService service;
 		Dictionary<GCalendarItem, List<GCalendarEventItem>> events;
 		
-		public GCalClient()
+		public GCalClient(string username, string password)
 		{
 			service = new CalendarService (GAppName);
-			service.setUserCredentials ("alex.launi@gmail.com", "l4z3rtr0ss");
+			service.setUserCredentials (username, password);
 			ServicePointManager.CertificatePolicy = new CertHandler ();
 			events = new Dictionary<GCalendarItem, List<GCalendarEventItem>> ();
 		}
@@ -60,13 +61,79 @@ namespace GCalendar
 			get { return events.Keys; }
 		}
 
-		public IEnumerable<GCalendarEventItem> EventsForCalendar (GCalendarItem calendar)
+		public List<GCalendarEventItem> EventsForCalendar (GCalendarItem calendar)
 		{
 			List<GCalendarEventItem> calEvents;
 
 			events.TryGetValue (calendar, out calEvents);
 			return calEvents;
 		}
+
+		public GCalendarEventItem NewEvent (GCalendarItem calendar, string data) 
+        {
+            EventEntry entry;
+            string url, desc, title, start;
+
+			url = desc = title = start = "";
+			
+            entry = new EventEntry ();
+            entry.QuickAdd = true;
+            entry.Content.Content = data;
+            			
+			try {
+				entry = service.Insert (new Uri (calendar.Url), entry);
+				
+				title = entry.Title.Text;
+				desc = entry.Content.Content;
+				url = entry.AlternateUri.Content;
+				
+	            if (entry.Times.Count > 0) {	                
+	                start  = entry.Times[0].StartTime.ToShortDateString ();
+	                desc = start + " - " + desc;
+	            }
+	            
+	        } catch (WebException e) {
+				Log.Error (ErrorInMethod, "NewEvent", e.Message);
+				Log.Debug (e.StackTrace);
+				
+				return null;
+			}
+            
+            return new GCalendarEventItem (title, url, desc);
+        }
+
+		public IEnumerable<GCalendarEventItem> SearchEvents (IEnumerable<GCalendarItem> calendars, string needle)
+        {
+        	EventFeed events;
+        	EventQuery query;
+
+       		foreach (GCalendarItem calendar in calendars) {
+       			query = BuildSearchQuery (calendar, needle);
+        	
+				try {
+					events = service.Query (query);
+				} catch (Exception e) {
+					Log.Error (ErrorInMethod, "SearchEvents", e.Message);
+					Log.Debug (e.StackTrace);
+					yield break;
+				}
+					
+				foreach (EventEntry entry in events.Entries) {
+					string title, url, desc, start;
+				    	
+				    title = entry.Title.Text;
+				    desc = entry.Content.Content;
+				    url = entry.AlternateUri.Content;
+				    
+				    if (entry.Times.Count > 0) {				    	
+				        start = entry.Times [0].StartTime.ToShortDateString ();
+				        desc = start + " - " + desc;
+	                }
+	
+					yield return new GCalendarEventItem (title, url, desc);
+	            }
+			}
+        }
 
 		public void UpdateCalendars ()
 		{
@@ -75,10 +142,10 @@ namespace GCalendar
 			GCalendarItem allEventsCal;
 			Dictionary<GCalendarItem, List<GCalendarEventItem>> cals;
 
-			query = new CalendarQuery (FeedUri);
-			
+			query = new CalendarQuery (FeedUri);			
 			cals = new Dictionary<GCalendarItem, List<GCalendarEventItem>> ();
 			allEventsCal = new GCalendarItem (AllEventsCalName, CalendarUiUrl);
+			
 			// we add this default meta-calendar which contains all events
 			cals [allEventsCal] = new List<GCalendarEventItem> ();
 
@@ -86,7 +153,6 @@ namespace GCalendar
 				calendarFeed = service.Query (query);
 				
 				foreach (CalendarEntry calendar in calendarFeed.Entries) {
-					string calUrl;
 					GCalendarItem gcal;
 	
 					gcal = new GCalendarItem (calendar.Title.Text, calendar.Content.AbsoluteUri);
@@ -99,7 +165,7 @@ namespace GCalendar
 				Log.Debug (e.StackTrace);
 			}
 
-			events = cals;
+			events = new Dictionary<GCalendarItem, List<GCalendarEventItem>> (cals);
 		}
 
 		List<GCalendarEventItem> UpdateEvents (GCalendarItem calendar)
@@ -138,6 +204,122 @@ namespace GCalendar
 			}
 
 			return events;
+		}
+
+		EventQuery BuildSearchQuery (GCalendarItem calendar, string needle)
+		{
+			EventQuery query;
+       		
+       		query = new EventQuery(calendar.Url);
+			DateTime [] dates = ParseEventDates (needle);
+			query.StartTime = dates [0];
+			query.EndTime = dates [1];
+        	query.Query = ParseSearchString (needle);
+
+			return query;
+		}
+
+		DateTime [] ParseEventDates (string needle)
+		{
+			needle = needle.ToLower ();
+			
+			int keydex;
+			// String string to just dates if search term + date range found
+			foreach (string keyword in keywords) {
+				if (needle.Contains(keyword)) {
+					keydex = needle.IndexOf (keyword);
+					needle = needle.Substring (keydex, needle.Length - keydex);
+					//Console.Error.WriteLine ("Needle stripped to {0}",needle);
+					break;
+				}
+			}
+			
+			// Get date ranges for single date keywords
+			if ((needle.StartsWith ("in ") || needle.Contains (" in ")) || 
+				needle.Contains ("before ") || needle.Contains ("after ") ||
+				(needle.StartsWith ("on ") || needle.Contains (" on ")) ||
+			    needle.Contains ("until ") || (needle.Contains ("from ") &&
+			    !( needle.Contains (" to ") || needle.Contains("-"))))
+					return ParseSingleDate (needle);
+					
+			else if (needle.Contains ("from "))
+				return ParseDateRange (needle);
+			else 
+				return new DateTime [] {DateTime.Now, DateTime.Now.AddYears(1)};
+		}
+		
+		DateTime [] ParseSingleDate (string needle)
+		{
+			DateTime [] dates = new DateTime [2];
+			if (needle.StartsWith ("in") || needle.Contains (" in ")) {
+				needle = StripDatePrefix (needle);
+				dates[0] = DateTime.Parse (needle);
+				dates[1] = dates[0].AddMonths (1);
+			}
+			else if (needle.Contains ("before") || needle.Contains ("until ")) {
+				needle = StripDatePrefix (needle);
+				dates[0] = DateTime.Now;
+				dates[1] = DateTime.Parse (needle);
+			}
+			else if (needle.Contains ("after ") || needle.Contains ("from ")) {
+				needle = StripDatePrefix (needle);
+				dates[0] = DateTime.Parse (needle);
+				dates[1] = dates[0].AddYears (5);
+			}
+			else if (needle.StartsWith ("on ") || needle.Contains (" on ")) {
+				needle = StripDatePrefix (needle);
+				dates[0] = DateTime.Parse (needle);
+				dates[1] = dates[0].AddDays(1);
+			}
+			return dates;
+		}
+		
+		DateTime [] ParseDateRange (string needle)
+		{
+			DateTime [] dates = new DateTime [2];
+			needle = needle.ToLower ();
+			needle = needle.Substring (needle.IndexOf ("from "), 
+				needle.Length - needle.IndexOf ("from "));
+			try {
+				int seperatorIndex = needle.IndexOf ("-");
+				if (seperatorIndex == -1 )
+					seperatorIndex = needle.IndexOf (" to ");
+				if (seperatorIndex == -1 ) {
+					dates[0] = DateTime.Now;
+					dates[1] = new DateTime (2012,12,27);
+					return dates;
+				}
+				string start = needle.Substring (0, seperatorIndex);
+				if (start.Substring(0,4).Equals ("from"))
+					start = start.Substring (4).Trim ();
+				dates[0] = DateTime.Parse (start.Trim ());
+				
+				string end = needle.Substring (seperatorIndex + 1);
+				if (end.Contains ("to "))
+					end = end.Substring (3);
+				dates[1] = DateTime.Parse (end.Trim ());
+			} catch (FormatException e) {
+					Console.Error.WriteLine (e.Message);
+			}
+			return dates;
+		}
+		
+		string StripDatePrefix (string needle)
+		{
+			needle = needle.Trim ().ToLower ();
+			needle = needle.Substring (needle.IndexOf (" "));
+			return needle;
+		}
+		
+		string ParseSearchString (string needle)
+		{
+			needle = needle.ToLower ();
+			foreach (string keyword in keywords) {
+			if (needle.Contains (keyword))
+				needle = needle.Substring (0,needle.IndexOf (keyword)).Trim ();
+			}
+			
+			return needle;
 		}
 	}
 }

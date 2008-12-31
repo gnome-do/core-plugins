@@ -27,8 +27,9 @@
     <File name="../BundledLibraries/Google.GData.Calendar.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Client.dll" subtype="Code" buildaction="Nothing" />
     <File name="../BundledLibraries/Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
-    <File name="src/GCal2.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GCalClient.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/GCal.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/GCalPreferences.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -41,8 +42,9 @@
     <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=1.0.3278.36580, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=1.0.3278.36575, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </References>
   <GtkDesignInfo />
 </Project>

@@ -19,8 +19,8 @@
  */
 
 using System;
-using System.Linq;
 using System.Threading;
+using System.Linq;
 using System.Collections.Generic;
 
 using Mono.Unix;
@@ -34,21 +34,8 @@ namespace GCalendar
 	{
 		public GCalendarItemSource ()
 		{
-			GCalClient client = new GCalClient ();
-			client.UpdateCalendars ();
-			foreach (GCalendarItem cal in client.Calendars) {
-				Console.Error.WriteLine (cal.Name);
-				foreach (GCalendarEventItem even in client.EventsForCalendar (cal)) {
-					Console.Error.WriteLine (even.Name);
-				}
-			}			
 		}
 
-		void PrintCalendar (GCalendarItem item)
-		{
-			Console.Error.WriteLine (item.Name);
-		}
-		
 		public override string Name {
 			get { return Catalog.GetString ("Google Calendars"); }
 		}
@@ -63,32 +50,24 @@ namespace GCalendar
 
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get {
-				return new Type[] {
-					typeof (GCalendarItem),
-				};
-			}
+			get { yield return typeof (GCalendarItem); }
 		}
 
 		public override IEnumerable<Item> Items
 		{
-			get { return GCal2.Calendars; }
+			get { return GCal.Calendars.Cast<Item> (); }
 		}
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			return GCal2.EventsForCalendar ((parent as GCalendarItem).Name);
+			return GCal.EventsForCalendar (parent as GCalendarItem).Cast<Item> ();
 		}
 
 		public override void UpdateItems ()
 		{
-			Thread updateCalendars = new Thread (new ThreadStart (GCal2.UpdateCalendars));
-			updateCalendars.IsBackground = true;
-			updateCalendars.Start ();
-			
-			Thread updateEvents = new Thread (new ThreadStart (GCal2.UpdateEvents));
-			updateEvents.IsBackground = true;
-			updateEvents.Start ();
+			Thread thread = new Thread ((ThreadStart) GCal.UpdateCalendars);
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 		
 		public Gtk.Bin GetConfiguration ()
