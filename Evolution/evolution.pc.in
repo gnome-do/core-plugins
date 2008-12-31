@@ -1,6 +1,0 @@
-Name: Evolution
-Description: Evolution
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Evolution.dll

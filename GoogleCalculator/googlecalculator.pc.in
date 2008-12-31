@@ -1,6 +1,0 @@
-Name: GoogleCalculator
-Description: GoogleCalculator
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/GoogleCalculator.dll

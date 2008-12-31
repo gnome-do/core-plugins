@@ -1,6 +1,0 @@
-Name: Tomboy
-Description: Tomboy
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Tomboy.dll
