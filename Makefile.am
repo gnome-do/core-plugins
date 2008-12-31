@@ -4,6 +4,7 @@ EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 SUBDIRS = po BundledLibraries \
 	AptURL \
 	Archive \
+	Bibtex \
 	del.icio.us \
 	DiskMounter \
 	Epiphany \

@@ -109,6 +109,7 @@ Amarok/Makefile
 AptURL/Makefile
 Archive/Makefile
 Banshee/Makefile
+Bibtex/Makefile
 del.icio.us/Makefile
 DiskMounter/Makefile
 Epiphany/Makefile
