@@ -123,6 +123,7 @@ GoogleSearch/Makefile
 ImageShack/Makefile
 Launchpad/Makefile
 LocateFiles/Makefile
+Microblogging/Makefile
 OpenSearch/Makefile
 Pastebin/Makefile
 Pidgin/Makefile
@@ -134,7 +135,6 @@ SSH/Makefile
 Tasque/Makefile
 Text/Makefile
 Tomboy/Makefile
-Twitter/Makefile
 Vinagre/Makefile
 VolumeControl/Makefile
 WindowManager/Makefile

@@ -23,6 +23,7 @@ SUBDIRS = po BundledLibraries \
 	ImageShack \
 	Launchpad \
 	LocateFiles \
+	Microblogging \
 	OpenSearch \
 	Pastebin \
 	Pidgin \
@@ -34,7 +35,6 @@ SUBDIRS = po BundledLibraries \
 	Tasque \
 	Text \
 	Tomboy \
-	Twitter \
 	Vinagre \
 	VolumeControl \
 	WindowManager
