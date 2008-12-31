@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="2.1"
 	name="Firefox"
-	description="Indexes Firefox 3 bookmarks."
+	description="Search Firefox 3 bookmarks."
 	author="David Siegel"
 	category="Official"
 	>

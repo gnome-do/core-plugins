@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.1"
 	name="Launchpad"
-	description="Provides integration with Launchpad.net."
+	description="Search various Launchpad properties (e.g. code, bugs, people)."
 	author="Ken Simon, David Siegel"
 	category="Official"
 >

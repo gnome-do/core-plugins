@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Woof! (Web Offer One File)"
-	description="Allows you to send a file or a whole directory at blazing speed to a Pidgin contact on the same network (LAN) as you."
+	description="Send files and folders at blazing speed to Pidgin contacts on your local network."
 	author="Mathieu Cadet"
 	category="Community"
 	>

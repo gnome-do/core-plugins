@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Thunderbird"
-	description="Indexes your Thunderbird contacts"
+	description="Search your Thunderbird contacts."
 	author="David Siegel"
 	category="Community"
 	>

@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Amarok"
-	description="Searches and plays Amarok music"
+	description="Search and play Amarok music."
 	author="David Siegel"
 	category="Community"
 >
@@ -16,8 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Do.Plugins.Amarok.AmarokMusicItemSource" />
 	</Extension>

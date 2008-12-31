@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Terminal Server Client"
-	description="Saved Terminal Server Client connections."
+	description="Search and open Terminal Server Client connections."
 	author="Ankit Solanki"
 	category="Community"
 	>

@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Music Player Daemon"
-	description="Provides support to play music from MPD"
+	description="Search and play music from MPD."
 	author="Zachary Goldberg"
 	category="Community"
 	>
