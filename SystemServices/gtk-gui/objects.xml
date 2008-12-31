@@ -1,0 +1,6 @@
+<objects attr-sync="on">
+  <object type="SystemServices.SystemServicesConfig" palette-category="SystemServices" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+</objects>
