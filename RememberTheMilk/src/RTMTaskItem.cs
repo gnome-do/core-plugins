@@ -22,7 +22,7 @@ using System;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 
     public class RTMTaskItem : Item, IUrlItem

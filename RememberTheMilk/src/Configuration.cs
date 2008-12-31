@@ -25,7 +25,7 @@ using Do.Platform;
 using Gtk;
 
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 	public partial class Configuration : Gtk.Bin
 	{
@@ -50,7 +50,7 @@ namespace Do.Addins.RTM
 		
 		static Configuration ()
 		{
-			prefs = Do.Platform.Services.Preferences.Get<Do.Addins.RTM.Configuration>();
+			prefs = Do.Platform.Services.Preferences.Get<RememberTheMilk.Configuration>();
 		}
 		
 		public static string AuthToken {

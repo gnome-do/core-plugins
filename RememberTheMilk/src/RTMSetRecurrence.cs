@@ -25,7 +25,7 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 	public class RTMSetRecurrence : Act
 	{
@@ -69,11 +69,6 @@ namespace Do.Addins.RTM
         public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
         {
 			return true;
-        }
-        
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
         }
         
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 

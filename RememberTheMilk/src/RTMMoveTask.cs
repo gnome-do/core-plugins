@@ -25,7 +25,7 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 	
 	
@@ -60,7 +60,7 @@ namespace Do.Addins.RTM
         }
         
         public override bool ModifierItemsOptional {
-            get {return false; }
+            get { return false; }
         }
         
         public override bool SupportsItem (Item item) 
@@ -74,11 +74,6 @@ namespace Do.Addins.RTM
 				return !(modItem as RTMListItem).Name.Equals ("All Tasks");
 			
             return true;
-        }
-        
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
         }
         
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
