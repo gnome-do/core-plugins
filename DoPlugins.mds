@@ -60,6 +60,7 @@
       <Entry build="True" name="Zim" configuration="Debug" />
       <Entry build="True" name="Putty" configuration="Debug" />
       <Entry build="True" name="SystemServices" configuration="Debug" />
+      <Entry build="True" name="Alias" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -121,6 +122,7 @@
       <Entry build="True" name="Zim" configuration="Release" />
       <Entry build="True" name="Putty" configuration="Release" />
       <Entry build="True" name="SystemServices" configuration="Release" />
+      <Entry build="True" name="Alias" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -183,6 +185,7 @@
     <Execute type="None" entry="Zim" />
     <Execute type="None" entry="Putty" />
     <Execute type="None" entry="SystemServices" />
+    <Execute type="None" entry="Alias" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -245,5 +248,6 @@
     <Entry filename="Zim/Zim.mdp" />
     <Entry filename="Putty/Putty.mdp" />
     <Entry filename="SystemServices/SystemServices.mdp" />
+    <Entry filename="Alias/Alias.mdp" />
   </Entries>
 </Combine>
