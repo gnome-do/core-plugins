@@ -13,3 +13,11 @@ FILES = \
 
 RESOURCES = \
 	src/Amarok.addin.xml
+
+REFERENCES = \
+	Mono.Data.Sqlite \
+	Mono.Posix \
+	System \
+	System.Data \
+	System.Xml \
+	$(DO_UNIVERSE_LIBS)
