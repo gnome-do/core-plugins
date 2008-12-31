@@ -110,6 +110,7 @@ AptURL/Makefile
 Archive/Makefile
 Banshee/Makefile
 Bibtex/Makefile
+Cl.ickable/Makefile
 del.icio.us/Makefile
 DiskMounter/Makefile
 Epiphany/Makefile

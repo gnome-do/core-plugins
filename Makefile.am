@@ -5,6 +5,7 @@ SUBDIRS = po BundledLibraries \
 	AptURL \
 	Archive \
 	Bibtex \
+	Cl.ickable \
 	del.icio.us \
 	DiskMounter \
 	Epiphany \
