@@ -20,12 +20,14 @@
 
 
 using System;
-using Do.Universe;
+
 using Mono.Unix;
 
-namespace Banshee1
+using Do.Universe;
+
+namespace Banshee
 {
-	public class BrowseMediaItem : IItem 
+	public class BrowseMediaItem : Item 
 	{
 		string name, description;
 		
@@ -35,15 +37,15 @@ namespace Banshee1
 			this.description = description;
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return name; }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return description; }
 		}
 		
-		public virtual string Icon {
+		public override string Icon {
 			get { return "media-optical"; }
 		}
 	}

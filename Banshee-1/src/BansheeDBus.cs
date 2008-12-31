@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-using Do.Universe;
+using Do.Platform;
 
 namespace Banshee
 {
@@ -60,21 +60,21 @@ namespace Banshee
 		static IBansheePlayQueue queue;
 		static IBansheeController controller;
 
-		static BansheeDBus ()
+		static BansheeDbus ()
 		{
 			BuildObjectPathsDict ();
 		}
 		
 		static T GetIBansheeObject<T> (string object_path)
 		{
-			if (!Bus.Session.NameHasOwner (BUS_NAME)) {
-				Bus.Session.StartServiceByName (BUS_NAME);
+			if (!Bus.Session.NameHasOwner (BusName)) {
+				Bus.Session.StartServiceByName (BusName);
 				System.Threading.Thread.Sleep (5000);
-				if (!Bus.Session.NameHasOwner (BUS_NAME))
-					throw new Exception (string.Format("Name {0} has no owner.", BUS_NAME));
+				if (!Bus.Session.NameHasOwner (BusName))
+					throw new Exception (string.Format("Name {0} has no owner.", BusName));
 			}
 			
-			return Bus.Session.GetObject<T> (BUS_NAME, new ObjectPath (object_path));
+			return Bus.Session.GetObject<T> (BusName, new ObjectPath (object_path));
 		}
 		
 		static IBansheePlayer Player {
@@ -125,13 +125,13 @@ namespace Banshee
 			Enqueue (media, false);
 		}
 		
-		public void Enqueue (IEnumerable<IMediaFile> media, bool prepend)
+		void Enqueue (IEnumerable<IMediaFile> media, bool prepend)
 		{
 			try {
 				// if we're prepending to the queue we need to queue in the uris in reverse order
 				if (prepend) media = media.Reverse ();
-				
-				media.Select (item => PlayQueue.EnqueueUri (item.Path, prepend));
+
+				media.ForEach (item => PlayQueue.EnqueueUri (item.Path, prepend));
 				
 			} catch (Exception e) {
 				Log.Error ("Encountered a problem in Enqueue. {0}.", e.Message);

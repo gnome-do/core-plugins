@@ -22,14 +22,14 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Do.Universe;
-using Do.Addins;
 
 using Mono.Unix;
 
-namespace Banshee1
+using Do.Universe;
+
+namespace Banshee
 {
-	public class BansheeSearchCollectionAction : AbstractAction
+	public class BansheeSearchCollectionAction : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Search Banshee Media"); }
@@ -47,7 +47,7 @@ namespace Banshee1
 			get { return new Type[] { typeof (ITextItem), typeof (MediaItem), }; }
 		}
 		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string search;
 			
@@ -56,7 +56,7 @@ namespace Banshee1
 			else
 				search = items.First ().Name;
 
-			return Banshee.SearchMedia (search);
+			return Banshee.SearchMedia (search).Cast<Item> ();
 		}
 	}
 }

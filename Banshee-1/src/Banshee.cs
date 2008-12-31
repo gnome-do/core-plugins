@@ -20,7 +20,10 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Collections.Generic;
+
+using Do.Platform;
 
 namespace Banshee
 {
@@ -32,7 +35,7 @@ namespace Banshee
         Album
     }
 	
-	public static class Banshee
+	public class Banshee
 	{
 		static BansheeDbus bus;
 		static BansheeIndexer indexer;
@@ -43,41 +46,114 @@ namespace Banshee
 			indexer = new BansheeIndexer ();
 		}
 
-		public static IEnumerable<T> LoadMedia (MediaItem item)
+		public static void Index ()
 		{
-			return Enumerable.Empty<MediaItem> ();
+			indexer.Start ();
 		}
-		
-		public void LoadVideos (out List<VideoItem> videosOut)
+
+		public static IEnumerable<IMediaFile> LoadMedia (MediaItem item)
 		{
-			videosOut = new List<VideoItem> ();
-			lock (indexer_mutex) {
-				foreach (VideoItem video in videos) {
-					videosOut.Add (video);
+			if (item is MusicItem)
+				return LoadSongsFor (item as MusicItem);
+			else if (item is PodcastItem)
+				return LoadPodcastsFor (item as PodcastItem);
+			else
+				return indexer.Videos as IEnumerable<IMediaFile>;
+		}
+
+		public static void Enqueue (MediaItem item)
+		{
+			bus.Enqueue (LoadMedia (item));
+		}
+
+		public static void Play (MediaItem item)
+		{
+			bus.Play (LoadMedia (item));
+		}
+
+		public static void Next ()
+		{
+			bus.Next ();
+		}
+
+		public static void Previous ()
+		{
+			bus.Previous ();
+		}
+
+		public static void TogglePlaying ()
+		{
+			bus.TogglePlaying ();
+		}
+
+		public static PlaybackShuffleMode ShuffleMode {
+			set { bus.ShuffleMode = value; }
+		}
+
+		static List<IMediaFile> LoadSongsFor (MusicItem item)
+		{
+			SortedList<string, IMediaFile> albumSongs;
+			string key;
+			
+			if (item is SongMusicItem) {
+				List<IMediaFile> single = new List<IMediaFile> ();
+				single.Add (item as SongMusicItem);
+				return single;
+			}
+			
+			albumSongs = new SortedList<string, IMediaFile> ();
+			foreach (SongMusicItem song in indexer.Songs) {
+				switch (item.GetType ().Name) {
+				case "AlbumMusicItem":
+					if (item.Name != song.Album) continue;
+					break;
+				case "ArtistMusicItem":
+					if (item.Name != song.Artist) continue;
+					break;
+				}
+				
+				key = string.Format ("{0}-{1}-{2}", song.Album, song.Track, song.Path);
+				try {
+					if (albumSongs.ContainsKey (key)) continue;
+					albumSongs.Add (key, song);
+				} catch (Exception e) {
+					Log.Error ("{0} : {1}", key, e.Message);
 				}
 			}
+			
+			return new List<IMediaFile> (albumSongs.Values);
 		}
-		
-		public void LoadPodcasts (out List<PodcastItem> podcastsOut)
+
+		static IEnumerable<IMediaFile> LoadPodcastsFor (PodcastItem item)
+		{			
+			if (item is PodcastPodcastItem) {
+				yield return item as IMediaFile;
+			}
+			
+			foreach (PodcastPodcastItem pc in indexer.Podcasts) {
+				if ((item as PodcastPublisherItem).Name != pc.Artist) continue;
+				
+				yield return pc;
+			}
+		}
+
+		public static void LoadPodcasts (out List<PodcastItem> podcastsOut)
 		{
 			Dictionary<string, PodcastItem> publishers;
 			
 			podcastsOut = new List<PodcastItem> ();
 			publishers = new Dictionary<string, PodcastItem> ();
-			
-			lock (indexer_mutex) {
-				foreach (PodcastPodcastItem podcast in podcasts) {
-					if (!publishers.ContainsKey (podcast.Artist))
-						publishers[podcast.Artist] = new PodcastPublisherItem (
-							podcast.Artist, podcast.Year, podcast.Cover);
-				}
+		
+			foreach (PodcastPodcastItem podcast in indexer.Podcasts) {
+				if (!publishers.ContainsKey (podcast.Artist))
+					publishers[podcast.Artist] = new PodcastPublisherItem (
+						podcast.Artist, podcast.Year, podcast.Cover);
 			}
 			
 			podcastsOut.AddRange (publishers.Values);
 		}
 		
-		public void LoadAlbumsAndArtists (out List<AlbumMusicItem> albumsOut,
-			out List<ArtistMusicItem> artistsOut)
+		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albumsOut, out List<ArtistMusicItem> artistsOut)
 		{
 			Dictionary<string, AlbumMusicItem>  albums;
 			Dictionary<string, ArtistMusicItem> artists;
@@ -88,114 +164,36 @@ namespace Banshee
 			albums = new Dictionary<string, AlbumMusicItem> ();
 			artists = new Dictionary<string,ArtistMusicItem> ();
 			
-			lock (indexer_mutex) {
-				foreach (SongMusicItem song in songs) {
-					if (!artists.ContainsKey (song.Artist))
-						artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
-						
-					if (!albums.ContainsKey (song.Album))
-						albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year,
-							song.Cover);
-				}
+			foreach (SongMusicItem song in indexer.Songs) {
+				if (!artists.ContainsKey (song.Artist))
+					artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
+					
+				if (!albums.ContainsKey (song.Album))
+					albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year,
+						song.Cover);
 			}
 			
 			albumsOut.AddRange (albums.Values);
 			artistsOut.AddRange (artists.Values);
 		}
-		
-		public List<PodcastPodcastItem> LoadPodcastsFor (PodcastItem item)
+
+		public static void LoadVideos (out List<VideoItem> videos)
 		{
-			List<PodcastPodcastItem> feedItems;
-			
-			if (item is PodcastPodcastItem) {
-				List<PodcastPodcastItem> podcast = new List<PodcastPodcastItem> ();
-				podcast.Add (item as PodcastPodcastItem);
-				return podcast;
-			}
-			
-			feedItems = new List<PodcastPodcastItem> ();
-			feedItems.Clear ();
-			lock (indexer_mutex) {
-				foreach (PodcastPodcastItem pc in podcasts) {
-					if ((item as PodcastPublisherItem).Name != pc.Artist) continue;
-					
-					try {
-						feedItems.Add (pc);
-					} catch (Exception e) {
-						Log.Error ("{0}", e.Message);
-					}
-				}
-			}
-			
-			return feedItems;
+			videos = new List<VideoItem> (indexer.Videos);
 		}
 		
-		public List<SongMusicItem> LoadSongsFor (MusicItem item)
+		public static List<IMediaFile> SearchMedia (string pattern)
 		{
-			SortedList<string, SongMusicItem> albumSongs;
-			string key;
+			List<IMediaFile> results = new List<IMediaFile> ();
 			
-			if (item is SongMusicItem) {
-				List<SongMusicItem> single = new List<SongMusicItem> ();
-				single.Add (item as SongMusicItem);
-				return single;
-			}
-			
-			albumSongs = new SortedList<string,SongMusicItem> ();
-			lock (indexer_mutex) {
-				foreach (SongMusicItem song in songs) {
-					switch (item.GetType ().Name) {
-					case "AlbumMusicItem":
-						if (item.Name != song.Album) continue;
-						break;
-					case "ArtistMusicItem":
-						if (item.Name != song.Artist) continue;
-						break;
-					}
-					
-					key = string.Format ("{0}-{1}-{2}", song.Album, song.Track, song.File);
-					try {
-						if (albumSongs.ContainsKey (key)) continue;
-						albumSongs.Add (key, song);
-					} catch (Exception e) {
-						Log.Error ("{0} : {1}", key, e.Message);
-					}
-				}
-			}
-			
-			return new List<SongMusicItem> (albumSongs.Values);
-		}
-		
-		public List<IItem> SearchMedia (string pattern)
-		{
-			Console.Error.WriteLine ("Into SM");
-			List<IItem> results = new List<IItem> ();
-			
-			lock (indexer_mutex) {
-				if (songs != null) {
-					results.AddRange (songs.FindAll (delegate (IItem item) {
-						return ContainsMatch (item, pattern);
-					}));
-				}
-			
-				if (videos != null) {
-					results.AddRange (videos.FindAll (delegate (IItem item) {
-						return ContainsMatch (item, pattern);
-					}));
-				}
-			
-				if (podcasts != null) {
-					results.AddRange (podcasts.FindAll (delegate (IItem item) {
-						return ContainsMatch (item, pattern);
-					}));
-				}
-			}
-			
-			Console.Error.WriteLine ("OUT");
+			results.AddRange (indexer.Songs.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
+			results.AddRange (indexer.Videos.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
+			results.AddRange (indexer.Podcasts.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
+
 			return results;
 		}
 
-		bool ContainsMatch (IItem item, string pattern)
+		static bool ContainsMatch (MediaItem item, string pattern)
 		{
 			foreach (PropertyInfo p in item.GetType ().GetProperties ()) {
 				try {

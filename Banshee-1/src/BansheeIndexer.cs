@@ -37,12 +37,13 @@ namespace Banshee
 {
 	public class BansheeIndexer : SimpleIndexerClient
 	{
-		List<VideoItem> videos;
-		List<SongMusicItem> songs;
-		List<PodcastItem> podcasts;
 		DateTime last_index;
 		object indexing_mutex;
 		string artwork_directory;
+		
+		List<VideoItem> videos;
+		List<SongMusicItem> songs;
+		List<PodcastItem> podcasts;
 		
 		readonly string[] export_fields = new [] {"name", "artist", "year", "album", "local-path", "URI", "media-attributes", "artwork-id", "track-number"};
 		
@@ -77,42 +78,43 @@ namespace Banshee
 		protected override void IndexResult (IDictionary<string, object> result)
 		{
 			MediaItem item;
-			string path, artpath, mediaType;
+			string path, artPath, mediaType;
 			Dictionary<string, string> exports;
-			
-			artpath = "";
-			
+					
 			exports = SetupExports ();
-			foreach (string export in exports.Keys) {
-				result.TryGetValue (export, out (exports [export]));
+			foreach (string export in export_fields) {
+				object objExport;
+				
+				result.TryGetValue (export, out objExport);
+				exports [export] = (objExport == null) ? "" : objExport.ToString ();
 			}
 			
 			mediaType = exports ["media-attributes"];
 
 			// some items dont have a local-path, we need to use the URI in this case.
-			path = string.IsNullOrEmpty (export ["local-path"]) ? export ["local-path"] : export ["URI"];
-			artpath = string.IsNullOrEmpty (exports ["artwork-id"]) ? "" : Path.Combine (artwork_directory, exports ["artwork-id"] + ".jpg");
-
+			path = string.IsNullOrEmpty (exports ["local-path"]) ? exports ["local-path"] : exports ["URI"];
+			artPath = string.IsNullOrEmpty (exports ["artwork-id"]) ? "" : Path.Combine (artwork_directory, exports ["artwork-id"] + ".jpg");
+			Console.Error.WriteLine (path);
 			lock (indexing_mutex) {
 			
 				//Handle videos in the collection
 				if (mediaType.Contains ("VideoStream")) {		
 					item = new VideoItem (exports ["name"], exports ["artist"], exports ["year"], artPath, path);
 	
-					videos.Add (item);
+					videos.Add (item as VideoItem);
 				
 				//Handle the podcasts in collection
 				} else if (mediaType.Contains ("Podcast")) {
 					item = new PodcastPodcastItem (exports ["name"], exports ["album"], exports ["year"], artPath, path);
 					
-					podcasts.Add (item);
+					podcasts.Add (item as PodcastPodcastItem);
 				
 				//everything else should be Music
 				} else {
-					item = new SongMusicItem (exports ["name"], exports ["artist"], exports , exports ["album"], exports ["year"], 
+					item = new SongMusicItem (exports ["name"], exports ["artist"], exports ["album"], exports ["year"], 
 						artPath, exports ["track-number"], path);
 					
-					songs.Add (item);
+					songs.Add (item as SongMusicItem);
 				}
 			}
 		}

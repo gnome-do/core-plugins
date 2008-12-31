@@ -20,22 +20,24 @@
 
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Collections.Generic;
 
-using Do.Addins;
+using Mono.Unix;
+
 using Do.Universe;
 
-namespace Banshee1
+namespace Banshee
 {
-	public class BansheeEnqueueAction : AbstractAction
+	public class BansheeEnqueueAction : Act
 	{
 		public override string Name {
-			get { return "Add to Play Queue"; }
+			get { return Catalog.GetString ("Add to Play Queue"); }
 		}
 		
 		public override string Description {
-			get { return "Adds tracks to Banshee play queue"; }
+			get { return Catalog.GetString ("Adds tracks to Banshee play queue"); }
 		}
 
 		public override string Icon {
@@ -43,30 +45,12 @@ namespace Banshee1
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
-				return new Type [] { typeof (MusicItem), };
-			}
+			get { yield return typeof (MediaItem); }
 		}
 
-		public override bool SupportsModifierItemForItems (IEnumerable<IItem> items, IItem modItem)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			return false;
-		}
-		
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
-		{
-			new Thread ((ThreadStart) delegate {
-				List<string> files = new List<string> ();
-				foreach (IItem item in items) {
-					foreach (SongMusicItem song in Banshee.LoadSongsFor ((item as MusicItem))) {
-						files.Add (song.File);
-					}
-				}
-				BansheeDBus bd = new BansheeDBus ();
-				bd.Enqueue (files.ToArray ());
-			}).Start ();
-			
-			return null;
+			return Enumerable.Empty<Item> ();
 		}
 	}
 }

@@ -28,12 +28,12 @@ using Do.Universe;
 
 namespace Banshee
 {
-	public class BansheeRunnableItem : IRunnableItem
+	public class BansheeRunnableItem : Item, IRunnableItem
 	{	
 		string name, description, icon, command;
 		
-		public static readonly BansheeRunnableItem[] DefaultItems =
-			new BansheeRunnableItem[] {
+		public static readonly BansheeRunnableItem [] DefaultItems =
+			new [] {
                 new BansheeRunnableItem (Catalog.GetString ("Pause/Play"),
 					Catalog.GetString ("Toggle Banshee Playback"),
 					"media-playback-pause",
@@ -58,34 +58,20 @@ namespace Banshee
 			this.command = command;
 		}
 		
-		public string Name {
+		public override string Name {
 			get { return name; }
 		}
 		
-		public string Description {
+		public override string Description {
 			get { return description; }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return icon; }
 		}
 		
 		public void Run ()
 		{
-			new Thread ((ThreadStart) delegate {
-				BansheeDBus bd = new BansheeDBus ();
-				switch (command) {
-				case "play-pause":
-					bd.TogglePlaying ();
-					break;
-				case "next":
-					bd.Next ();
-					break;
-				case "previous":
-					bd.Previous ();
-					break;
-				}
-			}).Start ();
 		}
 	}
 }

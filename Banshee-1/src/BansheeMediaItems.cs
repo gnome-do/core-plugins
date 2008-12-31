@@ -24,9 +24,16 @@ using Do.Universe;
 
 using Mono.Unix;
 
-namespace Banshee1
-{	
-	public class MediaItem : IItem
+namespace Banshee
+{
+	public interface IMediaFile : IFileItem
+	{
+		string Year { get; }
+		string Title { get; }
+		string Artist { get; }
+	}
+	
+	public class MediaItem : Item
 	{
 		protected string name, artist, year, cover;
 		
@@ -44,15 +51,15 @@ namespace Banshee1
 				this.cover = cover;
 		}
 		
-		public virtual string Name {
+		public override string Name {
 			get { return name; }
 		}
 		
-		public virtual string Description {
+		public override string Description {
 			get { return year == null ? Artist : string.Format ("{0} ({1})", artist, Year); }
 		}
 		
-		public virtual string Icon {
+		public override string Icon {
 			get { return cover ?? "applications-multimedia"; }
 		}
 		
@@ -69,7 +76,7 @@ namespace Banshee1
 		}
 	}
 	
-	public class VideoItem : MediaItem
+	public class VideoItem : MediaItem, IMediaFile
 	{
 		string file;
 		public VideoItem (string name, string artist, string year, string cover, string file) :
@@ -82,8 +89,15 @@ namespace Banshee1
 			get { return cover ?? "video-x-generic"; }
 		}
 		
-		public string File {
+		public string Title {
+			get { return Name; }
+		}
+		public string Path {
 			get { return file; }
+		}
+
+		public string Uri {
+			get { return string.Format ("file://{0}", Path); }
 		}
 	}
 	
@@ -114,7 +128,7 @@ namespace Banshee1
 		}
 	}
 	 
-	public class PodcastPodcastItem : PodcastItem
+	public class PodcastPodcastItem : PodcastItem, IMediaFile
 	{		
 		string file;
 		public PodcastPodcastItem (string name, string artist, string year, string cover, string file) :
@@ -128,9 +142,16 @@ namespace Banshee1
 			get { return "audio-x-generic"; }
 		}
 
+		public string Title {
+			get { return Name; }
+		}
 		
-		public string File {
+		public string Path {
 			get { return file; }
+		}
+
+		public string Uri {
+			get { return string.Format ("file://{0}", Path); }
 		}
 	}
 			
@@ -176,7 +197,7 @@ namespace Banshee1
 		}
 	}
 	
-	public class SongMusicItem : MusicItem
+	public class SongMusicItem : MusicItem, IMediaFile
 	{
 		string file, album, track;
 		
@@ -195,9 +216,17 @@ namespace Banshee1
 		public override string Icon {
 			get { return "audio-x-generic"; }
 		}
+
+		public string Title {
+			get { return Name; }
+		}
 		
-		public string File {
+		public string Path {
 			get { return file; }
+		}
+
+		public string Uri {
+			get { return string.Format ("file://{0}", Path); }
 		}
 		
 		public string Album {

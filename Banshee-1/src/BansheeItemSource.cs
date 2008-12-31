@@ -22,15 +22,15 @@
 using System;
 using System.Collections.Generic;
 
-using Do.Addins;
-using Do.Universe;
 using Mono.Unix;
 
-namespace Banshee1
+using Do.Universe;
+
+namespace Banshee
 {	
-	public class BansheeItemSource : IItemSource
+	public class BansheeItemSource : ItemSource
 	{
-		List<IItem> items;
+		List<Item> items;
 		List<AlbumMusicItem> albums;
 		List<ArtistMusicItem> artists;
 		List<VideoItem> videos;
@@ -38,44 +38,41 @@ namespace Banshee1
 		
 		public BansheeItemSource()
 		{
-			items = new List<IItem> ();
-			Banshee indexer = new Banshee ();
-			indexer.Start ();
+			items = new List<Item> ();
+			Banshee.Index ();
 		}
 		
-		public string Name {
-			get { return "Banshee Media"; }
+		public override string Name {
+			get { return Catalog.GetString ("Banshee Media"); }
 		}
 		
-		public string Description {
-			get { return "Indexes Media from Banshee Media Player"; }
+		public override string Description {
+			get { return Catalog.GetString ("Indexes Media from Banshee Media Player"); }
 		}
 		
-		public string Icon {
+		public override string Icon {
 			get { return "music-player-banshee"; }
 		}
 		
-		public IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (MediaItem),
-					typeof (BrowseMediaItem),
-					typeof (ApplicationItem),
-				};
+				yield return typeof (MediaItem);
+				yield return typeof (BrowseMediaItem);
+				yield return typeof (IApplicationItem);
 			}
 		}
 		
-		public IEnumerable<IItem> Items {
+		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
 		
-		public IEnumerable<IItem> ChildrenOfItem (IItem parent)
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			List<IItem> children;
+			List<Item> children;
 			
-			children = new List<IItem> ();
+			children = new List<Item> ();
 
-			if (parent is ApplicationItem && parent.Name.ToLower () == Catalog.GetString ("banshee media player")) {
+			if (parent is IApplicationItem && parent.Name.ToLower () == Catalog.GetString ("banshee media player")) {
 				if (albums != null && albums.Count > 0)
 					children.Add (new BrowseAlbumsMusicItem ());
 				if (artists != null && artists.Count > 0)
@@ -92,11 +89,11 @@ namespace Banshee1
 					children.Add (album);
 			}
 			else if (parent is AlbumMusicItem) {
-				foreach (SongMusicItem song in Banshee.LoadSongsFor (parent as AlbumMusicItem))
+				foreach (SongMusicItem song in Banshee.LoadMedia (parent as AlbumMusicItem))
 					children.Add (song);
 			}
 			else if (parent is PodcastPublisherItem) {
-				foreach (PodcastPodcastItem pc in Banshee.LoadPodcastsFor (parent as PodcastPublisherItem))
+				foreach (PodcastPodcastItem pc in Banshee.LoadMedia (parent as PodcastPublisherItem))
 					children.Add (pc);
 			}
 			else if (parent is BrowsePublisherPodcastItem) {
@@ -119,10 +116,8 @@ namespace Banshee1
 			return children;
 		}
 		
-		public void UpdateItems ()
-		{
-			//if (!Banshee.HasCollectionChanged) return;
-			
+		public override void UpdateItems ()
+		{			
 			items.Clear ();
 			
 			//Add browser features
@@ -133,16 +128,14 @@ namespace Banshee1
 			items.AddRange (BansheeRunnableItem.DefaultItems);
 			
 			//Add albums and artists to the universe
-			Banshee.LoadAlbumsAndArtists  (out albums, out artists);
 			Banshee.LoadVideos (out videos);
-		 	Banshee.LoadPodcasts (out publishers);
+			Banshee.LoadPodcasts (out publishers);
+			Banshee.LoadAlbumsAndArtists  (out albums, out artists);
 		
-			foreach (IItem album in albums) items.Add (album);
-			foreach (IItem artist in artists) items.Add (artist);
-			foreach (IItem video in videos) items.Add (video);
-			foreach (IItem podcast in publishers) items.Add (podcast);
-			
-			Banshee.HasCollectionChanged = false;
+			foreach (Item album in albums) items.Add (album);
+			foreach (Item video in videos) items.Add (video);
+			foreach (Item artist in artists) items.Add (artist);
+			foreach (Item podcast in publishers) items.Add (podcast);
 		}
 		
 		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)

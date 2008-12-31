@@ -59,22 +59,7 @@ namespace Banshee
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			new Thread ((ThreadStart) delegate {
-				List<string> files = new List<string> ();
-				BansheeDBus bd = new BansheeDBus ();
-			
-				foreach (Item item in items) {
-					if (item == null) continue;
-					foreach (SongMusicItem song in Banshee.LoadSongsFor ((item as MusicItem))) {
-						files.Add (song.File);
-					}
-				}
-			
-				bd.Enqueue (files.ToArray (), true);
-				Thread.Sleep (4000);
-				bd.Next ();
-			}).Start ();
-			return null;
+			return Enumerable.Empty<Item> ();
 		}
 	}
 }
