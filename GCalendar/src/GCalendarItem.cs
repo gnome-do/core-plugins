@@ -27,7 +27,7 @@ using Do.Universe;
 
 namespace GCalendar
 {
-    public class GCalendarItem : Item, IUrlItem
+    public class GCalendarItem : Item, IBookmarkItem
     {
         string name, url;
 		

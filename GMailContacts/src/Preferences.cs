@@ -29,8 +29,8 @@ namespace GMail
 	
 	public class Preferences
 	{
-		readonly string UsernameKey = Catalog.GetString ("Username");
-		readonly string PasswordKey = Catalog.GetString ("Password");
+		const string UsernameKey = "Username";
+		const string PasswordKey = "Password";
 		
 		IPreferences prefs;
 		

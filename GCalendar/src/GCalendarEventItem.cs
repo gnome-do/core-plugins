@@ -26,9 +26,14 @@ using Do.Universe;
 
 namespace GCalendar 
 {	
-	public sealed class GCalendarEventItem : Item, IUrlItem
+	public sealed class GCalendarEventItem : Item, IBookmarkItem
 	{
 		string name, url, desc;
+
+		public static GCalendarEventItem NewEvent (GCalendarItem calendar, string data)
+		{
+			return GCal.NewEvent (calendar, data);
+		}
 		
 		public GCalendarEventItem (string name, string url, string desc)
 		{

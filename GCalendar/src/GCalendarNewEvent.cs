@@ -67,7 +67,7 @@ namespace GCalendar
             GCalendarItem cal = modifierItems.First () as GCalendarItem;
             string eventData = (items.First () as ITextItem).Text;
             
-            yield return GCal.NewEvent (cal, eventData);
+            yield return GCalendarEventItem.NewEvent (cal, eventData);
         }
 	}
 }

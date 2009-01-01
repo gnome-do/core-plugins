@@ -72,6 +72,7 @@ namespace GCalendar
 		public GCalendarEventItem NewEvent (GCalendarItem calendar, string data) 
         {
             EventEntry entry;
+            GCalendarEventItem newEvent;
             string url, desc, title, start;
 
 			url = desc = title = start = "";
@@ -87,7 +88,7 @@ namespace GCalendar
 				desc = entry.Content.Content;
 				url = entry.AlternateUri.Content;
 				
-	            if (entry.Times.Count > 0) {	                
+	            if (entry.Times.Any ()) {	                
 	                start  = entry.Times[0].StartTime.ToShortDateString ();
 	                desc = start + " - " + desc;
 	            }
@@ -98,8 +99,11 @@ namespace GCalendar
 				
 				return null;
 			}
+			
+			newEvent = new GCalendarEventItem (title, url, desc);
+			events [calendar].Add (newEvent);
             
-            return new GCalendarEventItem (title, url, desc);
+            return newEvent;
         }
 
 		public IEnumerable<GCalendarEventItem> SearchEvents (IEnumerable<GCalendarItem> calendars, string needle)
@@ -125,7 +129,7 @@ namespace GCalendar
 				    desc = entry.Content.Content;
 				    url = entry.AlternateUri.Content;
 				    
-				    if (entry.Times.Count > 0) {				    	
+				    if (entry.Times.Any ()) {				    	
 				        start = entry.Times [0].StartTime.ToShortDateString ();
 				        desc = start + " - " + desc;
 	                }
@@ -191,7 +195,7 @@ namespace GCalendar
 					eventUrl = entry.AlternateUri.Content;
 
 					// check if the event has associated dates
-					if (entry.Times.Count > 0) {
+					if (entry.Times.Any ()) {
 				    	start = entry.Times [0].StartTime.ToShortDateString ();
 				    	eventDesc = start + " - " + eventDesc;
 	                }
@@ -229,7 +233,6 @@ namespace GCalendar
 				if (needle.Contains(keyword)) {
 					keydex = needle.IndexOf (keyword);
 					needle = needle.Substring (keydex, needle.Length - keydex);
-					//Console.Error.WriteLine ("Needle stripped to {0}",needle);
 					break;
 				}
 			}
@@ -299,7 +302,8 @@ namespace GCalendar
 					end = end.Substring (3);
 				dates[1] = DateTime.Parse (end.Trim ());
 			} catch (FormatException e) {
-					Console.Error.WriteLine (e.Message);
+				Log.Error (e.Message);
+				Log.Debug (e.StackTrace);
 			}
 			return dates;
 		}
