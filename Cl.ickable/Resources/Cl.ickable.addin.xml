@@ -2,8 +2,8 @@
 	id="Cl.ickable"
 	namespace="Do"
 	version="1.0"
-	name="Cli.ickable WebClips"
-	description="Create WebClips with Cl.ickable."
+	name="Cl.ickable WebClips"
+	description="Save clips on Cl.ickable.com"
 	author="Idealab"
 	category="Community"
 >
