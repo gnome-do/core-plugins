@@ -20,9 +20,10 @@
 
 using System;
 using System.Threading;
+using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
 
+using Mono.Unix;
 
 using Do.Universe;
 using Do.Platform.Linux;
@@ -31,6 +32,10 @@ namespace GCalendar
 {	
 	public sealed class GCalendarItemSource : ItemSource, IConfigurable
 	{
+		public GCalendarItemSource ()
+		{
+		}
+
 		public override string Name {
 			get { return Catalog.GetString ("Google Calendars"); }
 		}
@@ -45,32 +50,24 @@ namespace GCalendar
 
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get {
-				return new Type[] {
-					typeof (GCalendarItem),
-				};
-			}
+			get { yield return typeof (GCalendarItem); }
 		}
 
 		public override IEnumerable<Item> Items
 		{
-			get { return GCal2.Calendars; }
+			get { return GCal.Calendars.Cast<Item> (); }
 		}
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			return GCal2.EventsForCalendar ((parent as GCalendarItem).Name);
+			return GCal.EventsForCalendar (parent as GCalendarItem).Cast<Item> ();
 		}
 
 		public override void UpdateItems ()
 		{
-			Thread updateCalendars = new Thread (new ThreadStart (GCal2.UpdateCalendars));
-			updateCalendars.IsBackground = true;
-			updateCalendars.Start ();
-			
-			Thread updateEvents = new Thread (new ThreadStart (GCal2.UpdateEvents));
-			updateEvents.IsBackground = true;
-			updateEvents.Start ();
+			Thread thread = new Thread ((ThreadStart) GCal.UpdateCalendars);
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 		
 		public Gtk.Bin GetConfiguration ()

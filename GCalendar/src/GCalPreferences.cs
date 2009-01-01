@@ -1,4 +1,4 @@
-/* Preferences.cs 
+/* GCalPreferences.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -24,24 +24,24 @@ using Mono.Unix;
 
 using Do.Platform;
 
-namespace GMail
+namespace GCalendar
 {
 	
-	public class Preferences
+	public class GCalPreferences
 	{
 		const string UsernameKey = "Username";
 		const string PasswordKey = "Password";
 		
 		IPreferences prefs;
-		
-		public Preferences()
+
+		public GCalPreferences()
 		{
-			prefs = Services.Preferences.Get<Preferences> ();
+			prefs = Services.Preferences.Get<GCalPreferences> ();
 		}
 
 		public string Username {
-			get { return prefs.Get<string> (UsernameKey, ""); }
-			set { prefs.Set<string> (UsernameKey, value); }
+			get { return prefs.Get (UsernameKey, ""); }
+			set { prefs.Set (UsernameKey, value); }
 		}
 
 		public string Password {

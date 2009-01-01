@@ -22,9 +22,10 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Do.Platform;
-using Do.Platform.Linux;
 
+using Mono.Unix;
+
+using Do.Platform.Linux;
 
 namespace GCalendar
 {
@@ -33,31 +34,33 @@ namespace GCalendar
 		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
             + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
             + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
-		public Configuration() : base ("Google Calendar", "https://www.google.com/accounts/NewAccount?service=cl")
+            
+        const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
+        
+		public Configuration() : base ("Google Calendar", Uri)
 		{
+			UsernameLabel = Catalog.GetString ("E-Mail:");
+			Username = GCal.Preferences.Username;
+			Password = GCal.Preferences.Password;
 		}
 		
 		protected override bool Validate (string username, string password)
 		{
 			if (ValidateUsername (username) && password.Length > 0)
-				return GCal2.Connect (username, password);
+				return GCal.TryConnect (username, password);
 				
 			return false;
 		}
-		
+
+		protected override void SaveAccountData(string username, string password)
+		{
+			GCal.Preferences.Username = username;
+			GCal.Preferences.Password = password;
+		}
+
 		private bool ValidateUsername (string username)
 		{	
 			return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
-		}
-		
-		protected override void SaveAccountData (string username, string password)
-		{
-			Log.Error ("Account data not saved");
-		}
-
-		public static void GetAccountData (out string username, out string password, Type t)
-		{
-			username = password = "fixme";
 		}
 	}
 }

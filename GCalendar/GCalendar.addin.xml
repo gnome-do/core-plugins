@@ -27,5 +27,7 @@
 	<Extension path="/Do/Action">
 		<Action type="GCalendar.GCalendarNewEvent" />
 		<Action type="GCalendar.GCalendarSearchEvents" />
+		<Action type="GCalendar.ViewCalendarAction" />
+		<Action type="GCalendar.ViewEventAction" />
 	</Extension>
 </Addin>

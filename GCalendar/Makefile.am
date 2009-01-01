@@ -59,12 +59,13 @@ all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG)
 FILES = \
 	src/CertHandler.cs \
 	src/Configuration.cs \
+	src/GCal.cs \
 	src/GCalendarEventItem.cs \
 	src/GCalendarItem.cs \
 	src/GCalendarItemSource.cs \
 	src/GCalendarNewEvent.cs \
 	src/GCalendarSearchEvents.cs \
-	src/GCal2.cs 
+	src/GCalendarViewActions.cs 
 
 DATA_FILES = 
 
