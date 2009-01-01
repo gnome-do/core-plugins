@@ -25,6 +25,8 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
+using Do.Platform;
+
 namespace Do.Rhythmbox
 {
 
@@ -209,9 +211,11 @@ namespace Do.Rhythmbox
 					Process pidof = Process.Start ("pidof", "rhythmbox");
 					pidof.WaitForExit ();
 					return pidof.ExitCode == 0;
-				} catch {
-					return true;
+				} catch (Exception e) {
+					Log.Error ("Could not determine in Rhythmbox is running: {0}", e.Message);
+					Log.Debug (e.StackTrace);
 				}
+				return true;
 			}
 		}
 
