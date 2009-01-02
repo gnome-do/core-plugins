@@ -25,20 +25,29 @@ using Mono.Unix;
 using Do.Universe;
 using PingFM.API;
 
-namespace Do.Addins.PingFM
+namespace PingFM
 {
 	
-	public class PingFMServiceItem : Item
+	public class PingFMServiceItem : Item, IUrlItem
 	{		
 		private string service_name;
 		private string service_id;
 		private string service_method;
+		private string service_url;
 		
-		public PingFMServiceItem (string name, string id, string method)
+//		public PingFMServiceItem (string name, string id, string method)
+//		{
+//			service_name = name;
+//			service_id = id;
+//			service_method = method;
+//		}
+		
+		public PingFMServiceItem (string name, string id, string method, string url)
 		{
 			service_name = name;
 			service_id = id;
 			service_method = method;
+			service_url = url;
 		}
 		
 		public override string Name {
@@ -62,6 +71,10 @@ namespace Do.Addins.PingFM
 		
 		public string Method {
 			get { return service_method;}
+		}
+		
+		public string Url {
+			get { return service_url; }
 		}
 	}
 }

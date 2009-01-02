@@ -17,10 +17,10 @@
 	</Dependencies>
 
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="Do.Addins.PingFM.PingFMServiceItemSource" />
+		<ItemSource type="PingFM.PingFMServiceItemSource" />
 	</Extension>
 
 	<Extension path="/Do/Action">
-		<Action type="Do.Addins.PingFM.PingFMPost" />
+		<Action type="PingFM.PingFMPost" />
 	</Extension>
 </Addin>

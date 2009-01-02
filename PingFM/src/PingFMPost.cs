@@ -27,7 +27,7 @@ using PingFM.API;
 
 using Do.Universe;
 
-namespace Do.Addins.PingFM
+namespace PingFM
 {
 	
 	public sealed class PingFMPost : Act
@@ -77,18 +77,14 @@ namespace Do.Addins.PingFM
             return true;
         }
         
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
-        }
-        
         public override  IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {
-            string service = (modifierItems.First () as PingFMServiceItem).Id;
+            //string service = (modifierItems.First () as PingFMServiceItem).Id;
             string body = (items.First () as ITextItem).Text;
-			string method = (modifierItems.First () as PingFMServiceItem).Method;
+			//string method = (modifierItems.First () as PingFMServiceItem).Method;
 			
-			Do.Addins.PingFM.PingFM.Post (service, body, method);      
+			//PingFM.Post (service, body, method);
+			PingFM.Post (body, (modifierItems.First () as PingFMServiceItem));
             return null;
         }
 		
