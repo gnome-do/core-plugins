@@ -24,9 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
-using Do.Universe.Common;
 using Do.Platform;
-using Do.Platform.Linux;
 using Mono.Unix;
 
 /// <summary>

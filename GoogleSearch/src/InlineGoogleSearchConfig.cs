@@ -117,22 +117,18 @@ namespace InlineGoogleSearch {
 			}
 		}
 		
-		protected virtual void OnNosafeRbtnToggled (object sender, 
-		                                            System.EventArgs e) 
+		protected virtual void OnNosafeRbtnToggled (object sender, System.EventArgs e)
 		{
 			prefs.Set ("SearchRestrictions",noss);			
 		}
 
 		
-		protected virtual void OnModerateRbtnToggled (object sender, 
-		                                              System.EventArgs 
-		                                              e) 
+		protected virtual void OnModerateRbtnToggled (object sender, System.EventArgs e) 
 		{
 			prefs.Set ("SearchRestrictions",moderatess);
 		}
 
-		protected virtual void OnStrictRbtnToggled (object sender, 
-		                                            System.EventArgs e) 
+		protected virtual void OnStrictRbtnToggled (object sender, System.EventArgs e)  
 		{
 			prefs.Set ("SearchRestrictions",activess);
 		}

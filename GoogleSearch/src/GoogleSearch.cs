@@ -27,6 +27,10 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+
+using Do.Platform;
+using Do.Universe;
+
 /// <summary>
 /// InlineGoogleSearch namespace
 /// </summary>
@@ -74,7 +78,7 @@ namespace InlineGoogleSearch {
 			    ssl == "off") {
 				this.safeSearchLevel = ssl;
 			} else {
-				System.Console.WriteLine ("Error in Google Search: Invalid SafeSearch level specified! Default value assigned!");
+				Log.Error ("Error in Google Search: Invalid SafeSearch level specified! Default value assigned!");
 				this.safeSearchLevel = "moderate";
 			}
 		}
@@ -91,7 +95,7 @@ namespace InlineGoogleSearch {
 			if (rsz == "large" || rsz == "small") {
 				this.RSZ = rsz;
 			} else {
-				System.Console.WriteLine ("Error in GoogleSearch: Invalid RSZ specified! Default value assigned!");
+				Log.Error ("Error in GoogleSearch: Invalid RSZ specified! Default value assigned!");
 				this.RSZ = "large";
 			}
 		}
