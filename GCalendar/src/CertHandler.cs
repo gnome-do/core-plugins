@@ -20,7 +20,6 @@
 
 using System;
 using System.Net;
-using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 
 namespace GCalendar
@@ -37,22 +36,9 @@ namespace GCalendar
 		}
 		*/
 		
-		public bool CheckValidationResult (ServicePoint sp, X509Certificate cert,
-		                                   WebRequest request, int error)
+		public bool CheckValidationResult (ServicePoint sp, X509Certificate cert, WebRequest request, int error)
 		{
 			return true;
-			/*
-			if (error == 0) return true;
-			if (error != -2146762486) return false;
-			
-			Load ();
-			string thumbprint = cert.GetCertHashString ();
-			object result = ht [thumbprint];
-			if ((result is int) && ((int) result == error))
-				return true;
-			
-			return false;
-			*/
 		}
 	}
 }

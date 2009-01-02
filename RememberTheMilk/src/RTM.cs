@@ -28,7 +28,7 @@ using RtmNet;
 using Do.Universe;
 
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
     public static class RTM
     {

@@ -22,12 +22,12 @@ using System;
 using System.Text;
 using Mono.Unix;
 
-
+using Do.Platform;
 using Do.Universe;
 
 namespace GCalendar
 {
-    public class GCalendarItem : Item, IUrlItem
+    public class GCalendarItem : Item, IBookmarkItem
     {
         string name, url;
 		

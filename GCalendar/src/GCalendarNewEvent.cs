@@ -47,31 +47,14 @@ namespace GCalendar
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
+			get { yield return typeof (ITextItem); }
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get {
-		        return new Type[] {
-		            typeof (GCalendarItem),
-                };
-            }
+		    get { yield return typeof (GCalendarItem); }
         }
-        
-        public bool ModifierItemsOptional {
-            get {return false; }
-        }
-        
-        public bool SupportsItem (Item item) 
-        {
-            return true;
-        }
-        
-        public bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
+
+        public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
         {
             if (modItem is GCalendarItem)
         		return !(modItem as GCalendarItem).Name.Equals ("All Events");
@@ -79,17 +62,12 @@ namespace GCalendar
             return true;
         }
         
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
-        }
-        
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {
-            string calUrl = (modifierItems.First () as GCalendarItem).Url;
+            GCalendarItem cal = modifierItems.First () as GCalendarItem;
             string eventData = (items.First () as ITextItem).Text;
             
-            return new Item [] { GCal2.NewEvent (calUrl, eventData), };
+            yield return GCalendarEventItem.NewEvent (cal, eventData);
         }
 	}
 }

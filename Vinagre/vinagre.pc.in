@@ -1,6 +1,0 @@
-Name: Vinagre
-Description: Vinagre
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Vinagre.dll

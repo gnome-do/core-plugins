@@ -1,6 +1,0 @@
-Name: Pidgin
-Description: Pidgin
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Pidgin.dll

@@ -18,19 +18,19 @@
 
     <!-- Extensions included in this assembly -->
     <Extension path="/Do/ItemSource">
-        <ItemSource type="Do.Addins.RTM.RTMListItemSource" />
+        <ItemSource type="RememberTheMilk.RTMListItemSource" />
     </Extension>
 
     <Extension path="/Do/Action">
-        <Action type="Do.Addins.RTM.RTMNewTask" />
-        <Action type="Do.Addins.RTM.RTMDeleteTask" />
-        <Action type="Do.Addins.RTM.RTMCompleteTask" />
-        <Action type="Do.Addins.RTM.RTMSetPriority" />
-        <Action type="Do.Addins.RTM.RTMSetDue" />
-        <Action type="Do.Addins.RTM.RTMMoveTask" />
-        <Action type="Do.Addins.RTM.RTMRenameTask" />
-        <Action type="Do.Addins.RTM.RTMPostponeTask" />
-        <Action type="Do.Addins.RTM.RTMSetRecurrence" />
-        <Action type="Do.Addins.RTM.RTMUncompleteTask" />
+        <Action type="RememberTheMilk.RTMNewTask" />
+        <Action type="RememberTheMilk.RTMDeleteTask" />
+        <Action type="RememberTheMilk.RTMCompleteTask" />
+        <Action type="RememberTheMilk.RTMSetPriority" />
+        <Action type="RememberTheMilk.RTMSetDue" />
+        <Action type="RememberTheMilk.RTMMoveTask" />
+        <Action type="RememberTheMilk.RTMRenameTask" />
+        <Action type="RememberTheMilk.RTMPostponeTask" />
+        <Action type="RememberTheMilk.RTMSetRecurrence" />
+        <Action type="RememberTheMilk.RTMUncompleteTask" />
     </Extension>
 </Addin>

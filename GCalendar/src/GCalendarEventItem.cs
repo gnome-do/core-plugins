@@ -21,12 +21,20 @@
 using System;
 using System.Text;
 
-
+using Do.Platform;
 using Do.Universe;
 
-namespace GCalendar {
-	public sealed class GCalendarEventItem : Item, IUrlItem {
+namespace GCalendar 
+{	
+	public sealed class GCalendarEventItem : Item, IBookmarkItem
+	{
 		string name, url, desc;
+
+		public static GCalendarEventItem NewEvent (GCalendarItem calendar, string data)
+		{
+			return GCal.NewEvent (calendar, data);
+		}
+		
 		public GCalendarEventItem (string name, string url, string desc)
 		{
 			this.name = name;

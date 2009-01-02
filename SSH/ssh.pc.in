@@ -1,6 +1,0 @@
-Name: SSH
-Description: SSH
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/SSH.dll

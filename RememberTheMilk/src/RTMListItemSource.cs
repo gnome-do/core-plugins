@@ -24,7 +24,7 @@ using System.Threading;
 using Do.Platform.Linux;
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {	
 	public class RTMListItemSource : ItemSource, IConfigurable
 	{		

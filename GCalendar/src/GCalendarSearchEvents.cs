@@ -19,11 +19,10 @@
  */
 
 using System;
-using System.Text;
-using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using System.Collections.Generic;
 
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -50,27 +49,11 @@ namespace GCalendar {
         }
         
         public override IEnumerable<Type> SupportedItemTypes {
-            get {
-                return new Type[] {
-                    typeof (ITextItem),
-                };
-            }
+            get { yield return typeof (ITextItem); }
         }
         
         public override IEnumerable<Type> SupportedModifierItemTypes {
-            get { 
-                return new Type[] {
-                    typeof (GCalendarItem),
-                };
-            }
-        }
-        
-        public bool ModifierItemsOptional {
-            get { return false; }
-        }
-        
-        public bool SupportsItem (Item item) {
-            return true;
+            get { yield return typeof (GCalendarItem); }
         }
         
         public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
@@ -78,18 +61,12 @@ namespace GCalendar {
             return true;
         }
         
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-        {
-            return null;
-        }
-        
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
         {
-            string search_text = "";
-            foreach (Item item in items) {
-                search_text += (item as ITextItem).Text;
-            }
-            return GCal2.SearchEvents ((modifierItems.First () as GCalendarItem).Url, search_text);
+        	string search_text;
+
+            search_text = (items.First () as ITextItem).Text;
+            return GCal.SearchEvents (modifierItems.Cast<GCalendarItem> (), search_text).Cast<Item> ();
         }
     }
 }
