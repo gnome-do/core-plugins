@@ -102,6 +102,11 @@ namespace Pastebin
 			get { return false; }
 		}
 		
+		public string Name
+		{
+			get { return "paste.pocoo.org"; }
+		}		
+		
 		public string BaseUrl 
 		{ 
 			get { return urlRoot; } 
