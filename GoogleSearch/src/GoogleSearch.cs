@@ -74,11 +74,7 @@ namespace InlineGoogleSearch {
 			    ssl == "off") {
 				this.safeSearchLevel = ssl;
 			} else {
-				System.Console.WriteLine ("Error in Google Sear"
-				                          + "ch: Invalid SafeSe"
-				                          + "arch level specifi"
-				                          + "ed! Default value "
-				                          + "assigned!");
+				System.Console.WriteLine ("Error in Google Search: Invalid SafeSearch level specified! Default value assigned!");
 				this.safeSearchLevel = "moderate";
 			}
 		}
@@ -95,10 +91,7 @@ namespace InlineGoogleSearch {
 			if (rsz == "large" || rsz == "small") {
 				this.RSZ = rsz;
 			} else {
-				System.Console.WriteLine ("Error in GoogleSearc"
-				                          + "h: Invalid RSZ " 
-				                          + "specified! Default"
-				                          + "value assigned!");
+				System.Console.WriteLine ("Error in GoogleSearch: Invalid RSZ specified! Default value assigned!");
 				this.RSZ = "large";
 			}
 		}
@@ -120,13 +113,12 @@ namespace InlineGoogleSearch {
 		/// <returns>
 		/// A <see cref="GoogleSearchResult"/>
 		/// </returns>
-		public GoogleSearchResult [] search () 
+		public IEnumerable<GoogleSearchResult> Search () 
 		{
 			this.query = HttpUtility.UrlEncode (this.query);
 			string endpointURL =
-				"http://ajax.googleapis.com/ajax/services/searc"
-					+ "h/web?"
-					+ "callback=GwebSearch.RawCompletion"
+				"http://ajax.googleapis.com/ajax/services/search/web"
+					+ "?callback=GwebSearch.RawCompletion"
 					+ "&context=0"
 					+ "&lstkp=0"
 					+ "&rsz=" + this.RSZ
@@ -142,7 +134,10 @@ namespace InlineGoogleSearch {
 				(wrs.GetResponseStream ());
 			string parseString = sr.ReadLine ();
 			this.parse (parseString);
-			return resultsList.ToArray ();
+			
+			foreach (GoogleSearchResult result in resultsList) {
+				yield return result;
+			}
 		}
 		
 		/// <summary>

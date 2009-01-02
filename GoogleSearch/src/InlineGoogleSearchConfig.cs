@@ -66,7 +66,7 @@ namespace InlineGoogleSearch {
 			showFirstCheck.Active = ShowSearchFirst;
 			applySSL.Active = InheritSSL;
 			
-			updateSensitivities();
+			updateSensitivities ();
 		}
 		
 		/// <summary>
@@ -85,34 +85,42 @@ namespace InlineGoogleSearch {
 				return prefs.Get<string> ("SearchRestrictions", 
 				                          moderatess); 
 			}
-		 	set { prefs.Set<string> ("SearchRestrictions", value); }
+		 	set { 
+				prefs.Set<string> ("SearchRestrictions", value); 
+			}
 		}
 		
 		public static bool ShowSearchFirst {
 			get {
 				return prefs.Get<bool> ("ShowSearchFirst", true);
 			}
-			set {prefs.Set<bool> ("ShowSearchFirst", value); }
+			set { 
+				prefs.Set<bool> ("ShowSearchFirst", value); 
+			}
 		}
 
 		public static bool InheritSSL {
 			get {
 				return prefs.Get<bool> ("InheritSSL", false);
 			}
-			set {prefs.Set<bool> ("InheritSSL", value);}
+			set {
+				prefs.Set<bool> ("InheritSSL", value);
+			}
 		}
 		
 		public static bool ReturnResults {
 			get {
 				return prefs.Get<bool> ("ReturnResults", false);
 			}
-			set {prefs.Set<bool> ("ReturnResults", value);}
+			set {
+				prefs.Set<bool> ("ReturnResults", value);
+			}
 		}
 		
 		protected virtual void OnNosafeRbtnToggled (object sender, 
 		                                            System.EventArgs e) 
 		{
-			prefs.Set("SearchRestrictions",noss);			
+			prefs.Set ("SearchRestrictions",noss);			
 		}
 
 		
@@ -120,40 +128,40 @@ namespace InlineGoogleSearch {
 		                                              System.EventArgs 
 		                                              e) 
 		{
-			prefs.Set("SearchRestrictions",moderatess);
+			prefs.Set ("SearchRestrictions",moderatess);
 		}
 
 		protected virtual void OnStrictRbtnToggled (object sender, 
 		                                            System.EventArgs e) 
 		{
-			prefs.Set("SearchRestrictions",activess);
+			prefs.Set ("SearchRestrictions",activess);
 		}
 
 		protected virtual void OnShowFirstCheckClicked (object sender, System.EventArgs e)
 		{
-			prefs.Set("ShowSearchFirst", showFirstCheck.Active);
+			prefs.Set ("ShowSearchFirst", showFirstCheck.Active);
 			updateSensitivities();
 		}
 
 		protected virtual void OnApplySSLClicked (object sender, System.EventArgs e)
 		{
-			prefs.Set("InheritSSL", applySSL.Active);
-			updateSensitivities();
+			prefs.Set ("InheritSSL", applySSL.Active);
+			updateSensitivities ();
 		}
 		
 		protected virtual void OnReturnResultsRbtnToggled (object sender, System.EventArgs e)
 		{
-			prefs.Set("ReturnResults", true);
-			updateSensitivities();
+			prefs.Set ("ReturnResults", true);
+			updateSensitivities ();
 		}
 
 		protected virtual void OnGoToSearchRbtnToggled (object sender, System.EventArgs e)
 		{
-			prefs.Set("ReturnResults", false);
-			updateSensitivities();
+			prefs.Set ("ReturnResults", false);
+			updateSensitivities ();
 		}
 
-		private void updateSensitivities() {
+		private void updateSensitivities () {
 			showFirstCheck.Sensitive = ReturnResults;
 			safeSearchBox.Sensitive = ReturnResults || InheritSSL;
 		}

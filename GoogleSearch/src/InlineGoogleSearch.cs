@@ -77,41 +77,39 @@ namespace InlineGoogleSearch {
 		/// Search Google
 		/// </value>
 		public override string Name {
-			get { return Catalog.GetString ("Google Search"); }
+			get { 
+				return Catalog.GetString ("Search Google"); 
+			}
 		}
 		
 		/// <value>
 		/// Searches google and returns results to Do
 		/// </value>
 		public override string Description {
-			get { return Catalog.GetString ("Provides an interface to Google Search"); }
+			get { 
+				return Catalog.GetString ("Allows you to perform Google Searches from Do"); 
+			}
 		}
 		
 		/// <value>
 		/// web-browser
 		/// </value>
 		public override string Icon {
-			get { return "web-browser"; }
+			get { 
+				return "web-browser"; 
+			}
 		}
 		
 		/// <value>
 		/// ITextItem
 		/// </value>
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {                             
-					typeof (ITextItem),
-				};
-			}
+			get { 
+				yield return typeof (ITextItem); 
+			} 
 		}
+					
 		
-		/// <value>
-		/// true
-		/// </value>
-		public override bool ModifierItemsOptional {
-			get { return false; }
-		}
-
 		/// <summary>
 		/// Actual code performed when action is executed in Do
 		/// </summary>
@@ -134,22 +132,22 @@ namespace InlineGoogleSearch {
 			}
 			
 			if (!InlineGoogleSearchConfig.ReturnResults) {
-				Services.Environment.OpenUrl(searchURL);
+				Services.Environment.OpenUrl (searchURL);
 				yield break;
 			}
 
 			if (InlineGoogleSearchConfig.ShowSearchFirst) {
-				yield return new BookmarkItem( query + " - Google Search",
-				                              searchURL );
+				yield return new BookmarkItem ( query + " - Google Search",
+				                               searchURL );
 			}
 			
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery( query );
-			GoogleSearchResult [] results = googleSearch.search ();
+			googleSearch.setQuery ( query );
+			IEnumerable<GoogleSearchResult> results = googleSearch.Search ();
 
-			if (results.Length == 0) {
-				Services.Notifications.Notify("Google Search", "No Results Found");
+			if (!results.Any ()) {
+				Services.Notifications.Notify ("Google Search", "No Results Found");
 			}
 			
 			foreach (GoogleSearchResult result in results) {

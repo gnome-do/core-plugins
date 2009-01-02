@@ -42,39 +42,36 @@ namespace InlineGoogleSearch {
 		/// I'm Feeling Lucky
 		/// </value>
 		public override string Name {
-			get { return Catalog.GetString ("I'm Feeling Lucky!"); }
+			get { 
+				return Catalog.GetString ("I'm Feeling Lucky!"); 
+			}
 		}
 		
 		/// <value>
 		/// Searches google and takes you to the first returned result
 		/// </value>
 		public override string Description {
-			get { return Catalog.GetString ("Searches google and takes you to the first returned result"); }
+			get { 
+				return Catalog.GetString ("Searches Google and takes you to the first result"); 
+			}
 		}
 		
 		/// <value>
 		/// web-browser
 		/// </value>
 		public override string Icon {
-			get { return "web-browser"; }
+			get { 
+				return "web-browser"; 
+			}
 		}
 		
 		/// <value>
 		/// ITextItem
 		/// </value>
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {                             
-					typeof (ITextItem),
-				};
+			get { 
+				yield return typeof (ITextItem); 
 			}
-		}
-		
-		/// <value>
-		/// true
-		/// </value>
-		public override bool ModifierItemsOptional {
-			get { return false; }
 		}
 
 		/// <summary>
@@ -92,12 +89,12 @@ namespace InlineGoogleSearch {
 			googleSearch.setSafeSearchLevel
 				 (InlineGoogleSearchConfig.SearchRestrictions);
 			googleSearch.setQuery ( (items.First () as ITextItem).Text);
-			GoogleSearchResult [] results = googleSearch.search ();
+			IEnumerable<GoogleSearchResult> results = googleSearch.Search ();
 			
 			if (!results.Any ()) {
-				Services.Notifications.Notify("I'm Feeling Lucky", "No Results Found");
+				Services.Notifications.Notify ("I'm Feeling Lucky", "No Results Found");
 			} else {
-				Services.Environment.OpenUrl(results.First().url);
+				Services.Environment.OpenUrl ( results.First ().url );
 			}
 			yield break;
 		}
