@@ -1,20 +1,19 @@
-// BaseServiceAction.cs 
-// User: Karol Będkowski at 09:57 2008-10-24
-//
-//Copyright Karol Będkowski 2008
-//
-//This program is free software: you can redistribute it and/or modify
-//it under the terms of the GNU General Public License as published by
-//the Free Software Foundation, either version 3 of the License, or
-//(at your option) any later version.
-//
-//This program is distributed in the hope that it will be useful,
-//but WITHOUT ANY WARRANTY; without even the implied warranty of
-//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//GNU General Public License for more details.
-//
-//You should have received a copy of the GNU General Public License
-//along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  BaseServiceAction.cs 
+// 
+// Copyright Karol Będkowski 2008
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -72,12 +71,6 @@ namespace SystemServices {
 		public ServiceRestartAction () :
 			base ("Restart Service", "Restarts a system service.", ServiceActionType.Restart) {
 		}
-
-		public override bool SupportsItem (Item item)
-		{
-			int status = (item as Service).GetStatus ();
-			return status == 0 || status == Service.UnknownStatusExitCode;
-		}
 	}
 
 	/// <summary>
@@ -87,11 +80,6 @@ namespace SystemServices {
 		public ServiceStartAction () :
 			base ("Start Service", "Starts a system service.", ServiceActionType.Start) {
 		}
-
-		public override bool SupportsItem (Item item)
-		{
-			return (item as Service).GetStatus () != 0;
-		}
 	}
 
 	/// <summary>
@@ -100,12 +88,6 @@ namespace SystemServices {
 	public class ServiceStopAction: BaseServiceAction {
 		public ServiceStopAction () :
 			base ("Stop Service", "Stops a system service.", ServiceActionType.Stop) {
-		}
-
-		public override bool SupportsItem (Item item)
-		{
-			int status = (item as Service).GetStatus ();
-			return status == 0 || status == Service.UnknownStatusExitCode;
 		}
 	}
 }
