@@ -52,7 +52,12 @@ namespace OpenSearch
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { yield return typeof (IOpenSearchItem); }
 		}			
-	
+
+		public override IEnumerable<Item> DynamicModifierItemsForItem(Item item) {
+			OpenSearchItemSource itemSource = new OpenSearchItemSource ();
+			return itemSource.Items;
+		}
+
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{					
 			foreach (Item item in items) {
