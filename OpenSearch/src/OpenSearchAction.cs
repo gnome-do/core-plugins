@@ -46,25 +46,44 @@ namespace OpenSearch
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (ITextItem); }
+			get { 
+				yield return typeof (ITextItem);
+				yield return typeof (IOpenSearchItem);
+			}
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (IOpenSearchItem); }
-		}			
+			get { 
+				yield return typeof (IOpenSearchItem);
+				yield return typeof (ITextItem);
+			}
+		}
 
-		public override IEnumerable<Item> DynamicModifierItemsForItem(Item item) {
-			OpenSearchItemSource itemSource = new OpenSearchItemSource ();
-			return itemSource.Items;
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		{
+			if (modItem is ITextItem) {
+				return items.All ( (item) => item is IOpenSearchItem);
+			} else {
+				return items.All ( (item) => item is ITextItem);	
+			}
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-		{					
-			foreach (Item item in items) {
-				string searchTerm = (item as ITextItem).Text;
-				string url = (modItems.First () as IOpenSearchItem).BuildSearchUrl (searchTerm);
-				Services.Environment.OpenUrl (url);
+		{
+			bool itemsAreText = items.All( (item) => item is ITextItem);
+			IEnumerable<ITextItem> textItems;
+			IEnumerable<IOpenSearchItem> openSearchItems;
+
+			if (itemsAreText) {
+				textItems = items.Cast<ITextItem> ();
+				openSearchItems = modItems.Cast<IOpenSearchItem> ();
+			} else {
+				textItems = modItems.Cast<ITextItem> ();
+				openSearchItems = items.Cast<IOpenSearchItem> ();
 			}
+
+			textItems.Select (item => openSearchItems.First ().BuildSearchUrl (item.Text))
+					 .ForEach (Services.Environment.OpenUrl);
 
 			yield break;
 		}
