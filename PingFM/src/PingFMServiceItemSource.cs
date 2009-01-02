@@ -54,11 +54,6 @@ namespace PingFM
 		public override IEnumerable<Item> Items {
 			get { return PingFM.Services.Cast<Item> (); }
 		}
-//
-//		public override IEnumerable<Item> ChildrenOfItem (Item parent)
-//		{
-//			return null;
-//		}
 
 		public override void UpdateItems ()
 		{

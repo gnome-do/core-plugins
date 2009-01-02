@@ -35,13 +35,6 @@ namespace PingFM
 		private string service_method;
 		private string service_url;
 		
-//		public PingFMServiceItem (string name, string id, string method)
-//		{
-//			service_name = name;
-//			service_id = id;
-//			service_method = method;
-//		}
-		
 		public PingFMServiceItem (string name, string id, string method, string url)
 		{
 			service_name = name;

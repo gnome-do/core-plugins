@@ -35,9 +35,6 @@ namespace PingFM
 		public Configuration()
 		{
 			Build();
-//			string appkey;
-//			appkey = "";
-//			GetAccountData (out appkey, GetType());			
 			appkey_entry.Text = PingFM.Preferences.AppKey;
 		}
 
@@ -67,41 +64,7 @@ namespace PingFM
 		public static void SaveAccountData (string appkey)
 		{
 			PingFM.Preferences.AppKey = appkey;
-//			string keyName = type.FullName;
-//			string keyring;
-//			Hashtable ht;
-//			
-//			try {
-//				keyring = Ring.GetDefaultKeyring ();
-//				ht = new Hashtable ();
-//				ht["name"] = keyName;
-//				
-//				Ring.CreateItem (keyring, ItemType.GenericSecret, keyName,
-//					ht, appkey, true);
-//				                 
-//			} catch (Exception e) {
-//				Console.Error.WriteLine (e.Message);
-//			}
 		}
-//		
-//		public static void GetAccountData (out string appkey, Type type)
-//		{
-//			string keyName = type.FullName;
-//			appkey = "";
-//			Hashtable ht = new Hashtable ();
-//			ht ["name"] = keyName;
-//			
-//			try {
-//				foreach (ItemData s in Ring.Find (ItemType.GenericSecret, ht)) {
-//					if (s.Attributes.ContainsKey ("name") && (s.Attributes ["name"] as string).Equals (keyName)) {
-//						appkey = s.Secret;
-//						return;
-//					}
-//				}
-//			} catch (Exception) {
-//				Console.Error.WriteLine ("No account info stored for {0}", keyName);
-//			}
-//		}
 		
 		protected virtual void OnAppKeyEntryActivated (object sender, System.EventArgs e)
 		{
