@@ -25,7 +25,7 @@ using Gnome.Keyring;
 using Gtk;
 using Gdk;
 
-namespace Do.Addins.PingFM
+namespace PingFM
 {
 	
 	
@@ -35,10 +35,7 @@ namespace Do.Addins.PingFM
 		public Configuration()
 		{
 			Build();
-			string appkey;
-			appkey = "";
-			GetAccountData (out appkey, GetType());			
-			appkey_entry.Text = appkey;
+			appkey_entry.Text = PingFM.Preferences.AppKey;
 		}
 
 		protected virtual void OnApplyBtnClicked (object sender, System.EventArgs e)
@@ -46,14 +43,14 @@ namespace Do.Addins.PingFM
 			validate_lbl.Markup = "<i>Validating...</i>";
 			validate_btn.Sensitive = false;
 			
-			string application_key = appkey_entry.Text;
+			string appkey = appkey_entry.Text;
 			
 			Thread thread = new Thread ((ThreadStart) delegate {
-				bool valid = PingFM.Validate(application_key);
+				bool valid = PingFM.TryConnect (appkey);
 				Gtk.Application.Invoke (delegate {		
 					if (valid) {
 						validate_lbl.Markup = "<i>Account validation succeeded!</i>";
-						SaveAccountData (appkey_entry.Text, GetType ());
+						SaveAccountData (appkey_entry.Text);
 					} else {
 						validate_lbl.Markup = "<i>Account validation failed!</i>";
 					}
@@ -64,42 +61,9 @@ namespace Do.Addins.PingFM
 			thread.Start ();
 		}
 		
-		public static void SaveAccountData (string appkey, Type type)
+		public static void SaveAccountData (string appkey)
 		{
-			string keyName = type.FullName;
-			string keyring;
-			Hashtable ht;
-			
-			try {
-				keyring = Ring.GetDefaultKeyring ();
-				ht = new Hashtable ();
-				ht["name"] = keyName;
-				
-				Ring.CreateItem (keyring, ItemType.GenericSecret, keyName,
-					ht, appkey, true);
-				                 
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-			}
-		}
-		
-		public static void GetAccountData (out string appkey, Type type)
-		{
-			string keyName = type.FullName;
-			appkey = "";
-			Hashtable ht = new Hashtable ();
-			ht ["name"] = keyName;
-			
-			try {
-				foreach (ItemData s in Ring.Find (ItemType.GenericSecret, ht)) {
-					if (s.Attributes.ContainsKey ("name") && (s.Attributes ["name"] as string).Equals (keyName)) {
-						appkey = s.Secret;
-						return;
-					}
-				}
-			} catch (Exception) {
-				Console.Error.WriteLine ("No account info stored for {0}", keyName);
-			}
+			PingFM.Preferences.AppKey = appkey;
 		}
 		
 		protected virtual void OnAppKeyEntryActivated (object sender, System.EventArgs e)
