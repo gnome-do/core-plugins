@@ -27,7 +27,6 @@ using Do.Platform;
 
 namespace PingFM
 {	
-	
 	public static class PingFM
 	{		
 		static readonly string ConnectionErrorMessage = Catalog.GetString ("Failed to connect to Ping.FM service");		
@@ -42,14 +41,14 @@ namespace PingFM
 		
 		public static PingFMPreferences Preferences { get ; private set; }
 		
-		public static bool TryConnect (string appkey)
+		public static bool TryConnect (string appKey)
 		{
 			PingFMClient test;
 			
 			try {
-				test = new PingFMClient (appkey);
+				test = new PingFMClient (appKey);
 				test.UpdateServices ();
-				Connect (appkey);
+				Connect (appKey);
 			} catch (Exception e) {
 				Log.Error (ConnectionErrorMessage, e.Message);
 				return false;
@@ -67,9 +66,9 @@ namespace PingFM
 			client.UpdateServices ();
 		}
 		
-		public static void Post (string body, PingFMServiceItem service_item)
+		public static void Post (string body, PingFMServiceItem serviceItem)
 		{
-			client.Post (body, service_item);
+			client.Post (body, serviceItem);
 		}
 		
 		public static bool CheckLength (string message)
@@ -77,10 +76,10 @@ namespace PingFM
 			return client.CheckLength (message);
 		}
 		
-		static void Connect (string appkey) 
+		static void Connect (string appKey) 
 		{
 			try {
-				client = new PingFMClient (appkey);
+				client = new PingFMClient (appKey);
 			} catch (Exception e) {
 				Log.Error (ConnectionErrorMessage, e.Message);
 			}

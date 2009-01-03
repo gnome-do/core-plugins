@@ -26,8 +26,7 @@ using Do.Universe;
 using PingFM.API;
 
 namespace PingFM
-{
-	
+{	
 	public class PingFMServiceItem : Item, IUrlItem
 	{		
 		private string service_name;

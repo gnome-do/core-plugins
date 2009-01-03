@@ -27,8 +27,6 @@ using Gdk;
 
 namespace PingFM
 {
-	
-	
 	public partial class Configuration : Gtk.Bin
 	{
 		
@@ -50,7 +48,7 @@ namespace PingFM
 				Gtk.Application.Invoke (delegate {		
 					if (valid) {
 						validate_lbl.Markup = "<i>Account validation succeeded!</i>";
-						SaveAccountData (appkey_entry.Text);
+						PingFM.Preferences.AppKey = appkey_entry.Text;
 					} else {
 						validate_lbl.Markup = "<i>Account validation failed!</i>";
 					}
@@ -59,11 +57,6 @@ namespace PingFM
 			});
 			thread.IsBackground = true; //don't hang on exit if fail
 			thread.Start ();
-		}
-		
-		public static void SaveAccountData (string appkey)
-		{
-			PingFM.Preferences.AppKey = appkey;
 		}
 		
 		protected virtual void OnAppKeyEntryActivated (object sender, System.EventArgs e)
