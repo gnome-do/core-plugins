@@ -37,10 +37,8 @@ namespace Claws
 		const string ClawsAddrBookIndex = "addrbook--index.xml";
 		
 		List<Item> items;
-		
-		public ClawsContactsItemSource () {
-			items = new List<Item> ();
-		}
+
+		#region std properties
 		
 		public override string Name {
 			get { return Catalog.GetString ("Claws Mail contacts"); }
@@ -61,24 +59,35 @@ namespace Claws
 		public override IEnumerable<Item> Items {
 			get { return items;}
 		}
+
+		#endregion
+		
+		
+		public ClawsContactsItemSource () {
+			items = new List<Item> ();
+		}
+		
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			ContactItem contact = item as ContactItem;
 			foreach (string detail in contact.Details) {
+				/*
 				if (detail.Contains (".claws")) {
 					yield return new ClawsContactDetailItem (detail, contact[detail]);
-				} else if (detail.Contains (".email")) { // other emails?	
+				} else */
+				if (detail.Contains ("email.")) {
 					yield return new ClawsContactDetailItem (detail, contact[detail]);
 				}
 			}
 		}
 
+		
 		public override void UpdateItems () 
 		{
 			items.Clear ();
 
-			// get list of address book files 
+			// iterate over address book files 
 			foreach (string book in AddressBookFiles ) {				
 				try {
 					// read adress book
@@ -100,7 +109,7 @@ namespace Claws
 							XmlNode addressListNode = person.SelectSingleNode ("address-list");
 							XmlNodeList addresses = addressListNode.SelectNodes ("address");
 							
-							if (addresses.Count == 0) { // no childs = no emails
+							if (addresses.Count == 0) { // no childs == no emails -> skip
 								continue;
 							}
 
@@ -110,13 +119,8 @@ namespace Claws
 							foreach (XmlNode address in addresses) {
 								string email = address.Attributes["email"].InnerText;
 								if (!String.IsNullOrEmpty (email)) {
-									string id;
-									if (emailCounter == 0) { // first email
-										id = "email.claws";
-									} else { // next email
-										id = "email.claws." + emailCounter; 
-									}									
-									buddy[id] = email;
+									string id = "email.claws." + emailCounter; 
+									buddy[id] = email;									
 									emailCounter++;
 								}
 							}
@@ -173,8 +177,8 @@ namespace Claws
 						}
 					}				
 				} catch (Exception e) {
-					Log.Error("Claws.GetAddressBookFiles error: {0}", e.Message);
-					Log.Debug("Claws.GetAddressBookFiles error: {0}", e.StackTrace);
+					Log.Error("ClawsContactsItemSource.AddressBookFiles error: {0}", e.Message);
+					Log.Debug("ClawsContactsItemSource.AddressBookFiles: {0}", e.StackTrace);
 				}
 				
 				return result;

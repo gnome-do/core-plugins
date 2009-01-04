@@ -21,6 +21,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Mono.Unix;
 using Do.Universe;
+using Do.Platform;
 
 namespace Claws
 {
@@ -28,11 +29,14 @@ namespace Claws
 	/// <summary>
 	/// New mail action (with or without email).
 	/// </summary>
-	public class ClawsActionNewMail : ClawsActionBase {
+	public class ClawsActionNewMail : Act {
+
+		const string ClawsMailCommand = "claws-mail";
+		const string ComposeCommandParams = "--compose ";
+		const string EmailsSeparator = ",";
 		
-		protected override string Command {
-			get { return "claws-mail --compose"; }
-		}
+
+		#region std properties
 		
 		public override string Name {
 			get { return Catalog.GetString ("Compose Email"); }
@@ -45,52 +49,49 @@ namespace Claws
 		public override string Icon {
 			get { return "mail_new"; }
 		}
-
-		public override IEnumerable<Type> SupportedModifierItemTypes {
+		
+		public override IEnumerable<Type> SupportedItemTypes {
 			get { 
+				yield return typeof (ContactItem);
 				yield return typeof (ITextItem);
-				yield return typeof (ContactItem);	
 			}
 		}
-				
-		public override bool ModifierItemsOptional {
-			get { return true; }
-		}
+
+		# endregion
+
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (modItems.Any ()) {
-				Item firstModItem = modItems.First ();
-				string email = string.Empty;
-				ITextItem modTextItem = firstModItem as ITextItem;
-				if (modTextItem != null) { // modifier is text
-					email = modTextItem.Text;
-				} else {
-					ContactItem modContactItem = firstModItem as ContactItem;
-					if (modContactItem != null) { // modifier is contact
-						email = modContactItem.AnEmailAddress;
-					}
-				}
-				System.Diagnostics.Process.Start (this.Command + " " + email);
-			} else { // no modifier
-				System.Diagnostics.Process.Start (this.Command);
-			}
-
+			string emails = string.Join(EmailsSeparator, GetEmails (items).ToArray ());							
+			StartClawsNewMail (emails);
 			yield break;	
 		}
 
-		public override bool SupportsModifierItemForItems (System.Collections.Generic.IEnumerable<Item> items, Item modItem)
-		{
-			if (modItem is ITextItem) {
-				return true;
-			}
 
-			ContactItem modContactItem = modItem as ContactItem;
-			if (modContactItem != null) {
-				return !string.IsNullOrEmpty (modContactItem.AnEmailAddress);
+		static IEnumerable<string> GetEmails (IEnumerable<Item> items) {
+			foreach (Item item in items) {
+				ContactItem contactItem = item as ContactItem;
+				if (contactItem != null) {
+					yield return contactItem.AnEmailAddress;
+				} else {
+					ITextItem textItem = item as ITextItem;
+					if (textItem != null) {
+						yield return textItem.Text;
+					}
+				}
 			}
-			
-			return true;
+			yield break;
+		}
+
+		static void StartClawsNewMail(string emails) {
+			try {
+				// Log.Debug("ClawsActionNewMail.StartClawsNewMail: {0} {1}", clawsMailCommand, composeCommandParams + email);
+				System.Diagnostics.Process.Start (ClawsMailCommand, ComposeCommandParams + emails);
+			} catch (Exception e) {
+				Log.Error("ClawsActionNewMail.StartClawsNewMail {0} {1} {2}: {3}", ClawsMailCommand, ComposeCommandParams, 
+				          emails, e.Message);
+				Log.Debug("ClawsActionNewMail.StartClawsNewMail {0}", e.StackTrace);
+			}
 		}
 	}
 }

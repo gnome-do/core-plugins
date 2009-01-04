@@ -29,24 +29,7 @@ namespace Claws {
 	public class ClawsContactDetailItem: Item, IContactDetailItem {
 		private string type, detail, name, icon;
 
-		public ClawsContactDetailItem (string type, string detail) {
-			this.type = type.ToLower ();
-			this.detail = detail;
-
-			// name
-			if (type.Equals ("email.claws")) {
-				name = Catalog.GetString ("Claws Primary Email");
-			} else {
-				name = Catalog.GetString ("Claws Other") + " " + type.Substring (0, type.IndexOf ("."));
-			}
-
-			// icon
-			if (type.StartsWith ("email.")) {
-				icon = "stock_mail-compose";
-			} else {
-				icon = "stock_person";
-			}
-		}
+		#region std properties
 		
 		public override string Name {
 			get { return name; }
@@ -67,5 +50,30 @@ namespace Claws {
 		public override string Icon {
 			get { return icon; }
 		}
+
+		#endregion
+
+		
+		public ClawsContactDetailItem (string type, string detail) 
+		{
+			this.type = type.ToLower ();
+			this.detail = detail;
+
+			// name
+			if (type.Equals ("email.claws.0")) {
+				name = Catalog.GetString ("Primary Email");
+			} else {
+				name = Catalog.GetString ("Other email");
+			}
+
+			// icon
+			if (type.StartsWith ("email.")) {
+				icon = "stock_mail-compose";
+			} else {
+				icon = "stock_person";
+			}
+		}
+
+
 	}
 }
