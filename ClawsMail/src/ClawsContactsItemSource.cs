@@ -32,6 +32,9 @@ namespace Claws
 	/// Items source for Claws Mail - indexes Claws contacts saved in ~/.claws/addrbook-*.xml. 
 	/// </summary>
 	public class ClawsContactsItemSource: ItemSource {
+
+		const string ClawsHome = ".claws-mail";
+		const string ClawsAddrBookIndex = "addrbook--index.xml";
 		
 		List<Item> items;
 		
@@ -76,7 +79,7 @@ namespace Claws
 			items.Clear ();
 
 			// get list of address book files 
-			foreach (string book in Claws.GetAddressBookFiles ()) {				
+			foreach (string book in AddressBookFiles ) {				
 				try {
 					// read adress book
 					using (StreamReader reader = new StreamReader (book)) {
@@ -131,6 +134,52 @@ namespace Claws
 			}
 		}
 
+
+		/// <summary>
+		/// Get address book files from Claws config.
+		/// </summary>
+		/// <returns>
+		/// List of file names.<see cref="List`1"/>
+		/// </returns>
+		private static List<string> AddressBookFiles {
+			get {
+				List<string> result = new List<string> ();		
+				string clawsDir =  Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ClawsHome); // I need clawsDir below
+				string indexFile = Path.Combine (clawsDir, ClawsAddrBookIndex);
+	
+				//Log.Debug("claws path {0}, {1}", clawsDir, indexFile);
+	
+				if (!File.Exists (indexFile)) {
+					return result;
+				}
+				
+				try {
+					// open $HOME/.claws-mail/addrbook--index.xml
+					XmlDocument xmldoc = new XmlDocument ();
+					xmldoc.Load (indexFile);
+					XmlNode adressbook = xmldoc.SelectSingleNode ("addressbook");
+					XmlNode booklist = adressbook.SelectSingleNode ("book_list");
+					// list of file names
+					XmlNodeList books = booklist.SelectNodes ("book");				
+					foreach (XmlNode book in books) {
+						string file = book.Attributes["file"].InnerText;
+						if (String.IsNullOrEmpty (file)) {
+							continue;
+						}
+	
+						string file_path = Path.Combine (clawsDir, file);
+						if (File.Exists (file_path)) {
+							result.Add (file_path);
+						}
+					}				
+				} catch (Exception e) {
+					Log.Error("Claws.GetAddressBookFiles error: {0}", e.Message);
+					Log.Debug("Claws.GetAddressBookFiles error: {0}", e.StackTrace);
+				}
+				
+				return result;
+			}
+		}
 
 	}
 }

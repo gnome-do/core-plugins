@@ -30,8 +30,8 @@ namespace Claws
 	/// </summary>
 	public class ClawsActionNewMail : ClawsActionBase {
 		
-		protected override string Command () {
-			return "claws-mail --compose";
+		protected override string Command {
+			get { return "claws-mail --compose"; }
 		}
 		
 		public override string Name {
@@ -57,21 +57,25 @@ namespace Claws
 			get { return true; }
 		}
 		
-
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (!modItems.Any ()) { // no modifier
-				System.Diagnostics.Process.Start(this.Command ());
-			} else {
+			if (modItems.Any ()) {
 				Item firstModItem = modItems.First ();
 				string email = string.Empty;
-				if (firstModItem is ITextItem) { // modifier as text
-					email = (firstModItem as ITextItem).Text;
-				} else if (firstModItem is ContactItem) { // modifier as contact
-					email = (firstModItem as ContactItem).AnEmailAddress;					
+				ITextItem modTextItem = firstModItem as ITextItem;
+				if (modTextItem != null) { // modifier is text
+					email = modTextItem.Text;
+				} else {
+					ContactItem modContactItem = firstModItem as ContactItem;
+					if (modContactItem != null) { // modifier is contact
+						email = modContactItem.AnEmailAddress;
+					}
 				}
-				System.Diagnostics.Process.Start(this.Command () + " " + email);
+				System.Diagnostics.Process.Start (this.Command + " " + email);
+			} else { // no modifier
+				System.Diagnostics.Process.Start (this.Command);
 			}
+
 			yield break;	
 		}
 
@@ -80,10 +84,10 @@ namespace Claws
 			if (modItem is ITextItem) {
 				return true;
 			}
-			
-			if (modItem is ContactItem) {
-				string email = (modItem as ContactItem).AnEmailAddress;
-				return !string.IsNullOrEmpty(email);
+
+			ContactItem modContactItem = modItem as ContactItem;
+			if (modContactItem != null) {
+				return !string.IsNullOrEmpty (modContactItem.AnEmailAddress);
 			}
 			
 			return true;

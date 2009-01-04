@@ -27,8 +27,8 @@ namespace Claws
 	/// </summary>
 	public class ClawsActionQuit : ClawsActionBase {
 		
-		protected override string Command () {
-			return "claws-mail --quit";
+		protected override string Command {
+			get { return "claws-mail --quit"; }
 		}
 		
 		public override string Name {

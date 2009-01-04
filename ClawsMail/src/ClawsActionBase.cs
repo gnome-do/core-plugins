@@ -33,23 +33,27 @@ namespace Claws
 			get { yield return typeof (IApplicationItem); }
 		}
 
-
-		protected virtual string Command() {
-			return null;
+		protected virtual string Command {
+			get { return string.Empty; }
 		}
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is IApplicationItem) {
-				IApplicationItem apitem = (IApplicationItem) item;				
-				return apitem.Name == clawsMail;
+			IApplicationItem applicationItem = item as IApplicationItem;
+			if (item != null) {
+				return clawsMail.Equals (applicationItem.Name);
 			}
 			return false;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			System.Diagnostics.Process.Start (this.Command());
+			try {
+				System.Diagnostics.Process.Start (this.Command);
+			} catch (Exception err) {
+				Log.Error("ClawsActionBase.Perform command='{0}', error={1}", this.Command, err.Message);
+				Log.Debug("ClawsActionBase.Perform stack: {0}", err.StackTrace);
+			}
 			yield break;
 		}
 	}

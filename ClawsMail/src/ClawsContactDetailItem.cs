@@ -34,7 +34,7 @@ namespace Claws {
 			this.detail = detail;
 
 			// name
-			if (type == "email.claws") {
+			if (type.Equals ("email.claws")) {
 				name = Catalog.GetString ("Claws Primary Email");
 			} else {
 				name = Catalog.GetString ("Claws Other") + " " + type.Substring (0, type.IndexOf ("."));

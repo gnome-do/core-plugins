@@ -28,8 +28,8 @@ namespace Claws
 	/// </summary>
 	public class ClawsActionReceiveAll : ClawsActionBase {
 		
-		protected override string Command () {
-			return "claws-mail --receive-all";
+		protected override string Command {
+			get { return "claws-mail --receive-all"; }
 		}
 		
 		public override string Name {

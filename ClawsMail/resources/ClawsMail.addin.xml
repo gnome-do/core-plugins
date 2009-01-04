@@ -1,10 +1,11 @@
 <Addin 
 	id="ClawsMail"
-	namespace= "Do"
+	namespace="Do"
 	version="1.0"
 	name="ClawsMail"
 	description="Actions for ClawsMail and contacts saved in Claws addressbook."
 	author="Karol Będkowski"
+	category="Community"
 	>
 
 	<Runtime>
@@ -15,8 +16,6 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="Claws.ClawsContactsItemSource" />
 	</Extension>

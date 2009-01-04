@@ -27,8 +27,8 @@ namespace Claws
 	/// </summary>
 	public class ClawsActionOnline : ClawsActionBase {
 		
-		protected override string Command () {
-			return "claws-mail --online";
+		protected override string Command {
+			get { return "claws-mail --online"; }
 		}
 		
 		public override string Name {
