@@ -20,9 +20,9 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml;
+using Mono.Unix;
 using Do.Universe;
 using Do.Platform;
-using Mono.Unix;
 
 
 namespace Claws
@@ -63,7 +63,8 @@ namespace Claws
 		#endregion
 		
 		
-		public ClawsContactsItemSource () {
+		public ClawsContactsItemSource () 
+		{
 			items = new List<Item> ();
 		}
 		
@@ -84,7 +85,7 @@ namespace Claws
 			items.Clear ();
 
 			// iterate over address book files 
-			foreach (string addressBook in AddressBookFiles ) {				
+			foreach (string addressBook in AddressBookFiles) {				
 				try {
 					// read adress book
 					using (StreamReader reader = new StreamReader (addressBook)) {
@@ -96,7 +97,7 @@ namespace Claws
 						
 						foreach (XmlNode person in people) {						
 							// contact name from "cn" attribute
-							string personCn = person.Attributes["cn"].InnerText;
+							string personCn = person.Attributes ["cn"].InnerText;
 							if (string.IsNullOrEmpty (personCn)) {
 								continue;
 							}
@@ -113,7 +114,7 @@ namespace Claws
 							int emailCounter = 0;						
 							
 							foreach (XmlNode address in addresses) {
-								string email = address.Attributes["email"].InnerText;
+								string email = address.Attributes ["email"].InnerText;
 								if (!String.IsNullOrEmpty (email)) {
 									string id = "email.claws." + emailCounter; 
 									buddy[id] = email;									
@@ -144,7 +145,8 @@ namespace Claws
 		private static List<string> AddressBookFiles {
 			get {
 				List<string> result = new List<string> ();		
-				string clawsDir =  Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ClawsHome); // I need clawsDir below
+				string clawsDir =  Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), 
+				                                 ClawsHome); // I need clawsDir below
 				string indexFile = Path.Combine (clawsDir, ClawsAddrBookIndex);
 	
 				if (!File.Exists (indexFile)) {
@@ -160,7 +162,7 @@ namespace Claws
 					// list of file names
 					XmlNodeList books = booklist.SelectNodes ("book");				
 					foreach (XmlNode book in books) {
-						string file = book.Attributes["file"].InnerText;
+						string file = book.Attributes ["file"].InnerText;
 						if (String.IsNullOrEmpty (file)) {
 							continue;
 						}
