@@ -48,10 +48,16 @@ PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
 PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 
+dnl Handle bundled Google libs until they're packaged
+GDATA_SHARP_ACL_LIBS=-r:../BundledLibraries/Google.GData.AccessControl.dll
+GDATA_SHARP_CALENDAR_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Calendar.dll"
+
 
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])
+AC_SUBST([GDATA_SHARP_ACL_LIBS])
+AC_SUBST([GDATA_SHARP_CALENDAR_LIBS])
 AC_SUBST([GLADE_SHARP_20_LIBS])
 AC_SUBST([GLIB_SHARP_20_LIBS])
 AC_SUBST([GNOME_DESKTOP_SHARP_20_LIBS])
