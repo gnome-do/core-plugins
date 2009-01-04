@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="ClawsMail"
-	description="Actions for ClawsMail and contacts saved in Claws addressbook."
+	description="Access to contacts in ClawsMail addressbook."
 	author="Karol Będkowski"
 	category="Community"
 	>
@@ -20,11 +20,4 @@
 		<ItemSource type="Claws.ClawsContactsItemSource" />
 	</Extension>
 
-	<Extension path = "/Do/Action">
-		<Action type="Claws.ClawsActionNewMail" />
-		<Action type="Claws.ClawsActionReceiveAll" />
-		<Action type="Claws.ClawsActionOnline" />
-		<Action type="Claws.ClawsActionOffline" />
-		<Action type="Claws.ClawsActionQuit" />
-	</Extension>
 </Addin>

@@ -41,11 +41,11 @@ namespace Claws
 		#region std properties
 		
 		public override string Name {
-			get { return Catalog.GetString ("Claws Mail contacts"); }
+			get { return Catalog.GetString ("ClawsMail contacts"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Contacts from ClawsMail address book"); }
+			get { return Catalog.GetString ("Contacts in ClawsMail address book"); }
 		}
 
 		public override string Icon {
@@ -72,11 +72,7 @@ namespace Claws
 		{
 			ContactItem contact = item as ContactItem;
 			foreach (string detail in contact.Details) {
-				/*
 				if (detail.Contains (".claws")) {
-					yield return new ClawsContactDetailItem (detail, contact[detail]);
-				} else */
-				if (detail.Contains ("email.")) {
 					yield return new ClawsContactDetailItem (detail, contact[detail]);
 				}
 			}
@@ -88,10 +84,10 @@ namespace Claws
 			items.Clear ();
 
 			// iterate over address book files 
-			foreach (string book in AddressBookFiles ) {				
+			foreach (string addressBook in AddressBookFiles ) {				
 				try {
 					// read adress book
-					using (StreamReader reader = new StreamReader (book)) {
+					using (StreamReader reader = new StreamReader (addressBook)) {
 
 						XmlDocument xmldoc = new XmlDocument ();
 						xmldoc.Load (reader);
@@ -132,8 +128,8 @@ namespace Claws
 					}					
 
 				} catch (Exception e) {
-					Log.Error ("ClawsContactsItemSource: file:{1} error:{0}", e.Message, book);
-					Log.Debug ("ClawsContactsItemSource: file:{0}: {1}", book, e.StackTrace);
+					Log.Error ("ClawsContactsItemSource: file:{1} error:{0}", e.Message, addressBook);
+					Log.Debug ("ClawsContactsItemSource: file:{0}: {1}", addressBook, e.StackTrace);
 				}
 			}
 		}
@@ -150,8 +146,6 @@ namespace Claws
 				List<string> result = new List<string> ();		
 				string clawsDir =  Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ClawsHome); // I need clawsDir below
 				string indexFile = Path.Combine (clawsDir, ClawsAddrBookIndex);
-	
-				//Log.Debug("claws path {0}, {1}", clawsDir, indexFile);
 	
 				if (!File.Exists (indexFile)) {
 					return result;
