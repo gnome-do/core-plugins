@@ -51,13 +51,16 @@ PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 dnl Handle bundled Google libs until they're packaged
 GDATA_SHARP_ACL_LIBS=-r:../BundledLibraries/Google.GData.AccessControl.dll
 GDATA_SHARP_CALENDAR_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Calendar.dll"
-
+GDATA_SHARP_DOCUMENTS_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Documents.dll"
+GDATA_SHARP_CONTACTS_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Contacts.dll"
 
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])
 AC_SUBST([GDATA_SHARP_ACL_LIBS])
 AC_SUBST([GDATA_SHARP_CALENDAR_LIBS])
+AC_SUBST([GDATA_SHARP_CONTACTS_LIBS])
+AC_SUBST([GDATA_SHARP_DOCUMENTS_LIBS])
 AC_SUBST([GLADE_SHARP_20_LIBS])
 AC_SUBST([GLIB_SHARP_20_LIBS])
 AC_SUBST([GNOME_DESKTOP_SHARP_20_LIBS])
@@ -137,9 +140,12 @@ GoogleCalculator/Makefile
 GoogleMaps/Makefile
 GoogleSearch/Makefile
 ImageShack/Makefile
+JIRA/Makefile
 Launchpad/Makefile
 LocateFiles/Makefile
+ManLookUp/Makefile
 Microblogging/Makefile
+MPD/Makefile
 OpenSearch/Makefile
 Pastebin/Makefile
 Pidgin/Makefile

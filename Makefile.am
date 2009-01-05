@@ -26,9 +26,12 @@ SUBDIRS = po BundledLibraries \
 	GoogleMaps \
 	GoogleSearch \
 	ImageShack \
+	JIRA \
 	Launchpad \
 	LocateFiles \
+	ManLookUp \
 	Microblogging \
+	MPD \
 	OpenSearch \
 	Pastebin \
 	Pidgin \

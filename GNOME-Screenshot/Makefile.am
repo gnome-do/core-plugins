@@ -1,85 +1,21 @@
+include $(top_srcdir)/build.rules.mk
 
-EXTRA_DIST =  
-
-# Warning: This is an automatically generated file, do not edit!
-
-if ENABLE_DEBUG
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-ASSEMBLY = bin/Debug/GNOME-Screenshot.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-GNOME_SCREENSHOT_DLL_MDB_SOURCE=bin/Debug/GNOME-Screenshot.dll.mdb
-GNOME_SCREENSHOT_DLL_MDB=$(BUILD_DIR)/GNOME-Screenshot.dll.mdb
-
-endif
-
-if ENABLE_RELEASE
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/GNOME-Screenshot.dll
-ASSEMBLY_MDB = 
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Release
-
-GNOME_SCREENSHOT_DLL_MDB=
-
-endif
-
-AL=al2
-SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
-
-PROGRAMFILES = \
-	$(GNOME_SCREENSHOT_DLL_MDB)  
-
-LINUX_PKGCONFIG = \
-	$(GNOME_SCREENSHOT_PC)  
-
-
-RESGEN=resgen2
-	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+ASSEMBLY=GNOME-Screenshot
 
 FILES = \
 	src/CurrentWindowScreenshotItem.cs \
 	src/ScreenshotDelayItem.cs \
 	src/ScreenshotItem.cs \
+	src/ScreenshotItemSource.cs \
 	src/TakeScreenshotAction.cs \
-	src/WholeScreenScreenshotItem.cs \
-	src/ScreenshotItemSource.cs 
-
-DATA_FILES = 
+	src/WholeScreenScreenshotItem.cs
 
 RESOURCES = \
-	src/GNOME-Screenshot.addin.xml 
+	src/GNOME-Screenshot.addin.xml
 
-EXTRAS = \
-	gnome-screenshot.pc.in 
-
-REFERENCES =  \
-	System \
+REFERENCES = \
 	Mono.Posix \
-	Do.Addins
-
-DLL_REFERENCES = 
-
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
-
-include $(top_srcdir)/Makefile.include
-
-GNOME_SCREENSHOT_PC = $(BUILD_DIR)/gnome-screenshot.pc
-
-$(eval $(call emit-deploy-wrapper,GNOME_SCREENSHOT_PC,gnome-screenshot.pc))
-
-
-$(eval $(call emit_resgen_targets))
-$(build_xamlg_list): %.xaml.g.cs: %.xaml
-	xamlg '$<'
-
-$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
-	mkdir -p $(shell dirname $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+	System \
+	System.Core \
+	$(DO_PLATFORM_LIBS) \
+	$(DO_UNIVERSE_LIBS)
