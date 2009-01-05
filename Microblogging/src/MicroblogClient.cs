@@ -232,19 +232,19 @@ namespace Microblogging
 		void OnStatusUpdated (string status, string errorMessage)
 		{
 			if (StatusUpdated != null)
-				StatusUpdated (this, new StatusUpdatedEventArgs (status, errorMessage));
+				Gtk.Application.Invoke ((o, e) => StatusUpdated (this, new StatusUpdatedEventArgs (status, errorMessage)));
 		}
 
 		void OnTimelineUpdated (string screenname, string status, string icon)
 		{
 			if (TimelineUpdated != null)
-				TimelineUpdated (this, new TimelineUpdatedEventArgs (screenname, status, icon));
+				Gtk.Application.Invoke ((o, e) => TimelineUpdated (this, new TimelineUpdatedEventArgs (screenname, status, icon)));
 		}
 
 		void OnMessageFound (string screenname, string status, string icon)
 		{
 			if (MessageFound != null)
-				MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon));
+				Gtk.Application.Invoke ((o, e) => MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon)));
 		}
 		
 		public event StatusUpdatedDelegate StatusUpdated;
