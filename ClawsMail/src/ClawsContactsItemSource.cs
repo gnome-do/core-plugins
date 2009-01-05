@@ -35,6 +35,9 @@ namespace Claws
 
 		const string ClawsHome = ".claws-mail";
 		const string ClawsAddrBookIndex = "addrbook--index.xml";
+
+		readonly static string ClawsHomePath;
+		readonly static string ClawsIndexFilename;
 		
 		List<Item> items;
 
@@ -61,6 +64,14 @@ namespace Claws
 		}
 
 		#endregion
+
+
+		static ClawsContactsItemSource ()
+		{
+			ClawsHomePath =  Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), 
+				                                 ClawsHome);
+			ClawsIndexFilename = Path.Combine (ClawsHomePath, ClawsAddrBookIndex);
+		}
 		
 		
 		public ClawsContactsItemSource () 
@@ -87,7 +98,7 @@ namespace Claws
 			// iterate over address book files 
 			foreach (string addressBook in AddressBookFiles) {				
 				try {
-					// read adress book
+					// read adress book by StreamReader - direct == error:Encoding name '...' not supported
 					using (StreamReader reader = new StreamReader (addressBook)) {
 
 						XmlDocument xmldoc = new XmlDocument ();
@@ -144,32 +155,28 @@ namespace Claws
 		/// </returns>
 		private static List<string> AddressBookFiles {
 			get {
-				List<string> result = new List<string> ();		
-				string clawsDir =  Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), 
-				                                 ClawsHome); // I need clawsDir below
-				string indexFile = Path.Combine (clawsDir, ClawsAddrBookIndex);
+				List<string> result = new List<string> ();
 	
-				if (!File.Exists (indexFile)) {
+				if (!File.Exists (ClawsIndexFilename)) {
 					return result;
 				}
 				
 				try {
 					// open $HOME/.claws-mail/addrbook--index.xml
 					XmlDocument xmldoc = new XmlDocument ();
-					xmldoc.Load (indexFile);
+					xmldoc.Load (ClawsIndexFilename);
 					XmlNode adressbook = xmldoc.SelectSingleNode ("addressbook");
 					XmlNode booklist = adressbook.SelectSingleNode ("book_list");
-					// list of file names
 					XmlNodeList books = booklist.SelectNodes ("book");				
 					foreach (XmlNode book in books) {
-						string file = book.Attributes ["file"].InnerText;
-						if (String.IsNullOrEmpty (file)) {
+						string fileName = book.Attributes ["file"].InnerText;
+						if (String.IsNullOrEmpty (fileName)) {
 							continue;
 						}
 	
-						string file_path = Path.Combine (clawsDir, file);
-						if (File.Exists (file_path)) {
-							result.Add (file_path);
+						string filePath = Path.Combine (ClawsHomePath, fileName);
+						if (File.Exists (filePath)) {
+							result.Add (filePath);
 						}
 					}				
 				} catch (Exception e) {
