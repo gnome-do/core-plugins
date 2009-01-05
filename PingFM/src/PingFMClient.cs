@@ -29,24 +29,27 @@ using Do.Universe;
 using PingFM.API;
 
 namespace PingFM
-{
-	
+{	
 	public class PingFMClient
 	{
 		readonly string ErrorInMethod = Catalog.GetString ("An error has occurred in {0}");
-		readonly string MessagePosted = Catalog.GetString ("Message posted");
+		readonly string PostSuccessTitle = Catalog.GetString ("Message posted");
+		readonly string PostErrorTitle = Catalog.GetString ("Message posting failed");
+		readonly string PostErrorMessage = Catalog.GetString ("Cannot connect to the Ping.FM API server, or the server responds with an error.");
+		readonly string SinglePostSuccess = Catalog.GetString ("Your {0} message has been successfully posted to {1}");
+		readonly string MultiPostSuccess = Catalog.GetString ("Your message has been successfully posted to all {0} services");
 		
 		PingFMApi pingfm;
-		List<PingFMServiceItem> service_items;
+		List<PingFMServiceItem> services;
 		
-		public PingFMClient (string appkey)
+		public PingFMClient (string appKey)
 		{
-			pingfm = new PingFMApi (appkey);
-			service_items = new List<PingFMServiceItem> ();
+			pingfm = new PingFMApi (appKey);
+			services = new List<PingFMServiceItem> ();
 		}
 		
 		public IEnumerable<PingFMServiceItem> Services {
-			get { return service_items; }
+			get { return services; }
 		}
 		
 		public void UpdateServices ()
@@ -60,9 +63,9 @@ namespace PingFM
 				return;
 			}
 			
-			service_items.Clear ();			
-			service_items.Add (new PingFMServiceItem (Catalog.GetString ("Microblog"), "pingfm", "microblog", "http://ping.fm"));
-			service_items.Add (new PingFMServiceItem (Catalog.GetString ("Status"), "pingfm", "status", "http://ping.fm"));
+			services.Clear ();			
+			services.Add (new PingFMServiceItem (Catalog.GetString ("Microblog"), "pingfm", "microblog", "http://ping.fm"));
+			services.Add (new PingFMServiceItem (Catalog.GetString ("Status"), "pingfm", "status", "http://ping.fm"));
 			
 			// If a service has method "microblog" and/or "status", include it in the service_items list
 			// when both methods are available, use "microblog", because to an individual service
@@ -72,7 +75,7 @@ namespace PingFM
 					string method;
 					if (Regex.IsMatch (service.Methods, @".*(microblog|status).*")) {
 						method = (service.Methods.Contains ("microblog")) ? "microblog" : "status";
-						service_items.Add (new PingFMServiceItem (service.Name, service.ID, method, service.Url));		
+						services.Add (new PingFMServiceItem (service.Name, service.ID, method, service.Url));		
 					}
 				}
 			} else {
@@ -80,9 +83,9 @@ namespace PingFM
 			}
 		}
 		
-		public void Post (string body, PingFMServiceItem service_item) 
+		public void Post (string body, PingFMServiceItem serviceItem) 
 		{
-			string service = service_item.Id;
+			string service = serviceItem.Id;
 			if (service == "pingfm")
 				service = null;
 			
@@ -91,7 +94,7 @@ namespace PingFM
 			try {
 				// turn the last parameter true will switch to debug mode, 
 				// message will be sent to the server but won't be published.
-				pr = pingfm.Post (service_item.Method, null, body, service, false); 
+				pr = pingfm.Post (serviceItem.Method, null, body, service, false); 
 			} catch (Exception e) {
 				pr = null;
 				Log.Error (ErrorInMethod, "Post", e.Message);
@@ -100,29 +103,23 @@ namespace PingFM
 			
 			if (pr != null && pr.Status.Equals("OK")) {
 				
-				Do.Platform.Services.Notifications.Notify(GetSuccessfulNotification (service, service_item.Method, service_item.Icon));
+				Do.Platform.Services.Notifications.Notify (GetSuccessfulNotification (service, serviceItem.Method, serviceItem.Icon));
 			} else {
-				Do.Platform.Services.Notifications.Notify(GetFailedNotification (service_item.Icon));
+				Do.Platform.Services.Notifications.Notify (GetFailedNotification (serviceItem.Icon));
 			}
 		}
 		
 		Notification GetSuccessfulNotification (string service, string method, string icon)
 		{
 			if (service != null)
-				return new Notification (MessagePosted,
-				                         String.Format (Catalog.GetString ("Your {0} message has been successfully posted to {1}"), method, service),
-				                         icon);
+				return new Notification (PostSuccessTitle, String.Format (SinglePostSuccess, method, service), icon);
 			else
-				return new Notification (MessagePosted,
-				                         String.Format (Catalog.GetString ("Your message has been successfully posted to all {0} services"), method),
-				                         icon);
+				return new Notification (PostSuccessTitle, String.Format (MultiPostSuccess, method), icon);
 		}
 		
 		Notification GetFailedNotification (string icon)
 		{
-			return new Notification (Catalog.GetString ("Message posting failed"), 
-			                         Catalog.GetString ("Cannot connect to the Ping.FM API server, or the server responds with an error."),
-			                         icon);
+			return new Notification (PostErrorTitle, PostErrorMessage, icon);
 		}
 		
 		public bool CheckLength (string message)
@@ -130,9 +127,9 @@ namespace PingFM
 			// If the url length >= 24, Ping.FM will replace it to a short one,
 			// therefore the allowed length of the message can possibly be longer than 140.
 			// we calculate here the length after the replacement
-			const string LINK_PATTERN = @"https:\/\/[\S]{16,}|http:\/\/[\S]{17,}|ftp:\/\/[\S]{18,}";
-			const string FAKE_PINGFM_LINK = "http://ping.fm/xxxxx";
-			return Regex.Replace (message, LINK_PATTERN, FAKE_PINGFM_LINK).Length <= 140;
+			const string LinkPattern = @"https:\/\/[\S]{16,}|http:\/\/[\S]{17,}|ftp:\/\/[\S]{18,}";
+			const string FakePingFMLink = "http://ping.fm/xxxxx";
+			return Regex.Replace (message, LinkPattern, FakePingFMLink).Length <= 140;
 		}
 	}
 }

@@ -28,8 +28,7 @@ using PingFM.API;
 using Do.Universe;
 
 namespace PingFM
-{
-	
+{	
 	public sealed class PingFMPost : Act
 	{
 		public override string Name {
@@ -82,7 +81,8 @@ namespace PingFM
             string body = (items.First () as ITextItem).Text;
 			
 			PingFM.Post (body, (modifierItems.First () as PingFMServiceItem));
-            return null;
+            
+			yield break;
         }
 		
 	}
