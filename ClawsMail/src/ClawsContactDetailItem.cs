@@ -60,10 +60,15 @@ namespace Claws {
 			this.detail = detail;
 
 			// name
-			if (type.Equals ("email.claws.0")) {
+			if (type.Equals ("email.claws.0.")) {
 				name = Catalog.GetString ("Primary Email");
 			} else {
-				name = Catalog.GetString ("Other email");
+				string remark = type.Substring (type.LastIndexOf (".") + 1);
+				if (remark.Length > 0) {
+					name = Catalog.GetString ("Email ") + remark;
+				} else {
+					name = Catalog.GetString ("Other email");
+				}
 			}
 
 			// icon

@@ -33,7 +33,7 @@ namespace Claws
 	/// </summary>
 	public class ClawsContactsItemSource: ItemSource {
 
-		const string ClawsHome = ".claws-mail";
+		const string ClawsHome = ".claws-mail/addrbook";
 		const string ClawsAddrBookIndex = "addrbook--index.xml";
 
 		readonly static string ClawsHomePath;
@@ -126,8 +126,9 @@ namespace Claws
 							
 							foreach (XmlNode address in addresses) {
 								string email = address.Attributes ["email"].InnerText;
-								if (!String.IsNullOrEmpty (email)) {
-									string id = "email.claws." + emailCounter; 
+								if (!string.IsNullOrEmpty (email)) {
+									string remarks = address.Attributes ["remarks"].InnerText;
+									string id = "email.claws." + emailCounter + "." + remarks;
 									buddy[id] = email;									
 									emailCounter++;
 								}
