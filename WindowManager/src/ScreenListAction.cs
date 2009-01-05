@@ -398,54 +398,6 @@ namespace WindowManager
 		
 	}
 	
-	public class ScreenShelfAction : ScreenActionAction
-	{
-		public override string Name {
-			get { return Catalog.GetString ("Shelf Windows"); }
-		}
-		
-		public override string Description {
-			get { return Catalog.GetString ("Places your windows in a configurable shelf arrangement"); }
-		}
-		
-		public override string Icon {
-			get { return "preferences-system-windows"; }
-		}
-
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			return base.DynamicModifierItemsForItem (item);
-		}
-		
-		private Window LargestWindow (List<Window> windows)
-		{
-			Window largest = windows[0];
-			int largest_size = 0;
-			
-			foreach (Window w in windows) {
-				int x, y, height, width;
-				w.GetGeometry (out x, out y, out width, out height);
-				
-				if (width * height > largest_size) {
-					largest = w;
-					largest_size = width * height;
-				}
-			}
-			
-			return largest;
-		}
-
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-		{
-			//magic goes here (a.k.a the code that was here is too embarassing to release even into
-			//a beta tree
-			
-			return null;
-		}
-
-
-	}
-	
 	public class ScreenRestoreAction : ScreenActionAction
 	{
 		public override string Name {

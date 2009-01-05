@@ -28,6 +28,8 @@ namespace Pastebin
 	{
 		bool ShouldAllowAutoRedirect { get; }
 		
+		string Name { get; }
+		
 		string BaseUrl { get; }
 		
 		NameValueCollection Parameters { get; }

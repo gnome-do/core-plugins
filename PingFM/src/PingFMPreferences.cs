@@ -1,8 +1,7 @@
-/* Preferences.cs 
+/* PingFMPreferences.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,34 +18,24 @@
  */
 
 using System;
-
-using Mono.Unix;
-
 using Do.Platform;
 
-namespace GMail
+namespace PingFM
 {
-	
-	public class GMailPreferences
+	public class PingFMPreferences
 	{
-		const string UsernameKey = "Username";
-		const string PasswordKey = "Password";
+		const string AppKeyKey = "AppKey";
 		
 		IPreferences prefs;
 		
-		public GMailPreferences()
+		public PingFMPreferences()
 		{
-			prefs = Services.Preferences.Get<GMailPreferences> ();
+			prefs = Services.Preferences.Get <PingFMPreferences> ();
 		}
-
-		public string Username {
-			get { return prefs.Get<string> (UsernameKey, ""); }
-			set { prefs.Set<string> (UsernameKey, value); }
-		}
-
-		public string Password {
-			get { return prefs.GetSecure (PasswordKey, ""); }
-			set { prefs.SetSecure (PasswordKey, value); }
+		
+		public string AppKey {
+			get { return prefs.GetSecure <string> (AppKeyKey, ""); }
+			set { prefs.SetSecure <string> (AppKeyKey, value); }
 		}
 	}
 }

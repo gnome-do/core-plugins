@@ -146,8 +146,9 @@ namespace InlineGoogleSearch {
 			googleSearch.setQuery ( query );
 			IEnumerable<GoogleSearchResult> results = googleSearch.Search ();
 
+
 			if (!results.Any ()) {
-				Services.Notifications.Notify ("Google Search", "No Results Found");
+				Gtk.Application.Invoke ((o, e) => Services.Notifications.Notify (Name, "No Results Found"));
 			}
 			
 			foreach (GoogleSearchResult result in results) {

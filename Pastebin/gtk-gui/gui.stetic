@@ -2,8 +2,11 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.1</target-gtk-version>
+    <target-gtk-version>2.12</target-gtk-version>
   </configuration>
+  <import>
+    <widget-library name="../bin/Debug/Pastebin.dll" internal="true" />
+  </import>
   <widget class="Gtk.Bin" id="Pastebin.PastebinConfig" design-size="300 300">
     <property name="MemberName" />
     <child>
@@ -25,15 +28,11 @@
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
-                      <widget class="Gtk.RadioButton" id="Paste2RadioButton">
+                      <widget class="Gtk.ComboBox" id="cmbProvider">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">Paste2.org</property>
-                        <property name="DrawIndicator">True</property>
-                        <property name="HasLabel">True</property>
-                        <property name="UseUnderline">True</property>
-                        <property name="Group">providers</property>
-                        <signal name="Toggled" handler="OnPaste2Toggled" />
+                        <property name="IsTextCombo">True</property>
+                        <property name="Items" translatable="yes" />
+                        <signal name="Changed" handler="cmbProviderChanged" />
                       </widget>
                       <packing>
                         <property name="Position">0</property>
@@ -43,15 +42,24 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.RadioButton" id="PastebinCARadioButton">
+                      <widget class="Gtk.HBox" id="hbox1">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">pastebin.ca</property>
-                        <property name="DrawIndicator">True</property>
-                        <property name="HasLabel">True</property>
-                        <property name="UseUnderline">True</property>
-                        <property name="Group">providers</property>
-                        <signal name="Toggled" handler="OnPastebinCAToggled" />
+                        <property name="Spacing">6</property>
+                        <child>
+                          <widget class="Gtk.Label" id="lblCodes">
+                            <property name="MemberName" />
+                            <property name="LabelProp" translatable="yes">Supported Codes			</property>
+                          </widget>
+                          <packing>
+                            <property name="Position">0</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
                       </widget>
                       <packing>
                         <property name="Position">1</property>
@@ -61,21 +69,22 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.RadioButton" id="LodgeItRadioButton">
+                      <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">paste.pocoo.org</property>
-                        <property name="DrawIndicator">True</property>
-                        <property name="HasLabel">True</property>
-                        <property name="UseUnderline">True</property>
-                        <property name="Group">providers</property>
-                        <signal name="Toggled" handler="OnLodgeItToggled" />
+                        <property name="ShadowType">In</property>
+                        <child>
+                          <widget class="Gtk.TreeView" id="treeCodes">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="ShowScrollbars">True</property>
+                            <property name="EnableSearch">False</property>
+                            <property name="HeadersVisible">False</property>
+                          </widget>
+                        </child>
                       </widget>
                       <packing>
                         <property name="Position">2</property>
                         <property name="AutoSize">True</property>
-                        <property name="Expand">False</property>
-                        <property name="Fill">False</property>
                       </packing>
                     </child>
                   </widget>
@@ -96,8 +105,6 @@
           <packing>
             <property name="Position">0</property>
             <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
           </packing>
         </child>
       </widget>

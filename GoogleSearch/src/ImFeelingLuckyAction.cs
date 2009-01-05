@@ -90,7 +90,7 @@ namespace InlineGoogleSearch {
 			IEnumerable<GoogleSearchResult> results = googleSearch.Search ();
 			
 			if (!results.Any ()) {
-				Services.Notifications.Notify ("I'm Feeling Lucky", "No Results Found");
+				Gtk.Application.Invoke ((o, e) => Services.Notifications.Notify (Name, "No Results Found"));
 			} else {
 				Services.Environment.OpenUrl ( results.First ().url );
 			}

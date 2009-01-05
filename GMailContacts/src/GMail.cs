@@ -42,7 +42,7 @@ namespace GMail
 		
 		static GMail()
 		{
-			Preferences = new Preferences ();
+			Preferences = new GMailPreferences ();
 			client = new GMailClient (Preferences.Username, Preferences.Password);
 		}
 		
@@ -50,7 +50,7 @@ namespace GMail
 			get { return client.Contacts; }
 		}
 		
-		public static Preferences Preferences { get; private set; }
+		public static GMailPreferences Preferences { get; private set; }
 
 		public static void UpdateContacts ()
 		{

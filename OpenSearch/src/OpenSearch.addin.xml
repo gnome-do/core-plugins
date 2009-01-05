@@ -24,4 +24,5 @@
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="OpenSearch.OpenSearchItemSource" />
 	</Extension>
+
 </Addin>
