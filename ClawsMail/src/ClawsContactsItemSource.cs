@@ -98,47 +98,47 @@ namespace Claws
 			// iterate over address book files 
 			foreach (string addressBook in AddressBookFiles) {				
 				try {
+					XmlDocument xmldoc = new XmlDocument ();
 					// read adress book by StreamReader - direct == error:Encoding name '...' not supported
 					using (StreamReader reader = new StreamReader (addressBook)) {
-
-						XmlDocument xmldoc = new XmlDocument ();
 						xmldoc.Load (reader);
-						XmlNode addresBookNode = xmldoc.SelectSingleNode ("address-book");
-						XmlNodeList people = addresBookNode.SelectNodes ("person");
+					}
+					
+					XmlNodeList people = xmldoc.SelectNodes ("/address-book/person");
+					if (people == null) {
+						continue;
+					}
+					
+					foreach (XmlNode person in people) {						
+						// contact name from "cn" attribute
+						string personCn = person.Attributes ["cn"].InnerText;
+						if (string.IsNullOrEmpty (personCn)) {
+							continue;
+						}
 						
-						foreach (XmlNode person in people) {						
-							// contact name from "cn" attribute
-							string personCn = person.Attributes ["cn"].InnerText;
-							if (string.IsNullOrEmpty (personCn)) {
-								continue;
-							}
-							
-							// load emails
-							XmlNode addressListNode = person.SelectSingleNode ("address-list");
-							XmlNodeList addresses = addressListNode.SelectNodes ("address");
-							
-							if (addresses.Count == 0) { // no childs == no emails -> skip
-								continue;
-							}
+						// load emails
+						XmlNodeList addresses = person.SelectNodes ("address-list/address");						
+						if (addresses.Count == 0) { // no childs == no emails -> skip
+							continue;
+						}
 
-							ContactItem buddy = ContactItem.CreateWithName (personCn);
-							int emailCounter = 0;						
-							
-							foreach (XmlNode address in addresses) {
-								string email = address.Attributes ["email"].InnerText;
-								if (!string.IsNullOrEmpty (email)) {
-									string remarks = address.Attributes ["remarks"].InnerText;
-									string id = "email.claws." + emailCounter + "." + remarks;
-									buddy[id] = email;									
-									emailCounter++;
-								}
-							}
-							
-							if (emailCounter > 0) {
-								items.Add (buddy);
+						ContactItem buddy = ContactItem.CreateWithName (personCn);
+						int emailCounter = 0;						
+						
+						foreach (XmlNode address in addresses) {
+							string email = address.Attributes ["email"].InnerText;
+							if (!string.IsNullOrEmpty (email)) {
+								string remarks = address.Attributes ["remarks"].InnerText;
+								string id = "email.claws." + emailCounter + "." + remarks;
+								buddy[id] = email;
+								emailCounter++;
 							}
 						}
-					}					
+						
+						if (emailCounter > 0) {
+							items.Add (buddy);
+						}
+					}			
 
 				} catch (Exception e) {
 					Log.Error ("ClawsContactsItemSource: file:{1} error:{0}", e.Message, addressBook);
@@ -166,9 +166,7 @@ namespace Claws
 					// open $HOME/.claws-mail/addrbook--index.xml
 					XmlDocument xmldoc = new XmlDocument ();
 					xmldoc.Load (ClawsIndexFilename);
-					XmlNode adressbook = xmldoc.SelectSingleNode ("addressbook");
-					XmlNode booklist = adressbook.SelectSingleNode ("book_list");
-					XmlNodeList books = booklist.SelectNodes ("book");				
+					XmlNodeList books = xmldoc.SelectNodes ("/addressbook/book_list/book");				
 					foreach (XmlNode book in books) {
 						string fileName = book.Attributes ["file"].InnerText;
 						if (String.IsNullOrEmpty (fileName)) {
