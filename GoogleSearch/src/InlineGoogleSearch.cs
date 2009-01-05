@@ -102,7 +102,7 @@ namespace InlineGoogleSearch {
 			GoogleSearchResult [] results = googleSearch.search ();
 
 			if (results.Length == 0) {
-				Services.Notifications.Notify ("Google Search", "No Results Found");
+				Gtk.Application.Invoke ((o, e) => Services.Notifications.Notify ("Google Search", "No Results Found"));
 			}
 			
 			foreach (GoogleSearchResult result in results) {
