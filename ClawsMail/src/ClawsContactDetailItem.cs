@@ -27,6 +27,10 @@ namespace Claws {
 	/// Claws contact.
 	/// </summary>
 	public class ClawsContactDetailItem: Item, IContactDetailItem {
+
+		readonly static string IconForMail = "stock_mail-compose";
+		readonly static string IconForOthers = "stock_person";
+		
 		private string type, detail, name, icon;
 
 		#region std properties
@@ -59,23 +63,23 @@ namespace Claws {
 			this.type = type.ToLower ();
 			this.detail = detail;
 
-			// name
-			if (type.Equals ("email.claws.0.")) {
-				name = Catalog.GetString ("Primary Email");
-			} else {
-				string remark = type.Substring (type.LastIndexOf (".") + 1);
-				if (remark.Length > 0) {
-					name = Catalog.GetString ("Email ") + remark;
-				} else {
-					name = Catalog.GetString ("Other email");
-				}
-			}
-
-			// icon
 			if (type.StartsWith ("email.")) {
-				icon = "stock_mail-compose";
-			} else {
-				icon = "stock_person";
+				icon = IconForMail;
+				
+				string remark = type.Substring (type.LastIndexOf (".") + 1);
+				if (type.StartsWith (ClawsContactsItemSource.ClawsPrimaryEmailPrefix)) {
+					name = Catalog.GetString ("Primary Email") + " " + remark;
+				} else {
+					if (remark.Length > 0) {
+						name = Catalog.GetString ("Email") + " " + remark;
+					} else {
+						name = Catalog.GetString ("Other email");
+					}
+				}
+				
+			} else {				
+				icon = IconForOthers;
+				name = Catalog.GetString ("Other");
 			}
 		}
 

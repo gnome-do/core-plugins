@@ -29,12 +29,15 @@ namespace Claws
 {
 
 	/// <summary>
-	/// Items source for Claws Mail - indexes Claws contacts saved in ~/.claws/addrbook-*.xml. 
+	/// Items source for Claws Mail - indexes Claws contacts saved in ~/.claws/addrbook/addrbook-*.xml. 
 	/// </summary>
 	public class ClawsContactsItemSource: ItemSource {
 
-		const string ClawsHome = ".claws-mail/addrbook";
-		const string ClawsAddrBookIndex = "addrbook--index.xml";
+		readonly static string ClawsHome = ".claws-mail/addrbook";
+		readonly static string ClawsAddrBookIndex = "addrbook--index.xml";
+		
+		readonly static string ClawsKeyPrefix = "email.claws.";
+		public readonly static string ClawsPrimaryEmailPrefix = ClawsKeyPrefix + "0.";
 
 		readonly static string ClawsHomePath;
 		readonly static string ClawsIndexFilename;
@@ -52,7 +55,7 @@ namespace Claws
 		}
 
 		public override string Icon {
-			get { return "claws-mail";}
+			get { return "claws-mail"; }
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -60,7 +63,7 @@ namespace Claws
 		}
 
 		public override IEnumerable<Item> Items {
-			get { return items;}
+			get { return items; }
 		}
 
 		#endregion
@@ -84,7 +87,7 @@ namespace Claws
 		{
 			ContactItem contact = item as ContactItem;
 			foreach (string detail in contact.Details) {
-				if (detail.Contains (".claws")) {
+				if (detail.StartsWith (ClawsKeyPrefix)) {
 					yield return new ClawsContactDetailItem (detail, contact[detail]);
 				}
 			}
@@ -99,7 +102,7 @@ namespace Claws
 			foreach (string addressBook in AddressBookFiles) {				
 				try {
 					XmlDocument xmldoc = new XmlDocument ();
-					// read adress book by StreamReader - direct == error:Encoding name '...' not supported
+					// read adress book by StreamReader. Without: error:Encoding name '...' not supported
 					using (StreamReader reader = new StreamReader (addressBook)) {
 						xmldoc.Load (reader);
 					}
@@ -118,7 +121,7 @@ namespace Claws
 						
 						// load emails
 						XmlNodeList addresses = person.SelectNodes ("address-list/address");						
-						if (addresses.Count == 0) { // no childs == no emails -> skip
+						if ((addresses == null) || (addresses.Count == 0)) { // no childs == no emails -> skip
 							continue;
 						}
 
@@ -129,8 +132,8 @@ namespace Claws
 							string email = address.Attributes ["email"].InnerText;
 							if (!string.IsNullOrEmpty (email)) {
 								string remarks = address.Attributes ["remarks"].InnerText;
-								string id = "email.claws." + emailCounter + "." + remarks;
-								buddy[id] = email;
+								string id = ClawsKeyPrefix + emailCounter + "." + remarks;
+								buddy [id] = email;
 								emailCounter++;
 							}
 						}
@@ -141,8 +144,8 @@ namespace Claws
 					}			
 
 				} catch (Exception e) {
-					Log.Error ("ClawsContactsItemSource: file:{1} error:{0}", e.Message, addressBook);
-					Log.Debug ("ClawsContactsItemSource: file:{0}: {1}", addressBook, e.StackTrace);
+					Log.Error ("ClawsContactsItemSource: file:{0} error:{1}", addressBook, e.Message);
+					Log.Debug ("ClawsContactsItemSource: file:{0}: {1}", addressBook, e.ToString ());
 				}
 			}
 		}
@@ -166,7 +169,11 @@ namespace Claws
 					// open $HOME/.claws-mail/addrbook--index.xml
 					XmlDocument xmldoc = new XmlDocument ();
 					xmldoc.Load (ClawsIndexFilename);
-					XmlNodeList books = xmldoc.SelectNodes ("/addressbook/book_list/book");				
+					XmlNodeList books = xmldoc.SelectNodes ("/addressbook/book_list/book");
+					if (books == null) {
+						return result;
+					}
+					
 					foreach (XmlNode book in books) {
 						string fileName = book.Attributes ["file"].InnerText;
 						if (String.IsNullOrEmpty (fileName)) {
@@ -178,9 +185,9 @@ namespace Claws
 							result.Add (filePath);
 						}
 					}				
-				} catch (Exception e) {
+				} catch (Exception e) {					
 					Log.Error("ClawsContactsItemSource.AddressBookFiles error: {0}", e.Message);
-					Log.Debug("ClawsContactsItemSource.AddressBookFiles: {0}", e.StackTrace);
+					Log.Debug("ClawsContactsItemSource.AddressBookFiles: {0}", e.ToString ());
 				}
 				
 				return result;
