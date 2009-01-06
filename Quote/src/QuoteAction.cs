@@ -45,7 +45,7 @@ namespace Quote
 		}
 		
 		public override string Icon {
-			get { return "gtk-paste"; }
+			get { return "quoted-globe.svg@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {

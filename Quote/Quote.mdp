@@ -22,6 +22,7 @@
     <File name="src/Quote.cs" subtype="Code" buildaction="Compile" />
     <File name="src/QuoteAction.cs" subtype="Code" buildaction="Compile" />
     <File name="Quote.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="quoted-globe.svg" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
