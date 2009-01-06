@@ -10,7 +10,6 @@ SUBDIRS = \
 	Bibtex \
 	Cl.ickable \
 	Confluence \
-	del.icio.us \
 	DiskMounter \
 	EOG-Slideshow \
 	Epiphany \
