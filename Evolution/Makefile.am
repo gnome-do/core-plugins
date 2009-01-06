@@ -7,7 +7,8 @@ FILES = \
 	src/ContactDetailItem.cs \
 	src/ContactItemSource.cs \
 	src/EmailContactDetailItem.cs \
-	src/PhoneContactDetailItem.cs
+	src/PhoneContactDetailItem.cs \
+	src/AddressContactDetailItem.cs 
 
 RESOURCES = \
 	Resources/Evolution.addin.xml \

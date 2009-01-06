@@ -1,9 +1,9 @@
 <Addin
 	id="Google Search"
 	namespace="Do"
-	version="1.3"
+	version="1.4"
 	name="Google Search"
-	description="Perform Google searches, displaying results in Do."
+	description="Perform Google Searches from Do."
 	author="Brian Lucas"
 	category="Community"
 >
@@ -16,6 +16,8 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
 	<Extension path = "/Do/Action">
 		<Action type="InlineGoogleSearch.InlineGoogleSearch" />
 		<Action type="InlineGoogleSearch.ImFeelingLucky" />

@@ -1,8 +1,7 @@
-/* FileChooserParent.cs
+/* PingFMPreferences.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,19 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
+using Do.Platform;
 
-namespace GnomeDoFile
+namespace PingFM
 {
-	
-	
-	public partial class FileChooserParent : Gtk.Dialog
+	public class PingFMPreferences
 	{
+		const string AppKeyKey = "AppKey";
 		
-		public FileChooserParent()
+		IPreferences prefs;
+		
+		public PingFMPreferences()
 		{
-			this.Build();
+			prefs = Services.Preferences.Get <PingFMPreferences> ();
+		}
+		
+		public string AppKey {
+			get { return prefs.GetSecure <string> (AppKeyKey, ""); }
+			set { prefs.SetSecure <string> (AppKeyKey, value); }
 		}
 	}
 }

@@ -11,6 +11,7 @@ RESOURCES = \
 REFERENCES = \
 	Mono.Posix \
 	System \
+	System.Core \
 	System.Xml \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)
