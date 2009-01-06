@@ -47,14 +47,12 @@ namespace InlineGoogleSearch {
 			int upperBound = array.GetLength (0);
 			for (int i = 0; i < upperBound; i++) {
 				if (array [i].Contains ("unescapedUrl\":\"")) {
-					this.unescapedUrl = array [i].Remove 
-						(0,15);
+					this.unescapedUrl = array [i].Remove (0,15);
 				} else if (array [i].Contains ("url\":\"")) {
 					this.url = array [i].Remove (0,6);
 				} else if (array [i].Contains 
 				           ("visibleUrl\":\"")) {
-					this.visibleUrl = array [i].Remove 
-						(0,13);
+					this.visibleUrl = array [i].Remove (0,13);
 				} else if (array [i].Contains 
 				           ("cacheUrl\":\"")) {
 					this.cacheUrl = array [i].Remove (0,11);
