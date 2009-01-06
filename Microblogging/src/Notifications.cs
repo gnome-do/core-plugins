@@ -90,7 +90,7 @@ namespace Microblogging
 
 		public void Notify (Notification notification)
 		{
-			Gtk.Application.Invoke ((o, e) => Services.Notifications.Notify (notification));
+			Services.Notifications.Notify (notification);
 		}
 	}
 }
