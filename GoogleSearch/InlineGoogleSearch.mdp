@@ -40,10 +40,5 @@
     <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Interface.Linux, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </References>
-  <GtkDesignInfo>
-    <ExportedWidgets>
-      <Widget>InlineGoogleSearch.GoogleSearchConfig</Widget>
-      <Widget>InlineGoogleSearch.SearchConfig</Widget>
-    </ExportedWidgets>
-  </GtkDesignInfo>
+  <GtkDesignInfo />
 </Project>

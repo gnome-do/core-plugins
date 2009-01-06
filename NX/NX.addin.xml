@@ -1,0 +1,27 @@
+<Addin
+	id="NX"
+	namespace="Do"
+	version="1.0"
+	name="NX"
+	description="Indexes NX hosts and provides 'Connect with NX' action"
+	author="Sean Dague"
+	category="community"
+	>
+
+	<Runtime>
+		<Import assembly="NX.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="NX.NXHostItemSource" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="NX.NXAction" />
+	</Extension>
+</Addin>
