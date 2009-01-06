@@ -1,13 +1,15 @@
 ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
-SUBDIRS = po BundledLibraries \
+SUBDIRS = \
+	po \
+	BundledLibraries \
+	Alias \
 	AptURL \
 	Archive \
 	Bibtex \
 	Cl.ickable \
 	Confluence \
-	del.icio.us \
 	DiskMounter \
 	EOG-Slideshow \
 	Epiphany \
@@ -43,13 +45,6 @@ SUBDIRS = po BundledLibraries \
 	Vinagre \
 	VolumeControl \
 	WindowManager
-
-if BUILD_AMAROK
-SUBDIRS += Amarok 
-endif
-if BUILD_BANSHEE
-SUBDIRS += Banshee
-endif
 
 # Current dir _must_ be processed last; this ensures our repo is built with all the plugins
 SUBDIRS += .
