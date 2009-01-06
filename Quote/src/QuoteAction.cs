@@ -74,7 +74,7 @@ namespace Quote
       IQuoteProvider quoteProvider;
 
       foreach (Item item in items) {
-	text += (item as ITextItem).Text;
+	text += (item as ITextItem).Text + " ";
       }
       
       foreach (Item tag in modifierItems) {
@@ -89,7 +89,9 @@ namespace Quote
 	? QuoteProviderFactory.GetProviderFromPreferences (text)
         : QuoteProviderFactory.GetProviderFromPreferences (text, tags);		
       
-      string url = Quote.PostUsing (quoteProvider);	
+      string url = Quote.PostUsing (quoteProvider);
+
+      AddUnknownTags (tags, quoteProvider);
       
       yield return new TextItem (url);
     }
