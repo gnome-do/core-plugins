@@ -25,20 +25,21 @@ using System.Collections.Specialized;
 
 namespace Quote
 {
-	
-	public interface IQuoteProvider
-	{
-		bool ShouldAllowAutoRedirect { get; }
+  
+  public interface IQuoteProvider
+  {
+    bool ShouldAllowAutoRedirect { get; }
+    
+    string Name { get; }
+    
+    string BaseUrl { get; }
+    
+    NameValueCollection Parameters { get; }
+        
+    IEnumerable<QuoteTagItem> SavedTags { get; }
+    
+    void AddTag (QuoteTagItem tag);
 
-		string Name { get; }
-
-		string BaseUrl { get; }
-
-		NameValueCollection Parameters { get; }
-
-		string GetPasteUrlFromResponse (HttpWebResponse response);
-
-		// FIXME!!!! this should not be string
-		IEnumerable<string> SavedTags { get; }
-	}
+    string GetQuoteUrlFromResponse (HttpWebResponse response);
+  }
 }

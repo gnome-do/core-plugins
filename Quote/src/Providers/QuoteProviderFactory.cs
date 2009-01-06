@@ -23,33 +23,33 @@ using System;
 namespace Quote
 {
 	
-	public class QuoteProviderFactory
-	{
-						
-		public static IQuoteProvider GetProviderFromPreferences()
-		{
-			object [] args = new object [] {};
-			return GetProviderFromPreferences (args);		
-		}
-
-		public static IQuoteProvider GetProviderFromPreferences (string text)
-		{
-			object [] args = new object [] {text};
-			return GetProviderFromPreferences (args);		
-		}
-
-		public static IQuoteProvider GetProviderFromPreferences (string text, string syntax)
-		{
-			object [] args = new object [] {text, syntax};
-			return GetProviderFromPreferences (args);
-		}
-				
-		public static IQuoteProvider GetProviderFromPreferences (object [] args)
-		{	
-			Type providerType = typeof (Bubash);
-			IQuoteProvider provider = (IQuoteProvider) System.Activator.CreateInstance (providerType, args);
-			
-			return provider;
-		}
-	}
+  public class QuoteProviderFactory
+  {
+    
+    public static IQuoteProvider GetProviderFromPreferences()
+    {
+      object [] args = new [] {};
+      return GetProviderFromPreferences (args);		
+    }
+    
+    public static IQuoteProvider GetProviderFromPreferences (string text)
+    {
+      object [] args = new [] {text};
+      return GetProviderFromPreferences (args);		
+    }
+    
+    public static IQuoteProvider GetProviderFromPreferences (string text, string tags)
+    {
+      object [] args = new [] {text, tags};
+      return GetProviderFromPreferences (args);
+    }
+    
+    public static IQuoteProvider GetProviderFromPreferences (object [] args)
+    {	
+      Type providerType = typeof (Bubash);
+      IQuoteProvider provider = (IQuoteProvider) System.Activator.CreateInstance (providerType, args);
+      
+      return provider;
+    }
+  }
 }
