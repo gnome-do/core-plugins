@@ -24,6 +24,7 @@
 using System;
 using Do.Platform;
 
+
 /// <summary>
 /// Do plug-in that returns search results from google back to gnome-do for 
 /// further processing
@@ -53,77 +54,113 @@ namespace InlineGoogleSearch {
 			switch (SearchRestrictions) {
 			case noss:
 				nosafe_rbtn.Active = true; break;
-			case activess:
+			case moderatess:
 				moderate_rbtn.Active = true; break;
 			default:
 				strict_rbtn.Active = true; break;
 			}
+			
+			returnResults_rbtn.Active = ReturnResults;
+			goToSearch_rbtn.Active = !ReturnResults;
+			
+			showFirstCheck.Active = ShowSearchFirst;
+			applySSL.Active = InheritSSL;
+			
+			updateSensitivities ();
 		}
 		
 		/// <summary>
 		/// Initializes static preferences
-		/// </summary>
+		/// </summary>		
 		static InlineGoogleSearchConfig () 
 		{
-			prefs = Services.Preferences.Get<InlineGoogleSearchConfig> ();
+			prefs = Do.Platform.Services.Preferences.Get<InlineGoogleSearchConfig>();
 		}
-
+		
 		/// <value>
-		/// Default Value: 1 "Moderate"
+		/// Default Value: "moderate"
 		/// </value>
 		public static string SearchRestrictions {
 			get { 
 				return prefs.Get<string> ("SearchRestrictions", 
 				                          moderatess); 
 			}
-		 	set { prefs.Set<string> ("SearchRestrictions", value); }
+		 	set { 
+				prefs.Set<string> ("SearchRestrictions", value); 
+			}
 		}
-
-		/// <summary>
-		/// What to do If safe_off is clicked
-		/// </summary>
-		/// <param name="sender">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="e">
-		/// A <see cref="System.EventArgs"/>
-		/// </param>
 		
-		protected virtual void OnNosafeRbtnToggled (object sender, 
-		                                            System.EventArgs e) 
-		{
-			SearchRestrictions = noss;
+		public static bool ShowSearchFirst {
+			get {
+				return prefs.Get<bool> ("ShowSearchFirst", true);
+			}
+			set { 
+				prefs.Set<bool> ("ShowSearchFirst", value); 
+			}
 		}
 
-		/// <summary>
-		/// What to do if safe_moderate is clicked
-		/// </summary>
-		/// <param name="sender">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="e">
-		/// A <see cref="System.EventArgs"/>
-		/// </param>
-		protected virtual void OnModerateRbtnToggled (object sender, 
-		                                              System.EventArgs 
-		                                              e) 
+		public static bool InheritSSL {
+			get {
+				return prefs.Get<bool> ("InheritSSL", false);
+			}
+			set {
+				prefs.Set<bool> ("InheritSSL", value);
+			}
+		}
+		
+		public static bool ReturnResults {
+			get {
+				return prefs.Get<bool> ("ReturnResults", false);
+			}
+			set {
+				prefs.Set<bool> ("ReturnResults", value);
+			}
+		}
+		
+		protected virtual void OnNosafeRbtnToggled (object sender, System.EventArgs e)
 		{
-			SearchRestrictions = moderatess;
+			prefs.Set ("SearchRestrictions",noss);			
 		}
 
-		/// <summary>
-		/// What to do if safe_active is clicked
-		/// </summary>
-		/// <param name="sender">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="e">
-		/// A <see cref="System.EventArgs"/>
-		/// </param>
-		protected virtual void OnStrictRbtnToggled (object sender, 
-		                                            System.EventArgs e) 
+		
+		protected virtual void OnModerateRbtnToggled (object sender, System.EventArgs e) 
 		{
-			SearchRestrictions = activess;
+			prefs.Set ("SearchRestrictions",moderatess);
 		}
+
+		protected virtual void OnStrictRbtnToggled (object sender, System.EventArgs e)  
+		{
+			prefs.Set ("SearchRestrictions",activess);
+		}
+
+		protected virtual void OnShowFirstCheckClicked (object sender, System.EventArgs e)
+		{
+			prefs.Set ("ShowSearchFirst", showFirstCheck.Active);
+			updateSensitivities();
+		}
+
+		protected virtual void OnApplySSLClicked (object sender, System.EventArgs e)
+		{
+			prefs.Set ("InheritSSL", applySSL.Active);
+			updateSensitivities ();
+		}
+		
+		protected virtual void OnReturnResultsRbtnToggled (object sender, System.EventArgs e)
+		{
+			prefs.Set ("ReturnResults", true);
+			updateSensitivities ();
+		}
+
+		protected virtual void OnGoToSearchRbtnToggled (object sender, System.EventArgs e)
+		{
+			prefs.Set ("ReturnResults", false);
+			updateSensitivities ();
+		}
+
+		private void updateSensitivities () {
+			showFirstCheck.Sensitive = ReturnResults;
+			safeSearchBox.Sensitive = ReturnResults || InheritSSL;
+		}
+		
 	}
 }
