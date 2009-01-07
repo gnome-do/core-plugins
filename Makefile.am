@@ -36,6 +36,7 @@ SUBDIRS = \
 	Microblogging \
 	MPD \
 	OpenSearch \
+	Opera \
 	Pastebin \
 	Pidgin \
 	Rhythmbox \

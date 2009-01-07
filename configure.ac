@@ -142,6 +142,7 @@ ManLookUp/Makefile
 Microblogging/Makefile
 MPD/Makefile
 OpenSearch/Makefile
+Opera/Makefile
 Pastebin/Makefile
 Pidgin/Makefile
 Rhythmbox/Makefile
