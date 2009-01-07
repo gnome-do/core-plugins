@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,52 +37,79 @@ using Mono.Unix;
 /// further processing
 /// </summary>
 namespace InlineGoogleSearch {
+
+	
+	// No longer in Do, have to subclass 
+	public class BookmarkItem : Item, IBookmarkItem 
+	{
+		protected string name, url;
+		public BookmarkItem (string name, string url)
+		{
+			this.name = name;
+			this.url = url;
+		}
+		public override string Name
+		{
+			get { return name; }
+		}
+		public override string Description
+		{
+			get { return url; }
+		}
+
+		public override string Icon
+		{
+			get { return "www"; }
+		}
+
+		public string Url
+		{
+			get { return url; }
+		}
+	} 
 	
 	/// <summary>
 	/// Class Definition
 	/// </summary>
 	public class InlineGoogleSearch : Act, IConfigurable {	
+		
 		/// <value>
 		/// Search Google
 		/// </value>
 		public override string Name {
-			get { return Catalog.GetString ("Search Google"); }
+			get { 
+				return Catalog.GetString ("Search Google"); 
+			}
 		}
 		
 		/// <value>
 		/// Searches google and returns results to Do
 		/// </value>
 		public override string Description {
-			get { return Catalog.GetString ("Searches google and " +
-				                        "returns results to " +
-				                        "Do"); }
+			get { 
+				return Catalog.GetString ("Allows you to perform Google Searches from Do"); 
+			}
 		}
 		
 		/// <value>
 		/// web-browser
 		/// </value>
 		public override string Icon {
-			get { return "web-browser"; }
+			get { 
+				return "web-browser"; 
+			}
 		}
 		
 		/// <value>
 		/// ITextItem
 		/// </value>
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {                             
-					typeof (ITextItem),
-				};
-			}
+			get { 
+				yield return typeof (ITextItem); 
+			} 
 		}
+					
 		
-		/// <value>
-		/// true
-		/// </value>
-		public override bool ModifierItemsOptional {
-			get { return false; }
-		}
-
 		/// <summary>
 		/// Actual code performed when action is executed in Do
 		/// </summary>
@@ -96,18 +124,36 @@ namespace InlineGoogleSearch {
 		/// </returns>
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
+			string query = (items.First () as ITextItem).Text;
+			string searchURL = "http://google.com/search?q=" + HttpUtility.UrlEncode (query);
+			
+			if (InlineGoogleSearchConfig.InheritSSL) {
+				searchURL += "&safe=" + InlineGoogleSearchConfig.SearchRestrictions;
+			}
+			
+			if (!InlineGoogleSearchConfig.ReturnResults) {
+				Services.Environment.OpenUrl (searchURL);
+				yield break;
+			}
+
+			if (InlineGoogleSearchConfig.ShowSearchFirst) {
+				yield return new BookmarkItem ( query + " - Google Search",
+				                               searchURL );
+			}
+			
 			GoogleSearch googleSearch = new GoogleSearch ();
 			googleSearch.setSafeSearchLevel (InlineGoogleSearchConfig.SearchRestrictions);
-			googleSearch.setQuery ((items.First () as ITextItem).Text);
-			GoogleSearchResult [] results = googleSearch.search ();
+			googleSearch.setQuery ( query );
+			IEnumerable<GoogleSearchResult> results = googleSearch.Search ();
 
-			if (results.Length == 0) {
-				Services.Notifications.Notify ("Google Search", "No Results Found");
+
+			if (!results.Any ()) {
+				Gtk.Application.Invoke ((o, e) => Services.Notifications.Notify (Name, "No Results Found"));
 			}
 			
 			foreach (GoogleSearchResult result in results) {
 				yield return new BookmarkItem (result.titleNoFormatting, result.url);
-			}	
+			}
 		}
 
 		/// <summary>

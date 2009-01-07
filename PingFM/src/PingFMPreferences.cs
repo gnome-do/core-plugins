@@ -22,7 +22,6 @@ using Do.Platform;
 
 namespace PingFM
 {
-
 	public class PingFMPreferences
 	{
 		const string AppKeyKey = "AppKey";

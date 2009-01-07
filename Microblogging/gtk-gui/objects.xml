@@ -1,10 +1,2 @@
 <objects attr-sync="on">
-  <object type="Microblogging.Configuration" palette-category="General" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals>
-      <itemgroup label="Configuration Signals">
-        <signal name="ServiceChanged" />
-      </itemgroup>
-    </signals>
-  </object>
 </objects>
