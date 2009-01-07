@@ -1,0 +1,38 @@
+<Project name="Quote" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Quote" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" mainclass="" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Quote" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="src" subtype="Directory" buildaction="Compile" />
+    <File name="src/Providers" subtype="Directory" buildaction="Compile" />
+    <File name="src/Providers/IQuoteProvider.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Providers/Bubash.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Providers/QuoteProviderFactory.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Quote.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/QuoteAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="Quote.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="quoted-globe.svg" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/QuoteTagItem.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </References>
+  <GtkDesignInfo />
+</Project>
