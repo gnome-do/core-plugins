@@ -114,6 +114,7 @@ AptURL/Makefile
 Archive/Makefile
 Bibtex/Makefile
 Cl.ickable/Makefile
+ClawsMail/Makefile
 Confluence/Makefile
 del.icio.us/Makefile
 DiskMounter/Makefile
@@ -141,6 +142,7 @@ ManLookUp/Makefile
 Microblogging/Makefile
 MPD/Makefile
 OpenSearch/Makefile
+Opera/Makefile
 Pastebin/Makefile
 Pidgin/Makefile
 Quote/Makefile

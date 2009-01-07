@@ -1,0 +1,24 @@
+<Addin 
+	id="Opera"
+	namespace="Do"
+	version="0.1"
+	name="Opera"
+	description="Indexes your Opera 6 bookmarks"
+	author="gotoDo"
+	category="Community"
+>
+ 
+	<Runtime>
+		<Import assembly="Opera.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+		<Addin id="Platform" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Opera.OperaBookmarkItemSource" />
+	</Extension>
+</Addin>
