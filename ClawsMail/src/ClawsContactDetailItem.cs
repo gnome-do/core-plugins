@@ -1,25 +1,26 @@
-// ClawsContactDetailItem.cs created with MonoDevelop
-// User: Karol Będkowski at 22:49 2008-10-10
-
-// Copyright Karol Będkowski 2008
-
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/* ClawsContactDetailItem.cs 
+ *
+ * GNOME Do is the legal property of its developers. Please refer to the
+ * COPYRIGHT file distributed with this
+ * source distribution.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 using System;
 using Mono.Unix;
 using Do.Universe;
-
 
 namespace Claws {
 	
@@ -28,10 +29,10 @@ namespace Claws {
 	/// </summary>
 	public class ClawsContactDetailItem: Item, IContactDetailItem {
 
-		readonly static string IconForMail = "stock_mail-compose";
-		readonly static string IconForOthers = "stock_person";
+		const string IconForOthers = "stock_person";
+		const string IconForMail = "stock_mail-compose";
 		
-		private string type, detail, name, icon;
+		string type, detail, name, icon;
 
 		#region std properties
 		
@@ -56,7 +57,6 @@ namespace Claws {
 		}
 
 		#endregion
-
 		
 		public ClawsContactDetailItem (string type, string detail) 
 		{
