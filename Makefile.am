@@ -9,6 +9,7 @@ SUBDIRS = \
 	Archive \
 	Bibtex \
 	Cl.ickable \
+	ClawsMail \
 	Confluence \
 	DiskMounter \
 	EOG-Slideshow \
@@ -35,8 +36,10 @@ SUBDIRS = \
 	Microblogging \
 	MPD \
 	OpenSearch \
+	Opera \
 	Pastebin \
 	Pidgin \
+	Quote \
 	Rhythmbox \
 	Riptide \
 	RSS \
