@@ -9,8 +9,8 @@ RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
 	Microblogging.addin.xml \
-	twitter-icon.png \
-	twitter_items.png
+	twitter-icon.svg \
+	twitter_items.svg
 
 REFERENCES = \
 	Mono.Posix \
