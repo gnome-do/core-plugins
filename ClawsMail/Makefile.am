@@ -36,16 +36,8 @@ all: $(ASSEMBLY)
 DATA_FILES = 
 
 FILES = \
-	src/AssemblyInfo.cs \
-	src/ClawsActionBase.cs \
-	src/ClawsActionNewMail.cs \
-	src/ClawsActionOffline.cs \
-	src/ClawsActionOnline.cs \
-	src/ClawsActionQuit.cs \
-	src/ClawsActionReceiveAll.cs \
 	src/ClawsContactDetailItem.cs \
-	src/ClawsContactsItemSource.cs \
-	src/Claws.cs
+	src/ClawsContactsItemSource.cs 
 
 RESOURCES = \
 	resources/ClawsMail.addin.xml \
@@ -55,7 +47,8 @@ REFERENCES =  \
 	System \
 	System.Xml \
 	Mono.Posix \
-	$(DOADDINS_LIBS)
+	$(DO_PLATFORM_LIBS) \
+	$(DO_UNIVERSE_LIBS)
 
 DLL_REFERENCES = 
 
