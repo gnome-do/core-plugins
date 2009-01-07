@@ -1,0 +1,16 @@
+<Combine name="ClawsContacts" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="ClawsContacts" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="ClawsContacts" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="ClawsContacts" single="True">
+    <Execute type="None" entry="ClawsContacts" />
+  </StartMode>
+  <Entries>
+    <Entry filename="ClawsMail.mdp" />
+  </Entries>
+</Combine>
