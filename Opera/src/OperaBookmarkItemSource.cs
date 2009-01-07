@@ -6,6 +6,7 @@ using Mono.Unix;
 
 using Do.Platform;
 using Do.Universe;
+using Do.Universe.Common;
 
 namespace Opera 
 {
@@ -32,7 +33,7 @@ namespace Opera
 		}
 		
 		public override  IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof(BookmarkItem); }
+			get { yield return typeof (BookmarkItem); }
 		}
 		public override IEnumerable<Item> Items	{
 			get { return items; }
@@ -53,7 +54,7 @@ namespace Opera
 
 						strURL = streamReader.ReadLine ();
 
-						if (string.isNullOrEmpty (strURL) || !strURL.Contains ("URL")) continue;
+						if (string.IsNullOrEmpty (strURL) || !strURL.Contains ("URL")) continue;
 
 						strName = strName.Replace ("NAME=", "");
 						strURL = strURL.Replace ("URL=", "");
