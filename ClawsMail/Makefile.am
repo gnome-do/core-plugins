@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=Cl.ickable
+ASSEMBLY=ClawsMail
 
 FILES = \
 	src/ClawsContactDetailItem.cs \
@@ -12,6 +12,7 @@ RESOURCES = \
 
 REFERENCES = \
 	System \
+	System.Xml \
 	System.Core \
 	Mono.Posix \
 	$(DO_PLATFORM_LIBS) \
