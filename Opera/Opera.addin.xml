@@ -3,8 +3,8 @@
 	namespace="Do"
 	version="0.1"
 	name="Opera"
-	description="Indexes your Opera 6 bookmarks"
-	author="gotoDo"
+	description="Search your Opera 6 bookmarks."
+	author="goto"
 	category="Community"
 >
  
