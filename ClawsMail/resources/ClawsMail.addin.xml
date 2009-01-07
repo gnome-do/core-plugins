@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="ClawsMail"
-	description="Access to contacts in ClawsMail addressbook."
+	description="Search contacts in your ClawsMail address book."
 	author="Karol Będkowski"
 	category="Community"
 	>
