@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using Do.Platform;
 using Do.Universe;
@@ -32,6 +33,9 @@ namespace Quote
 {
 	public class PostQuote : Act
 	{
+		// thanks Ian Warford (iwarford) for the regexp help
+		const string TimeStampRegexp = @"\n\s*\S?\s*\d\d:\d\d(?::\d\d)\s*\S?";
+		
 		public override string Name {
 			get { return Catalog.GetString ("Submit Quote"); }
 		}
@@ -68,13 +72,16 @@ namespace Quote
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
-			string text = "";
-			string tags = "";
+			Regex timestamps = new Regex (TimeStampRegexp, RegexOptions.Compiled);
+			
+			string text;
+			string tags = "", url = "";
 			IQuoteProvider quoteProvider;
 		
-			foreach (Item item in items) {
-				text += (item as ITextItem).Text + " ";
-			}
+			text = (items.First () as ITextItem).Text;
+			text = timestamps.Replace (text, "");
+
+			Console.Error.WriteLine (text);
 		
 			foreach (Item tag in modifierItems) {
 				tags += tag is QuoteTagItem
@@ -88,7 +95,7 @@ namespace Quote
 				? QuoteProviderFactory.GetProviderFromPreferences (text)
 				: QuoteProviderFactory.GetProviderFromPreferences (text, tags);		
 		
-			string url = Quote.PostUsing (quoteProvider);
+			//string url = Quote.PostUsing (quoteProvider);
 		
 			AddUnknownTags (tags, quoteProvider);
 		
