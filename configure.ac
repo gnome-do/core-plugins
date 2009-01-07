@@ -114,6 +114,7 @@ AptURL/Makefile
 Archive/Makefile
 Bibtex/Makefile
 Cl.ickable/Makefile
+ClawsMail/Makefile
 Confluence/Makefile
 del.icio.us/Makefile
 DiskMounter/Makefile

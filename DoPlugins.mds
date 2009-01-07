@@ -61,6 +61,7 @@
       <Entry build="True" name="Putty" configuration="Debug" />
       <Entry build="True" name="SystemServices" configuration="Debug" />
       <Entry build="True" name="Alias" configuration="Debug" />
+      <Entry build="True" name="ClawsMail" configuration="Debug" />
       <Entry build="True" name="NX" configuration="Debug" />
       <Entry build="True" name="Opera" configuration="Debug" />
     </Configuration>
@@ -125,6 +126,7 @@
       <Entry build="True" name="Putty" configuration="Release" />
       <Entry build="True" name="SystemServices" configuration="Release" />
       <Entry build="True" name="Alias" configuration="Release" />
+      <Entry build="True" name="ClawsMail" configuration="Release" />
       <Entry build="True" name="NX" configuration="Release" />
       <Entry build="True" name="Opera" configuration="Release" />
     </Configuration>
@@ -190,6 +192,7 @@
     <Execute type="None" entry="Putty" />
     <Execute type="None" entry="SystemServices" />
     <Execute type="None" entry="Alias" />
+    <Execute type="None" entry="ClawsMail" />
     <Execute type="None" entry="NX" />
     <Execute type="None" entry="Opera" />
   </StartMode>
@@ -255,6 +258,7 @@
     <Entry filename="Putty/Putty.mdp" />
     <Entry filename="SystemServices/SystemServices.mdp" />
     <Entry filename="Alias/Alias.mdp" />
+    <Entry filename="ClawsMail/ClawsMail.mdp" />
     <Entry filename="NX/NX.mdp" />
     <Entry filename="Opera/Opera.mdp" />
   </Entries>

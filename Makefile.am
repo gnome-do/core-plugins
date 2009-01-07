@@ -9,6 +9,7 @@ SUBDIRS = \
 	Archive \
 	Bibtex \
 	Cl.ickable \
+	ClawsMail \
 	Confluence \
 	DiskMounter \
 	EOG-Slideshow \
