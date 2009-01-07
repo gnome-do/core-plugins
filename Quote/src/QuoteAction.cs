@@ -79,7 +79,7 @@ namespace Quote
 			IQuoteProvider quoteProvider;
 		
 			text = (items.First () as ITextItem).Text;
-			text = timestamps.Replace (text, "");
+			text = timestamps.Replace (text, "\n");
 
 			Console.Error.WriteLine (text);
 		
