@@ -34,7 +34,7 @@ namespace Quote
 	public class PostQuote : Act
 	{
 		// thanks Ian Warford (iwarford) for the regexp help
-		const string TimeStampRegexp = @"\n\s*\S?\s*\d\d:\d\d(?::\d\d)\s*\S?";
+		const string TimeStampRegexp = @"\n\s*\S?\d\d:\d\d(:\d\d)?\S?\s*|^\s*\S?\d\d:\d\d(:\d\d)?\S?\s*";
 		
 		public override string Name {
 			get { return Catalog.GetString ("Submit Quote"); }
@@ -75,7 +75,7 @@ namespace Quote
 			Regex timestamps = new Regex (TimeStampRegexp, RegexOptions.Compiled);
 			
 			string text;
-			string tags = "", url = "";
+			string tags = "";
 			IQuoteProvider quoteProvider;
 		
 			text = (items.First () as ITextItem).Text;
@@ -95,7 +95,7 @@ namespace Quote
 				? QuoteProviderFactory.GetProviderFromPreferences (text)
 				: QuoteProviderFactory.GetProviderFromPreferences (text, tags);		
 		
-			//string url = Quote.PostUsing (quoteProvider);
+			string url = Quote.PostUsing (quoteProvider);
 		
 			AddUnknownTags (tags, quoteProvider);
 		
