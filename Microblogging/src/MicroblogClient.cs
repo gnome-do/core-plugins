@@ -161,7 +161,6 @@ namespace Microblogging
 				OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
 			} catch (TwitterizerException e) {
 				Log.Error (genericError, e.Message);
-				Log.Debug (e.StackTrace);
 			} catch (ArgumentOutOfRangeException e) {
 				Log.Error (genericError, e.Message);
 				Log.Debug (e.StackTrace);
@@ -190,7 +189,6 @@ namespace Microblogging
 				OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
 			} catch (TwitterizerException e) {
 				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
-				Log.Debug (e.StackTrace);
 			} catch (ArgumentOutOfRangeException e) {
 				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
 				Log.Debug (e.StackTrace);
