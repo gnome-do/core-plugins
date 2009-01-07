@@ -29,93 +29,96 @@ using Do.Platform;
 
 namespace Quote
 {
-
-  public class Bubash : IQuoteProvider
-  {
-    const string urlRoot = "http://bubash.org/";
-    const int SaveTagsTimeout = 60 * 10 * 1000; //every 10 minutes we save tags
-
-    List<QuoteTagItem> tags;
-
-    readonly string TagFileName;
-    
-    public Bubash()
-    {
-	Parameters = new NameValueCollection ();
-	Parameters ["tags"] = "";
-	Parameters ["quote"] = "";
 	
-	TagFileName = Path.Combine (Services.Paths.UserDataDirectory, "BubashTags.txt");
+	public class Bubash : IQuoteProvider
+	{
+		const string urlRoot = "http://bubash.org/";
+		const int SaveTagsTimeout = 60 * 10 * 1000; //every 10 minutes we save tags
+		
+		static List<QuoteTagItem> tags;
+		
+		readonly string TagFilePath;
+		
+		public Bubash()
+		{
+			Parameters = new NameValueCollection ();
+			Parameters ["tags"] = "";
+			Parameters ["quote"] = "";
+		
+			TagFilePath = Path.Combine (Services.Paths.UserDataDirectory, "BubashTags.txt");
+			
+			if (tags == null)
+				tags = LoadSavedTags ();
+		
+			GLib.Timeout.Add (SaveTagsTimeout, () => { SaveTags (); return true; });
+		}
+		
+		public Bubash (string quote) : this ()
+		{
+			Parameters ["quote"] = quote;
+		}
+		
+		public Bubash (string quote, string tags) : this ()
+		{
+			Parameters ["tags"] = tags;
+			Parameters ["quote"] = quote;
+		}
+		
+		public string Name {
+			get { return "BuBash.org"; }
+		}
+		
+		public string BaseUrl {
+			get { return urlRoot + "submit"; }
+		}
+		
+		public bool ShouldAllowAutoRedirect {
+			get { return false; }
+		}
+		
+		public IEnumerable<QuoteTagItem> SavedTags {
+			get { return tags; }
+		}
+		
+		public NameValueCollection Parameters { get; private set; }
+		
+		public void AddTag (QuoteTagItem tag)
+		{
+			tags.Add (tag);
+		}
+		
+		public string GetQuoteUrlFromResponse (HttpWebResponse response)
+		{
+			return urlRoot + "queue";
+		}
+		
+		List<QuoteTagItem> LoadSavedTags ()
+		{
+			List<QuoteTagItem> saved = new List<QuoteTagItem> ();
 
-	tags = LoadSavedTags ();
+			if (!File.Exists (TagFilePath)) {
+				Log.Debug ("{0} Does not exist, cannot load saved tags", TagFilePath);
+				return saved;
+			}
+			
+			using (StreamReader sr = File.OpenText (TagFilePath)) {
+				string input;
+		
+				while ((input = sr.ReadLine ()) != null) {
+					saved.Add (new QuoteTagItem (input));
+				}
+			}
 
-	GLib.Timeout.Add (SaveTagsTimeout, () => { SaveTags (); return true; });
-    }
-    
-    public Bubash (string quote) : this ()
-    {
-	Parameters ["quote"] = quote;
-    }
-    
-    public Bubash (string quote, IEnumerable<QuoteTagItem> tags) : this ()
-    {
-	Parameters ["quote"] = quote;
-	Parameters ["tags"] = string.Join (" ", tags.Select (item => item.Name).ToArray ());
-    }
-    
-    public string Name {
-      get { return "BuBash.org"; }
-    }
-    
-    public string BaseUrl {
-      get { return urlRoot + "submit"; }
-    }
-    
-    public bool ShouldAllowAutoRedirect {
-      get { return false; }
-    }
-
-    public IEnumerable<QuoteTagItem> SavedTags {
-      get { return tags; }
-    }
-    
-    public NameValueCollection Parameters { get; private set; }
-    
-    public void AddTag (QuoteTagItem tag)
-    {
-      tags.Add (tag);
-    }
-    
-    public string GetQuoteUrlFromResponse (HttpWebResponse response)
-    {
-      return urlRoot + "/queue";
-    }
-    
-    List<QuoteTagItem> LoadSavedTags ()
-    {
-      if (!File.Exists (TagFileName)) {
-	Log.Debug ("{0} Does not exist, cannot load saved tags");
-	return;
-      }
-
-      tags.Clear ();
-
-      using (StreamReader sr = File.OpenText (TagFileName)) {
-	string input;
-	
-	while (input = sr.ReadLine () != null) {
-	  tags.Add (new QuoteTagItem (input));
+			return saved;
+		}
+		
+		void SaveTags ()
+		{
+			Log.Debug ("Loading tags from {0}", TagFilePath);
+		
+			using (StreamWriter sw = new StreamWriter (TagFilePath)) {
+				tags.ForEach (item => sw.WriteLine (item.Name));
+			}
+		}
 	}
-      }
-    }
-
-    void SaveTags ()
-    {
-      Log.Debug ("Loading tags from {0}", TagFileName);
-      
-      using (StreamWriter sw = new StreamWriter (TagFileName)) {
-	tags.ForEach (item => sw.WriteLine (item));
-      }
-    }
-  }
 }

@@ -5,7 +5,7 @@
 	name="Quote"
 	description="Post quotes to an online quoting service (e.g. BuBash.org)."
 	author="Alex Launi, Jason Jones"
-	category="Official"
+	category="Community"
 >
  
 	<Runtime>

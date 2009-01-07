@@ -24,89 +24,89 @@ using System.Collections.Generic;
 
 using Do.Platform;
 using Do.Universe;
+using Do.Universe.Common;
 
 using Mono.Unix;
 
 namespace Quote
 {
-  public class PostQuote : Act
-  {
-    public override string Name {
-      get { return Catalog.GetString ("Submit Quote"); }
-    }
-    
-    public override string Description {
-      get { return Catalog.GetString ("Sends text to Quote service."); }
-    }
-    
-    public override string Icon {
-      get { return "quoted-globe.svg@" + GetType ().Assembly.FullName; }
-    }
-    
-    public override IEnumerable<Type> SupportedItemTypes {
-      get {
-	yield return typeof (ITextItem);
-      }
-    }
-    
-    public override bool ModifierItemsOptional  {
-      get { return true; }
-    }
-    
-    public override IEnumerable<Type> SupportedModifierItemTypes {
-      get { 
-	yield return typeof (ITextItem);
-	yield return typeof (QuoteTagItem);
-      }
-    }
-    
-    public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-    {
-      IQuoteProvider quoteProvider = QuoteProviderFactory.GetProviderFromPreferences ();
-
-      return quoteProvider.SavedTags.Cast<Item> ();
-    }
-    
-    public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
-    {
-      string text = "";
-      string tags = "";
-      IQuoteProvider quoteProvider;
-
-      foreach (Item item in items) {
-	text += (item as ITextItem).Text + " ";
-      }
-      
-      foreach (Item tag in modifierItems) {
-	tags += tag is QuoteTagItem
-	  ? (tag as QuoteTagItem).Name
-	  : (tag as ITextItem).Text;
-	
-	tags += " ";
-      }
-
-      quoteProvider = string.IsNullOrEmpty (tags)
-	? QuoteProviderFactory.GetProviderFromPreferences (text)
-        : QuoteProviderFactory.GetProviderFromPreferences (text, tags);		
-      
-      string url = Quote.PostUsing (quoteProvider);
-
-      AddUnknownTags (tags, quoteProvider);
-      
-      yield return new TextItem (url);
-    }
-    
-    void AddUnknownTags (string tags, IQuoteProvider service)
-    {
-      QuoteTagItem tag;
-
-      foreach (string tagName in tags.Split (' ')) {
-	tag = new QuoteTagItem (tagName);
-
-	if (!service.SavedTags.Contains (tag))
-	  service.AddTag (tag);
-      }
-    }
-  }
+	public class PostQuote : Act
+	{
+		public override string Name {
+			get { return Catalog.GetString ("Submit Quote"); }
+		}
+		
+		public override string Description {
+			get { return Catalog.GetString ("Sends text to Quote service."); }
+		}
+		
+		public override string Icon {
+			get { return "quoted-globe.svg@" + GetType ().Assembly.FullName; }
+		}
+		
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ITextItem); }
+		}
+		
+		public override bool ModifierItemsOptional  {
+			get { return true; }
+		}
+		
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { 
+				yield return typeof (ITextItem);
+				yield return typeof (QuoteTagItem);
+			}
+		}
+		
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		{
+			IQuoteProvider quoteProvider = QuoteProviderFactory.GetProviderFromPreferences ();
+		
+			return quoteProvider.SavedTags.Cast<Item> ();
+		}
+		
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
+		{
+			string text = "";
+			string tags = "";
+			IQuoteProvider quoteProvider;
+		
+			foreach (Item item in items) {
+				text += (item as ITextItem).Text + " ";
+			}
+		
+			foreach (Item tag in modifierItems) {
+				tags += tag is QuoteTagItem
+					? (tag as QuoteTagItem).Name
+					: (tag as ITextItem).Text;
+		
+				tags += " ";
+			}
+		
+			quoteProvider = string.IsNullOrEmpty (tags)
+				? QuoteProviderFactory.GetProviderFromPreferences (text)
+				: QuoteProviderFactory.GetProviderFromPreferences (text, tags);		
+		
+			string url = Quote.PostUsing (quoteProvider);
+		
+			AddUnknownTags (tags, quoteProvider);
+		
+			yield return new BookmarkItem (url, url);
+		}
+		
+		void AddUnknownTags (string tags, IQuoteProvider service)
+		{
+			QuoteTagItem tag;
+		
+			foreach (string tagName in tags.Trim ().Split (' ')) {
+				tag = new QuoteTagItem (tagName);
+		
+				if (service.SavedTags.Contains (tag)) continue;
+				
+				service.AddTag (tag);
+			}
+		}
+	}
 }
 

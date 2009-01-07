@@ -37,6 +37,7 @@ SUBDIRS = \
 	OpenSearch \
 	Pastebin \
 	Pidgin \
+	Quote \
 	Rhythmbox \
 	Riptide \
 	RSS \

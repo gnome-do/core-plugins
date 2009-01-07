@@ -54,7 +54,7 @@ namespace Quote
 				
 				using (HttpWebResponse response = (HttpWebResponse) request.GetResponse ())
 				{			
-					url = quote.GetPasteUrlFromResponse (response);
+					url = quote.GetQuoteUrlFromResponse (response);
 				}
 			}
 			catch {
