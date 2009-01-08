@@ -150,7 +150,6 @@ Rhythmbox/Makefile
 Riptide/Makefile
 Shelf/Makefile
 SSH/Makefile
-Tasque/Makefile
 Text/Makefile
 Tomboy/Makefile
 Vinagre/Makefile

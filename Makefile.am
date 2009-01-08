@@ -44,7 +44,6 @@ SUBDIRS = \
 	Riptide \
 	Shelf \
 	SSH \
-	Tasque \
 	Text \
 	Tomboy \
 	Vinagre \
