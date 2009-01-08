@@ -295,9 +295,7 @@ namespace WindowManager
 					string application = (items.First () as IApplicationItem).Exec;
 					List<Application> apps = WindowManager.Util.GetApplicationList (application);
 					
-					foreach (Application app in apps)
-						foreach (Window w in app.Windows)
-							w.Close (Gtk.Global.CurrentEventTime);
+					WindowControl.CloseWindows (apps.SelectMany (app.Windows));
 					
 				}
 			}

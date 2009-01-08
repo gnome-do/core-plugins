@@ -105,8 +105,9 @@ namespace WindowManager
 		
 		public static void CloseWindows (IEnumerable<Window> windows)
 		{
-			foreach (Window window in windows.Where (w => !w.IsSkipTasklist))
+			foreach (Window window in windows.Where (w => !w.IsSkipTasklist)) {
 				window.Close (Gtk.Global.CurrentEventTime);
+			}
 		}
 		
 		public static void CloseWindows (Window window)
