@@ -43,6 +43,7 @@ SUBDIRS = \
 	PingFM \
 	Putty \
 	Quote \
+	RememberTheMilk \
 	Rhythmbox \
 	Riptide \
 	Shelf \

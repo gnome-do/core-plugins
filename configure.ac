@@ -149,6 +149,7 @@ Pidgin/Makefile
 PingFM/Makefile
 Putty/Makefile
 Quote/Makefile
+RememberTheMilk/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
 Shelf/Makefile
