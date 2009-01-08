@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=Epiphany
+ASSEMBLY=Opera
 
 FILES = \
 	src/OperaBookmarkItemSource.cs

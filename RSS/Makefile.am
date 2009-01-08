@@ -1,48 +1,6 @@
+include $(top_srcdir)/build.rules.mk
 
-EXTRA_DIST =  
-
-# Warning: This is an automatically generated file, do not edit!
-
-if ENABLE_DEBUG
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-ASSEMBLY = bin/Debug/RSS.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-RSS_DLL_MDB_SOURCE=bin/Debug/RSS.dll.mdb
-RSS_DLL_MDB=$(BUILD_DIR)/RSS.dll.mdb
-
-endif
-
-if ENABLE_RELEASE
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/RSS.dll
-ASSEMBLY_MDB = 
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Release
-
-RSS_DLL_MDB=
-
-endif
-
-AL=al2
-SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
-
-PROGRAMFILES = \
-	$(RSS_DLL_MDB)  
-
-LINUX_PKGCONFIG = \
-	$(RSS_PC)  
-
-
-RESGEN=resgen2
-	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+ASSEMBLY=RSS
 
 FILES = \
 	src/Configuration.cs \
@@ -70,45 +28,20 @@ FILES = \
 	src/RSS.NET/RssChannel/RssTextInput.cs \
 	src/RSS.NET/RssModuleItem.cs \
 	gtk-gui/Do.Plugins.Rss.Configuration.cs \
-	gtk-gui/generated.cs 
-
-DATA_FILES = 
+	gtk-gui/generated.cs
 
 RESOURCES = \
+	RSS.addin.xml \
 	resources/feed-icon.png \
-	resources/RSS.addin.xml \
 	gtk-gui/gui.stetic \
-	gtk-gui/objects.xml 
+	gtk-gui/objects.xml
 
-EXTRAS = \
-	src/RSS.usertasks \
-	src/RSS.userprefs \
-	rss.pc.in 
-
-REFERENCES =  \
-	$(GTK_SHARP_20_LIBS) \
+REFERENCES = \
 	System \
+	System.Core \
+	System.Web \
 	System.Xml \
 	Mono.Posix \
-	System.Web \
-	Do.Addins \
-	$(GCONF_SHARP_20_LIBS)
-
-DLL_REFERENCES = 
-
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
-
-include $(top_srcdir)/Makefile.include
-
-RSS_PC = $(BUILD_DIR)/rss.pc
-
-$(eval $(call emit-deploy-wrapper,RSS_PC,rss.pc))
-
-
-$(eval $(call emit_resgen_targets))
-$(build_xamlg_list): %.xaml.g.cs: %.xaml
-	xamlg '$<'
-
-$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
-	mkdir -p $(shell dirname $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+	$(GTK_SHARP_20_LIBS) \
+	$(DO_PLATFORM_LIBS) \
+	$(DO_UNIVERSE_LIBS)

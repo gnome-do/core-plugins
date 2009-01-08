@@ -42,7 +42,6 @@ SUBDIRS = \
 	Quote \
 	Rhythmbox \
 	Riptide \
-	RSS \
 	Shelf \
 	SSH \
 	Tasque \

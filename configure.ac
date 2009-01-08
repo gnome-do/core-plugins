@@ -148,7 +148,6 @@ Pidgin/Makefile
 Quote/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
-RSS/Makefile
 Shelf/Makefile
 SSH/Makefile
 Tasque/Makefile
