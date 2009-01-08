@@ -40,6 +40,7 @@ SUBDIRS = \
 	Opera \
 	Pastebin \
 	Pidgin \
+	PingFM \
 	Quote \
 	Rhythmbox \
 	Riptide \

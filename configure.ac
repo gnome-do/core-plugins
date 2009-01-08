@@ -146,6 +146,7 @@ OpenSearch/Makefile
 Opera/Makefile
 Pastebin/Makefile
 Pidgin/Makefile
+PingFM/Makefile
 Quote/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile

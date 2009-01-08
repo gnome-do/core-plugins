@@ -1,47 +1,18 @@
+include $(top_srcdir)/build.rules.mk
 
-EXTRA_DIST =  
-
-
-
-if ENABLE_DEBUG
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/PingFM.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-
-endif
-
-if ENABLE_RELEASE
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/PingFM.dll
-ASSEMBLY_MDB = 
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Release
-
-
-endif
-
-AL=al2
-SATELLITE_ASSEMBLY_NAME=.resources.dll
-
-all: $(ASSEMBLY)
+ASSEMBLY=PingFM
 
 FILES = \
-	gtk-gui/Do.Addins.PingFM.Configuration.cs \
+	gtk-gui/PingFM.Configuration.cs \
 	gtk-gui/generated.cs \
 	src/Configuration.cs \
-	src/PingFMApi.cs \
 	src/PingFM.cs \
+	src/PingFMApi.cs \
+	src/PingFMClient.cs \
 	src/PingFMPost.cs \
+	src/PingFMPreferences.cs \
 	src/PingFMServiceItem.cs \
-	src/PingFMServiceItemSource.cs
+	src/PingFMServiceItemSource.cs 
 
 RESOURCES = \
 	PingFM.addin.xml \
@@ -76,9 +47,7 @@ RESOURCES = \
 	resources/yammer.png \
 	resources/youare.png 
 
-DATA_FILES = 
-
-REFERENCES =  \
+REFERENCES = \
 	System \
 	System.Core \
 	System.Data \
@@ -86,22 +55,7 @@ REFERENCES =  \
 	System.Xml \
 	Mono.Posix \
 	$(GNOME_KEYRING_SHARP_LIBS) \
-	$(DOADDINS_LIBS) \
-	$(GTK_SHARP_20_LIBS)
-
-DLL_REFERENCES = 
-
-CLEANFILES = 
-
-include $(top_srcdir)/Makefile.include
-
-
-$(build_xamlg_list): %.xaml.g.cs: %.xaml
-	xamlg '$<'
-
-$(build_resx_resources) : %.resources: %.resx
-	resgen2 '$<' '$@'
-
-$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
-	mkdir -p $(dir $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+	$(GTK_SHARP_20_LIBS) \
+	$(DO_PLATFORM_LIBS) \
+	$(DO_PLATFORM_LINUX_LIBS) \
+	$(DO_UNIVERSE_LIBS)
