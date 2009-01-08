@@ -1,84 +1,20 @@
+include $(top_srcdir)/build.rules.mk
 
-EXTRA_DIST =  
-
-# Warning: This is an automatically generated file, do not edit!
-
-if ENABLE_DEBUG
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-ASSEMBLY = bin/Debug/VolumeControl.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-VOLUMECONTROL_DLL_MDB_SOURCE=bin/Debug/VolumeControl.dll.mdb
-VOLUMECONTROL_DLL_MDB=$(BUILD_DIR)/VolumeControl.dll.mdb
-
-endif
-
-if ENABLE_RELEASE
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/VolumeControl.dll
-ASSEMBLY_MDB = 
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Release
-
-VOLUMECONTROL_DLL_MDB=
-
-endif
-
-AL=al2
-SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
-
-PROGRAMFILES = \
-	$(VOLUMECONTROL_DLL_MDB)  
-
-LINUX_PKGCONFIG = \
-	$(VOLUMECONTROL_PC)  
-
-
-RESGEN=resgen2
-	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
+ASSEMBLY=VolumeControl
 
 FILES = \
 	src/VolumeUpItem.cs \
 	src/VolumeDownItem.cs \
 	src/VolumeMuteItem.cs \
 	src/VolumeUnmuteItem.cs \
-	src/VolumeItemSource.cs 
-
-DATA_FILES = 
+	src/VolumeItemSource.cs
 
 RESOURCES = \
 	VolumeControl.addin.xml 
 
-EXTRAS = \
-	volumecontrol.pc.in 
-
-REFERENCES =  \
+REFERENCES = \
+	Mono.Posix \
 	System \
-	Do.Addins \
-	Mono.Posix
-
-DLL_REFERENCES = 
-
-CLEANFILES = $(PROGRAMFILES) $(LINUX_PKGCONFIG) 
-
-include $(top_srcdir)/Makefile.include
-
-VOLUMECONTROL_PC = $(BUILD_DIR)/volumecontrol.pc
-
-$(eval $(call emit-deploy-wrapper,VOLUMECONTROL_PC,volumecontrol.pc))
-
-
-$(eval $(call emit_resgen_targets))
-$(build_xamlg_list): %.xaml.g.cs: %.xaml
-	xamlg '$<'
-
-$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
-	mkdir -p $(shell dirname $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+	System.Core \
+	$(DO_PLATFORM_LIBS) \
+	$(DO_UNIVERSE_LIBS)
