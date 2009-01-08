@@ -75,7 +75,7 @@ namespace RememberTheMilk
         {
 			RTM.RenameTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 			                (items.First () as RTMTaskItem).Id, (modifierItems.First () as ITextItem).Text);
-			return null;
+			yield break;
         }
 	}
 }

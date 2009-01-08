@@ -59,9 +59,9 @@ namespace RememberTheMilk
 		public string Url {
 			get {
 				if (list_id == "All Tasks")
-					return "http://www.rememberthemilk.com/home/" + RTM.Username;
+					return "http://www.rememberthemilk.com/home/" + RTM.Preferences.Username;
 				else 
-					return "http://www.rememberthemilk.com/home/" + RTM.Username + "/" + list_id;
+					return "http://www.rememberthemilk.com/home/" + RTM.Preferences.Username + "/" + list_id;
 			}
 		}
 	}

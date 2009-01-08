@@ -40,16 +40,15 @@ namespace RememberTheMilk
         private static object dict_lock;
         private static string timeline;
         private static DateTime last_sync;
-        private static string username;
-		private static string filter;
-		
+		private static string username;
+		private static string filter;		
 
-        private const string api_key = "ee32c06f2d45baf935a2c046323457d8";
-        private const string shared_secret = "1b835b123a903938";
+        private const string ApiKey = "ee32c06f2d45baf935a2c046323457d8";
+        private const string SharedSecret = "1b835b123a903938";
 
         static RTM ()
         {
-            rtm = new Rtm (api_key, shared_secret);
+            rtm = new Rtm (ApiKey, SharedSecret);
             tasks = new Dictionary<string,List<Item>> ();
             lists = new Dictionary<string,Item> ();
             lists_lock = new object ();
@@ -74,10 +73,6 @@ namespace RememberTheMilk
         }
 		
 		public static RTMPreferences Preferences { get; private set; }
-
-        public static string Username {
-            get { return username; }
-        }
 
         public static bool IsAuthenticated {
             get { return  (rtm.IsAuthenticated && !String.IsNullOrEmpty (rtm.AuthToken)); }
