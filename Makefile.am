@@ -41,6 +41,7 @@ SUBDIRS = \
 	Pastebin \
 	Pidgin \
 	PingFM \
+	Putty \
 	Quote \
 	Rhythmbox \
 	Riptide \

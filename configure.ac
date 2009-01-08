@@ -147,6 +147,7 @@ Opera/Makefile
 Pastebin/Makefile
 Pidgin/Makefile
 PingFM/Makefile
+Putty/Makefile
 Quote/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
