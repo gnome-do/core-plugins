@@ -1,12 +1,12 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=Epiphany
+ASSEMBLY=Opera
 
 FILES = \
 	src/OperaBookmarkItemSource.cs
 
 RESOURCES = \
-	src/Opera.addin.xml
+	Opera.addin.xml
 
 REFERENCES = \
 	Mono.Posix \
