@@ -29,7 +29,7 @@ namespace RememberTheMilk
 {
 	public partial class Configuration : Gtk.Bin
 	{
-		private static IPreferences prefs;
+		//private static IPreferences prefs;
 		private LinkButton rtm_ref_btn;
 		private string frob;
 		
@@ -43,49 +43,23 @@ namespace RememberTheMilk
 			wInt.Position = 1;
 			rtm_ref_btn.Clicked += OnRtmRefBtnClicked;
 			
-			if (!System.String.IsNullOrEmpty (AuthToken)) {
+			if (!System.String.IsNullOrEmpty (RTM.Preferences.Token)) {
 				SetStateComplete ();
 			}
 		}
 		
 		static Configuration ()
 		{
-			prefs = Do.Platform.Services.Preferences.Get<RememberTheMilk.Configuration>();
-		}
-		
-		public static string AuthToken {
-			get { return prefs.Get("Token", ""); }
-			set { prefs.Set("Token", value); }
-		}
-		
-		public static string Username {
-			get { return prefs.Get("Username", ""); }
-			set { prefs.Set("Username",value); }
-		}
-		
-		public static string Filter {
-			get { return prefs.Get<string> ("Filter", "status:incomplete"); }
-			set { prefs.Set<string> ("Filter", value); }
-		}
-		
-		public static bool OverdueNotification {
-			get { return prefs.Get<bool> ("OverdueNotification", true); }
-			set { prefs.Set<bool> ("OverdueNotification", value); }
-		}
-		
-		public static bool ActionNotification {
-			get { return prefs.Get<bool> ("ActionNotification", true); }
-			set { prefs.Set<bool> ("ActionNotification", value); }
 		}
 
 		protected virtual void OnConfirmChkbtnClicked (object sender, System.EventArgs e)
 		{
-			ActionNotification = confirm_chkbtn.Active;
+			RTM.Preferences.ActionNotification = confirm_chkbtn.Active;
 		}
 
 		protected virtual void OnOverdueChkbtnClicked (object sender, System.EventArgs e)
 		{
-			OverdueNotification = overdue_chkbtn.Active;
+			RTM.Preferences.OverdueNotification = overdue_chkbtn.Active;
 		}
 
 		protected virtual void OnAuthBtnClicked (object sender, System.EventArgs e)
@@ -94,8 +68,8 @@ namespace RememberTheMilk
 			authinfo_lbl.Text = Catalog.GetString ("A webpage from Remember The Milk should be opened"
 			     + " in your web browser now. Please follow the instructions there and come back to complete"
 			     + " the authrozation by clicking the button below.");
-			AuthToken = "";
-			Username = "";
+			RTM.Preferences.Token = "";
+			RTM.Preferences.Username = "";
 			//notification_frm.Visible = false;
 			//filter_frm.Visible = false;
 			Widget image = auth_btn.Image;
@@ -110,8 +84,8 @@ namespace RememberTheMilk
 			Auth auth;
 			auth = RTM.AuthComplete (frob);
 			if (auth != null ) {
-				AuthToken = auth.Token;
-				Username = auth.User.Username;
+				RTM.Preferences.Token = auth.Token;
+				RTM.Preferences.Username = auth.User.Username;
 				auth_btn.Clicked -= new EventHandler (OnCompleteBtnClicked);
 				auth_btn.Clicked += new EventHandler (OnAuthBtnClicked);
 				SetStateComplete ();
@@ -126,18 +100,18 @@ namespace RememberTheMilk
 		private void SetStateComplete ()
 		{
 			authinfo_lbl.Text = String.Format (Catalog.GetString ("Thank you {0}, "
-			    + "RTM plugin is now authorized to operate on your account."), Username);
+			    + "RTM plugin is now authorized to operate on your account."), RTM.Preferences.Username);
 			auth_btn.Label = "Sign in as a different user";
 			notification_frm.Visible = true;
 			filter_frm.Visible = true;
-			confirm_chkbtn.Active = ActionNotification;
-			overdue_chkbtn.Active = OverdueNotification;
-			filter_entry.Text = Filter;	
+			confirm_chkbtn.Active = RTM.Preferences.ActionNotification;
+			overdue_chkbtn.Active = RTM.Preferences.OverdueNotification;
+			filter_entry.Text = RTM.Preferences.Filter;	
 		}
 
 		protected virtual void OnFilterEntryChanged (object sender, System.EventArgs e)
 		{
-			Filter = filter_entry.Text;
+			RTM.Preferences.Filter = filter_entry.Text;
 		}
 
 		protected virtual void OnRtmRefBtnClicked (object sender, EventArgs e)
