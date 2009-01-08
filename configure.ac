@@ -157,6 +157,7 @@ SSH/Makefile
 Text/Makefile
 Tomboy/Makefile
 Vinagre/Makefile
+VirtualBox/Makefile
 VolumeControl/Makefile
 WindowManager/Makefile
 Makefile

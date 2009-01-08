@@ -51,6 +51,7 @@ SUBDIRS = \
 	Text \
 	Tomboy \
 	Vinagre \
+	VirtualBox \
 	VolumeControl \
 	WindowManager
 
