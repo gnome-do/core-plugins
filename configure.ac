@@ -160,6 +160,7 @@ Vinagre/Makefile
 VirtualBox/Makefile
 VolumeControl/Makefile
 WindowManager/Makefile
+Woof/Makefile
 Makefile
 po/Makefile.in
 BundledLibraries/Makefile
