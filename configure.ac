@@ -141,6 +141,7 @@ LocateFiles/Makefile
 ManLookUp/Makefile
 Microblogging/Makefile
 MPD/Makefile
+NX/Makefile
 OpenSearch/Makefile
 Opera/Makefile
 Pastebin/Makefile

@@ -35,6 +35,7 @@ SUBDIRS = \
 	ManLookUp \
 	Microblogging \
 	MPD \
+	NX \
 	OpenSearch \
 	Opera \
 	Pastebin \
