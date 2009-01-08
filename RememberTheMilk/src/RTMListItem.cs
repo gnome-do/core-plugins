@@ -40,7 +40,7 @@ namespace RememberTheMilk
 		}
 		
 		public override string Description {
-			get { return "Remeber The Milk Task List"; }
+			get { return "Remember The Milk Task List"; }
 		}
 		
 		public override string Icon {

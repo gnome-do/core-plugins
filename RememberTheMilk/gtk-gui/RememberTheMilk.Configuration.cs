@@ -118,7 +118,7 @@ namespace RememberTheMilk {
             this.auth_btn.UseUnderline = true;
             // Container child auth_btn.Gtk.Container+ContainerChild
             Gtk.Alignment w3 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            // Container child GtkAlignment1.Gtk.Container+ContainerChild
             Gtk.HBox w4 = new Gtk.HBox();
             w4.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild

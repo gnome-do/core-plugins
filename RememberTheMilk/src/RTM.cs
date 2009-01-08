@@ -56,12 +56,13 @@ namespace RememberTheMilk
             lists_lock_at = new object ();
             dict_lock = new object ();
             last_sync = DateTime.MinValue;
-			filter = Configuration.Filter;
+			Preferences = new RTMPreferences ();
+			filter = Preferences.Filter;
 			
-            if (!String.IsNullOrEmpty (Configuration.AuthToken)) {
+            if (!String.IsNullOrEmpty (Preferences.Token)) {
                 Auth auth;
                 try {
-                    auth = rtm.AuthCheckToken (Configuration.AuthToken);
+                    auth = rtm.AuthCheckToken (Preferences.Token);
                 } catch (RtmException e) {
                     Console.Error.WriteLine ("Token verification failed: " + e.Message);
                     return;
@@ -71,6 +72,8 @@ namespace RememberTheMilk
                 username = auth.User.Username;
             }
         }
+		
+		public static RTMPreferences Preferences { get; private set; }
 
         public static string Username {
             get { return username; }
@@ -160,7 +163,7 @@ namespace RememberTheMilk
             Tasks rtmTasks;
 			
 			// if settings have changed, reset the synchronization state;
-			if (filter != Configuration.Filter || username != Configuration.Username)
+			if (filter != Preferences.Filter || username != Preferences.Username)
 				last_sync = DateTime.MinValue;
 
             if (last_sync == DateTime.MinValue) {
@@ -168,7 +171,7 @@ namespace RememberTheMilk
                 tasks ["All Tasks"] = new List<Item> ();
             }
 			
-			filter = Configuration.Filter;
+			filter = Preferences.Filter;
 			if (String.IsNullOrEmpty (filter))
 				filter = "status:incomplete";				
 			else if (!filter.Contains ("status:"))
@@ -219,7 +222,7 @@ namespace RememberTheMilk
 
             last_sync = DateTime.Now;
 			
-			if (Configuration.OverdueNotification)
+			if (Preferences.OverdueNotification)
 				NotifyOverDueItems ();
         }
 
@@ -265,7 +268,7 @@ namespace RememberTheMilk
             }
 
 			int len = overdue_tasks.ToArray ().Length;
-			if ( len > 0 && Configuration.OverdueNotification) {
+			if (len > 0) {
 				string title;
 				title = String.Format (Catalog.GetPluralString ("{0} Task Overdue", 
 				                                                "{0} Tasks Overdue", len), len);
@@ -302,7 +305,7 @@ namespace RememberTheMilk
 		/// </param>
 		private static void ActionRoutine (string title, string body, string taskId, string listId)
 		{
-			if (Configuration.ActionNotification) {
+			if (Preferences.ActionNotification) {
 				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification( title, body, 
 				                                                                        "task.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
 			}
