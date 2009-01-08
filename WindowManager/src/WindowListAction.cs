@@ -295,7 +295,7 @@ namespace WindowManager
 					string application = (items.First () as IApplicationItem).Exec;
 					List<Application> apps = WindowManager.Util.GetApplicationList (application);
 					
-					WindowControl.CloseWindows (apps.SelectMany (app.Windows));
+					WindowControl.CloseWindows (apps.SelectMany (app => app.Windows));
 					
 				}
 			}
