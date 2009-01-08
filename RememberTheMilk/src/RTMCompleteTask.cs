@@ -60,7 +60,7 @@ namespace RememberTheMilk
         {
 			RTM.CompleteTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 			                  (items.First () as RTMTaskItem).Id);
-            return null;
+            yield break;
         }
 	}
 }

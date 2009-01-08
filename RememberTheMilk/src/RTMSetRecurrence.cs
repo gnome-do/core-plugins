@@ -75,7 +75,7 @@ namespace RememberTheMilk
         {
 			RTM.SetRecurrence ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 			                    (items.First () as RTMTaskItem).Id, (modifierItems.FirstOrDefault () as ITextItem).Text);
-			return null;
+			yield break;
         }
 	}
 }
