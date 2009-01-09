@@ -9,7 +9,7 @@
 	>
 
 	<Runtime>
-		<Import assembly="BibtexItemSource.dll"/>
+		<Import assembly="Bibtex.dll"/>
 	</Runtime>
 
 	<Dependencies>
