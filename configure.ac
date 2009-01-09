@@ -154,6 +154,8 @@ Rhythmbox/Makefile
 Riptide/Makefile
 Shelf/Makefile
 SSH/Makefile
+StockQuote/Makefile
+TerminalServerClient/Makefile
 Text/Makefile
 Tomboy/Makefile
 Vinagre/Makefile

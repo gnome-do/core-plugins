@@ -48,6 +48,8 @@ SUBDIRS = \
 	Riptide \
 	Shelf \
 	SSH \
+	StockQuote \
+	TerminalServerClient \
 	Text \
 	Tomboy \
 	Vinagre \
