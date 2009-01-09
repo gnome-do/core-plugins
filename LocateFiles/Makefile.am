@@ -3,7 +3,6 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=LocateFiles
 
 FILES = \
-	src/AssemblyInfo.cs \
 	src/LocateFilesAction.cs
 
 RESOURCES = \

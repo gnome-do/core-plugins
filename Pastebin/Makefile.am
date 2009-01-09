@@ -5,7 +5,6 @@ ASSEMBLY=Pastebin
 FILES = \
 	gtk-gui/generated.cs \
 	gtk-gui/Pastebin.PastebinConfig.cs \
-	src/AssemblyInfo.cs \
 	src/Config/PastebinConfig.cs \
 	src/PastebinAction.cs \
 	src/Pastebin.cs \

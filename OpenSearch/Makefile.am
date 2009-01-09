@@ -3,7 +3,6 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=OpenSearch
 
 FILES = \
-	src/AssemblyInfo.cs \
 	src/FirefoxOpenSearchDirectoryProvider.cs \
 	src/IOpenSearchItem.cs \
 	src/OpenSearchAction.cs \

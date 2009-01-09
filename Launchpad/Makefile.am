@@ -3,7 +3,6 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Launchpad
 
 FILES = \
-	src/AssemblyInfo.cs \
 	src/LaunchpadAction.cs \
 	src/LaunchpadItem.cs \
 	src/LaunchpadItems.cs
