@@ -15,13 +15,12 @@
   </Configurations>
   <Contents>
     <File name="." subtype="Directory" buildaction="Compile" />
-    <File name="src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="src/MPD.cs" subtype="Code" buildaction="Compile" />
     <File name="src/MPDItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/MPDItems.cs" subtype="Code" buildaction="Compile" />
     <File name="src/MPDPlayAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/MusicItems.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/MPD.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/MPD.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

@@ -1,84 +1,53 @@
+include $(top_srcdir)/build.rules.mk
 
-EXTRA_DIST =  
-
-
-
-if ENABLE_DEBUG
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-
-ASSEMBLY = bin/Debug/PingFM.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Debug
-
-
-endif
-
-if ENABLE_RELEASE
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+
-ASSEMBLY = bin/Release/PingFM.dll
-ASSEMBLY_MDB = 
-COMPILE_TARGET = library
-PROJECT_REFERENCES = 
-BUILD_DIR = bin/Release
-
-
-endif
-
-AL=al2
-SATELLITE_ASSEMBLY_NAME=.resources.dll
-
-all: $(ASSEMBLY)
+ASSEMBLY=PingFM
 
 FILES = \
-	gtk-gui/Do.Addins.PingFM.Configuration.cs \
+	gtk-gui/PingFM.Configuration.cs \
 	gtk-gui/generated.cs \
 	src/Configuration.cs \
-	src/PingFMApi.cs \
 	src/PingFM.cs \
+	src/PingFMApi.cs \
+	src/PingFMClient.cs \
 	src/PingFMPost.cs \
+	src/PingFMPreferences.cs \
 	src/PingFMServiceItem.cs \
-	src/PingFMServiceItemSource.cs
+	src/PingFMServiceItemSource.cs 
 
 RESOURCES = \
-	PingFM.addin.xml \
-	resources/bebo.png \
-	resources/blogger.png \
-	resources/brightkite.png \
-	resources/delicious.png \
-	resources/facebook.png \
-	resources/flickr.png \
-	resources/friendfeed.png \
-	resources/friendster.png \
-	resources/hi5.png \
-	resources/identica.png \
-	resources/jaiku.png \
-	resources/koornk.png \
-	resources/kwippy.png \
-	resources/linkedin.png \
-	resources/livejournal.png \
-	resources/mashable.png \
-	resources/multiply.png \
-	resources/myspace.png \
-	resources/pingfm.png \
-	resources/plaxo.png \
-	resources/plurk.png \
-	resources/pownce.png \
-	resources/rejaw.png \
-	resources/tumblr.png \
-	resources/twitter.png \
-	resources/wordpress.png \
-	resources/xanga.png \
-	resources/yahoo360.png \
-	resources/yammer.png \
-	resources/youare.png 
+	Resources/PingFM.addin.xml \
+	Resources/icons/bebo.png \
+	Resources/icons/blogger.png \
+	Resources/icons/brightkite.png \
+	Resources/icons/delicious.png \
+	Resources/icons/facebook.png \
+	Resources/icons/flickr.png \
+	Resources/icons/friendfeed.png \
+	Resources/icons/friendster.png \
+	Resources/icons/hi5.png \
+	Resources/icons/identica.png \
+	Resources/icons/jaiku.png \
+	Resources/icons/koornk.png \
+	Resources/icons/kwippy.png \
+	Resources/icons/linkedin.png \
+	Resources/icons/livejournal.png \
+	Resources/icons/mashable.png \
+	Resources/icons/multiply.png \
+	Resources/icons/myspace.png \
+	Resources/icons/pingfm.png \
+	Resources/icons/plaxo.png \
+	Resources/icons/plurk.png \
+	Resources/icons/pownce.png \
+	Resources/icons/rejaw.png \
+	Resources/icons/tumblr.png \
+	Resources/icons/twitter.png \
+	Resources/icons/wordpress.png \
+	Resources/icons/xanga.png \
+	Resources/icons/yahoo360.png \
+	Resources/icons/yammer.png \
+	Resources/icons/youare.png 
 
-DATA_FILES = 
-
-REFERENCES =  \
+REFERENCES = \
 	System \
 	System.Core \
 	System.Data \
@@ -86,22 +55,7 @@ REFERENCES =  \
 	System.Xml \
 	Mono.Posix \
 	$(GNOME_KEYRING_SHARP_LIBS) \
-	$(DOADDINS_LIBS) \
-	$(GTK_SHARP_20_LIBS)
-
-DLL_REFERENCES = 
-
-CLEANFILES = 
-
-include $(top_srcdir)/Makefile.include
-
-
-$(build_xamlg_list): %.xaml.g.cs: %.xaml
-	xamlg '$<'
-
-$(build_resx_resources) : %.resources: %.resx
-	resgen2 '$<' '$@'
-
-$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
-	mkdir -p $(dir $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+	$(GTK_SHARP_20_LIBS) \
+	$(DO_PLATFORM_LIBS) \
+	$(DO_PLATFORM_LINUX_LIBS) \
+	$(DO_UNIVERSE_LIBS)

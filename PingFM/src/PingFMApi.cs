@@ -70,6 +70,7 @@ namespace PingFM.API
             [XmlAttribute("id")]    public string ID;
             [XmlAttribute("name")]  public string Name;
             [XmlElement("methods")] public string Methods;
+			[XmlElement("url")]     public string Url;
             public override string ToString()
             {
                 if (!string.IsNullOrEmpty(Name))

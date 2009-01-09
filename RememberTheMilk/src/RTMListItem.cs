@@ -22,7 +22,7 @@ using System;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {	
 	public class RTMListItem : Item, IUrlItem
 	{
@@ -40,7 +40,7 @@ namespace Do.Addins.RTM
 		}
 		
 		public override string Description {
-			get { return "Remeber The Milk Task List"; }
+			get { return "Remember The Milk Task List"; }
 		}
 		
 		public override string Icon {
@@ -59,9 +59,9 @@ namespace Do.Addins.RTM
 		public string Url {
 			get {
 				if (list_id == "All Tasks")
-					return "http://www.rememberthemilk.com/home/" + RTM.Username;
+					return "http://www.rememberthemilk.com/home/" + RTM.Preferences.Username;
 				else 
-					return "http://www.rememberthemilk.com/home/" + RTM.Username + "/" + list_id;
+					return "http://www.rememberthemilk.com/home/" + RTM.Preferences.Username + "/" + list_id;
 			}
 		}
 	}

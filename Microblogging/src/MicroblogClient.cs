@@ -136,7 +136,7 @@ namespace Microblogging
 			}
 
 			Contacts = newContacts;
-			Log.Debug (string.Format ("Microblogging: Found {0} contacts", Contacts.Count ()));
+			Log.Debug ("Microblogging: Found {0} contacts", Contacts.Count ());
 			return;
 		}
 
@@ -161,7 +161,6 @@ namespace Microblogging
 				OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
 			} catch (TwitterizerException e) {
 				Log.Error (genericError, e.Message);
-				Log.Debug (e.StackTrace);
 			} catch (ArgumentOutOfRangeException e) {
 				Log.Error (genericError, e.Message);
 				Log.Debug (e.StackTrace);
@@ -188,9 +187,8 @@ namespace Microblogging
 				messages_last_updated = message.Created;
 
 				OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
-			} catch (TwitterizerException e) {
-				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
-				Log.Debug (e.StackTrace);
+			} catch (TwitterizerException) {
+				// Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
 			} catch (ArgumentOutOfRangeException e) {
 				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
 				Log.Debug (e.StackTrace);
@@ -232,19 +230,19 @@ namespace Microblogging
 		void OnStatusUpdated (string status, string errorMessage)
 		{
 			if (StatusUpdated != null)
-				StatusUpdated (this, new StatusUpdatedEventArgs (status, errorMessage));
+				Gtk.Application.Invoke ((o, e) => StatusUpdated (this, new StatusUpdatedEventArgs (status, errorMessage)));
 		}
 
 		void OnTimelineUpdated (string screenname, string status, string icon)
 		{
 			if (TimelineUpdated != null)
-				TimelineUpdated (this, new TimelineUpdatedEventArgs (screenname, status, icon));
+				Gtk.Application.Invoke ((o, e) => TimelineUpdated (this, new TimelineUpdatedEventArgs (screenname, status, icon)));
 		}
 
 		void OnMessageFound (string screenname, string status, string icon)
 		{
 			if (MessageFound != null)
-				MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon));
+				Gtk.Application.Invoke ((o, e) => MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon)));
 		}
 		
 		public event StatusUpdatedDelegate StatusUpdated;

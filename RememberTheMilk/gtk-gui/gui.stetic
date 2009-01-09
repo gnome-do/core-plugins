@@ -2,12 +2,12 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.1</target-gtk-version>
+    <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
     <widget-library name="../bin/Debug/RTM.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="Do.Addins.RTM.Configuration" design-size="374 367">
+  <widget class="Gtk.Bin" id="RememberTheMilk.Configuration" design-size="374 367">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox1">

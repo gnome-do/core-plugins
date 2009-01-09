@@ -135,18 +135,7 @@ namespace WindowManager
 			string application = (item as IApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
-			if (matchList.ContainsKey (application)) {
-				string s;
-				matchList.TryGetValue (application, out s);
-				if (s != item.Name) return false;
-			} else {
-				matchList.Add (application, item.Name);
-			}
-			
-			if (!procList.ContainsKey (application)) return false;
-			
-			//procList.Remove (application); //fixme potential crasher!
-			return true;
+			return WindowManager.Util.GetApplicationList (application).Any ();
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -164,21 +153,16 @@ namespace WindowManager
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (modItems.Any ()) { //user selected a mod item
+			if (modItems.Any ()) {
 				Window w = (modItems.First () as WindowItem).Window;
 				
 				ToggleWindow (w);
-			} else { //no mod item
-				if (items.First () is IApplicationItem) { //it was an application item
-					string application;
-					IApplicationItem app = (items.First () as IApplicationItem);
-					
-					application = app.Exec;
-					application = application.Split (new char[] {' '})[0];
-					
-					List<Window> windowList = WindowListItems.GetApplication (application);
-
-					ToggleGroup (windowList);
+			} else {
+				if (items.First () is IApplicationItem) {
+					List<Window> windows = new List<Window> ();
+					foreach (Wnck.Application app in WindowManager.Util.GetApplicationList ((items.First () as IApplicationItem).Exec))
+						windows.AddRange (app.Windows);
+					ToggleGroup (windows);
 				} else if (items.First () is GenericWindowItem) {
 					GenericWindowItem generic;
 					generic = (items.First () as GenericWindowItem);
@@ -203,7 +187,7 @@ namespace WindowManager
 	public class WindowMaximizeAction : WindowTogglableAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Maximize Window"); }
+			get { return Catalog.GetString ("Maximize"); }
 		}
 		
 		public override string Description {
@@ -216,32 +200,21 @@ namespace WindowManager
 
 		public override void ToggleGroup (List<Window> windows)
 		{
-			bool maximize = false;
-			foreach (Window w in windows) {
-				if (!w.IsMaximized) maximize = true;
-			}
-			
-			foreach (Window w in windows) {
-				if (maximize)
-					w.Maximize ();
-				else
-					w.Unmaximize ();
-			}
+			if (!windows.Any ())
+				return;
+			WindowControl.MaximizeWindow (windows.First ());
 		}
 
 		public override void ToggleWindow (Window window)
 		{
-			if (window.IsMaximized)
-				window.Unmaximize ();
-			else
-				window.Maximize ();
+			WindowControl.MaximizeWindow (window);
 		}
 	}
 	
 	public class WindowMinimizeAction : WindowTogglableAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Minimize Window"); }
+			get { return Catalog.GetString ("Minimize/Restore"); }
 		}
 		
 		public override string Description {
@@ -254,70 +227,19 @@ namespace WindowManager
 		
 		public override void ToggleWindow (Window window)
 		{
-			if (window.IsMinimized)
-				window.Unminimize (Gtk.Global.CurrentEventTime);
-			else
-				window.Minimize ();
+			WindowControl.MinimizeRestoreWindows (window);
 		}
 		
 		public override void ToggleGroup (List<Window> windows)
 		{
-			bool minimize = false;
-			foreach (Window w in windows) {
-				if (!w.IsMinimized) minimize = true;
-			}
-			
-			foreach (Window w in windows) {
-				if (minimize)
-					w.Minimize ();
-				else
-					w.Unminimize (Gtk.Global.CurrentEventTime);
-			}
-		}
-	}
-	
-	public class WindowShadeAction : WindowTogglableAction
-	{
-		public override string Name {
-			get { return Catalog.GetString ("Shade Window"); }
-		}
-		
-		public override string Description {
-			get { return Catalog.GetString ("Shade/Unshade a Window into its Titlebar"); }
-		}
-
-		public override string Icon {
-			get { return "top"; }
-		}
-		
-		public override void ToggleWindow (Window window)
-		{
-			if (window.IsShaded)
-				window.Unshade ();
-			else
-				window.Shade ();
-		}
-		
-		public override void ToggleGroup (List<Window> windows)
-		{
-			bool shade = true;
-			foreach (Window w in windows) {
-				if (w.IsShaded) shade = false;
-			}
-			
-			foreach (Window w in windows) {
-				if (shade) 
-					w.Shade();
-				else
-					w.Unshade ();
-			}
+			WindowControl.MinimizeRestoreWindows (windows);
 		}
 	}
 	
 	public class WindowCloseAction : WindowActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Close Window"); }
+			get { return Catalog.GetString ("Close All"); }
 		}
 		
 		public override string Description {
@@ -325,7 +247,7 @@ namespace WindowManager
 		}
 
 		public override string Icon {
-			get { return "gtk-close"; }
+			get { return Gtk.Stock.Quit; }
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -337,125 +259,14 @@ namespace WindowManager
 			} else {
 				if (items.First () is IApplicationItem) {
 					string application = (items.First () as IApplicationItem).Exec;
-					application = application.Split (new char[] {' '})[0];
+					List<Application> apps = WindowManager.Util.GetApplicationList (application);
 					
-					List<Window> windows = WindowListItems.GetApplication (application);
-
-					foreach (Window w in windows)
-						w.Close (Gtk.Global.CurrentEventTime);
+					WindowControl.CloseWindows (apps.SelectMany (app => app.Windows));
 					
 				}
 			}
 			return null;
 		}
 
-	}
-	
-	public class WindowFocusAction : WindowActionAction 
-	{
-		public override string Name {
-			get { return Catalog.GetString ("Focus Window"); }
-		}
-		
-		public override string Description {
-			get { return Catalog.GetString ("Bring a window into Focus"); }
-		}
-
-		public override string Icon {
-			get { return "window-new"; }
-		}
-		
-		private List<Window> SortWindowsToStack (List<Window> windows)
-		{
-			Window[] stack = Screen.Default.WindowsStacked;
-			List<Window> outList = new List<Window> ();
-			
-			for (int i = 0; i < stack.Length; i++) {
-				if (windows.Contains (stack[i]))
-					outList.Add (stack[i]);
-			}
-			
-			return outList;
-		}
-		
-		private void FocusWindowViewport (Window w)
-		{
-			if (!w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)) {
-				int viewX, viewY, viewW, viewH;
-				int midX, midY;
-				Screen scrn = Screen.Default;
-				Workspace wsp = scrn.ActiveWorkspace;
-				
-				//get our windows geometry
-				w.GetGeometry (out viewX, out viewY, out viewW, out viewH);
-				
-				//we want to focus on where the middle of the window is
-				midX = viewX + (viewW / 2);
-				midY = viewY + (viewH / 2);
-				
-				//The positions given above are relative to the current viewport
-				//This makes them absolute
-				midX += wsp.ViewportX;
-				midY += wsp.ViewportY;
-				
-				//Check to make sure our middle didn't wrap
-				if (midX > wsp.Width) {
-					midX %= wsp.Width;
-				}
-				
-				if (midY > wsp.Height) {
-					midY %= wsp.Height;
-				}
-				
-				//take care of negative numbers (happens?)
-				while (midX < 0)
-					midX += wsp.Width;
-			
-				while (midY < 0)
-					midX += wsp.Height;
-				
-				Wnck.Screen.Default.MoveViewport (midX, midY);
-			}
-			
-			w.Activate (Gtk.Global.CurrentEventTime);
-		}
-
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-		{
-			if (modItems.Any ()) {
-				Wnck.Window w = (modItems.First () as WindowItem).Window;
-				
-				FocusWindowViewport (w);
-			} else {
-				if (items.First () is IApplicationItem) {
-					string application = (items.First () as IApplicationItem).Exec;
-					application = application.Split (new char[] {' '})[0];
-					
-					List<Window> windows = WindowListItems.GetApplication (application);
-					windows = SortWindowsToStack (windows);
-					
-//					for (int i = 0; i < windows.Count; i++) {
-//						if ( i == windows.Count - 1) {
-//							Window w = windows[i];
-//							//The WM is ultimately going to determine what order this is done it.
-//							//It seems to like doing it in reverse order (stacks are fun)
-//							//So we delay to make sure this one is done last...
-//							FocusWindowViewport (w);
-//						}
-//						windows[i].Activate (Gtk.Global.CurrentEventTime);
-//					}
-					//Only focus the top window, otherwise we end up in blinky hell (see above)
-					FocusWindowViewport (windows[windows.Count - 1]);
-					
-				} else if (items.First () is GenericWindowItem) {
-					GenericWindowItem generic = (items.First () as GenericWindowItem);
-					
-					if (generic.WindowType == GenericWindowType.PreviousApplication ||
-					    generic.WindowType == GenericWindowType.PreviousWindow)
-						FocusWindowViewport (WindowListItems.PreviousWindow);
-				}
-			}
-			return null;
-		}
 	}
 }

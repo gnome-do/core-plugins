@@ -1,6 +1,0 @@
-Name: Launchpad
-Description: Launchpad
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/Launchpad.dll

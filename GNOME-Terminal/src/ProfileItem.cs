@@ -1,62 +1,66 @@
-/* ProIFileItem.cs
- * 
- * GNOME Do is the legal property of its developers, whose names are too numerous
- * to list here.  Please refer to the COPYRIGHT file distributed with this
- * source distribution.
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// ProfileItem.cs
+// 
+// GNOME Do is the legal property of its developers, whose names are too numerous
+// to list here.  Please refer to the COPYRIGHT file distributed with this
+// source distribution.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
 
 using System;
 using System.Collections.Generic;
 
-using Do.Universe;
 using GConf;
+using Mono.Unix;
+
+using Do.Universe;
 
 namespace GNOME.Terminal 
 {
 	public class ProfileItem : Item
 	{
-		private string name;
-		private string description;
+		readonly new string DefaultName = Catalog.GetString ("Unnamed Profile");
+		readonly new string DefaultDescription = Catalog.GetString ("GNOME Terminal Profile");
 
-        public ProfileItem (string profilePath)
-        {
-			Client gcClient = new Client ();
+		string name, description;
+
+		public ProfileItem (string profilePath)
+		{
+			Client client = new Client ();
+
+			name = description = null;
 			try {
-	            name = (string) gcClient.Get (profilePath + "/visible_name");
-				description = (string) gcClient.Get (profilePath + "/custom_command");
+				name = (string) client.Get (profilePath + "/visible_name");
+				description = (string) client.Get (profilePath + "/custom_command");
 			} catch {
-				name = "Unnamed Profile";
-				description = "";
+				name = description = null;
+			} finally {
+				name = name ?? DefaultName;
+				description = description ?? DefaultDescription;
 			}
-			if (string.IsNullOrEmpty (name))
-				description = "Unnamed Profile";
-			if (string.IsNullOrEmpty (description))
-				description = "GNOME Terminal Profile";
-        }
+		}
 
-        public override string Name {
-            get { return name; }
-        }
-       
-        public override string Description {
-            get { return description; }
-        }
-       
-        public override string Icon {
-            get { return "gnome-terminal"; }
-        }
+		public override string Name {
+			get { return name; }
+		}
+
+		public override string Description {
+			get { return description; }
+		}
+
+		public override string Icon {
+			get { return "gnome-terminal"; }
+		}
 	}
 }

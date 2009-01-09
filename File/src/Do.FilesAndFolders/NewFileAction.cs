@@ -35,6 +35,8 @@ namespace Do.FilesAndFolders
 	public class NewFileAction : Act
 	{
 
+		const int MaxPathLength = 256;
+
 		public override string Name {
 			get { return Catalog.GetString ("Create New File"); }
 		}
@@ -77,7 +79,7 @@ namespace Do.FilesAndFolders
 		/// </returns>
 		bool Supports (IFileItem item)
 		{
-			return Directory.Exists (item.Path);
+			return item.Path.Length < MaxPathLength && Directory.Exists (item.Path);
 		}
 
 		/// <summary>
@@ -93,7 +95,7 @@ namespace Do.FilesAndFolders
 		bool Supports (ITextItem item)
 		{
 			string path = item.Text.Replace ("~", Plugin.ImportantFolders.UserHome);
-			return !File.Exists (path) && !Directory.Exists (path);
+			return path.Length < MaxPathLength && !File.Exists (path) && !Directory.Exists (path);
 		}
 		
 		public override bool SupportsItem (Item item)

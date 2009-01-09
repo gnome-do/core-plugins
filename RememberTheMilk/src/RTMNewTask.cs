@@ -25,7 +25,7 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 	public class RTMNewTask : Act
 	{
@@ -72,11 +72,6 @@ namespace Do.Addins.RTM
         		return !(modItem as RTMListItem).Name.Equals ("All Tasks");
         		
             return true;
-        }
-        
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
         }
         
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 

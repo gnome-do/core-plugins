@@ -1,0 +1,23 @@
+<Addin 
+	id="ClawsMail"
+	namespace="Do"
+	version="1.0"
+	name="ClawsMail"
+	description="Search contacts in your ClawsMail address book."
+	author="Karol Będkowski"
+	category="Community"
+	>
+
+	<Runtime>
+		<Import assembly="ClawsMail.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Claws.ClawsContactsItemSource" />
+	</Extension>
+
+</Addin>

@@ -19,14 +19,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Mono.Unix;
-using PingFM.API;
 
 using Do.Platform.Linux;
 using Do.Universe;
 
-namespace Do.Addins.PingFM
+namespace PingFM
 {
 	
 	public sealed class PingFMServiceItemSource : ItemSource, IConfigurable
@@ -52,17 +52,12 @@ namespace Do.Addins.PingFM
 		}
 
 		public override IEnumerable<Item> Items {
-			get { return PingFM.ServiceItems; }
-		}
-
-		public override IEnumerable<Item> ChildrenOfItem (Item parent)
-		{
-			return null;
+			get { return PingFM.Services.Cast<Item> (); }
 		}
 
 		public override void UpdateItems ()
 		{
-			Thread updateServices = new Thread (new ThreadStart (Do.Addins.PingFM.PingFM.UpdateServices));
+			Thread updateServices = new Thread (new ThreadStart (PingFM.UpdateServices));
 			updateServices.IsBackground = true;
 			updateServices.Start ();
 		}

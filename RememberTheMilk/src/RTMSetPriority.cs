@@ -25,7 +25,7 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 	
 	
@@ -82,7 +82,7 @@ namespace Do.Addins.RTM
         {
 			RTM.SetTaskPriority ( (items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 			                         (items.First () as RTMTaskItem).Id, (modifierItems.First () as RTMPriorityItem).Priority);
-			return null;
+			yield break;
         }
 	}
 }

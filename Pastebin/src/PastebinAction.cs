@@ -25,10 +25,10 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
-
+using Do.Platform;
+using Do.Platform.Linux;
 using Do.Universe;
 using Do.Universe.Common;
-using Do.Platform.Linux;
 
 using Mono.Unix;
 

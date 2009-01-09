@@ -5,7 +5,6 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Do.Addins, Version=0.8.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/JIRA.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="JIRA.ConfigWidget" design-size="300 161">

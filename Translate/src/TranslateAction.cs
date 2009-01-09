@@ -20,10 +20,11 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+
 using Mono.Unix;
+
 using Do.Universe;
 using Do.Universe.Common;
-using Do.Universe;
 using Do.Platform;
 using Do.Platform.Linux;
 

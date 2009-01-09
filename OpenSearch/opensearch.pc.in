@@ -1,6 +1,0 @@
-Name: OpenSearch
-Description: OpenSearch
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/OpenSearch.dll

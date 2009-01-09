@@ -1,0 +1,33 @@
+<Addin 
+	id="WindowManager" 
+	namespace= "Do" 
+	version="1.1"
+	name="Window Manager"
+	description="Control your windows or groups of windows with Do."
+	author="Jason Smith"
+	category="Official"
+	>
+
+	<Runtime>
+		<Import assembly="WindowManager.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/Action">
+		<Action type="WindowManager.WindowMinimizeAction" />
+		<Action type="WindowManager.WindowMaximizeAction" />
+		<Action type="WindowManager.WindowCloseAction" />
+		<Action type="WindowManager.ScreenTileAction" />
+		<Action type="WindowManager.ScreenCascadeAction" />
+		<Action type="WindowManager.ScreenRestoreAction" />
+	</Extension>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="WindowManager.ScreenItemSource" />
+		<ItemSource type="WindowManager.WindowItemSource" />
+	</Extension>
+</Addin>

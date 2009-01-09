@@ -1,10 +1,78 @@
+ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
+EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
-EXTRA_DIST =  expansions.m4 BundledLibraries/Google.GData.Extensions.dll BundledLibraries/Google.GData.Client.dll BundledLibraries/Google.GData.Documents.dll BundledLibraries/Google.GData.AccessControl.dll BundledLibraries/Google.GData.Calendar.dll BundledLibraries/MonoTorrent.dll BundledLibraries/Google.GData.Contacts.dll
+SUBDIRS = \
+	po \
+	BundledLibraries \
+	Alias \
+	AptURL \
+	Archive \
+	Bibtex \
+	Cl.ickable \
+	ClawsMail \
+	Confluence \
+	DiskMounter \
+	EOG-Slideshow \
+	Epiphany \
+	Evolution \
+	File \
+	Firefox \
+	Flickr \
+	GNOME-Dictionary \
+	GNOME-Screenshot \
+	GNOME-Session \
+	GNOME-Terminal \
+	GoogleCalculator \
+	GoogleCalendar \
+	GoogleContacts \
+	GoogleDocs \
+	GoogleMaps \
+	GoogleSearch \
+	ImageShack \
+	JIRA \
+	Launchpad \
+	LocateFiles \
+	ManLookUp \
+	Microblogging \
+	MPD \
+	NX \
+	OpenSearch \
+	Opera \
+	Pastebin \
+	Pidgin \
+	PingFM \
+	Putty \
+	Quote \
+	RememberTheMilk \
+	Rhythmbox \
+	Riptide \
+	Shelf \
+	SSH \
+	StockQuote \
+	TerminalServerClient \
+	Text \
+	Translate \
+	Tomboy \
+	Vinagre \
+	VirtualBox \
+	VolumeControl \
+	WindowManager \
+	Woof \
+	Wordnet \
+	Xmms2 \
+	Zim 
 
-#Warning: This is an automatically generated file, do not edit!
-if ENABLE_DEBUG
- SUBDIRS =  Rhythmbox Epiphany Evolution File GNOME-Session GoogleCalculator Launchpad LocateFiles OpenSearch Pastebin Pidgin SSH Tomboy WindowManager Firefox Vinagre GNOME-Screenshot Tasque Archive GMailContacts DiskMounter Text GNOME-Terminal GNOME-Dictionary Flickr RSS GoogleMaps Riptide Shelf Twitter VolumeControl GCalendar GoogleSearch del.icio.us ImageShack Cl.ickable ManLookUp GDocs
-endif
-if ENABLE_RELEASE
- SUBDIRS =  Rhythmbox Amarok Banshee Epiphany Evolution File GNOME-Session GoogleCalculator Launchpad LocateFiles OpenSearch Pastebin Pidgin SSH Tomboy WindowManager Firefox Vinagre GNOME-Screenshot Tasque Archive GMailContacts DiskMounter Text GNOME-Terminal GNOME-Dictionary Flickr RSS GoogleMaps Riptide Shelf Twitter VolumeControl GCalendar GoogleSearch del.icio.us ImageShack Cl.ickable ManLookUp GDocs
-endif
+# Current dir _must_ be processed last; this ensures our repo is built with all the plugins
+SUBDIRS += .
+
+ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
+PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
+BUNDLED_ASSEMBLIES = $(wildcard BundledLibraries/*.dll)
+install-data-hook:
+	cp $(BUNDLED_ASSEMBLIES) $(ASSEMBLY_INSTALL_DIR)	
+	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
+	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
+
+uninstall-hook:
+	rm $(ASSEMBLY_INSTALL_DIR)/*.mpack
+	rm $(ASSEMBLY_INSTALL_DIR)/*.mrep

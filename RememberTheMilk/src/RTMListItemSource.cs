@@ -24,16 +24,16 @@ using System.Threading;
 using Do.Platform.Linux;
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {	
 	public class RTMListItemSource : ItemSource, IConfigurable
 	{		
 		public override string Name {
-			get { return "Remeber The Milk Task Lists"; }
+			get { return "Remember The Milk Task Lists"; }
 		}
 		
 		public override string Description {
-			get { return "Task Lists in your Remeber The Milk account."; }
+			get { return "Task Lists in your Remember The Milk account."; }
 		}
 		
 		public override string Icon {

@@ -29,7 +29,7 @@ namespace Translate
 		string Icon { get; }
 		string BuildTextRequestUrl(string ifaceLang, string toLang, string fromLang, string req);
 		string BuildUrlRequestUrl(string ifaceLang, string toLang, string fromLang, string req);
-		List<LanguageItem> SupportedLanguages { get; }
+		IEnumerable<LanguageItem> SupportedLanguages { get; }
 		string DefaultSourceCode { get; }
 		bool SupportsAutoDetect { get; }
 		string AutoDetectCode { get; }

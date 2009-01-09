@@ -7,36 +7,36 @@
   <import>
     <widget-library name="../bin/Debug/InlineGoogleSearch.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="InlineGoogleSearch.InlineGoogleSearchConfig" design-size="661 300">
+  <widget class="Gtk.Bin" id="InlineGoogleSearch.InlineGoogleSearchConfig" design-size="357 230">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox5">
         <property name="MemberName" />
         <property name="Spacing">6</property>
         <child>
-          <widget class="Gtk.Frame" id="frame3">
+          <widget class="Gtk.Frame" id="frame8">
             <property name="MemberName" />
             <property name="ShadowType">None</property>
             <child>
-              <widget class="Gtk.Alignment" id="GtkAlignment">
+              <widget class="Gtk.Alignment" id="GtkAlignment1">
                 <property name="MemberName" />
                 <property name="Xalign">0</property>
                 <property name="Yalign">0</property>
                 <property name="LeftPadding">12</property>
                 <child>
-                  <widget class="Gtk.VBox" id="vbox6">
+                  <widget class="Gtk.VBox" id="vbox4">
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
-                      <widget class="Gtk.RadioButton" id="nosafe_rbtn">
+                      <widget class="Gtk.RadioButton" id="goToSearch_rbtn">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">Do not filter my search results.</property>
+                        <property name="Label" translatable="yes">Go directly to Google Search page</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
-                        <property name="Group">group1</property>
-                        <signal name="Toggled" handler="OnNosafeRbtnToggled" />
+                        <property name="Group">searchPageGroup</property>
+                        <signal name="Toggled" handler="OnGoToSearchRbtnToggled" />
                       </widget>
                       <packing>
                         <property name="Position">0</property>
@@ -46,15 +46,15 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.RadioButton" id="moderate_rbtn">
+                      <widget class="Gtk.RadioButton" id="returnResults_rbtn">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">Use moderate filtering</property>
+                        <property name="Label" translatable="yes">Show search results in Do</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
-                        <property name="Group">group1</property>
-                        <signal name="Toggled" handler="OnModerateRbtnToggled" />
+                        <property name="Group">searchPageGroup</property>
+                        <signal name="Toggled" handler="OnReturnResultsRbtnToggled" />
                       </widget>
                       <packing>
                         <property name="Position">1</property>
@@ -64,15 +64,23 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.RadioButton" id="strict_rbtn">
+                      <widget class="Gtk.Alignment" id="GtkAlignment2">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">Use strict filtering</property>
-                        <property name="DrawIndicator">True</property>
-                        <property name="HasLabel">True</property>
-                        <property name="UseUnderline">True</property>
-                        <property name="Group">group1</property>
-                        <signal name="Toggled" handler="OnStrictRbtnToggled" />
+                        <property name="Xalign">0</property>
+                        <property name="Yalign">0</property>
+                        <property name="LeftPadding">12</property>
+                        <child>
+                          <widget class="Gtk.CheckButton" id="showFirstCheck">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Label" translatable="yes">Show Search page link as first result</property>
+                            <property name="Active">True</property>
+                            <property name="DrawIndicator">True</property>
+                            <property name="HasLabel">True</property>
+                            <property name="UseUnderline">True</property>
+                            <signal name="Clicked" handler="OnShowFirstCheckClicked" />
+                          </widget>
+                        </child>
                       </widget>
                       <packing>
                         <property name="Position">2</property>
@@ -86,9 +94,9 @@
               </widget>
             </child>
             <child>
-              <widget class="Gtk.Label" id="GtkLabel1">
+              <widget class="Gtk.Label" id="GtkLabel10">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;b&gt;SafeSearch Preferences&lt;/b&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;b&gt;Google Search&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>
@@ -104,10 +112,124 @@
           </packing>
         </child>
         <child>
-          <placeholder />
-        </child>
-        <child>
-          <placeholder />
+          <widget class="Gtk.Frame" id="frame3">
+            <property name="MemberName" />
+            <property name="ShadowType">None</property>
+            <child>
+              <widget class="Gtk.Alignment" id="GtkAlignment">
+                <property name="MemberName" />
+                <property name="Xalign">0</property>
+                <property name="Yalign">0</property>
+                <property name="LeftPadding">12</property>
+                <child>
+                  <widget class="Gtk.VBox" id="vbox7">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="applySSL">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Apply to Google Search page link</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="OnApplySSLClicked" />
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.VBox" id="safeSearchBox">
+                        <property name="MemberName" />
+                        <property name="Spacing">6</property>
+                        <child>
+                          <widget class="Gtk.RadioButton" id="nosafe_rbtn">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Label" translatable="yes">Do not filter my search results.</property>
+                            <property name="DrawIndicator">True</property>
+                            <property name="HasLabel">True</property>
+                            <property name="UseUnderline">True</property>
+                            <property name="Group">sslGroup</property>
+                            <signal name="Toggled" handler="OnNosafeRbtnToggled" />
+                          </widget>
+                          <packing>
+                            <property name="Position">0</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.RadioButton" id="moderate_rbtn">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Label" translatable="yes">Use moderate filtering</property>
+                            <property name="DrawIndicator">True</property>
+                            <property name="HasLabel">True</property>
+                            <property name="UseUnderline">True</property>
+                            <property name="Group">sslGroup</property>
+                            <signal name="Toggled" handler="OnModerateRbtnToggled" />
+                          </widget>
+                          <packing>
+                            <property name="Position">1</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.RadioButton" id="strict_rbtn">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Label" translatable="yes">Use strict filtering</property>
+                            <property name="DrawIndicator">True</property>
+                            <property name="HasLabel">True</property>
+                            <property name="UseUnderline">True</property>
+                            <property name="Group">sslGroup</property>
+                            <signal name="Toggled" handler="OnStrictRbtnToggled" />
+                          </widget>
+                          <packing>
+                            <property name="Position">2</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="PackType">End</property>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="GtkLabel12">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;b&gt;SafeSearch Preferences&lt;/b&gt;</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+              <packing>
+                <property name="type">label_item</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
         </child>
       </widget>
     </child>

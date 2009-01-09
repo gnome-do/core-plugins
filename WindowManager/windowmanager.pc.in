@@ -1,6 +1,0 @@
-Name: WindowManager
-Description: WindowManager
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/WindowManager.dll

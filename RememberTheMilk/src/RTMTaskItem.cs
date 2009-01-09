@@ -22,7 +22,7 @@ using System;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 
     public class RTMTaskItem : Item, IUrlItem
@@ -110,7 +110,7 @@ namespace Do.Addins.RTM
         public string Url {
             get {
                 return "http://www.rememberthemilk.com/home/" +
-                        RTM.Username + "/" + list_id + "/" + task_id;
+                        RTM.Preferences.Username + "/" + list_id + "/" + task_id;
             }
         }
 

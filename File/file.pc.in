@@ -1,6 +1,0 @@
-Name: File
-Description: File
-Version: 
-
-Requires: 
-Libs: -r:@expanded_libdir@/@PACKAGE@/File.dll

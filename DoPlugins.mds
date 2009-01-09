@@ -19,7 +19,6 @@
       <Entry build="True" name="GNOME-Screenshot" configuration="Debug" />
       <Entry build="True" name="Tasque" configuration="Debug" />
       <Entry build="True" name="Archive" configuration="Debug" />
-      <Entry build="True" name="GMailContacts" configuration="Debug" />
       <Entry build="True" name="DiskMounter" configuration="Debug" />
       <Entry build="True" name="Text" configuration="Debug" />
       <Entry build="True" name="GNOME-Terminal" configuration="Debug" />
@@ -30,20 +29,15 @@
       <Entry build="True" name="Riptide" configuration="Debug" />
       <Entry build="True" name="Shelf" configuration="Debug" />
       <Entry build="True" name="VolumeControl" configuration="Debug" />
-      <Entry build="True" name="GCalendar" configuration="Debug" />
-      <Entry build="True" name="InlineGoogleSearch" configuration="Debug" />
-      <Entry build="False" name="del.icio.us" configuration="Debug" />
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
       <Entry build="True" name="Banshee-1" configuration="Debug" />
-      <Entry build="False" name="GDocs" configuration="Debug" />
       <Entry build="True" name="Microblogging" configuration="Debug" />
       <Entry build="True" name="File" configuration="Debug" />
       <Entry build="True" name="AptURL" configuration="Debug" />
       <Entry build="True" name="Bibtex" configuration="Debug" />
       <Entry build="True" name="Confluence" configuration="Debug" />
-      <Entry build="True" name="EOG Slideshow" configuration="Debug" />
       <Entry build="True" name="JIRA" configuration="Debug" />
       <Entry build="True" name="MPD" configuration="Debug" />
       <Entry build="True" name="PingFM" configuration="Debug" />
@@ -51,13 +45,27 @@
       <Entry build="True" name="SqueezeCenterPlugin" configuration="Debug" />
       <Entry build="True" name="Woof" configuration="Debug" />
       <Entry build="True" name="Wordnet" configuration="Debug" />
-      <Entry build="True" name="xmms2" configuration="Debug" />
       <Entry build="True" name="VirtualBox" configuration="Debug" />
       <Entry build="True" name="Translate" configuration="Debug" />
-      <Entry build="True" name="Stock Quote" configuration="Debug" />
-      <Entry build="True" name="Terminal Server Client" configuration="Debug" />
       <Entry build="True" name="Thunderbird" configuration="Debug" />
       <Entry build="True" name="Skype" configuration="Debug" />
+      <Entry build="True" name="Zim" configuration="Debug" />
+      <Entry build="True" name="Putty" configuration="Debug" />
+      <Entry build="True" name="SystemServices" configuration="Debug" />
+      <Entry build="True" name="Alias" configuration="Debug" />
+      <Entry build="True" name="ClawsMail" configuration="Debug" />
+      <Entry build="True" name="NX" configuration="Debug" />
+      <Entry build="True" name="Quote" configuration="Debug" />
+      <Entry build="True" name="Opera" configuration="Debug" />
+      <Entry build="True" name="del.icio.us" configuration="Debug" />
+      <Entry build="True" name="EOG Slideshow" configuration="Debug" />
+      <Entry build="True" name="GoogleCalendar" configuration="Debug" />
+      <Entry build="True" name="GoogleDocs" configuration="Debug" />
+      <Entry build="True" name="GoogleContacts" configuration="Debug" />
+      <Entry build="True" name="GoogleSearch" configuration="Debug" />
+      <Entry build="True" name="Stock Quote" configuration="Debug" />
+      <Entry build="True" name="TerminalServerClient" configuration="Debug" />
+      <Entry build="True" name="xmms2" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -78,7 +86,6 @@
       <Entry build="True" name="GNOME-Screenshot" configuration="Release" />
       <Entry build="True" name="Tasque" configuration="Release" />
       <Entry build="True" name="Archive" configuration="Default" />
-      <Entry build="True" name="GMailContacts" configuration="Release" />
       <Entry build="True" name="DiskMounter" configuration="Release" />
       <Entry build="True" name="Text" configuration="Release" />
       <Entry build="True" name="GNOME-Terminal" configuration="Release" />
@@ -89,20 +96,15 @@
       <Entry build="True" name="Riptide" configuration="Release" />
       <Entry build="True" name="Shelf" configuration="Release" />
       <Entry build="True" name="VolumeControl" configuration="Release" />
-      <Entry build="True" name="GCalendar" configuration="Release" />
-      <Entry build="True" name="InlineGoogleSearch" configuration="Release" />
-      <Entry build="True" name="del.icio.us" configuration="Release" />
       <Entry build="True" name="ImageShack" configuration="Release" />
       <Entry build="True" name="Cl.ickable" configuration="Release" />
       <Entry build="True" name="ManLookUp" configuration="Release" />
-      <Entry build="True" name="GDocs" configuration="Release" />
       <Entry build="True" name="Banshee-1" configuration="Release" />
       <Entry build="True" name="Microblogging" configuration="Release" />
       <Entry build="True" name="File" configuration="Release" />
       <Entry build="True" name="AptURL" configuration="Release" />
       <Entry build="True" name="Bibtex" configuration="Release" />
       <Entry build="True" name="Confluence" configuration="Release" />
-      <Entry build="True" name="EOG Slideshow" configuration="Release" />
       <Entry build="True" name="JIRA" configuration="Release" />
       <Entry build="True" name="MPD" configuration="Release" />
       <Entry build="True" name="PingFM" configuration="Release" />
@@ -110,13 +112,27 @@
       <Entry build="True" name="SqueezeCenterPlugin" configuration="Release" />
       <Entry build="True" name="Woof" configuration="Release" />
       <Entry build="True" name="Wordnet" configuration="Release" />
-      <Entry build="True" name="xmms2" configuration="Release" />
       <Entry build="True" name="VirtualBox" configuration="Release" />
       <Entry build="True" name="Translate" configuration="Release" />
-      <Entry build="True" name="Stock Quote" configuration="Release" />
-      <Entry build="True" name="Terminal Server Client" configuration="Release" />
       <Entry build="True" name="Thunderbird" configuration="Release" />
       <Entry build="True" name="Skype" configuration="Release" />
+      <Entry build="True" name="Zim" configuration="Release" />
+      <Entry build="True" name="Putty" configuration="Release" />
+      <Entry build="True" name="SystemServices" configuration="Release" />
+      <Entry build="True" name="Alias" configuration="Release" />
+      <Entry build="True" name="ClawsMail" configuration="Release" />
+      <Entry build="True" name="NX" configuration="Release" />
+      <Entry build="True" name="Quote" configuration="Release" />
+      <Entry build="True" name="Opera" configuration="Release" />
+      <Entry build="True" name="del.icio.us" configuration="Release" />
+      <Entry build="True" name="EOG Slideshow" configuration="Release" />
+      <Entry build="True" name="GoogleCalendar" configuration="Release" />
+      <Entry build="True" name="GoogleDocs" configuration="Release" />
+      <Entry build="True" name="GoogleContacts" configuration="Release" />
+      <Entry build="True" name="GoogleSearch" configuration="Release" />
+      <Entry build="True" name="Stock Quote" configuration="Release" />
+      <Entry build="True" name="TerminalServerClient" configuration="Release" />
+      <Entry build="True" name="xmms2" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -138,7 +154,6 @@
     <Execute type="None" entry="GNOME-Screenshot" />
     <Execute type="None" entry="Tasque" />
     <Execute type="None" entry="Archive" />
-    <Execute type="None" entry="GMailContacts" />
     <Execute type="None" entry="DiskMounter" />
     <Execute type="None" entry="Text" />
     <Execute type="None" entry="GNOME-Terminal" />
@@ -149,20 +164,15 @@
     <Execute type="None" entry="Riptide" />
     <Execute type="None" entry="Shelf" />
     <Execute type="None" entry="VolumeControl" />
-    <Execute type="None" entry="GCalendar" />
-    <Execute type="None" entry="InlineGoogleSearch" />
-    <Execute type="None" entry="del.icio.us" />
     <Execute type="None" entry="ImageShack" />
     <Execute type="None" entry="Cl.ickable" />
     <Execute type="None" entry="ManLookUp" />
-    <Execute type="None" entry="GDocs" />
     <Execute type="None" entry="Banshee-1" />
     <Execute type="None" entry="Microblogging" />
     <Execute type="None" entry="File" />
     <Execute type="None" entry="AptURL" />
     <Execute type="None" entry="Bibtex" />
     <Execute type="None" entry="Confluence" />
-    <Execute type="None" entry="EOG Slideshow" />
     <Execute type="None" entry="JIRA" />
     <Execute type="None" entry="MPD" />
     <Execute type="None" entry="PingFM" />
@@ -170,13 +180,27 @@
     <Execute type="None" entry="SqueezeCenterPlugin" />
     <Execute type="None" entry="Woof" />
     <Execute type="None" entry="Wordnet" />
-    <Execute type="None" entry="xmms2" />
     <Execute type="None" entry="VirtualBox" />
     <Execute type="None" entry="Translate" />
-    <Execute type="None" entry="Stock Quote" />
-    <Execute type="None" entry="Terminal Server Client" />
     <Execute type="None" entry="Thunderbird" />
     <Execute type="None" entry="Skype" />
+    <Execute type="None" entry="Zim" />
+    <Execute type="None" entry="Putty" />
+    <Execute type="None" entry="SystemServices" />
+    <Execute type="None" entry="Alias" />
+    <Execute type="None" entry="ClawsMail" />
+    <Execute type="None" entry="NX" />
+    <Execute type="None" entry="Quote" />
+    <Execute type="None" entry="Opera" />
+    <Execute type="None" entry="del.icio.us" />
+    <Execute type="None" entry="EOG Slideshow" />
+    <Execute type="None" entry="GoogleCalendar" />
+    <Execute type="None" entry="GoogleDocs" />
+    <Execute type="None" entry="GoogleContacts" />
+    <Execute type="None" entry="GoogleSearch" />
+    <Execute type="None" entry="Stock Quote" />
+    <Execute type="None" entry="TerminalServerClient" />
+    <Execute type="None" entry="xmms2" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -198,7 +222,6 @@
     <Entry filename="GNOME-Screenshot/GNOME-Screenshot.mdp" />
     <Entry filename="Tasque/Tasque.mdp" />
     <Entry filename="Archive/Archive.mdp" />
-    <Entry filename="GMailContacts/GMailContacts.mdp" />
     <Entry filename="DiskMounter/DiskMounter.mdp" />
     <Entry filename="Text/Text.mdp" />
     <Entry filename="GNOME-Terminal/GNOME-Terminal.mdp" />
@@ -209,20 +232,15 @@
     <Entry filename="Riptide/Riptide.mdp" />
     <Entry filename="Shelf/Shelf.mdp" />
     <Entry filename="VolumeControl/VolumeControl.mdp" />
-    <Entry filename="GCalendar/GCalendar.mdp" />
-    <Entry filename="GoogleSearch/InlineGoogleSearch.mdp" />
-    <Entry filename="del.icio.us/del.icio.us.mdp" />
     <Entry filename="ImageShack/ImageShack.mdp" />
     <Entry filename="Cl.ickable/Cl.ickable.mdp" />
     <Entry filename="ManLookUp/ManLookUp.mdp" />
-    <Entry filename="GDocs/GDocs.mdp" />
     <Entry filename="Banshee-1/Banshee-1.mdp" />
     <Entry filename="Microblogging/Microblogging.mdp" />
     <Entry filename="File/File.mdp" />
     <Entry filename="AptURL/AptURL.mdp" />
     <Entry filename="Bibtex/Bibtex.mdp" />
     <Entry filename="Confluence/Confluence.mdp" />
-    <Entry filename="EOG Slideshow/EOG Slideshow.mdp" />
     <Entry filename="JIRA/JIRA.mdp" />
     <Entry filename="MPD/MPD.mdp" />
     <Entry filename="PingFM/PingFM.mdp" />
@@ -230,12 +248,26 @@
     <Entry filename="SqueezeCenter/SqueezeCenterPlugin.mdp" />
     <Entry filename="Woof/Woof.mdp" />
     <Entry filename="Wordnet/Wordnet.mdp" />
-    <Entry filename="xmms2/xmms2.mdp" />
     <Entry filename="VirtualBox/VirtualBox.mdp" />
     <Entry filename="Translate/Translate.mdp" />
-    <Entry filename="Stock Quote/Stock Quote.mdp" />
-    <Entry filename="Terminal Server Client/Terminal Server Client.mdp" />
     <Entry filename="Thunderbird/Thunderbird.mdp" />
     <Entry filename="Skype/Skype.mdp" />
+    <Entry filename="Zim/Zim.mdp" />
+    <Entry filename="Putty/Putty.mdp" />
+    <Entry filename="SystemServices/SystemServices.mdp" />
+    <Entry filename="Alias/Alias.mdp" />
+    <Entry filename="ClawsMail/ClawsMail.mdp" />
+    <Entry filename="NX/NX.mdp" />
+    <Entry filename="Quote/Quote.mdp" />
+    <Entry filename="Opera/Opera.mdp" />
+    <Entry filename="Del.icio.us/del.icio.us.mdp" />
+    <Entry filename="EOG-Slideshow/EOG-Slideshow.mdp" />
+    <Entry filename="GoogleCalendar/GoogleCalendar.mdp" />
+    <Entry filename="GoogleDocs/GDocs.mdp" />
+    <Entry filename="GoogleContacts/GMailContacts.mdp" />
+    <Entry filename="GoogleSearch/GoogleSearch.mdp" />
+    <Entry filename="StockQuote/Stock Quote.mdp" />
+    <Entry filename="TerminalServerClient/TerminalServerClient.mdp" />
+    <Entry filename="Xmms2/xmms2.mdp" />
   </Entries>
 </Combine>

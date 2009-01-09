@@ -25,7 +25,7 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Addins.RTM
+namespace RememberTheMilk
 {
 	public class RTMRenameTask : Act
 	{
@@ -71,16 +71,11 @@ namespace Do.Addins.RTM
 			return true;
         }
         
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return null;
-        }
-        
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {
 			RTM.RenameTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 			                (items.First () as RTMTaskItem).Id, (modifierItems.First () as ITextItem).Text);
-			return null;
+			yield break;
         }
 	}
 }

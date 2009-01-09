@@ -27,164 +27,163 @@ namespace Translate
 	
 	public class Google : ITranslateProvider
 	{		
-		private List<LanguageItem> supported_langauges;
+		IEnumerable<LanguageItem> supported_langauges;
 		
-		public Google()
+		public Google ()
 		{			
-			supported_langauges = new List<LanguageItem>();
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Arabic"),
-			                                          Catalog.GetString("Translate to Arabic"),
-			                                          "ar",
-			                                          "arabic") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Bulgarian"),
-			                                          Catalog.GetString("Translate to Bulgarian"),
-			                                          "bg",
-			                                          "bulgarian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Catalon"),
-			                                          Catalog.GetString("Translate to Catalon"),
-			                                          "ca",
-			                                          "catalan") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Chinese (Simplified)"),
-			                                          Catalog.GetString("Translate to Chinese (Simplified)"),
-			                                          "zh-CN",
-			                                          "chinese-simp") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Chinese (Traditional)"),
-			                                          Catalog.GetString("Translate to Chinese (Traditional)"),
-			                                          "zh-TW",
-			                                          "chinese-trad") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Croatian"),
-			                                          Catalog.GetString("Translate to Croatian"),
-			                                          "hr",
-			                                          "croatian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Czech"),
-			                                          Catalog.GetString("Translate to Czech"),
-			                                          "cs",
-			                                          "czech") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Danish"),
-			                                          Catalog.GetString("Translate to Danish"),
-			                                          "da",
-			                                          "danish") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Dutch"),
-			                                          Catalog.GetString("Translate to Dutch"),
-			                                          "nl",
-			                                          "dutch") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("English"),
-			                                          Catalog.GetString("Translate to English"),
-			                                          "en",
-			                                          "english") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Filipino"),
-			                                          Catalog.GetString("Translate to Filipino"),
-			                                          "tl",
-			                                          "filipino") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Finnish"),
-			                                          Catalog.GetString("Translate to Finnish"),
-			                                          "fi",
-			                                          "finnish") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("French"),
-			                                          Catalog.GetString("Translate to French"),
-			                                          "fr",
-			                                          "french") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("German"),
-			                                          Catalog.GetString("Translate to German"),
-			                                          "de",
-			                                          "german") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Greek"),
-			                                          Catalog.GetString("Translate to Greek"),
-			                                          "el",
-			                                          "greek") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Hebrew"),
-			                                          Catalog.GetString("Translate to Hebrew"),
-			                                          "iw",
-			                                          "hebrew") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Hindi"),
-			                                          Catalog.GetString("Translate to Hindi"),
-			                                          "hi",
-			                                          "hindi") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Indonesian"),
-			                                          Catalog.GetString("Translate to Indonesian"),
-			                                          "id",
-			                                          "indonesian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Italian"),
-			                                          Catalog.GetString("Translate to Italian"),
-			                                          "it",
-			                                          "italian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Japanese"),
-			                                          Catalog.GetString("Translate to Japanese"),
-			                                          "ja",
-			                                          "japanese") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Korean"),
-			                                          Catalog.GetString("Translate to Korean"),
-			                                          "ko",
-			                                          "korean") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Latvian"),
-			                                          Catalog.GetString("Translate to Latvian"),
-			                                          "lv",
-			                                          "latvian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Lithuanian"),
-			                                          Catalog.GetString("Translate to Lithuanian"),
-			                                          "lt",
-			                                          "lithuanian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Norwegian"),
-			                                          Catalog.GetString("Translate to Norwegian"),
-			                                          "no",
-			                                          "norwegian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Polish"),
-			                                          Catalog.GetString("Translate to Polish"),
-			                                          "pl",
-			                                          "polish") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Portuguese"),
-			                                          Catalog.GetString("Translate to Portuguese"),
-			                                          "pt",
-			                                          "portuguese") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Romanian"),
-			                                          Catalog.GetString("Translate to Romanian"),
-			                                          "ro",
-			                                          "romanian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Russian"),
-			                                          Catalog.GetString("Translate to Russian"),
-			                                          "ru",
-			                                          "russian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Serbian"),
-			                                          Catalog.GetString("Translate to Serbian"),
-			                                          "sr",
-			                                          "serbian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Slovak"),
-			                                          Catalog.GetString("Translate to Slovak"),
-			                                          "sk",
-			                                          "slovak") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Slovenian"),
-			                                          Catalog.GetString("Translate to Slovenian"),
-			                                          "sl",
-			                                          "slovenian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Spanish"),
-			                                          Catalog.GetString("Translate to Spanish"),
-			                                          "es",
-			                                          "spanish") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Swedish"),
-			                                          Catalog.GetString("Translate to Swedish"),
-			                                          "sv",
-			                                          "swedish") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Ukranian"),
-			                                          Catalog.GetString("Translate to Ukranian"),
-			                                          "uk",
-			                                          "ukranian") );
-			supported_langauges.Add( new LanguageItem(Catalog.GetString("Vietnamese"),
-			                                          Catalog.GetString("Translate to Vietnamese"),
-			                                          "vi",
-			                                          "vietnamese") );
+			supported_langauges = new [] {
+				new LanguageItem (Catalog.GetString ("Arabic"),
+												Catalog.GetString ("Translate to Arabic"),
+												"ar",
+												"arabic"),
+				new LanguageItem (Catalog.GetString ("Bulgarian"),
+												Catalog.GetString ("Translate to Bulgarian"),
+												"bg",
+												"bulgarian"),
+				new LanguageItem (Catalog.GetString ("Catalon"),
+												Catalog.GetString ("Translate to Catalon"),
+												"ca",
+												"catalan"),
+				new LanguageItem (Catalog.GetString ("Chinese (Simplified)"),
+												Catalog.GetString ("Translate to Chinese (Simplified)"),
+												"zh-CN",
+												"chinese-simp"),
+				new LanguageItem (Catalog.GetString ("Chinese (Traditional)"),
+												Catalog.GetString ("Translate to Chinese (Traditional)"),
+												"zh-TW",
+												"chinese-trad"),
+				new LanguageItem (Catalog.GetString ("Croatian"),
+												Catalog.GetString ("Translate to Croatian"),
+												"hr",
+												"croatian"),
+				new LanguageItem (Catalog.GetString ("Czech"),
+												Catalog.GetString ("Translate to Czech"),
+												"cs",
+												"czech"),
+				new LanguageItem (Catalog.GetString ("Danish"),
+												Catalog.GetString ("Translate to Danish"),
+												"da",
+												"danish"),
+				new LanguageItem (Catalog.GetString ("Dutch"),
+												Catalog.GetString ("Translate to Dutch"),
+												"nl",
+												"dutch"),
+				new LanguageItem (Catalog.GetString ("English"),
+												Catalog.GetString ("Translate to English"),
+												"en",
+												"english"),
+				new LanguageItem (Catalog.GetString ("Filipino"),
+												Catalog.GetString ("Translate to Filipino"),
+												"tl",
+												"filipino"),
+				new LanguageItem (Catalog.GetString ("Finnish"),
+												Catalog.GetString ("Translate to Finnish"),
+												"fi",
+												"finnish"),
+				new LanguageItem (Catalog.GetString ("French"),
+												Catalog.GetString ("Translate to French"),
+												"fr",
+												"french"),
+				new LanguageItem (Catalog.GetString ("German"),
+												Catalog.GetString ("Translate to German"),
+												"de",
+												"german"),
+				new LanguageItem (Catalog.GetString ("Greek"),
+												Catalog.GetString ("Translate to Greek"),
+												"el",
+												"greek"),
+				new LanguageItem (Catalog.GetString ("Hebrew"),
+												Catalog.GetString ("Translate to Hebrew"),
+												"iw",
+												"hebrew"),
+				new LanguageItem (Catalog.GetString ("Hindi"),
+												Catalog.GetString ("Translate to Hindi"),
+												"hi",
+												"hindi"),
+				new LanguageItem (Catalog.GetString ("Indonesian"),
+												Catalog.GetString ("Translate to Indonesian"),
+												"id",
+												"indonesian"),
+				new LanguageItem (Catalog.GetString ("Italian"),
+												Catalog.GetString ("Translate to Italian"),
+												"it",
+												"italian"),
+				new LanguageItem (Catalog.GetString ("Japanese"),
+												Catalog.GetString ("Translate to Japanese"),
+												"ja",
+												"japanese"),
+				new LanguageItem (Catalog.GetString ("Korean"),
+												Catalog.GetString ("Translate to Korean"),
+												"ko",
+												"korean"),
+				new LanguageItem (Catalog.GetString ("Latvian"),
+												Catalog.GetString ("Translate to Latvian"),
+												"lv",
+												"latvian"),
+				new LanguageItem (Catalog.GetString ("Lithuanian"),
+												Catalog.GetString ("Translate to Lithuanian"),
+												"lt",
+												"lithuanian"),
+				new LanguageItem (Catalog.GetString ("Norwegian"),
+												Catalog.GetString ("Translate to Norwegian"),
+												"no",
+												"norwegian"),
+				new LanguageItem (Catalog.GetString ("Polish"),
+												Catalog.GetString ("Translate to Polish"),
+												"pl",
+												"polish"),
+				new LanguageItem (Catalog.GetString ("Portuguese"),
+												Catalog.GetString ("Translate to Portuguese"),
+												"pt",
+												"portuguese"),
+				new LanguageItem (Catalog.GetString ("Romanian"),
+												Catalog.GetString ("Translate to Romanian"),
+												"ro",
+												"romanian"),
+				new LanguageItem (Catalog.GetString ("Russian"),
+												Catalog.GetString ("Translate to Russian"),
+												"ru",
+												"russian"),
+				new LanguageItem (Catalog.GetString ("Serbian"),
+												Catalog.GetString ("Translate to Serbian"),
+												"sr",
+												"serbian"),
+				new LanguageItem (Catalog.GetString ("Slovak"),
+												Catalog.GetString ("Translate to Slovak"),
+												"sk",
+												"slovak"),
+				new LanguageItem (Catalog.GetString ("Slovenian"),
+												Catalog.GetString ("Translate to Slovenian"),
+												"sl",
+												"slovenian"),
+				new LanguageItem (Catalog.GetString ("Spanish"),
+												Catalog.GetString ("Translate to Spanish"),
+												"es",
+												"spanish"),
+				new LanguageItem (Catalog.GetString ("Swedish"),
+												Catalog.GetString ("Translate to Swedish"),
+												"sv",
+												"swedish"),
+				new LanguageItem (Catalog.GetString ("Ukranian"),
+												Catalog.GetString ("Translate to Ukranian"),
+												"uk",
+												"ukranian"),
+				new LanguageItem (Catalog.GetString ("Vietnamese"),
+												Catalog.GetString ("Translate to Vietnamese"),
+												"vi",
+												"vietnamese"),
+			};
 		}
 		
-		public string Name
-		{
+		public string Name {
 			get { return "Google"; }
 		}
 		
-		public string Icon
-		{
-			get { return "google.png@"+GetType().Assembly.FullName; }
+		public string Icon {
+			get { return "google.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public string BuildTextRequestUrl(string ifaceLang, string toLang, string fromLang, string req)
+		public string BuildTextRequestUrl (string ifaceLang, string toLang, string fromLang, string req)
 		{
 			string options_begin = "#";
 			string options_separator = "|";
@@ -203,60 +202,41 @@ namespace Translate
 			return request_url;
 		}
 		
-		public string BuildUrlRequestUrl(string ifaceLang, string toLang, string fromLang, string req)
+		public string BuildUrlRequestUrl (string ifaceLang, string toLang, string fromLang, string req)
 		{
-			string options_begin = "?u=";
-			string options_separator = "&";
-			string options_end = "";
-			
-			string request_url = "http://translate.google.com/translate";
-			
-			request_url += options_begin;
-			request_url += HttpUtility.UrlEncode(req);
-			request_url += options_separator;
-			request_url += "hl=" + ifaceLang;
-			request_url += options_separator;
-			request_url += "ie=UTF-8";
-			request_url += options_separator;
-			request_url += "sl=" + fromLang;
-			request_url += options_separator;
-			request_url += "tl=" + toLang;
-
-			return request_url;
+			return "http://translate.google.com/translate?u=" +
+				HttpUtility.UrlEncode (req) +
+				"&hl=" + ifaceLang +
+				"&ie=UTF-8" +
+				"&sl=" + fromLang +
+				"&tl=" + toLang;
 		}
 		
-		public List<LanguageItem> SupportedLanguages
-		{
+		public IEnumerable<LanguageItem> SupportedLanguages {
 			get { return supported_langauges; }
 		}
 		
-		public string DefaultSourceCode
-		{
+		public string DefaultSourceCode {
 			get { return AutoDetectCode; }
 		}
 		
-		public bool SupportsAutoDetect
-		{
+		public bool SupportsAutoDetect {
 			get { return true; }
 		}
 		
-		public string AutoDetectCode
-		{
+		public string AutoDetectCode {
 			get { return "auto"; }
 		}
 		
-		public bool SupportsUrlTranslate
-		{
+		public bool SupportsUrlTranslate {
 			get { return true; }
 		}
 		
-		public bool SupportsIfaceLang
-		{
+		public bool SupportsIfaceLang {
 			get { return true; }
 		}
 		
-		public string DefaultIfaceCode
-		{
+		public string DefaultIfaceCode {
 			get { return "en"; }
 		}
 

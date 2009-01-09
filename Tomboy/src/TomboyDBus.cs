@@ -211,11 +211,10 @@ namespace Tomboy
 			}
 			
 			note_title = TomboyInstance.GetNoteTitle (uri);
+			TomboyInstance.DisplayNote (uri);
 			
 			if (!string.IsNullOrEmpty (note_content))
 				TomboyInstance.SetNoteContents (uri, note_title + "\n\n" + note_content);
-			
-			TomboyInstance.DisplayNote (uri);
 			return uri;
 		}
 		
