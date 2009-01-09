@@ -55,7 +55,8 @@ SUBDIRS = \
 	VolumeControl \
 	WindowManager \
 	Woof \
-	Wordnet
+	Wordnet \
+	Xmms2 
 
 # Current dir _must_ be processed last; this ensures our repo is built with all the plugins
 SUBDIRS += .

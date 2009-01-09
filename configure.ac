@@ -162,6 +162,7 @@ VolumeControl/Makefile
 WindowManager/Makefile
 Woof/Makefile
 Wordnet/Makefile
+Xmms2/Makefile
 Makefile
 po/Makefile.in
 BundledLibraries/Makefile
