@@ -39,7 +39,6 @@ namespace Banshee
 		public BansheeItemSource()
 		{
 			items = new List<Item> ();
-			Banshee.Index ();
 		}
 		
 		public override string Name {
@@ -118,6 +117,7 @@ namespace Banshee
 		
 		public override void UpdateItems ()
 		{
+			Banshee.Index ();
 			items.Clear ();
 			
 			//Add browser features
