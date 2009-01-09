@@ -56,6 +56,7 @@ REFERENCES = \
 	Mono.Posix \
 	System \
 	System.Core \
+	System.Web \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \
