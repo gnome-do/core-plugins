@@ -91,8 +91,6 @@ namespace Pastebin
 			Match urlMatch = urlPattern.Match (responseText);
 			string url = urlMatch.Value;
 
-			Console.Error.WriteLine(responseText);
-				
 			if (url == string.Empty) {
 				throw new Exception ("Parsed url was empty. Monoport may have changed their format.");
 			}
