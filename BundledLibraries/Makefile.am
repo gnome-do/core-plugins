@@ -3,5 +3,4 @@ EXTRA_DIST = \
 	Google.GData.Calendar.dll \
 	Google.GData.Client.dll \
 	Google.GData.Contacts.dll \
-	Google.GData.Extensions.dll \
-	MonoTorrent.dll
+	Google.GData.Extensions.dll 
