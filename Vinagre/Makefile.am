@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=Vingare
+ASSEMBLY=Vinagre
 
 FILES = \
 	src/Vinagre.cs \
