@@ -136,7 +136,7 @@ namespace Microblogging
 			}
 
 			Contacts = newContacts;
-			Log.Debug (string.Format ("Microblogging: Found {0} contacts", Contacts.Count ()));
+			Log.Debug ("Microblogging: Found {0} contacts", Contacts.Count ());
 			return;
 		}
 
@@ -187,8 +187,8 @@ namespace Microblogging
 				messages_last_updated = message.Created;
 
 				OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
-			} catch (TwitterizerException e) {
-				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
+			} catch (TwitterizerException) {
+				// Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
 			} catch (ArgumentOutOfRangeException e) {
 				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
 				Log.Debug (e.StackTrace);

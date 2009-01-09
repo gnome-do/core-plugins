@@ -1,4 +1,4 @@
-// ProIFileItemSource.cs
+// ProfileItemSource.cs
 // 
 // GNOME Do is the legal property of its developers, whose names are too
 // numerous to list here.  Please refer to the COPYRIGHT file distributed with
@@ -39,17 +39,17 @@ namespace GNOME.Terminal
 
 		List<Item> items;
 
-		public ProfileItemSource()
+		public ProfileItemSource ()
 		{
 			items = new List<Item> ();
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Gnome Terminal Profiles"); }
+			get { return Catalog.GetString ("GNOME Terminal Profiles"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Indexes your Gnome Terminal profiles."); } 
+			get { return Catalog.GetString ("Indexes your GNOME Terminal profiles."); } 
 		}
 
 		public override string Icon {

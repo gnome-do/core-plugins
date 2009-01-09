@@ -82,7 +82,7 @@ namespace RememberTheMilk
         {
 			RTM.SetTaskPriority ( (items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 			                         (items.First () as RTMTaskItem).Id, (modifierItems.First () as RTMPriorityItem).Priority);
-			return null;
+			yield break;
         }
 	}
 }
