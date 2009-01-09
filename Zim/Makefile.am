@@ -4,6 +4,7 @@ ASSEMBLY=Zim
 
 FILES = \
 	src/Zim.cs \
+	src/ZimNewPageAction.cs \
 	src/ZimOpenPageAction.cs \
 	src/ZimPage.cs \
 	src/ZimPagesItemSource.cs
