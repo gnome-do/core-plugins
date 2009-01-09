@@ -32,7 +32,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/RSS.addin.xml \
-	Resources/feed-icon.png \
+	Resources/icons/feed-icon.png \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml
 

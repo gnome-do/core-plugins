@@ -12,7 +12,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/Quote.addin.xml \
-	Resources/quoted-globe.svg
+	Resources/icons/quoted-globe.svg
 
 REFERENCES = \
 	System \

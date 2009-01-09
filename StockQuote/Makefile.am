@@ -7,7 +7,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/StockQuote.addin.xml \
-	Resources/stock.png
+	Resources/icons/stock.png
 
 REFERENCES = \
 	Mono.Posix \

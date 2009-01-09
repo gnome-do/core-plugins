@@ -17,7 +17,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/JIRA.addin.xml \
-	Resources/jira.png
+	Resources/icons/jira.png
 
 REFERENCES = \
 	System \

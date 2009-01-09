@@ -17,7 +17,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/GCalendar.addin.xml \
-	Resources/calIcon.png
+	Resources/icons/calIcon.png
 
 REFERENCES = \
 	Mono.Posix \

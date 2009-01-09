@@ -16,36 +16,36 @@ FILES = \
 
 RESOURCES = \
 	Resources/PingFM.addin.xml \
-	Resources/bebo.png \
-	Resources/blogger.png \
-	Resources/brightkite.png \
-	Resources/delicious.png \
-	Resources/facebook.png \
-	Resources/flickr.png \
-	Resources/friendfeed.png \
-	Resources/friendster.png \
-	Resources/hi5.png \
-	Resources/identica.png \
-	Resources/jaiku.png \
-	Resources/koornk.png \
-	Resources/kwippy.png \
-	Resources/linkedin.png \
-	Resources/livejournal.png \
-	Resources/mashable.png \
-	Resources/multiply.png \
-	Resources/myspace.png \
-	Resources/pingfm.png \
-	Resources/plaxo.png \
-	Resources/plurk.png \
-	Resources/pownce.png \
-	Resources/rejaw.png \
-	Resources/tumblr.png \
-	Resources/twitter.png \
-	Resources/wordpress.png \
-	Resources/xanga.png \
-	Resources/yahoo360.png \
-	Resources/yammer.png \
-	Resources/youare.png 
+	Resources/icons/bebo.png \
+	Resources/icons/blogger.png \
+	Resources/icons/brightkite.png \
+	Resources/icons/delicious.png \
+	Resources/icons/facebook.png \
+	Resources/icons/flickr.png \
+	Resources/icons/friendfeed.png \
+	Resources/icons/friendster.png \
+	Resources/icons/hi5.png \
+	Resources/icons/identica.png \
+	Resources/icons/jaiku.png \
+	Resources/icons/koornk.png \
+	Resources/icons/kwippy.png \
+	Resources/icons/linkedin.png \
+	Resources/icons/livejournal.png \
+	Resources/icons/mashable.png \
+	Resources/icons/multiply.png \
+	Resources/icons/myspace.png \
+	Resources/icons/pingfm.png \
+	Resources/icons/plaxo.png \
+	Resources/icons/plurk.png \
+	Resources/icons/pownce.png \
+	Resources/icons/rejaw.png \
+	Resources/icons/tumblr.png \
+	Resources/icons/twitter.png \
+	Resources/icons/wordpress.png \
+	Resources/icons/xanga.png \
+	Resources/icons/yahoo360.png \
+	Resources/icons/yammer.png \
+	Resources/icons/youare.png 
 
 REFERENCES = \
 	System \

@@ -16,7 +16,8 @@ FILES = \
 	src/PidginAccountActions.cs
 
 RESOURCES = \
-	Resources/Pidgin.addin.xml
+	Resources/Pidgin.addin.xml \
+	Resources/icons/internet-group-chat.svg
 
 REFERENCES = \
 	System \

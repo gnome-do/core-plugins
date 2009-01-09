@@ -12,7 +12,7 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Resources/imageshack.png \
+	Resources/icons/imageshack.png \
 	Resources/ImageShack.addin.xml
 
 REFERENCES = \

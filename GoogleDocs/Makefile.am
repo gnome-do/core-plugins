@@ -17,10 +17,10 @@ FILES = \
 	src/Preferences.cs
 
 RESOURCES = \
-	Resources/GDocs.addin.xml \
-	Resources/gDocsIcon.png \
-	Resources/gDocsTrashIcon.png \
-	Resources/gDocsUploadIcon.png
+	Resources/GoogleDocs.addin.xml \
+	Resources/icons/gDocsIcon.png \
+	Resources/icons/gDocsTrashIcon.png \
+	Resources/icons/gDocsUploadIcon.png
 
 REFERENCES = \
 	Mono.Posix \

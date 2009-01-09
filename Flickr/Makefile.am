@@ -15,7 +15,7 @@ RESOURCES = \
 	Resources/Flickr.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Resources/flickr.png
+	Resources/icons/flickr.png
 
 REFERENCES = \
 	Mono.Posix \
