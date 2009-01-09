@@ -54,7 +54,8 @@ SUBDIRS = \
 	VirtualBox \
 	VolumeControl \
 	WindowManager \
-	Woof
+	Woof \
+	Wordnet
 
 # Current dir _must_ be processed last; this ensures our repo is built with all the plugins
 SUBDIRS += .

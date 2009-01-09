@@ -1,18 +1,15 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=Woof
+ASSEMBLY=Wordnet
 
 FILES = \
-	src/Woof.cs \
-	src/WoofAction.cs
+	src/WordnetAction.cs
 
 RESOURCES = \
-	Woof.addin.xml 
+	Wordnet.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \
 	System \
 	System.Core \
-	$(NDESK_DBUS_10_LIBS) \
-	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)

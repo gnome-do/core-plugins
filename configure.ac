@@ -161,6 +161,7 @@ VirtualBox/Makefile
 VolumeControl/Makefile
 WindowManager/Makefile
 Woof/Makefile
+Wordnet/Makefile
 Makefile
 po/Makefile.in
 BundledLibraries/Makefile
