@@ -12,7 +12,7 @@ FILES = \
 	src/Configuration.cs
 
 RESOURCES = \
-	Bibtex.addin.xml \
+	Resources/Bibtex.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml
 

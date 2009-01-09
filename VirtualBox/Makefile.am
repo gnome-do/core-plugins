@@ -16,7 +16,7 @@ FILES = \
 	src/VMThread.cs 
 
 RESOURCES = \
-	VirtualBox.addin.xml \
+	Resources/VirtualBox.addin.xml \
 	resources/os_dos.png \
 	resources/os_linux.png \
 	resources/os_os2warp4.png \

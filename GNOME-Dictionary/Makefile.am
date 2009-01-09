@@ -6,7 +6,7 @@ FILES = \
 	src/DefineAction.cs
 
 RESOURCES = \
-	GNOME-Dictionary.addin.xml
+	GNOME-Resources/Dictionary.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

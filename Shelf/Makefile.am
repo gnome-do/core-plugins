@@ -7,7 +7,7 @@ FILES = \
 	src/ShelfItemSource.cs
 
 RESOURCES = \
-	Shelf.addin.xml 
+	Resources/Shelf.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

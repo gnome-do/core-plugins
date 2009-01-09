@@ -7,7 +7,7 @@ FILES = \
 	src/WoofAction.cs
 
 RESOURCES = \
-	Woof.addin.xml 
+	Resources/Woof.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

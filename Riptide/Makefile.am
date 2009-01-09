@@ -8,7 +8,7 @@ FILES = \
 	src/TorrentSearchAction.cs
 
 RESOURCES = \
-	Riptide.addin.xml 
+	Resources/Riptide.addin.xml 
 
 REFERENCES = \
 	System \

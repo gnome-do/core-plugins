@@ -16,7 +16,7 @@ FILES = \
 	src/GCalPreferences.cs
 
 RESOURCES = \
-	GCalendar.addin.xml \
+	Resources/GCalendar.addin.xml \
 	resources/calIcon.png
 
 REFERENCES = \

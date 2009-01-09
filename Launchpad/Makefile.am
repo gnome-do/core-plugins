@@ -17,7 +17,7 @@ RESOURCES = \
 	Resources/LaunchpadRegister.png \
 	Resources/LaunchpadTranslations.png \
 	Resources/LaunchpadUser.png \
-	src/Launchpad.addin.xml
+	src/Resources/Launchpad.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

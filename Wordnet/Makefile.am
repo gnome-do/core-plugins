@@ -6,7 +6,7 @@ FILES = \
 	src/WordnetAction.cs
 
 RESOURCES = \
-	Wordnet.addin.xml 
+	Resources/Wordnet.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

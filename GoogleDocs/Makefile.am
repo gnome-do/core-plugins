@@ -17,7 +17,7 @@ FILES = \
 	src/Preferences.cs
 
 RESOURCES = \
-	GDocs.addin.xml \
+	Resources/GDocs.addin.xml \
 	resources/gDocsIcon.png \
 	resources/gDocsTrashIcon.png \
 	resources/gDocsUploadIcon.png

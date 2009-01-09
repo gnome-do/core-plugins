@@ -14,7 +14,7 @@ FILES = \
 
 
 RESOURCES = \
-	xmms2.addin.xml 
+	Resources/xmms2.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

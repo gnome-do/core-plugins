@@ -11,7 +11,7 @@ FILES = \
 	src/Providers/QuoteProviderFactory.cs
 
 RESOURCES = \
-	Quote.addin.xml \
+	Resources/Quote.addin.xml \
 	quoted-globe.svg
 
 REFERENCES = \

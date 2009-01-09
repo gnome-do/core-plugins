@@ -15,7 +15,7 @@ FILES = \
 	src/WindowControl.cs 
 
 RESOURCES = \
-	WindowManager.addin.xml 
+	Resources/WindowManager.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

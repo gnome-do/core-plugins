@@ -7,7 +7,7 @@ FILES = \
 	src/SSHHosts.cs
 
 RESOURCES = \
-	SSH.addin.xml 
+	Resources/SSH.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

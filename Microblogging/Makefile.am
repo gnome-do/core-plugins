@@ -8,7 +8,7 @@ MCS_FLAGS += -recurse:*.cs
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Microblogging.addin.xml \
+	Resources/Microblogging.addin.xml \
 	twitter-icon.svg \
 	twitter_items.svg
 

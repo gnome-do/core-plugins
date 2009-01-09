@@ -9,7 +9,7 @@ FILES = \
 	src/SessionCommandsItemSource.cs
 
 RESOURCES = \
-	src/GNOME-Session.addin.xml
+	src/GNOME-Resources/Session.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

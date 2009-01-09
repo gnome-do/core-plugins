@@ -6,7 +6,7 @@ FILES = \
 	src/AptUrl.cs
 
 RESOURCES = \
-	AptURL.addin.xml
+	Resources/AptURL.addin.xml
 
 REFERENCES = \
 	System \

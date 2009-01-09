@@ -31,7 +31,7 @@ FILES = \
 	gtk-gui/generated.cs
 
 RESOURCES = \
-	RSS.addin.xml \
+	Resources/RSS.addin.xml \
 	resources/feed-icon.png \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml

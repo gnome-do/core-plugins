@@ -10,7 +10,7 @@ FILES = \
 	src/VolumeItemSource.cs
 
 RESOURCES = \
-	VolumeControl.addin.xml 
+	Resources/VolumeControl.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \
