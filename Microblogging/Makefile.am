@@ -8,8 +8,7 @@ RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
 	Resources/Microblogging.addin.xml \
-	Resources/icons/twitter-icon.svg \
-	Resources/icons/twitter_items.svg
+	Resources/icons/microblogging.svg
 
 REFERENCES = \
 	Mono.Posix \

@@ -28,8 +28,8 @@
     <File name="src/Remote/JIRARssClient.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Remote/IJIRAServerFacade.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Remote/JIRAServerFacade.cs" subtype="Code" buildaction="Compile" />
-    <File name="Resources/jira.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/JIRA.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/jira.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

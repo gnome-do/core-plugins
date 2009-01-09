@@ -52,7 +52,7 @@ namespace Microblogging
 		}
 		
 		public override string Icon {
-			get { return "twitter_items.svg@" + GetType ().Assembly.FullName; }
+			get { return "microblogging.svg@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
