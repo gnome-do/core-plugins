@@ -2,14 +2,14 @@
 	id="GMail"
 	namespace= "Do"
 	version="1.5"
-	name="GMail Contacts"
+	name="Google Contacts"
 	description="Search your GMail contacts."
 	author="Alex Launi"
 	category="Official"
 	>
 
 	<Runtime>
-		<Import assembly="GMailContacts.dll"/>
+		<Import assembly="GoogleContacts.dll"/>
 		<Import assembly="Google.GData.Contacts.dll"/>
 		<Import assembly="Google.GData.Client.dll"/>
 		<Import assembly="Google.GData.Extensions.dll"/>

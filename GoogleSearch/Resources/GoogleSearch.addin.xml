@@ -9,7 +9,7 @@
 >
  
 	<Runtime>
-		<Import assembly="InlineGoogleSearch.dll"/>
+		<Import assembly="GoogleSearch.dll"/>
 	</Runtime>
 	
 	<Dependencies>

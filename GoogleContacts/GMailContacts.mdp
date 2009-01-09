@@ -28,7 +28,7 @@
     <File name="../BundledLibraries/Google.GData.Extensions.dll" subtype="Code" buildaction="Nothing" />
     <File name="src/Preferences.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GMailClient.cs" subtype="Code" buildaction="Compile" />
-    <File name="Resources/GMailContacts.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/GoogleContacts.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/gmail-logo.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/phone.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>

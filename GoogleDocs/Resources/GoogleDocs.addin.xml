@@ -9,7 +9,7 @@
 	>
 
 	<Runtime>
-		<Import assembly="GDocs.dll"/>
+		<Import assembly="GoogleDocs.dll"/>
 		<Import assembly="Google.GData.AccessControl.dll"/>
 		<Import assembly="Google.GData.Documents.dll"/>
 		<Import assembly="Google.GData.Client.dll"/>
