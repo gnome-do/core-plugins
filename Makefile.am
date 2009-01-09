@@ -51,6 +51,7 @@ SUBDIRS = \
 	StockQuote \
 	TerminalServerClient \
 	Text \
+	Translate \
 	Tomboy \
 	Vinagre \
 	VirtualBox \

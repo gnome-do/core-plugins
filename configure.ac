@@ -156,6 +156,7 @@ SSH/Makefile
 StockQuote/Makefile
 TerminalServerClient/Makefile
 Text/Makefile
+Translate/Makefile
 Tomboy/Makefile
 Vinagre/Makefile
 VirtualBox/Makefile
