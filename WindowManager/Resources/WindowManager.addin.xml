@@ -20,7 +20,6 @@
 	<Extension path="/Do/Action">
 		<Action type="WindowManager.WindowMinimizeAction" />
 		<Action type="WindowManager.WindowMaximizeAction" />
-		<Action type="WindowManager.WindowShadeAction" />
 		<Action type="WindowManager.WindowCloseAction" />
 		<Action type="WindowManager.ScreenTileAction" />
 		<Action type="WindowManager.ScreenCascadeAction" />

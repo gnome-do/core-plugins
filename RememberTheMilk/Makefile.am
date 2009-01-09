@@ -64,10 +64,12 @@ RESOURCES = \
 	Resources/icons/task-medium.png \
 	Resources/icons/task-overdue.png \
 	Resources/icons/task.png \
+	Resources/icons/task-postpone.png \
 	Resources/icons/task-priority-down.png \
 	Resources/icons/task-priority.png \
 	Resources/icons/task-priority-up.png \
 	Resources/icons/task-rename.png \
+	Resources/icons/task-repeat.png \
 	Resources/icons/task-setdue.png
 
 REFERENCES = \

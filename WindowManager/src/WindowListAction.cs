@@ -236,40 +236,6 @@ namespace WindowManager
 		}
 	}
 	
-	public class WindowShadeAction : WindowTogglableAction
-	{
-		public override string Name {
-			get { return Catalog.GetString ("Shade Window"); }
-		}
-		
-		public override string Description {
-			get { return Catalog.GetString ("Shade/Unshade a Window into its Titlebar"); }
-		}
-
-		public override string Icon {
-			get { return "top"; }
-		}
-		
-		public override void ToggleWindow (Window window)
-		{
-			if (window.IsShaded)
-				window.Unshade ();
-			else
-				window.Shade ();
-		}
-		
-		public override void ToggleGroup (List<Window> windows)
-		{
-			bool shade = windows.All (w => !w.IsShaded);
-			foreach (Window w in windows.Where (window => window.IsInViewport (window.Workspace))) {
-				if (shade) 
-					w.Shade();
-				else
-					w.Unshade ();
-			}
-		}
-	}
-	
 	public class WindowCloseAction : WindowActionAction
 	{
 		public override string Name {
