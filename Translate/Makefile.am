@@ -17,44 +17,44 @@ RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
 	Resources/Translate.addin.xml \
-	Resources/arabic.png \
-	Resources/bulgarian.png \
-	Resources/catalan.png \
-	Resources/chinese-simp.png \
-	Resources/chinese-trad.png \
-	Resources/croatian.png \
-	Resources/czech.png \
-	Resources/danish.png \
-	Resources/dutch.png \
-	Resources/english.png \
-	Resources/filipino.png \
-	Resources/finnish.png \
-	Resources/french.png \
-	Resources/german.png \
-	Resources/globe.png \
-	Resources/google.ico \
-	Resources/google.png \
-	Resources/greek.png \
-	Resources/hebrew.png \
-	Resources/hindi.png \
-	Resources/indonesian.png \
-	Resources/italian.png \
-	Resources/japanese.png \
-	Resources/korean.png \
-	Resources/latvian.png \
-	Resources/lithuanian.png \
-	Resources/norwegian.png \
-	Resources/polish.png \
-	Resources/portuguese.png \
-	Resources/romanian.png \
-	Resources/russian.png \
-	Resources/serbian.png \
-	Resources/slovak.png \
-	Resources/slovenian.png \
-	Resources/spanish.png \
- 	Resources/swedish.png \
-	Resources/ukranian.png \
-	Resources/vietnamese.png 
+	Resources/icons/arabic.png \
+	Resources/icons/bulgarian.png \
+	Resources/icons/catalan.png \
+	Resources/icons/chinese-simp.png \
+	Resources/icons/chinese-trad.png \
+	Resources/icons/croatian.png \
+	Resources/icons/czech.png \
+	Resources/icons/danish.png \
+	Resources/icons/dutch.png \
+	Resources/icons/english.png \
+	Resources/icons/filipino.png \
+	Resources/icons/finnish.png \
+	Resources/icons/french.png \
+	Resources/icons/german.png \
+	Resources/icons/globe.png \
+	Resources/icons/google.ico \
+	Resources/icons/google.png \
+	Resources/icons/greek.png \
+	Resources/icons/hebrew.png \
+	Resources/icons/hindi.png \
+	Resources/icons/indonesian.png \
+	Resources/icons/italian.png \
+	Resources/icons/japanese.png \
+	Resources/icons/korean.png \
+	Resources/icons/latvian.png \
+	Resources/icons/lithuanian.png \
+	Resources/icons/norwegian.png \
+	Resources/icons/polish.png \
+	Resources/icons/portuguese.png \
+	Resources/icons/romanian.png \
+	Resources/icons/russian.png \
+	Resources/icons/serbian.png \
+	Resources/icons/slovak.png \
+	Resources/icons/slovenian.png \
+	Resources/icons/spanish.png \
+ 	Resources/icons/swedish.png \
+	Resources/icons/ukranian.png \
+	Resources/icons/vietnamese.png 
 
 REFERENCES = \
 	Mono.Posix \

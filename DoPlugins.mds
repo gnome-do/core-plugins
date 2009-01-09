@@ -44,7 +44,6 @@
       <Entry build="True" name="SqueezeCenterPlugin" configuration="Debug" />
       <Entry build="True" name="Woof" configuration="Debug" />
       <Entry build="True" name="Wordnet" configuration="Debug" />
-      <Entry build="True" name="xmms2" configuration="Debug" />
       <Entry build="True" name="VirtualBox" configuration="Debug" />
       <Entry build="True" name="Translate" configuration="Debug" />
       <Entry build="True" name="Thunderbird" configuration="Debug" />
@@ -65,6 +64,7 @@
       <Entry build="True" name="GoogleSearch" configuration="Debug" />
       <Entry build="True" name="Stock Quote" configuration="Debug" />
       <Entry build="True" name="Terminal Server Client" configuration="Debug" />
+      <Entry build="True" name="xmms2" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -110,7 +110,6 @@
       <Entry build="True" name="SqueezeCenterPlugin" configuration="Release" />
       <Entry build="True" name="Woof" configuration="Release" />
       <Entry build="True" name="Wordnet" configuration="Release" />
-      <Entry build="True" name="xmms2" configuration="Release" />
       <Entry build="True" name="VirtualBox" configuration="Release" />
       <Entry build="True" name="Translate" configuration="Release" />
       <Entry build="True" name="Thunderbird" configuration="Release" />
@@ -131,6 +130,7 @@
       <Entry build="True" name="GoogleSearch" configuration="Release" />
       <Entry build="True" name="Stock Quote" configuration="Release" />
       <Entry build="True" name="Terminal Server Client" configuration="Release" />
+      <Entry build="True" name="xmms2" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -177,7 +177,6 @@
     <Execute type="None" entry="SqueezeCenterPlugin" />
     <Execute type="None" entry="Woof" />
     <Execute type="None" entry="Wordnet" />
-    <Execute type="None" entry="xmms2" />
     <Execute type="None" entry="VirtualBox" />
     <Execute type="None" entry="Translate" />
     <Execute type="None" entry="Thunderbird" />
@@ -198,6 +197,7 @@
     <Execute type="None" entry="GoogleSearch" />
     <Execute type="None" entry="Stock Quote" />
     <Execute type="None" entry="Terminal Server Client" />
+    <Execute type="None" entry="xmms2" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -244,7 +244,6 @@
     <Entry filename="SqueezeCenter/SqueezeCenterPlugin.mdp" />
     <Entry filename="Woof/Woof.mdp" />
     <Entry filename="Wordnet/Wordnet.mdp" />
-    <Entry filename="xmms2/xmms2.mdp" />
     <Entry filename="VirtualBox/VirtualBox.mdp" />
     <Entry filename="Translate/Translate.mdp" />
     <Entry filename="Thunderbird/Thunderbird.mdp" />
@@ -265,5 +264,6 @@
     <Entry filename="GoogleSearch/GoogleSearch.mdp" />
     <Entry filename="StockQuote/Stock Quote.mdp" />
     <Entry filename="TerminalServerClient/TerminalServerClient.mdp" />
+    <Entry filename="Xmms2/xmms2.mdp" />
   </Entries>
 </Combine>

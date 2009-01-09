@@ -8,7 +8,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/ClawsMail.addin.xml \
-	Resources/claws-mail.png
+	Resources/icons/claws-mail.png
 
 REFERENCES = \
 	System \

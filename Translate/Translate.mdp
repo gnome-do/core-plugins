@@ -14,44 +14,6 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="img/arabic.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/bulgarian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/catalan.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/chinese-simp.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/chinese-trad.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/croatian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/czech.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/danish.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/dutch.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/english.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/filipino.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/finnish.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/french.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/german.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/globe.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/google.ico" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/google.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/greek.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/hebrew.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/hindi.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/indonesian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/italian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/japanese.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/korean.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/latvian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/lithuanian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/norwegian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/polish.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/portuguese.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/romanian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/russian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/serbian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/slovak.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/slovenian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/spanish.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/swedish.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/ukranian.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="img/vietnamese.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/LanguageItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TranslateAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/UI/LanguageNode.cs" subtype="Code" buildaction="Compile" />
@@ -63,6 +25,45 @@
     <File name="gtk-gui/Translate.ConfigUI.cs" subtype="Code" buildaction="Compile" />
     <File name="src/UI/ConfigUI.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/Translate.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/arabic.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/bulgarian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/catalan.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/chinese-simp.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/chinese-trad.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/croatian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/czech.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/danish.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/dutch.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/english.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/filipino.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/finnish.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/french.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/german.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/globe.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/google.ico" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/google.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/greek.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/hebrew.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/hindi.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/indonesian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/italian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/japanese.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/korean.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/latvian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/lithuanian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/norwegian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/polish.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/portuguese.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/romanian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/russian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/serbian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/slovak.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/slovenian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/spanish.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/swedish.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/ukranian.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/vietnamese.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
