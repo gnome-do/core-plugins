@@ -15,8 +15,7 @@ REFERENCES = \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
-	$(DO_UNIVERSE_LIBS) \
-	../BundledLibraries/MonoTorrent.dll
+	$(DO_UNIVERSE_LIBS)
 
 RESOURCES = \
 	Riptide.addin.xml \
