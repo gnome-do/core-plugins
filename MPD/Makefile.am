@@ -11,7 +11,7 @@ FILES = \
 	src/AssemblyInfo.cs
 
 RESOURCES = \
-	src/Resources/MPD.addin.xml
+	Resources/MPD.addin.xml
 
 REFERENCES = \
 	System \

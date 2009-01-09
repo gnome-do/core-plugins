@@ -12,8 +12,8 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	resources/imageshack.png \
-	src/Resources/ImageShack.addin.xml
+	Resources/imageshack.png \
+	Resources/ImageShack.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

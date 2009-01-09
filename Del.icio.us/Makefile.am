@@ -12,8 +12,8 @@ FILES = \
 	src/TagsItemSource.cs 
 
 RESOURCES = \
-	Resources/del.icio.us.addin.xml \
-	resources/delicious.png
+	Resources/delicious.addin.xml \
+	Resources/delicious.png
 
 REFERENCES = \
 	Mono.Posix \

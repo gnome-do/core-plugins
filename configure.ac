@@ -116,7 +116,6 @@ Bibtex/Makefile
 Cl.ickable/Makefile
 ClawsMail/Makefile
 Confluence/Makefile
-del.icio.us/Makefile
 DiskMounter/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile
@@ -124,14 +123,14 @@ Evolution/Makefile
 File/Makefile
 Firefox/Makefile
 Flickr/Makefile
-GCalendar/Makefile
-GDocs/Makefile
-GMailContacts/Makefile
 GNOME-Dictionary/Makefile
 GNOME-Screenshot/Makefile
 GNOME-Session/Makefile
 GNOME-Terminal/Makefile
 GoogleCalculator/Makefile
+GoogleCalendar/Makefile
+GoogleContacts/Makefile
+GoogleDocs/Makefile
 GoogleMaps/Makefile
 GoogleSearch/Makefile
 ImageShack/Makefile

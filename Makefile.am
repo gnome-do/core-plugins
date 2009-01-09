@@ -18,14 +18,14 @@ SUBDIRS = \
 	File \
 	Firefox \
 	Flickr \
-	GCalendar \
-	GDocs \
-	GMailContacts \
 	GNOME-Dictionary \
 	GNOME-Screenshot \
 	GNOME-Session \
 	GNOME-Terminal \
 	GoogleCalculator \
+	GoogleCalendar \
+	GoogleContacts \
+	GoogleDocs \
 	GoogleMaps \
 	GoogleSearch \
 	ImageShack \

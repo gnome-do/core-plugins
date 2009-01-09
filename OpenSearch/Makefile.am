@@ -12,7 +12,7 @@ FILES = \
 	src/OpenSearchParser.cs
 
 RESOURCES = \
-	src/Resources/OpenSearch.addin.xml
+	Resources/OpenSearch.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

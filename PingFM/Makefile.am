@@ -16,36 +16,36 @@ FILES = \
 
 RESOURCES = \
 	Resources/PingFM.addin.xml \
-	resources/bebo.png \
-	resources/blogger.png \
-	resources/brightkite.png \
-	resources/delicious.png \
-	resources/facebook.png \
-	resources/flickr.png \
-	resources/friendfeed.png \
-	resources/friendster.png \
-	resources/hi5.png \
-	resources/identica.png \
-	resources/jaiku.png \
-	resources/koornk.png \
-	resources/kwippy.png \
-	resources/linkedin.png \
-	resources/livejournal.png \
-	resources/mashable.png \
-	resources/multiply.png \
-	resources/myspace.png \
-	resources/pingfm.png \
-	resources/plaxo.png \
-	resources/plurk.png \
-	resources/pownce.png \
-	resources/rejaw.png \
-	resources/tumblr.png \
-	resources/twitter.png \
-	resources/wordpress.png \
-	resources/xanga.png \
-	resources/yahoo360.png \
-	resources/yammer.png \
-	resources/youare.png 
+	Resources/bebo.png \
+	Resources/blogger.png \
+	Resources/brightkite.png \
+	Resources/delicious.png \
+	Resources/facebook.png \
+	Resources/flickr.png \
+	Resources/friendfeed.png \
+	Resources/friendster.png \
+	Resources/hi5.png \
+	Resources/identica.png \
+	Resources/jaiku.png \
+	Resources/koornk.png \
+	Resources/kwippy.png \
+	Resources/linkedin.png \
+	Resources/livejournal.png \
+	Resources/mashable.png \
+	Resources/multiply.png \
+	Resources/myspace.png \
+	Resources/pingfm.png \
+	Resources/plaxo.png \
+	Resources/plurk.png \
+	Resources/pownce.png \
+	Resources/rejaw.png \
+	Resources/tumblr.png \
+	Resources/twitter.png \
+	Resources/wordpress.png \
+	Resources/xanga.png \
+	Resources/yahoo360.png \
+	Resources/yammer.png \
+	Resources/youare.png 
 
 REFERENCES = \
 	System \

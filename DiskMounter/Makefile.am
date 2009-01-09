@@ -10,7 +10,7 @@ FILES = \
 	src/UnmountAction.cs
 
 RESOURCES = \
-	src/Resources/DiskMounter.addin.xml
+	Resources/DiskMounter.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

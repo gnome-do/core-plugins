@@ -48,27 +48,27 @@ FILES = \
 
 RESOURCES = \
 	Resources/RTM.addin.xml \
-	resources/rtm.png \
-	resources/task-add.png \
-	resources/task-complete.png \
-	resources/task-delete.png \
-	resources/task-due.png \
-	resources/task-high-due.png \
-	resources/task-high-overdue.png \
-	resources/task-high.png \
-	resources/task-low-due.png \
-	resources/task-low-overdue.png \
-	resources/task-low.png \
-	resources/task-medium-due.png \
-	resources/task-medium-overdue.png \
-	resources/task-medium.png \
-	resources/task-overdue.png \
-	resources/task.png \
-	resources/task-priority-down.png \
-	resources/task-priority.png \
-	resources/task-priority-up.png \
-	resources/task-rename.png \
-	resources/task-setdue.png
+	Resources/rtm.png \
+	Resources/task-add.png \
+	Resources/task-complete.png \
+	Resources/task-delete.png \
+	Resources/task-due.png \
+	Resources/task-high-due.png \
+	Resources/task-high-overdue.png \
+	Resources/task-high.png \
+	Resources/task-low-due.png \
+	Resources/task-low-overdue.png \
+	Resources/task-low.png \
+	Resources/task-medium-due.png \
+	Resources/task-medium-overdue.png \
+	Resources/task-medium.png \
+	Resources/task-overdue.png \
+	Resources/task.png \
+	Resources/task-priority-down.png \
+	Resources/task-priority.png \
+	Resources/task-priority-up.png \
+	Resources/task-rename.png \
+	Resources/task-setdue.png
 
 REFERENCES = \
 	System \

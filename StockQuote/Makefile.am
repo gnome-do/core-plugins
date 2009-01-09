@@ -1,17 +1,17 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=Epiphany
+ASSEMBLY=SSH
 
 FILES = \
-	src/EpiphanyBookmarkItemSource.cs
+	src/StockQuoteAction.cs 
 
 RESOURCES = \
-	Resources/Epiphany.addin.xml
+	Resources/StockQuote.addin.xml \
+	Resources/stock.png
 
 REFERENCES = \
 	Mono.Posix \
 	System \
 	System.Core \
-	System.Xml \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)

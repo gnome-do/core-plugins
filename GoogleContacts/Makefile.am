@@ -16,8 +16,8 @@ RESOURCES = \
 	Resources/GMailContacts.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	resources/gmail-logo.png \
-	resources/phone.png
+	Resources/gmail-logo.png \
+	Resources/phone.png
 
 REFERENCES = \
 	Mono.Posix \

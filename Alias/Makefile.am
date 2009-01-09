@@ -9,7 +9,7 @@ FILES = \
 	src/DeleteAliasAction.cs
 
 RESOURCES = \
-	Resources/Resources/Alias.addin.xml
+	Resources/Alias.addin.xml
 
 REFERENCES = \
 	System \

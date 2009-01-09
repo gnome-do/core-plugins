@@ -1,12 +1,13 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=Epiphany
+ASSEMBLY=TerminalServerClient
 
 FILES = \
-	src/EpiphanyBookmarkItemSource.cs
+	src/TSClientItem.cs \
+	src/TSClientItemSource.cs
 
 RESOURCES = \
-	Resources/Epiphany.addin.xml
+	Resources/TerminalServerClient.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

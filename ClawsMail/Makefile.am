@@ -7,8 +7,8 @@ FILES = \
 	src/ClawsContactsItemSource.cs
 
 RESOURCES = \
-	resources/Resources/ClawsMail.addin.xml \
-	resources/claws-mail.png
+	Resources/ClawsMail.addin.xml \
+	Resources/claws-mail.png
 
 REFERENCES = \
 	System \

@@ -18,9 +18,9 @@ FILES = \
 
 RESOURCES = \
 	Resources/GDocs.addin.xml \
-	resources/gDocsIcon.png \
-	resources/gDocsTrashIcon.png \
-	resources/gDocsUploadIcon.png
+	Resources/gDocsIcon.png \
+	Resources/gDocsTrashIcon.png \
+	Resources/gDocsUploadIcon.png
 
 REFERENCES = \
 	Mono.Posix \
