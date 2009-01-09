@@ -7,6 +7,7 @@ SUBDIRS = \
 	Alias \
 	AptURL \
 	Archive \
+	Banshee \
 	Bibtex \
 	Cl.ickable \
 	ClawsMail \

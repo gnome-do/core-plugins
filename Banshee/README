@@ -1,0 +1,8 @@
+This plugin requires you to patch a trunk build of Banshee.
+If you would rather not run banshee from source, or patch your copy
+then you should wait for the Banshee 1.4.2 release that should be out
+shortly. However if you wish to start testing this plugin sooner rather
+than later, apply ``indexer.patch" in your banshee source directory with
+$ patch -p0 < indexer.patch
+
+Please report any issues to http://launchpad.net/do-plugins
