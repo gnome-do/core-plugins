@@ -7,7 +7,7 @@ FILES = \
 	src/LocateFilesAction.cs
 
 RESOURCES = \
-	src/LocateFiles.addin.xml
+	src/Resources/LocateFiles.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

@@ -47,7 +47,7 @@ FILES = \
 	src/RtmNet/Utils.cs
 
 RESOURCES = \
-	RTM.addin.xml \
+	Resources/RTM.addin.xml \
 	resources/rtm.png \
 	resources/task-add.png \
 	resources/task-complete.png \

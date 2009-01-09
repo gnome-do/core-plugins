@@ -9,7 +9,7 @@ FILES = \
 	src/ZimPagesItemSource.cs
 
 RESOURCES = \
-	Zim.addin.xml
+	Resources/Zim.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

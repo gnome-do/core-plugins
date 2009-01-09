@@ -13,7 +13,7 @@ FILES = \
 	gtk-gui/Tomboy.TomboyConfiguration.cs
 
 RESOURCES = \
-	Tomboy.addin.xml 
+	Resources/Tomboy.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

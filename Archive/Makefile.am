@@ -8,7 +8,7 @@ FILES = \
 	src/ExtractArchiveAction.cs
 
 RESOURCES = \
-	src/Archive.addin.xml
+	src/Resources/Archive.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

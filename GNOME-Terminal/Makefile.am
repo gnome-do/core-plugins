@@ -10,7 +10,7 @@ FILES = \
 	src/RunInTerminalAction.cs
 
 RESOURCES = \
-	GNOME-Terminal.addin.xml
+	GNOME-Resources/Terminal.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

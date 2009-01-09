@@ -14,7 +14,7 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	InlineGoogleSearch.addin.xml
+	Resources/InlineGoogleSearch.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

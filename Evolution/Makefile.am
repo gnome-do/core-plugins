@@ -11,7 +11,7 @@ FILES = \
 	src/AddressContactDetailItem.cs 
 
 RESOURCES = \
-	Resources/Evolution.addin.xml \
+	Resources/Resources/Evolution.addin.xml \
 	Resources/phone.png
 
 REFERENCES = \

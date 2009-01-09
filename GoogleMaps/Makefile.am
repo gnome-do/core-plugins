@@ -6,7 +6,7 @@ FILES = \
 	src/MapAction.cs
 
 RESOURCES = \
-	GoogleMaps.addin.xml
+	Resources/GoogleMaps.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

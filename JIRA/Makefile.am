@@ -16,7 +16,7 @@ FILES = \
 	gtk-gui/JIRA.ConfigWidget.cs
 
 RESOURCES = \
-	JIRA.addin.xml
+	Resources/JIRA.addin.xml
 
 REFERENCES = \
 	System \

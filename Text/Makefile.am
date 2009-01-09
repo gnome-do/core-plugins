@@ -6,7 +6,7 @@ FILES = \
 	src/AppendTextAction.cs 
 
 RESOURCES = \
-	Text.addin.xml 
+	Resources/Text.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

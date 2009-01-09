@@ -13,7 +13,7 @@ FILES = \
 	src/Preferences.cs
 
 RESOURCES = \
-	GMailContacts.addin.xml \
+	Resources/GMailContacts.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
 	resources/gmail-logo.png \

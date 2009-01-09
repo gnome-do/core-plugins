@@ -48,7 +48,7 @@ FILES = \
 	gtk-gui/generated.cs
 
 RESOURCES = \
-	resources/SystemServices.addin.xml
+	resources/Resources/SystemServices.addin.xml
 
 REFERENCES =  \
 	System \

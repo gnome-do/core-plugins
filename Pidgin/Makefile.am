@@ -16,7 +16,7 @@ FILES = \
 	src/PidginAccountActions.cs
 
 RESOURCES = \
-	Pidgin.addin.xml
+	Resources/Pidgin.addin.xml
 
 REFERENCES = \
 	System \

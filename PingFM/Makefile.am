@@ -15,7 +15,7 @@ FILES = \
 	src/PingFMServiceItemSource.cs 
 
 RESOURCES = \
-	PingFM.addin.xml \
+	Resources/PingFM.addin.xml \
 	resources/bebo.png \
 	resources/blogger.png \
 	resources/brightkite.png \

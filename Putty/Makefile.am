@@ -8,7 +8,7 @@ FILES = \
 	src/PuttySessionItemSource.cs
 
 RESOURCES = \
-	Putty.addin.xml 
+	Resources/Putty.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

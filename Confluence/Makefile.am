@@ -11,7 +11,7 @@ FILES = \
 	src/Remote/ConfluenceSoapServiceService.cs
 
 RESOURCES = \
-	Confluence.addin.xml \
+	Resources/Confluence.addin.xml \
 	confluence.png \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml

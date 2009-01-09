@@ -8,7 +8,7 @@ FILES = \
 	src/VNCHostSource.cs
 
 RESOURCES = \
-	Vinagre.addin.xml 
+	Resources/Vinagre.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

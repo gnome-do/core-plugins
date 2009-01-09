@@ -11,7 +11,7 @@ FILES = \
 	src/MusicItemSource.cs
 
 RESOURCES = \
-	Rhythmbox.addin.xml 
+	Resources/Rhythmbox.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \

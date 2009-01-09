@@ -8,7 +8,7 @@ FILES = \
 	src/WebClipsItem.cs
 
 RESOURCES = \
-	Resources/Cl.ickable.addin.xml
+	Resources/Resources/Cl.ickable.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

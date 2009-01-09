@@ -12,7 +12,7 @@ FILES = \
 	src/TagsItemSource.cs 
 
 RESOURCES = \
-	del.icio.us.addin.xml \
+	Resources/del.icio.us.addin.xml \
 	resources/delicious.png
 
 REFERENCES = \

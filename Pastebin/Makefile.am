@@ -20,7 +20,7 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	src/Pastebin.addin.xml
+	src/Resources/Pastebin.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

@@ -7,7 +7,7 @@ FILES = \
 	src/NXHosts.cs
 
 RESOURCES = \
-	NX.addin.xml 
+	Resources/NX.addin.xml 
 
 REFERENCES = \
 	Mono.Posix \
