@@ -9,7 +9,7 @@
 	>
 
 	<Runtime>
-		<Import assembly="Terminal Server Client.dll"/>
+		<Import assembly="TerminalServerClient.dll"/>
 	</Runtime>
 
 	<Dependencies>
