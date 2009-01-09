@@ -3,6 +3,8 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Translate
 
 FILES = \
+	gtk-gui/generated.cs \
+	gtk-gui/Translate.ConfigUI.cs \
 	src/LanguageItem.cs \
 	src/Provider/Google.cs \
 	src/Provider/ITranslateProvider.cs \
@@ -12,6 +14,8 @@ FILES = \
 	src/UI/LanguageNode.cs
 
 RESOURCES = \
+	gtk-gui/gui.stetic \
+	gtk-gui/objects.xml \
 	Resources/Translate.addin.xml \
 	Resources/arabic.png \
 	Resources/bulgarian.png \
