@@ -2,7 +2,6 @@ include $(top_srcdir)/build.rules.mk
 
 ASSEMBLY=Microblog
 
-# Spaces suck for autofoo, so we need to handle this differently
 MCS_FLAGS += -recurse:*.cs
 
 RESOURCES = \
