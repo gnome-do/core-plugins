@@ -99,6 +99,11 @@ namespace Pastebin
 			get { return "pastebin.ca"; }
 		}
 
+		public string UserAgent
+		{
+			get { return ""; }
+		}
+
 		public string BaseUrl
 		{
 			get { return urlRoot + "/quiet-paste.php"; }

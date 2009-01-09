@@ -41,6 +41,9 @@ namespace Pastebin
 				request.ContentType = "application/x-www-form-urlencoded";
 				request.AllowAutoRedirect = pastebin.ShouldAllowAutoRedirect;
 
+				if (!string.IsNullOrEmpty (pastebin.UserAgent))
+					request.UserAgent = pastebin.UserAgent;
+
 				UTF8Encoding encoding = new UTF8Encoding ();
 				byte[] data = encoding.GetBytes (postQueryString);
 				request.ContentLength = data.Length;
