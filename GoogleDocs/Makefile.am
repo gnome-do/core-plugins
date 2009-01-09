@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=GDocs
+ASSEMBLY=GoogleDocs
 
 FILES = \
 	src/CertHandler.cs \

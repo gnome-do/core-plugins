@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=GCalendar
+ASSEMBLY=GoogleCalendar
 
 FILES = \
 	src/CertHandler.cs \

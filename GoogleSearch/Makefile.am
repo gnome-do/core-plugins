@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=InlineGoogleSearch
+ASSEMBLY=GoogleSearch
 
 FILES = \
 	gtk-gui/generated.cs \

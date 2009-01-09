@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=GMailContacts
+ASSEMBLY=GoogleContacts
 
 FILES = \
 	gtk-gui/generated.cs \

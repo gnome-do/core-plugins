@@ -63,7 +63,7 @@
       <Entry build="True" name="GoogleContacts" configuration="Debug" />
       <Entry build="True" name="GoogleSearch" configuration="Debug" />
       <Entry build="True" name="Stock Quote" configuration="Debug" />
-      <Entry build="True" name="Terminal Server Client" configuration="Debug" />
+      <Entry build="True" name="TerminalServerClient" configuration="Debug" />
       <Entry build="True" name="xmms2" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
@@ -129,7 +129,7 @@
       <Entry build="True" name="GoogleContacts" configuration="Release" />
       <Entry build="True" name="GoogleSearch" configuration="Release" />
       <Entry build="True" name="Stock Quote" configuration="Release" />
-      <Entry build="True" name="Terminal Server Client" configuration="Release" />
+      <Entry build="True" name="TerminalServerClient" configuration="Release" />
       <Entry build="True" name="xmms2" configuration="Release" />
     </Configuration>
   </Configurations>
@@ -196,7 +196,7 @@
     <Execute type="None" entry="GoogleContacts" />
     <Execute type="None" entry="GoogleSearch" />
     <Execute type="None" entry="Stock Quote" />
-    <Execute type="None" entry="Terminal Server Client" />
+    <Execute type="None" entry="TerminalServerClient" />
     <Execute type="None" entry="xmms2" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
