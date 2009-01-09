@@ -3,7 +3,6 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=OpenSearch
 
 FILES = \
-	src/AssemblyInfo.cs \
 	src/FirefoxOpenSearchDirectoryProvider.cs \
 	src/IOpenSearchItem.cs \
 	src/OpenSearchAction.cs \
@@ -12,7 +11,7 @@ FILES = \
 	src/OpenSearchParser.cs
 
 RESOURCES = \
-	src/OpenSearch.addin.xml
+	Resources/OpenSearch.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

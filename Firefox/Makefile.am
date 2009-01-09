@@ -6,7 +6,7 @@ FILES = \
 	src/BookmarkItemSource.cs
 
 RESOURCES = \
-	src/Firefox.addin.xml
+	Resources/Firefox.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

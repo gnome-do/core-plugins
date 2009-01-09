@@ -3,11 +3,10 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=LocateFiles
 
 FILES = \
-	src/AssemblyInfo.cs \
 	src/LocateFilesAction.cs
 
 RESOURCES = \
-	src/LocateFiles.addin.xml
+	Resources/LocateFiles.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

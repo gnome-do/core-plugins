@@ -12,7 +12,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/Evolution.addin.xml \
-	Resources/phone.png
+	Resources/icons/phone.png
 
 REFERENCES = \
 	Mono.Posix \

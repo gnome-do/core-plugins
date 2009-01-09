@@ -6,7 +6,7 @@ FILES = \
 	src/EpiphanyBookmarkItemSource.cs
 
 RESOURCES = \
-	src/Epiphany.addin.xml
+	Resources/Epiphany.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

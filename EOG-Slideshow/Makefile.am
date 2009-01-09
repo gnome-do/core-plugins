@@ -6,7 +6,7 @@ FILES = \
 	src/PlaySlideshowAction.cs
 
 RESOURCES = \
-	EOG-Slideshow.addin.xml
+	Resources/EOG-Slideshow.addin.xml
 
 REFERENCES = \
 	System \

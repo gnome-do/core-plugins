@@ -6,7 +6,7 @@ FILES = \
 	src/GoogleCalculatorAction.cs
 
 RESOURCES = \
-	src/GoogleCalculatorAction.addin.xml
+	Resources/GoogleCalculator.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

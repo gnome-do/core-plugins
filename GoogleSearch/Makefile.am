@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=InlineGoogleSearch
+ASSEMBLY=GoogleSearch
 
 FILES = \
 	gtk-gui/generated.cs \
@@ -14,7 +14,7 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	InlineGoogleSearch.addin.xml
+	Resources/GoogleSearch.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

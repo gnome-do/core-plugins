@@ -6,7 +6,7 @@ FILES = \
 	src/OperaBookmarkItemSource.cs
 
 RESOURCES = \
-	Opera.addin.xml
+	Resources/Opera.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

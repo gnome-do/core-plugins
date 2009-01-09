@@ -7,9 +7,8 @@ MCS_FLAGS += -recurse:*.cs
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Microblogging.addin.xml \
-	twitter-icon.svg \
-	twitter_items.svg
+	Resources/Microblogging.addin.xml \
+	Resources/icons/microblogging.svg
 
 REFERENCES = \
 	Mono.Posix \

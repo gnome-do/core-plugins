@@ -3,21 +3,20 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Launchpad
 
 FILES = \
-	src/AssemblyInfo.cs \
 	src/LaunchpadAction.cs \
 	src/LaunchpadItem.cs \
 	src/LaunchpadItems.cs
 
 RESOURCES = \
-	Resources/LaunchpadAnswers.png \
-	Resources/LaunchpadBlueprints.png \
-	Resources/LaunchpadBugs.png \
-	Resources/LaunchpadCode.png \
-	Resources/Launchpad.png \
-	Resources/LaunchpadRegister.png \
-	Resources/LaunchpadTranslations.png \
-	Resources/LaunchpadUser.png \
-	src/Launchpad.addin.xml
+	Resources/icons/LaunchpadAnswers.png \
+	Resources/icons/LaunchpadBlueprints.png \
+	Resources/icons/LaunchpadBugs.png \
+	Resources/icons/LaunchpadCode.png \
+	Resources/icons/Launchpad.png \
+	Resources/icons/LaunchpadRegister.png \
+	Resources/icons/LaunchpadTranslations.png \
+	Resources/icons/LaunchpadUser.png \
+	Resources/Launchpad.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

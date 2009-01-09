@@ -5,7 +5,6 @@ ASSEMBLY=Pastebin
 FILES = \
 	gtk-gui/generated.cs \
 	gtk-gui/Pastebin.PastebinConfig.cs \
-	src/AssemblyInfo.cs \
 	src/Config/PastebinConfig.cs \
 	src/PastebinAction.cs \
 	src/Pastebin.cs \
@@ -20,7 +19,7 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	src/Pastebin.addin.xml
+	Resources/Pastebin.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

@@ -7,11 +7,10 @@ FILES = \
 	src/MPD.cs \
 	src/MPDItemSource.cs \
 	src/MPDItems.cs \
-	src/MusicItems.cs \
-	src/AssemblyInfo.cs
+	src/MusicItems.cs 
 
 RESOURCES = \
-	src/MPD.addin.xml
+	Resources/MPD.addin.xml
 
 REFERENCES = \
 	System \

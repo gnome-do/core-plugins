@@ -17,28 +17,6 @@
     <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
     <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="RTM.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/rtm.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-add.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-complete.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-delete.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-due.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-high.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-high-due.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-low.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-low-due.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-medium.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-medium-due.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-priority.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-setdue.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-high-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-low-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-medium-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-priority-down.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-priority-up.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/task-rename.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="src/RTMCompleteTask.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTM.cs" subtype="Code" buildaction="Compile" />
@@ -77,14 +55,36 @@
     <File name="src/RtmNet/User.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RtmNet/Utils.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RtmNet/License.txt" subtype="Code" buildaction="Nothing" />
-    <File name="resources/task-postpone.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/RTMPostponeTask.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTMSetRecurrence.cs" subtype="Code" buildaction="Compile" />
-    <File name="resources/task-repeat.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTMUncompleteTask.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/RememberTheMilk.Configuration.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTMPreferences.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/RTM.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/rtm.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-add.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-complete.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-delete.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-high.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-high-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-high-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-low.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-low-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-low-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-medium.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-medium-due.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-medium-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-overdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-postpone.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-priority.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-priority-down.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-priority-up.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-rename.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-repeat.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/task-setdue.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

@@ -2,15 +2,20 @@ include $(top_srcdir)/build.rules.mk
 
 ASSEMBLY=Rhythmbox
 
-MCS_FLAGS += -recurse:src/*.cs
+FILES = \
+	src/MusicItems.cs \
+	src/Rhythmbox.cs \
+	src/EnqueueAction.cs \
+	src/RhythmboxItems.cs \
+	src/PlayAction.cs \
+	src/MusicItemSource.cs
 
 RESOURCES = \
-	Resources/Rhythmbox.addin.xml
+	Resources/Rhythmbox.addin.xml 
 
 REFERENCES = \
 	System \
 	System.Core \
-	System.Web \
 	System.Xml \
 	Mono.Posix \
 	$(GTK_SHARP_20_LIBS) \

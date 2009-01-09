@@ -7,7 +7,7 @@ FILES = \
 	src/ManLookUpEntries.cs
 
 RESOURCES = \
-	src/ManLookUp.addin.xml
+	Resources/ManLookUp.addin.xml
 
 REFERENCES = \
 	System \

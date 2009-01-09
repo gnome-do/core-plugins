@@ -15,8 +15,6 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Pastebin.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Pastebin.cs" subtype="Code" buildaction="Compile" />
     <File name="src/PastebinAction.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
@@ -34,6 +32,7 @@
     <File name="src/TextSyntax/ITextSyntaxItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TextSyntax/TextSyntaxItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/LodgeIt.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/Pastebin.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

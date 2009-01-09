@@ -18,7 +18,6 @@
     <File name="src/WindowListAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/IWindowList.cs" subtype="Code" buildaction="Compile" />
     <File name="src/WindowItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/WindowManager.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/WindowItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/ScreenListAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/WindowListItems.cs" subtype="Code" buildaction="Compile" />
@@ -26,6 +25,7 @@
     <File name="src/ScreenItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Util.cs" subtype="Code" buildaction="Compile" />
     <File name="src/WindowControl.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/WindowManager.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

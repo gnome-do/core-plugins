@@ -18,14 +18,14 @@ SUBDIRS = \
 	File \
 	Firefox \
 	Flickr \
-	GCalendar \
-	GDocs \
-	GMailContacts \
 	GNOME-Dictionary \
 	GNOME-Screenshot \
 	GNOME-Session \
 	GNOME-Terminal \
 	GoogleCalculator \
+	GoogleCalendar \
+	GoogleContacts \
+	GoogleDocs \
 	GoogleMaps \
 	GoogleSearch \
 	ImageShack \
@@ -35,22 +35,32 @@ SUBDIRS = \
 	ManLookUp \
 	Microblogging \
 	MPD \
+	NX \
 	OpenSearch \
 	Opera \
 	Pastebin \
 	Pidgin \
+	PingFM \
+	Putty \
 	Quote \
+	RememberTheMilk \
 	Rhythmbox \
 	Riptide \
-	RSS \
 	Shelf \
 	SSH \
-	Tasque \
+	StockQuote \
+	TerminalServerClient \
 	Text \
+	Translate \
 	Tomboy \
 	Vinagre \
+	VirtualBox \
 	VolumeControl \
-	WindowManager
+	WindowManager \
+	Woof \
+	Wordnet \
+	Xmms2 \
+	Zim 
 
 # Current dir _must_ be processed last; this ensures our repo is built with all the plugins
 SUBDIRS += .

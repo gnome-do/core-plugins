@@ -11,7 +11,7 @@ FILES = \
 	src/WholeScreenScreenshotItem.cs
 
 RESOURCES = \
-	src/GNOME-Screenshot.addin.xml
+	Resources/GNOME-Screenshot.addin.xml
 
 REFERENCES = \
 	Mono.Posix \

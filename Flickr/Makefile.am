@@ -12,10 +12,10 @@ FILES = \
 	src/UploadConfig.cs
 
 RESOURCES = \
-	Flickr.addin.xml \
+	Resources/Flickr.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	resources/flickr.png
+	Resources/icons/flickr.png
 
 REFERENCES = \
 	Mono.Posix \

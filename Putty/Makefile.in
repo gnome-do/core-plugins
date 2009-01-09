@@ -14,6 +14,9 @@
 
 @SET_MAKE@
 
+# Rules to more easily specify a C# build for automake.
+#
+# Inspired and adapted from Banshee's build system
 
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
@@ -32,7 +35,8 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/Makefile.include
+	$(top_srcdir)/build.rules.mk
+@ENABLE_DEBUG_TRUE@am__append_1 = -debug -d:DEBUG
 subdir = Putty
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/shamrock/expansions.m4 \
@@ -44,10 +48,6 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bundledlibsdir)" \
-	"$(DESTDIR)$(linuxpkgconfigdir)" "$(DESTDIR)$(pluginfilesdir)"
-binSCRIPT_INSTALL = $(INSTALL_SCRIPT)
-SCRIPTS = $(bin_SCRIPTS)
 SOURCES =
 DIST_SOURCES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
@@ -56,10 +56,9 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-bundledlibsDATA_INSTALL = $(INSTALL_DATA)
-linuxpkgconfigDATA_INSTALL = $(INSTALL_DATA)
-pluginfilesDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(bundledlibs_DATA) $(linuxpkgconfig_DATA) $(pluginfiles_DATA)
+am__installdirs = "$(DESTDIR)$(plugindir)"
+pluginDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(plugin_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
@@ -81,10 +80,14 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DOADDINS_CFLAGS = @DOADDINS_CFLAGS@
-DOADDINS_LIBS = @DOADDINS_LIBS@
-DODBUS_CFLAGS = @DODBUS_CFLAGS@
-DODBUS_LIBS = @DODBUS_LIBS@
+DO_DBUS_CFLAGS = @DO_DBUS_CFLAGS@
+DO_DBUS_LIBS = @DO_DBUS_LIBS@
+DO_PLATFORM_CFLAGS = @DO_PLATFORM_CFLAGS@
+DO_PLATFORM_LIBS = @DO_PLATFORM_LIBS@
+DO_PLATFORM_LINUX_CFLAGS = @DO_PLATFORM_LINUX_CFLAGS@
+DO_PLATFORM_LINUX_LIBS = @DO_PLATFORM_LINUX_LIBS@
+DO_UNIVERSE_CFLAGS = @DO_UNIVERSE_CFLAGS@
+DO_UNIVERSE_LIBS = @DO_UNIVERSE_LIBS@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
@@ -96,6 +99,10 @@ FLICKRNET_CFLAGS = @FLICKRNET_CFLAGS@
 FLICKRNET_LIBS = @FLICKRNET_LIBS@
 GCONF_SHARP_20_CFLAGS = @GCONF_SHARP_20_CFLAGS@
 GCONF_SHARP_20_LIBS = @GCONF_SHARP_20_LIBS@
+GDATA_SHARP_ACL_LIBS = @GDATA_SHARP_ACL_LIBS@
+GDATA_SHARP_CALENDAR_LIBS = @GDATA_SHARP_CALENDAR_LIBS@
+GDATA_SHARP_CONTACTS_LIBS = @GDATA_SHARP_CONTACTS_LIBS@
+GDATA_SHARP_DOCUMENTS_LIBS = @GDATA_SHARP_DOCUMENTS_LIBS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_SHARP_20_CFLAGS = @GLADE_SHARP_20_CFLAGS@
 GLADE_SHARP_20_LIBS = @GLADE_SHARP_20_LIBS@
@@ -233,102 +240,58 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-EXTRA_DIST = $(build_sources) $(build_resx_files) \
-	$(build_others_files) $(ASSEMBLY_WRAPPER_IN) $(EXTRAS) \
-	$(DATA_FILES) $(build_culture_res_files)
-@ENABLE_DEBUG_TRUE@ASSEMBLY_COMPILER_COMMAND = gmcs
-@ENABLE_RELEASE_TRUE@ASSEMBLY_COMPILER_COMMAND = gmcs
-@ENABLE_DEBUG_TRUE@ASSEMBLY_COMPILER_FLAGS = -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-@ENABLE_RELEASE_TRUE@ASSEMBLY_COMPILER_FLAGS = -noconfig -codepage:utf8 -warn:4 -optimize+
-@ENABLE_DEBUG_TRUE@ASSEMBLY = bin/Debug/Putty.dll
-@ENABLE_RELEASE_TRUE@ASSEMBLY = bin/Release/Putty.dll
-@ENABLE_DEBUG_TRUE@ASSEMBLY_MDB = $(ASSEMBLY).mdb
-@ENABLE_RELEASE_TRUE@ASSEMBLY_MDB = 
-@ENABLE_DEBUG_TRUE@COMPILE_TARGET = library
-@ENABLE_RELEASE_TRUE@COMPILE_TARGET = library
-@ENABLE_DEBUG_TRUE@PROJECT_REFERENCES = 
-@ENABLE_RELEASE_TRUE@PROJECT_REFERENCES = 
-@ENABLE_DEBUG_TRUE@BUILD_DIR = bin/Debug
-@ENABLE_RELEASE_TRUE@BUILD_DIR = bin/Release
-AL = al2
-SATELLITE_ASSEMBLY_NAME = .resources.dll
-DATA_FILES = 
+TARGET = library
+SOURCES_BUILD = $(addprefix $(srcdir)/, $(FILES))
+RESOURCES_EXPANDED = $(addprefix $(srcdir)/, $(RESOURCES))
+RESOURCES_BUILD = $(foreach resource, $(RESOURCES_EXPANDED), \
+        -resource:$(resource),$(notdir $(resource)))
+
+BUILD_DIR = $(top_builddir)/build
+ASSEMBLY_EXTENSION = $(strip $(patsubst library, dll, $(TARGET)))
+ASSEMBLY_FILE = $(BUILD_DIR)/$(ASSEMBLY).$(ASSEMBLY_EXTENSION)
+STD_REFERENCES = $(foreach ref,$(filter-out -r:%,$(REFERENCES)),-r:$(ref))
+BUILD_REFERENCES = $(filter -r:%,$(REFERENCES) $(STD_REFERENCES))
+OUTPUT_FILES = \
+        $(ASSEMBLY_FILE) \
+        $(ASSEMBLY_FILE).mdb
+
+
+# Install plugins as data; there's no need for them to be excutable
+plugindir = ${datadir}/gnome-do/plugins
+plugin_DATA = $(foreach file,$(filter %.dll,$(OUTPUT_FILES)),$(file) $(file).mdb)
+MCS_FLAGS = $(MCS_LINQ_FLAG) -noconfig -codepage:utf8 -warn:4 \
+	$(am__append_1)
+
+#
+# Clean and dist targets
+#
+EXTRA_DIST = $(SOURCES_BUILD) $(RESOURCES_EXPANDED) $(THEME_ICONS_SOURCE) \
+	$(foreach pkgcfg_file, $(PKG_CONFIG_FILES), $(pkgcfg_file).in)
+
+CLEANFILES = $(OUTPUT_FILES) $(pkgconfig_DATA)
+DISTCLEANFILES = *.pidb
+MAINTAINERCLEANFILES = Makefile.in
+ASSEMBLY = Putty
 FILES = \
 	src/PuttyAction.cs \
 	src/PuttySession.cs \
 	src/PuttySessionItemSource.cs
 
 RESOURCES = \
-	resources/Putty.addin.xml
+	Resources/Putty.addin.xml 
 
 REFERENCES = \
-	System \
 	Mono.Posix \
-	$(DOADDINS_LIBS)
+	System \
+	System.Web \
+	System.Core \
+	$(DO_PLATFORM_LIBS) \
+	$(DO_UNIVERSE_LIBS)
 
-DLL_REFERENCES = 
-CLEANFILES = $(ASSEMBLY) $(ASSEMBLY).mdb $(BINARIES) \
-	$(build_resx_resources) $(build_satellite_assembly_list)
-VALID_CULTURES = ar bg ca zh-CHS cs da de el en es fi fr he hu is it ja ko nl no pl pt ro ru hr sk sq sv th tr id uk be sl et lv lt fa vi hy eu mk af fo hi sw gu ta te kn mr gl kok ar-SA bg-BG ca-ES zh-TW cs-CZ da-DK de-DE el-GR en-US fi-FI fr-FR he-IL hu-HU is-IS it-IT ja-JP ko-KR nl-NL nb-NO pl-PL pt-BR ro-RO ru-RU hr-HR sk-SK sq-AL sv-SE th-TH tr-TR id-ID uk-UA be-BY sl-SI et-EE lv-LV lt-LT fa-IR vi-VN hy-AM eu-ES mk-MK af-ZA fo-FO hi-IN sw-KE gu-IN ta-IN te-IN kn-IN mr-IN gl-ES kok-IN ar-IQ zh-CN de-CH en-GB es-MX fr-BE it-CH nl-BE nn-NO pt-PT sv-FI ar-EG zh-HK de-AT en-AU es-ES fr-CA ar-LY zh-SG de-LU en-CA es-GT fr-CH ar-DZ zh-MO en-NZ es-CR fr-LU ar-MA en-IE es-PA ar-TN en-ZA es-DO ar-OM es-VE ar-YE es-CO ar-SY es-PE ar-JO es-AR ar-LB en-ZW es-EC ar-KW en-PH es-CL ar-AE es-UY ar-BH es-PY ar-QA es-BO es-SV es-HN es-NI es-PR zh-CHT
-build_sources = $(FILES) $(GENERATED_FILES)
-build_sources_embed = $(build_sources:%='$(srcdir)/%')
-comma__ = ,
-get_resource_name = $(firstword $(subst $(comma__), ,$1))
-get_culture = $(lastword $(subst ., ,$(basename $1)))
-is_cultured_resource = $(and $(word 3,$(subst ., ,$1)), $(filter $(VALID_CULTURES),$(lastword $(subst ., ,$(basename $1)))))
-build_resx_list = $(foreach res, $(RESOURCES), $(if $(filter %.resx, $(call get_resource_name,$(res))),$(res),))
-build_non_culture_resx_list = $(foreach res, $(build_resx_list),$(if $(call is_cultured_resource,$(call get_resource_name,$(res))),,$(res)))
-build_non_culture_others_list = $(foreach res, $(filter-out $(build_resx_list),$(RESOURCES)),$(if $(call is_cultured_resource,$(call get_resource_name,$(res))),,$(res)))
-build_others_list = $(build_non_culture_others_list)
-build_xamlg_list = $(filter %.xaml.g.cs, $(FILES))
-
-# resgen all .resx resources
-build_resx_files = $(foreach res, $(build_resx_list), $(call get_resource_name,$(res)))
-build_resx_resources = $(build_resx_files:.resx=.resources)
-
-# embed resources for the main assembly
-build_resx_resources_hack = $(subst .resx,.resources, $(build_non_culture_resx_list))
-build_resx_resources_embed = $(build_resx_resources_hack:%='-resource:%')
-build_others_files = $(foreach res, $(build_others_list),$(call get_resource_name,$(res)))
-build_others_resources = $(build_others_files)
-build_others_resources_embed = $(build_others_list:%='-resource:$(srcdir)/%')
-build_resources = $(build_resx_resources) $(build_others_resources)
-build_resources_embed = $(build_resx_resources_embed) $(build_others_resources_embed)
-build_references_ref = $(foreach ref, $(REFERENCES), $(if $(filter \
-	-pkg:%, $(ref)), $(ref), $(if $(filter -r:%, $(ref)), $(ref), \
-	-r:$(ref)))) $(foreach ref, $(DLL_REFERENCES), -r:$(ref)) \
-	$(foreach ref, $(PROJECT_REFERENCES), -r:$(ref))
-DISTCLEANFILES = $(GENERATED_FILES) $(pc_files) $(BUILD_DIR)/*
-bin_SCRIPTS = $(BINARIES)
-
-############################################################
-# We want to install where GNOME-Do will pick our plugins  #
-# up from.  This is datadir/gnome-do/plugins               #
-############################################################
-pluginfilesdir = @datadir@/gnome-do/plugins
-bundledlibsdir = $(pluginfilesdir)
-bundledlibs_DATA = $(BUNDLED_LIBS)
-pluginfiles_DATA = $(ASSEMBLY)
-linuxpkgconfigdir = @libdir@/pkgconfig
-linuxpkgconfig_DATA = $(LINUX_PKGCONFIG)
-
-############################################################
-# Bundled libs are bad, m'kay!                             #
-# But we've got a bunch of them, so let's make it easier   #
-############################################################
-bundledir = $(srcdir)/../BundledLibraries
-
-# generating satellite assemblies
-culture_resources = $(foreach res, $(RESOURCES), $(if $(call is_cultured_resource,$(call get_resource_name, $(res))),$(res)))
-cultures = $(sort $(foreach res, $(culture_resources), $(call get_culture,$(call get_resource_name,$(res)))))
-culture_resource_dependencies = $(BUILD_DIR)/$1/$(SATELLITE_ASSEMBLY_NAME): $(subst .resx,.resources,$2)
-culture_resource_commandlines = cmd_line_satellite_$1 += '/embed:$(subst .resx,.resources,$2)'
-build_satellite_assembly_list = $(cultures:%=$(BUILD_DIR)/%/$(SATELLITE_ASSEMBLY_NAME))
-build_culture_res_files = $(foreach res, $(culture_resources),$(call get_resource_name,$(res)))
 all: all-am
 
 .SUFFIXES:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/Makefile.include $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/build.rules.mk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -357,75 +320,22 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-install-binSCRIPTS: $(bin_SCRIPTS)
+install-pluginDATA: $(plugin_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
-	@list='$(bin_SCRIPTS)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  if test -f $$d$$p; then \
-	    f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
-	    echo " $(binSCRIPT_INSTALL) '$$d$$p' '$(DESTDIR)$(bindir)/$$f'"; \
-	    $(binSCRIPT_INSTALL) "$$d$$p" "$(DESTDIR)$(bindir)/$$f"; \
-	  else :; fi; \
-	done
-
-uninstall-binSCRIPTS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(bin_SCRIPTS)'; for p in $$list; do \
-	  f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
-	  echo " rm -f '$(DESTDIR)$(bindir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(bindir)/$$f"; \
-	done
-install-bundledlibsDATA: $(bundledlibs_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(bundledlibsdir)" || $(MKDIR_P) "$(DESTDIR)$(bundledlibsdir)"
-	@list='$(bundledlibs_DATA)'; for p in $$list; do \
+	test -z "$(plugindir)" || $(MKDIR_P) "$(DESTDIR)$(plugindir)"
+	@list='$(plugin_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f=$(am__strip_dir) \
-	  echo " $(bundledlibsDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(bundledlibsdir)/$$f'"; \
-	  $(bundledlibsDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(bundledlibsdir)/$$f"; \
+	  echo " $(pluginDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(plugindir)/$$f'"; \
+	  $(pluginDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(plugindir)/$$f"; \
 	done
 
-uninstall-bundledlibsDATA:
+uninstall-pluginDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(bundledlibs_DATA)'; for p in $$list; do \
+	@list='$(plugin_DATA)'; for p in $$list; do \
 	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(bundledlibsdir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(bundledlibsdir)/$$f"; \
-	done
-install-linuxpkgconfigDATA: $(linuxpkgconfig_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(linuxpkgconfigdir)" || $(MKDIR_P) "$(DESTDIR)$(linuxpkgconfigdir)"
-	@list='$(linuxpkgconfig_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(linuxpkgconfigDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(linuxpkgconfigdir)/$$f'"; \
-	  $(linuxpkgconfigDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(linuxpkgconfigdir)/$$f"; \
-	done
-
-uninstall-linuxpkgconfigDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(linuxpkgconfig_DATA)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(linuxpkgconfigdir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(linuxpkgconfigdir)/$$f"; \
-	done
-install-pluginfilesDATA: $(pluginfiles_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(pluginfilesdir)" || $(MKDIR_P) "$(DESTDIR)$(pluginfilesdir)"
-	@list='$(pluginfiles_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(pluginfilesDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(pluginfilesdir)/$$f'"; \
-	  $(pluginfilesDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(pluginfilesdir)/$$f"; \
-	done
-
-uninstall-pluginfilesDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(pluginfiles_DATA)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(pluginfilesdir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(pluginfilesdir)/$$f"; \
+	  echo " rm -f '$(DESTDIR)$(plugindir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(plugindir)/$$f"; \
 	done
 tags: TAGS
 TAGS:
@@ -462,9 +372,9 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(SCRIPTS) $(DATA)
+all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bundledlibsdir)" "$(DESTDIR)$(linuxpkgconfigdir)" "$(DESTDIR)$(pluginfilesdir)"; do \
+	for dir in "$(DESTDIR)$(plugindir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -493,6 +403,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-am
 
 clean-am: clean-generic mostlyclean-am
@@ -511,12 +422,11 @@ info: info-am
 
 info-am:
 
-install-data-am: install-bundledlibsDATA install-linuxpkgconfigDATA \
-	install-pluginfilesDATA
+install-data-am: install-pluginDATA
 
 install-dvi: install-dvi-am
 
-install-exec-am: install-binSCRIPTS
+install-exec-am:
 
 install-html: install-html-am
 
@@ -546,64 +456,44 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binSCRIPTS uninstall-bundledlibsDATA \
-	uninstall-linuxpkgconfigDATA uninstall-pluginfilesDATA
+uninstall-am: uninstall-pluginDATA
 
 .MAKE: install-am install-strip
 
 .PHONY: all all-am check check-am clean clean-generic distclean \
 	distclean-generic distdir dvi dvi-am html html-am info info-am \
-	install install-am install-binSCRIPTS install-bundledlibsDATA \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-linuxpkgconfigDATA \
-	install-man install-pdf install-pdf-am install-pluginfilesDATA \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
-	pdf-am ps ps-am uninstall uninstall-am uninstall-binSCRIPTS \
-	uninstall-bundledlibsDATA uninstall-linuxpkgconfigDATA \
-	uninstall-pluginfilesDATA
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-pluginDATA install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am uninstall \
+	uninstall-am uninstall-pluginDATA
 
 
-all: $(ASSEMBLY)
+all: $(ASSEMBLY_FILE)
 
-# macros
+$(ASSEMBLY_FILE).mdb: $(ASSEMBLY_FILE)
 
-# $(call emit-deploy-target,deploy-variable-name)
-define emit-deploy-target
-$($1): $($1_SOURCE)
-	mkdir -p $$(dir $($1))
-	cp '$$<' '$$@'
-endef
-
-# $(call emit-deploy-wrapper,wrapper-variable-name,wrapper-sourcefile,x)
-# assumes that for a wrapper foo.pc its source template is foo.pc.in
-# if $3 is non-empty then wrapper is marked exec
-define emit-deploy-wrapper
-$($1): $2 
-	mkdir -p '$$(@D)'
-	cp '$$<' '$$@'
-	$(if $3,chmod +x '$$@')
-
-endef
-
-$(eval $(foreach res, $(culture_resources), $(eval $(call culture_resource_dependencies,$(call get_culture,$(call get_resource_name,$(res))),$(call get_resource_name,$(res))))))
-$(eval $(foreach res, $(culture_resources), $(eval $(call culture_resource_commandlines,$(call get_culture,$(call get_resource_name,$(res))),$(res)))))
-
-$(build_satellite_assembly_list): $(BUILD_DIR)/%/$(SATELLITE_ASSEMBLY_NAME):
-	mkdir -p '$(@D)'
-	$(AL) -out:'$@' -culture:$* -t:lib $(cmd_line_satellite_$*)
-
-$(build_xamlg_list): %.xaml.g.cs: %.xaml
-	xamlg '$<'
-
-$(build_resx_resources) : %.resources: %.resx
-	resgen2 '$<' '$@'
-
-$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
-	mkdir -p $(dir $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+$(ASSEMBLY_FILE): $(SOURCES_BUILD) $(RESOURCES_EXPANDED) $(COMPONENT_DEPS)
+	@mkdir -p $(BUILD_DIR)
+	@colors=no; \
+	case $$TERM in \
+                "xterm" | "rxvt" | "rxvt-unicode") \
+                        test "x$$COLORTERM" != "x" && colors=yes ;; \
+                "xterm-color") colors=yes ;; \
+	esac; \
+	if [ "x$$colors" = "xyes" ]; then \
+                tty -s && true || { colors=no; true; } \
+	fi; \
+	test "x$$colors" = "xyes" && \
+	        echo -e "\033[1mCompiling $(notdir $@)...\033[0m" || \
+	        echo "Compiling $(notdir $@)...";
+	@$(MCS) $(MCS_FLAGS) -target:$(TARGET) -out:$@ $(BUILD_DEFINES) $(BUILD_REFERENCES) $(COMPONENT_REFERENCES) $(RESOURCES_BUILD) $(SOURCES_BUILD) 
+	@if [ -e $(srcdir)/$(notdir $@.config) ]; then \
+	        cp $(srcdir)/$(notdir $@.config) $(BUILD_DIR) ; \
+	fi;
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

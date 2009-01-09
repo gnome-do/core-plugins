@@ -29,7 +29,7 @@ BUILD_DIR = bin/Release
 endif
 
 AL=al2
-SATELLITE_ASSEMBLY_NAME=.resources.dll
+SATELLITE_ASSEMBLY_NAME=.Resources.dll
 
 all: $(ASSEMBLY)
 
@@ -48,7 +48,7 @@ FILES = \
 	gtk-gui/generated.cs
 
 RESOURCES = \
-	resources/SystemServices.addin.xml
+	Resources/Resources/SystemServices.addin.xml
 
 REFERENCES =  \
 	System \
@@ -68,9 +68,9 @@ include $(top_srcdir)/Makefile.include
 $(build_xamlg_list): %.xaml.g.cs: %.xaml
 	xamlg '$<'
 
-$(build_resx_resources) : %.resources: %.resx
+$(build_resx_Resources) : %.Resources: %.resx
 	resgen2 '$<' '$@'
 
-$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+$(ASSEMBLY) $(ASSEMBLY_MDB): $(build_sources) $(build_Resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
 	mkdir -p $(dir $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_Resources_embed) $(build_references_ref)

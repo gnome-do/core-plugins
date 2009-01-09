@@ -22,43 +22,43 @@
     <File name="src/PingFMServiceItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="PingFM.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/PingFMApi.cs" subtype="Code" buildaction="Compile" />
     <File name="src/PingFMServiceItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="resources/bebo.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/blogger.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/brightkite.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/delicious.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/facebook.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/friendfeed.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/friendster.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/hi5.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/jaiku.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/koornk.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/kwippy.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/linkedin.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/livejournal.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/mashable.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/myspace.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/pingfm.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/plaxo.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/plurk.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/pownce.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/rejaw.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/tumblr.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/twitter.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/wordpress.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/xanga.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/yahoo360.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/identica.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/yammer.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/flickr.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="gtk-gui/PingFM.Configuration.cs" subtype="Code" buildaction="Compile" />
     <File name="src/PingFMPreferences.cs" subtype="Code" buildaction="Compile" />
     <File name="src/PingFMClient.cs" subtype="Code" buildaction="Compile" />
-    <File name="resources/multiply.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/utterli.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="resources/youare.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/PingFM.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/bebo.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/blogger.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/brightkite.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/delicious.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/facebook.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/flickr.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/friendfeed.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/friendster.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/hi5.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/identica.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/jaiku.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/koornk.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/kwippy.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/linkedin.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/livejournal.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/mashable.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/multiply.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/myspace.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/pingfm.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/plaxo.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/plurk.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/pownce.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/rejaw.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/tumblr.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/twitter.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/utterli.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/wordpress.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/xanga.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/yahoo360.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/yammer.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/youare.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />

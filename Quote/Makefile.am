@@ -2,18 +2,24 @@ include $(top_srcdir)/build.rules.mk
 
 ASSEMBLY=Quote
 
-MCS_FLAGS += -recurse:src/*.cs
+FILES = \
+	src/Quote.cs \
+	src/QuoteAction.cs \
+	src/QuoteTagItem.cs \
+	src/Providers/Bubash.cs \
+	src/Providers/IQuoteProvider.cs \
+	src/Providers/QuoteProviderFactory.cs
 
 RESOURCES = \
-	Quote.addin.xml \
-	quoted-globe.svg
+	Resources/Quote.addin.xml \
+	Resources/icons/quoted-globe.svg
 
 REFERENCES = \
 	System \
 	System.Web \
 	System.Core \
+	System.Web \
 	Mono.Posix \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
-	$(DO_PLATFORM_LINUX_LIBS) \
 	$(DO_UNIVERSE_LIBS)
