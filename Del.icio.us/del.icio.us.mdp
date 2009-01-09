@@ -17,14 +17,14 @@
     <File name="." subtype="Directory" buildaction="Compile" />
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="src/SearchAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="del.icio.us.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Delicious.cs" subtype="Code" buildaction="Compile" />
     <File name="src/BookmarksItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TagsItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TagItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="resources/delicious.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Configuration.cs" subtype="Code" buildaction="Compile" />
     <File name="src/NewBookmarkAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/delicious.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/delicious.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

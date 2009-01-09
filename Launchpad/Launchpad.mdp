@@ -16,7 +16,6 @@
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="../Launchpad.old/Resources/Launchpad.png" subtype="Code" buildaction="Nothing" />
-    <File name="src/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="src/LaunchpadAction.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Launchpad.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadAnswers.png" subtype="Code" buildaction="EmbedAsResource" />
@@ -26,9 +25,9 @@
     <File name="Resources/LaunchpadRegister.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadTranslations.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/LaunchpadUser.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/Launchpad.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/LaunchpadItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/LaunchpadItems.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/Launchpad.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

@@ -12,7 +12,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/Confluence.addin.xml \
-	confluence.png \
+	Resources/confluence.png \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml
 

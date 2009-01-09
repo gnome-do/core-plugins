@@ -15,9 +15,9 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/ManLookUp.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/ManLookUpAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/ManLookUpEntries.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/ManLookUp.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="gconf-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />

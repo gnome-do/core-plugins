@@ -18,7 +18,7 @@
     <File name="src" subtype="Directory" buildaction="Compile" />
     <File name="src/TSClientItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TSClientItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="TSClient.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/TerminalServerClient.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

@@ -3,6 +3,8 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=JIRA
 
 FILES = \
+	gtk-gui/generated.cs \
+	gtk-gui/JIRA.ConfigWidget.cs \
 	src/JIRAIssueItem.cs \
 	src/ConfigWidget.cs \
 	src/JIRAIssueAction.cs \
@@ -11,12 +13,11 @@ FILES = \
 	src/Remote/JIRAServerFacade.cs \
 	src/Remote/AtlassianJiraSoapService.cs \
 	src/JIRAConfiguration.cs \
-	src/JIRAIssueSource.cs \
-	gtk-gui/generated.cs \
-	gtk-gui/JIRA.ConfigWidget.cs
+	src/JIRAIssueSource.cs
 
 RESOURCES = \
-	Resources/JIRA.addin.xml
+	Resources/JIRA.addin.xml \
+	Resources/jira.png
 
 REFERENCES = \
 	System \

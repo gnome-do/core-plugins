@@ -14,12 +14,10 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="JIRA.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/JIRAIssueSource.cs" subtype="Code" buildaction="Compile" />
     <File name="src/JIRAIssueItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/JIRAIssueAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/JIRAConfiguration.cs" subtype="Code" buildaction="Compile" />
-    <File name="jira.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
     <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/JIRA.ConfigWidget.cs" subtype="Code" buildaction="Compile" />
@@ -30,6 +28,8 @@
     <File name="src/Remote/JIRARssClient.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Remote/IJIRAServerFacade.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Remote/JIRAServerFacade.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/jira.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/JIRA.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
