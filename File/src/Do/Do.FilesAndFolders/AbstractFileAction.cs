@@ -77,7 +77,7 @@ namespace Do.FilesAndFolders
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			foreach (Item source in items) {
-				if (SupportsModifierItems) {
+				if (modItems.Any ()) {
 					foreach (Item destination in modItems)
 						foreach (Item result in Perform (source, destination))
 							yield return result;
