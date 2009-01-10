@@ -31,6 +31,8 @@ namespace Pastebin
 		string Name { get; }
 		
 		string BaseUrl { get; }
+
+		string UserAgent { get; }
 		
 		NameValueCollection Parameters { get; }
 		

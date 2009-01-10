@@ -105,7 +105,12 @@ namespace Pastebin
 		public string Name
 		{
 			get { return "paste.pocoo.org"; }
-		}		
+		}
+
+		public string UserAgent
+		{
+			get { return ""; }
+		}
 		
 		public string BaseUrl 
 		{ 
