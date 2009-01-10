@@ -101,6 +101,11 @@ namespace Pastebin
 		{
 			get { return "paste2.org"; }
 		}
+
+		public string UserAgent
+		{
+			get { return ""; }
+		}
 		
 		public string BaseUrl 
 		{ 
