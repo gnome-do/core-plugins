@@ -1,8 +1,7 @@
-/* FileItemActions.cs
+/* MoveToTrashAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,42 +20,40 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+
 using Mono.Unix;
 
 using Do.Universe;
+using Do.Universe.Common;
 
-namespace FilePlugin {
-	abstract class DeleteAction : AbstractAction {
+namespace Do.FilesAndFolders
+{
+	
+	class MoveToTrashAction : MoveAction
+	{
+
+		readonly string TrashDirectory =
+			Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), "Trash/files");
 
 		public override string Name {
-			get { return Catalog.GetString ("Delete File"); }
+			get { return Catalog.GetString ("Move to Trash"); }
 		}
 		
-		public override string Description { 
-			get { return Catalog.GetString ("Deletes a file or folder."); }
+		public override string Description {
+			get { return Catalog.GetString ("Moves a file or folder to the trash"); }
 		}
 		
-		public override string Icon { get { return "gtk-delete"; } } 
-
-		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (IFileItem),
-				};
-			}
+		public override string Icon {
+			get { return "user-trash-full"; }
 		}
 
-		public override IEnumerable<IItem> Perform (IEnumerable<IItem> items, IEnumerable<IItem> modItems)
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield break; }
+		}
+
+		protected override IEnumerable<Item> Perform (string source)
 		{
-			foreach (IFileItem src in items) {
-				try {
-					File.Delete (FileItem.EscapedPath (src));
-				} catch (Exception e) {
-					Console.Error.WriteLine ("DeleteFileAction could not delete "+
-							src.Path + ": " + e.Message);
-				}
-			}
-			return null;
+			return Perform (source, TrashDirectory);
 		}
 	}
 }
