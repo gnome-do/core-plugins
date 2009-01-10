@@ -5,7 +5,7 @@
 	name="Banshee"
 	description="Searches and plays Banshee music"
 	author="Alex Launi"
-	Category="Official"
+	category="Official"
 >
  
 	<Runtime>
