@@ -47,6 +47,7 @@ SUBDIRS = \
 	Rhythmbox \
 	Riptide \
 	Shelf \
+	Skype \
 	SSH \
 	StockQuote \
 	TerminalServerClient \

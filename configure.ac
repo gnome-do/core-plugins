@@ -152,6 +152,7 @@ RememberTheMilk/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
 Shelf/Makefile
+Skype/Makefile
 SSH/Makefile
 StockQuote/Makefile
 TerminalServerClient/Makefile
