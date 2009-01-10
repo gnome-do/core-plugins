@@ -47,8 +47,8 @@ namespace Do.FilesAndFolders
 			get { return "user-trash-full"; }
 		}
 
-		protected override bool SupportsModifierItems {
-			get { return false; }
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield break; }
 		}
 
 		protected override IEnumerable<Item> Perform (string source)

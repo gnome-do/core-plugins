@@ -45,15 +45,9 @@ namespace Do.FilesAndFolders
 
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
-				if (SupportsModifierItems) {
-					yield return typeof (ITextItem);
-					yield return typeof (IFileItem);
-				}
+				yield return typeof (ITextItem);
+				yield return typeof (IFileItem);
 			}
-		}
-
-		protected virtual bool SupportsModifierItems {
-			get { return true; }
 		}
 
 		protected virtual bool SupportsItem (IFileItem item)
