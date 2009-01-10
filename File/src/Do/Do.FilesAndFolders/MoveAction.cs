@@ -53,23 +53,19 @@ namespace Do.FilesAndFolders
 		protected override IEnumerable<Item> Perform (string source, string destination)
 		{
 			PerformOnThread (() => {
-				FileTransformation move = new FileTransformation (MoveTransform);
 				try {
-					move.Transform (source, destination);
+					destination = Path.Combine (destination, Path.GetFileName (source));
+					Log.Info ("Moving {0} to {1}...", source, destination);
+					if (Directory.Exists (source))
+						Directory.Move (source, destination);
+					else if (File.Exists (source))
+						File.Move (source, destination);
 				} catch (Exception e) {
 					Log.Error ("Could not move {0} to {1}: {2}", source, destination, e.Message);
 					Log.Debug (e.StackTrace);
 				}
 			});
 			yield break;
-		}
-
-		void MoveTransform (string source, string destination)
-		{
-			if (Directory.Exists (source) && !Directory.Exists (destination))
-				Directory.CreateDirectory (destination);
-			else
-				File.Move (source, destination);
 		}
 	}
 }

@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Universe;
+using Do.Platform;
 
 namespace Do.FilesAndFolders
 {
@@ -58,7 +59,11 @@ namespace Do.FilesAndFolders
 		protected override IEnumerable<Item> Perform (string source, string newName)
 		{
 			string renamed = Path.Combine (Path.GetDirectoryName (source), newName);
+			
+			Log.Info ("Renaming {0} to {1}; new file is {2}.", source, newName, renamed);
 			base.Perform (source, renamed);
+			
+			System.Threading.Thread.Sleep (2 * 1000);
 			yield return Plugin.NewFileItem (renamed) as Item;
 		}
 	}
