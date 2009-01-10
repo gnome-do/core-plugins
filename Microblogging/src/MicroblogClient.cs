@@ -48,7 +48,7 @@ namespace Microblogging
 
 		const int UpdateTimelineTimeout = 30 * 1000;
 		const int UpdateContactsTimeout = 10 * 60 * 1000;
-		const int CheckForMessagesTimeout = 60 * 1000;
+		const int CheckForMessagesTimeout = 5 * 60 * 1000;
 
 		#endregion
 
@@ -56,25 +56,24 @@ namespace Microblogging
 		string username;
 		DateTime timeline_last_updated, messages_last_updated;
 
+		Timer [] timers;
+
 		readonly string PhotoDirectory;
 
 		public IEnumerable<Item> Contacts { get; private set; }
 		
 		public MicroblogClient (string username, string password, Service service)
 		{
+			timers = new Timer [3];
 			this.username = username;
 			Contacts = Enumerable.Empty<Item> ();
 			blog = new Twitter (username, password, service);
 			timeline_last_updated = messages_last_updated = DateTime.UtcNow;
 			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
-			
-			Thread updateRunner = new Thread (new ThreadStart (UpdateContacts));
-			updateRunner.IsBackground = true;
-			updateRunner.Start ();
-			
-			GLib.Timeout.Add (UpdateContactsTimeout, () => {UpdateContacts (); return true; });
-			GLib.Timeout.Add (UpdateTimelineTimeout, () => {UpdateTimeline (); return true; });
-			GLib.Timeout.Add (CheckForMessagesTimeout, () => {CheckForMessages (); return true; });
+
+			timers [0] = new Timer (UpdateContacts, null, 1 * 1000, UpdateContactsTimeout);
+			timers [1] = new Timer (UpdateTimeline, null, 60 *1000, UpdateTimelineTimeout);
+			timers [2] = new Timer (CheckForMessages, null, 120 * 1000, CheckForMessagesTimeout);
 		}
 
 		/// <value>
@@ -106,7 +105,7 @@ namespace Microblogging
 			OnStatusUpdated (status, errorMessage);
 		}
 
-		void UpdateContacts ()
+		void UpdateContacts (object o)
 		{
 			Log.Debug ("Microblogging: Updating contacts");
 			
@@ -140,7 +139,7 @@ namespace Microblogging
 			return;
 		}
 
-		void UpdateTimeline ()
+		void UpdateTimeline (object o)
 		{
 			string icon = "";
 			TwitterStatus tweet;
@@ -169,7 +168,7 @@ namespace Microblogging
 			}
 		}
 
-		void CheckForMessages ()
+		void CheckForMessages (object o)
 		{
 			string icon = "";
 			TwitterStatus message;
