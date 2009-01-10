@@ -55,6 +55,7 @@ namespace Do.FilesAndFolders
 			PerformOnThread (() => {
 				FileTransformation copy = new FileTransformation (CopyTransform);
 				try {
+					Log.Info ("Copying {0} to {1}...", source, destination);
 					copy.Transform (source, destination);
 				} catch (Exception e) {
 					Log.Error ("Could not copy {0} to {1}: {2}", source, destination, e.Message);

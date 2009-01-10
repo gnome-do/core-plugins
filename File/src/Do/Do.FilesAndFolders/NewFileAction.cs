@@ -84,10 +84,10 @@ namespace Do.FilesAndFolders
 		/// </returns>
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			Func<Item, bool> isDirectory = item =>
-				item is IFileItem && (item as IFileItem).DirectoryExists ();
-
-			return !isDirectory (items.First ()) || !isDirectory (modItem);
+			Item first = items.First ();
+			return
+				(first is IFileItem && !(modItem is IFileItem)) ||
+				(first is ITextItem && modItem is IFileItem && SupportsItem (modItem as IFileItem));
 		}
 
 		/// <summary>
