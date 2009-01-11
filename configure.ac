@@ -49,10 +49,12 @@ PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 
 dnl Handle bundled Google libs until they're packaged
-GDATA_SHARP_ACL_LIBS=-r:../BundledLibraries/Google.GData.AccessControl.dll
-GDATA_SHARP_CALENDAR_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Calendar.dll"
-GDATA_SHARP_DOCUMENTS_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Documents.dll"
-GDATA_SHARP_CONTACTS_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Contacts.dll"
+top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
+
+GDATA_SHARP_ACL_LIBS=-r:$top_srcdir/BundledLibraries/Google.GData.AccessControl.dll
+GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Calendar.dll"
+GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
+GDATA_SHARP_CONTACTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Contacts.dll"
 
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
