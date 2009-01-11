@@ -3,6 +3,7 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Microblog
 
 MCS_FLAGS += -recurse:*.cs
+EXTRA_DIST += $(wildcard src/*.cs) $(wildcard gtk-gui/*.cs)
 
 RESOURCES = \
 	gtk-gui/gui.stetic \
