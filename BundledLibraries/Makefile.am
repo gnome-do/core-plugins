@@ -8,4 +8,4 @@ bundle_DATA = \
 	Google.GData.Documents.dll \
 	Google.GData.Extensions.dll 
 
-EXTRA_DIST=$(bundle_DATA)
+EXTRA_DIST=$(bundle_DATA) gmcs.exe

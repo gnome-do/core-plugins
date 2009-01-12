@@ -22,8 +22,8 @@ fi
 
 AC_PROG_INSTALL
 
-SHAMROCK_FIND_MONO_2_0_COMPILER
-SHAMROCK_CHECK_LINQ_FLAG
+top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
+SHAMROCK_FIND_C_SHARP_3_0_COMPILER
 
 dnl Expansions
 SHAMROCK_EXPAND_LIBDIR
@@ -49,8 +49,6 @@ PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 
 dnl Handle bundled Google libs until they're packaged
-top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
-
 GDATA_SHARP_ACL_LIBS=-r:$top_srcdir/BundledLibraries/Google.GData.AccessControl.dll
 GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Calendar.dll"
 GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
