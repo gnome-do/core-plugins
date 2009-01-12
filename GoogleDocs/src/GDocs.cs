@@ -55,10 +55,8 @@ namespace GDocs
 
 			// Google works over SSL, we need accept the cert.
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
-			
-			string username, password;
-			Configuration.GetAccountData (out username, out password, typeof (Configuration));
-			Connect (username, password);
+
+			Connect (Preferences.Username, Preferences.Password);
 		}
 		
 		public static bool Connect (string username, string password)
