@@ -48,6 +48,7 @@ SUBDIRS = \
 	Rhythmbox \
 	Riptide \
 	Shelf \
+	Skype \
 	SSH \
 	StockQuote \
 	TerminalServerClient \
@@ -70,7 +71,6 @@ ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
 PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
 BUNDLED_ASSEMBLIES = $(wildcard BundledLibraries/*.dll)
 install-data-hook:
-	cp $(BUNDLED_ASSEMBLIES) $(ASSEMBLY_INSTALL_DIR)	
 	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
 	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
 

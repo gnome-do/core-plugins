@@ -5,17 +5,25 @@ ASSEMBLY=File
 FILES = \
 	gtk-gui/Do.FilesAndFolders.Configuration.cs \
 	gtk-gui/generated.cs \
-	src/Do.FilesAndFolders/Configuration.cs \
-	src/Do.FilesAndFolders/FileItemSource.cs \
-	src/Do.FilesAndFolders/ImportantFolders.cs \
-	src/Do.FilesAndFolders/IndexedFolderCollection.cs \
-	src/Do.FilesAndFolders/IndexedFolder.cs \
-	src/Do.FilesAndFolders/NewFileAction.cs \
-	src/Do.FilesAndFolders/NewFolderAction.cs \
-	src/Do.FilesAndFolders/Plugin.cs \
-	src/Do.FilesAndFolders/Preferences.cs \
-	src/Do.FilesAndFolders/RecentFileItemSource.cs \
-	src/PathNodeView.cs
+	src/PathNodeView.cs \
+	src/Do/Do.FilesAndFolders/FileTransformation.cs \
+	src/Do/Do.FilesAndFolders/NewFolderAction.cs \
+	src/Do/Do.FilesAndFolders/IndexedFolderCollection.cs \
+	src/Do/Do.FilesAndFolders/Preferences.cs \
+	src/Do/Do.FilesAndFolders/NewFileAction.cs \
+	src/Do/Do.FilesAndFolders/DeleteAction.cs \
+	src/Do/Do.FilesAndFolders/ImportantFolders.cs \
+	src/Do/Do.FilesAndFolders/MoveAction.cs \
+	src/Do/Do.FilesAndFolders/AbstractFileAction.cs \
+	src/Do/Do.FilesAndFolders/Configuration.cs \
+	src/Do/Do.FilesAndFolders/MoveToTrashAction.cs \
+	src/Do/Do.FilesAndFolders/RecentFileItemSource.cs \
+	src/Do/Do.FilesAndFolders/Plugin.cs \
+	src/Do/Do.FilesAndFolders/IndexedFolder.cs \
+	src/Do/Do.FilesAndFolders/FileItemSource.cs \
+	src/Do/Do.FilesAndFolders/CopyAction.cs \
+	src/Do/Do.FilesAndFolders/RenameAction.cs \
+	src/Do/Do.Universe/IFileItemExtensions.cs
 
 RESOURCES = \
 	gtk-gui/gui.stetic \

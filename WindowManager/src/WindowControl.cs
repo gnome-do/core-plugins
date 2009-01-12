@@ -169,6 +169,10 @@ namespace WindowManager
 				
 				Wnck.Screen.Default.MoveViewport (midX, midY);
 			}
+
+			if (w.Workspace != w.Screen.ActiveWorkspace)
+				w.Workspace.Activate (Gtk.Global.CurrentEventTime);
+
 			if (w.IsMinimized)
 				w.Unminimize (Gtk.Global.CurrentEventTime);
 			

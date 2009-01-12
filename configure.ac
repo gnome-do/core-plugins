@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.6.0.0])
-AM_INIT_AUTOMAKE([foreign])
+AC_INIT([gnome-do-plugins], [0.7.95.2])
+AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -22,8 +22,8 @@ fi
 
 AC_PROG_INSTALL
 
-SHAMROCK_FIND_MONO_2_0_COMPILER
-SHAMROCK_CHECK_LINQ_FLAG
+top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
+SHAMROCK_FIND_C_SHARP_3_0_COMPILER
 
 dnl Expansions
 SHAMROCK_EXPAND_LIBDIR
@@ -49,10 +49,10 @@ PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 
 dnl Handle bundled Google libs until they're packaged
-GDATA_SHARP_ACL_LIBS=-r:../BundledLibraries/Google.GData.AccessControl.dll
-GDATA_SHARP_CALENDAR_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Calendar.dll"
-GDATA_SHARP_DOCUMENTS_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Documents.dll"
-GDATA_SHARP_CONTACTS_LIBS="-r:../BundledLibraries/Google.GData.Client.dll -r:../BundledLibraries/Google.GData.Extensions.dll -r:../BundledLibraries/Google.GData.Contacts.dll"
+GDATA_SHARP_ACL_LIBS=-r:$top_srcdir/BundledLibraries/Google.GData.AccessControl.dll
+GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Calendar.dll"
+GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
+GDATA_SHARP_CONTACTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Contacts.dll"
 
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
@@ -153,6 +153,7 @@ RememberTheMilk/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
 Shelf/Makefile
+Skype/Makefile
 SSH/Makefile
 StockQuote/Makefile
 TerminalServerClient/Makefile

@@ -20,8 +20,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
 
 using Mono.Unix;
@@ -32,10 +30,8 @@ using Do.Platform;
 namespace Do.FilesAndFolders
 {
 	
-	public class NewFileAction : Act
+	public class NewFileAction : AbstractFileAction
 	{
-
-		const int MaxPathLength = 256;
 
 		public override string Name {
 			get { return Catalog.GetString ("Create New File"); }
@@ -49,37 +45,8 @@ namespace Do.FilesAndFolders
 			get { return "filenew"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				yield return typeof (ITextItem);
-				yield return typeof (IFileItem);
-			}
-		}
-
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get {
-				yield return typeof (ITextItem);
-				yield return typeof (IFileItem);
-			}
-		}
-
 		public override bool ModifierItemsOptional {
 			get { return true; }
-		}
-
-		/// <summary>
-		/// Supports using an IFileItem as the parent if it is a folder
-		/// that already exists.
-		/// </summary>
-		/// <param name="item">
-		/// A <see cref="IFileItem"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="System.Boolean"/>
-		/// </returns>
-		bool Supports (IFileItem item)
-		{
-			return item.Path.Length < MaxPathLength && Directory.Exists (item.Path);
 		}
 
 		/// <summary>
@@ -92,17 +59,15 @@ namespace Do.FilesAndFolders
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		bool Supports (ITextItem item)
+		protected override bool SupportsItem (ITextItem item)
 		{
-			string path = item.Text.Replace ("~", Plugin.ImportantFolders.UserHome);
+			string path = GetPath (item);
 			return path.Length < MaxPathLength && !File.Exists (path) && !Directory.Exists (path);
 		}
-		
-		public override bool SupportsItem (Item item)
+
+		protected override bool SupportsItem (IFileItem item)
 		{
-			if (item is ITextItem) return Supports (item as ITextItem);
-			if (item is IFileItem) return Supports (item as IFileItem);
-			return false;
+			return Directory.Exists (GetPath (item));
 		}
 
 		/// <summary>
@@ -119,10 +84,10 @@ namespace Do.FilesAndFolders
 		/// </returns>
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			Func<Item, bool> isDirectory = item =>
-				item is IFileItem && Supports (item as IFileItem);
-
-			return !isDirectory (items.First ()) || !isDirectory (modItem);
+			Item first = items.First ();
+			return
+				(first is IFileItem && !(modItem is IFileItem)) ||
+				(first is ITextItem && modItem is IFileItem && SupportsItem (modItem as IFileItem));
 		}
 
 		/// <summary>
@@ -137,27 +102,31 @@ namespace Do.FilesAndFolders
 		/// <returns>
 		/// A <see cref="IEnumerable"/>
 		/// </returns>
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		protected override IEnumerable<Item> Perform (Item source, Item destination)
 		{
 			IFileItem parent = null;
 			ITextItem fileName = null;
-			Item first = items.First (), mod = modItems.FirstOrDefault ();
 			
-			if (first is IFileItem) {
-				parent = first as IFileItem;
+			if (source is IFileItem) {
+				parent = source as IFileItem;
 				// We provide a default folder name if none is provided.
-				fileName = mod as ITextItem ??
+				fileName = destination as ITextItem ??
 					Plugin.NewTextItem (GetNewFileName (parent.Path));
-			} else if (first is ITextItem) {
-				fileName = first as ITextItem;
+			} else if (source is ITextItem) {
+				fileName = source as ITextItem;
 				// We provide a default parent folder if none is provided.
-				parent = mod as IFileItem ??
+				parent = destination as IFileItem ??
 					Plugin.NewFileItem (Plugin.ImportantFolders.Desktop);
 			}
 			
 			string path = Path.Combine (parent.Path, fileName.Text);
 			CreateFile (path);
 			yield return Plugin.NewFileItem (path) as Item;
+		}
+
+		protected override IEnumerable<Item> Perform (Item source)
+		{
+			return Perform (source, null);
 		}
 
 		/// <summary>

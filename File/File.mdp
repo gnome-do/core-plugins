@@ -15,28 +15,33 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/FileCopyToAction.cs" subtype="Code" buildaction="Nothing" />
-    <File name="src/FileRenameToAction.cs" subtype="Code" buildaction="Nothing" />
-    <File name="src/FileMoveToAction.cs" subtype="Code" buildaction="Nothing" />
-    <File name="src/FileMoveToTrashAction.cs" subtype="Code" buildaction="Nothing" />
-    <File name="src/FileDeleteAction.cs" subtype="Code" buildaction="Nothing" />
     <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
     <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/PathNodeView.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/Configuration.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/FileItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/ImportantFolders.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/IndexedFolder.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/NewFolderAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/Plugin.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/Preferences.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/RecentFileItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources" subtype="Directory" buildaction="Compile" />
     <File name="Resources/File.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="gtk-gui/Do.FilesAndFolders.Configuration.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/NewFileAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Do.FilesAndFolders/IndexedFolderCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do" subtype="Directory" buildaction="Compile" />
+    <File name="src/Do/Do.Universe" subtype="Directory" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/FileItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/ImportantFolders.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/IndexedFolder.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/IndexedFolderCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/NewFileAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/NewFolderAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/Plugin.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/Preferences.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/RecentFileItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.Universe/IFileItemExtensions.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/CopyAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/DeleteAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/MoveAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/MoveToTrashAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/FileTransformation.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/AbstractFileAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Do/Do.FilesAndFolders/RenameAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

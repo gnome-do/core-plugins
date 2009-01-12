@@ -41,22 +41,24 @@ namespace PingFM
 			validate_lbl.Markup = "<i>Validating...</i>";
 			validate_btn.Sensitive = false;
 			
-			string appkey = appkey_entry.Text;
-			
-			Thread thread = new Thread ((ThreadStart) delegate {
-				bool valid = PingFM.TryConnect (appkey);
-				Gtk.Application.Invoke (delegate {		
-					if (valid) {
-						validate_lbl.Markup = "<i>Account validation succeeded!</i>";
-						PingFM.Preferences.AppKey = appkey_entry.Text;
-					} else {
-						validate_lbl.Markup = "<i>Account validation failed!</i>";
-					}
-					validate_btn.Sensitive = true;
-				});
-			});
+			Thread thread = new Thread (UpdateButtons);
 			thread.IsBackground = true; //don't hang on exit if fail
 			thread.Start ();
+		}
+
+		void UpdateButtons ()
+		{
+			string appkey = appkey_entry.Text;
+			bool valid = PingFM.TryConnect (appkey);
+			Gtk.Application.Invoke (delegate {		
+				if (valid) {
+					validate_lbl.Markup = "<i>Account validation succeeded!</i>";
+					PingFM.Preferences.AppKey = appkey_entry.Text;
+				} else {
+					validate_lbl.Markup = "<i>Account validation failed!</i>";
+				}
+				validate_btn.Sensitive = true;
+			});
 		}
 		
 		protected virtual void OnAppKeyEntryActivated (object sender, System.EventArgs e)

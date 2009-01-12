@@ -24,5 +24,9 @@
 	<Extension path="/Do/Action">
 		<Action type="Do.FilesAndFolders.NewFileAction" />
 		<Action type="Do.FilesAndFolders.NewFolderAction" />
+		<Action type="Do.FilesAndFolders.CopyAction" />
+		<Action type="Do.FilesAndFolders.MoveAction" />
+		<Action type="Do.FilesAndFolders.RenameAction" />
+		<Action type="Do.FilesAndFolders.MoveToTrashAction" />
 	</Extension>
 </Addin>
