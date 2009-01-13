@@ -5,7 +5,7 @@
 	name="Flickr"
 	description="Upload photos to Flickr."
 	author="Alex Launi"
-	category="Official"
+	category="Community"
 >
  
 	<Runtime>
