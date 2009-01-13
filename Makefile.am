@@ -50,6 +50,7 @@ SUBDIRS = \
 	Skype \
 	SSH \
 	StockQuote \
+	SystemServices \
 	TerminalServerClient \
 	Text \
 	Translate \

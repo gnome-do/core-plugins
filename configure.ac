@@ -155,6 +155,7 @@ Shelf/Makefile
 Skype/Makefile
 SSH/Makefile
 StockQuote/Makefile
+SystemServices/Makefile
 TerminalServerClient/Makefile
 Text/Makefile
 Translate/Makefile
