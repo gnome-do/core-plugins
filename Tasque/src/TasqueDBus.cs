@@ -20,6 +20,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
@@ -30,17 +31,17 @@ using Do.Universe;
 
 namespace Tasque.DBus
 {
-	[Interface("org.gnome.Tasque.RemoteControl")]
-	public interface ITasque
-	{
-	    string CreateTask (string categoryName, string taskName, bool enterEditMode);
-		string [] GetCategoryNames ();
-		void ShowTasks ();
-	}
+	[Interface ("org.gnome.Tasque.RemoteControl")]
+		public interface ITasque
+		{
+			string CreateTask (string categoryName, string taskName, bool enterEditMode);
+			string [] GetCategoryNames ();
+			void ShowTasks ();
+		}
 
 	public class TasqueDBus
 	{
-		
+
 		const string OBJECT_PATH = "/org/gnome/Tasque/RemoteControl";
 		const string BUS_NAME = "org.gnome.Tasque";
 		static ITasque Tasque;
@@ -49,39 +50,37 @@ namespace Tasque.DBus
 		{
 			try {
 				Tasque = FindInstance ();
-            } catch (Exception) {
-            	Log.Error ("Could not locate Tasque on D-Bus. Make sure Tasque is running");
-            }
-	        
-			BusG.Init();
+			} catch (Exception) {
+				Log.Error ("Could not locate Tasque on D-Bus. Make sure Tasque is running");
+			}
 		}
-	
+
 		static private ITasque FindInstance () 
-        {
-                if (!Bus.Session.NameHasOwner (BUS_NAME)) 
-                        throw new Exception (String.Format("Name {0} has no owner", BUS_NAME));
-    
-                return Bus.Session.GetObject<ITasque> (BUS_NAME, new ObjectPath (OBJECT_PATH));
-        }
-		
-		
+		{
+			if (!Bus.Session.NameHasOwner (BUS_NAME)) 
+				throw new Exception (String.Format ("Name {0} has no owner", BUS_NAME));
+
+			return Bus.Session.GetObject<ITasque> (BUS_NAME, new ObjectPath (OBJECT_PATH));
+		}
+
+
 		public IEnumerable<string> GetCategoryNames () 
 		{
 			return Tasque.GetCategoryNames ();
 		}
 
-		
+
 		public string CreateTask (string category, string task) 
 		{
 			IEnumerable<string> categories = GetCategoryNames ();
-			
+
 			if (categories.Contains (category)) 
 				return Tasque.CreateTask (category, task, false);
 			else 
 				return Tasque.CreateTask (categories.First (), task, false);
-			
+
 		}
-		
+
 		public void ShowTasks ()
 		{
 			Tasque.ShowTasks ();
