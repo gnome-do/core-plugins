@@ -52,26 +52,24 @@ namespace Do.FilesAndFolders
 
 		protected override IEnumerable<Item> Perform (string source, string destination)
 		{
+			string result = null;
+			Log.Info ("Copying {0} to {1}...", source, destination);
 			PerformOnThread (() => {
-				FileTransformation copy = new FileTransformation (CopyTransform);
 				try {
-					Log.Info ("Copying {0} to {1}...", source, destination);
-					copy.Transform (source, destination);
+					result = Copy (source, destination);
 				} catch (Exception e) {
 					Log.Error ("Could not copy {0} to {1}: {2}", source, destination, e.Message);
 					Log.Debug (e.StackTrace);
 				}
 			});
 			
-			yield break;
+			// Give the move some time to run, then try to yield the result.
+			PerformWait ();
+			if (string.IsNullOrEmpty (result))
+				yield break;
+			else
+				yield return Plugin.NewFileItem (result) as Item;
 		}
 
-		void CopyTransform (string source, string destination)
-		{
-			if (Directory.Exists (source) && !Directory.Exists (destination))
-				Directory.CreateDirectory (destination);
-			else
-				File.Copy (source, destination, true);
-		}
 	}
 }
