@@ -77,6 +77,8 @@ namespace Do.FilesAndFolders
 
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
 		{
+			// If the updated folder is not actually any different, don't udpate.
+			if (Folders.ContainsKey (path) && Folders [path] == folder) return;
 			RemoveIndexedFolder (path);
 			Add (folder);
 		}
