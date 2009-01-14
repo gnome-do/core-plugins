@@ -70,11 +70,21 @@ namespace Do.FilesAndFolders
 			}
 		}
 
+		public void UpdateIndexedFolder (string path, string newPath, uint newDepth)
+		{
+			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth));
+		}
+
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
 		{
-			if (Folders.ContainsKey (path)) Folders.Remove (path);
-			Folders [path] = folder;
-			Serialize ();
+			RemoveIndexedFolder (path);
+			Add (folder);
+		}
+
+		public void RemoveIndexedFolder (string path)
+		{
+			if (!Folders.ContainsKey (path)) return;
+			Remove (Folders [path]);
 		}
 
 		#region ICollection<IndexedFolder>
@@ -117,7 +127,7 @@ namespace Do.FilesAndFolders
 
 		public bool Contains (IndexedFolder folder)
 		{
-			return Folders.ContainsKey (folder.Path) && Folders [folder.Path] == folder;
+			return Folders.ContainsKey (folder.Path);
 		}
 
 		public int Count {

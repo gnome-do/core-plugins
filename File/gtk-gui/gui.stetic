@@ -5,6 +5,7 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
+    <widget-library name="Do.Platform.Linux, Version=0.8.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/File.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Do.FilesAndFolders.Configuration" design-size="330 354">

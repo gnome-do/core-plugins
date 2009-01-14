@@ -39,12 +39,11 @@ namespace Do.FilesAndFolders
 		
 		public PathNodeView () : base ()
 		{
-			ListStore store;
 			CellRenderer cell;
 			RulesHint = true;
 			HeadersVisible = true;
 			
-			Model = store = new ListStore (typeof (string), typeof (string));
+			Model = new ListStore (typeof (string), typeof (uint));
 
 			cell = new CellRendererText ();
 			(cell as CellRendererText).Width = 310;
@@ -57,37 +56,46 @@ namespace Do.FilesAndFolders
 			(cell as CellRendererText).Alignment = Pango.Alignment.Right;
 			AppendColumn (Catalog.GetString ("Depth"), cell, "text", Column.Depth);
 						
+			Refresh ();
+		}
+
+		public void Refresh ()
+		{
+			ListStore store = Model as ListStore;
+			store.Clear ();
 			foreach (IndexedFolder pair in Plugin.FolderIndex)
 				store.AppendValues (pair.Path, pair.Level);
 		}
 		                    
 		void OnDepthEdited (object o, EditedArgs e)
 		{
-			int depth;
+			uint depth;
 			string path;
 			TreeIter iter;
 			ListStore store;
-			
+
 			store = Model as ListStore;
-			store.GetIter (out iter, new Gtk.TreePath (e.Path));
-			//store.GetValue (iter, (int)Column.Path, ref path);
-			//store.GetValue (iter, (int)Column.Depth, ref depth);
-			//Plugin.FolderIndex.UpdateIndexedFolderDepth (path, depth);
+			store.GetIter (out iter, new TreePath (e.Path));
+			path = store.GetValue (iter, (int)Column.Path) as string;
+			depth = uint.Parse (e.NewText);
+			Plugin.FolderIndex.UpdateIndexedFolder (path, path, depth);
+			
+			Refresh ();
 		}
 
 		public void OnRemoveSelected (object sender, EventArgs e)
 		{
-			int depth;
 			string path;
 			TreeIter iter;
 			ListStore store;
 
 			store = Model as ListStore;
 			Selection.GetSelected (out iter);
-			//store.GetValue (iter, (int)Column.Path, ref path);
-			//store.GetValue (iter, (int)Column.Depth, ref depth);
-			//Plugin.FolderIndex.Remove (new IndexedFolder (path, depth));
-			//store.Remove (ref iter);
+			path = store.GetValue (iter, (int)Column.Path) as string;
+			Plugin.FolderIndex.RemoveIndexedFolder (path);
+			store.Remove (ref iter);
+			
+			Refresh ();
 		}
 		
 	}
