@@ -53,6 +53,7 @@ namespace Tasque.DBus
 			} catch (Exception) {
 				Log.Error ("Could not locate Tasque on D-Bus. Make sure Tasque is running");
 			}
+			// BusG.Init ();
 		}
 
 		static private ITasque FindInstance () 
