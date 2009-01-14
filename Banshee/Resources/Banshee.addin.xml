@@ -3,14 +3,13 @@
 	namespace= "Do"
 	version="1.0"
 	name="Banshee"
-	description="Searches and plays Banshee music"
+	description="Control Banshee Media Player playback"
 	author="Alex Launi"
 	category="Official"
 >
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
-		<Import assembly="Banshee.CollectionIndexer.dll"/>
 	</Runtime>
 	
 	<Dependencies>
@@ -19,10 +18,10 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<!-- Itemsources -->
+	<!-- Itemsources 
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type = "Banshee.BansheeItemSource" />
-	</Extension>
+	</Extension> -->
 
 	<!-- Actions -->
 	<Extension path = "/Do/Action">

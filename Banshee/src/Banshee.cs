@@ -20,6 +20,7 @@
 
 using System;
 using System.Linq;
+using System.Threading;
 using System.Reflection;
 using System.Collections.Generic;
 
@@ -68,22 +69,30 @@ namespace Banshee
 
 		public static void Play (MediaItem item)
 		{
-			bus.Play (LoadMedia (item));
+			Thread thread = new Thread ((ThreadStart) (() => bus.Play (LoadMedia (item))));
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 
 		public static void Next ()
 		{
-			bus.Next ();
+			Thread thread = new Thread ((ThreadStart) (() => bus.Next ()));
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 
 		public static void Previous ()
 		{
-			bus.Previous ();
+			Thread thread = new Thread ((ThreadStart) (() => bus.Previous ()));
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 
 		public static void TogglePlaying ()
 		{
-			bus.TogglePlaying ();
+			Thread thread = new Thread ((ThreadStart) (() => bus.TogglePlaying ()));
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 
 		public static PlaybackShuffleMode ShuffleMode {

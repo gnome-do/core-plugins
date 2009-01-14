@@ -37,7 +37,6 @@ namespace Banshee
 {
 	public class BansheeIndexer : SimpleIndexerClient
 	{
-		DateTime last_index;
 		string artwork_directory;
 		List<IDictionary<string, object>> indexed_items;
 		
@@ -46,7 +45,6 @@ namespace Banshee
 		public BansheeIndexer ()
 		{
 			AddExportField (export_fields);
-			last_index = DateTime.MinValue;
 			IndexWhenCollectionChanged = false;
 			artwork_directory = Path.Combine (ReadXdgUserDir ("XDG_CACHE_DIR", ".cache"), "album-art");
 		
@@ -80,7 +78,7 @@ namespace Banshee
 		}
 		
 		protected override DateTime CollectionLastModified {
-			get { return last_index; }
+			get { return DateTime.UtcNow; }
 		}
 		
 		protected override void OnBeginUpdateIndex()
@@ -91,8 +89,6 @@ namespace Banshee
 
 		protected override void OnEndUpdateIndex()
 		{
-			last_index = DateTime.Now;
-		
 			ProcessesList ();
 			
 			Log.Debug ("Finished indexing Banshee library, Found {0} media items", CollectionCount);
