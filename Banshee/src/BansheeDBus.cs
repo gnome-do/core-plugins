@@ -32,13 +32,9 @@ namespace Banshee
 {
 	[Interface ("org.bansheeproject.Banshee.PlayerEngine")]
 	interface IBansheePlayer {
-		void TogglePlaying ();
-	}
-	
-	[Interface ("org.bansheeproject.Banshee.PlayQueue")]
-	interface IBansheePlayQueue {
-		void EnqueueUri (string uri);
-		void EnqueueUri (string uri, bool prepend);
+		void Play ();
+		void Pause ();
+		bool CanPause { get; }
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlaybackController")]
@@ -51,13 +47,13 @@ namespace Banshee
 	public class BansheeDbus
 	{
 		const string BusName = "org.bansheeproject.Banshee";
+		const string ErrorMessage = "Banshee encountered an error in {0}; {1}";
 
 		# region static Banshee d-bus members
 		
 		static Dictionary<Type, string> object_paths;
 		
 		static IBansheePlayer player;
-		static IBansheePlayQueue queue;
 		static IBansheeController controller;
 
 		static BansheeDbus ()
@@ -83,14 +79,7 @@ namespace Banshee
 					player = GetIBansheeObject<IBansheePlayer> (object_paths [typeof (IBansheePlayer)]);
 			}
 		}
-		
-		static IBansheePlayQueue PlayQueue {
-			get {
-				return queue ?? 
-					queue = GetIBansheeObject<IBansheePlayQueue> (object_paths  [typeof (IBansheePlayQueue)]);
-			}
-		}	
-		
+
 		static IBansheeController Controller {
 			get {
 				return controller ??
@@ -104,46 +93,38 @@ namespace Banshee
 			get { return (PlaybackShuffleMode) Controller.ShuffleMode; }
 			set { Controller.ShuffleMode = (int) value; }
 		}
-		
-		public void TogglePlaying ()
+
+		public bool Playing {
+			get { return Player.CanPause; }
+		}
+
+		public void Play ()
 		{
 			try {
-				Player.TogglePlaying ();
+				Player.Play ();
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Enqueue. {0}.", e.Message);
+				Log.Error (ErrorMessage, "Play", e.Message);
+				Log.Debug (e.StackTrace);
 			}
 		}
 
-		public void Play (IEnumerable<IMediaFile> media)
-		{
-			Enqueue (media, true);
-			Next ();
-		}			
-
-		public void Enqueue (IEnumerable<IMediaFile> media)
-		{
-			Enqueue (media, false);
-		}
-		
-		void Enqueue (IEnumerable<IMediaFile> media, bool prepend)
+		public void Pause ()
 		{
 			try {
-				// if we're prepending to the queue we need to queue in the uris in reverse order
-				if (prepend) media = media.Reverse ();
-
-				media.ForEach (item => PlayQueue.EnqueueUri (item.Path, prepend));
-				
+				Player.Pause ();
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Enqueue. {0}.", e.Message);
+				Log.Error (ErrorMessage, "Pause", e);
+				Log.Debug (e.StackTrace);
 			}
 		}
-		
+
 		public void Next ()
 		{
 			try {
 				Controller.Next (false);
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Next. {0}.", e.Message);
+				Log.Error (ErrorMessage, "Next", e.Message);
+				Log.Debug (e.StackTrace);
 			}
 		}
 		
@@ -152,7 +133,8 @@ namespace Banshee
 			try {
 				Controller.Previous (false);
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Previous. {0}.", e.Message);
+				Log.Error (ErrorMessage, "Previous", e.Message);
+				Log.Debug (e.StackTrace);
 			}
 		}
 		
@@ -160,7 +142,6 @@ namespace Banshee
 		{
 			object_paths = new Dictionary<Type, string> ();
 			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
-			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");
 			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
 		}
 	}

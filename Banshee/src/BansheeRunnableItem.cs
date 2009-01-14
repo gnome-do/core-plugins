@@ -20,7 +20,6 @@
 
 
 using System;
-using System.Threading;
 
 using Mono.Unix;
 

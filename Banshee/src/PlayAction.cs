@@ -20,8 +20,6 @@
 
 
 using System;
-using System.Linq;
-using System.Threading;
 using System.Collections.Generic;
 
 using Mono.Unix;
@@ -30,7 +28,7 @@ using Do.Universe;
 
 namespace Banshee
 {	
-	public class BansheePlayAction : Act
+	public class PlayAction : Act
 	{		
 		public override string Name {
 			get { return Catalog.GetString ("Play"); }
@@ -45,22 +43,19 @@ namespace Banshee
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return 
-				new Type[] { 
-					typeof (MediaItem),
-				};
-			}
+			get { yield return typeof (IApplicationItem); }
 		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+
+		public override bool SupportsItem (Item item)
 		{
-			return false;
+			return true;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Banshee.Play (items.Cast<MediaItem> ().First ());
-			return Enumerable.Empty<Item> ();
+			Banshee.Play ();
+			
+			yield break;
 		}
 	}
 }

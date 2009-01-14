@@ -1,4 +1,4 @@
-/* BansheeEnqueueAction.cs
+/* NextAction.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -18,42 +18,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
-using System.Linq;
-using System.Threading;
 using System.Collections.Generic;
 
 using Mono.Unix;
 
-using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
 {
-	public class BansheeEnqueueAction : Act
+	
+	public class NextAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Add to Play Queue"); }
+			get {
+				return Catalog.GetString ("Next");
+			}
 		}
-		
+
 		public override string Description {
-			get { return Catalog.GetString ("Adds tracks to Banshee play queue"); }
+			get {
+				return Catalog.GetString ("Play next track");
+			}
 		}
 
 		public override string Icon {
-			get { return "list-add"; }
-		}
-		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (MediaItem); }
+			get {
+				return "media-skip-forward";
+			}
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override IEnumerable<Type> SupportedItemTypes {
+			get {
+				yield return typeof (IApplicationItem);
+			}
+		}
+
+		public override IEnumerable<Item> Perform(IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			items.Cast<MediaItem> ().ForEach (item => Banshee.Enqueue (item));
-			
-			return Enumerable.Empty<Item> ();
+			Banshee.Next ();
+
+			yield break;
 		}
 	}
 }
