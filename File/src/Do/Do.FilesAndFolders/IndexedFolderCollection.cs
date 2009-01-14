@@ -48,15 +48,14 @@ namespace Do.FilesAndFolders
 			}
 		}
 
-		IEnumerable<IndexedFolder> DefaultFolders {
-			get	{
-				yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 0);
-				yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
-			}
+		IEnumerable<IndexedFolder> GetDefaultFolders ()
+		{
+			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 0);
+			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
 		}
-		
+
 		public IndexedFolderCollection ()
 		{
 		}
@@ -144,7 +143,7 @@ namespace Do.FilesAndFolders
 			} finally {
 				// Some sort of error occurred, so load the default data set and save it.
 				if (Folders == null) {
-					Folders = DefaultFolders.ToDictionary (pair => pair.Path);
+					Folders = GetDefaultFolders ().ToDictionary (pair => pair.Path);
 					Serialize ();
 				}
 			}
