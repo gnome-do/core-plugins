@@ -158,6 +158,7 @@ StockQuote/Makefile
 SystemServices/Makefile
 TerminalServerClient/Makefile
 Text/Makefile
+TinyUrl/Makefile
 Translate/Makefile
 Tomboy/Makefile
 Vinagre/Makefile

@@ -65,6 +65,7 @@
       <Entry build="True" name="Stock Quote" configuration="Debug" />
       <Entry build="True" name="TerminalServerClient" configuration="Debug" />
       <Entry build="True" name="xmms2" configuration="Debug" />
+      <Entry build="True" name="TinyUrl" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -131,6 +132,7 @@
       <Entry build="True" name="Stock Quote" configuration="Release" />
       <Entry build="True" name="TerminalServerClient" configuration="Release" />
       <Entry build="True" name="xmms2" configuration="Release" />
+      <Entry build="True" name="TinyUrl" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -198,6 +200,7 @@
     <Execute type="None" entry="Stock Quote" />
     <Execute type="None" entry="TerminalServerClient" />
     <Execute type="None" entry="xmms2" />
+    <Execute type="None" entry="TinyUrl" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -265,5 +268,6 @@
     <Entry filename="StockQuote/Stock Quote.mdp" />
     <Entry filename="TerminalServerClient/TerminalServerClient.mdp" />
     <Entry filename="Xmms2/xmms2.mdp" />
+    <Entry filename="TinyUrl/TinyUrl.mdp" />
   </Entries>
 </Combine>

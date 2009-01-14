@@ -53,6 +53,7 @@ SUBDIRS = \
 	SystemServices \
 	TerminalServerClient \
 	Text \
+	TinyUrl \
 	Translate \
 	Tomboy \
 	Vinagre \
