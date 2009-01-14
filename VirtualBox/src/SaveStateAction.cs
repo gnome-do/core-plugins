@@ -64,7 +64,7 @@ namespace VirtualBox
 		
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 
 		public override IEnumerable<Type> SupportedModifierItemTypes
