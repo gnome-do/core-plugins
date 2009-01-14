@@ -156,6 +156,7 @@ Skype/Makefile
 SSH/Makefile
 StockQuote/Makefile
 SystemServices/Makefile
+Tasque/Makefile
 TerminalServerClient/Makefile
 Text/Makefile
 TinyUrl/Makefile

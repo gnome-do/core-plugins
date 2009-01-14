@@ -51,6 +51,7 @@ SUBDIRS = \
 	SSH \
 	StockQuote \
 	SystemServices \
+	Tasque \
 	TerminalServerClient \
 	Text \
 	TinyUrl \
