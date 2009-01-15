@@ -46,8 +46,10 @@ SUBDIRS = \
 	RememberTheMilk \
 	Rhythmbox \
 	Riptide \
+	RSS \
 	Shelf \
 	Skype \
+	SqueezeCenter \
 	SSH \
 	StockQuote \
 	SystemServices \

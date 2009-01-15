@@ -151,8 +151,10 @@ Quote/Makefile
 RememberTheMilk/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
+RSS/Makefile
 Shelf/Makefile
 Skype/Makefile
+SqueezeCenter/Makefile
 SSH/Makefile
 StockQuote/Makefile
 SystemServices/Makefile
