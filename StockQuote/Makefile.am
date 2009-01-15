@@ -1,6 +1,6 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=SSH
+ASSEMBLY=StockQuote
 
 FILES = \
 	src/StockQuoteAction.cs 
