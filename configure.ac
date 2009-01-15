@@ -161,6 +161,7 @@ SystemServices/Makefile
 Tasque/Makefile
 TerminalServerClient/Makefile
 Text/Makefile
+Thunderbird/Makefile
 TinyUrl/Makefile
 Translate/Makefile
 Tomboy/Makefile

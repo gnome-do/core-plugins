@@ -56,6 +56,7 @@ SUBDIRS = \
 	Tasque \
 	TerminalServerClient \
 	Text \
+	Thunderbird \
 	TinyUrl \
 	Translate \
 	Tomboy \
