@@ -19,39 +19,42 @@
 using System;
 using System.Collections.Generic;
 
-using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Pidgin
+using Do.Universe;
+using Do.Platform;
+
+namespace PidginPlugin
 {
+
 	public class PidginAccountItemSource : ItemSource
 	{
+
 		List<Item> items;
+
 		public PidginAccountItemSource ()
 		{
 			items = new List<Item> ();
-			//UpdateItems ();
 		}
 		
-		public override string Name { get { return Catalog.GetString ("Pidgin Accounts"); } }
-		public override string Description { get { return Catalog.GetString ("Available Pidgin IM Accounts"); } }
-		public override string Icon { get { return "pidgin"; } }
+		public override string Name {
+			get { return Catalog.GetString ("Pidgin Accounts"); }
+		}
+
+		public override string Description {
+			get { return Catalog.GetString ("Available Pidgin IM Accounts"); }
+		}
+
+		public override string Icon {
+			get { return "pidgin"; }
+		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (PidginAccountItem),
-				};
-			}
+			get { yield return typeof (PidginAccountItem); }
 		}
 		
 		public override IEnumerable<Item> Items {
 			get { return items; }
-		}
-		
-		public override IEnumerable<Item> ChildrenOfItem (Item item)
-		{
-			return null;
 		}
 		
 		public override void UpdateItems ()
@@ -67,7 +70,9 @@ namespace Do.Addins.Pidgin
 					name = prpl.PurpleAccountGetUsername (account);
 					items.Add (new PidginAccountItem (name, proto, account));
 				}
-			} catch { 
+			} catch (Exception e) { 
+				Log.Error ("Could not get Pidgin accounts: {0}", e.Message);
+				Log.Debug (e.StackTrace);
 			}
 		}
 	}

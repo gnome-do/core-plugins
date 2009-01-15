@@ -18,15 +18,20 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Do.Universe;
+using System.Collections.Generic;
+
 using Mono.Unix;
 
-namespace Do.Addins.Pidgin
+using Do.Universe;
+using Do.Platform;
+
+namespace PidginPlugin
 {
+
 	public class PidginEnableAccount : Act
 	{
+
 		public override string Name {
 			get { return Catalog.GetString ("Sign on"); }
 		}
@@ -48,7 +53,7 @@ namespace Do.Addins.Pidgin
 			Pidgin.IPurpleObject prpl;
 			 try {
 				prpl = Pidgin.GetPurpleObject ();
-				if (!prpl.PurpleAccountIsConnected ((item as PidginAccountItem).ID))
+				if (!prpl.PurpleAccountIsConnected ((item as PidginAccountItem).Id))
 					return true;
 			} catch { }
 			
@@ -60,7 +65,7 @@ namespace Do.Addins.Pidgin
 			Pidgin.IPurpleObject prpl;
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).ID,
+				prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).Id,
 					"gtk-gaim", 1);
 			} catch { }
 			
@@ -81,32 +86,30 @@ namespace Do.Addins.Pidgin
 		public override string Icon {
 			get { return "pidgin"; }
 		}
-		
+
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (PidginAccountItem); }
 		}
-		
+
 		public override bool SupportsItem (Item item)
 		{
-			 Pidgin.IPurpleObject prpl;
-			 try {
-				prpl = Pidgin.GetPurpleObject ();
-				if (prpl.PurpleAccountIsConnected ((item as PidginAccountItem).ID))
-					return true;
-			} catch { }
-			
-			return false;
+			Pidgin.IPurpleObject prpl = Pidgin.GetPurpleObject ();
+			PidginAccountItem account = item as PidginAccountItem;
+			return prpl.PurpleAccountIsConnected (account.Id);
 		}
-		
+
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
+			PidginAccountItem account = items.First () as PidginAccountItem;
+
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).ID,
-					"gtk-gaim", 0);
-			} catch { }
-			
+				prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", 0);
+			} catch (Exception e) {
+				Log.Error ("Could not disable Pidgin account: {0}", e.Message);
+				Log.Debug (e.StackTrace);
+			}
 			yield break;
 		}
 	}

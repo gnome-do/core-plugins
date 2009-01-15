@@ -20,24 +20,28 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Linq;
 using System.Collections.Generic;
 
-using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Pidgin
+using Do.Universe;
+using Do.Platform;
+
+namespace PidginPlugin
 {
+
 	public class PidginContactItemSource : ItemSource
 	{
-		static readonly string kBuddyListFile;
-		static readonly string kBuddyIconDirectory;
+
+		static readonly string BuddyListFile;
+		static readonly string BuddyIconDirectory;
 		
-		static PidginContactItemSource () {
-			string home;
-			
-			home =  Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			kBuddyListFile = "~/.purple/blist.xml".Replace("~", home);
-			kBuddyIconDirectory = "~/.purple/icons".Replace("~", home);
+		static PidginContactItemSource ()
+		{
+			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			BuddyListFile = Path.Combine (home, ".purple/blist.xml");
+			BuddyIconDirectory = Path.Combine (home, ".purple/icons");
 		}
 		
 		List<Item> buddies;
@@ -45,24 +49,23 @@ namespace Do.Addins.Pidgin
 		public PidginContactItemSource ()
 		{
 			buddies = new List<Item> ();
-			//UpdateItems ();
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ContactItem),
-				};
-			}
+			get { yield return typeof (ContactItem); }
 		}
 		
-		public override string Name { get { return Catalog.GetString ("Pidgin Buddies"); } }
+		public override string Name {
+			get { return Catalog.GetString ("Pidgin Buddies"); }
+		}
 		
 		public override string Description {
 			get { return Catalog.GetString ("Buddies on your Pidgin buddy list."); } 
 		}
 		
-		public override string Icon {get { return "pidgin"; } }
+		public override string Icon {
+			get { return "pidgin"; }
+		}
 		
 		public override IEnumerable<Item> Items {
 			get { return buddies; }
@@ -71,15 +74,10 @@ namespace Do.Addins.Pidgin
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			ContactItem buddy = item as ContactItem;
-			List<Item> details;
-
-			details = new List<Item> ();
-			foreach (string detail in buddy.Details) {
-				if (detail.StartsWith ("prpl-")) {
-					details.Add (new PidginHandleContactDetailItem (detail, buddy[detail]));
-				}
-			}
-			return details;
+			return buddy.Details
+				.Where (d => d.StartsWith ("prpl-"))
+				.Select (d => new PidginHandleContactDetailItem (d, buddy [d]))
+				.Cast<Item> ();
 		}
 		
 		public override void UpdateItems ()
@@ -92,19 +90,20 @@ namespace Do.Addins.Pidgin
 			buddies_seen = new Dictionary<ContactItem, bool> ();
 			blist = new XmlDocument ();
 			try {
-				blist.Load (kBuddyListFile);
+				blist.Load (BuddyListFile);
 
 				foreach (XmlNode contact_node in blist.GetElementsByTagName ("contact"))
-				foreach (XmlNode buddy_node in contact_node.ChildNodes) {
-					ContactItem buddy;		
-					
-					buddy = ContactItemFromBuddyXmlNode (buddy_node);
-					if (buddy == null) continue;
-					buddies_seen[buddy] = true;
-				}
+					foreach (XmlNode buddy_node in contact_node.ChildNodes) {
+						ContactItem buddy;		
+						
+						buddy = ContactItemFromBuddyXmlNode (buddy_node);
+						if (buddy == null) continue;
+						buddies_seen[buddy] = true;
+					}
 				
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not read Pidgin buddy list file: " + e.Message);
+				Log.Error ("Could not read Pidgin buddy list file: {0}", e.Message);
+				Log.Debug (e.StackTrace);
 			}
 			foreach (ContactItem buddy in buddies_seen.Keys) {
 				buddies.Add (buddy);
@@ -133,7 +132,7 @@ namespace Do.Addins.Pidgin
 					// Buddy icon image file.
 					case "setting":
 						if (attr.Attributes.GetNamedItem ("name").Value == "buddy_icon") {
-							icon = Path.Combine (kBuddyIconDirectory, attr.InnerText);
+							icon = Path.Combine (BuddyIconDirectory, attr.InnerText);
 						}
 						break;
 					}

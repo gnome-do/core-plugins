@@ -17,52 +17,45 @@
 //
 
 using System;
-using Do.Universe;
+using System.IO;
 
-namespace Do.Addins.Pidgin
+using Do.Universe;
+using Do.Platform;
+
+namespace PidginPlugin
 {
+
 	public class PidginAccountItem : Item
 	{
-		string name, proto;
-		int id;
-		public PidginAccountItem(string name, string proto, int id)
+		string name;
+
+		public PidginAccountItem (string name, string proto, int id)
 		{
+			proto = proto.ToLower ();
+
 			this.name = name;
-			this.proto = proto.ToLower ();
-			if (proto.Equals ("XMPP"))
-			    this.proto = "jabber";
-			this.id = id;
+			Id = id;
+			Proto = proto.Equals ("XMPP") ? "jabber" : proto;
 		}
+
+		public int Id { get; protected set; }
+		public string Proto { get; protected set; }
 		
 		public override string Name {
-			get {
-				return name;
-			}
+			get { return name; }
 		}
 		
 		public override string Description {
-			get {
-				return proto;
-			}
+			get { return Proto; }
 		}
 		
 		public override string Icon {
 			get {
-				string icon_base = "/usr/share/pixmaps/pidgin/protocols/48/";
-				string proto_icon = proto;
-				string icon = icon_base + proto_icon + ".png";
-
-				if (System.IO.File.Exists (icon))
-					return icon;
-				else
-					return "internet-group-chat";
+				string icon = Path.Combine (
+					"/usr/share/pixmaps/pidgin/protocols/48", Proto + ".png");
+				return File.Exists (icon) ? icon : "internet-group-chat";
 			}
 		}
 		
-		public int ID {
-			get {
-				return id;
-			}
-		}
 	}
 }

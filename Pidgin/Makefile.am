@@ -23,8 +23,8 @@ REFERENCES = \
 	System \
 	System.Xml \
 	System.Core \
-	$(GTK_SHARP_20_LIBS) \
+	Mono.Posix \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_LIBS) \
-	Mono.Posix \
+	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS) 

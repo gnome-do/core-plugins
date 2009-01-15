@@ -17,20 +17,26 @@
 //
 
 using System;
-using Do.Universe;
+using System.IO;
+
 using Mono.Unix;
 
-namespace Do.Addins.Pidgin
+using Do.Universe;
+using Do.Platform;
+
+namespace PidginPlugin
 {
+
 	public class PidginStatusTypeItem : Item
 	{
-		string iconBase;
+
+		const string IconBase = "/usr/share/pixmaps/pidgin/status/48";
+
 		uint status;
 		
-		public PidginStatusTypeItem(uint status)
+		public PidginStatusTypeItem (uint status)
 		{
 			this.status = status;
-			this.iconBase = "/usr/share/pixmaps/pidgin/status/48/";
 		}
 		
 		public override string Name {
@@ -53,12 +59,12 @@ namespace Do.Addins.Pidgin
 		public override string Icon { 
 			get  { 
 				switch (status) {
-				case 1: return iconBase + "offline.png";
-				case 2: return iconBase + "available.png";
-				case 3: return iconBase + "busy.png";
+				case 1: return Path.Combine (IconBase, "offline.png");
+				case 2: return Path.Combine (IconBase, "available.png");
+				case 3: return Path.Combine (IconBase, "busy.png");
 				//there is not a 48px invisible icon.
 				case 4: return "/usr/share/pixmaps/pidgin/status/32/invisible.png";
-				case 5: return iconBase + "away.png";
+				case 5: return Path.Combine (IconBase, "away.png");
 				default: return "pidgin";
 				}
 			}
