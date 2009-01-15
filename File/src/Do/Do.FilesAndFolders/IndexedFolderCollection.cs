@@ -48,15 +48,14 @@ namespace Do.FilesAndFolders
 			}
 		}
 
-		IEnumerable<IndexedFolder> DefaultFolders {
-			get	{
-				yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 0);
-				yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
-			}
+		IEnumerable<IndexedFolder> GetDefaultFolders ()
+		{
+			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 0);
+			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
 		}
-		
+
 		public IndexedFolderCollection ()
 		{
 		}
@@ -71,11 +70,23 @@ namespace Do.FilesAndFolders
 			}
 		}
 
+		public void UpdateIndexedFolder (string path, string newPath, uint newDepth)
+		{
+			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth));
+		}
+
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
 		{
-			if (Folders.ContainsKey (path)) Folders.Remove (path);
-			Folders [path] = folder;
-			Serialize ();
+			// If the updated folder is not actually any different, don't udpate.
+			if (Folders.ContainsKey (path) && Folders [path] == folder) return;
+			RemoveIndexedFolder (path);
+			Add (folder);
+		}
+
+		public void RemoveIndexedFolder (string path)
+		{
+			if (!Folders.ContainsKey (path)) return;
+			Remove (Folders [path]);
 		}
 
 		#region ICollection<IndexedFolder>
@@ -118,7 +129,7 @@ namespace Do.FilesAndFolders
 
 		public bool Contains (IndexedFolder folder)
 		{
-			return Folders.ContainsKey (folder.Path) && Folders [folder.Path] == folder;
+			return Folders.ContainsKey (folder.Path);
 		}
 
 		public int Count {
@@ -144,7 +155,7 @@ namespace Do.FilesAndFolders
 			} finally {
 				// Some sort of error occurred, so load the default data set and save it.
 				if (Folders == null) {
-					Folders = DefaultFolders.ToDictionary (pair => pair.Path);
+					Folders = GetDefaultFolders ().ToDictionary (pair => pair.Path);
 					Serialize ();
 				}
 			}

@@ -21,6 +21,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 using Mono.Unix;
@@ -35,6 +36,11 @@ namespace Do.FilesAndFolders
 	{
 
 		protected const int MaxPathLength = 256;
+
+		// How much time should these PerformWait pause for?
+		// Right now, we do not pause, because it will annoy the user if the Do
+		// interface remains exposed and frozen.
+		static readonly TimeSpan PerformWaitSpan = new TimeSpan (0, 0, 0);
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
@@ -127,6 +133,27 @@ namespace Do.FilesAndFolders
 				action ();
 			}).Start ();
 		}
+
+		protected void PerformWait ()
+		{
+			Thread.Sleep (PerformWaitSpan);
+		}
+
+		protected string Move (string source, string destination)
+		{
+			Process mv = Process.Start ("mv", source + " " + destination);
+			mv.WaitForExit ();
+			return Path.Combine (destination, Path.GetFileName (source));
+		}
+
+		protected string Copy (string source, string destination)
+		{
+			Process cp = Process.Start ("cp -r", source + " " + destination);
+			cp.WaitForExit ();
+			return Path.Combine (destination, Path.GetFileName (source));
+		}
+
 	}
+
 }
 

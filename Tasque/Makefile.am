@@ -3,16 +3,20 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Tasque
 
 FILES = \
-	src/SSHAction.cs \
-	src/SSHHosts.cs
+	src/TasqueDBus.cs \
+	src/TasqueCategoryItem.cs \
+	src/Tasque.cs \
+	src/TasqueAction.cs
 
 RESOURCES = \
-	Resources/SSH.addin.xml 
+	Resources/Tasque.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
+	Mono.Posix \
+	$(NDESK_DBUS_10_LIBS) \
+	$(NDESK_DBUS_GLIB_LIBS) \
 	$(GCONF_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)

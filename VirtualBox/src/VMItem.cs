@@ -54,10 +54,13 @@ namespace VirtualBox
 		
 			uuid = MachineAttrs["uuid"].Value.Replace("{", "").Replace("}", "");
 			//find machine specific xml file
-			string MachineSource = string.Format("~/.VirtualBox/{0}", MachineAttrs["src"].Value);
+			string MachineSource = MachineAttrs["src"].Value;
+			if (!File.Exists (MachineSource)) {
+				MachineSource = string.Format("{0}/.VirtualBox/{1}", home, MachineSource);
+			}
 			//find the OS type of the machine
 			XmlDocument MachineDoc = new XmlDocument();
-			MachineDoc.Load(MachineSource.Replace("~", home));
+			MachineDoc.Load(MachineSource);
 			XmlNodeList MachineInfo = MachineDoc.GetElementsByTagName("Machine");
 			name = MachineInfo[0].Attributes["name"].Value;
 			try

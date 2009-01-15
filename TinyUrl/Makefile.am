@@ -1,16 +1,17 @@
 include $(top_srcdir)/build.rules.mk
 
-ASSEMBLY=EOG-Slideshow
+ASSEMBLY=TinyUrl
 
 FILES = \
-	src/PlaySlideshowAction.cs
+	src/TinyUrl/MakeUrlTinyAction.cs
 
 RESOURCES = \
-	Resources/EOG-Slideshow.addin.xml
+	Resources/TinyUrl.addin.xml
 
 REFERENCES = \
 	System \
-	System.Core \
 	Mono.Posix \
+	System.Core \
+	System.Web \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)

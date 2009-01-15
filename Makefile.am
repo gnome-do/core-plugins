@@ -51,8 +51,11 @@ SUBDIRS = \
 	Skype \
 	SSH \
 	StockQuote \
+	SystemServices \
+	Tasque \
 	TerminalServerClient \
 	Text \
+	TinyUrl \
 	Translate \
 	Tomboy \
 	Vinagre \
