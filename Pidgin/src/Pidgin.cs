@@ -167,8 +167,8 @@ namespace PidginPlugin
 				conversation = prpl.PurpleConversationNew (1, account, name);
 				prpl.PurpleConversationPresent (conversation);
 			} catch (Exception e) {
-				Log.Error ("Could not create new Pidgin conversation: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<Pidgin>.Error ("Could not create new Pidgin conversation: {0}", e.Message);
+				Log<Pidgin>.Debug (e.StackTrace);
 			}
 		}
 

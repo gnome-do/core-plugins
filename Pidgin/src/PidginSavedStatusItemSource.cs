@@ -80,8 +80,8 @@ namespace PidginPlugin
 					}
 				}
 			} catch (Exception e) {
-				Log.Error ("Could not read saved statuses: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<PidginSavedStatusItemSource>.Error ("Could not read saved statuses: {0}", e.Message);
+				Log<PidginSavedStatusItemSource>.Debug (e.StackTrace);
 			}
 		}
 	}

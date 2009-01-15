@@ -100,8 +100,8 @@ namespace PidginPlugin
 					Pidgin.PurpleSetAvailabilityStatus ((uint) status, message);
 				}
 			} catch (Exception e) {
-				Log.Error ("Could not set Pidgin status: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<PidginSetStatusAction>.Error ("Could not set Pidgin status: {0}", e.Message);
+				Log<PidginSetStatusAction>.Debug (e.StackTrace);
 			}
 
 			yield break;

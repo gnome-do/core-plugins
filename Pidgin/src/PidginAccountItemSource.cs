@@ -71,8 +71,8 @@ namespace PidginPlugin
 					items.Add (new PidginAccountItem (name, proto, account));
 				}
 			} catch (Exception e) { 
-				Log.Error ("Could not get Pidgin accounts: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<PidginAccountItemSource>.Error ("Could not get Pidgin accounts: {0}", e.Message);
+				Log<PidginAccountItemSource>.Debug (e.StackTrace);
 			}
 		}
 	}

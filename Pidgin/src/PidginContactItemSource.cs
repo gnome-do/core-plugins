@@ -102,8 +102,8 @@ namespace PidginPlugin
 					}
 				
 			} catch (Exception e) {
-				Log.Error ("Could not read Pidgin buddy list file: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<PidginContactItemSource>.Error ("Could not read Pidgin buddy list file: {0}", e.Message);
+				Log<PidginContactItemSource>.Debug (e.StackTrace);
 			}
 			foreach (ContactItem buddy in buddies_seen.Keys) {
 				buddies.Add (buddy);

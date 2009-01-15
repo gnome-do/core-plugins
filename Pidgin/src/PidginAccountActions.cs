@@ -67,7 +67,10 @@ namespace PidginPlugin
 				prpl = Pidgin.GetPurpleObject ();
 				prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).Id,
 					"gtk-gaim", 1);
-			} catch { }
+			} catch (Exception e) {
+				Log<PidginEnableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);
+				Log<PidginEnableAccount>.Debug (e.StackTrace);
+			}
 			
 			yield break;
 		}		
@@ -107,8 +110,8 @@ namespace PidginPlugin
 				prpl = Pidgin.GetPurpleObject ();
 				prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", 0);
 			} catch (Exception e) {
-				Log.Error ("Could not disable Pidgin account: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<PidginDisableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);
+				Log<PidginDisableAccount>.Debug (e.StackTrace);
 			}
 			yield break;
 		}
