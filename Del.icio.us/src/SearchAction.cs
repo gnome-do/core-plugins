@@ -44,11 +44,11 @@ namespace Delicious
 	public class SearchAction : Act
 	{
 		public override string Name {
-			get { return "Search del.icio.us"; }
+			get { return Catalog.GetString ("Search del.icio.us"); }
 		}
 		
 		public override string Description {
-			get { return "del.icio.us tag search"; }
+			get { return Catalog.GetString ("del.icio.us tag search"); }
 		}
 		
 		public override string Icon {
@@ -61,9 +61,9 @@ namespace Delicious
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			String tags = (items.First () as ITextItem).Text.Replace(" ","+");
+			string tags = (items.First () as ITextItem).Text.Replace(" ","+");
 
-			String url = "https://api.del.icio.us/v1/posts/recent?tag=" + tags;
+			string url = "https://api.del.icio.us/v1/posts/recent?tag=" + tags;
 			//Console.WriteLine (url);
 			HttpWebRequest request = WebRequest.Create (url) as HttpWebRequest;
 
@@ -71,8 +71,8 @@ namespace Delicious
 
 			//Console.WriteLine ("made it");
 
-			String username;
-			String password;
+			string username;
+			string password;
 			
 			username = Delicious.Preferences.Username;
 			password = Delicious.Preferences.Password;
