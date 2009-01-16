@@ -32,6 +32,7 @@ namespace Banshee
 	{
 		// TODO: use an IApplicationItem instead of this hardcoded string.
 		const string BansheeBin = "banshee-1";
+		const string BansheeABIVersion = "1.4";
 		const string MinBansheeVersion = "4.2"; // 1 is assumed.
 
 		public static string UnsupportedVersionMessage {
@@ -54,7 +55,7 @@ namespace Banshee
 			banshee.WaitForExit ();
 			stdout = banshee.StandardOutput.ReadToEnd ();
 
-			version = stdout.Substring (stdout.IndexOf (MinBansheeVersion), MinBansheeVersion.Length);
+			version = stdout.Substring (stdout.IndexOf (BansheeABIVersion) + "1.".Length, MinBansheeVersion.Length);
 			return float.Parse (version) >= float.Parse (MinBansheeVersion);
 		}
 	}

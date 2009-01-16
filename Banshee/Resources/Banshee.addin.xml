@@ -34,6 +34,9 @@
 		<Action type = "Banshee.NextAction" />
 	</Extension>
 	<Extension path = "/Do/Action">
+		<Action type = "Banshee.PreviousAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
 		<Action type = "Banshee.PlayAction" />
 	</Extension>
 	<Extension path = "/Do/Action">

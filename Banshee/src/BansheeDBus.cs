@@ -34,7 +34,7 @@ namespace Banshee
 	interface IBansheePlayer {
 		void Pause ();
 		void TogglePlaying ();
-		bool CanPause { get; }
+		string CurrentState { get; }
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlayQueue")]
@@ -109,7 +109,7 @@ namespace Banshee
 		public bool IsPlaying ()
 		{
 			try {
-				return Player.CanPause;
+				return Player.CurrentState == "playing";
 			} catch (Exception e) {
 				LogError ("IsPlaying", e);
 			}

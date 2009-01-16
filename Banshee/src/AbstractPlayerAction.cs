@@ -24,23 +24,16 @@ using System.Collections.Generic;
 using Do.Universe;
 
 namespace Banshee
-{
-	
-	
+{	
 	public abstract class AbstractPlayerAction : Act
 	{
-		
-		public AbstractPlayerAction ()
-		{
-		}
-
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (IApplicationItem); }
 		}
 
 		public override bool SupportsItem (Item item)
 		{
-			return (item as IApplicationItem).Exec == "banshee-1";
+			return (item is IApplicationItem) && (item as IApplicationItem).Exec.StartsWith ("banshee-1");
 		}
 	}
 }
