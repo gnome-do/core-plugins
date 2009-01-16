@@ -7,13 +7,14 @@ FILES = \
 	src/Configuration.cs \
 	src/Delicious.cs \
 	src/NewBookmarkAction.cs \
+	src/Preferences.cs \
 	src/SearchAction.cs \
 	src/TagItem.cs \
 	src/TagsItemSource.cs 
 
 RESOURCES = \
 	Resources/delicious.addin.xml \
-	Resources/delicious.png
+	Resources/icons/delicious.png
 
 REFERENCES = \
 	Mono.Posix \
@@ -22,5 +23,4 @@ REFERENCES = \
 	System.Web \
 	System.Xml \
 	$(GTK_SHARP_20_LIBS) \
-	$(GCONF_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS)

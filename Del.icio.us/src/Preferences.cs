@@ -1,4 +1,4 @@
-/* Configuration.cs
+/* Preferences.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -18,31 +18,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
-using Do.Platform.Linux;
+
+using Do.Platform;
 
 namespace Delicious
-{	
-	public class Configuration : AbstractLoginWidget
+{
+	
+	public class Preferences
 	{
-		public Configuration () : base ("del.icio.us", "https://secure.delicious.com/register")
+		const string UsernameKey = "Username";
+		const string PasswordKey = "Password";
+
+		IPreferences prefs;
+
+		public Preferences()
 		{
-			Username = Delicious.Preferences.Username;
-			Password = Delicious.Preferences.Password;
+			prefs = Services.Preferences.Get<Preferences> ();
 		}
 
-		protected override void SaveAccountData(string username, string password)
-		{
-			Delicious.Preferences.Username = username;
-			Delicious.Preferences.Password = password;
+		public string Username {
+			get { return prefs.Get<string> (UsernameKey, ""); }
+			set { prefs.Set (UsernameKey, value); }
 		}
 
-		
-		protected override bool Validate (string username, string password)
-		{
-			Delicious.Connect ();
-			return true;
+		public string Password {
+			get { return prefs.GetSecure (PasswordKey, ""); }
+			set { prefs.SetSecure (PasswordKey, value); }
 		}
 	}
 }
