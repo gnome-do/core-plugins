@@ -17,7 +17,8 @@
 	</Dependencies>
 	
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="ManPages.ManualPageItemSource" />
+		<!-- This item source is not a good citizen. Let people type out commands as plain text. -->
+		<!--		<ItemSource type="ManPages.ManualPageItemSource" /> -->
 	</Extension>
 	<Extension path = "/Do/Action">
 		<Action type="ManPages.ReadManualPageAction" />
