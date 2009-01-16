@@ -22,5 +22,9 @@
 	<Extension path= "/Do/Action">
 		<Action type="Do.Rhythmbox.EnqueueAction" />
 		<Action type="Do.Rhythmbox.PlayAction" />
+		<Action type="Do.Rhythmbox.PlayItemAction" />
+		<Action type="Do.Rhythmbox.PauseAction" />
+		<Action type="Do.Rhythmbox.NextAction" />
+		<Action type="Do.Rhythmbox.PreviousAction" />
 	</Extension>
 </Addin>
