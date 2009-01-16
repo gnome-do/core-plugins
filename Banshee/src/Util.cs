@@ -24,7 +24,6 @@ using System.Diagnostics;
 using Mono.Unix;
 
 using Do.Platform;
-using Do.Universe;
 
 namespace Banshee
 {
@@ -49,13 +48,14 @@ namespace Banshee
 			banshee.StartInfo.FileName = BansheeBin;
 			banshee.StartInfo.Arguments = "--version";
 			banshee.StartInfo.UseShellExecute = false;
+			banshee.StartInfo.RedirectStandardOutput = true;
 
 			banshee.Start ();
 			banshee.WaitForExit ();
 			stdout = banshee.StandardOutput.ReadToEnd ();
 
 			version = stdout.Substring (stdout.IndexOf (MinBansheeVersion), MinBansheeVersion.Length);
-			return int.Parse (version) >= int.Parse (MinBansheeVersion);
+			return float.Parse (version) >= float.Parse (MinBansheeVersion);
 		}
 	}
 }
