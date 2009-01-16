@@ -1,4 +1,4 @@
-/* BansheePlayAction.cs
+/* NextAction.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -18,49 +18,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
-using System.Linq;
-using System.Threading;
 using System.Collections.Generic;
 
 using Mono.Unix;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
 {	
-	public class BansheePlayAction : Act
-	{		
+	public class NextAction : AbstractPlayerAction
+	{
 		public override string Name {
-			get { return Catalog.GetString ("Play"); }
-		}
-		
-		public override string Description {
-			get { return Catalog.GetString ("Play from your Banshee Collection"); }
-		}
-		
-		public override string Icon {
-			get { return "media-playback-start"; }
-		}
-		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { return 
-				new Type[] { 
-					typeof (MediaItem),
-				};
-			}
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return false;
+			get { return Catalog.GetString ("Next"); }
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override string Description {
+			get { return Catalog.GetString ("Play next track in Banshee"); }
+		}
+
+		public override string Icon {
+			get { return "media-skip-forward"; }
+		}
+
+		public override IEnumerable<Item> Perform(IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Banshee.Play (items.Cast<MediaItem> ().First ());
-			return Enumerable.Empty<Item> ();
+			Banshee.Next ();
+			yield break;
 		}
 	}
 }

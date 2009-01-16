@@ -1,4 +1,4 @@
-/* BansheeItemSource.cs
+/* MediaItemSource.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -24,11 +24,12 @@ using System.Collections.Generic;
 
 using Mono.Unix;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
 {	
-	public class BansheeItemSource : ItemSource
+	public class MediaItemSource : ItemSource
 	{
 		List<Item> items;
 		List<AlbumMusicItem> albums;
@@ -36,8 +37,13 @@ namespace Banshee
 		List<VideoItem> videos;
 		List<PodcastItem> publishers;
 		
-		public BansheeItemSource()
+		public MediaItemSource()
 		{
+			if (!Util.VersionSupportsIndexing ()) {
+				Log<Banshee>.Error (Util.UnsupportedVersionMessage);
+				throw new Exception (Util.UnsupportedVersionMessage);
+			}
+				
 			items = new List<Item> ();
 		}
 		
@@ -71,7 +77,7 @@ namespace Banshee
 			
 			children = new List<Item> ();
 
-			if (parent is IApplicationItem && parent.Name.ToLower () == Catalog.GetString ("banshee media player")) {
+			if (parent is IApplicationItem && (parent as IApplicationItem).Exec == "banshee-1") {
 				if (albums != null && albums.Count > 0)
 					children.Add (new BrowseAlbumsMusicItem ());
 				if (artists != null && artists.Count > 0)

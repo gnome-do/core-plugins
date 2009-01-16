@@ -1,9 +1,9 @@
 <Addin 
-	id="Banshee"
+	id="Banshee (beta)"
 	namespace= "Do"
-	version="1.0"
+	version="0.8"
 	name="Banshee"
-	description="Control Banshee Media Player playback"
+	description="Control Banshee Media Player and Search Collection"
 	author="Alex Launi"
 	category="Official"
 >
@@ -18,19 +18,28 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<!-- Itemsources 
+	<!-- Itemsources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type = "Banshee.BansheeItemSource" />
-	</Extension> -->
+		<ItemSource type = "Banshee.MediaItemSource" />
+	</Extension>
 
 	<!-- Actions -->
 	<Extension path = "/Do/Action">
-		<Action type = "Banshee.BansheePlayAction" />
+		<Action type = "Banshee.PlayAction" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type = "Banshee.BansheeEnqueueAction" />
+		<Action type = "Banshee.PauseAction" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type = "Banshee.BansheeSearchCollectionAction" />
+		<Action type = "Banshee.NextAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type = "Banshee.PlayAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type = "Banshee.EnqueueAction" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type = "Banshee.SearchCollectionAction" />
 	</Extension>
 </Addin>

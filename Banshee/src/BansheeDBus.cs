@@ -32,12 +32,13 @@ namespace Banshee
 {
 	[Interface ("org.bansheeproject.Banshee.PlayerEngine")]
 	interface IBansheePlayer {
+		void Pause ();
 		void TogglePlaying ();
+		bool CanPause { get; }
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlayQueue")]
 	interface IBansheePlayQueue {
-		void EnqueueUri (string uri);
 		void EnqueueUri (string uri, bool prepend);
 	}
 	
@@ -48,7 +49,7 @@ namespace Banshee
 		int ShuffleMode { get; set; }
 	}
 	
-	public class BansheeDbus
+	public class BansheeDBus
 	{
 		const string BusName = "org.bansheeproject.Banshee";
 
@@ -60,7 +61,7 @@ namespace Banshee
 		static IBansheePlayQueue queue;
 		static IBansheeController controller;
 
-		static BansheeDbus ()
+		static BansheeDBus ()
 		{
 			BuildObjectPathsDict ();
 		}
@@ -104,13 +105,32 @@ namespace Banshee
 			get { return (PlaybackShuffleMode) Controller.ShuffleMode; }
 			set { Controller.ShuffleMode = (int) value; }
 		}
+
+		public bool IsPlaying ()
+		{
+			try {
+				return Player.CanPause;
+			} catch (Exception e) {
+				LogError ("IsPlaying", e);
+			}
+			return false;
+		}
+
+		public void Pause ()
+		{
+			try {
+				Player.Pause ();
+			} catch (Exception e) {
+				LogError ("Pause", e);
+			}
+		}
 		
 		public void TogglePlaying ()
 		{
 			try {
 				Player.TogglePlaying ();
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Enqueue. {0}.", e.Message);
+				LogError ("TogglePlaying", e);
 			}
 		}
 
@@ -134,7 +154,7 @@ namespace Banshee
 				media.ForEach (item => PlayQueue.EnqueueUri (item.Path, prepend));
 				
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Enqueue. {0}.", e.Message);
+				LogError ("Enqueue", e);
 			}
 		}
 		
@@ -143,7 +163,7 @@ namespace Banshee
 			try {
 				Controller.Next (false);
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Next. {0}.", e.Message);
+				LogError ("Next", e);
 			}
 		}
 		
@@ -152,7 +172,7 @@ namespace Banshee
 			try {
 				Controller.Previous (false);
 			} catch (Exception e) {
-				Log.Error ("Encountered a problem in Previous. {0}.", e.Message);
+				LogError ("Previous", e);
 			}
 		}
 		
@@ -162,6 +182,11 @@ namespace Banshee
 			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
 			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");
 			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
+		}
+
+		void LogError (string methodName, Exception e)
+		{
+			Log<BansheeDBus>.Error ("Encountered a problem in {0}: {1}", methodName, e.Message);
 		}
 	}
 }

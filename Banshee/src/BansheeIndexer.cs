@@ -36,14 +36,14 @@ using Do.Universe;
 namespace Banshee
 {
 	public class BansheeIndexer : SimpleIndexerClient
-	{
+	{		
 		string artwork_directory;
 		List<IDictionary<string, object>> indexed_items;
 		
 		readonly string[] export_fields = new [] {"name", "artist", "year", "album", "local-path", "URI", "media-attributes", "artwork-id", "track-number"};
 		
 		public BansheeIndexer ()
-		{
+		{			
 			AddExportField (export_fields);
 			IndexWhenCollectionChanged = false;
 			artwork_directory = Path.Combine (ReadXdgUserDir ("XDG_CACHE_DIR", ".cache"), "album-art");
@@ -52,8 +52,6 @@ namespace Banshee
 			Songs = Enumerable.Empty<SongMusicItem> ();
 			Podcasts = Enumerable.Empty<PodcastItem> ();
 			indexed_items = new List<IDictionary<string, object>> ();
-
-			
 		}
 
 		public IEnumerable<VideoItem> Videos { get; private set; }

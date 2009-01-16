@@ -38,12 +38,12 @@ namespace Banshee
 	
 	public class Banshee
 	{
-		static BansheeDbus bus;
+		static BansheeDBus bus;
 		static BansheeIndexer indexer;
 		
 		static Banshee()
 		{
-			bus = new BansheeDbus ();
+			bus = new BansheeDBus ();
 			indexer = new BansheeIndexer ();
 		}
 
@@ -52,14 +52,8 @@ namespace Banshee
 			indexer.Start ();
 		}
 
-		public static IEnumerable<IMediaFile> LoadMedia (MediaItem item)
-		{
-			if (item is MusicItem)
-				return LoadSongsFor (item as MusicItem);
-			else if (item is PodcastItem)
-				return LoadPodcastsFor (item as PodcastItem);
-			else
-				return indexer.Videos as IEnumerable<IMediaFile>;
+		public static bool IsPlaying {
+			get { return bus.IsPlaying (); }
 		}
 
 		public static void Enqueue (MediaItem item)
@@ -67,9 +61,21 @@ namespace Banshee
 			bus.Enqueue (LoadMedia (item));
 		}
 
+		public static void Play ()
+		{
+			Play (null);
+		}
+		
 		public static void Play (MediaItem item)
 		{
 			Thread thread = new Thread ((ThreadStart) (() => bus.Play (LoadMedia (item))));
+			thread.IsBackground = true;
+			thread.Start ();
+		}
+
+		public static void Pause ()
+		{
+			Thread thread = new Thread ((ThreadStart) (() => bus.Pause ()));
 			thread.IsBackground = true;
 			thread.Start ();
 		}
@@ -97,6 +103,18 @@ namespace Banshee
 
 		public static PlaybackShuffleMode ShuffleMode {
 			set { bus.ShuffleMode = value; }
+		}
+
+		public static IEnumerable<IMediaFile> LoadMedia (MediaItem item)
+		{
+			if (item is MusicItem)
+				return LoadSongsFor (item as MusicItem);
+			else if (item is PodcastItem)
+				return LoadPodcastsFor (item as PodcastItem);
+			else if (item is VideoItem)
+				return indexer.Videos as IEnumerable<IMediaFile>;
+			else
+				return Enumerable.Empty<IMediaFile> ();
 		}
 
 		public static void LoadVideos (out List<VideoItem> videos)

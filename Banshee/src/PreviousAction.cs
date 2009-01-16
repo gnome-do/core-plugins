@@ -1,4 +1,4 @@
-/* BansheeSearchCollectionAction.cs
+/* PreviousAction.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -18,45 +18,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 using Mono.Unix;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
-{
-	public class BansheeSearchCollectionAction : Act
+{	
+	public class PreviousAction : AbstractPlayerAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Search Banshee Media"); }
+			get { return Catalog.GetString ("Previous"); }
 		}
-		
+
 		public override string Description {
-			get { return Catalog.GetString ("Search your entire Banshee collection"); }
+			get { return Catalog.GetString ("Play previous track in Banshee"); }
 		}
 
 		public override string Icon {
-			get { return "edit-find"; }
+			get { return "media-skip-backward"; }
 		}
-		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] { typeof (ITextItem), typeof (MediaItem), }; }
-		}
-		
+
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string search;
-			
-			if (items.First () is ITextItem)
-				search = (items.First () as ITextItem).Text;
-			else
-				search = items.First ().Name;
-
-			return Banshee.SearchMedia (search).Cast<Item> ();
+			Banshee.Previous ();
+			yield break;
 		}
 	}
 }
