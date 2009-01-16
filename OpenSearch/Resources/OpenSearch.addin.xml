@@ -20,9 +20,5 @@
 	<Extension path="/Do/Action">
 		<Action type="OpenSearch.OpenSearchAction" />
 	</Extension>
-
-	<Extension path="/Do/ItemSource">
-		<ItemSource type="OpenSearch.OpenSearchItemSource" />
-	</Extension>
-
+	
 </Addin>
