@@ -40,8 +40,7 @@ namespace Microblogging
 		#region Class constants, error messages
 		
 		readonly string DownloadFailedMsg = Catalog.GetString ("Failed to fetch file from {0}");
-		readonly string NoUpdatesMsg = Catalog.GetString ("No new microblog status updates found.");
-		readonly string GenericErrorMsg = Catalog.GetString ("Twitter encountered an error in {0}");
+		readonly string GenericErrorMsg = Catalog.GetString ("Twitter encountered an error in {0}. {1}");
 		
 		readonly string FailedPostMsg = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
 			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
@@ -97,9 +96,7 @@ namespace Microblogging
 				
 			} catch (TwitterizerException e) {
 				errorMessage = FailedPostMsg;
-					
-				Log.Error (string.Format (GenericErrorMsg, "Post"), e.Message);
-				Log.Debug (e.StackTrace);
+				Log<MicroblogClient>.Debug (GenericErrorMsg, "Post", e.Message);
 			}
 
 			OnStatusUpdated (status, errorMessage);
@@ -117,8 +114,7 @@ namespace Microblogging
 				newContacts = new List<Item> ();
 				friends = blog.User.Friends ();
 			} catch (TwitterizerException e) {
-				Log.Error (string.Format (GenericErrorMsg, "UpdateFriends"), e.Message);
-				Log.Debug (e.StackTrace);
+				Log<MicroblogClient>.Debug (GenericErrorMsg, "UpdateContacts", e.Message);
 				return;
 			}
 				
@@ -144,7 +140,6 @@ namespace Microblogging
 			string icon = "";
 			TwitterStatus tweet;
 			TwitterParameters parameters;
-			string genericError = string.Format (GenericErrorMsg, "UpdateTimeline");
 
 			try {
 				// get the most recent update
@@ -158,13 +153,8 @@ namespace Microblogging
 				timeline_last_updated = tweet.Created;
 			
 				OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
-			} catch (TwitterizerException e) {
-				Log.Error (genericError, e.Message);
-			} catch (ArgumentOutOfRangeException e) {
-				Log.Error (genericError, e.Message);
-				Log.Debug (e.StackTrace);
-			} catch (IndexOutOfRangeException) {
-				Log.Debug (NoUpdatesMsg);
+			} catch (Exception e) {
+				Log<MicroblogClient>.Debug (GenericErrorMsg, "UpdateTimeline", e.Message);
 			}
 		}
 
@@ -186,14 +176,8 @@ namespace Microblogging
 				messages_last_updated = message.Created;
 
 				OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
-			} catch (TwitterizerException) {
-				// Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
-			} catch (ArgumentOutOfRangeException e) {
-				Log.Error (string.Format (GenericErrorMsg, "CheckForMessages"), e.Message);
-				Log.Debug (e.StackTrace);
-			} catch (IndexOutOfRangeException) {
-				Log.Debug (NoUpdatesMsg);
-				return;
+			} catch (Exception e) {
+				Log<MicroblogClient>.Debug (GenericErrorMsg, "CheckForMessages", e.Message);
 			}
 		}
 		
