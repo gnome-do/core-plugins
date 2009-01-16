@@ -22,8 +22,9 @@
 using System;
 using System.Collections.Generic;
 
-using Do.Universe;
 using Mono.Unix;
+
+using Do.Universe;
 
 namespace Delicious
 {
@@ -42,20 +43,14 @@ namespace Delicious
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (TagItem),
-				};
-			}
+			get { yield return typeof (TagItem); }
 		}
 		
 		public override IEnumerable<Item> Items {
 			get {
-				List<Item> tags = new List<Item> ();
 				foreach (string tag in Delicious.Tags.Keys) {
-					tags.Add (new TagItem (tag));
+					yield return new TagItem (tag);
 				}
-				return tags;
 			}
 		}
 		

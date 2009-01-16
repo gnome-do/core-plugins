@@ -41,18 +41,21 @@ namespace Delicious
 		//private static string new_tags = "dookie";
 		
 		static Delicious ()
-		{	
-			username = password = "";
+		{
+			Preferences = new Preferences ();
 			
 			bookmarks = new Dictionary<string,List<Item>> ();
 			book_lock = new object ();
 			
 			Connect ();
 		}
+
+		public static Preferences Preferences { get; private set; }
 		
 		public static void Connect ()
 		{
-			Configuration.GetAccountData (out username, out password, typeof (Configuration));
+			username = Preferences.Username;
+			password = Preferences.Password;
 		}
 		
 		public static Dictionary<string, List<Item>> Tags {
