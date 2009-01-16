@@ -116,6 +116,7 @@ Bibtex/Makefile
 Cl.ickable/Makefile
 ClawsMail/Makefile
 Confluence/Makefile
+Del.icio.us/Makefile
 DiskMounter/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile

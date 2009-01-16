@@ -3,8 +3,9 @@
 	namespace="Do"
 	version="2.0"
 	name="del.icio.us Tag Search" 
-	description="Search del.icio.us tags."
-	author="Jacob Andreas"
+	description="Search your del.icio.us bookmarks."
+	author="Jacob Andreas, Alex Launi"
+	category="Community"
 >
  
 	<Runtime>

@@ -20,18 +20,16 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Xml;
+using System.Linq;
 using System.Collections.Generic;
-using GConf;
-using Mono;
+using System.Security.Cryptography.X509Certificates;
+
 using Mono.Unix;
 
 using Do.Universe;
 using Do.Universe.Common;
-using Do.Platform;
 
 namespace Delicious
 {
@@ -46,33 +44,19 @@ namespace Delicious
 	public class SearchAction : Act
 	{
 		public override string Name {
-			get {
-				return "Search del.icio.us";
-			}
+			get { return "Search del.icio.us"; }
 		}
 		
 		public override string Description {
-			get {
-				return "del.icio.us tag search";
-			}
+			get { return "del.icio.us tag search"; }
 		}
 		
 		public override string Icon {
-			get {
-				return "bookmark-new";
-			}
+			get { return "bookmark-new"; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
-		}
-
-		public bool SupportsItem (Item item) {
-			return true;
+			get { yield return typeof (ITextItem); }
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -87,25 +71,12 @@ namespace Delicious
 
 			//Console.WriteLine ("made it");
 
-			GConf.Client gconf = new GConf.Client ();
-
 			String username;
 			String password;
 			
-			try {
-				username = gconf.Get ("/apps/gnome-do/plugins/del.icio.us/username") as String;
-				password = gconf.Get ("/apps/gnome-do/plugins/del.icio.us/password") as String;
-			}
-			catch (GConf.NoSuchKeyException) {
-				gconf.Set ("/apps/gnome-do/plugins/del.icio.us/username", "");
-				gconf.Set ("/apps/gnome-do/plugins/del.icio.us/password", "");
-				return null;
-			}
-
-			//Console.WriteLine ("got data");
-			//Console.WriteLine (username);
-			//Console.WriteLine (password);
-
+			username = Delicious.Preferences.Username;
+			password = Delicious.Preferences.Password;
+			
 			request.Credentials = new NetworkCredential (username, password);
 			request.Method = "POST";
 
@@ -129,7 +100,7 @@ namespace Delicious
 			hits.Add (new BookmarkItem ("See all mine...", "http://del.icio.us/search/?type=user&p=" + tags));
 			hits.Add (new BookmarkItem ("See everybody's...", "http://del.icio.us/tag/" + tags));
 			
-			return hits.ToArray ();
+			return hits;
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {

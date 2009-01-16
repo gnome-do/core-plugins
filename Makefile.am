@@ -11,6 +11,7 @@ SUBDIRS = \
 	Cl.ickable \
 	ClawsMail \
 	Confluence \
+	Del.icio.us \
 	DiskMounter \
 	EOG-Slideshow \
 	Epiphany \
