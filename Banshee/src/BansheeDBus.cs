@@ -32,6 +32,7 @@ namespace Banshee
 {
 	[Interface ("org.bansheeproject.Banshee.PlayerEngine")]
 	interface IBansheePlayer {
+		void Play ();
 		void Pause ();
 		void TogglePlaying ();
 		string CurrentState { get; }
@@ -132,6 +133,11 @@ namespace Banshee
 			} catch (Exception e) {
 				LogError ("TogglePlaying", e);
 			}
+		}
+
+		public void Play ()
+		{
+			Player.Play ();
 		}
 
 		public void Play (IEnumerable<IMediaFile> media)

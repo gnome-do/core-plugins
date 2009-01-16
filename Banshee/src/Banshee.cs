@@ -63,7 +63,9 @@ namespace Banshee
 
 		public static void Play ()
 		{
-			Play (null);
+			Thread thread = new Thread ((ThreadStart) (() => bus.Play ()));
+			thread.IsBackground = true;
+			thread.Start ();
 		}
 		
 		public static void Play (MediaItem item)
