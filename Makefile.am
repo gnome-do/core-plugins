@@ -59,6 +59,7 @@ SUBDIRS = \
 	Text \
 	Thunderbird \
 	TinyUrl \
+	Tracker \
 	Translate \
 	Tomboy \
 	Vinagre \
