@@ -22,12 +22,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
-using Do.Universe;
 using Mono.Unix;
+
+using Do;
+using Do.Platform;
+using Do.Universe;
 
 namespace OpenSearch
 {
-	public static class CachingOpenSearchItemSource 
+	public class CachingOpenSearchItemSource 
 	{	
 		static readonly string valid_file_pattern = @"^.*\.xml$";		
 		static Dictionary<string, Item> cached_items;
@@ -53,8 +56,11 @@ namespace OpenSearch
 					OpenSearchItem item = OpenSearchParser.Create (filePath);
 					if (item != null) {
 						cached_items.Add (filePath, item);
+						Log<CachingOpenSearchItemSource>.Debug ("Adding new OpenSearch plugin: {0}", filePath);
 					}
-				} catch {
+				} catch (Exception e) {
+					Log<CachingOpenSearchItemSource>.Debug ("Error adding new OpenSearch plugin: {0} {1}", filePath, e.Message);
+					Log<CachingOpenSearchItemSource>.Debug (e.StackTrace);
 					continue;
 				}
 			}
