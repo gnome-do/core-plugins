@@ -164,6 +164,7 @@ TerminalServerClient/Makefile
 Text/Makefile
 Thunderbird/Makefile
 TinyUrl/Makefile
+Tracker/Makefile
 Translate/Makefile
 Tomboy/Makefile
 Vinagre/Makefile
