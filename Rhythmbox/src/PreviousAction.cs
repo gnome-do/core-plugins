@@ -58,7 +58,7 @@ namespace Do.Rhythmbox
 		
         public override bool SupportsItem (Item item) 
         {
-			if ((item as IApplicationItem).Exec.Contains("rhythmbox")) {
+			if ((item as IApplicationItem).Exec.Contains ("rhythmbox")) {
 				if (Rhythmbox.InstanceIsRunning)
 					return true;
 			}
@@ -68,8 +68,8 @@ namespace Do.Rhythmbox
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.Client("--previous --no-start");
-				Rhythmbox.Client("--previous --no-start");
+				Rhythmbox.Client ("--previous --no-start");
+				Rhythmbox.Client ("--previous --no-start");
 			}).Start ();
 			return null;
 		}

@@ -65,26 +65,6 @@ namespace Do.Rhythmbox
 		public static readonly RhythmboxRunnableItem[] DefaultItems =
 			new RhythmboxRunnableItem[] {
 
-				new RhythmboxRunnableItem (Catalog.GetString ("Play"),
-						Catalog.GetString ("Play Current Track in Rhythmbox"),
-						"player_play",
-						"--play"),
-
-				new RhythmboxRunnableItem (Catalog.GetString ("Pause"),
-						Catalog.GetString ("Pause Rhythmbox Playback"),
-						"player_pause",
-						"--play-pause"),
-
-				new RhythmboxRunnableItem (Catalog.GetString ("Next"),
-						Catalog.GetString ("Play Next Track in Rhythmbox"),
-						"player_end",
-						"--next"),
-
-				new RhythmboxRunnableItem (Catalog.GetString ("Previous"),
-						Catalog.GetString ("Play Previous Track in Rhythmbox"),
-						"player_start",
-						"--previous"),
-
 				new RhythmboxRunnableItem (Catalog.GetString ("Show Current Track"),
 						Catalog.GetString ("Show Notification of Current Track in Rhythmbox"),
 						"gnome-mime-audio",
