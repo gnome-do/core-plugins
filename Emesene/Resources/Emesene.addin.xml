@@ -1,0 +1,37 @@
+<Addin
+	id="Emesene"
+	namespace="Do"
+	version="1.8"
+	name="Emesene"
+	description="Indexes your contact list and initiate chats with Emesene friends."
+	author="Luis Miguel Montiel G"
+>
+ 
+	<Runtime>
+		<Import assembly="Emesene.dll"/>
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Emesene.EmeseneContactItemSource" />
+		<ItemSource type="Emesene.EmeseneStatusItemSource" />		
+		<ItemSource type="Emesene.EmeseneAvatarItemSource" />	
+	</Extension>
+
+	<!--- Actions -->
+	<Extension path= "/Do/Action">
+		<Action type="Emesene.EmeseneChatAction" />
+    	<Action type="Emesene.EmeseneChangeNickAction" />
+     	<Action type="Emesene.EmeseneChangeAvatarAction" />
+      	<Action type="Emesene.EmeseneChangePSMAction" />
+      	<Action type="Emesene.EmeseneChangeStatusAction" />
+      	<Action type="Emesene.EmeseneOpenConversationHistoryAction" />      	
+      	<Action type="Emesene.EmeseneOpenAvatarHistoryAction" />
+	</Extension>
+
+</Addin>

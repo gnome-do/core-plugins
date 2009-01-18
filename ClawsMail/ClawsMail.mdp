@@ -1,11 +1,11 @@
 <Project name="ClawsMail" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Debug" assemblyKeyFile="/home/k/jp/gnome-do/k-plugins/do-plugins_clawsmail/ClawsMail/." assembly="ClawsMail" />
+      <Output directory="bin/Debug" assemblyKeyFile="../../../../../../k/jp/gnome-do/k-plugins/do-plugins_clawsmail/ClawsMail" assembly="ClawsMail" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
-      <EnvironmentVariables />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+      <EnvironmentVariables />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assemblyKeyFile="." assembly="ClawsMail" />

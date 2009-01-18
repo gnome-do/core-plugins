@@ -1,4 +1,4 @@
-<Project name="DiskMounter" fileversion="2.0" language="C#" DefaultNamespace="DiskMounter" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
+<Project name="DiskMounter" fileversion="2.0" DefaultNamespace="DiskMounter" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="DiskMounter" />
