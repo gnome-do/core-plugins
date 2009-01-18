@@ -31,7 +31,7 @@ using Do.Universe;
 namespace Do.Rhythmbox
 {
 
-	public class PlayAction : Act
+	public class PlayAction : AbstractPlaybackAction
 	{
 
 		public PlayAction ()
@@ -50,20 +50,6 @@ namespace Do.Rhythmbox
 			get { return "media-playback-start"; }
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
-				yield return typeof (IApplicationItem);
-			}
-		}
-		
-        public override bool SupportsItem (Item item) 
-        {
-			if ((item as IApplicationItem).Exec.Contains ("rhythmbox")) {
-				if (Rhythmbox.InstanceIsRunning)
-					return true;
-			}
-			return false;
-		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{

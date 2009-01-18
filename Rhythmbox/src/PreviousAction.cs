@@ -1,4 +1,4 @@
-//  RhythmboxPlayAction.cs
+//  RhythmboxPreviousAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -31,7 +31,7 @@ using Do.Universe;
 namespace Do.Rhythmbox
 {
 
-	public class PreviousAction : Act
+	public class PreviousAction : AbstractPlaybackAction
 	{
 
 		public PreviousAction ()
@@ -50,25 +50,10 @@ namespace Do.Rhythmbox
 			get { return "media-skip-backward"; }
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
-				yield return typeof (IApplicationItem);
-			}
-		}
-		
-        public override bool SupportsItem (Item item) 
-        {
-			if ((item as IApplicationItem).Exec.Contains ("rhythmbox")) {
-				if (Rhythmbox.InstanceIsRunning)
-					return true;
-			}
-			return false;
-		}
-
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.Client ("--previous --no-start");
+				Rhythmbox.Client ("--previous --no-start", true);
 				Rhythmbox.Client ("--previous --no-start");
 			}).Start ();
 			return null;

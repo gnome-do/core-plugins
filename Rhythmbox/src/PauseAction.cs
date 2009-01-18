@@ -1,4 +1,4 @@
-//  RhythmboxPlayAction.cs
+//  RhythmboxPauseAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -31,7 +31,7 @@ using Do.Universe;
 namespace Do.Rhythmbox
 {
 
-	public class PauseAction : Act
+	public class PauseAction : AbstractPlaybackAction
 	{
 
 		public PauseAction ()
@@ -48,21 +48,6 @@ namespace Do.Rhythmbox
 
 		public override string Icon {
 			get { return "media-playback-pause"; }
-		}
-
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
-				yield return typeof (IApplicationItem);
-			}
-		}
-		
-        public override bool SupportsItem (Item item) 
-        {
-			if ((item as IApplicationItem).Exec.Contains ("rhythmbox")) {
-				if (Rhythmbox.InstanceIsRunning)
-					return true;
-			}
-			return false;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)

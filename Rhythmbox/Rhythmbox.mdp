@@ -4,8 +4,8 @@
       <Output directory="bin/Debug" assembly="Rhythmbox" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <EnvironmentVariables />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+      <EnvironmentVariables />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assembly="Rhythmbox" />
@@ -28,6 +28,7 @@
     <File name="src/PauseAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/NextAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/PreviousAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/AbstractPlaybackAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
