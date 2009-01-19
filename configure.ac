@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.7.96])
+AC_INIT([gnome-do-plugins], [0.7.97])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
