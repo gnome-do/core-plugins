@@ -77,7 +77,7 @@ namespace Banshee
 			
 			children = new List<Item> ();
 
-			if (parent is IApplicationItem && (parent as IApplicationItem).Exec == "banshee-1") {
+			if (parent is IApplicationItem && (parent as IApplicationItem).Exec.Contains ("banshee-1")) {
 				if (albums != null && albums.Count > 0)
 					children.Add (new BrowseAlbumsMusicItem ());
 				if (artists != null && artists.Count > 0)
@@ -123,23 +123,15 @@ namespace Banshee
 		
 		public override void UpdateItems ()
 		{
-			Banshee.Index ();
 			items.Clear ();
-			
-			//Add browser features
-			items.Add (new BrowseAlbumsMusicItem ());
-			items.Add (new BrowseArtistMusicItem ());
-			items.Add (new BrowsePublisherPodcastItem ());
-			items.Add (new BrowseVideoItem ());
-			items.AddRange (BansheeRunnableItem.DefaultItems);
-			
-			//Add albums and artists to the universe
+			Banshee.Index ();
+
 			Banshee.LoadVideos (out videos);
 			Banshee.LoadPodcasts (out publishers);
-			Banshee.LoadAlbumsAndArtists  (out albums, out artists);
-		
-			foreach (Item album in albums) items.Add (album);
+			Banshee.LoadAlbumsAndArtists (out albums, out artists);
+
 			foreach (Item video in videos) items.Add (video);
+			foreach (Item album in albums) items.Add (album);
 			foreach (Item artist in artists) items.Add (artist);
 			foreach (Item podcast in publishers) items.Add (podcast);
 		}

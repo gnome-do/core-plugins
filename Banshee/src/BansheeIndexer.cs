@@ -81,14 +81,13 @@ namespace Banshee
 		
 		protected override void OnBeginUpdateIndex()
 		{
-			indexed_items.Clear ();
 			Log.Debug ("Reading Banshee index results from DBus");
 		}
 
 		protected override void OnEndUpdateIndex()
 		{
 			ProcessesList ();
-			
+			indexed_items.Clear ();
 			Log.Debug ("Finished indexing Banshee library, Found {0} media items", CollectionCount);
 		}
 
@@ -145,9 +144,9 @@ namespace Banshee
 					songs.Add (item as SongMusicItem);
 				}
 
-				Videos = new List<VideoItem> (videos);
-				Songs = new List<SongMusicItem> (songs);
-				Podcasts = new List<PodcastItem> (podcasts);
+				Videos = videos;
+				Songs = songs;
+				Podcasts = podcasts;
 			}
 		}
 		
