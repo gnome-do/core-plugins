@@ -1,8 +1,8 @@
 // MakeUrlTinyAction.cs
 //
-// GNOME Do is the legal property of its developers, whose names are too numerous
-// to list here.  Please refer to the COPYRIGHT file distributed with this
-// source distribution.
+// GNOME Do is the legal property of its developers, whose names are too
+// numerous to list here.  Please refer to the COPYRIGHT file distributed with
+// this source distribution.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ namespace TinyUrl
 		       + "[a-zA-Z]{2,6})" // first level domain- .com or .museum
 		       + "(:[0-9]{1,4})?" // port number- :80
 		       + "((/?)|" // a slash isn't required if there is no file name
-		       + "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+		       + "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?) *$";
 
 		readonly Regex url_regex;
 

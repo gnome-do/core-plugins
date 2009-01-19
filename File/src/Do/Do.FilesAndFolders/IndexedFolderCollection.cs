@@ -154,10 +154,23 @@ namespace Do.FilesAndFolders
 			} finally {
 				// Some sort of error occurred, so load the default data set and save it.
 				if (Folders == null) {
-					Folders = GetDefaultFolders ().ToDictionary (pair => pair.Path);
+					// TODO System.Linq.Enumerable.ToDictionary is not implemented
+					// in earlier versions of mono.
+					// Folders = GetDefaultFolders ().ToDictionary (pair => pair.Path);
+					Folders = ToDictionary (GetDefaultFolders (), pair => pair.Path);
 					Serialize ();
 				}
 			}
+		}
+
+		// TODO remove this when older versions of mono with unimplemented
+		// System.Linq.Enumerable.ToDictionary are deprecated.
+		Dictionary<TKey, TValue> ToDictionary<TKey, TValue> (IEnumerable<TValue> xs, Func<TValue, TKey> f)
+		{
+			Dictionary<TKey, TValue> d = new Dictionary<TKey, TValue> ();
+			foreach (TValue x in xs)
+				d [f (x)] = x;
+			return d;
 		}
 
 		void Serialize ()

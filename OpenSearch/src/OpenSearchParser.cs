@@ -28,6 +28,10 @@ namespace OpenSearch
 {
 	public class OpenSearchParser
 	{	
+		readonly static string short_name_xpath = "//*/{0}:ShortName";
+		readonly static string description_xpath = "//*/{0}:Description";
+		readonly static string url_xpath = "//*/{0}:Url[@type='text/html' and @method='GET']";
+		
 		/// <summary>
 		/// Creates an OpenSearchItem from the specified file.
 		/// </summary>
@@ -38,101 +42,62 @@ namespace OpenSearch
 		/// A populated OpenSearchItem, or null if it was unable to create an
 		/// OpenSearchItem from the file.
 		/// </returns>
-		public static OpenSearchItem Create ( string file )
-		{
-			OpenSearchFileType fileType = DetermineOpenSearchFileType (file);
-			
-			switch (fileType) {
-				case OpenSearchFileType.MozillaSearch:
-					return CreateMozillaItem (file);
-				case OpenSearchFileType.OpenSearch:
-					return CreateOpenSearchItem (file);
-				default:
-					return null;
-			}
-		}
-			
-		/// <summary>
-		/// Creates an OpenSearchItem from a file in the MozillaSearch format.
-		/// </summary>
-		/// <param name="file">
-		/// The file to process.
-		/// </param>
-		/// <returns>
-		/// A populated OpenSearchItem
-		/// </returns>
-		private static OpenSearchItem CreateMozillaItem (string file)
-		{
+		public static OpenSearchItem Create (string file)
+		{	
+			string elementNamespace = DetermineOpenSearchElementNamespace (file);		
+						
 			XmlDocument doc = new XmlDocument ();
 			doc.Load (file);						
 			XmlNamespaceManager namespaceManager = PopulateNamespaceManager (doc);
 			
-			XmlNode shortName = doc.SelectSingleNode ("//*/default:ShortName", namespaceManager);		
-			XmlNode description = doc.SelectSingleNode ("//*/default:Description", namespaceManager);	
-			XmlNode url = doc.SelectSingleNode ("//*/default:Url[@type='text/html' and @method='GET']", namespaceManager);
+			XmlNode shortName = doc.SelectSingleNode (string.Format(short_name_xpath, elementNamespace), namespaceManager);		
+			XmlNode description = doc.SelectSingleNode (string.Format(description_xpath, elementNamespace), namespaceManager);	
+			XmlNode url = doc.SelectSingleNode (string.Format(url_xpath, elementNamespace), namespaceManager);
+
+			if (description == null)
+				description = shortName;
 			
-			if(shortName == null || description == null || url == null)
+			if (shortName == null || description == null || url == null)
 				return null;
-
-			string templateUrl = url.Attributes["template"].Value + "?";
 			
-			// For the Mozilla format, we parse the additional Param nodes to find the one that contains the searchTerms. 
-			XmlNodeList paramList = url.ChildNodes;
-			foreach (XmlNode node in paramList) {
-				// We only want to deal with Param nodes.
-				if (node.Name != "Param")
-					continue;
-				// It's possible to have multiple replacable bits, signified by {sometext}. Since we only know how to 
-				// replace searchTerms, we skip the node if it has a {} and isn't searchTerms.
-				if (Regex.IsMatch (node.Attributes["value"].Value, "{.*}") && !(Regex.IsMatch(node.Attributes["value"].Value, "{searchTerms}")))
-					continue;
-				// Append the parameter name and value.
-				templateUrl += node.Attributes["name"].Value + "=" + node.Attributes["value"].Value + "&";
-			}
-				             
-			templateUrl = templateUrl.TrimEnd (new char [] {'&','?'});	 
-
-			return new OpenSearchItem (shortName.InnerText, "OpenSearch plugin: " + description.InnerText, templateUrl);
-		}
-		
-		/// <summary>
-		/// Creates an OpenSearchItem from a file in the OpenSearch format.
-		/// </summary>
-		/// <param name="file">
-		/// The file to process.
-		/// </param>
-		/// <returns>
-		/// A populated OpenSearchItem
-		/// </returns>
-		private static OpenSearchItem CreateOpenSearchItem ( string file)
-		{
-			XmlDocument doc = new XmlDocument ();
-			doc.Load (file);						
-			XmlNamespaceManager namespaceManager = PopulateNamespaceManager (doc);
-			
-			XmlNode shortName = doc.SelectSingleNode ("//*/os:ShortName", namespaceManager);		
-			XmlNode description = doc.SelectSingleNode ("//*/os:Description", namespaceManager);	
-			XmlNode url = doc.SelectSingleNode ("//*/os:Url[@type='text/html' and @method='GET']", namespaceManager);
-			
-			if(shortName == null || description == null || url == null)
-				return null;
-
 			string templateUrl = url.Attributes["template"].Value;
-							
+			
+			// If the template url doesn't contain the searchTerms text, we'll 
+			// have to search params for it.
+			if (!Regex.IsMatch (templateUrl, "{searchTerms}"))
+			{			
+				templateUrl += "?";
+				
+				// Parse the additional Param nodes to find the one that contains the searchTerms. 
+				XmlNodeList paramList = url.ChildNodes;
+				foreach (XmlNode node in paramList) {
+					// We only want to deal with Param nodes.
+					if (node.Name != string.Format ("{0}:Param", elementNamespace) && node.Name != "Param")
+						continue;
+					// It's possible to have multiple replacable bits, signified by {sometext}. Since we only know how to 
+					// replace searchTerms, we skip the node if it has a {} and isn't searchTerms.
+					if (Regex.IsMatch (node.Attributes["value"].Value, "{.*}") && !(Regex.IsMatch(node.Attributes["value"].Value, "{searchTerms}")))
+						continue;
+					// Append the parameter name and value.
+					templateUrl += node.Attributes["name"].Value + "=" + node.Attributes["value"].Value + "&";
+				}
+					             
+				templateUrl = templateUrl.TrimEnd (new char [] {'&','?'});	
+			}
+			
 			return new OpenSearchItem (shortName.InnerText, "OpenSearch plugin: " + description.InnerText, templateUrl);
-		}
+		}			
 		
 		/// <summary>
-		/// Determines if the provided file is in the OpenSearch format or the MozillaSearch format,
-		/// which we need to know so we can parse it.
+		/// Determines the namespace we should look for OpenSearch elements in when parsing the documents.
 		/// </summary>
 		/// <param name="file">
 		/// The source file.
 		/// </param>
 		/// <returns>
-		/// The file type.
+		/// The namespace to look for elements in.
 		/// </returns>
-		private static OpenSearchFileType DetermineOpenSearchFileType (string file)
+		private static string DetermineOpenSearchElementNamespace (string file)
 		{
 			XmlDocument doc = new XmlDocument ();
 			doc.Load (file);				
@@ -147,12 +112,12 @@ namespace OpenSearch
 					
 			// ...and then apply a little logic.
 			if (isOpenSearch)
-				return OpenSearchFileType.OpenSearch;
+				return "os";
 						
 			if (isMozillaSearch && !isOpenSearch)
-				return OpenSearchFileType.MozillaSearch;
+				return "default";
 			
-			return OpenSearchFileType.Unknown;
+			throw new Exception ("Unable to determine OpenSearch plugin type.");
 		}
 		
 		/// <summary>
@@ -176,18 +141,5 @@ namespace OpenSearch
 			}
 		    return namespaceManager;
 		} 
-	}
-	
-	/// <summary>
-	/// There are two formats that we need to handle for OpenSearch. The first 
-	/// is the actual OpenSearch format, which I would love to have be the only.
-	/// The second is what I call the MozillaSearch format, which is the format 
-	/// Mozilla has shipped its default plugins in (starting with Firefox 2).
-	/// </summary>
-	public enum OpenSearchFileType
-	{
-		OpenSearch,
-		MozillaSearch,
-		Unknown
 	}
 }
