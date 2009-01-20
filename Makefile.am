@@ -69,6 +69,7 @@ SUBDIRS = \
 	Woof \
 	Wordnet \
 	Xmms2 \
+	YouTube \
 	Zim 
 
 # Current dir _must_ be processed last; this ensures our repo is built with all the plugins

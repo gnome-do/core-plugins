@@ -174,6 +174,7 @@ WindowManager/Makefile
 Woof/Makefile
 Wordnet/Makefile
 Xmms2/Makefile
+YouTube/Makefile
 Zim/Makefile
 Makefile
 po/Makefile.in
