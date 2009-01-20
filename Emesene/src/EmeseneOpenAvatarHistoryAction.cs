@@ -39,7 +39,7 @@ namespace Emesene
 		{
 			if (item is ContactItem) 
 			{
-				foreach (string detail in (item as ContactItem).Details) \
+				foreach (string detail in (item as ContactItem).Details)
 				{
 					if (detail.StartsWith ("prpl-")) return false;
 				}

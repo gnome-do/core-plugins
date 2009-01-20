@@ -3,6 +3,7 @@ using NDesk.DBus;
 using org.freedesktop.DBus;
 using System.Collections.Generic;
 using Do.Universe;
+using Do.Platform;
 
 namespace Emesene
 {
@@ -36,6 +37,7 @@ namespace Emesene
 		public interface EmeseneInterface
 		{
 			void open_conversation(string email, bool weStarted);
+			void open_conversation(string email);
 			string get_last_display_picture(string account, bool cache);
 			string get_user_account();
 			string set_nick(string nick);
@@ -97,7 +99,15 @@ namespace Emesene
 		public static void openChatWith(string mail)
 		{
 			EmeseneInterface em = Emesene.getEmeseneObject();
-			em.open_conversation(mail, true);
+			try{
+			    em.open_conversation(mail, true);
+			}catch(Exception e){
+			    //User is using older emesene
+			    em.open_conversation(mail);
+			    Log.Debug ("Emesene > Old version of emesene");
+		        Log.Debug (e.StackTrace);
+			}
+			
 		}
 		
 		public static string getCurrentEmeseneUser()
