@@ -78,7 +78,7 @@ namespace PingFM {
             // Container child vbox2.Gtk.Box+BoxChild
             this.validate_lbl = new Gtk.Label();
             this.validate_lbl.Name = "validate_lbl";
-            this.validate_lbl.LabelProp = Mono.Unix.Catalog.GetString("<i>Varify and save your account information</i>");
+            this.validate_lbl.LabelProp = Mono.Unix.Catalog.GetString("<i>Verify and save your account information</i>");
             this.validate_lbl.UseMarkup = true;
             this.vbox2.Add(this.validate_lbl);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox2[this.validate_lbl]));
