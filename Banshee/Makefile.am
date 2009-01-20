@@ -5,6 +5,7 @@ ASSEMBLY=Banshee
 FILES = \
 	src/Banshee.cs \
 	src/BansheeDBus.cs \
+	src/AbstractPlaybackAction.cs \
 	src/NextAction.cs \
 	src/PauseAction.cs \
 	src/PlayAction.cs \

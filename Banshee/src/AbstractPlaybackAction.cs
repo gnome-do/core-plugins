@@ -1,4 +1,4 @@
-// NextAction.cs 
+// AbstractPlaybackAction.cs 
 //
 // GNOME Do is the legal property of its developers. Please refer to the
 // COPYRIGHT file distributed with this source distribution.
@@ -18,6 +18,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 
 using Mono.Unix;
 
@@ -26,23 +27,34 @@ using Do.Universe;
 namespace Banshee
 {
 	
-	public class NextAction : AbstractPlaybackAction
+	public abstract class AbstractPlaybackAction : Act
 	{
-		public override string Name {
-			get { return Catalog.GetString ("Next"); }
-		}
 
-		public override string Description {
-			get { return Catalog.GetString ("Play next track"); }
-		}
+		protected abstract void Perform ();
 
-		public override string Icon {
-			get { return "media-skip-forward"; }
-		}
-
-		protected override void Perform ()
+		protected virtual bool IsAvailable ()
 		{
-			Banshee.Next ();
+			return true;
+		}
+
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (IApplicationItem); }
+		}
+
+		public override bool SupportsItem (Item item)
+		{
+			return IsBanshee (item as IApplicationItem) && IsAvailable ();
+		}
+
+		bool IsBanshee (IApplicationItem app)
+		{
+			return app.Exec.Contains ("banshee");
+		}
+
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			Perform ();
+			yield break;
 		}
 	}
 }
