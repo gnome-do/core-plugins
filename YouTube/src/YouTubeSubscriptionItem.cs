@@ -1,16 +1,8 @@
-// YouTubeSubscriptionItem.cs created with MonoDevelop
-// User: luis at 02:00 p 07/09/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using Do.Universe;
 
 namespace YouTube
-{
-	
-	
+{	
 	public class YouTubeSubscriptionItem : Item, IUrlItem
 	{
 		protected string name;

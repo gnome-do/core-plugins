@@ -1,9 +1,3 @@
-// YouTubeSearchAction.cs created with MonoDevelop
-// User: luis at 10:19 p 08/09/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using System.Collections.Generic;
 using Do.Universe;
@@ -11,8 +5,6 @@ using Do.Platform;
 
 namespace YouTube
 {
-	
-	
 	public class YouTubeSearchAction : Act
 	{
 					

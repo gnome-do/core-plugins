@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Mono.Unix;
 using Do.Universe;
 
@@ -20,7 +19,8 @@ namespace YouTube
 		{
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes 
+		{
 			get {
 				return new Type[] {
 					typeof (YoutubeVideoItem),
@@ -32,7 +32,8 @@ namespace YouTube
 		public override string Description { get { return "Your own YouTube videos"; } }
 		public override string Icon {get { return "youtube_logo.png@" + GetType ().Assembly.FullName; } }
 		
-		public override IEnumerable<Item> Items {
+		public override IEnumerable<Item> Items 
+		{
 			get { return Youtube.own; }
 		}
 		
@@ -43,13 +44,7 @@ namespace YouTube
 		
 		public override void UpdateItems ()
 		{
-			try {
-				Thread thread = new Thread ((ThreadStart) (Youtube.updateOwn));
-				thread.IsBackground = true;
-				thread.Start ();
-			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-			}
+			Youtube.updateOwn();
 		}
 		
 	}

@@ -1,11 +1,4 @@
-// YoutubeConfig.cs created with MonoDevelop
-// User: luis at 07:21 p 06/09/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
-
 using Gtk;
 using Do.Platform;
 using Do.Platform.Linux;
