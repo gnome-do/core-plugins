@@ -32,6 +32,7 @@
       <Entry build="True" name="ImageShack" configuration="Debug" />
       <Entry build="True" name="Cl.ickable" configuration="Debug" />
       <Entry build="True" name="ManLookUp" configuration="Debug" />
+      <Entry build="True" name="Banshee" configuration="Debug" />
       <Entry build="True" name="Microblogging" configuration="Debug" />
       <Entry build="True" name="File" configuration="Debug" />
       <Entry build="True" name="AptURL" configuration="Debug" />
@@ -100,6 +101,7 @@
       <Entry build="True" name="ImageShack" configuration="Release" />
       <Entry build="True" name="Cl.ickable" configuration="Release" />
       <Entry build="True" name="ManLookUp" configuration="Release" />
+      <Entry build="True" name="Banshee" configuration="Release" />
       <Entry build="True" name="Microblogging" configuration="Release" />
       <Entry build="True" name="File" configuration="Release" />
       <Entry build="True" name="AptURL" configuration="Release" />
@@ -169,6 +171,7 @@
     <Execute type="None" entry="ImageShack" />
     <Execute type="None" entry="Cl.ickable" />
     <Execute type="None" entry="ManLookUp" />
+    <Execute type="None" entry="Banshee" />
     <Execute type="None" entry="Microblogging" />
     <Execute type="None" entry="File" />
     <Execute type="None" entry="AptURL" />
@@ -238,6 +241,7 @@
     <Entry filename="ImageShack/ImageShack.mdp" />
     <Entry filename="Cl.ickable/Cl.ickable.mdp" />
     <Entry filename="ManLookUp/ManLookUp.mdp" />
+    <Entry filename="Banshee/Banshee.mdp" />
     <Entry filename="Microblogging/Microblogging.mdp" />
     <Entry filename="File/File.mdp" />
     <Entry filename="AptURL/AptURL.mdp" />

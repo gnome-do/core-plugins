@@ -1,0 +1,12 @@
+This plugin requires you to patch a trunk build of Banshee.
+If you would rather not run banshee from source, or patch your copy
+then you should wait for the Banshee 1.4.2 release that should be out
+shortly. However if you wish to start testing this plugin sooner rather
+than later, apply ``indexer.patch" in your banshee source directory with
+$ patch -p0 < indexer.patch
+
+If Banshee fails to build with make, check your pkgconfig (/usr/local/lib/pkgconfig/banshee-1-collection-indexer.pc, make the Libs line look like
+
+Libs: -r:${bansheedir}/Banshee.CollectionIndexer.dll
+
+Please report any issues to http://launchpad.net/do-plugins
