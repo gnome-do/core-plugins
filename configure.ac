@@ -112,6 +112,7 @@ AC_CONFIG_FILES([
 Alias/Makefile
 AptURL/Makefile
 Archive/Makefile
+Banshee/Makefile
 Bibtex/Makefile
 Cl.ickable/Makefile
 ClawsMail/Makefile

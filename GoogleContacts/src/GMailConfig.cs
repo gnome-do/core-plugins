@@ -24,14 +24,12 @@ using System.Text.RegularExpressions;
 
 using Gtk;
 
-using Do.Platform;
 using Do.Platform.Linux;
 
 namespace GMail
 {	
 	public class GMailConfig : AbstractLoginWidget   
 	{
-		static IPreferences prefs;
 		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
             + @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
             + @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
@@ -60,14 +58,6 @@ namespace GMail
 		bool ValidateUsername (string username)
 		{			
 			return new Regex (EmailPattern, RegexOptions.Compiled).IsMatch (username);
-		}
-		
-		public static string username { 
-			get { return prefs.GetSecure<string> ("username", "" ); } 
-		}
-
-		public static string password { 
-			get { return prefs.GetSecure<string> ("password", "" ); } 
 		}
 	}
 }

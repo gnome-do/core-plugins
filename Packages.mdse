@@ -1,5 +1,5 @@
 <CombineEntry name="Packages" fileversion="2.0" ctype="PackagingProject">
-  <Configurations active="Debug">
+  <Configurations>
     <Configuration name="Repo" ctype="PackagingProjectConfiguration" />
   </Configurations>
   <Packages>
