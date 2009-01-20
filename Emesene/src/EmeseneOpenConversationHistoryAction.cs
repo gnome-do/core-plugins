@@ -1,17 +1,9 @@
-// EmeseneOpenConversationHistoryAction.cs created with MonoDevelop
-// User: luis at 06:09 p 21/11/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using System.Collections.Generic;
 using Do.Universe;
 
 namespace Emesene
 {
-	
-	
 	public class EmeseneOpenConversationHistoryAction : Act
 	{
 		
@@ -45,8 +37,10 @@ namespace Emesene
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ContactItem) {
-				foreach (string detail in (item as ContactItem).Details) {
+			if (item is ContactItem) 
+			{
+				foreach (string detail in (item as ContactItem).Details) 
+				{
 					if (detail.StartsWith ("prpl-")) return false;
 				}
 				return true;
@@ -55,7 +49,8 @@ namespace Emesene
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item buddy in items){
+			foreach(Item buddy in items)
+			{
 				ContactItem contact = buddy as ContactItem;
 				Emesene.get_conversation_history(contact["email"]);
 			}

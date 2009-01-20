@@ -1,17 +1,9 @@
-// EmeseneAvatarItem.cs created with MonoDevelop
-// User: luis at 03:06 p 21/11/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using Do.Universe;
 using Do.Platform;
 
 namespace Emesene
 {
-	
-	
 	public class EmeseneAvatarItem : Item, IFileItem
 	{
 		

@@ -1,9 +1,3 @@
-// EmeseneChangePSMAction.cs created with MonoDevelop
-// User: luis at 08:26 p 20/11/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using Do.Universe;
 using System.Collections.Generic;
@@ -12,7 +6,6 @@ namespace Emesene
 {	
 	public class EmeseneChangePSMAction : Act
 	{
-		
 		public EmeseneChangePSMAction()
 		{
 		}
@@ -51,11 +44,10 @@ namespace Emesene
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{				
-			foreach(Item ps in items){
+			foreach(Item ps in items)
+			{
 				if (ps is ITextItem) 
-				{
 					Emesene.set_psm((ps as ITextItem).Text);
-				}
 			}
 			return null;
 		}

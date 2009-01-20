@@ -1,18 +1,10 @@
-// EmeseneChangeAvatarAction.cs created with MonoDevelop
-// User: luis at 07:56 p 20/11/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using Do.Universe;
 using System.Collections.Generic;
 using System.IO;
 	
 namespace Emesene
-{
-	
-	
+{	
 	public class EmeseneChangeAvatarAction : Act
 	{
 		public static Dictionary<string, string> imageMimeTypeMap = new Dictionary<string,string>
@@ -56,15 +48,15 @@ namespace Emesene
 			
 		public override bool SupportsItem (Item item)
 		{	
-			if (item is IFileItem) {	
+			if (item is IFileItem)
 				    return IsImageFile((item as IFileItem));
-				}
 			return false;
 		}	
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item avatar in items){
+			foreach(Item avatar in items)
+			{
 				string path = (avatar as IFileItem).Path;
 				Emesene.set_avatar(path);
 			}

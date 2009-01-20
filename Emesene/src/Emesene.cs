@@ -1,6 +1,3 @@
-// Emesene.cs created with MonoDevelop
-// User: luis at 11:53 a 05/07/2008
-
 using System;
 using NDesk.DBus;
 using org.freedesktop.DBus;
@@ -75,7 +72,8 @@ namespace Emesene
 			}
 			catch(Exception e)
 			{
-				System.Console.WriteLine("Exception: "+e.Message);
+                Log.Error ("Emesene > Error getting EmeseneObject - {0}", e.Message);
+				Log.Debug (e.StackTrace);
 				return null;
 			}
 		}

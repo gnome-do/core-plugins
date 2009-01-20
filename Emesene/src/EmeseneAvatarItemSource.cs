@@ -1,18 +1,10 @@
-// EmeseneAvatarItemSource.cs created with MonoDevelop
-// User: luis at 03:56 p 21/11/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using System.IO;
 using Do.Universe;
 using System.Collections.Generic;
 
 namespace Emesene
-{
-	
-	
+{	
 	public class EmeseneAvatarItemSource : ItemSource
 	{
 		private List<Item> avatars;
@@ -24,12 +16,12 @@ namespace Emesene
 	
 	public override void UpdateItems ()
 		{
-			System.Console.WriteLine("---Checking for emesene---");
+			Log.Debug ("Emesene > Checking for emesene Dbus...");
 			if (Emesene.checkForEmesene())
 			{
-				System.Console.WriteLine("---emesene Dbus is ON---");
+    			Log.Debug ("Emesene > Emesene Dbus is ON");
 				string avatarsPath = Emesene.getAvatarPathForUser();				
-				System.Console.WriteLine("Folder with emesene avatars: " + avatarsPath);
+    			Log.Debug ("Emesene > Folder with emesene avatars: {0}", avatarsPath);
 				string [] fileEntries = Directory.GetFiles(avatarsPath);
 			    foreach(string fileName in fileEntries)
 			    {	       
@@ -41,7 +33,7 @@ namespace Emesene
 			} 
 			else 
 			{
-				System.Console.WriteLine("---emesene Dbus is OFF---");
+    			Log.Debug ("Emesene > Emesene Dbus is OFF");
 			}			
 		}
 		

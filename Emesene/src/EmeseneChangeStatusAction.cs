@@ -1,17 +1,9 @@
-// EmeseneChangeStatusAction.cs created with MonoDevelop
-// User: luis at 11:54 a 21/11/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using Do.Universe;
 using System.Collections.Generic;
 
 namespace Emesene
-{
-	
-	
+{	
 	public class EmeseneChangeStatusAction : Act
 	{
 		
@@ -52,11 +44,10 @@ namespace Emesene
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item status in items){
+			foreach(Item status in items)
+			{
 				if (status is EmeseneStatusItem) 
-				{
 					Emesene.set_status((status as EmeseneStatusItem).GetAbbreviation());
-				}
 			}
 			return null;
 		}

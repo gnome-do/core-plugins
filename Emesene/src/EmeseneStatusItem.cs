@@ -1,9 +1,3 @@
-// EmeseneStatusItem.cs created with MonoDevelop
-// User: luis at 12:01 p 21/11/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using Do.Universe;
 
