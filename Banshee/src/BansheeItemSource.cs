@@ -45,11 +45,13 @@ namespace Banshee
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (BansheeRunnableItem); }
+			// get { yield return typeof (BansheeRunnableItem); }
+			get { yield break; }
 		}
 
 		public override IEnumerable<Item> Items {
-			get { return BansheeRunnableItem.DefaultItems.OfType<Item> (); }
+			// get { return BansheeRunnableItem.DefaultItems.OfType<Item> (); }
+			get { yield break; }
 		}
 
 	}
