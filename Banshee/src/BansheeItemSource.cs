@@ -1,4 +1,4 @@
-// Banshee.cs 
+// BansheeItemSource.cs
 //
 // GNOME Do is the legal property of its developers. Please refer to the
 // COPYRIGHT file distributed with this source distribution.
@@ -19,54 +19,39 @@
 
 using System;
 using System.Linq;
-using System.Threading;
-using System.Reflection;
 using System.Collections.Generic;
 
+using Mono.Unix;
+
+using Do.Universe;
 using Do.Platform;
 
 namespace Banshee
 {
 
-	public enum PlaybackShuffleMode
+	public class BansheeItemSource : ItemSource
 	{
-		Linear,
-		Song,
-		Artist,
-		Album
-	}
 
-	public class Banshee
-	{
-		static BansheeDbus bus;
-
-		static Banshee ()
-		{
-			bus = new BansheeDbus ();
+		public override string Name {
+			get { return Catalog.GetString ("Banshee Items"); }
+		}
+		
+		public override string Description { 
+			get { return Catalog.GetString ("Currently empty..."); }
+		}
+		
+		public override string Icon {
+			get { return "banshee"; }
 		}
 
-		public static bool Playing {
-			get { return bus.Playing; }
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (BansheeRunnableItem); }
 		}
 
-		public static void Play ()
-		{
-			Services.Application.RunOnThread (bus.Play);
+		public override IEnumerable<Item> Items {
+			get { return BansheeRunnableItem.DefaultItems.OfType<Item> (); }
 		}
 
-		public static void Pause ()
-		{
-			Services.Application.RunOnThread (bus.Pause);
-		}
-
-		public static void Next ()
-		{
-			Services.Application.RunOnThread (bus.Next);
-		}
-
-		public static void Previous ()
-		{
-			Services.Application.RunOnThread (bus.Previous);
-		}
 	}
 }
+

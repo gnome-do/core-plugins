@@ -16,10 +16,15 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<Extension path = "/Do/Action">
-		<Action type = "Banshee.PlayAction" />
-		<Action type = "Banshee.PauseAction" />
-		<Action type = "Banshee.NextAction" />
-		<Action type = "Banshee.PreviousAction" />
+	<Extension path="/Do/Action">
+		<Action type="Banshee.PlayAction" />
+		<Action type="Banshee.PauseAction" />
+		<Action type="Banshee.NextAction" />
+		<Action type="Banshee.PreviousAction" />
 	</Extension>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Banshee.BansheeItemSource" />
+	</Extension>
+
 </Addin>

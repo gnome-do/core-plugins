@@ -18,6 +18,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 
 using Mono.Unix;
 
@@ -34,10 +35,15 @@ namespace Banshee
 
 		public static readonly IEnumerable<BansheeRunnableItem> DefaultItems =
 			new [] {
-				new BansheeRunnableItem (Catalog.GetString ("Pause/Play"),
-						Catalog.GetString ("Toggle Banshee Playback"),
+				new BansheeRunnableItem (Catalog.GetString ("Play"),
+						Catalog.GetString ("Start or resume Banshee playback."),
+						"media-playback-play",
+						Banshee.Play),
+
+				new BansheeRunnableItem (Catalog.GetString ("Pause"),
+						Catalog.GetString ("Pause or resume Banshee playback."),
 						"media-playback-pause",
-						Banshee.TogglePlaying),
+						Banshee.Pause),
 
 				new BansheeRunnableItem (Catalog.GetString ("Next"),
 						Catalog.GetString ("Play Next Track in Banshee"),
