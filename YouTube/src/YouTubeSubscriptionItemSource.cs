@@ -29,11 +29,6 @@ namespace YouTube
 			get { return Youtube.subscriptions; }
 		}
 		
-		public override IEnumerable<Item> ChildrenOfItem (Item item)
-		{
-			return null;
-		}
-		
 		public override void UpdateItems ()
 		{
 			Youtube.updateSubscriptions();

@@ -138,8 +138,8 @@ namespace YouTube
 					if(subFeed.Entries.Count > 0){
 						foreach (SubscriptionEntry entry in subFeed.Entries)
 						{
-							Console.WriteLine(++i);
-							Console.WriteLine(entry.Title.Text);
+                            Log.Debug ("YouTube > Subscriptions - {0}", ++i);
+                            Log.Debug ("YouTube > {0}", entry.Title.Text);
 							string url = "http://www.youtube.com/user/"+entry.Title.Text.Substring(entry.Title.Text.IndexOf(":")+1).Trim();
 							YouTubeSubscriptionItem subscription = new YouTubeSubscriptionItem(entry.Title.Text.Substring(entry.Title.Text.IndexOf(":")+1).Trim(), url, entry.Title.Text);
 							Youtube.subscriptions.Add(subscription);

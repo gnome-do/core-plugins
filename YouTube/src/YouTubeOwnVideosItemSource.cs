@@ -37,11 +37,6 @@ namespace YouTube
 			get { return Youtube.own; }
 		}
 		
-		public override IEnumerable<Item> ChildrenOfItem (Item item)
-		{
-			return null;
-		}
-		
 		public override void UpdateItems ()
 		{
 			Youtube.updateOwn();

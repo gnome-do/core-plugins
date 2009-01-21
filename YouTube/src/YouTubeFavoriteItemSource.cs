@@ -31,11 +31,6 @@ namespace YouTube
 			get { return Youtube.favorites; }
 		}
 		
-		public override IEnumerable<Do.Universe.Item> ChildrenOfItem (Do.Universe.Item item)
-		{
-			return null;
-		}
-		
 		public override void UpdateItems ()
 		{
 			Youtube.updateFavorites();
