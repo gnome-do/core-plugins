@@ -1,8 +1,8 @@
 //  NewNoteAction.cs
 //
-//  GNOME Do is the legal property of its developers, whose names are too numerous
-//  to list here.  Please refer to the COPYRIGHT file distributed with this
-//  source distribution.
+//  GNOME Do is the legal property of its developers, whose names are too
+//  numerous to list here.  Please refer to the COPYRIGHT file distributed with
+//  this source distribution.
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,59 +18,52 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.Collections.Generic;
 
+using Mono.Unix;
 
 using Do.Universe;
 using Do.Platform.Linux;
 
 namespace Tomboy
 {	
+
 	public class NewNoteAction : Act, IConfigurable
 	{
-		private const string name = "New Tomboy Note";
-		private const string desc = "Create a new Tomboy note";
-		private const string icon = "tomboy";
-		private static Type [] textItemTypeArray = new Type [] {
-			typeof (ITextItem) };
 		
 		public override string Name {
-			get { return name; }
+			get { return Catalog.GetString ("New Tomboy Note"); }
 		}
 		
 		public override string Description {
-			get { return desc; }
+			get { return Catalog.GetString ("Create a new Tomboy note."); }
 		}
 		
 		public override string Icon {
-			get { return icon; }
+			get { return "tomboy"; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return textItemTypeArray;
-			}
+			get { yield return typeof (ITextItem); }
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get {
-				return textItemTypeArray;
-			}
+			get { yield return typeof (ITextItem); }
 		}
 		
 		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
 		
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			ITextItem mainItem = items.First () as ITextItem;
 			
 			ITextItem modItem = null;
-			if (modifierItems.Any ()) {
-				modItem = modifierItems.First () as ITextItem;
+			if (modItems.Any ()) {
+				modItem = modItems.First () as ITextItem;
 			}
 			
 			string title = null, content = null;
@@ -87,12 +80,11 @@ namespace Tomboy
 					title = modItem.Text;
 			}
 			
-			
 			TomboyDBus tb = new TomboyDBus ();
 			// Null values are acceptable here.
 			tb.CreateNewNote (title, content);
 			
-			return null;
+			yield break;
 		}
 		
 		public Gtk.Bin GetConfiguration ()
