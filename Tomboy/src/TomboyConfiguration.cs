@@ -48,16 +48,12 @@ namespace Tomboy
 		
 		public static bool DeriveTitle
 		{
-			get {
-				return prefs.Get (DeriveTitlePrefKey, false);
-			}
+			get { return prefs.Get (DeriveTitlePrefKey, false); }
 		}
 		
 		public static bool TitleFirst
 		{
-			get {
-				return prefs.Get (TitleFirstPrefKey, false);
-			}
+			get { return prefs.Get (TitleFirstPrefKey, false); }
 		}
 		
 		public TomboyConfiguration()
