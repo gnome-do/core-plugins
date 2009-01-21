@@ -53,8 +53,8 @@ namespace YouTube
 		public static void updateFavorites()
 		{
 			favUpdate++;
-			Log.Debug ("YouTube > Update favorites videos tries = {0}", favUpdate);
-			if (favUpdate < 2 || favUpdate%20 == 0){
+			Log.Debug ("YouTube > Update favorites videos tries = {0} - favorite.Count : {1}", favUpdate, Youtube.favorites.Count);
+			if (Youtube.favorites.Count == 0 || favUpdate%20 == 0){
 				Youtube.favorites.Clear();
 				int i =0;
 				int maxResults = 50;
@@ -68,7 +68,7 @@ namespace YouTube
 					while(videoFeed.Entries.Count > 0){				
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    Log.Debug ("YouTube > Video #{0}, Title: ", ++i, entry.Title.Text);
+						    Log.Debug ("YouTube > Video #{0}, Title: {1}", ++i, entry.Title.Text);
 							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							favorites.Add(video);
@@ -89,8 +89,8 @@ namespace YouTube
 		public static void updateOwn()
 		{
 			ownUpdate++;
-			Log.Debug ("YouTube > Update own videos tries = {0}", ownUpdate);
-			if (ownUpdate < 2 || ownUpdate%20 == 0){
+			Log.Debug ("YouTube > Update own videos tries = {0} - own.Count : {1}", ownUpdate, Youtube.own.Count);
+			if (Youtube.own.Count == 0 || ownUpdate%20 == 0){
 				Youtube.own.Clear();
 				int i =0;
 				int maxResults = 50;
@@ -104,7 +104,7 @@ namespace YouTube
 					while(videoFeed.Entries.Count > 0){				
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    Log.Debug ("YouTube > Video #{0}, Title(own video): ", ++i, entry.Title.Text);
+						    Log.Debug ("YouTube > Video #{0}, Title(own video): {1}", ++i, entry.Title.Text);
 							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							own.Add(video);
@@ -124,8 +124,8 @@ namespace YouTube
 		public static void updateSubscriptions()
 		{
 			subUpdate++;
-			Log.Debug ("YouTube > Update subscriptions tries = {0}", ownUpdate);
-			if (subUpdate < 2 || subUpdate%20==0){
+			Log.Debug ("YouTube > Update subscriptions tries = {0} - subscriptions.Count - {1}", subUpdate, Youtube.subscriptions.Count);
+			if (Youtube.subscriptions.Count == 0 || subUpdate%20==0){
 				Youtube.subscriptions.Clear();
 				int i =0;
 				
