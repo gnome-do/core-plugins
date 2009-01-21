@@ -140,8 +140,8 @@ namespace YouTube
 						{
                             Log.Debug ("YouTube > Subscriptions - {0}", ++i);
                             Log.Debug ("YouTube > {0}", entry.Title.Text);
-							string url = "http://www.youtube.com/user/"+entry.Title.Text.Substring(entry.Title.Text.IndexOf(":")+1).Trim();
-							YouTubeSubscriptionItem subscription = new YouTubeSubscriptionItem(entry.Title.Text.Substring(entry.Title.Text.IndexOf(":")+1).Trim(), url, entry.Title.Text);
+							string url = "http://www.youtube.com/user/" + entry.UserName;
+							YouTubeSubscriptionItem subscription = new YouTubeSubscriptionItem(entry.UserName, url, entry.Title.Text);
 							Youtube.subscriptions.Add(subscription);
 						}
 					}
