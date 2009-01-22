@@ -40,7 +40,7 @@ namespace Do.FilesAndFolders
 		// How much time should these PerformWait pause for?
 		// Right now, we do not pause, because it will annoy the user if the Do
 		// interface remains exposed and frozen.
-		static readonly TimeSpan PerformWaitSpan = new TimeSpan (0, 0, 0);
+		protected static readonly TimeSpan PerformWaitSpan = new TimeSpan (0, 0, 0);
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
@@ -54,6 +54,11 @@ namespace Do.FilesAndFolders
 				yield return typeof (ITextItem);
 				yield return typeof (IFileItem);
 			}
+		}
+
+		protected void PerformWait ()
+		{
+			Thread.Sleep (PerformWaitSpan);
 		}
 
 		protected virtual bool SupportsItem (IFileItem item)
@@ -127,28 +132,23 @@ namespace Do.FilesAndFolders
 			return Perform (GetPath (source));
 		}
 
-		protected void PerformOnThread (Action action)
+		string QuoteBinaryArguments (string a, string b)
 		{
-			new Thread ((ThreadStart) delegate {
-				action ();
-			}).Start ();
-		}
-
-		protected void PerformWait ()
-		{
-			Thread.Sleep (PerformWaitSpan);
+			return string.Format ("\"{0}\" \"{1}\"", a, b);
 		}
 
 		protected string Move (string source, string destination)
 		{
-			Process mv = Process.Start ("mv", source + " " + destination);
+			Process mv = Process.Start ("mv",
+				QuoteBinaryArguments (source, destination));
 			mv.WaitForExit ();
 			return Path.Combine (destination, Path.GetFileName (source));
 		}
 
 		protected string Copy (string source, string destination)
 		{
-			Process cp = Process.Start ("cp -r", source + " " + destination);
+			Process cp = Process.Start ("cp",
+				"-r " + QuoteBinaryArguments (source, destination));
 			cp.WaitForExit ();
 			return Path.Combine (destination, Path.GetFileName (source));
 		}
