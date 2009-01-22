@@ -23,129 +23,103 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+
 using Mono.Unix;
+
+using Do.Platform;
 
 namespace Pastebin
 {
-	public class LodgeIt : IPastebinProvider
+	public class LodgeIt : AbstractPastebinProvider
 	{		
-		private const string urlRoot = "http://paste.pocoo.org";
-	
-		private NameValueCollection parameters;
-		private List<TextSyntaxItem> supportedLanguages;
+		const string url_root = "http://paste.pocoo.org";
+		const string content_key = "code";
+		const string syntax_key = "language";
 		
 		public LodgeIt ()
 		{
-			parameters = new NameValueCollection();
-			parameters["language"] = "text";
-			parameters["code"] = "";
+			Name = "paste.pocoo.org";
+			BaseUrl = url_root;
+			ShouldAllowAutoRedirect = false;
 			
-			supportedLanguages = new List<TextSyntaxItem> (); 
-			supportedLanguages.Add (new TextSyntaxItem ("Apache Config (.htaccess)", "Apache Config (.htaccess)", "file", "apache"));
-			supportedLanguages.Add (new TextSyntaxItem ("Bash", "Bash", "file", "bash"));
-			supportedLanguages.Add (new TextSyntaxItem ("Batch (.bat)", "Batch (.bat)", "file", "bat"));
-			supportedLanguages.Add (new TextSyntaxItem ("C", "C", "file", "c"));
-			supportedLanguages.Add (new TextSyntaxItem ("C#", "C#", "file", "csharp"));
-			supportedLanguages.Add (new TextSyntaxItem ("C++", "C++", "file", "cpp"));
-			supportedLanguages.Add (new TextSyntaxItem ("CSS", "CSS", "file", "css"));
-			supportedLanguages.Add (new TextSyntaxItem ("D", "D", "file", "d"));
-			supportedLanguages.Add (new TextSyntaxItem ("Django / Jinja Templates", "Django / Jinja Templates", "file", "html+django"));
-			supportedLanguages.Add (new TextSyntaxItem ("Dylan", "Dylan", "file", "dylan"));
-			supportedLanguages.Add (new TextSyntaxItem ("Erlang", "Erlang", "file", "erlang"));
-			supportedLanguages.Add (new TextSyntaxItem ("GAS", "GAS", "file", "gas"));
-			supportedLanguages.Add (new TextSyntaxItem ("Genshi Templates", "Genshi Templates", "file", "html+genshi"));
-			supportedLanguages.Add (new TextSyntaxItem ("HTML", "HTML", "file", "html"));
-			supportedLanguages.Add (new TextSyntaxItem ("Haskell", "Haskell", "file", "haskell"));
-			supportedLanguages.Add (new TextSyntaxItem ("IRC Logs", "IRC Logs", "file", "irc"));
-			supportedLanguages.Add (new TextSyntaxItem ("Interactive Ruby", "Interactive Ruby", "file", "irb"));
-			supportedLanguages.Add (new TextSyntaxItem ("JSP", "JSP", "file", "jsp"));
-			supportedLanguages.Add (new TextSyntaxItem ("Java", "Java", "file", "java"));
-			supportedLanguages.Add (new TextSyntaxItem ("JavaScript", "JavaScript", "file", "js"));
-			supportedLanguages.Add (new TextSyntaxItem ("Lua", "Lua", "file", "lua"));
-			supportedLanguages.Add (new TextSyntaxItem ("Mako Templates", "Mako Templates", "file", "html+mako"));
-			supportedLanguages.Add (new TextSyntaxItem ("MiniD", "MiniD", "file", "minid"));
-			supportedLanguages.Add (new TextSyntaxItem ("Myghty Templates", "Myghty Templates", "file", "html+myghty"));
-			supportedLanguages.Add (new TextSyntaxItem ("OCaml", "OCaml", "file", "ocaml"));
-			supportedLanguages.Add (new TextSyntaxItem ("PHP", "PHP", "file", "html+php"));
-			supportedLanguages.Add (new TextSyntaxItem ("Perl", "Perl", "file", "perl"));
-			supportedLanguages.Add (new TextSyntaxItem ("Python", "Python", "file", "python"));
-			supportedLanguages.Add (new TextSyntaxItem ("Python Console Sessions", "Python Console Sessions", "file", "pycon"));
-			supportedLanguages.Add (new TextSyntaxItem ("Python Tracebacks", "Python Tracebacks", "file", "pytb"));
-			supportedLanguages.Add (new TextSyntaxItem ("Ruby", "Ruby", "file", "ruby"));
-			supportedLanguages.Add (new TextSyntaxItem ("SQL", "SQL", "file", "sql"));
-			supportedLanguages.Add (new TextSyntaxItem ("Scheme", "Scheme", "file", "scheme"));
-			supportedLanguages.Add (new TextSyntaxItem ("Smarty", "Smarty", "file", "smarty"));
-			supportedLanguages.Add (new TextSyntaxItem ("SquidConf", "SquidConf", "file", "squidconf"));
-			supportedLanguages.Add (new TextSyntaxItem ("TeX / LaTeX", "TeX / LaTeX", "file", "tex"));
-			supportedLanguages.Add (new TextSyntaxItem ("Text", "Text", "file", "text"));
-			supportedLanguages.Add (new TextSyntaxItem ("Unified Diff", "Unified Diff", "file", "diff"));
-			supportedLanguages.Add (new TextSyntaxItem ("Vim", "Vim", "file", "vim"));
-			supportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "xml"));
-			supportedLanguages.Add (new TextSyntaxItem ("eRuby / rhtml", "eRuby / rhtml", "file", "rhtml"));
-			supportedLanguages.Add (new TextSyntaxItem ("reStructuredText", "reStructuredText", "file", "rst"));
-			supportedLanguages.Add (new TextSyntaxItem ("sources.list", "sources.list", "file", "sourceslist"));
+			Parameters[content_key] = "";
+			Parameters[syntax_key] = "text";
+			 
+			SupportedLanguages.Add (new TextSyntaxItem ("Apache Config (.htaccess)", "Apache Config (.htaccess)", "file", "apache"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Bash", "Bash", "file", "bash"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Batch (.bat)", "Batch (.bat)", "file", "bat"));
+			SupportedLanguages.Add (new TextSyntaxItem ("C", "C", "file", "c"));
+			SupportedLanguages.Add (new TextSyntaxItem ("C#", "C#", "file", "csharp"));
+			SupportedLanguages.Add (new TextSyntaxItem ("C++", "C++", "file", "cpp"));
+			SupportedLanguages.Add (new TextSyntaxItem ("CSS", "CSS", "file", "css"));
+			SupportedLanguages.Add (new TextSyntaxItem ("D", "D", "file", "d"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Django / Jinja Templates", "Django / Jinja Templates", "file", "html+django"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Dylan", "Dylan", "file", "dylan"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Erlang", "Erlang", "file", "erlang"));
+			SupportedLanguages.Add (new TextSyntaxItem ("GAS", "GAS", "file", "gas"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Genshi Templates", "Genshi Templates", "file", "html+genshi"));
+			SupportedLanguages.Add (new TextSyntaxItem ("HTML", "HTML", "file", "html"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Haskell", "Haskell", "file", "haskell"));
+			SupportedLanguages.Add (new TextSyntaxItem ("IRC Logs", "IRC Logs", "file", "irc"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Interactive Ruby", "Interactive Ruby", "file", "irb"));
+			SupportedLanguages.Add (new TextSyntaxItem ("JSP", "JSP", "file", "jsp"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Java", "Java", "file", "java"));
+			SupportedLanguages.Add (new TextSyntaxItem ("JavaScript", "JavaScript", "file", "js"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Lua", "Lua", "file", "lua"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Mako Templates", "Mako Templates", "file", "html+mako"));
+			SupportedLanguages.Add (new TextSyntaxItem ("MiniD", "MiniD", "file", "minid"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Myghty Templates", "Myghty Templates", "file", "html+myghty"));
+			SupportedLanguages.Add (new TextSyntaxItem ("OCaml", "OCaml", "file", "ocaml"));
+			SupportedLanguages.Add (new TextSyntaxItem ("PHP", "PHP", "file", "html+php"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Perl", "Perl", "file", "perl"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Python", "Python", "file", "python"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Python Console Sessions", "Python Console Sessions", "file", "pycon"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Python Tracebacks", "Python Tracebacks", "file", "pytb"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Ruby", "Ruby", "file", "ruby"));
+			SupportedLanguages.Add (new TextSyntaxItem ("SQL", "SQL", "file", "sql"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Scheme", "Scheme", "file", "scheme"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Smarty", "Smarty", "file", "smarty"));
+			SupportedLanguages.Add (new TextSyntaxItem ("SquidConf", "SquidConf", "file", "squidconf"));
+			SupportedLanguages.Add (new TextSyntaxItem ("TeX / LaTeX", "TeX / LaTeX", "file", "tex"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Text", "Text", "file", "text"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Unified Diff", "Unified Diff", "file", "diff"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Vim", "Vim", "file", "vim"));
+			SupportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "xml"));
+			SupportedLanguages.Add (new TextSyntaxItem ("eRuby / rhtml", "eRuby / rhtml", "file", "rhtml"));
+			SupportedLanguages.Add (new TextSyntaxItem ("reStructuredText", "reStructuredText", "file", "rst"));
+			SupportedLanguages.Add (new TextSyntaxItem ("sources.list", "sources.list", "file", "sourceslist"));
 		}
 	
 		public LodgeIt (string content, string syntax) : this ()
 		{		
-			parameters["language"] = syntax;
-			parameters["code"] = content;
+			Parameters[syntax_key] = syntax;
+			Parameters[content_key] = content;
 		}
 		
 		public LodgeIt (string content) : this ()
 		{		
-			parameters["code"] = content;
-		}
-
-		public bool ShouldAllowAutoRedirect
-		{
-			get { return false; }
+			Parameters[content_key] = content;
 		}
 		
-		public string Name
-		{
-			get { return "paste.pocoo.org"; }
-		}
-
-		public string UserAgent
-		{
-			get { return ""; }
-		}
-		
-		public string BaseUrl 
-		{ 
-			get { return urlRoot; } 
-		}
-		
-		public NameValueCollection Parameters 
-		{ 
-			get { return parameters; } 
-		}
-		
-		public string GetPasteUrlFromResponse (HttpWebResponse response)
-		{	
+		public override string GetPasteUrlFromResponse (HttpWebResponse response)
+		{				
 			string responseText;
 			using (Stream responseStream = response.GetResponseStream ()) {
 				using (StreamReader reader = new StreamReader (responseStream)) {
 					responseText = reader.ReadToEnd ();
 				}
 			}
-
+			
 			Regex urlPattern = new Regex ("<a href=\"(.*?)\">"); 
 			Match urlMatch = urlPattern.Match (responseText);
 				
 			string url = urlMatch.Groups[1].Value;
-				
 			if (url == string.Empty) {
+				Log<LodgeIt>.Debug (responseText);
 				throw new Exception (Catalog.GetString ("Parsed url was empty. Lodge It has probably changed its format."));
 			}
 			
-			return urlRoot + url;
-		}
-		
-		public List<TextSyntaxItem> SupportedLanguages 
-		{ 
-			get { return supportedLanguages; }
+			return url_root + url;
 		}
 	}
 }
