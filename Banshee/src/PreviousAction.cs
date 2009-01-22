@@ -19,11 +19,9 @@
  */
 
 using System;
-using System.Collections.Generic;
 
 using Mono.Unix;
 
-using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
@@ -35,7 +33,7 @@ namespace Banshee
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Play previous track in Banshee"); }
+			get { return Catalog.GetString ("Play previous track"); }
 		}
 
 		public override string Icon {

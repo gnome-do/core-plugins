@@ -24,8 +24,9 @@ using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Universe;
+using Do.Platform;
 
-namespace Do.Addins.Pidgin
+namespace PidginPlugin
 {
 
 	public class PidginSetStatusAction : Act
@@ -34,12 +35,12 @@ namespace Do.Addins.Pidgin
 
 		public PidginSetStatusAction ()
 		{
-			statuses = new Item [] {
+			statuses = new [] {
 				new PidginStatusTypeItem (1), 
 				new PidginStatusTypeItem (2),
 				new PidginStatusTypeItem (3),
 				new PidginStatusTypeItem (4),
-				new PidginStatusTypeItem (5)
+				new PidginStatusTypeItem (5),
 			};
 		}
 
@@ -57,8 +58,8 @@ namespace Do.Addins.Pidgin
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				yield return typeof (PidginSavedStatusItem);
 				yield return typeof (ITextItem);
+				yield return typeof (PidginSavedStatusItem);
 			}
 		}
 
@@ -98,7 +99,11 @@ namespace Do.Addins.Pidgin
 						status = prpl.PurpleSavedstatusGetType (prpl.PurpleSavedstatusGetCurrent ());
 					Pidgin.PurpleSetAvailabilityStatus ((uint) status, message);
 				}
-			} catch { }
+			} catch (Exception e) {
+				Log<PidginSetStatusAction>.Error ("Could not set Pidgin status: {0}", e.Message);
+				Log<PidginSetStatusAction>.Debug (e.StackTrace);
+			}
+
 			yield break;
 		}
 	}

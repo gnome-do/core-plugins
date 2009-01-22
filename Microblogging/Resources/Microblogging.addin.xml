@@ -2,7 +2,7 @@
 	id="Microblog"
 	namespace="Do"
 	version="1.0"
-	name="Microblogging"
+	name="Microblogging (Twitter)"
 	description="Update your microblog (e.g. Twitter, Identi.ca)."
 	author="Jacob Andreas, Alex Launi"
 	category="Official"

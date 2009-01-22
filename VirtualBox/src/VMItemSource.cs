@@ -51,7 +51,7 @@ public class VMItemSource : ItemSource {
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			return null;  
+			yield break; 
 		}
 
 		public override void UpdateItems ()
@@ -68,10 +68,11 @@ public class VMItemSource : ItemSource {
 				foreach (XmlNode Machine in MachineEntries)
 					items.Add(new VMItem(Machine.Attributes));	
 			}
-			catch 
+			catch (Exception e)
 			{
 				//meltdown
-				Log.Error("Error parsing VBox XML file."); 
+				Log.Error("Error parsing VBox XML file.");
+				Log.Debug (e.ToString ());
 			}
 		}
 	}

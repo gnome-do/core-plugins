@@ -1,22 +1,21 @@
-/* BansheeDBus.cs
- *
- * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// BansheeDBus.cs
+//
+// GNOME Do is the legal property of its developers. Please refer to the
+// COPYRIGHT file distributed with this source distribution.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
 
 
 using System;
@@ -30,6 +29,7 @@ using Do.Platform;
 
 namespace Banshee
 {
+
 	[Interface ("org.bansheeproject.Banshee.PlayerEngine")]
 	interface IBansheePlayer {
 		void Play ();
@@ -43,7 +43,8 @@ namespace Banshee
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlaybackController")]
-	interface IBansheeController {
+	interface IBansheeController
+	{
 		void Next (bool restart);
 		void Previous (bool restart);
 		int ShuffleMode { get; set; }
@@ -52,13 +53,14 @@ namespace Banshee
 	public class BansheeDBus
 	{
 		const string BusName = "org.bansheeproject.Banshee";
+		const string ErrorMessage = "Banshee encountered an error in {0}; {1}";
 
 		# region static Banshee d-bus members
 		
 		static Dictionary<Type, string> object_paths;
 		
 		static IBansheePlayer player;
-		static IBansheePlayQueue queue;
+		static IBansheePlayQueue play_queue;
 		static IBansheeController controller;
 
 		static BansheeDBus ()
@@ -80,22 +82,28 @@ namespace Banshee
 		
 		static IBansheePlayer Player {
 			get {
-				return player ?? 
-					player = GetIBansheeObject<IBansheePlayer> (object_paths [typeof (IBansheePlayer)]);
+				player = ((player == null)
+					? GetIBansheeObject<IBansheePlayer> (object_paths [typeof (IBansheePlayer)])
+					: player);
+				return player;
 			}
 		}
-		
-		static IBansheePlayQueue PlayQueue {
-			get {
-				return queue ?? 
-					queue = GetIBansheeObject<IBansheePlayQueue> (object_paths  [typeof (IBansheePlayQueue)]);
-			}
-		}	
-		
+
 		static IBansheeController Controller {
 			get {
-				return controller ??
-					controller = GetIBansheeObject<IBansheeController> (object_paths [typeof (IBansheeController)]);
+				controller = ((controller == null) 
+					? GetIBansheeObject<IBansheeController> (object_paths [typeof (IBansheeController)])
+					: controller);
+				return controller;
+			}
+		}
+
+		static IBansheePlayQueue PlayQueue {
+			get {
+				play_queue = ((play_queue == null)
+					? GetIBansheeObject<IBansheePlayQueue> (object_paths [typeof (IBansheePlayQueue)])
+					: play_queue);
+				return play_queue;
 			}
 		}
 
@@ -176,7 +184,6 @@ namespace Banshee
 		{
 			object_paths = new Dictionary<Type, string> ();
 			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
-			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");
 			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
 		}
 

@@ -1,9 +1,9 @@
 <Addin 
-	id="Banshee (beta)"
+	id="Banshee"
 	namespace= "Do"
-	version="0.8"
-	name="Banshee"
-	description="Control Banshee Media Player and Search Collection"
+	version="0.9"
+	name="Banshee (beta)"
+	description="Control Banshee Media Player playback and Search Collection"
 	author="Alex Launi"
 	category="Official"
 >
@@ -13,7 +13,6 @@
 	</Runtime>
 	
 	<Dependencies>
-		<Addin id="Platform" version="1.0" />
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	

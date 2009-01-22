@@ -12,6 +12,7 @@ SUBDIRS = \
 	Cl.ickable \
 	ClawsMail \
 	Confluence \
+	Del.icio.us \
 	DiskMounter \
 	EOG-Slideshow \
 	Epiphany \
@@ -47,12 +48,19 @@ SUBDIRS = \
 	RememberTheMilk \
 	Rhythmbox \
 	Riptide \
+	RSS \
 	Shelf \
 	Skype \
+	SqueezeCenter \
 	SSH \
 	StockQuote \
+	SystemServices \
+	Tasque \
 	TerminalServerClient \
 	Text \
+	Thunderbird \
+	TinyUrl \
+	Tracker \
 	Translate \
 	Tomboy \
 	Vinagre \

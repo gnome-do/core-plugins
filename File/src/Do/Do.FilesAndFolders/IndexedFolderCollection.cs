@@ -1,22 +1,21 @@
-/* IndexedFolderCollection.cs
- *
- * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// IndexedFolderCollection.cs
+//
+// GNOME Do is the legal property of its developers. Please refer to the
+// COPYRIGHT file distributed with this source distribution.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
 
 using System;
 using System.IO;
@@ -48,15 +47,14 @@ namespace Do.FilesAndFolders
 			}
 		}
 
-		IEnumerable<IndexedFolder> DefaultFolders {
-			get	{
-				yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 0);
-				yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
-				yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
-			}
+		IEnumerable<IndexedFolder> GetDefaultFolders ()
+		{
+			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 1);
+			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
 		}
-		
+
 		public IndexedFolderCollection ()
 		{
 		}
@@ -71,11 +69,23 @@ namespace Do.FilesAndFolders
 			}
 		}
 
+		public void UpdateIndexedFolder (string path, string newPath, uint newDepth)
+		{
+			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth));
+		}
+
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
 		{
-			if (Folders.ContainsKey (path)) Folders.Remove (path);
-			Folders [path] = folder;
-			Serialize ();
+			// If the updated folder is not actually any different, don't udpate.
+			if (Folders.ContainsKey (path) && Folders [path] == folder) return;
+			RemoveIndexedFolder (path);
+			Add (folder);
+		}
+
+		public void RemoveIndexedFolder (string path)
+		{
+			if (!Folders.ContainsKey (path)) return;
+			Remove (Folders [path]);
 		}
 
 		#region ICollection<IndexedFolder>
@@ -118,7 +128,7 @@ namespace Do.FilesAndFolders
 
 		public bool Contains (IndexedFolder folder)
 		{
-			return Folders.ContainsKey (folder.Path) && Folders [folder.Path] == folder;
+			return Folders.ContainsKey (folder.Path);
 		}
 
 		public int Count {
@@ -144,10 +154,23 @@ namespace Do.FilesAndFolders
 			} finally {
 				// Some sort of error occurred, so load the default data set and save it.
 				if (Folders == null) {
-					Folders = DefaultFolders.ToDictionary (pair => pair.Path);
+					// TODO System.Linq.Enumerable.ToDictionary is not implemented
+					// in earlier versions of mono.
+					// Folders = GetDefaultFolders ().ToDictionary (pair => pair.Path);
+					Folders = ToDictionary (GetDefaultFolders (), pair => pair.Path);
 					Serialize ();
 				}
 			}
+		}
+
+		// TODO remove this when older versions of mono with unimplemented
+		// System.Linq.Enumerable.ToDictionary are deprecated.
+		Dictionary<TKey, TValue> ToDictionary<TKey, TValue> (IEnumerable<TValue> xs, Func<TValue, TKey> f)
+		{
+			Dictionary<TKey, TValue> d = new Dictionary<TKey, TValue> ();
+			foreach (TValue x in xs)
+				d [f (x)] = x;
+			return d;
 		}
 
 		void Serialize ()

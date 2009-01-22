@@ -1,7 +1,7 @@
 <Addin
 	id="Firefox"
 	namespace="Do"
-	version="2.1"
+	version="2.2"
 	name="Firefox"
 	description="Search Firefox 3 bookmarks."
 	author="David Siegel"

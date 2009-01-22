@@ -34,11 +34,16 @@ namespace Do.FilesAndFolders
 		
 		static Plugin ()
 		{
-			Preferences = new FilesAndFoldersPreferences ();
-			ImportantFolders = new ImportantFolders ();
-			FolderIndex = new IndexedFolderCollection ();
+			try {
+				Preferences = new FilesAndFoldersPreferences ();
+				ImportantFolders = new ImportantFolders ();
+				FolderIndex = new IndexedFolderCollection ();
 
-			FolderIndex.Initialize ();
+				FolderIndex.Initialize ();
+			} catch (Exception e) {
+				Log.Error ("Files and folders plugin failed to initialize: {0}", e.Message);
+				Log.Debug (e.StackTrace);
+			}
 		}
 
 		public static IFileItem NewFileItem (string path)

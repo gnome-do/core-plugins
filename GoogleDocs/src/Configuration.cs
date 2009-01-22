@@ -34,12 +34,13 @@ namespace GDocs
 		const string EmailPattern = @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\."
 			+ @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*"
 			+ @"[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?";
-		const string Uri = "https://www.google.com/accounts/NewAccount?service=cl";
+		const string Uri = "https://www.google.com/accounts/NewAccount?service=Writely";
 
-		public Configuration () :
-			base (Catalog.GetString ("Google Documents"),
-					"https://www.google.com/accounts/NewAccount?service=writely")
+		public Configuration () : base ("Google Docs", Uri)
 		{
+			UsernameLabel = Catalog.GetString ("E-Mail:");
+			Username = GDocs.Preferences.Username;
+			Password = GDocs.Preferences.Password;
 		}
 
 		protected override bool Validate (string username, string password)
@@ -60,12 +61,6 @@ namespace GDocs
 			//Log.Error ("Account data not saved");
 			GDocs.Preferences.Username = username;
 			GDocs.Preferences.Password = password;
-		}
-
-		public static void GetAccountData (out string username, out string password, Type t)
-		{
-			username = GDocs.Preferences.Username;
-			password = GDocs.Preferences.Password;
 		}
 	}
 }

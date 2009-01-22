@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.7.95.2])
+AC_INIT([gnome-do-plugins], [0.7.97])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
@@ -119,6 +119,7 @@ Bibtex/Makefile
 Cl.ickable/Makefile
 ClawsMail/Makefile
 Confluence/Makefile
+Del.icio.us/Makefile
 DiskMounter/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile
@@ -154,12 +155,19 @@ Quote/Makefile
 RememberTheMilk/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
+RSS/Makefile
 Shelf/Makefile
 Skype/Makefile
+SqueezeCenter/Makefile
 SSH/Makefile
 StockQuote/Makefile
+SystemServices/Makefile
+Tasque/Makefile
 TerminalServerClient/Makefile
 Text/Makefile
+Thunderbird/Makefile
+TinyUrl/Makefile
+Tracker/Makefile
 Translate/Makefile
 Tomboy/Makefile
 Vinagre/Makefile
