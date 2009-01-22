@@ -30,14 +30,13 @@ namespace Banshee
 	
 	public static class Util
 	{
-		// TODO: use an IApplicationItem instead of this hardcoded string.
 		const string BansheeBin = "banshee-1";
-		const string BansheeABIVersion = "1.4";
 		const string MinBansheeVersion = "4.2"; // 1 is assumed.
+		const string BansheeSeriesVersion = "1.4";
 
 		public static string UnsupportedVersionMessage {
-			get { return string.Format (Catalog.GetString ("Banshee Version is unsupported. Banshee {0} is newer is required to index collection"),
-				MinBansheeVersion);
+			get { return string.Format (Catalog.GetString ("Banshee Version is unsupported. Banshee {0} or newer "
+				+ "is required to index collection"), MinBansheeVersion);
 			}
 		}
 		
@@ -55,7 +54,7 @@ namespace Banshee
 			banshee.WaitForExit ();
 			stdout = banshee.StandardOutput.ReadToEnd ();
 
-			version = stdout.Substring (stdout.IndexOf (BansheeABIVersion) + "1.".Length, MinBansheeVersion.Length);
+			version = stdout.Substring (stdout.IndexOf (BansheeSeriesVersion) + "1.".Length, MinBansheeVersion.Length);
 			return float.Parse (version) >= float.Parse (MinBansheeVersion);
 		}
 	}

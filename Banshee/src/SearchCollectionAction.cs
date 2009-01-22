@@ -53,19 +53,23 @@ namespace Banshee
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] { typeof (ITextItem), typeof (MediaItem), }; }
+			get {
+				yield return typeof (ITextItem);
+				yield return typeof (MediaItem); 
+			}
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string search;
+			string pattern;
 			
 			if (items.First () is ITextItem)
-				search = (items.First () as ITextItem).Text;
+				pattern = (items.First () as ITextItem).Text;
 			else
-				search = items.First ().Name;
+				pattern = items.First ().Name;
 
-			return Banshee.SearchMedia (search).Cast<Item> ();
+			Log<SearchCollectionAction>.Debug ("Searching collection for {0}", pattern);
+			return Banshee.SearchMedia (pattern).Cast<Item> ();
 		}
 	}
 }

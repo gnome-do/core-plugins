@@ -111,9 +111,9 @@ namespace Banshee
 		{
 			List<IMediaFile> results = new List<IMediaFile> ();
 			
-			results.AddRange (indexer.Songs.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
-			results.AddRange (indexer.Videos.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
-			results.AddRange (indexer.Podcasts.Where (item => ContainsMatch (item, pattern)) as IEnumerable<IMediaFile>);
+			results.AddRange (indexer.Songs.Where (item => ContainsMatch (item, pattern)).Cast<IMediaFile> ());
+			results.AddRange (indexer.Videos.Where (item => ContainsMatch (item, pattern)).Cast<IMediaFile> ());
+			results.AddRange (indexer.Podcasts.Where (item => ContainsMatch (item, pattern)).Cast<IMediaFile> ());
 
 			return results;
 		}
@@ -209,10 +209,7 @@ namespace Banshee
 		static bool ContainsMatch (MediaItem item, string pattern)
 		{
 			foreach (PropertyInfo p in item.GetType ().GetProperties ()) {
-				try {
-					if (p.Name != "File" && (p.GetValue (item, null).ToString ().Contains (pattern)))
-						return true;
-				} catch { }
+				return (p.Name != "File" && (p.GetValue (item, null).ToString ().Contains (pattern)));
 			}
 			
 			return false;
