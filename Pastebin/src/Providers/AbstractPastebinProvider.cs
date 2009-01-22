@@ -1,4 +1,4 @@
-//  IPastebinProvider.cs
+//  AbstractPastebinProvider.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too
 //  numerous to list here.  Please refer to the COPYRIGHT file distributed with
@@ -23,23 +23,34 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace Pastebin
-{	
-	public interface IPastebinProvider
+{
+	public abstract class AbstractPastebinProvider : IPastebinProvider
 	{
-		bool ShouldAllowAutoRedirect { get; }
+		public AbstractPastebinProvider()
+		{
+			ShouldAllowAutoRedirect = true;
+			UserAgent = "";
+			Expect100Continue = true;
+			Parameters = new NameValueCollection ();
+			SupportedLanguages = new List<TextSyntaxItem> ();
+		}
 		
-		string Name { get; }
+		public bool ShouldAllowAutoRedirect { get; protected set; }
 		
-		string BaseUrl { get; }
+		public string UserAgent { get; protected set; }
+		
+		public bool Expect100Continue { get; protected set; }
+		
+		public NameValueCollection Parameters { get; protected set; }
+				
+		public List<TextSyntaxItem> SupportedLanguages { get; protected set;}
+		
+		public string Name { get; protected set; }
+		
+		public string BaseUrl { get; protected set; }
+		
+		public abstract string GetPasteUrlFromResponse (HttpWebResponse response);
+		
 
-		string UserAgent { get; }
-		
-		bool Expect100Continue { get; }
-		
-		NameValueCollection Parameters { get; }
-		
-		string GetPasteUrlFromResponse (HttpWebResponse response);
-		
-		List<TextSyntaxItem> SupportedLanguages { get; }
 	}
 }
