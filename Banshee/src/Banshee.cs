@@ -158,6 +158,11 @@ namespace Banshee
 			artistsOut.AddRange (artists.Values);
 		}
 
+		public static IEnumerable<AlbumMusicItem> LoadAlbumsFor (ArtistMusicItem artist, IEnumerable<AlbumMusicItem> albums)
+		{
+			return albums.Where (album => album.Artist == artist.Name);
+		}
+
 		static List<IMediaFile> LoadSongsFor (MusicItem item)
 		{
 			SortedList<string, IMediaFile> albumSongs;

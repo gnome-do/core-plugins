@@ -185,6 +185,7 @@ namespace Banshee
 			object_paths = new Dictionary<Type, string> ();
 			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
 			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
+			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");
 		}
 
 		void LogError (string methodName, Exception e)

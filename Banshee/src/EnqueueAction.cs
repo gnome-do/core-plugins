@@ -38,7 +38,7 @@ namespace Banshee
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Adds tracks to Banshee play queue"); }
+			get { return Catalog.GetString ("Add media to play queue"); }
 		}
 
 		public override string Icon {
@@ -51,9 +51,8 @@ namespace Banshee
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			items.Cast<MediaItem> ().ForEach (item => Banshee.Enqueue (item));
-			
-			return Enumerable.Empty<Item> ();
+			items.Cast<MediaItem> ().ForEach (item => Banshee.Enqueue (item as MediaItem));
+			yield break;
 		}
 	}
 }

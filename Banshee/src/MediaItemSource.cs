@@ -88,7 +88,7 @@ namespace Banshee
 					children.Add (new BrowsePublisherPodcastItem ());
 			}
 			else if (parent is ArtistMusicItem) {
-				foreach (AlbumMusicItem album in AllAlbumsBy (parent as ArtistMusicItem))
+				foreach (AlbumMusicItem album in Banshee.LoadAlbumsFor (parent as ArtistMusicItem, albums))
 					children.Add (album);
 			}
 			else if (parent is AlbumMusicItem) {
@@ -132,13 +132,6 @@ namespace Banshee
 			foreach (Item album in albums) items.Add (album);
 			foreach (Item artist in artists) items.Add (artist);
 			foreach (Item podcast in publishers) items.Add (podcast);
-		}
-		
-		protected List<AlbumMusicItem> AllAlbumsBy (ArtistMusicItem artist)
-		{
-			return albums.FindAll (delegate (AlbumMusicItem album) {
-				return album.Artist == artist.Name;
-			});
 		}
 	}
 }
