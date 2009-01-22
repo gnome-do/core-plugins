@@ -1,0 +1,71 @@
+Index: src/Core/Banshee.Services/Banshee.Collection.Indexer/CollectionIndexerService.cs
+===================================================================
+--- src/Core/Banshee.Services/Banshee.Collection.Indexer/CollectionIndexerService.cs	(revision 4893)
++++ src/Core/Banshee.Services/Banshee.Collection.Indexer/CollectionIndexerService.cs	(working copy)
+@@ -219,6 +219,7 @@
+                     field != Banshee.Query.BansheeQuery.PlayCountField &&
+                     field != Banshee.Query.BansheeQuery.SkipCountField) {
+                     OnCollectionChanged ();
++                    return;
+                 }
+             }
+         }
+Index: src/Core/Banshee.CollectionIndexer/Banshee.Collection.Indexer.RemoteHelper/IndexerClient.cs
+===================================================================
+--- src/Core/Banshee.CollectionIndexer/Banshee.Collection.Indexer.RemoteHelper/IndexerClient.cs	(revision 4893)
++++ src/Core/Banshee.CollectionIndexer/Banshee.Collection.Indexer.RemoteHelper/IndexerClient.cs	(working copy)
+@@ -50,6 +50,7 @@
+         private bool listening;
+         private ICollectionIndexerService service;
+         private bool cleanup_and_shutdown;
++        private bool index_when_collection_changed;
+         
+         public void Start ()
+         {
+@@ -87,7 +88,7 @@
+                 indexer.Index ();
+             }
+         }
+-        
++
+         private void _UpdateIndex (ICollectionIndexer indexer)
+         {
+             ThreadPool.QueueUserWorkItem (delegate {
+@@ -182,7 +183,9 @@
+         
+         private void OnCollectionChanged ()
+         {
+-            Index ();
++            if (IndexWhenCollectionChanged) {
++                Index ();
++            }
+         }
+         
+         private void OnCleanupAndShutdown ()
+@@ -216,6 +219,11 @@
+         protected bool CleanupAndShutdown {
+             get { return cleanup_and_shutdown; }
+         }
++
++        public bool IndexWhenCollectionChanged {
++            get { return index_when_collection_changed; }
++            set { index_when_collection_changed = value; }
++        }
+         
+         protected ICollectionIndexerService Service {
+             get { return service; }
+Index: src/Core/Banshee.CollectionIndexer/Banshee.Collection.Indexer.RemoteHelper/SimpleIndexerClient.cs
+===================================================================
+--- src/Core/Banshee.CollectionIndexer/Banshee.Collection.Indexer.RemoteHelper/SimpleIndexerClient.cs	(revision 4893)
++++ src/Core/Banshee.CollectionIndexer/Banshee.Collection.Indexer.RemoteHelper/SimpleIndexerClient.cs	(working copy)
+@@ -51,6 +51,10 @@
+         {
+             return client.GetAvailableExportFields ();
+         }
++
++        protected bool IndexWhenCollectionChanged {
++            set { client.IndexWhenCollectionChanged = value; }
++        }
+         
+         public void AddExportField (params string [] fields)
+         {

@@ -1,4 +1,4 @@
-// DeleteAction.cs
+// PreviousAction.cs 
 //
 // GNOME Do is the legal property of its developers. Please refer to the
 // COPYRIGHT file distributed with this source distribution.
@@ -18,51 +18,32 @@
 //
 
 using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Platform;
 
-namespace Do.FilesAndFolders
+namespace Banshee
 {
 	
-	class DeleteAction : AbstractFileAction
+	public class PreviousAction : AbstractPlaybackAction
 	{
 
 		public override string Name {
-			get { return Catalog.GetString ("Delete File"); }
+			get { return Catalog.GetString ("Previous"); }
 		}
-		
-		public override string Description { 
-			get { return Catalog.GetString ("Deletes a file or folder."); }
+
+		public override string Description {
+			get { return Catalog.GetString ("Play next track"); }
 		}
-		
+
 		public override string Icon {
-			get { return "gtk-delete"; }
+			get { return "media-skip-backward"; }
 		}
 
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield break; }
-		}
-
-		protected override IEnumerable<Item> Perform (string source)
+		protected override void Perform ()
 		{
-			Services.Application.RunOnThread (() => Delete (source));
-			yield break;
-		}
-
-		void Delete (string path)
-		{
-			if (Directory.Exists (path)) {
-				Directory.GetFileSystemEntries (path).ForEach (Delete);
-				Directory.Delete (path);
-			} else {
-				File.Delete (path);
-			}
+			Banshee.Next ();
 		}
 	}
 }

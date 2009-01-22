@@ -1,4 +1,4 @@
-// DeleteAction.cs
+// PlayAction.cs
 //
 // GNOME Do is the legal property of its developers. Please refer to the
 // COPYRIGHT file distributed with this source distribution.
@@ -18,51 +18,32 @@
 //
 
 using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 
 using Mono.Unix;
 
 using Do.Universe;
-using Do.Platform;
 
-namespace Do.FilesAndFolders
-{
-	
-	class DeleteAction : AbstractFileAction
-	{
+namespace Banshee
+{	
+
+	public class PlayAction : AbstractPlaybackAction
+	{		
 
 		public override string Name {
-			get { return Catalog.GetString ("Delete File"); }
+			get { return Catalog.GetString ("Play"); }
 		}
 		
-		public override string Description { 
-			get { return Catalog.GetString ("Deletes a file or folder."); }
+		public override string Description {
+			get { return Catalog.GetString ("Play from your Banshee Collection"); }
 		}
 		
 		public override string Icon {
-			get { return "gtk-delete"; }
+			get { return "media-playback-start"; }
 		}
-
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield break; }
-		}
-
-		protected override IEnumerable<Item> Perform (string source)
+		
+		protected override void Perform ()
 		{
-			Services.Application.RunOnThread (() => Delete (source));
-			yield break;
-		}
-
-		void Delete (string path)
-		{
-			if (Directory.Exists (path)) {
-				Directory.GetFileSystemEntries (path).ForEach (Delete);
-				Directory.Delete (path);
-			} else {
-				File.Delete (path);
-			}
+			Banshee.Play ();
 		}
 	}
 }

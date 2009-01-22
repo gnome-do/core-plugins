@@ -2,11 +2,8 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12</target-gtk-version>
+    <target-gtk-version>2.12.1</target-gtk-version>
   </configuration>
-  <import>
-    <widget-library name="../bin/Debug/PingFM.dll" internal="true" />
-  </import>
   <widget class="Gtk.Bin" id="PingFM.Configuration" design-size="300 300">
     <property name="MemberName" />
     <child>
@@ -87,7 +84,7 @@
             <child>
               <widget class="Gtk.Label" id="validate_lbl">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;i&gt;Varify and save your account information&lt;/i&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;i&gt;Verify and save your account information&lt;/i&gt;</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>

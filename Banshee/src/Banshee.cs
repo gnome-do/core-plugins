@@ -1,4 +1,4 @@
-// DeleteAction.cs
+// Banshee.cs 
 //
 // GNOME Do is the legal property of its developers. Please refer to the
 // COPYRIGHT file distributed with this source distribution.
@@ -18,51 +18,55 @@
 //
 
 using System;
-using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Reflection;
 using System.Collections.Generic;
 
-using Mono.Unix;
-
-using Do.Universe;
 using Do.Platform;
 
-namespace Do.FilesAndFolders
+namespace Banshee
 {
-	
-	class DeleteAction : AbstractFileAction
+
+	public enum PlaybackShuffleMode
 	{
+		Linear,
+		Song,
+		Artist,
+		Album
+	}
 
-		public override string Name {
-			get { return Catalog.GetString ("Delete File"); }
-		}
-		
-		public override string Description { 
-			get { return Catalog.GetString ("Deletes a file or folder."); }
-		}
-		
-		public override string Icon {
-			get { return "gtk-delete"; }
-		}
+	public class Banshee
+	{
+		static BansheeDbus bus;
 
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield break; }
-		}
-
-		protected override IEnumerable<Item> Perform (string source)
+		static Banshee ()
 		{
-			Services.Application.RunOnThread (() => Delete (source));
-			yield break;
+			bus = new BansheeDbus ();
 		}
 
-		void Delete (string path)
+		public static bool Playing {
+			get { return bus.Playing; }
+		}
+
+		public static void Play ()
 		{
-			if (Directory.Exists (path)) {
-				Directory.GetFileSystemEntries (path).ForEach (Delete);
-				Directory.Delete (path);
-			} else {
-				File.Delete (path);
-			}
+			Services.Application.RunOnThread (bus.Play);
+		}
+
+		public static void Pause ()
+		{
+			Services.Application.RunOnThread (bus.Pause);
+		}
+
+		public static void Next ()
+		{
+			Services.Application.RunOnThread (bus.Next);
+		}
+
+		public static void Previous ()
+		{
+			Services.Application.RunOnThread (bus.Previous);
 		}
 	}
 }

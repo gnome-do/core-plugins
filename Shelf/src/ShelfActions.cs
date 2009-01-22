@@ -1,8 +1,7 @@
 // ShelfActions.cs
 //
-//GNOME Do is the legal property of its developers. Please refer to the
-//COPYRIGHT file distributed with this
-//source distribution.
+// GNOME Do is the legal property of its developers. Please refer to the
+// COPYRIGHT file distributed with this source distribution.
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

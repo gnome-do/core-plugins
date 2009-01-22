@@ -9,6 +9,7 @@ FILES = \
 	src/PastebinAction.cs \
 	src/Pastebin.cs \
 	src/Providers/IPastebinProvider.cs \
+	src/Providers/AbstractPastebinProvider.cs \
 	src/Providers/LodgeIt.cs \
 	src/Providers/Monoport.cs \
 	src/Providers/Paste2.cs \
