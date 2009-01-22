@@ -25,106 +25,78 @@ using System.Collections.Specialized;
 
 namespace Pastebin
 {
-	public class Paste2 : IPastebinProvider
+	public class Paste2 : AbstractPastebinProvider
 	{		
-		private const string urlRoot = "http://paste2.org";
-	
-		private NameValueCollection parameters;
-		private List<TextSyntaxItem> supportedLanguages;
+		const string url_root = "http://paste2.org";
+		const string content_key = "code";
+		const string syntax_key = "lang";
 		
 		public Paste2 ()
 		{
-			parameters = new NameValueCollection();
-			parameters["lang"] = "text";
-			parameters["description"] = "";
-			parameters["code"] = "";
-			parameters["parent"] = "0";		
+			Name = "paste2.org";
+			BaseUrl = url_root + "/new-paste";
+							
+			ShouldAllowAutoRedirect = false;
 			
-			supportedLanguages = new List<TextSyntaxItem> (); 
-			supportedLanguages.Add (new TextSyntaxItem ("Plain Text", "Plain Text", "file", "text"));
-			supportedLanguages.Add (new TextSyntaxItem ("Actionscript", "Actionscript", "file", "actionscript"));
-			supportedLanguages.Add (new TextSyntaxItem ("Ada", "Ada", "file", "ada"));
-			supportedLanguages.Add (new TextSyntaxItem ("Apache Config", "Apache Config", "file", "apache"));
-			supportedLanguages.Add (new TextSyntaxItem ("AppleScript", "AppleScript", "file", "applescript"));
-			supportedLanguages.Add (new TextSyntaxItem ("ASP", "ASP", "file", "asp"));
-			supportedLanguages.Add (new TextSyntaxItem ("Bash", "Bash", "file", "bash"));			
-			supportedLanguages.Add (new TextSyntaxItem ("C", "C", "file", "c"));
-			supportedLanguages.Add (new TextSyntaxItem ("Cold Fusion", "Cold Fusion", "file", "cfm"));
-			supportedLanguages.Add (new TextSyntaxItem ("C++", "C++", "file", "cpp"));
-			supportedLanguages.Add (new TextSyntaxItem ("C#", "C#", "file", "csharp"));
-			supportedLanguages.Add (new TextSyntaxItem ("CSS", "CSS", "file", "css"));
-			supportedLanguages.Add (new TextSyntaxItem ("D", "D", "file", "d"));
-			supportedLanguages.Add (new TextSyntaxItem ("Delphi", "Delphi", "file", "delphi"));
-			supportedLanguages.Add (new TextSyntaxItem ("UNIX Diff", "UNIX Diff", "file", "diff"));
-			supportedLanguages.Add (new TextSyntaxItem ("Eiffel", "Eiffel", "file", "eiffel"));
-			supportedLanguages.Add (new TextSyntaxItem ("Fortran", "Fortran", "file", "fortran"));
-			supportedLanguages.Add (new TextSyntaxItem ("HTML 4 Strict", "HTML 4 Strict", "file", "html4strict"));
-			supportedLanguages.Add (new TextSyntaxItem ("Ini", "Ini", "file", "ini"));
-			supportedLanguages.Add (new TextSyntaxItem ("Java", "Java", "file", "java"));
-			supportedLanguages.Add (new TextSyntaxItem ("Java5", "Java5", "file", "java5"));
-			supportedLanguages.Add (new TextSyntaxItem ("Javascript", "Javascript", "file", "javascript"));
-			supportedLanguages.Add (new TextSyntaxItem ("LaTeX", "LaTeX", "file", "latex"));
-			supportedLanguages.Add (new TextSyntaxItem ("LISP", "LISP", "file", "lisp"));
-			supportedLanguages.Add (new TextSyntaxItem ("Lua", "Lua", "file", "lua"));
-			supportedLanguages.Add (new TextSyntaxItem ("MATLAB", "MATLAB", "file", "matlab"));
-			supportedLanguages.Add (new TextSyntaxItem ("Perl", "Perl", "file", "perl"));
-			supportedLanguages.Add (new TextSyntaxItem ("PHP", "PHP", "file", "php"));
-			supportedLanguages.Add (new TextSyntaxItem ("Python", "Python", "file", "python"));
-			supportedLanguages.Add (new TextSyntaxItem ("QBasic / QuickBASIC", "QBasic / QuickBASIC", "file", "qbasic"));
-			supportedLanguages.Add (new TextSyntaxItem ("Robots", "Robots", "file", "robots"));
-			supportedLanguages.Add (new TextSyntaxItem ("Ruby", "Ruby", "file", "ruby"));	
-			supportedLanguages.Add (new TextSyntaxItem ("SQL", "SQL", "file", "sql"));		
-			supportedLanguages.Add (new TextSyntaxItem ("TCL", "TCL", "file", "tcl"));
-			supportedLanguages.Add (new TextSyntaxItem ("Visual BASIC", "Visual BASIC", "file", "vb"));
-			supportedLanguages.Add (new TextSyntaxItem ("VB.NET", "VB.NET", "file", "vbnet"));
-			supportedLanguages.Add (new TextSyntaxItem ("Winbatch", "Winbatch", "file", "winbatch"));		
-			supportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "xml"));
+			Parameters[syntax_key] = "text";
+			Parameters["description"] = "";
+			Parameters[content_key] = "";
+			Parameters["parent"] = "0";		
+			
+			SupportedLanguages.Add (new TextSyntaxItem ("Plain Text", "Plain Text", "file", "text"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Actionscript", "Actionscript", "file", "actionscript"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Ada", "Ada", "file", "ada"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Apache Config", "Apache Config", "file", "apache"));
+			SupportedLanguages.Add (new TextSyntaxItem ("AppleScript", "AppleScript", "file", "applescript"));
+			SupportedLanguages.Add (new TextSyntaxItem ("ASP", "ASP", "file", "asp"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Bash", "Bash", "file", "bash"));			
+			SupportedLanguages.Add (new TextSyntaxItem ("C", "C", "file", "c"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Cold Fusion", "Cold Fusion", "file", "cfm"));
+			SupportedLanguages.Add (new TextSyntaxItem ("C++", "C++", "file", "cpp"));
+			SupportedLanguages.Add (new TextSyntaxItem ("C#", "C#", "file", "csharp"));
+			SupportedLanguages.Add (new TextSyntaxItem ("CSS", "CSS", "file", "css"));
+			SupportedLanguages.Add (new TextSyntaxItem ("D", "D", "file", "d"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Delphi", "Delphi", "file", "delphi"));
+			SupportedLanguages.Add (new TextSyntaxItem ("UNIX Diff", "UNIX Diff", "file", "diff"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Eiffel", "Eiffel", "file", "eiffel"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Fortran", "Fortran", "file", "fortran"));
+			SupportedLanguages.Add (new TextSyntaxItem ("HTML 4 Strict", "HTML 4 Strict", "file", "html4strict"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Ini", "Ini", "file", "ini"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Java", "Java", "file", "java"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Java5", "Java5", "file", "java5"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Javascript", "Javascript", "file", "javascript"));
+			SupportedLanguages.Add (new TextSyntaxItem ("LaTeX", "LaTeX", "file", "latex"));
+			SupportedLanguages.Add (new TextSyntaxItem ("LISP", "LISP", "file", "lisp"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Lua", "Lua", "file", "lua"));
+			SupportedLanguages.Add (new TextSyntaxItem ("MATLAB", "MATLAB", "file", "matlab"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Perl", "Perl", "file", "perl"));
+			SupportedLanguages.Add (new TextSyntaxItem ("PHP", "PHP", "file", "php"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Python", "Python", "file", "python"));
+			SupportedLanguages.Add (new TextSyntaxItem ("QBasic / QuickBASIC", "QBasic / QuickBASIC", "file", "qbasic"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Robots", "Robots", "file", "robots"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Ruby", "Ruby", "file", "ruby"));	
+			SupportedLanguages.Add (new TextSyntaxItem ("SQL", "SQL", "file", "sql"));		
+			SupportedLanguages.Add (new TextSyntaxItem ("TCL", "TCL", "file", "tcl"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Visual BASIC", "Visual BASIC", "file", "vb"));
+			SupportedLanguages.Add (new TextSyntaxItem ("VB.NET", "VB.NET", "file", "vbnet"));
+			SupportedLanguages.Add (new TextSyntaxItem ("Winbatch", "Winbatch", "file", "winbatch"));		
+			SupportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "xml"));
 		}
 	
 		public Paste2 (string content, string syntax) : this ()
 		{		
-			parameters["lang"] = syntax;
-			parameters["code"] = content;
+			Parameters[syntax_key] = syntax;
+			Parameters[content_key] = content;
 		}
 		
 		public Paste2 (string content) : this ()
 		{		
-			parameters["code"] = content;
+			Parameters[content_key] = content;
 		}
-
-		public bool ShouldAllowAutoRedirect
+				
+		public override string GetPasteUrlFromResponse (HttpWebResponse response)
 		{
-			get { return false; }
-		}
-		
-		public string Name
-		{
-			get { return "paste2.org"; }
-		}
-
-		public string UserAgent
-		{
-			get { return ""; }
-		}
-		
-		public string BaseUrl 
-		{ 
-			get { return urlRoot + "/new-paste"; } 
-		}
-		
-		public NameValueCollection Parameters 
-		{ 
-			get { return parameters; } 
-		}
-		
-		public string GetPasteUrlFromResponse (HttpWebResponse response)
-		{
-			return urlRoot + response.Headers["Location"];
-		}
-		
-		public List<TextSyntaxItem> SupportedLanguages 
-		{ 
-			get { return supportedLanguages; }
+			return url_root + response.Headers["Location"];
 		}
 	}
 }
