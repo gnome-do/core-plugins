@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using Do.Universe;
+using Do.Platform;
 
 namespace Do.Plugins.Rss
 {
@@ -74,7 +75,7 @@ namespace Do.Plugins.Rss
 
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 
 		public override void UpdateItems ()
@@ -164,9 +165,7 @@ namespace Do.Plugins.Rss
 					}
 				}
 			} catch (Exception e) {
-				// Something went horribly wrong, so we print the error message.
-				Console.Error.WriteLine ("Could not read live bookmarks from " +
-						"firefox bookmarks file {0}: {1}", file, e.Message);
+				Log.Debug ("Could not read live bookmarks from firefox bookmarks file {0}: {1}", file, e.Message);
 			}
 			return list;
 
