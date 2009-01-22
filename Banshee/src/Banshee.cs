@@ -58,49 +58,32 @@ namespace Banshee
 
 		public static void Enqueue (MediaItem item)
 		{
-			bus.Enqueue (LoadMedia (item));
+			Services.Application.RunOnThread (() => bus.Enqueue (LoadMedia (item)));
 		}
 
 		public static void Play ()
 		{
-			Thread thread = new Thread ((ThreadStart) (() => bus.Play ()));
-			thread.IsBackground = true;
-			thread.Start ();
+			Services.Application.RunOnThread (bus.Play);
 		}
 		
 		public static void Play (MediaItem item)
 		{
-			Thread thread = new Thread ((ThreadStart) (() => bus.Play (LoadMedia (item))));
-			thread.IsBackground = true;
-			thread.Start ();
+			Services.Application.RunOnThread (() => bus.Play (LoadMedia (item)));
 		}
 
 		public static void Pause ()
 		{
-			Thread thread = new Thread ((ThreadStart) (() => bus.Pause ()));
-			thread.IsBackground = true;
-			thread.Start ();
+			Services.Application.RunOnThread (bus.Pause);
 		}
 
 		public static void Next ()
 		{
-			Thread thread = new Thread ((ThreadStart) (() => bus.Next ()));
-			thread.IsBackground = true;
-			thread.Start ();
+			Services.Application.RunOnThread (bus.Next);
 		}
 
 		public static void Previous ()
 		{
-			Thread thread = new Thread ((ThreadStart) (() => bus.Previous ()));
-			thread.IsBackground = true;
-			thread.Start ();
-		}
-
-		public static void TogglePlaying ()
-		{
-			Thread thread = new Thread ((ThreadStart) (() => bus.TogglePlaying ()));
-			thread.IsBackground = true;
-			thread.Start ();
+			Services.Application.RunOnThread (bus.Previous);
 		}
 
 		public static PlaybackShuffleMode ShuffleMode {

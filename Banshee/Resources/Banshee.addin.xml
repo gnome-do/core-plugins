@@ -26,23 +26,10 @@
 	<!-- Actions -->
 	<Extension path = "/Do/Action">
 		<Action type = "Banshee.PlayAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type = "Banshee.PauseAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type = "Banshee.NextAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type = "Banshee.PreviousAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
-		<Action type = "Banshee.PlayAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type = "Banshee.EnqueueAction" />
-	</Extension>
-	<Extension path = "/Do/Action">
 		<Action type = "Banshee.SearchCollectionAction" />
 	</Extension>
 </Addin>

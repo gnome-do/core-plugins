@@ -86,8 +86,6 @@ namespace Banshee
 					children.Add (new BrowseVideoItem ());
 				if (publishers != null && publishers.Count > 0)
 					children.Add (new BrowsePublisherPodcastItem ());
-				
-				children.AddRange (BansheeRunnableItem.DefaultItems);
 			}
 			else if (parent is ArtistMusicItem) {
 				foreach (AlbumMusicItem album in AllAlbumsBy (parent as ArtistMusicItem))
@@ -129,7 +127,7 @@ namespace Banshee
 			Banshee.LoadVideos (out videos);
 			Banshee.LoadPodcasts (out publishers);
 			Banshee.LoadAlbumsAndArtists (out albums, out artists);
-
+			
 			foreach (Item video in videos) items.Add (video);
 			foreach (Item album in albums) items.Add (album);
 			foreach (Item artist in artists) items.Add (artist);

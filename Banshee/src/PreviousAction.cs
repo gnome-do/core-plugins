@@ -42,10 +42,9 @@ namespace Banshee
 			get { return "media-skip-backward"; }
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		protected override void Perform ()
 		{
 			Banshee.Previous ();
-			yield break;
 		}
 	}
 }

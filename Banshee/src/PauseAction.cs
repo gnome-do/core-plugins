@@ -42,15 +42,14 @@ namespace Banshee
 			get { return "media-playback-pause"; }
 		}
 
-		public override bool SupportsItem (Item item)
+		protected override bool IsAvailable()
 		{
-			return Banshee.IsPlaying && base.SupportsItem (item);
+			return Banshee.IsPlaying;
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		protected override void Perform ()
 		{
 			Banshee.Pause ();
-			yield break;
 		}
 	}
 }

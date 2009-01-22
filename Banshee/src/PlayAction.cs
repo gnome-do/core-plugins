@@ -53,9 +53,11 @@ namespace Banshee
 
 		public override bool SupportsItem(Item item)
 		{
-			if (item is MediaItem) return true;
+			return (item is MediaItem) || base.SupportsItem (item);
+		}
 
-			return base.SupportsItem (item);
+		protected override void Perform ()
+		{
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -65,7 +67,7 @@ namespace Banshee
 			else 
 				Banshee.Play ();
 				
-			return Enumerable.Empty<Item> ();
+			yield break;
 		}
 	}
 }

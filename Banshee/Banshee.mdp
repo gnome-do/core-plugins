@@ -19,7 +19,6 @@
     <File name="src/MediaItems.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Banshee.cs" subtype="Code" buildaction="Compile" />
     <File name="src/MediaItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/RunnableItems.cs" subtype="Code" buildaction="Compile" />
     <File name="src/BansheeDBus.cs" subtype="Code" buildaction="Compile" />
     <File name="src/PlayAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/EnqueueAction.cs" subtype="Code" buildaction="Compile" />

@@ -7,7 +7,7 @@ FILES = \
 	src/Banshee.cs \
 	src/BansheeDBus.cs \
 	src/BansheeIndexer.cs \
-	src/BrowseMediaItems.cs
+	src/BrowseMediaItems.cs \
 	src/EnqueueAction.cs \
 	src/MediaItems.cs \
 	src/MediaItemSource.cs \
@@ -15,8 +15,7 @@ FILES = \
 	src/PauseAction.cs \
 	src/PlayAction.cs \
 	src/PreviousAction.cs \
-	src/RunnableItems.cs \
-	src/CollectionAction.cs \
+	src/SearchCollectionAction.cs \
 	src/Util.cs
 
 RESOURCES = \
@@ -26,7 +25,7 @@ REFERENCES = \
 	Mono.Posix \
 	System \
 	System.Core \
-	Banshee.CollectionIndexer \
+	$(BANSHEE_INDEXER_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_LIBS) \
 	$(DO_PLATFORM_LIBS) \

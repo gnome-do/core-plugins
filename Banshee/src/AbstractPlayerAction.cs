@@ -27,13 +27,31 @@ namespace Banshee
 {	
 	public abstract class AbstractPlayerAction : Act
 	{
+		protected abstract void Perform ();
+
+		protected virtual bool IsAvailable ()
+		{
+			return true;
+		}
+		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (IApplicationItem); }
 		}
 
 		public override bool SupportsItem (Item item)
 		{
-			return (item is IApplicationItem) && (item as IApplicationItem).Exec.StartsWith ("banshee-1");
+			return IsBanshee (item as IApplicationItem) && IsAvailable ();
+		}
+
+		bool IsBanshee (IApplicationItem app)
+		{
+			return app.Exec.Contains ("banshee");
+		}
+
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			Perform ();
+			yield break;
 		}
 	}
 }
