@@ -160,7 +160,7 @@ namespace Banshee
 
 		public static IEnumerable<AlbumMusicItem> LoadAlbumsFor (ArtistMusicItem artist, IEnumerable<AlbumMusicItem> albums)
 		{
-			return albums.Where (album => album.Artist == artist.Name);
+			return albums.Where (album => album.Artist.Contains (artist.Name));
 		}
 
 		static List<IMediaFile> LoadSongsFor (MusicItem item)
@@ -213,11 +213,17 @@ namespace Banshee
 
 		static bool ContainsMatch (MediaItem item, string pattern)
 		{
-			foreach (PropertyInfo p in item.GetType ().GetProperties ()) {
-				return (p.Name != "File" && (p.GetValue (item, null).ToString ().Contains (pattern)));
-			}
-			
-			return false;
+			return ContainsMatch (item, p => PropertyInfoMatchesPattern (item, p, pattern));
+		}
+
+		static bool ContainsMatch (MediaItem item, Func<PropertyInfo, bool> predicate)
+		{
+			return item.GetType ().GetProperties ().Any (predicate);
+		}
+
+		static bool PropertyInfoMatchesPattern (MediaItem item, PropertyInfo info, string pattern)
+		{
+			return (info.Name != "File" && (info.GetValue (item, null).ToString ().Contains (pattern)));
 		}
 	}
 }

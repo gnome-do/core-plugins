@@ -35,7 +35,7 @@ namespace Banshee
 		const string BansheeSeriesVersion = "1.4";
 
 		public static string UnsupportedVersionMessage {
-			get { return string.Format (Catalog.GetString ("Banshee Version is unsupported. Banshee {0} or newer "
+			get { return string.Format (Catalog.GetString ("Banshee Version is unsupported. Banshee 1.{0} or newer "
 				+ "is required to index collection"), MinBansheeVersion);
 			}
 		}
