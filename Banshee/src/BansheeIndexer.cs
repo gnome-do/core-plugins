@@ -45,7 +45,6 @@ namespace Banshee
 		public BansheeIndexer ()
 		{
 			AddExportField (export_fields);
-			processing_mutex = new object ();
 			IndexWhenCollectionChanged = false;
 			artwork_directory = Path.Combine (ReadXdgUserDir ("XDG_CACHE_DIR", ".cache"), "album-art");
 		
