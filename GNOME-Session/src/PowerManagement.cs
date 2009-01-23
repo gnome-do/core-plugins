@@ -48,7 +48,9 @@ namespace GNOME
 				try {
 					return Bus.Session.GetObject<IPowerManagement> (BusName,
 							new ObjectPath (ObjectPath));
-				} catch {
+				} catch (Exception e) {
+					Log<PowerManagement>.Error ("Could not get PowerManagement bus object: {0}", e.Message);
+					Log<PowerManagement>.Debug (e.StackTrace);
 					return null;
 				}
 			}
