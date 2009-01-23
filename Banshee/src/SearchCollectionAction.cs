@@ -1,4 +1,4 @@
-/* PlayAction.cs
+/* SearchCollectionAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -25,49 +25,51 @@ using System.Collections.Generic;
 
 using Mono.Unix;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
-{	
-	public class PlayAction : AbstractPlayerAction
-	{		
+{
+	public class SearchCollectionAction : Act
+	{
+		public SearchCollectionAction ()
+		{
+			if (!Util.VersionSupportsIndexing ()) {
+				Log<Banshee>.Error (Util.UnsupportedVersionMessage);
+				throw new Exception (Util.UnsupportedVersionMessage);
+			}
+		}
+		
 		public override string Name {
-			get { return Catalog.GetString ("Play"); }
+			get { return Catalog.GetString ("Search Banshee Media"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Play from your Banshee Collection"); }
+			get { return Catalog.GetString ("Search your entire Banshee collection"); }
 		}
-		
+
 		public override string Icon {
-			get { return "media-playback-start"; }
+			get { return "edit-find"; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
-				yield return typeof (MediaItem);
-				foreach (Type type in base.SupportedItemTypes)
-					yield return type;
+			get {
+				yield return typeof (ITextItem);
+				yield return typeof (MediaItem); 
 			}
 		}
-
-		public override bool SupportsItem(Item item)
-		{
-			return (item is MediaItem) || base.SupportsItem (item);
-		}
-
-		protected override void Perform ()
-		{
-		}
-
+		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (items.First () is MediaItem)
-				Banshee.Play (items.Cast<MediaItem> ().First ());
-			else 
-				Banshee.Play ();
-				
-			yield break;
+			string pattern;
+			
+			if (items.First () is ITextItem)
+				pattern = (items.First () as ITextItem).Text;
+			else
+				pattern = items.First ().Name;
+
+			Log<SearchCollectionAction>.Debug ("Searching collection for {0}", pattern);
+			return Banshee.SearchMedia (pattern).Cast<Item> ();
 		}
 	}
 }

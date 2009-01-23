@@ -1,4 +1,4 @@
-/* PauseAction.cs 
+/* AbstractPlayerAction.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -19,35 +19,39 @@
  */
 
 using System;
-
-using Mono.Unix;
+using System.Collections.Generic;
 
 using Do.Universe;
 
 namespace Banshee
 {	
-	public class PauseAction : AbstractPlayerAction
+	public abstract class AbstractPlayerAction : Act
 	{
-		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
-		}
+		protected abstract void Perform ();
 
-		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
-		}
-
-		public override string Icon {
-			get { return "media-playback-pause"; }
-		}
-
-		protected override bool IsAvailable()
+		protected virtual bool IsAvailable ()
 		{
-			return Banshee.IsPlaying;
+			return true;
+		}
+		
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (IApplicationItem); }
 		}
 
-		protected override void Perform ()
+		public override bool SupportsItem (Item item)
 		{
-			Banshee.Pause ();
+			return IsBanshee (item as IApplicationItem) && IsAvailable ();
+		}
+
+		bool IsBanshee (IApplicationItem app)
+		{
+			return app.Exec.Contains ("banshee");
+		}
+
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			Perform ();
+			yield break;
 		}
 	}
 }
