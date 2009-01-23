@@ -39,11 +39,6 @@ namespace Banshee
 		
 		public MediaItemSource()
 		{
-			if (!Util.VersionSupportsIndexing ()) {
-				Log<Banshee>.Error (Util.UnsupportedVersionMessage);
-				throw new Exception (Util.UnsupportedVersionMessage);
-			}
-				
 			items = new List<Item> ();
 		}
 		
