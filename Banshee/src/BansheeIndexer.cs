@@ -37,7 +37,6 @@ namespace Banshee
 {
 	public class BansheeIndexer : SimpleIndexerClient
 	{
-		object processing_mutex;
 		string artwork_directory;
 		List<IDictionary<string, object>> indexed_items;
 		
@@ -146,7 +145,7 @@ namespace Banshee
 					
 					songs.Add (item as SongMusicItem);
 				}
-				
+					
 				Videos = videos;
 				Songs = songs;
 				Podcasts = podcasts;
