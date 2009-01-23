@@ -31,11 +31,15 @@ namespace Banshee
 {
 
 	[Interface ("org.bansheeproject.Banshee.PlayerEngine")]
-	interface IBansheePlayer
-	{
+	interface IBansheePlayer {
 		void Play ();
 		void Pause ();
-		bool CanPause { get; }
+		string CurrentState { get; }
+	}
+	
+	[Interface ("org.bansheeproject.Banshee.PlayQueue")]
+	interface IBansheePlayQueue {
+		void EnqueueUri (string uri, bool prepend);
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlaybackController")]
@@ -46,7 +50,7 @@ namespace Banshee
 		int ShuffleMode { get; set; }
 	}
 	
-	public class BansheeDbus
+	public class BansheeDBus
 	{
 		const string BusName = "org.bansheeproject.Banshee";
 		const string ErrorMessage = "Banshee encountered an error in {0}; {1}";
@@ -56,9 +60,10 @@ namespace Banshee
 		static Dictionary<Type, string> object_paths;
 		
 		static IBansheePlayer player;
+		static IBansheePlayQueue play_queue;
 		static IBansheeController controller;
 
-		static BansheeDbus ()
+		static BansheeDBus ()
 		{
 			BuildObjectPathsDict ();
 		}
@@ -77,19 +82,28 @@ namespace Banshee
 		
 		static IBansheePlayer Player {
 			get {
-				if (player == null)
-					player = GetIBansheeObject<IBansheePlayer> (
-						object_paths [typeof (IBansheePlayer)]);
+				player = ((player == null)
+					? GetIBansheeObject<IBansheePlayer> (object_paths [typeof (IBansheePlayer)])
+					: player);
 				return player;
 			}
 		}
 
 		static IBansheeController Controller {
 			get {
-				if (controller == null)
-					controller = GetIBansheeObject<IBansheeController> (
-						object_paths [typeof (IBansheeController)]);
+				controller = ((controller == null) 
+					? GetIBansheeObject<IBansheeController> (object_paths [typeof (IBansheeController)])
+					: controller);
 				return controller;
+			}
+		}
+
+		static IBansheePlayQueue PlayQueue {
+			get {
+				play_queue = ((play_queue == null)
+					? GetIBansheeObject<IBansheePlayQueue> (object_paths [typeof (IBansheePlayQueue)])
+					: play_queue);
+				return play_queue;
 			}
 		}
 
@@ -100,37 +114,60 @@ namespace Banshee
 			set { Controller.ShuffleMode = (int) value; }
 		}
 
-		public bool Playing {
-			get { return Player.CanPause; }
-		}
-
-		public void Play ()
-		{
+		public bool IsPlaying ()
+		{			
 			try {
-				Player.Play ();
+				return player != null && Player.CurrentState == "playing";
 			} catch (Exception e) {
-				Log.Error (ErrorMessage, "Play", e.Message);
-				Log.Debug (e.StackTrace);
+				LogError ("IsPlaying", e);
 			}
+			return false;
 		}
 
 		public void Pause ()
-		{
+		{	
 			try {
 				Player.Pause ();
 			} catch (Exception e) {
-				Log.Error (ErrorMessage, "Pause", e);
-				Log.Debug (e.StackTrace);
+				LogError ("Pause", e);
 			}
 		}
+		
+		public void Play ()
+		{
+			Player.Play ();
+		}
 
+		public void Play (IEnumerable<IMediaFile> media)
+		{
+			Enqueue (media, true);
+			Next ();
+		}			
+
+		public void Enqueue (IEnumerable<IMediaFile> media)
+		{
+			Enqueue (media, false);
+		}
+		
+		void Enqueue (IEnumerable<IMediaFile> media, bool prepend)
+		{
+			try {
+				// if we're prepending to the queue we need to queue in the uris in reverse order
+				if (prepend) media = media.Reverse ();
+
+				media.ForEach (item => PlayQueue.EnqueueUri (item.Path, prepend));
+				
+			} catch (Exception e) {
+				LogError ("Enqueue", e);
+			}
+		}
+		
 		public void Next ()
 		{
 			try {
 				Controller.Next (false);
 			} catch (Exception e) {
-				Log.Error (ErrorMessage, "Next", e.Message);
-				Log.Debug (e.StackTrace);
+				LogError ("Next", e);
 			}
 		}
 		
@@ -139,8 +176,7 @@ namespace Banshee
 			try {
 				Controller.Previous (false);
 			} catch (Exception e) {
-				Log.Error (ErrorMessage, "Previous", e.Message);
-				Log.Debug (e.StackTrace);
+				LogError ("Previous", e);
 			}
 		}
 		
@@ -149,6 +185,12 @@ namespace Banshee
 			object_paths = new Dictionary<Type, string> ();
 			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
 			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
+			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");
+		}
+
+		void LogError (string methodName, Exception e)
+		{
+			Log<BansheeDBus>.Error ("Encountered a problem in {0}: {1}", methodName, e.Message);
 		}
 	}
 }

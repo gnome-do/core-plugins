@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTextSyntaxItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TextSyntaxItem>
+    <SerializableName>Plain Text</SerializableName>
+    <SerializableDescription>Plain Text</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>1</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Actionscript</SerializableName>
+    <SerializableDescription>Actionscript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>18</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Ada</SerializableName>
+    <SerializableDescription>Ada</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>19</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Apache Config</SerializableName>
+    <SerializableDescription>Apache Config</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>20</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ASP</SerializableName>
+    <SerializableDescription>ASP</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>22</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Bash</SerializableName>
+    <SerializableDescription>Bash</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>23</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C</SerializableName>
+    <SerializableDescription>C</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>3</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C++</SerializableName>
+    <SerializableDescription>C++</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>4</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C#</SerializableName>
+    <SerializableDescription>C#</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>9</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>CSS</SerializableName>
+    <SerializableDescription>CSS</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>24</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Delphi</SerializableName>
+    <SerializableDescription>Delphi</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>25</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Diff / Patch</SerializableName>
+    <SerializableDescription>Diff / Patch</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>34</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>HTML 4 Strict</SerializableName>
+    <SerializableDescription>HTML 4 Strict</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>26</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Java</SerializableName>
+    <SerializableDescription>Java</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>7</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Javascript</SerializableName>
+    <SerializableDescription>Javascript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>27</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>LISP</SerializableName>
+    <SerializableDescription>LISP</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>28</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Lua</SerializableName>
+    <SerializableDescription>Lua</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>29</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Microprocessor ASM</SerializableName>
+    <SerializableDescription>Microprocessor ASM</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>30</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>mIRC Script</SerializableName>
+    <SerializableDescription>mIRC SCript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>13</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Objective C</SerializableName>
+    <SerializableDescription>Objective C</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>31</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Perl</SerializableName>
+    <SerializableDescription>Perl</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>6</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>PHP</SerializableName>
+    <SerializableDescription>PHP</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>5</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>PL/I</SerializableName>
+    <SerializableDescription>PL/I</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>14</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Python</SerializableName>
+    <SerializableDescription>Python</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>11</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Ruby</SerializableName>
+    <SerializableDescription>Ruby</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>10</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>SQL</SerializableName>
+    <SerializableDescription>SQL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>16</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Scheme</SerializableName>
+    <SerializableDescription>Scheme</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>17</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Script Log</SerializableName>
+    <SerializableDescription>Script Log</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>33</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Visual BASIC</SerializableName>
+    <SerializableDescription>Visual BASIC</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>8</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>VB.NET</SerializableName>
+    <SerializableDescription>VB.NET</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>32</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>XML</SerializableName>
+    <SerializableDescription>XML</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>15</Syntax>
+  </TextSyntaxItem>
+</ArrayOfTextSyntaxItem>
