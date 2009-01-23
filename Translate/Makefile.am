@@ -11,7 +11,8 @@ FILES = \
 	src/Provider/TranslateProviderFactory.cs \
 	src/TranslateAction.cs \
 	src/UI/ConfigUI.cs \
-	src/UI/LanguageNode.cs
+	src/UI/LanguageNode.cs \
+	src/TranslateEngine.cs
 
 RESOURCES = \
 	gtk-gui/gui.stetic \
