@@ -1,22 +1,21 @@
-/* PowerManagement.cs
- *
- * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+// PowerManagement.cs
+//
+// GNOME Do is the legal property of its developers. Please refer to the
+// COPYRIGHT file distributed with this source distribution.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
 
 using System;
 using System.Diagnostics;
@@ -59,8 +58,9 @@ namespace GNOME
 		{
 			try {
 				BusInstance.Shutdown ();
-			} catch {
-				Log.Error ("Could not find PowerManagement on D-Bus.");
+			} catch (Exception e) {
+				Log<PowerManagement>.Error ("Could not shutdown: {0}", e.Message);
+				Log<PowerManagement>.Debug (e.StackTrace);
 			}
 		}
 
@@ -68,8 +68,9 @@ namespace GNOME
 		{
 			try {
 				BusInstance.Hibernate ();
-			} catch {
-				Log.Error ("Could not find PowerManagement on D-Bus.");
+			} catch (Exception e) {
+				Log<PowerManagement>.Error ("Could not hibernate: {0}", e.Message);
+				Log<PowerManagement>.Debug (e.StackTrace);
 			}
 		}
 
@@ -77,8 +78,9 @@ namespace GNOME
 		{
 			try {
 				BusInstance.Reboot ();
-			} catch {
-				Log.Error ("Could not find PowerManagement on D-Bus.");
+			} catch (Exception e) {
+				Log<PowerManagement>.Error ("Could not reboot: {0}", e.Message);
+				Log<PowerManagement>.Debug (e.StackTrace);
 			}
 		}
 
@@ -86,8 +88,9 @@ namespace GNOME
 		{
 			try {
 				BusInstance.Suspend ();
-			} catch {
-				Log.Error ("Could not find PowerManagement on D-Bus.");
+			} catch (Exception e) {
+				Log<PowerManagement>.Error ("Could not suspend: {0}", e.Message);
+				Log<PowerManagement>.Debug (e.StackTrace);
 			}
 		}
 
@@ -96,7 +99,8 @@ namespace GNOME
 			try {
 				Process.Start ("gnome-session-save", "--kill --silent");
 			} catch (Exception e) {
-				Log.Error ("Could not end GNOME session: " + e.Message);
+				Log<PowerManagement>.Error ("Could not logout: {0}", e.Message);
+				Log<PowerManagement>.Debug (e.StackTrace);
 			}
 		}
 	}
