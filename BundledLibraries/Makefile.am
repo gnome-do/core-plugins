@@ -1,7 +1,6 @@
 bundledir = ${datadir}/gnome-do/plugins
 
 bundle_DATA = \
-	Banshee.CollectionIndexer.dll \
 	Google.GData.AccessControl.dll \
 	Google.GData.Calendar.dll \
 	Google.GData.Client.dll \

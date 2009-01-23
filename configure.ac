@@ -30,6 +30,7 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2])
 PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
 PKG_CHECK_MODULES([FLICKRNET], [flickrnet])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
@@ -54,6 +55,7 @@ GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.d
 GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
 GDATA_SHARP_CONTACTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Contacts.dll"
 
+AC_SUBST([BANSHEE_INDEXER_LIBS])
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])

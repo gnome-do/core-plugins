@@ -15,8 +15,7 @@ FILES = \
 	src/PauseAction.cs \
 	src/PlayAction.cs \
 	src/PreviousAction.cs \
-	src/SearchCollectionAction.cs \
-	src/Util.cs
+	src/SearchCollectionAction.cs 
 
 RESOURCES = \
 	Resources/Banshee.addin.xml
@@ -25,7 +24,7 @@ REFERENCES = \
 	Mono.Posix \
 	System \
 	System.Core \
-	Banshee.CollectionIndexer.dll \
+	$(BANSHEE_INDEXER_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_LIBS) \
 	$(DO_PLATFORM_LIBS) \

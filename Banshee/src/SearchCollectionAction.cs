@@ -31,15 +31,7 @@ using Do.Universe;
 namespace Banshee
 {
 	public class SearchCollectionAction : Act
-	{
-		public SearchCollectionAction ()
-		{
-			if (!Util.VersionSupportsIndexing ()) {
-				Log<Banshee>.Error (Util.UnsupportedVersionMessage);
-				throw new Exception (Util.UnsupportedVersionMessage);
-			}
-		}
-		
+	{	
 		public override string Name {
 			get { return Catalog.GetString ("Search Banshee Media"); }
 		}
