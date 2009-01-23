@@ -39,17 +39,24 @@ namespace Banshee
 	public class Banshee
 	{
 		static BansheeDBus bus;
+		static Thread index_mutex;
 		static BansheeIndexer indexer;
 		
 		static Banshee()
 		{
 			bus = new BansheeDBus ();
 			indexer = new BansheeIndexer ();
+			index_mutex = MakeIndexerThread ();
 		}
 
 		public static void Index ()
 		{
-			indexer.Start ();
+			if (index_mutex.ThreadState == ThreadState.Running)
+				return;
+			if (index_mutex.ThreadState == ThreadState.Unstarted)
+				index_mutex.Start ();
+			else
+				index_mutex = MakeIndexerThread ();
 		}
 
 		public static bool IsPlaying {
@@ -97,7 +104,7 @@ namespace Banshee
 			else if (item is PodcastItem)
 				return LoadPodcastsFor (item as PodcastItem);
 			else if (item is VideoItem)
-				return indexer.Videos as IEnumerable<IMediaFile>;
+				return indexer.Videos.Cast<IMediaFile> ();
 			else
 				return Enumerable.Empty<IMediaFile> ();
 		}
@@ -110,7 +117,7 @@ namespace Banshee
 		public static List<IMediaFile> SearchMedia (string pattern)
 		{
 			List<IMediaFile> results = new List<IMediaFile> ();
-			
+
 			results.AddRange (indexer.Songs.Where (item => ContainsMatch (item, pattern)).Cast<IMediaFile> ());
 			results.AddRange (indexer.Videos.Where (item => ContainsMatch (item, pattern)).Cast<IMediaFile> ());
 			results.AddRange (indexer.Podcasts.Where (item => ContainsMatch (item, pattern)).Cast<IMediaFile> ());
@@ -122,7 +129,6 @@ namespace Banshee
 		{
 			Dictionary<string, PodcastItem> publishers;
 			
-			podcastsOut = new List<PodcastItem> ();
 			publishers = new Dictionary<string, PodcastItem> ();
 		
 			foreach (PodcastPodcastItem podcast in indexer.Podcasts) {
@@ -131,16 +137,13 @@ namespace Banshee
 						podcast.Artist, podcast.Year, podcast.Cover);
 			}
 			
-			podcastsOut.AddRange (publishers.Values);
+			podcastsOut = new List<PodcastItem> (publishers.Values);
 		}
 		
 		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albumsOut, out List<ArtistMusicItem> artistsOut)
 		{
 			Dictionary<string, AlbumMusicItem>  albums;
 			Dictionary<string, ArtistMusicItem> artists;
-			
-			albumsOut = new List<AlbumMusicItem> ();
-			artistsOut = new List<ArtistMusicItem> ();
 			
 			albums = new Dictionary<string, AlbumMusicItem> ();
 			artists = new Dictionary<string,ArtistMusicItem> ();
@@ -154,8 +157,8 @@ namespace Banshee
 						song.Cover);
 			}
 			
-			albumsOut.AddRange (albums.Values);
-			artistsOut.AddRange (artists.Values);
+			albumsOut = new List<AlbumMusicItem> (albums.Values);
+			artistsOut = new List<ArtistMusicItem> (artists.Values);
 		}
 
 		public static IEnumerable<AlbumMusicItem> LoadAlbumsFor (ArtistMusicItem artist, IEnumerable<AlbumMusicItem> albums)
@@ -224,6 +227,11 @@ namespace Banshee
 		static bool PropertyInfoMatchesPattern (MediaItem item, PropertyInfo info, string pattern)
 		{
 			return (info.Name != "File" && (info.GetValue (item, null).ToString ().Contains (pattern)));
+		}
+
+		static Thread MakeIndexerThread ()
+		{
+			return new Thread ((ThreadStart) indexer.Start);
 		}
 	}
 }
