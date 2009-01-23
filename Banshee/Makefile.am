@@ -25,7 +25,7 @@ REFERENCES = \
 	Mono.Posix \
 	System \
 	System.Core \
-	$(BANSHEE_INDEXER_LIBS) \
+	Banshee.CollectionIndexer.dll \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_LIBS) \
 	$(DO_PLATFORM_LIBS) \
