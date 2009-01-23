@@ -19,66 +19,52 @@
  */
 
 using System;
-using System.IO;
-using System.Net;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
+
+using Do.Platform;
 
 namespace Pastebin
 {
-	
-	public class Monoport : IPastebinProvider
+	public class Monoport : AbstractPastebinProvider
 	{
-		const string SyntaxKey = "format";
-		const string ContentKey = "code2";
-
-		const string PastebinName = "Monoport";
-		const string UrlRoot = "http://monoport.com";
+		const string url_root = "http://monoport.com";
+		const string syntax_key = "format";
+		const string content_key = "code2";
 		
 		public Monoport ()
 		{
-			SupportedLanguages = BuildSyntaxList ();
-			
+			Name = "Monoport";
+			BaseUrl = url_root + "/pastebin.php";
+						
 			Parameters = new NameValueCollection ();
 			Parameters ["poster"] = System.Environment.UserName;
-			Parameters [SyntaxKey] = "text";
+			Parameters [syntax_key] = "text";
 			Parameters ["parent_pid"] = "";
 			Parameters ["paste"] = "send";
 			Parameters ["expiry_day"] = "d";
-			Parameters [ContentKey] = "";
+			Parameters [content_key] = "";
 			
 			UserAgent = "monoporter";
+			
+			SupportedLanguages = BuildSyntaxList ();
 		}
 
 		public Monoport (string content) : this ()
 		{
-			Parameters [ContentKey] = content;
+			Parameters [content_key] = content;
 		}
 
 		public Monoport (string content, string syntax) : this ()
 		{
-			Parameters [SyntaxKey] = syntax;
-			Parameters [ContentKey] = content;
+			Parameters [syntax_key] = syntax;
+			Parameters [content_key] = content;
 		}
 
-		public NameValueCollection Parameters { get; private set; }
-
-		public string Name {
-			get { return PastebinName; }
-		}
-
-		public string UserAgent { get; private set; }
-
-		public bool ShouldAllowAutoRedirect {
-			get { return true; }
-		}
-
-		public string BaseUrl {
-			get { return UrlRoot + "/pastebin.php"; }
-		}
-
-		public string GetPasteUrlFromResponse (HttpWebResponse response)
+		public override string GetPasteUrlFromResponse (HttpWebResponse response)
 		{
 			string responseText;
 			using (Stream responseStream = response.GetResponseStream ()) {
@@ -92,13 +78,12 @@ namespace Pastebin
 			string url = urlMatch.Value;
 
 			if (url == string.Empty) {
+				Log<Monoport>.Debug (responseText);
 				throw new Exception ("Parsed url was empty. Monoport may have changed their format.");
 			}
 			
-			return UrlRoot + "/" + url.Substring (url.LastIndexOf ('=') + 1);
+			return url_root + "/" + url.Substring (url.LastIndexOf ('=') + 1);
 		}
-
-		public List<TextSyntaxItem> SupportedLanguages { get; private set; }
 
 		List<TextSyntaxItem> BuildSyntaxList ()
 		{

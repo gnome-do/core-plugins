@@ -62,7 +62,7 @@ namespace Do.FilesAndFolders
 			string destination = Path.Combine (Path.GetDirectoryName (source), newName);
 
 			Log.Info ("Renaming {0} to {1}...", source, destination);
-			PerformOnThread (() => {
+			Services.Application.RunOnThread (() => {
 				try {
 					result = Move (source, destination);
 				} catch (Exception e) {
@@ -70,7 +70,8 @@ namespace Do.FilesAndFolders
 					Log.Debug (e.StackTrace);
 				}
 			});
-			// Wait for the other thread to begin moving the file. We may need to yield.
+			// Wait for the other thread to begin moving the file. We may need to
+			// yield.
 			PerformWait ();
 			if (string.IsNullOrEmpty (result))
 				yield break;
