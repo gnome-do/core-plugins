@@ -31,7 +31,7 @@ namespace GNOME
 	class PowerManagement
 	{
 		[Interface ("org.freedesktop.PowerManagement")]
-		interface IPowerManagement
+		interface IPowerManagementProxy
 		{
 			void Shutdown ();
 			void Reboot ();
@@ -42,11 +42,11 @@ namespace GNOME
 		private const string ObjectPath = "/org/freedesktop/PowerManagement";
 		private const string BusName = "org.freedesktop.PowerManagement";
 
-		private static IPowerManagement BusInstance
+		private static IPowerManagementProxy BusInstance
 		{
 			get {
 				try {
-					return Bus.Session.GetObject<IPowerManagement> (BusName,
+					return Bus.Session.GetObject<IPowerManagementProxy> (BusName,
 							new ObjectPath (ObjectPath));
 				} catch (Exception e) {
 					Log<PowerManagement>.Error ("Could not get PowerManagement bus object: {0}", e.Message);
