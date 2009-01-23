@@ -51,6 +51,7 @@ namespace Banshee
 
 		public static void Index ()
 		{
+			Log<Banshee>.Debug (Enum.GetName (typeof (ThreadState), index_mutex.ThreadState));
 			if (index_mutex.ThreadState == ThreadState.Running)
 				return;
 			if (index_mutex.ThreadState == ThreadState.Unstarted)
