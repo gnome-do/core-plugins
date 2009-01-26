@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.7.97])
+AC_INIT([gnome-do-plugins], [0.7.98.1])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
@@ -30,7 +30,7 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
-PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer])
+PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2])
 PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
 PKG_CHECK_MODULES([FLICKRNET], [flickrnet])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
@@ -79,12 +79,10 @@ AC_SUBST([NOTIFY_SHARP_LIBS])
 AC_SUBST([WNCK_SHARP_10_LIBS])
 
 dnl Do core references
-PKG_CHECK_MODULES([DO_DBUS], [do.dbus >= 0.8])
 PKG_CHECK_MODULES([DO_PLATFORM], [do.platform >= 0.8])
 PKG_CHECK_MODULES([DO_PLATFORM_LINUX], [do.platform.linux >= 0.8])
 PKG_CHECK_MODULES([DO_UNIVERSE], [do.universe >= 0.8])
 
-AC_SUBST([DO_DBUS_LIBS])
 AC_SUBST([DO_PLATFORM_LIBS])
 AC_SUBST([DO_PLATFORM_LINUX_LIBS])
 AC_SUBST([DO_UNIVERSE_LIBS])
