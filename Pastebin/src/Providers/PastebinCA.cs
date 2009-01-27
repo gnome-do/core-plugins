@@ -47,37 +47,7 @@ namespace Pastebin
 			Parameters["name"] = "";
 			Parameters["expiry"] = "1 month";
 			
-			SupportedLanguages.Add (new TextSyntaxItem ("Plain Text", "Plain Text", "file", "1"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Actionscript", "Actionscript", "file", "18"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Ada", "Ada", "file", "19"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Apache Config", "Apache Config", "file", "20"));
-			SupportedLanguages.Add (new TextSyntaxItem ("ASP", "ASP", "file", "22"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Bash", "Bash", "file", "23"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C", "C", "file", "3"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C++", "C++", "file", "4"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C#", "C#", "file", "9"));
-			SupportedLanguages.Add (new TextSyntaxItem ("CSS", "CSS", "file", "24"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Delphi", "Delphi", "file", "25"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Diff / Patch", "Diff / Patch", "file", "34"));
-			SupportedLanguages.Add (new TextSyntaxItem ("HTML 4 Strict", "HTML 4 Strict", "file", "26"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Java", "Java", "file", "7"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Javascript", "Javascript", "file", "27"));
-			SupportedLanguages.Add (new TextSyntaxItem ("LISP", "LISP", "file", "28"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Lua", "Lua", "file", "29"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Microprocessor ASM", "Microprocessor ASM", "file", "30"));
-			SupportedLanguages.Add (new TextSyntaxItem ("mIRC Script", "mIRC SCript", "file", "13"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Objective C", "Objective C", "file", "31"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Perl", "Perl", "file", "6"));
-			SupportedLanguages.Add (new TextSyntaxItem ("PHP", "PHP", "file", "5"));
-			SupportedLanguages.Add (new TextSyntaxItem ("PL/I", "PL/I", "file", "14"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Python", "Python", "file", "11"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Ruby", "Ruby", "file", "10"));
-			SupportedLanguages.Add (new TextSyntaxItem ("SQL", "SQL", "file", "16"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Scheme", "Scheme", "file", "17"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Script Log", "Script Log", "file", "33"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Visual BASIC", "Visual BASIC", "file", "8"));
-			SupportedLanguages.Add (new TextSyntaxItem ("VB.NET", "VB.NET", "file", "32"));
-			SupportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "15"));
+			SupportedLanguages = PopulateTextSyntaxItemsFromXml ("PastebinCA.xml");
 		}
 		
 		public PastebinCA(string content, string syntax)

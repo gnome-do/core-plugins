@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTextSyntaxItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TextSyntaxItem>
+    <SerializableName>Apache Config (.htaccess)</SerializableName>
+    <SerializableDescription>Apache Config (.htaccess)</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>apache</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Bash</SerializableName>
+    <SerializableDescription>Bash</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>bash</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Batch (.bat)</SerializableName>
+    <SerializableDescription>Batch (.bat)</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>bat</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C</SerializableName>
+    <SerializableDescription>C</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>c</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C#</SerializableName>
+    <SerializableDescription>C#</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>csharp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C++</SerializableName>
+    <SerializableDescription>C++</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>cpp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>CSS</SerializableName>
+    <SerializableDescription>CSS</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>css</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>D</SerializableName>
+    <SerializableDescription>D</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>d</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Django / Jinja Templates</SerializableName>
+    <SerializableDescription>Django / Jinja Templates</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>html+django</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Dylan</SerializableName>
+    <SerializableDescription>Dylan</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>dylan</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Erlang</SerializableName>
+    <SerializableDescription>Erlang</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>erlang</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>GAS</SerializableName>
+    <SerializableDescription>GAS</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>gas</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Genshi Templates</SerializableName>
+    <SerializableDescription>Genshi Templates</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>html+genshi</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>HTML</SerializableName>
+    <SerializableDescription>HTML</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>html</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Haskell</SerializableName>
+    <SerializableDescription>Haskell</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>haskell</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>IRC Logs</SerializableName>
+    <SerializableDescription>IRC Logs</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>irc</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Interactive Ruby</SerializableName>
+    <SerializableDescription>Interactive Ruby</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>irb</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>JSP</SerializableName>
+    <SerializableDescription>JSP</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>jsp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Java</SerializableName>
+    <SerializableDescription>Java</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>java</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>JavaScript</SerializableName>
+    <SerializableDescription>JavaScript</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>js</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Lua</SerializableName>
+    <SerializableDescription>Lua</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>lua</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Mako Templates</SerializableName>
+    <SerializableDescription>Mako Templates</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>html+mako</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>MiniD</SerializableName>
+    <SerializableDescription>MiniD</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>minid</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Myghty Templates</SerializableName>
+    <SerializableDescription>Myghty Templates</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>html+myghty</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>OCaml</SerializableName>
+    <SerializableDescription>OCaml</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>ocaml</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>PHP</SerializableName>
+    <SerializableDescription>PHP</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>html+php</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Perl</SerializableName>
+    <SerializableDescription>Perl</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>perl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Python</SerializableName>
+    <SerializableDescription>Python</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>python</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Python Console Sessions</SerializableName>
+    <SerializableDescription>Python Console Sessions</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>pycon</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Python Tracebacks</SerializableName>
+    <SerializableDescription>Python Tracebacks</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>pytb</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Ruby</SerializableName>
+    <SerializableDescription>Ruby</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>ruby</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>SQL</SerializableName>
+    <SerializableDescription>SQL</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>sql</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Scheme</SerializableName>
+    <SerializableDescription>Scheme</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>scheme</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Smarty</SerializableName>
+    <SerializableDescription>Smarty</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>smarty</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>SquidConf</SerializableName>
+    <SerializableDescription>SquidConf</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>squidconf</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>TeX / LaTeX</SerializableName>
+    <SerializableDescription>TeX / LaTeX</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>tex</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Text</SerializableName>
+    <SerializableDescription>Text</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>text</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Unified Diff</SerializableName>
+    <SerializableDescription>Unified Diff</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>diff</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Vim</SerializableName>
+    <SerializableDescription>Vim</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>vim</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>XML</SerializableName>
+    <SerializableDescription>XML</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>xml</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>eRuby / rhtml</SerializableName>
+    <SerializableDescription>eRuby / rhtml</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>rhtml</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>reStructuredText</SerializableName>
+    <SerializableDescription>reStructuredText</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>rst</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>sources.list</SerializableName>
+    <SerializableDescription>sources.list</SerializableDescription>
+    <SerializableIcon>text-x-generic</SerializableIcon>
+    <Syntax>sourceslist</Syntax>
+  </TextSyntaxItem>
+</ArrayOfTextSyntaxItem>

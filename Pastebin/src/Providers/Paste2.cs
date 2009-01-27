@@ -43,44 +43,7 @@ namespace Pastebin
 			Parameters[content_key] = "";
 			Parameters["parent"] = "0";		
 			
-			SupportedLanguages.Add (new TextSyntaxItem ("Plain Text", "Plain Text", "file", "text"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Actionscript", "Actionscript", "file", "actionscript"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Ada", "Ada", "file", "ada"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Apache Config", "Apache Config", "file", "apache"));
-			SupportedLanguages.Add (new TextSyntaxItem ("AppleScript", "AppleScript", "file", "applescript"));
-			SupportedLanguages.Add (new TextSyntaxItem ("ASP", "ASP", "file", "asp"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Bash", "Bash", "file", "bash"));			
-			SupportedLanguages.Add (new TextSyntaxItem ("C", "C", "file", "c"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Cold Fusion", "Cold Fusion", "file", "cfm"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C++", "C++", "file", "cpp"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C#", "C#", "file", "csharp"));
-			SupportedLanguages.Add (new TextSyntaxItem ("CSS", "CSS", "file", "css"));
-			SupportedLanguages.Add (new TextSyntaxItem ("D", "D", "file", "d"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Delphi", "Delphi", "file", "delphi"));
-			SupportedLanguages.Add (new TextSyntaxItem ("UNIX Diff", "UNIX Diff", "file", "diff"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Eiffel", "Eiffel", "file", "eiffel"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Fortran", "Fortran", "file", "fortran"));
-			SupportedLanguages.Add (new TextSyntaxItem ("HTML 4 Strict", "HTML 4 Strict", "file", "html4strict"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Ini", "Ini", "file", "ini"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Java", "Java", "file", "java"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Java5", "Java5", "file", "java5"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Javascript", "Javascript", "file", "javascript"));
-			SupportedLanguages.Add (new TextSyntaxItem ("LaTeX", "LaTeX", "file", "latex"));
-			SupportedLanguages.Add (new TextSyntaxItem ("LISP", "LISP", "file", "lisp"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Lua", "Lua", "file", "lua"));
-			SupportedLanguages.Add (new TextSyntaxItem ("MATLAB", "MATLAB", "file", "matlab"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Perl", "Perl", "file", "perl"));
-			SupportedLanguages.Add (new TextSyntaxItem ("PHP", "PHP", "file", "php"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Python", "Python", "file", "python"));
-			SupportedLanguages.Add (new TextSyntaxItem ("QBasic / QuickBASIC", "QBasic / QuickBASIC", "file", "qbasic"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Robots", "Robots", "file", "robots"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Ruby", "Ruby", "file", "ruby"));	
-			SupportedLanguages.Add (new TextSyntaxItem ("SQL", "SQL", "file", "sql"));		
-			SupportedLanguages.Add (new TextSyntaxItem ("TCL", "TCL", "file", "tcl"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Visual BASIC", "Visual BASIC", "file", "vb"));
-			SupportedLanguages.Add (new TextSyntaxItem ("VB.NET", "VB.NET", "file", "vbnet"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Winbatch", "Winbatch", "file", "winbatch"));		
-			SupportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "xml"));
+			SupportedLanguages = PopulateTextSyntaxItemsFromXml ("Paste2.xml");
 		}
 	
 		public Paste2 (string content, string syntax) : this ()

@@ -239,6 +239,5 @@ namespace Translate
 		public string DefaultIfaceCode {
 			get { return "en"; }
 		}
-
 	}
 }

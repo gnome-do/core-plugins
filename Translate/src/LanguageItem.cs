@@ -26,7 +26,7 @@ namespace Translate
 	{
 		private string name, desc, code, flag;
 		
-		public LanguageItem(string na, string de, string co, string fl)
+		public LanguageItem (string na, string de, string co, string fl)
 		{
 			this.name = na;
 			this.desc = de;
