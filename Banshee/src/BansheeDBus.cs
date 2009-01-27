@@ -20,6 +20,7 @@
 
 using System;
 using System.Linq;
+using System.Threading;
 using System.Collections.Generic;
 
 using NDesk.DBus;
@@ -67,17 +68,26 @@ namespace Banshee
 		{
 			BuildObjectPathsDict ();
 		}
-		
-		static T GetIBansheeObject<T> (string object_path)
+
+		static bool FullApplicationAvailable {
+			get { return Bus.Session.NameHasOwner (BusName); }
+		}
+
+		static void MaybeStartFullApplication ()
 		{
-			if (!Bus.Session.NameHasOwner (BusName)) {
-				Bus.Session.StartServiceByName (BusName);
-				System.Threading.Thread.Sleep (5000);
-				if (!Bus.Session.NameHasOwner (BusName))
-					throw new Exception (string.Format("Name {0} has no owner.", BusName));
-			}
+			if (FullApplicationAvailable) return;
 			
-			return Bus.Session.GetObject<T> (BusName, new ObjectPath (object_path));
+			Bus.Session.StartServiceByName (BusName);
+			Thread.Sleep (5000);
+
+			if (!FullApplicationAvailable)
+				throw new Exception (string.Format("Name {0} has no owner.", BusName));
+		}
+		
+		static T GetIBansheeObject<T> (string objectPath)
+		{
+			MaybeStartFullApplication ();
+			return Bus.Session.GetObject<T> (BusName, new ObjectPath (objectPath));
 		}
 		
 		static IBansheePlayer Player {
@@ -152,6 +162,8 @@ namespace Banshee
 		void Enqueue (IEnumerable<IMediaFile> media, bool prepend)
 		{
 			try {
+				MaybeStartFullApplication (); //if banshee isn't already started the enqueue seems to fail
+				
 				// if we're prepending to the queue we need to queue in the uris in reverse order
 				if (prepend) media = media.Reverse ();
 

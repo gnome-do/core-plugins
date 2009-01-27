@@ -51,13 +51,13 @@ namespace Banshee
 
 		public static void Index ()
 		{
-			Log<Banshee>.Debug (Enum.GetName (typeof (ThreadState), index_mutex.ThreadState));
 			if (index_mutex.ThreadState == ThreadState.Running)
 				return;
-			if (index_mutex.ThreadState == ThreadState.Unstarted)
+			else if (index_mutex.ThreadState == ThreadState.Unstarted)
 				index_mutex.Start ();
-			else
+			else {
 				index_mutex = MakeIndexerThread ();
+			}
 		}
 
 		public static bool IsPlaying {
