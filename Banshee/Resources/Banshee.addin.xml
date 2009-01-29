@@ -17,10 +17,6 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
-	<!-- Itemsources -->
-	<Extension path = "/Do/ItemSource">
-		<ItemSource type = "Banshee.MediaItemSource" />
-	</Extension>
 
 	<!-- Actions -->
 	<Extension path = "/Do/Action">
@@ -28,7 +24,5 @@
 		<Action type = "Banshee.PauseAction" />
 		<Action type = "Banshee.NextAction" />
 		<Action type = "Banshee.PreviousAction" />
-		<Action type = "Banshee.EnqueueAction" />
-		<Action type = "Banshee.SearchCollectionAction" />
 	</Extension>
 </Addin>
