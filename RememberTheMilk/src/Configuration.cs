@@ -61,7 +61,12 @@ namespace RememberTheMilk
 		{
 			RTM.Preferences.OverdueNotification = overdue_chkbtn.Active;
 		}
-
+		
+		protected virtual void OnReturnNewChkBtnClicked (object sender, System.EventArgs e)
+		{
+			RTM.Preferences.ReturnNewTask = returnnew_chkbtn.Active;
+		}
+		
 		protected virtual void OnAuthBtnClicked (object sender, System.EventArgs e)
 		{
 			frob = RTM.AuthInit ();
@@ -106,6 +111,7 @@ namespace RememberTheMilk
 			filter_frm.Visible = true;
 			confirm_chkbtn.Active = RTM.Preferences.ActionNotification;
 			overdue_chkbtn.Active = RTM.Preferences.OverdueNotification;
+			returnnew_chkbtn.Active = RTM.Preferences.ReturnNewTask;
 			filter_entry.Text = RTM.Preferences.Filter;	
 		}
 

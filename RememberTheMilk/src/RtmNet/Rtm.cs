@@ -974,7 +974,7 @@ namespace RtmNet
 			parameters.Add("method", "rtm.tasks.add");
 			parameters.Add("timeline", timeline);
 			parameters.Add("name", name);
-			if (listID != null)
+			if (!String.IsNullOrEmpty (listID))
 				parameters.Add("list_id", listID);
 			if (parse)
 				parameters.Add("parse", "1");
