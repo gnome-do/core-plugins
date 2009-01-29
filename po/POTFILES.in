@@ -4,6 +4,15 @@ Alias/src/DeleteAliasAction.cs
 Alias/src/AliasItemSource.cs
 Archive/src/ExtractArchiveAction.cs
 Archive/src/CreateArchiveAction.cs
+Banshee/src/BrowseMediaItems.cs
+Banshee/src/EnqueueAction.cs
+Banshee/src/MediaItemSource.cs
+Banshee/src/MediaItems.cs
+Banshee/src/NextAction.cs
+Banshee/src/PauseAction.cs
+Banshee/src/PlayAction.cs
+Banshee/src/PreviousAction.cs
+Banshee/src/SearchCollectionAction.cs
 Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs
 ClawsMail/src/ClawsContactsItemSource.cs
 ClawsMail/src/ClawsContactDetailItem.cs
@@ -158,6 +167,10 @@ Text/src/AppendTextAction.cs
 Thunderbird/src/Mork.cs
 TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs
 Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs
+Tomboy/src/NewNoteAction.cs
+Tomboy/src/NotesItemSource.cs
+Tomboy/src/SearchNotesAction.cs
+Tomboy/src/TomboyItem.cs
 Tracker/src/TrackerSearch.cs
 Translate/gtk-gui/Translate.ConfigUI.cs
 Translate/src/TranslateAction.cs
