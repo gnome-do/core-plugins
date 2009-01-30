@@ -10,6 +10,7 @@
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
+		<Import assembly="Banshee.CollectionIndexer.dll"/>
 	</Runtime>
 	
 	<Dependencies>
