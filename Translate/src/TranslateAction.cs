@@ -69,12 +69,18 @@ namespace Translate
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				yield return typeof (TextItem);
-
-				ITranslateProvider translator =
-					TranslateProviderFactory.GetProviderFromPreferences ();
-				if (translator.SupportsUrlTranslate)
-					yield return typeof (IUrlItem);
+				yield return typeof (IUrlItem);
 			}
+		}
+		
+		public override bool SupportsItem (Item item)
+		{
+			ITranslateProvider Translator = TranslateEngine.Translator;
+			if (Translator.SupportsUrlTranslate)
+				return true;
+			else if (!(url_regex.IsMatch ((item as ITextItem).Text)) || (item is IUrlItem))
+				return false;
+			return true;
 		}
 
 		public override IEnumerable<Type> SupportedModifierItemTypes {
@@ -82,21 +88,17 @@ namespace Translate
 		}
 
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{        
-			ITranslateProvider Translator = TranslateProviderFactory.GetProviderFromPreferences ();
-			List<Item> TranslationLanguages = new List<Item> ();
-			foreach (LanguageItem Language in Translator.SupportedLanguages)
-			{
-				//only show languages that are enabled
-				if (prefs.Get (Language.Code, true))
-					TranslationLanguages.Add (Language);
+		{
+			ITranslateProvider Translator = TranslateEngine.Translator;
+			foreach (LanguageItem Language in Translator.SupportedLanguages) {
+				if (prefs.Get (Language.Code, false))
+					yield return Language;
 			}
-			return TranslationLanguages.ToArray ();
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			ITranslateProvider Translator = TranslateProviderFactory.GetProviderFromPreferences ();
+			ITranslateProvider Translator = TranslateEngine.Translator;
 			string url = null;
 			LanguageItem ToLang = (modItems.First () as LanguageItem);
 
@@ -107,24 +109,9 @@ namespace Translate
 					url = Translator.BuildTextRequestUrl (ConfigUI.SelectedIfaceLang, ToLang.Code, ConfigUI.SelectedSourceLang, (items.First () as ITextItem).Text);
 
 				if (!string.IsNullOrEmpty (url))
-					Services.Environment.OpenUrl (EscapeBadChars (url));
+					Services.Environment.OpenUrl (url);
 			}
 			yield break;
-		}
-
-		private string EscapeBadChars (string input)
-		{
-			char[] bad_chars = { '#', ' ', '\'' };
-			string escape_char = "\\";
-			foreach (char escape in bad_chars) {
-				for (int i=0;i<input.Length;i++) {
-					if (input[i] == escape) {
-						input = input.Insert (i, escape_char);
-						i++;
-					}
-				}
-			}
-			return input;
 		}
 
 		public Gtk.Bin GetConfiguration ()

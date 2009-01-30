@@ -1,4 +1,4 @@
-/* PauseAction.cs 
+/* SearchCollectionAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -18,36 +18,50 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 using Mono.Unix;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
-{	
-	public class PauseAction : AbstractPlayerAction
-	{
+{
+	public class SearchCollectionAction : Act
+	{	
 		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+			get { return Catalog.GetString ("Search Banshee Media"); }
 		}
-
+		
 		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
+			get { return Catalog.GetString ("Search your entire Banshee collection"); }
 		}
 
 		public override string Icon {
-			get { return "media-playback-pause"; }
+			get { return "edit-find"; }
 		}
-
-		protected override bool IsAvailable()
-		{
-			return Banshee.IsPlaying;
+		
+		public override IEnumerable<Type> SupportedItemTypes {
+			get {
+				yield return typeof (ITextItem);
+				yield return typeof (MediaItem); 
+			}
 		}
-
-		protected override void Perform ()
+		
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Banshee.Pause ();
+			string pattern;
+			
+			if (items.First () is ITextItem)
+				pattern = (items.First () as ITextItem).Text;
+			else
+				pattern = items.First ().Name;
+
+			Log<SearchCollectionAction>.Debug ("Searching collection for {0}", pattern);
+			return Banshee.SearchMedia (pattern).Cast<Item> ();
 		}
 	}
 }

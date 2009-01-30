@@ -30,7 +30,7 @@ namespace Translate
 		string name;
 		string code;
 		
-		public LanguageNode(Gdk.Pixbuf icon, string name, string code)
+		public LanguageNode (Gdk.Pixbuf icon, string name, string code)
 		{
 			TranslatePluginPrefs = Services.Preferences.Get<Translate.ConfigUI> ();
 			this.icon = icon;
@@ -45,7 +45,7 @@ namespace Translate
 
 		public string Name
 		{
-			get { return Catalog.GetString(name); }
+			get { return Catalog.GetString (name); }
 		}
 
 		public bool IsEnabled
@@ -53,27 +53,5 @@ namespace Translate
 			get { return (bool)TranslatePluginPrefs.Get<bool> (this.code, true); }
 			set { TranslatePluginPrefs.Set<bool> (this.code, value); }
 		}
-		
-		/*
-		public bool IsDefSource
-		{
-			get { return (this.code == TranslatePluginPrefs.Get<string> ("SelectedSourceLanguage", null)); }
-		}
-		
-		public void SetAsDefSource()
-		{
-			TranslatePluginPrefs.Set<string> ("SelectedSourceLanguage", this.code);
-		}
-		
-		public bool IsDefIface
-		{
-			get { return (this.code == TranslatePluginPrefs.Get<string> ("SelectedIfaceLanguage", null)); }
-		}
-		
-		public void SetAsIface()
-		{
-			TranslatePluginPrefs.Set<string> ("SelectedIfaceLanguage", this.code);
-		}
-		*/
 	}
 }
