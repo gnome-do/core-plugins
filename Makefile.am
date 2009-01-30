@@ -84,5 +84,5 @@ install-data-hook:
 	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
 
 uninstall-hook:
-	rm $(ASSEMBLY_INSTALL_DIR)/*.mpack
-	rm $(ASSEMBLY_INSTALL_DIR)/*.mrep
+	rm -f $(ASSEMBLY_INSTALL_DIR)/*.mpack
+	rm -f $(ASSEMBLY_INSTALL_DIR)/*.mrep
