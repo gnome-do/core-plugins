@@ -41,10 +41,7 @@ namespace Do.Universe
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] { 
-					typeof (ShelfItem), 
-				}; 
-			}
+			get { yield return typeof (ShelfItem);} 
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)

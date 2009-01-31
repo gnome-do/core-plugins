@@ -24,10 +24,7 @@ namespace Do.Universe
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] {
-				typeof (Item),
-				};
-			}
+			get { yield return typeof (Item); }
 		}
 		
 		public override bool SupportsItem (Item item)
@@ -57,7 +54,7 @@ namespace Do.Universe
 				ShelfItemSource.RemoveFromAll (items.First ());
 			else
 				(modItems.First () as ShelfItem).RemoveItem (items.First ());
-			return null;
+			yield break;
 		}
 	}
 }

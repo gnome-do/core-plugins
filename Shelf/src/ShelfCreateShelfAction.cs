@@ -28,10 +28,7 @@ namespace Do.Universe
 //		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] {
-				typeof (ITextItem),
-				};
-			}
+				get { yield return typeof (ITextItem); } 
 		}
 
 		public override bool SupportsItem (Item item)
@@ -43,9 +40,9 @@ namespace Do.Universe
 		{
 			foreach(Item txt in items){
 				ShelfItemSource.CreateShelf((txt as ITextItem).Text);
-				return null;	
+				yield break;	
 			}
-			return null;
+			yield break;
 		}
 	}
 }
