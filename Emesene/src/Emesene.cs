@@ -74,8 +74,8 @@ namespace Emesene
 			}
 			catch(Exception e)
 			{
-                Log.Error ("Emesene > Error getting EmeseneObject - {0}", e.Message);
-				Log.Debug (e.StackTrace);
+                Log<Emesene>.Error ("Emesene > Error getting EmeseneObject - {0}", e.Message);
+				Log<Emesene>.Debug (e.StackTrace);
 				return null;
 			}
 		}
@@ -103,9 +103,9 @@ namespace Emesene
 			    em.open_conversation(mail, true);
 			}catch(Exception e){
 			    //User is using older emesene
-			    em.open_conversation(mail);
-			    Log.Debug ("Emesene > Old version of emesene");
-		        Log.Debug (e.StackTrace);
+			    //em.open_conversation(mail);
+			    Log<Emesene>.Debug ("Old version of emesene");
+		        Log<Emesene>.Debug (e.StackTrace);
 			}
 			
 		}

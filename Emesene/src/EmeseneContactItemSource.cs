@@ -41,16 +41,16 @@ namespace Emesene
 		public void getDisplayFromDB(ContactItem contact)
 		{
 			string photo;
-			Log.Debug ("Emesene > Tryng to get display from DB for: {0}...", contact["email"]);
+			Log<EmeseneContactItemSource>.Debug ("Tryng to get display from DB for: {0}...", contact["email"]);
 			photo = Emesene.get_last_display_picture(contact["email"], false);
 			if (photo != "noImage") 
 			{
-                Log.Debug ("Emesene > Display found! in: {0}", photo);
+                Log<EmeseneContactItemSource>.Debug ("Display found! in: {0}", photo);
 				contact["photo"] = photo;
 			}
 			else
 			{   
-			    Log.Debug ("Emesene > No display picture in DB for: {0}", contact["email"]);
+			    Log<EmeseneContactItemSource>.Debug ("No display picture in DB for: {0}", contact["email"]);
 				if(this.lastContact == -1)
 				{
 					this.lastContact = this.contactsRelation[contact["email"]];
@@ -64,35 +64,35 @@ namespace Emesene
 						this.lastContact--;
 						continue;
 					}
-					Log.Debug ("Emesene > Now tryng to get display from DB for: {0}", newContact["email"]);
+					Log<EmeseneContactItemSource>.Debug ("Now tryng to get display from DB for: {0}", newContact["email"]);
 					photo = Emesene.get_last_display_picture(newContact["email"], false);
 					if (photo != "noImage")
 					{
-                        Log.Debug ("Emesene > Display found! in: {0}", photo);
+                        Log<EmeseneContactItemSource>.Debug ("Display found! in: {0}", photo);
 						newContact["photo"] = photo;
-						Log.Debug ("Emesene > Display picture of user: {0} : {1}", newContact["email"], newContact["photo"]);
+						Log<EmeseneContactItemSource>.Debug ("Display picture of user: {0} : {1}", newContact["email"], newContact["photo"]);
 					}
 					else
 					{
-					    Log.Debug ("Emesene > No display picture in DB for user: {0}", newContact["email"]);
+					    Log<EmeseneContactItemSource>.Debug ("No display picture in DB for user: {0}", newContact["email"]);
 					}
 					this.lastContact--;
-					Log.Debug ("Emesene > lastContact: {0}", this.lastContact);
+					Log<EmeseneContactItemSource>.Debug ("lastContact: {0}", this.lastContact);
 				}while(photo == "noImage" && this.lastContact > 0);
 			}
 		}
 		
 		public override void UpdateItems ()
 		{   
-            Log.Debug ("Emesene > Updating contacts");
-            Log.Debug ("Emesene > Checking for emesene...");
+            Log<EmeseneContactItemSource>.Debug ("Updating contacts");
+            Log<EmeseneContactItemSource>.Debug ("Checking for emesene...");
 			if (Emesene.checkForEmesene())
 			{
-                Log.Debug ("Emesene > emesene Dbus is ON");
+                Log<EmeseneContactItemSource>.Debug ("emesene Dbus is ON");
 			} 
 			else 
 			{
-				Log.Debug ("Emesene > emesene Dbus is OFF");
+				Log<EmeseneContactItemSource>.Debug ("emesene Dbus is OFF");
 			}			
 			string contactsFile;			
 			if (Emesene.checkForEmesene())
@@ -105,8 +105,8 @@ namespace Emesene
 							(Environment.SpecialFolder.Personal)+
 							"/.config/emesene1.0/"+contactsFile.Replace("@","_")+
 								"/cache/"+Emesene.getCurrentEmeseneUser()+"_di.xml";
-					Log.Debug ("Emesene > ------------------EmeseneContactItemSource------------------");
-					Log.Debug ("Emesene > XML file with contacts: {0}", contactsFile);					
+					//Log<EmeseneContactItemSource>.Debug (" ------------------EmeseneContactItemSource------------------");
+					Log<EmeseneContactItemSource>.Debug ("XML file with contacts: {0}", contactsFile);					
 					XmlDocument blist;
 					Dictionary<ContactItem, bool> buddies_seen;
 					buddies_seen = new Dictionary<ContactItem, bool> ();
@@ -122,32 +122,32 @@ namespace Emesene
 						{
 							i++;
 							mail = buddy_node.InnerText;
-							Log.Debug ("Emesene > ===============================================");
-							Log.Debug ("Emesene > Node#: {0} - PassportName: {1}", i,mail);
+							//Log<EmeseneContactItemSource>.Debug ("===============================================");
+							//Log<EmeseneContactItemSource>.Debug ("Emesene > Node#: {0} - PassportName: {1}", i,mail);
 							ContactItem buddy;
 							buddy = ContactItem.CreateWithEmail(mail);
 							photo = Emesene.get_last_display_picture(mail, true);
 							if (photo != "noImage")
 							{
 								buddy["photo"] = photo;
-								Log.Debug ("Emesene > User: {0} - Display: {1}", buddy["email"], photo);
+								//Log<EmeseneContactItemSource>.Debug ("User: {0} - Display: {1}", buddy["email"], photo);
 								withDP++;
 							}
 							else
 							{
-							    Log.Debug ("Emesene > User: {0} - Display: None", buddy["email"]);
+							    //Log<EmeseneContactItemSource>.Debug ("User: {0} - Display: None", buddy["email"]);
 							}
 							if (buddy == null) continue;
 							buddies_seen[buddy] = true;
 						}
-						Log.Debug ("Emesene > Total # of node contacts: {0}", --i);
-						Log.Debug ("Emesene > Total # of buddies seen: {0}", buddies_seen.Keys.Count);
-						Log.Debug ("Emesene > # of buddies with display: {0}", withDP);
+						Log<EmeseneContactItemSource>.Debug ("Total # of node contacts: {0}", --i);
+						//Log<EmeseneContactItemSource>.Debug ("Total # of buddies seen: {0}", buddies_seen.Keys.Count);
+						//Log<EmeseneContactItemSource>.Debug ("# of buddies with display: {0}", withDP);
 					} 
 					catch (Exception e) 
 					{
-					    Log.Error ("Emesene > Error reading contact list file: {0}", e.Message);
-				        Log.Debug (e.StackTrace);
+					    Log<EmeseneContactItemSource>.Error ("Error reading contact list file: {0}", e.Message);
+				        Log<EmeseneContactItemSource>.Debug (e.StackTrace);
 					}
 					foreach (ContactItem buddy in buddies_seen.Keys) 
 					{
@@ -158,19 +158,19 @@ namespace Emesene
 				//contacts > 0
 				else
 				{
-				    Log.Debug ("Emesene > Length of the contact list was larger than 0...");
+				    Log<EmeseneContactItemSource>.Debug ("Length of the contact list was larger than 0...");
 					string photo;
 					ContactItem newContact = null;
 					foreach (ContactItem contact in contacts)
 					{
 						if(contact["photo"] == null)
 						{
-						    Log.Debug ("Emesene > Getting display picture from emesene cache for: {0}...", contact["email"]);
+						    //Log<EmeseneContactItemSource>.Debug ("Getting display picture from emesene cache for: {0}...", contact["email"]);
 							photo = Emesene.get_last_display_picture(contact["email"], true);
 							if (photo != "noImage")
 							{
 								contact["photo"] = photo;
-								Log.Debug ("Emesene > Display picture found! : {0}", contact["photo"]);
+								//Log<EmeseneContactItemSource>.Debug ("Display picture found! : {0}", contact["photo"]);
 							}
 							else
 							{
@@ -183,7 +183,7 @@ namespace Emesene
 						this.getDisplayFromDB(newContact);
 					}
 				}
-				Log.Debug ("Emesene > End, waiting to update again...");
+				Log<EmeseneContactItemSource>.Debug ("End, waiting to update again...");
 			}
 		}
 	}

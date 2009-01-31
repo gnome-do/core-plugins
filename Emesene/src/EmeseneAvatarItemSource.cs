@@ -17,12 +17,12 @@ namespace Emesene
 	
 	public override void UpdateItems ()
 		{
-			Log.Debug ("Emesene > Checking for emesene Dbus...");
+			Log<EmeseneAvatarItemSource>.Debug ("Checking for emesene Dbus...");
 			if (Emesene.checkForEmesene())
 			{
-    			Log.Debug ("Emesene > Emesene Dbus is ON");
+    			Log<EmeseneAvatarItemSource>.Debug ("Emesene Dbus is ON");
 				string avatarsPath = Emesene.getAvatarPathForUser();				
-    			Log.Debug ("Emesene > Folder with emesene avatars: {0}", avatarsPath);
+    			Log<EmeseneAvatarItemSource>.Debug ("Folder with emesene avatars: {0}", avatarsPath);
 				string [] fileEntries = Directory.GetFiles(avatarsPath);
 			    foreach(string fileName in fileEntries)
 			    {	       
@@ -34,7 +34,7 @@ namespace Emesene
 			} 
 			else 
 			{
-    			Log.Debug ("Emesene > Emesene Dbus is OFF");
+    			Log<EmeseneAvatarItemSource>.Debug ("Emesene Dbus is OFF");
 			}			
 		}
 		
