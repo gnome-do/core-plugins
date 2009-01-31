@@ -12,7 +12,7 @@ using Google.GData.Extensions.MediaRss;
 
 namespace YouTube
 {
-	public static class Youtube
+	public class Youtube
 	{
 
 		static readonly string ConnectionErrorMessage = Catalog.GetString ("An error occurred connecting to YouTube, "
@@ -53,7 +53,7 @@ namespace YouTube
 		public static void updateFavorites()
 		{
 			favUpdate++;
-			Log.Debug ("YouTube > Update favorites videos tries = {0} - favorite.Count : {1}", favUpdate, Youtube.favorites.Count);
+			Log<Youtube>.Debug("Update favorites videos tries = {0} - favorite.Count : {1}", favUpdate, Youtube.favorites.Count);
 			if (Youtube.favorites.Count == 0 || favUpdate%20 == 0){
 				Youtube.favorites.Clear();
 				int i =0;
@@ -62,13 +62,13 @@ namespace YouTube
 				
 				string feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/favorites?start-index="+ startIndex +"&max-results="+maxResults;
 				YouTubeQuery query = new YouTubeQuery(feedUrl);
-				Log.Debug ("YouTube > feedUrl for favorites videos: {0}", feedUrl);
+				Log<Youtube>.Debug("feedUrl for favorites videos: {0}", feedUrl);
 				try{
 					YouTubeFeed videoFeed = service.Query(query);
 					while(videoFeed.Entries.Count > 0){				
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    Log.Debug ("YouTube > Video #{0}, Title: {1}", ++i, entry.Title.Text);
+						    Log<Youtube>.Debug("Video #{0}, Title: {1}", ++i, entry.Title.Text);
 							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							favorites.Add(video);
@@ -80,8 +80,8 @@ namespace YouTube
 					}
 					startIndex = 1;
 				}catch(Exception e) {
-					Log.Error ("YouTube > Error getting favorites videos - {0}", e.Message);
-    				Log.Debug (e.StackTrace);
+					Log<Youtube>.Error ("Error getting favorites videos - {0}", e.Message);
+    				Log<Youtube>.Debug (e.StackTrace);
 				}
 			}
 		}
@@ -89,7 +89,7 @@ namespace YouTube
 		public static void updateOwn()
 		{
 			ownUpdate++;
-			Log.Debug ("YouTube > Update own videos tries = {0} - own.Count : {1}", ownUpdate, Youtube.own.Count);
+			Log<Youtube>.Debug("Update own videos tries = {0} - own.Count : {1}", ownUpdate, Youtube.own.Count);
 			if (Youtube.own.Count == 0 || ownUpdate%20 == 0){
 				Youtube.own.Clear();
 				int i =0;
@@ -98,13 +98,13 @@ namespace YouTube
 				
 				string feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/uploads?start-index="+ startIndex +"&max-results="+maxResults;
 				YouTubeQuery query = new YouTubeQuery(feedUrl);
-				Log.Debug ("YouTube > feedUrl for own videos: {0}", feedUrl);
+				Log<Youtube>.Debug("feedUrl for own videos: {0}", feedUrl);
 				try{
 					YouTubeFeed videoFeed = service.Query(query);
 					while(videoFeed.Entries.Count > 0){				
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    Log.Debug ("YouTube > Video #{0}, Title(own video): {1}", ++i, entry.Title.Text);
+						    Log<Youtube>.Debug("Video #{0}, Title(own video): {1}", ++i, entry.Title.Text);
 							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							own.Add(video);
@@ -115,8 +115,8 @@ namespace YouTube
 						videoFeed = service.Query(query);
 					}
 				}catch(Exception e) {
-					Log.Error ("YouTube > Error getting own videos - {0}", e.Message);
-    				Log.Debug (e.StackTrace);
+					Log<Youtube>.Error ("Error getting own videos - {0}", e.Message);
+    				Log<Youtube>.Debug (e.StackTrace);
 				}
 			}
 		}		
@@ -124,22 +124,22 @@ namespace YouTube
 		public static void updateSubscriptions()
 		{
 			subUpdate++;
-			Log.Debug ("YouTube > Update subscriptions tries = {0} - subscriptions.Count - {1}", subUpdate, Youtube.subscriptions.Count);
+			Log<Youtube>.Debug("Update subscriptions tries = {0} - subscriptions.Count - {1}", subUpdate, Youtube.subscriptions.Count);
 			if (Youtube.subscriptions.Count == 0 || subUpdate%20==0){
 				Youtube.subscriptions.Clear();
 				int i =0;
 				
 				string feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/subscriptions";
 				YouTubeQuery query = new YouTubeQuery(feedUrl);
-				Log.Debug ("YouTube > feedUrl for subscriptions: {0}", feedUrl);				
+				Log<Youtube>.Debug("feedUrl for subscriptions: {0}", feedUrl);				
 				try
 				{
 					SubscriptionFeed subFeed = service.GetSubscriptions(query);
 					if(subFeed.Entries.Count > 0){
 						foreach (SubscriptionEntry entry in subFeed.Entries)
 						{
-                            Log.Debug ("YouTube > Subscriptions - {0}", ++i);
-                            Log.Debug ("YouTube > {0}", entry.Title.Text);
+                            Log<Youtube>.Debug("Subscriptions - {0}", ++i);
+                            Log<Youtube>.Debug("{0}", entry.Title.Text);
 							string url = "http://www.youtube.com/user/" + entry.UserName;
 							YouTubeSubscriptionItem subscription = new YouTubeSubscriptionItem(entry.UserName, url, entry.Title.Text);
 							Youtube.subscriptions.Add(subscription);
@@ -148,8 +148,8 @@ namespace YouTube
 				}
 				catch(Exception e) 
 				{
-                    Log.Error ("YouTube > Error getting subscriptions - {0}", e.Message);
-    				Log.Debug (e.StackTrace);
+                    Log<Youtube>.Error ("Error getting subscriptions - {0}", e.Message);
+    				Log<Youtube>.Debug (e.StackTrace);
 				}
 			}
 		}		
@@ -166,8 +166,8 @@ namespace YouTube
 				service = new YouTubeService (appName, clientID, developerKey);
 				service.setUserCredentials (username, password);
 			} catch (Exception e) {
-                Log.Error ("YouTube > Error connecting to service - {0}", e.Message);
-   				Log.Debug (e.StackTrace);
+                Log<Youtube>.Error ("Error connecting to service - {0}", e.Message);
+   				Log<Youtube>.Debug (e.StackTrace);
 			}
 		}
 		
