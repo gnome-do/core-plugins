@@ -90,9 +90,11 @@ namespace Do.Universe
 			shelves[defaultName].AddItem (item);
 		}
 		
-		static public void RemoveFromDefault (Item item)
-		{
-			shelves[defaultName].RemoveItem (item);
+		static public void RemoveFromAll (Item item)
+		{			
+			foreach(string key in ShelfItemSource.shelves.Keys)
+				if(shelves[key].Items.Contains (item))
+					shelves[key].RemoveItem(item);
 		}
 		
 		static public bool InSomeShelf (Item item)

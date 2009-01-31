@@ -37,7 +37,7 @@ namespace Do.Universe
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item moditem)
 		{
-			return true;
+			return (moditem as ShelfItem).Items.Contains(items.First());
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
@@ -46,14 +46,15 @@ namespace Do.Universe
 		
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			foreach (Item i in ShelfItemSource.Shelves.Values)
-					yield return i;
+			foreach(string key in ShelfItemSource.Shelves.Keys)
+				if(ShelfItemSource.Shelves[key].Items.Contains (item))
+					yield return ShelfItemSource.Shelves[key];
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (!modItems.Any ())
-				ShelfItemSource.RemoveFromDefault (items.First ());
+				ShelfItemSource.RemoveFromAll (items.First ());
 			else
 				(modItems.First () as ShelfItem).RemoveItem (items.First ());
 			return null;
