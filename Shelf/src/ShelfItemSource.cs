@@ -5,7 +5,7 @@
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
+// the Free SoftwDictionary<string,ShelfItem> shelvesare Foundation; either version 2 of the License, or
 // (at your option) any later version.
 //
 // This program is distributed in the hope that it will be useful,
@@ -30,68 +30,28 @@ using Mono.Unix;
 using Do.Universe;
 
 namespace Do.Universe
-{	
-
-	public class ShelfItem : Item
-	{
-
-		string name;
-		
-		List<Item> items = new List<Item> ();
-		
-		public List<Item> Items {
-			get { return items; }
-		}
-		
-		public ShelfItem (string name)
-		{
-			this.name = name;
-		}
-		
-		public string ShelfName {
-			get { return name; }
-		}
-		
-		public override string Name {
-			get { return name + Catalog.GetString (" Shelf"); }
-		}
-		
-		public override string Description {
-			get {
-				return string.Format (
-						Catalog.GetString ("Your {0} shelf items."), name);
-			}
-		}
-
-		public override string Icon {
-			get { return "folder-saved-search"; }
-		}
-		
-		public void AddItem (Item item)
-		{
-			if (Items.Contains (item)) return;
-		
-			Items.Add (item); //temp items
-		}
-		
-		public void RemoveItem (Item item)
-		{
-			Items.Remove (item);
-		}
-	}
-	
+{		
 	public class ShelfItemSource : ItemSource
 	{	
 		
-		static Dictionary<string,ShelfItem> shelf;
+		static Dictionary<string,ShelfItem> shelves;
 		static string defaultName;
 		
+		static ShelfItemSource()
+		{
+			shelves = new Dictionary<string,ShelfItem> ();
+		}
+		
+		public static Dictionary<string,ShelfItem> Shelves {
+			get { return shelves; }
+		}
+		
 		public override string Name {
-			get { return Catalog.GetString ("Shelf Items"); }
+			get { return Catalog.GetString ("Shelves"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Your Shelf Items"); }
+			get { return Catalog.GetString ("Your Shelves"); }
 		}
 
 		public override string Icon {
@@ -104,8 +64,8 @@ namespace Do.Universe
 
 		public override IEnumerable<Item> Items {
 			get {
-				if (shelf != null) {
-					foreach (Item item in shelf.Values)
+				if (shelves != null) {
+					foreach (Item item in shelves.Values)
 						yield return item;
 				}
 			}
@@ -115,34 +75,38 @@ namespace Do.Universe
 		{
 			return (item as ShelfItem).Items;
 		}
-
-		static ShelfItemSource ()
-		{
-			shelf = new Dictionary<string,ShelfItem> ();
-		}
 		
 		public ShelfItemSource ()
 		{
 			defaultName = Catalog.GetString ("Default");
 			
-			if (shelf.Count == 0) {
-				shelf.Add (defaultName, new ShelfItem (defaultName));
+			if (shelves.Count == 0) {
+				shelves.Add (defaultName, new ShelfItem (defaultName));
 			}
 		}
 
 		static public void AddToDefault (Item item)
 		{
-			shelf[defaultName].AddItem (item);
+			shelves[defaultName].AddItem (item);
 		}
 		
 		static public void RemoveFromDefault (Item item)
 		{
-			shelf[defaultName].RemoveItem (item);
+			shelves[defaultName].RemoveItem (item);
 		}
 		
-		static public bool InShelf (Item item)
+		static public bool InSomeShelf (Item item)
 		{
-			return shelf[defaultName].Items.Contains (item);
+			bool b = false;
+			foreach(string key in ShelfItemSource.shelves.Keys){
+				b |= shelves[key].Items.Contains (item);
+			}	
+			return b;
+		}
+		
+		static public void CreateShelf (string name)
+		{
+			shelves.Add (name, new ShelfItem (name));			
 		}
 	}
 }

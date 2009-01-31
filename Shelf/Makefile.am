@@ -3,8 +3,12 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Shelf
 
 FILES = \
-	src/ShelfActions.cs \
-	src/ShelfItemSource.cs
+	src/ShelfAddToShelfAction.cs \
+	src/ShelfCreateShelfAction.cs \
+	src/ShelfExploreAction.cs \
+	src/ShelfItem.cs \
+	src/ShelfItemSource.cs \
+	src/ShelfRemoveFromShelfAction.cs
 
 RESOURCES = \
 	Resources/Shelf.addin.xml 

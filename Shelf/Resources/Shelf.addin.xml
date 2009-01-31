@@ -1,7 +1,7 @@
 <Addin
 	id="Shelf"
 	namespace="Do"
-	version="1.0"
+	version="1.1"
 	name="Shelf"
 	description="Store items on a 'shelf' for quick access."
 	author="Jason Smith"
@@ -21,9 +21,10 @@
 	</Extension>
 
 	<Extension path="/Do/Action">
-		<Action type="Do.Universe.ShelfAddAction" />
+		<Action type="Do.Universe.ShelfAddToShelfAction" />
+		<Action type="Do.Universe.ShelfCreateShelfAction" />
 		<Action type="Do.Universe.ShelfExploreAction" />
-		<Action type="Do.Universe.ShelfRemoveAction" />
+		<Action type="Do.Universe.ShelfRemoveFromShelfAction" />
 	</Extension>
 
 </Addin>
