@@ -22,6 +22,7 @@ namespace YouTube
 			+ "login information in YouTube plugin configuration.");
 		
 		public const string appName = "luismmontielg-gnomeDoYoutubePlugin0.1";
+		public const string searchUrl = "http://www.youtube.com/results?search_query=";
 		public static string clientID = "ytapi-lmg-test-ojd8d285-0";
 		public static string developerKey = "AI39si5c61jYzQLvzEDjAnU1HOQIf-DzyzvIBXAkGJ82NlXoMg10RDW1sRz5Uyodv9_ETPzmJXdfFqVRNt51yGkkNo2YW0BdxQ";
 		public static List<Item> favorites;
@@ -56,7 +57,6 @@ namespace YouTube
 			Log<Youtube>.Debug("Update favorites videos tries = {0} - favorite.Count : {1}", favUpdate, Youtube.favorites.Count);
 			if (Youtube.favorites.Count == 0 || favUpdate%20 == 0){
 				Youtube.favorites.Clear();
-				int i =0;
 				int maxResults = 50;
 				int startIndex = 1;
 				
@@ -68,7 +68,7 @@ namespace YouTube
 					while(videoFeed.Entries.Count > 0){				
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    Log<Youtube>.Debug("Video #{0}, Title: {1}", ++i, entry.Title.Text);
+						    //Log<Youtube>.Debug("Video #{0}, Title: {1}", ++i, entry.Title.Text);
 							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							favorites.Add(video);
@@ -92,7 +92,6 @@ namespace YouTube
 			Log<Youtube>.Debug("Update own videos tries = {0} - own.Count : {1}", ownUpdate, Youtube.own.Count);
 			if (Youtube.own.Count == 0 || ownUpdate%20 == 0){
 				Youtube.own.Clear();
-				int i =0;
 				int maxResults = 50;
 				int startIndex = 1;
 				
@@ -104,7 +103,7 @@ namespace YouTube
 					while(videoFeed.Entries.Count > 0){				
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    Log<Youtube>.Debug("Video #{0}, Title(own video): {1}", ++i, entry.Title.Text);
+						    //Log<Youtube>.Debug("Video #{0}, Title(own video): {1}", ++i, entry.Title.Text);
 							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							own.Add(video);
@@ -127,7 +126,6 @@ namespace YouTube
 			Log<Youtube>.Debug("Update subscriptions tries = {0} - subscriptions.Count - {1}", subUpdate, Youtube.subscriptions.Count);
 			if (Youtube.subscriptions.Count == 0 || subUpdate%20==0){
 				Youtube.subscriptions.Clear();
-				int i =0;
 				
 				string feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/subscriptions";
 				YouTubeQuery query = new YouTubeQuery(feedUrl);
@@ -138,8 +136,8 @@ namespace YouTube
 					if(subFeed.Entries.Count > 0){
 						foreach (SubscriptionEntry entry in subFeed.Entries)
 						{
-                            Log<Youtube>.Debug("Subscriptions - {0}", ++i);
-                            Log<Youtube>.Debug("{0}", entry.Title.Text);
+                            //Log<Youtube>.Debug("Subscriptions - {0}", ++i);
+                            //Log<Youtube>.Debug("{0}", entry.Title.Text);
 							string url = "http://www.youtube.com/user/" + entry.UserName;
 							YouTubeSubscriptionItem subscription = new YouTubeSubscriptionItem(entry.UserName, url, entry.Title.Text);
 							Youtube.subscriptions.Add(subscription);
@@ -156,20 +154,31 @@ namespace YouTube
 		
 		public static bool TryConnect (string username, string password)
 		{
-			Connect(username, password);
+			try {
+				service = new YouTubeService (appName, clientID, developerKey);
+				service.setUserCredentials (username, password);
+				Connect (username, password);
+			} catch (Exception) {
+				Log<Youtube>.Error (ConnectionErrorMessage);
+				return false;
+			}
+			
 			return true;
 		}		
 		
 		private static void Connect (string username, string password) 
 		{
+			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
+				Log<Youtube>.Error (MissingCredentialsMessage);
+				return;
+			}
+			
 			try {
 				service = new YouTubeService (appName, clientID, developerKey);
 				service.setUserCredentials (username, password);
 			} catch (Exception e) {
-                Log<Youtube>.Error ("Error connecting to service - {0}", e.Message);
-   				Log<Youtube>.Debug (e.StackTrace);
+				Log<Youtube>.Error (ConnectionErrorMessage);
 			}
 		}
-		
 	}
 }

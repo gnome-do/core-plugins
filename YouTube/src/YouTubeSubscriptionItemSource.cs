@@ -13,11 +13,7 @@ namespace YouTube
 		
 		public override IEnumerable<Type> SupportedItemTypes 
 		{
-			get {
-				return new Type[] {
-					typeof (YouTubeSubscriptionItem),
-				};
-			}
+			get {yield return typeof (YouTubeSubscriptionItem);}
 		}
 		
 		public override string Name { get { return "Youtube Subscriptions"; } }

@@ -8,13 +8,19 @@ namespace YouTube
 	
 	public class YouTubeConfig : AbstractLoginWidget
 	{
-		static IPreferences prefs;		
 		const string Uri = "http://www.youtube.com/signup?next_url=/index&";
         
 		public YouTubeConfig() : base ("YouTube", Uri)
 		{
-			Username = YouTube.Youtube.Preferences.Username;
-			Password = YouTube.Youtube.Preferences.Password;
+			Username = Youtube.Preferences.Username;
+			Password = Youtube.Preferences.Password;
+		}
+		
+		
+		protected override void SaveAccountData(string username, string password)
+		{
+			Youtube.Preferences.Username = username;
+			Youtube.Preferences.Password = password;
 		}
 		
 		protected override bool Validate (string username, string password)
@@ -22,20 +28,6 @@ namespace YouTube
 			if (username.Length > 0 && password.Length > 0)
 				return Youtube.TryConnect (username, password);
 			return false;
-		}
-		
-		protected override void SaveAccountData(string username, string password)
-		{
-			YouTube.Youtube.Preferences.Username = username;
-			YouTube.Youtube.Preferences.Password = password;
-		}
-		
-		public static string username { 
-			get { return prefs.GetSecure<string> ("username", "" ); } 
-		}
-
-		public static string password { 
-			get { return prefs.GetSecure<string> ("password", "" ); } 
 		}
 	}
 }

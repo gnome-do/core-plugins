@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform;
+using System.Linq;
 
 namespace YouTube
 {
@@ -33,26 +34,28 @@ namespace YouTube
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ITextItem) 
-				return true;
-			return false;
+			return (item is ITextItem);
 		}
 	
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{				
-			string url = "http://www.youtube.com/results?search_query=";
-			string search = "";
 			
-			foreach (Item item in items) {
-				if (item is IUrlItem) {
-					search = (item as IUrlItem).Url;
-				} else if (item is ITextItem) {
-					search = (item as ITextItem).Text;
-				}
-				search = search.Replace (" ", "%20");
-				Services.Environment.OpenUrl(url+search);
-			}
-			return null;
+			//string search = "";
+			
+//			foreach (Item item in items) {
+//				if (item is IUrlItem) {
+//					search = (item as IUrlItem).Url;
+//				} else if (item is ITextItem) {
+//					search = (item as ITextItem).Text;
+//				}
+//				search = search.Replace (" ", "%20");
+//				Services.Environment.OpenUrl(url+search);
+//			}
+			
+			string search = (items.First() as ITextItem).Text; 
+			search = search.Replace (" ", "%20");
+			Services.Environment.OpenUrl(Youtube.searchUrl+search);
+			yield break;
 		}
 	}
 }

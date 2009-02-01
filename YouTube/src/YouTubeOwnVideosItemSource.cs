@@ -21,11 +21,7 @@ namespace YouTube
 		
 		public override IEnumerable<Type> SupportedItemTypes 
 		{
-			get {
-				return new Type[] {
-					typeof (YoutubeVideoItem),
-				};
-			}
+			get { yield return typeof (YoutubeVideoItem);}
 		}
 		
 		public override string Name { get { return "YouTube Videos"; } }

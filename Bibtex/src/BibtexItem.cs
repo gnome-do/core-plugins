@@ -21,17 +21,17 @@ using System;
 using System.IO;
 using Do.Platform;
 using Do.Universe;
-using Do.Universe.Linux;
-using Do.Platform.Linux;
 
 
-namespace Do.Addins.Bibtex
+namespace Bibtex
 {
-	public class BibtexItem : Item
+	public class BibtexItem : Item, IFileItem
 	{
 		string title;
 		string authors;
 		string citekey;
+		string path;
+		string icon;
 
 		public BibtexItem (string title, string authors, string citekey, string path):
 		base ()
@@ -39,22 +39,31 @@ namespace Do.Addins.Bibtex
 			this.title = title;
 			this.authors = authors;
 			this.citekey = citekey;
+			this.path = path;
 		}
 
 		//Name is text under the icon
 		public override string Name { get { return title; } }
-		//Des is text below the 2 icon displays, is not searchable
+		//Description is not searchable
 		public override string Description { get { return authors; } }
 		//Cite key is used for citations in latex documents
 		virtual public string Citekey { get { return citekey; } }
-		//I dont know where this is displayed. :(
-		public string Text { get { return title; } }
 		
-		public override string Icon {
-			get{
-				return "stock_dialog_warning";
+		public string Path { get { return path; } }
+		
+		public string Uri {
+			get { return "file://" + Path; }
+		}
+		
+		public override string Icon {		
+			get {
+				if (null != icon) return icon;
+				else
+				{ 
+					icon = Services.UniverseFactory.NewFileItem (path).Icon;
+					return icon;
+				}
 			}
 		}
-
 	}
 }
