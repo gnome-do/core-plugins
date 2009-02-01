@@ -1,4 +1,4 @@
-//  RhythmboxPlayAction.cs
+//  RhythmboxNextAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -31,30 +31,29 @@ using Do.Universe;
 namespace Do.Rhythmbox
 {
 
-	public class PlayAction : AbstractPlaybackAction
+	public class NextAction : AbstractPlaybackAction
 	{
 
-		public PlayAction ()
+		public NextAction ()
 		{
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Play"); }
+			get { return Catalog.GetString ("Next"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Play music in Rhythmbox."); }
+			get { return Catalog.GetString ("Skip to the next track in Rhythmbox."); }
 		}
 
 		public override string Icon {
-			get { return "media-playback-start"; }
+			get { return "media-skip-forward"; }
 		}
-
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.Client ("--play --no-start");
+				Rhythmbox.Client ("--next --no-start");
 			}).Start ();
 			return null;
 		}

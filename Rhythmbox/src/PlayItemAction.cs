@@ -1,4 +1,4 @@
-//  RhythmboxPlayAction.cs
+//  RhythmboxPlayItemAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -27,14 +27,13 @@ using Mono.Unix;
 
 using Do.Universe;
 
-
 namespace Do.Rhythmbox
 {
 
-	public class PlayAction : AbstractPlaybackAction
+	public class PlayItemAction : Act
 	{
 
-		public PlayAction ()
+		public PlayItemAction ()
 		{
 		}
 
@@ -43,18 +42,36 @@ namespace Do.Rhythmbox
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Play music in Rhythmbox."); }
+			get { return Catalog.GetString ("Play an item in Rhythmbox."); }
 		}
 
 		public override string Icon {
-			get { return "media-playback-start"; }
+			get { return "rhythmbox"; }
 		}
 
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { 
+				yield return typeof (MusicItem);
+			}
+		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.Client ("--play --no-start");
+				Rhythmbox.StartIfNeccessary ();
+
+				Rhythmbox.Client ("--pause --no-present");
+				Rhythmbox.Client ("--clear-queue --no-present", true);
+				foreach (Item item in items) {
+					if (item is MusicItem) {
+						string enqueue = "--no-present ";
+						foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
+							enqueue = string.Format ("{0} --enqueue \"{1}\" ", enqueue, song.File);
+						Rhythmbox.Client (enqueue, true);
+					}
+				}
+				Rhythmbox.Client ("--next --no-present");
+				Rhythmbox.Client ("--play --no-present");
 			}).Start ();
 			return null;
 		}
