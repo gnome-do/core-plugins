@@ -1,4 +1,4 @@
-//  RhythmboxPlayAction.cs
+//  RhythmboxAbstractPlaybackAction.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too numerous
 //  to list here.  Please refer to the COPYRIGHT file distributed with this
@@ -18,12 +18,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Linq;
-using System.Threading;
-using System.Diagnostics;
 using System.Collections.Generic;
-
-using Mono.Unix;
 
 using Do.Universe;
 
@@ -31,32 +26,24 @@ using Do.Universe;
 namespace Do.Rhythmbox
 {
 
-	public class PlayAction : AbstractPlaybackAction
+	public abstract class AbstractPlaybackAction : Act
 	{
 
-		public PlayAction ()
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { 
+				yield return typeof (IApplicationItem);
+			}
+		}
+		
+		public override bool SupportsItem (Item item) 
 		{
-		}
-
-		public override string Name {
-			get { return Catalog.GetString ("Play"); }
-		}
-
-		public override string Description {
-			get { return Catalog.GetString ("Play music in Rhythmbox."); }
-		}
-
-		public override string Icon {
-			get { return "media-playback-start"; }
-		}
-
-
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
-		{
-			new Thread ((ThreadStart) delegate {
-				Rhythmbox.Client ("--play --no-start");
-			}).Start ();
-			return null;
+			if (!(item is IApplicationItem))
+				return false;
+			if ((item as IApplicationItem).Exec.Contains ("rhythmbox")) {
+				if (Rhythmbox.InstanceIsRunning)
+					return true;
+			}
+			return false;
 		}
 	}
 }
