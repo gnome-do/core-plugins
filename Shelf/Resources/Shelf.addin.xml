@@ -25,6 +25,7 @@
 		<Action type="Do.Universe.ShelfCreateShelfAction" />
 		<Action type="Do.Universe.ShelfExploreAction" />
 		<Action type="Do.Universe.ShelfRemoveFromShelfAction" />
+		<Action type="Do.Universe.ShelfRenameShelfAction" />
 	</Extension>
 
 </Addin>

@@ -39,7 +39,7 @@ namespace Do.Universe
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof(ShelfItem); }
+			get { yield return typeof(ShelfItem); yield return typeof (ITextItem);}
 		}
 		
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
@@ -51,9 +51,22 @@ namespace Do.Universe
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (modItems.Any ())
-				(modItems.First () as ShelfItem).AddItem (items.First ());
-			 else 
+			{
+				if(modItems.First () is ITextItem)
+			    {
+					string name = (modItems.First () as ITextItem).Text;
+					ShelfItemSource.CreateShelf(name);
+					ShelfItemSource.Shelves[name].AddItem(items.First ());
+			    }
+				else
+				{
+					(modItems.First () as ShelfItem).AddItem (items.First ());
+				}
+			}
+			else
+			{
 				ShelfItemSource.AddToDefault (items.First ());
+			}
 			yield break;
 		}
 

@@ -20,6 +20,7 @@ namespace Do.Universe
 		
 		public string ShelfName {
 			get { return name; }
+			set { this.name = value; }
 		}
 		
 		public override string Name {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mono.Unix;
+using System.Linq;
 
 namespace Do.Universe
 {
@@ -38,10 +39,7 @@ namespace Do.Universe
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item txt in items){
-				ShelfItemSource.CreateShelf((txt as ITextItem).Text);
-				yield break;	
-			}
+			ShelfItemSource.CreateShelf((items.First () as ITextItem).Text);
 			yield break;
 		}
 	}
