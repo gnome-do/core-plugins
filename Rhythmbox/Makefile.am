@@ -8,7 +8,12 @@ FILES = \
 	src/EnqueueAction.cs \
 	src/RhythmboxItems.cs \
 	src/PlayAction.cs \
-	src/MusicItemSource.cs
+	src/MusicItemSource.cs \
+	src/AbstractPlaybackAction.cs \
+	src/NextAction.cs \
+	src/PauseAction.cs \
+	src/PreviousAction.cs \
+	src/PlayItemAction.cs 
 
 RESOURCES = \
 	Resources/Rhythmbox.addin.xml 

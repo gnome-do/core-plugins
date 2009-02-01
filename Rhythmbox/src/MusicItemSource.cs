@@ -93,7 +93,7 @@ namespace Do.Rhythmbox
 		{
 			items.Clear ();
 
-			// Add play, pause, etc. controls.
+			// Add volume and display controls.
 			items.AddRange (RhythmboxRunnableItem.DefaultItems);
 
 			// Add browse features.
