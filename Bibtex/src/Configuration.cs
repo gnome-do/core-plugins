@@ -20,7 +20,7 @@
 using System;
 using Do.Platform;
 
-namespace Do.Addins.Bibtex
+namespace Bibtex
 {
 
 	[System.ComponentModel.Category("Bibtex")]
