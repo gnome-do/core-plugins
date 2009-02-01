@@ -2,7 +2,7 @@ using System;
 using Mono.Unix;
 using Do.Platform;
 
-namespace YouTube
+namespace Do.Universe
 {	
 	public class YouTubePreferences
 	{

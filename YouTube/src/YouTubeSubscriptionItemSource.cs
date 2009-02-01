@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Mono.Unix;
 using Do.Universe;
 
-namespace YouTube
+namespace Do.Universe
 {	
 	public class YouTubeSubscriptionItemSource : ItemSource
 	{

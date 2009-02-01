@@ -10,7 +10,7 @@ using Google.GData.Extensions;
 using Google.GData.YouTube;
 using Google.GData.Extensions.MediaRss;
 
-namespace YouTube
+namespace Do.Universe
 {
 	public class Youtube
 	{

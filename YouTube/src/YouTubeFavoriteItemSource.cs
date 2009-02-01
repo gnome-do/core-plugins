@@ -5,7 +5,7 @@ using Gtk;
 using Do.Universe;
 using Do.Platform.Linux;
 
-namespace YouTube
+namespace Do.Universe
 {
 	public class YouTubeFavoriteItemSource : ItemSource, IConfigurable
 	{

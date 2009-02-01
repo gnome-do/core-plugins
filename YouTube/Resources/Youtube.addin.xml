@@ -3,7 +3,7 @@
 	namespace= "Do"
 	version="1.0"
 	name="YouTube"
-	description="YouTube plugin"
+	description="Indexes your favorites, subscriptions and uploaded videos, also searches in YouTube"
 	author="Luis Miguel Montiel G"
 	>
 
@@ -21,11 +21,11 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="YouTube.YouTubeFavoriteItemSource" />
-		<ItemSource type="YouTube.YouTubeSubscriptionItemSource" />
-		<ItemSource type="YouTube.YouTubeOwnVideosItemSource" />
+		<ItemSource type="Do.Universe.YouTubeFavoriteItemSource" />
+		<ItemSource type="Do.Universe.YouTubeSubscriptionItemSource" />
+		<ItemSource type="Do.Universe.YouTubeOwnVideosItemSource" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="YouTube.YouTubeSearchAction" />
+		<Action type="Do.Universe.YouTubeSearchAction" />
 	</Extension>
 </Addin>

@@ -3,7 +3,7 @@ using Gtk;
 using Do.Platform;
 using Do.Platform.Linux;
 
-namespace YouTube
+namespace Do.Universe
 {	
 	
 	public class YouTubeConfig : AbstractLoginWidget
