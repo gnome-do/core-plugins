@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using Do.Universe;
 
 
-namespace Do.Addins.Bibtex
+namespace Bibtex
 {
 	public class BibtexCiteAction : Act
 	{
