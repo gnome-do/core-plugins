@@ -2,8 +2,9 @@ using System;
 using Do.Universe;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 	
-namespace Emesene
+namespace Do.Universe
 {	
 	public class EmeseneChangeAvatarAction : Act
 	{
@@ -55,12 +56,8 @@ namespace Emesene
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item avatar in items)
-			{
-				string path = (avatar as IFileItem).Path;
-				Emesene.set_avatar(path);
-			}
-			return null;
+			Emesene.set_avatar((items.First() as IFileItem).Path);
+			yield break;
 		}
 	}
 }

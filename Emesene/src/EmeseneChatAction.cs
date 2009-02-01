@@ -1,11 +1,12 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using Do.Universe;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-namespace Emesene
+namespace Do.Universe
 {
 	public class EmeseneChatAction : Act
 	{
@@ -29,11 +30,7 @@ namespace Emesene
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ContactItem),					
-				};
-			}
+			get {yield return typeof (ContactItem);}
 		}
 
 		public override bool SupportsItem (Item item)
@@ -50,18 +47,8 @@ namespace Emesene
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item buddy in items){
-				string mail = null;
-
-				if (buddy is ContactItem) 
-				{
-					ContactItem contact = buddy as ContactItem;
-				    mail = contact["email"];
-				}
-				if (null != mail)
-					Emesene.openChatWith(mail);
-			}
-			return null;
+			Emesene.openChatWith((items.First() as ContactItem)["email"]);
+			yield break;
 		}
 	}
 }

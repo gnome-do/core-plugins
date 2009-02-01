@@ -1,8 +1,8 @@
 using System;
-using Do.Universe;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Emesene
+namespace Do.Universe
 {	
 	public class EmeseneChangeNickAction : Act
 	{
@@ -27,28 +27,18 @@ namespace Emesene
 		
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
+			get { yield return typeof (ITextItem); }
 		}
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ITextItem) 
-				return true;
-			return false;
+			return (item is ITextItem);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item nick in items)
-			{
-				if (nick is ITextItem) 
-					Emesene.set_nick((nick as ITextItem).Text);
-			}
-			return null;
+			Emesene.set_nick((items.First () as ITextItem).Text);
+			yield break;
 		}
 	}
 }

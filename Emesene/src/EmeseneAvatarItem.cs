@@ -2,7 +2,7 @@ using System;
 using Do.Universe;
 using Do.Platform;
 
-namespace Emesene
+namespace Do.Universe
 {
 	public class EmeseneAvatarItem : Item, IFileItem
 	{

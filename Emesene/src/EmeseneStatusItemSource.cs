@@ -2,7 +2,7 @@ using System;
 using Do.Universe;
 using System.Collections.Generic;
 
-namespace Emesene
+namespace Do.Universe
 {
 	public class EmeseneStatusItemSource : ItemSource
 	{
@@ -22,11 +22,7 @@ namespace Emesene
 		
 		public override IEnumerable<Type> SupportedItemTypes 
 		{
-			get {
-				return new Type[] {
-					typeof (EmeseneStatusItem)
-				};
-			}
+			get { yield return typeof (EmeseneStatusItem);}
 		}
 		
 		public override IEnumerable<Item> Items 

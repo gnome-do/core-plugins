@@ -4,7 +4,7 @@ using Do.Universe;
 using Do.Platform;
 using System.Collections.Generic;
 
-namespace Emesene
+namespace Do.Universe
 {	
 	public class EmeseneAvatarItemSource : ItemSource
 	{
@@ -44,11 +44,7 @@ namespace Emesene
 		
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get {
-				return new Type[] {
-					typeof (EmeseneAvatarItem)
-				};
-			}
+			get { yield return typeof (EmeseneAvatarItem); }
 		}
 		
 		public override IEnumerable<Do.Universe.Item> Items 

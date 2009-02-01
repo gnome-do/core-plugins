@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform;
 
-namespace Emesene
+namespace Do.Universe
 {
 	public class Emesene
 	{

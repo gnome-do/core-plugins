@@ -32,6 +32,7 @@ RESOURCES = \
 
 REFERENCES = \
 	System \
+	System.Core \
 	System.Xml \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_LIBS) \

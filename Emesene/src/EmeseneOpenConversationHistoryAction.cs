@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Do.Universe;
+using System.Linq;
 
-namespace Emesene
+namespace Do.Universe
 {
 	public class EmeseneOpenConversationHistoryAction : Act
 	{
@@ -28,11 +29,7 @@ namespace Emesene
 		
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get {
-				return new Type[] {
-					typeof (ContactItem),
-				};
-			}
+			get { yield return typeof (ContactItem);}
 		}
 
 		public override bool SupportsItem (Item item)
@@ -49,12 +46,8 @@ namespace Emesene
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach(Item buddy in items)
-			{
-				ContactItem contact = buddy as ContactItem;
-				Emesene.get_conversation_history(contact["email"]);
-			}
-			return null;
+			//Emesene.get_conversation_history((items.First() as ContactItem)["email"]);
+			yield break;
 		}
 	}
 }

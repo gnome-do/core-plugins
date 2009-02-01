@@ -1,8 +1,9 @@
 using System;
 using Do.Universe;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Emesene
+namespace Do.Universe
 {	
 	public class EmeseneChangeStatusAction : Act
 	{
@@ -28,28 +29,18 @@ namespace Emesene
 		
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get {
-				return new Type[] {
-					typeof (EmeseneStatusItem),
-				};
-			}
+			get { yield return typeof (EmeseneStatusItem);}
 		}
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is EmeseneStatusItem) 
-				return true;
-			return false;
+			return (item is EmeseneStatusItem); 
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-		{
-			foreach(Item status in items)
-			{
-				if (status is EmeseneStatusItem) 
-					Emesene.set_status((status as EmeseneStatusItem).GetAbbreviation());
-			}
-			return null;
+		{ 
+			Emesene.set_status((items.First () as EmeseneStatusItem).GetAbbreviation());
+			yield break;
 		}
 	}
 }

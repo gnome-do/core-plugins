@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform;
 
-namespace Emesene
+namespace Do.Universe
 {
 	public class EmeseneContactItemSource : ItemSource
 	{
@@ -26,11 +26,7 @@ namespace Emesene
 		
 		public override IEnumerable<Type> SupportedItemTypes 
 		{
-			get {
-				return new Type[] {
-					typeof (ContactItem)
-				};
-			}
+			get { yield return typeof (ContactItem); }
 		}
 		
 		public override IEnumerable<Item> Items 
@@ -45,12 +41,12 @@ namespace Emesene
 			photo = Emesene.get_last_display_picture(contact["email"], false);
 			if (photo != "noImage") 
 			{
-                Log<EmeseneContactItemSource>.Debug ("Display found! in: {0}", photo);
+                //Log<EmeseneContactItemSource>.Debug ("Display found! in: {0}", photo);
 				contact["photo"] = photo;
 			}
 			else
 			{   
-			    Log<EmeseneContactItemSource>.Debug ("No display picture in DB for: {0}", contact["email"]);
+			    //Log<EmeseneContactItemSource>.Debug ("No display picture in DB for: {0}", contact["email"]);
 				if(this.lastContact == -1)
 				{
 					this.lastContact = this.contactsRelation[contact["email"]];
@@ -64,27 +60,26 @@ namespace Emesene
 						this.lastContact--;
 						continue;
 					}
-					Log<EmeseneContactItemSource>.Debug ("Now tryng to get display from DB for: {0}", newContact["email"]);
+					//Log<EmeseneContactItemSource>.Debug ("Now tryng to get display from DB for: {0}", newContact["email"]);
 					photo = Emesene.get_last_display_picture(newContact["email"], false);
 					if (photo != "noImage")
 					{
-                        Log<EmeseneContactItemSource>.Debug ("Display found! in: {0}", photo);
+                        //Log<EmeseneContactItemSource>.Debug ("Display found! in: {0}", photo);
 						newContact["photo"] = photo;
-						Log<EmeseneContactItemSource>.Debug ("Display picture of user: {0} : {1}", newContact["email"], newContact["photo"]);
+						//Log<EmeseneContactItemSource>.Debug ("Display picture of user: {0} : {1}", newContact["email"], newContact["photo"]);
 					}
 					else
 					{
-					    Log<EmeseneContactItemSource>.Debug ("No display picture in DB for user: {0}", newContact["email"]);
+					    //Log<EmeseneContactItemSource>.Debug ("No display picture in DB for user: {0}", newContact["email"]);
 					}
 					this.lastContact--;
-					Log<EmeseneContactItemSource>.Debug ("lastContact: {0}", this.lastContact);
+					//Log<EmeseneContactItemSource>.Debug ("lastContact: {0}", this.lastContact);
 				}while(photo == "noImage" && this.lastContact > 0);
 			}
 		}
 		
 		public override void UpdateItems ()
 		{   
-            Log<EmeseneContactItemSource>.Debug ("Updating contacts");
             Log<EmeseneContactItemSource>.Debug ("Checking for emesene...");
 			if (Emesene.checkForEmesene())
 			{
