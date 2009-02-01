@@ -205,6 +205,11 @@ namespace RtmNet
 				// Serialization error occurred!
 				throw new ResponseXmlException("Invalid response received from Rtm.", ex);
 			}
+			catch (System.Xml.XmlException ex)
+			{
+				// Serialization error occurred!
+				throw new ResponseXmlException("An Xml Exception is thrown from RtmNet.Utils.Deserialize (1).", ex);
+			}
 		}
 
 		internal static object Deserialize(System.Xml.XmlNode node, Type type)
@@ -223,6 +228,11 @@ namespace RtmNet
 			{
 				// Serialization error occurred!
 				throw new ResponseXmlException("Invalid response received from Rtm.", ex);
+			}
+			catch (System.Xml.XmlException ex)
+			{
+				// Serialization error occurred!
+				throw new ResponseXmlException("An Xml Exception is thrown from RtmNet.Utils.Deserialize (2).", ex);
 			}
 		}
 
