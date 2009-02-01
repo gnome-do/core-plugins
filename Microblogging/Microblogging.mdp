@@ -27,15 +27,6 @@
     <File name="src/Twitterizer/Twitterizer.Framework/Twitter.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Twitterizer/Twitterizer.Framework/TwitterizerException.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Twitterizer/Twitterizer.Framework/TwitterRequest.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterParameters.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterRequestData.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterStatus.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterStatusCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterUser.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Data Transfer Objects/TwitterUserCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Method Classes/TwitterDirectMessageMethods.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Method Classes/TwitterStatusMethods.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Twitterizer/Twitterizer.Framework/Method Classes/TwitterUserMethods.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Twitterizer/Twitterizer.Framework/Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Twitterizer/Twitterizer.Framework/Urls.cs" subtype="Code" buildaction="Compile" />
     <File name="gtk-gui/Microblogging.GenConfig.cs" subtype="Code" buildaction="Compile" />
@@ -45,6 +36,15 @@
     <File name="src/Notifications.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Microblogging.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/microblogging.svg" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/Twitterizer/Twitterizer.Framework/DataTransferObjects/TwitterParameters.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/DataTransferObjects/TwitterRequestData.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/DataTransferObjects/TwitterStatus.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/DataTransferObjects/TwitterStatusCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/DataTransferObjects/TwitterUser.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/DataTransferObjects/TwitterUserCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/MethodClasses/TwitterDirectMessageMethods.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/MethodClasses/TwitterStatusMethods.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Twitterizer/Twitterizer.Framework/MethodClasses/TwitterUserMethods.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />

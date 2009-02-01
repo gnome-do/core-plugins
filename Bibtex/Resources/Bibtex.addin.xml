@@ -1,7 +1,7 @@
 <Addin
 	id="Bibtex"
 	namespace="Do"
-	version="1.7"
+	version="1.8"
 	name="Bibtex"
 	description="Quickly open documents linked from BibTeX files."
 	author="Niall Murphy"
@@ -17,9 +17,9 @@
 	</Dependencies>
 
 	<Extension path = "/Do/Action">
-		<Action type="Do.Addins.Bibtex.BibtexCiteAction" />
+		<Action type="Bibtex.BibtexCiteAction" />
 	</Extension>
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Addins.Bibtex.BibtexItemSource" />
+		<ItemSource type="Bibtex.BibtexItemSource" />
 	</Extension>
 </Addin>

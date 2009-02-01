@@ -5,7 +5,7 @@
 	name="AptURL Package Installer"
 	description="Install apt packages by name."
 	author="Christer Edwards"
-	category="Official"
+	category="Community"
 	>
 
 	<Runtime>

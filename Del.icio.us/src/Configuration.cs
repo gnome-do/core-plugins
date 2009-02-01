@@ -26,9 +26,18 @@ namespace Delicious
 {	
 	public class Configuration : AbstractLoginWidget
 	{
-		public Configuration () : base ("del.icio.us")
+		public Configuration () : base ("del.icio.us", "https://secure.delicious.com/register")
 		{
+			Username = Delicious.Preferences.Username;
+			Password = Delicious.Preferences.Password;
 		}
+
+		protected override void SaveAccountData(string username, string password)
+		{
+			Delicious.Preferences.Username = username;
+			Delicious.Preferences.Password = password;
+		}
+
 		
 		protected override bool Validate (string username, string password)
 		{

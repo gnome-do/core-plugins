@@ -18,40 +18,35 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Xml.Serialization;
+
 using Do.Universe;
 
 namespace Pastebin
 {
 	public class TextSyntaxItem : Item, ITextSyntaxItem
-	{	
-		private string name, description, icon, syntax;		
-		
-		public TextSyntaxItem (string name, string description, string icon, string syntax)
+	{		
+		public TextSyntaxItem ()
 		{
-			this.name = name;
-			this.description = description;
-			this.icon = icon;
-			this.syntax = syntax;
 		}
 		
-		public override string Name
-		{
-			get { return name; }
-		}
+		[XmlIgnore]
+		public override string Name { get { return SerializableName; } }
 		
-		public override string Description
-		{
-			get { return description; }
-		}
+		[XmlIgnore]
+		public override string Description { get { return SerializableDescription; } }
 		
-		public override string Icon
-		{
-			get { return icon; }
-		}
+		[XmlIgnore]
+		public override string Icon { get { return SerializableIcon; } }
+
+		public string Syntax { get; set; }
 		
-		public string Syntax
-		{
-			get { return syntax; }
-		}
+		public string SerializableName { get; set; }
+		
+		public string SerializableDescription { get; set; }
+		
+		public string SerializableIcon { get; set; }
+		
+		
 	}
 }

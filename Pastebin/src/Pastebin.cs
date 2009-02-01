@@ -18,15 +18,17 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
-using System.Web;
 using System.Text;
-using System.Collections.Specialized;
+using System.Web;
+
+using Do.Platform;
 
 namespace Pastebin
 {
-	public static class Pastebin
+	public class Pastebin
 	{		
 		public static string PostUsing (IPastebinProvider pastebin)
 		{
@@ -34,12 +36,14 @@ namespace Pastebin
 			try
 			{
 				string postQueryString = CreateQueryString (pastebin.Parameters);
-
+				
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (pastebin.BaseUrl);
 				request.Timeout = 15000;
 				request.Method = "POST";
 				request.ContentType = "application/x-www-form-urlencoded";
-				request.AllowAutoRedirect = pastebin.ShouldAllowAutoRedirect;
+				
+				request.AllowAutoRedirect = pastebin.ShouldAllowAutoRedirect;				
+				request.ServicePoint.Expect100Continue = pastebin.Expect100Continue;
 
 				if (!string.IsNullOrEmpty (pastebin.UserAgent))
 					request.UserAgent = pastebin.UserAgent;
@@ -58,8 +62,9 @@ namespace Pastebin
 					url = pastebin.GetPasteUrlFromResponse (response);
 				}
 			}
-			catch
+			catch (Exception e)
 			{
+				Log<Pastebin>.Error (e.ToString ());
 				url = "An error occured while pasting.";
 			}
 			

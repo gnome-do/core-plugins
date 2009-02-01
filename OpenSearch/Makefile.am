@@ -7,7 +7,7 @@ FILES = \
 	src/IOpenSearchItem.cs \
 	src/OpenSearchAction.cs \
 	src/OpenSearchItem.cs \
-	src/OpenSearchItemSource.cs \
+	src/CachingOpenSearchItemSource.cs \
 	src/OpenSearchParser.cs
 
 RESOURCES = \

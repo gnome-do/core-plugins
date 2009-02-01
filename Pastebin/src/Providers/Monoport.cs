@@ -19,66 +19,52 @@
  */
 
 using System;
-using System.IO;
-using System.Net;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
+
+using Do.Platform;
 
 namespace Pastebin
 {
-	
-	public class Monoport : IPastebinProvider
+	public class Monoport : AbstractPastebinProvider
 	{
-		const string SyntaxKey = "format";
-		const string ContentKey = "code2";
-
-		const string PastebinName = "Monoport";
-		const string UrlRoot = "http://monoport.com";
+		const string url_root = "http://monoport.com";
+		const string syntax_key = "format";
+		const string content_key = "code2";
 		
 		public Monoport ()
 		{
-			SupportedLanguages = BuildSyntaxList ();
-			
+			Name = "Monoport";
+			BaseUrl = url_root + "/pastebin.php";
+						
 			Parameters = new NameValueCollection ();
 			Parameters ["poster"] = System.Environment.UserName;
-			Parameters [SyntaxKey] = "text";
+			Parameters [syntax_key] = "text";
 			Parameters ["parent_pid"] = "";
 			Parameters ["paste"] = "send";
 			Parameters ["expiry_day"] = "d";
-			Parameters [ContentKey] = "";
+			Parameters [content_key] = "";
 			
 			UserAgent = "monoporter";
+			
+			SupportedLanguages = PopulateTextSyntaxItemsFromXml ("Monoport.xml");
 		}
 
 		public Monoport (string content) : this ()
 		{
-			Parameters [ContentKey] = content;
+			Parameters [content_key] = content;
 		}
 
 		public Monoport (string content, string syntax) : this ()
 		{
-			Parameters [SyntaxKey] = syntax;
-			Parameters [ContentKey] = content;
+			Parameters [syntax_key] = syntax;
+			Parameters [content_key] = content;
 		}
 
-		public NameValueCollection Parameters { get; private set; }
-
-		public string Name {
-			get { return PastebinName; }
-		}
-
-		public string UserAgent { get; private set; }
-
-		public bool ShouldAllowAutoRedirect {
-			get { return true; }
-		}
-
-		public string BaseUrl {
-			get { return UrlRoot + "/pastebin.php"; }
-		}
-
-		public string GetPasteUrlFromResponse (HttpWebResponse response)
+		public override string GetPasteUrlFromResponse (HttpWebResponse response)
 		{
 			string responseText;
 			using (Stream responseStream = response.GetResponseStream ()) {
@@ -92,73 +78,11 @@ namespace Pastebin
 			string url = urlMatch.Value;
 
 			if (url == string.Empty) {
+				Log<Monoport>.Debug (responseText);
 				throw new Exception ("Parsed url was empty. Monoport may have changed their format.");
 			}
 			
-			return UrlRoot + "/" + url.Substring (url.LastIndexOf ('=') + 1);
-		}
-
-		public List<TextSyntaxItem> SupportedLanguages { get; private set; }
-
-		List<TextSyntaxItem> BuildSyntaxList ()
-		{
-			List<TextSyntaxItem> syntaxes;
-
-			syntaxes = new List<TextSyntaxItem> ();
-			syntaxes.Add (new TextSyntaxItem ("ASM", "ASM (NASM based)", "text-x-generic", "ASM"));
-			syntaxes.Add (new TextSyntaxItem ("ASP", "ASP", "text-x-generic", "asp"));
-			syntaxes.Add (new TextSyntaxItem ("ActionScript", "ActionScript", "text-x-generic", "actionscript"));
-			syntaxes.Add (new TextSyntaxItem ("Ada", "Ada", "text-x-generic", "ada"));
-			syntaxes.Add (new TextSyntaxItem ("Apache Log", "Apache Log", "text-x-generic", "apache"));
-			syntaxes.Add (new TextSyntaxItem ("AppleScript", "AppleScript", "text-x-generic", "applescript"));
-			syntaxes.Add (new TextSyntaxItem ("Bash", "Bash", "text-x-generic", "bash"));
-			syntaxes.Add (new TextSyntaxItem ("C for Macs", "C for Macs", "text-x-generic", "c_mac"));
-			syntaxes.Add (new TextSyntaxItem ("C", "C", "text-x-generic", "c"));
-			syntaxes.Add (new TextSyntaxItem ("C", "C", "text-x-generic", "c"));
-			syntaxes.Add (new TextSyntaxItem ("C#", "C#", "text-x-generic", "csharp"));
-			syntaxes.Add (new TextSyntaxItem ("C++", "C++", "text-x-generic", "cpp"));
-			syntaxes.Add (new TextSyntaxItem ("CAD DCL", "CAD DCL", "text-x-generic", "caddcl"));
-			syntaxes.Add (new TextSyntaxItem ("CAD Lisp", "CAD Lisp", "text-x-generic", "cadlisp"));
-			syntaxes.Add (new TextSyntaxItem ("CSS", "CSS", "text-x-generic", "css"));
-			syntaxes.Add (new TextSyntaxItem ("ColdFusion", "ColdFusion", "text-x-generic", "cfm"));
-			syntaxes.Add (new TextSyntaxItem ("D", "D", "text-x-generic", "d"));
-			syntaxes.Add (new TextSyntaxItem ("DOS", "DOS", "text-x-generic", "dos"));
-			syntaxes.Add (new TextSyntaxItem ("Delphi", "Delphia", "text-x-generic", "delphi"));
-			syntaxes.Add (new TextSyntaxItem ("Diff", "Diff", "text-x-generic", "diff"));
-			syntaxes.Add (new TextSyntaxItem ("Eiffel", "Eiffel", "text-x-generic", "eiffel"));
-			syntaxes.Add (new TextSyntaxItem ("Fortran", "Fortrain", "text-x-generic", "fortran"));
-			syntaxes.Add (new TextSyntaxItem ("FreeBasic", "FreeBasic", "text-x-generic", "freebasic"));
-			syntaxes.Add (new TextSyntaxItem ("Game Maker", "Game Maker", "text-x-generic", "gml"));
-			syntaxes.Add (new TextSyntaxItem ("HTML 4", "HTML 4 Strict", "text-x-generic", "html4strict"));
-			syntaxes.Add (new TextSyntaxItem ("Java", "Java", "text-x-generic", "java"));
-			syntaxes.Add (new TextSyntaxItem ("Javascript", "JavaScript", "text-x-generic", "javascript"));
-			syntaxes.Add (new TextSyntaxItem ("Lua", "Lua", "text-x-generic", "lua"));
-			syntaxes.Add (new TextSyntaxItem ("MPASM", "MPASM", "text-x-generic", "mpasm"));
-			syntaxes.Add (new TextSyntaxItem ("Matlab", "Matlab", "text-x-generic", "matlab"));
-			syntaxes.Add (new TextSyntaxItem ("MySQL", "MySQL", "text-x-generic", "mysql"));
-			syntaxes.Add (new TextSyntaxItem ("NullSoft Installer", "NullSoft Installer", "text-x-generic", "nsis"));
-			syntaxes.Add (new TextSyntaxItem ("OCaml", "OCaml", "text-x-generic", "ocaml"));
-			syntaxes.Add (new TextSyntaxItem ("Objective-C", "Objective-C", "text-x-generic", "cobjc"));
-			syntaxes.Add (new TextSyntaxItem ("OpenOffice.org BASIC", "OpenOffice.org BASIC", "text-x-generic", "oobas"));
-			syntaxes.Add (new TextSyntaxItem ("Oracle 8", "Oracle 8", "text-x-generic", "oracle8"));
-			syntaxes.Add (new TextSyntaxItem ("PHP", "PHP", "text-x-generic", "php"));
-			syntaxes.Add (new TextSyntaxItem ("Pascal", "Pascal", "text-x-generic", "pascal"));
-			syntaxes.Add (new TextSyntaxItem ("Perl", "Perl", "text-x-generic", "perl"));
-			syntaxes.Add (new TextSyntaxItem ("Plain Text", "Plain Text", "text-x-generic", "text"));
-			syntaxes.Add (new TextSyntaxItem ("Python", "Python", "text-x-generic", "python"));
-			syntaxes.Add (new TextSyntaxItem ("QuickBASIC", "QuickBASIC", "text-x-generic", "qbasic"));
-			syntaxes.Add (new TextSyntaxItem ("Robots", "Robots", "text-x-generic", "robots"));
-			syntaxes.Add (new TextSyntaxItem ("Ruby", "Ruby", "text-x-generic", "ruby"));
-			syntaxes.Add (new TextSyntaxItem ("SQL", "SQL", "text-x-generic", "sql"));
-			syntaxes.Add (new TextSyntaxItem ("Scheme", "Scheme", "text-x-generic", "scheme"));
-			syntaxes.Add (new TextSyntaxItem ("Smarrty", "Smarty", "text-x-generic", "smarty"));
-			syntaxes.Add (new TextSyntaxItem ("Tcl", "Tcl", "text-x-generic", "tcl"));
-			syntaxes.Add (new TextSyntaxItem ("VB.NET", "VB.NET", "text-x-generic", "vbnet"));
-			syntaxes.Add (new TextSyntaxItem ("VisualBasic", "VisualBasic", "text-x-generic", "vb"));
-			syntaxes.Add (new TextSyntaxItem ("VisualFoxPro", "VisualFoxPro", "text-x-generic", "visualfoxpro"));
-			syntaxes.Add (new TextSyntaxItem ("XML", "XML", "text-x-generic", "xml"));
-
-			return syntaxes;
+			return url_root + "/" + url.Substring (url.LastIndexOf ('=') + 1);
 		}
 	}
 }
