@@ -57,6 +57,11 @@ namespace Putty
 
 		void StartPuttySession (string session)
 		{
+			Process.Start ("putty", "-load " + session);
+		}
+		
+		void ConnectToHost (string session)
+		{
 			Process.Start ("putty", session);
 		}
 		
@@ -64,7 +69,7 @@ namespace Putty
 		{
 			foreach (Item item in items) {
 				 if (item is ITextItem)
-	                StartPuttySession ((item as ITextItem).Text);              
+	                ConnectToHost ((item as ITextItem).Text);              
 	            else if (item is PuttySession)
 	                StartPuttySession ((item as PuttySession).Session);
 			}
