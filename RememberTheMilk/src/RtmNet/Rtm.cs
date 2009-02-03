@@ -251,7 +251,7 @@ namespace RtmNet
 			{
 				// This is needed in the Compact Framework
 				// See for more details: http://msdn2.microsoft.com/en-us/library/1afx2b0f.aspx
-				//req.GetRequestStream().Close();
+				req.GetRequestStream().Close();
 			}
 
 			try
