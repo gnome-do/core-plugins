@@ -3,7 +3,6 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=GNOME-Terminal
 
 FILES = \
-	src/OpenProfileAction.cs \
 	src/OpenTerminalHereAction.cs \
 	src/ProfileItem.cs \
 	src/ProfileItemSource.cs \
