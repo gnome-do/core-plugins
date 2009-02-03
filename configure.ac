@@ -20,6 +20,12 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
+dnl We need mdtool (at least for now)
+AC_PATH_PROG(MDTOOL, mdtool, no)
+if test "x$MDTOOL" = "xno" ; then
+   	AC_MSG_ERROR([You need to install mdtool, from the Monodevelop package])
+fi
+
 AC_PROG_INSTALL
 
 top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
