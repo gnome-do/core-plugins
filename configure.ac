@@ -62,7 +62,10 @@ GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.d
 GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
 GDATA_SHARP_CONTACTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Contacts.dll"
 
-AC_SUBST([BANSHEE_INDEXER_LIBS])
+dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
+BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
+
+AC_SUBST([BANSHEE_INDEXER_DLL])
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])
