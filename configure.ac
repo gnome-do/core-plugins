@@ -20,11 +20,12 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
-dnl We need mdtool (at least for now)
-AC_PATH_PROG(MDTOOL, mdtool, no)
-if test "x$MDTOOL" = "xno" ; then
-   	AC_MSG_ERROR([You need to install mdtool, from the Monodevelop package])
+dnl We need mautil (at least for now)
+AC_PATH_PROG(MAUTIL, mautil, no)
+if test "x$MAUTIL" = "xno" ; then
+   	AC_MSG_ERROR([You need to install mautil (from mono-addins)])
 fi
+AC_SUBST([MAUTIL])
 
 AC_PROG_INSTALL
 
