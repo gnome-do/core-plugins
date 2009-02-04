@@ -80,8 +80,8 @@ ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
 PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
 BUNDLED_ASSEMBLIES = $(wildcard BundledLibraries/*.dll)
 install-data-hook:
-	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
-	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
+	cd $(ASSEMBLY_INSTALL_DIR) && $(MDTOOL) setup pack $(PLUGIN_ASSEMBLIES)
+	$(MDTOOL) setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
 
 uninstall-hook:
 	rm -f $(ASSEMBLY_INSTALL_DIR)/*.mpack
