@@ -1,19 +1,21 @@
 bundledir = ${datadir}/gnome-do/plugins
 
-bundle_DATA = \
+GOOGLE_LIBS = \
 	Google.GData.AccessControl.dll \
 	Google.GData.Calendar.dll \
 	Google.GData.Client.dll \
 	Google.GData.Contacts.dll \
 	Google.GData.Documents.dll \
-	Google.GData.Extensions.dll 
+	Google.GData.Extensions.dll
 
-EXTRA_DIST=$(bundle_DATA) gmcs.exe
+bundle_DATA = \
+	$(addprefix $(srcdir)/,$(GOOGLE_LIBS)) \
+	$(BANSHEE_INDEXER_DLL)
 
-BANSHEE_INDEXER_DLL = $(shell $(PKG_CONFIG) --variable=Libraries banshee-1-collection-indexer)
-install-data-hook:
-	$(INSTALL) -d $(bundledir)
-	$(INSTALL) -m 644 -t $(bundledir) $(BANSHEE_INDEXER_DLL)
+EXTRA_DIST=$(GOOGLE_LIBS) gmcs.exe
 
-uninstall-hook:
-	rm $(bundledir)/$(notdir $(BANSHEE_INDEXER_DLL))
+# Copy these to the build dir; some things require the dlls to be present
+# during build - particularly mautil.
+all-local:
+	mkdir -p $(top_builddir)/build
+	install -m 644 -t $(top_builddir)/build $(bundle_DATA)
