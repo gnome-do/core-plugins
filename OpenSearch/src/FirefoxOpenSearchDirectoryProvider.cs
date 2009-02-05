@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using System.IO;
 
 using Do;
+using Do.Platform;
+using Do.Universe;
 
 namespace OpenSearch
 {
@@ -46,11 +48,13 @@ namespace OpenSearch
 			
 			string firefoxProfilePath = GetProfileSearchPluginsPath ();
 			if (firefoxProfilePath != null) {
+				Log<FirefoxOpenSearchDirectoryProvider>.Debug ("Profile plugin search path: {0}", firefoxProfilePath);
 				openSearchPluginDirectories.Add (firefoxProfilePath);
 			}
 			
 			string firefoxLibPath = GetLibSearchPluginsPath ();
 			if (firefoxLibPath != null) {
+				Log<FirefoxOpenSearchDirectoryProvider>.Debug ("Library plugin search path: {0}", firefoxLibPath);
 				openSearchPluginDirectories.Add (firefoxLibPath);	
 			}
 		}
@@ -98,8 +102,10 @@ namespace OpenSearch
 					return path;
 				}
 			}
-			catch {
+			catch (Exception e) {
 				// just return null if we've got problems
+				Log<FirefoxOpenSearchDirectoryProvider>.Debug ("Error building library plugin search path: {0}", e.Message);
+				Log<FirefoxOpenSearchDirectoryProvider>.Debug (e.StackTrace);				
 			}
 				
 			return null;
@@ -141,7 +147,9 @@ namespace OpenSearch
 				
 					return path;
 				}
-			} catch {
+			} catch (Exception e) {
+				Log<FirefoxOpenSearchDirectoryProvider>.Debug ("Error building profile plugin search path: {0}", e.Message);
+				Log<FirefoxOpenSearchDirectoryProvider>.Debug (e.StackTrace);	
 				// just return null if we've got problems
 			}
 				

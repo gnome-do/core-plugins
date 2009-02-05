@@ -18,8 +18,9 @@
 
 using System;
 using System.Web;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+
 using Mono.Unix;
 
 using Do.Platform;
@@ -46,11 +47,7 @@ namespace Cl.ickable
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
+			get { yield return typeof (ITextItem); }
 		}
 		
 		public override bool ModifierItemsOptional {
@@ -58,20 +55,16 @@ namespace Cl.ickable
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get {
-				return new Type[] {
-					typeof (ITextItem),
-				};
-			}
+			get { yield return typeof (ITextItem); }
 		}
 		
-		protected static string AsParameterString (Dictionary<string, string> parameters)
+		string AsParameterString (IDictionary<string, string> parameters)
 		{
 			string s = "";
 			
 			foreach (KeyValuePair<string, string> kv in parameters) {
 				s += s.Length == 0 ? "?" : "&";
-				s += kv.Key + "=" + System.Web.HttpUtility.UrlEncode (kv.Value);
+				s += kv.Key + "=" + HttpUtility.UrlEncode (kv.Value);
 			}
 			return s;
 		}
@@ -87,13 +80,16 @@ namespace Cl.ickable
 				text.Substring (0, Math.Min (text.Length, MaxTitleLength)) + "...";
 			
 			parameters = new Dictionary<string, string> ();
-			// "title" is the "human readable" title of the containing document, available in FF JS as document.title
+			// "title" is the "human readable" title of the containing document,
+			// available in FF JS as document.title
 			parameters ["title"] = title;
 			// "content" is HTML content (it can be just text, of course).
 			parameters ["content"] = text;
-			// "location" is an absolute URL to the containing page ... available in Firefox JavaScript as document.location
+			// "location" is an absolute URL to the containing page ... available in
+			// Firefox JavaScript as document.location
 			parameters ["location"] = "";
-			// "base" is the "base URL" of the page ... available in Firefox JavaScript as document.baseURI
+			// "base" is the "base URL" of the page ... available in Firefox
+			// JavaScript as document.baseURI
 			parameters ["base"] = "";
 			
 			url = ClipPostURL + AsParameterString (parameters);

@@ -58,7 +58,7 @@ namespace SqueezeCenter
 		public override string Icon 
 		{
 			get {
-				return (this.poweredOn ? "SB on" : "SB off") + ".png@" + this.GetType ().Assembly.FullName;				
+				return (this.poweredOn ? "SB_on" : "SB_off") + ".png@" + this.GetType ().Assembly.FullName;				
 			}
 		}		
 		

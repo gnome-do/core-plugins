@@ -22,16 +22,16 @@ namespace Translate
 {
 	public class TranslateProviderFactory
 	{						
-		public static ITranslateProvider GetProviderFromPreferences()
+		public static ITranslateProvider GetProviderFromPreferences ()
 		{
 			object [] args = new object [] {};
-			return GetProviderFromPreferences(args);		
+			return GetProviderFromPreferences (args);		
 		}
 				
-		public static ITranslateProvider GetProviderFromPreferences(object [] args)
+		public static ITranslateProvider GetProviderFromPreferences (object [] args)
 		{	
-			Type providerType = Type.GetType("Translate."+ConfigUI.SelectedProvider, true);
-			ITranslateProvider provider = (ITranslateProvider)System.Activator.CreateInstance(providerType, args);
+			Type providerType = Type.GetType ("Translate."+ConfigUI.SelectedProvider, true);
+			ITranslateProvider provider = (ITranslateProvider)System.Activator.CreateInstance (providerType, args);
 			return provider;
 		}	
 	}

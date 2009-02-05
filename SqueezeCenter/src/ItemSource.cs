@@ -44,7 +44,7 @@ namespace SqueezeCenter
 
 		public override string Name { get { return "SqueezeCenter"; } }
 		public override string Description { get { return "Artists, albums and radio."; } }
-		public override string Icon { get { return "SB on.png@" + this.GetType ().Assembly.FullName; } }		
+		public override string Icon { get { return "SB_on.png@" + this.GetType ().Assembly.FullName; } }		
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {

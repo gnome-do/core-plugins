@@ -98,7 +98,7 @@ namespace NX {
             foreach (FileInfo file in dir.GetFiles ("*.nxs"))
             {
                 string name = file.Name.Replace (".nxs", "");
-                items.Add (new NXHostItem (name, Path.Combine (nxDir, name)));
+                items.Add (new NXHostItem (name, Path.Combine (nxDir, file.Name)));
             }
         }
     }

@@ -1,64 +1,60 @@
-//  TomboySearchNotesCommand.cs
+// TomboySearchNotesCommand.cs
 //
-//  GNOME Do is the legal property of its developers, whose names are too numerous
-//  to list here.  Please refer to the COPYRIGHT file distributed with this
-//  source distribution.
+// GNOME Do is the legal property of its developers, whose names are too
+// numerous to list here.  Please refer to the COPYRIGHT file distributed with
+// this source distribution.
 //
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.Collections.Generic;
+
+using Mono.Unix;
 
 using Do.Universe;
 
 namespace Tomboy
 {
+
 	public class SearchNotesAction : Act
 	{
-		private const string name = "Search Tomboy Notes";
-		private const string desc = "Searches contents of Tomboy notes";
-		private const string icon = "gtk-find";
-		private static Type [] supportedTypes = new Type [] {
-			typeof (ITextItem) };
-		
+
 		public override string Name {
-			get { return name; }
+			get { return Catalog.GetString ("Search Tomboy Notes"); }
 		}
 		
 		public override string Description {
-			get { return desc; }
+			get { return Catalog.GetString ("Searches contents of Tomboy notes."); }
 		}
 		
 		public override string Icon {
-			get { return icon; }
+			get { return "gtk-find"; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return supportedTypes;
-			}
+			get { yield return typeof (ITextItem); }
 		}
 		
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			TomboyDBus tb = new TomboyDBus ();
 			// This action will start Tomboy if it is not
 			// already running.
 			tb.SearchNotes ((items.First () as ITextItem).Text);
-			return null;
+			yield break;
 		}
 	}
 }

@@ -39,7 +39,6 @@ namespace Do.FilesAndFolders
 			get {
 				// This returns UserHome
 				//return Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments);
-				
 				return ReadXdgUserDir ("XDG_DOCUMENTS_DIR", "Documents");
 			}
 		}

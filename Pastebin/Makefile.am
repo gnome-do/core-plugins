@@ -9,6 +9,7 @@ FILES = \
 	src/PastebinAction.cs \
 	src/Pastebin.cs \
 	src/Providers/IPastebinProvider.cs \
+	src/Providers/AbstractPastebinProvider.cs \
 	src/Providers/LodgeIt.cs \
 	src/Providers/Monoport.cs \
 	src/Providers/Paste2.cs \
@@ -20,13 +21,18 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Resources/Pastebin.addin.xml
+	Resources/Pastebin.addin.xml \
+	Resources/LodgeIt.xml \
+	Resources/Paste2.xml \
+	Resources/PastebinCA.xml \
+	Resources/Monoport.xml
 
 REFERENCES = \
 	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \
+	System.Xml \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \
 	$(DO_UNIVERSE_LIBS)

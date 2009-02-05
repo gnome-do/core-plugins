@@ -1,8 +1,7 @@
 // ShelfItemSource.cs
 //
-//GNOME Do is the legal property of its developers. Please refer to the
-//COPYRIGHT file distributed with this
-//source distribution.
+// GNOME Do is the legal property of its developers. Please refer to the
+// COPYRIGHT file distributed with this source distribution.
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,21 +25,22 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-using Do.Universe;
 using Mono.Unix;
+
+using Do.Universe;
 
 namespace Do.Universe
 {	
+
 	public class ShelfItem : Item
 	{
-		private string name;
+
+		string name;
 		
-		private List<Item> items = new List<Item> ();
+		List<Item> items = new List<Item> ();
 		
 		public List<Item> Items {
-			get {
-				return items ?? items = new List<Item> ();
-			}
+			get { return items; }
 		}
 		
 		public ShelfItem (string name)
@@ -49,27 +49,22 @@ namespace Do.Universe
 		}
 		
 		public string ShelfName {
-			get {
-				return name;
-			}
+			get { return name; }
 		}
 		
 		public override string Name {
-			get {
-				return name + Catalog.GetString (" Shelf");
-			}
+			get { return name + Catalog.GetString (" Shelf"); }
 		}
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Your ") + name + Catalog.GetString (" Shelf Items");
+				return string.Format (
+						Catalog.GetString ("Your {0} shelf items."), name);
 			}
 		}
 
 		public override string Icon {
-			get {
-				return "folder-saved-search";
-			}
+			get { return "folder-saved-search"; }
 		}
 		
 		public void AddItem (Item item)
@@ -92,40 +87,27 @@ namespace Do.Universe
 		static string defaultName;
 		
 		public override string Name {
-			get {
-				return Catalog.GetString ("Shelf Item Source");
-			}
+			get { return Catalog.GetString ("Shelf Items"); }
 		}
 
 		public override string Description {
-			get {
-				return Catalog.GetString ("Your Shelf Items");
-			}
+			get { return Catalog.GetString ("Your Shelf Items"); }
 		}
 
 		public override string Icon {
-			get {
-				return "folder-saved-search";
-			}
+			get { return "folder-saved-search"; }
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (ShelfItem),
-				};
-			}
+			get { yield return typeof (ShelfItem); }
 		}
 
 		public override IEnumerable<Item> Items {
 			get {
-				List<Item> items = new List<Item> ();
 				if (shelf != null) {
 					foreach (Item item in shelf.Values)
-						items.Add (item);
+						yield return item;
 				}
-				
-				return items;
 			}
 		}
 		
@@ -148,10 +130,6 @@ namespace Do.Universe
 			}
 		}
 
-		public override void UpdateItems ()
-		{
-		}
-		
 		static public void AddToDefault (Item item)
 		{
 			shelf[defaultName].AddItem (item);

@@ -76,12 +76,12 @@ namespace Pastebin
 
 			// Get an instance of each pastebin provider in this assembly.
 			var providers =
-				from type in Assembly.GetExecutingAssembly().GetTypes()
-				where type.GetInterface("Pastebin.IPastebinProvider") != null
-				select Activator.CreateInstance(type);
+				from type in Assembly.GetExecutingAssembly ().GetTypes ()
+				where type.GetInterface ("Pastebin.IPastebinProvider") != null && type.IsAbstract == false
+				select Activator.CreateInstance (type);
 
 			foreach (IPastebinProvider provider in providers) {
-				ProvidersList.AppendValues(provider.Name, provider.GetType().ToString());
+				ProvidersList.AppendValues (provider.Name, provider.GetType ().ToString ());
 			}
 			
 			cmbProvider.Model = ProvidersList;

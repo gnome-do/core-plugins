@@ -1,33 +1,38 @@
-//  Pidgin.cs
+// Pidgin.cs
 //
-//  GNOME Do is the legal property of its developers, whose names are too numerous
-//  to list here.  Please refer to the COPYRIGHT file distributed with this
-//  source distribution.
+// GNOME Do is the legal property of its developers, whose names are too
+// numerous to list here.  Please refer to the COPYRIGHT file distributed with
+// this source distribution.
 //
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-namespace Do.Addins.Pidgin
+using Do.Platform;
+
+namespace PidginPlugin
 {
+
 	public class Pidgin
 	{
+
 		const string PurpleObjectPath = "/im/pidgin/purple/PurpleObject";
 		const string PurpleServiceBusName = "im.pidgin.purple.PurpleService";
 
@@ -59,6 +64,22 @@ namespace Do.Addins.Pidgin
 			string PurpleAccountGetUsername (int account);
 		}
 
+		public static string ChatIcon {
+			get { return "internet-group-chat.svg@" + typeof (Pidgin).Assembly.FullName; }
+		}
+
+		public static string GetProtocolIcon (string proto)
+		{
+			string icon;
+
+			proto = proto.ToLower ();
+			if (proto.StartsWith ("prpl-"))
+				proto = proto.Substring ("prpl-".Length);
+			icon = Path.Combine (
+				"/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
+			return File.Exists (icon) ? icon : Pidgin.ChatIcon;
+		}
+
 		public static IPurpleObject GetPurpleObject ()
 		{
 			try {
@@ -69,7 +90,7 @@ namespace Do.Addins.Pidgin
 			}
 		}
 
-		private static int[] ConnectedAccounts {
+		private static int [] ConnectedAccounts {
 			get {
 				List<int> connected;
 				IPurpleObject prpl;
@@ -135,8 +156,8 @@ namespace Do.Addins.Pidgin
 
 		public static void OpenConversationWithBuddy (string name)
 		{
-			IPurpleObject prpl;
 			int account, conversation;
+			IPurpleObject prpl;
 
 			prpl = GetPurpleObject ();
 			try {
@@ -146,7 +167,8 @@ namespace Do.Addins.Pidgin
 				conversation = prpl.PurpleConversationNew (1, account, name);
 				prpl.PurpleConversationPresent (conversation);
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not create new Pidgin conversation: {0}", e.Message);
+				Log<Pidgin>.Error ("Could not create new Pidgin conversation: {0}", e.Message);
+				Log<Pidgin>.Debug (e.StackTrace);
 			}
 		}
 

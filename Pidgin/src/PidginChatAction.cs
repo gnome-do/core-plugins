@@ -18,60 +18,52 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Collections.Generic;
 
-using Do.Universe;
 using Mono.Unix;
 
-namespace Do.Addins.Pidgin
+using Do.Platform;
+using Do.Universe;
+
+namespace PidginPlugin
 {
+
 	public class PidginChatAction : Act
 	{
+
 		public PidginChatAction ()
 		{
 		}
 		
-		public override string Name
-		{
+		public override string Name {
 			get { return Catalog.GetString ("Chat"); }
 		}
 		
-		public override string Description
-		{
+		public override string Description {
 			get { return Catalog.GetString ("Send an instant message to a friend."); }
 		}
 		
-		public override string Icon
-		{
-			get { return "internet-group-chat.svg@" + GetType ().Assembly.FullName; }
+		public override string Icon {
+			get { return Pidgin.ChatIcon; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes
-		{
+		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (ContactItem),
-					typeof (PidginHandleContactDetailItem),
-				};
+				yield return typeof (ContactItem);
+				yield return typeof (PidginHandleContactDetailItem);
 			}
 		}
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ContactItem) {
-				foreach (string detail in (item as ContactItem).Details) {
-					if (detail.StartsWith ("prpl-")) return true;
-				}
-				return false;
-			} else if (item is PidginHandleContactDetailItem) {
-				return true;
-			}
-			return false;
+			if (item is ContactItem)
+				return (item as ContactItem).Details.Any (d => d.StartsWith ("prpl-"));
+			return true;
 		}
 		
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Item item = items.First ();
 			string name = null;
@@ -89,15 +81,16 @@ namespace Do.Addins.Pidgin
 			} else if (item is PidginHandleContactDetailItem) {
 				name = (item as PidginHandleContactDetailItem).Value;
 			}
-			if (null != name) {
-				new Thread ((ThreadStart) delegate {
+
+			if (name != null) {
+				Services.Application.RunOnThread (() => {
 					Pidgin.StartIfNeccessary ();
-					Gtk.Application.Invoke (delegate {
-						Pidgin.OpenConversationWithBuddy (name);
-					});
-				}).Start ();
+					Services.Application.RunOnMainThread (() =>
+						Pidgin.OpenConversationWithBuddy (name)
+					);
+				});
 			}
-			return null;
+			yield break;
 		}
 		
 	}

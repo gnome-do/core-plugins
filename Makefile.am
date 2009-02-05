@@ -7,10 +7,12 @@ SUBDIRS = \
 	Alias \
 	AptURL \
 	Archive \
+	Banshee \
 	Bibtex \
 	Cl.ickable \
 	ClawsMail \
 	Confluence \
+	Del.icio.us \
 	DiskMounter \
 	EOG-Slideshow \
 	Epiphany \
@@ -46,15 +48,19 @@ SUBDIRS = \
 	RememberTheMilk \
 	Rhythmbox \
 	Riptide \
+	RSS \
 	Shelf \
 	Skype \
+	SqueezeCenter \
 	SSH \
 	StockQuote \
 	SystemServices \
 	Tasque \
 	TerminalServerClient \
 	Text \
+	Thunderbird \
 	TinyUrl \
+	Tracker \
 	Translate \
 	Tomboy \
 	Vinagre \
@@ -66,16 +72,16 @@ SUBDIRS = \
 	Xmms2 \
 	Zim 
 
-# Current dir _must_ be processed last; this ensures our repo is built with all the plugins
+# Current dir _must_ be processed last; this ensures our repo is built with all
+# the plugins
 SUBDIRS += .
 
 ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
-PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
-BUNDLED_ASSEMBLIES = $(wildcard BundledLibraries/*.dll)
 install-data-hook:
-	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
-	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
+	$(MAUTIL) rep-build $(ASSEMBLY_INSTALL_DIR)
 
 uninstall-hook:
-	rm $(ASSEMBLY_INSTALL_DIR)/*.mpack
-	rm $(ASSEMBLY_INSTALL_DIR)/*.mrep
+	rm -f $(ASSEMBLY_INSTALL_DIR)/*.mrep
+
+clean-local:
+	-rm -rf $(top_builddir)/build

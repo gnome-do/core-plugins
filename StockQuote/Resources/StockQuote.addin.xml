@@ -9,7 +9,7 @@
 	>
 
 	<Runtime>
-		<Import assembly="Stock Quote.dll"/>
+		<Import assembly="StockQuote.dll"/>
 	</Runtime>
 
 	<Dependencies>

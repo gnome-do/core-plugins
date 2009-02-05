@@ -23,6 +23,7 @@ using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Web;
 
 using Mono.Unix;
 
@@ -97,13 +98,7 @@ namespace Do.Plugins.Google
 
 		string GoogleCalculatorURLWithExpression (string e)
 		{
-			return "http://www.google.com/search?&q=" + (e ?? "")
-				.Replace ("+", "%2B")
-				.Replace ("(", "%28")
-				.Replace (")", "%29")
-				.Replace ("/", "%2F")
-				.Replace ("^", "%5E")
-				.Replace (" ", "+");
+			return "http://www.google.com/search?&q=" + HttpUtility.UrlEncode (e ?? "");
 		}
 
 		string GetWebpageContents (string url)

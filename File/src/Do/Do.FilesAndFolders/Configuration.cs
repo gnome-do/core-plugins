@@ -55,8 +55,10 @@ namespace Do.FilesAndFolders
 				Catalog.GetString ("Choose folder"), ResponseType.Accept);
 					
 			
-			if (chooser.Run () == (int) ResponseType.Accept)
+			if (chooser.Run () == (int) ResponseType.Accept) {
 				Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, 1));
+				nview.Refresh ();
+			}
 			chooser.Destroy ();
 		}
 
