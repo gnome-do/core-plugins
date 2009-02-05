@@ -50,7 +50,7 @@ namespace VirtualBox
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] { typeof (VMItem) };
+				yield return typeof (VMItem);
 			}
 		}
 
@@ -122,7 +122,7 @@ namespace VirtualBox
 				t.IsBackground = true;
 				t.Start(); 
 			}		
-			return null;
+			yield break;
 		}
 	}
 }

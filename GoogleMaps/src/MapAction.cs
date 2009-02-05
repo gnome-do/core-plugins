@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Mono.Unix;
 
 using Do.Universe;
@@ -125,8 +126,7 @@ namespace Google
 		
 		string GoogleMapsURLWithExpression (string e)
 		{
-			return "http://maps.google.com/maps?q=" + (e ?? "")
-				.Replace (" ", "+");
+			return "http://maps.google.com/maps?q=" + HttpUtility.UrlEncode (e ?? "");
 		}
 		
 		bool ContactSupportsAddress (ContactItem item)
