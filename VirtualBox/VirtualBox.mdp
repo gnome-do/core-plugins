@@ -33,7 +33,6 @@
     <File name="Resources/icons/os_freebsd.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/os_gentoo.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/os_l4.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/icons/os_linux.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/os_linux22.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/os_linux24.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/os_linux26.png" subtype="Code" buildaction="EmbedAsResource" />
@@ -70,6 +69,30 @@
     <File name="Resources/icons/vm_start_32px.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/vrdp_16px.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/VMDynItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/IconMap.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/icons/os_archlinux.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_archlinux_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_debian_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_fedora_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_freebsd_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_gentoo_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_linux24_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_linux26_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_mandriva_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_netbsd_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_openbsd_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_opensolaris_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_opensuse_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_os2_other.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_redhat_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_solaris_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_ubuntu_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_win2k3_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_win2k8_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_winvista_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_winxp_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_xandros_64.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/os_os2ecs.png" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
