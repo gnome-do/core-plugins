@@ -30,43 +30,57 @@ using Do.Universe;
 
 namespace TrackerSearch
 {
+	public class TrackerSearchAction : Act
+	{
+		const int maxResults = 100;
 
-  public class TrackerSearchAction : Act
-  {
+		public override string Name {
+			get { return Catalog.GetString ("Search with Tracker"); }
+		}
 
-    public override string Name {
-      get { return Catalog.GetString ("Search with Tracker"); }
-    }
+		public override string Description {
+			get { return Catalog.GetString ("Launches Tracker with the given query."); }
+		}
 
-    public override string Description {
-      get { return Catalog.GetString ("Launches Tracker with the given query."); }
-    }
+		public override string Icon {
+			get { return "tracker"; }
+		}
+		
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ITextItem); }
+		}
 
-    public override string Icon {
-      get { return "tracker"; }
-    }
-    public override IEnumerable<Type> SupportedItemTypes {
-      get { yield return typeof (ITextItem); }
-    }
-
-    public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-    {
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			List<Item> results = new List<Item> ();
 			foreach (ITextItem text in items)
-				Search (text.Text);
+				results.AddRange (Search (text.Text));
 
-      yield break;
-    }
+			return results;
+		}
 
-		void Search (string query)
-    {
-      try {
-        Process.Start ("tracker-search-tool", string.Format ("\"{0}\"", query));
-      } catch (Exception e) {
-        Log<TrackerSearchAction>
-					.Error ("Could not run tracker-search-tool {0}: {1}", query, e.Message);
-        Log<TrackerSearchAction>.Debug (e.StackTrace);
-      }
-    }
-  }
+		private List<Item> Search (string query)
+		{
+			List<Item> files = new List<Item> ();
+			try {		
+				System.Diagnostics.Process tracker = new System.Diagnostics.Process ();
+				tracker.StartInfo.FileName = "tracker-search";
+				tracker.StartInfo.Arguments = string.Format ("--limit={0} \"{1}\"", maxResults, query);
+				tracker.StartInfo.RedirectStandardOutput = true;
+				tracker.StartInfo.UseShellExecute = false;
+				tracker.Start ();
+
+				string path;	
+				while (null != (path = tracker.StandardOutput.ReadLine ())) {
+					files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
+				}
+			} catch (Exception e) {
+				Log<TrackerSearchAction>.Error ("Could not run tracker-search --limit={0} \"{1}\": {1}", maxResults, query, e.Message);
+				Log<TrackerSearchAction>.Debug (e.StackTrace);
+			}	
+
+			return files;
+		}
+	}
 }
 
