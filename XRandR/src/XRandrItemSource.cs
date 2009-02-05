@@ -47,8 +47,10 @@ namespace XRandR
 		public override void UpdateItems ()
 		{
 			items.Clear ();
-			foreach(string name in Wrapper.OutputNames)
-				items.Add (new OutputItem(name));
+			foreach(ScreenResources res in External.ScreenResources()){
+				foreach(XRROutputInfo output in res.Outputs.All)
+					items.Add (new OutputItem(output.name));
+			}
 		}
 	}
 }

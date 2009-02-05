@@ -1,0 +1,340 @@
+// Main.cs created with MonoDevelop
+// User: johannes at 2:18 PM 2/3/2009
+//
+// To change standard headers go to Edit->Preferences->Coding->Standard Headers
+//
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace XRandR
+{
+	public delegate void ResourceAction<T>(T res);
+	public delegate void ResourceActionWithId<T>(int id,T res);
+	
+	[StructLayout (LayoutKind.Sequential)]
+	public struct XRROutputInfo {
+	    public int timestamp;
+	    
+		public int	    crtc_id;
+
+		public string	    name;
+	    public int		    nameLen;
+
+		public int   mm_width;
+	    public int   mm_height;
+
+		public short	    connection;
+	    public short   subpixel_order;
+
+		public int		    ncrtc;
+	    public IntPtr	    crtcs;
+
+		public int		    nclone;
+		public IntPtr   	clones;
+	    
+		public int		    nmode;
+	    public int		    npreferred;
+	    public IntPtr	    modes;
+	};
+	
+	[StructLayout (LayoutKind.Sequential)]
+	public struct XRRModeInfo {
+		public int	id;
+		public int	width;
+		public int	height;
+		public int	dotClock;
+		public int	hSyncStart;
+		public int	hSyncEnd;
+		public int	hTotal;
+		public int	hSkew;
+		public int	vSyncStart;
+		public int	vSyncEnd;
+		public int	vTotal;
+		public string  name;
+		public int	nameLength;
+		public int	modeFlags;
+	};
+	
+	[StructLayout (LayoutKind.Sequential)]
+	public struct XRRCrtcInfo {
+		public int timestamp;
+		public int x;
+		public int y;
+		public int width, height;
+		public int mode;
+		public short rotation;
+
+		public int noutput;
+		public IntPtr outputs;
+		
+		public IntPtr rotations;
+		
+		public int npossible;
+		public IntPtr possible;
+	};
+	
+	[StructLayout(LayoutKind.Sequential)]
+	public struct XRRScreenResources{
+		public int	timestamp;
+		public int	configTimestamp;
+
+		public int		ncrtc;
+		public IntPtr	crtcs;
+		
+		public int		noutput;
+		public IntPtr   outputs;
+		
+		public int		nmode;
+		public IntPtr	modes;
+	}
+	
+	public class External{
+		[DllImport("libX11")]
+		public static extern IntPtr XOpenDisplay([MarshalAs(UnmanagedType.LPTStr)] string name);
+		[DllImport("libX11")]
+        public static extern int XCloseDisplay(IntPtr display);
+		[DllImport("libX11")]
+		public static extern IntPtr XRootWindow(IntPtr display,int screen);
+		
+		[DllImport("libXrandr")]
+		public static extern IntPtr XRRGetScreenResources (IntPtr dpy, IntPtr window);
+		
+		[DllImport("libXrandr")]
+		public static extern void XRRFreeScreenResources (IntPtr resources);
+
+		[DllImport("libXrandr")]
+		public static extern IntPtr XRRGetOutputInfo (IntPtr dpy, IntPtr resources, int output_id);
+		
+		[DllImport("libXrandr")]
+		public static extern void XRRFreeOutputInfo (IntPtr outputInfo);
+		
+		[DllImport("libXrandr")]
+		public static extern IntPtr XRRGetCrtcInfo (IntPtr dpy, IntPtr resources, int crtc_id);
+		
+		[DllImport("libXrandr")]
+		public static extern void XRRFreeCrtcInfo (IntPtr crtcInfo);
+		
+		[DllImport("libXrandr")]
+		public static extern int XRRSetCrtcConfig (IntPtr dpy,
+		                                           IntPtr resources,
+		                                           int crtc_id,
+		                                           int timestamp,
+		                                           int x, int y,
+		                                           int mode_id,
+		                                           int rotation,
+		                                           IntPtr outputs,
+		                                           int noutputs);
+		
+		public static T Structure<T>(IntPtr ptr){
+			return (T)Marshal.PtrToStructure(ptr,typeof(T));
+		}
+		/*public delegate void DoWithResource<T>(int id,ResourceAction<T> func);
+		public static DoWithResource<T> Accessor<T>(RetrieveFunc getF,FreeFunc freeF){
+			return delegate(int id,ResourceAction<T> func){
+				IntPtr p = getF(id);
+				func(External.Structure<T>(p));
+				freeF(p);
+			};
+		}
+		public delegate void ForEachFunc<T>(IntPtr arrayPtr,int numEls,ResourceAction<T> func);
+		
+		public static ForEachFunc<T> CreateForEach<T>(RetrieveFunc getF,FreeFunc freeF){
+			return delegate(IntPtr array,int numEls,ResourceAction<T> func){
+				foreach(int id in PtrToIntArray(array,numEls)){
+					IntPtr ptr = getF(id);
+					func((T)Marshal.PtrToStructure(ptr,typeof(T)));
+					freeF(ptr);
+				}
+			};
+		}
+		public static ForEachFunc<T> CreateForEach<T>(DoWithResource<T> acc){
+			return delegate(IntPtr array,int numEls,ResourceAction<T> func){
+				foreach(int id in PtrToIntArray(array,numEls))
+					acc(id,func);
+			};
+		}*/
+
+		public interface Accessor<T>{
+			void doWith(int id,ResourceAction<T> func);
+			IEnumerable<T> doWith(int id);
+			void AllWithId(ResourceActionWithId<T> func);
+			IEnumerable<T> All{get;}
+		}
+		public delegate IntPtr RetrieveFunc(int id);
+		public delegate void FreeFunc(IntPtr element);
+		public class AccessorImpl<T> : Accessor<T>{
+			private RetrieveFunc getF;
+			private FreeFunc freeF;
+			private IEnumerable<int> ids;
+			public AccessorImpl(RetrieveFunc getF,FreeFunc freeF,IEnumerable<int> ids){
+				this.getF = getF;
+				this.freeF = freeF;
+				this.ids = ids;
+			}
+			
+			public IEnumerable<T> All{
+				get{
+					foreach(int id in ids){
+						IntPtr ptr = getF(id);
+						yield return Structure<T>(ptr);
+						freeF(ptr);
+					}
+				}
+			}
+			public void AllWithId(ResourceActionWithId<T> func){
+				foreach(int id in ids){
+					IntPtr ptr = getF(id);
+					func(id,Structure<T>(ptr));
+					freeF(ptr);
+				}
+			}
+			public void doWith(int id,ResourceAction<T> func){
+				IntPtr ptr = getF(id);
+				func(Structure<T>(ptr));
+				freeF(ptr);
+			}
+			public IEnumerable<T> doWith(int id){
+				IntPtr ptr = getF(id);
+				yield return Structure<T>(ptr);
+				freeF(ptr);
+			}
+		}
+		
+		public static int[] PtrToIntArray(IntPtr ptr,int numElements){
+			int[] res = new int[numElements];
+			for (int i=0;i<numElements;i++)
+				res[i] = Marshal.ReadIntPtr(ptr,IntPtr.Size * i).ToInt32();
+			return res;
+		}
+		public static T[] PtrToStructurePtrArray<T>(IntPtr ptr,int numElements){
+			T[] res = new T[numElements];
+			for (int i=0;i<numElements;i++){
+				res[i] = (T)Marshal.PtrToStructure(Marshal.ReadIntPtr(ptr,IntPtr.Size * i),(Type)typeof(T));
+			}
+			return res;
+		}		
+		public static T[] PtrToStructureArray<T>(IntPtr ptr,int numElements){
+			T[] res = new T[numElements];
+			for (int i=0;i<numElements;i++)
+				res[i] = (T)Marshal.PtrToStructure(new IntPtr(ptr.ToInt32() + i * Marshal.SizeOf(typeof(T)))
+				                                   ,typeof(T));
+			return res;
+		}
+		
+		public static void doWithDefaultDisplay(ResourceAction<IntPtr> func){
+			IntPtr display = XOpenDisplay(null);
+			func(display);
+			XCloseDisplay(display);
+		}
+		public static IEnumerable<IntPtr> DefaultDisplay(){
+			IntPtr display = XOpenDisplay(null);
+			yield return display;
+			XCloseDisplay(display);
+		}
+		public static void doWithScreenResources(IntPtr display,ResourceAction<ScreenResources> func){
+			IntPtr w = External.XRootWindow(display,0);
+			IntPtr res = External.XRRGetScreenResources(display,w);
+			func(new ScreenResources(display,res));
+			External.XRRFreeScreenResources(res);
+		}
+		public static IEnumerable<ScreenResources> ScreenResources(IntPtr display){
+			IntPtr w = External.XRootWindow(display,0);
+			IntPtr res = External.XRRGetScreenResources(display,w);
+			yield return new ScreenResources(display,res);
+			External.XRRFreeScreenResources(res);
+		}
+		public static void doWithScreenResources(ResourceAction<ScreenResources> func){
+			doWithDefaultDisplay(delegate(IntPtr display){doWithScreenResources(display,func);});
+		}
+		public static IEnumerable<ScreenResources> ScreenResources(){
+			foreach(IntPtr display in DefaultDisplay())
+				foreach(ScreenResources res in ScreenResources(display))
+					yield return res;
+		}
+	}
+	public class ScreenResources{
+		IntPtr display;
+		IntPtr presources;
+		XRRScreenResources resources;
+		Dictionary<int,XRRModeInfo> modes = new Dictionary<int,XRRModeInfo>();
+		
+		internal ScreenResources(IntPtr d,IntPtr presources){
+			this.resources = External.Structure<XRRScreenResources>(presources);
+			this.presources = presources;
+			this.display = d;
+			
+			foreach(XRRModeInfo mode in External.PtrToStructureArray<XRRModeInfo>(resources.modes,resources.nmode)){
+				modes[mode.id] = mode;
+			}
+		}
+
+		public External.Accessor<XRROutputInfo> Outputs{
+			get{
+				return new External.AccessorImpl<XRROutputInfo>(delegate(int id){
+					                                      return External.XRRGetOutputInfo(display,presources,id);
+				                                       }
+				                                       ,External.XRRFreeOutputInfo
+				                                       ,External.PtrToIntArray(resources.outputs,resources.noutput));
+			}
+		}
+		public External.Accessor<XRRCrtcInfo> Crtcs{
+			get{
+				return new External.AccessorImpl<XRRCrtcInfo>(delegate(int id){
+					                                      return External.XRRGetCrtcInfo(display,presources,id);
+				                                       }
+				                                       ,External.XRRFreeCrtcInfo
+				                                       ,External.PtrToIntArray(resources.crtcs,resources.ncrtc));
+			}
+		}
+		
+		public XRRModeInfo GetMode(int id){
+			return modes[id];
+		}
+		public IEnumerable<XRRModeInfo> Modes(){
+			return modes.Values;
+		}
+		
+		public XRRScreenResources Resources{
+			get{
+				return resources;
+			}
+		}
+		
+		public void setMode(int output_id,int mode_id){
+			foreach(XRROutputInfo output in Outputs.doWith(output_id)){
+				int crtc_id = output.crtc_id;
+				if (crtc_id == 0)
+					crtc_id = External.PtrToIntArray(output.crtcs,output.ncrtc)[0];
+					
+				foreach(XRRCrtcInfo crtc in Crtcs.doWith(crtc_id)){
+				    IntPtr ptr = Marshal.AllocHGlobal(sizeof(int));
+				    Marshal.WriteInt32(ptr,output_id);
+					External.XRRSetCrtcConfig(display,presources,crtc_id,output.timestamp,crtc.x,crtc.y,mode_id,crtc.rotation,ptr,1);
+				    Marshal.FreeHGlobal(ptr);
+			    }
+			}
+		}
+	}
+	
+	class MainClass
+	{
+		public static void printModeInfo(XRRModeInfo mode){
+			Console.WriteLine("Id: "+mode.id+" Name: "+mode.name+" width: "+mode.width+" height: "+mode.height);
+		}			
+		public static void printOutputInfo(int id,XRROutputInfo output){
+			Console.WriteLine("Id: "+id+" Name: "+output.name+" Connection: "+output.connection);
+		}
+		public static void Main(string[] args)
+		{
+			foreach(ScreenResources res in External.ScreenResources()){
+				foreach(XRRModeInfo mode in res.Modes())
+					printModeInfo(mode);
+				
+				res.Outputs.AllWithId(printOutputInfo);
+				
+				//res.setMode(60,0x5b);
+			};
+		}
+	}
+}
