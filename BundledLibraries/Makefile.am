@@ -9,7 +9,7 @@ GOOGLE_LIBS = \
 	Google.GData.Extensions.dll
 
 bundle_DATA = \
-	$(GOOGLE_LIBS) \
+	$(addprefix $(srcdir)/,$(GOOGLE_LIBS)) \
 	$(BANSHEE_INDEXER_DLL)
 
 EXTRA_DIST=$(GOOGLE_LIBS) gmcs.exe
@@ -18,4 +18,4 @@ EXTRA_DIST=$(GOOGLE_LIBS) gmcs.exe
 # during build - particularly mautil.
 all-local:
 	mkdir -p $(top_builddir)/build
-	cp $(bundle_DATA) $(top_builddir)/build/
+	install -m 644 -t $(top_builddir)/build $(bundle_DATA)
