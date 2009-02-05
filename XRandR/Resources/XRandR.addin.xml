@@ -1,0 +1,22 @@
+<Addin
+	id="XRandR"
+	namespace="Do"
+	version="0.1"
+	name="XRandr"
+	description="Control the resolution of your X outputs."
+	author="Johannes Rudolph"
+	category="Community"
+	>
+
+	<Runtime>
+		<Import assembly="XRandR.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="XRandR.XRandRItemSource" />
+	</Extension>
+</Addin>
