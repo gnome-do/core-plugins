@@ -70,7 +70,7 @@ namespace VirtualBox
 		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get {
-				return new Type[] { typeof (ITextItem) };
+				yield return typeof (ITextItem);
 			}
 		}
 
@@ -101,7 +101,7 @@ namespace VirtualBox
 			Thread t = new Thread (new ThreadStart(thread.DoAction));
 			t.IsBackground = true;
 			t.Start(); 
-			return null;
+			yield break;
 		}
 	}
 }
