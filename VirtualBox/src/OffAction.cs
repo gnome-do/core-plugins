@@ -50,7 +50,7 @@ namespace VirtualBox
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] { typeof (VMItem) };
+				yield return typeof (VMItem);
 			}
 		}
 
@@ -88,7 +88,7 @@ namespace VirtualBox
 		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get {
-				return new Type[] { typeof (VMDynItm) };
+				yield return typeof (VMDynItm);
 			}
 		}
 		
@@ -117,7 +117,7 @@ namespace VirtualBox
 				t.IsBackground = true;
 				t.Start();
 			}
-			return null;
+			yield break;
 		}
 	}
 }

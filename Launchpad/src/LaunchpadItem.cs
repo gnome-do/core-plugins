@@ -20,6 +20,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Web;
 
 using Mono.Unix;
 
@@ -69,7 +70,7 @@ namespace Launchpad
 
 		public virtual void Perform (ITextItem item)
 		{
-			string query = item.Text.Replace (" ",  "+");
+			string query = HttpUtility.UrlEncode (item.Text);
 			Services.Environment.OpenUrl (FormatUrl (url, query));
 		}
 
