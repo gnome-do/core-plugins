@@ -22,10 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-using GConf;
-
-
 using Do.Universe;
+using Do.Platform;
 using Do.Platform.Linux;
 
 namespace Do.Plugins.Rss
@@ -33,7 +31,7 @@ namespace Do.Plugins.Rss
 	public class RssItemSource : ItemSource, IConfigurable
 	{
 		private static List<Item> items;        
-		private static GConf.Client gconfClient;
+		private static IPreferences prefs;
 
 		public RssItemSource()
 		{
@@ -41,14 +39,18 @@ namespace Do.Plugins.Rss
 			//UpdateItems ();  
 		}
 
-		public override string Name { get { return null; } }
-		public override string Description { get { return null; } }
+		static RssItemSource () {
+			prefs = Services.Preferences.Get<RssItemSource> ();
+		}
+		
+		public override string Name { get { return "RSS Feeds"; } }
+		public override string Description { get { return "RSS Feeds from OPML"; } }
 		public override string Icon { get { return "feed-icon.png@" + GetType ().Assembly.FullName; } }
 		
 		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
-				return new Type[] { typeof(RssFeedItem) };
+				yield return typeof(RssFeedItem);
 			}
 		}
 
@@ -58,34 +60,20 @@ namespace Do.Plugins.Rss
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			return null;
+			yield break; 
 		}
 
-		public static GConf.Client GConfClient {
-			get {
-				if(gconfClient == null) {
-					gconfClient = new GConf.Client ();
-				}
-				return gconfClient;
-			}   
-		}
+		
 		/// <value>
 		/// URI of the OPML file
 		/// </value>
 		public static string OpmlFile {
-			get {
-				string opmlFile;
-				try {
-					opmlFile = GConfClient.Get (GConfKeyBase + "opmlfile") as string;
-				} catch (GConf.NoSuchKeyException) {
-					opmlFile = "http://www.scripting.com/feeds/top100.opml"; 
-				}
-				return opmlFile;
+			get { 
+				return prefs.Get<string> ("opmlfile", "http://www.scripting.com/feeds/top100.opml");
 			}
-
 			set {
-				if(value != null)
-					GConfClient.Set (GConfKeyBase + "opmlfile", value);
+				Log.Debug("Setting OPML file to " + value);
+				prefs.Set<string> ("opmlfile", value);
 			}
 		}
 
@@ -94,17 +82,10 @@ namespace Do.Plugins.Rss
 		/// </value>
 		public static int Timeout {
 			get {
-				int timeout;
-				try {
-					timeout = (int)GConfClient.Get (GConfKeyBase + "timeout");
-				} catch (GConf.NoSuchKeyException) {
-					timeout = 5;
-				}
-				return timeout;
+				return prefs.Get<int> ("timeout", 5);
 			}
-
 			set {
-				GConfClient.Set(GConfKeyBase + "timeout", value);
+				prefs.Set<int> ("timeout", value);
 			}
 		}
 
@@ -113,23 +94,11 @@ namespace Do.Plugins.Rss
 		/// </value>
 		public static int CacheDuration {
 			get {
-				int cacheDuration;
-				try {
-					cacheDuration = 
-						(int)GConfClient.Get (GConfKeyBase + "cacheDuration");
-				} catch (GConf.NoSuchKeyException) {
-					cacheDuration = 10;
-				}
-				return cacheDuration;
+				return prefs.Get<int> ("cacheDuration", 10);
 			}
-
 			set {
-				GConfClient.Set(GConfKeyBase + "cacheDuration", value);
+				prefs.Set<int> ("cacheDuration", value);
 			}
-		}
-
-		private static string GConfKeyBase {
-			get { return "/apps/gnome-do/plugins/rss/"; }
 		}
 
 		public override void UpdateItems () {
@@ -146,19 +115,20 @@ namespace Do.Plugins.Rss
 						// and link.
 						reader.MoveToAttribute ("text");
 						title = reader.Value;
-						reader.MoveToAttribute ("xmlUrl");
-						link = reader.Value;
-
-						// Create a new bookmark using the BookmarkItem class 
-						// from the Do.Addins library. The Open URL action 
-						// already knows how to open BookmarkItems.
-						items.Add (new RssFeedItem (title, link));
+						
+						// If it doesn't find a URL, then this is a category outline
+						if (reader.MoveToAttribute ("xmlUrl")) {
+							link = reader.Value;
+							// Create a new bookmark using the BookmarkItem class 
+							// from the Do.Addins library. The Open URL action 
+							// already knows how to open BookmarkItems.
+							items.Add (new RssFeedItem (title, link));
+						}						
 					}
 				}
 			} catch (Exception e) {
 				// Something went horribly wrong, so we print the error message.
-				Console.Error.WriteLine ("Could not read OPML file {0}: {1}",
-						opmlFile, e.Message);
+				Log.Error("Could not read OPML file {0}: {1}", opmlFile, e.Message);
 			}
 		}
 
