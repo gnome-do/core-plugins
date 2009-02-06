@@ -13,12 +13,12 @@ FILES = \
 	src/VMDynItem.cs \
 	src/VMItem.cs \
 	src/VMItemSource.cs \
-	src/VMThread.cs 
+	src/VMThread.cs  \
+	src/IconMap.cs
 
 RESOURCES = \
 	Resources/VirtualBox.addin.xml \
 	Resources/icons/os_dos.png \
-	Resources/icons/os_linux.png \
 	Resources/icons/os_os2warp4.png \
 	Resources/icons/os_win95.png \
 	Resources/icons/VirtualBox_64px.png \
@@ -58,6 +58,25 @@ RESOURCES = \
 	Resources/icons/os_linux26.png \
 	Resources/icons/os_os2warp45.png \
 	Resources/icons/os_win31.png \
+	Resources/icons/os_redhat_64.png \
+	Resources/icons/os_solaris_64.png \
+	Resources/icons/os_ubuntu_64.png \
+	Resources/icons/os_win2k3_64.png \
+	Resources/icons/os_win2k8_64.png \
+	Resources/icons/os_winvista_64.png \
+	Resources/icons/os_winxp_64.png \
+	Resources/icons/os_xandros_64.png \
+	Resources/icons/os_archlinux_64.png \
+	Resources/icons/os_debian_64.png \
+	Resources/icons/os_fedora_64.png \
+	Resources/icons/os_freebsd_64.png \
+	Resources/icons/os_gentoo_64.png \
+	Resources/icons/os_linux24_64.png \
+	Resources/icons/os_linux26_64.png \
+	Resources/icons/os_mandriva_64.png \
+	Resources/icons/os_netbsd_64.png \
+	Resources/icons/os_openbsd_64.png \
+	Resources/icons/os_os2ecs.png \
 	Resources/icons/take_snapshot_22px.png
 
 REFERENCES = \

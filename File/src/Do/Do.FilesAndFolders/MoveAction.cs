@@ -54,7 +54,7 @@ namespace Do.FilesAndFolders
 		{
 			string result = null;
 			Log.Info ("Moving {0} to {1}...", source, destination);
-			PerformOnThread (() => {
+			Services.Application.RunOnThread (() => {
 				try {
 					result = Move (source, destination);
 				} catch (Exception e) {

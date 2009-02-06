@@ -18,13 +18,23 @@ ASSEMBLY_FILE = $(BUILD_DIR)/$(ASSEMBLY).$(ASSEMBLY_EXTENSION)
 STD_REFERENCES = $(foreach ref,$(filter-out -r:%,$(REFERENCES)),-r:$(ref))
 BUILD_REFERENCES = $(filter -r:%,$(REFERENCES) $(STD_REFERENCES))
 
+MA_MANIFEST_FILE = $(filter %.addin.xml, $(RESOURCES_EXPANDED))
+MA_ADDIN_NAME = $(shell egrep -o -m 1 'id=".*"' $(MA_MANIFEST_FILE) \
+	          | sed 's/id="//g' | sed 's/"//g')
+MA_ADDIN_VER = $(shell egrep -o -m 1 'version=".*"' $(MA_MANIFEST_FILE) \
+	          | sed 's/version="//g' | sed 's/"//g')
+MA_ADDIN_NAMESPACE = Do
+MA_PACKFILE = $(MA_ADDIN_NAMESPACE).$(MA_ADDIN_NAME)_$(MA_ADDIN_VER).mpack
+
 OUTPUT_FILES = \
         $(ASSEMBLY_FILE) \
-        $(ASSEMBLY_FILE).mdb
+        $(ASSEMBLY_FILE).mdb \
+	$(BUILD_DIR)/$(MA_PACKFILE)
+
 
 # Install plugins as data; there's no need for them to be excutable
 plugindir = ${datadir}/gnome-do/plugins
-plugin_DATA = $(foreach file,$(filter %.dll,$(OUTPUT_FILES)),$(file) $(file).mdb)
+plugin_DATA = $(OUTPUT_FILES)
 
 MCS_FLAGS = $(MCS_LINQ_FLAG) -noconfig -codepage:utf8 -warn:4
 
@@ -32,10 +42,13 @@ if ENABLE_DEBUG
 MCS_FLAGS += -debug -d:DEBUG
 endif
 
-all: $(ASSEMBLY_FILE)
+all: $(OUTPUT_FILES)
 
 reference-debug:
 	@echo $(BUILD_REFERENCES) $(COMPONENT_REFERENCES)
+	@echo $(RESOURCES_EXPANDED)
+	@echo $(MA_MANIFEST_FILE)
+
 
 $(ASSEMBLY_FILE).mdb: $(ASSEMBLY_FILE)
 
@@ -57,6 +70,9 @@ $(ASSEMBLY_FILE): $(SOURCES_BUILD) $(RESOURCES_EXPANDED) $(COMPONENT_DEPS)
 	@if [ -e $(srcdir)/$(notdir $@.config) ]; then \
 	        cp $(srcdir)/$(notdir $@.config) $(BUILD_DIR) ; \
 	fi;
+
+$(BUILD_DIR)/$(MA_PACKFILE): $(ASSEMBLY_FILE)
+	cd $(BUILD_DIR) && $(MAUTIL) pack $(ASSEMBLY_FILE)
 
 #
 # Clean and dist targets

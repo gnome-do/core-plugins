@@ -1,8 +1,8 @@
 // ProfileItem.cs
 // 
-// GNOME Do is the legal property of its developers, whose names are too numerous
-// to list here.  Please refer to the COPYRIGHT file distributed with this
-// source distribution.
+// GNOME Do is the legal property of its developers, whose names are too
+// numerous to list here.  Please refer to the COPYRIGHT file distributed with
+// this source distribution.
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,16 +19,19 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 using GConf;
 using Mono.Unix;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace GNOME.Terminal 
 {
-	public class ProfileItem : Item
+
+	public class ProfileItem : Item, IOpenableItem
 	{
 		readonly new string DefaultName = Catalog.GetString ("Unnamed Profile");
 		readonly new string DefaultDescription = Catalog.GetString ("GNOME Terminal Profile");
@@ -43,11 +46,15 @@ namespace GNOME.Terminal
 			try {
 				name = (string) client.Get (profilePath + "/visible_name");
 				description = (string) client.Get (profilePath + "/custom_command");
+				if (!string.IsNullOrEmpty (description))
+					description = string.Format ("{0} - {1}", description, DefaultDescription);
 			} catch {
 				name = description = null;
 			} finally {
-				name = name ?? DefaultName;
-				description = description ?? DefaultDescription;
+				if (string.IsNullOrEmpty (name))
+					name = DefaultName;
+				if (string.IsNullOrEmpty (description))
+					description = DefaultDescription;
 			}
 		}
 
@@ -61,6 +68,18 @@ namespace GNOME.Terminal
 
 		public override string Icon {
 			get { return "gnome-terminal"; }
+		}
+
+		public void Open ()
+		{
+			try {
+				string args = string.Format ("--window-with-profile=\"{0}\"", Name);
+				Process.Start ("gnome-terminal", args);
+			} catch (Exception e) {
+				Log<ProfileItem>
+					.Error ("Could not open gnome-terminal for {0}: {1}", Name, e.Message );
+				Log<ProfileItem>.Debug (e.StackTrace);
+			}
 		}
 	}
 }

@@ -3,28 +3,27 @@
 	namespace= "Do"
 	version="0.9"
 	name="Banshee (beta)"
-	description="Control Banshee Media Player playback."
+	description="Control Banshee Media Player playback and Search Collection"
 	author="Alex Launi"
 	category="Official"
 >
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
+		<Import assembly="Banshee.CollectionIndexer.dll"/>
 	</Runtime>
 	
 	<Dependencies>
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 	
-	<Extension path="/Do/Action">
-		<Action type="Banshee.PlayAction" />
-		<Action type="Banshee.PauseAction" />
-		<Action type="Banshee.NextAction" />
-		<Action type="Banshee.PreviousAction" />
-	</Extension>
+	<!-- Extensions included in this assembly -->
 
-	<Extension path="/Do/ItemSource">
-		<ItemSource type="Banshee.BansheeItemSource" />
+	<!-- Actions -->
+	<Extension path = "/Do/Action">
+		<Action type = "Banshee.PlayAction" />
+		<Action type = "Banshee.PauseAction" />
+		<Action type = "Banshee.NextAction" />
+		<Action type = "Banshee.PreviousAction" />
 	</Extension>
-
 </Addin>

@@ -23,28 +23,28 @@ namespace Pastebin
 {
 	public class PastebinProviderFactory
 	{		
-		public static IPastebinProvider GetProviderFromPreferences(string text, string syntax)
+		public static IPastebinProvider GetProviderFromPreferences (string text, string syntax)
 		{
 			object [] args = new object [] {text, syntax};
-			return GetProviderFromPreferences(args);
+			return GetProviderFromPreferences (args);
 		}
 		
-		public static IPastebinProvider GetProviderFromPreferences(string text)
+		public static IPastebinProvider GetProviderFromPreferences (string text)
 		{
 			object [] args = new object [] {text};
-			return GetProviderFromPreferences(args);		
+			return GetProviderFromPreferences (args);		
 		}
 				
-		public static IPastebinProvider GetProviderFromPreferences()
+		public static IPastebinProvider GetProviderFromPreferences ()
 		{
 			object [] args = new object [] {};
-			return GetProviderFromPreferences(args);		
+			return GetProviderFromPreferences (args);		
 		}
 				
-		public static IPastebinProvider GetProviderFromPreferences(object [] args)
+		public static IPastebinProvider GetProviderFromPreferences (object [] args)
 		{	
-			Type providerType = Type.GetType(PastebinConfig.SelectedProviderType, true);
-			IPastebinProvider provider = (IPastebinProvider)System.Activator.CreateInstance(providerType, args);
+			Type providerType = Type.GetType (PastebinConfig.SelectedProviderType, true);
+			IPastebinProvider provider = (IPastebinProvider) System.Activator.CreateInstance (providerType, args);
 			return provider;
 		}	
 	}

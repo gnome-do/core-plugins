@@ -34,6 +34,8 @@ namespace Pastebin
 
 		string UserAgent { get; }
 		
+		bool Expect100Continue { get; }
+		
 		NameValueCollection Parameters { get; }
 		
 		string GetPasteUrlFromResponse (HttpWebResponse response);
