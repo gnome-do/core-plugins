@@ -297,10 +297,8 @@ namespace XRandR
 			}
 		}
 		public static void doWithScreenResources(IntPtr display,ResourceAction<ScreenResources> func){
-			IntPtr w = External.XRootWindow(display,0);
-			IntPtr res = External.XRRGetScreenResources(display,w);
-			func(new ScreenResources(display,res));
-			External.XRRFreeScreenResources(res);
+			foreach(ScreenResources res in ScreenResources(display))
+				func(res);
 		}
 		public static IEnumerable<ScreenResources> ScreenResources(IntPtr display){
 			IntPtr w = External.XRootWindow(display,0);
