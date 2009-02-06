@@ -80,7 +80,7 @@ namespace XRandR
 			items.Clear ();
 			foreach(ScreenResources res in External.ScreenResources()){
 				res.Outputs.AllWithId(delegate(int id,XRROutputInfo output){
-					items.Add (new OutputItem(id,output));
+					items.Add (new OutputItem(id,output,output.connection==0));
 				});
 			}
 		}

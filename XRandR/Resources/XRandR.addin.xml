@@ -1,7 +1,7 @@
 <Addin
 	id="XRandR"
 	namespace="Do"
-	version="0.3.0"
+	version="0.3.1"
 	name="XRandR Screen Resolution Control"
 	description="Control the resolution of your X outputs."
 	author="Johannes Rudolph"

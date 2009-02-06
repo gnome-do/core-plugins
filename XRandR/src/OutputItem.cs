@@ -29,10 +29,12 @@ namespace XRandR
 	{
 		string name;
 		int id;
-		public OutputItem(int id,XRROutputInfo output)
+		bool connected;
+		public OutputItem(int id,XRROutputInfo output,bool connected)
 		{
 			this.name = output.name;
 			this.id = id;
+			this.connected = connected;
 		}
 		
 		public override string Name {
@@ -43,7 +45,7 @@ namespace XRandR
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Set your resolution"); }
+			get { return Catalog.GetString (connected ? "Set your resolution" : "Not connected"); }
 		}
 		
 		public override string Icon {
