@@ -29,6 +29,7 @@ namespace RememberTheMilk
 		const string FilterKey = "Filter";
 		const string OverdueNotificationKey = "OverdueNotification";
 		const string ActionNotificationKey = "ActionNotification";
+		const string ReturnNewTaskKey = "ReturnNewTask";
 		
 		IPreferences prefs;
 		
@@ -60,6 +61,11 @@ namespace RememberTheMilk
 		public bool ActionNotification {
 			get { return prefs.Get<bool> (ActionNotificationKey, true); }
 			set { prefs.Set<bool> (ActionNotificationKey, value); }
+		}
+		
+		public bool ReturnNewTask {
+			get { return prefs.Get<bool> (ReturnNewTaskKey, true); }
+			set { prefs.Set<bool> (ReturnNewTaskKey, value); }
 		}
 	}
 }
