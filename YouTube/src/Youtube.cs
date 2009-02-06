@@ -69,7 +69,8 @@ namespace Do.Universe
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
 						    //Log<Youtube>.Debug("Video #{0}, Title: {1}", ++i, entry.Title.Text);
-							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
+							string url = ("http://www.youtube.com/watch?v="+entry.VideoId);
+							//Log<Youtube>.Debug("Video url: {0}", url);
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							favorites.Add(video);
 						}
@@ -79,6 +80,7 @@ namespace Do.Universe
 						videoFeed = service.Query(query);
 					}
 					startIndex = 1;
+					Log<Youtube>.Debug("Finished updating favorite videos");
 				}catch(Exception e) {
 					Log<Youtube>.Error ("Error getting favorites videos - {0}", e.Message);
     				Log<Youtube>.Debug (e.StackTrace);
@@ -104,7 +106,7 @@ namespace Do.Universe
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
 						    //Log<Youtube>.Debug("Video #{0}, Title(own video): {1}", ++i, entry.Title.Text);
-							string url = "http://www.youtube.com/watch?v="+entry.Id.AbsoluteUri.Substring(entry.Id.AbsoluteUri.Length - 11);
+							string url = "http://www.youtube.com/watch?v="+entry.VideoId;
 							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
 							own.Add(video);
 						}
@@ -113,6 +115,7 @@ namespace Do.Universe
 						query = new YouTubeQuery(feedUrl);
 						videoFeed = service.Query(query);
 					}
+					Log<Youtube>.Debug("Finished updating own videos");
 				}catch(Exception e) {
 					Log<Youtube>.Error ("Error getting own videos - {0}", e.Message);
     				Log<Youtube>.Debug (e.StackTrace);
@@ -143,6 +146,7 @@ namespace Do.Universe
 							Youtube.subscriptions.Add(subscription);
 						}
 					}
+					Log<Youtube>.Debug("Finished updating subscriptions");
 				}
 				catch(Exception e) 
 				{

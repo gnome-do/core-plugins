@@ -4,6 +4,7 @@ using Mono.Unix;
 using Gtk;
 using Do.Universe;
 using Do.Platform.Linux;
+using System.Threading;
 
 namespace Do.Universe
 {
@@ -29,7 +30,9 @@ namespace Do.Universe
 		
 		public override void UpdateItems ()
 		{
-			Youtube.updateFavorites();
+			Thread t = new Thread((ThreadStart) Youtube.updateFavorites);
+			t.IsBackground = true;
+			t.Start();
 		}
 		
 		public Gtk.Bin GetConfiguration ()

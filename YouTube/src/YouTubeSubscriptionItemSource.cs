@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mono.Unix;
+using System.Threading;
 using Do.Universe;
 
 namespace Do.Universe
@@ -27,7 +28,9 @@ namespace Do.Universe
 		
 		public override void UpdateItems ()
 		{
-			Youtube.updateSubscriptions();
+			Thread t = new Thread((ThreadStart) Youtube.updateSubscriptions);
+			t.IsBackground = true;
+			t.Start();
 		}		
 	}
 }
