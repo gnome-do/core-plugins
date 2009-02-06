@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.7.97])
+AC_INIT([gnome-do-plugins], [0.8.0.1])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
@@ -20,6 +20,13 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
+dnl We need mautil (at least for now)
+AC_PATH_PROG(MAUTIL, mautil, no)
+if test "x$MAUTIL" = "xno" ; then
+   	AC_MSG_ERROR([You need to install mautil (from mono-addins)])
+fi
+AC_SUBST([MAUTIL])
+
 AC_PROG_INSTALL
 
 top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
@@ -30,6 +37,7 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2])
 PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
 PKG_CHECK_MODULES([FLICKRNET], [flickrnet])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
@@ -54,6 +62,10 @@ GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.d
 GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
 GDATA_SHARP_CONTACTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Contacts.dll"
 
+dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
+BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
+
+AC_SUBST([BANSHEE_INDEXER_DLL])
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])
@@ -77,12 +89,10 @@ AC_SUBST([NOTIFY_SHARP_LIBS])
 AC_SUBST([WNCK_SHARP_10_LIBS])
 
 dnl Do core references
-PKG_CHECK_MODULES([DO_DBUS], [do.dbus >= 0.8])
 PKG_CHECK_MODULES([DO_PLATFORM], [do.platform >= 0.8])
 PKG_CHECK_MODULES([DO_PLATFORM_LINUX], [do.platform.linux >= 0.8])
 PKG_CHECK_MODULES([DO_UNIVERSE], [do.universe >= 0.8])
 
-AC_SUBST([DO_DBUS_LIBS])
 AC_SUBST([DO_PLATFORM_LIBS])
 AC_SUBST([DO_PLATFORM_LINUX_LIBS])
 AC_SUBST([DO_UNIVERSE_LIBS])
@@ -119,6 +129,7 @@ ClawsMail/Makefile
 Confluence/Makefile
 Del.icio.us/Makefile
 DiskMounter/Makefile
+Emesene/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile
 Evolution/Makefile
@@ -175,6 +186,7 @@ WindowManager/Makefile
 Woof/Makefile
 Wordnet/Makefile
 Xmms2/Makefile
+YouTube/Makefile
 Zim/Makefile
 Makefile
 po/Makefile.in

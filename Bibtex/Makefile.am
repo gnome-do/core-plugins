@@ -3,7 +3,7 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Bibtex
 
 FILES = \
-	gtk-gui/Do.Addins.Bibtex.Configuration.cs \
+	gtk-gui/Bibtex.Configuration.cs \
 	gtk-gui/generated.cs \
 	src/BibtexAuthorsItem.cs \
 	src/BibtexCiteAction.cs \

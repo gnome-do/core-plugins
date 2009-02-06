@@ -72,7 +72,7 @@ namespace VirtualBox
 				t.IsBackground = true;
 				t.Start();
 			}		
-			return null;
+			yield break;
 		}
 	}
 }

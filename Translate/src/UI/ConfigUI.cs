@@ -32,181 +32,172 @@ namespace Translate
 	{
 		static IPreferences TranslatePluginPrefs;
 		
-		public ConfigUI()
+		public ConfigUI ()
 		{
-			this.Build();
-			SetupColumns();
-			FillProviderCmb();	
+			this.Build ();
+			SetupColumns ();
+			FillProviderCmb ();	
 		}
-		static ConfigUI()
+		static ConfigUI ()
 		{
 			TranslatePluginPrefs = Services.Preferences.Get<Translate.ConfigUI> ();
 		}
 		
-		public void SetupColumns()
+		public void SetupColumns ()
 		{		
 			//setup columns
-			Gtk.TreeViewColumn FlagCol = new Gtk.TreeViewColumn();
+			Gtk.TreeViewColumn FlagCol = new Gtk.TreeViewColumn ();
 			Gtk.CellRendererPixbuf pixbuf = new Gtk.CellRendererPixbuf ();	
-			FlagCol.PackStart(pixbuf, false);
-			treeEnableLang.AppendColumn(FlagCol);
-			FlagCol.AddAttribute(pixbuf, "pixbuf", 0);
+			FlagCol.PackStart (pixbuf, false);
+			treeEnableLang.AppendColumn (FlagCol);
+			FlagCol.AddAttribute (pixbuf, "pixbuf", 0);
 			
-			Gtk.TreeViewColumn LanguageCol = new Gtk.TreeViewColumn();
-			Gtk.CellRendererText text = new Gtk.CellRendererText();
-			LanguageCol.PackStart(text, true);
-			treeEnableLang.AppendColumn(LanguageCol);
-			LanguageCol.AddAttribute(text, "text", 1);
+			Gtk.TreeViewColumn LanguageCol = new Gtk.TreeViewColumn ();
+			Gtk.CellRendererText text = new Gtk.CellRendererText ();
+			LanguageCol.PackStart (text, true);
+			treeEnableLang.AppendColumn (LanguageCol);
+			LanguageCol.AddAttribute (text, "text", 1);
 			
-			Gtk.TreeViewColumn IsEnabled = new Gtk.TreeViewColumn();
-			Gtk.CellRendererToggle EnabledToggle = new Gtk.CellRendererToggle();
+			Gtk.TreeViewColumn IsEnabled = new Gtk.TreeViewColumn ();
+			Gtk.CellRendererToggle EnabledToggle = new Gtk.CellRendererToggle ();
 			EnabledToggle.Activatable = true;
 			EnabledToggle.Toggled += CheckEnable;
-			IsEnabled.PackStart(EnabledToggle, false);
-			treeEnableLang.AppendColumn(IsEnabled);
-			IsEnabled.AddAttribute(EnabledToggle, "active", 2);
+			IsEnabled.PackStart (EnabledToggle, false);
+			treeEnableLang.AppendColumn (IsEnabled);
+			IsEnabled.AddAttribute (EnabledToggle, "active", 2);
 			
 			//add a dummy column to fill the rest
-			Gtk.TreeViewColumn DummyCol = new Gtk.TreeViewColumn();
-			Gtk.CellRendererText DummyText = new Gtk.CellRendererText();
-			DummyCol.PackStart(DummyText, true);
-			treeEnableLang.AppendColumn(DummyCol);
-			DummyCol.AddAttribute(DummyText, "text", 3);
+			Gtk.TreeViewColumn DummyCol = new Gtk.TreeViewColumn ();
+			Gtk.CellRendererText DummyText = new Gtk.CellRendererText ();
+			DummyCol.PackStart (DummyText, true);
+			treeEnableLang.AppendColumn (DummyCol);
+			DummyCol.AddAttribute (DummyText, "text", 3);
 		}
-		public void FillProviderCmb()
+		public void FillProviderCmb ()
 		{		
-			cmbProvider.Clear();
+			cmbProvider.Clear ();
 			
-	        Gtk.CellRendererText cell = new Gtk.CellRendererText();
+	        Gtk.CellRendererText cell = new Gtk.CellRendererText ();
 			Gtk.CellRendererPixbuf pixbuf = new Gtk.CellRendererPixbuf ();
-			cmbProvider.PackStart(pixbuf, true);
-			cmbProvider.PackStart(cell, true);
-			cmbProvider.AddAttribute(pixbuf, "pixbuf" , 0);
-	        cmbProvider.AddAttribute(cell, "text", 1);	
+			cmbProvider.PackStart (pixbuf, true);
+			cmbProvider.PackStart (cell, true);
+			cmbProvider.AddAttribute (pixbuf, "pixbuf" , 0);
+	        cmbProvider.AddAttribute (cell, "text", 1);	
 			
-			Gtk.ListStore ProvidersList = new Gtk.ListStore(typeof (Gdk.Pixbuf), typeof (string));
+			Gtk.ListStore ProvidersList = new Gtk.ListStore (typeof (Gdk.Pixbuf), typeof (string));
 			
 			// Get an instance of each pastebin provider in this assembly.
-			var providers = from type in Assembly.GetExecutingAssembly().GetTypes()
-					where type.GetInterface("Translate.ITranslateProvider") != null
-					select Activator.CreateInstance(type);
+			var providers = from type in Assembly.GetExecutingAssembly ().GetTypes ()
+					where type.GetInterface ("Translate.ITranslateProvider") != null
+					select Activator.CreateInstance (type);
 			
 			Gdk.Pixbuf pb = null;
 			string[] Icon = null;
-			foreach (ITranslateProvider provider in providers)
-			{
-				Icon = provider.Icon.Split(new char[] {'@'});
-				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0]))
-				{
-					pb = temp.ScaleSimple((20 * temp.Width)/temp.Height, 20, Gdk.InterpType.Bilinear);
+			foreach (ITranslateProvider provider in providers) {
+				Icon = provider.Icon.Split (new char[] {'@'});
+				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0])) {
+					pb = temp.ScaleSimple ((20 * temp.Width)/temp.Height, 20, Gdk.InterpType.Bilinear);
 				}		    
 		        ProvidersList.AppendValues (pb, provider.Name);
 			}
 			cmbProvider.Model = ProvidersList;
 			//set selection to what's in GConf, if we can
 			Gtk.TreeIter ti;
-			if (SearchCombobox(out ti, cmbProvider, SelectedProvider,1))
-				cmbProvider.SetActiveIter(ti);
+			if (SearchCombobox (out ti, cmbProvider, SelectedProvider,1))
+				cmbProvider.SetActiveIter (ti);
 		}
 		
-		public void FillSourceCmb(ITranslateProvider Translator)
+		public void FillSourceCmb (ITranslateProvider Translator)
 		{
-			cmbDefaultSource.Clear();
+			cmbDefaultSource.Clear ();
 			
-	        Gtk.CellRendererText cell = new Gtk.CellRendererText();
+	        Gtk.CellRendererText cell = new Gtk.CellRendererText ();
 			Gtk.CellRendererPixbuf pixbuf = new Gtk.CellRendererPixbuf ();
-			cmbDefaultSource.PackStart(pixbuf, true);
-			cmbDefaultSource.PackStart(cell, true);
-			cmbDefaultSource.AddAttribute(pixbuf, "pixbuf" , 0);
-	        cmbDefaultSource.AddAttribute(cell, "text", 1);	
+			cmbDefaultSource.PackStart( pixbuf, true);
+			cmbDefaultSource.PackStart (cell, true);
+			cmbDefaultSource.AddAttribute (pixbuf, "pixbuf" , 0);
+	        cmbDefaultSource.AddAttribute (cell, "text", 1);	
 			
 			
-			Gtk.ListStore SourceList = new Gtk.ListStore(typeof (Gdk.Pixbuf), typeof (string), typeof (string));
+			Gtk.ListStore SourceList = new Gtk.ListStore (typeof (Gdk.Pixbuf), typeof (string), typeof (string));
 
 			Gdk.Pixbuf LanguageFlag = null;
 			const int scale_height = 20;
 			string[] Icon = null;
 			if (Translator.SupportsAutoDetect)
-				SourceList.AppendValues(null, Catalog.GetString("Auto Detect (Recommended)"), Translator.AutoDetectCode);
+				SourceList.AppendValues (null, Catalog.GetString ("Auto Detect (Recommended)"), Translator.AutoDetectCode);
 			foreach (LanguageItem Lang in Translator.SupportedLanguages)
 			{
-				Icon = Lang.Icon.Split(new char[] {'@'});
-				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0]))
-				{
-					LanguageFlag = temp.ScaleSimple((scale_height * temp.Width) / temp.Height, scale_height, Gdk.InterpType.Bilinear);
+				Icon = Lang.Icon.Split (new char[] {'@'});
+				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource (Icon[0])) {
+					LanguageFlag = temp.ScaleSimple ((scale_height * temp.Width) / temp.Height, scale_height, Gdk.InterpType.Bilinear);
 				}
-				SourceList.AppendValues(LanguageFlag, Lang.Name, Lang.Code);
+				SourceList.AppendValues (LanguageFlag, Lang.Name, Lang.Code);
 			}
 
 			cmbDefaultSource.Model = SourceList;
 			//set default source to auto if it's enabled, else try what's in gconf, else, just the first in the list
 			Gtk.TreeIter ti;
-			if ((Translator.SupportsAutoDetect) && (SearchCombobox(out ti, cmbDefaultSource, Translator.AutoDetectCode, 2)))
-				cmbDefaultSource.SetActiveIter(ti);
+			if ((Translator.SupportsAutoDetect) && (SearchCombobox (out ti, cmbDefaultSource, Translator.AutoDetectCode, 2)))
+				cmbDefaultSource.SetActiveIter (ti);
 			else if (SearchCombobox(out ti, cmbDefaultSource, SelectedSourceLang, 2))
-				cmbDefaultSource.SetActiveIter(ti);
-			else
-			{
-				cmbDefaultSource.Model.GetIterFirst(out ti);
-				cmbDefaultSource.SetActiveIter(ti);
+				cmbDefaultSource.SetActiveIter (ti);
+			else {
+				cmbDefaultSource.Model.GetIterFirst (out ti);
+				cmbDefaultSource.SetActiveIter (ti);
 			}
 		}
 		
-		private void FillIfaceCmb(ITranslateProvider Translator)
+		private void FillIfaceCmb (ITranslateProvider Translator)
 		{
-			cmbDefaultIface.Clear();
+			cmbDefaultIface.Clear ();
 			
-	        Gtk.CellRendererText cell = new Gtk.CellRendererText();
+	        Gtk.CellRendererText cell = new Gtk.CellRendererText ();
 			Gtk.CellRendererPixbuf pixbuf = new Gtk.CellRendererPixbuf ();
-			cmbDefaultIface.PackStart(pixbuf, true);
-			cmbDefaultIface.PackStart(cell, true);
-			cmbDefaultIface.AddAttribute(pixbuf, "pixbuf" , 0);
-	        cmbDefaultIface.AddAttribute(cell, "text", 1);	
+			cmbDefaultIface.PackStart (pixbuf, true);
+			cmbDefaultIface.PackStart (cell, true);
+			cmbDefaultIface.AddAttribute (pixbuf, "pixbuf" , 0);
+	        cmbDefaultIface.AddAttribute (cell, "text", 1);	
 			
-			Gtk.ListStore IfaceList = new Gtk.ListStore(typeof (Gdk.Pixbuf), typeof (string), typeof (string));
+			Gtk.ListStore IfaceList = new Gtk.ListStore (typeof (Gdk.Pixbuf), typeof (string), typeof (string));
 
 			Gdk.Pixbuf LanguageFlag = null;
 			const int scale_height = 20;
 			string[] Icon = null;
-			foreach (LanguageItem Lang in Translator.SupportedLanguages)
-			{
+			foreach (LanguageItem Lang in Translator.SupportedLanguages) {
 				Icon = Lang.Icon.Split(new char[] {'@'});
-				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0]))
-				{
-					LanguageFlag = temp.ScaleSimple((scale_height * temp.Width) / temp.Height, scale_height, Gdk.InterpType.Bilinear);
+				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0])) {
+					LanguageFlag = temp.ScaleSimple ((scale_height * temp.Width) / temp.Height, scale_height, Gdk.InterpType.Bilinear);
 				}
-				IfaceList.AppendValues(LanguageFlag, Lang.Name, Lang.Code);
+				IfaceList.AppendValues (LanguageFlag, Lang.Name, Lang.Code);
 			}
 
 			cmbDefaultIface.Model = IfaceList;
 			//set selection to what's in GConf, if we can
 			Gtk.TreeIter ti;
-			if (SearchCombobox(out ti, cmbDefaultIface, SelectedIfaceLang, 2))
+			if (SearchCombobox (out ti, cmbDefaultIface, SelectedIfaceLang, 2))
 				cmbDefaultIface.SetActiveIter(ti);
-			else
-			{
-				cmbDefaultIface.Model.GetIterFirst(out ti);
-				cmbDefaultIface.SetActiveIter(ti);
+			else {
+				cmbDefaultIface.Model.GetIterFirst (out ti);
+				cmbDefaultIface.SetActiveIter (ti);
 			}
 		}
 		
 		private void FillEnableBox(ITranslateProvider Translator)
 		{
-			Gtk.ListStore LanguageList = new Gtk.ListStore(typeof (Gdk.Pixbuf), typeof (string), typeof (bool), typeof (string), typeof (LanguageNode));
+			Gtk.ListStore LanguageList = new Gtk.ListStore (typeof (Gdk.Pixbuf), typeof (string), typeof (bool), typeof (string), typeof (LanguageNode));
 			const int scale_height = 25;
 			Gdk.Pixbuf LanguageFlag = null;
 			string[] Icon = null;
 			LanguageNode LanguageTreeNode = null;
 
-			foreach (LanguageItem Lang in Translator.SupportedLanguages)
-			{
-				Icon = Lang.Icon.Split(new char[] {'@'});
-				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0]))
-				{
-					LanguageFlag = temp.ScaleSimple((scale_height * temp.Width) / temp.Height, scale_height, Gdk.InterpType.Bilinear);
+			foreach (LanguageItem Lang in Translator.SupportedLanguages) {
+				Icon = Lang.Icon.Split (new char[] {'@'});
+				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0])) {
+					LanguageFlag = temp.ScaleSimple ((scale_height * temp.Width) / temp.Height, scale_height, Gdk.InterpType.Bilinear);
 				}
-				LanguageTreeNode = new LanguageNode(LanguageFlag, Lang.Name, Lang.Code);
-				LanguageList.AppendValues(LanguageTreeNode.Icon, LanguageTreeNode.Name, LanguageTreeNode.IsEnabled, string.Empty, LanguageTreeNode);
+				LanguageTreeNode = new LanguageNode (LanguageFlag, Lang.Name, Lang.Code);
+				LanguageList.AppendValues (LanguageTreeNode.Icon, LanguageTreeNode.Name, LanguageTreeNode.IsEnabled, string.Empty, LanguageTreeNode);
 			}
 
 			treeEnableLang.HeadersVisible = false;
@@ -218,11 +209,9 @@ namespace Translate
 			Gtk.TreeIter iter;
 			Gtk.TreeModel model = treeEnableLang.Model;
 			
-			if(model.GetIter(out iter, new Gtk.TreePath(e.Path))) 
-			{
-				LanguageNode SelectedLanguage = (LanguageNode)model.GetValue(iter, 4);
-				if (SelectedLanguage.Name != "Auto Detect Language")
-				{
+			if (model.GetIter (out iter, new Gtk.TreePath (e.Path))) {
+				LanguageNode SelectedLanguage = (LanguageNode)model.GetValue (iter, 4);
+				if (SelectedLanguage.Name != "Auto Detect Language") {
 					bool currentState = SelectedLanguage.IsEnabled;
 					SelectedLanguage.IsEnabled = !currentState;
 					model.SetValue(iter, 2, SelectedLanguage.IsEnabled);
@@ -230,15 +219,13 @@ namespace Translate
 			}
 		}
 
-		public bool SearchCombobox(out Gtk.TreeIter ti, Gtk.ComboBox box, string val, int col)
+		public bool SearchCombobox (out Gtk.TreeIter ti, Gtk.ComboBox box, string val, int col)
 		{
-			box.Model.GetIterFirst(out ti);
-			do 
-			{
-				if ((string)box.Model.GetValue(ti,col) == val)
+			box.Model.GetIterFirst (out ti);
+			do {
+				if ((string)box.Model.GetValue (ti,col) == val)
 					return true;
-			} while (box.Model.IterNext(ref ti));
-			//haven't found it
+			} while (box.Model.IterNext (ref ti));
 			return false;
 		}
 
@@ -246,30 +233,30 @@ namespace Translate
 		{
 			Gtk.ComboBox ProviderBox = (Gtk.ComboBox)sender;
 			Gtk.TreeIter ti;
-			ProviderBox.GetActiveIter(out ti);
-			SelectedProvider = (string)ProviderBox.Model.GetValue(ti,1);
-			ITranslateProvider Translator = TranslateProviderFactory.GetProviderFromPreferences();
+			ProviderBox.GetActiveIter (out ti);
+			SelectedProvider = (string)ProviderBox.Model.GetValue (ti,1);
+			TranslateEngine.LoadValuesFromPrefs();
+			ITranslateProvider Translator = TranslateEngine.Translator;
 			
 			//fill boxes
-			FillSourceCmb(Translator);
+			FillSourceCmb (Translator);
 			if (Translator.SupportsIfaceLang)
-				FillIfaceCmb(Translator);
+				FillIfaceCmb (Translator);
 			else
 			{
-				cmbDefaultIface.Clear();
+				cmbDefaultIface.Clear ();
 				cmbDefaultIface.Model = null;
 			}
-			FillEnableBox(Translator);
-			
+			FillEnableBox (Translator);
 		}
 
 		protected virtual void SourceSelectionChanged (object sender, System.EventArgs e)
 		{
 			Gtk.ComboBox SourceBox = (Gtk.ComboBox)sender;
 			Gtk.TreeIter ti;
-			SourceBox.GetActiveIter(out ti);
+			SourceBox.GetActiveIter (out ti);
 			//column 2 holds the language "code"
-			SelectedSourceLang = (string)SourceBox.Model.GetValue(ti,2);
+			SelectedSourceLang = (string)SourceBox.Model.GetValue (ti,2);
 		}
 
 		protected virtual void IfaceSelectionChanged (object sender, System.EventArgs e)
@@ -278,30 +265,29 @@ namespace Translate
 			Gtk.TreeIter ti;
 			IfaceBox.GetActiveIter(out ti);
 			//column 2 holds the language "code"
-			SelectedIfaceLang = (string)IfaceBox.Model.GetValue(ti,2);
+			SelectedIfaceLang = (string)IfaceBox.Model.GetValue (ti,2);
 		}
 		
-		public static string SelectedProvider 
+		public static string SelectedProvider
 		{
-			get 
-			{ 
-				ITranslateProvider DefaultProvider = new Google();
+			get { 
+				ITranslateProvider DefaultProvider = new Google ();
 				return TranslatePluginPrefs.Get<string> ("SelectedProvider", DefaultProvider.Name);
 			}
 			set { TranslatePluginPrefs.Set<string> ("SelectedProvider", value); }
 		}
-		public static string SelectedSourceLang {
-			get 
-			{ 
-				ITranslateProvider Translator = TranslateProviderFactory.GetProviderFromPreferences();				
+		public static string SelectedSourceLang
+		{
+			get { 
+				ITranslateProvider Translator = TranslateProviderFactory.GetProviderFromPreferences ();				
 				return TranslatePluginPrefs.Get<string> ("SelectedSourceLanguage", Translator.DefaultSourceCode); 
 			}
 			set { TranslatePluginPrefs.Set<string> ("SelectedSourceLanguage", value); }
 		}
-		public static string SelectedIfaceLang {
-			get 
-			{ 
-				ITranslateProvider Translator = TranslateProviderFactory.GetProviderFromPreferences();
+		public static string SelectedIfaceLang
+		{
+			get { 
+				ITranslateProvider Translator = TranslateProviderFactory.GetProviderFromPreferences ();
 				return TranslatePluginPrefs.Get<string> ("SelectedIfaceLanguage", Translator.DefaultIfaceCode); 
 			}
 			set { TranslatePluginPrefs.Set<string> ("SelectedIfaceLanguage", value); }

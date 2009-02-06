@@ -45,49 +45,7 @@ namespace Pastebin
 			Parameters[content_key] = "";
 			Parameters[syntax_key] = "text";
 			 
-			SupportedLanguages.Add (new TextSyntaxItem ("Apache Config (.htaccess)", "Apache Config (.htaccess)", "file", "apache"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Bash", "Bash", "file", "bash"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Batch (.bat)", "Batch (.bat)", "file", "bat"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C", "C", "file", "c"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C#", "C#", "file", "csharp"));
-			SupportedLanguages.Add (new TextSyntaxItem ("C++", "C++", "file", "cpp"));
-			SupportedLanguages.Add (new TextSyntaxItem ("CSS", "CSS", "file", "css"));
-			SupportedLanguages.Add (new TextSyntaxItem ("D", "D", "file", "d"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Django / Jinja Templates", "Django / Jinja Templates", "file", "html+django"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Dylan", "Dylan", "file", "dylan"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Erlang", "Erlang", "file", "erlang"));
-			SupportedLanguages.Add (new TextSyntaxItem ("GAS", "GAS", "file", "gas"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Genshi Templates", "Genshi Templates", "file", "html+genshi"));
-			SupportedLanguages.Add (new TextSyntaxItem ("HTML", "HTML", "file", "html"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Haskell", "Haskell", "file", "haskell"));
-			SupportedLanguages.Add (new TextSyntaxItem ("IRC Logs", "IRC Logs", "file", "irc"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Interactive Ruby", "Interactive Ruby", "file", "irb"));
-			SupportedLanguages.Add (new TextSyntaxItem ("JSP", "JSP", "file", "jsp"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Java", "Java", "file", "java"));
-			SupportedLanguages.Add (new TextSyntaxItem ("JavaScript", "JavaScript", "file", "js"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Lua", "Lua", "file", "lua"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Mako Templates", "Mako Templates", "file", "html+mako"));
-			SupportedLanguages.Add (new TextSyntaxItem ("MiniD", "MiniD", "file", "minid"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Myghty Templates", "Myghty Templates", "file", "html+myghty"));
-			SupportedLanguages.Add (new TextSyntaxItem ("OCaml", "OCaml", "file", "ocaml"));
-			SupportedLanguages.Add (new TextSyntaxItem ("PHP", "PHP", "file", "html+php"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Perl", "Perl", "file", "perl"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Python", "Python", "file", "python"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Python Console Sessions", "Python Console Sessions", "file", "pycon"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Python Tracebacks", "Python Tracebacks", "file", "pytb"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Ruby", "Ruby", "file", "ruby"));
-			SupportedLanguages.Add (new TextSyntaxItem ("SQL", "SQL", "file", "sql"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Scheme", "Scheme", "file", "scheme"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Smarty", "Smarty", "file", "smarty"));
-			SupportedLanguages.Add (new TextSyntaxItem ("SquidConf", "SquidConf", "file", "squidconf"));
-			SupportedLanguages.Add (new TextSyntaxItem ("TeX / LaTeX", "TeX / LaTeX", "file", "tex"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Text", "Text", "file", "text"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Unified Diff", "Unified Diff", "file", "diff"));
-			SupportedLanguages.Add (new TextSyntaxItem ("Vim", "Vim", "file", "vim"));
-			SupportedLanguages.Add (new TextSyntaxItem ("XML", "XML", "file", "xml"));
-			SupportedLanguages.Add (new TextSyntaxItem ("eRuby / rhtml", "eRuby / rhtml", "file", "rhtml"));
-			SupportedLanguages.Add (new TextSyntaxItem ("reStructuredText", "reStructuredText", "file", "rst"));
-			SupportedLanguages.Add (new TextSyntaxItem ("sources.list", "sources.list", "file", "sourceslist"));
+			SupportedLanguages = PopulateTextSyntaxItemsFromXml ("LodgeIt.xml");
 		}
 	
 		public LodgeIt (string content, string syntax) : this ()

@@ -32,10 +32,11 @@ namespace GNOME.Terminal
 
 	public class ProfileItemSource : ItemSource
 	{
+		const string GConfTerminalPath = "/apps/gnome-terminal/profiles";
 		static readonly string ProfilesDirectory = 
 			Path.Combine (
 				Environment.GetFolderPath (Environment.SpecialFolder.Personal),
-				".gconf/apps/gnome-terminal/profiles");
+				".gconf" + GConfTerminalPath);
 
 		List<Item> items;
 
@@ -72,7 +73,7 @@ namespace GNOME.Terminal
 
 			string [] profiles = Directory.GetDirectories (ProfilesDirectory);
 			foreach (string _profile in profiles) {
-				string profile = Regex.Replace (_profile, ProfilesDirectory, "");
+				string profile = Regex.Replace (_profile, ProfilesDirectory, GConfTerminalPath);
 				if (profile.EndsWith ("template", StringComparison.CurrentCultureIgnoreCase))
 					continue;
 				items.Add (new ProfileItem (profile));

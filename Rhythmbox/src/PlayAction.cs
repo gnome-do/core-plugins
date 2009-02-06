@@ -18,6 +18,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -26,10 +27,11 @@ using Mono.Unix;
 
 using Do.Universe;
 
+
 namespace Do.Rhythmbox
 {
 
-	public class PlayAction : Act
+	public class PlayAction : AbstractPlaybackAction
 	{
 
 		public PlayAction ()
@@ -41,32 +43,18 @@ namespace Do.Rhythmbox
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Play an item in Rhythmbox."); }
+			get { return Catalog.GetString ("Play music in Rhythmbox."); }
 		}
 
 		public override string Icon {
-			get { return "rhythmbox"; }
+			get { return "media-playback-start"; }
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (MusicItem); }
-		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.StartIfNeccessary ();
-
-				Rhythmbox.Client ("--pause --no-present");
-				Rhythmbox.Client ("--clear-queue --no-present", true);
-				foreach (Item item in items) {
-					string enqueue = "--no-present ";
-					foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
-						enqueue = string.Format ("{0} --enqueue \"{1}\" ", enqueue, song.File);
-					Rhythmbox.Client (enqueue, true);
-				}
-				Rhythmbox.Client ("--next --no-present");
-				Rhythmbox.Client ("--play --no-present");
+				Rhythmbox.Client ("--play --no-start");
 			}).Start ();
 			return null;
 		}
