@@ -248,20 +248,38 @@ namespace XRandR
 			return res;
 		}
 		
+		public class XErrorException:Exception{
+			XErrorEvent xevent;
+			string error_text;
+			internal XErrorException(XErrorEvent xevent,string text){
+				this.xevent = xevent;
+				this.error_text = text;
+			}
+			public override string ToString() {
+				return "got X error: "+"display:"+xevent.display+
+			                  " error:"+((int)xevent.error_code)+"("+error_text+")"+
+			                  " serial:"+xevent.serial+
+			                  " request:"+xevent.request_code+
+			                  " minor:"+xevent.minor_code;			                  
+			}
+		}
+		
 		public static string GetErrorText(IntPtr display,XErrorEvent xevent){
 			StringBuilder sb = new StringBuilder(1000);
 			XGetErrorText(display,xevent.error_code,sb,sb.Capacity);
-			return "display:"+xevent.display+
-			                  " error:"+((int)xevent.error_code)+"("+sb.ToString()+")"+
-			                  " serial:"+xevent.serial+
-			                  " request:"+xevent.request_code+
-			                  " minor:"+xevent.minor_code
-			                  ;
+			return sb.ToString();			
 		}
 		public static IntPtr ignoreErrorHandler(IntPtr display,IntPtr ev){
-			Console.WriteLine("XRandR plugin: got X error: "+GetErrorText(display,Structure<XErrorEvent>(ev)));
+			XErrorEvent xevent = Structure<XErrorEvent>(ev);
+			string text = GetErrorText(display,xevent);
+			XErrorException excp = new XErrorException(xevent,text);
+			
+			Console.WriteLine("XRandR plugin: "+excp.ToString());
 			Console.WriteLine(Environment.StackTrace);
-			return new IntPtr(0);
+			
+			// don't know if it is a good idea to throw an exception out 
+			// of unmanaged code? But seems to work well. 
+			throw excp;
 		}
 		public static void doWithDefaultDisplay(ResourceAction<IntPtr> func){
 			foreach(IntPtr display in DefaultDisplay())
@@ -270,9 +288,13 @@ namespace XRandR
 		public static IEnumerable<IntPtr> DefaultDisplay(){
 			IntPtr oldHandler = XSetErrorHandler(Marshal.GetFunctionPointerForDelegate(new ErrorHandler(ignoreErrorHandler)));
 			IntPtr display = XOpenDisplay(null);
-			yield return display;
-			XCloseDisplay(display);
-			XSetErrorHandler(oldHandler);
+			try{
+				yield return display;
+			}
+			finally{
+				XCloseDisplay(display);
+				XSetErrorHandler(oldHandler);
+			}
 		}
 		public static void doWithScreenResources(IntPtr display,ResourceAction<ScreenResources> func){
 			IntPtr w = External.XRootWindow(display,0);
