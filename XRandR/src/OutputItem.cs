@@ -12,14 +12,19 @@ namespace XRandR
 {
 	public class OutputItem : Item
 	{
-		String name;
-		public OutputItem(String name)
+		string name;
+		int id;
+		public OutputItem(int id,XRROutputInfo output)
 		{
-			this.name = name;
+			this.name = output.name;
+			this.id = id;
 		}
 		
 		public override string Name {
 			get { return name; }
+		}
+		public int Id {
+			get { return id; }
 		}
 		
 		public override string Description {
@@ -27,7 +32,7 @@ namespace XRandR
 		}
 		
 		public override string Icon {
-			get { return "system-config-display"; }
+			get { return "video-display"; }
 		}
 	}
 }

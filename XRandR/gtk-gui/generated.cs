@@ -15,13 +15,6 @@ namespace Stetic {
         
         private static bool initialized;
         
-        public static void Build(object cobj, System.Type type) {
-            Stetic.Gui.Build(cobj, type.FullName);
-        }
-        
-        public static void Build(object cobj, string id) {
-        }
-        
         internal static void Initialize(Gtk.Widget iconRenderer) {
             if ((Stetic.Gui.initialized == false)) {
                 Stetic.Gui.initialized = true;

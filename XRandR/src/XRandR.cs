@@ -160,6 +160,7 @@ namespace XRandR
 			IEnumerable<T> doWith(int id);
 			void AllWithId(ResourceActionWithId<T> func);
 			IEnumerable<T> All{get;}
+			IEnumerable<int> Ids{get;}
 		}
 		public delegate IntPtr RetrieveFunc(int id);
 		public delegate void FreeFunc(IntPtr element);
@@ -198,6 +199,11 @@ namespace XRandR
 				IntPtr ptr = getF(id);
 				yield return Structure<T>(ptr);
 				freeF(ptr);
+			}
+			public IEnumerable<int> Ids{
+				get{
+					return ids;
+				}
 			}
 		}
 		
@@ -294,6 +300,10 @@ namespace XRandR
 		public IEnumerable<XRRModeInfo> Modes(){
 			return modes.Values;
 		}
+		public IEnumerable<XRRModeInfo> ModesOfOutput(XRROutputInfo output){
+			foreach(int mode_id in External.PtrToIntArray(output.modes,output.nmode))
+				yield return GetMode(mode_id);
+		}
 		
 		public XRRScreenResources Resources{
 			get{
@@ -333,6 +343,11 @@ namespace XRandR
 				
 				res.Outputs.AllWithId(printOutputInfo);
 				
+				foreach(XRROutputInfo output in res.Outputs.All){
+					Console.WriteLine("Modes for "+output.name);
+					foreach (XRRModeInfo mode in res.ModesOfOutput(output))
+						printModeInfo(mode);
+				}
 				//res.setMode(60,0x5b);
 			};
 		}

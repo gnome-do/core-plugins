@@ -43,13 +43,26 @@ namespace XRandR
 			get { return items; }
 		}
 
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
+		{
+			if (parent is OutputItem){
+				OutputItem outputItem = parent as OutputItem;
+				foreach(ScreenResources res in External.ScreenResources())
+					foreach(XRROutputInfo output in res.Outputs.doWith(outputItem.Id))
+						foreach(XRRModeInfo mode in res.ModesOfOutput(output))
+							yield return new OutputModeItem(outputItem.Id,mode);
+			}
+			else
+				yield break;
+		}
 		
 		public override void UpdateItems ()
 		{
 			items.Clear ();
 			foreach(ScreenResources res in External.ScreenResources()){
-				foreach(XRROutputInfo output in res.Outputs.All)
-					items.Add (new OutputItem(output.name));
+				res.Outputs.AllWithId(delegate(int id,XRROutputInfo output){
+					items.Add (new OutputItem(id,output));
+				});
 			}
 		}
 	}
