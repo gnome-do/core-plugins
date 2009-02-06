@@ -2,11 +2,8 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12</target-gtk-version>
+    <target-gtk-version>2.12.1</target-gtk-version>
   </configuration>
-  <import>
-    <widget-library name="../bin/Debug/RSS.dll" internal="true" />
-  </import>
   <widget class="Gtk.Bin" id="Do.Plugins.Rss.Configuration" design-size="410 300">
     <property name="MemberName" />
     <child>
@@ -108,7 +105,7 @@
             <child>
               <widget class="Gtk.FileChooserButton" id="OpmlChooser">
                 <property name="MemberName" />
-                <signal name="SelectionChanged" handler="OnOpmlChooserSelectionChanged" />
+                <signal name="FileActivated" handler="OnOpmlChooserFileActivated" />
               </widget>
               <packing>
                 <property name="LeftAttach">1</property>
