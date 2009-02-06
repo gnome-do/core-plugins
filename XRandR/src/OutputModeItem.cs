@@ -21,6 +21,11 @@ namespace XRandR
 			this.name = mode.name + " "+mode.dotClock/mode.vTotal/mode.hTotal + "Hz";
 			this.mode_id = mode.id;
 		}
+		public OutputModeItem(int output_id,int mode_id, string name){
+			this.output_id = output_id;
+			this.mode_id = mode_id;
+			this.name = name;
+		}			
 		
 		public override string Name {
 			get { return name; }

@@ -370,15 +370,20 @@ namespace XRandR
 		public void setMode(int output_id,int mode_id){
 			foreach(XRROutputInfo output in Outputs.doWith(output_id)){
 				int crtc_id = output.crtc_id;
-				if (crtc_id == 0)
-					crtc_id = External.PtrToIntArray(output.crtcs,output.ncrtc)[0];
-					
-				foreach(XRRCrtcInfo crtc in Crtcs.doWith(crtc_id)){
-				    IntPtr ptr = Marshal.AllocHGlobal(sizeof(int));
-				    Marshal.WriteInt32(ptr,output_id);
-					External.XRRSetCrtcConfig(display,presources,crtc_id,output.timestamp,crtc.x,crtc.y,mode_id,crtc.rotation,ptr,1);
-				    Marshal.FreeHGlobal(ptr);
-			    }
+
+				if (mode_id != 0){
+					if (crtc_id == 0)
+						crtc_id = External.PtrToIntArray(output.crtcs,output.ncrtc)[0];
+						
+					foreach(XRRCrtcInfo crtc in Crtcs.doWith(crtc_id)){
+					    IntPtr ptr = Marshal.AllocHGlobal(sizeof(int));
+					    Marshal.WriteInt32(ptr,output_id);
+						External.XRRSetCrtcConfig(display,presources,crtc_id,output.timestamp,crtc.x,crtc.y,mode_id,crtc.rotation,ptr,1);
+					    Marshal.FreeHGlobal(ptr);
+				    }
+				}
+				else  // switch off output
+					External.XRRSetCrtcConfig(display,presources,crtc_id,output.timestamp,0,0,0,1,new IntPtr(0),0);
 			}
 		}
 	}
@@ -404,7 +409,7 @@ namespace XRandR
 					foreach (XRRModeInfo mode in res.ModesOfOutput(output))
 						printModeInfo(mode);
 				}
-				res.setMode(60,0x5b);
+				res.setMode(60,0);
 			};
 		}
 	}

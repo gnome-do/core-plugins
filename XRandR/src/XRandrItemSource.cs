@@ -48,9 +48,13 @@ namespace XRandR
 			if (parent is OutputItem){
 				OutputItem outputItem = parent as OutputItem;
 				foreach(ScreenResources res in External.ScreenResources())
-					foreach(XRROutputInfo output in res.Outputs.doWith(outputItem.Id))
+					foreach(XRROutputInfo output in res.Outputs.doWith(outputItem.Id)){
 						foreach(XRRModeInfo mode in res.ModesOfOutput(output))
 							yield return new OutputModeItem(outputItem.Id,mode);
+						
+						if (output.crtc_id != 0)
+							yield return new OutputModeItem(outputItem.Id,0,Catalog.GetString("Off"));
+					}
 			}
 			else
 				yield break;
