@@ -1,8 +1,24 @@
-// Main.cs created with MonoDevelop
-// User: johannes at 2:18 PM 2/3/2009
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
+/* XRandR.cs
+ *
+ * GNOME Do is the legal property of its developers. Please refer to the
+ * COPYRIGHT file distributed with this source distribution.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * XRandR is a P/Invoke wrapper around libX11 and libXrandr
+ */
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -227,19 +243,24 @@ namespace XRandR
 			}
 		}
 		
+		// some helper to access different sorts of unmanaged arrays
+		
+		// defined as int * in a structure
 		public static int[] PtrToIntArray(IntPtr ptr,int numElements){
 			int[] res = new int[numElements];
 			for (int i=0;i<numElements;i++)
 				res[i] = Marshal.ReadIntPtr(ptr,IntPtr.Size * i).ToInt32();
 			return res;
 		}
+		// defined as struct** in a structure
 		public static T[] PtrToStructurePtrArray<T>(IntPtr ptr,int numElements){
 			T[] res = new T[numElements];
 			for (int i=0;i<numElements;i++){
 				res[i] = (T)Marshal.PtrToStructure(Marshal.ReadIntPtr(ptr,IntPtr.Size * i),(Type)typeof(T));
 			}
 			return res;
-		}		
+		}
+		// defined as struct* in a structure
 		public static T[] PtrToStructureArray<T>(IntPtr ptr,int numElements){
 			T[] res = new T[numElements];
 			for (int i=0;i<numElements;i++)
@@ -285,6 +306,8 @@ namespace XRandR
 			foreach(IntPtr display in DefaultDisplay())
 				func(display);
 		}
+		// IEnumerable wrapper around resource, makes sure resources are freed after usage.
+		// It is the reponsibility of the user to don't leak any pointers outside of the foreach block.
 		public static IEnumerable<IntPtr> DefaultDisplay(){
 			IntPtr oldHandler = XSetErrorHandler(Marshal.GetFunctionPointerForDelegate(new ErrorHandler(ignoreErrorHandler)));
 			IntPtr display = XOpenDisplay(null);
@@ -367,12 +390,13 @@ namespace XRandR
 			}
 		}
 		
+		// Sets the mode of an output. Doesn't change any settings such as position offset or rotation.
 		public void setMode(int output_id,int mode_id){
 			foreach(XRROutputInfo output in Outputs.doWith(output_id)){
 				int crtc_id = output.crtc_id;
 
 				if (mode_id != 0){
-					if (crtc_id == 0)
+					if (crtc_id == 0) // if output is switched off, output has no crtc defined, so we use 1st one
 						crtc_id = External.PtrToIntArray(output.crtcs,output.ncrtc)[0];
 						
 					foreach(XRRCrtcInfo crtc in Crtcs.doWith(crtc_id)){
@@ -382,7 +406,7 @@ namespace XRandR
 					    Marshal.FreeHGlobal(ptr);
 				    }
 				}
-				else  // switch off output
+				else  // switch off output, by setting the mode of the crtc of the output to 0 
 					External.XRRSetCrtcConfig(display,presources,crtc_id,output.timestamp,0,0,0,1,new IntPtr(0),0);
 			}
 		}
