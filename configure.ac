@@ -181,6 +181,7 @@ WindowManager/Makefile
 Woof/Makefile
 Wordnet/Makefile
 Xmms2/Makefile
+XRandR/Makefile
 Zim/Makefile
 Makefile
 po/Makefile.in
