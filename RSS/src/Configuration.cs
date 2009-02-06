@@ -39,15 +39,15 @@ namespace Do.Plugins.Rss
 		{
 			RssItemSource.Timeout = Timeout.ValueAsInt;
 		}
-
-		protected virtual void OnOpmlChooserSelectionChanged (object o, EventArgs e)
-		{
-			RssItemSource.OpmlFile = OpmlChooser.Uri;
-		}
-
+		
 		protected virtual void OnCacheDurationValueChanged (object o, EventArgs e)
 		{
 			RssItemSource.CacheDuration = CacheDuration.ValueAsInt;
+		}
+
+		protected virtual void OnOpmlChooserFileActivated (object o, EventArgs e)
+		{
+			RssItemSource.OpmlFile = OpmlChooser.Uri;
 		}
 	}
 }

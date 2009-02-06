@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.8.0])
+AC_INIT([gnome-do-plugins], [0.8.0.1])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
@@ -19,6 +19,13 @@ AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
+
+dnl We need mautil (at least for now)
+AC_PATH_PROG(MAUTIL, mautil, no)
+if test "x$MAUTIL" = "xno" ; then
+   	AC_MSG_ERROR([You need to install mautil (from mono-addins)])
+fi
+AC_SUBST([MAUTIL])
 
 AC_PROG_INSTALL
 
@@ -55,7 +62,10 @@ GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.d
 GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
 GDATA_SHARP_CONTACTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Contacts.dll"
 
-AC_SUBST([BANSHEE_INDEXER_LIBS])
+dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
+BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
+
+AC_SUBST([BANSHEE_INDEXER_DLL])
 AC_SUBST([EVOLUTION_SHARP_LIBS])
 AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])
@@ -119,6 +129,7 @@ ClawsMail/Makefile
 Confluence/Makefile
 Del.icio.us/Makefile
 DiskMounter/Makefile
+Emesene/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile
 Evolution/Makefile
@@ -175,6 +186,7 @@ WindowManager/Makefile
 Woof/Makefile
 Wordnet/Makefile
 Xmms2/Makefile
+YouTube/Makefile
 Zim/Makefile
 Makefile
 po/Makefile.in

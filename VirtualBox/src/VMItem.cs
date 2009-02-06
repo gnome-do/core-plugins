@@ -51,36 +51,36 @@ namespace VirtualBox
 		public VMItem (XmlAttributeCollection MachineAttrs) 
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-		
-			uuid = MachineAttrs["uuid"].Value.Replace("{", "").Replace("}", "");
+			
+			uuid = MachineAttrs["uuid"].Value.Replace ("{", "").Replace("}", "");
 			//find machine specific xml file
 			string MachineSource = MachineAttrs["src"].Value;
-			if (!File.Exists (MachineSource)) {
-				MachineSource = string.Format("{0}/.VirtualBox/{1}", home, MachineSource);
-			}
+			if (!File.Exists (MachineSource))
+				MachineSource = Path.Combine (Path.Combine (home, ".VirtualBox"), MachineSource);
 			//find the OS type of the machine
-			XmlDocument MachineDoc = new XmlDocument();
-			MachineDoc.Load(MachineSource);
+			XmlDocument MachineDoc = new XmlDocument ();
+			MachineDoc.Load (MachineSource);
 			XmlNodeList MachineInfo = MachineDoc.GetElementsByTagName("Machine");
 			name = MachineInfo[0].Attributes["name"].Value;
 			try
 			{
-				ico_file = string.Format("os_{0}.png@{1}", MachineInfo[0].Attributes["OSType"].Value, GetType().Assembly.FullName);
+				string icon = IconMap.LookUp (MachineInfo[0].Attributes["OSType"].Value);
+				ico_file = string.Format("os_{0}.png@{1}", icon, GetType ().Assembly.FullName);
 			}
-			catch //can't find icon, assign default VBox Icon
+			catch //something went bad trying to assign an icon
 			{
-				Log.Warn("Could not determine machine type for VM: {0}", name);
-				ico_file = string.Format("VirtualBox_64px.png@{0}", GetType().Assembly.FullName);
+				Log<VMItem>.Warn ("Could not determine machine type for VM: {0}", name);
+				ico_file = string.Format ("VirtualBox_64px.png@{0}", GetType().Assembly.FullName);
 			}
 			this.state = CurrentState;
-			Log.Info("VM: {0} indexed [State: {1} Uuid: {2}]", name, state, uuid);
+			Log<VMItem>.Info ("VM: {0} indexed [State: {1} Uuid: {2}]", name, state, uuid);
 		}
 		
 		public VMState CurrentState
 		{
 			get
 			{
-				VMState cur_state = default(VMState);
+				VMState cur_state = default (VMState);
 				//determine the state of thte VM
 				ProcessStartInfo ps = new ProcessStartInfo ("VBoxManage", "showvminfo " + uuid);
 				ps.UseShellExecute = false;
@@ -89,19 +89,19 @@ namespace VirtualBox
 				{
 					p.WaitForExit ();
 					string output = p.StandardOutput.ReadToEnd ();
-					int s = output.IndexOf("State:");
-					int e = output.IndexOf("\n", s);
+					int s = output.IndexOf ("State:");
+					int e = output.IndexOf ("\n", s);
 					string outputState = output.Substring(s, e-s);
 					//States: saved, running, paused, powered off
-					if (outputState.Contains("saved"))
+					if (outputState.Contains ("saved"))
 						cur_state = VMState.saved;
-					else if (outputState.Contains("running"))
+					else if (outputState.Contains ("running"))
 						cur_state = VMState.on;
-					else if (outputState.Contains("paused"))
+					else if (outputState.Contains ("paused"))
 						cur_state = VMState.paused;
-					else if (outputState.Contains("powered off"))
+					else if (outputState.Contains ("powered off"))
 						cur_state = VMState.off;
-					if (output.Contains("Snapshots:"))
+					if (output.Contains ("Snapshots:"))
 					    has_saved_states = true;
 				}
 				return cur_state;

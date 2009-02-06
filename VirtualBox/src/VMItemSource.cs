@@ -18,6 +18,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 using Mono.Unix;
@@ -60,7 +61,7 @@ public class VMItemSource : ItemSource {
 			try
 			{
 				string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-				string xml_file = "~/.VirtualBox/VirtualBox.xml".Replace ("~", home);
+				string xml_file = Path.Combine(home, ".VirtualBox/VirtualBox.xml");
 				XmlDocument VboxXML = new XmlDocument();
 				VboxXML.Load(xml_file);
 				XmlNodeList MachineEntries = VboxXML.GetElementsByTagName("MachineEntry");
@@ -71,8 +72,8 @@ public class VMItemSource : ItemSource {
 			catch (Exception e)
 			{
 				//meltdown
-				Log.Error("Error parsing VBox XML file.");
-				Log.Debug (e.ToString ());
+				Log<VMItemSource>.Error("Error parsing VBox XML file.");
+				Log<VMItemSource>.Debug (e.ToString ());
 			}
 		}
 	}
