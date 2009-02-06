@@ -14,6 +14,7 @@ SUBDIRS = \
 	Confluence \
 	Del.icio.us \
 	DiskMounter \
+	Emesene \
 	EOG-Slideshow \
 	Epiphany \
 	Evolution \
@@ -70,18 +71,19 @@ SUBDIRS = \
 	Woof \
 	Wordnet \
 	Xmms2 \
+	YouTube \
 	Zim 
 
-# Current dir _must_ be processed last; this ensures our repo is built with all the plugins
+# Current dir _must_ be processed last; this ensures our repo is built with all
+# the plugins
 SUBDIRS += .
 
 ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
-PLUGIN_ASSEMBLIES = $(notdir $(wildcard $(ASSEMBLY_INSTALL_DIR)/*.dll))
-BUNDLED_ASSEMBLIES = $(wildcard BundledLibraries/*.dll)
 install-data-hook:
-	cd $(ASSEMBLY_INSTALL_DIR) && mdtool setup pack $(PLUGIN_ASSEMBLIES)
-	mdtool setup rep-build $(DESTDIR)/@datadir@/gnome-do/plugins
+	$(MAUTIL) rep-build $(ASSEMBLY_INSTALL_DIR)
 
 uninstall-hook:
-	rm -f $(ASSEMBLY_INSTALL_DIR)/*.mpack
 	rm -f $(ASSEMBLY_INSTALL_DIR)/*.mrep
+
+clean-local:
+	-rm -rf $(top_builddir)/build

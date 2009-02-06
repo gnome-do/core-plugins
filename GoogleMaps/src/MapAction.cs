@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Mono.Unix;
 
 using Do.Universe;
@@ -29,9 +30,9 @@ using Do.Platform;
 namespace Google
 {
 	/// <summary>
-	/// Given an ITextItem, GoogleMapAction will plot its location,
-	/// with a modifier item it will plot the route from the item location
-	/// to the modifier location
+	/// Given an ITextItem, ContactItem, or ContactDetailItem GoogleMapAction 
+	/// will plot its location, with a modifier item it will plot the route 
+	/// from the item location to the modifier location.
 	/// </summary>
 	public class MapAction : Act
 	{
@@ -52,22 +53,18 @@ namespace Google
 		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
-				return new Type[] {
-					typeof (IContactDetailItem),
-					typeof (ContactItem),
-					typeof (ITextItem),
-				};
+				yield return typeof (IContactDetailItem);
+				yield return typeof (ContactItem);
+				yield return typeof (ITextItem);
 			}
 		}
 
 		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get {
-				return new Type[] {
-					typeof (IContactDetailItem),
-					typeof (ContactItem),
-					typeof (ITextItem),
-				};
+				yield return typeof (IContactDetailItem);
+				yield return typeof (ContactItem);
+				yield return typeof (ITextItem);
 			}		
 		}
 				
@@ -89,13 +86,13 @@ namespace Google
 		}
 		
 		public override bool ModifierItemsOptional {
-            get { return true; }
-        }
+            		get { return true; }
+        	}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			string expression, url, start, end;
-			start = end = String.Empty;
+			start = end = "";
 			
 			foreach (Item item in items) {
 				start = AddressFromItem (item);
@@ -103,9 +100,9 @@ namespace Google
 				if (modifierItems.Any ())
 					end = AddressFromItem (modifierItems.First ());
 							
-				expression = String.Format ("from: {0}", start);
-				if (!String.IsNullOrEmpty (end))
-					expression += String.Format (" to: {0}",end);
+				expression = String.IsNullOrEmpty (end) ?
+					start :
+					String.Format ("from: {0} to: {1}", start, end);
 
 				url = GoogleMapsURLWithExpression (expression);
 				
@@ -129,8 +126,7 @@ namespace Google
 		
 		string GoogleMapsURLWithExpression (string e)
 		{
-			return "http://maps.google.com/maps?q=" + (e ?? "")
-				.Replace (" ", "+");
+			return "http://maps.google.com/maps?q=" + HttpUtility.UrlEncode (e ?? "");
 		}
 		
 		bool ContactSupportsAddress (ContactItem item)

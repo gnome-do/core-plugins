@@ -96,18 +96,18 @@ namespace VirtualBox
 				ps.UseShellExecute = false;
 				ps.RedirectStandardOutput = true;
 				using (Process p = Process.Start (ps)) {
-					Log.Info("Execution thread for {0} started.", vm.Name);
+					Log<VMThread>.Info("Execution thread for {0} started.", vm.Name);
 					p.WaitForExit ();
 					if (p.HasExited)
 					{
 						vm.Status = NewState;
-						Log.Info("Execution thread for {0} finished.", vm.Name);
+						Log<VMThread>.Info("Execution thread for {0} finished.", vm.Name);
 					}
 				}	
 			}
 			catch 
 			{
-				Log.Fatal("Something horrible happened to {0}.", vm.Name);
+				Log<VMThread>.Fatal("Something horrible happened to {0}.", vm.Name);
 			}
 		}
 		
@@ -117,7 +117,7 @@ namespace VirtualBox
 			{
 				if (!CheckState())
 				{
-					Log.Error("State mismatch for {0}", vm.Name);
+					Log<VMThread>.Error("State mismatch for {0}", vm.Name);
 					return;
 				}
 				vm.Status = VMState.limbo;
@@ -126,7 +126,7 @@ namespace VirtualBox
 				Processes.Add( new ProcessStartInfo ("sleep", "2") );
 				Processes.Add( new ProcessStartInfo ("VBoxManage", "snapshot " + vm.Uuid + " discardcurrent -state") );
 				
-				Log.Info("Execution thread for {0} started.", vm.Name);
+				Log<VMThread>.Info("Execution thread for {0} started.", vm.Name);
 				foreach (ProcessStartInfo ps in Processes)
 				{
 					ps.UseShellExecute = false;
@@ -134,12 +134,12 @@ namespace VirtualBox
 					using (Process p = Process.Start (ps))
 						p.WaitForExit ();
 				}
-				Log.Info("Execution thread for {0} finished.", vm.Name);
+				Log<VMThread>.Info("Execution thread for {0} finished.", vm.Name);
 				vm.Status = VMState.off;
 			}
 			catch 
 			{
-				Log.Fatal("Something horrible happened to {0}.", vm.Name);
+				Log<VMThread>.Fatal("Something horrible happened to {0}.", vm.Name);
 			}
 		}
 		

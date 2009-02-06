@@ -1,0 +1,31 @@
+<Addin 
+	id="YouTube"
+	namespace= "Do"
+	version="1.0"
+	name="YouTube"
+	description="Indexes your favorites, subscriptions and uploaded videos, also searches in YouTube"
+	author="Luis Miguel Montiel G"
+	>
+
+	<Runtime>
+		<Import assembly="YouTube.dll"/>
+		<Import assembly="Google.GData.YouTube.dll"/>
+		<Import assembly="Google.GData.Client.dll"/>
+		<Import assembly="Google.GData.Extensions.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Universe.YouTubeFavoriteItemSource" />
+		<ItemSource type="Do.Universe.YouTubeSubscriptionItemSource" />
+		<ItemSource type="Do.Universe.YouTubeOwnVideosItemSource" />
+	</Extension>
+	<Extension path = "/Do/Action">
+		<Action type="Do.Universe.YouTubeSearchAction" />
+	</Extension>
+</Addin>
