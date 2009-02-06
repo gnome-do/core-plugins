@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace XRandR
 {
@@ -36,6 +37,17 @@ namespace XRandR
 		public int		    nmode;
 	    public int		    npreferred;
 	    public IntPtr	    modes;
+	};
+
+	[StructLayout (LayoutKind.Sequential)]
+	public struct XErrorEvent{
+        public int type;
+        public IntPtr display;   /* Display the event was read from */
+		public long serial;/* serial number of failed request */
+        public byte error_code;/* error code of failed request */
+        public byte request_code;/* Major op-code of failed request */
+        public byte minor_code;/* Minor op-code of failed request */
+        public int resourceid;     /* resource id */
 	};
 	
 	[StructLayout (LayoutKind.Sequential)]
@@ -96,6 +108,14 @@ namespace XRandR
         public static extern int XCloseDisplay(IntPtr display);
 		[DllImport("libX11")]
 		public static extern IntPtr XRootWindow(IntPtr display,int screen);
+		
+		public delegate IntPtr ErrorHandler(IntPtr display,IntPtr ev);
+		[DllImport("libX11")]
+		public static extern IntPtr XSetErrorHandler(IntPtr handler);
+		
+		[DllImport("libX11")]
+		public static extern int XGetErrorText(IntPtr display, int code, StringBuilder sb,
+              int length);
 		
 		[DllImport("libXrandr")]
 		public static extern IntPtr XRRGetScreenResources (IntPtr dpy, IntPtr window);
@@ -228,15 +248,31 @@ namespace XRandR
 			return res;
 		}
 		
+		public static string GetErrorText(IntPtr display,XErrorEvent xevent){
+			StringBuilder sb = new StringBuilder(1000);
+			XGetErrorText(display,xevent.error_code,sb,sb.Capacity);
+			return "display:"+xevent.display+
+			                  " error:"+((int)xevent.error_code)+"("+sb.ToString()+")"+
+			                  " serial:"+xevent.serial+
+			                  " request:"+xevent.request_code+
+			                  " minor:"+xevent.minor_code
+			                  ;
+		}
+		public static IntPtr ignoreErrorHandler(IntPtr display,IntPtr ev){
+			Console.WriteLine("XRandR plugin: got X error: "+GetErrorText(display,Structure<XErrorEvent>(ev)));
+			Console.WriteLine(Environment.StackTrace);
+			return new IntPtr(0);
+		}
 		public static void doWithDefaultDisplay(ResourceAction<IntPtr> func){
-			IntPtr display = XOpenDisplay(null);
-			func(display);
-			XCloseDisplay(display);
+			foreach(IntPtr display in DefaultDisplay())
+				func(display);
 		}
 		public static IEnumerable<IntPtr> DefaultDisplay(){
+			IntPtr oldHandler = XSetErrorHandler(Marshal.GetFunctionPointerForDelegate(new ErrorHandler(ignoreErrorHandler)));
 			IntPtr display = XOpenDisplay(null);
 			yield return display;
 			XCloseDisplay(display);
+			XSetErrorHandler(oldHandler);
 		}
 		public static void doWithScreenResources(IntPtr display,ResourceAction<ScreenResources> func){
 			IntPtr w = External.XRootWindow(display,0);
@@ -348,7 +384,7 @@ namespace XRandR
 					foreach (XRRModeInfo mode in res.ModesOfOutput(output))
 						printModeInfo(mode);
 				}
-				//res.setMode(60,0x5b);
+				res.setMode(60,0x5b);
 			};
 		}
 	}
