@@ -6,6 +6,7 @@ GOOGLE_LIBS = \
 	Google.GData.Client.dll \
 	Google.GData.Contacts.dll \
 	Google.GData.Documents.dll \
+	Google.GData.YouTube.dll \
 	Google.GData.Extensions.dll
 
 bundle_DATA = \
