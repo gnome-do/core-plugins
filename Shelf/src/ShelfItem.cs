@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Mono.Unix;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Shelf
 {
 	public class ShelfItem : Item
 	{

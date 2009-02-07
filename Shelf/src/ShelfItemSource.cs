@@ -24,12 +24,13 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Do.Platform;
+using Do.Universe;
 
 using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Universe
+namespace Shelf
 {		
 	public class ShelfItemSource : ItemSource
 	{	
@@ -64,6 +65,7 @@ namespace Do.Universe
 
 		public override IEnumerable<Item> Items {
 			get {
+				//problem here with duplicity
 				if (shelves != null) {
 					foreach (Item item in shelves.Values)
 						yield return item;

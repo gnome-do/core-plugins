@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using Mono.Unix;
 using System.Linq;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Shelf
 {
 	public class ShelfDeleteShelfAction : Act
 	{

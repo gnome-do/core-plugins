@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Mono.Unix;
+using Do.Universe;
 using System.Linq;
 
-namespace Do.Universe
+namespace Shelf
 {
 	public class ShelfCreateShelfAction : Act
 	{

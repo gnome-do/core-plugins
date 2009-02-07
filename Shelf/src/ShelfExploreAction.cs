@@ -23,8 +23,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mono.Unix;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Shelf
 {
 	public class ShelfExploreAction : Act
 	{
