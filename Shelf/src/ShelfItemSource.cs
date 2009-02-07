@@ -17,13 +17,13 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 //
-//
 
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using Do.Platform;
 
 using Mono.Unix;
 
@@ -69,6 +69,12 @@ namespace Do.Universe
 						yield return item;
 				}
 			}
+		}
+		
+		public override void UpdateItems ()
+		{
+			Log<ShelfItemSource>.Debug("Total # of shelves: "+ ShelfItemSource.Shelves.Values.Count);
+			
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)

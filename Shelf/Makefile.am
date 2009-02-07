@@ -9,7 +9,8 @@ FILES = \
 	src/ShelfItem.cs \
 	src/ShelfItemSource.cs \
 	src/ShelfRemoveFromShelfAction.cs \
-	src/ShelfRenameShelfAction.cs
+	src/ShelfRenameShelfAction.cs \
+	src/ShelfDeleteShelfAction.cs
 
 RESOURCES = \
 	Resources/Shelf.addin.xml 

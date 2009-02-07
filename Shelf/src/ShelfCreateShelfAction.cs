@@ -23,10 +23,6 @@ namespace Do.Universe
 		public override string Icon {
 			get { return "folder-saved-search"; }
 		}
-		
-//		public override bool ModifierItemsOptional {
-//			get { return true; }
-//		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
 				get { yield return typeof (ITextItem); } 
