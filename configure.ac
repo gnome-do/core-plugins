@@ -129,6 +129,7 @@ ClawsMail/Makefile
 Confluence/Makefile
 Del.icio.us/Makefile
 DiskMounter/Makefile
+Emesene/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile
 Evolution/Makefile
@@ -185,6 +186,7 @@ WindowManager/Makefile
 Woof/Makefile
 Wordnet/Makefile
 Xmms2/Makefile
+YouTube/Makefile
 Zim/Makefile
 Makefile
 po/Makefile.in

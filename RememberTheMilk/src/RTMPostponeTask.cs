@@ -22,8 +22,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Mono.Unix;
 
-
 using Do.Universe;
+using Do.Platform;
 
 namespace RememberTheMilk
 {
@@ -56,8 +56,10 @@ namespace RememberTheMilk
         
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {
-			RTM.PostponeTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-			                  (items.First () as RTMTaskItem).Id);
+			Services.Application.RunOnThread (() => {
+				RTM.PostponeTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
+				                  (items.First () as RTMTaskItem).Id);
+			});
             yield break;
         }
 	}

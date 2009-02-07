@@ -205,28 +205,36 @@ namespace RtmNet
 				// Serialization error occurred!
 				throw new ResponseXmlException("Invalid response received from Rtm.", ex);
 			}
-		}
-
-		internal static object Deserialize(System.Xml.XmlNode node, Type type)
-		{
-			XmlSerializer serializer = GetSerializer(type);
-			try
-			{
-				// Deserialise the web response into the Rtm response object
-				System.Xml.XmlNodeReader reader = new System.Xml.XmlNodeReader(node);
-				object o = serializer.Deserialize(reader);
-				reader.Close();
-
-				return o;
-			}
-			catch(InvalidOperationException ex)
+			catch (System.Xml.XmlException ex)
 			{
 				// Serialization error occurred!
-				throw new ResponseXmlException("Invalid response received from Rtm.", ex);
+				throw new ResponseXmlException("An Xml Exception is thrown from RtmNet.Utils.Deserializ.", ex);
 			}
 		}
 
-
+//		internal static object Deserialize(System.Xml.XmlNode node, Type type)
+//		{
+//			XmlSerializer serializer = GetSerializer(type);
+//			try
+//			{
+//				// Deserialise the web response into the Rtm response object
+//				System.Xml.XmlNodeReader reader = new System.Xml.XmlNodeReader(node);
+//				object o = serializer.Deserialize(reader);
+//				reader.Close();
+//
+//				return o;
+//			}
+//			catch(InvalidOperationException ex)
+//			{
+//				// Serialization error occurred!
+//				throw new ResponseXmlException("Invalid response received from Rtm.", ex);
+//			}
+//			catch (System.Xml.XmlException ex)
+//			{
+//				// Serialization error occurred!
+//				throw new ResponseXmlException("An Xml Exception is thrown from RtmNet.Utils.Deserialize (2).", ex);
+//			}
+//		}
 
 	}
 

@@ -45,9 +45,9 @@ namespace RememberTheMilk {
         
         private Gtk.CheckButton confirm_chkbtn;
         
-        private Gtk.Fixed fixed2;
+        private Gtk.CheckButton returnnew_chkbtn;
         
-        private Gtk.Label GtkLabel4;
+        private Gtk.Label GtkLabel5;
         
         private Gtk.Frame filter_frm;
         
@@ -65,7 +65,7 @@ namespace RememberTheMilk {
         
         private Gtk.Fixed fixed4;
         
-        private Gtk.Label GtkLabel5;
+        private Gtk.Label GtkLabel6;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -188,7 +188,7 @@ namespace RememberTheMilk {
             this.overdue_chkbtn = new Gtk.CheckButton();
             this.overdue_chkbtn.CanFocus = true;
             this.overdue_chkbtn.Name = "overdue_chkbtn";
-            this.overdue_chkbtn.Label = Mono.Unix.Catalog.GetString("For overdue task(s)");
+            this.overdue_chkbtn.Label = Mono.Unix.Catalog.GetString("Show notification for overdue task(s)");
             this.overdue_chkbtn.DrawIndicator = true;
             this.overdue_chkbtn.UseUnderline = true;
             this.vbox3.Add(this.overdue_chkbtn);
@@ -200,7 +200,7 @@ namespace RememberTheMilk {
             this.confirm_chkbtn = new Gtk.CheckButton();
             this.confirm_chkbtn.CanFocus = true;
             this.confirm_chkbtn.Name = "confirm_chkbtn";
-            this.confirm_chkbtn.Label = Mono.Unix.Catalog.GetString("When actions (e.g. rename) are completed");
+            this.confirm_chkbtn.Label = Mono.Unix.Catalog.GetString("Show notification when actions are completed");
             this.confirm_chkbtn.DrawIndicator = true;
             this.confirm_chkbtn.UseUnderline = true;
             this.vbox3.Add(this.confirm_chkbtn);
@@ -209,21 +209,24 @@ namespace RememberTheMilk {
             w19.Expand = false;
             w19.Fill = false;
             // Container child vbox3.Gtk.Box+BoxChild
-            this.fixed2 = new Gtk.Fixed();
-            this.fixed2.Name = "fixed2";
-            this.fixed2.HasWindow = false;
-            this.vbox3.Add(this.fixed2);
-            Gtk.Box.BoxChild w20 = ((Gtk.Box.BoxChild)(this.vbox3[this.fixed2]));
+            this.returnnew_chkbtn = new Gtk.CheckButton();
+            this.returnnew_chkbtn.CanFocus = true;
+            this.returnnew_chkbtn.Name = "returnnew_chkbtn";
+            this.returnnew_chkbtn.Label = Mono.Unix.Catalog.GetString("Return the newly created task");
+            this.returnnew_chkbtn.DrawIndicator = true;
+            this.returnnew_chkbtn.UseUnderline = true;
+            this.vbox3.Add(this.returnnew_chkbtn);
+            Gtk.Box.BoxChild w20 = ((Gtk.Box.BoxChild)(this.vbox3[this.returnnew_chkbtn]));
             w20.Position = 2;
             w20.Expand = false;
             w20.Fill = false;
             this.GtkAlignment2.Add(this.vbox3);
             this.notification_frm.Add(this.GtkAlignment2);
-            this.GtkLabel4 = new Gtk.Label();
-            this.GtkLabel4.Name = "GtkLabel4";
-            this.GtkLabel4.LabelProp = Mono.Unix.Catalog.GetString("<b>Notification</b>");
-            this.GtkLabel4.UseMarkup = true;
-            this.notification_frm.LabelWidget = this.GtkLabel4;
+            this.GtkLabel5 = new Gtk.Label();
+            this.GtkLabel5.Name = "GtkLabel5";
+            this.GtkLabel5.LabelProp = Mono.Unix.Catalog.GetString("<b>Interactivity</b>");
+            this.GtkLabel5.UseMarkup = true;
+            this.notification_frm.LabelWidget = this.GtkLabel5;
             this.vbox1.Add(this.notification_frm);
             Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox1[this.notification_frm]));
             w23.Position = 1;
@@ -289,11 +292,11 @@ namespace RememberTheMilk {
             w28.Fill = false;
             this.GtkAlignment3.Add(this.vbox4);
             this.filter_frm.Add(this.GtkAlignment3);
-            this.GtkLabel5 = new Gtk.Label();
-            this.GtkLabel5.Name = "GtkLabel5";
-            this.GtkLabel5.LabelProp = Mono.Unix.Catalog.GetString("<b>Filter</b>");
-            this.GtkLabel5.UseMarkup = true;
-            this.filter_frm.LabelWidget = this.GtkLabel5;
+            this.GtkLabel6 = new Gtk.Label();
+            this.GtkLabel6.Name = "GtkLabel6";
+            this.GtkLabel6.LabelProp = Mono.Unix.Catalog.GetString("<b>Filter</b>");
+            this.GtkLabel6.UseMarkup = true;
+            this.filter_frm.LabelWidget = this.GtkLabel6;
             this.vbox1.Add(this.filter_frm);
             Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.vbox1[this.filter_frm]));
             w31.Position = 2;
@@ -309,6 +312,7 @@ namespace RememberTheMilk {
             this.auth_btn.Clicked += new System.EventHandler(this.OnAuthBtnClicked);
             this.overdue_chkbtn.Clicked += new System.EventHandler(this.OnOverdueChkbtnClicked);
             this.confirm_chkbtn.Clicked += new System.EventHandler(this.OnConfirmChkbtnClicked);
+            this.returnnew_chkbtn.Clicked += new System.EventHandler(this.OnReturnNewChkBtnClicked);
             this.filter_entry.Changed += new System.EventHandler(this.OnFilterEntryChanged);
         }
     }
