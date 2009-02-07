@@ -82,7 +82,7 @@ namespace ManPages {
 			string keyword;
 			foreach (Item i in items)
 			{
-				keyword = (items.First () as ITextItem).Text;
+				keyword = (i as ITextItem).Text;
 				if (!string.IsNullOrEmpty (keyword)) {
 					Process term = new Process ();
 					term.StartInfo.FileName = "yelp";
