@@ -57,98 +57,12 @@ namespace ManPages {
 		}
 
 		/// <value>
-		/// 	List of supported items (ITextItem , ManualPageItem)
+		/// 	List of supported items (ITextItem)
 		/// </value>
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				yield return typeof(IApplicationItem);
-				yield return typeof(ManualPageItem);
 				yield return typeof(ITextItem);
 			}
-		}
-
-		/// <summary>
-		/// 	Do we support the item?
-		/// </summary>
-		/// <param name="item">
-		/// A <see cref="Item"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="System.Boolean"/>
-		/// </returns>
-		public override bool SupportsItem (Item item) 
-		{
-
-			bool rc  = false;
-			string execStr;
-
-			if (!(item is IApplicationItem)) {			
-				rc = true;				
-			} else {
-
-				IApplicationItem appItem = item as IApplicationItem;
-				//grab the parameter we'll be using for whatis command from the Exec string
-				//note, we use whatis becuase redirecting its output is a lot more efficient
-				//than that of a regular 'man page' which can contain thousands of lines. 
-				//man and whatis should use the same db anyways..
-				execStr = this.getExecutableName (appItem);
-				//is there a matching man page?
-				if (execStr.Length > 0) {
-					Process term 				= new Process ();
-					term.StartInfo.FileName 		= "whatis";
-					term.StartInfo.Arguments 		= "'"+execStr+"'";
-					term.StartInfo.UseShellExecute 		= false;
-					term.StartInfo.RedirectStandardOutput 	= true;
-					term.StartInfo.RedirectStandardError 	= true;
-					term.Start ();
-
-					//if we don't put these, WaitForExit () blocks
-					//on big buffers or ExitCode is not avalable yet..
-					term.StandardOutput.ReadToEnd ();
-					term.WaitForExit ();
-
-					//if we didn't find a man page, we don't support it. 
-					rc = term.ExitCode == 0;
-				}
-			}
-			return rc;
-		}
-
-		/// <summary>
-		///    Parse the <see cref="ApplicationItem"/> Exec string to attempt to obtain
-		///    name of the binary being executed so we may use it as a parameter for man
-		/// </summary>
-		/// <param name="appItem">
-		/// A <see cref="ApplicationItem"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="System.String"/>
-		/// </returns>
-		private static string getExecutableName (IApplicationItem appItem) 
-		{			
-			string execStr;
-			Match m;
-			Regex r;
-			int i;		
-
-			// Now we parse the execute string to attempt to find a binary 
-			// name that we can look up a man page for. Ideally this should
-			// be given to us rather than guess the format but this
-			// will have to do for now.
-			// 1. if being invoked with gksu, ignore gksu itself and grab its parameter
-			// 2. remove any arguments sent to the call
-			// 3. reduce absolute paths to just the filename. 
-			//
-			r = new Regex ("^(gksu\\s+)?([^ ]+)\\s?.*$");
-			m = r.Match (appItem.Exec);			
-			execStr = !m.Success ? appItem.Exec : execStr = m.Groups [2].ToString ();
-
-			//grab base
-			i = execStr.LastIndexOf ('/');
-			if (i != -1)
-				execStr = execStr.Substring (i+1);
-
-			return execStr;
 		}
 
 		/// <summary>
@@ -165,24 +79,16 @@ namespace ManPages {
 		/// </returns>
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) 
 		{
-			string keyword = null;
-
-			//ok, was it plain text, an application item, or one of our own?
-			if (items.First () is IApplicationItem) {
-				keyword = this.getExecutableName (items.First () as IApplicationItem);
-			} else if (items.First () is ManualPageItem) {
-				ManualPageItem keyworditem = items.First () as ManualPageItem;
-				keyword = keyworditem.Text;							
-			} else {
-				ITextItem textitem = items.First () as ITextItem;
-				keyword = textitem.Text;				 
-			}
-
-			if (!string.IsNullOrEmpty (keyword)) {
-				Process term = new Process ();
-				term.StartInfo.FileName = "yelp";
-				term.StartInfo.Arguments = " 'man:"+keyword+"' ";				
-				term.Start ();
+			string keyword;
+			foreach (Item i in items)
+			{
+				keyword = (i as ITextItem).Text;
+				if (!string.IsNullOrEmpty (keyword)) {
+					Process term = new Process ();
+					term.StartInfo.FileName = "yelp";
+					term.StartInfo.Arguments = " 'man:"+keyword+"' ";				
+					term.Start ();
+				}
 			}
 			yield break;
 		}

@@ -66,6 +66,7 @@ namespace RememberTheMilk
                     Console.Error.WriteLine ("Token verification failed: " + e.Message);
                     return;
                 }
+				
                 rtm.AuthToken = auth.Token;
                 timeline = rtm.TimelineCreate ();
                 username = auth.User.Username;

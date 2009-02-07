@@ -2,12 +2,9 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12</target-gtk-version>
+    <target-gtk-version>2.12.1</target-gtk-version>
   </configuration>
-  <import>
-    <widget-library name="../bin/Debug/RTM.dll" internal="true" />
-  </import>
-  <widget class="Gtk.Bin" id="RememberTheMilk.Configuration" design-size="374 367">
+  <widget class="Gtk.Bin" id="RememberTheMilk.Configuration" design-size="407 390">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox1">
@@ -146,7 +143,7 @@
                       <widget class="Gtk.CheckButton" id="overdue_chkbtn">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">For overdue task(s)</property>
+                        <property name="Label" translatable="yes">Show notification for overdue task(s)</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -163,7 +160,7 @@
                       <widget class="Gtk.CheckButton" id="confirm_chkbtn">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">When actions (e.g. rename) are completed</property>
+                        <property name="Label" translatable="yes">Show notification when actions are completed</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -177,9 +174,14 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Fixed" id="fixed2">
+                      <widget class="Gtk.CheckButton" id="returnnew_chkbtn">
                         <property name="MemberName" />
-                        <property name="HasWindow">False</property>
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Return the newly created task</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="OnReturnNewChkBtnClicked" />
                       </widget>
                       <packing>
                         <property name="Position">2</property>
@@ -193,9 +195,9 @@
               </widget>
             </child>
             <child>
-              <widget class="Gtk.Label" id="GtkLabel4">
+              <widget class="Gtk.Label" id="GtkLabel5">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;b&gt;Notification&lt;/b&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;b&gt;Interactivity&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>
@@ -295,7 +297,7 @@
               </widget>
             </child>
             <child>
-              <widget class="Gtk.Label" id="GtkLabel5">
+              <widget class="Gtk.Label" id="GtkLabel6">
                 <property name="MemberName" />
                 <property name="LabelProp" translatable="yes">&lt;b&gt;Filter&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
