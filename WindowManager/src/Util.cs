@@ -35,6 +35,9 @@ namespace WindowManager
 				yield return "sudo";
 				yield return "java";
 				yield return "mono";
+				yield return "ruby";
+				yield return "padsp";
+				yield return "aoss";
 				yield return "python";
 				yield return "python2.4";
 				yield return "python2.5";
