@@ -301,9 +301,8 @@ namespace XRandR
 			string text = GetErrorText(display,xevent);
 			XErrorException excp = new XErrorException(xevent,text);
 			
-			Do.Platform.Log.Debug("XRandR plugin: "+excp.ToString());
-			Do.Platform.Log.Debug(Environment.StackTrace);
-			
+			Do.Platform.Log<XRandR.External>.Debug("XRandR plugin: {0}\n{1}",excp.ToString(),Environment.StackTrace);
+
 			// don't know if it is a good idea to throw an exception out 
 			// of unmanaged code? But seems to work well. 
 			throw excp;
@@ -405,7 +404,7 @@ namespace XRandR
 			    Marshal.FreeHGlobal(ptr);
 			}
 			catch(External.XErrorException excp){
-				Do.Platform.Log.Debug("Error when calling XRRSetCtrcConfig: 0x{0:x},{1},{2},{3},0x{4:x},{5},[{6}]"
+				Do.Platform.Log<XRandR.External>.Debug("Error when calling XRRSetCtrcConfig: 0x{0:x},{1},{2},{3},0x{4:x},{5},[{6}]"
 				                  ,crtc_id
 				                  ,timestamp
 				                  ,x
@@ -424,7 +423,7 @@ namespace XRandR
 			//  - finding a good CRTC allocation
 			string cmd = string.Format("xrandr --output 0x{0:x} --mode 0x{1:x}",output_id,mode_id);
 			
-			Do.Platform.Log.Debug("Setting mode using: '{0}'",cmd);
+			Do.Platform.Log<XRandR.External>.Debug("Setting mode using: '{0}'",cmd);
 
 			System.Diagnostics.Process.Start (cmd);
 			/*foreach(XRROutputInfo output in Outputs.doWith(output_id)){

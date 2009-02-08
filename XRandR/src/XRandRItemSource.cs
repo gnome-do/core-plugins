@@ -80,6 +80,7 @@ namespace XRandR
 			items.Clear ();
 			foreach(ScreenResources res in External.ScreenResources()){
 				res.Outputs.AllWithId(delegate(int id,XRROutputInfo output){
+					Do.Platform.Log<XRandRItemSource>.Debug("Found output: 0x{0:x} - {1}",id,output.name); 
 					items.Add (new OutputItem(id,output,output.connection==0));
 				});
 			}
