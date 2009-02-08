@@ -24,7 +24,7 @@ using Mono.Unix;
 using System.Threading;
 using Do.Universe;
 
-namespace Do.Universe
+namespace YouTube
 {
 	
 	

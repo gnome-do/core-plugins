@@ -24,7 +24,7 @@ using Do.Universe;
 using Do.Platform;
 using System.Linq;
 
-namespace Do.Universe
+namespace YouTube
 {
 	public class YouTubeSearchAction : Act
 	{

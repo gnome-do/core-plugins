@@ -23,7 +23,7 @@ using Gtk;
 using Do.Platform;
 using Do.Platform.Linux;
 
-namespace Do.Universe
+namespace YouTube
 {	
 	
 	public class YouTubeConfig : AbstractLoginWidget

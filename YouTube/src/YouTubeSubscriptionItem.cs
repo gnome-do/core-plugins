@@ -22,7 +22,7 @@
 using System;
 using Do.Universe;
 
-namespace Do.Universe
+namespace YouTube
 {	
 	public class YouTubeSubscriptionItem : Item, IUrlItem
 	{
