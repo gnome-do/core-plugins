@@ -1,22 +1,22 @@
-// ShelfItemSource.cs
-//
-// GNOME Do is the legal property of its developers. Please refer to the
-// COPYRIGHT file distributed with this source distribution.
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free SoftwDictionary<string,ShelfItem> shelvesare Foundation; either version 2 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-//
+/* ShelfItemSource.cs
+ *
+ * GNOME Do is the legal property of its developers. Please refer to the
+ * COPYRIGHT file distributed with this source distribution.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 
 using System;
 using System.IO;
@@ -25,23 +25,142 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Do.Platform;
 using Do.Universe;
-
 using Mono.Unix;
-
-using Do.Universe;
 
 namespace Shelf
 {		
 	public class ShelfItemSource : ItemSource
-	{	
+	{
 		
-		static Dictionary<string,ShelfItem> shelves;
-		static string defaultName;
+		[Serializable]
+		class ItemsRecord {
+			
+			public string UniqueId { get; protected set; }
+			public string Shelf { get; protected set; }
+			
+			public ItemsRecord (string uniqueId, string shelf)
+			{
+				UniqueId = uniqueId;
+				Shelf = shelf;
+			}
+
+			public Item MaybeGetItem ()
+			{
+				return Services.Core.GetElement (UniqueId) as Item;
+			}
+		}
 		
+		static string ShelfNamesFile {
+			get {
+				return Path.Combine (Services.Paths.UserDataDirectory, typeof (ShelfItemSource).FullName);
+			}
+		}
+		
+		static string ItemsFile {
+			get {
+				return Path.Combine (Services.Paths.UserDataDirectory, "ItemsInShelves");
+			}
+		}
+		
+		static List<ItemsRecord> AllItems
+		{
+			get{
+				List<ItemsRecord> items =  new List<ItemsRecord>();
+				foreach(ShelfItem shelf in ShelfItemSource.shelves.Values)
+					foreach(Item i in shelf.Items){
+						items.Add(new ItemsRecord(i.UniqueId, shelf.ShelfName));
+				}
+				return items;
+			}
+		}
+
 		static ShelfItemSource()
 		{
-			shelves = new Dictionary<string,ShelfItem> ();
+			ShelfItemSource.defaultName = "Default";
+			Deserialize ();
+			ShelfItemSource.HasDeSerialized = false;
+			if(!ShelfItemSource.shelves.ContainsKey("Default")){
+				ShelfItemSource.shelves.Add("Default", new ShelfItem("Default"));
+				Serialize();
+			}
 		}
+		
+		static void Deserialize ()
+		{
+			ShelfItemSource.shelves = new Dictionary<string,ShelfItem> ();
+			
+			IEnumerable<string> shelfNames = null;
+			try {
+				using (Stream s = File.OpenRead (ShelfNamesFile)) {
+					BinaryFormatter f = new BinaryFormatter ();
+					shelfNames = f.Deserialize (s) as IEnumerable<string>;
+				}
+			} catch (FileNotFoundException) {
+			} catch (Exception e) {
+				Log<ShelfItemSource>.Error ("Could not deserialize shelf names: {0}", e.Message);
+				Log<ShelfItemSource>.Debug (e.StackTrace);
+			}
+			
+			if(shelfNames == null)
+				return;
+			foreach(string name in shelfNames){
+				ShelfItemSource.shelves.Add(name, new ShelfItem(name)); 
+			}
+			
+			//Deserialize items in shelves
+			List<ItemsRecord> itemsInShelves = null;
+			try {
+				using (Stream s = File.OpenRead (ItemsFile)) {
+					BinaryFormatter f = new BinaryFormatter ();
+					itemsInShelves = f.Deserialize (s) as List<ItemsRecord>;
+				}
+			} catch (FileNotFoundException) {
+			} catch (Exception e) {
+				Log<ShelfItemSource>.Error ("Could not deserialize items : {0}", e.Message);
+				Log<ShelfItemSource>.Debug (e.StackTrace);
+			}
+			
+			if (itemsInShelves==null){
+				return;
+			}
+				
+			foreach(ItemsRecord itemRecord in itemsInShelves){
+				Item t = itemRecord.MaybeGetItem();
+				if(t==null){
+					continue;
+				}
+				ShelfItemSource.shelves[itemRecord.Shelf].AddItem(t);
+			}			
+			ShelfItemSource.HasDeSerialized = true;
+		}
+		
+		public static void Serialize ()
+		{
+			//serialize shelves...
+			try {
+				using (Stream s = File.OpenWrite (ShelfNamesFile)) {
+					BinaryFormatter f = new BinaryFormatter ();
+					f.Serialize (s, new List<string>(ShelfItemSource.shelves.Keys));
+				}
+			} catch (Exception e) {
+				Log<ShelfItemSource>.Error ("Could not serialize shelves names: {0}", e.Message);
+				Log<ShelfItemSource>.Debug (e.StackTrace);
+			}
+			//then serialize the items in the shelves
+			try {
+				using (Stream s = File.OpenWrite (ItemsFile)) {
+					BinaryFormatter f = new BinaryFormatter ();
+					f.Serialize (s, AllItems);
+				}
+			} catch (Exception e) {
+				Log<ShelfItemSource>.Error ("Could not serialize items: {0}", e.Message);
+				Log<ShelfItemSource>.Debug (e.StackTrace);
+			}
+		}
+				
+		static Dictionary<string,ShelfItem> shelves;
+		static string defaultName;
+		static bool HasDeSerialized = false;
 		
 		public static Dictionary<string,ShelfItem> Shelves {
 			get { return shelves; }
@@ -65,37 +184,28 @@ namespace Shelf
 
 		public override IEnumerable<Item> Items {
 			get {
-				//problem here with duplicity
-				if (shelves != null) {
-					foreach (Item item in shelves.Values)
-						yield return item;
+				if(!ShelfItemSource.HasDeSerialized){
+					ShelfItemSource.Deserialize();
 				}
+				
+				//problem here with duplicity??
+				if (shelves != null) {
+					foreach (Item item in shelves.Values){
+						yield return item;
+					}
+				}				
 			}
-		}
-		
-		public override void UpdateItems ()
-		{
-			Log<ShelfItemSource>.Debug("Total # of shelves: "+ ShelfItemSource.Shelves.Values.Count);
-			
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			return (item as ShelfItem).Items;
 		}
-		
-		public ShelfItemSource ()
-		{
-			defaultName = Catalog.GetString ("Default");
-			
-			if (shelves.Count == 0) {
-				shelves.Add (defaultName, new ShelfItem (defaultName));
-			}
-		}
 
 		static public void AddToDefault (Item item)
 		{
 			shelves[defaultName].AddItem (item);
+			Serialize();
 		}
 		
 		static public void RemoveFromAll (Item item)
@@ -103,6 +213,7 @@ namespace Shelf
 			foreach(string key in ShelfItemSource.shelves.Keys)
 				if(shelves[key].Items.Contains (item))
 					shelves[key].RemoveItem(item);
+			Serialize();
 		}
 		
 		static public bool InSomeShelf (Item item)
@@ -116,7 +227,8 @@ namespace Shelf
 		
 		static public void CreateShelf (string name)
 		{
-			shelves.Add (name, new ShelfItem (name));			
+			shelves.Add (name, new ShelfItem (name));
+			Serialize();
 		}
 	}
 }

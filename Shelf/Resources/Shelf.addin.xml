@@ -1,7 +1,7 @@
 <Addin
 	id="Shelf"
 	namespace="Do"
-	version="1.1"
+	version="1.2"
 	name="Shelf"
 	description="Store items on a 'shelf' for quick access."
 	author="Jason Smith"
