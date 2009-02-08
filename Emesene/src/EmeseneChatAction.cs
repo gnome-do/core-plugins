@@ -26,7 +26,7 @@ using Do.Universe;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-namespace Do.Universe
+namespace Emesene
 {
 	public class EmeseneChatAction : Act
 	{

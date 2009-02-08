@@ -18,20 +18,20 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="Do.Universe.EmeseneContactItemSource" />
-		<ItemSource type="Do.Universe.EmeseneStatusItemSource" />		
-		<ItemSource type="Do.Universe.EmeseneAvatarItemSource" />	
+		<ItemSource type="Emesene.EmeseneContactItemSource" />
+		<ItemSource type="Emesene.EmeseneStatusItemSource" />		
+		<ItemSource type="Emesene.EmeseneAvatarItemSource" />	
 	</Extension>
 
 	<!--- Actions -->
 	<Extension path= "/Do/Action">
-		<Action type="Do.Universe.EmeseneChatAction" />
-    	<Action type="Do.Universe.EmeseneChangeNickAction" />
-     	<Action type="Do.Universe.EmeseneChangeAvatarAction" />
-      	<Action type="Do.Universe.EmeseneChangePSMAction" />
-      	<Action type="Do.Universe.EmeseneChangeStatusAction" />
-      	<Action type="Do.Universe.EmeseneOpenConversationHistoryAction" />      	
-      	<Action type="Do.Universe.EmeseneOpenAvatarHistoryAction" />
+		<Action type="Emesene.EmeseneChatAction" />
+    	<Action type="Emesene.EmeseneChangeNickAction" />
+     	<Action type="Emesene.EmeseneChangeAvatarAction" />
+      	<Action type="Emesene.EmeseneChangePSMAction" />
+      	<Action type="Emesene.EmeseneChangeStatusAction" />
+      	<Action type="Emesene.EmeseneOpenConversationHistoryAction" />      	
+      	<Action type="Emesene.EmeseneOpenAvatarHistoryAction" />
 	</Extension>
 
 </Addin>

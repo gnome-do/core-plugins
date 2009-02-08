@@ -22,7 +22,7 @@ using System;
 using Do.Universe;
 using System.Collections.Generic;
 
-namespace Do.Universe
+namespace Emesene
 {
 	public class EmeseneStatusItemSource : ItemSource
 	{

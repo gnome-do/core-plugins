@@ -23,7 +23,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Do.Universe;
 
-namespace Do.Universe
+namespace Emesene
 {	
 	public class EmeseneOpenAvatarHistoryAction : Act
 	{

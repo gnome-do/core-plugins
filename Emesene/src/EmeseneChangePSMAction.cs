@@ -23,7 +23,7 @@ using System.Linq;
 using Do.Universe;
 using System.Collections.Generic;
 
-namespace Do.Universe
+namespace Emesene
 {	
 	public class EmeseneChangePSMAction : Act
 	{

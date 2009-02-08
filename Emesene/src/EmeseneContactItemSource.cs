@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform;
 
-namespace Do.Universe
+namespace Emesene
 {
 	public class EmeseneContactItemSource : ItemSource
 	{

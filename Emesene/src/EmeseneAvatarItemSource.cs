@@ -25,7 +25,7 @@ using Do.Universe;
 using Do.Platform;
 using System.Collections.Generic;
 
-namespace Do.Universe
+namespace Emesene
 {	
 	public class EmeseneAvatarItemSource : ItemSource
 	{

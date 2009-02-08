@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 	
-namespace Do.Universe
+namespace Emesene
 {	
 	public class EmeseneChangeAvatarAction : Act
 	{

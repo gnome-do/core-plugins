@@ -21,8 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Do.Universe;
 
-namespace Do.Universe
+namespace Emesene
 {	
 	public class EmeseneChangeNickAction : Act
 	{

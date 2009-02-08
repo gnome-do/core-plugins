@@ -21,7 +21,7 @@
 using System;
 using Do.Universe;
 
-namespace Do.Universe
+namespace Emesene
 {	
 	public class EmeseneStatusItem : Item
 	{

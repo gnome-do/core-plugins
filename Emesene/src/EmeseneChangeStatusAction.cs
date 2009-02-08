@@ -23,7 +23,7 @@ using Do.Universe;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Do.Universe
+namespace Emesene
 {	
 	public class EmeseneChangeStatusAction : Act
 	{
