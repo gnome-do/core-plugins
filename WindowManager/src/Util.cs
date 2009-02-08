@@ -29,6 +29,18 @@ namespace WindowManager
 	
 	public static class Util
 	{
+		static IEnumerable<string> BadPrefixes {
+			get {
+				yield return "gksu";
+				yield return "sudo";
+				yield return "java";
+				yield return "mono";
+				yield return "python";
+				yield return "python2.4";
+				yield return "python2.5";
+			}
+		}
+		
 		/// <summary>
 		/// Returns a list of applications that match an exec string
 		/// </summary>
@@ -40,22 +52,31 @@ namespace WindowManager
 		/// </returns>
 		public static List<Application> GetApplicationList (string exec)
 		{
-			exec = exec.Split (' ')[0];
 			List<Application> apps = new List<Application> ();
+			if (string.IsNullOrEmpty (exec))
+				return apps;
+			
+			exec = ProcessExecString (exec);
+			
 			Application out_app = null;
 			foreach (string dir in Directory.GetDirectories ("/proc")) {
 				int pid;
 				out_app = null;
-				try { pid = Convert.ToInt32 (dir.Substring (6)); } 
+				try { pid = Convert.ToInt32 (Path.GetFileName (dir)); } 
 				catch { continue; }
 				
 				string exec_line = CmdLineForPid (pid);
 				if (string.IsNullOrEmpty (exec_line))
 					continue;
-				
-				if (exec_line.Contains (exec)) {
+
+				exec_line = ProcessExecString (exec_line);
+
+				if (exec_line != null && exec_line.Contains (exec)) {
 					foreach (Application app in GetApplications ()) {
-						if (app.Pid == pid) {
+						if (app == null)
+							continue;
+						
+						if (app.Pid == pid || app.Windows.Any (w => w.Pid == pid)) {
 							if (app.Windows.Select (win => !win.IsSkipTasklist).Any ())
 								out_app = app;
 							break;
@@ -67,6 +88,28 @@ namespace WindowManager
 					apps.Add (out_app);
 			}
 			return apps;
+		}
+		
+		public static string ProcessExecString (string exec)
+		{
+			string [] parts = exec.Split (' ');
+			for (int i = 0; i < parts.Length; i++) {
+				if (parts [i].StartsWith ("-"))
+					continue;
+				
+				if (parts [i].Contains ("/"))
+					parts [i] = parts [i].Split ('/').Last ();
+				
+				foreach (string prefix in BadPrefixes) {
+					if (parts [i] == prefix)
+						parts [i] = null;
+				}
+				
+				if (!string.IsNullOrEmpty (parts [i])) {
+					return parts [i].ToLower ();
+				}
+			}
+			return null;
 		}
 		
 		/// <summary>
@@ -81,14 +124,15 @@ namespace WindowManager
 		public static string CmdLineForPid (int pid)
 		{
 			StreamReader reader;
-			string cmdline;
+			string cmdline = null;
+			
 			try {
 				string procPath = new [] { "/proc", pid.ToString (), "cmdline" }.Aggregate (Path.Combine);
 				reader = new StreamReader (procPath);
-				cmdline = reader.ReadLine ();
+				cmdline = reader.ReadLine ().Replace (Convert.ToChar (0x0), ' ');
 				reader.Close ();
 				reader.Dispose ();
-			} catch { return null; }
+			} catch { }
 			
 			return cmdline;
 		}
