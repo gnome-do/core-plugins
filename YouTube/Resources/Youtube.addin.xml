@@ -21,11 +21,11 @@
 	<!-- Extensions included in this assembly -->
 	<!-- Sources -->
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Universe.YouTubeFavoriteItemSource" />
-		<ItemSource type="Do.Universe.YouTubeSubscriptionItemSource" />
-		<ItemSource type="Do.Universe.YouTubeOwnVideosItemSource" />
+		<ItemSource type="YouTube.YouTubeFavoriteItemSource" />
+		<ItemSource type="YouTube.YouTubeSubscriptionItemSource" />
+		<ItemSource type="YouTube.YouTubeOwnVideosItemSource" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="Do.Universe.YouTubeSearchAction" />
+		<Action type="YouTube.YouTubeSearchAction" />
 	</Extension>
 </Addin>
