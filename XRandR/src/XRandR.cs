@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -162,6 +163,11 @@ namespace XRandR
 		                                           IntPtr outputs,
 		                                           int noutputs);
 		
+		[DllImport("libXrandr")]
+		public static extern void XRRSetScreenSize (IntPtr dpy, IntPtr window,
+		                                            int width, int height,
+		                                            int mmWidth, int mmHeight);
+		
 		public static T Structure<T>(IntPtr ptr){
 			return (T)Marshal.PtrToStructure(ptr,typeof(T));
 		}
@@ -295,8 +301,8 @@ namespace XRandR
 			string text = GetErrorText(display,xevent);
 			XErrorException excp = new XErrorException(xevent,text);
 			
-			Console.WriteLine("XRandR plugin: "+excp.ToString());
-			Console.WriteLine(Environment.StackTrace);
+			Do.Platform.Log.Debug("XRandR plugin: "+excp.ToString());
+			Do.Platform.Log.Debug(Environment.StackTrace);
 			
 			// don't know if it is a good idea to throw an exception out 
 			// of unmanaged code? But seems to work well. 
@@ -390,25 +396,50 @@ namespace XRandR
 			}
 		}
 		
+		public static void safeSetConfig(IntPtr display,IntPtr res,int crtc_id,int timestamp,int x,int y,int mode_id,int rotation,int[]outputs){
+			try{
+				IntPtr ptr = Marshal.AllocHGlobal(sizeof(int) * outputs.Length);
+				for(int i=0;i<outputs.Length;i++)
+					Marshal.WriteInt32(ptr,sizeof(int)*i,outputs[i]);
+				External.XRRSetCrtcConfig(display,res,crtc_id,timestamp,x,y,mode_id,rotation,ptr,outputs.Length);
+			    Marshal.FreeHGlobal(ptr);
+			}
+			catch(External.XErrorException excp){
+				Do.Platform.Log.Debug("Error when calling XRRSetCtrcConfig: 0x{0:x},{1},{2},{3},0x{4:x},{5},[{6}]"
+				                  ,crtc_id
+				                  ,timestamp
+				                  ,x
+				                  ,y
+				                  ,mode_id
+				                  ,rotation
+				                  ,outputs.Aggregate("",(a,b)=> a+";"+b));
+				throw excp;
+			}
+		}
+		
 		// Sets the mode of an output. Doesn't change any settings such as position offset or rotation.
 		public void setMode(int output_id,int mode_id){
-			foreach(XRROutputInfo output in Outputs.doWith(output_id)){
+			// use xrandr command line tool to set mode for now, since it is more reliable in
+			//  - changing screen size if necessary and calculating DPI and mm sizes
+			//  - finding a good CRTC allocation
+			string cmd = string.Format("xrandr --output 0x{0:x} --mode 0x{1:x}",output_id,mode_id);
+			
+			Do.Platform.Log.Debug("Setting mode using: '{0}'",cmd);
+
+			System.Diagnostics.Process.Start (cmd);
+			/*foreach(XRROutputInfo output in Outputs.doWith(output_id)){
 				int crtc_id = output.crtc_id;
 
 				if (mode_id != 0){
 					if (crtc_id == 0) // if output is switched off, output has no crtc defined, so we use 1st one
 						crtc_id = External.PtrToIntArray(output.crtcs,output.ncrtc)[0];
 						
-					foreach(XRRCrtcInfo crtc in Crtcs.doWith(crtc_id)){
-					    IntPtr ptr = Marshal.AllocHGlobal(sizeof(int));
-					    Marshal.WriteInt32(ptr,output_id);
-						External.XRRSetCrtcConfig(display,presources,crtc_id,output.timestamp,crtc.x,crtc.y,mode_id,crtc.rotation,ptr,1);
-					    Marshal.FreeHGlobal(ptr);
-				    }
+					foreach(XRRCrtcInfo crtc in Crtcs.doWith(crtc_id))
+						safeSetConfig(display,presources,crtc_id,0,crtc.x,crtc.y,mode_id,crtc.rotation,new[]{output_id});
 				}
 				else  // switch off output, by setting the mode of the crtc of the output to 0 
-					External.XRRSetCrtcConfig(display,presources,crtc_id,output.timestamp,0,0,0,1,new IntPtr(0),0);
-			}
+					safeSetConfig(display,presources,crtc_id,output.timestamp,0,0,0,1,new int[0]);
+			}*/
 		}
 	}
 	
@@ -418,7 +449,7 @@ namespace XRandR
 			Console.WriteLine("Id: "+mode.id+" Name: "+mode.name+" width: "+mode.width+" height: "+mode.height);
 		}			
 		public static void printOutputInfo(int id,XRROutputInfo output){
-			Console.WriteLine("Id: "+id+" Name: "+output.name+" Connection: "+output.connection);
+			Console.WriteLine("Id: {0} Name: {1} Connection: {2} crtc:{3}",id,output.name,output.connection,output.crtc_id);
 		}
 		public static void Main(string[] args)
 		{
@@ -433,7 +464,7 @@ namespace XRandR
 					foreach (XRRModeInfo mode in res.ModesOfOutput(output))
 						printModeInfo(mode);
 				}
-				res.setMode(60,0);
+				res.setMode(0x3c,0x5d);
 			};
 		}
 	}
