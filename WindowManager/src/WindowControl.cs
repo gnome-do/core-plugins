@@ -61,7 +61,7 @@ namespace WindowManager
 		public static void MinimizeWindows (IEnumerable<Window> windows)
 		{
 			foreach (Window window in windows) {
-				if (window.IsInViewport (window.Workspace) && !window.IsMinimized)
+				if (window.IsInViewport (window.Screen.ActiveWorkspace) && !window.IsMinimized)
 					window.Minimize ();
 			}
 		}
@@ -75,27 +75,29 @@ namespace WindowManager
 		public static void RestoreWindows (IEnumerable<Window> windows)
 		{
 			foreach (Window window in windows) {
-				if (window.IsInViewport (window.Workspace) && window.IsMinimized)
+				if (window.IsInViewport (window.Screen.ActiveWorkspace) && window.IsMinimized)
 					window.Unminimize (Gtk.Global.CurrentEventTime);
 			}
 		}
 		
 		public static void FocusWindows (IEnumerable<Window> windows)
 		{
-			if (!windows.Any ())
+			foreach (Window window in windows) {
+				if (window.IsInViewport (window.Screen.ActiveWorkspace) && !window.IsMinimized)
+					window.CenterAndFocusWindow ();
+			}
+			
+			if (windows.Count () <= 1)
 				return;
 			
-			if (!windows.Any (win => win.IsInViewport (win.Workspace)))
-				windows.First ().CenterAndFocusWindow ();
-			
-			foreach (Window window in windows) {
-				if (window.IsInViewport (window.Workspace) && !window.IsMinimized)
-					window.Activate (Gtk.Global.CurrentEventTime);
-			}
-			
-			if (windows.Any (w => w.NeedsAttention ())) {
-				windows.Where (w => w.NeedsAttention ()).First ().Activate (Gtk.Global.CurrentEventTime+20);
-			}
+			// we do this to make sure our active window is also at the front... Its a tricky thing to do.
+			uint time = Gtk.Global.CurrentEventTime + 200;
+			GLib.Timeout.Add (200, delegate {
+				if (!windows.Any (w => w.IsActive))
+					return false;
+				windows.Where (w => w.IsActive).First ().Activate (time);
+				return false;
+			});
 		}
 		
 		public static void FocusWindows (Window window)
@@ -105,9 +107,8 @@ namespace WindowManager
 		
 		public static void CloseWindows (IEnumerable<Window> windows)
 		{
-			foreach (Window window in windows.Where (w => !w.IsSkipTasklist)) {
+			foreach (Window window in windows.Where (w => !w.IsSkipTasklist))
 				window.Close (Gtk.Global.CurrentEventTime);
-			}
 		}
 		
 		public static void CloseWindows (Window window)
@@ -133,10 +134,13 @@ namespace WindowManager
 		/// </param>
 		public static void CenterAndFocusWindow (this Window w) 
 		{
-			if (!w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)) {
+			if (w == null)
+				return;
+
+			if (!w.IsInViewport (w.Screen.ActiveWorkspace)) {
 				int viewX, viewY, viewW, viewH;
 				int midX, midY;
-				Screen scrn = Screen.Default;
+				Screen scrn = w.Screen;
 				Workspace wsp = scrn.ActiveWorkspace;
 				
 				//get our windows geometry
@@ -167,12 +171,12 @@ namespace WindowManager
 				while (midY < 0)
 					midX += wsp.Height;
 				
-				Wnck.Screen.Default.MoveViewport (midX, midY);
+				scrn.MoveViewport (midX, midY);
 			}
 
-			if (w.Workspace != w.Screen.ActiveWorkspace)
+			if (w.Workspace != null && w.Workspace != w.Screen.ActiveWorkspace)
 				w.Workspace.Activate (Gtk.Global.CurrentEventTime);
-
+			
 			if (w.IsMinimized)
 				w.Unminimize (Gtk.Global.CurrentEventTime);
 			

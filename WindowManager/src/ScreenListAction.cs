@@ -66,7 +66,7 @@ namespace WindowManager
 				outRect.Height = scrn.Height;
 				
 				foreach (Window w in scrn.Windows) {
-					if (!w.IsSkipTasklist) continue;
+					if (!w.IsSkipTasklist || w.Name == "Do") continue;
 					if (w.WindowType == WindowType.Dock) {
 						//ok this is likely a panel.  Lets make sure!
 						Gdk.Rectangle windowGeo = new Gdk.Rectangle ();
