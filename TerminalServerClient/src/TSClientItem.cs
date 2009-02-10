@@ -23,7 +23,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-namespace Simulacra
+namespace TSClient
 {
 	public class TSClientItem : Item, IOpenableItem
 	{
