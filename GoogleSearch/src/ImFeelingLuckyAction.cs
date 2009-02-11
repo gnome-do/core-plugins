@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
@@ -92,7 +93,7 @@ namespace InlineGoogleSearch {
 			if (!results.Any ()) {
 				Gtk.Application.Invoke ((o, e) => Services.Notifications.Notify (Name, "No Results Found"));
 			} else {
-				Services.Environment.OpenUrl ( results.First ().url );
+				Services.Environment.OpenUrl (HttpUtility.UrlDecode (results.First ().url));
 			}
 			yield break;
 		}
