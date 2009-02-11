@@ -50,12 +50,16 @@ namespace Shelf
 
 		public override bool SupportsItem (Item item)
 		{
-			return (item is ShelfItem);
+			if(!(item is ShelfItem))
+				return false;
+			if((item as ShelfItem).ShelfName.Equals("Default"))
+				return false;
+			return true;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			ShelfItemSource.Shelves.Remove((items.First () as ShelfItem).Name);
+			ShelfItemSource.Shelves.Remove((items.First () as ShelfItem).ShelfName);
 			ShelfItemSource.Serialize();
 			yield break;
 		}
