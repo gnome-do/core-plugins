@@ -4,7 +4,8 @@ ASSEMBLY=SSH
 
 FILES = \
 	src/SSHAction.cs \
-	src/SSHHosts.cs
+	src/SSHHostItem.cs \
+	src/SSHHostItemSource.cs
 
 RESOURCES = \
 	Resources/SSH.addin.xml 

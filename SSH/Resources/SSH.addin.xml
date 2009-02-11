@@ -1,7 +1,7 @@
 <Addin
 	id="SSH"
 	namespace="Do"
-	version="1.0"
+	version="1.1"
 	name="SSH"
 	description="Search and connect to SSH hosts."
 	author="Peter Stuifzand"
@@ -17,9 +17,9 @@
 	</Dependencies>
 
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="GnomeDoSSH.SSHHostItemSource" />
+		<ItemSource type="SSH.SSHHostItemSource" />
 	</Extension>
 	<Extension path = "/Do/Action">
-		<Action type="GnomeDoSSH.SSHAction" />
+		<Action type="SSH.SSHAction" />
 	</Extension>
 </Addin>
