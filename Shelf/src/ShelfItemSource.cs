@@ -77,6 +77,7 @@ namespace Shelf
 		static ShelfItemSource()
 		{
 			ShelfItemSource.defaultName = "Default";
+			shelvesList = new List<Item>();
 			Deserialize ();
 			ShelfItemSource.HasDeSerialized = false;
 			if(!ShelfItemSource.shelves.ContainsKey("Default")){
@@ -160,6 +161,7 @@ namespace Shelf
 				
 		static Dictionary<string,ShelfItem> shelves;
 		static string defaultName;
+		static List<Item> shelvesList;
 		static bool HasDeSerialized = false;
 		
 		public static Dictionary<string,ShelfItem> Shelves {
@@ -183,18 +185,23 @@ namespace Shelf
 		}
 
 		public override IEnumerable<Item> Items {
-			get {
-				if(!ShelfItemSource.HasDeSerialized){
-					ShelfItemSource.Deserialize();
-				}
-				
-				//problem here with duplicity??
-				if (shelves != null) {
-					foreach (Item item in shelves.Values){
-						yield return item;
-					}
-				}				
+			get { return shelvesList ;}
+		}
+		
+		public override void UpdateItems() 
+		{
+			
+			if(!ShelfItemSource.HasDeSerialized)
+			{
+				ShelfItemSource.Deserialize();
 			}
+			if (shelves != null)
+			{
+				shelvesList.Clear();
+				foreach (Item item in shelves.Values){
+					shelvesList.Add(item);
+				}
+			}	
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)

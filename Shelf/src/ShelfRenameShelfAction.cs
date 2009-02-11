@@ -69,9 +69,9 @@ namespace Shelf
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string name = (items.First () as ShelfItem).ShelfName;
-			ShelfItem shelf = ShelfItemSource.Shelves[name];
-			shelf.ShelfName = (modItems.First () as ITextItem).Text;
-			ShelfItemSource.Shelves.Add(shelf.ShelfName, shelf);
+			ShelfItem oldShelf = ShelfItemSource.Shelves[name];
+			ShelfItem newShelf = new ShelfItem((modItems.First () as ITextItem).Text, oldShelf.ItemList);
+			ShelfItemSource.Shelves.Add(newShelf.ShelfName, newShelf);
 			ShelfItemSource.Shelves.Remove(name);
 			ShelfItemSource.Serialize();
 			yield break;

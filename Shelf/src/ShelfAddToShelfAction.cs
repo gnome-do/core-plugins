@@ -61,12 +61,6 @@ namespace Shelf
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { yield return typeof(ShelfItem); yield return typeof (ITextItem);}
 		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			foreach (Item i in ShelfItemSource.Shelves.Values)
-					yield return i;
-		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{

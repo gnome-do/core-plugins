@@ -38,6 +38,12 @@ namespace Shelf
 			this.name = name;
 		}
 		
+		public ShelfItem (string name, List<Item> items)
+		{
+			this.name = name;
+			this.items = items;
+		}
+		
 		public string ShelfName {
 			get { return this.name; }
 			set { this.name = value; }
@@ -69,16 +75,10 @@ namespace Shelf
 			Items.Remove (item);
 		}
 		
-		public override bool Equals(object obj)
+		public List<Item> ItemList
 		{
-		    if (obj == null) return false;
-
-		    if (this.GetType() != obj.GetType()) return false;
-		    ShelfItem shelf = (ShelfItem) obj;     
-
-		    if (!String.Equals(this.name, shelf.name)) return false;
-
-		    return true;
-		} 
+			get{ return this.items ;}
+			set{ this.items = value;}
+		}
 	}
 }
