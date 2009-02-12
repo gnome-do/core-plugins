@@ -5,6 +5,7 @@
 	name="Emesene"
 	description="Indexes your contact list and initiate chats with Emesene friends."
 	author="Luis Miguel Montiel G"
+	category="Community"
 >
  
 	<Runtime>

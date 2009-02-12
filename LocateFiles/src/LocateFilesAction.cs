@@ -25,14 +25,17 @@ using System.Collections.Generic;
 using Mono.Unix;
 
 using Do.Platform;
+using Do.Universe;
+using Do.Universe.Common;
 
-namespace Do.Universe
+namespace Locate
 {
 	public class LocateFilesAction : Act
 	{
 		
 		bool allowHidden = false;
 		const uint maxResults = 500;
+		string Error = Catalog.GetString ("Locate found 0 files for: ");
 		
 		public override string Name
 		{
@@ -52,9 +55,7 @@ namespace Do.Universe
 		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
-				return new Type[] {
-					typeof (ITextItem)
-				};
+				yield return typeof (ITextItem);
 			}
 		}
 		
@@ -71,6 +72,7 @@ namespace Do.Universe
 			locate.StartInfo.FileName = "locate";
 			locate.StartInfo.Arguments = string.Format ("-i \"{0}\"", query);
 			locate.StartInfo.RedirectStandardOutput = true;
+			locate.StartInfo.RedirectStandardError = true;
 			locate.StartInfo.UseShellExecute = false;
 			locate.Start ();
 
@@ -93,8 +95,13 @@ namespace Do.Universe
 					files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
 				}
 			}
-			files.Sort (new IFileItemNameComparer (query));
-			return files;
+			if (results > 0) {
+				files.Sort (new IFileItemNameComparer (query));
+				foreach (Item file in files)
+					yield return file;
+			}
+			else
+				yield return new TextItem (Error + query);
 		}
 
 		// Order files by (A) position of query in the file name and
