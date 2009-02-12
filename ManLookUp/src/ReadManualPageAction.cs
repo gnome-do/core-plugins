@@ -61,7 +61,7 @@ namespace ManPages {
 		/// </value>
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				yield return typeof(ITextItem);
+				yield return typeof (ITextItem);
 			}
 		}
 
