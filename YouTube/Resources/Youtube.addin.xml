@@ -5,6 +5,7 @@
 	name="YouTube"
 	description="Indexes your favorites, subscriptions and uploaded videos, also searches in YouTube"
 	author="Luis Miguel Montiel G"
+	category="Community"
 	>
 
 	<Runtime>
