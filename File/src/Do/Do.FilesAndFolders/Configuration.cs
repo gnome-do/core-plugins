@@ -38,10 +38,13 @@ namespace Do.FilesAndFolders
 			
 			nview = new PathNodeView ();
 			nview.Selection.Changed += OnPathNodeViewSelectionChange;
+			numFiles.Changed += OnNumFilesEdited;
 			node_scroll.Add (nview);
 			
 			show_hidden_chk.Active = Plugin.Preferences.IncludeHiddenFiles;
+			numFiles.Text = Plugin.Preferences.MaximumFilesIndexed.ToString ();
 			remove_btn.Sensitive = false;
+			
 		}
 
 		protected virtual void OnAddBtnClicked (object sender, System.EventArgs e)
@@ -75,6 +78,17 @@ namespace Do.FilesAndFolders
 		protected virtual void OnShowHiddenChkClicked (object sender, EventArgs e)
 		{
 			Plugin.Preferences.IncludeHiddenFiles = show_hidden_chk.Active;
+		}
+		
+		protected virtual void OnNumFilesEdited (object sender, EventArgs e)
+		{
+			try {
+				Plugin.Preferences.MaximumFilesIndexed = int.Parse (numFiles.Text);
+			}
+			catch (Exception ex) {
+				numFiles.Text = "";
+				Plugin.Preferences.MaximumFilesIndexed = 0;
+			}
 		}
 	}
 }
