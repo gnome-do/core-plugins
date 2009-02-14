@@ -33,18 +33,68 @@ namespace Do.FilesAndFolders
 		PathNodeView nview;
 		
 		public Configuration ()
-		{
+		{			
 			Build ();
 			
 			nview = new PathNodeView ();
 			nview.Selection.Changed += OnPathNodeViewSelectionChange;
 			numFiles.Changed += OnNumFilesEdited;
+			IndexIgnore.Clicked += OnIndexIgnoreClick;
 			node_scroll.Add (nview);
 			
 			show_hidden_chk.Active = Plugin.Preferences.IncludeHiddenFiles;
 			numFiles.Text = Plugin.Preferences.MaximumFilesIndexed.ToString ();
 			remove_btn.Sensitive = false;
 			
+			UpdateIndexIgnoreBtnImg (true);
+			IndexIgnore.Sensitive = false;
+			IndexIgnore.Label = "";
+			IndexIgnore.HeightRequest = 35;
+			IndexIgnoreLabel.Text = Catalog.GetString ("Folder status:");
+			
+		}
+		
+		private void UpdateIndexIgnoreBtnImg (bool index)
+		{
+			string stock;
+			if (index) { 
+				stock = "gtk-apply";
+				IndexIgnoreLabel.Text = Catalog.GetString ("Folder is indexed.");
+			}
+			else {
+				stock = "gtk-cancel";
+				IndexIgnoreLabel.Text = Catalog.GetString ("Folder is ignored.");
+			}
+			Image btnImage = new Image(stock, IconSize.Button);
+			IndexIgnore.Image = btnImage;
+		}
+		
+		protected virtual void OnIndexIgnoreClick (object sender, System.EventArgs e)
+		{
+			Gtk.TreeIter iter;
+			string path;
+			uint depth;
+			bool newIndexMode;
+			try {
+				nview.Model.GetIter (out iter, nview.Selection.GetSelectedRows ()[0]);
+				newIndexMode = !(bool) nview.Model.GetValue (iter, (int) Do.FilesAndFolders.PathNodeView.Column.Index);
+				path = nview.Model.GetValue (iter, (int) Do.FilesAndFolders.PathNodeView.Column.Path) as string;
+				depth = (uint) nview.Model.GetValue (iter, (int) Do.FilesAndFolders.PathNodeView.Column.Depth);
+				// if we ARE indexing this folder
+				if (newIndexMode && depth == 0) {
+					depth = 1;
+				}
+				else
+					depth = 0;
+				//update folder
+				nview.Model.SetValue (iter, (int) Do.FilesAndFolders.PathNodeView.Column.Index, newIndexMode);
+				Plugin.FolderIndex.UpdateIndexedFolder (path, path, depth, newIndexMode);
+				UpdateIndexIgnoreBtnImg (newIndexMode);
+				nview.Refresh ();
+			}
+			catch (Exception ex) {
+				Console.WriteLine ("Error: {0}", ex.ToString());
+			}
 		}
 
 		protected virtual void OnAddBtnClicked (object sender, System.EventArgs e)
@@ -56,10 +106,9 @@ namespace Do.FilesAndFolders
 				new Dialog (), FileChooserAction.SelectFolder,
 				Catalog.GetString ("Cancel"), ResponseType.Cancel,
 				Catalog.GetString ("Choose folder"), ResponseType.Accept);
-					
-			
+				
 			if (chooser.Run () == (int) ResponseType.Accept) {
-				Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, 1));
+				Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, 1, true));
 				nview.Refresh ();
 			}
 			chooser.Destroy ();
@@ -72,7 +121,16 @@ namespace Do.FilesAndFolders
 		
 		protected void OnPathNodeViewSelectionChange (object sender, EventArgs e)
 		{
-			remove_btn.Sensitive = nview.Selection.GetSelectedRows ().Any ();
+			Gtk.TreeIter iter;
+			try {
+				nview.Model.GetIter (out iter, nview.Selection.GetSelectedRows ()[0]);
+				UpdateIndexIgnoreBtnImg ((bool )nview.Model.GetValue (iter, (int)Do.FilesAndFolders.PathNodeView.Column.Index));
+			}
+			catch { }
+			finally {
+				remove_btn.Sensitive = nview.Selection.GetSelectedRows ().Any ();
+				IndexIgnore.Sensitive = nview.Selection.GetSelectedRows ().Any ();
+			}
 		}
 
 		protected virtual void OnShowHiddenChkClicked (object sender, EventArgs e)

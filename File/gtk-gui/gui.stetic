@@ -39,46 +39,74 @@
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.HButtonBox" id="hbuttonbox1">
+                  <widget class="Gtk.HBox" id="hbox1">
                     <property name="MemberName" />
-                    <property name="Spacing">4</property>
-                    <property name="Size">2</property>
-                    <property name="LayoutStyle">End</property>
+                    <property name="Spacing">6</property>
                     <child>
-                      <widget class="Gtk.Button" id="remove_btn">
+                      <widget class="Gtk.Button" id="IndexIgnore">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Type">Custom</property>
-                        <signal name="Clicked" handler="OnRemoveBtnClicked" />
-                        <child>
-                          <widget class="Gtk.Image" id="image3">
-                            <property name="MemberName" />
-                            <property name="Pixbuf">stock:gtk-remove Button</property>
-                          </widget>
-                        </child>
+                        <property name="Type">TextOnly</property>
+                        <property name="Label" translatable="yes" />
+                        <property name="UseUnderline">True</property>
                       </widget>
                       <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
                         <property name="Expand">False</property>
                         <property name="Fill">False</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Button" id="add_btn">
+                      <widget class="Gtk.Label" id="IndexIgnoreLabel">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="Type">Custom</property>
-                        <signal name="Clicked" handler="OnAddBtnClicked" />
-                        <child>
-                          <widget class="Gtk.Image" id="image1">
-                            <property name="MemberName" />
-                            <property name="Pixbuf">stock:gtk-add Button</property>
-                          </widget>
-                        </child>
+                        <property name="LabelProp" translatable="yes">label1</property>
                       </widget>
                       <packing>
                         <property name="Position">1</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.HButtonBox" id="hbuttonbox2">
+                        <property name="MemberName" />
+                        <property name="Size">2</property>
+                        <child>
+                          <widget class="Gtk.Button" id="remove_btn">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Type">TextAndIcon</property>
+                            <property name="Icon">stock:gtk-remove Button</property>
+                            <property name="Label" translatable="yes" />
+                            <property name="UseUnderline">True</property>
+                            <signal name="Clicked" handler="OnRemoveBtnClicked" />
+                          </widget>
+                          <packing>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.Button" id="add_btn">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Type">TextAndIcon</property>
+                            <property name="Icon">stock:gtk-add Menu</property>
+                            <property name="Label" translatable="yes" />
+                            <property name="UseUnderline">True</property>
+                            <signal name="Clicked" handler="OnAddBtnClicked" />
+                          </widget>
+                          <packing>
+                            <property name="Position">1</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">2</property>
+                        <property name="AutoSize">False</property>
                         <property name="Expand">False</property>
-                        <property name="Fill">False</property>
                       </packing>
                     </child>
                   </widget>
@@ -88,6 +116,9 @@
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
                   </packing>
+                </child>
+                <child>
+                  <placeholder />
                 </child>
                 <child>
                   <widget class="Gtk.HBox" id="hbox2">
@@ -122,7 +153,7 @@
                     </child>
                   </widget>
                   <packing>
-                    <property name="Position">1</property>
+                    <property name="Position">2</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -153,7 +184,7 @@
                     </child>
                   </widget>
                   <packing>
-                    <property name="Position">2</property>
+                    <property name="Position">3</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -162,9 +193,8 @@
               </widget>
               <packing>
                 <property name="Position">1</property>
-                <property name="AutoSize">True</property>
+                <property name="AutoSize">False</property>
                 <property name="Expand">False</property>
-                <property name="Fill">False</property>
               </packing>
             </child>
           </widget>

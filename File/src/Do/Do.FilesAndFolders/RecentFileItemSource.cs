@@ -53,10 +53,14 @@ namespace Do.FilesAndFolders
 
 		IEnumerable<IFileItem> GetRecentFiles ()
 		{
-			// These lines always cause mono to blow up:
-			//foreach (RecentInfo info in RecentManager.Default.Items) {
-			//	yield return UniverseFactory.NewFileItem (info.Uri);
-			//}
+			/*
+			These lines always cause mono to blow up:
+			
+			foreach (Gtk.RecentInfo info in Gtk.RecentManager.Default.Items) {
+				Console.WriteLine(info);
+				yield return Services.UniverseFactory.NewFileItem (info.Uri);
+			}
+			*/
 			return Enumerable.Empty<IFileItem> ();
 		}
 		

@@ -6,6 +6,7 @@ FILES = \
 	gtk-gui/Do.FilesAndFolders.Configuration.cs \
 	gtk-gui/generated.cs \
 	src/PathNodeView.cs \
+	src/CellRendererTogglePixbuf.cs \
 	src/Do/Do.FilesAndFolders/NewFolderAction.cs \
 	src/Do/Do.FilesAndFolders/IndexedFolderCollection.cs \
 	src/Do/Do.FilesAndFolders/Preferences.cs \

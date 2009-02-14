@@ -36,6 +36,7 @@ namespace Do.FilesAndFolders {
 	public class FileItemSource : ItemSource, IConfigurable {
 
 		IEnumerable<Item> items;
+		static IEnumerable<IndexedFolder> ignored;
 		bool maximum_files_warned;
 
 		string MaximumFilesIndexedWarning {
@@ -55,6 +56,7 @@ namespace Do.FilesAndFolders {
 		public FileItemSource ()
 		{
 			items = Enumerable.Empty<Item> ();
+			ignored = Enumerable.Empty<IndexedFolder> ();
 		}
 
 		public override IEnumerable<Item> Items {
@@ -104,11 +106,15 @@ namespace Do.FilesAndFolders {
 		
 		public override void UpdateItems ()
 		{
+			ignored = Plugin.FolderIndex
+				.Where (folder => !folder.Index)
+				.ToArray ();
+			
 			items = Plugin.FolderIndex
 				.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles))
 				.Take (Plugin.Preferences.MaximumFilesIndexed)
 				.ToArray ();
-
+			
 			if (!maximum_files_warned && items.Count () == Plugin.Preferences.MaximumFilesIndexed) {
 				Log.Warn (MaximumFilesIndexedWarning);
 				Services.Notifications.Notify ("Do is indexing too many files.", MaximumFilesIndexedWarning);
@@ -167,9 +173,9 @@ namespace Do.FilesAndFolders {
 				IEnumerable<string> files, directories, recursiveFiles;
 				
 				files = Directory.GetFiles (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, false));
 				directories = Directory.GetDirectories (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, true));
 				recursiveFiles = directories
 					.SelectMany (dir => RecursiveListFiles (dir, levels - 1, includeHidden));
 				
@@ -182,11 +188,13 @@ namespace Do.FilesAndFolders {
 			return results;
 		}
 
-		static bool ShouldIndexPath (string path, bool includeHidden)
+		static bool ShouldIndexPath (string path, bool includeHidden, bool isDirectory)
 		{
 			string filename = Path.GetFileName (path);
 			bool isForbidden = filename == "." || filename == ".." || filename.EndsWith ("~");
 			bool isHidden = filename.StartsWith (".");
+			if (isDirectory && ignored.Where (folder => path == folder.Path).Any ())
+				isForbidden = true;
 			return !isForbidden && (includeHidden || !isHidden);
 		}
 		

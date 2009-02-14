@@ -31,18 +31,20 @@ namespace Do.FilesAndFolders
 	{
 		public string Path { get; private set; }
 		public uint Level { get; private set; }
+		public bool Index { get; private set; }
 		
-		public IndexedFolder (string path, uint level)
+		public IndexedFolder (string path, uint level, bool index)
 		{
 			if (path == null) throw new ArgumentNullException ("path");
 			
 			Path = path.Replace ("~", Plugin.ImportantFolders.UserHome);
 			Level = level;
+			Index = index;
 		}
 
 		public override string ToString ()
 		{
-			return string.Format ("{0} {2} {1}", GetType ().Name, Path, Level);
+			return string.Format ("{0} {2} {1} {3}", GetType ().Name, Path, Level, Index);
 		}
 
 		public override bool Equals (object other)
@@ -52,12 +54,12 @@ namespace Do.FilesAndFolders
 
 		public override int GetHashCode ()
 		{
-			return Path.GetHashCode () ^ Level.GetHashCode ();
+			return Path.GetHashCode () ^ Level.GetHashCode () ^ Index.GetHashCode ();
 		}
 
 		public bool Equals (IndexedFolder other)
 		{
-			return other.Path == Path && other.Level == Level;
+			return other.Path == Path && other.Level == Level && other.Index == Index;
 		}
 
 		public static bool operator== (IndexedFolder left, IndexedFolder right)

@@ -31,8 +31,9 @@ namespace Do.FilesAndFolders
 	// TODO: update this class to use spin buttons,
 	public class PathNodeView : NodeView
 	{
-		enum Column {
-			Path = 0,
+		public enum Column {
+			Index = 0,
+			Path,
 			Depth,
 			NumColumns
 		}
@@ -43,7 +44,7 @@ namespace Do.FilesAndFolders
 			RulesHint = true;
 			HeadersVisible = true;
 			
-			Model = new ListStore (typeof (string), typeof (uint));
+			Model = new ListStore (typeof (bool), typeof (string), typeof (uint));
 
 			cell = new CellRendererText ();
 			(cell as CellRendererText).Width = 310;
@@ -62,23 +63,37 @@ namespace Do.FilesAndFolders
 		public void Refresh ()
 		{
 			ListStore store = Model as ListStore;
-			store.Clear ();
-			foreach (IndexedFolder pair in Plugin.FolderIndex)
-				store.AppendValues (pair.Path, pair.Level);
+			//try to keep the currently selected row across refreshes
+			Gtk.TreePath selected = null;
+			try {
+				selected = this.Selection.GetSelectedRows ()[0];
+			}
+			catch {	}
+			finally {
+				store.Clear ();
+				foreach (IndexedFolder pair in Plugin.FolderIndex) {
+					store.AppendValues (pair.Index, pair.Path, pair.Level);
+				}
+				if (selected != null)
+					this.Selection.SelectPath (selected);
+			}
 		}
 		                    
 		void OnDepthEdited (object o, EditedArgs e)
 		{
 			uint depth;
 			string path;
+			bool index;
 			TreeIter iter;
 			ListStore store;
 
 			store = Model as ListStore;
 			store.GetIter (out iter, new TreePath (e.Path));
-			path = store.GetValue (iter, (int)Column.Path) as string;
+			
+			path = store.GetValue (iter, (int) Column.Path) as string;
 			depth = uint.Parse (e.NewText);
-			Plugin.FolderIndex.UpdateIndexedFolder (path, path, depth);
+			index = (bool) store.GetValue (iter, (int) Column.Index);
+			Plugin.FolderIndex.UpdateIndexedFolder (path, path, depth, index);
 			
 			Refresh ();
 		}
@@ -91,7 +106,7 @@ namespace Do.FilesAndFolders
 
 			store = Model as ListStore;
 			Selection.GetSelected (out iter);
-			path = store.GetValue (iter, (int)Column.Path) as string;
+			path = store.GetValue (iter, (int) Column.Path) as string;
 			Plugin.FolderIndex.RemoveIndexedFolder (path);
 			store.Remove (ref iter);
 			

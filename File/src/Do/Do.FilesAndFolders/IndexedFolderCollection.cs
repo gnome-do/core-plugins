@@ -49,10 +49,10 @@ namespace Do.FilesAndFolders
 
 		IEnumerable<IndexedFolder> GetDefaultFolders ()
 		{
-			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 1);
-			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
-			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
-			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
+			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 1, true);
+			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1, true);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1, true);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2, true);
 		}
 
 		public IndexedFolderCollection ()
@@ -69,9 +69,9 @@ namespace Do.FilesAndFolders
 			}
 		}
 
-		public void UpdateIndexedFolder (string path, string newPath, uint newDepth)
+		public void UpdateIndexedFolder (string path, string newPath, uint newDepth, bool newIndex)
 		{
-			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth));
+			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth, newIndex));
 		}
 
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
