@@ -77,12 +77,18 @@ namespace XRandR
 		
 		public override void UpdateItems ()
 		{
-			items.Clear ();
-			foreach(ScreenResources res in External.ScreenResources()){
-				res.Outputs.AllWithId(delegate(int id,XRROutputInfo output){
-					Do.Platform.Log<XRandRItemSource>.Debug("Found output: 0x{0:x} - {1}",id,output.name); 
-					items.Add (new OutputItem(id,output,output.connection==0));
-				});
+			try{
+				items.Clear ();
+				foreach(ScreenResources res in External.ScreenResources()){
+					res.Outputs.AllWithId(delegate(int id,XRROutputInfo output){
+						Do.Platform.Log<XRandRItemSource>.Debug("Found output: 0x{0:x} - {1}",id,output.name); 
+						items.Add (new OutputItem(id,output,output.connection==0));
+					});
+				}
+			}catch(Exception e){
+				// Necessary, since Do.Universe.SafeElement.LogSafeError does not output a StackTrace 
+				Do.Platform.Log<XRandRItemSource>.Error("Error in UpdateItems: {0}\n{1}",e.Message,e.StackTrace);
+				throw e;
 			}
 		}
 	}
