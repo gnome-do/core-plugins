@@ -64,13 +64,15 @@ namespace Do.FilesAndFolders
 			Deserialize ();
 
 			foreach (IndexedFolder folder in Folders.Values) {
-				if (folder.Level < LargeIndexLevel) continue;
-				Log.Warn (LargeIndexLevelWarning, folder.Path, folder.Level);
+				if (folder.Level > LargeIndexLevel)
+					Log.Warn (LargeIndexLevelWarning, folder.Path, folder.Level);
 			}
 		}
 
 		public void UpdateIndexedFolder (string path, string newPath, uint newDepth, bool newIndex)
 		{
+			if (newDepth > LargeIndexLevel)
+				Log.Warn (LargeIndexLevelWarning, newPath, newDepth);
 			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth, newIndex));
 		}
 
@@ -86,6 +88,11 @@ namespace Do.FilesAndFolders
 		{
 			if (!Folders.ContainsKey (path)) return;
 			Remove (Folders [path]);
+		}
+		
+		public bool ContainsFolder (string path)
+		{
+			return Folders.ContainsKey (path);
 		}
 
 		#region ICollection<IndexedFolder>
