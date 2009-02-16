@@ -1,4 +1,4 @@
-/* PathNodeView.cs
+/* IndexPathNodeView.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
