@@ -122,7 +122,7 @@ namespace Do.FilesAndFolders
 			try {
 				Plugin.Preferences.MaximumFilesIndexed = int.Parse (numFiles.Text);
 			}
-			catch (Exception ex) {
+			catch {
 				numFiles.Text = "";
 				Plugin.Preferences.MaximumFilesIndexed = 0;
 			}

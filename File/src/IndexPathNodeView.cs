@@ -69,7 +69,7 @@ namespace Do.FilesAndFolders
 			finally {
 				store.Clear ();
 				foreach (IndexedFolder pair in Plugin.FolderIndex) {
-					if( pair.Index)
+					if (pair.Index)
 						store.AppendValues ( pair.Path, pair.Level);
 				}
 				if (selected != null)
@@ -81,7 +81,6 @@ namespace Do.FilesAndFolders
 		{
 			uint depth;
 			string path;
-			bool index;
 			TreeIter iter;
 			ListStore store;
 

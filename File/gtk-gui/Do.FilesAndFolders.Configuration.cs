@@ -35,6 +35,14 @@ namespace Do.FilesAndFolders {
         
         private Gtk.Button index_add_btn;
         
+        private Gtk.HBox hbox2;
+        
+        private Gtk.Label maxFileslbl;
+        
+        private Gtk.Entry numFiles;
+        
+        private Gtk.CheckButton show_hidden_chk;
+        
         private Gtk.Label label1;
         
         private Gtk.VBox vbox5;
@@ -52,16 +60,6 @@ namespace Do.FilesAndFolders {
         private Gtk.Button ignore_add_btn;
         
         private Gtk.Label label2;
-        
-        private Gtk.HBox hbox2;
-        
-        private Gtk.Label maxFileslbl;
-        
-        private Gtk.Entry numFiles;
-        
-        private Gtk.VBox vbox3;
-        
-        private Gtk.CheckButton show_hidden_chk;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -85,7 +83,8 @@ namespace Do.FilesAndFolders {
             this.notebook1.HeightRequest = 270;
             this.notebook1.CanFocus = true;
             this.notebook1.Name = "notebook1";
-            this.notebook1.CurrentPage = 0;
+            this.notebook1.CurrentPage = 1;
+            this.notebook1.ShowBorder = false;
             // Container child notebook1.Gtk.Notebook+NotebookChild
             this.vbox4 = new Gtk.VBox();
             this.vbox4.Name = "vbox4";
@@ -141,14 +140,14 @@ namespace Do.FilesAndFolders {
             this.index_add_btn.UseUnderline = true;
             // Container child index_add_btn.Gtk.Container+ContainerChild
             Gtk.Alignment w12 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment1.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w13 = new Gtk.HBox();
             w13.Spacing = 2;
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w14 = new Gtk.Image();
             w14.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-add", Gtk.IconSize.Menu, 16);
             w13.Add(w14);
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w16 = new Gtk.Label();
             w13.Add(w16);
             w12.Add(w13);
@@ -167,6 +166,49 @@ namespace Do.FilesAndFolders {
             w22.Position = 1;
             w22.Expand = false;
             w22.Fill = false;
+            // Container child vbox4.Gtk.Box+BoxChild
+            this.hbox2 = new Gtk.HBox();
+            this.hbox2.Name = "hbox2";
+            this.hbox2.Spacing = 6;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.maxFileslbl = new Gtk.Label();
+            this.maxFileslbl.Name = "maxFileslbl";
+            this.maxFileslbl.LabelProp = Mono.Unix.Catalog.GetString("Maximum number of items to index:");
+            this.hbox2.Add(this.maxFileslbl);
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.hbox2[this.maxFileslbl]));
+            w23.Position = 0;
+            w23.Expand = false;
+            w23.Fill = false;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.numFiles = new Gtk.Entry();
+            this.numFiles.CanFocus = true;
+            this.numFiles.Name = "numFiles";
+            this.numFiles.IsEditable = true;
+            this.numFiles.WidthChars = 5;
+            this.numFiles.InvisibleChar = '●';
+            this.hbox2.Add(this.numFiles);
+            Gtk.Box.BoxChild w24 = ((Gtk.Box.BoxChild)(this.hbox2[this.numFiles]));
+            w24.Position = 1;
+            w24.Expand = false;
+            this.vbox4.Add(this.hbox2);
+            Gtk.Box.BoxChild w25 = ((Gtk.Box.BoxChild)(this.vbox4[this.hbox2]));
+            w25.Position = 2;
+            w25.Expand = false;
+            w25.Fill = false;
+            // Container child vbox4.Gtk.Box+BoxChild
+            this.show_hidden_chk = new Gtk.CheckButton();
+            this.show_hidden_chk.CanFocus = true;
+            this.show_hidden_chk.Name = "show_hidden_chk";
+            this.show_hidden_chk.Label = Mono.Unix.Catalog.GetString("Show hidden files");
+            this.show_hidden_chk.Active = true;
+            this.show_hidden_chk.DrawIndicator = true;
+            this.show_hidden_chk.UseUnderline = true;
+            this.show_hidden_chk.BorderWidth = ((uint)(5));
+            this.vbox4.Add(this.show_hidden_chk);
+            Gtk.Box.BoxChild w26 = ((Gtk.Box.BoxChild)(this.vbox4[this.show_hidden_chk]));
+            w26.Position = 3;
+            w26.Expand = false;
+            w26.Fill = false;
             this.notebook1.Add(this.vbox4);
             // Notebook tab
             this.label1 = new Gtk.Label();
@@ -184,8 +226,8 @@ namespace Do.FilesAndFolders {
             this.ignore_node_scroll.Name = "ignore_node_scroll";
             this.ignore_node_scroll.ShadowType = ((Gtk.ShadowType)(1));
             this.vbox5.Add(this.ignore_node_scroll);
-            Gtk.Box.BoxChild w24 = ((Gtk.Box.BoxChild)(this.vbox5[this.ignore_node_scroll]));
-            w24.Position = 0;
+            Gtk.Box.BoxChild w28 = ((Gtk.Box.BoxChild)(this.vbox5[this.ignore_node_scroll]));
+            w28.Position = 0;
             // Container child vbox5.Gtk.Box+BoxChild
             this.hbox3 = new Gtk.HBox();
             this.hbox3.Name = "hbox3";
@@ -194,9 +236,9 @@ namespace Do.FilesAndFolders {
             this.IgnoreLabel = new Gtk.Label();
             this.IgnoreLabel.Name = "IgnoreLabel";
             this.hbox3.Add(this.IgnoreLabel);
-            Gtk.Box.BoxChild w25 = ((Gtk.Box.BoxChild)(this.hbox3[this.IgnoreLabel]));
-            w25.Position = 0;
-            w25.Fill = false;
+            Gtk.Box.BoxChild w29 = ((Gtk.Box.BoxChild)(this.hbox3[this.IgnoreLabel]));
+            w29.Position = 0;
+            w29.Fill = false;
             // Container child hbox3.Gtk.Box+BoxChild
             this.hbuttonbox3 = new Gtk.HButtonBox();
             this.hbuttonbox3.Name = "hbuttonbox3";
@@ -206,59 +248,59 @@ namespace Do.FilesAndFolders {
             this.ignore_remove_btn.Name = "ignore_remove_btn";
             this.ignore_remove_btn.UseUnderline = true;
             // Container child ignore_remove_btn.Gtk.Container+ContainerChild
-            Gtk.Alignment w26 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment2.Gtk.Container+ContainerChild
-            Gtk.HBox w27 = new Gtk.HBox();
-            w27.Spacing = 2;
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
-            Gtk.Image w28 = new Gtk.Image();
-            w28.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 20);
-            w27.Add(w28);
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
-            Gtk.Label w30 = new Gtk.Label();
-            w27.Add(w30);
-            w26.Add(w27);
-            this.ignore_remove_btn.Add(w26);
+            Gtk.Alignment w30 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            Gtk.HBox w31 = new Gtk.HBox();
+            w31.Spacing = 2;
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Image w32 = new Gtk.Image();
+            w32.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 20);
+            w31.Add(w32);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w34 = new Gtk.Label();
+            w31.Add(w34);
+            w30.Add(w31);
+            this.ignore_remove_btn.Add(w30);
             this.hbuttonbox3.Add(this.ignore_remove_btn);
-            Gtk.ButtonBox.ButtonBoxChild w34 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox3[this.ignore_remove_btn]));
-            w34.Expand = false;
-            w34.Fill = false;
+            Gtk.ButtonBox.ButtonBoxChild w38 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox3[this.ignore_remove_btn]));
+            w38.Expand = false;
+            w38.Fill = false;
             // Container child hbuttonbox3.Gtk.ButtonBox+ButtonBoxChild
             this.ignore_add_btn = new Gtk.Button();
             this.ignore_add_btn.CanFocus = true;
             this.ignore_add_btn.Name = "ignore_add_btn";
             this.ignore_add_btn.UseUnderline = true;
             // Container child ignore_add_btn.Gtk.Container+ContainerChild
-            Gtk.Alignment w35 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment3.Gtk.Container+ContainerChild
-            Gtk.HBox w36 = new Gtk.HBox();
-            w36.Spacing = 2;
-            // Container child GtkHBox3.Gtk.Container+ContainerChild
-            Gtk.Image w37 = new Gtk.Image();
-            w37.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-add", Gtk.IconSize.Menu, 16);
-            w36.Add(w37);
-            // Container child GtkHBox3.Gtk.Container+ContainerChild
-            Gtk.Label w39 = new Gtk.Label();
-            w36.Add(w39);
-            w35.Add(w36);
-            this.ignore_add_btn.Add(w35);
+            Gtk.Alignment w39 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            Gtk.HBox w40 = new Gtk.HBox();
+            w40.Spacing = 2;
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Image w41 = new Gtk.Image();
+            w41.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-add", Gtk.IconSize.Menu, 16);
+            w40.Add(w41);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w43 = new Gtk.Label();
+            w40.Add(w43);
+            w39.Add(w40);
+            this.ignore_add_btn.Add(w39);
             this.hbuttonbox3.Add(this.ignore_add_btn);
-            Gtk.ButtonBox.ButtonBoxChild w43 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox3[this.ignore_add_btn]));
-            w43.Position = 1;
-            w43.Expand = false;
-            w43.Fill = false;
+            Gtk.ButtonBox.ButtonBoxChild w47 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox3[this.ignore_add_btn]));
+            w47.Position = 1;
+            w47.Expand = false;
+            w47.Fill = false;
             this.hbox3.Add(this.hbuttonbox3);
-            Gtk.Box.BoxChild w44 = ((Gtk.Box.BoxChild)(this.hbox3[this.hbuttonbox3]));
-            w44.Position = 1;
-            w44.Expand = false;
+            Gtk.Box.BoxChild w48 = ((Gtk.Box.BoxChild)(this.hbox3[this.hbuttonbox3]));
+            w48.Position = 1;
+            w48.Expand = false;
             this.vbox5.Add(this.hbox3);
-            Gtk.Box.BoxChild w45 = ((Gtk.Box.BoxChild)(this.vbox5[this.hbox3]));
-            w45.Position = 1;
-            w45.Expand = false;
-            w45.Fill = false;
+            Gtk.Box.BoxChild w49 = ((Gtk.Box.BoxChild)(this.vbox5[this.hbox3]));
+            w49.Position = 1;
+            w49.Expand = false;
+            w49.Fill = false;
             this.notebook1.Add(this.vbox5);
-            Gtk.Notebook.NotebookChild w46 = ((Gtk.Notebook.NotebookChild)(this.notebook1[this.vbox5]));
-            w46.Position = 1;
+            Gtk.Notebook.NotebookChild w50 = ((Gtk.Notebook.NotebookChild)(this.notebook1[this.vbox5]));
+            w50.Position = 1;
             // Notebook tab
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
@@ -266,64 +308,11 @@ namespace Do.FilesAndFolders {
             this.notebook1.SetTabLabel(this.vbox5, this.label2);
             this.label2.ShowAll();
             this.vbox1.Add(this.notebook1);
-            Gtk.Box.BoxChild w47 = ((Gtk.Box.BoxChild)(this.vbox1[this.notebook1]));
-            w47.Position = 0;
-            // Container child vbox1.Gtk.Box+BoxChild
-            this.hbox2 = new Gtk.HBox();
-            this.hbox2.Name = "hbox2";
-            this.hbox2.Spacing = 6;
-            // Container child hbox2.Gtk.Box+BoxChild
-            this.maxFileslbl = new Gtk.Label();
-            this.maxFileslbl.Name = "maxFileslbl";
-            this.maxFileslbl.LabelProp = Mono.Unix.Catalog.GetString("Maximum number of items to index:");
-            this.hbox2.Add(this.maxFileslbl);
-            Gtk.Box.BoxChild w48 = ((Gtk.Box.BoxChild)(this.hbox2[this.maxFileslbl]));
-            w48.Position = 0;
-            w48.Expand = false;
-            w48.Fill = false;
-            // Container child hbox2.Gtk.Box+BoxChild
-            this.numFiles = new Gtk.Entry();
-            this.numFiles.CanFocus = true;
-            this.numFiles.Name = "numFiles";
-            this.numFiles.IsEditable = true;
-            this.numFiles.WidthChars = 5;
-            this.numFiles.InvisibleChar = '●';
-            this.hbox2.Add(this.numFiles);
-            Gtk.Box.BoxChild w49 = ((Gtk.Box.BoxChild)(this.hbox2[this.numFiles]));
-            w49.Position = 1;
-            w49.Expand = false;
-            this.vbox1.Add(this.hbox2);
-            Gtk.Box.BoxChild w50 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
-            w50.Position = 1;
-            w50.Expand = false;
-            w50.Fill = false;
-            // Container child vbox1.Gtk.Box+BoxChild
-            this.vbox3 = new Gtk.VBox();
-            this.vbox3.Name = "vbox3";
-            this.vbox3.Spacing = 6;
-            // Container child vbox3.Gtk.Box+BoxChild
-            this.show_hidden_chk = new Gtk.CheckButton();
-            this.show_hidden_chk.CanFocus = true;
-            this.show_hidden_chk.Name = "show_hidden_chk";
-            this.show_hidden_chk.Label = Mono.Unix.Catalog.GetString("Show hidden files");
-            this.show_hidden_chk.Active = true;
-            this.show_hidden_chk.DrawIndicator = true;
-            this.show_hidden_chk.UseUnderline = true;
-            this.show_hidden_chk.BorderWidth = ((uint)(5));
-            this.vbox3.Add(this.show_hidden_chk);
-            Gtk.Box.BoxChild w51 = ((Gtk.Box.BoxChild)(this.vbox3[this.show_hidden_chk]));
+            Gtk.Box.BoxChild w51 = ((Gtk.Box.BoxChild)(this.vbox1[this.notebook1]));
             w51.Position = 0;
-            w51.Expand = false;
-            w51.Fill = false;
-            this.vbox1.Add(this.vbox3);
-            Gtk.Box.BoxChild w52 = ((Gtk.Box.BoxChild)(this.vbox1[this.vbox3]));
-            w52.Position = 2;
-            w52.Expand = false;
-            w52.Fill = false;
             this.vbox2.Add(this.vbox1);
-            Gtk.Box.BoxChild w53 = ((Gtk.Box.BoxChild)(this.vbox2[this.vbox1]));
-            w53.Position = 0;
-            w53.Expand = false;
+            Gtk.Box.BoxChild w52 = ((Gtk.Box.BoxChild)(this.vbox2[this.vbox1]));
+            w52.Position = 0;
             this.alignment1.Add(this.vbox2);
             this.Add(this.alignment1);
             if ((this.Child != null)) {
@@ -332,10 +321,10 @@ namespace Do.FilesAndFolders {
             this.Show();
             this.index_remove_btn.Clicked += new System.EventHandler(this.OnRemoveBtnClicked);
             this.index_add_btn.Clicked += new System.EventHandler(this.OnAddBtnClicked);
-            this.ignore_remove_btn.Clicked += new System.EventHandler(this.OnRemoveBtnClicked);
-            this.ignore_add_btn.Clicked += new System.EventHandler(this.OnAddBtnClicked);
             this.numFiles.Changed += new System.EventHandler(this.OnNumFilesEdited);
             this.show_hidden_chk.Clicked += new System.EventHandler(this.OnShowHiddenChkClicked);
+            this.ignore_remove_btn.Clicked += new System.EventHandler(this.OnRemoveBtnClicked);
+            this.ignore_add_btn.Clicked += new System.EventHandler(this.OnAddBtnClicked);
         }
     }
 }

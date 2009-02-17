@@ -64,7 +64,7 @@ namespace Do.FilesAndFolders
 				store.Clear ();
 				foreach (IndexedFolder pair in Plugin.FolderIndex) {
 					if (!pair.Index)
-						store.AppendValues ( pair.Path, pair.Index);
+						store.AppendValues (pair.Path, pair.Index);
 				}
 				if (selected != null)
 					this.Selection.SelectPath (selected);
