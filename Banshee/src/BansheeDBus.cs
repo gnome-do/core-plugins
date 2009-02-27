@@ -54,12 +54,14 @@ namespace Banshee
 	public class BansheeDBus
 	{
 		const string BusName = "org.bansheeproject.Banshee";
+		const string SessionBusName = "org.freedesktop.DBus";
 		const string ErrorMessage = "Banshee encountered an error in {0}; {1}";
 
 		# region static Banshee d-bus members
 		
 		static Dictionary<Type, string> object_paths;
 		
+		static IBus session_bus;
 		static IBansheePlayer player;
 		static IBansheePlayQueue play_queue;
 		static IBansheeController controller;
@@ -67,6 +69,18 @@ namespace Banshee
 		static BansheeDBus ()
 		{
 			BuildObjectPathsDict ();
+			session_bus = Bus.Session.GetObject<IBus> (SessionBusName, new ObjectPath (object_paths[typeof (IBus)]));
+			session_bus.NameOwnerChanged += HandleNameOwnerChanged;
+		}
+
+		static void HandleNameOwnerChanged(string name, string old_owner, string new_owner)
+		{
+			// when the owner changes on this path, we release our dbus objects.
+			if (name == BusName) {
+				player = null;
+				controller = null;
+				play_queue = null;
+			}	
 		}
 
 		static bool FullApplicationAvailable {
@@ -125,9 +139,9 @@ namespace Banshee
 		}
 
 		public bool IsPlaying ()
-		{			
+		{
 			try {
-				return player != null && Player.CurrentState == "playing";
+				return (player != null || FullApplicationAvailable) && Player.CurrentState == "playing";
 			} catch (Exception e) {
 				LogError ("IsPlaying", e);
 			}
@@ -195,6 +209,7 @@ namespace Banshee
 		static void BuildObjectPathsDict ()
 		{
 			object_paths = new Dictionary<Type, string> ();
+			object_paths.Add (typeof (IBus), "/org/freedesktop/DBus");
 			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
 			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
 			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");

@@ -69,5 +69,11 @@ namespace Banshee
 				
 			yield break;
 		}
+		
+		protected override bool IsAvailable ()
+		{
+			return !Banshee.IsPlaying;
+		}
+
 	}
 }
