@@ -86,6 +86,7 @@ namespace Microblogging
 
 		static void OnTimelineUpdated (object sender, TimelineUpdatedEventArgs args)
 		{
+			if (!Preferences.ShowNotifications) return;
 			notifications.Notify (new TimelineNotification (args.Screenname, args.Status, args.Icon));
 		}
 

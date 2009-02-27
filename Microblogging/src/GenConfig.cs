@@ -38,7 +38,5 @@ namespace Microblogging
 		{
 			Microblog.Preferences.ShowNotifications = show_updates_chk.Active;
 		}
-
-		
 	}
 }
