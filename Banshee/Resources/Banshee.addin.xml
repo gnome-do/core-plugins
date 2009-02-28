@@ -1,9 +1,9 @@
 <Addin 
 	id="Banshee"
 	namespace= "Do"
-	version="0.9"
-	name="Banshee (beta)"
-	description="Control Banshee Media Player playback and Search Collection"
+	version="1.0"
+	name="Banshee Media Player"
+	description="Search your media collection and control playback."
 	author="Alex Launi"
 	category="Official"
 >
