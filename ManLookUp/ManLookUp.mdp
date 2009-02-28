@@ -1,4 +1,4 @@
-<Project name="ManLookUp" fileversion="2.0" Description="Gnome-do plugin" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
+<Project name="ManLookUp" fileversion="2.0" language="C#" Description="Gnome-do plugin" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assemblyKeyFile="." assembly="ManLookUp" />
@@ -25,5 +25,4 @@
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </References>
-  <GtkDesignInfo />
 </Project>
