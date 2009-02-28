@@ -92,7 +92,8 @@ namespace Microblogging
 
 		static void DirectMessageFound (object sender, TimelineUpdatedEventArgs args)
 		{
-			notifications.Notify (new DirectMessageNotification (args.Screenname, args.Screenname, args.Icon));
+			if (!Preferences.ShowDirectMessages) return;
+			notifications.Notify (new DirectMessageNotification (args.Screenname, args.Status, args.Icon));
 		}
 		
 		static void ServiceChanged (object sender, EventArgs args)
