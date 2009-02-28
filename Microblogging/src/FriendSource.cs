@@ -37,7 +37,6 @@ namespace Microblogging
 	/// </summary>
 	public sealed class FriendSource : ItemSource, IConfigurable
 	{
-	
 		public FriendSource()
 		{
 			Microblog.Connect (Microblog.Preferences.Username, Microblog.Preferences.Password);
@@ -56,7 +55,16 @@ namespace Microblogging
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (ContactItem); }
+			get { yield return typeof (FriendItem); }
+		}
+		
+		public override IEnumerable<Item> Items {
+			get { return Microblog.Friends.OfType<Item> (); }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			return (item as FriendItem).Statuses.OfType<Item> ();
 		}
 
 		public Gtk.Bin GetConfiguration () 

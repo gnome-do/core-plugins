@@ -62,7 +62,10 @@ namespace Microblogging
         }
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-            get { yield return typeof (ContactItem); }
+            get { 
+				yield return typeof (FriendItem);
+				yield return typeof (MicroblogStatus);
+			}
         }
 
         public override bool ModifierItemsOptional {
@@ -72,30 +75,40 @@ namespace Microblogging
         public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
         {
 			ITextItem message = items.First () as ITextItem;
-			ContactItem buddy = modItem as ContactItem;
-			string buddyName = buddy [MicroblogClient.ContactKeyName] ?? "";
+			string buddyName = GetContactNameFromItem (modItem);
 
         	// make sure we dont go over 140 chars with the contact screen name
-        	return message.Text.Length + buddyName.Length < MaxMessageLength;
+        	return !string.IsNullOrEmpty (buddyName) && message.Text.Length + buddyName.Length < MaxMessageLength;
         }
 
 		public override IEnumerable<Item> DynamicModifierItemsForItem(Item item)
 		{
-			return Microblog.Friends;
+			return Microblog.Friends.OfType<Item> ();
 		}
 
         
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
         {
         	string status;
+			MicroblogStatusReply reply;
         	
         	status = (items.First () as ITextItem).Text;
-			if (modItems.Any ())
+			if (modItems.Any ()) {
 				status = BuildTweet (status, modItems);
+			
+				if (modItems.First () is FriendItem) {
+					reply = new MicroblogStatusReply (null, status);
+				} else {
+					MicroblogStatus s = modItems.First () as MicroblogStatus;
+					reply = new MicroblogStatusReply (s.Id, status);
+				}
+			} else {
+				reply = new MicroblogStatusReply (null, status);
+			}
 			
 			Thread updateRunner = new Thread (new ParameterizedThreadStart (Microblog.UpdateStatus));
 			updateRunner.IsBackground = true;
-			updateRunner.Start (status);
+			updateRunner.Start (reply);
 			
 			return null;
 		}
@@ -108,23 +121,32 @@ namespace Microblogging
 		string BuildTweet(string status, IEnumerable<Item> modItems)
 		{
 			string tweet = "";
+			string buddyName;
 			
 			//Handle situations without a contact
 			if (modItems.Count () == 0) return status;
 			
-			// Direct messaging
+			buddyName =  GetContactNameFromItem (modItems.First ());
+			
+			// Direct messaging starts with "d "
 			if (status.Substring (0,2).Equals ("d ")) {
-				tweet = "d " + (modItems.First () as ContactItem) [MicroblogClient.ContactKeyName] + " " +	status.Substring (2);
+				tweet = "d " + buddyName + " " +	status.Substring (2);
 					
 			// Tweet replying
 			} else {
-				foreach (ContactItem contact in modItems) {
-					tweet += "@" + contact [MicroblogClient.ContactKeyName] + " " ;
+				foreach (Item contact in modItems) {
+					tweet += "@" + GetContactNameFromItem (contact) + " " ;
 				}
 				
 				tweet += status;
 			}
+			
 			return tweet;
+		}
+		
+		string GetContactNameFromItem (Item modItem)
+		{
+			return (modItem is FriendItem) ? (modItem as FriendItem).Name : (modItem as MicroblogStatus).Owner;
 		}
 	}
 }
