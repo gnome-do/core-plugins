@@ -32,11 +32,17 @@ namespace Microblogging
 		{
 			this.Build();
 			show_updates_chk.Active = Microblog.Preferences.ShowNotifications;
+			show_dms_chk.Active = Microblog.Preferences.ShowDirectMessages;
 		}
 		
 		protected virtual void OnShowUpdatesChkClicked (object sender, EventArgs e)
 		{
 			Microblog.Preferences.ShowNotifications = show_updates_chk.Active;
+		}
+		
+		protected virtual void OnShowDMsChkClicked (object sender, EventArgs e)
+		{
+			Microblog.Preferences.ShowDirectMessages = show_dms_chk.Active;
 		}
 	}
 }
