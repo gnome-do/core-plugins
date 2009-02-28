@@ -29,44 +29,62 @@ namespace WindowManager
 	
 	public static class Util
 	{
-		/// <summary>
-		/// Returns a list of applications that match an exec string
-		/// </summary>
-		/// <param name="exec">
-		/// A <see cref="System.String"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="List"/>
-		/// </returns>
-		public static List<Application> GetApplicationList (string exec)
-		{
-			exec = exec.Split (' ')[0];
-			List<Application> apps = new List<Application> ();
-			Application out_app = null;
-			foreach (string dir in Directory.GetDirectories ("/proc")) {
-				int pid;
-				out_app = null;
-				try { pid = Convert.ToInt32 (dir.Substring (6)); } 
-				catch { continue; }
-				
-				string exec_line = CmdLineForPid (pid);
-				if (string.IsNullOrEmpty (exec_line))
-					continue;
-				
-				if (exec_line.Contains (exec)) {
-					foreach (Application app in GetApplications ()) {
-						if (app.Pid == pid) {
-							if (app.Windows.Select (win => !win.IsSkipTasklist).Any ())
-								out_app = app;
-							break;
-						}
-					}
-				}
-				
-				if (out_app != null)
-					apps.Add (out_app);
+		static IEnumerable<string> BadPrefixes {
+			get {
+				yield return "gksu";
+				yield return "sudo";
+				yield return "java";
+				yield return "mono";
+				yield return "ruby";
+				yield return "padsp";
+				yield return "aoss";
+				yield return "python";
+				yield return "python2.4";
+				yield return "python2.5";
 			}
-			return apps;
+		}
+		
+		static List<Application> application_list;
+		static bool application_list_update_needed;
+		
+		static Dictionary<int, string> exec_lines = new Dictionary<int, string> ();
+		static DateTime last_update = new DateTime (0);
+		
+		static Util ()
+		{
+			Wnck.Screen.Default.WindowClosed += delegate {
+				application_list_update_needed = true;
+			};
+			
+			Wnck.Screen.Default.WindowOpened += delegate {
+				application_list_update_needed = true;
+			};
+			
+			Wnck.Screen.Default.ApplicationOpened += delegate {
+				application_list_update_needed = true;
+			};
+			
+			Wnck.Screen.Default.ApplicationClosed += delegate {
+				application_list_update_needed = true;
+			};
+		}
+		
+		/// <summary>
+		/// Returns a list of all applications on the default screen
+		/// </summary>
+		/// <returns>
+		/// A <see cref="Application"/> array
+		/// </returns>
+		public static List<Application> GetApplications ()
+		{
+			if (application_list == null || application_list_update_needed) {
+				application_list = new List<Application> ();
+				foreach (Window w in Wnck.Screen.Default.Windows) {
+					if (!application_list.Contains (w.Application))
+						application_list.Add (w.Application);
+				}
+			}
+			return application_list;
 		}
 		
 		/// <summary>
@@ -81,32 +99,98 @@ namespace WindowManager
 		public static string CmdLineForPid (int pid)
 		{
 			StreamReader reader;
-			string cmdline;
+			string cmdline = null;
+			
 			try {
 				string procPath = new [] { "/proc", pid.ToString (), "cmdline" }.Aggregate (Path.Combine);
 				reader = new StreamReader (procPath);
-				cmdline = reader.ReadLine ();
+				cmdline = reader.ReadLine ().Replace (Convert.ToChar (0x0), ' ');
 				reader.Close ();
 				reader.Dispose ();
-			} catch { return null; }
+			} catch { }
 			
 			return cmdline;
 		}
 		
 		/// <summary>
-		/// Returns a list of all applications on the default screen
+		/// Returns a list of applications that match an exec string
 		/// </summary>
+		/// <param name="exec">
+		/// A <see cref="System.String"/>
+		/// </param>
 		/// <returns>
-		/// A <see cref="Application"/> array
+		/// A <see cref="List"/>
 		/// </returns>
-		public static Application[] GetApplications ()
+		public static List<Application> GetApplicationList (string exec)
 		{
 			List<Application> apps = new List<Application> ();
-			foreach (Window w in Wnck.Screen.Default.Windows) {
-				if (!apps.Contains (w.Application))
-					apps.Add (w.Application);
+			if (string.IsNullOrEmpty (exec))
+				return apps;
+			
+			exec = ProcessExecString (exec);
+			
+			UpdateExecList ();
+
+			foreach (KeyValuePair<int, string> kvp in exec_lines) {
+				if (kvp.Value != null && kvp.Value.Contains (exec)) {
+					foreach (Application app in GetApplications ()) {
+						if (app == null)
+							continue;
+						
+						if (app.Pid == kvp.Key || app.Windows.Any (w => w.Pid == kvp.Key)) {
+							if (app.Windows.Any (win => !win.IsSkipTasklist))
+								apps.Add (app);
+							break;
+						}
+					}
+				}
 			}
-			return apps.ToArray ();
+			return apps;
+		}
+		
+		static void UpdateExecList ()
+		{
+			if ((DateTime.UtcNow - last_update).TotalMilliseconds < 200) return;
+			
+			exec_lines.Clear ();
+			
+			foreach (string dir in Directory.GetDirectories ("/proc")) {
+				int pid;
+				try { pid = Convert.ToInt32 (Path.GetFileName (dir)); } 
+				catch { continue; }
+				
+				string exec_line = CmdLineForPid (pid);
+				if (string.IsNullOrEmpty (exec_line))
+					continue;
+
+				exec_line = ProcessExecString (exec_line);
+				
+				exec_lines [pid] = exec_line;
+			}
+			
+			last_update = DateTime.UtcNow;
+		}
+
+		public static string ProcessExecString (string exec)
+		{
+			string [] parts = exec.Split (' ');
+			for (int i = 0; i < parts.Length; i++) {
+				if (parts [i].StartsWith ("-"))
+					continue;
+				
+				if (parts [i].Contains ("/"))
+					parts [i] = parts [i].Split ('/').Last ();
+				
+				foreach (string prefix in BadPrefixes) {
+					if (parts [i] == prefix)
+						parts [i] = null;
+				}
+				
+				if (!string.IsNullOrEmpty (parts [i])) {
+					return parts [i].ToLower ();
+				}
+			}
+			return null;
 		}
 	}
 }

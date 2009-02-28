@@ -24,9 +24,9 @@ using System.Collections.Generic;
 
 
 using Do.Universe;
-using Do.Platform.Default;
+using Do.Platform;
 
-namespace Simulacra
+namespace TSClient
 {
 	public class TSClientItemSource : ItemSource
 	{
@@ -57,15 +57,40 @@ namespace Simulacra
 		public override void UpdateItems () {
 			items.Clear ();
 			try {
-				string rdpFiles = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.Personal), 
+				string tsclientDir = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.Personal), 
 				                                         ".tsclient");
-				DirectoryInfo di = new DirectoryInfo (rdpFiles);
-				foreach (FileInfo fi in di.GetFiles ("*.rdp")) {
-					string name = fi.Name.Replace (".rdp", "");
-					items.Add (new TSClientItem (name, fi.FullName));
+				List<string> clients = GetFilesRecursive(tsclientDir);
+				
+				foreach (string file in clients) {
+					string name = file.Replace (".rdp", "");
+					items.Add (new TSClientItem (name, file));
+					Log<TSClientItemSource>.Debug ("rdp file '{0}' indexed.", file);
 				}
 			} catch { }
 		}
+		
+	    private static List<string> GetFilesRecursive (string src) {
+	        List<string> result = new List<string> ();
+	        Stack<string> stack = new Stack<string> ();
+
+	        stack.Push (src);
+
+	        while (stack.Count > 0) {
+	            string dir = stack.Pop ();
+
+	            try {
+	                result.AddRange (Directory.GetFiles(dir, "*.rdp"));
+
+	                foreach (string dn in Directory.GetDirectories (dir))
+	                    stack.Push (dn);
+	            }
+	            catch {
+					Log<TSClientItemSource>.Error ("Could not open directory '{0}'", dir);
+	            }
+	        }
+	        return result;
+	    }
+
 	}
 
 }

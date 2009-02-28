@@ -19,9 +19,8 @@
  */
 using System;
 using Do.Universe;
-using Do.Platform.Linux;
 
-namespace Do.Addins.Bibtex
+namespace Bibtex
 {
 	public class BibtexAuthorsItem : BibtexItem
 	{

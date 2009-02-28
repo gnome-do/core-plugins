@@ -119,7 +119,7 @@ namespace Do.Plugins.Rss {
             }
             this.Show();
             this.Timeout.ValueChanged += new System.EventHandler(this.OnTimeoutValueChanged);
-            this.OpmlChooser.SelectionChanged += new System.EventHandler(this.OnOpmlChooserSelectionChanged);
+            this.OpmlChooser.FileActivated += new System.EventHandler(this.OnOpmlChooserFileActivated);
             this.CacheDuration.ValueChanged += new System.EventHandler(this.OnCacheDurationValueChanged);
         }
     }

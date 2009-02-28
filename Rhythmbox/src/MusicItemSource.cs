@@ -1,8 +1,8 @@
 //  RhythmboxItemSource.cs
 //
-//  GNOME Do is the legal property of its developers, whose names are too numerous
-//  to list here.  Please refer to the COPYRIGHT file distributed with this
-//  source distribution.
+//  GNOME Do is the legal property of its developers, whose names are too
+//  numerous to list here.  Please refer to the COPYRIGHT file distributed with
+//  this source distribution.
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,14 +18,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
-using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 
+using Mono.Unix;
 
 using Do.Universe;
-using Mono.Unix;
+using Do.Platform;
 
 namespace Do.Rhythmbox
 {
@@ -55,21 +54,32 @@ namespace Do.Rhythmbox
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (MusicItem),
-					typeof (BrowseMusicItem),
-					typeof (IApplicationItem),
-				};
+				yield return typeof (MusicItem);
+				yield return typeof (BrowseMusicItem);
+				yield return typeof (IApplicationItem);
 			}
 		}
 
-		public override IEnumerable<Item> Items { get { return items; } }
+		public override IEnumerable<Item> Items {
+			get { return items; }
+		}
+
+		bool IsRhythmbox (Item item)
+		{
+			return item is IApplicationItem && IsRhythmbox (item as IApplicationItem);
+		}
+
+		bool IsRhythmbox (IApplicationItem item)
+		{
+			return item.Exec.Contains ("rhythmbox");
+		}
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent) {
-			if (parent is IApplicationItem && parent.Name == "Rhythmbox Music Player") {
+			if (IsRhythmbox (parent)) {
 				yield return new BrowseAlbumsMusicItem ();
 				yield return new BrowseArtistsMusicItem ();
-				foreach (Item item in RhythmboxRunnableItem.DefaultItems) yield return item;
+				foreach (Item item in RhythmboxRunnableItem.Items)
+					yield return item;
 			}
 			else if (parent is ArtistMusicItem) {
 				foreach (AlbumMusicItem album in albums.Where (album => album.Artist.Contains (parent.Name)))
@@ -93,8 +103,9 @@ namespace Do.Rhythmbox
 		{
 			items.Clear ();
 
-			// Add play, pause, etc. controls.
-			items.AddRange (RhythmboxRunnableItem.DefaultItems);
+			// Add volume and display controls.
+			foreach (Item item in RhythmboxRunnableItem.Items)
+				items.Add (item);
 
 			// Add browse features.
 			items.Add (new BrowseAlbumsMusicItem ());

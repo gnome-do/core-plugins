@@ -24,7 +24,8 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform.Linux;
 
-namespace Do.Addins.Bibtex {
+
+namespace Bibtex {
 
 	public class BibtexItemSource : ItemSource, IConfigurable {
 		

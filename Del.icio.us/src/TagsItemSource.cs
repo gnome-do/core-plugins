@@ -35,7 +35,7 @@ namespace Delicious
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Organizes your del.icio.bookmarks by tag"); }
+			get { return Catalog.GetString ("Organizes your del.icio.us bookmarks by tag"); }
 		}
 		
 		public override string Icon {

@@ -197,22 +197,27 @@ namespace Do.Rhythmbox
 		{
 			if (!InstanceIsRunning) {
 				Process.Start ("rhythmbox-client", "--no-present");
-				System.Threading.Thread.Sleep (3 * 1000);
+				//System.Threading.Thread.Sleep (3 * 1000);
 			}
 		}
 
-		private static bool InstanceIsRunning
+		public static bool InstanceIsRunning
 		{
 			get {
 				try {
 					// Use pidof command to look for Rhythmbox process. Exit
 					// status is 0 if at least one matching process is found.
 					// If there's any error, just assume some it's running.
-					Process pidof = Process.Start ("pidof", "rhythmbox");
-					pidof.WaitForExit ();
-					return pidof.ExitCode == 0;
+					ProcessStartInfo pidof = new ProcessStartInfo ("pidof", "rhythmbox");
+					pidof.UseShellExecute = false;
+					pidof.RedirectStandardOutput = true;
+					Process run = new Process ();
+					run.StartInfo = pidof;
+					run.Start ();
+					run.WaitForExit ();
+					return run.ExitCode == 0;
 				} catch (Exception e) {
-					Log.Error ("Could not determine in Rhythmbox is running: {0}", e.Message);
+					Log.Error ("Could not determine if Rhythmbox is running: {0}", e.Message);
 					Log.Debug (e.StackTrace);
 				}
 				return true;

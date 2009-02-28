@@ -152,7 +152,7 @@ namespace InlineGoogleSearch {
 			}
 			
 			foreach (GoogleSearchResult result in results) {
-				yield return new BookmarkItem (result.titleNoFormatting, result.url);
+				yield return new BookmarkItem (result.titleNoFormatting, HttpUtility.UrlDecode (result.url));
 			}
 		}
 
