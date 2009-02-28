@@ -146,21 +146,23 @@ namespace Microblogging
 			string icon = "";
 			TwitterStatus tweet;
 			TwitterParameters parameters;
-
+			
 			try {
 				// get the most recent update
 				parameters = new TwitterParameters ();
 				parameters.Add (TwitterParameterNames.Count, 1);
 				tweet = blog.Status.FriendsTimeline (parameters) [0];
 
-				if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= timeline_last_updated) return;
+				if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= timeline_last_updated)
+					return;
 			
 				icon = FindIconForUser (tweet.TwitterUser);
 				timeline_last_updated = tweet.Created;
 				
 				OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
-				Log.Debug ("Adding '{0}' to user {1}", tweet.Text, Contacts.Where (contact => contact.Id == tweet.TwitterUser.ID).First ().Name);
-				Contacts.Where (contact => contact.Id == tweet.TwitterUser.ID).First ()
+
+				Contacts.Where (contact => contact.Id == tweet.TwitterUser.ID)
+					.First ()
 					.AddStatus (new MicroblogStatus (tweet.ID, tweet.Text, tweet.TwitterUser.ScreenName, tweet.Created));
 			} catch (Exception e) {
 				Log<MicroblogClient>.Debug (GenericErrorMsg, "UpdateTimeline", e.Message);
@@ -238,10 +240,10 @@ namespace Microblogging
 			if (MessageFound != null)
 				Gtk.Application.Invoke ((o, e) => MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon)));
 		}
-		
-		public event StatusUpdatedDelegate StatusUpdated;
-		public event TimelineUpdatedDelegate TimelineUpdated;
+
+  		public event StatusUpdatedDelegate StatusUpdated;
 		public event TimelineUpdatedDelegate MessageFound;
+		public event TimelineUpdatedDelegate TimelineUpdated;
 		
 		public delegate void StatusUpdatedDelegate (object sender, StatusUpdatedEventArgs args);
 		public delegate void TimelineUpdatedDelegate (object sender, TimelineUpdatedEventArgs args);
