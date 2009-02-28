@@ -27,7 +27,7 @@ namespace Microblogging
 		}
 		
 		public override string Icon {
-			get { return "cancel"; }
+			get { return "microblogging.svg@" + GetType ().Assembly.FullName; }
 		}
 		
 		public virtual int Id { get; private set; }
