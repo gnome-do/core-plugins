@@ -33,7 +33,7 @@ namespace Twitterizer.Framework
 		}
 		
 		public string UpdateUrl {
-			get { return rootUrl + "statuses/update.xml?status={0}&source=Do&in_reply_to_status_id{1}"; }
+			get { return rootUrl + "statuses/update.xml?status={0}&source=Do&in_reply_to_status_id={1}"; }
 		}
 		
 		public string RepliesUrl { 
