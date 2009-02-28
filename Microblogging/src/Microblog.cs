@@ -56,19 +56,21 @@ namespace Microblogging
 			
 			client = new MicroblogClient (username, password, prefs.ActiveService);
 			client.StatusUpdated += OnStatusUpdated;
-			client.TimelineUpdated += OnTimelineUpdated;
 			client.MessageFound += DirectMessageFound;
+			client.TimelineUpdated += OnTimelineUpdated;
 			
 			return true;
 		}
 			
-		public static IEnumerable<Item> Friends {
+		public static IEnumerable<FriendItem> Friends {
 			get { return client.Contacts; }
 		}
 
 		public static void UpdateStatus (object status)
 		{
-			client.UpdateStatus (status.ToString ());
+			MicroblogStatusReply reply = status as MicroblogStatusReply;
+			if (reply != null)
+				client.UpdateStatus (reply.Status, reply.InReplyToId);
 		}
 		
 		internal static MicroblogPreferences Preferences {

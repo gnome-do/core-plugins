@@ -70,7 +70,7 @@ namespace Locate
 			
 			locate = new System.Diagnostics.Process ();
 			locate.StartInfo.FileName = "locate";
-			locate.StartInfo.Arguments = string.Format ("-i \"{0}\"", query);
+			locate.StartInfo.Arguments = string.Format ("-b -i \"{0}\"", query);
 			locate.StartInfo.RedirectStandardOutput = true;
 			locate.StartInfo.RedirectStandardError = true;
 			locate.StartInfo.UseShellExecute = false;
@@ -87,13 +87,8 @@ namespace Locate
 						Path.GetDirectoryName (path).Contains ("/."))
 					continue;
 
-				// Only allow files that contain the query as a substring
-				// of the file name. It may be faster to use grep, but I've
-				// tested this and it seems prety snappy.
-				if (Path.GetFileName (path).ToLower().Contains (query)) {
-					results++;
-					files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
-				}
+				results++;
+				files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
 			}
 			if (results > 0) {
 				files.Sort (new IFileItemNameComparer (query));
