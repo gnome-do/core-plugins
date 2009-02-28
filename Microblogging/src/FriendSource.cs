@@ -64,7 +64,7 @@ namespace Microblogging
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			return (item as FriendItem).Statuses.OfType<Item> ();
+			return (item as FriendItem).Statuses.Where (status => status.Id > 0).OfType<Item> ();
 		}
 
 		public Gtk.Bin GetConfiguration () 

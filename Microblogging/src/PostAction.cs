@@ -146,7 +146,7 @@ namespace Microblogging
 		
 		string GetContactNameFromItem (Item modItem)
 		{
-			return (modItem is FriendItem) ? (modItem as FriendItem).Name : (modItem as MicroblogStatus).Owner;
+			return (modItem is MicroblogStatus) ? (modItem as MicroblogStatus).Owner : modItem.Name;
 		}
 	}
 }

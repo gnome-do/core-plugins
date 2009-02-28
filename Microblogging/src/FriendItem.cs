@@ -14,22 +14,22 @@ namespace Microblogging
 	public class FriendItem : Item
 	{
 		string name, photo, status;
-		List<MicroblogStatus> statuses;
+		SortedList<DateTime, MicroblogStatus> statuses;
 		
 		public FriendItem (int id, string name) : 
-			this (id, name, new MicroblogStatus (-1, Catalog.GetString ("No Status"), name, DateTime.Now))
+			this (id, name, new MicroblogStatus (-1, Catalog.GetString ("No Status"), name, DateTime.MinValue))
 		{
 		}
 		
 		public FriendItem (int id, string name, MicroblogStatus status)
 		{
-			statuses = new List<MicroblogStatus> ();
+			statuses = new SortedList<DateTime, MicroblogStatus> ();
 			
 			Id = id;
 			this.name = name;
 			this.status = status.Status;
 			this.photo = Path.Combine (MicroblogClient.PhotoDirectory,  "" + id);
-			statuses.Add (status);
+			statuses.Add (status.Created, status);
 		}
 		
 		public override string Name {
@@ -51,13 +51,13 @@ namespace Microblogging
 		public int Id { get; private set; }
 		
 		public IEnumerable<MicroblogStatus> Statuses {
-			get { return statuses; }
+			get { return statuses.Values; }
 		}
 		
 		public void AddStatus (MicroblogStatus status)
 		{
-			this.status = status.Status;
-			statuses.Add (status);
+			if (!statuses.ContainsKey (status.Created))
+				statuses.Add (status.Created, status);
 		}
 	}
 }

@@ -7,15 +7,13 @@ namespace Microblogging
 {
 	
 	public class MicroblogStatus : Item
-	{		
-		DateTime time;
-		
+	{				
 		public MicroblogStatus (int id, string status, string owner, DateTime time)
 		{
 			Id = id;
 			Owner = owner;
 			Status = status;
-			this.time = time;
+			Created = time;
 		}
 		
 		public override string Name {
@@ -23,16 +21,17 @@ namespace Microblogging
 		}
 		
 		public override string Description {
-			get { return string.Format ("Posted at {0}", time); }
+			get { return string.Format ("Posted at {0}", Created); }
 		}
 		
 		public override string Icon {
 			get { return "microblogging.svg@" + GetType ().Assembly.FullName; }
 		}
 		
-		public virtual int Id { get; private set; }
-		public virtual string Owner { get; private set; }
-		public virtual string Status { get; private set; }
+		public int Id { get; private set; }
+		public string Owner { get; private set; }
+		public string Status { get; private set; }
+		public DateTime Created { get; private set; }
 	}
 	
 	public class MicroblogStatusReply
