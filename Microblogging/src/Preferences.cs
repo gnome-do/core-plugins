@@ -36,9 +36,11 @@ namespace Microblogging
 		const string PasswordKey = "{0}/Password";
 		const string MicroblogServiceKey = "Service";
 		const string ShowNotificationsKey = "ShowFriendUpdates";
+		const string ShowDirectMessagesKey = "ShowFriendDirectMessages";
 		
 		const string MicroblogServiceDefault = "twitter";
 		const bool ShowNotificationsDefault = true;
+		const bool ShowDirectMessagesDefault = true;
 		
 		#endregion
 	
@@ -64,6 +66,11 @@ namespace Microblogging
 		public bool ShowNotifications {
 			get { return prefs.Get<bool> (ShowNotificationsKey, ShowNotificationsDefault); }
 			set { prefs.Set<bool> (ShowNotificationsKey, value); }
+		}
+		
+		public bool ShowDirectMessages {
+			get { return prefs.Get<bool> (ShowDirectMessagesKey, ShowDirectMessagesDefault); }
+			set { prefs.Set<bool> (ShowDirectMessagesKey, value); }
 		}
 		
 		public string MicroblogService {
