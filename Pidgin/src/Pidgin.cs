@@ -47,7 +47,7 @@ namespace PidginPlugin
 			int PurpleFindBuddy (int account, string name);
 			void PurpleConversationPresent (int conversation);
 			int PurpleAccountsFindConnected (string account, string proto);
-			int PurpleConversationNew (int type, int account, string name);
+			int PurpleConversationNew (uint type, int account, string name);
 			int PurpleSavedstatusNew (string title, uint type);
 			void PurpleSavedstatusSetMessage (int type, string message);
 			void PurpleSavedstatusActivate (int status);
