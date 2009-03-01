@@ -6,10 +6,12 @@ FILES = \
 	gtk-gui/generated.cs \
 	gtk-gui/Microblogging.GenConfig.cs \
 	src/Configuration.cs \
+	src/FriendItem.cs \
 	src/FriendSource.cs \
 	src/GenConfig.cs \
-	src/MicroblogClient.cs \
 	src/Microblog.cs \
+	src/MicroblogClient.cs \
+	src/MicroblogStatus.cs \
 	src/Notifications.cs \
 	src/PostAction.cs \
 	src/Preferences.cs \

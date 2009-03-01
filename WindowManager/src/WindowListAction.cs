@@ -132,6 +132,9 @@ namespace WindowManager
 		public override bool SupportsItem (Item item)
 		{
 			if (item is GenericWindowItem) return true;
+			
+			if (!(item is IApplicationItem)) return false;
+			
 			string application = (item as IApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
