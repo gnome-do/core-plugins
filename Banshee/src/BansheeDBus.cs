@@ -46,6 +46,7 @@ namespace Banshee
 	[Interface ("org.bansheeproject.Banshee.PlaybackController")]
 	interface IBansheeController
 	{
+		void First ();
 		void Next (bool restart);
 		void Previous (bool restart);
 		int ShuffleMode { get; set; }
@@ -159,13 +160,13 @@ namespace Banshee
 		
 		public void Play ()
 		{
-			Player.Play ();
+			First ();
 		}
 
 		public void Play (IEnumerable<IMediaFile> media)
 		{
 			Enqueue (media, true);
-			Next ();
+			First ();
 		}			
 
 		public void Enqueue (IEnumerable<IMediaFile> media)
@@ -179,7 +180,8 @@ namespace Banshee
 				MaybeStartFullApplication (); //if banshee isn't already started the enqueue seems to fail
 				
 				// if we're prepending to the queue we need to queue in the uris in reverse order
-				if (prepend) media = media.Reverse ();
+				if (prepend) 
+					media = media.Reverse ();
 
 				media.ForEach (item => PlayQueue.EnqueueUri (item.Path, prepend));
 				
@@ -187,7 +189,7 @@ namespace Banshee
 				LogError ("Enqueue", e);
 			}
 		}
-		
+				
 		public void Next ()
 		{
 			try {
@@ -203,6 +205,15 @@ namespace Banshee
 				Controller.Previous (false);
 			} catch (Exception e) {
 				LogError ("Previous", e);
+			}
+		}
+		
+		void First ()
+		{
+			try {
+				Controller.First ();
+			} catch (Exception e) {
+				LogError ("First", e);
 			}
 		}
 		
