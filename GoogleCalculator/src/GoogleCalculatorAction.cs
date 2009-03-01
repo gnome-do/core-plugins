@@ -93,7 +93,7 @@ namespace Do.Plugins.Google
 				reply = Catalog.GetString ("Google Calculator could not evaluate the expression.");
 			}
 
-			yield return new TextItem (reply);
+			yield return new TextItem (HttpUtility.HtmlDecode(reply));
 		}
 
 		string GoogleCalculatorURLWithExpression (string e)
