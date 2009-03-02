@@ -275,6 +275,15 @@ namespace XRandR
 			return res;
 		}
 		
+		public static void logStructure(Object o){
+			Type t = o.GetType();
+			
+			Do.Platform.Log<XRandR.External>.Debug("Dumping object of type {0}",t.Name);
+
+			foreach(System.Reflection.FieldInfo fi in t.GetFields())
+				Do.Platform.Log<XRandR.External>.Debug("{0} = {1}",fi.Name,fi.GetValue(o));
+		}
+		
 		public class XErrorException:Exception{
 			XErrorEvent xevent;
 			string error_text;
@@ -351,6 +360,7 @@ namespace XRandR
 		
 		internal ScreenResources(IntPtr d,IntPtr presources){
 			this.resources = External.Structure<XRRScreenResources>(presources);
+			External.logStructure(this.resources);
 			this.presources = presources;
 			this.display = d;
 			
