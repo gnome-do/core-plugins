@@ -34,9 +34,9 @@ namespace XRandR
 	public struct XRROutputInfo {
 	    public int timestamp;
 	    
-		public int	    crtc_id;
+	    public int	    crtc_id;
 
-		public string	    name;
+	    public string	    name;
 	    public int		    nameLen;
 
 		public int   mm_width;
@@ -108,13 +108,13 @@ namespace XRandR
 		public int	timestamp;
 		public int	configTimestamp;
 
-		public int		ncrtc;
+		public int	ncrtc;
 		public IntPtr	crtcs;
 		
-		public int		noutput;
+		public int	noutput;
 		public IntPtr   outputs;
 		
-		public int		nmode;
+		public int	nmode;
 		public IntPtr	modes;
 	}
 	
