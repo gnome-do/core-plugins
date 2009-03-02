@@ -35,7 +35,27 @@ namespace Do.FilesAndFolders
 		{
 		}
 
-		public abstract void Refresh ();
+		public void Refresh (bool indexed)
+		{
+			ListStore store = Model as ListStore;
+			//try to keep the currently selected row across refreshes
+			Gtk.TreePath selected = null;
+			try {
+				selected = this.Selection.GetSelectedRows ()[0];
+			}
+			catch {	}
+			finally {
+				store.Clear ();
+				foreach (IndexedFolder pair in Plugin.FolderIndex) {
+					if (indexed && pair.Index)
+						store.AppendValues (pair.Path, pair.Level);
+					else if (!indexed && !pair.Index)
+						store.AppendValues (pair.Path, pair.Index);
+				}
+				if (selected != null)
+					this.Selection.SelectPath (selected);
+			}
+		}
 
 		public virtual void OnRemoveSelected (object sender, EventArgs e)
 		{
@@ -49,7 +69,6 @@ namespace Do.FilesAndFolders
 			Plugin.FolderIndex.RemoveIndexedFolder (path);
 			store.Remove (ref iter);
 			
-			Refresh ();
 		}
 		
 	}

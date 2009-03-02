@@ -56,25 +56,10 @@ namespace Do.FilesAndFolders
 						
 			Refresh ();
 		}
-
-		public override void Refresh ()
+		
+		public void Refresh ()
 		{
-			ListStore store = Model as ListStore;
-			//try to keep the currently selected row across refreshes
-			Gtk.TreePath selected = null;
-			try {
-				selected = this.Selection.GetSelectedRows ()[0];
-			}
-			catch {	}
-			finally {
-				store.Clear ();
-				foreach (IndexedFolder pair in Plugin.FolderIndex) {
-					if (pair.Index)
-						store.AppendValues ( pair.Path, pair.Level);
-				}
-				if (selected != null)
-					this.Selection.SelectPath (selected);
-			}
+			base.Refresh (true);
 		}
 		                    
 		public void OnDepthEdited (object o, EditedArgs e)

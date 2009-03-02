@@ -69,6 +69,16 @@ namespace Do.FilesAndFolders
 			return currentNview;
 		}
 		
+		private void RefreshCurrentView ()
+		{
+			PathNodeView curr = GetCurrentView ();
+			if (curr is IndexPathNodeView)
+				curr.Refresh (true);
+			else
+				curr.Refresh (false);
+		}
+			
+		
 		protected virtual void OnAddBtnClicked (object sender, System.EventArgs e)
 		{
 			FileChooserDialog chooser;
@@ -82,9 +92,9 @@ namespace Do.FilesAndFolders
 				depth = 1;
 			}
 			else {
+				dialogTitle = ignoreDialog;
 				index = false;
 				depth = 0;
-				dialogTitle = ignoreDialog;
 			}
 			
 			chooser = new FileChooserDialog (
@@ -96,7 +106,7 @@ namespace Do.FilesAndFolders
 			if (chooser.Run () == (int) ResponseType.Accept) {
 				if (!Plugin.FolderIndex.ContainsFolder (chooser.Filename))
 				    Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, depth, index));
-				GetCurrentView ().Refresh ();
+				RefreshCurrentView ();
 			}
 			chooser.Destroy ();
 		}
@@ -104,6 +114,7 @@ namespace Do.FilesAndFolders
 		protected virtual void OnRemoveBtnClicked (object sender, EventArgs e)
 		{
 			GetCurrentView ().OnRemoveSelected (sender, e);
+			RefreshCurrentView ();
 		}
 		
 		protected void OnPathNodeViewSelectionChange (object sender, EventArgs e)

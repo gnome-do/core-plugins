@@ -36,7 +36,6 @@ namespace Do.FilesAndFolders {
 	public class FileItemSource : ItemSource, IConfigurable {
 
 		IEnumerable<Item> items;
-		static IEnumerable<IndexedFolder> ignored;
 		bool maximum_files_warned;
 
 		string MaximumFilesIndexedWarning {
@@ -56,7 +55,6 @@ namespace Do.FilesAndFolders {
 		public FileItemSource ()
 		{
 			items = Enumerable.Empty<Item> ();
-			ignored = Enumerable.Empty<IndexedFolder> ();
 		}
 
 		public override IEnumerable<Item> Items {
@@ -106,19 +104,25 @@ namespace Do.FilesAndFolders {
 		
 		public override void UpdateItems ()
 		{
-			ignored = Plugin.FolderIndex
-				.Where (folder => !folder.Index)
-				.ToArray ();
-			
-			items = Plugin.FolderIndex
-				.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles))
-				.Take (Plugin.Preferences.MaximumFilesIndexed)
-				.ToArray ();
-			
-			if (!maximum_files_warned && items.Count () == Plugin.Preferences.MaximumFilesIndexed) {
-				Log.Warn (MaximumFilesIndexedWarning);
-				Services.Notifications.Notify ("Do is indexing too many files.", MaximumFilesIndexedWarning);
-				maximum_files_warned = true;
+			try {
+				IEnumerable<IndexedFolder> ignored = Enumerable.Empty<IndexedFolder> ();
+				
+				ignored = Plugin.FolderIndex
+					.Where (folder => !folder.Index);
+				
+				items = Plugin.FolderIndex
+					.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles, ignored))
+					.Take (Plugin.Preferences.MaximumFilesIndexed)
+					.ToArray ();
+								
+				if (!maximum_files_warned && items.Count () == Plugin.Preferences.MaximumFilesIndexed) {
+					Log.Warn (MaximumFilesIndexedWarning);
+					Services.Notifications.Notify ("Do is indexing too many files.", MaximumFilesIndexedWarning);
+					maximum_files_warned = true;
+				}
+			}
+			catch (Exception e) {
+				Console.WriteLine(e.ToString());
 			}
 		}
 
@@ -141,12 +145,18 @@ namespace Do.FilesAndFolders {
 		/// <returns>
 		/// A <see cref="IEnumerable"/>
 		/// </returns>
+		
 		static IEnumerable<Item> RecursiveGetItems (string path, uint levels, bool includeHidden)
+		{
+			return RecursiveGetItems(path, levels, includeHidden, Enumerable.Empty<IndexedFolder> ());
+		}
+		
+		static IEnumerable<Item> RecursiveGetItems (string path, uint levels, bool includeHidden, IEnumerable<IndexedFolder> ignored)
 		{
 			IEnumerable<string> files;
 			IEnumerable<Item> fileItems, applicationItems;
 			
-			files = RecursiveListFiles (path, levels, includeHidden);
+			files = RecursiveListFiles (path, levels, includeHidden, ignored);
 
 			fileItems = files
 				.Select (filepath => Plugin.NewFileItem (filepath))
@@ -160,7 +170,7 @@ namespace Do.FilesAndFolders {
 			return applicationItems.Concat (fileItems);
 		}
 		
-		static IEnumerable<string> RecursiveListFiles (string path, uint levels, bool includeHidden)
+		static IEnumerable<string> RecursiveListFiles (string path, uint levels, bool includeHidden, IEnumerable<IndexedFolder> ignored)
 		{
 			IEnumerable<string> results = null;
 
@@ -173,13 +183,13 @@ namespace Do.FilesAndFolders {
 				IEnumerable<string> files, directories, recursiveFiles;
 				
 				files = Directory.GetFiles (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden, false));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, false, ignored));
 				directories = Directory.GetDirectories (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden, true));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, true, ignored));
 				recursiveFiles = directories
-					.SelectMany (dir => RecursiveListFiles (dir, levels - 1, includeHidden));
-				
+					.SelectMany (dir => RecursiveListFiles (dir, levels - 1, includeHidden, ignored));
 				results = files.Concat (directories).Concat (recursiveFiles);
+				
 			} catch (Exception e) {
 				Log.Error ("Encountered an error while attempting to index {0}: {1}", path, e.Message);
 				Log.Debug (e.StackTrace);
@@ -188,12 +198,12 @@ namespace Do.FilesAndFolders {
 			return results;
 		}
 
-		static bool ShouldIndexPath (string path, bool includeHidden, bool isDirectory)
+		static bool ShouldIndexPath (string path, bool includeHidden, bool isDirectory, IEnumerable<IndexedFolder> ignored)
 		{
 			string filename = Path.GetFileName (path);
 			bool isForbidden = filename == "." || filename == ".." || filename.EndsWith ("~");
 			bool isHidden = filename.StartsWith (".");
-			if (isDirectory && ignored.Where (folder => path == folder.Path).Any ())
+			if (ignored.Where (folder => path == folder.Path).Any ()) 
 				isForbidden = true;
 			return !isForbidden && (includeHidden || !isHidden);
 		}
