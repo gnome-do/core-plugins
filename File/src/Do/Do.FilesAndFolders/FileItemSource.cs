@@ -183,9 +183,9 @@ namespace Do.FilesAndFolders {
 				IEnumerable<string> files, directories, recursiveFiles;
 				
 				files = Directory.GetFiles (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden, false, ignored));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, ignored));
 				directories = Directory.GetDirectories (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden, true, ignored));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, ignored));
 				recursiveFiles = directories
 					.SelectMany (dir => RecursiveListFiles (dir, levels - 1, includeHidden, ignored));
 				results = files.Concat (directories).Concat (recursiveFiles);
@@ -198,7 +198,7 @@ namespace Do.FilesAndFolders {
 			return results;
 		}
 
-		static bool ShouldIndexPath (string path, bool includeHidden, bool isDirectory, IEnumerable<IndexedFolder> ignored)
+		static bool ShouldIndexPath (string path, bool includeHidden, IEnumerable<IndexedFolder> ignored)
 		{
 			string filename = Path.GetFileName (path);
 			bool isForbidden = filename == "." || filename == ".." || filename.EndsWith ("~");
