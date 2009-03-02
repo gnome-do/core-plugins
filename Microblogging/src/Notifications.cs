@@ -57,7 +57,7 @@ namespace Microblogging
 		readonly string FailedPostTitle = Catalog.GetString ("Post failed");
 		readonly string SuccessfulPostTitle = Catalog.GetString ("Post Successful");
 		readonly string FailFormat = Catalog.GetString ("Failed to post '{0}' to {1}");
-		readonly string SuccessFormat = Catalog.GetString ("'{0}' sucessfully posted to {1}");
+		readonly string SuccessFormat = Catalog.GetString ("'{0}' successfully posted to {1}");
 
 		bool success;
 		string status;
