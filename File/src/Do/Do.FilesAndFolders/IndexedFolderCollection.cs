@@ -153,6 +153,11 @@ namespace Do.FilesAndFolders
 			try {
 				using (Stream stream = File.OpenRead (SavedStateFile))
 					Folders = new BinaryFormatter ().Deserialize (stream) as IDictionary<string, IndexedFolder>;
+				//check & fix old version of database
+				foreach (IndexedFolder folder in Folders.Values) {
+					if ((folder.Level > 0) && !(folder.Index))
+						UpdateIndexedFolder(folder.Path, folder.Path, folder.Level, !folder.Index);
+				}
 				Log.Debug ("Loaded Files and Folders plugin state.");
 			} catch (FileNotFoundException) {
 			} catch (Exception e) {
