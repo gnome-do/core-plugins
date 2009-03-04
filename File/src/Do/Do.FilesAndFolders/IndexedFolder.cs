@@ -41,6 +41,10 @@ namespace Do.FilesAndFolders
 			Level = level;
 			Status = status;
 		}
+		
+		public IndexedFolder (string path, uint level) : this (path, level, FolderStatus.Indexed)
+		{
+		}
 
 		public override string ToString ()
 		{
