@@ -31,7 +31,6 @@ namespace Do.FilesAndFolders
 	{
 		public enum Column {
 			Path = 0,
-			Index,
 			NumColumns
 		}
 		
@@ -41,7 +40,7 @@ namespace Do.FilesAndFolders
 			RulesHint = true;
 			HeadersVisible = true;
 			
-			Model = new ListStore (typeof (string), typeof (bool));
+			Model = new ListStore (typeof (string));
 
 			cell = new CellRendererText ();
 			(cell as CellRendererText).Width = 310;

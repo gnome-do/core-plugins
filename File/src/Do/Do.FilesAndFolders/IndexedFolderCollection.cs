@@ -30,6 +30,11 @@ using Do.Platform;
 namespace Do.FilesAndFolders
 {
 	
+	public enum FolderStatus : byte {
+		Ignored = 0,
+		Indexed
+	}
+	
  	class IndexedFolderCollection : ICollection<IndexedFolder>
 	{
 
@@ -49,10 +54,10 @@ namespace Do.FilesAndFolders
 
 		IEnumerable<IndexedFolder> GetDefaultFolders ()
 		{
-			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 1, true);
-			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1, true);
-			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1, true);
-			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2, true);
+			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 1, FolderStatus.Indexed);
+			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1, FolderStatus.Indexed);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1, FolderStatus.Indexed);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2, FolderStatus.Indexed);
 		}
 
 		public IndexedFolderCollection ()
@@ -69,11 +74,11 @@ namespace Do.FilesAndFolders
 			}
 		}
 
-		public void UpdateIndexedFolder (string path, string newPath, uint newDepth, bool newIndex)
+		public void UpdateIndexedFolder (string path, string newPath, uint newDepth, FolderStatus newStatus)
 		{
 			if (newDepth > LargeIndexLevel)
 				Log<IndexedFolderCollection>.Warn (LargeIndexLevelWarning, newPath, newDepth);
-			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth, newIndex));
+			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth, newStatus));
 		}
 
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
@@ -156,9 +161,9 @@ namespace Do.FilesAndFolders
 				//check & fix old version of database
 				List<IndexedFolder> f = Folders.Values.ToList<IndexedFolder> ();
 				foreach (IndexedFolder folder in f) {
-					if ((folder.Level > 0) && !(folder.Index)) {
-						Log<IndexedFolderCollection>.Debug ("Old DB entry for {0} found, fixing.", folder.Path);
-						UpdateIndexedFolder(folder.Path, folder.Path, folder.Level, !folder.Index);
+					if (folder.Level > 0 && folder.Status == FolderStatus.Ignored) {
+						Log<IndexedFolderCollection>.Debug ("Old DB entry found for {0}, fixing.", folder.Path);
+						UpdateIndexedFolder(folder.Path, folder.Path, folder.Level, FolderStatus.Indexed);
 					}
 				}
 				Log<IndexedFolderCollection>.Debug ("Loaded Files and Folders plugin state.");

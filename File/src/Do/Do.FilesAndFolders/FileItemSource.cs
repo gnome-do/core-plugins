@@ -108,7 +108,7 @@ namespace Do.FilesAndFolders {
 				IEnumerable<IndexedFolder> ignored = Enumerable.Empty<IndexedFolder> ();
 				
 				ignored = Plugin.FolderIndex
-					.Where (folder => !folder.Index);
+					.Where (folder => folder.Status == FolderStatus.Ignored);
 				
 				items = Plugin.FolderIndex
 					.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles, ignored))

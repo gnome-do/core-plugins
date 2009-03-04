@@ -47,10 +47,10 @@ namespace Do.FilesAndFolders
 			finally {
 				store.Clear ();
 				foreach (IndexedFolder pair in Plugin.FolderIndex) {
-					if (indexed && pair.Index)
+					if (indexed && pair.Status == FolderStatus.Indexed)
 						store.AppendValues (pair.Path, pair.Level);
-					else if (!indexed && !pair.Index)
-						store.AppendValues (pair.Path, pair.Index);
+					else if (!indexed && pair.Status == FolderStatus.Ignored)
+						store.AppendValues (pair.Path);
 				}
 				if (selected != null)
 					this.Selection.SelectPath (selected);

@@ -83,17 +83,17 @@ namespace Do.FilesAndFolders
 		{
 			FileChooserDialog chooser;
 			string dialogTitle;
-			bool index;
+			FolderStatus status;
 			uint depth;
 			
 			if (GetCurrentView () == indexNview) {
 				dialogTitle = indexDialog;
-				index = true;
+				status = FolderStatus.Indexed;
 				depth = 1;
 			}
 			else {
 				dialogTitle = ignoreDialog;
-				index = false;
+				status = FolderStatus.Ignored;
 				depth = 0;
 			}
 			
@@ -105,7 +105,7 @@ namespace Do.FilesAndFolders
 				
 			if (chooser.Run () == (int) ResponseType.Accept) {
 				if (!Plugin.FolderIndex.ContainsFolder (chooser.Filename))
-				    Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, depth, index));
+				    Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, depth, status));
 				RefreshCurrentView ();
 			}
 			chooser.Destroy ();
