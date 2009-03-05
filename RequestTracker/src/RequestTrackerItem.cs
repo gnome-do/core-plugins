@@ -1,4 +1,4 @@
-/* RequestTracker.cs
+/* RequestTrackerItem.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this source distribution.
@@ -18,61 +18,56 @@
  */
 
 using System;
-using System.IO;
-using System.Net;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Web;
-
-using Do.Platform;
-using Do.Universe;
-using Do.Universe.Common;
 
 using Mono.Unix;
 
+using Do.Universe;
+using Do.Platform;
 
 namespace RequestTracker
 {
-	/// <summary>
-	/// Given an ITextItem, RequestTrackerAction will construct a URL
-	///  and feed it to a web browser
-	/// </summary>
-	class RTAction : Act
+	
+	
+	public class RequestTrackerItem : Item
 	{
+		string name, url;
+		
+		public RequestTrackerItem (string name, string url)
+		{
+			this.name = Catalog.GetString (name);
+			this.url = url;
+		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Request Tracker"); }
+			get { return name; }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Display tickets from Request Tracker."); }
+			get { return Catalog.GetString ("Specific Request Tracker instance"); }
 		}
-		
-		public override string Icon	{
+
+		public override string Icon { 
 			get { return "rt.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (ITextItem); }
-		}
-
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (RequestTrackerItem);}
-		}
-
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
+		public void Perform (IEnumerable<ITextItem> items)
 		{
-			return RequestTrackerItems.Items.OfType<Item> ();
+			foreach (ITextItem item in items)
+				Perform (item);
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public virtual void Perform (ITextItem item)
 		{
-			foreach (RequestTrackerItem rt in modItems)
-				rt.Perform (items.OfType<ITextItem> ());
-			
-			yield break;
+			string query = HttpUtility.UrlEncode (item.Text);
+			Services.Environment.OpenUrl (FormatUrl (url, query));
+		}
+
+		protected virtual string FormatUrl (string url, string query)
+		{
+			return string.Format (url, query);
 		}
 	}
-	
 }
