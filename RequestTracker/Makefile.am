@@ -7,7 +7,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/RequestTracker.addin.xml \
-	Resources/icons/stock.png
+	Resources/icons/rt.png
 
 REFERENCES = \
 	Mono.Posix \

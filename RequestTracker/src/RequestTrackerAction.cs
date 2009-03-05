@@ -23,7 +23,9 @@ using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Web;
 
+using Do.Platform;
 using Do.Universe;
 using Do.Universe.Common;
 
@@ -55,7 +57,7 @@ namespace RequestTracker
 		
 		public override string Icon
 		{
-			get { return "stock.png@" + GetType ().Assembly.FullName; }
+			get { return "rt.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes
@@ -80,6 +82,7 @@ namespace RequestTracker
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
+			string expression, url;
 			expression = (items.First () as ITextItem).Text;
 
 			foreach (ITextItem item in items) {

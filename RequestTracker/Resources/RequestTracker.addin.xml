@@ -9,7 +9,7 @@
 	>
 
 	<Runtime>
-		<Import assembly="RequestTracker.dll"/>
+		<Import assembly="Request Tracker.dll"/>
 	</Runtime>
 
 	<Dependencies>
@@ -18,7 +18,7 @@
 
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/Action">
-		<Action type="RequestTracker.QuoteAction" />
+		<Action type="RequestTracker.RTAction" />
 	</Extension>
 
 </Addin>
