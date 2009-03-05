@@ -44,7 +44,7 @@ namespace Do.FilesAndFolders
 			Model = new ListStore (typeof (string), typeof (uint));
 
 			cell = new CellRendererText ();
-			(cell as CellRendererText).Width = 310;
+			(cell as CellRendererText).Width = 280;
 			(cell as CellRendererText).Ellipsize = Pango.EllipsizeMode.Middle;
 			AppendColumn (Catalog.GetString ("Folder"), cell, "text", Column.Path);
 			

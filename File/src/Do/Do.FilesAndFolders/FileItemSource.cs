@@ -110,10 +110,15 @@ namespace Do.FilesAndFolders {
 				ignored = Plugin.FolderIndex
 					.Where (folder => folder.Status == FolderStatus.Ignored);
 				
-				items = Plugin.FolderIndex
-					.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles, ignored))
-					.Take (Plugin.Preferences.MaximumFilesIndexed)
-					.ToArray ();
+				if (Plugin.Preferences.LimitMaxFilesIndexed)
+					items = Plugin.FolderIndex
+						.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles, ignored))
+						.Take (Plugin.Preferences.MaximumFilesIndexed)
+						.ToArray ();
+				else
+					items = Plugin.FolderIndex
+						.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles, ignored))
+						.ToArray ();
 								
 				if (!maximum_files_warned && items.Count () == Plugin.Preferences.MaximumFilesIndexed) {
 					Log.Warn (MaximumFilesIndexedWarning);

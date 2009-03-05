@@ -30,8 +30,7 @@ namespace Do.FilesAndFolders
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class Configuration : Gtk.Bin
 	{
-		IndexPathNodeView indexNview;
-		IgnorePathNodeView ignoreNview;
+		PathNodeView[] nodeViews = new PathNodeView[2];
 		
 		string indexDialog = Catalog.GetString ("Choose a folder to index");
 		string ignoreDialog = Catalog.GetString ("Choose a folder to ignore");
@@ -40,17 +39,17 @@ namespace Do.FilesAndFolders
 		{			
 			Build ();
 			
-			indexNview = new IndexPathNodeView ();
-			ignoreNview = new IgnorePathNodeView ();
-			indexNview.Selection.Changed += OnPathNodeViewSelectionChange;
-			ignoreNview.Selection.Changed += OnPathNodeViewSelectionChange;
-			numFiles.Changed += OnNumFilesEdited;
+			nodeViews[0] = new IndexPathNodeView ();
+			nodeViews[1] = new IgnorePathNodeView ();
+
+			foreach (PathNodeView nodeView in nodeViews)
+				nodeView.Selection.Changed += OnPathNodeViewSelectionChange;
 			
-			index_node_scroll.Add (indexNview);
-			ignore_node_scroll.Add (ignoreNview);
+			index_node_scroll.Add (nodeViews[0]);
+			ignore_node_scroll.Add (nodeViews[1]);
 			
 			show_hidden_chk.Active = Plugin.Preferences.IncludeHiddenFiles;
-			numFiles.Text = Plugin.Preferences.MaximumFilesIndexed.ToString ();
+
 			index_remove_btn.Sensitive = false;
 			ignore_remove_btn.Sensitive = false;
 			
@@ -60,13 +59,7 @@ namespace Do.FilesAndFolders
 		
 		private PathNodeView GetCurrentView ()
 		{
-			PathNodeView currentNview;
-			if (this.notebook1.CurrentPage == 0)
-				currentNview = indexNview;
-			else
-				currentNview = ignoreNview;
-			
-			return currentNview;
+			return nodeViews[this.notebook1.CurrentPage];
 		}
 		
 		private void RefreshCurrentView ()
@@ -86,7 +79,7 @@ namespace Do.FilesAndFolders
 			FolderStatus status;
 			uint depth;
 			
-			if (GetCurrentView () == indexNview) {
+			if (GetCurrentView() is IndexPathNodeView) {
 				dialogTitle = indexDialog;
 				status = FolderStatus.Indexed;
 				depth = 1;
@@ -100,8 +93,8 @@ namespace Do.FilesAndFolders
 			chooser = new FileChooserDialog (
 			    dialogTitle,
 				new Dialog (), FileChooserAction.SelectFolder,
-				Catalog.GetString ("Cancel"), ResponseType.Cancel,
-				Catalog.GetString ("Choose folder"), ResponseType.Accept);
+			    Gtk.Stock.Cancel, ResponseType.Cancel,
+			    Gtk.Stock.Add, ResponseType.Accept);
 				
 			if (chooser.Run () == (int) ResponseType.Accept) {
 				if (!Plugin.FolderIndex.ContainsFolder (chooser.Filename))
@@ -119,8 +112,8 @@ namespace Do.FilesAndFolders
 		
 		protected void OnPathNodeViewSelectionChange (object sender, EventArgs e)
 		{
-			index_remove_btn.Sensitive = indexNview.Selection.GetSelectedRows ().Any ();
-			ignore_remove_btn.Sensitive = ignoreNview.Selection.GetSelectedRows ().Any ();
+			index_remove_btn.Sensitive = nodeViews[0].Selection.GetSelectedRows ().Any ();
+			ignore_remove_btn.Sensitive = nodeViews[1].Selection.GetSelectedRows ().Any ();
 		}
 
 		protected virtual void OnShowHiddenChkClicked (object sender, EventArgs e)
@@ -128,15 +121,5 @@ namespace Do.FilesAndFolders
 			Plugin.Preferences.IncludeHiddenFiles = show_hidden_chk.Active;
 		}
 		
-		protected virtual void OnNumFilesEdited (object sender, EventArgs e)
-		{
-			try {
-				Plugin.Preferences.MaximumFilesIndexed = int.Parse (numFiles.Text);
-			}
-			catch {
-				numFiles.Text = "";
-				Plugin.Preferences.MaximumFilesIndexed = 0;
-			}
-		}
 	}
 }
