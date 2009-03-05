@@ -170,6 +170,7 @@ Skype/Makefile
 SqueezeCenter/Makefile
 SSH/Makefile
 StockQuote/Makefile
+RequestTracker/Makefile
 SystemServices/Makefile
 Tasque/Makefile
 TerminalServerClient/Makefile

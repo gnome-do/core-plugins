@@ -55,6 +55,7 @@ SUBDIRS = \
 	SqueezeCenter \
 	SSH \
 	StockQuote \
+	RequestTracker \
 	SystemServices \
 	Tasque \
 	TerminalServerClient \

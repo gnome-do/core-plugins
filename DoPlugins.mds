@@ -65,6 +65,7 @@
       <Entry build="True" name="GoogleContacts" configuration="Debug" />
       <Entry build="True" name="GoogleSearch" configuration="Debug" />
       <Entry build="True" name="Stock Quote" configuration="Debug" />
+      <Entry build="True" name="Request Tracker" configuration="Debug" />
       <Entry build="True" name="TerminalServerClient" configuration="Debug" />
       <Entry build="True" name="xmms2" configuration="Debug" />
       <Entry build="True" name="TinyUrl" configuration="Debug" />
@@ -136,6 +137,7 @@
       <Entry build="True" name="GoogleContacts" configuration="Release" />
       <Entry build="True" name="GoogleSearch" configuration="Release" />
       <Entry build="True" name="Stock Quote" configuration="Release" />
+      <Entry build="True" name="Request Tracker" configuration="Release" />
       <Entry build="True" name="TerminalServerClient" configuration="Release" />
       <Entry build="True" name="xmms2" configuration="Release" />
       <Entry build="True" name="TinyUrl" configuration="Release" />
@@ -208,6 +210,7 @@
     <Execute type="None" entry="GoogleContacts" />
     <Execute type="None" entry="GoogleSearch" />
     <Execute type="None" entry="Stock Quote" />
+    <Execute type="None" entry="Request Tracker" />
     <Execute type="None" entry="TerminalServerClient" />
     <Execute type="None" entry="xmms2" />
     <Execute type="None" entry="TinyUrl" />
@@ -280,6 +283,7 @@
     <Entry filename="GoogleContacts/GMailContacts.mdp" />
     <Entry filename="GoogleSearch/GoogleSearch.mdp" />
     <Entry filename="StockQuote/Stock Quote.mdp" />
+    <Entry filename="RequestTracker/Request Tracker.mdp" />
     <Entry filename="TerminalServerClient/TerminalServerClient.mdp" />
     <Entry filename="Xmms2/xmms2.mdp" />
     <Entry filename="TinyUrl/TinyUrl.mdp" />
