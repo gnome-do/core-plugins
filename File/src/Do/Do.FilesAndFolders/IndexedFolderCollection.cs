@@ -30,6 +30,11 @@ using Do.Platform;
 namespace Do.FilesAndFolders
 {
 	
+	public enum FolderStatus : byte {
+		Ignored = 0,
+		Indexed
+	}
+	
  	class IndexedFolderCollection : ICollection<IndexedFolder>
 	{
 
@@ -49,10 +54,10 @@ namespace Do.FilesAndFolders
 
 		IEnumerable<IndexedFolder> GetDefaultFolders ()
 		{
-			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 1);
-			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1);
-			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1);
-			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2);
+			yield return new IndexedFolder (Path.GetDirectoryName (Plugin.ImportantFolders.UserHome), 1, FolderStatus.Indexed);
+			yield return new IndexedFolder (Plugin.ImportantFolders.UserHome, 1, FolderStatus.Indexed);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Desktop, 1, FolderStatus.Indexed);
+			yield return new IndexedFolder (Plugin.ImportantFolders.Documents, 2, FolderStatus.Indexed);
 		}
 
 		public IndexedFolderCollection ()
@@ -64,14 +69,16 @@ namespace Do.FilesAndFolders
 			Deserialize ();
 
 			foreach (IndexedFolder folder in Folders.Values) {
-				if (folder.Level < LargeIndexLevel) continue;
-				Log.Warn (LargeIndexLevelWarning, folder.Path, folder.Level);
+				if (folder.Level > LargeIndexLevel)
+					Log<IndexedFolderCollection>.Warn (LargeIndexLevelWarning, folder.Path, folder.Level);
 			}
 		}
 
-		public void UpdateIndexedFolder (string path, string newPath, uint newDepth)
+		public void UpdateIndexedFolder (string path, string newPath, uint newDepth, FolderStatus newStatus)
 		{
-			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth));
+			if (newDepth > LargeIndexLevel)
+				Log<IndexedFolderCollection>.Warn (LargeIndexLevelWarning, newPath, newDepth);
+			UpdateIndexedFolder (path, new IndexedFolder (newPath, newDepth, newStatus));
 		}
 
 		public void UpdateIndexedFolder (string path, IndexedFolder folder)
@@ -86,6 +93,11 @@ namespace Do.FilesAndFolders
 		{
 			if (!Folders.ContainsKey (path)) return;
 			Remove (Folders [path]);
+		}
+		
+		public bool ContainsFolder (string path)
+		{
+			return Folders.ContainsKey (path);
 		}
 
 		#region ICollection<IndexedFolder>
@@ -146,11 +158,19 @@ namespace Do.FilesAndFolders
 			try {
 				using (Stream stream = File.OpenRead (SavedStateFile))
 					Folders = new BinaryFormatter ().Deserialize (stream) as IDictionary<string, IndexedFolder>;
-				Log.Debug ("Loaded Files and Folders plugin state.");
+				//check & fix old version of database
+				List<IndexedFolder> f = Folders.Values.ToList<IndexedFolder> ();
+				foreach (IndexedFolder folder in f) {
+					if (folder.Level > 0 && folder.Status == FolderStatus.Ignored) {
+						Log<IndexedFolderCollection>.Debug ("Old DB entry found for {0}, fixing.", folder.Path);
+						UpdateIndexedFolder(folder.Path, folder.Path, folder.Level, FolderStatus.Indexed);
+					}
+				}
+				Log<IndexedFolderCollection>.Debug ("Loaded Files and Folders plugin state.");
 			} catch (FileNotFoundException) {
 			} catch (Exception e) {
-				Log.Error ("Failed to load Files and Folders plugin state: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<IndexedFolderCollection>.Error ("Failed to load Files and Folders plugin state: {0}", e.Message);
+				Log<IndexedFolderCollection>.Debug (e.StackTrace);
 			} finally {
 				// Some sort of error occurred, so load the default data set and save it.
 				if (Folders == null) {
@@ -178,10 +198,10 @@ namespace Do.FilesAndFolders
 			try {
 				using (Stream stream = File.OpenWrite (SavedStateFile))
 					new BinaryFormatter ().Serialize (stream, Folders);
-				Log.Debug ("Saved Files and Folders plugin state.");
+				Log<IndexedFolderCollection>.Debug ("Saved Files and Folders plugin state.");
 			} catch (Exception e) {
-				Log.Error ("Failed to save lFiles and Folders plugin state: {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<IndexedFolderCollection>.Error ("Failed to save lFiles and Folders plugin state: {0}", e.Message);
+				Log<IndexedFolderCollection>.Debug (e.StackTrace);
 			}
 		}
 		

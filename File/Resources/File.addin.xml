@@ -1,10 +1,10 @@
 <Addin 
 	id="File"
 	namespace="Do"
-	version="2.0"
+	version="2.5"
 	name="Files and Folders"
 	description="Search, browse, and perform other actions on files and folders."
-	author="David Siegel, Alex Launi, Ankit Solanki"
+	author="David Siegel, Alex Launi, Ankit Solanki, Chris Szikszoy"
 	category="Official"
 	>
 
