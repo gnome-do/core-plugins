@@ -15,9 +15,15 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/ShelfActions.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfExploreAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/ShelfItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Shelf.addin.xml" subtype="Code" buildaction="Nothing" />
+    <File name="src/ShelfItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfRemoveFromShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfAddToShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfCreateShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfRenameShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfDeleteShelfAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Emesene"
-	description="Indexes your contact list and initiate chats with Emesene friends."
+	description="Search your buddies and initiate chats."
 	author="Luis Miguel Montiel G"
 	category="Community"
 >
