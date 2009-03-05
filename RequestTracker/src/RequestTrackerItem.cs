@@ -21,6 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web;
+using System.Text.RegularExpressions;
 
 using Mono.Unix;
 
@@ -61,7 +62,8 @@ namespace RequestTracker
 
 		public virtual void Perform (ITextItem item)
 		{
-			string query = HttpUtility.UrlEncode (item.Text);
+			string newtext = Regex.Replace (item.Text, @"[^0-9]", "");
+			string query = HttpUtility.UrlEncode (newtext);
 			Services.Environment.OpenUrl (FormatUrl (url, query));
 		}
 
