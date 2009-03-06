@@ -26,6 +26,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 
 using Do.Platform;
+using Do.Platform.Linux;
 using Do.Universe;
 using Do.Universe.Common;
 
@@ -38,7 +39,7 @@ namespace RequestTracker
 	/// Given an ITextItem, RequestTrackerAction will construct a URL
 	///  and feed it to a web browser
 	/// </summary>
-	class RTAction : Act
+	class RTAction : Act, IConfigurable
 	{
 		
 		public override string Name {
@@ -63,7 +64,8 @@ namespace RequestTracker
 
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return RequestTrackerItems.Items.OfType<Item> ();
+			RequestTrackerItems items = new RequestTrackerItems ();
+			return items.Items.OfType<Item> ();
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -73,6 +75,12 @@ namespace RequestTracker
 			
 			yield break;
 		}
+		
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new RTPrefs ();
+		}
+		
 	}
 	
 }

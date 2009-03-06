@@ -15,6 +15,8 @@ namespace RequestTracker {
         
         private Gtk.VBox vbox1;
         
+        private Gtk.Label label1;
+        
         private Gtk.HBox hbox1;
         
         private Gtk.ScrolledWindow GtkScrolledWindow;
@@ -23,13 +25,9 @@ namespace RequestTracker {
         
         private Gtk.VButtonBox vbuttonbox1;
         
-        private Gtk.Button button4;
+        private Gtk.Button add_btn;
         
-        private Gtk.Button button5;
-        
-        private Gtk.HButtonBox hbuttonbox1;
-        
-        private Gtk.Button button7;
+        private Gtk.Button remove_btn;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -40,6 +38,18 @@ namespace RequestTracker {
             this.vbox1 = new Gtk.VBox();
             this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
+            // Container child vbox1.Gtk.Box+BoxChild
+            this.label1 = new Gtk.Label();
+            this.label1.Name = "label1";
+            this.label1.LabelProp = Mono.Unix.Catalog.GetString("<b>Request Trackers</b>\n\nUse the list below to add/configure your Request Tracker sites.\n\n<i>The ticket number will be inserted into the URL at the place specified by the string: {0}</i>");
+            this.label1.UseMarkup = true;
+            this.label1.Wrap = true;
+            this.label1.Justify = ((Gtk.Justification)(2));
+            this.vbox1.Add(this.label1);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox1[this.label1]));
+            w1.Position = 0;
+            w1.Expand = false;
+            w1.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
             this.hbox1.Name = "hbox1";
@@ -54,68 +64,50 @@ namespace RequestTracker {
             this.RTTree.Name = "RTTree";
             this.GtkScrolledWindow.Add(this.RTTree);
             this.hbox1.Add(this.GtkScrolledWindow);
-            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox1[this.GtkScrolledWindow]));
-            w2.Position = 0;
+            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.hbox1[this.GtkScrolledWindow]));
+            w3.Position = 0;
             // Container child hbox1.Gtk.Box+BoxChild
             this.vbuttonbox1 = new Gtk.VButtonBox();
             this.vbuttonbox1.Name = "vbuttonbox1";
             this.vbuttonbox1.LayoutStyle = ((Gtk.ButtonBoxStyle)(3));
             // Container child vbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
-            this.button4 = new Gtk.Button();
-            this.button4.CanFocus = true;
-            this.button4.Name = "button4";
-            this.button4.UseStock = true;
-            this.button4.UseUnderline = true;
-            this.button4.Label = "gtk-add";
-            this.vbuttonbox1.Add(this.button4);
-            Gtk.ButtonBox.ButtonBoxChild w3 = ((Gtk.ButtonBox.ButtonBoxChild)(this.vbuttonbox1[this.button4]));
-            w3.Expand = false;
-            w3.Fill = false;
-            // Container child vbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
-            this.button5 = new Gtk.Button();
-            this.button5.CanFocus = true;
-            this.button5.Name = "button5";
-            this.button5.UseStock = true;
-            this.button5.UseUnderline = true;
-            this.button5.Label = "gtk-remove";
-            this.vbuttonbox1.Add(this.button5);
-            Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(this.vbuttonbox1[this.button5]));
-            w4.Position = 1;
+            this.add_btn = new Gtk.Button();
+            this.add_btn.CanFocus = true;
+            this.add_btn.Name = "add_btn";
+            this.add_btn.UseStock = true;
+            this.add_btn.UseUnderline = true;
+            this.add_btn.Label = "gtk-add";
+            this.vbuttonbox1.Add(this.add_btn);
+            Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(this.vbuttonbox1[this.add_btn]));
             w4.Expand = false;
             w4.Fill = false;
-            this.hbox1.Add(this.vbuttonbox1);
-            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.hbox1[this.vbuttonbox1]));
+            // Container child vbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
+            this.remove_btn = new Gtk.Button();
+            this.remove_btn.CanFocus = true;
+            this.remove_btn.Name = "remove_btn";
+            this.remove_btn.UseStock = true;
+            this.remove_btn.UseUnderline = true;
+            this.remove_btn.Label = "gtk-remove";
+            this.vbuttonbox1.Add(this.remove_btn);
+            Gtk.ButtonBox.ButtonBoxChild w5 = ((Gtk.ButtonBox.ButtonBoxChild)(this.vbuttonbox1[this.remove_btn]));
             w5.Position = 1;
             w5.Expand = false;
             w5.Fill = false;
+            this.hbox1.Add(this.vbuttonbox1);
+            Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.hbox1[this.vbuttonbox1]));
+            w6.Position = 1;
+            w6.Expand = false;
+            w6.Fill = false;
             this.vbox1.Add(this.hbox1);
-            Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
-            w6.Position = 0;
-            // Container child vbox1.Gtk.Box+BoxChild
-            this.hbuttonbox1 = new Gtk.HButtonBox();
-            this.hbuttonbox1.Name = "hbuttonbox1";
-            this.hbuttonbox1.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-            // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
-            this.button7 = new Gtk.Button();
-            this.button7.CanFocus = true;
-            this.button7.Name = "button7";
-            this.button7.UseStock = true;
-            this.button7.UseUnderline = true;
-            this.button7.Label = "gtk-close";
-            this.hbuttonbox1.Add(this.button7);
-            Gtk.ButtonBox.ButtonBoxChild w7 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.button7]));
-            w7.Expand = false;
-            w7.Fill = false;
-            this.vbox1.Add(this.hbuttonbox1);
-            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbuttonbox1]));
-            w8.Position = 1;
-            w8.Expand = false;
-            w8.Fill = false;
+            Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
+            w7.Position = 1;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.Hide();
+            this.add_btn.Clicked += new System.EventHandler(this.OnAddBtnClicked);
+            this.remove_btn.Clicked += new System.EventHandler(this.OnRemoveBtnClicked);
         }
     }
 }

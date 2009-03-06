@@ -18,22 +18,37 @@
  */
 
 using System;
+using System.Collections;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using Do.Platform;
 
 namespace RequestTracker
 {
 	
-	
 	class RequestTrackerItems
 	{
+		public ICollection<RequestTrackerItem> Items = new Collection<RequestTrackerItem>();
 		
-		public static readonly IEnumerable<RequestTrackerItem> Items = new [] {
-			new RequestTrackerItem (
-				"Canonical RT",
-				"https://rt.admin.canonical.com/Ticket/Display.html?id={0}"),
-			new RequestTrackerItem (
-			    "Ubuntu RT",
-			    "https://rt.ubuntu.com/Ticket/Display.html?id={0}"),
-		};
+		public RequestTrackerItems () {
+			RTPreferences prefs = new RTPreferences ();
+
+			if (prefs.URLs == "") {
+				RequestTrackerItem defitem = new RequestTrackerItem (
+					     "No Trackers Configured",
+					     "Please use the GNOME Do Preferences to add some RT sites",
+					     "FAIL{0}");
+				Items.Add (defitem);
+			} else {
+				string[] urlbits = prefs.URLs.Split('|');
+				for (int i = 0; i < urlbits.Length; i++) {
+					string name = urlbits[i];
+					Uri url = new System.Uri(urlbits[++i]);
+					string description = url.Scheme + url.Host;
+					
+					Items.Add (new RequestTrackerItem (name, description, url.ToString ()));
+				}
+			}
+		}
 	}
 }
