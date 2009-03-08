@@ -64,7 +64,7 @@ namespace RequestTracker
 		public virtual void Perform (ITextItem item)
 		{
 			if (url.Substring (0, 4) == "FAIL") {
-				Console.WriteLine ("FIXME: Show a proper error here, and open the config dialog");
+				// FIXME: Show a proper error here, and open the config dialog
 				return;
 			}
 			string newtext = Regex.Replace (item.Text, @"[^0-9]", "");
