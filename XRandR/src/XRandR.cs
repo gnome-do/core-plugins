@@ -275,13 +275,13 @@ namespace XRandR
 			return res;
 		}
 		
-		public static void logStructure(Object o){
+		public static void logStructure(object o){
 			Type t = o.GetType();
 			
-			Do.Platform.Log<XRandR.External>.Debug("Dumping object of type {0}",t.Name);
+			Do.Platform.Log<XRandR.External>.Debug("Dumping object of type {0} Size: {1}",t.Name,Marshal.SizeOf(t));
 
 			foreach(System.Reflection.FieldInfo fi in t.GetFields())
-				Do.Platform.Log<XRandR.External>.Debug("{0} = {1}",fi.Name,fi.GetValue(o));
+				Do.Platform.Log<XRandR.External>.Debug("\t{0} (+ {2}) = {1}",fi.Name,fi.GetValue(o),Marshal.OffsetOf(t,fi.Name));
 		}
 		
 		public class XErrorException:Exception{
