@@ -41,6 +41,13 @@ namespace RequestTracker
 		
 		protected virtual void OnURLCellEdited (object sender, Gtk.EditedArgs args)
 		{
+			// Test the URL is valid
+			try {
+				new System.Uri (args.NewText);
+			} catch (System.UriFormatException) {
+				return;
+			}
+			
 			OnCellEdited (sender, args, 1);
 		}
 		
@@ -116,7 +123,13 @@ namespace RequestTracker
 				string[] urlbits = prefs.URLs.Split('|');
 				for (int i = 0; i < urlbits.Length; i++) {
 					string name = urlbits[i];
-					Uri url = new System.Uri(urlbits[++i]);
+					string uri = urlbits[++i];
+					Uri url;
+					try {
+						url = new System.Uri(uri);
+					} catch (System.UriFormatException) {
+						continue;
+					}
 					
 					rtListStore.AppendValues (name, url.ToString());
 				}

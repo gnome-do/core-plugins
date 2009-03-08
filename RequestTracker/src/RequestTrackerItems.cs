@@ -43,7 +43,13 @@ namespace RequestTracker
 				string[] urlbits = prefs.URLs.Split('|');
 				for (int i = 0; i < urlbits.Length; i++) {
 					string name = urlbits[i];
-					Uri url = new System.Uri(urlbits[++i]);
+					string uri = urlbits[++i];
+					Uri url;
+					try {
+						url = new System.Uri(uri);
+					} catch (System.UriFormatException) {
+						continue;
+					}
 					string description = url.Scheme + url.Host;
 					
 					Items.Add (new RequestTrackerItem (name, description, url.ToString ()));
