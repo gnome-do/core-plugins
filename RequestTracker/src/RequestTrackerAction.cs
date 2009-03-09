@@ -54,6 +54,10 @@ namespace RequestTracker
 			get { return "rt.png@" + GetType ().Assembly.FullName; }
 		}
 		
+		public override bool ModifierItemsOptional {
+			get { return false; }
+		}
+		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (ITextItem); }
 		}
