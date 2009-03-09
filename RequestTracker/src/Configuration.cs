@@ -75,7 +75,7 @@ namespace RequestTracker
 				name = rtListStore.GetValue (iter, 0).ToString ();
 				url = rtListStore.GetValue (iter, 1).ToString ();
 				
-				if (name != "" && url != "") {
+				if (!string.IsNullOrEmpty (name) && !string.IsNullOrEmpty (url)) {
 					if (i > 0) {
 						URLs += "|";
 					}
@@ -119,7 +119,7 @@ namespace RequestTracker
 			nameColumn.AddAttribute (nameNameCell, "text", 0);
 			urlColumn.AddAttribute (urlTitleCell, "text", 1);
 			
-			if (prefs.URLs != "") {
+			if (!string.IsNullOrEmpty (prefs.URLs)) {
 				string[] urlbits = prefs.URLs.Split('|');
 				for (int i = 0; i < urlbits.Length; i++) {
 					string name = urlbits[i];

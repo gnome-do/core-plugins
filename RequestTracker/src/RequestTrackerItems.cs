@@ -33,7 +33,7 @@ namespace RequestTracker
 		public RequestTrackerItems () {
 			RTPreferences prefs = new RTPreferences ();
 
-			if (prefs.URLs == "") {
+			if (string.IsNullOrEmpty (prefs.URLs)) {
 				RequestTrackerItem defitem = new RequestTrackerItem (
 					     "No Trackers Configured",
 					     "Please use the GNOME Do Preferences to add some RT sites",
