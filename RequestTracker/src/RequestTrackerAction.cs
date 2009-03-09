@@ -74,8 +74,12 @@ namespace RequestTracker
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			foreach (RequestTrackerItem rt in modItems)
-				rt.Perform (items.OfType<ITextItem> ());
+			RequestTrackerItem rt;
+			ITextItem item;
+			
+			rt = (modItems.First() as RequestTrackerItem);
+			item = (items.First() as ITextItem);
+			rt.Perform (item);
 			
 			yield break;
 		}
