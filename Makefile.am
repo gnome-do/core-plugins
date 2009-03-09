@@ -47,6 +47,7 @@ SUBDIRS = \
 	Putty \
 	Quote \
 	RememberTheMilk \
+	RequestTracker \
 	Rhythmbox \
 	Riptide \
 	RSS \
@@ -55,7 +56,6 @@ SUBDIRS = \
 	SqueezeCenter \
 	SSH \
 	StockQuote \
-	RequestTracker \
 	SystemServices \
 	Tasque \
 	TerminalServerClient \
