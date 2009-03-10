@@ -2,7 +2,7 @@
 	id="RequestTracker" 
 	namespace="Do"
 	version="1.0"
-	name="Request Tracker"
+	name="RequestTracker"
 	description="Show tickets from Request Tracker."
 	author="Chris Jones"
 	category="Community"
