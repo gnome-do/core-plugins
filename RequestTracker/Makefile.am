@@ -3,7 +3,13 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=RequestTracker
 
 FILES = \
-	src/RequestTrackerAction.cs 
+  gtk-gui/generated.cs \
+  gtk-gui/RequestTracker.RTPrefs.cs \
+  src/Configuration.cs \
+  src/Preferences.cs \
+	src/RequestTrackerAction.cs \
+  src/RequestTrackerItem.cs \
+  src/RequestTrackerItems.cs
 
 RESOURCES = \
 	Resources/RequestTracker.addin.xml \
