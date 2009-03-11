@@ -88,8 +88,8 @@ namespace RequestTracker
 		private string GetUrl (RequestTrackerItem tracker, ITextItem ticket)
 		{
 			if (tracker.URL.Substring (0, 4) == "FAIL") {
-				// FIXME: Show a proper error here, and open the config dialog
-				return "";
+				Do.Platform.Services.Notifications.Notify ("Request Tracker", "No trackers are configured. Please use the GNOME Do preferences ");
+				throw new UriFormatException ();
 			}
 			string newtext = Regex.Replace (ticket.Text, @"[^0-9]", "");
 			
