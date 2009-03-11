@@ -26,11 +26,11 @@ using Do.Platform;
 namespace RequestTracker
 {
 	
-	class RequestTrackerItems
+	public static class RequestTrackerItems
 	{
-		public ICollection<RequestTrackerItem> Items = new Collection<RequestTrackerItem>();
+		public static ICollection<RequestTrackerItem> Items = new Collection<RequestTrackerItem>();
 		
-		public RequestTrackerItems () {
+		static RequestTrackerItems () {
 			RTPreferences prefs = new RTPreferences ();
 
 			if (string.IsNullOrEmpty (prefs.URLs)) {

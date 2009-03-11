@@ -63,13 +63,12 @@ namespace RequestTracker
 		}
 
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (RequestTrackerItem);}
+			get { yield return typeof (RequestTrackerItem); }
 		}
 
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			RequestTrackerItems items = new RequestTrackerItems ();
-			return items.Items.OfType<Item> ();
+			return RequestTrackerItems.Items.OfType<Item> ();
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -77,11 +76,29 @@ namespace RequestTracker
 			RequestTrackerItem rt;
 			ITextItem item;
 			
-			rt = (modItems.First() as RequestTrackerItem);
-			item = (items.First() as ITextItem);
-			rt.Perform (item);
-			
-			yield break;
+			if (items.First () is ITextItem && modItems.First () is RequestTrackerItem) {
+				rt = (modItems.First() as RequestTrackerItem);
+				item = (items.First() as ITextItem);
+				
+				yield return new TextItem (GetUrl (rt, item));
+			}
+			else yield break;
+		}
+		
+		private string GetUrl (RequestTrackerItem tracker, ITextItem ticket)
+		{
+			if (tracker.URL.Substring (0, 4) == "FAIL") {
+				// FIXME: Show a proper error here, and open the config dialog
+				return "";
+			}
+			string newtext = Regex.Replace (ticket.Text, @"[^0-9]", "");
+			string query = HttpUtility.UrlEncode (newtext);
+			return FormatUrl (tracker.URL, query);
+		}
+
+		private string FormatUrl (string url, string ticket)
+		{
+			return string.Format (url, ticket);
 		}
 		
 		public Gtk.Bin GetConfiguration ()

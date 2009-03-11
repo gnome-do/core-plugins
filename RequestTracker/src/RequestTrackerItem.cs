@@ -34,14 +34,16 @@ namespace RequestTracker
 	
 	public class RequestTrackerItem : Item
 	{
-		string name, description, url;
+		string name, description;
 		
 		public RequestTrackerItem (string name, string description, string url)
 		{
 			this.name = Catalog.GetString (name);
 			this.description = Catalog.GetString (description);
-			this.url = url;
+			this.URL = url;
 		}
+		
+		public string URL { get; private set; }
 		
 		public override string Name {
 			get { return name; }
@@ -53,28 +55,6 @@ namespace RequestTracker
 
 		public override string Icon { 
 			get { return "rt.png@" + GetType ().Assembly.FullName; }
-		}
-		
-		public void Perform (IEnumerable<ITextItem> items)
-		{
-			foreach (ITextItem item in items)
-				Perform (item);
-		}
-
-		public virtual void Perform (ITextItem item)
-		{
-			if (url.Substring (0, 4) == "FAIL") {
-				// FIXME: Show a proper error here, and open the config dialog
-				return;
-			}
-			string newtext = Regex.Replace (item.Text, @"[^0-9]", "");
-			string query = HttpUtility.UrlEncode (newtext);
-			Services.Environment.OpenUrl (FormatUrl (url, query));
-		}
-
-		protected virtual string FormatUrl (string url, string query)
-		{
-			return string.Format (url, query);
 		}
 	}
 }
