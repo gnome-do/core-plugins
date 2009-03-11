@@ -92,6 +92,12 @@ namespace RequestTracker
 				return "";
 			}
 			string newtext = Regex.Replace (ticket.Text, @"[^0-9]", "");
+			
+			if (string.IsNullOrEmpty (newtext)) {
+				Do.Platform.Services.Notifications.Notify ("Request Tracker", "No ticket number provided");
+				throw new ArgumentNullException ();
+			}
+			
 			string query = HttpUtility.UrlEncode (newtext);
 			return FormatUrl (tracker.URL, query);
 		}
