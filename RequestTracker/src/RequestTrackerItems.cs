@@ -50,7 +50,7 @@ namespace RequestTracker
 					} catch (System.UriFormatException) {
 						continue;
 					}
-					string description = url.Scheme + url.Host;
+					string description = url.Scheme + "://" + url.Host;
 					
 					Items.Add (new RequestTrackerItem (name, description, url.ToString ()));
 				}
