@@ -84,44 +84,59 @@ namespace WindowManager
 				RemapDictionary ["banshee.exe"] = "banshee";
 				RemapDictionary ["banshee-1"] = "banshee";
 				
-				StreamWriter writer = new StreamWriter (RemapFile);
-				writer.WriteLine ("# Docky Remap File");
-				writer.WriteLine ("# Add key value pairs following dictionary syntax");
-				writer.WriteLine ("# key, value");
-				writer.WriteLine ("# key, altKey, value");
-				writer.WriteLine ("# Lines starting with # are comments, otherwise # is a valid character");
-				
-				foreach (KeyValuePair<string, string> kvp in RemapDictionary) {
-					writer.WriteLine ("{0}, {1}", kvp.Key, kvp.Value);
-				}
-				writer.Close ();
-				writer.Dispose ();
-			} else {
-				StreamReader reader = new StreamReader (RemapFile);
-				
-				string line;
-				while (!reader.EndOfStream) {
-					line = reader.ReadLine ();
-					if (line.StartsWith ("#") || !line.Contains (","))
-						continue;
-					string [] array = line.Split (',');
-					if (array.Length < 2 || array [0].Length == 0)
-						continue;
+				StreamWriter writer = null;
+				try {
+					writer = new StreamWriter (RemapFile);
+					writer.WriteLine ("# Docky Remap File");
+					writer.WriteLine ("# Add key value pairs following dictionary syntax");
+					writer.WriteLine ("# key, value");
+					writer.WriteLine ("# key, altKey, value");
+					writer.WriteLine ("# Lines starting with # are comments, otherwise # is a valid character");
 					
-					string val = array [array.Length - 1].Trim ().ToLower ();
-					if (string.IsNullOrEmpty (val))
-						continue;
-					
-					for (int i=0; i < array.Length - 1; i++) {
-						string key = array [i].Trim ().ToLower ();
-						if (string.IsNullOrEmpty (key))
-							continue;
-						RemapDictionary [key] = val;
+					foreach (KeyValuePair<string, string> kvp in RemapDictionary) {
+						writer.WriteLine ("{0}, {1}", kvp.Key, kvp.Value);
 					}
+					writer.Close ();
+				} finally {
+					if (writer != null)
+						writer.Dispose ();
 				}
-				
-				reader.Close ();
-				reader.Dispose ();
+			} else {
+				StreamReader reader = null;
+				try {
+					reader = new StreamReader (RemapFile);
+					
+					string line;
+					while (!reader.EndOfStream) {
+						line = reader.ReadLine ();
+						if (line.StartsWith ("#") || !line.Contains (","))
+							continue;
+						string [] array = line.Split (',');
+						if (array.Length < 2 || array [0].Length == 0)
+							continue;
+						
+						string val = array [array.Length - 1].Trim ().ToLower ();
+						if (string.IsNullOrEmpty (val))
+							continue;
+						
+						for (int i=0; i < array.Length - 1; i++) {
+							string key = array [i].Trim ().ToLower ();
+							if (string.IsNullOrEmpty (key))
+								continue;
+							RemapDictionary [key] = val;
+						}
+					}
+					
+					reader.Close ();
+				} catch {
+					Do.Platform.Log.Error ("Could not read remap file");
+					RemapDictionary = new Dictionary<string, string> ();
+					RemapDictionary ["banshee.exe"] = "banshee";
+					RemapDictionary ["banshee-1"] = "banshee";
+				} finally {
+					if (reader != null)
+						reader.Dispose ();
+				}
 			}
 		}
 		
@@ -218,9 +233,28 @@ namespace WindowManager
 				string exec_line = CmdLineForPid (pid);
 				if (string.IsNullOrEmpty (exec_line))
 					continue;
-
-				exec_line = ProcessExecString (exec_line);
 				
+				if (exec_line.Contains ("java") && exec_line.Contains ("-D")) {
+					foreach (Application app in GetApplications ()) {
+						if (app == null)
+							continue;
+						
+						if (app.Pid == pid || app.Windows.Any (w => w.Pid == pid)) {
+							foreach (Wnck.Window window in app.Windows.Where (win => !win.IsSkipTasklist)) {
+								exec_line = window.ClassGroup.Name;
+								
+								// Vuze is retarded
+								if (exec_line == "SWT")
+									exec_line = window.Name;
+								
+								break;
+							}
+						}
+					}
+				}	
+				
+				exec_line = ProcessExecString (exec_line);
+					
 				exec_lines [pid] = exec_line;
 			}
 			
@@ -235,7 +269,7 @@ namespace WindowManager
 				return RemapDictionary [exec];
 			
 			if (exec.StartsWith ("/")) {
-				string first_part = exec.Split (' ')[0];
+				string first_part = exec.Split (' ') [0];
 				int length = first_part.Length;
 				first_part = first_part.Split ('/').Last ();
 				
