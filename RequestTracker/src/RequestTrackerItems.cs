@@ -18,21 +18,29 @@
  */
 
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using Do.Platform;
+using Do.Universe;
 
 namespace RequestTracker
 {
 	
 	public static class RequestTrackerItems
 	{
-		public static ICollection<RequestTrackerItem> Items = new Collection<RequestTrackerItem>();
+		private static ICollection<RequestTrackerItem> Items;
+		
+		private static RTPreferences prefs;
 		
 		static RequestTrackerItems () {
-			RTPreferences prefs = new RTPreferences ();
-
+			Items =  new Collection<RequestTrackerItem> ();
+			prefs = new RTPreferences ();
+		}
+		
+		public static IEnumerable<Item> GetItems (string query) {
+			Items.Clear ();
 			if (string.IsNullOrEmpty (prefs.URLs)) {
 				RequestTrackerItem defitem = new RequestTrackerItem (
 					     "No Trackers Configured",
@@ -50,11 +58,13 @@ namespace RequestTracker
 					} catch (System.UriFormatException) {
 						continue;
 					}
-					string description = url.Scheme + "://" + url.Host;
+
+					string description = string.Format (url.ToString (), query);
 					
 					Items.Add (new RequestTrackerItem (name, description, url.ToString ()));
 				}
 			}
+			return Items.OfType<Item> ();
 		}
 	}
 }

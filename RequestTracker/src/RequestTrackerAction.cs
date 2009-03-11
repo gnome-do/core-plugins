@@ -68,7 +68,10 @@ namespace RequestTracker
 
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return RequestTrackerItems.Items.OfType<Item> ();
+			if (item is ITextItem)
+				return RequestTrackerItems.GetItems ((item as ITextItem).Text);
+			return Enumerable.Empty<Item> ();
+			
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
