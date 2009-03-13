@@ -100,7 +100,7 @@ namespace Pastebin
 			{
 				Services.Notifications.Notify("Pastebin",
 					"No text provided for pasting.");
-				throw new ArgumentNullException();
+				yield break;
 			}
 			
 			IPastebinProvider pastebinProvider = null;
