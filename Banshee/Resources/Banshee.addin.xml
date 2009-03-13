@@ -1,16 +1,15 @@
 <Addin 
 	id="Banshee"
 	namespace= "Do"
-	version="0.9"
-	name="Banshee (beta)"
-	description="Search your music library and control playback."
+	version="1.0"
+	name="Banshee Media Player"
+	description="Search your media collection and control playback."
 	author="Alex Launi"
 	category="Official"
 >
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
-		<Import assembly="Banshee.CollectionIndexer.dll"/>
 	</Runtime>
 	
 	<Dependencies>
@@ -18,6 +17,10 @@
 	</Dependencies>
 	
 	<!-- Extensions included in this assembly -->
+	<!-- Itemsources -->
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type = "Banshee.MediaItemSource" />
+	</Extension>
 
 	<!-- Actions -->
 	<Extension path = "/Do/Action">
@@ -25,5 +28,7 @@
 		<Action type = "Banshee.PauseAction" />
 		<Action type = "Banshee.NextAction" />
 		<Action type = "Banshee.PreviousAction" />
+		<Action type = "Banshee.EnqueueAction" />
+		<Action type = "Banshee.SearchCollectionAction" />
 	</Extension>
 </Addin>
