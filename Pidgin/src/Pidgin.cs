@@ -47,8 +47,8 @@ namespace PidginPlugin
 			int PurpleFindBuddy (int account, string name);
 			void PurpleConversationPresent (int conversation);
 			int PurpleAccountsFindConnected (string account, string proto);
-			int PurpleConversationNew (uint type, int account, string name);
-			int PurpleSavedstatusNew (string title, uint type);
+			int PurpleConversationNew (int type, int account, string name);
+			int PurpleSavedstatusNew (string title, int type);
 			void PurpleSavedstatusSetMessage (int type, string message);
 			void PurpleSavedstatusActivate (int status);
 			int [] PurpleSavedstatusesGetAll ();
@@ -60,8 +60,16 @@ namespace PidginPlugin
 			int PurpleSavedstatusFind (string title);
 			string PurpleAccountGetProtocolName (int account);
 			string PurpleAccountGetAlias (int account);
-			void PurpleAccountSetEnabled (int account, string ui, uint value);
+			void PurpleAccountSetEnabled (int account, string ui, int value);
 			string PurpleAccountGetUsername (int account);
+			
+			#region Pidgin < 2.5.4 compatibility methods
+			
+			int PurpleConversationNew (uint type, int account, string name);
+			int PurpleSavedstatusNew (string title, uint type);
+			void PurpleAccountSetEnabled (int account, string ui, uint value);
+			
+			#endregion
 		}
 
 		public static string ChatIcon {
@@ -147,7 +155,12 @@ namespace PidginPlugin
 			prpl = GetPurpleObject ();
 			int status;
 			try {
-				status = prpl.PurpleSavedstatusNew ("", kind);
+				try {
+					status = prpl.PurpleSavedstatusNew ("", (int) kind);
+				}
+				catch {
+					status = prpl.PurpleSavedstatusNew ("", (uint) kind);
+				}
 				prpl.PurpleSavedstatusSetMessage (status, message);
 				prpl.PurpleSavedstatusActivate (status);
 			} catch {
@@ -164,7 +177,12 @@ namespace PidginPlugin
 				GetBuddyIsOnlineAndAccount (name, out account);
 				if (account == -1)
 					account = prpl.PurpleAccountsFindConnected ("", "");
-				conversation = prpl.PurpleConversationNew (1, account, name);
+				try {
+					conversation = prpl.PurpleConversationNew ((int) 1, account, name);
+				}
+				catch {
+					conversation = prpl.PurpleConversationNew ((uint) 1, account, name);
+				}
 				prpl.PurpleConversationPresent (conversation);
 			} catch (Exception e) {
 				Log<Pidgin>.Error ("Could not create new Pidgin conversation: {0}", e.Message);

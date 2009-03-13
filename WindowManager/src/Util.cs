@@ -29,6 +29,10 @@ namespace WindowManager
 	
 	public static class Util
 	{
+		static string RemapFile {
+			get { return Path.Combine (Do.Platform.Services.Paths.UserDataDirectory, "RemapFile"); }
+		}
+		
 		static IEnumerable<string> BadPrefixes {
 			get {
 				yield return "gksu";
@@ -43,6 +47,8 @@ namespace WindowManager
 				yield return "python2.5";
 			}
 		}
+		
+		static Dictionary<string, string> RemapDictionary { get; set; }
 		
 		static List<Application> application_list;
 		static bool application_list_update_needed;
@@ -67,6 +73,71 @@ namespace WindowManager
 			Wnck.Screen.Default.ApplicationClosed += delegate {
 				application_list_update_needed = true;
 			};
+			
+			BuildRemapDictionary ();
+		}
+		
+		static void BuildRemapDictionary ()
+		{
+			RemapDictionary = new Dictionary<string, string> ();
+			if (!File.Exists (RemapFile)) {
+				RemapDictionary ["banshee.exe"] = "banshee";
+				RemapDictionary ["banshee-1"] = "banshee";
+				
+				StreamWriter writer = null;
+				try {
+					writer = new StreamWriter (RemapFile);
+					writer.WriteLine ("# Docky Remap File");
+					writer.WriteLine ("# Add key value pairs following dictionary syntax");
+					writer.WriteLine ("# key, value");
+					writer.WriteLine ("# key, altKey, value");
+					writer.WriteLine ("# Lines starting with # are comments, otherwise # is a valid character");
+					
+					foreach (KeyValuePair<string, string> kvp in RemapDictionary) {
+						writer.WriteLine ("{0}, {1}", kvp.Key, kvp.Value);
+					}
+					writer.Close ();
+				} finally {
+					if (writer != null)
+						writer.Dispose ();
+				}
+			} else {
+				StreamReader reader = null;
+				try {
+					reader = new StreamReader (RemapFile);
+					
+					string line;
+					while (!reader.EndOfStream) {
+						line = reader.ReadLine ();
+						if (line.StartsWith ("#") || !line.Contains (","))
+							continue;
+						string [] array = line.Split (',');
+						if (array.Length < 2 || array [0].Length == 0)
+							continue;
+						
+						string val = array [array.Length - 1].Trim ().ToLower ();
+						if (string.IsNullOrEmpty (val))
+							continue;
+						
+						for (int i=0; i < array.Length - 1; i++) {
+							string key = array [i].Trim ().ToLower ();
+							if (string.IsNullOrEmpty (key))
+								continue;
+							RemapDictionary [key] = val;
+						}
+					}
+					
+					reader.Close ();
+				} catch {
+					Do.Platform.Log.Error ("Could not read remap file");
+					RemapDictionary = new Dictionary<string, string> ();
+					RemapDictionary ["banshee.exe"] = "banshee";
+					RemapDictionary ["banshee-1"] = "banshee";
+				} finally {
+					if (reader != null)
+						reader.Dispose ();
+				}
+			}
 		}
 		
 		/// <summary>
@@ -162,9 +233,28 @@ namespace WindowManager
 				string exec_line = CmdLineForPid (pid);
 				if (string.IsNullOrEmpty (exec_line))
 					continue;
-
-				exec_line = ProcessExecString (exec_line);
 				
+				if (exec_line.Contains ("java") && exec_line.Contains ("jar")) {
+					foreach (Application app in GetApplications ()) {
+						if (app == null)
+							continue;
+						
+						if (app.Pid == pid || app.Windows.Any (w => w.Pid == pid)) {
+							foreach (Wnck.Window window in app.Windows.Where (win => !win.IsSkipTasklist)) {
+								exec_line = window.ClassGroup.Name;
+								
+								// Vuze is retarded
+								if (exec_line == "SWT")
+									exec_line = window.Name;
+								
+								break;
+							}
+						}
+					}
+				}	
+				
+				exec_line = ProcessExecString (exec_line);
+					
 				exec_lines [pid] = exec_line;
 			}
 			
@@ -173,6 +263,24 @@ namespace WindowManager
 
 		public static string ProcessExecString (string exec)
 		{
+			exec = exec.ToLower ().Trim ();
+			
+			if (RemapDictionary.ContainsKey (exec))
+				return RemapDictionary [exec];
+			
+			if (exec.StartsWith ("/")) {
+				string first_part = exec.Split (' ') [0];
+				int length = first_part.Length;
+				first_part = first_part.Split ('/').Last ();
+				
+				if (length < exec.Length)
+					 first_part = first_part + " " + exec.Substring (length + 1);
+						
+				if (RemapDictionary.ContainsKey (first_part)) {
+					return RemapDictionary [first_part];
+				}
+			}
+			
 			string [] parts = exec.Split (' ');
 			for (int i = 0; i < parts.Length; i++) {
 				if (parts [i].StartsWith ("-"))
@@ -187,7 +295,10 @@ namespace WindowManager
 				}
 				
 				if (!string.IsNullOrEmpty (parts [i])) {
-					return parts [i].ToLower ();
+					string out_val = parts [i];
+					if (RemapDictionary.ContainsKey (out_val))
+						out_val = RemapDictionary [out_val];
+					return out_val;
 				}
 			}
 			return null;

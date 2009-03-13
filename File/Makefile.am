@@ -6,6 +6,8 @@ FILES = \
 	gtk-gui/Do.FilesAndFolders.Configuration.cs \
 	gtk-gui/generated.cs \
 	src/PathNodeView.cs \
+	src/IndexPathNodeView.cs \
+	src/IgnorePathNodeView.cs \
 	src/Do/Do.FilesAndFolders/NewFolderAction.cs \
 	src/Do/Do.FilesAndFolders/IndexedFolderCollection.cs \
 	src/Do/Do.FilesAndFolders/Preferences.cs \

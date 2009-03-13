@@ -47,6 +47,7 @@ SUBDIRS = \
 	Putty \
 	Quote \
 	RememberTheMilk \
+	RequestTracker \
 	Rhythmbox \
 	Riptide \
 	RSS \
