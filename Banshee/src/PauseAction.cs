@@ -22,6 +22,7 @@ using System;
 
 using Mono.Unix;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Banshee

@@ -20,6 +20,7 @@
 
 using System;
 using System.Linq;
+using System.Threading;
 using System.Collections.Generic;
 
 using NDesk.DBus;
@@ -45,6 +46,7 @@ namespace Banshee
 	[Interface ("org.bansheeproject.Banshee.PlaybackController")]
 	interface IBansheeController
 	{
+		void First ();
 		void Next (bool restart);
 		void Previous (bool restart);
 		int ShuffleMode { get; set; }
@@ -53,12 +55,14 @@ namespace Banshee
 	public class BansheeDBus
 	{
 		const string BusName = "org.bansheeproject.Banshee";
+		const string SessionBusName = "org.freedesktop.DBus";
 		const string ErrorMessage = "Banshee encountered an error in {0}; {1}";
 
 		# region static Banshee d-bus members
 		
 		static Dictionary<Type, string> object_paths;
 		
+		static IBus session_bus;
 		static IBansheePlayer player;
 		static IBansheePlayQueue play_queue;
 		static IBansheeController controller;
@@ -66,18 +70,39 @@ namespace Banshee
 		static BansheeDBus ()
 		{
 			BuildObjectPathsDict ();
+			session_bus = Bus.Session.GetObject<IBus> (SessionBusName, new ObjectPath (object_paths[typeof (IBus)]));
+			session_bus.NameOwnerChanged += HandleNameOwnerChanged;
+		}
+
+		static void HandleNameOwnerChanged(string name, string old_owner, string new_owner)
+		{
+			// when the owner changes on this path, we release our dbus objects.
+			if (name == BusName) {
+				player = null;
+				controller = null;
+				play_queue = null;
+			}	
+		}
+
+		static bool FullApplicationAvailable {
+			get { return Bus.Session.NameHasOwner (BusName); }
+		}
+
+		static void MaybeStartFullApplication ()
+		{
+			if (FullApplicationAvailable) return;
+			
+			Bus.Session.StartServiceByName (BusName);
+			Thread.Sleep (5000);
+
+			if (!FullApplicationAvailable)
+				throw new Exception (string.Format("Name {0} has no owner.", BusName));
 		}
 		
-		static T GetIBansheeObject<T> (string object_path)
+		static T GetIBansheeObject<T> (string objectPath)
 		{
-			if (!Bus.Session.NameHasOwner (BusName)) {
-				Bus.Session.StartServiceByName (BusName);
-				System.Threading.Thread.Sleep (5000);
-				if (!Bus.Session.NameHasOwner (BusName))
-					throw new Exception (string.Format("Name {0} has no owner.", BusName));
-			}
-			
-			return Bus.Session.GetObject<T> (BusName, new ObjectPath (object_path));
+			MaybeStartFullApplication ();
+			return Bus.Session.GetObject<T> (BusName, new ObjectPath (objectPath));
 		}
 		
 		static IBansheePlayer Player {
@@ -115,9 +140,9 @@ namespace Banshee
 		}
 
 		public bool IsPlaying ()
-		{			
+		{
 			try {
-				return player != null && Player.CurrentState == "playing";
+				return (player != null || FullApplicationAvailable) && Player.CurrentState == "playing";
 			} catch (Exception e) {
 				LogError ("IsPlaying", e);
 			}
@@ -135,13 +160,13 @@ namespace Banshee
 		
 		public void Play ()
 		{
-			Player.Play ();
+			First ();
 		}
 
 		public void Play (IEnumerable<IMediaFile> media)
 		{
 			Enqueue (media, true);
-			Next ();
+			First ();
 		}			
 
 		public void Enqueue (IEnumerable<IMediaFile> media)
@@ -152,8 +177,11 @@ namespace Banshee
 		void Enqueue (IEnumerable<IMediaFile> media, bool prepend)
 		{
 			try {
+				MaybeStartFullApplication (); //if banshee isn't already started the enqueue seems to fail
+				
 				// if we're prepending to the queue we need to queue in the uris in reverse order
-				if (prepend) media = media.Reverse ();
+				if (prepend) 
+					media = media.Reverse ();
 
 				media.ForEach (item => PlayQueue.EnqueueUri (item.Path, prepend));
 				
@@ -161,7 +189,7 @@ namespace Banshee
 				LogError ("Enqueue", e);
 			}
 		}
-		
+				
 		public void Next ()
 		{
 			try {
@@ -180,9 +208,19 @@ namespace Banshee
 			}
 		}
 		
+		void First ()
+		{
+			try {
+				Controller.First ();
+			} catch (Exception e) {
+				LogError ("First", e);
+			}
+		}
+		
 		static void BuildObjectPathsDict ()
 		{
 			object_paths = new Dictionary<Type, string> ();
+			object_paths.Add (typeof (IBus), "/org/freedesktop/DBus");
 			object_paths.Add (typeof (IBansheePlayer), "/org/bansheeproject/Banshee/PlayerEngine");
 			object_paths.Add (typeof (IBansheeController), "/org/bansheeproject/Banshee/PlaybackController");
 			object_paths.Add (typeof (IBansheePlayQueue), "/org/bansheeproject/Banshee/SourceManager/PlayQueue");

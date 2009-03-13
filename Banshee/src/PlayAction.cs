@@ -63,11 +63,16 @@ namespace Banshee
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (items.First () is MediaItem)
-				Banshee.Play (items.Cast<MediaItem> ().First ());
+				Banshee.Play (items.OfType<MediaItem> ().First ());
 			else 
 				Banshee.Play ();
 				
 			yield break;
+		}
+		
+		protected override bool IsAvailable ()
+		{
+			return !Banshee.IsPlaying;
 		}
 	}
 }
