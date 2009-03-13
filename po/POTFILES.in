@@ -96,7 +96,6 @@ ImageShack/src/Notifications.cs
 Launchpad/src/LaunchpadAction.cs
 Launchpad/src/LaunchpadItem.cs
 LocateFiles/src/LocateFilesAction.cs
-ManLookUp/src/ManualPageItemSource.cs
 ManLookUp/src/ReadManualPageAction.cs
 Microblogging/gtk-gui/Microblogging.GenConfig.cs
 Microblogging/src/FriendSource.cs
