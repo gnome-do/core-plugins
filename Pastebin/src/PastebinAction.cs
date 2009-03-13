@@ -96,6 +96,13 @@ namespace Pastebin
 				text += titem.Text;
 			}
 			
+			if (string.IsNullOrEmpty(text))
+			{
+				Services.Notifications.Notify("Pastebin",
+					"No text provided for pasting.");
+				throw new ArgumentNullException();
+			}
+			
 			IPastebinProvider pastebinProvider = null;
 					
 			if (modifierItems.Any ()) {
