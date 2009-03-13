@@ -46,6 +46,8 @@ File/src/Do/Do.FilesAndFolders/NewFileAction.cs
 File/src/Do/Do.FilesAndFolders/NewFolderAction.cs
 File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs
 File/src/Do/Do.FilesAndFolders/RenameAction.cs
+File/src/IgnorePathNodeView.cs
+File/src/IndexPathNodeView.cs
 File/src/PathNodeView.cs
 Firefox/src/BookmarkItemSource.cs
 Flickr/gtk-gui/Flickr.AccountConfig.cs
@@ -99,6 +101,7 @@ LocateFiles/src/LocateFilesAction.cs
 ManLookUp/src/ReadManualPageAction.cs
 Microblogging/gtk-gui/Microblogging.GenConfig.cs
 Microblogging/src/FriendSource.cs
+Microblogging/src/FriendItem.cs
 Microblogging/src/MicroblogClient.cs
 Microblogging/src/Microblog.cs
 Microblogging/src/Notifications.cs
@@ -140,6 +143,8 @@ RememberTheMilk/src/RTMSetDue.cs
 RememberTheMilk/src/RTMSetPriority.cs
 RememberTheMilk/src/RTMSetRecurrence.cs
 RememberTheMilk/src/RTMUncompleteTask.cs
+RequestTracker/gtk-gui/RequestTracker.RTPrefs.cs
+RequestTracker/src/RequestTrackerAction.cs
 Rhythmbox/src/EnqueueAction.cs
 Rhythmbox/src/MusicItems.cs
 Rhythmbox/src/MusicItemSource.cs
@@ -150,11 +155,18 @@ Rhythmbox/src/PlayItemAction.cs
 Rhythmbox/src/PreviousAction.cs
 Rhythmbox/src/RhythmboxItems.cs
 RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs
-Shelf/src/ShelfActions.cs
+Shelf/src/ShelfAddToShelfAction.cs
+Shelf/src/ShelfExploreAction.cs
+Shelf/src/ShelfRemoveFromShelfAction.cs
+Shelf/src/ShelfCreateShelfAction.cs
+Shelf/src/ShelfItem.cs
+Shelf/src/ShelfRenameShelfAction.cs
+Shelf/src/ShelfDeleteShelfAction.cs
 Shelf/src/ShelfItemSource.cs
 SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs
 SSH/src/SSHAction.cs
-SSH/src/SSHHosts.cs
+SSH/src/SSHHostItem.cs
+SSH/src/SSHHostItemSource.cs
 SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs
 SystemServices/src/ServiceActions.cs
 SystemServices/src/Service.cs
@@ -194,6 +206,7 @@ WindowManager/src/ScreenItemSource.cs
 WindowManager/src/ScreenListAction.cs
 WindowManager/src/WindowItemSource.cs
 WindowManager/src/WindowListAction.cs
+YouTube/src/Youtube.cs
 Zim/src/ZimNewPageAction.cs
 Zim/src/ZimOpenPageAction.cs
 Zim/src/ZimPage.cs
