@@ -23,3 +23,6 @@ all-local:
 	mkdir -p $(top_builddir)/build
 	install -m 644 -t $(srcdir) $(bundle_DATA)
 	install -m 644 -t $(top_builddir)/build $(bundle_DATA)
+
+clean-local:
+	-rm -f $(srcdir)/*.dll
