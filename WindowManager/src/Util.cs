@@ -79,10 +79,8 @@ namespace WindowManager
 		
 		static void BuildRemapDictionary ()
 		{
-			RemapDictionary = new Dictionary<string, string> ();
 			if (!File.Exists (RemapFile)) {
-				RemapDictionary ["banshee.exe"] = "banshee";
-				RemapDictionary ["banshee-1"] = "banshee";
+				RemapDictionary = BuildDefaultRemapDictionary ();
 				
 				StreamWriter writer = null;
 				try {
@@ -102,6 +100,8 @@ namespace WindowManager
 						writer.Dispose ();
 				}
 			} else {
+				RemapDictionary = new Dictionary<string, string> ();
+				
 				StreamReader reader = null;
 				try {
 					reader = new StreamReader (RemapFile);
@@ -130,14 +130,24 @@ namespace WindowManager
 					reader.Close ();
 				} catch {
 					Do.Platform.Log.Error ("Could not read remap file");
-					RemapDictionary = new Dictionary<string, string> ();
-					RemapDictionary ["banshee.exe"] = "banshee";
-					RemapDictionary ["banshee-1"] = "banshee";
+					RemapDictionary = BuildDefaultRemapDictionary ();
 				} finally {
 					if (reader != null)
 						reader.Dispose ();
 				}
 			}
+		}
+		
+		static Dictionary<string, string> BuildDefaultRemapDictionary ()
+		{
+			Dictionary<string, string> remapDict = new Dictionary<string, string> ();
+			remapDict ["banshee.exe"] = "banshee";
+			remapDict ["banshee-1"] = "banshee";
+			remapDict ["azureus"] = "vuze";
+			remapDict ["thunderbird-3.0"] = "thunderbird";
+			remapDict ["thunderbird-bin"] = "thunderbird";
+			
+			return remapDict;
 		}
 		
 		/// <summary>
