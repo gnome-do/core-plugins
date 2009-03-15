@@ -53,7 +53,7 @@ samples =	\
 	PhotoTool.exe \
 	HealthTool.exe \
 
-all: $(ALLLIBS) tests $(samples) $(PKGCONFIG_FILES)
+all: $(ALLLIBS) $(samples) $(PKGCONFIG_FILES)
 
 core_sources = $(wildcard src/core/*.cs) $(wildcard version/*.cs)
 extensions_sources = $(wildcard src/extensions/*.cs) $(wildcard version/*.cs)

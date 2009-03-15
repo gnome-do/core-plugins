@@ -1,13 +1,15 @@
 bundledir = ${datadir}/gnome-do/plugins
 
+SUBDIRS = libgoogle-data-mono-1.4.0.2
+
 GOOGLE_LIBS = \
-	Google.GData.AccessControl.dll \
-	Google.GData.Calendar.dll \
-	Google.GData.Client.dll \
-	Google.GData.Contacts.dll \
-	Google.GData.Documents.dll \
-	Google.GData.YouTube.dll \
-	Google.GData.Extensions.dll
+	libgoogle-data-mono-1.4.0.2/Google.GData.AccessControl.dll \
+	libgoogle-data-mono-1.4.0.2/Google.GData.Calendar.dll \
+	libgoogle-data-mono-1.4.0.2/Google.GData.Client.dll \
+	libgoogle-data-mono-1.4.0.2/Google.GData.Contacts.dll \
+	libgoogle-data-mono-1.4.0.2/Google.GData.Documents.dll \
+	libgoogle-data-mono-1.4.0.2/Google.GData.YouTube.dll \
+	libgoogle-data-mono-1.4.0.2/Google.GData.Extensions.dll
 
 bundle_DATA = \
 	$(addprefix $(srcdir)/,$(GOOGLE_LIBS)) \
@@ -19,4 +21,5 @@ EXTRA_DIST=$(GOOGLE_LIBS) gmcs.exe
 # during build - particularly mautil.
 all-local:
 	mkdir -p $(top_builddir)/build
+	install -m 644 -t $(srcdir) $(bundle_DATA)
 	install -m 644 -t $(top_builddir)/build $(bundle_DATA)
