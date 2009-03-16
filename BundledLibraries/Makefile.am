@@ -25,13 +25,11 @@ all-local:
 	install -m 644 -t $(top_builddir)/build $(bundle_DATA)
 clean-local:
 	$(MAKE) -C $(gdata_subdir)$(AM_MAKEFLAGS) clean
+	-rm -f $(srcdir)/*.dll
      
 all-local:
 	mkdir -p $(top_builddir)/build
 	install -m 644 -t $(top_builddir)/build $(bundle_DATA)
-
-clean-local:
-	-rm -f $(srcdir)/*.dll
 
 %.dll:
 	$(MAKE) -C $(gdata_subdir)$(AM_MAKEFLAGS) $@
