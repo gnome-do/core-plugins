@@ -204,11 +204,11 @@ namespace RememberTheMilk
 							if (rtmTask.Deleted == DateTime.MinValue) {
 								tasks [rtmList.ID].Add (new RTMTaskItem (rtmList.ID, rtmTaskSeries.TaskSeriesID,
 								                                         rtmTask.TaskID, rtmTaskSeries.Name,
-								                                         rtmTask.Due, rtmTask.Completed, rtmTask.Priority,
+								                                         rtmTask.Due, rtmTask.Completed, rtmTask.TaskURL, rtmTask.Priority,
 								                                         rtmTask.HasDueTime));
 								tasks ["All Tasks"].Add (new RTMTaskItem (rtmList.ID, rtmTaskSeries.TaskSeriesID,
 								                                          rtmTask.TaskID, rtmTaskSeries.Name,
-								                                          rtmTask.Due, rtmTask.Completed, rtmTask.Priority,
+								                                          rtmTask.Due, rtmTask.Completed, rtmTask.TaskURL, rtmTask.Priority,
 								                                          rtmTask.HasDueTime));
 							}
                         }
@@ -353,7 +353,7 @@ namespace RememberTheMilk
                                     rtmList.TaskSeriesCollection[0].Name,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].Due, 
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].Completed, 
-			                        priority,
+			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskURL, priority,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime);
         }
 
@@ -500,6 +500,26 @@ namespace RememberTheMilk
 			               Catalog.GetString ("The recurrence pattern of the selected task in your"
 			                                  + " Remember The Milk task list has been changed."), 
 			               taskId, listId);
+        }
+        
+        public static void SetURL(string listId, string taskSeriesId, string taskId, string url)
+        {
+        	try {
+        		rtm.TasksSetUrl(timeline, listId, taskSeriesId, taskId, url);
+        	} catch (RtmException e) {
+			Console.Error.WriteLine (e.Message);
+			return;
+		}
+		
+		if (!string.IsNullOrEmpty(url)) {
+			ActionRoutine (Catalog.GetString ("Task URL Set"),
+				Catalog.GetString ("The selected task has been assigned an URL."),
+					taskId, listId);
+		} else {
+			ActionRoutine (Catalog.GetString ("Task URL Reset"),
+				Catalog.GetString ("The URL for the selected task has been reset."),
+					taskId, listId);
+		}
         }
 		
 		public static void UncompleteTask (string listId, string taskSeriesId, string taskId)

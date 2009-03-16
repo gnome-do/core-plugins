@@ -1117,6 +1117,29 @@ namespace RtmNet
 			}
 
 		}
+		
+		public List TasksSetUrl(string timeline, string listID, string taskSeriesID, string taskID, string url)
+		{
+			Hashtable parameters = new Hashtable();
+			parameters.Add("method", "rtm.tasks.setURL");
+			parameters.Add("timeline", timeline);
+			parameters.Add("list_id", listID);	
+			parameters.Add("taskseries_id", taskSeriesID);
+			parameters.Add("task_id", taskID);
+			parameters.Add("url", url);
+
+			RtmNet.Response response = GetResponse(parameters);
+
+			if( response.Status == ResponseStatus.OK )
+			{
+				return response.List;
+			}
+			else
+			{
+				throw new RtmApiException(response.Error);
+			}
+
+		}
 #endregion
 
 		

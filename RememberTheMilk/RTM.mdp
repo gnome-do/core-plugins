@@ -85,6 +85,7 @@
     <File name="Resources/icons/task-rename.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/task-repeat.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/task-setdue.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/RTMSetUrl.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
