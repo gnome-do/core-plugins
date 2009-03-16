@@ -62,6 +62,7 @@ namespace PidginPlugin
 			string PurpleAccountGetAlias (int account);
 			void PurpleAccountSetEnabled (int account, string ui, int value);
 			string PurpleAccountGetUsername (int account);
+			string PurpleBuddyGetServerAlias(int buddy);
 			
 			#region Pidgin < 2.5.4 compatibility methods
 			
@@ -81,8 +82,10 @@ namespace PidginPlugin
 			string icon;
 
 			proto = proto.ToLower ();
-			if (proto.StartsWith ("prpl-"))
-				proto = proto.Substring ("prpl-".Length);
+			string[] parts = proto.Split ('-');
+			
+			if (parts[0] == "prpl")
+				proto = parts[1];
 			icon = Path.Combine (
 				"/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
 			return File.Exists (icon) ? icon : Pidgin.ChatIcon;
@@ -113,6 +116,24 @@ namespace PidginPlugin
 				} catch { }
 				return connected.ToArray ();
 			}
+		}
+		
+		public static string GetBuddyServerAlias (string name)
+		{
+			IPurpleObject prpl = GetPurpleObject ();
+			int buddy;
+			string alias;
+			
+			if (!InstanceIsRunning)
+				return null;
+			
+			foreach (int account in ConnectedAccounts) {
+				buddy = prpl.PurpleFindBuddy (account, name);
+				if (buddy == 0) continue;
+				alias = prpl.PurpleBuddyGetServerAlias (buddy);
+				return (string.IsNullOrEmpty (alias)) ? null : alias;
+			}
+			return null;
 		}
 
 		public static bool BuddyIsOnline (string name)
@@ -194,13 +215,17 @@ namespace PidginPlugin
 		{
 			get {
 				Process pidof;
-				
+				ProcessStartInfo pidofInfo = new ProcessStartInfo ("pidof", "pidgin");
+				pidofInfo.UseShellExecute = true;
+				pidofInfo.RedirectStandardError = true;
+				pidofInfo.RedirectStandardOutput = true;
+								
 				try {
 					// Use pidof command to look for pidgin process. Exit
 					// status is 0 if at least one matching process is found.
 					// If there's any error, just assume some Purple client
 					// is running.
-					pidof = Process.Start ("pidof", "pidgin");
+					pidof = Process.Start (pidofInfo);
 					pidof.WaitForExit ();
 					return pidof.ExitCode == 0;
 				} catch {

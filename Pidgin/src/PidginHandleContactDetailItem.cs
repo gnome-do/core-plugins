@@ -19,6 +19,7 @@
 //
 
 using System;
+using Mono.Unix;
 
 using Do.Universe;
 
@@ -28,12 +29,17 @@ namespace PidginPlugin
 	class PidginHandleContactDetailItem : Item, IContactDetailItem
 	{
 
-		string proto, handle;
-
-		public PidginHandleContactDetailItem (string proto, string handle)
+		string proto, handle, custom_icon;
+		
+		public PidginHandleContactDetailItem (string proto, string handle) : this (proto, handle, null)
+		{
+		}
+		
+		public PidginHandleContactDetailItem (string proto, string handle, string custom_icon)
 		{
 			this.proto = proto;
 			this.handle = handle;
+			this.custom_icon = custom_icon;
 		}
 
 		public override string Name {
@@ -44,14 +50,19 @@ namespace PidginPlugin
 
 		public override string Description {
 			get {
-				return ReadableProto (proto) + " " + "Handle" ;
+				string online = (Pidgin.BuddyIsOnline (handle)) ? Catalog.GetString ("Online") :
+																  Catalog.GetString ("Offline");
+				return string.Format ("{0} {1} ({2})", 
+				                      ReadableProto (proto), 
+				                      Catalog.GetString ("Handle"),
+				                      online);
 			}
 		}
 
 		public override string Icon {
-			get { return Pidgin.GetProtocolIcon (proto); }
+			get { return custom_icon ?? Pidgin.GetProtocolIcon (proto); }
 		}
-
+		
 		public string Key {
 			get { return proto; }
 		}
@@ -62,11 +73,8 @@ namespace PidginPlugin
 
 		string ReadableProto (string proto)
 		{
-			switch (proto) {
-			case "prpl-aim":		return "AIM";
-			case "prpl-jabber":	return "Jabber";
-			default:						return proto;
-			}
+			string[] parts = proto.Split ('-');
+			return char.ToUpper (parts[1][0]) + parts[1].Substring(1);
 		}
 	}
 }
