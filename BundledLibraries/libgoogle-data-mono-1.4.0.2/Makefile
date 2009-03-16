@@ -53,7 +53,7 @@ samples =	\
 	PhotoTool.exe \
 	HealthTool.exe \
 
-all: $(ALLLIBS) $(samples) $(PKGCONFIG_FILES)
+all: $(ALLLIBS) tests $(samples) $(PKGCONFIG_FILES)
 
 core_sources = $(wildcard src/core/*.cs) $(wildcard version/*.cs)
 extensions_sources = $(wildcard src/extensions/*.cs) $(wildcard version/*.cs)
@@ -128,7 +128,7 @@ uninstall:
 	for i in $(PKGCONFIG_FILES) ; do rm "$(DESTDIR)$(PREFIX)/lib/pkgconfig/$$i" ; done
 
 tests: $(ALLLIBS)
-	$(CSC) $(DEFINES) -target:library -out:unittests.dll $(ALLREFS) -r:nunit.framework.dll $(test_sources)
+	$(CSC) $(DEFINES) -target:library -out:unittests.dll $(ALLREFS) -pkg:nunit-2.4 $(test_sources)
 
 gbase_customertool_sources = samples/gbase/example.cs \
 	samples/gbase/customertool.cs	\
