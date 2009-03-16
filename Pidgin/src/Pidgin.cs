@@ -62,7 +62,9 @@ namespace PidginPlugin
 			string PurpleAccountGetAlias (int account);
 			void PurpleAccountSetEnabled (int account, string ui, int value);
 			string PurpleAccountGetUsername (int account);
-			string PurpleBuddyGetServerAlias(int buddy);
+			string PurpleBuddyGetServerAlias (int buddy);
+			void PurpleConvImSend (int im, string message);
+			int PurpleConversationGetImData (int conv);
 			
 			#region Pidgin < 2.5.4 compatibility methods
 			
@@ -79,15 +81,17 @@ namespace PidginPlugin
 
 		public static string GetProtocolIcon (string proto)
 		{
-			string icon;
+			string icon = null;
 
 			proto = proto.ToLower ();
 			string[] parts = proto.Split ('-');
 			
-			if (parts[0] == "prpl")
-				proto = parts[1];
-			icon = Path.Combine (
-				"/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
+			if (parts.Length > 2) {
+				if (parts[0] == "prpl")
+					proto = parts[1];
+				icon = Path.Combine (
+					"/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
+			}
 			return File.Exists (icon) ? icon : Pidgin.ChatIcon;
 		}
 
@@ -187,8 +191,8 @@ namespace PidginPlugin
 			} catch {
 			}
 		}
-
-		public static void OpenConversationWithBuddy (string name)
+		
+		public static void OpenConversationWithBuddy (string name, string message)
 		{
 			int account, conversation;
 			IPurpleObject prpl;
@@ -204,11 +208,20 @@ namespace PidginPlugin
 				catch {
 					conversation = prpl.PurpleConversationNew ((uint) 1, account, name);
 				}
+				if (!string.IsNullOrEmpty (message)) {
+					int im = prpl.PurpleConversationGetImData (conversation);
+					prpl.PurpleConvImSend (im, message);
+				}
 				prpl.PurpleConversationPresent (conversation);
 			} catch (Exception e) {
 				Log<Pidgin>.Error ("Could not create new Pidgin conversation: {0}", e.Message);
 				Log<Pidgin>.Debug (e.StackTrace);
 			}
+		}
+
+		public static void OpenConversationWithBuddy (string name)
+		{
+			OpenConversationWithBuddy (name, null);
 		}
 
 		public static bool InstanceIsRunning

@@ -63,10 +63,29 @@ namespace PidginPlugin
 			return true;
 		}
 		
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield return typeof (ITextItem); }
+		}
+
+		public override bool ModifierItemsOptional {
+			get { return true; }
+		}
+
+		/*
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		{
+			return items.First () is ITextItem;
+		}
+		*/
+		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Item item = items.First ();
-			string name = null;
+			string name, message;
+			name = message = null;
+			
+			if (modItems.Any ())
+				message = (modItems.First () as ITextItem).Text;
 
 			if (item is ContactItem) {
 				// Just grab the first protocol we see.
@@ -85,9 +104,12 @@ namespace PidginPlugin
 			if (name != null) {
 				Services.Application.RunOnThread (() => {
 					Pidgin.StartIfNeccessary ();
-					Services.Application.RunOnMainThread (() =>
-						Pidgin.OpenConversationWithBuddy (name)
-					);
+					Services.Application.RunOnMainThread (() => {
+						if (!string.IsNullOrEmpty (message))
+							Pidgin.OpenConversationWithBuddy (name, message);
+						else
+							Pidgin.OpenConversationWithBuddy (name);	
+					});
 				});
 			}
 			yield break;

@@ -50,8 +50,10 @@ namespace PidginPlugin
 
 		public override string Description {
 			get {
-				string online = (Pidgin.BuddyIsOnline (handle)) ? Catalog.GetString ("Online") :
-																  Catalog.GetString ("Offline");
+				string online = (Pidgin.BuddyIsOnline (handle)) 
+					? Catalog.GetString ("Online") 
+					: Catalog.GetString ("Offline");
+				
 				return string.Format ("{0} {1} ({2})", 
 				                      ReadableProto (proto), 
 				                      Catalog.GetString ("Handle"),

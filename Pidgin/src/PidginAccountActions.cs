@@ -63,15 +63,15 @@ namespace PidginPlugin
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
+			PidginAccountItem account = items.First () as PidginAccountItem;
+			
 			try {
 				prpl = Pidgin.GetPurpleObject ();
 				try {
-					prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).Id,
-						"gtk-gaim", (int) 1);
+					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (int) 1);
 				}
 				catch {
-					prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).Id,
-						"gtk-gaim", (uint) 1);
+					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (uint) 1);
 				}
 			} catch (Exception e) {
 				Log<PidginEnableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);
@@ -114,7 +114,12 @@ namespace PidginPlugin
 
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", 0);
+				try {
+					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (int) 0);
+				}
+				catch {
+					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (uint) 0);
+				}
 			} catch (Exception e) {
 				Log<PidginDisableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);
 				Log<PidginDisableAccount>.Debug (e.StackTrace);

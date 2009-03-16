@@ -73,9 +73,9 @@ namespace PidginPlugin
 		
 		private PidginHandleContactDetailItem MakeChildren (ContactItem buddy, string proto, IEnumerable<string> icons)
 		{
-			return (icons.Contains (proto+"-icon")) ? 
-					new PidginHandleContactDetailItem (proto, buddy[proto], buddy[proto+"-icon"]) :
-					new PidginHandleContactDetailItem (proto, buddy[proto]);
+			return (icons.Contains (proto+"-icon")) 
+				? new PidginHandleContactDetailItem (proto, buddy[proto], buddy[proto+"-icon"])
+				: new PidginHandleContactDetailItem (proto, buddy[proto]);
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
