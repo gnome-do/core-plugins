@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 using Wnck;
 
@@ -42,9 +43,7 @@ namespace WindowManager
 				yield return "ruby";
 				yield return "padsp";
 				yield return "aoss";
-				yield return "python";
-				yield return "python2.4";
-				yield return "python2.5";
+				yield return "python(\\d.\\d)?";
 			}
 		}
 		
@@ -79,10 +78,8 @@ namespace WindowManager
 		
 		static void BuildRemapDictionary ()
 		{
-			RemapDictionary = new Dictionary<string, string> ();
 			if (!File.Exists (RemapFile)) {
-				RemapDictionary ["banshee.exe"] = "banshee";
-				RemapDictionary ["banshee-1"] = "banshee";
+				RemapDictionary = BuildDefaultRemapDictionary ();
 				
 				StreamWriter writer = null;
 				try {
@@ -102,6 +99,8 @@ namespace WindowManager
 						writer.Dispose ();
 				}
 			} else {
+				RemapDictionary = new Dictionary<string, string> ();
+				
 				StreamReader reader = null;
 				try {
 					reader = new StreamReader (RemapFile);
@@ -130,14 +129,24 @@ namespace WindowManager
 					reader.Close ();
 				} catch {
 					Do.Platform.Log.Error ("Could not read remap file");
-					RemapDictionary = new Dictionary<string, string> ();
-					RemapDictionary ["banshee.exe"] = "banshee";
-					RemapDictionary ["banshee-1"] = "banshee";
+					RemapDictionary = BuildDefaultRemapDictionary ();
 				} finally {
 					if (reader != null)
 						reader.Dispose ();
 				}
 			}
+		}
+		
+		static Dictionary<string, string> BuildDefaultRemapDictionary ()
+		{
+			Dictionary<string, string> remapDict = new Dictionary<string, string> ();
+			remapDict ["banshee.exe"] = "banshee";
+			remapDict ["banshee-1"] = "banshee";
+			remapDict ["azureus"] = "vuze";
+			remapDict ["thunderbird-3.0"] = "thunderbird";
+			remapDict ["thunderbird-bin"] = "thunderbird";
+			
+			return remapDict;
 		}
 		
 		/// <summary>
@@ -241,7 +250,7 @@ namespace WindowManager
 						
 						if (app.Pid == pid || app.Windows.Any (w => w.Pid == pid)) {
 							foreach (Wnck.Window window in app.Windows.Where (win => !win.IsSkipTasklist)) {
-								exec_line = window.ClassGroup.Name;
+								exec_line = window.ClassGroup.ResClass;
 								
 								// Vuze is retarded
 								if (exec_line == "SWT")
@@ -289,9 +298,13 @@ namespace WindowManager
 				if (parts [i].Contains ("/"))
 					parts [i] = parts [i].Split ('/').Last ();
 				
+				Regex regex;
 				foreach (string prefix in BadPrefixes) {
-					if (parts [i] == prefix)
+					regex = new Regex (string.Format ("^{0}$", prefix), RegexOptions.IgnoreCase);
+					if (regex.IsMatch (parts [i])) {
 						parts [i] = null;
+						break;
+					}
 				}
 				
 				if (!string.IsNullOrEmpty (parts [i])) {
