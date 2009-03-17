@@ -31,6 +31,7 @@ namespace PidginPlugin
 
 	public class PidginEnableAccount : Act
 	{
+		const string gtkGaim = "gtk-gaim";
 
 		public override string Name {
 			get { return Catalog.GetString ("Sign on"); }
@@ -68,10 +69,10 @@ namespace PidginPlugin
 			try {
 				prpl = Pidgin.GetPurpleObject ();
 				try {
-					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (int) 1);
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (int) 1);
 				}
 				catch {
-					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (uint) 1);
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (uint) 1);
 				}
 			} catch (Exception e) {
 				Log<PidginEnableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);
@@ -84,6 +85,8 @@ namespace PidginPlugin
 	
 	public class PidginDisableAccount : Act
 	{
+		const string gtkGaim = "gtk-gaim";
+		
 		public override string Name {
 			get { return Catalog.GetString ("Sign off"); }
 		}
@@ -115,10 +118,10 @@ namespace PidginPlugin
 			try {
 				prpl = Pidgin.GetPurpleObject ();
 				try {
-					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (int) 0);
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (int) 0);
 				}
 				catch {
-					prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", (uint) 0);
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (uint) 0);
 				}
 			} catch (Exception e) {
 				Log<PidginDisableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);

@@ -39,37 +39,39 @@ namespace PidginPlugin
 		[Interface ("im.pidgin.purple.PurpleInterface")]
 		public interface IPurpleObject
 		{
-			int [] PurpleAccountsGetAllActive ();
 			int[] PurpleAccountsGetAll ();
+			int [] PurpleAccountsGetAllActive ();
 			bool PurpleBuddyIsOnline (int buddy);
 			int PurpleBuddyGetAccount (int buddy);
-			bool PurpleAccountIsConnected (int account);
-			int PurpleFindBuddy (int account, string name);
-			void PurpleConversationPresent (int conversation);
-			int PurpleAccountsFindConnected (string account, string proto);
-			int PurpleConversationNew (int type, int account, string name);
-			int PurpleSavedstatusNew (string title, int type);
-			void PurpleSavedstatusSetMessage (int type, string message);
-			void PurpleSavedstatusActivate (int status);
-			int [] PurpleSavedstatusesGetAll ();
-			bool PurpleSavedstatusIsTransient (int saved_status);
-			int PurpleSavedstatusGetType (int saved_status);
-			string PurpleSavedstatusGetMessage (int saved_status);
-			string PurpleSavedstatusGetTitle (int saved_status);
-			int PurpleSavedstatusGetCurrent ();
-			int PurpleSavedstatusFind (string title);
-			string PurpleAccountGetProtocolName (int account);
 			string PurpleAccountGetAlias (int account);
-			void PurpleAccountSetEnabled (int account, string ui, int value);
-			string PurpleAccountGetUsername (int account);
+			bool PurpleAccountIsConnected (int account);
 			string PurpleBuddyGetServerAlias (int buddy);
-			void PurpleConvImSend (int im, string message);
+			string PurpleAccountGetUsername (int account);
+			int PurpleFindBuddy (int account, string name);
+			string PurpleAccountGetProtocolName (int account);
+			int PurpleAccountsFindConnected (string account, string proto);
+			void PurpleAccountSetEnabled (int account, string ui, int value);
+
+			int PurpleSavedstatusGetCurrent ();
+			int [] PurpleSavedstatusesGetAll ();
+			int PurpleSavedstatusFind (string title);
+			void PurpleSavedstatusActivate (int status);
+			int PurpleSavedstatusGetType (int saved_status);
+			int PurpleSavedstatusNew (string title, int type);
+			string PurpleSavedstatusGetTitle (int saved_status);
+			bool PurpleSavedstatusIsTransient (int saved_status);
+			string PurpleSavedstatusGetMessage (int saved_status);
+			void PurpleSavedstatusSetMessage (int type, string message);
+			
 			int PurpleConversationGetImData (int conv);
+			void PurpleConvImSend (int im, string message);
+			void PurpleConversationPresent (int conversation);
+			int PurpleConversationNew (int type, int account, string name);
 			
 			#region Pidgin < 2.5.4 compatibility methods
 			
-			int PurpleConversationNew (uint type, int account, string name);
 			int PurpleSavedstatusNew (string title, uint type);
+			int PurpleConversationNew (uint type, int account, string name);
 			void PurpleAccountSetEnabled (int account, string ui, uint value);
 			
 			#endregion
@@ -86,11 +88,10 @@ namespace PidginPlugin
 			proto = proto.ToLower ();
 			string[] parts = proto.Split ('-');
 			
-			if (parts.Length > 2) {
+			if (parts.Length >= 2) {
 				if (parts[0] == "prpl")
 					proto = parts[1];
-				icon = Path.Combine (
-					"/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
+				icon = Path.Combine ("/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
 			}
 			return File.Exists (icon) ? icon : Pidgin.ChatIcon;
 		}
@@ -129,15 +130,15 @@ namespace PidginPlugin
 			string alias;
 			
 			if (!InstanceIsRunning)
-				return null;
+				return "";
 			
 			foreach (int account in ConnectedAccounts) {
 				buddy = prpl.PurpleFindBuddy (account, name);
 				if (buddy == 0) continue;
 				alias = prpl.PurpleBuddyGetServerAlias (buddy);
-				return (string.IsNullOrEmpty (alias)) ? null : alias;
+				return (string.IsNullOrEmpty (alias)) ? "" : alias;
 			}
-			return null;
+			return "";
 		}
 
 		public static bool BuddyIsOnline (string name)
@@ -221,7 +222,7 @@ namespace PidginPlugin
 
 		public static void OpenConversationWithBuddy (string name)
 		{
-			OpenConversationWithBuddy (name, null);
+			OpenConversationWithBuddy (name, "");
 		}
 
 		public static bool InstanceIsRunning

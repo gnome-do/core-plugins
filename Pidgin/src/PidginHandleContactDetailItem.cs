@@ -29,9 +29,9 @@ namespace PidginPlugin
 	class PidginHandleContactDetailItem : Item, IContactDetailItem
 	{
 
-		string proto, handle, custom_icon;
+		string proto, handle, custom_icon, online;
 		
-		public PidginHandleContactDetailItem (string proto, string handle) : this (proto, handle, null)
+		public PidginHandleContactDetailItem (string proto, string handle) : this (proto, handle, Pidgin.GetProtocolIcon (proto))
 		{
 		}
 		
@@ -40,6 +40,7 @@ namespace PidginPlugin
 			this.proto = proto;
 			this.handle = handle;
 			this.custom_icon = custom_icon;
+			this.online = (Pidgin.BuddyIsOnline (handle)) ? Catalog.GetString ("Online") : Catalog.GetString ("Offline");
 		}
 
 		public override string Name {
@@ -50,19 +51,12 @@ namespace PidginPlugin
 
 		public override string Description {
 			get {
-				string online = (Pidgin.BuddyIsOnline (handle)) 
-					? Catalog.GetString ("Online") 
-					: Catalog.GetString ("Offline");
-				
-				return string.Format ("{0} {1} ({2})", 
-				                      ReadableProto (proto), 
-				                      Catalog.GetString ("Handle"),
-				                      online);
+				return string.Format ("{0} {1} ({2})", ReadableProto (proto), Catalog.GetString ("Handle"), online);
 			}
 		}
 
 		public override string Icon {
-			get { return custom_icon ?? Pidgin.GetProtocolIcon (proto); }
+			get { return custom_icon; }
 		}
 		
 		public string Key {
@@ -76,7 +70,7 @@ namespace PidginPlugin
 		string ReadableProto (string proto)
 		{
 			string[] parts = proto.Split ('-');
-			return char.ToUpper (parts[1][0]) + parts[1].Substring(1);
+			return (parts.Length >= 2) ? char.ToUpper (parts[1][0]) + parts[1].Substring(1) : proto; 
 		}
 	}
 }

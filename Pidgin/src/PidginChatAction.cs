@@ -70,45 +70,47 @@ namespace PidginPlugin
 		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
-
-		/*
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return items.First () is ITextItem;
-		}
-		*/
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Item item = items.First ();
-			string name, message;
-			name = message = null;
+			List<string> names = new List<string> ();
+			string message = "";
 			
 			if (modItems.Any ())
 				message = (modItems.First () as ITextItem).Text;
-
-			if (item is ContactItem) {
-				// Just grab the first protocol we see.
-				ContactItem contact = item as ContactItem;
-				foreach (string detail in contact.Details) {
-					if (detail.StartsWith ("prpl-")) {
-						name = contact[detail];
-						// If this buddy is online, break, else keep looking.
-						if (Pidgin.BuddyIsOnline (name)) break;
+			
+			Console.WriteLine (items.Count ());
+			
+			foreach (Item item in items) {
+				if (item is ContactItem) {
+					// Just grab the first protocol we see.
+					ContactItem contact = item as ContactItem;
+					foreach (string detail in contact.Details) {
+						if (detail.StartsWith ("prpl-")) {
+							//if this buddy is online, add and break
+							if (Pidgin.BuddyIsOnline (contact[detail])) {
+								names.Add (contact[detail]);
+								break;
+							}
+						}
 					}
+				} else if (item is PidginHandleContactDetailItem) {
+					names.Add ((item as PidginHandleContactDetailItem).Value);
 				}
-			} else if (item is PidginHandleContactDetailItem) {
-				name = (item as PidginHandleContactDetailItem).Value;
 			}
-
-			if (name != null) {
+	
+			
+			if (names.Count > 0) {
 				Services.Application.RunOnThread (() => {
 					Pidgin.StartIfNeccessary ();
 					Services.Application.RunOnMainThread (() => {
-						if (!string.IsNullOrEmpty (message))
-							Pidgin.OpenConversationWithBuddy (name, message);
-						else
-							Pidgin.OpenConversationWithBuddy (name);	
+						foreach (string name in names) {
+							Console.WriteLine (name);
+							if (!string.IsNullOrEmpty (message))
+								Pidgin.OpenConversationWithBuddy (name, message);
+							else
+								Pidgin.OpenConversationWithBuddy (name);
+						}
 					});
 				});
 			}
