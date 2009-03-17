@@ -16,19 +16,23 @@ bundle_DATA = \
 	$(addprefix $(srcdir)/,$(GOOGLE_LIBS)) \
 	$(BANSHEE_INDEXER_DLL)
 
-EXTRA_DIST= $(GOOGLE_LIBS) gmcs.exe $(gdata_subdir_full)
+EXTRA_DIST= gmcs.exe $(gdata_subdir_full)
 
 # Copy these to the build dir; some things require the dlls to be present
 # during build - particularly mautil.
-all-local:
+all-local: $(GOOGLE_LIBS)
 	mkdir -p $(top_builddir)/build
 	install -m 644 -t $(top_builddir)/build $(bundle_DATA)
 
+dist-hook:
+	chmod -R u+w $(distdir)
+	rm -f $(distdir)/*.dll
+
 clean-local:
-	chmod -R u+w $(srcdir)
-	$(MAKE) -C $(gdata_subdir_full) $(AM_MAKEFLAGS) clean
-	cd $(srcdir) && rm -f *.dll
+	rm -f $(srcdir)/*.dll
+	rm -f $(top_builddir)/build/*.dll
      
 %.dll:
+	chmod -R u+w $(srcdir)
 	$(MAKE) -C $(gdata_subdir_full) $(AM_MAKEFLAGS) $@
-	cp $(gdata_subdir_full)/$@ $(srcdir)
+	mv $(gdata_subdir_full)/*.dll $(srcdir)
