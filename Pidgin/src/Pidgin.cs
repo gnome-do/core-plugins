@@ -130,15 +130,15 @@ namespace PidginPlugin
 			string alias;
 			
 			if (!InstanceIsRunning)
-				return "";
+				return null;
 			
 			foreach (int account in ConnectedAccounts) {
 				buddy = prpl.PurpleFindBuddy (account, name);
 				if (buddy == 0) continue;
 				alias = prpl.PurpleBuddyGetServerAlias (buddy);
-				return (string.IsNullOrEmpty (alias)) ? "" : alias;
+				return (string.IsNullOrEmpty (alias)) ? null : alias;
 			}
-			return "";
+			return null;
 		}
 
 		public static bool BuddyIsOnline (string name)

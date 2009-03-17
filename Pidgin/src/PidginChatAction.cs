@@ -87,10 +87,11 @@ namespace PidginPlugin
 					ContactItem contact = item as ContactItem;
 					foreach (string detail in contact.Details) {
 						if (detail.StartsWith ("prpl-")) {
+							Console.WriteLine ("checking {0} ({1})", contact["name"], contact[detail]);
 							//if this buddy is online, add and break
 							if (Pidgin.BuddyIsOnline (contact[detail])) {
 								names.Add (contact[detail]);
-								break;
+								continue;
 							}
 						}
 					}

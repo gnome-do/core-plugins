@@ -184,7 +184,9 @@ namespace PidginPlugin
 			
 			//in case we don't have an alias, take one of the proto values for the name
 			name = alias ?? protos.Values.FirstOrDefault ();
-
+			
+			Console.WriteLine ("name found: {0}", name);
+			
 			// If crucial details are missing, we can't make a buddy.
 			if (name == null || protos.Values.Count () < 0) return null;
 			
@@ -192,8 +194,8 @@ namespace PidginPlugin
 			buddy = ContactItem.Create (alias ?? name);
 			
 			//remove old pidgin-related keys here
-			foreach (string key in buddy.Details.Where (d => d.Contains ("prpl")).ToArray ())
-				buddy[key] = "";
+			//foreach (string key in buddy.Details.Where (d => d.Contains ("prpl")).ToArray ())
+			//	buddy[key] = "";
 
 			//assign the default buddy icon as the ContactItem's photo
 			if (icons.Keys.Contains ("default"))
