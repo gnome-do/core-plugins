@@ -42,9 +42,7 @@ namespace WindowManager
 				yield return "ruby";
 				yield return "padsp";
 				yield return "aoss";
-				yield return "python";
-				yield return "python2.4";
-				yield return "python2.5";
+				yield return "python(\\d.\\d)?";
 			}
 		}
 		
@@ -299,9 +297,13 @@ namespace WindowManager
 				if (parts [i].Contains ("/"))
 					parts [i] = parts [i].Split ('/').Last ();
 				
+				Regex regex;
 				foreach (string prefix in BadPrefixes) {
-					if (parts [i] == prefix)
+					regex = new Regex (string.Format ("^{0}$", prefix), RegexOptions.IgnoreCase);
+					if (regex.IsMatch (parts [i])) {
 						parts [i] = null;
+						break;
+					}
 				}
 				
 				if (!string.IsNullOrEmpty (parts [i])) {
