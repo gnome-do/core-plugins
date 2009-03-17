@@ -34,5 +34,5 @@ clean-local:
      
 %.dll:
 	chmod -R u+w $(srcdir)
-	$(MAKE) -C $(gdata_subdir_full) $(AM_MAKEFLAGS) $@
+	$(MAKE) -C $(gdata_subdir_full) $(AM_MAKEFLAGS) $(addsuffix .dll, $(notdir $(basename $@)))
 	mv $(gdata_subdir_full)/*.dll $(srcdir)
