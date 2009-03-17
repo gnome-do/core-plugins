@@ -33,7 +33,7 @@ namespace RememberTheMilk
         private string name;
         private DateTime due;
 		private DateTime completed;
-	private string url;
+        private string url;
         private string priority;
         private int has_due_time;
 

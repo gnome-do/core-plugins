@@ -1,4 +1,4 @@
-/* RTMSetDue.cs
+/* RTMSetUrl.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this source distribution.
@@ -35,7 +35,7 @@ namespace RememberTheMilk
 				
 		public override string Description {
 			get { return Catalog.GetString ("Set the URL of a task."); }
-        }
+        	}
 			
 		public override string Icon {
 			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
@@ -55,47 +55,50 @@ namespace RememberTheMilk
 					typeof (ITextItem),
 				};
 			}
-        }
+        	}
         
-        public override bool ModifierItemsOptional {
-            get { return true; }
-        }
+        	public override bool ModifierItemsOptional {
+            		get { return true; }
+        	}
         
-        public override bool SupportsItem (Item item) 
-        {
-            return true;
-        }
+        	public override bool SupportsItem (Item item) {
+            		return true;
+        	}
         
-        public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-        {
+        	public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
+        	{
 			return true;
-        }
+        	}
 		
-        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
-        {
-        	string uri = ((modifierItems.FirstOrDefault () as ITextItem).Text);
-        	Uri url;
+        	public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+        	{
+        		string url = String.Empty;
+ 			Uri uri;
         	
-        	// The URL set to the task may be reset if the entered text is empty.
-        	try {
-        		// Check if it is a valid URL.
-        		url = new System.Uri(uri);
-			uri = url.ToString ();
-        	} catch (System.UriFormatException) {
-        		// It's not - check if not empty.
-        		if (!string.IsNullOrEmpty(uri)) {
-        			// Error in entered URL.
-				Services.Notifications.Notify("Remember The Milk",
-					"Invalid URL provided.");
-				yield break;
+        		if (modifierItems.FirstOrDefault() != null) {
+        			url = ((modifierItems.FirstOrDefault() as ITextItem).Text);
 			}
-		}
+        	
+        		// The URL set to the task may be reset if the entered text is empty.
+        		// Check if it's not empty.
+        		if (!string.IsNullOrEmpty(url)) {
+        			try { 
+        				// Check if the entered text is a valid URL.
+        				uri = new System.Uri(url);
+					url = uri.ToString ();
+        			} catch (System.UriFormatException) {
+        				// Error in entered URL.
+					Services.Notifications.Notify("Remember The Milk",
+						"Invalid URL provided.");
+					yield break;
+				}
+			}
 		
-		Services.Application.RunOnThread (() => {
-			RTM.SetURL ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				(items.First () as RTMTaskItem).Id, uri);
-		});
-		yield break;
-        }
+			Services.Application.RunOnThread (() => {
+				RTM.SetURL ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id, url);
+			});
+			yield break;
+        	}
 	}
 }

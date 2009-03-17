@@ -202,14 +202,24 @@ namespace RememberTheMilk
 							// delete one recurrent task will cause other deleted instances
 							// appear in the taskseries tag, so here we need to check again.
 							if (rtmTask.Deleted == DateTime.MinValue) {
-								tasks [rtmList.ID].Add (new RTMTaskItem (rtmList.ID, rtmTaskSeries.TaskSeriesID,
-								                                         rtmTask.TaskID, rtmTaskSeries.Name,
-								                                         rtmTask.Due, rtmTask.Completed, rtmTask.TaskURL, rtmTask.Priority,
-								                                         rtmTask.HasDueTime));
-								tasks ["All Tasks"].Add (new RTMTaskItem (rtmList.ID, rtmTaskSeries.TaskSeriesID,
-								                                          rtmTask.TaskID, rtmTaskSeries.Name,
-								                                          rtmTask.Due, rtmTask.Completed, rtmTask.TaskURL, rtmTask.Priority,
-								                                          rtmTask.HasDueTime));
+								tasks [rtmList.ID].Add (new RTMTaskItem (rtmList.ID,
+									rtmTaskSeries.TaskSeriesID,
+								        rtmTask.TaskID,
+								        rtmTaskSeries.Name,
+								        rtmTask.Due,
+								        rtmTask.Completed,
+								        rtmTask.TaskURL,
+								        rtmTask.Priority,
+								        rtmTask.HasDueTime));
+								tasks ["All Tasks"].Add (new RTMTaskItem (rtmList.ID,
+								        rtmTaskSeries.TaskSeriesID,
+								        rtmTask.TaskID,
+								        rtmTaskSeries.Name,
+								        rtmTask.Due,
+								        rtmTask.Completed,
+								        rtmTask.TaskURL,
+								        rtmTask.Priority,
+								        rtmTask.HasDueTime));
 							}
                         }
                     }
@@ -352,8 +362,9 @@ namespace RememberTheMilk
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
                                     rtmList.TaskSeriesCollection[0].Name,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].Due, 
-			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].Completed, 
-			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskURL, priority,
+			            rtmList.TaskSeriesCollection[0].TaskCollection[0].Completed, 
+			            rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskURL,
+			            priority,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime);
         }
 
