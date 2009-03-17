@@ -1,5 +1,5 @@
-CSC1=mcs
-CSC=gmcs
+CSC1 ?= mcs
+CSC ?= gmcs
 
 DEFINES=/d:TRACE
 
