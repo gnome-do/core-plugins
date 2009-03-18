@@ -20,6 +20,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Mono.Unix;
 
 using Do.Universe;
@@ -29,77 +30,91 @@ namespace RememberTheMilk
 {
 	public class RTMSetUrl : Act
 	{
-			public override string Name {
-				get { return Catalog.GetString ("Set URL"); }
-			}
+		public override string Name {
+			get { return Catalog.GetString ("Set URL"); }
+		}
 		
-			public override string Description {
-				get { return Catalog.GetString ("Set the URL of a task."); }
+		public override string Description {
+			get { return Catalog.GetString ("Set the URL of a task."); }
         	}
 			
-			public override string Icon {
-				get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
-			}
+		public override string Icon {
+			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
+		}
+
+		// URL regex taken from http://www.osix.net/modules/article/?id=586
+                const string UrlPattern = "^(https?://)"
+			+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //user@
+			+ @"(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP- 199.194.52.184
+			+ "|" // allows either IP or domain
+			+ @"([0-9a-zA-Z_!~*'()-]+\.)*" // tertiary domain(s)- www.
+			+ @"([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]\." // second level domain
+			+ "[a-zA-Z]{2,6})" // first level domain- .com or .museum
+			+ "(:[0-9]{1,4})?" // port number- :80
+			+ "((/?)|" // a slash isn't required if there is no file name
+			+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?) *$";
+
+		public bool CheckValidURL(string url) {
+			Regex url_regex;
+			url_regex = new Regex (UrlPattern, RegexOptions.Compiled);
+			return url_regex.IsMatch (url);
+		}
 		
-			public override IEnumerable<Type> SupportedItemTypes {
-				get {
-					return new Type[] {
-						typeof (RTMTaskItem),
-					};
-				}
+		public override IEnumerable<Type> SupportedItemTypes {
+			get {
+				return new Type[] {
+					typeof (RTMTaskItem),
+				};
 			}
+		}
 		
-			public override IEnumerable<Type> SupportedModifierItemTypes {
-		    	get { 
-					return new Type[] {
-						typeof (ITextItem),
-					};
-				}
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { 
+				return new Type[] {
+					typeof (ITextItem),
+				};
+			}
         	}
         
         	public override bool ModifierItemsOptional {
-            	get { return true; }
+            		get { return true; }
         	}
         
         	public override bool SupportsItem (Item item) {
-            	return true;
+            		return true;
         	}
         
         	public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
         	{
-				return true;
+			return true;
         	}
 		
         	public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         	{
         		string url = String.Empty;
-				Uri uri;
         	
         		if (modifierItems.FirstOrDefault() != null) {
         			url = ((modifierItems.FirstOrDefault() as ITextItem).Text);
-				}
+			}
         	
         		// The URL set to the task may be reset if the entered text is empty.
         		// Check if it's not empty.
         		if (!string.IsNullOrEmpty(url)) {
-        			try { 
-        				// Check if the entered text is a valid URL.
-        				uri = new System.Uri(url);
-					url = uri.ToString ();
-        			} catch (System.UriFormatException) {
+        			// Check if the entered text is a valid URL.
+				if (!CheckValidURL(url)) {
         				// Error in entered URL.
-						Services.Notifications.Notify("Remember The Milk",
-							"Invalid URL provided.");
-						yield break;
-					}
+					Services.Notifications.Notify("Remember The Milk",
+						"Invalid URL provided.");
+					yield break;
 				}
+			}
 		
-				Services.Application.RunOnThread (() => {
-					RTM.SetURL ((items.First () as RTMTaskItem).ListId,
-				            	(items.First () as RTMTaskItem).TaskSeriesId,
-				        	    (items.First () as RTMTaskItem).Id, url);
+			Services.Application.RunOnThread (() => {
+				RTM.SetURL ((items.First () as RTMTaskItem).ListId,
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id, url);
 				});
-				yield break;
+			yield break;
         	}
 	}
 }
