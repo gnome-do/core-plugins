@@ -524,7 +524,7 @@ namespace RememberTheMilk
 		
 			if (!string.IsNullOrEmpty(url)) {
 				ActionRoutine (Catalog.GetString ("Task URL Set"),
-					Catalog.GetString ("The selected task has been assigned an URL."),
+					Catalog.GetString ("The selected task has been assigned a URL."),
 						taskId, listId);
 			} else {
 				ActionRoutine (Catalog.GetString ("Task URL Reset"),
