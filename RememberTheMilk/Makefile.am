@@ -18,6 +18,7 @@ FILES = \
 	src/RTMPriorityItem.cs \
 	src/RTMRenameTask.cs \
 	src/RTMSetDue.cs \
+	src/RTMSetUrl.cs \
 	src/RTMSetPriority.cs \
 	src/RTMSetRecurrence.cs \
 	src/RTMTaskItem.cs \

@@ -518,19 +518,19 @@ namespace RememberTheMilk
         	try {
         		rtm.TasksSetUrl(timeline, listId, taskSeriesId, taskId, url);
         	} catch (RtmException e) {
-			Console.Error.WriteLine (e.Message);
-			return;
-		}
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
 		
-		if (!string.IsNullOrEmpty(url)) {
-			ActionRoutine (Catalog.GetString ("Task URL Set"),
-				Catalog.GetString ("The selected task has been assigned an URL."),
-					taskId, listId);
-		} else {
-			ActionRoutine (Catalog.GetString ("Task URL Reset"),
-				Catalog.GetString ("The URL for the selected task has been reset."),
-					taskId, listId);
-		}
+			if (!string.IsNullOrEmpty(url)) {
+				ActionRoutine (Catalog.GetString ("Task URL Set"),
+					Catalog.GetString ("The selected task has been assigned an URL."),
+						taskId, listId);
+			} else {
+				ActionRoutine (Catalog.GetString ("Task URL Reset"),
+					Catalog.GetString ("The URL for the selected task has been reset."),
+						taskId, listId);
+			}
         }
 		
 		public static void UncompleteTask (string listId, string taskSeriesId, string taskId)

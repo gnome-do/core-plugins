@@ -29,55 +29,55 @@ namespace RememberTheMilk
 {
 	public class RTMSetUrl : Act
 	{
-		public override string Name {
-			get { return Catalog.GetString ("Set URL"); }
-		}		
-				
-		public override string Description {
-			get { return Catalog.GetString ("Set the URL of a task."); }
+			public override string Name {
+				get { return Catalog.GetString ("Set URL"); }
+			}
+		
+			public override string Description {
+				get { return Catalog.GetString ("Set the URL of a task."); }
         	}
 			
-		public override string Icon {
-			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
-		}
-		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (RTMTaskItem),
-				};
+			public override string Icon {
+				get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
 			}
-		}
 		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { 
-				return new Type[] {
-					typeof (ITextItem),
-				};
+			public override IEnumerable<Type> SupportedItemTypes {
+				get {
+					return new Type[] {
+						typeof (RTMTaskItem),
+					};
+				}
 			}
+		
+			public override IEnumerable<Type> SupportedModifierItemTypes {
+		    	get { 
+					return new Type[] {
+						typeof (ITextItem),
+					};
+				}
         	}
         
         	public override bool ModifierItemsOptional {
-            		get { return true; }
+            	get { return true; }
         	}
         
         	public override bool SupportsItem (Item item) {
-            		return true;
+            	return true;
         	}
         
         	public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
         	{
-			return true;
+				return true;
         	}
 		
         	public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         	{
         		string url = String.Empty;
- 			Uri uri;
+				Uri uri;
         	
         		if (modifierItems.FirstOrDefault() != null) {
         			url = ((modifierItems.FirstOrDefault() as ITextItem).Text);
-			}
+				}
         	
         		// The URL set to the task may be reset if the entered text is empty.
         		// Check if it's not empty.
@@ -88,17 +88,18 @@ namespace RememberTheMilk
 					url = uri.ToString ();
         			} catch (System.UriFormatException) {
         				// Error in entered URL.
-					Services.Notifications.Notify("Remember The Milk",
-						"Invalid URL provided.");
-					yield break;
+						Services.Notifications.Notify("Remember The Milk",
+							"Invalid URL provided.");
+						yield break;
+					}
 				}
-			}
 		
-			Services.Application.RunOnThread (() => {
-				RTM.SetURL ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-					(items.First () as RTMTaskItem).Id, url);
-			});
-			yield break;
+				Services.Application.RunOnThread (() => {
+					RTM.SetURL ((items.First () as RTMTaskItem).ListId,
+				            	(items.First () as RTMTaskItem).TaskSeriesId,
+				        	    (items.First () as RTMTaskItem).Id, url);
+				});
+				yield break;
         	}
 	}
 }
