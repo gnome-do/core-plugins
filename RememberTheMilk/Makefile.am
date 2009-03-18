@@ -71,7 +71,8 @@ RESOURCES = \
 	Resources/icons/task-priority-up.png \
 	Resources/icons/task-rename.png \
 	Resources/icons/task-repeat.png \
-	Resources/icons/task-setdue.png
+	Resources/icons/task-setdue.png \
+	Resources/icons/task-seturl.png
 
 REFERENCES = \
 	System \

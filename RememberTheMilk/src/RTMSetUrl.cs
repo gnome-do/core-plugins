@@ -39,7 +39,7 @@ namespace RememberTheMilk
         	}
 			
 		public override string Icon {
-			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
+			get { return "task-seturl.png@" + GetType ().Assembly.FullName; }
 		}
 
 		// URL regex taken from http://www.osix.net/modules/article/?id=586
