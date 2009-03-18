@@ -313,7 +313,7 @@ namespace RememberTheMilk
 		{
 			if (Preferences.ActionNotification) {
 				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification( title, body, 
-				                                                                        "task.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
+				                                                                        "rtm.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
 			}
 			if (taskId != null && listId != null)
 				UniverseRemoveTask (taskId, listId);
@@ -463,8 +463,8 @@ namespace RememberTheMilk
 
             ActionRoutine (Catalog.GetString ("Task Moved"),
 			               Catalog.GetString (String.Format ("The selected task has been moved from"
-			                                                + " Remember The Milk list \"{0}\" to list \"{1}\".",
-			                                                lists [fromListId].Name, lists [toListId].Name)),
+			                                                 + " Remember The Milk list \"{0}\" to list \"{1}\".",
+			                                                 lists [fromListId].Name, lists [toListId].Name)),
 			               taskId, fromListId);
         }
 

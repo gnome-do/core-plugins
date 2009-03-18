@@ -30,6 +30,18 @@ namespace RememberTheMilk
 {
 	public class RTMSetUrl : Act
 	{
+		// URL regex taken from http://www.osix.net/modules/article/?id=586
+		const string UrlPattern = "^(https?://)"
+			+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //user@
+			+ @"(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP- 199.194.52.184
+			+ "|" // allows either IP or domain
+			+ @"([0-9a-zA-Z_!~*'()-]+\.)*" // tertiary domain(s)- www.
+			+ @"([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]\." // second level domain
+			+ "[a-zA-Z]{2,6})" // first level domain- .com or .museum
+			+ "(:[0-9]{1,4})?" // port number- :80
+			+ "((/?)|" // a slash isn't required if there is no file name
+			+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?) *$";
+		
 		public override string Name {
 			get { return Catalog.GetString ("Set URL"); }
 		}
@@ -41,18 +53,6 @@ namespace RememberTheMilk
 		public override string Icon {
 			get { return "task-seturl.png@" + GetType ().Assembly.FullName; }
 		}
-
-		// URL regex taken from http://www.osix.net/modules/article/?id=586
-                const string UrlPattern = "^(https?://)"
-			+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //user@
-			+ @"(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP- 199.194.52.184
-			+ "|" // allows either IP or domain
-			+ @"([0-9a-zA-Z_!~*'()-]+\.)*" // tertiary domain(s)- www.
-			+ @"([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]\." // second level domain
-			+ "[a-zA-Z]{2,6})" // first level domain- .com or .museum
-			+ "(:[0-9]{1,4})?" // port number- :80
-			+ "((/?)|" // a slash isn't required if there is no file name
-			+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?) *$";
 
 		public bool CheckValidURL(string url) {
 			Regex url_regex;
@@ -74,47 +74,47 @@ namespace RememberTheMilk
 					typeof (ITextItem),
 				};
 			}
-        	}
+		}
         
-        	public override bool ModifierItemsOptional {
-            		get { return true; }
-        	}
-        
-        	public override bool SupportsItem (Item item) {
-            		return true;
-        	}
-        
-        	public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-        	{
-			return true;
-        	}
+		public override bool ModifierItemsOptional {
+			get { return true; }
+		}
 		
-        	public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
-        	{
-        		string url = String.Empty;
-        	
-        		if (modifierItems.FirstOrDefault() != null) {
-        			url = ((modifierItems.FirstOrDefault() as ITextItem).Text);
+		public override bool SupportsItem (Item item) {
+			return true;
+		}
+		
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
+		{
+			return true;
+		}
+		
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+		{
+			string url = String.Empty;
+			
+			if (modifierItems.FirstOrDefault() != null) {
+				url = ((modifierItems.FirstOrDefault() as ITextItem).Text);
 			}
-        	
-        		// The URL set to the task may be reset if the entered text is empty.
-        		// Check if it's not empty.
-        		if (!string.IsNullOrEmpty(url)) {
-        			// Check if the entered text is a valid URL.
+			
+			// The URL set to the task may be reset if the entered text is empty.
+			// Check if it's not empty.
+			if (!string.IsNullOrEmpty(url)) {
+				// Check if the entered text is a valid URL.
 				if (!CheckValidURL(url)) {
-        				// Error in entered URL.
+					// Error in entered URL.
 					Services.Notifications.Notify("Remember The Milk",
-						"Invalid URL provided.");
+					                              "Invalid URL provided.");
 					yield break;
 				}
 			}
-		
+			
 			Services.Application.RunOnThread (() => {
 				RTM.SetURL ((items.First () as RTMTaskItem).ListId,
-					(items.First () as RTMTaskItem).TaskSeriesId,
-					(items.First () as RTMTaskItem).Id, url);
-				});
+				            (items.First () as RTMTaskItem).TaskSeriesId,
+				            (items.First () as RTMTaskItem).Id, url);
+			});
 			yield break;
-        	}
+		}
 	}
 }
