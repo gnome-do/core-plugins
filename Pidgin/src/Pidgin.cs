@@ -86,11 +86,7 @@ namespace PidginPlugin
 		
 		public static string PurpleUserDir
 		{
-			get 
-			{
-				IPurpleObject prpl = GetPurpleObject ();
-				return prpl.PurpleUserDir ();
-			}
+			get { return (GetPurpleObject () as IPurpleObject).PurpleUserDir (); }
 		}
 
 		public static string GetProtocolIcon (string proto)

@@ -183,9 +183,7 @@ namespace PidginPlugin
 			
 			//in case we don't have an alias, take one of the proto values for the name
 			name = alias ?? protos.Values.FirstOrDefault ();
-			
-			Console.WriteLine ("name found: {0}", name);
-			
+
 			// If crucial details are missing, we can't make a buddy.
 			if (name == null || protos.Values.Count () < 0) return null;
 			
