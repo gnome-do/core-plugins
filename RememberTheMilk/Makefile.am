@@ -73,6 +73,7 @@ RESOURCES = \
 	Resources/icons/task-rename.png \
 	Resources/icons/task-repeat.png \
 	Resources/icons/task-setdue.png \
+	Resources/icons/task-setestimate.png \
 	Resources/icons/task-seturl.png
 
 REFERENCES = \

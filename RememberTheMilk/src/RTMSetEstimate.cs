@@ -108,7 +108,7 @@ namespace RememberTheMilk
 			RTM.SetEstimateTime ((items.First () as RTMTaskItem).ListId,
 				(items.First () as RTMTaskItem).TaskSeriesId,
 				(items.First () as RTMTaskItem).Id,
-				(modifierItems.FirstOrDefault () as ITextItem).Text);
+				estimatedTime);
 			});
 			yield break;
 		}
