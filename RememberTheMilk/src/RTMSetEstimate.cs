@@ -40,6 +40,24 @@ namespace RememberTheMilk
 		public override string Icon {
 			get { return "task-setestimate.png@" + GetType ().Assembly.FullName; }
 		}
+				
+		public bool CheckValidTime(string timeEntered) {
+			// These are the valid time values specified by the RTM API.
+			// See if the user has entered one of them.
+			string[] times = {"minute", "minutes", "hour",
+						"hours", "day", "days"};
+			bool hasValidTime = false;
+			
+			foreach(string timeValue in times)
+			{
+				if(timeEntered.IndexOf(timeValue) != -1) {
+					hasValidTime = true;
+					break;
+				}
+			}
+			
+			return hasValidTime;
+		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
@@ -56,7 +74,7 @@ namespace RememberTheMilk
 				};
 			}
 		}
-        
+
 		public override bool ModifierItemsOptional {
 			get { return false; }
 		}
@@ -73,6 +91,19 @@ namespace RememberTheMilk
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
+			string estimatedTime = String.Empty;
+			
+			if (modifierItems.FirstOrDefault() != null)
+				estimatedTime = ((modifierItems.FirstOrDefault() as ITextItem).Text);
+			
+			if (!string.IsNullOrEmpty(estimatedTime)) {
+				if (!CheckValidTime(estimatedTime)) {
+					Services.Notifications.Notify("Remember The Milk",
+						"Invalid estimated time provided.");
+					yield break;
+				}
+			}
+			
 			Services.Application.RunOnThread (() => {
 			RTM.SetEstimateTime ((items.First () as RTMTaskItem).ListId,
 				(items.First () as RTMTaskItem).TaskSeriesId,
