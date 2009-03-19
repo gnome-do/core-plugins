@@ -47,7 +47,7 @@ namespace RememberTheMilk
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Set the URL of a task."); }
+			get { return Catalog.GetString ("Set or reset the URL of a task."); }
         	}
 			
 		public override string Icon {

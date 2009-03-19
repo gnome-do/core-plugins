@@ -13,7 +13,7 @@
     </Runtime>
 
     <Dependencies>
-        <Addin id="Universe" version="1.0" />
+        <Addin id="Universe" version="1.1" />
     </Dependencies>
 
     <!-- Extensions included in this assembly -->
@@ -27,6 +27,7 @@
         <Action type="RememberTheMilk.RTMCompleteTask" />
         <Action type="RememberTheMilk.RTMSetPriority" />
         <Action type="RememberTheMilk.RTMSetDue" />
+        <Action type="RememberTheMilk.RTMSetEstimate" />
         <Action type="RememberTheMilk.RTMSetUrl" />
         <Action type="RememberTheMilk.RTMMoveTask" />
         <Action type="RememberTheMilk.RTMRenameTask" />

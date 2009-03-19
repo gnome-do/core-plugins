@@ -532,6 +532,27 @@ namespace RememberTheMilk
 						taskId, listId);
 			}
         }
+        
+        public static void SetEstimateTime(string listId, string taskSeriesId, string taskId, string estimateTime)
+        {
+        	try {
+        		rtm.TasksSetEstimateTime(timeline, listId, taskSeriesId,
+        			taskId, estimateTime);
+        	} catch (RtmException e) {
+			Console.Error.WriteLine (e.Message);
+			return;
+		}
+		
+		if (!string.IsNullOrEmpty(estimateTime)) {
+			ActionRoutine (Catalog.GetString ("Task Estimated Time Set"),
+				Catalog.GetString ("The selected task has been assigned an estimated time."),
+				taskId, listId);
+		} else {
+			ActionRoutine (Catalog.GetString ("Task Estimated Time Reset"),
+				Catalog.GetString ("The estimated time for the selected task has been reset."),
+				taskId, listId);
+		}
+        }
 		
 		public static void UncompleteTask (string listId, string taskSeriesId, string taskId)
 		{

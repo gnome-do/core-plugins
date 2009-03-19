@@ -28,7 +28,9 @@
     <File name="src/RTMPriorityItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTMRenameTask.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTMSetDue.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMSetEstimate.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTMSetPriority.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMSetUrl.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RTMTaskItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RtmNet" subtype="Directory" buildaction="Compile" />
     <File name="src/RtmNet/ApiKeyRequiredException.cs" subtype="Code" buildaction="Compile" />
@@ -86,7 +88,6 @@
     <File name="Resources/icons/task-repeat.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/task-setdue.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/task-seturl.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/RTMSetUrl.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
