@@ -40,9 +40,8 @@ namespace PidginPlugin
 		
 		static PidginContactItemSource ()
 		{
-			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			BuddyListFile = Path.Combine (home, ".purple/blist.xml");
-			BuddyIconDirectory = Path.Combine (home, ".purple/icons");
+			BuddyListFile = Path.Combine (Pidgin.PurpleUserDir, "blist.xml");
+			BuddyIconDirectory = Path.Combine (Pidgin.PurpleUserDir, "icons");
 		}
 		
 		List<Item> buddies;
@@ -194,8 +193,8 @@ namespace PidginPlugin
 			buddy = ContactItem.Create (alias ?? name);
 			
 			//remove old pidgin-related keys here
-			//foreach (string key in buddy.Details.Where (d => d.Contains ("prpl")).ToArray ())
-			//	buddy[key] = "";
+			foreach (string key in buddy.Details.Where (d => d.Contains ("prpl")).ToArray ())
+				buddy[key] = "";
 
 			//assign the default buddy icon as the ContactItem's photo
 			if (icons.Keys.Contains ("default"))

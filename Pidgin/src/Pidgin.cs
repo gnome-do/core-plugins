@@ -39,6 +39,8 @@ namespace PidginPlugin
 		[Interface ("im.pidgin.purple.PurpleInterface")]
 		public interface IPurpleObject
 		{
+			string PurpleUserDir ();
+			
 			int[] PurpleAccountsGetAll ();
 			int [] PurpleAccountsGetAllActive ();
 			bool PurpleBuddyIsOnline (int buddy);
@@ -77,8 +79,18 @@ namespace PidginPlugin
 			#endregion
 		}
 
-		public static string ChatIcon {
+		public static string ChatIcon 
+		{
 			get { return "internet-group-chat.svg@" + typeof (Pidgin).Assembly.FullName; }
+		}
+		
+		public static string PurpleUserDir
+		{
+			get 
+			{
+				IPurpleObject prpl = GetPurpleObject ();
+				return prpl.PurpleUserDir ();
+			}
 		}
 
 		public static string GetProtocolIcon (string proto)
@@ -174,7 +186,7 @@ namespace PidginPlugin
 			Away = 5,
 		}
 		
-		public static void PurpleSetAvailabilityStatus  (uint kind, string message)
+		public static void PurpleSetAvailabilityStatus  (int kind, string message)
 		{
 			IPurpleObject prpl;
 			

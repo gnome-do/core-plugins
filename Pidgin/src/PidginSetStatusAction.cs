@@ -97,7 +97,7 @@ namespace PidginPlugin
 						status = (int) (modItems.First () as PidginStatusTypeItem).Status;
 					else
 						status = prpl.PurpleSavedstatusGetType (prpl.PurpleSavedstatusGetCurrent ());
-					Pidgin.PurpleSetAvailabilityStatus ((uint) status, message);
+					Pidgin.PurpleSetAvailabilityStatus (status, message);
 				}
 			} catch (Exception e) {
 				Log<PidginSetStatusAction>.Error ("Could not set Pidgin status: {0}", e.Message);
