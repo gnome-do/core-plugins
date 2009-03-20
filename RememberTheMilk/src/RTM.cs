@@ -328,6 +328,15 @@ namespace RememberTheMilk
 			}
 			UpdateLists ();
 		}
+		
+		private static void ActionRoutine (string title, string body)
+		{
+			if (Preferences.ActionNotification) {
+				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification( title, body, 
+				                                                                        "rtm.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
+			}
+			UpdateLists ();
+		}
 
         public static RTMTaskItem NewTask (string listId, string taskData)
         {
@@ -375,6 +384,20 @@ namespace RememberTheMilk
 			            rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskURL,
 			            priority,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime);
+        }
+        
+        public static void NewList(string newListName)
+        {
+        	try {
+        		rtm.ListsNew(timeline, newListName);
+        	} catch (RtmException e) {
+			Console.Error.WriteLine (e.Message);
+			return;
+		}
+		
+		ActionRoutine (Catalog.GetString("New List Created"),
+			Catalog.GetString(String.Format ("A new task"
+				+ " list named \"{0}\" has been created.", newListName)));
         }
 
         public static void DeleteTask (string listId, string taskSeriesId, string taskId)
