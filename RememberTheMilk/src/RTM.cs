@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Mono.Unix;
@@ -150,6 +151,23 @@ namespace RememberTheMilk
         {
             return tasks [listId];
         }
+		
+		public static List<Item> AttributesForTask (RTMTaskItem task)
+		{
+			List<Item> attribute_list = new List<Item> ();
+			
+			attribute_list.Add (new RTMTaskAttributeItem ("Name", task.Name, task.Url));
+			if (task.Due != DateTime.MinValue)
+				attribute_list.Add (new RTMTaskAttributeItem ("Due", 
+				                                              task.Due.ToString ((task.HasDueTime != 0) ? "g" : "d"), 
+				                                              task.Url));
+			if (!String.IsNullOrEmpty (task.TaskUrl))
+				attribute_list.Add (new RTMTaskAttributeItem ("URL", task.TaskUrl, task.TaskUrl));
+			if (!String.IsNullOrEmpty (task.Estimate))
+				attribute_list.Add (new RTMTaskAttributeItem ("Time Estimate", task.Estimate, task.Url));
+			 
+			return attribute_list;
+		}
 
         public static string ListNameForList (string listId)
         {
@@ -209,25 +227,27 @@ namespace RememberTheMilk
 							// appear in the taskseries tag, so here we need to check again.
 							if (rtmTask.Deleted == DateTime.MinValue) {
 								tasks [rtmList.ID].Add (new RTMTaskItem (rtmList.ID,
-									rtmTaskSeries.TaskSeriesID,
-								        rtmTask.TaskID,
-								        rtmTaskSeries.Name,
-								        rtmTask.Due,
-								        rtmTask.Completed,
-								        rtmTask.TaskURL,
-								        rtmTask.Priority,
-								        rtmTask.HasDueTime));
+								                                         rtmTaskSeries.TaskSeriesID,
+								                                         rtmTask.TaskID,
+								                                         rtmTaskSeries.Name,
+								                                         rtmTask.Due,
+								                                         rtmTask.Completed,
+								                                         rtmTaskSeries.TaskURL,
+								                                         rtmTask.Priority,
+								                                         rtmTask.HasDueTime,
+								                                         rtmTask.Estimate));
 								tasks ["All Tasks"].Add (new RTMTaskItem (rtmList.ID,
-								        rtmTaskSeries.TaskSeriesID,
-								        rtmTask.TaskID,
-								        rtmTaskSeries.Name,
-								        rtmTask.Due,
-								        rtmTask.Completed,
-								        rtmTask.TaskURL,
-								        rtmTask.Priority,
-								        rtmTask.HasDueTime));
+								                                          rtmTaskSeries.TaskSeriesID,
+								                                          rtmTask.TaskID,
+								                                          rtmTaskSeries.Name,
+								                                          rtmTask.Due,
+								                                          rtmTask.Completed,
+								                                          rtmTaskSeries.TaskURL,
+								                                          rtmTask.Priority,
+								                                          rtmTask.HasDueTime,
+								                                          rtmTask.Estimate));
 							}
-                        }
+						}
                     }
                 }
             }
@@ -365,13 +385,14 @@ namespace RememberTheMilk
 
             UpdateTasks ();
             return new RTMTaskItem (rtmList.ID, rtmList.TaskSeriesCollection[0].TaskSeriesID,
-                                    rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
-                                    rtmList.TaskSeriesCollection[0].Name,
-                                    rtmList.TaskSeriesCollection[0].TaskCollection[0].Due, 
-			            rtmList.TaskSeriesCollection[0].TaskCollection[0].Completed, 
-			            rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskURL,
-			            priority,
-                                    rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime);
+			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
+			                        rtmList.TaskSeriesCollection[0].Name,
+			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].Due, 
+			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].Completed, 
+			                        rtmList.TaskSeriesCollection[0].TaskURL,
+			                        priority,
+			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime,
+			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].Estimate);
         }
 
         public static void DeleteTask (string listId, string taskSeriesId, string taskId)
@@ -530,12 +551,12 @@ namespace RememberTheMilk
 		
 			if (!string.IsNullOrEmpty(url)) {
 				ActionRoutine (Catalog.GetString ("Task URL Set"),
-					Catalog.GetString ("The selected task has been assigned a URL."),
-						taskId, listId);
+				               Catalog.GetString ("The selected task has been assigned a URL."),
+				               taskId, listId);
 			} else {
 				ActionRoutine (Catalog.GetString ("Task URL Reset"),
-					Catalog.GetString ("The URL for the selected task has been reset."),
-						taskId, listId);
+				               Catalog.GetString ("The URL for the selected task has been reset."),
+				               taskId, listId);
 			}
         }
         
@@ -545,20 +566,20 @@ namespace RememberTheMilk
         		rtm.TasksSetEstimateTime(timeline, listId, taskSeriesId,
         			taskId, estimateTime);
         	} catch (RtmException e) {
-			Console.Error.WriteLine (e.Message);
-			return;
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
+			
+			if (!string.IsNullOrEmpty(estimateTime)) {
+				ActionRoutine (Catalog.GetString ("Task Estimated Time Set"),
+				               Catalog.GetString ("The selected task has been assigned an estimated time."),
+				               taskId, listId);
+			} else {
+				ActionRoutine (Catalog.GetString ("Task Estimated Time Reset"),
+				               Catalog.GetString ("The estimated time for the selected task has been reset."),
+				               taskId, listId);
+			}
 		}
-		
-		if (!string.IsNullOrEmpty(estimateTime)) {
-			ActionRoutine (Catalog.GetString ("Task Estimated Time Set"),
-				Catalog.GetString ("The selected task has been assigned an estimated time."),
-				taskId, listId);
-		} else {
-			ActionRoutine (Catalog.GetString ("Task Estimated Time Reset"),
-				Catalog.GetString ("The estimated time for the selected task has been reset."),
-				taskId, listId);
-		}
-        }
 		
 		public static void UncompleteTask (string listId, string taskSeriesId, string taskId)
 		{

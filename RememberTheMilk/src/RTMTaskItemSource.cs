@@ -56,7 +56,7 @@ namespace RememberTheMilk
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			return null; //RTM.TasksForList ((parent as RTMListItem).Id);
+			return RTM.AttributesForTask ((parent as RTMTaskItem));
 		}
 
 		public override void UpdateItems ()

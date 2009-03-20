@@ -26,15 +26,19 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	
-	public class RTMTaskAttributeItem : Item
+	public class RTMTaskAttributeItem : Item, IUrlItem
 	{
 		string name;
 		string description;
+		string icon;
+		string url;
 		
-		public RTMTaskAttributeItem(string name, string description)
+		public RTMTaskAttributeItem(string name, string description, string url)
 		{
 			this.name = name;
 			this.description = description;
+			this.url = url;
+			this.icon = "rtm.png@" + GetType ().Assembly.FullName; 
 		}
 		
 		public override string Name {
@@ -46,7 +50,11 @@ namespace RememberTheMilk
 		}
 		
 		public override string Icon {
-			get { return "rtm.png@" + GetType ().Assembly.FullName; }
+			get { return icon; }
+		}
+		
+		public string Url {
+			get { return url; }
 		}
 	}
 }

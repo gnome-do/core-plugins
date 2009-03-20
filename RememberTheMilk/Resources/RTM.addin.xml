@@ -4,8 +4,8 @@
     version="1.1"
     name="Remember The Milk"
     description="Manage tasks with Remember The Milk."
-    author="Peng Deng"
-		category="Community"
+    author="Peng Deng, Jonathan Davies"
+	category="Community"
     >
 
     <Runtime>
@@ -19,6 +19,7 @@
     <!-- Extensions included in this assembly -->
     <Extension path="/Do/ItemSource">
         <ItemSource type="RememberTheMilk.RTMListItemSource" />
+        <ItemSource type="RememberTheMilk.RTMTaskItemSource" />
     </Extension>
 
     <Extension path="/Do/Action">

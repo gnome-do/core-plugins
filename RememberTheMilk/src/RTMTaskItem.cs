@@ -33,17 +33,19 @@ namespace RememberTheMilk
         private string name;
         private DateTime due;
 		private DateTime completed;
-        private string url;
+        private string task_url;
         private string priority;
         private int has_due_time;
+		private string estimate;
 
         public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name) :
-            this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0)
+            this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "")
         {
         }
 
         public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name, 
-		                    DateTime due, DateTime completed, string url, string priority, int hasDueTime)
+		                    DateTime due, DateTime completed, string taskUrl, 
+		                    string priority, int hasDueTime, string estimate)
         {
             this.list_id = listId;
             this.taskseries_id = taskSeriesId;
@@ -51,9 +53,10 @@ namespace RememberTheMilk
             this.name = name;
             this.due = due;
 			this.completed = completed;
-	    this.url = url;
+			this.task_url = taskUrl;
             this.priority = priority;
             this.has_due_time = hasDueTime;
+			this.estimate = estimate;
         }
 
         public override string Name { get { return name; } }
@@ -128,8 +131,8 @@ namespace RememberTheMilk
             get { return taskseries_id; }
         }
         
-        public string TaskURL {
-        	get { return url; }
+        public string TaskUrl {
+        	get { return task_url; }
         }
 
         public DateTime Due {
@@ -142,6 +145,10 @@ namespace RememberTheMilk
 		
 		public int HasDueTime {
 			get { return has_due_time; }
+		}
+		
+		public string Estimate {
+			get { return estimate; }
 		}
     }
 }

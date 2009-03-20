@@ -93,7 +93,11 @@ namespace RtmNet
 
 		/// <remarks/>
 		[XmlElement("notes", Form=XmlSchemaForm.Unqualified)]
-		public Notes Notes;		
+		public Notes Notes;
+		
+		/// <remarks/>
+		[XmlAttribute("url", Form=XmlSchemaForm.Unqualified)]
+		public string TaskURL;   
 	}
 
 
@@ -228,9 +232,5 @@ namespace RtmNet
 		/// <remarks/>
 		[XmlAttribute("estimate", Form=XmlSchemaForm.Unqualified)]
 		public string Estimate;
-		
-		/// <remarks/>
-		[XmlAttribute("url", Form=XmlSchemaForm.Unqualified)]
-		public string TaskURL;   
 	}
 }

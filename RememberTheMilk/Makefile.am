@@ -22,7 +22,9 @@ FILES = \
 	src/RTMSetUrl.cs \
 	src/RTMSetPriority.cs \
 	src/RTMSetRecurrence.cs \
+	src/RTMTaskAttributeItem.cs \
 	src/RTMTaskItem.cs \
+	src/RTMTaskItemSource.cs \
 	src/RTMUncompleteTask.cs \
 	src/RtmNet/ApiKeyRequiredException.cs \
 	src/RtmNet/Auth.cs \
