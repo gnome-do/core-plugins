@@ -4,13 +4,13 @@
       <Output directory="bin/Debug" assemblyKeyFile="." assembly="WindowManager" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" win32Icon="." ctype="CSharpCompilerParameters" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assembly="WindowManager" />
       <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" win32Icon="." ctype="CSharpCompilerParameters" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
@@ -23,8 +23,6 @@
     <File name="src/WindowListItems.cs" subtype="Code" buildaction="Compile" />
     <File name="src/GenericWindowItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/ScreenItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Util.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/WindowControl.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/WindowManager.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
@@ -39,4 +37,5 @@
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </References>
+  <LanguageParameters ApplicationIcon="." ctype="CSharpProjectParameters" />
 </Project>

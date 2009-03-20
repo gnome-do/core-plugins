@@ -27,6 +27,7 @@ using System.Diagnostics;
 using System.Threading;
 
 using Do.Universe;
+using Do.Interface.Wink;
 
 using Wnck;
 using Mono.Unix;
@@ -138,7 +139,7 @@ namespace WindowManager
 			string application = (item as IApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
-			return WindowManager.Util.GetApplicationList (application).Any ();
+			return WindowUtils.GetApplicationList (application).Any ();
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -163,7 +164,7 @@ namespace WindowManager
 			} else {
 				if (items.First () is IApplicationItem) {
 					List<Window> windows = new List<Window> ();
-					foreach (Wnck.Application app in WindowManager.Util.GetApplicationList ((items.First () as IApplicationItem).Exec))
+					foreach (Wnck.Application app in WindowUtils.GetApplicationList ((items.First () as IApplicationItem).Exec))
 						windows.AddRange (app.Windows);
 					ToggleGroup (windows);
 				} else if (items.First () is GenericWindowItem) {
@@ -262,7 +263,7 @@ namespace WindowManager
 			} else {
 				if (items.First () is IApplicationItem) {
 					string application = (items.First () as IApplicationItem).Exec;
-					List<Application> apps = WindowManager.Util.GetApplicationList (application);
+					List<Application> apps = WindowUtils.GetApplicationList (application);
 					
 					WindowControl.CloseWindows (apps.SelectMany (app => app.Windows));
 					
