@@ -58,7 +58,10 @@ namespace PidginPlugin
 		}
 
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (ITextItem); }
+			get { 
+				yield return typeof (ITextItem); 
+				yield return typeof (PidginStatusTypeItem);
+			}
 		}
 
 		public override bool ModifierItemsOptional {
@@ -67,7 +70,11 @@ namespace PidginPlugin
 
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			return items.First () is PidginStatusTypeItem;
+			if (items.First () is PidginStatusTypeItem && modItem is ITextItem)
+				return true;
+			if (items.First () is ITextItem && modItem is PidginStatusTypeItem)
+				return true;
+			return false;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -86,7 +93,10 @@ namespace PidginPlugin
 						message = (modItems.First () as ITextItem).Text;
 					Pidgin.PurpleSetAvailabilityStatus (status, message);
 				} else if (items.First () is ITextItem) {
-					status = prpl.PurpleSavedstatusGetType (prpl.PurpleSavedstatusGetCurrent ());
+					if (modItems.Any ())
+						status = (modItems.First () as PidginStatusTypeItem).Status;
+					else
+						status = prpl.PurpleSavedstatusGetType (prpl.PurpleSavedstatusGetCurrent ());
 					message = (items.First () as ITextItem).Text;
 					Pidgin.PurpleSetAvailabilityStatus (status, message);
 				}
