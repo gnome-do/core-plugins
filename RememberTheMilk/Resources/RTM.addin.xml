@@ -24,13 +24,16 @@
     </Extension>
 
     <Extension path="/Do/Action">
+        <Action type="RememberTheMilk.RTMNewList" />
         <Action type="RememberTheMilk.RTMNewTask" />
+        <Action type="RememberTheMilk.RTMDeleteList" />
         <Action type="RememberTheMilk.RTMDeleteTask" />
         <Action type="RememberTheMilk.RTMCompleteTask" />
         <Action type="RememberTheMilk.RTMSetPriority" />
         <Action type="RememberTheMilk.RTMSetDue" />
         <Action type="RememberTheMilk.RTMSetEstimate" />
         <Action type="RememberTheMilk.RTMSetUrl" />
+        <Action type="RememberTheMilk.RTMRenameList" />
         <Action type="RememberTheMilk.RTMMoveTask" />
         <Action type="RememberTheMilk.RTMRenameTask" />
         <Action type="RememberTheMilk.RTMPostponeTask" />

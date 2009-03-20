@@ -8,14 +8,17 @@ FILES = \
 	src/Configuration.cs \
 	src/RTM.cs \
 	src/RTMCompleteTask.cs \
+	src/RTMDeleteList.cs \
 	src/RTMDeleteTask.cs \
 	src/RTMListItem.cs \
 	src/RTMListItemSource.cs \
 	src/RTMMoveTask.cs \
+	src/RTMNewList.cs \
 	src/RTMNewTask.cs \
 	src/RTMPostponeTask.cs \
 	src/RTMPreferences.cs \
 	src/RTMPriorityItem.cs \
+	src/RTMRenameList.cs \
 	src/RTMRenameTask.cs \
 	src/RTMSetDue.cs \
 	src/RTMSetEstimate.cs \
@@ -56,6 +59,9 @@ FILES = \
 RESOURCES = \
 	Resources/RTM.addin.xml \
 	Resources/icons/rtm.png \
+	Resources/icons/list-add.png \
+	Resources/icons/list-delete.png \
+	Resources/icons/list-rename.png \
 	Resources/icons/task-add.png \
 	Resources/icons/task-complete.png \
 	Resources/icons/task-delete.png \
