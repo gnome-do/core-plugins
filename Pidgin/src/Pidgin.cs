@@ -39,8 +39,6 @@ namespace PidginPlugin
 		[Interface ("im.pidgin.purple.PurpleInterface")]
 		public interface IPurpleObject
 		{
-			string PurpleUserDir ();
-			
 			int[] PurpleAccountsGetAll ();
 			int [] PurpleAccountsGetAllActive ();
 			bool PurpleBuddyIsOnline (int buddy);
@@ -82,11 +80,6 @@ namespace PidginPlugin
 		public static string ChatIcon 
 		{
 			get { return "internet-group-chat.svg@" + typeof (Pidgin).Assembly.FullName; }
-		}
-		
-		public static string PurpleUserDir
-		{
-			get { return (GetPurpleObject () as IPurpleObject).PurpleUserDir (); }
 		}
 
 		public static string GetProtocolIcon (string proto)
@@ -195,11 +188,11 @@ namespace PidginPlugin
 				catch {
 					status = prpl.PurpleSavedstatusNew ("", (uint) kind);
 				}
-				Console.WriteLine ("in here, message: {0}", message);
 				prpl.PurpleSavedstatusSetMessage (status, message);
 				prpl.PurpleSavedstatusActivate (status);
 			} catch (Exception e) {
-				Console.WriteLine (e.ToString ());
+				Log<Pidgin>.Error ("Could set Pidgin status: {0}", e.Message);
+				Log<Pidgin>.Debug (e.StackTrace);
 			}
 		}
 		
@@ -240,7 +233,7 @@ namespace PidginPlugin
 			get {
 				Process pidof;
 				ProcessStartInfo pidofInfo = new ProcessStartInfo ("pidof", "pidgin");
-				pidofInfo.UseShellExecute = true;
+				pidofInfo.UseShellExecute = false;
 				pidofInfo.RedirectStandardError = true;
 				pidofInfo.RedirectStandardOutput = true;
 								
