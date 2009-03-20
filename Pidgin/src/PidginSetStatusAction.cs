@@ -31,17 +31,10 @@ namespace PidginPlugin
 
 	public class PidginSetStatusAction : Act
 	{
-		IEnumerable<Item> statuses;
+
 
 		public PidginSetStatusAction ()
 		{
-			statuses = new [] {
-				new PidginStatusTypeItem (1), 
-				new PidginStatusTypeItem (2),
-				new PidginStatusTypeItem (3),
-				new PidginStatusTypeItem (4),
-				new PidginStatusTypeItem (5),
-			};
 		}
 
 		public override string Name {
@@ -58,13 +51,14 @@ namespace PidginPlugin
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				yield return typeof (ITextItem);
+				yield return typeof (PidginStatusTypeItem);
 				yield return typeof (PidginSavedStatusItem);
+				yield return typeof (ITextItem);
 			}
 		}
 
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (PidginStatusTypeItem); }
+			get { yield return typeof (ITextItem); }
 		}
 
 		public override bool ModifierItemsOptional {
@@ -73,32 +67,38 @@ namespace PidginPlugin
 
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
-			return items.First () is ITextItem;
-		}
-
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			return statuses;
+			return items.First () is PidginStatusTypeItem;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			int status;
-			string message;
+			string message = "";
 			try {
 				Pidgin.IPurpleObject prpl = Pidgin.GetPurpleObject ();
 
 				if (items.First () is PidginSavedStatusItem) {
 					status = (items.First () as PidginSavedStatusItem).ID;
 					prpl.PurpleSavedstatusActivate (status);
+				} else if (items.First () is PidginStatusTypeItem) {
+					status = (items.First () as PidginStatusTypeItem).Status;
+					if (modItems.Any ())
+						message = (modItems.First () as ITextItem).Text;
+					Pidgin.PurpleSetAvailabilityStatus (status, message);
+				} else if (items.First () is ITextItem) {
+					status = prpl.PurpleSavedstatusGetType (prpl.PurpleSavedstatusGetCurrent ());
+					message = (items.First () as ITextItem).Text;
+					Pidgin.PurpleSetAvailabilityStatus (status, message);
+				}
+				/*
 				} else {
 					message = (items.First () as ITextItem).Text;
 					if (modItems.Any ())
 						status = (int) (modItems.First () as PidginStatusTypeItem).Status;
 					else
-						status = prpl.PurpleSavedstatusGetType (prpl.PurpleSavedstatusGetCurrent ());
 					Pidgin.PurpleSetAvailabilityStatus (status, message);
 				}
+				*/
 			} catch (Exception e) {
 				Log<PidginSetStatusAction>.Error ("Could not set Pidgin status: {0}", e.Message);
 				Log<PidginSetStatusAction>.Debug (e.StackTrace);
