@@ -16,40 +16,52 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-using System;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Do.Platform.Linux;
 using Do.Universe;
-using Do.Platform;
 
 namespace RememberTheMilk
-{
-	
-	
-	public class RTMTaskNoteItem : Item, ITextItem
-	{
-		string title, text;
-		
-		public RTMTaskNoteItem (string title, string text)
-		{
-			this.title = title;
-			this.text = text;
-		}
-		
+{	
+	public class RTMTaskAttributeNotesSource : ItemSource
+	{		
 		public override string Name {
-			get { return title; }
+			get { return "Remember The Milk Notes"; }
 		}
 		
 		public override string Description {
-			get { return text; }
+			get { return "All the notes in your Remember The Milk account."; }
 		}
 		
 		public override string Icon {
-			get { return "text-x-generic"; } // "rtm.png@" + GetType ().Assembly.FullName; }
+			get { return "rtm.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public string Text {
-			get { return text; }
+		public override IEnumerable<Type> SupportedItemTypes
+		{
+			get {
+				return new Type[] {
+					typeof (RTMTaskAttributeNotes),
+				};
+			}
+		}
+		
+		public override IEnumerable<Item> Items
+		{
+			get { return RTM.Notes; }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
+		{
+			return (parent as RTMTaskAttributeNotes).Notes.OfType<Item> ();
+		}
+
+		public override void UpdateItems ()
+		{
+			;
 		}
 	}
 }

@@ -23,6 +23,8 @@ FILES = \
 	src/RTMSetPriority.cs \
 	src/RTMSetRecurrence.cs \
 	src/RTMTaskAttributeItem.cs \
+	src/RTMTaskAttributeNotes.cs \
+	src/RTMTaskAttributeNotesSource.cs \
 	src/RTMTaskNoteItem.cs \
 	src/RTMTaskItem.cs \
 	src/RTMTaskItemSource.cs \

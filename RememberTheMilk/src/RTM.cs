@@ -36,9 +36,11 @@ namespace RememberTheMilk
         private static Rtm rtm;
         private static Dictionary<string,List<Item>> tasks;
         private static Dictionary<string,Item> lists;
+		private static Dictionary<string,Item> notes;
         private static object lists_lock;
         private static object lists_lock_at;
         private static object dict_lock;
+		private static object notes_lock;
         private static string timeline;
         private static DateTime last_sync;
 		private static string username;
@@ -52,9 +54,11 @@ namespace RememberTheMilk
             rtm = new Rtm (ApiKey, SharedSecret);
             tasks = new Dictionary<string,List<Item>> ();
             lists = new Dictionary<string,Item> ();
+			notes = new Dictionary<string,Item> ();
             lists_lock = new object ();
             lists_lock_at = new object ();
             dict_lock = new object ();
+			notes_lock =  new object ();
             last_sync = DateTime.MinValue;
 			Preferences = new RTMPreferences ();
 			filter = Preferences.Filter;
@@ -127,6 +131,18 @@ namespace RememberTheMilk
 			}
 		}
 
+		public static List<Item> Notes {
+			get {
+				List<Item> notes2 = new List<Item> ();
+				notes2.Clear ();
+				
+				lock (notes_lock)
+					foreach (KeyValuePair<string,Item> kvp in notes)
+						notes2.Add (kvp.Value);
+				return notes2;
+			}
+		}
+		
         public static void UpdateLists ()
         {
 			if (!IsAuthenticated)
@@ -156,15 +172,20 @@ namespace RememberTheMilk
 		{
 			List<Item> attribute_list = new List<Item> ();
 			
-			attribute_list.Add (new RTMTaskAttributeItem ("Name", task.Name, task.Url));
+			// attribute_list.Add (new RTMTaskAttributeItem ("Name", task.Name, task.Url, task.Icon));
+			
 			if (task.Due != DateTime.MinValue)
 				attribute_list.Add (new RTMTaskAttributeItem ("Due", 
 				                                              task.Due.ToString ((task.HasDueTime != 0) ? "g" : "d"), 
-				                                              task.Url));
+				                                              task.Url, "stock_calendar"));
 			if (!String.IsNullOrEmpty (task.TaskUrl))
-				attribute_list.Add (new RTMTaskAttributeItem ("URL", task.TaskUrl, task.TaskUrl));
+				attribute_list.Add (new RTMTaskAttributeItem ("URL", task.TaskUrl, 
+				                                              task.TaskUrl, "stock_internet"));
 			if (!String.IsNullOrEmpty (task.Estimate))
-				attribute_list.Add (new RTMTaskAttributeItem ("Time Estimate", task.Estimate, task.Url));
+				attribute_list.Add (new RTMTaskAttributeItem ("Time Estimate", task.Estimate,
+				                                              task.Url, "stock_appointment-reminder"));
+			if (notes.ContainsKey (task.Id))
+				attribute_list.Add (notes [task.Id] as RTMTaskAttributeItem);
 			 
 			return attribute_list;
 		}
@@ -226,6 +247,28 @@ namespace RememberTheMilk
 							// delete one recurrent task will cause other deleted instances
 							// appear in the taskseries tag, so here we need to check again.
 							if (rtmTask.Deleted == DateTime.MinValue) {
+								if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
+									List<RTMTaskNoteItem> note_list = new List<RTMTaskNoteItem> ();
+									note_list.Clear ();
+									foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection) 
+										note_list.Add (new RTMTaskNoteItem (rtmNote.Title, rtmNote.Text));
+
+									string desc1 = String.Format (Catalog.GetPluralString 
+									                              ("{0} note is", 
+									                               "{0} notes are", 
+									                               rtmTaskSeries.Notes.NoteCollection.Length), 
+									                              rtmTaskSeries.Notes.NoteCollection.Length);
+									string desc2 = Catalog.GetString (" associated with this task");
+									string url =  "http://www.rememberthemilk.com/print/" +
+										RTM.Preferences.Username + "/" + rtmList.ID + "/" + rtmTask.TaskID + "/notes/";
+									
+									notes [rtmTask.TaskID] = 
+										new RTMTaskAttributeNotes (Catalog.GetString("Notes"), 
+										                           desc1+desc2,
+										                           url,
+										                           note_list);
+								}
+								                      
 								RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
 								                                        rtmTaskSeries.TaskSeriesID,
 								                                        rtmTask.TaskID,
@@ -236,13 +279,6 @@ namespace RememberTheMilk
 								                                        rtmTask.Priority,
 								                                        rtmTask.HasDueTime,
 								                                        rtmTask.Estimate);
-								if (rtmTaskSeries.Notes.NoteCollection != null) {
-									List<RTMTaskNoteItem> notes = new List<RTMTaskNoteItem> ();
-									foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection) {
-										notes.Add (new RTMTaskNoteItem (rtmNote.Title, rtmNote.Text));
-									}							
-									new_task.Notes = notes;
-								}
 								tasks [rtmList.ID].Add (new_task);
 								tasks ["All Tasks"].Add (new_task);
 							}

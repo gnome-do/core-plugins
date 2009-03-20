@@ -1,4 +1,4 @@
-/* RTMTaskAttributeItem.cs
+/* RTMTaskAttributeNotes.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -19,47 +19,26 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 using Do.Universe;
 using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
-	public class RTMTaskAttributeItem : Item, IUrlItem
-	{
-		string name;
-		string description;
-		string icon;
-		string url;
+	public class RTMTaskAttributeNotes : RTMTaskAttributeItem
+	{		
+		List<RTMTaskNoteItem> notes;
 		
-		public RTMTaskAttributeItem (string name, string description, string url) :
-			this (name, description, url, "rtm.png@" + typeof(RTMTaskAttributeItem).Assembly.FullName)
+		public RTMTaskAttributeNotes (string name, string description, string url, 
+		                              List<RTMTaskNoteItem> notes) : base (name, description, url, "gnome-sticky-notes-applet")
 		{			
+			this.notes = new List<RTMTaskNoteItem> ();
+			this.notes = notes;
 		}
 		
-		public RTMTaskAttributeItem (string name, string description, string url, string icon)
-		{
-			this.name = name;
-			this.description = description;
-			this.url = url;
-			this.icon = icon;
-		}
-		
-		public override string Name {
-			get { return name; }
-		}
-		
-		public override string Description {
-			get { return description;}
-		}
-		
-		public override string Icon {
-			get { return icon; }
-		}
-		
-		public string Url {
-			get { return url; }
+		public List<RTMTaskNoteItem> Notes {
+			get { return notes; }
 		}
 	}
 }
