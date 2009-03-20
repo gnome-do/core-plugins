@@ -18,7 +18,7 @@
  */
 
 using System;
-
+using System.Collections.Generic;
 
 using Do.Universe;
 
@@ -37,6 +37,7 @@ namespace RememberTheMilk
         private string priority;
         private int has_due_time;
 		private string estimate;
+		private List<RTMTaskNoteItem> notes;
 
         public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name) :
             this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "")
@@ -57,6 +58,7 @@ namespace RememberTheMilk
             this.priority = priority;
             this.has_due_time = hasDueTime;
 			this.estimate = estimate;
+			this.notes = new List<RTMTaskNoteItem> ();
         }
 
         public override string Name { get { return name; } }
@@ -149,6 +151,11 @@ namespace RememberTheMilk
 		
 		public string Estimate {
 			get { return estimate; }
+		}
+		
+		public List<RTMTaskNoteItem> Notes {
+			get { return notes; }
+			set { this.notes = value; }
 		}
     }
 }

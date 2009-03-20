@@ -226,26 +226,25 @@ namespace RememberTheMilk
 							// delete one recurrent task will cause other deleted instances
 							// appear in the taskseries tag, so here we need to check again.
 							if (rtmTask.Deleted == DateTime.MinValue) {
-								tasks [rtmList.ID].Add (new RTMTaskItem (rtmList.ID,
-								                                         rtmTaskSeries.TaskSeriesID,
-								                                         rtmTask.TaskID,
-								                                         rtmTaskSeries.Name,
-								                                         rtmTask.Due,
-								                                         rtmTask.Completed,
-								                                         rtmTaskSeries.TaskURL,
-								                                         rtmTask.Priority,
-								                                         rtmTask.HasDueTime,
-								                                         rtmTask.Estimate));
-								tasks ["All Tasks"].Add (new RTMTaskItem (rtmList.ID,
-								                                          rtmTaskSeries.TaskSeriesID,
-								                                          rtmTask.TaskID,
-								                                          rtmTaskSeries.Name,
-								                                          rtmTask.Due,
-								                                          rtmTask.Completed,
-								                                          rtmTaskSeries.TaskURL,
-								                                          rtmTask.Priority,
-								                                          rtmTask.HasDueTime,
-								                                          rtmTask.Estimate));
+								RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
+								                                        rtmTaskSeries.TaskSeriesID,
+								                                        rtmTask.TaskID,
+								                                        rtmTaskSeries.Name,
+								                                        rtmTask.Due,
+								                                        rtmTask.Completed,
+								                                        rtmTaskSeries.TaskURL,
+								                                        rtmTask.Priority,
+								                                        rtmTask.HasDueTime,
+								                                        rtmTask.Estimate);
+								if (rtmTaskSeries.Notes.NoteCollection != null) {
+									List<RTMTaskNoteItem> notes = new List<RTMTaskNoteItem> ();
+									foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection) {
+										notes.Add (new RTMTaskNoteItem (rtmNote.Title, rtmNote.Text));
+									}							
+									new_task.Notes = notes;
+								}
+								tasks [rtmList.ID].Add (new_task);
+								tasks ["All Tasks"].Add (new_task);
 							}
 						}
                     }
