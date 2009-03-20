@@ -119,6 +119,12 @@ namespace RememberTheMilk
                 return lists2;
             }
         }
+		
+		public static List<Item> Tasks {
+			get {
+				return tasks ["All Tasks"];
+			}
+		}
 
         public static void UpdateLists ()
         {
@@ -303,7 +309,7 @@ namespace RememberTheMilk
 		{
 			if (Preferences.ActionNotification) {
 				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification( title, body, 
-				                                                                        "task.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
+				                                                                        "rtm.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
 			}
 			if (taskId != null && listId != null)
 				UniverseRemoveTask (taskId, listId);
