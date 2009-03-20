@@ -41,6 +41,18 @@ namespace RememberTheMilk
 			get { return "list-rename.png@" + GetType ().Assembly.FullName; }
 		}
 		
+		public bool IsValidListName(string newName) {
+			string[] invalidNames = {"Inbox", "Sent", "All Tasks"};
+			bool isValid = true;
+			
+			foreach(string name in invalidNames) {
+				if (newName == name)
+					isValid = false;
+			}
+			
+			return isValid;
+		}
+		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
@@ -74,13 +86,17 @@ namespace RememberTheMilk
 		{
 			string newListName = ((modifierItems.FirstOrDefault() as ITextItem).Text);
 			
-			Console.WriteLine("DEBUG: GOT: " + newListName);
-			
 			// Check if user is empty.
 			if (string.IsNullOrEmpty(newListName)) {
 				// Need new name.
 				Services.Notifications.Notify("Remember The Milk",
 					"No new list name provided.");
+				yield break;
+			}
+
+			if(!IsValidListName(newListName)) {
+				Services.Notifications.Notify("Remember The Milk",
+					"Invalid list name provided.");
 				yield break;
 			}
 			
