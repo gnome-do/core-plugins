@@ -40,8 +40,11 @@ namespace PidginPlugin
 		
 		static PidginContactItemSource ()
 		{
-			BuddyListFile = Path.Combine (Pidgin.PurpleUserDir, "blist.xml");
-			BuddyIconDirectory = Path.Combine (Pidgin.PurpleUserDir, "icons");
+			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			string[] blist_parts = new string[] {home, ".purple", "blist.xml"};
+		 	BuddyListFile = blist_parts.Aggregate ((aggregation, val) => Path.Combine (aggregation, val));
+			string[] icondir_parts = new string[] {home, ".purple", "icons"};
+			BuddyIconDirectory = icondir_parts.Aggregate ((aggregation, val) => Path.Combine (aggregation, val));
 		}
 		
 		List<Item> buddies;

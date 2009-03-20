@@ -93,6 +93,7 @@ namespace PidginPlugin
 					prpl.PurpleSavedstatusActivate (status);
 				} else {
 					message = (items.First () as ITextItem).Text;
+					Console.WriteLine ("message: {0}", message);
 					if (modItems.Any ())
 						status = (int) (modItems.First () as PidginStatusTypeItem).Status;
 					else

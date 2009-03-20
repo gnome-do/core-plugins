@@ -195,9 +195,11 @@ namespace PidginPlugin
 				catch {
 					status = prpl.PurpleSavedstatusNew ("", (uint) kind);
 				}
+				Console.WriteLine ("in here, message: {0}", message);
 				prpl.PurpleSavedstatusSetMessage (status, message);
 				prpl.PurpleSavedstatusActivate (status);
-			} catch {
+			} catch (Exception e) {
+				Console.WriteLine (e.ToString ());
 			}
 		}
 		
