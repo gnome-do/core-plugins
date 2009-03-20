@@ -78,6 +78,12 @@ namespace RememberTheMilk
         {
             string listId = String.Empty;
             string taskData = (items.First () as ITextItem).Text;
+
+            if (string.IsNullOrEmpty(taskData)) {
+                 Services.Notifications.Notify("Remember The Milk",
+			"No title provided for new task.");
+                 yield break;
+	    }
 			
 			if (modifierItems.FirstOrDefault () != null)
 				listId = (modifierItems.FirstOrDefault () as RTMListItem).Id;
