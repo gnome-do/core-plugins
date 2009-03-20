@@ -90,15 +90,6 @@ namespace PidginPlugin
 					message = (items.First () as ITextItem).Text;
 					Pidgin.PurpleSetAvailabilityStatus (status, message);
 				}
-				/*
-				} else {
-					message = (items.First () as ITextItem).Text;
-					if (modItems.Any ())
-						status = (int) (modItems.First () as PidginStatusTypeItem).Status;
-					else
-					Pidgin.PurpleSetAvailabilityStatus (status, message);
-				}
-				*/
 			} catch (Exception e) {
 				Log<PidginSetStatusAction>.Error ("Could not set Pidgin status: {0}", e.Message);
 				Log<PidginSetStatusAction>.Debug (e.StackTrace);

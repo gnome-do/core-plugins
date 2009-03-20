@@ -77,8 +77,7 @@ namespace PidginPlugin
 			#endregion
 		}
 
-		public static string ChatIcon 
-		{
+		public static string ChatIcon {
 			get { return "internet-group-chat.svg@" + typeof (Pidgin).Assembly.FullName; }
 		}
 
