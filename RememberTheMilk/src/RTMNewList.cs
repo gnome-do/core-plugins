@@ -1,4 +1,4 @@
-/* RTMListRename.cs
+/* RTMNewList.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this source distribution.
@@ -61,13 +61,13 @@ namespace RememberTheMilk
 			}
 		}
 		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
+		/*public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { 
 				return new Type[] {
 					typeof (RTMListItem),
 				};
 			}
-		}
+		}*/
         
 		public override bool ModifierItemsOptional {
 			get { return true; }

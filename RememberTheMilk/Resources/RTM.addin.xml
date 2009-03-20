@@ -24,6 +24,7 @@
     <Extension path="/Do/Action">
         <Action type="RememberTheMilk.RTMNewList" />
         <Action type="RememberTheMilk.RTMNewTask" />
+        <Action type="RememberTheMilk.RTMDeleteList" />
         <Action type="RememberTheMilk.RTMDeleteTask" />
         <Action type="RememberTheMilk.RTMCompleteTask" />
         <Action type="RememberTheMilk.RTMSetPriority" />

@@ -570,6 +570,25 @@ namespace RtmNet
 			}
 		}
 		
+		public Lists ListsDelete(string timeline, string listId)
+		{
+			Hashtable parameters = new Hashtable();
+			parameters.Add("method", "rtm.lists.delete");
+			parameters.Add("timeline", timeline);
+			parameters.Add("list_id", listId);
+			
+			RtmNet.Response response = GetResponse(parameters);
+
+			if( response.Status == ResponseStatus.OK )
+			{
+				return response.Lists;
+			}
+			else
+			{
+				throw new RtmApiException(response.Error);
+			}
+		}
+		
 		public Lists ListsRename(string timeline, string listId, string newName)
 		{
 			Hashtable parameters = new Hashtable();

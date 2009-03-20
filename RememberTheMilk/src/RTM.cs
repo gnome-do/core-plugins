@@ -399,6 +399,19 @@ namespace RememberTheMilk
 			Catalog.GetString(String.Format ("A new task"
 				+ " list named \"{0}\" has been created.", newListName)));
         }
+        
+        public static void DeleteList(string listId)
+        {
+        	try {
+        		rtm.ListsDelete(timeline, listId);
+        	} catch (RtmException e) {
+			Console.Error.WriteLine (e.Message);
+			return;
+		}
+		
+		ActionRoutine (Catalog.GetString("List Deleted"),
+			Catalog.GetString("The selected task list has been deleted."));
+        }
 
         public static void DeleteTask (string listId, string taskSeriesId, string taskId)
         {
