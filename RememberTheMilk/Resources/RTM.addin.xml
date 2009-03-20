@@ -28,6 +28,7 @@
         <Action type="RememberTheMilk.RTMSetPriority" />
         <Action type="RememberTheMilk.RTMSetDue" />
         <Action type="RememberTheMilk.RTMSetUrl" />
+        <Action type="RememberTheMilk.RTMRenameList" />
         <Action type="RememberTheMilk.RTMMoveTask" />
         <Action type="RememberTheMilk.RTMRenameTask" />
         <Action type="RememberTheMilk.RTMPostponeTask" />

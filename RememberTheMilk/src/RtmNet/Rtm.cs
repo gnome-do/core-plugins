@@ -549,6 +549,26 @@ namespace RtmNet
 				throw new RtmApiException(response.Error);
 			}
 		}
+		
+		public Lists ListsRename(string timeline, string listId, string newName)
+		{
+			Hashtable parameters = new Hashtable();
+			parameters.Add("method", "rtm.lists.setName");
+			parameters.Add("timeline", timeline);
+			parameters.Add("list_id", listId);
+			parameters.Add("name", newName);
+
+			RtmNet.Response response = GetResponse(parameters);
+
+			if( response.Status == ResponseStatus.OK )
+			{
+				return response.Lists;
+			}
+			else
+			{
+				throw new RtmApiException(response.Error);
+			}
+		}
 #endregion
 
 		

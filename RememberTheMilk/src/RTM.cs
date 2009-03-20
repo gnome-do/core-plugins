@@ -319,6 +319,15 @@ namespace RememberTheMilk
 				UniverseRemoveTask (taskId, listId);
 			UpdateTasks ();
 		}
+		
+		private static void ActionRoutine (string title, string body, string listId)
+		{
+			if (Preferences.ActionNotification) {
+				Do.Platform.Services.Notifications.Notify( new Do.Platform.Notification( title, body, 
+				                                                                        "rtm.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
+			}
+			UpdateLists ();
+		}
 
         public static RTMTaskItem NewTask (string listId, string taskData)
         {
@@ -531,6 +540,21 @@ namespace RememberTheMilk
 					Catalog.GetString ("The URL for the selected task has been reset."),
 						taskId, listId);
 			}
+        }
+        
+        public static void RenameList(string listId, string newListName)
+        {
+        	try {
+        		rtm.ListsRename(timeline, listId, newListName);
+        	} catch (RtmException e) {
+			Console.Error.WriteLine (e.Message);
+			return;
+		}
+		
+		ActionRoutine (Catalog.GetString("Task List Renamed"),
+			Catalog.GetString(String.Format ("The selected task"
+				+ " list has been renamed to \"{0}\".", newListName)),
+			listId);
         }
 		
 		public static void UncompleteTask (string listId, string taskSeriesId, string taskId)

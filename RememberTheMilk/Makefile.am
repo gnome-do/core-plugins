@@ -16,6 +16,7 @@ FILES = \
 	src/RTMPostponeTask.cs \
 	src/RTMPreferences.cs \
 	src/RTMPriorityItem.cs \
+	src/RTMRenameList.cs \
 	src/RTMRenameTask.cs \
 	src/RTMSetDue.cs \
 	src/RTMSetUrl.cs \
