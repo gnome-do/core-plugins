@@ -27,6 +27,10 @@ namespace RtmNet
 		public Tasks Tasks;
 
 		/// <remarks/>
+		[XmlElement("locations", Form=XmlSchemaForm.Unqualified)]
+		public Locations Locations;
+
+		/// <remarks/>
 		[XmlAttribute("stat", Form=XmlSchemaForm.Unqualified)]
 		public ResponseStatus Status;
 		

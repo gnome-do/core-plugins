@@ -28,7 +28,7 @@ using RtmNet;
 
 using Do.Universe;
 
-
+// TODO: should replace all Console.Error.WriteLine with Log.Error 
 namespace RememberTheMilk
 {
     public static class RTM
