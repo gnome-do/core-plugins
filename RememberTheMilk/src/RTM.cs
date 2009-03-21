@@ -640,48 +640,7 @@ namespace RememberTheMilk
                                taskId, listId);
             }
         }
-
-        public static void NewList(string newListName)
-        {
-            try {
-                rtm.ListsNew(timeline, newListName);
-            } catch (RtmException e) {
-            Console.Error.WriteLine (e.Message);
-            return;
-        }
-
-        ActionRoutine (Catalog.GetString("New List Created"),
-            Catalog.GetString(String.Format ("A new task"
-                + " list named \"{0}\" has been created.", newListName)));
-        }
-
-        public static void DeleteList(string listId)
-        {
-            try {
-                rtm.ListsDelete(timeline, listId);
-            } catch (RtmException e) {
-            Console.Error.WriteLine (e.Message);
-            return;
-        }
-
-        ActionRoutine (Catalog.GetString("List Deleted"),
-            Catalog.GetString("The selected task list has been deleted."));
-        }      
 		
-		public static void RenameList(string listId, string newListName)
-        {
-            try {
-                rtm.ListsRename(timeline, listId, newListName);
-            } catch (RtmException e) {
-                Console.Error.WriteLine (e.Message);
-                return;
-            }
-            ActionRoutine (Catalog.GetString("Task List Renamed"),
-                Catalog.GetString(String.Format ("The selected task"
-                        + " list has been renamed to \"{0}\".", newListName)),
-                listId);
-        }
-
         public static void UncompleteTask (string listId, string taskSeriesId, string taskId)
         {
             try {
@@ -695,5 +654,80 @@ namespace RememberTheMilk
                            Catalog.GetString ("The selected task has been marked as \"incomplete\"."),
                            taskId, listId);
         }
-    }
+
+		public static void NewList(string newListName)
+		{
+			try {
+				rtm.ListsNew(timeline, newListName);
+			} catch (RtmException e) {
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
+			
+			ActionRoutine (Catalog.GetString("New List Created"),
+			               Catalog.GetString(String.Format ("A new task"
+			                                                + " list named \"{0}\" has been created.", newListName)));
+		}
+		
+		public static void DeleteList(string listId)
+		{
+			try {
+				rtm.ListsDelete(timeline, listId);
+			} catch (RtmException e) {
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
+			
+			ActionRoutine (Catalog.GetString("List Deleted"),
+			               Catalog.GetString("The selected task list has been deleted."));
+		}      
+		
+		public static void RenameList(string listId, string newListName)
+		{
+			try {
+				rtm.ListsRename(timeline, listId, newListName);
+			} catch (RtmException e) {
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
+			ActionRoutine (Catalog.GetString("Task List Renamed"),
+			               Catalog.GetString(String.Format ("The selected task"
+			                                                + " list has been renamed to \"{0}\".", newListName)),
+			               listId);
+		}
+		
+		public static void NewNote (string listId, string taskSeriesId, string taskId, string note)
+		{
+			string[] parts = null;
+			string note_title;
+			string note_body;
+			bool has_separator = (0 < note.IndexOf ("|") && note.IndexOf ("|") < note.Length);
+			bool has_newline = (0 < note.IndexOf ("\n") && note.IndexOf ("\n") < note.Length) ;
+			
+			if (has_separator) {      // when separator is used, don't care about newlines
+				parts = note.Split(new char[] {'|'}, 2);
+			} else if (has_newline) {
+				parts = note.Split(new char[] {'\n'}, 2);
+			}
+			
+			if (string.IsNullOrEmpty (note) || ((has_separator || has_newline) && parts != null && parts.Length < 2)) {
+				Console.Error.WriteLine ("Entered text cannot be used as a note.");
+				return;
+			} else {
+				note_title = (has_separator || has_newline) ? parts[0].Trim () : "Untitled Note";
+				note_body = (has_separator || has_newline) ? parts[1].Trim () : note;
+			}
+			
+			try {
+				rtm.NotesAdd (timeline, listId, taskSeriesId, taskId, note_title, note_body);
+			} catch (RtmException e) {
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
+			
+			ActionRoutine (Catalog.GetString ("Note Added"),
+			               Catalog.GetString ("A note has been added to the selected Remember The Milk task"),
+			               taskId, listId);
+		}
+	}
 }
