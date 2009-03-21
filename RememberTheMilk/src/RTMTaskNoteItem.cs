@@ -26,7 +26,7 @@ namespace RememberTheMilk
 {
 	
 	
-	public class RTMTaskNoteItem : Item, ITextItem
+	public class RTMTaskNoteItem : Item //, ITextItem
 	{
 		string title, text, note_id;
 		
@@ -49,9 +49,9 @@ namespace RememberTheMilk
 			get { return "text-x-generic"; } // "rtm.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public string Text {
-			get { return text; }
-		}
+//		public string Text {
+//			get { return text; }
+//		}
 		
 		public string Id {
 			get { return note_id; }
