@@ -35,22 +35,10 @@ namespace RememberTheMilk
 		
 		public override string Description {
 			get { return Catalog.GetString ("Create a new task list."); }
-        	}
-			
-		public override string Icon {
-			get { return "list-add.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public bool IsValidListName(string newName) {
-			string[] invalidNames = {"Inbox", "Sent", "All Tasks"};
-			bool isValid = true;
-			
-			foreach(string name in invalidNames) {
-				if (newName == name)
-					isValid = false;
-			}
-			
-			return isValid;
+		public override string Icon {
+			get { return "task-add.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -60,25 +48,8 @@ namespace RememberTheMilk
 				};
 			}
 		}
-		
-		/*public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { 
-				return new Type[] {
-					typeof (RTMListItem),
-				};
-			}
-		}*/
-        
-		public override bool ModifierItemsOptional {
-			get { return true; }
-		}
-		
+				
 		public override bool SupportsItem (Item item) {
-			return true;
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-		{
 			return true;
 		}
 		
@@ -90,17 +61,17 @@ namespace RememberTheMilk
 			if (string.IsNullOrEmpty(newListName)) {
 				// Need new name.
 				Services.Notifications.Notify("Remember The Milk",
-					"No new list name provided.");
-				yield break;
-			}
-
-			if(!IsValidListName(newListName)) {
-				Services.Notifications.Notify("Remember The Milk",
-					"Invalid list name provided.");
+				                              "No new list name provided.");
 				yield break;
 			}
 			
-            		Services.Application.RunOnThread (() => {
+			if(RTM.IsProtectedList (newListName)) {
+				Services.Notifications.Notify("Remember The Milk",
+				                              "Invalid list name provided.");
+				yield break;
+			}
+			
+			Services.Application.RunOnThread (() => {
 				RTM.NewList (newListName);
 			});
 			yield break;

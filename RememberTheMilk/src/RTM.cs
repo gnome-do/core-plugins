@@ -143,26 +143,6 @@ namespace RememberTheMilk
             }
         }
 
-        public static void UpdateLists ()
-        {
-            if (!IsAuthenticated)
-                return;
-
-            Lists rtmLists;
-            try {
-                rtmLists = rtm.ListsGetList ();
-            } catch (RtmException e) {
-                Console.Error.WriteLine (e.Message);
-                rtmLists = null;
-                return;
-            }
-
-            lists.Clear ();
-            foreach (List rtmList in rtmLists.listCollection)
-                if (rtmList.Deleted == 0 && rtmList.Smart == 0)
-                    lists [rtmList.ID] = new RTMListItem (rtmList.ID, rtmList.Name);
-        }
-
         public static List<Item> TasksForList (string listId)
         {
             return tasks [listId];
@@ -195,7 +175,27 @@ namespace RememberTheMilk
             return lists [listId].Name;
         }
 
-        public static void UpdateTasks ()
+        public static void UpdateLists ()
+        {
+            if (!IsAuthenticated)
+                return;
+
+            Lists rtmLists;
+            try {
+                rtmLists = rtm.ListsGetList ();
+            } catch (RtmException e) {
+                Console.Error.WriteLine (e.Message);
+                rtmLists = null;
+                return;
+            }
+
+            lists.Clear ();
+            foreach (List rtmList in rtmLists.listCollection)
+                if (rtmList.Deleted == 0 && rtmList.Smart == 0)
+                    lists [rtmList.ID] = new RTMListItem (rtmList.ID, rtmList.Name);
+        }
+        
+		public static void UpdateTasks ()
         {
 
             if (!IsAuthenticated)
@@ -293,6 +293,12 @@ namespace RememberTheMilk
                 NotifyOverDueItems ();
         }
 
+		public static bool IsProtectedList (string listName)
+		{
+			const string ProtectedListPattern = @"^(All\ Tasks|Inbox|Sent)$";
+			return new Regex (ProtectedListPattern, RegexOptions.Compiled).IsMatch (listName);
+		}
+		
         /// <summary>
         /// Remove task identified by taskId from list identified by listId
         /// and from 'All Tasks' list
@@ -388,6 +394,7 @@ namespace RememberTheMilk
                                                                                         "rtm.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
             }
             UpdateLists ();
+			UpdateTasks ();
         }
 
         private static void ActionRoutine (string title, string body)
@@ -446,33 +453,6 @@ namespace RememberTheMilk
                                     priority,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].Estimate);
-        }
-
-        public static void NewList(string newListName)
-        {
-            try {
-                rtm.ListsNew(timeline, newListName);
-            } catch (RtmException e) {
-            Console.Error.WriteLine (e.Message);
-            return;
-        }
-
-        ActionRoutine (Catalog.GetString("New List Created"),
-            Catalog.GetString(String.Format ("A new task"
-                + " list named \"{0}\" has been created.", newListName)));
-        }
-
-        public static void DeleteList(string listId)
-        {
-            try {
-                rtm.ListsDelete(timeline, listId);
-            } catch (RtmException e) {
-            Console.Error.WriteLine (e.Message);
-            return;
-        }
-
-        ActionRoutine (Catalog.GetString("List Deleted"),
-            Catalog.GetString("The selected task list has been deleted."));
         }
 
         public static void DeleteTask (string listId, string taskSeriesId, string taskId)
@@ -661,7 +641,34 @@ namespace RememberTheMilk
             }
         }
 
-        public static void RenameList(string listId, string newListName)
+        public static void NewList(string newListName)
+        {
+            try {
+                rtm.ListsNew(timeline, newListName);
+            } catch (RtmException e) {
+            Console.Error.WriteLine (e.Message);
+            return;
+        }
+
+        ActionRoutine (Catalog.GetString("New List Created"),
+            Catalog.GetString(String.Format ("A new task"
+                + " list named \"{0}\" has been created.", newListName)));
+        }
+
+        public static void DeleteList(string listId)
+        {
+            try {
+                rtm.ListsDelete(timeline, listId);
+            } catch (RtmException e) {
+            Console.Error.WriteLine (e.Message);
+            return;
+        }
+
+        ActionRoutine (Catalog.GetString("List Deleted"),
+            Catalog.GetString("The selected task list has been deleted."));
+        }      
+		
+		public static void RenameList(string listId, string newListName)
         {
             try {
                 rtm.ListsRename(timeline, listId, newListName);
@@ -674,7 +681,6 @@ namespace RememberTheMilk
                         + " list has been renamed to \"{0}\".", newListName)),
                 listId);
         }
-
 
         public static void UncompleteTask (string listId, string taskSeriesId, string taskId)
         {

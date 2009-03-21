@@ -35,10 +35,10 @@ namespace RememberTheMilk
 		
 		public override string Description {
 			get { return Catalog.GetString ("Sets a new name for a task list."); }
-        	}
-			
+		}
+		
 		public override string Icon {
-			get { return "list-rename.png@" + GetType ().Assembly.FullName; }
+			get { return "task-rename.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public bool IsValidListName(string newName) {
@@ -68,13 +68,13 @@ namespace RememberTheMilk
 				};
 			}
 		}
-        
+		
 		public override bool ModifierItemsOptional {
 			get { return false; }
 		}
 		
 		public override bool SupportsItem (Item item) {
-			return true;
+			return !RTM.IsProtectedList ((item as RTMListItem).Name);
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
@@ -90,19 +90,19 @@ namespace RememberTheMilk
 			if (string.IsNullOrEmpty(newListName)) {
 				// Need new name.
 				Services.Notifications.Notify("Remember The Milk",
-					"No new list name provided.");
-				yield break;
-			}
-
-			if(!IsValidListName(newListName)) {
-				Services.Notifications.Notify("Remember The Milk",
-					"Invalid list name provided.");
+				                              "No new list name provided.");
 				yield break;
 			}
 			
-            		Services.Application.RunOnThread (() => {
+			if(RTM.IsProtectedList (newListName)) {
+				Services.Notifications.Notify("Remember The Milk",
+				                              "Invalid list name provided.");
+				yield break;
+			}
+			
+			Services.Application.RunOnThread (() => {
 				RTM.RenameList ((items.First () as RTMListItem).Id,
-				            newListName);
+				                newListName);
 			});
 			yield break;
 		}

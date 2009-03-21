@@ -59,9 +59,6 @@ FILES = \
 RESOURCES = \
 	Resources/RTM.addin.xml \
 	Resources/icons/rtm.png \
-	Resources/icons/list-add.png \
-	Resources/icons/list-delete.png \
-	Resources/icons/list-rename.png \
 	Resources/icons/task-add.png \
 	Resources/icons/task-complete.png \
 	Resources/icons/task-delete.png \
@@ -84,7 +81,6 @@ RESOURCES = \
 	Resources/icons/task-rename.png \
 	Resources/icons/task-repeat.png \
 	Resources/icons/task-setdue.png \
-	Resources/icons/task-setestimate.png \
 	Resources/icons/task-seturl.png
 
 REFERENCES = \

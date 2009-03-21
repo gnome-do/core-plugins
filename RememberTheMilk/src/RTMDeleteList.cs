@@ -32,13 +32,13 @@ namespace RememberTheMilk
 		public override string Name {
 			get { return Catalog.GetString ("Delete List"); }
 		}		
-				
+		
 		public override string Description {
 			get { return Catalog.GetString ("Delete the selected task list from Remember The Milk"); }
- 	       }
-			
+		}
+		
 		public override string Icon {
-			get { return "list-delete.png@" + GetType ().Assembly.FullName; }
+			get { return "task-delete.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -49,19 +49,19 @@ namespace RememberTheMilk
 			}
 		}
 		
- 	       public override bool SupportsItem (Item item) 
- 	       {
- 	           return true;
- 	       }
-        
+		public override bool SupportsItem (Item item) 
+		{
+			return !RTM.IsProtectedList ((item as RTMListItem).Name);
+		}
+		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
-	        	string listname = (items.First () as RTMListItem).Id;
-	        		        	
+			string listname = (items.First () as RTMListItem).Id;
+			
 			Services.Application.RunOnThread (() => {
 				RTM.DeleteList (listname);
 			});
-	            	yield break;
- 	       }
+			yield break;
+		}
 	}
 }

@@ -38,7 +38,7 @@ namespace RememberTheMilk
         	}
 			
 		public override string Icon {
-			get { return "task-setestimate.png@" + GetType ().Assembly.FullName; }
+			get { return "task-due.png@" + GetType ().Assembly.FullName; }
 		}
 				
 		public bool CheckValidTime(string timeEntered) {
