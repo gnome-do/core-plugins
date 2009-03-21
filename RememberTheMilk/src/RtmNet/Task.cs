@@ -98,6 +98,10 @@ namespace RtmNet
 		/// <remarks/>
 		[XmlAttribute("url", Form=XmlSchemaForm.Unqualified)]
 		public string TaskURL;   
+		
+		/// <remarks/>
+		[XmlAttribute("location_id", Form=XmlSchemaForm.Unqualified)]
+		public string LocationID; 
 	}
 
 

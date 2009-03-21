@@ -12,6 +12,7 @@ FILES = \
 	src/RTMDeleteTask.cs \
 	src/RTMListItem.cs \
 	src/RTMListItemSource.cs \
+	src/RTMLocationItem.cs \
 	src/RTMMoveTask.cs \
 	src/RTMNewList.cs \
 	src/RTMNewNote.cs \
@@ -43,6 +44,7 @@ FILES = \
 	src/RtmNet/Groups.cs \
 	src/RtmNet/GroupSearchResults.cs \
 	src/RtmNet/List.cs \
+	src/RtmNet/Location.cs \
 	src/RtmNet/Methods.cs \
 	src/RtmNet/Note.cs \
 	src/RtmNet/Response.cs \

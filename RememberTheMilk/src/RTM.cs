@@ -37,10 +37,12 @@ namespace RememberTheMilk
         private static Dictionary<string,List<Item>> tasks;
         private static Dictionary<string,Item> lists;
         private static Dictionary<string,Item> notes;
+		private static Dictionary<string,Item> locations;
         private static object lists_lock;
         private static object lists_lock_at;
         private static object dict_lock;
         private static object notes_lock;
+		private static object loc_lock;
         private static string timeline;
         private static DateTime last_sync;
         private static string username;
@@ -55,10 +57,12 @@ namespace RememberTheMilk
             tasks = new Dictionary<string,List<Item>> ();
             lists = new Dictionary<string,Item> ();
             notes = new Dictionary<string,Item> ();
+			locations = new Dictionary<string,Item> ();
             lists_lock = new object ();
             lists_lock_at = new object ();
             dict_lock = new object ();
             notes_lock =  new object ();
+			loc_lock =  new object ();
             last_sync = DateTime.MinValue;
             Preferences = new RTMPreferences ();
             filter = Preferences.Filter;
@@ -142,6 +146,19 @@ namespace RememberTheMilk
                 return notes2;
             }
         }
+		
+		public static List<Item> Locations {
+			get {
+				List<Item> locations2 = new List<Item> ();
+				locations2.Clear ();
+				
+				lock (loc_lock)
+					foreach (KeyValuePair<string,Item> kvp in locations)
+						locations2.Add (kvp.Value);
+				
+				return locations2;
+			}
+		}
 
         public static List<Item> TasksForList (string listId)
         {
@@ -160,10 +177,18 @@ namespace RememberTheMilk
                                                               task.Url, "stock_calendar"));
             if (!String.IsNullOrEmpty (task.TaskUrl))
                 attribute_list.Add (new RTMTaskAttributeItem ("URL", task.TaskUrl,
-                                                              task.TaskUrl, "stock_internet"));
+                                                              task.TaskUrl, "text-html"));
             if (!String.IsNullOrEmpty (task.Estimate))
                 attribute_list.Add (new RTMTaskAttributeItem ("Time Estimate", task.Estimate,
                                                               task.Url, "stock_appointment-reminder"));
+            if (!String.IsNullOrEmpty (task.LocationId)) {
+				RTMLocationItem loc = locations [task.LocationId] as RTMLocationItem;
+				attribute_list.Add (new RTMTaskAttributeItem ("Location", 
+				                                              "[" + loc.Name + "] " + loc.Description,
+				                                              "http://maps.google.com/maps?q=" + loc.Latitude + "," + loc.Longitude,
+				                                              loc.Icon));
+			}
+			
             if (notes.ContainsKey (task.Id))
                 attribute_list.Add (notes [task.Id] as RTMTaskAttributeItem);
 
@@ -194,7 +219,33 @@ namespace RememberTheMilk
                 if (rtmList.Deleted == 0 && rtmList.Smart == 0)
                     lists [rtmList.ID] = new RTMListItem (rtmList.ID, rtmList.Name);
         }
-        
+
+		public static void UpdateLocations ()
+		{
+			if (!IsAuthenticated)
+				return;
+			
+			Locations rtmLocations;
+			try {
+				rtmLocations = rtm.LocationsGetList ();
+			} catch (RtmException e) {
+				Console.Error.WriteLine (e.Message);
+				rtmLocations = null;
+				return;
+            }
+			
+			locations.Clear ();
+			if (rtmLocations.locationCollection.Length > 0) {
+				foreach (Location rtmLocation in rtmLocations.locationCollection) {
+					locations [rtmLocation.ID] = new RTMLocationItem (rtmLocation.ID, 
+					                                                  rtmLocation.Name, 
+					                                                  rtmLocation.Address,
+					                                                  rtmLocation.Longitude, 
+					                                                  rtmLocation.Latitude);
+				}
+			}
+		}
+		
 		public static void UpdateTasks ()
         {
 
@@ -278,7 +329,8 @@ namespace RememberTheMilk
                                                                         rtmTaskSeries.TaskURL,
                                                                         rtmTask.Priority,
                                                                         rtmTask.HasDueTime,
-                                                                        rtmTask.Estimate);
+                                                                        rtmTask.Estimate,
+								                                        rtmTaskSeries.LocationID);
                                 tasks [rtmList.ID].Add (new_task);
                                 tasks ["All Tasks"].Add (new_task);
                             }
@@ -452,7 +504,8 @@ namespace RememberTheMilk
                                     rtmList.TaskSeriesCollection[0].TaskURL,
                                     priority,
                                     rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime,
-                                    rtmList.TaskSeriesCollection[0].TaskCollection[0].Estimate);
+                                    rtmList.TaskSeriesCollection[0].TaskCollection[0].Estimate,
+			                        rtmList.TaskSeriesCollection[0].LocationID);
         }
 
         public static void DeleteTask (string listId, string taskSeriesId, string taskId)
@@ -729,5 +782,6 @@ namespace RememberTheMilk
 			               Catalog.GetString ("A note has been added to the selected Remember The Milk task"),
 			               taskId, listId);
 		}
+
 	}
 }

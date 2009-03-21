@@ -40,13 +40,13 @@ namespace RtmNet
 		/// The longitude of the location
 		/// </summary>
 		[XmlAttribute("longitude", Form=XmlSchemaForm.Unqualified)]
-		public double Longitude;
+		public string Longitude;
     
 		/// <summary>
 		/// The latitute of the location
 		/// </summary>
 		[XmlAttribute("latitude", Form=XmlSchemaForm.Unqualified)]
-		public double Latitude;
+		public string Latitude;
     
 		/// <summary>
 		/// The zoom level of the location

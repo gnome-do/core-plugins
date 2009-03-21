@@ -37,15 +37,16 @@ namespace RememberTheMilk
         private string priority;
         private int has_due_time;
 		private string estimate;
+		private string location_id;
 
         public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name) :
-            this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "")
+            this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "", "")
         {
         }
 
         public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name, 
 		                    DateTime due, DateTime completed, string taskUrl, 
-		                    string priority, int hasDueTime, string estimate)
+		                    string priority, int hasDueTime, string estimate, string locationId)
         {
             this.list_id = listId;
             this.taskseries_id = taskSeriesId;
@@ -57,6 +58,7 @@ namespace RememberTheMilk
             this.priority = priority;
             this.has_due_time = hasDueTime;
 			this.estimate = estimate;
+			this.location_id = locationId;
         }
 
         public override string Name { get { return name; } }
@@ -149,6 +151,10 @@ namespace RememberTheMilk
 		
 		public string Estimate {
 			get { return estimate; }
+		}
+		
+		public string LocationId {
+			get { return location_id; }
 		}
     }
 }

@@ -1225,7 +1225,25 @@ namespace RtmNet
 #endregion
 
 		
+#region [ Locations ]
 		
+		public Locations LocationsGetList()
+		{
+			Hashtable parameters = new Hashtable();
+			parameters.Add ("method", "rtm.locations.getList");
+			RtmNet.Response response = GetResponse(parameters);
+			
+			if( response.Status == ResponseStatus.OK )
+			{
+				return response.Locations;
+			}
+			else
+			{
+				throw new RtmApiException(response.Error);
+			}
+		}
+		
+#endregion
 		
 		
 		
