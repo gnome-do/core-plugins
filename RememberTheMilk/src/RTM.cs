@@ -251,7 +251,7 @@ namespace RememberTheMilk
                                     List<RTMTaskNoteItem> note_list = new List<RTMTaskNoteItem> ();
                                     note_list.Clear ();
                                     foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection)
-                                        note_list.Add (new RTMTaskNoteItem (rtmNote.Title, rtmNote.Text));
+                                        note_list.Add (new RTMTaskNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID));
 
                                     string desc1 = String.Format (Catalog.GetPluralString
                                                                   ("{0} note is",

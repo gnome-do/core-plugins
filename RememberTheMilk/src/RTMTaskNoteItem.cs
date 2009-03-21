@@ -28,12 +28,13 @@ namespace RememberTheMilk
 	
 	public class RTMTaskNoteItem : Item, ITextItem
 	{
-		string title, text;
+		string title, text, note_id;
 		
-		public RTMTaskNoteItem (string title, string text)
+		public RTMTaskNoteItem (string title, string text, string note_id)
 		{
 			this.title = title;
 			this.text = text;
+			this.note_id = note_id;
 		}
 		
 		public override string Name {
@@ -50,6 +51,10 @@ namespace RememberTheMilk
 		
 		public string Text {
 			get { return text; }
+		}
+		
+		public string Id {
+			get { return note_id; }
 		}
 	}
 }
