@@ -139,7 +139,7 @@ namespace WindowManager
 			string application = (item as IApplicationItem).Exec;
 			application = application.Split (new char[] {' '})[0];
 			
-			return WindowUtils.GetApplicationList (application).Any ();
+			return WindowUtils.WindowListForCmd (application).Any ();
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -164,8 +164,8 @@ namespace WindowManager
 			} else {
 				if (items.First () is IApplicationItem) {
 					List<Window> windows = new List<Window> ();
-					foreach (Wnck.Application app in WindowUtils.GetApplicationList ((items.First () as IApplicationItem).Exec))
-						windows.AddRange (app.Windows);
+					windows.AddRange (WindowUtils.WindowListForCmd ((items.First () as IApplicationItem).Exec));
+					
 					ToggleGroup (windows);
 				} else if (items.First () is GenericWindowItem) {
 					GenericWindowItem generic;
@@ -263,9 +263,9 @@ namespace WindowManager
 			} else {
 				if (items.First () is IApplicationItem) {
 					string application = (items.First () as IApplicationItem).Exec;
-					List<Application> apps = WindowUtils.GetApplicationList (application);
+					List<Window> windows = WindowUtils.WindowListForCmd (application);
 					
-					WindowControl.CloseWindows (apps.SelectMany (app => app.Windows));
+					WindowControl.CloseWindows (windows);
 					
 				}
 			}
