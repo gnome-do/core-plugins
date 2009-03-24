@@ -1,0 +1,29 @@
+<Addin
+	id="Exaile"
+	namespace="Do"
+	version="0.1"
+	name="Exaile"
+	description="Search and play music in Exaile."
+	author="Graham Whelan"
+	category="Community"
+	>
+
+	<Runtime>
+		<Import assembly="Exaile.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Exaile.MusicItemSource" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="Do.Exaile.PlayAction" />
+		<Action type="Do.Exaile.PlayItemAction" />
+		<Action type="Do.Exaile.PauseAction" />
+		<Action type="Do.Exaile.NextAction" />
+		<Action type="Do.Exaile.PreviousAction" />
+	</Extension>
+</Addin>
