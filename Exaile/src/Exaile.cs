@@ -19,6 +19,7 @@
 
 using System;
 using System.IO;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Diagnostics;
@@ -28,7 +29,7 @@ using Mono.Data.Sqlite;
 
 using Do.Platform;
 
-namespace Do.Exaile
+namespace Exaile
 {
 
 	public static class Exaile
@@ -114,44 +115,49 @@ namespace Do.Exaile
 			
 			if (songs.Any ()) return songs;
 
+			// If the database doesn't exist then just return.
+			// This prevents the code below from creating an empty database
+			// which causes Exaile to crash.
+			if (!File.Exists (MusicLibraryFile)) {
+				Log.Error ("Could not find Exaile database file: " + MusicLibraryFile);
+				return songs;
+			}
+				
 			// Song list is not cached. Load songs from database.
 			try {
 				string connectionString = "URI=file:" + MusicLibraryFile;
-				System.Data.IDbConnection dbcon =
-					new SqliteConnection(connectionString);
-				dbcon.Open();
-				System.Data.IDbCommand dbcmd = dbcon.CreateCommand();
-				dbcmd.CommandText =
-					"SELECT tracks.title, artists.name, albums.name, " + 
-					"tracks.year, albums.image, paths.name, tracks.track " +
-					"FROM tracks " +
-					"JOIN artists ON tracks.artist = artists.id " +
-					"JOIN albums ON tracks.album = albums.id " +
-					"JOIN paths ON tracks.path = paths.id";
-				System.Data.IDataReader reader = dbcmd.ExecuteReader();
+				using (IDbConnection dbcon = new SqliteConnection(connectionString)) {
+					using (IDbCommand dbcmd = dbcon.CreateCommand()) {
+						dbcon.Open();
+						dbcmd.CommandText =
+							"SELECT tracks.title, artists.name, albums.name, " + 
+							"tracks.year, albums.image, paths.name, tracks.track " +
+							"FROM tracks " +
+							"JOIN artists ON tracks.artist = artists.id " +
+							"JOIN albums ON tracks.album = albums.id " +
+							"JOIN paths ON tracks.path = paths.id";
 
-				while(reader.Read()) {
-					string name = reader.GetString(0);
-					string artist = reader.GetString(1);
-					string album = reader.GetString(2);
-					string year = reader.GetString(3);
-					object image_value = reader.GetValue(4);
-					string cover = null;
-					string file = reader.GetString(5);
-					int track = reader.GetInt32(6);
+						using (IDataReader reader = dbcmd.ExecuteReader()) {
+							while(reader.Read()) {
+								string name = reader.GetString(0);
+								string artist = reader.GetString(1);
+								string album = reader.GetString(2);
+								string year = reader.GetString(3);
+								object image_value = reader.GetValue(4);
+								string cover = null;
+								string file = reader.GetString(5);
+								int track = reader.GetInt32(6);
 
-					if (image_value is string) {
-						cover = Path.Combine(CoverArtDirectory,
-							image_value as string);
+								if (image_value is string)
+									cover = Path.Combine(CoverArtDirectory, image_value as string);
+
+								songs.Add(new SongMusicItem(name, artist, album, year, cover, file, track));
+							}
+						}
 					}
-
-					songs.Add(new SongMusicItem(name, artist, album, year,
-						cover, file, track));
 				}
-
 			} catch (Exception e) {
-				Console.Error.WriteLine (
-					"Could not read Exaile database file: " + e.Message);
+				Log.Error ("Could not read Exaile database file: " + e.Message);
 			}
 			return songs;
 		}

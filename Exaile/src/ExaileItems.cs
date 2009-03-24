@@ -26,7 +26,7 @@ using Mono.Unix;
 using Do.Universe;
 using Do.Platform;
 
-namespace Do.Exaile
+namespace Exaile
 {
 
 	class BrowseMusicItem: Item

@@ -17,13 +17,13 @@
 	</Dependencies>
 
 	<Extension path = "/Do/ItemSource">
-		<ItemSource type="Do.Exaile.MusicItemSource" />
+		<ItemSource type="Exaile.MusicItemSource" />
 	</Extension>
 	<Extension path= "/Do/Action">
-		<Action type="Do.Exaile.PlayAction" />
-		<Action type="Do.Exaile.PlayItemAction" />
-		<Action type="Do.Exaile.PauseAction" />
-		<Action type="Do.Exaile.NextAction" />
-		<Action type="Do.Exaile.PreviousAction" />
+		<Action type="Exaile.PlayAction" />
+		<Action type="Exaile.PlayItemAction" />
+		<Action type="Exaile.PauseAction" />
+		<Action type="Exaile.NextAction" />
+		<Action type="Exaile.PreviousAction" />
 	</Extension>
 </Addin>

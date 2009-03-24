@@ -24,7 +24,7 @@ using Mono.Unix;
 
 using Do.Universe;
 
-namespace Do.Exaile
+namespace Exaile
 {
 
 	public abstract class MusicItem : Item

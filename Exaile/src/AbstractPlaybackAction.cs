@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using Do.Universe;
 
 
-namespace Do.Exaile
+namespace Exaile
 {
 
 	public abstract class AbstractPlaybackAction : Act

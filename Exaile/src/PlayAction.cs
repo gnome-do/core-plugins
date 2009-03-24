@@ -28,7 +28,7 @@ using Mono.Unix;
 using Do.Universe;
 
 
-namespace Do.Exaile
+namespace Exaile
 {
 
 	public class PlayAction : AbstractPlaybackAction
