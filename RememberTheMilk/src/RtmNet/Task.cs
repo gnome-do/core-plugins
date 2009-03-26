@@ -90,7 +90,11 @@ namespace RtmNet
 
 		[XmlElement("task", Form=XmlSchemaForm.Unqualified)]
 		public Task[] TaskCollection = new Task[0];
-
+		
+		/// <remarks/>
+		[XmlElement("tags", Form=XmlSchemaForm.Unqualified)]
+		public Tags Tags;
+		
 		/// <remarks/>
 		[XmlElement("notes", Form=XmlSchemaForm.Unqualified)]
 		public Notes Notes;
