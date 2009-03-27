@@ -10,9 +10,7 @@ FILES = \
 	src/ScreenListAction.cs \
 	src/WindowListItems.cs \
 	src/GenericWindowItem.cs \
-	src/ScreenItemSource.cs \
-	src/Util.cs \
-	src/WindowControl.cs 
+	src/ScreenItemSource.cs
 
 RESOURCES = \
 	Resources/WindowManager.addin.xml 
@@ -26,4 +24,5 @@ REFERENCES = \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GNOME_DESKTOP_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
-	$(DO_UNIVERSE_LIBS)
+	$(DO_UNIVERSE_LIBS) \
+	$(DO_INTERFACE_WINK_LIBS)
