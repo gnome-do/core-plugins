@@ -18,5 +18,6 @@
 
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="Mozilla.Firefox.BookmarkItemSource" />
+		<ItemSource type="Mozilla.Firefox.FABarItemSource" />
 	</Extension>
 </Addin>
