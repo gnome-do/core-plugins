@@ -36,9 +36,6 @@ namespace Mozilla.Firefox
 		const string BeginProfileName = "Path=";
 		const string BeginDefaultProfile = "Default=1";
 
-		private static bool update = true;
-		private static string tempDatabaseFile;
-
 		IEnumerable<BookmarkItem> bookmarks;
 
 		public FABarItemSource ()
@@ -68,12 +65,7 @@ namespace Mozilla.Firefox
 
 		public override void UpdateItems ()
 		{
-			if (update == true)
-			{ 
-				bookmarks = LoadBookmarkItems ();
-				update = false;
-			}
-			else update = true;
+			bookmarks = LoadBookmarkItems ();
 		}
 
 		/// <summary>
@@ -86,12 +78,12 @@ namespace Mozilla.Firefox
 		/// bookmarks.html file of the default firefox profile for the current
 		/// user.
 		/// </returns>
-		static string profile_path;
+		static string storedProfilePath;
 		static string ProfilePath {
 			get {
 				string line, profile, path, home;
 
-				if (null != profile_path) return profile_path;
+				if (!String.IsNullOrEmpty(storedProfilePath)) return storedProfilePath;
 				
 				home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 				profile = null;
@@ -106,7 +98,7 @@ namespace Mozilla.Firefox
 						}
 					}
 				}
-				return profile_path =
+				return storedProfilePath =
 					Path.Combine (Path.Combine (home, ".mozilla/firefox"), profile);
 			}
 		}
@@ -118,59 +110,48 @@ namespace Mozilla.Firefox
 		/// <returns>
 		/// The path of the current database file in memory.
 		/// </returns>
+		static string storedTempDatabasePath;
 		static string tempDatabasePath {
 			get {
 				// Create a reference to the current firefox file.
-				string firefoxFile = Path.Combine (ProfilePath, "places.sqlite");				
-				;
+				string firefoxPath = Path.Combine (ProfilePath, "places.sqlite");				
 				
-				// Check if the temp file exists.				
-				if  ((tempDatabaseFile == null) || (!File.Exists(tempDatabaseFile))) {
+				// Check if the stored temp file exists.				
+				if  ((String.IsNullOrEmpty(storedTempDatabasePath)) || (!File.Exists(storedTempDatabasePath))) {
 					// If it doesn't, make one.
 					string copyPath = Path.GetTempFileName();
-					System.IO.File.Copy(firefoxFile, copyPath, true);
-					tempDatabaseFile = copyPath;
+					System.IO.File.Copy(firefoxPath, copyPath, true);
+					storedTempDatabasePath = copyPath;
 				}
-				else if (File.Exists(tempDatabaseFile))
+				else if (File.Exists(storedTempDatabasePath))
 				{
-					FileInfo currentFileInfo = new FileInfo(firefoxFile);
-					FileInfo firefoxFileInfo = new FileInfo(tempDatabaseFile);
+					FileInfo currentFileInfo = new FileInfo(firefoxPath);
+					FileInfo firefoxFileInfo = new FileInfo(storedTempDatabasePath);
 					
 					if (currentFileInfo.Length != firefoxFileInfo.Length) 
-						System.IO.File.Copy(firefoxFile, tempDatabaseFile, true);
+						System.IO.File.Copy(firefoxPath, storedTempDatabasePath, true);
 				}
 				
-				return tempDatabaseFile;
+				return storedTempDatabasePath;
 			}
 		}
 
 		IEnumerable<BookmarkItem> LoadBookmarkItems ()
 		{
-			string connectionString = "URI=file:" + tempDatabasePath + ",version=3";
-			IDbConnection dbcon;
-			dbcon = (IDbConnection) new SqliteConnection(connectionString);
-			dbcon.Open();
-				
-			string search = "SELECT title, url FROM moz_places ORDER BY frecency DESC";
+			string connectionString = String.Format ("URI=file:{0},version=3",tempDatabasePath);
 			
-			IDbCommand dbcmd = dbcon.CreateCommand();
-			dbcmd.CommandText = search;
-			
-			IDataReader reader = dbcmd.ExecuteReader();
-			
-			while(reader.Read()) {
-	            string title = reader.GetString (0);
-	            string url = reader.GetString (1);
-	            if (url[0] != 'p') yield return new BookmarkItem (title, url);
+			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection(connectionString)) {
+				using (IDbCommand dbcmd = dbcon.CreateCommand()) {
+					dbcmd.CommandText = "SELECT title, url FROM moz_places ORDER BY frecency DESC";
+					using (IDataReader reader = dbcmd.ExecuteReader()) {
+						while(reader.Read()) {
+							string title = reader.GetString (0);
+							string url = reader.GetString (1);
+							if (url[0] != 'p') yield return new BookmarkItem (title, url);
+						}
+					}
+				}
 			}
-			
-			// clean up
-			reader.Close();
-			reader = null;
-			dbcmd.Dispose();
-			dbcmd = null;
-			dbcon.Close();
-			dbcon = null;
 		}
 	}
 }  
