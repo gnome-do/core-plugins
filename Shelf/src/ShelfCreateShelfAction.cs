@@ -1,8 +1,7 @@
-/* PauseAction.cs 
+/* ShelfCreateShelfAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,36 +18,45 @@
  */
 
 using System;
-
+using System.Collections.Generic;
 using Mono.Unix;
-
-using Do.Platform;
 using Do.Universe;
+using System.Linq;
 
-namespace Banshee
-{	
-	public class PauseAction : AbstractPlayerAction
+namespace Shelf
+{
+	public class ShelfCreateShelfAction : Act
 	{
-		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+		
+		public ShelfCreateShelfAction()
+		{
 		}
-
+		
+		public override string Name {
+			get { return Catalog.GetString ("Create a new Shelf"); }
+		}
+		
 		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
+			get { return Catalog.GetString ("Adds a new Shelf"); }
 		}
 
 		public override string Icon {
-			get { return "media-playback-pause"; }
+			get { return "folder-saved-search"; }
 		}
 
-		protected override bool IsAvailable()
-		{
-			return Banshee.IsPlaying;
+		public override IEnumerable<Type> SupportedItemTypes {
+				get { yield return typeof (ITextItem); } 
 		}
 
-		protected override void Perform ()
+		public override bool SupportsItem (Item item)
 		{
-			Banshee.Pause ();
+			return (item is ITextItem);
+		}
+
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			ShelfItemSource.CreateShelf((items.First () as ITextItem).Text);
+			yield break;
 		}
 	}
 }

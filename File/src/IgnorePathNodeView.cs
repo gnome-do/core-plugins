@@ -1,4 +1,4 @@
-/* PauseAction.cs 
+/* IgnorePathNodeView.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -19,36 +19,40 @@
  */
 
 using System;
-
 using Mono.Unix;
 
-using Do.Platform;
-using Do.Universe;
+using Gtk;
 
-namespace Banshee
-{	
-	public class PauseAction : AbstractPlayerAction
+namespace Do.FilesAndFolders
+{
+	
+	// TODO: update this class to use spin buttons,
+	public class IgnorePathNodeView : PathNodeView
 	{
-		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+		public enum Column {
+			Path = 0,
+			NumColumns
 		}
-
-		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
-		}
-
-		public override string Icon {
-			get { return "media-playback-pause"; }
-		}
-
-		protected override bool IsAvailable()
+		
+		public IgnorePathNodeView () : base ()
 		{
-			return Banshee.IsPlaying;
-		}
+			CellRenderer cell;
+			RulesHint = true;
+			HeadersVisible = true;
+			
+			Model = new ListStore (typeof (string));
 
-		protected override void Perform ()
+			cell = new CellRendererText ();
+			(cell as CellRendererText).Width = 310;
+			(cell as CellRendererText).Ellipsize = Pango.EllipsizeMode.Middle;
+			AppendColumn (Catalog.GetString ("Folder"), cell, "text", Column.Path);
+			
+			Refresh ();
+		}
+		
+		public void Refresh()
 		{
-			Banshee.Pause ();
+			base.Refresh(false);
 		}
 	}
 }

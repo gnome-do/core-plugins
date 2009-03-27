@@ -34,11 +34,12 @@ namespace Do.FilesAndFolders
 		#region Preference keys and default values.
 		const string IncludeHiddenFilesKey = "IncludeHiddenFiles";
 		const string IncludeHiddenFilesWhenBrowsingKey = "IncludeHiddenFilesWhenBrowsing";
-		const string MaximumFilesIndexedKey = "MaximumFilesIndexed";
-
+		const string LimitMaxFilesIndexedKey = "LimitMaximumFilesIndexed";
+		
 		const bool IncludeHiddenFilesDefaultValue = false;
 		const bool IncludeHiddenFilesWhenBrowsingDefaultValue = true;
-		const int MaximumFilesIndexedDefaultValue = 3000;
+		const bool LimitMaxFilesIndexedDefaultValue = true;
+		const int MaximumFilesIndexedValue = 3000;
 		#endregion
 
 		IPreferences Prefs { get; set; }
@@ -52,10 +53,14 @@ namespace Do.FilesAndFolders
 			get { return Prefs.Get (IncludeHiddenFilesWhenBrowsingKey, IncludeHiddenFilesWhenBrowsingDefaultValue); }
 			set { Prefs.Set (IncludeHiddenFilesWhenBrowsingKey, value); }
 		}
+		
+		public bool LimitMaxFilesIndexed {
+			get { return Prefs.Get (LimitMaxFilesIndexedKey, LimitMaxFilesIndexedDefaultValue); }
+			set { Prefs.Set (LimitMaxFilesIndexedKey, value); }
+		}
 
 		public int MaximumFilesIndexed {
-			get { return Prefs.Get (MaximumFilesIndexedKey, MaximumFilesIndexedDefaultValue); }
-			set { Prefs.Set (MaximumFilesIndexedKey, value); }
+			get { return MaximumFilesIndexedValue; }
 		}
 		
 		public FilesAndFoldersPreferences ()

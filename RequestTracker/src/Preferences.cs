@@ -1,4 +1,4 @@
-/* PauseAction.cs 
+/* Preferences.cs 
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -17,38 +17,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 using System;
-
-using Mono.Unix;
-
 using Do.Platform;
-using Do.Universe;
 
-namespace Banshee
-{	
-	public class PauseAction : AbstractPlayerAction
+namespace RequestTracker
+{
+	
+	public class RTPreferences
 	{
-		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+		const string URLsKey = "URLs";
+		
+		IPreferences prefs;
+
+		public RTPreferences() {
+			prefs = Services.Preferences.Get<RTPreferences> ();
 		}
 
-		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
-		}
-
-		public override string Icon {
-			get { return "media-playback-pause"; }
-		}
-
-		protected override bool IsAvailable()
-		{
-			return Banshee.IsPlaying;
-		}
-
-		protected override void Perform ()
-		{
-			Banshee.Pause ();
+		public string URLs {
+			get { return prefs.Get<string> (URLsKey, ""); }
+			set { prefs.Set (URLsKey, value); }
 		}
 	}
+	
 }
+

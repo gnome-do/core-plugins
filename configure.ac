@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.8.0.1])
+AC_INIT([gnome-do-plugins], [0.8.1.1])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
@@ -170,6 +170,7 @@ Skype/Makefile
 SqueezeCenter/Makefile
 SSH/Makefile
 StockQuote/Makefile
+RequestTracker/Makefile
 SystemServices/Makefile
 Tasque/Makefile
 TerminalServerClient/Makefile

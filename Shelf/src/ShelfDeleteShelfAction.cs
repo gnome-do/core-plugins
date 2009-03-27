@@ -1,8 +1,7 @@
-/* PlayAction.cs
+/* ShelDeleteShelfAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,61 +17,51 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
-using System.Linq;
 using System.Collections.Generic;
-
 using Mono.Unix;
-
+using System.Linq;
 using Do.Universe;
 
-namespace Banshee
-{	
-	public class PlayAction : AbstractPlayerAction
-	{		
+namespace Shelf
+{
+	public class ShelfDeleteShelfAction : Act
+	{
+		
+		public ShelfDeleteShelfAction()
+		{
+		}
+		
 		public override string Name {
-			get { return Catalog.GetString ("Play"); }
+			get { return Catalog.GetString ("Remove a shelf"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Play from your Banshee Collection"); }
+			get { return Catalog.GetString ("Removes a shelf from your shelves"); }
 		}
-		
+
 		public override string Icon {
-			get { return "media-playback-start"; }
+			get { return "remove"; }
 		}
-		
+
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
-				yield return typeof (MediaItem);
-				foreach (Type type in base.SupportedItemTypes)
-					yield return type;
-			}
+				get { yield return typeof (ShelfItem); } 
 		}
 
-		public override bool SupportsItem(Item item)
+		public override bool SupportsItem (Item item)
 		{
-			return (item is MediaItem) || base.SupportsItem (item);
-		}
-
-		protected override void Perform ()
-		{
+			if(!(item is ShelfItem))
+				return false;
+			if((item as ShelfItem).ShelfName.Equals("Default"))
+				return false;
+			return true;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (items.First () is MediaItem)
-				Banshee.Play (items.OfType<MediaItem> ().First ());
-			else 
-				Banshee.Play ();
-				
+			ShelfItemSource.Shelves.Remove((items.First () as ShelfItem).ShelfName);
+			ShelfItemSource.Serialize();
 			yield break;
-		}
-		
-		protected override bool IsAvailable ()
-		{
-			return !Banshee.IsPlaying;
 		}
 	}
 }
