@@ -228,6 +228,9 @@ namespace RtmNet
 		/// <remarks/>
 		[XmlAttribute("estimate", Form=XmlSchemaForm.Unqualified)]
 		public string Estimate;
-    
+		
+		/// <remarks/>
+		[XmlAttribute("url", Form=XmlSchemaForm.Unqualified)]
+		public string TaskURL;   
 	}
 }
