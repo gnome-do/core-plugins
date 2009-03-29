@@ -59,14 +59,10 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Items {
 			get {
-                List<Item> items;
-		
-                items = new List<Item> ();
-				items.Add (new ScreenItem (Catalog.GetString ("Current Desktop"), 
-                   Catalog.GetString ("Everything on the Current Desktop"),
-                   "desktop"));
+				yield return new CurrentScreenItem ();
 				
-				return items;
+				foreach (Wnck.Workspace workspace in Wnck.Screen.Default.Workspaces)
+					yield return new ScreenItem (workspace);
 			}
 		}
 

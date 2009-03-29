@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 using Wnck;
 
 using Do.Universe;
@@ -38,5 +39,8 @@ namespace WindowManager
 	
 	public interface IScreenItem : IItem
 	{
+		Wnck.Workspace Workspace { get; }
+		
+		IEnumerable<Wnck.Window> Windows { get; }
 	}
 }

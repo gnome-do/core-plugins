@@ -22,10 +22,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 using System.Threading;
 
 using Do.Universe;
+using Do.Interface.Wink;
 
 using Wnck;
 using Mono.Unix;
@@ -244,32 +246,6 @@ namespace WindowManager
                            WindowMoveResizeMask.Y,
 			               x, y, width, height);
 		}
-		
-		protected List<Window> ViewportWindows {
-			get {
-				List<Window> windowList = new List<Window> ();
-				
-				Dictionary<string, List<Window>> processesList;
-				
-				WindowListItems.GetList (out processesList);
-				
-				//We need a list of every window in our current viewport only
-				foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
-					foreach (Window w in kvp.Value) {
-						if (w.IsInViewport (Screen.Default.ActiveWorkspace))
-							windowList.Add (w);
-					}
-				}
-				
-				return windowList;
-			}
-		}
-		
-		protected List<Window> VisibleViewportWindows {
-			get {
-				return ViewportWindows.FindAll (delegate (Window w) { return !w.IsMinimized; });
-			}
-		}
 	}
 	
 	public class ScreenTileAction : ScreenActionAction
@@ -288,24 +264,25 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			List<Window> windowList = VisibleViewportWindows;
+			ScreenItem item = items.First () as ScreenItem;
+			IEnumerable<Window> windowList = item.VisibleWindows;
 			Gdk.Rectangle screenGeo = DoModifyGeometry.GetScreenMinusPanelGeometry;
 			
 			//can't tile no windows
-			if (windowList.Count <= 1) return null;
+			if (windowList.Count () <= 1) return null;
 			
 			int square, height, width;
 			
 			//We are going to tile to a square, so what we want is to find
 			//the smallest perfect square all our windows will fit into
-			square = (int) Math.Ceiling (Math.Sqrt (windowList.Count));
+			square = (int) Math.Ceiling (Math.Sqrt (windowList.Count ()));
 			
 			//Our width will always be our perfect square
 			width = square;
 			
 			//Our height is at least one (e.g. a 2x1)
 			height = 1;
-			while (width * height < windowList.Count) {
+			while (width * height < windowList.Count ()) {
 				height++;
 			}
 			
@@ -317,15 +294,15 @@ namespace WindowManager
 			int row = 0, column = 0;
 			int x, y;
 			
-			for (int i = 0; i < windowList.Count; i++) {
+			foreach (Wnck.Window window in windowList) {
 				x = (column * windowWidth) + screenGeo.X;
 				y = (row * windowHeight) + screenGeo.Y;
 				
-				if (i == windowList.Count - 1) {
-					DoModifyGeometry.SetWindowGeometry (windowList[i], x, y,
+				if (window == windowList.Last ()) {
+					DoModifyGeometry.SetWindowGeometry (window, x, y,
 					                                    windowHeight, screenGeo.Width - x, true);
 				} else {
-					DoModifyGeometry.SetWindowGeometry (windowList[i], x, y, windowHeight, 
+					DoModifyGeometry.SetWindowGeometry (window, x, y, windowHeight, 
 					                                    windowWidth, true);
 				}
 				
@@ -357,10 +334,11 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			List<Window> windowList = VisibleViewportWindows;
+			ScreenItem item = items.First () as ScreenItem;
+			IEnumerable<Window> windowList = item.VisibleWindows;
 			
 			//can't tile no windows
-			if (windowList.Count <= 1) return null;
+			if (windowList.Count () <= 1) return null;
 			
 			int width, height, offsetx, offsety;
 			
@@ -377,10 +355,10 @@ namespace WindowManager
 			//calculated for too.
 			
 			width = (Screen.Default.Width - (2 * xbuffer)) - 
-				(winbuffer * (windowList.Count - 1));
+				(winbuffer * (windowList.Count () - 1));
 			
 			height =  (Screen.Default.Height - (2 * ybuffer)) - 
-				(winbuffer * (windowList.Count - 1));
+				(winbuffer * (windowList.Count () - 1));
 			
 			offsetx = xbuffer;
 			offsety = ybuffer;
@@ -415,6 +393,8 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
+			//fixme
+			ScreenItem item = items.First () as ScreenItem;
 			List<Window> windowList = new List<Window> ();
 			
 			Dictionary<string, List<Window>> processesList;
@@ -423,7 +403,7 @@ namespace WindowManager
 			
 			foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
 				foreach (Window w in kvp.Value) {
-					if (w.IsInViewport (Screen.Default.ActiveWorkspace))
+					if (w.IsInViewport (item.Workspace))
 						windowList.Add (w);
 				}
 			}

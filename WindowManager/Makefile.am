@@ -3,14 +3,22 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=WindowManager
 
 FILES = \
-	src/WindowListAction.cs \
+	src/GenericWindowItem.cs \
 	src/IWindowList.cs \
 	src/WindowItem.cs \
 	src/WindowItemSource.cs \
-	src/ScreenListAction.cs \
 	src/WindowListItems.cs \
-	src/GenericWindowItem.cs \
-	src/ScreenItemSource.cs
+	src/Screen/CurrentScreenItem.cs \
+	src/Screen/ScreenItem.cs \
+	src/Screen/ScreenItemSource.cs \
+	src/Screen/ScreenListAction.cs \
+	src/WindowActions/WindowActionAction.cs \
+	src/WindowActions/WindowCloseAction.cs \
+	src/WindowActions/WindowMaximizeAction.cs \
+	src/WindowActions/WindowMinimizeAction.cs \
+	src/WindowActions/WindowMoveAction.cs \
+	src/WindowActions/WindowTogglableAction.cs
+
 
 RESOURCES = \
 	Resources/WindowManager.addin.xml 

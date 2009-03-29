@@ -21,9 +21,14 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Wnck;
 
+using Mono.Unix;
+
 using Do.Universe;
+using Do.Interface.Wink;
 
 namespace WindowManager
 {	
@@ -62,36 +67,5 @@ namespace WindowManager
 			this.icon = icon;
 		}
 		
-	}
-	
-	public class ScreenItem : Item, IScreenItem
-	{
-		string name, description, icon;
-		
-		public override string Name {
-			get {
-				return name;
-			}
-		}
-
-		public override string Description {
-			get {
-				return description;
-			}
-		}
-
-		public override string Icon {
-			get {
-				return icon;
-			}
-		}
-
-		
-		public ScreenItem (string name, string description, string icon) 
-		{
-			this.name = name;
-			this.icon = icon;
-			this.description = description;
-		}
 	}
 }
