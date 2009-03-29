@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using Wnck;
 
 using Do.Universe;
+using Do.Interface.Wink;
 
 namespace WindowManager
 {
@@ -39,8 +40,10 @@ namespace WindowManager
 	
 	public interface IScreenItem : IItem
 	{
-		Wnck.Workspace Workspace { get; }
+		Viewport Viewport { get; }
 		
 		IEnumerable<Wnck.Window> Windows { get; }
+		
+		IEnumerable<Wnck.Window> VisibleWindows { get; }
 	}
 }

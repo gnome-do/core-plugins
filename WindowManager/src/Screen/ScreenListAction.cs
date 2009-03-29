@@ -264,7 +264,7 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			ScreenItem item = items.First () as ScreenItem;
+			IScreenItem item = items.First () as IScreenItem;
 			IEnumerable<Window> windowList = item.VisibleWindows;
 			Gdk.Rectangle screenGeo = DoModifyGeometry.GetScreenMinusPanelGeometry;
 			
@@ -334,7 +334,7 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			ScreenItem item = items.First () as ScreenItem;
+			IScreenItem item = items.First () as IScreenItem;
 			IEnumerable<Window> windowList = item.VisibleWindows;
 			
 			//can't tile no windows
@@ -394,7 +394,7 @@ namespace WindowManager
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			//fixme
-			ScreenItem item = items.First () as ScreenItem;
+			IScreenItem item = items.First () as IScreenItem;
 			List<Window> windowList = new List<Window> ();
 			
 			Dictionary<string, List<Window>> processesList;
@@ -403,7 +403,7 @@ namespace WindowManager
 			
 			foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
 				foreach (Window w in kvp.Value) {
-					if (w.IsInViewport (item.Workspace))
+					if (item.Viewport.WindowVisibleInVeiwport (w))
 						windowList.Add (w);
 				}
 			}

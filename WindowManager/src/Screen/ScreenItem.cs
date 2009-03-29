@@ -31,13 +31,13 @@ namespace WindowManager
 	{
 		public override string Name {
 			get {
-				return Workspace.Name;
+				return Viewport.Name;
 			}
 		}
 
 		public override string Description {
 			get {
-				return Workspace.Name;
+				return Viewport.Name;
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace WindowManager
 		
 		public IEnumerable<Wnck.Window> Windows {
 			get {
-				return ScreenUtils.WorkspaceWindows (Workspace);
+				return ScreenUtils.ViewportWindows (Viewport);
 			}
 		}
 		
@@ -59,11 +59,11 @@ namespace WindowManager
 			}
 		}
 		
-		public Wnck.Workspace Workspace { get; set; }
+		public Viewport Viewport { get; set; }
 		
-		public ScreenItem (Wnck.Workspace workspace) 
+		public ScreenItem (Viewport viewport) 
 		{
-			Workspace = workspace;
+			Viewport = viewport;
 		}
 	}
 }

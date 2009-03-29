@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Do.Interface.Wink;
 using Wnck;
 using Mono.Unix;
 
@@ -61,19 +62,16 @@ namespace WindowManager
 			get {
 				yield return new CurrentScreenItem ();
 				
-				foreach (Wnck.Workspace workspace in Wnck.Screen.Default.Workspaces)
-					yield return new ScreenItem (workspace);
+				
+				foreach (Viewport viewport in ScreenUtils.Viewports)
+					yield return new ScreenItem (viewport);
 			}
 		}
 
 		
 		public ScreenItemSource()
 		{
-		}
-
-		public override IEnumerable<Item> ChildrenOfItem (Item item)
-		{
-			return null;
+			ScreenUtils.Initialize ();
 		}
 
 		public override void UpdateItems ()

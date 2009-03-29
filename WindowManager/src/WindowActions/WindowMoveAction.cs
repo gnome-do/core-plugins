@@ -29,7 +29,7 @@ namespace WindowManager
 {
 	
 	
-	public class WindowMoveAction : WindowActionAction
+	public class WindowMoveAction : Act
 	{
 		
 		public WindowMoveAction()
@@ -62,7 +62,7 @@ namespace WindowManager
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
-				return new [] { typeof (ScreenItem) };
+				return new [] { typeof (IScreenItem) };
 			}
 		}
 		
@@ -71,15 +71,30 @@ namespace WindowManager
 				return new [] { typeof (IApplicationItem) };
 			}
 		}
-
+		
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+		{
+			return true;
+		}
+		
+		public override bool SupportsItem (Item item)
+		{
+			if (!(item is IApplicationItem)) return false;
+			
+			string application = (item as IApplicationItem).Exec;
+			application = application.Split (new char[] {' '})[0];
+			
+			return WindowUtils.WindowListForCmd (application).Any ();
+		}
+		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			ScreenItem screen = modItems.First () as ScreenItem;
+			IScreenItem screen = modItems.First () as IScreenItem;
 			
 			foreach (IApplicationItem app in items.Cast<IApplicationItem> ()) {
 				List<Window> windows = WindowUtils.WindowListForCmd (app.Exec);
 				foreach (Wnck.Window window in windows)
-					window.MoveToWorkspace (screen.Workspace);
+					screen.Viewport.MoveWindowInto (window);
 			}
 			
 			return null;

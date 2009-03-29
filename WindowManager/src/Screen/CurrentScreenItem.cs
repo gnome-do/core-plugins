@@ -49,7 +49,7 @@ namespace WindowManager
 		
 		public IEnumerable<Wnck.Window> Windows {
 			get {
-				return ScreenUtils.WorkspaceWindows (Workspace);
+				return ScreenUtils.ViewportWindows (Viewport);
 			}
 		}
 		
@@ -59,9 +59,9 @@ namespace WindowManager
 			}
 		}
 		
-		public Wnck.Workspace Workspace {
+		public Viewport Viewport {
 			get {
-				return Wnck.Screen.Default.ActiveWorkspace;
+				return ScreenUtils.ActiveViewport;
 			}
 		}
 		
