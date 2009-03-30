@@ -3,11 +3,11 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=WindowManager
 
 FILES = \
-	src/GenericWindowItem.cs \
+	src/CurrentApplicationItem.cs \
+	src/CurrentWindowItem.cs \
 	src/IWindowList.cs \
 	src/WindowItem.cs \
 	src/WindowItemSource.cs \
-	src/WindowListItems.cs \
 	src/Screen/CurrentScreenItem.cs \
 	src/Screen/ScreenItem.cs \
 	src/Screen/ScreenItemSource.cs \

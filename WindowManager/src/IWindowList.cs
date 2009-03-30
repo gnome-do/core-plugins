@@ -33,12 +33,12 @@ namespace WindowManager
 //	{
 //	}
 	
-	public interface IWindowItem : IItem
+	public interface IWindowItem
 	{
-		Wnck.Window Window { get; }
+		IEnumerable<Wnck.Window> Windows { get; }
 	}
 	
-	public interface IScreenItem : IItem
+	public interface IScreenItem
 	{
 		Viewport Viewport { get; }
 		

@@ -34,24 +34,24 @@ namespace WindowManager
 {	
 	public class WindowItem : Item, IWindowItem
 	{
-		Wnck.Window window;
+		List<Wnck.Window> windows;
 		string icon;
 		
 		public override string Name {
 			get {
-				return window.Name;
+				return windows.First ().Name;
 			}
 		}
 
 		public override string Description {
 			get {
-				return window.Name;
+				return windows.First ().Name;
 			}
 		}
 		
-		public Wnck.Window Window {
+		public IEnumerable<Wnck.Window> Windows {
 			get {
-				return window;
+				return windows;
 			}
 		}
 
@@ -63,9 +63,15 @@ namespace WindowManager
 		
 		public WindowItem(Window w, string icon)
 		{
-			this.window = w;
 			this.icon = icon;
+			windows = new List<Window> ();
+			windows.Add (w);
 		}
 		
+		public WindowItem(IEnumerable<Window> w, string icon)
+		{
+			this.icon = icon;
+			windows = new List<Window> (w);
+		}
 	}
 }

@@ -42,109 +42,31 @@ namespace WindowManager
 	//have even showed interest from time to time.  I love you baby girl.
 	//Without you I never would have gotten this far.
 	
-	public class WindowActionAction : Act
+	public abstract class WindowActionAction : Act
 	{
-		protected Dictionary<string, List<Window>> procList;
-		protected Dictionary<string, List<Window>> procListDyn;
-		protected Dictionary<string, string> matchList;
-		protected Screen scrn;
-		
-		public WindowActionAction()
-		{
-			Gtk.Application.Init ();
-			
-			scrn = Screen.Default;
-			
-			WindowListItems.GetList (out procList);
-			WindowListItems.GetList (out procListDyn);
-			matchList = new Dictionary<string,string> ();
-			
-			WindowListItems.ListUpdated += UpdateList;
-		}
-		
-		public override string Name {
-			get { return Catalog.GetString ("Action Window"); }
-		}
-		
-		public override string Description {
-			get { return Catalog.GetString ("Action a Window."); }
-		}
-
-		public override string Icon {
-			get { return "eog"; } //fixme
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return true;
-		}
-
 		public override bool ModifierItemsOptional {
 			get { return true; }
-		}
-		
-		protected void UpdateList ()
-		{
-			WindowListItems.GetList (out procList);
-			WindowListItems.GetList (out procListDyn);
-		}
-		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { return new Type [] {
-				typeof (IWindowItem)};
-			}
-		}
-
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			Item[] items;
-			
-			if (item is IApplicationItem) {
-				string application = (item as IApplicationItem).Exec;
-				application = application.Split (new char[] {' '})[0];
-				
-				if (!procList.ContainsKey (application)) return null;
-				
-				List<Window> winList;
-				procList.TryGetValue(application, out winList);
-				
-				items = new Item[winList.Count];
-				for (int i = 0; i < winList.Count; i++) {
-					items[i] = new WindowItem (winList[i], item.Icon);
-				}
-			} else if (item.GetType () == typeof (GenericWindowItem)) {
-				items = new Item [1];
-				
-				items[0] = new WindowItem (WindowListItems.CurrentWindow, 
-				                           "gnome-window-manager");
-			} else {
-				return null;
-			}
-			return items;
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type[] {
 					typeof (IApplicationItem),
-					typeof (GenericWindowItem) };
+					typeof (IWindowItem),
+				};
 			}
 		}
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is GenericWindowItem) return true;
+			if (item is IApplicationItem) {
+				string application = (item as IApplicationItem).Exec;
+				application = application.Split (new char[] {' '})[0];
 			
-			if (!(item is IApplicationItem)) return false;
-			
-			string application = (item as IApplicationItem).Exec;
-			application = application.Split (new char[] {' '})[0];
-			
-			return WindowUtils.WindowListForCmd (application).Any ();
-		}
-
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-		{
-			return null;
+				return WindowUtils.WindowListForCmd (application).Any ();
+			} else if (item is WindowItem) {
+				return true;
+			}
+			return false;
 		}
 	}
 }

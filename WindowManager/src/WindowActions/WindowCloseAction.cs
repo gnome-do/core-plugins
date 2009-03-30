@@ -31,11 +31,11 @@ namespace WindowManager
 	public class WindowCloseAction : WindowActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Close All"); }
+			get { return Catalog.GetString ("Close"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Close your current window."); }
+			get { return Catalog.GetString ("Close selected windows."); }
 		}
 
 		public override string Icon {
@@ -44,19 +44,14 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (modItems.Any ()) {
-				Wnck.Window w = (modItems.First () as WindowItem).Window;
-				
-				w.Close (Gtk.Global.CurrentEventTime);
-			} else {
-				if (items.First () is IApplicationItem) {
-					string application = (items.First () as IApplicationItem).Exec;
-					List<Window> windows = WindowUtils.WindowListForCmd (application);
-					
-					WindowControl.CloseWindows (windows);
-					
-				}
-			}
+			IEnumerable<Wnck.Window> windows = null;
+			if (items.First () is IWindowItem)
+				windows = items.Cast<IWindowItem> ().SelectMany (wi => wi.Windows);
+			else if (items.First () is IApplicationItem)
+				windows = items.Cast<IApplicationItem> ().SelectMany (a => WindowUtils.WindowListForCmd (a.Exec));
+			
+			if (windows != null)
+				WindowControl.CloseWindows (windows);
 			return null;
 		}
 

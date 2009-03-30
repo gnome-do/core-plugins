@@ -182,7 +182,7 @@ namespace WindowManager
 		}
 	}
 	
-	public class ScreenActionAction : Act
+	public abstract class ScreenActionAction : Act
 	{
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type [] {
@@ -193,43 +193,11 @@ namespace WindowManager
 		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
-
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { return new Type [] {}; }
-		}
 		
 		public override bool SupportsItem (Item item)
 		{
 			return true;
 		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
-		{
-			return null;
-		}
-
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-		{
-			return false;
-		}
-		
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override string Description {
-			get { return ""; }
-		}
-
-		public override string Icon {
-			get { return ""; }
-		}
-
-		public override string Name {
-			get { return ""; }
-		}
-
 		
 		protected void SetWindowGeometry (Window w, int x, int y, int width, int height)
 		{
@@ -393,24 +361,10 @@ namespace WindowManager
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			//fixme
 			IScreenItem item = items.First () as IScreenItem;
-			List<Window> windowList = new List<Window> ();
 			
-			Dictionary<string, List<Window>> processesList;
-			
-			WindowListItems.GetList (out processesList);
-			
-			foreach (KeyValuePair<string, List<Window>> kvp in processesList) {
-				foreach (Window w in kvp.Value) {
-					if (item.Viewport.WindowVisibleInVeiwport (w))
-						windowList.Add (w);
-				}
-			}
-			
-			foreach (Window w in windowList) {
+			foreach (Window w in ScreenUtils.ViewportWindows (item.Viewport))
 				DoModifyGeometry.RestoreWindowGeometry (w);
-			}
 			
 			return null;
 		}

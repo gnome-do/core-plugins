@@ -43,16 +43,11 @@ namespace WindowManager
 			get { return "up"; }
 		}
 
-		public override void ToggleGroup (List<Window> windows)
+		public override void ToggleGroup (IEnumerable<Window> windows)
 		{
 			if (!windows.Any ())
 				return;
 			WindowControl.MaximizeWindow (windows.First ());
-		}
-
-		public override void ToggleWindow (Window window)
-		{
-			WindowControl.MaximizeWindow (window);
 		}
 	}
 }

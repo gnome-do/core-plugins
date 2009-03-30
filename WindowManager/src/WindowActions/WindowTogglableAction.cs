@@ -32,36 +32,19 @@ namespace WindowManager
 	//of groups.  So lets just put it all here.
 	public abstract class WindowTogglableAction : WindowActionAction
 	{
-		public abstract void ToggleGroup (List<Window> windows);
-		public abstract void ToggleWindow (Window window);
+		public abstract void ToggleGroup (IEnumerable<Window> windows);
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (modItems.Any ()) {
-				Window w = (modItems.First () as WindowItem).Window;
-				
-				ToggleWindow (w);
-			} else {
-				if (items.First () is IApplicationItem) {
-					List<Window> windows = new List<Window> ();
-					windows.AddRange (WindowUtils.WindowListForCmd ((items.First () as IApplicationItem).Exec));
-					
-					ToggleGroup (windows);
-				} else if (items.First () is GenericWindowItem) {
-					GenericWindowItem generic;
-					generic = (items.First () as GenericWindowItem);
-					
-					if (generic.WindowType == GenericWindowType.CurrentWindow) {
-						ToggleWindow (WindowListItems.CurrentWindow);
-					} else if (generic.WindowType == GenericWindowType.CurrentApplication) {
-						ToggleGroup (WindowListItems.CurrentApplication);
-					} else if (generic.WindowType == GenericWindowType.PreviousWindow) {
-						ToggleWindow (WindowListItems.PreviousWindow);
-					} else if (generic.WindowType == GenericWindowType.PreviousApplication) {
-						ToggleGroup (WindowListItems.PreviousApplication);
-					}
-				}
-			}
+			IEnumerable<Window> windows = null;
+			
+			if (items.First () is IWindowItem)
+				windows = items.Cast<IWindowItem> ().SelectMany (w => w.Windows);
+			else if (items.First () is IApplicationItem)
+				windows = items.Cast<IApplicationItem> ().SelectMany (a => WindowUtils.WindowListForCmd (a.Exec));
+			
+			if (windows != null)
+				ToggleGroup (windows);
 			
 			return null;
 		}

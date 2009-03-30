@@ -43,12 +43,7 @@ namespace WindowManager
 			get { return "down"; }
 		}
 		
-		public override void ToggleWindow (Window window)
-		{
-			WindowControl.MinimizeRestoreWindows (window);
-		}
-		
-		public override void ToggleGroup (List<Window> windows)
+		public override void ToggleGroup (IEnumerable<Window> windows)
 		{
 			WindowControl.MinimizeRestoreWindows (windows);
 		}
