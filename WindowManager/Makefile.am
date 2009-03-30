@@ -15,13 +15,13 @@ FILES = \
 	src/Screen/ScreenActionAction.cs \
 	src/Screen/ScreenCascadeAction.cs \
 	src/Screen/ScreenRestoreAction.cs \
+	src/Screen/ScreenSwapAction.cs \
 	src/Screen/ScreenTileAction.cs \
 	src/WindowActions/WindowActionAction.cs \
 	src/WindowActions/WindowCloseAction.cs \
 	src/WindowActions/WindowMaximizeAction.cs \
 	src/WindowActions/WindowMinimizeAction.cs \
 	src/WindowActions/WindowMoveAction.cs \
-	src/WindowActions/WindowTogglableAction.cs
 
 
 RESOURCES = \

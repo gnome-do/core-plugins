@@ -29,7 +29,7 @@ namespace WindowManager
 {
 	
 	
-	public class WindowMinimizeAction : WindowTogglableAction
+	public class WindowMinimizeAction : WindowActionAction
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Minimize/Restore"); }
@@ -43,7 +43,7 @@ namespace WindowManager
 			get { return "down"; }
 		}
 		
-		public override void ToggleGroup (IEnumerable<Window> windows)
+		public override void Action (IEnumerable<Window> windows)
 		{
 			WindowControl.MinimizeRestoreWindows (windows);
 		}

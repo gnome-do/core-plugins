@@ -42,18 +42,9 @@ namespace WindowManager
 			get { return Gtk.Stock.Quit; }
 		}
 
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		public override void Action (IEnumerable<Window> windows)
 		{
-			IEnumerable<Wnck.Window> windows = null;
-			if (items.First () is IWindowItem)
-				windows = items.Cast<IWindowItem> ().SelectMany (wi => wi.Windows);
-			else if (items.First () is IApplicationItem)
-				windows = items.Cast<IApplicationItem> ().SelectMany (a => WindowUtils.WindowListForCmd (a.Exec));
-			
-			if (windows != null)
-				WindowControl.CloseWindows (windows);
-			return null;
+			WindowControl.CloseWindows (windows);
 		}
-
 	}
 }

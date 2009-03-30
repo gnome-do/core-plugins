@@ -25,6 +25,7 @@
 		<Action type="WindowManager.ScreenTileAction" />
 		<Action type="WindowManager.ScreenCascadeAction" />
 		<Action type="WindowManager.ScreenRestoreAction" />
+		<Action type="WindowManager.ScreenSwapAction" />
 	</Extension>
 
 	<Extension path="/Do/ItemSource">

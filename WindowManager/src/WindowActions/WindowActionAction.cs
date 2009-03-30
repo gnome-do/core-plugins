@@ -61,5 +61,20 @@ namespace WindowManager
 			}
 			return false;
 		}
+		
+		public abstract void Action (IEnumerable<Window> windows);
+		
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			IEnumerable<Wnck.Window> windows = null;
+			if (items.First () is IWindowItem)
+				windows = items.Cast<IWindowItem> ().SelectMany (wi => wi.Windows);
+			else if (items.First () is IApplicationItem)
+				windows = items.Cast<IApplicationItem> ().SelectMany (a => WindowUtils.WindowListForCmd (a.Exec));
+			
+			if (windows != null)
+				Action (windows);
+			return null;
+		}
 	}
 }

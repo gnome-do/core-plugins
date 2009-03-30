@@ -29,7 +29,7 @@ namespace WindowManager
 {
 	
 	
-	public class WindowMaximizeAction : WindowTogglableAction
+	public class WindowMaximizeAction : WindowActionAction
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Maximize"); }
@@ -43,7 +43,7 @@ namespace WindowManager
 			get { return "up"; }
 		}
 
-		public override void ToggleGroup (IEnumerable<Window> windows)
+		public override void Action (IEnumerable<Window> windows)
 		{
 			if (!windows.Any ())
 				return;
