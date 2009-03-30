@@ -1,10 +1,10 @@
 <Addin
 	id="Pidgin"
 	namespace="Do"
-	version="1.6"
+	version="2.0"
 	name="Pidgin"
 	description="Search buddies and initiate chats in Pidgin."
-	author="David Siegel, Alex Launi"
+	author="David Siegel, Alex Launi, Chris Szikszoy"
 	category="Official"
 >
  

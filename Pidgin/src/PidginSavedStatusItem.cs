@@ -18,6 +18,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 
 using Do.Universe;
@@ -59,11 +60,11 @@ namespace PidginPlugin
 		public override string Icon { 
 			get  { 
 				switch (status) {
-				case 2: return iconBase + "available.png";
-				case 3: return iconBase + "busy.png";
+				case 2: return Path.Combine (iconBase, "available.png");
+				case 3: return Path.Combine (iconBase, "busy.png");
 				//there is not a 48px invisible icon.
 				case 4: return "/usr/share/pixmaps/pidgin/status/32/invisible.png";
-				case 5: return iconBase + "away.png";
+				case 5: return Path.Combine (iconBase, "away.png");
 				default: return "pidgin";
 				}
 			}
