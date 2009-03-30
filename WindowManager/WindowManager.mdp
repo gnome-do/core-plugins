@@ -22,7 +22,7 @@
     <File name="src/Screen" subtype="Directory" buildaction="Compile" />
     <File name="src/Screen/ScreenItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Screen/ScreenItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Screen/ScreenListAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenRestoreAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Screen/CurrentScreenItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/WindowActions" subtype="Directory" buildaction="Compile" />
     <File name="src/WindowActions/WindowActionAction.cs" subtype="Code" buildaction="Compile" />
@@ -33,6 +33,10 @@
     <File name="src/WindowActions/WindowMoveAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/CurrentWindowItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/CurrentApplicationItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/DoModifyGeometry.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenActionAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenTileAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenCascadeAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

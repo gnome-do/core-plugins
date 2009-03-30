@@ -11,7 +11,11 @@ FILES = \
 	src/Screen/CurrentScreenItem.cs \
 	src/Screen/ScreenItem.cs \
 	src/Screen/ScreenItemSource.cs \
-	src/Screen/ScreenListAction.cs \
+	src/Screen/DoModifyGeometry.cs \
+	src/Screen/ScreenActionAction.cs \
+	src/Screen/ScreenCascadeAction.cs \
+	src/Screen/ScreenRestoreAction.cs \
+	src/Screen/ScreenTileAction.cs \
 	src/WindowActions/WindowActionAction.cs \
 	src/WindowActions/WindowCloseAction.cs \
 	src/WindowActions/WindowMaximizeAction.cs \

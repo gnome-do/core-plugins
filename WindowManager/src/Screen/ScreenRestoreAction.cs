@@ -1,8 +1,8 @@
-// WindowActionAction.cs
+// ScreenListAction.cs
 //
-// GNOME Do is the legal property of its developers. Please refer to the
-// COPYRIGHT file distributed with this
-// source distribution.
+//GNOME Do is the legal property of its developers. Please refer to the
+//COPYRIGHT file distributed with this
+//source distribution.
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,31 +35,29 @@ using Mono.Unix;
 namespace WindowManager
 {
 	
-	public abstract class WindowActionAction : Act
+	public class ScreenRestoreAction : ScreenActionAction
 	{
-		public override bool ModifierItemsOptional {
-			get { return true; }
+		public override string Name {
+			get { return Catalog.GetString ("Restore Windows"); }
+		}
+		
+		public override string Description {
+			get { return Catalog.GetString ("Restore Windows to their Previous Positions"); }
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] {
-					typeof (IApplicationItem),
-					typeof (IWindowItem),
-				};
-			}
+		public override string Icon {
+			get { return "preferences-system-windows"; }
 		}
 
-		public override bool SupportsItem (Item item)
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			if (item is IApplicationItem) {
-				string application = (item as IApplicationItem).Exec;
-				application = application.Split (new char[] {' '})[0];
+			IScreenItem item = items.First () as IScreenItem;
 			
-				return WindowUtils.WindowListForCmd (application).Any ();
-			} else if (item is IWindowItem) {
-				return true;
-			}
-			return false;
+			foreach (Window w in ScreenUtils.ViewportWindows (item.Viewport))
+				DoModifyGeometry.RestoreWindowGeometry (w);
+			
+			return null;
 		}
+
 	}
 }

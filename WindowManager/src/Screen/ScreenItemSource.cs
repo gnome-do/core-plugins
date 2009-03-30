@@ -47,7 +47,7 @@ namespace WindowManager
 
 		public override string Icon {
 			get {
-				return "desktop"; //fixme
+				return "desktop";
 			}
 		}
 
@@ -71,7 +71,6 @@ namespace WindowManager
 		
 		public ScreenItemSource()
 		{
-			ScreenUtils.Initialize ();
 		}
 
 		public override void UpdateItems ()
