@@ -75,7 +75,7 @@ namespace RememberTheMilk
 				};
 			}
 		}
-        
+		
 		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
@@ -97,8 +97,8 @@ namespace RememberTheMilk
 				url = ((modifierItems.FirstOrDefault() as ITextItem).Text);
 			}
 			
-                	// User may have entered explicit mode and entered a blank line.
-                	// To be safe; strip out all new line characters from input
+			// User may have entered explicit mode and entered a blank line.
+			// To be safe; strip out all new line characters from input
 			// for URL resetting.
 			url = url.Replace("\n", "");
 
@@ -114,7 +114,7 @@ namespace RememberTheMilk
 				}
 			}
 			
-            		Services.Application.RunOnThread (() => {
+			Services.Application.RunOnThread (() => {
 				RTM.SetURL ((items.First () as RTMTaskItem).ListId,
 				            (items.First () as RTMTaskItem).TaskSeriesId,
 				            (items.First () as RTMTaskItem).Id, url);

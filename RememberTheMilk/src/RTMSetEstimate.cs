@@ -35,10 +35,10 @@ namespace RememberTheMilk
 				
 		public override string Description {
 			get { return Catalog.GetString ("Set or reset the estimated time for a task"); }
-        	}
+		}
 			
 		public override string Icon {
-			get { return "task-due.png@" + GetType ().Assembly.FullName; }
+			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
 		}
 				
 		public bool CheckValidTime(string timeEntered) {
@@ -80,10 +80,10 @@ namespace RememberTheMilk
 		}
         
 		public override bool SupportsItem (Item item) 
-	        {
-	        	return true;
-	        }
-        
+		{
+			return true;
+		}
+		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
 		{
 			return true;
