@@ -33,7 +33,7 @@ OUTPUT_FILES = \
 
 
 # Install plugins as data; there's no need for them to be excutable
-plugindir = ${datadir}/gnome-do/plugins
+plugindir = ${libdir}/gnome-do/plugins
 plugin_DATA = $(OUTPUT_FILES)
 
 MCS_FLAGS = $(MCS_LINQ_FLAG) -noconfig -codepage:utf8 -warn:4
