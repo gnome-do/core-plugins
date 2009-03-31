@@ -71,6 +71,12 @@ namespace WindowManager
 			return true;
 		}
 		
+		public override void Action (IEnumerable<Window> windows)
+		{
+			// not used
+		}
+
+		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			IScreenItem screen = modItems.First () as IScreenItem;

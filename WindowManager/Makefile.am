@@ -19,9 +19,10 @@ FILES = \
 	src/Screen/ScreenTileAction.cs \
 	src/WindowActions/WindowActionAction.cs \
 	src/WindowActions/WindowCloseAction.cs \
+	src/WindowActions/WindowFocusAction.cs \
 	src/WindowActions/WindowMaximizeAction.cs \
 	src/WindowActions/WindowMinimizeAction.cs \
-	src/WindowActions/WindowMoveAction.cs \
+	src/WindowActions/WindowMoveAction.cs
 
 
 RESOURCES = \
