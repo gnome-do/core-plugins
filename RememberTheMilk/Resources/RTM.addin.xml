@@ -6,6 +6,7 @@
     description="Manage tasks with Remember The Milk."
     author="Peng Deng"
 		category="Community"
+	defaultEnabled="false"
     >
 
     <Runtime>

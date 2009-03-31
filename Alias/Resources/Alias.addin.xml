@@ -6,6 +6,7 @@
 	description="Assign alternate names to items."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

@@ -6,6 +6,7 @@
 	description="Search Firefox 3 bookmarks."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>
