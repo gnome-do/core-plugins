@@ -64,9 +64,5 @@ namespace WindowManager
 				return ScreenUtils.ActiveViewport;
 			}
 		}
-		
-		public CurrentScreenItem () 
-		{
-		}
 	}
 }

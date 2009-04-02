@@ -68,11 +68,6 @@ namespace WindowManager
 			}
 		}
 
-		
-		public ScreenItemSource()
-		{
-		}
-
 		public override void UpdateItems ()
 		{
 		}

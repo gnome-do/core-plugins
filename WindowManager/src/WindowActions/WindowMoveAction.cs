@@ -32,10 +32,6 @@ namespace WindowManager
 	public class WindowMoveAction : WindowActionAction
 	{
 		
-		public WindowMoveAction()
-		{
-		}
-		
 		public override string Name {
 			get {
 				return "Move Window To...";
