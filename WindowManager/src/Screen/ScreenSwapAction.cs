@@ -69,10 +69,10 @@ namespace WindowManager
 			IScreenItem screen1 = items.First () as IScreenItem;
 			IScreenItem screen2 = modItems.First () as IScreenItem;
 			
-			IEnumerable<Window> screen2Windows = ScreenUtils.ViewportWindows (screen2.Viewport);
+			IEnumerable<Window> screen2Windows = screen2.Viewport.Windows ();
 			
 			// Move screen1 windows to screen2
-			foreach (Window w in ScreenUtils.ViewportWindows (screen1.Viewport)) {
+			foreach (Window w in screen1.Viewport.Windows ()) {
 				screen2.Viewport.MoveWindowInto (w);
 			}
 			

@@ -49,7 +49,7 @@ namespace WindowManager
 		
 		public IEnumerable<Wnck.Window> Windows {
 			get {
-				return ScreenUtils.ViewportWindows (Viewport);
+				return Viewport.Windows ();
 			}
 		}
 		

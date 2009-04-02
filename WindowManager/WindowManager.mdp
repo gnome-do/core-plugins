@@ -32,7 +32,6 @@
     <File name="src/WindowActions/WindowMoveAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/CurrentWindowItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/CurrentApplicationItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Screen/DoModifyGeometry.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Screen/ScreenActionAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Screen/ScreenTileAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Screen/ScreenCascadeAction.cs" subtype="Code" buildaction="Compile" />

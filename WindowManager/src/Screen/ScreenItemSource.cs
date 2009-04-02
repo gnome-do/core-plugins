@@ -41,7 +41,7 @@ namespace WindowManager
 
 		public override string Description {
 			get {
-				return Catalog.GetString ("Actions you can do to your screens.");
+				return Catalog.GetString ("Screens and viewports on your desktop.");
 			}
 		}
 
@@ -53,8 +53,7 @@ namespace WindowManager
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (IScreenItem) };
+				yield return typeof (IScreenItem);
 			}
 		}
 

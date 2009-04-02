@@ -52,10 +52,7 @@ namespace WindowManager
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			IScreenItem item = items.First () as IScreenItem;
-			
-			foreach (Window w in ScreenUtils.ViewportWindows (item.Viewport))
-				DoModifyGeometry.RestoreWindowGeometry (w);
-			
+			item.Viewport.RestoreLayout ();
 			return null;
 		}
 

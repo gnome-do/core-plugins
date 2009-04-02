@@ -48,53 +48,7 @@ namespace WindowManager
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			IScreenItem item = items.First () as IScreenItem;
-			IEnumerable<Window> windowList = item.VisibleWindows;
-			Gdk.Rectangle screenGeo = DoModifyGeometry.GetScreenMinusPanelGeometry;
-			
-			//can't tile no windows
-			if (windowList.Count () <= 1) return null;
-			
-			int square, height, width;
-			
-			//We are going to tile to a square, so what we want is to find
-			//the smallest perfect square all our windows will fit into
-			square = (int) Math.Ceiling (Math.Sqrt (windowList.Count ()));
-			
-			//Our width will always be our perfect square
-			width = square;
-			
-			//Our height is at least one (e.g. a 2x1)
-			height = 1;
-			while (width * height < windowList.Count ()) {
-				height++;
-			}
-			
-			int windowWidth, windowHeight;
-			windowWidth = screenGeo.Width / width;
-			
-			windowHeight = screenGeo.Height / height;
-			
-			int row = 0, column = 0;
-			int x, y;
-			
-			foreach (Wnck.Window window in windowList) {
-				x = (column * windowWidth) + screenGeo.X;
-				y = (row * windowHeight) + screenGeo.Y;
-				
-				if (window == windowList.Last ()) {
-					DoModifyGeometry.SetWindowGeometry (window, x, y,
-					                                    windowHeight, screenGeo.Width - x, true);
-				} else {
-					DoModifyGeometry.SetWindowGeometry (window, x, y, windowHeight, 
-					                                    windowWidth, true);
-				}
-				
-				column++;
-				if (column == width) {
-					column = 0;
-					row++;
-				}
-			}
+			item.Viewport.Tile ();
 			
 			return null;
 		}

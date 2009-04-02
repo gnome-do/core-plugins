@@ -48,43 +48,8 @@ namespace WindowManager
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			IScreenItem item = items.First () as IScreenItem;
-			IEnumerable<Window> windowList = item.VisibleWindows;
-			
-			//can't tile no windows
-			if (windowList.Count () <= 1) return null;
-			
-			int width, height, offsetx, offsety;
-			
-			int xbuffer = 13;
-			int ybuffer = 30;
-			int winbuffer = 30;
-			
-			//we want to cascade here, so the idea is that for each window we
-			//need to be able to create a buffer that is about the width of the
-			//title bar.  We will approximate this to around 30px.  Therefor our
-			//width and height need to be (30 * number of Windows) pixels
-			//smaller than the screen.  We will also offset by 100 on both
-			//the x and y axis, so we should end as such.  This needs to be
-			//calculated for too.
-			
-			width = (Screen.Default.Width - (2 * xbuffer)) - 
-				(winbuffer * (windowList.Count () - 1));
-			
-			height =  (Screen.Default.Height - (2 * ybuffer)) - 
-				(winbuffer * (windowList.Count () - 1));
-			
-			offsetx = xbuffer;
-			offsety = ybuffer;
-			
-			
-			foreach (Window w in windowList) {
-				DoModifyGeometry.SetWindowGeometry (w, offsetx, offsety, height,
-				                                    width, true);
-				
-				offsetx += winbuffer;
-				offsety += winbuffer;
-			}
-			
+			item.Viewport.Cascade ();
+
 			return null;
 		}
 		
