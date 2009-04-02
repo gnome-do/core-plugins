@@ -34,8 +34,8 @@ namespace WindowManager
 	public abstract class ScreenActionAction : Act
 	{
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type [] {
-				typeof (IScreenItem), };
+			get {
+				yield return typeof (IScreenItem);
 			}
 		}
 

@@ -133,13 +133,13 @@ namespace WindowManager
 			WindowMoveResizeMask mask = 0;
 			
 			if (width != oldwidth)
-				mask = mask | WindowMoveResizeMask.Width;
+				mask |= WindowMoveResizeMask.Width;
 			if (height != oldheight)
-				mask = mask | WindowMoveResizeMask.Height;
+				mask |= WindowMoveResizeMask.Height;
 			if (x != oldx)
-				mask = mask | WindowMoveResizeMask.X;
+				mask |= WindowMoveResizeMask.X;
 			if (y != oldy)
-				mask = mask | WindowMoveResizeMask.Y;
+				mask |= WindowMoveResizeMask.Y;
 			
 			w.SetGeometry (WindowGravity.Northwest, mask, x, y, width, height);
 			

@@ -58,7 +58,7 @@ namespace WindowManager
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
-				return new [] { typeof (IScreenItem) };
+				yield return typeof (IScreenItem);
 			}
 		}
 		

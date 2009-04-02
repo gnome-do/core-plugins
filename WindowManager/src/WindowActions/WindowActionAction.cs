@@ -42,10 +42,9 @@ namespace WindowManager
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type[] {
-					typeof (IApplicationItem),
-					typeof (IWindowItem),
-				};
+			get {
+					yield return typeof (IApplicationItem);
+					yield return typeof (IWindowItem);
 			}
 		}
 
