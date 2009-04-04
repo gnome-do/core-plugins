@@ -15,15 +15,29 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/WindowListAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/IWindowList.cs" subtype="Code" buildaction="Compile" />
     <File name="src/WindowItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/WindowItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/ScreenListAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/WindowListItems.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/GenericWindowItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/ScreenItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/WindowManager.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/Screen" subtype="Directory" buildaction="Compile" />
+    <File name="src/Screen/ScreenItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenRestoreAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/CurrentScreenItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/WindowActions" subtype="Directory" buildaction="Compile" />
+    <File name="src/WindowActions/WindowActionAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/WindowActions/WindowMaximizeAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/WindowActions/WindowCloseAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/WindowActions/WindowMinimizeAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/WindowActions/WindowMoveAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/CurrentWindowItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/CurrentApplicationItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenActionAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenTileAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenCascadeAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ScreenSwapAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/WindowActions/WindowFocusAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Screen/ShowDesktopAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -36,6 +50,7 @@
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Interface.Wink, Version=1.0.3375.29611, Culture=neutral" />
   </References>
   <LanguageParameters ApplicationIcon="." ctype="CSharpProjectParameters" />
 </Project>
