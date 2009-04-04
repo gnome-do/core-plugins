@@ -16,6 +16,7 @@ FILES = \
 	src/Screen/ScreenRestoreAction.cs \
 	src/Screen/ScreenSwapAction.cs \
 	src/Screen/ScreenTileAction.cs \
+	src/Screen/ShowDesktopAction.cs \
 	src/WindowActions/WindowActionAction.cs \
 	src/WindowActions/WindowCloseAction.cs \
 	src/WindowActions/WindowFocusAction.cs \
