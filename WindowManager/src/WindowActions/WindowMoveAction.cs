@@ -80,8 +80,8 @@ namespace WindowManager
 			IEnumerable<Window> windows = null;
 			if (items.First () is IApplicationItem) {
 				windows = items.Cast<IApplicationItem> ().SelectMany (app => WindowUtils.WindowListForCmd (app.Exec));
-			} else if (items.First () is WindowItem) {
-				windows = items.Cast<WindowItem> ().SelectMany (wi => wi.Windows);
+			} else if (items.First () is IWindowItem) {
+				windows = items.Cast<IWindowItem> ().SelectMany (wi => wi.Windows);
 			}
 			
 			if (windows != null)
