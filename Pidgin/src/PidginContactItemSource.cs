@@ -133,18 +133,10 @@ namespace PidginPlugin
 					foreach (int buddyID in Pidgin.FindBuddies (bonjourAccount, "")) {
 						ContactItem buddy;
 						
-						//Console.WriteLine ("Bonjour buddy: {0}.", buddyID);
-						//Console.WriteLine ("Alias for {0}: {1}", buddyID, Pidgin.GetBuddyServerAlias(buddyID));
-						//Console.WriteLine ("Icon for {0}: {1}", buddyID, Pidgin.GetBuddyIconPath (buddyID));
 						buddy = CreateBuddy (buddyID);
 						buddies_seen [buddy] = true;
 					}			
 				}
-					/*
-					proto = prpl.PurpleAccountGetProtocolName (account);
-					name = prpl.PurpleAccountGetUsername (account);
-					items.Add (new PidginAccountItem (name, proto, account));
-					*/
 			} catch (Exception e) { 
 				Log<PidginContactItemSource>.Error ("Could not get Pidgin accounts: {0}", e.Message);
 				Log<PidginContactItemSource>.Debug (e.StackTrace);
