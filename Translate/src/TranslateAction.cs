@@ -48,12 +48,10 @@ namespace Translate
 	        + "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?) *$";
 
 		readonly Regex url_regex;
-		//IPreferences prefs;
 
 		public TranslateAction ()
 		{
 			url_regex = new Regex (UrlPattern, RegexOptions.Compiled);
-			//prefs = Services.Preferences.Get<Translate.ConfigUI> ();
 		}
 
 		public override string Name {
