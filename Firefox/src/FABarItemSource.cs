@@ -28,7 +28,7 @@ using Do.Universe.Common;
 
 using Mono.Data.SqliteClient;
 using Mono.Unix;
-
+	
 namespace Mozilla.Firefox
 {
 	public class FABarItemSource : ItemSource
@@ -36,15 +36,22 @@ namespace Mozilla.Firefox
 		const string BeginProfileName = "Path=";
 		const string BeginDefaultProfile = "Default=1";
 
-		IEnumerable<BookmarkItem> bookmarks;
-
+		
+		List<Item> items;
+		IEnumerable<PlaceItem> places;
+		IEnumerable<FolderItem> folders;
 		public FABarItemSource ()
 		{
-			bookmarks = Enumerable.Empty<BookmarkItem> ();
+			places = Enumerable.Empty<PlaceItem> ();
+			folders = Enumerable.Empty<FolderItem> ();
+			items = new List<Item> ();
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (BookmarkItem); }
+			get { 
+				yield return typeof (PlaceItem); 
+				yield return typeof (FolderItem);
+			}
 		}
 
 		public override string Name {
@@ -59,13 +66,33 @@ namespace Mozilla.Firefox
 			get { return "firefox-3.0"; }
 		}
 
+		
 		public override IEnumerable<Item> Items {
-			get { return bookmarks.OfType<Item> (); }
+			get { return items; }
 		}
 
 		public override void UpdateItems ()
 		{
-			bookmarks = LoadBookmarkItems ();
+			this.places = LoadPlaceItems ();
+			this.folders = LoadFolderItems ();
+			foreach (PlaceItem place in places) items.Add((Item) place);
+			foreach (FolderItem folder in folders) items.Add((Item) folder);
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item) {
+			if (isFolder(item)) {
+				FolderItem parent = (FolderItem) item;
+				foreach (PlaceItem place in places) {
+					if (parent.Id == place.ParentId) yield return (Item) place;
+				}
+				foreach (FolderItem folder in folders) {
+					if (parent.Id == folder.ParentId) yield return (Item) folder;
+				}
+			}
+		}
+		
+		bool isFolder(Item item) {
+			return item.Icon.Contains("folder"); 
 		}
 
 		/// <summary>
@@ -135,20 +162,96 @@ namespace Mozilla.Firefox
 				return storedTempDatabasePath;
 			}
 		}
+		
+		/// <summary>
+		/// Creates the current SQL connection string to the temporary database in use. 
+		/// </summary>
+		/// <returns>
+		/// The current SQL connection string to the temporary database in use.
+		/// </returns>
+		string connectionString {
+			get { return String.Format ("URI=file:{0},version=3",tempDatabasePath); }
+		}
 
-		IEnumerable<BookmarkItem> LoadBookmarkItems ()
+		/// <summary>
+		/// Opens a connection to the current temporary database copy, 
+		/// and searches for bookmark directories, then adds those to 
+		/// the IEnumerable collection to be returned. 
+		/// </summary>
+		/// <returns>
+		/// A collection of bookmark directory Folder Items.
+		/// </returns>
+		IEnumerable<FolderItem> LoadFolderItems ()
 		{
-			string connectionString = String.Format ("URI=file:{0},version=3",tempDatabasePath);
 			
 			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection(connectionString)) {
 				dbcon.Open();
 				using (IDbCommand dbcmd = dbcon.CreateCommand()) {
-					dbcmd.CommandText = "SELECT title, url FROM moz_places ORDER BY frecency DESC";
+					dbcmd.CommandText = @"SELECT title, 
+												 id, 
+												 parent 
+										  FROM moz_bookmarks
+										  WHERE type = 2";
 					using (IDataReader reader = dbcmd.ExecuteReader()) {
 						while(reader.Read()) {
-							string title = reader.GetString (0);
-							string url = reader.GetString (1);
-							if (url[0] != 'p') yield return new BookmarkItem (title, url);
+							if (!reader.IsDBNull(2)) {
+								string title = reader.GetString(0);
+								int id = reader.GetInt32(1);
+								if (id == 1)
+									yield return new FolderItem("Mozilla Bookmarks", 
+									                            reader.GetInt32(1), 
+									                            reader.GetInt32(2));
+								else if ((title != "") || (title != "Mozilla Firefox")) {
+									yield return new FolderItem(reader.GetString(0), 
+									                            reader.GetInt32(1), 
+									                            reader.GetInt32(2));
+								}
+							}
+							else
+								yield return new FolderItem(reader.GetString(0),
+								                            reader.GetInt32(1));
+						}
+					}
+				}
+				dbcon.Close();
+			}
+		}
+		
+		/// <summary>
+		/// Opens a connection to the current temporary database, and searches for all
+		/// place entries then adds those to the IEnumerable collection to be returned. 
+		/// </summary>
+		/// <returns>
+		/// A collection of bookmarks and history Place Items.
+		/// </returns>
+		IEnumerable<PlaceItem> LoadPlaceItems ()
+		{	
+			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection(connectionString)) {
+				dbcon.Open();
+				using (IDbCommand dbcmd = dbcon.CreateCommand()) {
+					dbcmd.CommandText = @"SELECT moz_places.title,
+												 moz_places.url, 
+												 moz_bookmarks.parent,
+												 moz_bookmarks.title
+										  FROM moz_places LEFT OUTER JOIN moz_bookmarks 
+										  ON moz_places.id=moz_bookmarks.fk 
+										  ORDER BY moz_places.frecency DESC";
+					using (IDataReader reader = dbcmd.ExecuteReader()) {
+						while(reader.Read()) {							
+							string url = reader.GetString(1);
+							if (url[0] != 'p') {
+								string title = reader.GetString(0);
+								if (title != "") {
+									if (!reader.IsDBNull(2)) {
+										yield return new PlaceItem (reader.GetString(3),
+										                            reader.GetString(1),
+										                            reader.GetInt32(2));
+									}
+									else 
+										yield return new PlaceItem (reader.GetString(0),
+										                            reader.GetString(1));
+								}
+							}
 						}
 					}
 				}

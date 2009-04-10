@@ -4,7 +4,8 @@ ASSEMBLY=Firefox
 
 FILES = \
 	src/BookmarkItemSource.cs \
-	src/FABarItemSource.cs
+	src/FABarItemSource.cs \
+	src/FABarItems.cs
 
 RESOURCES = \
 	Resources/Firefox.addin.xml
