@@ -148,7 +148,6 @@ namespace Mozilla.Firefox
 						while(reader.Read()) {
 							string title = reader.GetString (0);
 							string url = reader.GetString (1);
-							Console.WriteLine("HM!");
 							if (url[0] != 'p') yield return new BookmarkItem (title, url);
 						}
 					}
