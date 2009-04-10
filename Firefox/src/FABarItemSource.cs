@@ -141,16 +141,19 @@ namespace Mozilla.Firefox
 			string connectionString = String.Format ("URI=file:{0},version=3",tempDatabasePath);
 			
 			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection(connectionString)) {
+				dbcon.Open();
 				using (IDbCommand dbcmd = dbcon.CreateCommand()) {
 					dbcmd.CommandText = "SELECT title, url FROM moz_places ORDER BY frecency DESC";
 					using (IDataReader reader = dbcmd.ExecuteReader()) {
 						while(reader.Read()) {
 							string title = reader.GetString (0);
 							string url = reader.GetString (1);
+							Console.WriteLine("HM!");
 							if (url[0] != 'p') yield return new BookmarkItem (title, url);
 						}
 					}
 				}
+				dbcon.Close();
 			}
 		}
 	}
