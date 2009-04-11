@@ -58,7 +58,7 @@ namespace RememberTheMilk
         }
         
         public override bool ModifierItemsOptional {
-            get { return true; }
+            get { return false; }
         }
         
         public override bool SupportsItem (Item item) 

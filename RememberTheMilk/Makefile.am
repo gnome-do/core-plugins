@@ -18,6 +18,7 @@ FILES = \
 	src/RTMPriorityItem.cs \
 	src/RTMRenameTask.cs \
 	src/RTMSetDue.cs \
+	src/RTMSetUrl.cs \
 	src/RTMSetPriority.cs \
 	src/RTMSetRecurrence.cs \
 	src/RTMTaskItem.cs \
@@ -70,7 +71,8 @@ RESOURCES = \
 	Resources/icons/task-priority-up.png \
 	Resources/icons/task-rename.png \
 	Resources/icons/task-repeat.png \
-	Resources/icons/task-setdue.png
+	Resources/icons/task-setdue.png \
+	Resources/icons/task-seturl.png
 
 REFERENCES = \
 	System \

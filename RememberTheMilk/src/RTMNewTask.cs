@@ -35,7 +35,7 @@ namespace RememberTheMilk
 				
 		public override string Description {
 			get { return Catalog.GetString ("Create a new task in Remember The Milk"); }
-        }
+		}
 			
 		public override string Icon {
 			get { return "task-add.png@" + GetType ().Assembly.FullName; }
@@ -53,41 +53,40 @@ namespace RememberTheMilk
 		    get {
 		        return new Type[] {
 		            typeof (RTMListItem),
-                };
-            }
-        }
+				};
+			}
+		}
         
-        public override bool ModifierItemsOptional {
-            get {return true; }
-        }
+		public override bool ModifierItemsOptional {
+			get {return true; }
+		}
         
-        public override bool SupportsItem (Item item) 
-        {
-            return true;
-        }
+		public override bool SupportsItem (Item item) 
+		{
+			return true;
+		}
         
-        public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-        {
-            if (modItem is RTMListItem)
-        		return !(modItem as RTMListItem).Name.Equals ("All Tasks");
-        		
-            return true;
-        }
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
+		{
+			if (modItem is RTMListItem)
+				return !(modItem as RTMListItem).Name.Equals ("All Tasks");
+		
+			return true;
+		}
         
-        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
-        {
-            string listId = String.Empty;
-            string taskData = (items.First () as ITextItem).Text;
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+		{
+			string listId = String.Empty;
+			string taskData = (items.First () as ITextItem).Text;
             
-            if (string.IsNullOrEmpty(taskData)) {
-            	Services.Notifications.Notify("Remember The Milk",
-            		"No title provided for new task.");
-            	yield break;
-            }
+			if (string.IsNullOrEmpty(taskData)) {
+				Services.Notifications.Notify("Remember The Milk", "No title provided for new task.");
+				yield break;
+			}
 			
 			if (modifierItems.FirstOrDefault () != null)
 				listId = (modifierItems.FirstOrDefault () as RTMListItem).Id;
-			
+		
 			if (RTM.Preferences.ReturnNewTask)
 				yield return RTM.NewTask (listId, taskData);
 			else {
@@ -96,6 +95,6 @@ namespace RememberTheMilk
 				});
 				yield break;
 			}
-        }
+		}
 	}
 }

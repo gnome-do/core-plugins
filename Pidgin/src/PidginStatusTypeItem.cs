@@ -29,19 +29,16 @@ namespace PidginPlugin
 
 	public class PidginStatusTypeItem : Item
 	{
-
 		const string IconBase = "/usr/share/pixmaps/pidgin/status/48";
-
-		uint status;
 		
-		public PidginStatusTypeItem (uint status)
+		public PidginStatusTypeItem (int status)
 		{
-			this.status = status;
+			this.Status = status;
 		}
 		
 		public override string Name {
 			get {
-				switch (status) {
+				switch (this.Status) {
 				case 1: return Catalog.GetString ("Offline");
 				case 2: return Catalog.GetString ("Available");
 				case 3: return Catalog.GetString ("Busy");
@@ -58,7 +55,7 @@ namespace PidginPlugin
 		
 		public override string Icon { 
 			get  { 
-				switch (status) {
+				switch (this.Status) {
 				case 1: return Path.Combine (IconBase, "offline.png");
 				case 2: return Path.Combine (IconBase, "available.png");
 				case 3: return Path.Combine (IconBase, "busy.png");
@@ -70,8 +67,6 @@ namespace PidginPlugin
 			}
 		}
 		
-		public uint Status {
-			get { return status; }
-		}
+		public int Status { get; private set; }
 	}
 }
