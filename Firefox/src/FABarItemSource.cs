@@ -206,21 +206,21 @@ namespace Mozilla.Firefox
 										  WHERE type = 2";
 					using (IDataReader reader = dbcmd.ExecuteReader()) {
 						while(reader.Read()) {
-							if (!reader.IsDBNull(2)) {
-								string title = reader.GetString(0);
+							string title = reader.GetString(0);
+							if (!reader.IsDBNull(2)) {								
 								int id = reader.GetInt32(1);
 								if (id == 1)
 									yield return new FolderItem("Mozilla Bookmarks", 
 									                            reader.GetInt32(1), 
 									                            reader.GetInt32(2));
-								else if ((title != "") && (title != "Mozilla Firefox")) {
-									yield return new FolderItem(reader.GetString(0), 
+								else if (title != "") {
+									yield return new FolderItem(title, 
 									                            reader.GetInt32(1), 
 									                            reader.GetInt32(2));
 								}
 							}
 							else
-								yield return new FolderItem(reader.GetString(0),
+								yield return new FolderItem(title,
 								                            reader.GetInt32(1));
 						}
 					}
@@ -260,7 +260,7 @@ namespace Mozilla.Firefox
 										                            reader.GetInt32(2));
 									}
 									else 
-										yield return new PlaceItem (reader.GetString(0),
+										yield return new PlaceItem (title,
 										                            reader.GetString(1));
 								}
 							}
