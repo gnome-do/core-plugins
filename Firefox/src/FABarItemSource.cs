@@ -75,8 +75,9 @@ namespace Mozilla.Firefox
 		{
 			this.places = LoadPlaceItems ();
 			this.folders = LoadFolderItems ();
-			foreach (PlaceItem place in places) items.Add((Item) place);
+			items.Clear();
 			foreach (FolderItem folder in folders) items.Add((Item) folder);
+			foreach (PlaceItem place in places) items.Add((Item) place);			
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item) {
@@ -201,7 +202,7 @@ namespace Mozilla.Firefox
 									yield return new FolderItem("Mozilla Bookmarks", 
 									                            reader.GetInt32(1), 
 									                            reader.GetInt32(2));
-								else if ((title != "") || (title != "Mozilla Firefox")) {
+								else if ((title != "") && (title != "Mozilla Firefox")) {
 									yield return new FolderItem(reader.GetString(0), 
 									                            reader.GetInt32(1), 
 									                            reader.GetInt32(2));
