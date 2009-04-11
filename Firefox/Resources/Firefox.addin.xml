@@ -1,11 +1,11 @@
 <Addin
 	id="Firefox"
 	namespace="Do"
-	version="2.2"
+	version="3"
 	name="Firefox"
-	description="Search Firefox 3 bookmarks."
-	author="David Siegel"
-	category="Official"
+	description="Search Firefox 3 bookmarks, bookmark directories, and history."
+	author="Neal Stewart"
+	category="Community"
 	>
 
 	<Runtime>
@@ -17,6 +17,6 @@
 	</Dependencies>
 
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="Mozilla.Firefox.BookmarkItemSource" />
+		<ItemSource type="Mozilla.Firefox.FABarItemSource" />
 	</Extension>
 </Addin>
