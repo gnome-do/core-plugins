@@ -80,7 +80,7 @@ namespace RememberTheMilk
 			string taskData = (items.First () as ITextItem).Text;
             
 			if (string.IsNullOrEmpty(taskData)) {
-				Services.Notifications.Notify("Remember The Milk", "No title provided for new task.");
+				Services.Notifications.Notify ("Remember The Milk", "No title provided for new task.");
 				yield break;
 			}
 			

@@ -103,8 +103,7 @@ namespace Locate
 				foreach (Item file in files)
 					yield return file;
 			} else {
-				Services.Notifications.Notify("Locate Files",
-					Error + query);
+				Services.Notifications.Notify ("Locate Files", Error + query);
 				yield break;
 			}
 		}
