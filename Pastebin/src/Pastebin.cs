@@ -65,7 +65,8 @@ namespace Pastebin
 			catch (Exception e)
 			{
 				Log<Pastebin>.Error (e.ToString ());
-				url = "An error occured while pasting.";
+				Services.Notifications.Notify ("Pastebin", "An error occured while pasting.");
+				url = null;
 			}
 			
 			return url;
