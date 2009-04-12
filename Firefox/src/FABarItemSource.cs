@@ -77,17 +77,21 @@ namespace Mozilla.Firefox
 			this.places = LoadPlaceItems ();
 			this.folders = LoadFolderItems ();
 			items.Clear();
+			// Feed the main itemsource only Bookmark places and directories.
 			foreach (FolderItem folder in folders) items.Add((Item) folder);
 			foreach (PlaceItem place in places) 
 				if (place.ParentId != null) items.Add((Item) place);			
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item) {
+			// If it's the Firefox Application Item, give them everything.
 			if (isFirefox(item)) {
+				UpdateItems();
 				foreach (Item folder in folders) yield return folder;
 				foreach (Item place in places) yield return place;
 			}
 			
+			// If it's a folder, give them its' children.
 			if (isFolder(item)) {
 				FolderItem parent = (FolderItem) item;
 				foreach (FolderItem folder in folders) {
@@ -206,22 +210,24 @@ namespace Mozilla.Firefox
 										  WHERE type = 2";
 					using (IDataReader reader = dbcmd.ExecuteReader()) {
 						while(reader.Read()) {
-							string title = reader.GetString(0);
-							if (!reader.IsDBNull(2)) {								
-								int id = reader.GetInt32(1);
-								if (id == 1)
-									yield return new FolderItem("Mozilla Bookmarks", 
-									                            reader.GetInt32(1), 
-									                            reader.GetInt32(2));
-								else if (title != "") {
-									yield return new FolderItem(title, 
-									                            reader.GetInt32(1), 
-									                            reader.GetInt32(2));
-								}
+							string title = reader.GetString(0);							
+							int id = reader.GetInt32(1);
+							/* Firefox's parent system uses the field with ID 1 as a 
+							 * parent for all other directories. It doesn't have a name,
+							 * so we'll give it one. */								
+							if (id == 1)
+								yield return new FolderItem("Mozilla Bookmarks", 
+								                            reader.GetInt32(1), 
+								                            reader.GetInt32(2));
+							/* Firefox uses another field that doesn't have a name.
+							 * It references portions of their menu that generate
+							 * information dynamically from History, Tags, etc.
+							 * Ignore it. */
+							else if (title != "") {
+								yield return new FolderItem(title, 
+								                            reader.GetInt32(1), 
+								                            reader.GetInt32(2));
 							}
-							else
-								yield return new FolderItem(title,
-								                            reader.GetInt32(1));
 						}
 					}
 				}
@@ -251,18 +257,21 @@ namespace Mozilla.Firefox
 					using (IDataReader reader = dbcmd.ExecuteReader()) {
 						while(reader.Read()) {							
 							string url = reader.GetString(1);
+							// Firefox stores some interesting non-url places. Ignore them.
 							if (url[0] != 'p') {
 								string title = reader.GetString(0);
-								if (title != "") {
-									if (!reader.IsDBNull(2)) {
-										yield return new PlaceItem (reader.GetString(3),
-										                            reader.GetString(1),
-										                            reader.GetInt32(2));
-									}
-									else 
-										yield return new PlaceItem (title,
-										                            reader.GetString(1));
-								}
+								// If the place is a bookmark, use the title stored in Bookmarks.
+								if (!reader.IsDBNull(2))
+									yield return new PlaceItem (reader.GetString(3),
+									                            reader.GetString(1),
+									                            reader.GetInt32(2));
+								// If the place has no title, use the url as a title so it's searchable.
+								else if (title == "") 
+									yield return new PlaceItem (reader.GetString(1),
+									                            reader.GetString(1));
+								else
+									yield return new PlaceItem (title,
+									                            reader.GetString(1));
 							}
 						}
 					}
