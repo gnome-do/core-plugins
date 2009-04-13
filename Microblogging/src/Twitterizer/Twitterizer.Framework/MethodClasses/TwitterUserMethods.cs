@@ -87,6 +87,7 @@ namespace Twitterizer.Framework
         /// <returns></returns>
         public TwitterUserCollection Friends(TwitterParameters Parameters)
         {
+			Console.Error.WriteLine ("Goona get friends");
             // page 0 == page 1 is the start
             TwitterRequest Request = new TwitterRequest();
             TwitterRequestData Data = new TwitterRequestData();
@@ -95,9 +96,9 @@ namespace Twitterizer.Framework
 
             string actionUri = (Parameters == null ? Twitter.Urls.FriendsUrl : Parameters.BuildActionUri(Twitter.Urls.FriendsUrl));
             Data.ActionUri = new Uri(actionUri);
-
+			Console.Error.WriteLine ("GOING TO GET EM");
             Data = Request.PerformWebRequest(Data);
-
+			Console.Error.WriteLine ("I have {0} frienz", Data.Users.Count);
             return Data.Users;
         }
     }
