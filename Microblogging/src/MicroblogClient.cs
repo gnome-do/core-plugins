@@ -61,7 +61,6 @@ namespace Microblogging
 		
 		static MicroblogClient ()
 		{
-			Log<MicroblogClient>.Debug ("Using limited version!!!~~~~~");
 			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
 		}
 		
@@ -128,7 +127,6 @@ namespace Microblogging
 			}
 			
 			foreach (TwitterUser friend in friends) {
-				Log<MicroblogClient>.Error ("we had friendzzz");
 				if (friend.Status != null) {
 					status = new MicroblogStatus (friend.Status.ID, friend.Status.Text, friend.ScreenName, friend.Status.Created);
 					newContact = new FriendItem (friend.ID, friend.ScreenName, status);

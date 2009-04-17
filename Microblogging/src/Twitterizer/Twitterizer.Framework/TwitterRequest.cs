@@ -48,9 +48,7 @@ namespace Twitterizer.Framework
 
         public TwitterRequestData PerformWebRequest(TwitterRequestData Data, string HTTPMethod)
         {
-    	    Console.Error.WriteLine ("Posting {0} via {1}", Data.ActionUri, HTTPMethod);
 			HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(Data.ActionUri);
-
 
             Request.Method = HTTPMethod;
 
