@@ -47,7 +47,7 @@ namespace Microblogging
 
 		const int UpdateTimelineTimeout = 60 * 1000; // every 60 seconds
 		const int UpdateContactsTimeout = 30 * 1000 * 60; // every 30 minutes
-		const int CheckForMessagesTimeout = 5 * 1000 * 60; // every 5 minutespr
+		const int CheckForMessagesTimeout = 5 * 1000 * 60; // every 5 minutes
 
 		#endregion
 
