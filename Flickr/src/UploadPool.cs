@@ -35,9 +35,10 @@ namespace Flickr
 		const int workerCount = 4;
 		Thread[] uploaders;
 		Queue<IFileItem> taskQ = new Queue<IFileItem>();
+		UploadDialog dialog;
 		FlickrNet.Flickr flickr;
 
-		public UploadPool (string tags) 
+		public UploadPool (string tags, int totalUploads) 
 		{
 			uploaders = new Thread [workerCount];
 			UploadTags = tags;
@@ -47,6 +48,16 @@ namespace Flickr
 			                               AccountConfig.AuthToken
 			                               );
 			
+			
+				dialog = new UploadDialog ();
+				dialog.TotalUploads = totalUploads;
+			Services.Application.RunOnMainThread ( () => {
+				dialog.Show ();
+			});
+		}
+		
+		public void BeginUploads ()
+		{
 			// Create and start a separate thread for each worker
 			for (int i = 0; i < workerCount; i++)
 				(uploaders [i] = new Thread (Consume)).Start();
@@ -55,8 +66,10 @@ namespace Flickr
 		public void Dispose() 
 		{
 			// Enqueue one null task per worker to make each exit.
-			foreach (Thread uploader in uploaders) QueueUpload (null);
-			foreach (Thread uploader in uploaders) uploader.Join();
+			foreach (Thread uploader in uploaders)
+				QueueUpload (null);
+			foreach (Thread uploader in uploaders)
+				uploader.Join();
 			
 			Services.Notifications.Notify ("Flickr",
 			                               String.Format ("Finished uploading pictures."),
@@ -78,24 +91,28 @@ namespace Flickr
 
 		void Consume() 
 		{
-			while (true) 
-			{
-				IFileItem photo;
-				lock (locker) 
-				{
-					while (taskQ.Count == 0) Monitor.Wait (locker);
+			IFileItem photo;
+			do {
+				lock (locker) {
+					while (taskQ.Count == 0)
+						Monitor.Wait (locker);
 					photo = taskQ.Dequeue();
 				}
-				if (photo == null) return;         // This signals our exit
-				flickr.UploadPicture (photo.Path, 
-				                      photo.Name, 
-				                      "", 
-				                      UploadTags,
-				                      AccountConfig.IsPublic, 
-				                      AccountConfig.FamilyAllowed,
-				                      AccountConfig.FriendsAllowed
-				                      );
-			}
+				if (photo != null) {
+					Thread.Sleep (4000);
+					Services.Application.RunOnMainThread ( () => dialog.IncrementProgress ());
+					/*
+					flickr.UploadPicture (photo.Path, 
+					                      photo.Name, 
+					                      "", 
+					                      UploadTags,
+					                      AccountConfig.IsPublic, 
+					                      AccountConfig.FamilyAllowed,
+					                      AccountConfig.FriendsAllowed
+					                      );
+					 */
+				}
+			} while (photo != null);
 		}
 	}
 }

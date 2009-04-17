@@ -107,7 +107,7 @@ namespace Flickr
 			}
 		
 			Services.Application.RunOnThread ( () => {
-				using (UploadPool uploadQueue = new UploadPool (tags))
+				using (UploadPool uploadQueue = new UploadPool (tags, uploads.Count))
 				{
 					foreach (IFileItem photo in uploads)
 						uploadQueue.QueueUpload (photo);
@@ -116,6 +116,7 @@ namespace Flickr
 					                               String.Format ("Uploading {0} pictures.", uploads.Count),
 					                               "flickr.png@" + GetType ().Assembly.FullName
 					                               ); 
+					uploadQueue.BeginUploads ();
 				}
 			});
 
