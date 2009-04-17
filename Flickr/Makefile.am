@@ -9,6 +9,7 @@ FILES = \
 	src/AccountConfig.cs \
 	src/FlickrItemSource.cs \
 	src/UploadAction.cs \
+	src/UploadPool.cs \
 	src/UploadConfig.cs
 
 RESOURCES = \

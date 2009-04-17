@@ -30,8 +30,6 @@ using Do.Universe;
 using Do.Platform;
 using Do.Platform.Linux;
 
-using FlickrNet;
-
 namespace Flickr
 {	
 	public class UploadAction : Act, IConfigurable
@@ -90,7 +88,7 @@ namespace Flickr
 					tags += tag.Text + " ";
 				}
 			}
-			
+						
 			//Build a list of all of the files to upload.
 			List<IFileItem> uploads = new List<IFileItem> ();
 			foreach (Item item in items) {
@@ -106,39 +104,22 @@ namespace Flickr
 					uploads.Add (file);
 				}
 				upload_num = 1;
-				foreach (IFileItem photo in uploads) {
-					AsyncUploadToFlickr (photo, tags, uploads.Count);
-				}
 			}
-			
-			return null;
-		}
 		
-		public static void AsyncUploadToFlickr (IFileItem photo, string tags, int num)
-		{			
-			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
-				AccountConfig.ApiSecret, AccountConfig.AuthToken);
-				
-			new Thread ((ThreadStart) delegate {
-				try {
-					int thisUpload;
-					
-					flickr.UploadPicture (photo.Path, photo.Name, "", tags,
-						AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
-						AccountConfig.FriendsAllowed);
-					
-					lock (count_lock) {
-						thisUpload = upload_num;
-						upload_num++;
-					}
-					
+			Services.Application.RunOnThread ( () => {
+				using (UploadPool uploadQueue = new UploadPool (tags))
+				{
+					foreach (IFileItem photo in uploads)
+						uploadQueue.QueueUpload (photo);
+						
 					Services.Notifications.Notify ("Flickr",
-						String.Format ("Uploaded {0}. ({1} of {2})", photo.Name,
-						thisUpload, num), photo.Path); 
-				} catch (FlickrNet.FlickrException e) {
-					Console.Error.WriteLine (e.Message);
+					                               String.Format ("Uploading {0} pictures.", uploads.Count),
+					                               "flickr.png@" + GetType ().Assembly.FullName
+					                               ); 
 				}
-			}).Start ();
+			});
+
+			return null;
 		}
 		
 		public Gtk.Bin GetConfiguration ()
