@@ -31,13 +31,13 @@ using Mono.Unix;
 namespace SSH
 {
 	
-	public class SSHHostItemSource : ItemSource {
+	public class SSHHostItemSource : ItemSource
+	{
 		List<Item> items;
 
 		public SSHHostItemSource ()
 		{
 			items = new List<Item> ();
-			UpdateItems ();
 		}
 
 		public override string Name { get { return Catalog.GetString ("SSH Hosts"); } }
@@ -66,19 +66,25 @@ namespace SSH
 				string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 				string hostsFile = Path.Combine(home, ".ssh/config");
 				FileStream fs = new FileStream (hostsFile, FileMode.Open, FileAccess.Read);
-				StreamReader reader = new StreamReader (fs);
-
-				Regex NameRegex = new Regex ("^\\s*Host\\s+([^ ]+)\\s*$");
-
-				string s;
-				while ((s = reader.ReadLine ()) != null) {
-					Match NameMatch = NameRegex.Match (s);
-					if (NameMatch.Groups.Count == 2) {
-						items.Add (new SSHHostItem (NameMatch.Groups[1].ToString ()));
-						Log<SSHHostItemSource>.Debug ("SSH Host '{0}' indexed.", NameMatch.Groups[1].ToString ());
+				
+				Regex NameRegex = new Regex ("^\\s*Host\\s+(.+)\\s*$");
+				
+				using (StreamReader reader = new StreamReader (fs))
+				{
+					string s;
+					while ((s = reader.ReadLine ()) != null) {
+						Match NameMatch = NameRegex.Match (s);
+						if (NameMatch.Groups.Count != 2) continue;
+						
+						string line = NameMatch.Groups[1].ToString();
+						string[] hosts = line.Split(new string[] { " " }, StringSplitOptions.None);
+						foreach (string host in hosts)
+							items.Add (new SSHHostItem (host));
 					}
 				}
+				fs.Dispose ();
 			} catch { }
 		}
 	}
 }
+
