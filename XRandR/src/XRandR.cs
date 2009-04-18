@@ -81,8 +81,8 @@ namespace XRandR
 		public int	vSyncEnd;
 		public int	vTotal;
 		public string  name;
-		public IntPtr	nameLength;
-		public int	modeFlags;
+		public int	nameLength;
+		public IntPtr	modeFlags;
 	};
 	
 	[StructLayout (LayoutKind.Sequential)]
