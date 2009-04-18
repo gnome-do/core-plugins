@@ -33,8 +33,8 @@ namespace XRandR
 		public OutputModeItem(int output_id,XRRModeInfo mode)
 		{
 			this.output_id = output_id;
-			this.name = mode.name + " "+mode.dotClock/mode.vTotal/mode.hTotal + "Hz";
-			this.mode_id = mode.id;
+			this.name = mode.name + " "+mode.dotClock.ToInt64()/mode.vTotal/mode.hTotal + "Hz";
+			this.mode_id = mode.id.ToInt32();
 		}
 		public OutputModeItem(int output_id,int mode_id, string name){
 			this.output_id = output_id;

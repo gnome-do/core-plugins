@@ -32,15 +32,15 @@ namespace XRandR
 	
 	[StructLayout (LayoutKind.Sequential)]
 	public struct XRROutputInfo {
-	    public int timestamp;
+	    public IntPtr timestamp;
 	    
 	    public int	    crtc_id;
 
 	    public string	    name;
-	    public int		    nameLen;
+	    public int		nameLen;
 
-		public int   mm_width;
-	    public int   mm_height;
+		public IntPtr   mm_width;
+	    public IntPtr   mm_height;
 
 		public short	    connection;
 	    public short   subpixel_order;
@@ -69,10 +69,10 @@ namespace XRandR
 	
 	[StructLayout (LayoutKind.Sequential)]
 	public struct XRRModeInfo {
-		public int	id;
+		public IntPtr	id;
 		public int	width;
 		public int	height;
-		public int	dotClock;
+		public IntPtr	dotClock;
 		public int	hSyncStart;
 		public int	hSyncEnd;
 		public int	hTotal;
@@ -81,23 +81,23 @@ namespace XRandR
 		public int	vSyncEnd;
 		public int	vTotal;
 		public string  name;
-		public int	nameLength;
+		public IntPtr	nameLength;
 		public int	modeFlags;
 	};
 	
 	[StructLayout (LayoutKind.Sequential)]
 	public struct XRRCrtcInfo {
-		public int timestamp;
+		public IntPtr timestamp;
 		public int x;
 		public int y;
 		public int width, height;
-		public int mode;
+		public IntPtr mode;
 		public short rotation;
 
 		public int noutput;
 		public IntPtr outputs;
 		
-		public IntPtr rotations;
+		public int rotations;
 		
 		public int npossible;
 		public IntPtr possible;
@@ -105,8 +105,8 @@ namespace XRandR
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct XRRScreenResources{
-		public int	timestamp;
-		public int	configTimestamp;
+		public IntPtr	timestamp;
+		public IntPtr	configTimestamp;
 
 		public int	ncrtc;
 		public IntPtr	crtcs;
@@ -155,10 +155,10 @@ namespace XRandR
 		[DllImport("libXrandr")]
 		public static extern int XRRSetCrtcConfig (IntPtr dpy,
 		                                           IntPtr resources,
-		                                           int crtc_id,
-		                                           int timestamp,
+		                                           IntPtr crtc_id,
+		                                           IntPtr timestamp,
 		                                           int x, int y,
-		                                           int mode_id,
+		                                           IntPtr mode_id,
 		                                           int rotation,
 		                                           IntPtr outputs,
 		                                           int noutputs);
@@ -365,7 +365,7 @@ namespace XRandR
 			this.display = d;
 			
 			foreach(XRRModeInfo mode in External.PtrToStructureArray<XRRModeInfo>(resources.modes,resources.nmode)){
-				modes[mode.id] = mode;
+				modes[mode.id.ToInt32()] = mode;
 			}
 		}
 
@@ -405,7 +405,7 @@ namespace XRandR
 			}
 		}
 		
-		public static void safeSetConfig(IntPtr display,IntPtr res,int crtc_id,int timestamp,int x,int y,int mode_id,int rotation,int[]outputs){
+		public static void safeSetConfig(IntPtr display,IntPtr res,IntPtr crtc_id,IntPtr timestamp,int x,int y,IntPtr mode_id,int rotation,int[]outputs){
 			try{
 				IntPtr ptr = Marshal.AllocHGlobal(sizeof(int) * outputs.Length);
 				for(int i=0;i<outputs.Length;i++)
@@ -421,7 +421,7 @@ namespace XRandR
 				                  ,y
 				                  ,mode_id
 				                  ,rotation
-				                  ,outputs.Aggregate("",(a,b)=> a+";"+b));
+				                  ,outputs/*.Aggregate("",(a,b)=> a+";"+b)*/);
 				throw excp;
 			}
 		}
@@ -462,7 +462,11 @@ namespace XRandR
 		}
 		public static void Main(string[] args)
 		{
-			foreach(ScreenResources res in External.ScreenResources()){
+			External.logStructure(new XRRScreenResources());
+			External.logStructure(new XRRCrtcInfo());
+			External.logStructure(new XRRModeInfo());
+			External.logStructure(new XRROutputInfo());
+			/*foreach(ScreenResources res in External.ScreenResources()){
 				foreach(XRRModeInfo mode in res.Modes())
 					printModeInfo(mode);
 				
@@ -474,7 +478,7 @@ namespace XRandR
 						printModeInfo(mode);
 				}
 				res.setMode(0x3c,0x5d);
-			};
+			};*/
 		}
 	}
 }
