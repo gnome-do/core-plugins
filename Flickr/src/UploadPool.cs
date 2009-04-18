@@ -31,43 +31,88 @@ namespace Flickr
 	
 	public class UploadPool : IDisposable 
 	{
-		object locker = new object();
 		const int workerCount = 4;
+		object locker = new object();
+		
 		Thread[] uploaders;
-		Queue<IFileItem> taskQ = new Queue<IFileItem>();
 		UploadDialog dialog;
+		Queue<IFileItem> taskQ;
 		FlickrNet.Flickr flickr;
-
-		public UploadPool (string tags, int totalUploads) 
+		
+		public UploadPool (string tags) 
 		{
-			uploaders = new Thread [workerCount];
 			UploadTags = tags;
-			
-			flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
-			                               AccountConfig.ApiSecret, 
-			                               AccountConfig.AuthToken
-			                               );
-			
-			
-				dialog = new UploadDialog ();
-				dialog.TotalUploads = totalUploads;
-			Services.Application.RunOnMainThread ( () => {
-				dialog.Show ();
-			});
+			taskQ = new Queue<IFileItem> ();
+			uploaders = new Thread [workerCount];
+			flickr = new FlickrNet.Flickr (AccountConfig.ApiKey, AccountConfig.ApiSecret, AccountConfig.AuthToken);
+		}
+		
+		public void EnqueueUpload (IFileItem file)
+		{
+			lock (locker)
+			{
+				taskQ.Enqueue (file);
+				Monitor.PulseAll (locker);
+			}
 		}
 		
 		public void BeginUploads ()
 		{
+			Log.Debug ("Queue has {0} items", QueueLength);
+			dialog = new UploadDialog ();
+			dialog.TotalUploads = QueueLength;
+			
 			// Create and start a separate thread for each worker
-			for (int i = 0; i < workerCount; i++)
-				(uploaders [i] = new Thread (Consume)).Start();
+			for (int i = 0; i < workerCount; i++) {
+				uploaders [i] = new Thread (Consume);
+				uploaders [i].IsBackground = true;
+				uploaders [i].Start();
+			}
+			
+			dialog.Show ();
+		}
+		
+		public string UploadTags { get; private set; }
+		
+		public int QueueLength { 
+			get { return taskQ.Count; } 
 		}
 
+		void Consume() 
+		{
+			IFileItem photo;
+			
+			do {
+				lock (locker) {
+					while (taskQ.Count == 0)
+						Monitor.Wait (locker);
+		
+					photo = taskQ.Dequeue();
+				}
+				
+				Thread.Sleep (4000);
+				if (dialog != null)
+					Services.Application.RunOnMainThread ( () => dialog.IncrementProgress ());
+				
+				/*
+				flickr.UploadPicture (photo.Path, 
+				                      photo.Name, 
+				                      "", 
+				                      UploadTags,
+				                      AccountConfig.IsPublic, 
+				                      AccountConfig.FamilyAllowed,
+				                      AccountConfig.FriendsAllowed
+				                      );
+				 */
+			} while (photo != null);
+		}
+		
+#region IDisposable
 		public void Dispose() 
 		{
 			// Enqueue one null task per worker to make each exit.
 			foreach (Thread uploader in uploaders)
-				QueueUpload (null);
+				EnqueueUpload (null);
 			foreach (Thread uploader in uploaders)
 				uploader.Join();
 			
@@ -76,43 +121,6 @@ namespace Flickr
 			                               "flickr.png@" + GetType ().Assembly.FullName
 			                               );
 		}
-		
-		public string UploadTags { get; private set; }
-		public int UploadsInQueue {get { return taskQ.Count; } }
-		
-		public void QueueUpload (IFileItem file)
-		{
-			lock (locker)
-			{
-				taskQ.Enqueue (file);
-				Monitor.PulseAll (locker);
-			}
-		}
-
-		void Consume() 
-		{
-			IFileItem photo;
-			do {
-				lock (locker) {
-					while (taskQ.Count == 0)
-						Monitor.Wait (locker);
-					photo = taskQ.Dequeue();
-				}
-				if (photo != null) {
-					Thread.Sleep (4000);
-					Services.Application.RunOnMainThread ( () => dialog.IncrementProgress ());
-					/*
-					flickr.UploadPicture (photo.Path, 
-					                      photo.Name, 
-					                      "", 
-					                      UploadTags,
-					                      AccountConfig.IsPublic, 
-					                      AccountConfig.FamilyAllowed,
-					                      AccountConfig.FriendsAllowed
-					                      );
-					 */
-				}
-			} while (photo != null);
-		}
+#endregion
 	}
 }

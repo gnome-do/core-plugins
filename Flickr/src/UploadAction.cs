@@ -33,12 +33,9 @@ using Do.Platform.Linux;
 namespace Flickr
 {	
 	public class UploadAction : Act, IConfigurable
-	{
-		static object count_lock = new object ();
-		static int upload_num;
-		
-		const string ImageExtensions = ".jpg .jpef .gif .png .tiff";
-		
+	{			
+		const string ImageExtensions = ".jpg .jpeg .gif .png .tiff";
+	
 		public override string Name {
 			get { return Catalog.GetString ("Upload photo"); }
 		}
@@ -57,13 +54,13 @@ namespace Flickr
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { 
-				return new Type [] { typeof (IFileItem) };
+				yield return typeof (IFileItem);
 			}
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
-				return new Type [] { typeof (ITextItem) };
+				yield return typeof (ITextItem);
 			}
 		}
 		
@@ -80,6 +77,8 @@ namespace Flickr
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string tags;
+			List<IFileItem> uploads;
+				
 			tags = AccountConfig.Tags + " ";
 			
 			if (modItems.Any ()) {
@@ -90,37 +89,32 @@ namespace Flickr
 			}
 						
 			//Build a list of all of the files to upload.
-			List<IFileItem> uploads = new List<IFileItem> ();
+			uploads = new List<IFileItem> ();
+			
 			foreach (Item item in items) {
 				IFileItem file = item as IFileItem;
+				
+				if (file == null)
+					continue;
+				
 				if (Directory.Exists (file.Path)) {
 					DirectoryInfo dinfo = new DirectoryInfo (file.Path);
-					FileInfo [] finfo = dinfo.GetFiles ();
-					foreach (FileInfo f in finfo) {
+					foreach (FileInfo f in dinfo.GetFiles ()) {
 						if (FileIsPicture (f.FullName))
 							uploads.Add (Services.UniverseFactory.NewFileItem (f.FullName));
 					}
 				} else {
 					uploads.Add (file);
 				}
-				upload_num = 1;
 			}
 		
-			Services.Application.RunOnThread ( () => {
-				using (UploadPool uploadQueue = new UploadPool (tags, uploads.Count))
-				{
-					foreach (IFileItem photo in uploads)
-						uploadQueue.QueueUpload (photo);
-						
-					Services.Notifications.Notify ("Flickr",
-					                               String.Format ("Uploading {0} pictures.", uploads.Count),
-					                               "flickr.png@" + GetType ().Assembly.FullName
-					                               ); 
-					uploadQueue.BeginUploads ();
-				}
-			});
-
-			return null;
+			UploadPool uploadQueue = new UploadPool (tags);
+			foreach (IFileItem photo in uploads)
+				uploadQueue.EnqueueUpload (photo);
+				
+			uploadQueue.BeginUploads ();
+			
+			yield break;
 		}
 		
 		public Gtk.Bin GetConfiguration ()
