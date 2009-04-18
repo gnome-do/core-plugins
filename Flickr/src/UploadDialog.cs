@@ -3,6 +3,7 @@ using Mono.Unix;
 
 using Gtk;
 using Gdk;
+using GLib;
 
 using Do.Platform;
 
@@ -13,11 +14,14 @@ namespace Flickr
 	public partial class UploadDialog : Gtk.Dialog
 	{
 
+		readonly string UploadingLabel;
+		
 		public UploadDialog()
 		{
-			this.Build();
+			Build();
 			
-			this.CurrentUpload = 0;
+			CurrentUpload = 0;
+			UploadingLabel = Catalog.GetString ("Uploading {0} of {1}...");
 		
 			/*Pixbuf FlickrPix = Pixbuf.LoadFromResource ("flickr@" + GetType ().Assembly.FullName);
 			FlickrImage.Pixbuf = FlickrPix.ScaleSimple (50, 50, Gdk.InterpType.Bilinear);*/
@@ -25,28 +29,27 @@ namespace Flickr
 			TextLabel.Text = Catalog.GetString ("Your images are being uploaded to Flickr.");
 			
 			HideButton.Clicked += OnHide;
-			uploadProgress.Text = Catalog.GetString (string.Format ("Uploading {0} of {1}...", this.CurrentUpload, this.TotalUploads));
+			uploadProgress.Text = Catalog.GetString (string.Format (UploadingLabel, CurrentUpload, TotalUploads));
+			GLib.Timeout.Add (100, () => { uploadProgress.Pulse (); return true; });
 		}
 		
-		public int CurrentUpload { get; set; }
 		public int TotalUploads {get; set; }
+		public int CurrentUpload { get; set; }
 		
 		protected void OnHide (object sender, EventArgs args)
 		{
 			Services.Notifications.Notify ("Flickr", String.Format ("Your images are still being uploaded."),
 				"flickr.png@" + GetType ().Assembly.FullName);
-			this.Destroy ();
+			Destroy ();
 		}
 		
 		public void IncrementProgress ()
 		{
-			Log.Debug ("Uploading {0} of {1}", CurrentUpload, TotalUploads);
 			CurrentUpload++;
-			uploadProgress.Fraction = (double)CurrentUpload / (double)TotalUploads;
-			uploadProgress.Text = Catalog.GetString (string.Format ("Uploading {0} of {1}...", CurrentUpload, TotalUploads));
+			uploadProgress.Text = Catalog.GetString (string.Format (UploadingLabel, CurrentUpload, TotalUploads));
 			
 			if (CurrentUpload == TotalUploads)
-				this.Destroy ();
+				Destroy ();
 		}
 	}
 }

@@ -31,8 +31,8 @@ namespace Flickr
 	
 	public class UploadPool : IDisposable 
 	{
-		const int workerCount = 4;
-		object locker = new object();
+		object locker;
+		const int WorkerCount = 4;
 		
 		Thread[] uploaders;
 		UploadDialog dialog;
@@ -42,8 +42,9 @@ namespace Flickr
 		public UploadPool (string tags) 
 		{
 			UploadTags = tags;
+			locker = new object ();
 			taskQ = new Queue<IFileItem> ();
-			uploaders = new Thread [workerCount];
+			uploaders = new Thread [WorkerCount];
 			flickr = new FlickrNet.Flickr (AccountConfig.ApiKey, AccountConfig.ApiSecret, AccountConfig.AuthToken);
 		}
 		
@@ -63,7 +64,7 @@ namespace Flickr
 			dialog.TotalUploads = QueueLength;
 			
 			// Create and start a separate thread for each worker
-			for (int i = 0; i < workerCount; i++) {
+			for (int i = 0; i < WorkerCount; i++) {
 				uploaders [i] = new Thread (Consume);
 				uploaders [i].IsBackground = true;
 				uploaders [i].Start();
@@ -91,19 +92,17 @@ namespace Flickr
 				}
 				
 				Thread.Sleep (4000);
+				
 				if (dialog != null)
 					Services.Application.RunOnMainThread ( () => dialog.IncrementProgress ());
 				
-				/*
-				flickr.UploadPicture (photo.Path, 
-				                      photo.Name, 
-				                      "", 
-				                      UploadTags,
-				                      AccountConfig.IsPublic, 
-				                      AccountConfig.FamilyAllowed,
-				                      AccountConfig.FriendsAllowed
-				                      );
-				 */
+				try {
+					flickr.UploadPicture (photo.Path, photo.Name, "", UploadTags, AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
+						AccountConfig.FriendsAllowed);
+				} catch (FlickrApiException e) {
+					Log.Error ("Cannot upload photos, please grant permissions in configuration dialog");
+				}
+				                      
 			} while (photo != null);
 		}
 		
