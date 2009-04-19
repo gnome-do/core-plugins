@@ -56,7 +56,8 @@ namespace Firefox
 			historyItem = new BrowseHistoryItem ();
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes 
+		{
 			get { 
 				yield return typeof (PlaceItem); 
 				yield return typeof (FolderItem);
@@ -66,19 +67,23 @@ namespace Firefox
 			}
 		}
 
-		public override string Name {
+		public override string Name 
+		{
 			get { return Catalog.GetString ("Firefox Awesome Bar"); }
 		}
 
-		public override string Description {
+		public override string Description 
+		{
 			get { return Catalog.GetString ("Search through your bookmarks and history."); }
 		}
 
-		public override string Icon {
+		public override string Icon 
+		{
 			get { return "firefox-3.0"; }
 		}
 
-		public override IEnumerable<Item> Items {
+		public override IEnumerable<Item> Items 
+		{
 			get { return items; }
 		}
 
@@ -97,7 +102,8 @@ namespace Firefox
 					items.Add((Item) place);			
 		}
 		
-		public override IEnumerable<Item> ChildrenOfItem (Item item) {
+		public override IEnumerable<Item> ChildrenOfItem (Item item) 
+		{
 			if (isFirefox(item)) {				
 				yield return bookmarksItem;
 				yield return historyItem;
@@ -118,7 +124,6 @@ namespace Firefox
 					yield return place;
 			}
 			
-			// If it's a folder, give them its' children.
 			if (isFolder(item)) {
 				FolderItem parent = (FolderItem) item;
 				foreach (FolderItem folder in folders)
@@ -130,13 +135,12 @@ namespace Firefox
 			}
 		}
 		
-		bool isFirefox(Item item) {
+		bool isFirefox(Item item) 
+		{
 			return item.Equals(Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand("firefox"));
 		}
 		
-		bool isFolder(Item item) {
-			return item is FolderItem;
-		}
+		bool isFolder(Item item) { return item is FolderItem; }
 
 		/// <summary>
 		/// Looks in the firefox profiles file (~/.mozilla/firefox/profiles.ini)
@@ -149,7 +153,8 @@ namespace Firefox
 		/// user.
 		/// </returns>
 		
-		static string ProfilePath {
+		static string ProfilePath 
+		{
 			get {
 				string line, profile, path, home;
 
@@ -181,7 +186,8 @@ namespace Firefox
 		/// <returns>
 		/// The path of the current database file in memory.
 		/// </returns>
-		static string tempDatabasePath {
+		static string tempDatabasePath 
+		{
 			get {
 				// Create a reference to the current firefox file.
 				string firefoxPath = Path.Combine (ProfilePath, "places.sqlite");				
@@ -211,7 +217,8 @@ namespace Firefox
 		/// <returns>
 		/// The current SQL connection string to the temporary database in use.
 		/// </returns>
-		string connectionString {
+		string connectionString 
+		{
 			get { return String.Format ("URI=file:{0},version=3",tempDatabasePath); }
 		}
 
@@ -225,15 +232,15 @@ namespace Firefox
 		/// </returns>
 		IEnumerable<FolderItem> LoadFolderItems ()
 		{
-			
 			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection (connectionString)) {
 				dbcon.Open ();
 				using (IDbCommand dbcmd = dbcon.CreateCommand () ) {
-					dbcmd.CommandText = "SELECT title, " + 
-											   "id, " + 
-											   "parent " + 
-										"FROM moz_bookmarks " +
-										"WHERE type = 2";
+					dbcmd.CommandText = 
+						"SELECT title, " + 
+							   "id, " + 
+							   "parent " + 
+						"FROM moz_bookmarks " +
+						"WHERE type = 2";
 					using (IDataReader reader = dbcmd.ExecuteReader () ) {
 						while(reader.Read () ) {
 							string title = reader.GetString (0);							
@@ -258,7 +265,6 @@ namespace Firefox
 						}
 					}
 				}
-				dbcon.Close ();
 			}
 		}
 		
@@ -274,13 +280,14 @@ namespace Firefox
 			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection (connectionString)) {
 				dbcon.Open ();
 				using (IDbCommand dbcmd = dbcon.CreateCommand ()) {
-					dbcmd.CommandText = "SELECT moz_places.title, " +
-											   "moz_places.url, " + 
-							                   "moz_bookmarks.parent, " +
-											   "moz_bookmarks.title " +
-										"FROM moz_places LEFT OUTER JOIN moz_bookmarks " + 
-										"ON moz_places.id=moz_bookmarks.fk " +
-										"ORDER BY moz_places.frecency DESC";
+					dbcmd.CommandText = 
+						"SELECT moz_places.title, " +
+							   "moz_places.url, " + 
+							   "moz_bookmarks.parent, " +
+							   "moz_bookmarks.title " +
+						"FROM moz_places LEFT OUTER JOIN moz_bookmarks " + 
+						"ON moz_places.id=moz_bookmarks.fk " +
+						"ORDER BY moz_places.frecency DESC";
 					using (IDataReader reader = dbcmd.ExecuteReader ()) {
 						while(reader.Read () ) {				
 							string title = reader.GetString (0);
@@ -306,7 +313,6 @@ namespace Firefox
 						}
 					}
 				}
-				dbcon.Close ();
 			}
 		}
 	}

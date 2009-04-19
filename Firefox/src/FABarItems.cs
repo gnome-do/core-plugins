@@ -23,19 +23,22 @@ using Do.Universe.Common;
 
 namespace Firefox
 {
-	public class BrowseBookmarkItem : Item {
+	public class BrowseBookmarkItem : Item 
+	{
 		public override string Name { get { return "Bookmarks"; } }
 		public override string Description { get { return "Browse Firefox Bookmarks"; } }
 		public override string Icon { get { return "firefox-3.0"; } }
 	}
 	
-	public class BrowseHistoryItem : Item {
+	public class BrowseHistoryItem : Item 
+	{
 		public override string Name { get { return "History"; } }
 		public override string Description { get { return "Browse Firefox History."; } }
 		public override string Icon { get { return "firefox-3.0"; } }
 	}
 	
-	public class FolderItem : Item {
+	public class FolderItem : Item 
+	{
 		string title;
 		int id;
 		int parentID;
@@ -57,9 +60,7 @@ namespace Firefox
 		public override string Description { get { return "Mozilla Firefox Bookmark Directory"; } }
 		public override string Icon { get { return "folder"; } }
 		public int Id { get { return id; } }
-		public int ParentId { 
-			get { return parentID; }
-		}
+		public int ParentId { get { return parentID; } }
 	}
 	
 	public class PlaceItem : Item, IBookmarkItem
@@ -84,8 +85,6 @@ namespace Firefox
 		public override string Description { get { return url; } }
 		public override string Icon { get { return "www"; } }
 		public string Url { get { return url; } }
-		public int? ParentId { 
-			get { return parentID; }
-		}
+		public int? ParentId { get { return parentID; } }
 	}
 }
