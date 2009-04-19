@@ -41,5 +41,9 @@
     <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../usr/local/lib/gnome-do/Do.Platform.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../usr/local/lib/gnome-do/Do.Universe.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../usr/local/lib/gnome-do/Do.Interface.Linux.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </References>
 </Project>
