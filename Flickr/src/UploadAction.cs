@@ -108,12 +108,15 @@ namespace Flickr
 				}
 			}
 		
-			UploadPool uploadQueue = new UploadPool (tags);
-			foreach (IFileItem photo in uploads)
-				uploadQueue.EnqueueUpload (photo);
-				
-			uploadQueue.BeginUploads ();
-			
+			Services.Application.RunOnThread ( () => {
+				using (UploadPool uploadQueue = new UploadPool (tags)) {
+					foreach (IFileItem photo in uploads)
+						uploadQueue.EnqueueUpload (photo);
+						
+					uploadQueue.BeginUploads ();
+				}
+			});
+
 			yield break;
 		}
 		

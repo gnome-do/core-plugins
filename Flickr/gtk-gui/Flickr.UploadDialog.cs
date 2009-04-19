@@ -15,17 +15,19 @@ namespace Flickr {
         
         private Gtk.Alignment alignment1;
         
-        private Gtk.VBox vbox3;
-        
         private Gtk.HBox hbox1;
         
         private Gtk.Image FlickrImage;
+        
+        private Gtk.VBox vbox2;
         
         private Gtk.Label TextLabel;
         
         private Gtk.ProgressBar uploadProgress;
         
         private Gtk.Button HideButton;
+        
+        private Gtk.Button OKButton;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -50,10 +52,6 @@ namespace Flickr {
             this.alignment1.RightPadding = ((uint)(10));
             this.alignment1.BottomPadding = ((uint)(10));
             // Container child alignment1.Gtk.Container+ContainerChild
-            this.vbox3 = new Gtk.VBox();
-            this.vbox3.Name = "vbox3";
-            this.vbox3.Spacing = 6;
-            // Container child vbox3.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
             this.hbox1.Name = "hbox1";
             this.hbox1.Spacing = 6;
@@ -66,27 +64,30 @@ namespace Flickr {
             w2.Expand = false;
             w2.Fill = false;
             // Container child hbox1.Gtk.Box+BoxChild
+            this.vbox2 = new Gtk.VBox();
+            this.vbox2.Name = "vbox2";
+            this.vbox2.Spacing = 6;
+            // Container child vbox2.Gtk.Box+BoxChild
             this.TextLabel = new Gtk.Label();
             this.TextLabel.Name = "TextLabel";
-            this.hbox1.Add(this.TextLabel);
-            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.hbox1[this.TextLabel]));
-            w3.Position = 1;
+            this.TextLabel.Justify = ((Gtk.Justification)(2));
+            this.vbox2.Add(this.TextLabel);
+            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox2[this.TextLabel]));
+            w3.Position = 0;
             w3.Expand = false;
             w3.Fill = false;
-            this.vbox3.Add(this.hbox1);
-            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox3[this.hbox1]));
-            w4.Position = 0;
-            w4.Expand = false;
-            w4.Fill = false;
-            // Container child vbox3.Gtk.Box+BoxChild
+            // Container child vbox2.Gtk.Box+BoxChild
             this.uploadProgress = new Gtk.ProgressBar();
             this.uploadProgress.Name = "uploadProgress";
-            this.vbox3.Add(this.uploadProgress);
-            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox3[this.uploadProgress]));
+            this.vbox2.Add(this.uploadProgress);
+            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox2[this.uploadProgress]));
+            w4.Position = 1;
+            w4.Expand = false;
+            w4.Fill = false;
+            this.hbox1.Add(this.vbox2);
+            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.hbox1[this.vbox2]));
             w5.Position = 1;
-            w5.Expand = false;
-            w5.Fill = false;
-            this.alignment1.Add(this.vbox3);
+            this.alignment1.Add(this.hbox1);
             w1.Add(this.alignment1);
             Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(w1[this.alignment1]));
             w7.Position = 0;
@@ -124,11 +125,37 @@ namespace Flickr {
             Gtk.ButtonBox.ButtonBoxChild w17 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[this.HideButton]));
             w17.Expand = false;
             w17.Fill = false;
+            // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            this.OKButton = new Gtk.Button();
+            this.OKButton.CanFocus = true;
+            this.OKButton.Name = "OKButton";
+            this.OKButton.UseUnderline = true;
+            // Container child OKButton.Gtk.Container+ContainerChild
+            Gtk.Alignment w18 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            // Container child GtkAlignment1.Gtk.Container+ContainerChild
+            Gtk.HBox w19 = new Gtk.HBox();
+            w19.Spacing = 2;
+            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            Gtk.Image w20 = new Gtk.Image();
+            w20.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-ok", Gtk.IconSize.LargeToolbar, 24);
+            w19.Add(w20);
+            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            Gtk.Label w22 = new Gtk.Label();
+            w22.LabelProp = Mono.Unix.Catalog.GetString("_OK");
+            w22.UseUnderline = true;
+            w19.Add(w22);
+            w18.Add(w19);
+            this.OKButton.Add(w18);
+            this.AddActionWidget(this.OKButton, 0);
+            Gtk.ButtonBox.ButtonBoxChild w26 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[this.OKButton]));
+            w26.Position = 1;
+            w26.Expand = false;
+            w26.Fill = false;
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 428;
-            this.DefaultHeight = 149;
+            this.DefaultWidth = 414;
+            this.DefaultHeight = 147;
             this.Show();
         }
     }

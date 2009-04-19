@@ -24,6 +24,8 @@ using System.Collections.Generic;
 using Do.Platform;
 using Do.Universe;
 
+using Gtk;
+
 using FlickrNet;
 
 namespace Flickr
@@ -59,9 +61,13 @@ namespace Flickr
 		
 		public void BeginUploads ()
 		{
-			Log.Debug ("Queue has {0} items", QueueLength);
-			dialog = new UploadDialog ();
-			dialog.TotalUploads = QueueLength;
+			Log<UploadAction>.Debug ("Queue has {0} items", QueueLength);
+			
+			Services.Application.RunOnMainThread ( () => {
+				dialog = new UploadDialog ();
+				dialog.TotalUploads = QueueLength;
+				dialog.Show ();
+			});
 			
 			// Create and start a separate thread for each worker
 			for (int i = 0; i < WorkerCount; i++) {
@@ -69,8 +75,6 @@ namespace Flickr
 				uploaders [i].IsBackground = true;
 				uploaders [i].Start();
 			}
-			
-			dialog.Show ();
 		}
 		
 		public string UploadTags { get; private set; }
@@ -91,17 +95,18 @@ namespace Flickr
 					photo = taskQ.Dequeue();
 				}
 				
-				Thread.Sleep (4000);
-				
-				if (dialog != null)
-					Services.Application.RunOnMainThread ( () => dialog.IncrementProgress ());
-				
-				try {
-					flickr.UploadPicture (photo.Path, photo.Name, "", UploadTags, AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
-						AccountConfig.FriendsAllowed);
-				} catch (FlickrApiException e) {
-					Log.Error ("Cannot upload photos, please grant permissions in configuration dialog");
+				if (photo != null) {					
+					try {
+						Thread.Sleep (4000);
+						Services.Application.RunOnMainThread ( () => dialog.IncrementProgress ());
+						//flickr.UploadPicture (photo.Path, photo.Name, "", UploadTags, AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
+						//	AccountConfig.FriendsAllowed);
+					} catch (FlickrApiException e) {
+						Log<UploadAction>.Error ("Cannot upload photos, please grant permissions in configuration dialog");
+					}
 				}
+				else
+					Log<UploadPool>.Debug ("Thread reached the end of queue");
 				                      
 			} while (photo != null);
 		}
@@ -112,13 +117,11 @@ namespace Flickr
 			// Enqueue one null task per worker to make each exit.
 			foreach (Thread uploader in uploaders)
 				EnqueueUpload (null);
+			//wait until the upload threads have finished
 			foreach (Thread uploader in uploaders)
 				uploader.Join();
 			
-			Services.Notifications.Notify ("Flickr",
-			                               String.Format ("Finished uploading pictures."),
-			                               "flickr.png@" + GetType ().Assembly.FullName
-			                               );
+			Services.Application.RunOnMainThread ( () => dialog.Finish ());
 		}
 #endregion
 	}
