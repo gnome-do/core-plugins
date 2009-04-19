@@ -17,6 +17,6 @@
 	</Dependencies>
 
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="Mozilla.Firefox.FABarItemSource" />
+		<ItemSource type="Firefox.FABarItemSource" />
 	</Extension>
 </Addin>

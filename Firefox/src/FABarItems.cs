@@ -21,8 +21,20 @@ using Do.Universe;
 using Do.Universe.Common;
 
 
-namespace Mozilla.Firefox
+namespace Firefox
 {
+	public class BrowseBookmarkItem : Item {
+		public override string Name { get { return "Bookmarks"; } }
+		public override string Description { get { return "Browse Firefox Bookmarks"; } }
+		public override string Icon { get { return "firefox-3.0"; } }
+	}
+	
+	public class BrowseHistoryItem : Item {
+		public override string Name { get { return "History"; } }
+		public override string Description { get { return "Browse Firefox History."; } }
+		public override string Icon { get { return "firefox-3.0"; } }
+	}
+	
 	public class FolderItem : Item {
 		string title;
 		int id;
