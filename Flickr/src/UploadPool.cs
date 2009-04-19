@@ -70,11 +70,8 @@ namespace Flickr
 			});
 			
 			// Create and start a separate thread for each worker
-			for (int i = 0; i < WorkerCount; i++) {
-				uploaders [i] = new Thread (Consume);
-				uploaders [i].IsBackground = true;
-				uploaders [i].Start();
-			}
+			for (int i = 0; i < WorkerCount; i++)
+				(uploaders [i] = new Thread (Consume)).Start ();
 		}
 		
 		public string UploadTags { get; private set; }
