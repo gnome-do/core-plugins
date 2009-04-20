@@ -117,7 +117,7 @@ namespace Firefox
 						yield return place;
 			}
 			
-			if (item is FolderItem) {
+			if (item is BrowseHistoryItem) {
 				foreach (FolderItem folder in folders)
 					yield return folder;
 				foreach (PlaceItem place in places)
