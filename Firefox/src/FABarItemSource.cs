@@ -104,7 +104,7 @@ namespace Firefox
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item) 
 		{
-			if (isFirefox(item)) {				
+			if (IsFirefox(item)) {				
 				yield return bookmarksItem;
 				yield return historyItem;
 			}
@@ -117,14 +117,14 @@ namespace Firefox
 						yield return place;
 			}
 			
-			if (item is BrowseHistoryItem) {
+			if (item is FolderItem) {
 				foreach (FolderItem folder in folders)
 					yield return folder;
 				foreach (PlaceItem place in places)
 					yield return place;
 			}
 			
-			if (isFolder(item)) {
+			if (item is FolderItem) {
 				FolderItem parent = (FolderItem) item;
 				foreach (FolderItem folder in folders)
 					if (parent.Id == folder.ParentId) 
@@ -135,13 +135,11 @@ namespace Firefox
 			}
 		}
 		
-		bool isFirefox(Item item) 
+		bool IsFirefox(Item item) 
 		{
 			return item.Equals(Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand("firefox"));
 		}
 		
-		bool isFolder(Item item) { return item is FolderItem; }
-
 		/// <summary>
 		/// Looks in the firefox profiles file (~/.mozilla/firefox/profiles.ini)
 		/// for the name of the default profile, and returns the path to the
@@ -186,7 +184,7 @@ namespace Firefox
 		/// <returns>
 		/// The path of the current database file in memory.
 		/// </returns>
-		static string tempDatabasePath 
+		static string TempDatabasePath 
 		{
 			get {
 				// Create a reference to the current firefox file.
@@ -217,9 +215,9 @@ namespace Firefox
 		/// <returns>
 		/// The current SQL connection string to the temporary database in use.
 		/// </returns>
-		string connectionString 
+		string ConnectionString 
 		{
-			get { return String.Format ("URI=file:{0},version=3",tempDatabasePath); }
+			get { return String.Format ("URI=file:{0},version=3",TempDatabasePath); }
 		}
 
 		/// <summary>
@@ -232,7 +230,7 @@ namespace Firefox
 		/// </returns>
 		IEnumerable<FolderItem> LoadFolderItems ()
 		{
-			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection (connectionString)) {
+			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection (ConnectionString)) {
 				dbcon.Open ();
 				using (IDbCommand dbcmd = dbcon.CreateCommand () ) {
 					dbcmd.CommandText = 
@@ -277,7 +275,7 @@ namespace Firefox
 		/// </returns>
 		IEnumerable<PlaceItem> LoadPlaceItems ()
 		{	
-			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection (connectionString)) {
+			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection (ConnectionString)) {
 				dbcon.Open ();
 				using (IDbCommand dbcmd = dbcon.CreateCommand ()) {
 					dbcmd.CommandText = 
