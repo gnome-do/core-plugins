@@ -77,14 +77,11 @@ namespace VinagreVNC
         		xml.Load (bookmarksFile);
         		
         		elements = xml.GetElementsByTagName ("item");
-        		Log.Debug ("found {0} elements named item", elements.Count);
         	
         		foreach (XmlNode node in elements) {
         			string bookmark = "", host = "", port = "";
         			
-        			Log.Debug ("item element has {0} children", node.ChildNodes.Count);
         			foreach (XmlNode child in node.ChildNodes) {
-        				Log.Debug ("looking at {0}", child.Name);
         				switch (child.Name) {
         				case "name":
         					bookmark = child.InnerText;
