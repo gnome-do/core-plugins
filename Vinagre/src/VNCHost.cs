@@ -26,31 +26,31 @@ using Do.Universe;
 
 namespace VinagreVNC 
 {  
-    public class HostItem : Item  
-    {
-        public HostItem (string bookmark, string hostname, string port)
-        {
-        	port = port;
-            Bookmark = bookmark;
-            Hostname = hostname;
-        }
+	public class HostItem : Item  
+	{
+		public HostItem (string bookmark, string hostname, string port)
+		{
+			Port = port;
+			Bookmark = bookmark;
+			Hostname = hostname;
+		}
 
-        public override string Name { 
-            get { return Bookmark; }
-        }
+		public override string Name { 
+			get { return Bookmark; }
+		}
 
-        public override string Description { 
-            get { return Hostname; }
-        }
+		public override string Description { 
+			get { return Hostname; }
+		}
 
-        public override string Icon { 
-            get { return "gnome-globe"; } 
-        }
+		public override string Icon { 
+			get { return "gnome-globe"; } 
+		}
         
-        public string Hostname { get; private set; }
+		public string Hostname { get; private set; }
 
-        public string Bookmark { get; private set; }
+		public string Bookmark { get; private set; }
         
-        public string Port { get; private set; }
-    }
+		public string Port { get; private set; }
+	}
 }

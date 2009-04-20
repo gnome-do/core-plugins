@@ -31,80 +31,80 @@ using Do.Universe;
 
 namespace VinagreVNC 
 {  
-    public class VNCHostItem : ItemSource 
-    {
-        List<Item> items;
+	public class VNCHostItem : ItemSource 
+	{
+		List<Item> items;
 
-        public VNCHostItem ()
-        {
-            items = new List<Item> ();
-        }
+		public VNCHostItem ()
+		{
+        	    items = new List<Item> ();
+	        }
 
-        public override string Name { 
-            get { return Catalog.GetString ("Vinagre Bookmarks"); }
-        }
+		public override string Name { 
+			get { return Catalog.GetString ("Vinagre Bookmarks"); }
+		}
 
-        public override string Description { 
-            get { return Catalog.GetString ("Indexes your Vinagre Bookmarks"); }
-        }
+		public override string Description { 
+			get { return Catalog.GetString ("Indexes your Vinagre Bookmarks"); }
+		}
 
-        public override string Icon {
-            get { return "gnome-globe"; }
-        }
+		public override string Icon {
+			get { return "gnome-globe"; }
+		}
 
-        public override IEnumerable<Type> SupportedItemTypes {
-            get {
-            	yield return typeof (HostItem);
+		public override IEnumerable<Type> SupportedItemTypes {
+			get {
+				yield return typeof (HostItem);
 				yield return typeof (VNCHostItem);
-            }
-        }
+			}
+		}
 
-        public override IEnumerable<Item> Items {
-            get { return items; }
-        }
+		public override IEnumerable<Item> Items {
+			get { return items; }
+		}
 
-        public override void UpdateItems ()
-        {
-        	XmlDocument xml;
-        	XmlNodeList elements;
-        	string bookmarksFile;
-        	
-        	items.Clear ();
-        	xml = new XmlDocument ();
-        	bookmarksFile = new [] {ReadXdgUserDir ("XDG_DATA_HOME", ".local/share"), "vinagre", "vinagre-bookmarks.xml"}.Aggregate (Path.Combine);
-        	
-        	try {
-        		xml.Load (bookmarksFile);
-        		
-        		elements = xml.GetElementsByTagName ("item");
-        	
-        		foreach (XmlNode node in elements) {
-        			string bookmark = "", host = "", port = "";
-        			
-        			foreach (XmlNode child in node.ChildNodes) {
-        				switch (child.Name) {
-        				case "name":
-        					bookmark = child.InnerText;
-        					break;
-        				case "host":
-        					host = child.InnerText;
-        					break;
-        				case "port":
-        					port = child.InnerText;
-        					break;
-        				}
-        			}
-        			
-        			items.Add (new HostItem (bookmark, host, port));
-        		}
-        	} catch (FileNotFoundException e) {
-        		Log.Debug ("Cound not find vinagre bookmarks file {0}", bookmarksFile);
-        	} catch (XmlException e) {
-        		Log.Debug ("An error occured parsing bookmarks file {0}:", e.Message);
-        	}
-        }
+		public override void UpdateItems ()
+		{
+			XmlDocument xml;
+			XmlNodeList elements;
+			string bookmarksFile;
+		
+			items.Clear ();
+			xml = new XmlDocument ();
+			bookmarksFile = new [] {ReadXdgUserDir ("XDG_DATA_HOME", ".local/share"), "vinagre", "vinagre-bookmarks.xml"}.Aggregate (Path.Combine);
+		
+			try {
+				xml.Load (bookmarksFile);
+			
+				elements = xml.GetElementsByTagName ("item");
+		
+				foreach (XmlNode node in elements) {
+					string bookmark = "", host = "", port = "";
+				
+					foreach (XmlNode child in node.ChildNodes) {
+						switch (child.Name) {
+						case "name":
+							bookmark = child.InnerText;
+							break;
+						case "host":
+							host = child.InnerText;
+							break;
+						case "port":
+							port = child.InnerText;
+							break;
+						}
+					}
+				
+					items.Add (new HostItem (bookmark, host, port));
+				}
+			} catch (FileNotFoundException e) {
+				Log.Debug ("Cound not find vinagre bookmarks file {0}", bookmarksFile);
+			} catch (XmlException e) {
+				Log.Debug ("An error occured parsing bookmarks file {0}:", e.Message);
+			}
+		}
         
-        string ReadXdgUserDir (string key, string fallback)
+		string ReadXdgUserDir (string key, string fallback)
 		{
 			string home_dir, config_dir, env_path, user_dirs_path;
 
@@ -130,7 +130,7 @@ namespace VinagreVNC
 						if (delim_index > 8 && line.Substring (0, delim_index) == key) {
 							string path = line.Substring (delim_index + 1).Trim ('"');
 							bool relative = false;
-
+	
 							if (path.StartsWith ("$HOME/")) {
 								relative = true;
 								path = path.Substring (6);
@@ -138,16 +138,17 @@ namespace VinagreVNC
 								relative = true;
 								path = path.Substring (1);
 							} else if (!path.StartsWith ("/")) {
-								relative = true;
+							relative = true;
 							}
 							return relative ? Path.Combine (home_dir, path) : path;
 						}
 					}
 				}
-			} catch (FileNotFoundException) {
+			} catch (FileNotFoundException e) {
 			}
+
 			return Path.Combine (home_dir, fallback);
 		}
-    }
+	}
 }
 

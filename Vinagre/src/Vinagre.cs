@@ -29,44 +29,45 @@ using Do.Universe;
 
 namespace VinagreVNC 
 {
-    public class VNCAction : Act 
-    {
-        public override string Name { 
-            get { return Catalog.GetString ("Connect with VNC"); }
-        }
+	public class VNCAction : Act 
+	{
+       
+		public override string Name { 
+			get { return Catalog.GetString ("Connect with VNC"); }
+		}
 
-        public override string Description {
-            get { return Catalog.GetString ("Connect with VNC"); }
-        }
+		public override string Description {
+	            get { return Catalog.GetString ("Connect with VNC"); }
+	        }
 
-        public override string Icon {
-            get { return "vinagre"; }
-        }
+		public override string Icon {
+			get { return "vinagre"; }
+		}
 
-        public override IEnumerable<Type> SupportedItemTypes {
-            get { 
-                yield return typeof (HostItem);
-                yield return typeof (ITextItem);
-                yield return typeof (VNCHostItem);
-            }
-        }
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { 
+				yield return typeof (HostItem);
+				yield return typeof (ITextItem);
+				yield return typeof (VNCHostItem);
+			}
+		}
 
-        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {         
-            string hostname;
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {         
+			string hostname;
             
-            if (items.First () is ITextItem) {
-                hostname = (items.First () as ITextItem).Text;
-            } else {
-                HostItem hostitem = items.First () as HostItem;
-                hostname = hostitem.Hostname + ":" + hostitem.Port;
-            }
+			if (items.First () is ITextItem) {
+				hostname = (items.First () as ITextItem).Text;
+			} else {
+				HostItem hostitem = items.First () as HostItem;
+				hostname = hostitem.Hostname + ":" + hostitem.Port;
+			}
             
-            Process vinagre = new Process ();
-            vinagre.StartInfo.FileName = "vinagre";
-            vinagre.StartInfo.Arguments = hostname;
-            vinagre.Start ();
+			Process vinagre = new Process ();
+			vinagre.StartInfo.FileName = "vinagre";
+			vinagre.StartInfo.Arguments = hostname;
+			vinagre.Start ();
             
-            yield break;
-        }
-    }
+			yield break;
+		}
+	}
 }
