@@ -22,12 +22,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+
 using Mono.Unix;
 
 using Do.Universe;
 
-namespace VinagreVNC {
-    public class VNCAction : Act {
+namespace VinagreVNC 
+{
+    public class VNCAction : Act 
+    {
         public override string Name { 
             get { return Catalog.GetString ("Connect with VNC"); }
         }
@@ -42,33 +45,28 @@ namespace VinagreVNC {
 
         public override IEnumerable<Type> SupportedItemTypes {
             get { 
-                return new Type[] {
-                    typeof(HostItem),
-                    typeof(VNCHostItem),
-                    typeof(ITextItem),
-                };
+                yield return typeof (HostItem);
+                yield return typeof (ITextItem);
+                yield return typeof (VNCHostItem);
             }
-        }
-
-        public override bool SupportsItem (Item item) {
-            return true;
         }
 
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {         
             string hostname;
+            
             if (items.First () is ITextItem) {
-                ITextItem textitem = items.First () as ITextItem;
-                hostname = textitem.Text;
-            }
-            else {
+                hostname = (items.First () as ITextItem).Text;
+            } else {
                 HostItem hostitem = items.First () as HostItem;
-                hostname = hostitem.Description + ":" + hostitem.Port;
+                hostname = hostitem.Hostname + ":" + hostitem.Port;
             }
+            
             Process vinagre = new Process ();
             vinagre.StartInfo.FileName = "vinagre";
             vinagre.StartInfo.Arguments = hostname;
             vinagre.Start ();
-            return null;
+            
+            yield break;
         }
     }
 }
