@@ -22,8 +22,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Do.Universe;
+using Do.Interface.Wink;
+
 using Wnck;
 using Mono.Unix;
 
@@ -54,7 +57,8 @@ namespace WindowManager
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type [] {
-					typeof (GenericWindowItem)};
+					typeof (IApplicationItem),
+				};
 			}
 		}
 
@@ -67,33 +71,25 @@ namespace WindowManager
 		public WindowItemSource ()
 		{
 			items = new List<Item> ();
-			
-			items.Add (new GenericWindowItem (Catalog.GetString ("Current Window"),
-			                                  Catalog.GetString ("The Currently Active Window"),
-			                                  "gnome-window-manager",
-			                                  GenericWindowType.CurrentWindow));
-			items.Add (new GenericWindowItem (Catalog.GetString ("Current Application"),
-			                                  Catalog.GetString ("The Currently Active Application"),
-			                                  "gnome-window-manager",
-			                                  GenericWindowType.CurrentApplication));
-			items.Add (new GenericWindowItem (Catalog.GetString ("Previous Window"),
-			                                  Catalog.GetString ("The Previously Active Window"),
-			                                  "gnome-window-manager",
-			                                  GenericWindowType.PreviousWindow));
-			items.Add (new GenericWindowItem (Catalog.GetString ("Previous Application"),
-			                                  Catalog.GetString ("The Previously Active Application"),
-			                                  "gnome-window-manager",
-			                                  GenericWindowType.PreviousApplication));
+			items.Add (new CurrentApplicationItem ());
+			items.Add (new CurrentWindowItem ());
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			return null;
-		}
-
-		public override void UpdateItems ()
-		{
-			return;
-		}		
+			List<Item> results = new List<Item> ();
+			IApplicationItem app = item as IApplicationItem;
+			if (app == null)
+				return results;
+			
+			List<Wnck.Window> windows = WindowUtils.WindowListForCmd (app.Exec);
+			if (!windows.Any ())
+				return results;
+			
+			foreach (Wnck.Window window in windows)
+				results.Add (new WindowItem (window, app.Icon));
+			
+			return results;
+		}	
 	}
 }

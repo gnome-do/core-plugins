@@ -96,6 +96,12 @@ namespace Pastebin
 				text += titem.Text;
 			}
 			
+			if (string.IsNullOrEmpty(text))
+			{
+				Services.Notifications.Notify ("Pastebin", "No text provided for pasting.");
+				yield break;
+			}
+			
 			IPastebinProvider pastebinProvider = null;
 					
 			if (modifierItems.Any ()) {
@@ -106,8 +112,9 @@ namespace Pastebin
 			}
 					
 			string url = Pastebin.PostUsing (pastebinProvider);	
-					
-			yield return new TextItem (url);
+			
+			if (!string.IsNullOrEmpty (url))
+				yield return new TextItem (url);
 		}
 				
 		public Gtk.Bin GetConfiguration ()

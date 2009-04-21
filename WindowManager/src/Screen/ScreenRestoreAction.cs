@@ -1,4 +1,4 @@
-// GenericWindowItem.cs
+// ScreenListAction.cs
 //
 //GNOME Do is the legal property of its developers. Please refer to the
 //COPYRIGHT file distributed with this
@@ -21,56 +21,40 @@
 //
 
 using System;
-using Wnck;
+using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
+using System.Threading;
+
 using Do.Universe;
+using Do.Interface.Wink;
+
+using Wnck;
+using Mono.Unix;
 
 namespace WindowManager
 {
-	public enum GenericWindowType
-	{
-		CurrentWindow = 0,
-		PreviousWindow = 1,
-		CurrentApplication = 2,
-		PreviousApplication = 3,
-	}
 	
-	public class GenericWindowItem : Item
+	public class ScreenRestoreAction : ScreenActionAction
 	{
-		string name, description, icon;
-		GenericWindowType windowType;
-		
-		public GenericWindowItem (string name, string description, string icon, 
-		                          GenericWindowType windowType) 
-		{
-			this.name = name;
-			this.description = description;
-			this.icon = icon;
-			this.windowType = windowType;
-		}
-		
 		public override string Name {
-			get {
-				return name;
-			}
+			get { return Catalog.GetString ("Restore Windows"); }
 		}
-
+		
 		public override string Description {
-			get {
-				return description;
-			}
+			get { return Catalog.GetString ("Restore Windows to their Previous Positions"); }
 		}
 
 		public override string Icon {
-			get {
-				return icon;
-			}
+			get { return "preferences-system-windows"; }
 		}
 
-		public GenericWindowType WindowType {
-			get {
-				return windowType;
-			}
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+		{
+			IScreenItem item = items.First () as IScreenItem;
+			item.Viewport.RestoreLayout ();
+			return null;
 		}
-		
+
 	}
 }
