@@ -270,7 +270,7 @@ namespace XRandR
 		public static T[] PtrToStructureArray<T>(IntPtr ptr,int numElements){
 			T[] res = new T[numElements];
 			for (int i=0;i<numElements;i++)
-				res[i] = (T)Marshal.PtrToStructure(new IntPtr(ptr.ToInt32() + i * Marshal.SizeOf(typeof(T)))
+				res[i] = (T)Marshal.PtrToStructure(new IntPtr(ptr.ToInt64() + i * Marshal.SizeOf(typeof(T)))
 				                                   ,typeof(T));
 			return res;
 		}
