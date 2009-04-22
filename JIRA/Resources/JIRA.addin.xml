@@ -6,6 +6,7 @@
 	description="Creates fast lookup links for JIRA issues."
 	author="Andrew Franklin"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

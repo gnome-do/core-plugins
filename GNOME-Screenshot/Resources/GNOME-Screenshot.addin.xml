@@ -6,6 +6,7 @@
 	description="Take screenshots with optional delay."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

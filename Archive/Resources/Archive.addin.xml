@@ -6,6 +6,7 @@
 	description="Create and extract archive files."
 	author="Guillaume Beland"
 	category="Community"
+	defaultEnabled="false"
 >
  
 	<Runtime>

@@ -73,18 +73,8 @@ SUBDIRS = \
 	Wordnet \
 	Xmms2 \
 	YouTube \
-	Zim 
-
-# Current dir _must_ be processed last; this ensures our repo is built with all
-# the plugins
-SUBDIRS += .
-
-ASSEMBLY_INSTALL_DIR = $(DESTDIR)/@datadir@/gnome-do/plugins
-install-data-hook:
-	$(MAUTIL) rep-build $(ASSEMBLY_INSTALL_DIR)
-
-uninstall-hook:
-	rm -f $(ASSEMBLY_INSTALL_DIR)/*.mrep
+	Zim \
+	.
 
 clean-local:
 	-rm -rf $(top_builddir)/build

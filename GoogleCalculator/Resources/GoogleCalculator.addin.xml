@@ -6,6 +6,7 @@
 	description="Perform calculations, and currency/quantity conversions."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

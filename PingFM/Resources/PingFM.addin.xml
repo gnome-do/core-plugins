@@ -6,6 +6,7 @@
 	description="Post microblog/status updates via Ping.FM"
 	author="Peng Deng"
 	category="Community"
+	defaultEnabled="false"
 >
 
 	<Runtime>

@@ -6,6 +6,7 @@
 	description="Browse your VNC Viewer bookmarks and connect to remote servers."
 	author="Alex Launi"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

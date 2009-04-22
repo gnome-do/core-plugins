@@ -6,6 +6,7 @@
 	description="Search the web using your installed OpenSearch plugins."
 	author="Jason Jones"	
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

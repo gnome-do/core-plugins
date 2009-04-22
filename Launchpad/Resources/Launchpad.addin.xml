@@ -6,6 +6,7 @@
 	description="Search various Launchpad properties (e.g. code, bugs, people)."
 	author="Ken Simon, David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

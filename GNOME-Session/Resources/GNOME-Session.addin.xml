@@ -6,6 +6,7 @@
 	description="Log out, lock your screen, shutdown, suspend, etc."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>
