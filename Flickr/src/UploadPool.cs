@@ -94,10 +94,9 @@ namespace Flickr
 				
 				if (photo != null) {					
 					try {
-						Thread.Sleep (4000);
 						Services.Application.RunOnMainThread ( () => dialog.IncrementProgress ());
-						//flickr.UploadPicture (photo.Path, photo.Name, "", UploadTags, AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
-						//	AccountConfig.FriendsAllowed);
+						flickr.UploadPicture (photo.Path, photo.Name, "", UploadTags, AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
+							AccountConfig.FriendsAllowed);
 					} catch (FlickrApiException e) {
 						Log<UploadAction>.Error ("Cannot upload photos, please grant permissions in configuration dialog");
 					}
