@@ -67,10 +67,20 @@ namespace PidginPlugin
 			get { return handle; }
 		}
 
+		//valid proto values:
+		//prpl-msn, prpl-msn-1, prpl-<contributor>-proto
 		string ReadableProto (string proto)
 		{
 			string[] parts = proto.Split ('-');
-			return (parts.Length >= 2) ? char.ToUpper (parts[1][0]) + parts[1].Substring(1) : proto; 
+			string prplProto;
+			int similarProtos;
+			
+			if (int.TryParse (parts [parts.Length-1], out similarProtos))
+				prplProto = parts[1];
+			else
+				 prplProto = parts[parts.Length-1];
+			
+			return (parts.Length >= 2) ? char.ToUpper (prplProto[0]) + prplProto.Substring(1) : proto; 
 		}
 	}
 }

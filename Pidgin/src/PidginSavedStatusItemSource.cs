@@ -70,27 +70,29 @@ namespace PidginPlugin
 		{			
 			Pidgin.IPurpleObject prpl;
 			int [] rawStatuses;
-			try {
-				prpl = Pidgin.GetPurpleObject ();
-				foreach (Item status in statuses.Where (i => i is PidginSavedStatusItem).ToArray ())
-					statuses.Remove (status);
-				rawStatuses = prpl.PurpleSavedstatusesGetAll ();
-				foreach (int status in rawStatuses) {
-					if (!prpl.PurpleSavedstatusIsTransient (status)) {
-						string title, message;
-						int id, statId;
-						
-						title = prpl.PurpleSavedstatusGetTitle (status);
-						message = prpl.PurpleSavedstatusGetMessage (status);
-						id = prpl.PurpleSavedstatusFind (title);
-						statId = prpl.PurpleSavedstatusGetType (status);
-						
-						statuses.Add (new PidginSavedStatusItem (title,message,id,statId));
+			if (Pidgin.InstanceIsRunning) {
+				try {
+					prpl = Pidgin.GetPurpleObject ();
+					foreach (Item status in statuses.Where (i => i is PidginSavedStatusItem).ToArray ())
+						statuses.Remove (status);
+					rawStatuses = prpl.PurpleSavedstatusesGetAll ();
+					foreach (int status in rawStatuses) {
+						if (!prpl.PurpleSavedstatusIsTransient (status)) {
+							int id, statId;
+							string title, message;
+							
+							title = prpl.PurpleSavedstatusGetTitle (status);
+							id = prpl.PurpleSavedstatusFind (title);
+							statId = prpl.PurpleSavedstatusGetType (status);
+							message = prpl.PurpleSavedstatusGetMessage (status);
+							
+							statuses.Add (new PidginSavedStatusItem (title,message,id,statId));
+						}
 					}
+				} catch (Exception e) {
+					Log<PidginSavedStatusItemSource>.Error ("Could not read saved statuses: {0}", e.Message);
+					Log<PidginSavedStatusItemSource>.Debug (e.StackTrace);
 				}
-			} catch (Exception e) {
-				Log<PidginSavedStatusItemSource>.Error ("Could not read saved statuses: {0}", e.Message);
-				Log<PidginSavedStatusItemSource>.Debug (e.StackTrace);
 			}
 		}
 	}
