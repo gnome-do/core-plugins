@@ -28,7 +28,6 @@ using Do.Universe.Common;
 using Do.Platform.Common;
 using Do.Platform;
 	
-
 using Mono.Data.SqliteClient;
 using Mono.Unix;
 	
@@ -38,32 +37,34 @@ namespace Firefox
 	{
 		const string BeginProfileName = "Path=";
 		const string BeginDefaultProfile = "Default=1";
-		static string storedProfilePath;		
-		static string storedTempDatabasePath;		
-		static BrowseBookmarkItem bookmarksItem;
-		static BrowseHistoryItem historyItem;
-		
+		// File Information
+		string storedProfilePath;		
+		string storedTempDatabasePath;
+		// Generic History and Bookmark items for Menu
+		BrowseHistoryItem historyItem;
+		BrowseBookmarkItem bookmarksItem;
+		// Collections for Storing Items to be used by Do
 		List<Item> items;
 		IEnumerable<PlaceItem> places;
 		IEnumerable<FolderItem> folders;		
 		
 		public FABarItemSource ()
 		{
-			places = Enumerable.Empty<PlaceItem> ();
-			folders = Enumerable.Empty<FolderItem> ();
-			items = new List<Item> ();
+			historyItem = new BrowseHistoryItem ();			
 			bookmarksItem = new BrowseBookmarkItem ();
-			historyItem = new BrowseHistoryItem ();
+			items = new List<Item> ();
+			places = Enumerable.Empty<PlaceItem> ();			
+			folders = Enumerable.Empty<FolderItem> ();
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes 
 		{
-			get { 
+			get {
 				yield return typeof (PlaceItem); 
 				yield return typeof (FolderItem);
-				yield return typeof (BrowseBookmarkItem);
-				yield return typeof (BrowseHistoryItem);
-				yield return typeof (IApplicationItem);
+				yield return typeof (IApplicationItem);				
+				yield return typeof (BrowseHistoryItem);				
+				yield return typeof (BrowseBookmarkItem);				
 			}
 		}
 
@@ -92,46 +93,48 @@ namespace Firefox
 			this.places = LoadPlaceItems ();
 			this.folders = LoadFolderItems ();
 			items.Clear();
-			// Feed the main itemsource only Bookmark places and directories.
 			items.Add (bookmarksItem);
 			items.Add (historyItem);			
 			foreach (FolderItem folder in folders) 
 				items.Add((Item) folder);
-			foreach (PlaceItem place in places) 
-				if (place.ParentId != null) 
-					items.Add((Item) place);			
+			foreach (PlaceItem place in places.Where (place => place.ParentId != null) )
+			    items.Add((Item) place);
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item) 
 		{
-			if (IsFirefox(item)) {				
+			if (IsFirefox(item)) 
+			{				
 				yield return bookmarksItem;
 				yield return historyItem;
 			}
 			
-			if (item is BrowseBookmarkItem) {
+			if (item is BrowseBookmarkItem) 
+			{
 				foreach (FolderItem folder in folders)
 					yield return folder;
-				foreach (PlaceItem place in places)
-					if (place.ParentId != null)
-						yield return place;
+				
+				foreach (PlaceItem place in places.Where (place => place.ParentId != null))
+					yield return place;
 			}
 			
-			if (item is BrowseHistoryItem) {
+			if (item is BrowseHistoryItem) 
+			{
 				foreach (FolderItem folder in folders)
 					yield return folder;
 				foreach (PlaceItem place in places)
 					yield return place;
 			}
 			
-			if (item is FolderItem) {
+			if (item is FolderItem) 
+			{
 				FolderItem parent = (FolderItem) item;
-				foreach (FolderItem folder in folders)
-					if (parent.Id == folder.ParentId) 
-						yield return (Item) folder;
-				foreach (PlaceItem place in places)
-					if (parent.Id == place.ParentId) 
-						yield return (Item) place;
+				
+				foreach (FolderItem folder in folders.Where (folder => folder.ParentId == parent.Id))
+					yield return folder;
+				
+				foreach (PlaceItem place in places.Where (place => place.ParentId == parent.Id))
+					yield return place;
 			}
 		}
 		
@@ -151,7 +154,7 @@ namespace Firefox
 		/// user.
 		/// </returns>
 		
-		static string ProfilePath 
+		string ProfilePath 
 		{
 			get {
 				string line, profile, path, home;
@@ -165,7 +168,8 @@ namespace Firefox
 					while ((line = r.ReadLine ()) != null) {
 						if (line.StartsWith (BeginDefaultProfile)) 
 							break;
-						if (line.StartsWith (BeginProfileName)) {
+						if (line.StartsWith (BeginProfileName)) 
+						{
 							line = line.Trim ();
 							line = line.Substring (BeginProfileName.Length);
 							profile = line;
@@ -177,6 +181,15 @@ namespace Firefox
 			}
 		}
 
+
+		string FirefoxDBPath
+		{
+			get 
+			{
+				return Path.Combine (ProfilePath, "places.sqlite");
+			}
+		}
+		
 		/// <summary>
 		/// Looks at the file currently saved in the temp folder and sees if it
 		/// needs to be updated.
@@ -184,27 +197,25 @@ namespace Firefox
 		/// <returns>
 		/// The path of the current database file in memory.
 		/// </returns>
-		static string TempDatabasePath 
+		string TempDatabasePath 
 		{
-			get {
-				// Create a reference to the current firefox file.
-				string firefoxPath = Path.Combine (ProfilePath, "places.sqlite");				
-				
+			get 
+			{				
 				// Check if the stored temp file exists.				
-				if  ((String.IsNullOrEmpty (storedTempDatabasePath)) || (!File.Exists (storedTempDatabasePath))) {
+				if  ((String.IsNullOrEmpty (storedTempDatabasePath)) 
+				     || (!File.Exists (storedTempDatabasePath))) 
+				{
 					// If it doesn't, make one.
-					string copyPath = Path.GetTempFileName ();
-					System.IO.File.Copy (firefoxPath, copyPath, true);
-					storedTempDatabasePath = copyPath;
+					storedTempDatabasePath = Path.GetTempFileName ();
+					System.IO.File.Copy (FirefoxDBPath, storedTempDatabasePath, true);
 				}
 				else if (File.Exists (storedTempDatabasePath))
 				{
-					FileInfo currentFileInfo = new FileInfo (firefoxPath);
-					FileInfo firefoxFileInfo = new FileInfo (storedTempDatabasePath);
-					if (currentFileInfo.Length != firefoxFileInfo.Length) 
-						System.IO.File.Copy (firefoxPath, storedTempDatabasePath, true);
+					FileInfo firefoxDBFileInfo = new FileInfo (FirefoxDBPath);
+					FileInfo tempDBFileInfo = new FileInfo (storedTempDatabasePath);
+					if (firefoxDBFileInfo.Length != tempDBFileInfo.Length) 
+						System.IO.File.Copy (FirefoxDBPath, storedTempDatabasePath, true);
 				}
-				
 				return storedTempDatabasePath;
 			}
 		}
@@ -232,14 +243,16 @@ namespace Firefox
 		{
 			using (IDbConnection dbcon = (IDbConnection) new SqliteConnection (ConnectionString)) {
 				dbcon.Open ();
-				using (IDbCommand dbcmd = dbcon.CreateCommand () ) {
+				using (IDbCommand dbcmd = dbcon.CreateCommand ()) 
+				{
 					dbcmd.CommandText = 
 						"SELECT title, " + 
 							   "id, " + 
 							   "parent " + 
 						"FROM moz_bookmarks " +
 						"WHERE type = 2";
-					using (IDataReader reader = dbcmd.ExecuteReader () ) {
+					using (IDataReader reader = dbcmd.ExecuteReader ()) 
+					{
 						while(reader.Read () ) {
 							string title = reader.GetString (0);							
 							int id = reader.GetInt32 (1);
@@ -255,7 +268,8 @@ namespace Firefox
 							 * It references portions of their menu that generate
 							 * information dynamically from History, Tags, etc.
 							 * Ignore it. */							
-							else if (title != "") {
+							else if (title != "") 
+							{
 								yield return new FolderItem(title, 
 								                            id, 
 								                            parent);
@@ -314,6 +328,4 @@ namespace Firefox
 			}
 		}
 	}
-}  
-
-
+}
