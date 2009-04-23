@@ -6,6 +6,7 @@
 	description="Search and play music in Rhythmbox."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

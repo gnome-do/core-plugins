@@ -19,6 +19,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 
@@ -40,17 +41,21 @@ namespace PidginPlugin
 		public interface IPurpleObject
 		{
 			int[] PurpleAccountsGetAll ();
-			int [] PurpleAccountsGetAllActive ();
+			int PurpleBuddyGetIcon (int buddy);
+			int[] PurpleAccountsGetAllActive ();
 			bool PurpleBuddyIsOnline (int buddy);
 			int PurpleBuddyGetAccount (int buddy);
 			string PurpleAccountGetAlias (int account);
 			bool PurpleAccountIsConnected (int account);
+			string PurpleBuddyGetLocalAlias (int buddy);
 			string PurpleBuddyGetServerAlias (int buddy);
+			string PurpleBuddyIconGetFullPath (int icon);
 			string PurpleAccountGetUsername (int account);
 			int PurpleFindBuddy (int account, string name);
 			string PurpleAccountGetProtocolName (int account);
+			int[] PurpleFindBuddies (int account, string name);
 			int PurpleAccountsFindConnected (string account, string proto);
-			void PurpleAccountSetEnabled (int account, string ui, int value);
+			void PurpleAccountSetEnabled (int account, string ui, int val);
 
 			int PurpleSavedstatusGetCurrent ();
 			int [] PurpleSavedstatusesGetAll ();
@@ -72,7 +77,7 @@ namespace PidginPlugin
 			
 			int PurpleSavedstatusNew (string title, uint type);
 			int PurpleConversationNew (uint type, int account, string name);
-			void PurpleAccountSetEnabled (int account, string ui, uint value);
+			void PurpleAccountSetEnabled (int account, string ui, uint val);
 			
 			#endregion
 		}
@@ -91,9 +96,21 @@ namespace PidginPlugin
 			if (parts.Length >= 2) {
 				if (parts[0] == "prpl")
 					proto = parts[1];
-				icon = Path.Combine ("/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
 			}
+			icon = Path.Combine ("/usr/share/pixmaps/pidgin/protocols/48", proto + ".png");
 			return File.Exists (icon) ? icon : Pidgin.ChatIcon;
+		}
+		
+		public static string GetBuddyIconPath (int buddyID)
+		{
+			IPurpleObject prpl = GetPurpleObject ();
+
+			int icon = prpl.PurpleBuddyGetIcon (buddyID);
+			if (icon == 0) 
+				return null;
+			
+			string iconPath = prpl.PurpleBuddyIconGetFullPath (icon);
+			return (File.Exists (iconPath)) ? iconPath : null;
 		}
 
 		public static IPurpleObject GetPurpleObject ()
@@ -105,22 +122,45 @@ namespace PidginPlugin
 				return null;
 			}
 		}
-
-		private static int [] ConnectedAccounts {
+		
+		private static IEnumerable<int> ConnectedAccounts {
 			get {
-				List<int> connected;
-				IPurpleObject prpl;
+				IPurpleObject prpl = GetPurpleObject ();
 
-				prpl = GetPurpleObject ();
-				connected = new List<int> ();
-				try {
-					foreach (int account in prpl.PurpleAccountsGetAllActive ()) {
-						if (prpl.PurpleAccountIsConnected (account))
-							connected.Add (account);
-					}
-				} catch { }
-				return connected.ToArray ();
+				return prpl.PurpleAccountsGetAllActive ().Where (acct => prpl.PurpleAccountIsConnected (acct));
 			}
+		}
+		
+		public static int GetAccountID (string name, string proto) 
+		{
+			IPurpleObject prpl = GetPurpleObject ();
+			int account;
+			try {
+				account = prpl.PurpleAccountsFindConnected (name, proto); 
+			} catch { 
+				account = -1;
+			}			
+			return account;
+		}
+		
+		public static IEnumerable<int> FindBuddies (int account, string name)
+		{
+			IPurpleObject prpl = GetPurpleObject ();	
+
+			return prpl.PurpleFindBuddies (account, name);
+		}
+		
+		public static string GetBuddyLocalAlias (int buddy)
+		{
+			IPurpleObject prpl = GetPurpleObject ();
+			
+			if (!InstanceIsRunning)
+				return null;
+				
+			//don't need to do too much error checking here,
+			//this method should always return something and it's only used
+			//for bonjour, which _will_ always return what I'm looking for.
+			return prpl.PurpleBuddyGetLocalAlias (buddy);
 		}
 		
 		public static string GetBuddyServerAlias (string name)
@@ -134,11 +174,25 @@ namespace PidginPlugin
 			
 			foreach (int account in ConnectedAccounts) {
 				buddy = prpl.PurpleFindBuddy (account, name);
-				if (buddy == 0) continue;
+				
+				if (buddy == 0) 
+					continue;
+				
 				alias = prpl.PurpleBuddyGetServerAlias (buddy);
-				return (string.IsNullOrEmpty (alias)) ? null : alias;
+				return string.IsNullOrEmpty (alias) ? null : alias;
 			}
 			return null;
+		}
+		
+		public static string GetBuddyServerAlias (int buddy)
+		{
+			IPurpleObject prpl = GetPurpleObject ();
+			
+			if (!InstanceIsRunning)
+				return null;
+			
+			string alias = prpl.PurpleBuddyGetServerAlias (buddy);
+			return string.IsNullOrEmpty (alias) ? null : alias;
 		}
 
 		public static bool BuddyIsOnline (string name)

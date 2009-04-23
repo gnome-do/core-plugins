@@ -28,12 +28,11 @@ MA_PACKFILE = $(MA_ADDIN_NAMESPACE).$(MA_ADDIN_NAME)_$(MA_ADDIN_VER).mpack
 
 OUTPUT_FILES = \
         $(ASSEMBLY_FILE) \
-        $(ASSEMBLY_FILE).mdb \
-	$(BUILD_DIR)/$(MA_PACKFILE)
+        $(ASSEMBLY_FILE).mdb
 
 
 # Install plugins as data; there's no need for them to be excutable
-plugindir = ${datadir}/gnome-do/plugins
+plugindir = ${libdir}/gnome-do/plugins
 plugin_DATA = $(OUTPUT_FILES)
 
 MCS_FLAGS = $(MCS_LINQ_FLAG) -noconfig -codepage:utf8 -warn:4

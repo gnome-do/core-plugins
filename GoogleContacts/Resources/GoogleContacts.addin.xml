@@ -6,6 +6,7 @@
 	description="Search your GMail contacts."
 	author="Alex Launi"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

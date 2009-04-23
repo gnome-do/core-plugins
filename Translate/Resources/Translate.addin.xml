@@ -6,6 +6,7 @@
 	description="Translate text and websites."
 	author="Chris Szikszoy"
 	category="Community"
+	defaultEnabled="false"
 >
  
 	<Runtime>

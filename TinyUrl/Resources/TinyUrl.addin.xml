@@ -6,6 +6,7 @@
 	description="Make unwieldy urls tiny."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

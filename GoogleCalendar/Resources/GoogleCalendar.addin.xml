@@ -6,6 +6,7 @@
 	description="Create, search, and browse Google calendar events."
 	author="Alex Launi"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

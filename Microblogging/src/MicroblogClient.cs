@@ -45,9 +45,9 @@ namespace Microblogging
 		readonly string FailedPostMsg = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
 			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
 
-		const int UpdateTimelineTimeout = 30 * 1000;
-		const int UpdateContactsTimeout = 10 * 60 * 1000;
-		const int CheckForMessagesTimeout = 5 * 60 * 1000;
+		const int UpdateTimelineTimeout = 60 * 1000; // every 60 seconds
+		const int UpdateContactsTimeout = 30 * 1000 * 60; // every 30 minutes
+		const int CheckForMessagesTimeout = 5 * 1000 * 60; // every 5 minutes
 
 		#endregion
 
@@ -121,6 +121,7 @@ namespace Microblogging
 				newContacts = new List<FriendItem> ();
 				friends = blog.User.Friends ();
 			} catch (TwitterizerException e) {
+				Log.Error("{0} {1}", e.RequestData.ResponseException.Message, e.RequestData.ResponseException.StackTrace);
 				Log<MicroblogClient>.Debug (GenericErrorMsg, "UpdateContacts", e.Message);
 				return;
 			}

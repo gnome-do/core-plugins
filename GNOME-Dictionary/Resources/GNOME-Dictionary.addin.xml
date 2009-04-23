@@ -6,6 +6,7 @@
 	description="Look up word definitions in GNOME Dictionary."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

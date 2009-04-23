@@ -6,6 +6,7 @@
 	description="Control Logitech Squeezebox and Transport audio players."
 	author="Anders Thomsen"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

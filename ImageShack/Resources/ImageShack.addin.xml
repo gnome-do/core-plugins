@@ -6,6 +6,7 @@
 	description="Upload images to ImageShack."
 	author="Jason Jones"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

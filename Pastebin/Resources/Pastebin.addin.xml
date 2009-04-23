@@ -6,6 +6,7 @@
 	description="Paste text to an online pastebin."
 	author="Jason Jones"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

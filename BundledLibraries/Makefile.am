@@ -1,4 +1,4 @@
-bundledir = ${datadir}/gnome-do/plugins
+bundledir = ${libdir}/gnome-do/plugins
 
 gdata_subdir = libgoogle-data-mono-1.4.0.2
 gdata_subdir_full = $(addprefix $(srcdir)/,$(gdata_subdir))

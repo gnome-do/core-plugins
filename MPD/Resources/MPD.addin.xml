@@ -6,6 +6,7 @@
 	description="Search and play music from MPD."
 	author="Zachary Goldberg"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

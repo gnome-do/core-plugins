@@ -6,6 +6,7 @@
 	description="Access saved Putty sessions."
 	author="Karol Będkowski"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

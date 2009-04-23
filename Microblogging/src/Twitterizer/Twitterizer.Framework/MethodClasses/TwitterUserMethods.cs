@@ -95,9 +95,7 @@ namespace Twitterizer.Framework
 
             string actionUri = (Parameters == null ? Twitter.Urls.FriendsUrl : Parameters.BuildActionUri(Twitter.Urls.FriendsUrl));
             Data.ActionUri = new Uri(actionUri);
-
             Data = Request.PerformWebRequest(Data);
-
             return Data.Users;
         }
     }

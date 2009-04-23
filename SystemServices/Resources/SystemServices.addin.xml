@@ -6,6 +6,7 @@
 	description="Start, stop, and restart system services."
 	author="Karol Będkowski, David Siegel"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>
