@@ -19,6 +19,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 
@@ -72,8 +73,6 @@ namespace PidginPlugin
 			void PurpleConversationPresent (int conversation);
 			int PurpleConversationNew (int type, int account, string name);
 			
-			
-			
 			#region Pidgin < 2.5.4 compatibility methods
 			
 			int PurpleSavedstatusNew (string title, uint type);
@@ -106,8 +105,10 @@ namespace PidginPlugin
 		{
 			IPurpleObject prpl = GetPurpleObject ();
 
-			int icon = 	prpl.PurpleBuddyGetIcon (buddyID);
-			if (icon == 0) return null;
+			int icon = prpl.PurpleBuddyGetIcon (buddyID);
+			if (icon == 0) 
+				return null;
+			
 			string iconPath = prpl.PurpleBuddyIconGetFullPath (icon);
 			return (File.Exists (iconPath)) ? iconPath : null;
 		}
@@ -122,18 +123,11 @@ namespace PidginPlugin
 			}
 		}
 		
-		private static int [] ConnectedAccounts {
+		private static IEnumerable<int> ConnectedAccounts {
 			get {
-				List<int> connected = new List<int> ();
 				IPurpleObject prpl = GetPurpleObject ();
 
-				try {
-					foreach (int account in prpl.PurpleAccountsGetAllActive ()) {
-						if (prpl.PurpleAccountIsConnected (account))
-							connected.Add (account);
-					}
-				} catch { }
-				return connected.ToArray ();
+				return prpl.PurpleAccountsGetAllActive ().Where (acct => prpl.PurpleAccountIsConnected (acct));
 			}
 		}
 		
@@ -149,15 +143,11 @@ namespace PidginPlugin
 			return account;
 		}
 		
-		public static int[] FindBuddies (int account, string name)
+		public static IEnumerable<int> FindBuddies (int account, string name)
 		{
-			List<int> buddies = new List<int> ();
 			IPurpleObject prpl = GetPurpleObject ();	
-			
-			foreach (int buddy in prpl.PurpleFindBuddies (account, name))
-				buddies.Add (buddy);
-			
-			return buddies.ToArray ();
+
+			return prpl.PurpleFindBuddies (account, name);
 		}
 		
 		public static string GetBuddyLocalAlias (int buddy)
@@ -184,7 +174,10 @@ namespace PidginPlugin
 			
 			foreach (int account in ConnectedAccounts) {
 				buddy = prpl.PurpleFindBuddy (account, name);
-				if (buddy == 0) continue;
+				
+				if (buddy == 0) 
+					continue;
+				
 				alias = prpl.PurpleBuddyGetServerAlias (buddy);
 				return string.IsNullOrEmpty (alias) ? null : alias;
 			}
@@ -197,6 +190,7 @@ namespace PidginPlugin
 			
 			if (!InstanceIsRunning)
 				return null;
+			
 			string alias = prpl.PurpleBuddyGetServerAlias (buddy);
 			return string.IsNullOrEmpty (alias) ? null : alias;
 		}

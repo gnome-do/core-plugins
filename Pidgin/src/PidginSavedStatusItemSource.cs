@@ -78,13 +78,13 @@ namespace PidginPlugin
 					rawStatuses = prpl.PurpleSavedstatusesGetAll ();
 					foreach (int status in rawStatuses) {
 						if (!prpl.PurpleSavedstatusIsTransient (status)) {
-							string title, message;
 							int id, statId;
+							string title, message;
 							
 							title = prpl.PurpleSavedstatusGetTitle (status);
-							message = prpl.PurpleSavedstatusGetMessage (status);
 							id = prpl.PurpleSavedstatusFind (title);
 							statId = prpl.PurpleSavedstatusGetType (status);
+							message = prpl.PurpleSavedstatusGetMessage (status);
 							
 							statuses.Add (new PidginSavedStatusItem (title,message,id,statId));
 						}

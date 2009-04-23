@@ -104,10 +104,10 @@ namespace PidginPlugin
 				foreach (string key in buddy.Details.Where (d => d.Contains ("prpl")).ToArray ())
 					buddy[key] = "";
 			}
-
 			
 			buddies.Clear ();
 			buddies_seen = new Dictionary<ContactItem, bool> ();
+			
 			//load buddies from xml file
 			blist = new XmlDocument ();
 			try {
@@ -117,7 +117,8 @@ namespace PidginPlugin
 					ContactItem buddy;
 					
 					buddy = CreateBuddy (contact_node);
-					if (buddy == null) continue;
+					if (buddy == null) 
+						continue;
 					buddies_seen[buddy] = true;
 				}
 
@@ -138,7 +139,7 @@ namespace PidginPlugin
 					}			
 				}
 			} catch (Exception e) { 
-				Log<PidginContactItemSource>.Error ("Could not get Pidgin accounts: {0}", e.Message);
+				Log<PidginContactItemSource>.Error ("Error reading Bonjour buddies: {0}", e.Message);
 				Log<PidginContactItemSource>.Debug (e.StackTrace);
 			}
 			foreach (ContactItem buddy in buddies_seen.Keys) {
@@ -152,10 +153,10 @@ namespace PidginPlugin
 			ContactItem buddy;
 			string alias, proto, icon, accountAlias;
 			
+			proto = "prpl-bonjour";
+			icon = Pidgin.GetBuddyIconPath (buddyID);
 			alias = Pidgin.GetBuddyServerAlias(buddyID);
 			accountAlias = Pidgin.GetBuddyLocalAlias (buddyID);
-			icon = Pidgin.GetBuddyIconPath (buddyID);
-			proto = "prpl-bonjour";
 			buddy = ContactItem.Create (alias);
 			
 			//if for some reason this buddy has multiple prpl-bonjour accounts associated with it
@@ -239,7 +240,8 @@ namespace PidginPlugin
 			name = alias ?? protos.Values.FirstOrDefault ();
 
 			// If crucial details are missing, we can't make a buddy.
-			if (name == null || protos.Values.Count () <= 0) return null;
+			if (name == null || protos.Values.Count () <= 0) 
+				return null;
 			
 			// Create a new buddy, add the details we have.
 			buddy = ContactItem.Create (alias ?? name);
