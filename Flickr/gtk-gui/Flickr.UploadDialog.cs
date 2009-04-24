@@ -71,6 +71,8 @@ namespace Flickr {
             this.TextLabel = new Gtk.Label();
             this.TextLabel.Name = "TextLabel";
             this.TextLabel.Justify = ((Gtk.Justification)(2));
+            this.TextLabel.Ellipsize = ((Pango.EllipsizeMode)(3));
+            this.TextLabel.WidthChars = 40;
             this.vbox2.Add(this.TextLabel);
             Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox2[this.TextLabel]));
             w3.Position = 0;
@@ -154,7 +156,7 @@ namespace Flickr {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 414;
+            this.DefaultWidth = 408;
             this.DefaultHeight = 147;
             this.Show();
         }

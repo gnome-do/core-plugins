@@ -351,7 +351,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Flickr.UploadDialog" design-size="414 147">
+  <widget class="Gtk.Dialog" id="Flickr.UploadDialog" design-size="408 147">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Flickr Upload</property>
     <property name="Icon">resource:flickr.png</property>
@@ -396,6 +396,8 @@
                       <widget class="Gtk.Label" id="TextLabel">
                         <property name="MemberName" />
                         <property name="Justify">Center</property>
+                        <property name="Ellipsize">End</property>
+                        <property name="WidthChars">40</property>
                       </widget>
                       <packing>
                         <property name="Position">0</property>
