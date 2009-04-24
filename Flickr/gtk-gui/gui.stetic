@@ -105,7 +105,6 @@
             <child>
               <widget class="Gtk.Button" id="auth_btn">
                 <property name="MemberName" />
-                <property name="WidthRequest">174</property>
                 <property name="CanFocus">True</property>
                 <property name="Type">TextAndIcon</property>
                 <property name="Icon">stock:gtk-yes Menu</property>

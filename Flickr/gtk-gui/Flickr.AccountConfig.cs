@@ -102,7 +102,6 @@ namespace Flickr {
             this.hbuttonbox1.Name = "hbuttonbox1";
             // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
             this.auth_btn = new Gtk.Button();
-            this.auth_btn.WidthRequest = 174;
             this.auth_btn.CanFocus = true;
             this.auth_btn.Name = "auth_btn";
             this.auth_btn.UseUnderline = true;
