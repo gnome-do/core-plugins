@@ -5,7 +5,6 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../../../../../../usr/local/lib/gnome-do/Do.Interface.Linux.dll" />
     <widget-library name="../bin/Debug/Flickr.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Flickr.AccountConfig" design-size="401 347">
