@@ -39,11 +39,7 @@ namespace Exaile
 		{
 			if (!(item is IApplicationItem))
 				return false;
-			if ((item as IApplicationItem).Exec.Contains ("exaile")) {
-				if (Exaile.InstanceIsRunning)
-					return true;
-			}
-			return false;
+			return ((item as IApplicationItem).Exec.Contains ("exaile") && Exaile.InstanceIsRunning);
 		}
 	}
 }

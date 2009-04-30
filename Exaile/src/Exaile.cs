@@ -45,15 +45,12 @@ namespace Exaile
 
 		static Exaile ()
 		{
-			string home =
-				Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			
-			MusicLibraryFile = Path.Combine (home, ".exaile/music.db");
+			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 
+			MusicLibraryFile = Path.Combine (home, ".exaile/music.db");
 			CoverArtDirectory = Path.Combine (home, ".exaile/covers");
 
-			clear_songs_timer = new Timer (state =>
-				Gtk.Application.Invoke ((sender, args) => songs.Clear ()));
+			clear_songs_timer = new Timer (state => Gtk.Application.Invoke ((sender, args) => songs.Clear ()));
 
 			songs = new List<SongMusicItem> ();
 		}
@@ -65,25 +62,15 @@ namespace Exaile
 			albums_out = new List<AlbumMusicItem> ();
 			artists_out = new List<ArtistMusicItem> ();
 
-			Dictionary<string, AlbumMusicItem> albums =
-				new Dictionary<string, AlbumMusicItem> ();
-			Dictionary<string, ArtistMusicItem> artists =
-				new Dictionary<string, ArtistMusicItem> ();
+			Dictionary<string, AlbumMusicItem> albums = new Dictionary<string, AlbumMusicItem> ();
+			Dictionary<string, ArtistMusicItem> artists = new Dictionary<string, ArtistMusicItem> ();
 
 			foreach (SongMusicItem song in LoadAllSongs ()) {
-				if (!artists.ContainsKey (song.Artist) ||
-					artists[song.Artist].Cover == null)
-				{
-					artists[song.Artist] =
-						new ArtistMusicItem (song.Artist, song.Cover);
-				}
-				if (!albums.ContainsKey (song.Album) ||
-					albums[song.Album].Cover == null)
-				{
-					albums[song.Album] =
-						new AlbumMusicItem (song.Album, song.Artist, song.Year,
-							song.Cover);	
-				}
+				if (!artists.ContainsKey (song.Artist) || artists[song.Artist].Cover == null)
+					artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
+
+				if (!albums.ContainsKey (song.Album) || albums[song.Album].Cover == null)
+					albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);
 			}
 			albums_out.AddRange (albums.Values);
 			artists_out.AddRange (artists.Values);
@@ -93,17 +80,17 @@ namespace Exaile
 		{
 			if (item is SongMusicItem)
 				return new SongMusicItem[] { item as SongMusicItem };
-			
+
 			else if (item is ArtistMusicItem)
 				return LoadAllSongs ()
 					.Where (song => song.Artist.Contains (item.Name))
 					.OrderBy (song => song.Album).ThenBy (song => song.Track);
-			
+
 			else if (item is AlbumMusicItem)
 				return LoadAllSongs ()
 					.Where (song => song.Album == item.Name)
 					.OrderBy (song => song.Track);
-			
+
 			else
 				return Enumerable.Empty<SongMusicItem> ();
 		}
@@ -112,7 +99,7 @@ namespace Exaile
 		{
 			// Begin a new timer to clear the songs.
 			clear_songs_timer.Change (SecondsSongsCached*1000, Timeout.Infinite);
-			
+
 			if (songs.Any ()) return songs;
 
 			// If the database doesn't exist then just return.
@@ -130,8 +117,7 @@ namespace Exaile
 					using (IDbCommand dbcmd = dbcon.CreateCommand()) {
 						dbcon.Open();
 						dbcmd.CommandText =
-							"SELECT tracks.title, artists.name, albums.name, " + 
-							"tracks.year, albums.image, paths.name, tracks.track " +
+							"SELECT tracks.title, artists.name, albums.name, tracks.year, albums.image, paths.name, tracks.track " +
 							"FROM tracks " +
 							"JOIN artists ON tracks.artist = artists.id " +
 							"JOIN albums ON tracks.album = albums.id " +

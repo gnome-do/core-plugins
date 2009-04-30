@@ -47,8 +47,7 @@ namespace Exaile
 	class BrowseArtistsMusicItem : BrowseMusicItem
 	{
 		public BrowseArtistsMusicItem ():
-			base (Catalog.GetString ("Browse Artists"), 
-				Catalog.GetString ("Browse Exaile Music by Artist"))
+			base (Catalog.GetString ("Browse Artists"), Catalog.GetString ("Browse Exaile Music by Artist"))
 		{
 		}
 	}
@@ -56,8 +55,7 @@ namespace Exaile
 	class BrowseAlbumsMusicItem : BrowseMusicItem
 	{
 		public BrowseAlbumsMusicItem ():
-			base (Catalog.GetString ("Browse Albums"), 
-				Catalog.GetString ("Browse Exaile Music by Album"))
+			base (Catalog.GetString ("Browse Albums"), Catalog.GetString ("Browse Exaile Music by Album"))
 		{
 		}
 	}
