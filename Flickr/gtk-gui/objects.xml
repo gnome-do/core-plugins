@@ -1,6 +1,2 @@
 <objects attr-sync="on">
-  <object type="Flickr.UploadConfig" palette-category="Flickr" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals />
-  </object>
 </objects>
