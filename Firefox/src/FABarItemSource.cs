@@ -97,7 +97,7 @@ namespace Firefox
 			items.Add (historyItem);			
 			foreach (FolderItem folder in folders) 
 				items.Add((Item) folder);
-			foreach (PlaceItem place in places.Where (place => place.ParentId != null) )
+			foreach (PlaceItem place in places.Where (place => place.ParentId != null))
 			    items.Add((Item) place);
 		}
 		
@@ -140,7 +140,7 @@ namespace Firefox
 		
 		bool IsFirefox(Item item) 
 		{
-			return item.Equals(Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand("firefox"));
+			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand("firefox"));
 		}
 		
 		/// <summary>
@@ -156,13 +156,14 @@ namespace Firefox
 		
 		string ProfilePath 
 		{
-			get {
+			get 
+			{
 				string line, profile, path, home;
-
 				if (!String.IsNullOrEmpty (storedProfilePath)) 
 					return storedProfilePath;
 				home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 				profile = null;
+				
 				path = Path.Combine (home, ".mozilla/firefox/profiles.ini");
 				using (StreamReader r = File.OpenText (path)) {
 					while ((line = r.ReadLine ()) != null) {
@@ -176,8 +177,7 @@ namespace Firefox
 						}
 					}
 				}
-				return storedProfilePath =
-					Path.Combine (Path.Combine (home, ".mozilla/firefox"), profile);
+				return storedProfilePath = new [] {home, ".mozilla/firefox", profile}.Aggregate (Path.Combine); 
 			}
 		}
 
