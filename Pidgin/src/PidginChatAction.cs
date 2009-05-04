@@ -58,8 +58,10 @@ namespace PidginPlugin
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ContactItem)
-				return (item as ContactItem).Details.Any (d => d.StartsWith ("prpl-"));
+			if (item is ContactItem) {
+				ContactItem contact = item as ContactItem;
+				return contact.Details.Where (d => Pidgin.BuddyIsOnline (contact[d])).Any ();
+			}
 			return true;
 		}
 		
