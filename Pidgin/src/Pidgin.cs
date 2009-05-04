@@ -207,16 +207,17 @@ namespace PidginPlugin
 			int buddy;
 		   
 			prpl = GetPurpleObject ();
+			account_out = -1;
+			
 			try {
 				foreach (int account in ConnectedAccounts) {
 					buddy = prpl.PurpleFindBuddy (account, name);
-					if (prpl.PurpleBuddyIsOnline (buddy)) {
+					if (buddy != 0)
 						account_out = account;
+					if (prpl.PurpleBuddyIsOnline (buddy))
 						return true;
-					}
 				}
 			} catch { }
-			account_out = -1;
 			return false;
 		}
 		
@@ -258,7 +259,7 @@ namespace PidginPlugin
 			try {
 				GetBuddyIsOnlineAndAccount (name, out account);
 				if (account == -1)
-					account = prpl.PurpleAccountsFindConnected ("", "");
+					throw new ArgumentException ();
 				try {
 					conversation = prpl.PurpleConversationNew ((int) 1, account, name);
 				}
