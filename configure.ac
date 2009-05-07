@@ -56,11 +56,10 @@ PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
 PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 
-dnl Handle bundled Google libs until they're packaged
-GDATA_SHARP_ACL_LIBS=-r:$top_srcdir/BundledLibraries/Google.GData.AccessControl.dll
-GDATA_SHARP_CALENDAR_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Calendar.dll"
-GDATA_SHARP_DOCUMENTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Documents.dll"
-GDATA_SHARP_CONTACTS_LIBS="-r:$top_srcdir/BundledLibraries/Google.GData.Client.dll -r:$top_srcdir/BundledLibraries/Google.GData.Extensions.dll -r:$top_srcdir/BundledLibraries/Google.GData.Contacts.dll"
+PKG_CHECK_MODULES([GDATA_SHARP_ACL], [gdata-sharp-acl])
+PKG_CHECK_MODULES([GDATA_SHARP_CALENDAR], [gdata-sharp-core gdata-sharp-calendar])
+PKG_CHECK_MODULES([GDATA_SHARP_DOCUMENTS], [gdata-sharp-core gdata-sharp-documents])
+PKG_CHECK_MODULES([GDATA_SHARP_CONTACTS], [gdata-sharp-core gdata-sharp-contacts ])
 
 dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
 BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
