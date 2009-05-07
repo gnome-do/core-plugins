@@ -131,6 +131,7 @@ ClawsMail/Makefile
 Confluence/Makefile
 Del.icio.us/Makefile
 DiskMounter/Makefile
+Dropbox/Makefile
 Emesene/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile

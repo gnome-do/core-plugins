@@ -1,0 +1,24 @@
+<Project name="Dropbox" fileversion="2.0" language="C#" targetFramework="2.0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Dropbox" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Dropbox" />
+      <Build debugmode="False" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="src" subtype="Directory" buildaction="Compile" />
+    <File name="Resources" subtype="Directory" buildaction="Compile" />
+    <File name="src/DropboxStartAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/DropboxStopAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/Dropbox.addin.xml" subtype="Code" buildaction="Nothing" />
+    <File name="src/DropboxPuburlAction.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+</Project>
