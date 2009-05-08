@@ -251,3 +251,24 @@ BundledLibraries/Makefile
 ])
 
 AC_OUTPUT
+
+cat <<EOF
+
+${PACKAGE}-${VERSION}
+
+  Build Environment
+    Install Prefix:    ${prefix}
+    Plugin directory:  ${expanded_libdir}/gnome-do/plugins
+
+    Mono C# Compiler:  ${MCS} ${GMCS_FLAGS}
+    Mono Runtime:      ${MONO}
+
+  Optional plugins:
+    Banshee:           ${HAVE_BANSHEE}
+    Evolution:         ${HAVE_EVOLUTION}
+    Flickr:            ${HAVE_FLICKR}
+
+  Build/Development:
+    Release Build:     ${enable_release}
+
+EOF
