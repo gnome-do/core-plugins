@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="1.0"
 	name="Dropbox"
-	description="Control Dropbox."
+	description="Share and manage files in Dropbox."
 	author="Stephen Elson"
 	category="Community"
 	defaultEnabled="false"
