@@ -42,7 +42,7 @@ namespace Dropbox
 		}
 		
 		public override string Description {
-			get { return "View file revisions in web interface."; }
+			get { return "Views file history in Dropbox web interface."; }
 		}
 		
 		public override string Icon {

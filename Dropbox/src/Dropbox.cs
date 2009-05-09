@@ -121,7 +121,7 @@ namespace Dropbox
 				path = GetSharedFileLink (path);
 			}
 			
-			return db_url + "revisions/" + path.Substring (BasePath.Length);
+			return db_url + "revisions" + path.Substring (BasePath.Length);
 		}
 		
 		private static string Exec (string args) 

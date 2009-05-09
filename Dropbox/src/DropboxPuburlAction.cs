@@ -38,11 +38,11 @@ namespace Dropbox
 	{
 				
 		public override string Name {
-			get { return "Get Public Dropbox URL";  }
+			get { return "Get public URL";  }
 		}
 		
 		public override string Description {
-			get { return "Get public url of a file in your dropbox."; }
+			get { return "Gets public URL of a shared Dropbox file."; }
 		}
 		
 		public override string Icon {
