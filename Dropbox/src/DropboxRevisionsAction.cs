@@ -42,7 +42,7 @@ namespace Dropbox
 		}
 		
 		public override string Description {
-			get { return "View file revisions in Dropbox web interface"; }
+			get { return "View file revisions in web interface."; }
 		}
 		
 		public override string Icon {
@@ -57,8 +57,9 @@ namespace Dropbox
 		{
 			string path = (item as IFileItem).Path;
 			
-			return path.StartsWith (Dropbox.FolderPath) &&
-				File.Exists (path);
+			return File.Exists (path) && 
+				(path.StartsWith (Dropbox.BasePath) || 
+				Dropbox.FileIsShared (path));
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)

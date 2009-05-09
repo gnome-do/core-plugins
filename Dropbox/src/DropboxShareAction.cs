@@ -1,5 +1,5 @@
 // 
-// DropboxWebInterfaceAction.cs
+// DropboxShareAction.cs
 // 
 // GNOME Do is the legal property of its developers. Please refer to the
 // COPYRIGHT file distributed with this
@@ -23,23 +23,28 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-
+ 
 using Do.Universe;
+using Do.Universe.Common;
 using Do.Platform;
+
+using Mono.Unix;
+using Mono.Unix.Native;
+
 
 namespace Dropbox
 {
 	
 	
-	public class DropboxWebInterfaceAction : Act
+	public class DropboxShareAction : Act
 	{
-		
+				
 		public override string Name {
-			get { return "Web Interface";  }
+			get { return "Share with Dropbox";  }
 		}
 		
 		public override string Description {
-			get { return "View folder in web interface."; }
+			get { return "Links a file to your Dropbox public folder."; }
 		}
 		
 		public override string Icon {
@@ -47,41 +52,25 @@ namespace Dropbox
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (IApplicationItem),
-					typeof (IFileItem)
-				};
-			}
-
+			get { yield return typeof (IFileItem); }
 		}
 		
 		public override bool SupportsItem (Item item) 
 		{
-			if (item is IApplicationItem) {
-				return item.Name == "Dropbox";
-			} else {
-				string path = (item as IFileItem).Path;
-				return path.StartsWith (Dropbox.BasePath) &&
-					Directory.Exists (path);
-			}
+			string path = (item as IFileItem).Path;
+			
+			return File.Exists (path) && !Dropbox.FileIsShared (path);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string url, path;
-			Item item = items.First ();
+			string path = (items.First () as IFileItem).Path;
+			string shared_path = Dropbox.ShareFile (path);
+			string url = Dropbox.GetPubUrl (shared_path);
 			
-			if (item is IApplicationItem) {
-				url = Dropbox.GetWebUrl ();
-			} else {
-				path = (item as IFileItem).Path;
-				url = Dropbox.GetWebUrl (path);
-			}
-			
-			Services.Environment.OpenUrl (url);
-			
-			return null;
+			yield return new BookmarkItem (url, url);
 		}
+
 	}
 }
+

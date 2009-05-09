@@ -6,6 +6,8 @@ FILES = \
   src/DropboxWebInterfaceAction.cs \
   src/DropboxRevisionsAction.cs \
   src/DropboxPuburlAction.cs \
+  src/DropboxUnshareAction.cs \
+  src/DropboxShareAction.cs \
   src/DropboxStartAction.cs \
   src/DropboxStopAction.cs \
   src/Dropbox.cs

@@ -51,7 +51,7 @@ namespace Dropbox
 		
 		public override bool SupportsItem (Item item) 
 		{
-			return item.Name == "Dropbox" && Dropbox.IsRunning ();
+			return item.Name == "Dropbox" && Dropbox.IsRunning;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)

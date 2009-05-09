@@ -20,6 +20,8 @@
 	<Extension path="/Do/Action">
 		<Action type="Dropbox.DropboxStopAction" />
 		<Action type="Dropbox.DropboxStartAction" />
+		<Action type="Dropbox.DropboxShareAction" />
+		<Action type="Dropbox.DropboxUnshareAction" />
 		<Action type="Dropbox.DropboxPuburlAction" />
 		<Action type="Dropbox.DropboxRevisionsAction" />
 		<Action type="Dropbox.DropboxWebInterfaceAction" />		
