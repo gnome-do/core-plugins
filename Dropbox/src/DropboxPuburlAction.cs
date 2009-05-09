@@ -1,7 +1,26 @@
+/* DropboxPuburlAction.cs
+ *
+ * GNOME Do is the legal property of its developers. Please refer to the
+ * COPYRIGHT file distributed with this
+ * source distribution.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 using System;
+using System.IO;
 using System.Linq;
-using System.Diagnostics;
 using System.Collections.Generic;
  
 using Do.Universe;
@@ -17,9 +36,7 @@ namespace Dropbox
 	
 	public class DropboxPuburlAction : Act
 	{
-		
-		private string dropbox_dir = Environment.GetFolderPath (Environment.SpecialFolder.Personal) + "/Dropbox";
-		
+				
 		public override string Name {
 			get { return "Public URL";  }
 		}
@@ -38,20 +55,22 @@ namespace Dropbox
 		
 		public override bool SupportsItem (Item item) 
 		{
-			return (item as IFileItem).Path.StartsWith (dropbox_dir);
+			string path = (item as IFileItem).Path;
+			
+			return path.StartsWith (Dropbox.FolderPath) &&
+				File.Exists (path);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string path = (items.First () as IFileItem).Path;
-			string url = GetPubUrl (path);
+			string url = Dropbox.GetPubUrl (path);
 			
 			if (url == "") {
 				
 				string msg = String.Format ("Sorry, the file \"{0}\" is not public", 
 					UnixPath.GetFileName (path));
 				
-				Log<DropboxPuburlAction>.Debug (msg);
 				Notification notification = new Notification ("Dropbox", msg, "dropbox");
 				Services.Notifications.Notify (notification);
 				
@@ -59,29 +78,6 @@ namespace Dropbox
 				yield return new BookmarkItem (url, url);
 			}
 			
-		}
-		
-		private string GetPubUrl (string path)
-		{
-			string url = "";
-			
-			try {
-				ProcessStartInfo cmd = new ProcessStartInfo ();
-				cmd.FileName = "dropbox";
-				cmd.Arguments = String.Format ("puburl \"{0}\"", path); 
-				cmd.UseShellExecute = false;
-				cmd.RedirectStandardOutput = true;
-				
-				Process run = Process.Start (cmd);
-				run.WaitForExit ();
-				
-				url = run.StandardOutput.ReadLine ();
-				if (!url.StartsWith ("http")) { url = ""; }
-				
-			} catch {
-			}
-			
-			return url;
 		}
 
 	}

@@ -1,4 +1,4 @@
-/* DropboxStartActions.cs
+/* DropboxPuburlAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -19,26 +19,30 @@
  */
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
  
 using Do.Universe;
+using Do.Universe.Common;
 using Do.Platform;
+
+using Mono.Unix;
 
 
 namespace Dropbox
 {
 	
 	
-	public class DropboxStartAction : Act
+	public class DropboxRevisionsAction : Act
 	{
-		
+				
 		public override string Name {
-			get { return "Start";  }
+			get { return "Revisions";  }
 		}
 		
 		public override string Description {
-			get { return "Starts the dropbox daemon."; }
+			get { return "View file revisions in Dropbox web interface"; }
 		}
 		
 		public override string Icon {
@@ -46,17 +50,23 @@ namespace Dropbox
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (IApplicationItem); }
+			get { yield return typeof (IFileItem); }
 		}
 		
 		public override bool SupportsItem (Item item) 
 		{
-			return item.Name == "Dropbox" && !Dropbox.IsRunning ();
+			string path = (item as IFileItem).Path;
+			
+			return path.StartsWith (Dropbox.FolderPath) &&
+				File.Exists (path);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Dropbox.Start ();
+			string path = (items.First () as IFileItem).Path;
+			string url = Dropbox.GetRevisionsUrl (path);
+			
+			Services.Environment.OpenUrl (url);
 			
 			return null;
 		}

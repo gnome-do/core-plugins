@@ -18,9 +18,11 @@
 	</Dependencies>
 	
 	<Extension path="/Do/Action">
-		<Action type="Dropbox.DropboxPuburlAction" />
-		<Action type="Dropbox.DropboxStartAction" />
 		<Action type="Dropbox.DropboxStopAction" />
+		<Action type="Dropbox.DropboxStartAction" />
+		<Action type="Dropbox.DropboxPuburlAction" />
+		<Action type="Dropbox.DropboxRevisionsAction" />
+		<Action type="Dropbox.DropboxWebInterfaceAction" />		
 	</Extension>
 
 </Addin>

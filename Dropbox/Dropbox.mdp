@@ -20,5 +20,8 @@
     <File name="src/DropboxStopAction.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Dropbox.addin.xml" subtype="Code" buildaction="Nothing" />
     <File name="src/DropboxPuburlAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Dropbox.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/DropboxWebInterfaceAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/DropboxRevisionsAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
 </Project>

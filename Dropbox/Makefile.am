@@ -3,9 +3,12 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Dropbox
 
 FILES = \
+  src/DropboxWebInterfaceAction.cs \
+  src/DropboxRevisionsAction.cs \
   src/DropboxPuburlAction.cs \
   src/DropboxStartAction.cs \
-  src/DropboxStopAction.cs
+  src/DropboxStopAction.cs \
+  src/Dropbox.cs
 
 RESOURCES = \
   Resources/Dropbox.addin.xml
