@@ -38,7 +38,7 @@ namespace Dropbox
 	{
 				
 		public override string Name {
-			get { return "Revisions";  }
+			get { return "View revisions";  }
 		}
 		
 		public override string Description {

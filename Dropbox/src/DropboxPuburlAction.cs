@@ -38,7 +38,7 @@ namespace Dropbox
 	{
 				
 		public override string Name {
-			get { return "Public URL";  }
+			get { return "Get Public Dropbox URL";  }
 		}
 		
 		public override string Description {

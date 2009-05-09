@@ -34,11 +34,11 @@ namespace Dropbox
 	{
 		
 		public override string Name {
-			get { return "Stop";  }
+			get { return "Stop Dropbox";  }
 		}
 		
 		public override string Description {
-			get { return "Stops the dropbox daemon."; }
+			get { return "Stops the Dropbox daemon."; }
 		}
 		
 		public override string Icon {
