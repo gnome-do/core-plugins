@@ -59,7 +59,9 @@ namespace Dropbox
 		{
 			string path = (item as IFileItem).Path;
 			
-			return File.Exists (path) && !Dropbox.FileIsShared (path);
+			return File.Exists (path) && 
+				!Dropbox.FileIsPublic (path) && 
+				!Dropbox.FileIsShared (path);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)

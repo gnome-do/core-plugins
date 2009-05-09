@@ -87,10 +87,14 @@ namespace Dropbox
 			Syscall.unlink (link_path);
 		}
 		
+		public static bool FileIsPublic (string path)
+		{
+			return path.StartsWith (Dropbox.PublicPath);
+		}
+		
 		public static bool FileIsShared (string path)
 		{
-			return !path.StartsWith (Dropbox.PublicPath) && 
-				GetSharedFileLink (path) != "";
+			return GetSharedFileLink (path) != "";
 		}
 		
 		public static string GetPubUrl (string path)
@@ -117,7 +121,7 @@ namespace Dropbox
 		
 		public static string GetRevisionsUrl (string path)
 		{
-			if (FileIsShared (path)) {
+			if (!path.StartsWith (BasePath) && FileIsShared (path)) {
 				path = GetSharedFileLink (path);
 			}
 			
