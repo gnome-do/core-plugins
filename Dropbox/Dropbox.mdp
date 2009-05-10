@@ -26,5 +26,6 @@
     <File name="src/DropboxShareAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/DropboxUnshareAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/DropboxLinkAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/DropboxAbstractAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
 </Project>

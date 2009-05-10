@@ -4,6 +4,7 @@ ASSEMBLY=Dropbox
 
 FILES = \
   src/DropboxWebInterfaceAction.cs \
+  src/DropboxAbstractAction.cs \
   src/DropboxRevisionsAction.cs \
   src/DropboxPuburlAction.cs \
   src/DropboxUnshareAction.cs \
