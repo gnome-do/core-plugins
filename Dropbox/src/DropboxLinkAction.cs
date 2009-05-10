@@ -1,5 +1,5 @@
 // 
-// DropboxShareAction.cs
+// DropboxLinkAction.cs
 // 
 // GNOME Do is the legal property of its developers. Please refer to the
 // COPYRIGHT file distributed with this
@@ -36,15 +36,15 @@ namespace Dropbox
 {
 	
 	
-	public class DropboxShareAction : Act
+	public class DropboxLinkAction : Act
 	{
 				
 		public override string Name {
-			get { return "Share with Dropbox";  }
+			get { return "Link to Dropbox...";  }
 		}
 		
 		public override string Description {
-			get { return "Links a file to your Dropbox public folder."; }
+			get { return "Links a file to your Dropbox folder."; }
 		}
 		
 		public override string Icon {
@@ -55,24 +55,38 @@ namespace Dropbox
 			get { yield return typeof (IFileItem); }
 		}
 		
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+	        	get { yield return typeof (IFileItem); }
+	        }
+	        
 		public override bool SupportsItem (Item item) 
 		{
 			string path = (item as IFileItem).Path;
 			
-			return File.Exists (path) && 
-				!Dropbox.PathIsPublic (path) && 
-				!Dropbox.PathIsShared (path);
+			return !Dropbox.PathIsDropbox (path);
 		}
+		
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
+	        {
+	        	string path = (modItem as IFileItem).Path;
+	        	
+			return Directory.Exists (path) && Dropbox.PathIsDropbox (path);
+	        }
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string path = (items.First () as IFileItem).Path;
-			string shared_path = Dropbox.ShareFile (path);
-			string url = Dropbox.GetPubUrl (shared_path);
+			string result = null;
+			string target = (items.First () as IFileItem).Path;
+			string folder = (modItems.First () as IFileItem).Path;
+			string link_name = Path.Combine (folder, Path.GetFileName (target));
 			
-			yield return new BookmarkItem (url, url);
+			result = Dropbox.Link (target, link_name);
+			
+			if (string.IsNullOrEmpty (result))
+				yield break;
+			else
+				yield return Services.UniverseFactory.NewFileItem (result) as Item;
 		}
 
 	}
 }
-

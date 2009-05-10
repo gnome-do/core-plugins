@@ -18,6 +18,7 @@
 	</Dependencies>
 	
 	<Extension path="/Do/Action">
+		<Action type="Dropbox.DropboxLinkAction" />
 		<Action type="Dropbox.DropboxStopAction" />
 		<Action type="Dropbox.DropboxStartAction" />
 		<Action type="Dropbox.DropboxShareAction" />

@@ -87,19 +87,24 @@ namespace Dropbox
 			Syscall.unlink (link_path);
 		}
 		
-		public static bool FileIsPublic (string path)
+		public static bool PathIsDropbox (string path)
 		{
-			return path.StartsWith (Dropbox.PublicPath);
+			return path == BasePath || path.StartsWith (BasePath);
 		}
 		
-		public static bool FileIsShared (string path)
+		public static bool PathIsPublic (string path)
+		{
+			return path.StartsWith (PublicPath);
+		}
+		
+		public static bool PathIsShared (string path)
 		{
 			return GetSharedFileLink (path) != "";
 		}
 		
 		public static string GetPubUrl (string path)
 		{
-			if (FileIsShared (path)) {
+			if (PathIsShared (path)) {
 				path = GetSharedFileLink (path);
 			}
 			
@@ -121,7 +126,7 @@ namespace Dropbox
 		
 		public static string GetRevisionsUrl (string path)
 		{
-			if (!path.StartsWith (BasePath) && FileIsShared (path)) {
+			if (!path.StartsWith (BasePath) && PathIsShared (path)) {
 				path = GetSharedFileLink (path);
 			}
 			
@@ -154,7 +159,7 @@ namespace Dropbox
 		private static string GetSharedFileLink (string path)
 		{
 			if (!Directory.Exists (DoSharedPath))
-				return "";
+				return String.Empty;
 			
 			UnixSymbolicLinkInfo link;
 			UnixDirectoryInfo dir = new UnixDirectoryInfo (DoSharedPath);
@@ -167,7 +172,22 @@ namespace Dropbox
 					return file.FullName;
 			}
 
-			return "";
+			return String.Empty;
 		}
+		
+		public static string Link (string target, string link_name)
+		{
+			if (Directory.Exists (link_name) || File.Exists (link_name)) {
+				Log.Error ("{0} already exists", link_name);
+				return String.Empty;
+			}
+			
+			Process ln = Process.Start ("ln",
+				"-s " + string.Format ("\"{0}\" \"{1}\"", target, link_name));
+			ln.WaitForExit ();
+			
+			return link_name;
+		}
+		
 	}
 }

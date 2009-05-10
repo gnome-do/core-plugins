@@ -10,6 +10,7 @@ FILES = \
   src/DropboxShareAction.cs \
   src/DropboxStartAction.cs \
   src/DropboxStopAction.cs \
+  src/DropboxLinkAction.cs \
   src/Dropbox.cs
 
 RESOURCES = \
