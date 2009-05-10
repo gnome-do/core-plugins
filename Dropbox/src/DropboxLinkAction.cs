@@ -28,10 +28,6 @@ using Do.Universe;
 using Do.Universe.Common;
 using Do.Platform;
 
-using Mono.Unix;
-using Mono.Unix.Native;
-
-
 namespace Dropbox
 {
 	
@@ -70,7 +66,6 @@ namespace Dropbox
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string result = null;
 			string target = GetPath (items.First ());
 			string folder = GetPath (modItems.First ());
 			string link_name = Path.Combine (folder, Path.GetFileName (target));
