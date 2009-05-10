@@ -34,7 +34,7 @@ namespace Dropbox
 {
 	
 	
-	public class DropboxPuburlAction : Act
+	public class DropboxPuburlAction : DropboxAbstractAction
 	{
 				
 		public override string Name {
@@ -49,36 +49,25 @@ namespace Dropbox
 			get { return "dropbox"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (IFileItem); }
-		}
-		
 		public override bool SupportsItem (Item item) 
 		{
-			string path = (item as IFileItem).Path;
+			string path = GetPath(item);
 			
 			return File.Exists (path) && 
 				(path.StartsWith (Dropbox.PublicPath) || 
-				Dropbox.PathIsShared (path));
+				HasLink (path));
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string path = (items.First () as IFileItem).Path;
+			string path = GetPath(items.First ());
+			
+			if (!path.StartsWith (Dropbox.PublicPath)) 
+				path = GetLink (path);
+
 			string url = Dropbox.GetPubUrl (path);
 			
-			if (url == "") {
-				
-				string msg = String.Format ("Sorry, the file \"{0}\" is not public", 
-					UnixPath.GetFileName (path));
-				
-				Notification notification = new Notification ("Dropbox", msg, "dropbox");
-				Services.Notifications.Notify (notification);
-				
-			} else {
-				yield return new BookmarkItem (url, url);
-			}
-			
+			yield return new BookmarkItem (url, url);
 		}
 
 	}

@@ -34,7 +34,7 @@ namespace Dropbox
 {
 	
 	
-	public class DropboxRevisionsAction : Act
+	public class DropboxRevisionsAction : DropboxAbstractAction
 	{
 				
 		public override string Name {
@@ -49,22 +49,22 @@ namespace Dropbox
 			get { return "dropbox"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (IFileItem); }
-		}
-		
 		public override bool SupportsItem (Item item) 
 		{
-			string path = (item as IFileItem).Path;
+			string path = GetPath(item);
 			
 			return File.Exists (path) && 
 				(path.StartsWith (Dropbox.BasePath) || 
-				Dropbox.PathIsShared (path));
+				HasLink (path));
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string path = (items.First () as IFileItem).Path;
+			string path = GetPath(items.First ());
+			
+			if (!path.StartsWith (Dropbox.BasePath)) 
+				path = GetLink (path);
+			
 			string url = Dropbox.GetRevisionsUrl (path);
 			
 			Services.Environment.OpenUrl (url);

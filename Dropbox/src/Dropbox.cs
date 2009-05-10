@@ -23,10 +23,9 @@ using System;
 using System.IO;
 using System.Diagnostics;
 
-using Do.Platform;
-
 using Mono.Unix;
-using Mono.Unix.Native;
+
+using Do.Platform;
 
 namespace Dropbox
 {
@@ -38,7 +37,6 @@ namespace Dropbox
 		public static string PublicPath;
 		public static string DoSharedPath;
 		
-		private static Random rand = new Random ();
 		private static string db_url = "https://www.getdropbox.com/";
 		
 		static Dropbox ()
@@ -66,50 +64,10 @@ namespace Dropbox
 			Exec ("stop");
 		}
 		
-		public static string ShareFile (string path)
-		{
-			string file_ext = Path.GetExtension (path);
-			string file_name = Path.GetFileNameWithoutExtension (path);
-			
-			string link = String.Format ("{0}-{1}{2}", file_name, rand.Next (), file_ext);
-			string link_path = Path.Combine (DoSharedPath, link);
-			
-			Directory.CreateDirectory (DoSharedPath);
-			Syscall.symlink (path, link_path);
-			
-			return link_path;
-		}
-		
-		public static void UnshareFile (string path)
-		{			
-			string link_path = GetSharedFileLink (path);
-			
-			Syscall.unlink (link_path);
-		}
-		
-		public static bool PathIsDropbox (string path)
-		{
-			return path == BasePath || path.StartsWith (BasePath);
-		}
-		
-		public static bool PathIsPublic (string path)
-		{
-			return path.StartsWith (PublicPath);
-		}
-		
-		public static bool PathIsShared (string path)
-		{
-			return GetSharedFileLink (path) != "";
-		}
-		
 		public static string GetPubUrl (string path)
 		{
-			if (PathIsShared (path)) {
-				path = GetSharedFileLink (path);
-			}
-			
 			string url = Exec (String.Format ("puburl \"{0}\"", path));
-			if (!url.StartsWith ("http")) { url = ""; }
+			if (!url.StartsWith ("http")) { url = null; }
 			
 			return url;
 		}
@@ -126,10 +84,6 @@ namespace Dropbox
 		
 		public static string GetRevisionsUrl (string path)
 		{
-			if (!path.StartsWith (BasePath) && PathIsShared (path)) {
-				path = GetSharedFileLink (path);
-			}
-			
 			return db_url + "revisions" + path.Substring (BasePath.Length);
 		}
 		
@@ -150,44 +104,13 @@ namespace Dropbox
 				stdout = run.StandardOutput.ReadLine ();
 				Log.Debug (stdout);
 				
-			} catch {
+			} catch (Exception e) {
+				Log.Error ("Error running dropbox {0}: {2}", args, e.Message);
+				Log.Debug (e.StackTrace);
 			}
 			
 			return stdout;
 		}
-		
-		private static string GetSharedFileLink (string path)
-		{
-			if (!Directory.Exists (DoSharedPath))
-				return String.Empty;
 			
-			UnixSymbolicLinkInfo link;
-			UnixDirectoryInfo dir = new UnixDirectoryInfo (DoSharedPath);
-			
-			foreach (UnixFileSystemInfo file in dir.GetFileSystemEntries ()) {
-				if (!file.IsSymbolicLink) continue;
-				
-				link = new UnixSymbolicLinkInfo (file.FullName);
-				if (link.HasContents && link.ContentsPath == path) 
-					return file.FullName;
-			}
-
-			return String.Empty;
-		}
-		
-		public static string Link (string target, string link_name)
-		{
-			if (Directory.Exists (link_name) || File.Exists (link_name)) {
-				Log.Error ("{0} already exists", link_name);
-				return String.Empty;
-			}
-			
-			Process ln = Process.Start ("ln",
-				"-s " + string.Format ("\"{0}\" \"{1}\"", target, link_name));
-			ln.WaitForExit ();
-			
-			return link_name;
-		}
-		
 	}
 }

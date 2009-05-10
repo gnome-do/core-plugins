@@ -36,7 +36,7 @@ namespace Dropbox
 {
 	
 	
-	public class DropboxShareAction : Act
+	public class DropboxShareAction : DropboxAbstractAction
 	{
 				
 		public override string Name {
@@ -51,26 +51,31 @@ namespace Dropbox
 			get { return "dropbox"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (IFileItem); }
-		}
-		
 		public override bool SupportsItem (Item item) 
 		{
-			string path = (item as IFileItem).Path;
+			string path = GetPath (item);
 			
 			return File.Exists (path) && 
-				!Dropbox.PathIsPublic (path) && 
-				!Dropbox.PathIsShared (path);
+				!path.StartsWith (Dropbox.PublicPath) && 
+				!HasLink (path);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string path = (items.First () as IFileItem).Path;
-			string shared_path = Dropbox.ShareFile (path);
-			string url = Dropbox.GetPubUrl (shared_path);
+			string target = GetPath (items.First ());
+			string extension = Path.GetExtension (target);
+			string filename = Path.GetFileNameWithoutExtension (target);
+			string link_name = Path.Combine (Dropbox.DoSharedPath, 
+				String.Format ("{0}-{1}{2}", filename, rand.Next (), extension));
 			
-			yield return new BookmarkItem (url, url);
+			Directory.CreateDirectory (Dropbox.DoSharedPath);
+			
+			if (MakeLink (target, link_name)) {
+				
+				string url = Dropbox.GetPubUrl (link_name);	
+				yield return new BookmarkItem (url, url);
+			
+			}
 		}
 
 	}

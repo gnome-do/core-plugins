@@ -36,7 +36,7 @@ namespace Dropbox
 {
 	
 	
-	public class DropboxUnshareAction : Act
+	public class DropboxUnshareAction : DropboxAbstractAction
 	{
 				
 		public override string Name {
@@ -51,27 +51,21 @@ namespace Dropbox
 			get { return "dropbox"; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (IFileItem); }
-		}
-		
 		public override bool SupportsItem (Item item) 
 		{
-			string path = (item as IFileItem).Path;
+			string path = GetPath(item);
 			
-			return File.Exists (path) && Dropbox.PathIsShared (path);
+			return File.Exists (path) && HasLink (path);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string path = (items.First () as IFileItem).Path;
+			string path = GetPath(items.First ());
+			string link_path = GetLink (path);
 			
-			Dropbox.UnshareFile (path);
+			Unlink (link_path);
 			
-			string msg = String.Format ("Stopped sharing \"{0}\"", path);
-			
-			Notification notification = new Notification ("Dropbox", msg, "dropbox");
-			Services.Notifications.Notify (notification);
+			Notify (String.Format ("Stopped sharing \"{0}\"", path));
 			
 			return null;
 		}

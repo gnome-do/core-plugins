@@ -35,24 +35,19 @@ using Mono.Unix.Native;
 namespace Dropbox
 {
 	
-	
-	public class DropboxLinkAction : Act
+	public class DropboxLinkAction : DropboxAbstractAction
 	{
 				
 		public override string Name {
-			get { return "Link to Dropbox...";  }
+			get { return "Add to Dropbox...";  }
 		}
 		
 		public override string Description {
-			get { return "Links a file to your Dropbox folder."; }
+			get { return "Links a file or folder to your Dropbox."; }
 		}
 		
 		public override string Icon {
 			get { return "dropbox"; }
-		}
-		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (IFileItem); }
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
@@ -61,31 +56,29 @@ namespace Dropbox
 	        
 		public override bool SupportsItem (Item item) 
 		{
-			string path = (item as IFileItem).Path;
+			string path = GetPath (item);
 			
-			return !Dropbox.PathIsDropbox (path);
+			return !path.StartsWith (Dropbox.BasePath);
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 	        {
-	        	string path = (modItem as IFileItem).Path;
+	        	string path = GetPath (modItem);
 	        	
-			return Directory.Exists (path) && Dropbox.PathIsDropbox (path);
+			return Directory.Exists (path) && path.StartsWith (Dropbox.BasePath);
 	        }
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string result = null;
-			string target = (items.First () as IFileItem).Path;
-			string folder = (modItems.First () as IFileItem).Path;
+			string target = GetPath (items.First ());
+			string folder = GetPath (modItems.First ());
 			string link_name = Path.Combine (folder, Path.GetFileName (target));
 			
-			result = Dropbox.Link (target, link_name);
+			if (MakeLink (target, link_name))
+				yield return Services.UniverseFactory.NewFileItem (link_name) as Item;
 			
-			if (string.IsNullOrEmpty (result))
-				yield break;
-			else
-				yield return Services.UniverseFactory.NewFileItem (result) as Item;
+			yield break;
 		}
 
 	}
