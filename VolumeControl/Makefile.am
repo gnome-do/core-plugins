@@ -7,6 +7,7 @@ FILES = \
 	src/VolumeDownItem.cs \
 	src/VolumeMuteItem.cs \
 	src/VolumeUnmuteItem.cs \
+	src/VolumeMaximizeItem.cs \
 	src/VolumeItemSource.cs
 
 RESOURCES = \
