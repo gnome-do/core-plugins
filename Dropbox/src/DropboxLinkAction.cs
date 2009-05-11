@@ -47,9 +47,9 @@ namespace Dropbox
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-	        	get { yield return typeof (IFileItem); }
-	        }
-	        
+			get { yield return typeof (IFileItem); }
+		}
+		
 		public override bool SupportsItem (Item item) 
 		{
 			string path = GetPath (item);
@@ -58,11 +58,11 @@ namespace Dropbox
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
-	        {
-	        	string path = GetPath (modItem);
-	        	
+		{
+			string path = GetPath (modItem);
+			
 			return Directory.Exists (path) && path.StartsWith (Dropbox.BasePath);
-	        }
+		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{

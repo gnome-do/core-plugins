@@ -35,7 +35,7 @@ namespace Dropbox
 	
 	public class DropboxUnshareAction : DropboxAbstractAction
 	{
-				
+	
 		public override string Name {
 			get { return "Stop sharing with Dropbox";  }
 		}
