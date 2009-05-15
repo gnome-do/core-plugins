@@ -1,3 +1,5 @@
+dnl vim: set sw=4 sts=4 ts=4 noet ft=config foldmethod=marker foldmarker={{{,}}} :
+
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
 AC_INIT([gnome-do-plugins], [0.8.1.3])
@@ -37,9 +39,66 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
-PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2])
-PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp])
-PKG_CHECK_MODULES([FLICKRNET], [flickrnet])
+dnl {{{ check for Banshee
+AC_ARG_ENABLE(banshee, 
+	AC_HELP_STRING([--enable-banshee], [Build plugin to interact with Banshee (default: auto)]),
+	enable_banshee=$enableval,
+	enable_banshee=auto)
+
+if test "x$enable_banshee" != "xno"; then
+	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
+
+	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno"; then
+		AC_MSG_ERROR([Banshee support explicitly requested but dependencies not found])
+	fi
+fi
+
+AM_CONDITIONAL(HAVE_BANSHEE, test "x$HAVE_BANSHEE" = "xyes")
+
+dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
+BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
+
+AC_SUBST([BANSHEE_INDEXER_DLL])
+dnl }}}
+
+dnl {{{ check for Evolution
+AC_ARG_ENABLE(evolution,
+	AC_HELP_STRING([--enable-evolution], [Build plugin to interact with Evolution (default: auto)]),
+	enable_evolution=$enableval,
+	enable_evolution=auto)
+
+if test "x$enable_evolution" != "xno"; then
+	PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp], HAVE_EVOLUTION=yes, HAVE_EVOLUTION=no)
+
+	if test "x$enable_evolution" = "xyes" -a "x$HAVE_EVOLUTION" = "xno"; then
+		AC_MSG_ERROR([Evolution support explicitly requestion but dependencies not found])
+	fi
+fi
+
+AM_CONDITIONAL(HAVE_EVOLUTION, test "x$HAVE_EVOLUTION" = "xyes")
+
+AC_SUBST([EVOLUTION_SHARP_LIBS])
+dnl }}}
+
+dnl {{{ check for Flickr
+AC_ARG_ENABLE(flickr,
+	AC_HELP_STRING([--enable-flickr], [Build plugin to interact with flickr using flickrnet (default: auto)]),
+	enable_flickr=$enableval,
+	enable_flickr=auto)
+
+if test "x$enable_flickr" != "xno"; then
+	PKG_CHECK_MODULES([FLICKRNET], [flickrnet], HAVE_FLICKR=yes, HAVE_FLICKR=no)
+
+	if test "x$enable_flickr" = "xyes" -a "x$HAVE_FLICKR" = "xno"; then
+		AC_MSG_ERROR([Flickr support explicitly requestion but dependencies not found])
+	fi
+fi
+
+AM_CONDITIONAL(HAVE_FLICKR, test "x$HAVE_FLICKR" = "xyes")
+
+AC_SUBST([FLICKRNET_LIBS])
+dnl }}}
+
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
@@ -62,12 +121,7 @@ PKG_CHECK_MODULES([GDATA_SHARP_DOCUMENTS], [gdata-sharp-core gdata-sharp-documen
 PKG_CHECK_MODULES([GDATA_SHARP_CONTACTS], [gdata-sharp-core gdata-sharp-contacts ])
 PKG_CHECK_MODULES([GDATA_SHARP_YOUTUBE], [gdata-sharp-youtube])
 
-dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
-BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
 
-AC_SUBST([BANSHEE_INDEXER_DLL])
-AC_SUBST([EVOLUTION_SHARP_LIBS])
-AC_SUBST([FLICKRNET_LIBS])
 AC_SUBST([GCONF_SHARP_20_LIBS])
 AC_SUBST([GDATA_SHARP_ACL_LIBS])
 AC_SUBST([GDATA_SHARP_CALENDAR_LIBS])
@@ -198,3 +252,24 @@ BundledLibraries/Makefile
 ])
 
 AC_OUTPUT
+
+cat <<EOF
+
+${PACKAGE}-${VERSION}
+
+  Build Environment
+    Install Prefix:    ${prefix}
+    Plugin directory:  ${expanded_libdir}/gnome-do/plugins
+
+    Mono C# Compiler:  ${MCS} ${GMCS_FLAGS}
+    Mono Runtime:      ${MONO}
+
+  Optional plugins:
+    Banshee:           ${HAVE_BANSHEE}
+    Evolution:         ${HAVE_EVOLUTION}
+    Flickr:            ${HAVE_FLICKR}
+
+  Build/Development:
+    Release Build:     ${enable_release}
+
+EOF
