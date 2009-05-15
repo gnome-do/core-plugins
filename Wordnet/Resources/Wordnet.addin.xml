@@ -6,6 +6,7 @@
 	description="Define words on Wordnet."
 	author="Ankit Solanki"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

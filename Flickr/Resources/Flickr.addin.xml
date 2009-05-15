@@ -6,6 +6,7 @@
 	description="Upload photos to Flickr."
 	author="Alex Launi"
 	category="Community"
+	defaultEnabled="false"
 >
  
 	<Runtime>

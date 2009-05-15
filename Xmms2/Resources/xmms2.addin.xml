@@ -6,6 +6,7 @@
 	description="Search and play xmms2 music."
 	author="Scott Albertine"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

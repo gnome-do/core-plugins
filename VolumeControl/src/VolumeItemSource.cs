@@ -50,6 +50,7 @@ namespace VolumeControl
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type [] {
 				typeof (VolumeDownItem),
+				typeof (VolumeMaximizeItem),
 				typeof (VolumeMuteItem),
 				typeof (VolumeUnmuteItem),
 				typeof (VolumeUpItem), };
@@ -71,6 +72,7 @@ namespace VolumeControl
 		private Item [] VolumeItems {
 			get { return new Item [] {
 				new VolumeDownItem (),
+				new VolumeMaximizeItem(),
 				new VolumeMuteItem (),
 				new VolumeUnmuteItem (),
 				new VolumeUpItem (), };

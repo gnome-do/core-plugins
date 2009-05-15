@@ -109,7 +109,7 @@ namespace Twitterizer.Framework
 
             string actionUri = (Parameters == null ? Twitter.Urls.FriendsTimelineUrl : Parameters.BuildActionUri(Twitter.Urls.FriendsTimelineUrl));
             Data.ActionUri = new Uri(actionUri);
-
+			
             Data = Request.PerformWebRequest(Data);
 
             return Data.Statuses;
@@ -141,7 +141,7 @@ namespace Twitterizer.Framework
             Data.ActionUri = new Uri(
                 string.Format(Twitter.Urls.UpdateUrl, HttpUtility.UrlEncode(Status), InReplyToStatusID));
 			
-            Data = Request.PerformWebRequest(Data);
+            Data = Request.PerformWebRequest(Data, "POST");
 
             return Data.Statuses[0];
         }

@@ -58,36 +58,59 @@ namespace PidginPlugin
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ContactItem)
-				return (item as ContactItem).Details.Any (d => d.StartsWith ("prpl-"));
+			if (item is ContactItem) {
+				ContactItem contact = item as ContactItem;
+				return contact.Details.Where (d => Pidgin.BuddyIsOnline (contact[d])).Any ();
+			}
 			return true;
+		}
+		
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+			get { yield return typeof (ITextItem); }
+		}
+
+		public override bool ModifierItemsOptional {
+			get { return true; }
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Item item = items.First ();
-			string name = null;
-
-			if (item is ContactItem) {
-				// Just grab the first protocol we see.
-				ContactItem contact = item as ContactItem;
-				foreach (string detail in contact.Details) {
-					if (detail.StartsWith ("prpl-")) {
-						name = contact[detail];
-						// If this buddy is online, break, else keep looking.
-						if (Pidgin.BuddyIsOnline (name)) break;
+			List<string> names = new List<string> ();
+			string message = "";
+			
+			if (modItems.Any ())
+				message = (modItems.First () as ITextItem).Text;
+			
+			foreach (Item item in items) {
+				if (item is ContactItem) {
+					// Just grab the first protocol we see.
+					ContactItem contact = item as ContactItem;
+					foreach (string detail in contact.Details) {
+						if (!detail.StartsWith ("prpl-"))
+							continue;
+						//if this buddy is online, add and break
+						if (Pidgin.BuddyIsOnline (contact[detail])) {
+							names.Add (contact[detail]);
+							break;
+						}
 					}
+				} else if (item is PidginHandleContactDetailItem) {
+					names.Add ((item as PidginHandleContactDetailItem).Value);
 				}
-			} else if (item is PidginHandleContactDetailItem) {
-				name = (item as PidginHandleContactDetailItem).Value;
 			}
-
-			if (name != null) {
+	
+			
+			if (names.Count > 0) {
 				Services.Application.RunOnThread (() => {
 					Pidgin.StartIfNeccessary ();
-					Services.Application.RunOnMainThread (() =>
-						Pidgin.OpenConversationWithBuddy (name)
-					);
+					Services.Application.RunOnMainThread (() => {
+						foreach (string name in names) {
+							if (!string.IsNullOrEmpty (message))
+								Pidgin.OpenConversationWithBuddy (name, message);
+							else
+								Pidgin.OpenConversationWithBuddy (name);
+						}
+					});
 				});
 			}
 			yield break;

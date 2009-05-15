@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Do.Interface.Wink;
 using Wnck;
 using Mono.Unix;
 
@@ -40,44 +41,30 @@ namespace WindowManager
 
 		public override string Description {
 			get {
-				return Catalog.GetString ("Actions you can do to your screens.");
+				return Catalog.GetString ("Screens and viewports on your desktop.");
 			}
 		}
 
 		public override string Icon {
 			get {
-				return "desktop"; //fixme
+				return "desktop";
 			}
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (IScreenItem) };
+				yield return typeof (IScreenItem);
 			}
 		}
 
 		public override IEnumerable<Item> Items {
 			get {
-                List<Item> items;
-		
-                items = new List<Item> ();
-				items.Add (new ScreenItem (Catalog.GetString ("Current Desktop"), 
-                   Catalog.GetString ("Everything on the Current Desktop"),
-                   "desktop"));
+				yield return new CurrentScreenItem ();
 				
-				return items;
+				
+				foreach (Viewport viewport in ScreenUtils.Viewports)
+					yield return new ScreenItem (viewport);
 			}
-		}
-
-		
-		public ScreenItemSource()
-		{
-		}
-
-		public override IEnumerable<Item> ChildrenOfItem (Item item)
-		{
-			return null;
 		}
 
 		public override void UpdateItems ()

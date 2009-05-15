@@ -7,6 +7,7 @@
 	author="DR Colkitt"
 	contributer="Chris Szikszoy"
 	category="Community"
+	defaultEnabled="false"
 >
  
 	<Runtime>

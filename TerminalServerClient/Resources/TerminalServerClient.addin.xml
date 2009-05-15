@@ -6,6 +6,7 @@
 	description="Search and open Terminal Server Client connections."
 	author="Ankit Solanki"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

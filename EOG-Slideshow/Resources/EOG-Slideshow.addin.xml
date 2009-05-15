@@ -6,6 +6,7 @@
 	description="Play slideshows in Eye of GNOME."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

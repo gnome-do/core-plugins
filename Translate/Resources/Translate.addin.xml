@@ -1,11 +1,12 @@
 <Addin 
 	id="Translate" 
 	namespace="Do"
-	version="1.0"
+	version="1.1"
 	name="Translate"
 	description="Translate text and websites."
 	author="Chris Szikszoy"
 	category="Community"
+	defaultEnabled="false"
 >
  
 	<Runtime>

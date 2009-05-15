@@ -50,11 +50,7 @@ namespace PidginPlugin
 		}
 		
 		public override string Icon {
-			get {
-				string icon = Path.Combine (
-					"/usr/share/pixmaps/pidgin/protocols/48", Proto + ".png");
-				return File.Exists (icon) ? icon : "internet-group-chat";
-			}
+			get { return Pidgin.GetProtocolIcon (this.Proto); }
 		}
 		
 	}
