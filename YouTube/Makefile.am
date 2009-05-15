@@ -1,4 +1,6 @@
+if HAVE_YOUTUBE
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=YouTube
 
