@@ -1,4 +1,4 @@
-/* VolumeUnmuteItem.cs
+/* VolumeMaximizeItem.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -18,7 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 using System;
 
 using Do.Universe;
@@ -26,22 +25,23 @@ using Mono.Unix;
 
 namespace VolumeControl
 {
-	public class VolumeUnmuteItem : AbstractVolumeItem
+	public class VolumeMaximizeItem : AbstractVolumeItem
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Unmute Volume"); }
+			get { return Catalog.GetString ("Maximize Volume"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Unmute system volume"); }
+			get { return Catalog.GetString ("Maximize system volume"); }
 		}
 		
 		public override string Icon {
-			get { return "audio-volume-medium"; }
+			get { return "audio-volume-high"; }
 		}
 
 		protected override string VolumeArgument {
-			get { return "50%"; }
+			get { return "100%"; }
 		}
+
 	}
 }
