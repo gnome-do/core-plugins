@@ -3,6 +3,7 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=VolumeControl
 
 FILES = \
+	src/AbstractVolumeItem.cs \
 	src/VolumeUpItem.cs \
 	src/VolumeDownItem.cs \
 	src/VolumeMuteItem.cs \

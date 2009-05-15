@@ -26,7 +26,7 @@ using Mono.Unix;
 
 namespace VolumeControl
 {
-	public class VolumeUnmuteItem : Item, IRunnableItem
+	public class VolumeUnmuteItem : AbstractVolumeItem
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Unmute Volume"); }
@@ -39,10 +39,9 @@ namespace VolumeControl
 		public override string Icon {
 			get { return "audio-volume-medium"; }
 		}
-		
-		public void Run ()
-		{
-			System.Diagnostics.Process.Start ("amixer set Master 50% > /dev/null");
+
+		protected override string VolumeArgument {
+			get { return "50%"; }
 		}
 	}
 }

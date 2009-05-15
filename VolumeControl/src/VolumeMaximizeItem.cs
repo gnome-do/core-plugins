@@ -25,7 +25,7 @@ using Mono.Unix;
 
 namespace VolumeControl
 {
-	public class VolumeMaximizeItem : Item, IRunnableItem
+	public class VolumeMaximizeItem : AbstractVolumeItem
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Maximize Volume"); }
@@ -38,10 +38,10 @@ namespace VolumeControl
 		public override string Icon {
 			get { return "audio-volume-high"; }
 		}
-		
-		public void Run ()
-		{
-			System.Diagnostics.Process.Start ("amixer set Master 100% > /dev/null");
+
+		protected override string VolumeArgument {
+			get { return "100%"; }
 		}
+
 	}
 }
