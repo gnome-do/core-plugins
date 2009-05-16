@@ -1,4 +1,6 @@
+if HAVE_FLICKR
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=Flickr
 
