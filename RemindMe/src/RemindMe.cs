@@ -122,6 +122,9 @@ namespace RemindMe
 		{
 			string message, matchedWord;
 			TimeSpan timeout;
+			
+			if (!(items.First () is ITextItem))
+				yield break;
 			message = (items.First () as ITextItem).Text;
 			
 			//bad time string, bail
