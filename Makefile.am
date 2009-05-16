@@ -18,6 +18,7 @@ SUBDIRS = \
 	EOG-Slideshow \
 	Epiphany \
 	Evolution \
+	Exaile \
 	File \
 	Firefox \
 	Flickr \

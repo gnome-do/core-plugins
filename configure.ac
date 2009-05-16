@@ -189,6 +189,7 @@ Emesene/Makefile
 EOG-Slideshow/Makefile
 Epiphany/Makefile
 Evolution/Makefile
+Exaile/Makefile
 File/Makefile
 Firefox/Makefile
 Flickr/Makefile
