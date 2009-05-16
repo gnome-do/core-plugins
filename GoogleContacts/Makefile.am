@@ -1,4 +1,6 @@
+if HAVE_GMAIL
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=GoogleContacts
 
@@ -25,7 +27,6 @@ REFERENCES = \
 	System.Core \
 	System.Security \
 	$(GTK_SHARP_20_LIBS) \
-	$(GDATA_SHARP_ACL_LIBS) \
 	$(GDATA_SHARP_CONTACTS_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \
 	$(DO_UNIVERSE_LIBS)
