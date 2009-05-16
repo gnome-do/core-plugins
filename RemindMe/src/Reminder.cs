@@ -30,12 +30,18 @@ namespace RemindMe
 	public class Reminder : Notification
 	{
 		
-		public Reminder(string message, TimeSpan timeout) : base ("RemindMe", message, "")
+		public Reminder (string message, TimeSpan timeout) : base ("RemindMe", message, "")
 		{
 			base.Body = message;
 			this.ReminderDelay = timeout;
 		}
 		
+		public override string Icon {
+			get {
+				return "alarm.png@" + GetType ().Assembly.FullName;
+			}
+		}
+
 		TimeSpan ReminderDelay { get; set; }
 	}
 }

@@ -30,7 +30,7 @@ namespace RemindMe
 	public class SnoozeableReminder : ActionableNotification
 	{
 		
-		public SnoozeableReminder(string message, TimeSpan timeout) : base ("RemindMe", message, "", "Snooze")
+		public SnoozeableReminder (string message, TimeSpan timeout) : base ("RemindMe", message, "", "Snooze")
 		{
 			base.Body = message;
 			this.ReminderDelay = timeout;
@@ -41,18 +41,23 @@ namespace RemindMe
 		TimeSpan SnoozeTime {
 			get 
 			{
-				//the snooze time is the lesser of (TotalReminderSeconds / 4) and 180 (3 minutes
-				//ie, for all reminders > 12 minutes, the snooze time is still 3 minutes.
+				//the snooze time is the lesser of (TotalReminderSeconds / 4) and 300 (5 minutes
+				//ie, for all reminders > 20 minutes, the snooze time is still 5 minutes.
 				//however, we still set the floor for a snooze time to be 30 seconds
-				int snoozeTime = (int) Math.Max (Math.Min (ReminderDelay.TotalSeconds / 4, 180), 30);
+				int snoozeTime = (int) Math.Max (Math.Min (ReminderDelay.TotalSeconds / 4, 300), 30);
 				return new TimeSpan (0,0,snoozeTime);
+			}
+		}
+		
+		public override string Icon {
+			get {
+				return "snooze.png@" + GetType ().Assembly.FullName;
 			}
 		}
 		
 		public override void PerformAction ()
 		{
-			GLib.Timeout.Add ((uint) 
-this.SnoozeTime.TotalMilliseconds, () => {
+			GLib.Timeout.Add ((uint) this.SnoozeTime.TotalMilliseconds, () => {
 				Services.Notifications.Notify (new SnoozeableReminder (this.Body, this.SnoozeTime));
 				return false; 
 			});

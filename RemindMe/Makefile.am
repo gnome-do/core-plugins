@@ -9,7 +9,9 @@ FILES = \
 	src/StringExtensions.cs
 
 RESOURCES = \
-	Resources/RemindMe.addin.xml
+	Resources/RemindMe.addin.xml \
+	Resources/alarm.png \
+	Resources/snooze.png
 
 REFERENCES = \
 	Mono.Posix \

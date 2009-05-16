@@ -50,7 +50,7 @@ namespace RemindMe
 			}
 			
 			public override string Icon {
-			get { return ""; }
+			get { return "snooze.png@" + GetType ().Assembly.FullName; }
 			}			
 		}
 		
@@ -66,7 +66,7 @@ namespace RemindMe
 			}
 			
 			public override string Icon {
-			get { return ""; }
+			get { return "alarm.png@" + GetType ().Assembly.FullName; }
 			}			
 		}
 		
@@ -86,7 +86,7 @@ namespace RemindMe
 		}
 
 		public override string Icon {
-			get { return ""; }
+			get { return "alarm.png@" + GetType ().Assembly.FullName; }
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -138,18 +138,16 @@ namespace RemindMe
 			
 			Notification reminder;
 			
-			if (modItems.Any ())
-			{
+			if (modItems.Any ()) {
 				if (modItems.First () is AllowSnoozeItem)
 					reminder = new SnoozeableReminder (message, timeout);
 				else
 					reminder = new Reminder (message, timeout);
-			}
-			else
+			} else {
 				reminder = new Reminder (message, timeout);
+			}
 			
-			GLib.Timeout.Add ((uint) 
-timeout.TotalMilliseconds, () => { 
+			GLib.Timeout.Add ((uint) timeout.TotalMilliseconds, () => { 
 				Services.Notifications.Notify (reminder);
 				return false; 
 			});
@@ -163,11 +161,10 @@ timeout.TotalMilliseconds, () => {
 			
 			//this will catch strings like 10:00 PM or 14:12
 			if (TryConvert (timeStr, out t)) {
-				notificationTimeout = t-DateTime.Now;
+				notificationTimeout = t - DateTime.Now;
 				return notificationTimeout;
-			}
-			//this will catch strings like 2m2s or 2 h 2 m
-			else /*if (timeStr.ContainsAny (new [] {"h", "m", "s"}))*/ {
+			} else {
+				//this will catch strings like 2m2s or 2 h 2 m
 				int hours, minutes, seconds;
 				hours = minutes = seconds = 0;
 				
@@ -188,9 +185,8 @@ timeout.TotalMilliseconds, () => {
 							seconds = GetTimeUnit (timeStr, "s", out timeStr);
 							break;
 						}
-					}
-					//bad time string
-					catch (Exception e) {
+					} catch {
+						//bad time string
 						return new TimeSpan ();
 					}
 				}
@@ -204,8 +200,7 @@ timeout.TotalMilliseconds, () => {
 		{			
 			try {
 				time = Convert.ToDateTime (timeString);
-			}
-			catch {
+			} catch {
 				time = default (DateTime);
 				return false;
 			}
@@ -219,8 +214,7 @@ timeout.TotalMilliseconds, () => {
 			else if (timeout.TotalMinutes < 60) {
 				Services.Notifications.Notify ("RemindMe", 
 			        string.Format (remindMessageMin, timeout.Minutes));
-			}
-			else {
+			} else {
 				Services.Notifications.Notify ("RemindMe", 
 			        string.Format (remindMessageHourMin, timeout.Hours, timeout.Minutes));
 			}
