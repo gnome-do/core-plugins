@@ -6,6 +6,7 @@
 	description="Search and play music in Exaile."
 	author="Graham Whelan"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>
