@@ -218,6 +218,7 @@ PingFM/Makefile
 Putty/Makefile
 Quote/Makefile
 RememberTheMilk/Makefile
+RemindMe/Makefile
 Rhythmbox/Makefile
 Riptide/Makefile
 RSS/Makefile

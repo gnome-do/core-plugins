@@ -3,7 +3,6 @@ using Mono.Unix;
 
 using Gtk;
 using Gdk;
-using GLib;
 
 using Do.Platform;
 
