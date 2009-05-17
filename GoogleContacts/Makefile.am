@@ -27,7 +27,6 @@ REFERENCES = \
 	System \
 	System.Core \
 	System.Security \
-	System.Web \
 	$(GTK_SHARP_20_LIBS) \
 	$(GDATA_SHARP_CONTACTS_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \
