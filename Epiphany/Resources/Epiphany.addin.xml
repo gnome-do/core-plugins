@@ -6,6 +6,7 @@
 	description="Search your Epiphany bookmarks."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

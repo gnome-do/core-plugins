@@ -6,6 +6,7 @@
 	description="Search your Evolution contacts."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

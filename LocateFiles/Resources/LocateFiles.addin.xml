@@ -6,6 +6,7 @@
 	description="Find files on your computer using the GNU locate command."
 	author="David Siegel"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

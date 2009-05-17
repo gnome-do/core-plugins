@@ -1,4 +1,6 @@
+if HAVE_YOUTUBE
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=YouTube
 
@@ -23,7 +25,7 @@ REFERENCES = \
 	System.Core \
 	Mono.Posix \
 	$(GDATA_SHARP_CONTACTS_LIBS) \
-	$(top_srcdir)/BundledLibraries/Google.GData.YouTube.dll \
+	$(GDATA_SHARP_YOUTUBE_LIBS) \
 	$(DO_PLATFORM_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \

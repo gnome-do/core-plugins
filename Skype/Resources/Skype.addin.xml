@@ -6,6 +6,7 @@
 	description="Make calls, chats, change your status, and more."
 	author="kiwanami"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

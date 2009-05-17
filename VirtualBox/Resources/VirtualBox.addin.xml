@@ -6,6 +6,7 @@
 	description="Control virtual machines in VirtualBox."
 	author="Chris Szikszoy"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

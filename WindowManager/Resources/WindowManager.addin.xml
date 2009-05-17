@@ -6,6 +6,7 @@
 	description="Control your windows or groups of windows with Do."
 	author="Jason Smith"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

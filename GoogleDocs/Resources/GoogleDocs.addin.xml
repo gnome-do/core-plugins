@@ -6,14 +6,11 @@
 	description="Search documents, spreadsheets, and presentations on Google Docs."
 	author="Peng Deng"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>
 		<Import assembly="GoogleDocs.dll"/>
-		<Import assembly="Google.GData.AccessControl.dll"/>
-		<Import assembly="Google.GData.Documents.dll"/>
-		<Import assembly="Google.GData.Client.dll"/>
-		<Import assembly="Google.GData.Extensions.dll"/>
 	</Runtime>
 
 	<Dependencies>

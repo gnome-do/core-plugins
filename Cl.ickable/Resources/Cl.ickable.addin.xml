@@ -6,6 +6,7 @@
 	description="Save clips on Cl.ickable.com"
 	author="Idealab"
 	category="Community"
+	defaultEnabled="false"
 >
  
 	<Runtime>

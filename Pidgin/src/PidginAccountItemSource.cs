@@ -62,17 +62,18 @@ namespace PidginPlugin
 			Pidgin.IPurpleObject prpl;
 			prpl = Pidgin.GetPurpleObject ();
 			string name, proto;
-			
-			items.Clear ();
-			try {
-				foreach (int account in prpl.PurpleAccountsGetAll ()) {
-					proto = prpl.PurpleAccountGetProtocolName (account);
-					name = prpl.PurpleAccountGetUsername (account);
-					items.Add (new PidginAccountItem (name, proto, account));
+			if (Pidgin.InstanceIsRunning) {
+				items.Clear ();
+				try {
+					foreach (int account in prpl.PurpleAccountsGetAll ()) {
+						proto = prpl.PurpleAccountGetProtocolName (account);
+						name = prpl.PurpleAccountGetUsername (account);
+						items.Add (new PidginAccountItem (name, proto, account));
+					}
+				} catch (Exception e) { 
+					Log<PidginAccountItemSource>.Error ("Could not get Pidgin accounts: {0}", e.Message);
+					Log<PidginAccountItemSource>.Debug (e.StackTrace);
 				}
-			} catch (Exception e) { 
-				Log<PidginAccountItemSource>.Error ("Could not get Pidgin accounts: {0}", e.Message);
-				Log<PidginAccountItemSource>.Debug (e.StackTrace);
 			}
 		}
 	}

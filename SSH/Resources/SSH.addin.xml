@@ -6,6 +6,7 @@
 	description="Search and connect to SSH hosts."
 	author="Peter Stuifzand"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

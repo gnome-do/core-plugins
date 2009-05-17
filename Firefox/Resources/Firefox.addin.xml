@@ -6,7 +6,7 @@
 	description="Search Firefox 3 bookmarks, bookmark directories, and history."
 	author="Neal Stewart"
 	category="Official"
-        defaultEnabled="false"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

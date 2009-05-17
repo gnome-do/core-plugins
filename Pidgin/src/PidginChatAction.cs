@@ -58,8 +58,10 @@ namespace PidginPlugin
 
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ContactItem)
-				return (item as ContactItem).Details.Any (d => d.StartsWith ("prpl-"));
+			if (item is ContactItem) {
+				ContactItem contact = item as ContactItem;
+				return contact.Details.Where (d => Pidgin.BuddyIsOnline (contact[d])).Any ();
+			}
 			return true;
 		}
 		
@@ -79,20 +81,17 @@ namespace PidginPlugin
 			if (modItems.Any ())
 				message = (modItems.First () as ITextItem).Text;
 			
-			Console.WriteLine (items.Count ());
-			
 			foreach (Item item in items) {
 				if (item is ContactItem) {
 					// Just grab the first protocol we see.
 					ContactItem contact = item as ContactItem;
 					foreach (string detail in contact.Details) {
-						if (detail.StartsWith ("prpl-")) {
-							Console.WriteLine ("checking {0} ({1})", contact["name"], contact[detail]);
-							//if this buddy is online, add and break
-							if (Pidgin.BuddyIsOnline (contact[detail])) {
-								names.Add (contact[detail]);
-								continue;
-							}
+						if (!detail.StartsWith ("prpl-"))
+							continue;
+						//if this buddy is online, add and break
+						if (Pidgin.BuddyIsOnline (contact[detail])) {
+							names.Add (contact[detail]);
+							break;
 						}
 					}
 				} else if (item is PidginHandleContactDetailItem) {
@@ -106,7 +105,6 @@ namespace PidginPlugin
 					Pidgin.StartIfNeccessary ();
 					Services.Application.RunOnMainThread (() => {
 						foreach (string name in names) {
-							Console.WriteLine (name);
 							if (!string.IsNullOrEmpty (message))
 								Pidgin.OpenConversationWithBuddy (name, message);
 							else
