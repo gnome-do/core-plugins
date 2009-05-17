@@ -1,4 +1,6 @@
+if HAVE_GCAL
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=GoogleCalendar
 
@@ -24,7 +26,6 @@ REFERENCES = \
 	System \
 	System.Core \
 	System.Xml \
-	$(GDATA_SHARP_ACL_LIBS) \
 	$(GDATA_SHARP_CALENDAR_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \

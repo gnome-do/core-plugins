@@ -6,14 +6,11 @@
 	description="Create, search, and browse Google calendar events."
 	author="Alex Launi"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>
 		<Import assembly="GoogleCalendar.dll"/>
-		<Import assembly="Google.GData.AccessControl.dll"/>
-		<Import assembly="Google.GData.Calendar.dll"/>
-		<Import assembly="Google.GData.Client.dll"/>
-		<Import assembly="Google.GData.Extensions.dll"/>
 	</Runtime>
 
 	<Dependencies>

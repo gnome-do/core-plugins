@@ -1,11 +1,12 @@
 <Addin
 	id="Pidgin"
 	namespace="Do"
-	version="2.0"
+	version="2.1"
 	name="Pidgin"
 	description="Search buddies and initiate chats in Pidgin."
 	author="David Siegel, Alex Launi, Chris Szikszoy"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

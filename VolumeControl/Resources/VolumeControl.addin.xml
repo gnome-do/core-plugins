@@ -6,6 +6,7 @@
 	description="Control your system volume."
 	author="Alex Launi"
 	category="Official"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

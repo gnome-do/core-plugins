@@ -6,6 +6,7 @@
 	description="Interact with Confluence wikis."
 	author="John Wood"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

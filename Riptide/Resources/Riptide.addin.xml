@@ -6,6 +6,7 @@
 	description="'Do' away with torrent sites!"
 	author="Jason Smith"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

@@ -40,7 +40,7 @@ namespace Twitterizer.Framework
     {
         public TwitterRequestData PerformWebRequest(TwitterRequestData Data)
         {
-            PerformWebRequest(Data, "POST");
+            PerformWebRequest(Data, "GET");
             
             return (Data);
 
@@ -48,8 +48,7 @@ namespace Twitterizer.Framework
 
         public TwitterRequestData PerformWebRequest(TwitterRequestData Data, string HTTPMethod)
         {
-            HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(Data.ActionUri);
-
+			HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(Data.ActionUri);
 
             Request.Method = HTTPMethod;
 
@@ -99,7 +98,7 @@ namespace Twitterizer.Framework
             {
                 XmlDocument ResultXmlDocument = new XmlDocument();
                 ResultXmlDocument.LoadXml(Data.Response);
-
+				
                 if (ResultXmlDocument.DocumentElement != null)
                     switch (ResultXmlDocument.DocumentElement.Name.ToLower())
                     {

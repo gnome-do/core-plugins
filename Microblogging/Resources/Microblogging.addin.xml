@@ -6,6 +6,7 @@
 	description="Update your microblog (e.g. Twitter, Identi.ca)."
 	author="Jacob Andreas, Alex Launi"
 	category="Official"
+	defaultEnabled="false"
 >
 
 	<Runtime>

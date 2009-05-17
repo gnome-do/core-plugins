@@ -25,7 +25,7 @@ using Mono.Unix;
 
 namespace VolumeControl
 {
-	public class VolumeDownItem : Item, IRunnableItem
+	public class VolumeDownItem : AbstractVolumeItem
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Volume Down"); }
@@ -38,10 +38,9 @@ namespace VolumeControl
 		public override string Icon {
 			get { return "audio-volume-low"; }
 		}
-		
-		public void Run ()
-		{
-			System.Diagnostics.Process.Start ("amixer set Master 3%- /dev/null");
+
+		protected override string VolumeArgument {
+			get { return "5%-"; }
 		}
 	}
 }

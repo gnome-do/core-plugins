@@ -1,4 +1,6 @@
+if HAVE_EVOLUTION
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=Evolution
 

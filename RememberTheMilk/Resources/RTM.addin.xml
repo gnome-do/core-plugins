@@ -1,44 +1,38 @@
 <Addin
-    id="RememberTheMilk"
-    namespace= "Do"
-    version="1.5"
-    name="Remember The Milk"
-    description="Manage tasks with Remember The Milk."
-    author="Peng Deng, Jonathan Davies"
+	id="RememberTheMilk"
+	namespace= "Do"
+	version="1.5"
+	name="Remember The Milk"
+	description="Manage tasks with Remember The Milk."
+	author="Peng Deng, Jonathan Davies"
 	category="Community"
-    >
+	defaultEnabled="false"
+>
 
-    <Runtime>
-        <Import assembly="RTM.dll"/>
-    </Runtime>
+	<Runtime>
+		<Import assembly="RTM.dll"/>
+	</Runtime>
 
-    <Dependencies>
-        <Addin id="Universe" version="1.0" />
-    </Dependencies>
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
 
-    <!-- Extensions included in this assembly -->
-    <Extension path="/Do/ItemSource">
-        <ItemSource type="RememberTheMilk.RTMListItemSource" />
-        <ItemSource type="RememberTheMilk.RTMTaskItemSource" />
-        <ItemSource type="RememberTheMilk.RTMTaskAttributeNotesSource" />
-    </Extension>
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="RememberTheMilk.RTMListItemSource" />
+	</Extension>
 
-    <Extension path="/Do/Action">
-        <Action type="RememberTheMilk.RTMNewList" />
-        <Action type="RememberTheMilk.RTMNewNote" />
-        <Action type="RememberTheMilk.RTMNewTask" />
-        <Action type="RememberTheMilk.RTMDeleteList" />
-        <Action type="RememberTheMilk.RTMDeleteTask" />
-        <Action type="RememberTheMilk.RTMCompleteTask" />
-        <Action type="RememberTheMilk.RTMSetPriority" />
-        <Action type="RememberTheMilk.RTMSetDue" />
-        <Action type="RememberTheMilk.RTMSetEstimate" />
-        <Action type="RememberTheMilk.RTMSetUrl" />
-        <Action type="RememberTheMilk.RTMRenameList" />
-        <Action type="RememberTheMilk.RTMMoveTask" />
-        <Action type="RememberTheMilk.RTMRenameTask" />
-        <Action type="RememberTheMilk.RTMPostponeTask" />
-        <Action type="RememberTheMilk.RTMSetRecurrence" />
-        <Action type="RememberTheMilk.RTMUncompleteTask" />
-    </Extension>
+	<Extension path="/Do/Action">
+		<Action type="RememberTheMilk.RTMNewTask" />
+		<Action type="RememberTheMilk.RTMDeleteTask" />
+		<Action type="RememberTheMilk.RTMCompleteTask" />
+		<Action type="RememberTheMilk.RTMSetPriority" />
+		<Action type="RememberTheMilk.RTMSetDue" />
+		<Action type="RememberTheMilk.RTMSetUrl" />
+		<Action type="RememberTheMilk.RTMMoveTask" />
+		<Action type="RememberTheMilk.RTMRenameTask" />
+		<Action type="RememberTheMilk.RTMPostponeTask" />
+		<Action type="RememberTheMilk.RTMSetRecurrence" />
+		<Action type="RememberTheMilk.RTMUncompleteTask" />
+	</Extension>
 </Addin>

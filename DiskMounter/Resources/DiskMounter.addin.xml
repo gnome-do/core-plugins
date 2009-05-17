@@ -6,6 +6,7 @@
 	description="Mount and unmount drive volumes in GNOME."
 	author="Guillaume Béland"
 	category="Community"
+	defaultEnabled="false"
 >
  
 	<Runtime>

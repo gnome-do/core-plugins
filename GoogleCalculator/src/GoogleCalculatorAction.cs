@@ -38,7 +38,7 @@ namespace Do.Plugins.Google
 	{
 
 		const string BeginCalculator = "<img src=/images/calc_img.gif";
-		const string BeginReply = "<td nowrap dir=ltr><h2 class=r style=\"font-size:138%\"><b>";
+		const string BeginReply = "<td nowrap ><h2 class=r style=\"font-size:138%\"><b>";
 		const string EndReply = "</b>";
 
 		public GoogleCalculatorAction ()

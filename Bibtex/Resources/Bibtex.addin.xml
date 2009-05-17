@@ -6,6 +6,7 @@
 	description="Quickly open documents linked from BibTeX files."
 	author="Niall Murphy"
 	category="Community"
+	defaultEnabled="false"
 	>
 
 	<Runtime>

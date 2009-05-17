@@ -1,4 +1,6 @@
+if HAVE_BANSHEE
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=Banshee
 

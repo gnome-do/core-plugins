@@ -6,6 +6,7 @@
 	description="Search your media collection and control playback."
 	author="Alex Launi"
 	category="Official"
+	defaultEnabled="false"
 >
  
 	<Runtime>

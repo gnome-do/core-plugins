@@ -67,6 +67,13 @@ namespace Locate
 				
 			files = new List<Item> ();
 			query = (items.First () as ITextItem).Text;
+
+			if (string.IsNullOrEmpty(query))
+			{
+				Services.Notifications.Notify("Locate Files",
+					"No text provided for searching.");
+				yield break;
+			}
 			
 			locate = new System.Diagnostics.Process ();
 			locate.StartInfo.FileName = "locate";
@@ -90,13 +97,15 @@ namespace Locate
 				results++;
 				files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
 			}
+			
 			if (results > 0) {
 				files.Sort (new IFileItemNameComparer (query));
 				foreach (Item file in files)
 					yield return file;
+			} else {
+				Services.Notifications.Notify ("Locate Files", Error + query);
+				yield break;
 			}
-			else
-				yield return new TextItem (Error + query);
 		}
 
 		// Order files by (A) position of query in the file name and
