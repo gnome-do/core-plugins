@@ -160,7 +160,11 @@ namespace Banshee
 		
 		public void Play ()
 		{
-			First ();
+			try {
+				Player.Play ();
+			} catch (Exception e) {
+				LogError ("Play", e);
+			}
 		}
 
 		public void Play (IEnumerable<IMediaFile> media)
