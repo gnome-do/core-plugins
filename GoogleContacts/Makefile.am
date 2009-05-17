@@ -12,7 +12,8 @@ FILES = \
 	src/GMailContactDetailItem.cs \
 	src/GMailContactItemSource.cs \
 	src/GMail.cs \
-	src/Preferences.cs
+	src/Preferences.cs \
+	src/RecentConversationsAction.cs
 
 RESOURCES = \
 	Resources/GoogleContacts.addin.xml \
@@ -26,6 +27,7 @@ REFERENCES = \
 	System \
 	System.Core \
 	System.Security \
+	System.Web \
 	$(GTK_SHARP_20_LIBS) \
 	$(GDATA_SHARP_CONTACTS_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \

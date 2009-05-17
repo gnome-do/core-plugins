@@ -1,4 +1,4 @@
-<Project name="GoogleContacts" fileversion="2.0" language="C#" DefaultNamespace="GMail" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
+<Project name="GoogleContacts" fileversion="2.0" language="C#" DefaultNamespace="GMail" clr-version="Net_2_0" targetFramework="3.5" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="GoogleContacts" />
@@ -31,6 +31,7 @@
     <File name="Resources/GoogleContacts.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/gmail-logo.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/phone.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/RecentConversationsAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -42,8 +43,9 @@
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Contacts.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../BundledLibraries/Google.GData.Extensions.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../usr/local/lib/gnome-do/Do.Platform.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../usr/local/lib/gnome-do/Do.Platform.Linux.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../usr/local/lib/gnome-do/Do.Universe.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </References>
 </Project>
