@@ -501,7 +501,11 @@ namespace RememberTheMilk
 				}
 			}
 			
-			UpdateTasks ();
+			ActionRoutine (Catalog.GetString ("New Task Created"),
+			               Catalog.GetString ("The task has been successully added to your"
+			                                  + "Remember The milk task likst."),
+			               null, null);
+			
 			return new RTMTaskItem (rtmList.ID, rtmList.TaskSeriesCollection[0].TaskSeriesID,
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
 			                        rtmList.TaskSeriesCollection[0].Name,
