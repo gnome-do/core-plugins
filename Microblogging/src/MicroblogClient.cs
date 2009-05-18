@@ -63,13 +63,19 @@ namespace Microblogging
 		{
 			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
 		}
+
+
+		public static bool CredentialsValid (string username, string password)
+		{
+			return Twitter.VerifyCredentials (username, password);
+		}
 		
 		public MicroblogClient (string username, string password, Service service)
 		{
 			timers = new Timer [3];
 			this.username = username;
 			Contacts = Enumerable.Empty<FriendItem> ();
-			blog = new Twitter (username, password, service);
+			blog = new Twitter (username, password, service, "Do");
 			timeline_last_updated = messages_last_updated = DateTime.UtcNow;
 
 			timers [0] = new Timer (UpdateContacts, null, 1 * 1000, UpdateContactsTimeout);
@@ -108,7 +114,7 @@ namespace Microblogging
 			}
 
 			OnStatusUpdated (status, errorMessage);
-		}
+		}	
 
 		void UpdateContacts (object o)
 		{
