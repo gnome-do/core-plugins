@@ -47,19 +47,17 @@ namespace Microblogging
 			Configuration.ServiceChanged += ServiceChanged;
 		}
 
-		public static bool Connect (string username, string password)
+		public static void Connect (string username, string password)
 		{
 			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
 				Log.Error (MissingCredentialsMsg);
-				return false;
+				return;
 			}
 			
 			client = new MicroblogClient (username, password, prefs.ActiveService);
 			client.StatusUpdated += OnStatusUpdated;
 			client.MessageFound += DirectMessageFound;
 			client.TimelineUpdated += OnTimelineUpdated;
-			
-			return true;
 		}
 			
 		public static IEnumerable<FriendItem> Friends {

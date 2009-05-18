@@ -13,7 +13,7 @@ namespace Microblogging
 {	
 	public class FriendItem : Item
 	{
-		const string DefaultIcon = "stock_person";
+		const string FallbackIcon = "stock_person";
 
 		string name, photo, status;
 		SortedList<DateTime, MicroblogStatus> statuses;
@@ -46,7 +46,7 @@ namespace Microblogging
 			get {
 				if (!string.IsNullOrEmpty (photo) && File.Exists (photo))
 					return photo;
-				return DefaultIcon;
+				return FallbackIcon;
 			}
 		}
 		
