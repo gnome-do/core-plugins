@@ -63,6 +63,12 @@ namespace Microblogging
 		{
 			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
 		}
+
+
+		public static bool CredentialsValid (string username, string password)
+		{
+			return Twitter.VerifyCredentials (username, password);
+		}
 		
 		public MicroblogClient (string username, string password, Service service)
 		{
@@ -108,7 +114,7 @@ namespace Microblogging
 			}
 
 			OnStatusUpdated (status, errorMessage);
-		}
+		}	
 
 		void UpdateContacts (object o)
 		{

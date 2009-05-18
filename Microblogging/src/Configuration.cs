@@ -58,7 +58,12 @@ namespace Microblogging
 		
 		protected override bool Validate (string username, string password)
 		{
-			return Microblog.Connect (username, password);
+			if (MicroblogClient.CredentialsValid (username, password)) {
+				Microblog.Connect (username, password);
+				return true;
+			}
+
+			return false;
 		}
 
 		protected override void SaveAccountData (string username, string password)
