@@ -33,36 +33,24 @@ namespace GNOME
 		[Interface ("org.freedesktop.PowerManagement")]
 		interface IPowerManagementProxy
 		{
-			void Shutdown ();
-			void Reboot ();
 			void Hibernate ();
 			void Suspend ();
 		}
 
-		private const string ObjectPath = "/org/freedesktop/PowerManagement";
-		private const string BusName = "org.freedesktop.PowerManagement";
+		const string BusName = "org.freedesktop.PowerManagement";
+		const string ObjectPath = "/org/freedesktop/PowerManagement";
 
-		private static IPowerManagementProxy BusInstance
+		static IPowerManagementProxy BusInstance
 		{
 			get {
 				try {
-					return Bus.Session.GetObject<IPowerManagementProxy> (BusName,
-							new ObjectPath (ObjectPath));
+					return Bus.Session.GetObject<IPowerManagementProxy> (BusName, new ObjectPath (ObjectPath));
 				} catch (Exception e) {
 					Log<PowerManagement>.Error ("Could not get PowerManagement bus object: {0}", e.Message);
 					Log<PowerManagement>.Debug (e.StackTrace);
-					return null;
 				}
-			}
-		}
 
-		public static void Shutdown ()
-		{
-			try {
-				BusInstance.Shutdown ();
-			} catch (Exception e) {
-				Log<PowerManagement>.Error ("Could not shutdown: {0}", e.Message);
-				Log<PowerManagement>.Debug (e.StackTrace);
+				return null;
 			}
 		}
 
@@ -72,16 +60,6 @@ namespace GNOME
 				BusInstance.Hibernate ();
 			} catch (Exception e) {
 				Log<PowerManagement>.Error ("Could not hibernate: {0}", e.Message);
-				Log<PowerManagement>.Debug (e.StackTrace);
-			}
-		}
-
-		public static void Reboot ()
-		{
-			try {
-				BusInstance.Reboot ();
-			} catch (Exception e) {
-				Log<PowerManagement>.Error ("Could not reboot: {0}", e.Message);
 				Log<PowerManagement>.Debug (e.StackTrace);
 			}
 		}
