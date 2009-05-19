@@ -52,7 +52,6 @@ namespace Firefox
 			folders = Enumerable.Empty<FolderItem> ();
 
 			ProfilePath = FindProfilePath ();
-			Log<PlacesItemSource>.Debug ("Temp db being stored at {0}", stored_temp_db_path);
 		}
 
 		~PlacesItemSource ()
@@ -203,6 +202,7 @@ namespace Firefox
 					if (firefoxDBFileInfo.LastWriteTimeUtc > tempDBFileInfo.LastWriteTimeUtc)
 						System.IO.File.Copy (FirefoxDBPath, stored_temp_db_path, true);
 				}
+				Log<PlacesItemSource>.Debug ("Temp db being stored at {0}", stored_temp_db_path);
 				return stored_temp_db_path;
 			}
 		}
