@@ -52,7 +52,7 @@ namespace Firefox
 			folders = Enumerable.Empty<FolderItem> ();
 
 			ProfilePath = FindProfilePath ();
-			Log<PlacesItemSource>.Debug ("Temp db being stored at {0}", ProfilePath);
+			Log<PlacesItemSource>.Debug ("Temp db being stored at {0}", stored_temp_db_path);
 		}
 
 		~PlacesItemSource ()
