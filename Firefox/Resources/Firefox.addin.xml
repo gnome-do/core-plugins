@@ -1,10 +1,10 @@
 <Addin
 	id="Firefox"
 	namespace="Do"
-	version="3"
+	version="3.0"
 	name="Firefox"
 	description="Search Firefox 3 bookmarks, bookmark directories, and history."
-	author="Neal Stewart"
+	author="David Siegel, Neal Stewart, Alex Launi"
 	category="Official"
 	defaultEnabled="false"
 	>
@@ -18,6 +18,6 @@
 	</Dependencies>
 
 	<Extension path="/Do/ItemSource">
-		<ItemSource type="Firefox.FABarItemSource" />
+		<ItemSource type="Firefox.PlacesItemSource" />
 	</Extension>
 </Addin>

@@ -16,10 +16,12 @@
   <Contents>
     <File name="." subtype="Directory" buildaction="Compile" />
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/BookmarkItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Firefox.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/FABarItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/FABarItems.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PlacesItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/BrowseBookmarkItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/BrowseHistoryItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/FolderItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PlaceItem.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
