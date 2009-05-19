@@ -288,9 +288,10 @@ namespace Firefox
 								if (!reader.IsDBNull (2)) {
 									int parent = reader.GetInt32 (2);
 									string bookmarkTitle = reader.GetString (3);
+									
 									yield return new PlaceItem (bookmarkTitle, url, parent);
-								} else if (title == "") {
-								// If the place has no title, use the url as a title so it's searchable.
+								} else if (string.IsNullOrEmpty (title)) {
+									// If the place has no title, use the url as a title so it's searchable.
 									yield return new PlaceItem (url, url);
 								} else {
 									yield return new PlaceItem (title, url);
