@@ -52,6 +52,7 @@ namespace Firefox
 			folders = Enumerable.Empty<FolderItem> ();
 
 			ProfilePath = FindProfilePath ();
+			Log<PlacesItemSource>.Debug ("Temp db being stored at {0}", ProfilePath);
 		}
 
 		~PlacesItemSource ()
@@ -95,11 +96,9 @@ namespace Firefox
 		public override IEnumerable<Item> ChildrenOfItem (Item item) 
 		{
 			if (IsFirefox (item)) {
-				Log.Debug ("ITEM");
 				yield return new BrowseHistoryItem ();
 				yield return new BrowseBookmarkItem ();
 			} else if (item is BrowseBookmarkItem || item is BrowseHistoryItem) {
-				Log.Debug ("BROWSE");
 				foreach (FolderItem folder in folders)
 					yield return folder;
 				
@@ -110,7 +109,6 @@ namespace Firefox
 					foreach (PlaceItem place in places)
 						yield return place;
 			} else if (item is FolderItem) {
-				Log.Debug ("FOLDER");
 				FolderItem parent = (FolderItem) item;
 				
 				foreach (FolderItem folder in folders.Where (folder => folder.ParentId == parent.Id))
