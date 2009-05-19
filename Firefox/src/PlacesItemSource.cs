@@ -202,7 +202,6 @@ namespace Firefox
 					if (firefoxDBFileInfo.LastWriteTimeUtc > tempDBFileInfo.LastWriteTimeUtc)
 						System.IO.File.Copy (FirefoxDBPath, stored_temp_db_path, true);
 				}
-				Log<PlacesItemSource>.Debug ("Temp db being stored at {0}", stored_temp_db_path);
 				return stored_temp_db_path;
 			}
 		}
@@ -247,7 +246,7 @@ namespace Firefox
 							 * parent for all other directories. It doesn't have a name,
 							 * so we'll give it one. */							
 							if (id == 1)
-								yield return new FolderItem ("Mozilla Bookmarks", id, parent);
+								yield return new FolderItem (Catalog.GetString ("Mozilla Bookmarks"), id, parent);
 							/* Firefox uses another field that doesn't have a name.
 							 * It references portions of their menu that generate
 							 * information dynamically from History, Tags, etc.
