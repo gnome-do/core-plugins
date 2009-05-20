@@ -66,7 +66,7 @@ namespace RememberTheMilk
 		public override string Description {
 			get {
 				if (due != DateTime.MinValue) {
-					string desc = "";						
+					string desc = "";
 					//if (in_all_tasks)
 					//	desc += "[" + RTM.ListNameForList (list_id) + "] ";
 					

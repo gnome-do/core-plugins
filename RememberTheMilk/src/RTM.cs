@@ -226,7 +226,7 @@ namespace RememberTheMilk
 			try {
 				rtmLists = rtm.ListsGetList ();
 			} catch (RtmException e) {
-				Log.Error (Catalog.GetString ("An error happend when updating RTM lists."), e.Message);
+				Log.Debug (Catalog.GetString ("An error happend when updating RTM lists."), e.Message);
 				rtmLists = null;
 				return;
 			}
@@ -247,7 +247,7 @@ namespace RememberTheMilk
 			try {
 				rtmLocations = rtm.LocationsGetList ();
 			} catch (RtmException e) {
-				Log.Error (Catalog.GetString ("An error happend when updating RTM locations."), e.Message);
+				Log.Debug (Catalog.GetString ("An error happend when updating RTM locations."), e.Message);
 				rtmLocations = null;
 				return;
 			}
@@ -297,7 +297,7 @@ namespace RememberTheMilk
 			} catch (RtmException e) {
 				rtmTasks = null;
 				last_sync = DateTime.MinValue;
-				Log.Error (Catalog.GetString ("An error happend when updating RTM tasks."), e.Message);
+				Log.Debug (Catalog.GetString ("An error happend when updating RTM tasks."), e.Message);
 				return;
 			}
 			
@@ -493,7 +493,7 @@ namespace RememberTheMilk
 			try {
 				rtmList = rtm.TasksAdd (timeline, taskData, listId, parse);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return null;
 			}
 			
@@ -505,7 +505,7 @@ namespace RememberTheMilk
 					                      rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
 					                      priority);
 				} catch (RtmException e) {
-					Log.Error (e.Message);
+					Log.Debug (e.Message);
 				}
 			}
 			
@@ -531,7 +531,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksDelete (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -546,7 +546,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksComplete (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -582,7 +582,7 @@ namespace RememberTheMilk
 				else
 					rtm.TasksSetPriority (timeline, listId, taskSeriesId, taskId, priority);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -600,7 +600,7 @@ namespace RememberTheMilk
 				else
 					rtm.TasksSetDueDateParse (timeline, listId, taskSeriesId, taskId, due);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -615,7 +615,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksMoveTo (timeline, fromListId, toListId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -631,7 +631,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetName (timeline, listId, taskSeriesId, taskId, newName);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -646,7 +646,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksPostpone (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -661,7 +661,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetRecurrence (timeline, listId, taskSeriesId, taskId, repeat);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -676,7 +676,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetUrl(timeline, listId, taskSeriesId, taskId, url);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -697,7 +697,7 @@ namespace RememberTheMilk
 				rtm.TasksSetEstimateTime(timeline, listId, taskSeriesId,
 				                         taskId, estimateTime);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -717,7 +717,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetLocation (timeline, listId, taskSeriesId, taskId, locationId);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -738,7 +738,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksUncomplete (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -752,7 +752,7 @@ namespace RememberTheMilk
 			try {
 				rtm.ListsNew(timeline, newListName);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -766,7 +766,7 @@ namespace RememberTheMilk
 			try {
 				rtm.ListsDelete(timeline, listId);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
@@ -779,7 +779,7 @@ namespace RememberTheMilk
 			try {
 				rtm.ListsRename(timeline, listId, newListName);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			ActionRoutine (Catalog.GetString("Task List Renamed"),
@@ -803,7 +803,7 @@ namespace RememberTheMilk
 			}
 			
 			if (string.IsNullOrEmpty (note) || ((has_separator || has_newline) && parts != null && parts.Length < 2)) {
-				Log.Error ("Entered text cannot be used as a note.");
+				Log.Debug ("Entered text cannot be used as a note.");
 				return;
 			} else {
 				note_title = (has_separator || has_newline) ? parts[0].Trim () : "Untitled Note";
@@ -813,7 +813,7 @@ namespace RememberTheMilk
 			try {
 				rtm.NotesAdd (timeline, listId, taskSeriesId, taskId, note_title, note_body);
 			} catch (RtmException e) {
-				Log.Error (e.Message);
+				Log.Debug (e.Message);
 				return;
 			}
 			
