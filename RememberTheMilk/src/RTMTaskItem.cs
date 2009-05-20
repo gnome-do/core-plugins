@@ -84,7 +84,7 @@ namespace RememberTheMilk
 				} else if (completed != DateTime.MinValue)
 					return "This task has been completed at " + completed.ToString ("g");
 				else
-					return ""; "This task has no due date/time.";
+					return ""; //"This task has no due date/time.";
 			}
 		}
 		

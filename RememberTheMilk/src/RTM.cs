@@ -67,13 +67,18 @@ namespace RememberTheMilk
 			Preferences = new RTMPreferences ();
 			filter = Preferences.Filter;
 			
+			TryConnect ();
+		}
+		
+		static bool TryConnect ()
+		{
 			if (!String.IsNullOrEmpty (Preferences.Token)) {
 				Auth auth;
 				try {
 					auth = rtm.AuthCheckToken (Preferences.Token);
 				} catch (RtmException e) {
 					Console.Error.WriteLine ("Token verification failed: " + e.Message);
-					return;
+					return false;
 				}
 				
 				rtm.AuthToken = auth.Token;
@@ -83,8 +88,12 @@ namespace RememberTheMilk
 					timeline = rtm.TimelineCreate ();
 				} catch (RtmException e) {
 					Console.Error.WriteLine ("Remember The Milk timeline creation failed: " + e.Message);
-					return;
+					return false;
 				}
+				
+				return true;
+			} else {
+				return false;
 			}
 		}
 		
@@ -210,7 +219,8 @@ namespace RememberTheMilk
 		public static void UpdateLists ()
 		{
 			if (!IsAuthenticated)
-				return;
+				if (!TryConnect ())
+					return;
 			
 			Lists rtmLists;
 			try {
@@ -230,7 +240,8 @@ namespace RememberTheMilk
 		public static void UpdateLocations ()
 		{
 			if (!IsAuthenticated)
-				return;
+				if (!TryConnect ())
+					return;
 			
 			Locations rtmLocations;
 			try {
@@ -257,7 +268,8 @@ namespace RememberTheMilk
 		{
 			
 			if (!IsAuthenticated)
-				return;
+				if (!TryConnect ())
+					return;
 			
 			Tasks rtmTasks;
 
