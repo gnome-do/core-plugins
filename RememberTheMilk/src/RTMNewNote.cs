@@ -37,7 +37,7 @@ namespace RememberTheMilk
 		
 		public override string Description {
 			get { return Catalog.GetString ("Add a new note to the selected task."); }
-        	}
+		}
 			
 		public override string Icon {
 			get { return "note-add.png@" + GetType ().Assembly.FullName; }

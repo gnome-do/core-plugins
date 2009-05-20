@@ -60,13 +60,13 @@ namespace RememberTheMilk
 			// Check if user is empty.
 			if (string.IsNullOrEmpty(newListName)) {
 				// Need new name.
-				Services.Notifications.Notify("Remember The Milk",
+				Services.Notifications.Notify ("Remember The Milk",
 				                              "No new list name provided.");
 				yield break;
 			}
 			
-			if(RTM.IsProtectedList (newListName)) {
-				Services.Notifications.Notify("Remember The Milk",
+			if (RTM.IsProtectedList (newListName)) {
+				Services.Notifications.Notify ("Remember The Milk",
 				                              "Invalid list name provided.");
 				yield break;
 			}

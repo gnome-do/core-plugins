@@ -50,9 +50,9 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get {
-		        return new Type[] {
-		            typeof (RTMListItem),
+			get {
+				return new Type[] {
+					typeof (RTMListItem),
 				};
 			}
 		}
@@ -70,7 +70,7 @@ namespace RememberTheMilk
 		{
 			if (modItem is RTMListItem)
 				return !(modItem as RTMListItem).Name.Equals ("All Tasks");
-		
+			
 			return true;
 		}
         
