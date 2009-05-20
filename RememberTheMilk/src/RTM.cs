@@ -294,7 +294,7 @@ namespace RememberTheMilk
 				if (!tasks.ContainsKey (rtmList.ID))
 					tasks [rtmList.ID] = new List<Item> ();
 				
-				if (rtmList.DeletedTaskSeries != null)
+				 if (rtmList.DeletedTaskSeries != null)
 					foreach (TaskSeries rtmTaskSeries in rtmList.DeletedTaskSeries.TaskSeriesCollection)
 						foreach (Task rtmTask in rtmTaskSeries.TaskCollection)
 							UniverseRemoveTask (rtmTask.TaskID, rtmList.ID);
@@ -404,16 +404,12 @@ namespace RememberTheMilk
 				string title;
 				title = String.Format (Catalog.GetPluralString ("{0} Task Overdue",
 				                                                "{0} Tasks Overdue", len), len);
-				//if (len > 1)
-				//title = Catalog.GetString (String.Format ("{0} Tasks overdue", len));
-				//else
-				//title = Catalog.GetString ("1 Task Overdue");
 				
 				string body = "";
 				foreach (string name in overdue_tasks) // TODO: missing lock
 					body += ("- " + name +"\n");
 				
-				Do.Platform.Services.Notifications.Notify(new Do.Platform.Notification( title, body, "task-overdue.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
+				Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification( title, body, "task-overdue.png@" + typeof(RTMTaskItem).Assembly.FullName ) );
 			}
 		}
 		
