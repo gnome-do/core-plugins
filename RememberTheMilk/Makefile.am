@@ -25,6 +25,7 @@ FILES = \
 	src/RTMSetDue.cs \
 	src/RTMSetEstimate.cs \
 	src/RTMSetUrl.cs \
+	src/RTMSetLocation.cs \
 	src/RTMSetPriority.cs \
 	src/RTMSetRecurrence.cs \
 	src/RTMTaskAttributeItem.cs \

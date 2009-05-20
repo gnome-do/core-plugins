@@ -38,6 +38,8 @@
 		<Action type="RememberTheMilk.RTMMoveTask" />
 		<Action type="RememberTheMilk.RTMRenameTask" />
 		<Action type="RememberTheMilk.RTMPostponeTask" />
+		<Action type="RememberTheMilk.RTMSetEstimate" />
+		<Action type="RememberTheMilk.RTMSetLocation" />
 		<Action type="RememberTheMilk.RTMSetRecurrence" />
 		<Action type="RememberTheMilk.RTMUncompleteTask" />
 	</Extension>

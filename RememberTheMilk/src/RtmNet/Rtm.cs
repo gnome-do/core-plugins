@@ -1083,10 +1083,10 @@ namespace RtmNet
 		/// <param name="photoId">The photo id of the photo.</param>
 		/// <param name="tags">An array of strings containing the tags.</param>
 		/// <returns>True if the tags are added successfully.</returns>
-		public void TasksAddTags(string photoId, string[] tags)
+		public void TasksAddTags (string timeline, string listID, string taskSeriesID, string taskID, string[] tags)
 		{	
-			string s = string.Join(",", tags);
-			TasksAddTags(photoId, s);
+			string s = string.Join (",", tags);
+			TasksAddTags (timeline, listID, taskSeriesID, taskID, s);
 		}
 
 		/// <summary>
@@ -1095,22 +1095,41 @@ namespace RtmNet
 		/// <param name="photoId">The photo id of the photo.</param>
 		/// <param name="tags">An string of comma delimited tags.</param>
 		/// <returns>True if the tags are added successfully.</returns>
-		public void TasksAddTags(string photoId, string tags)
+		public void TasksAddTags (string timeline, string listID, string taskSeriesID, string taskID, string tags)
 		{
-			Hashtable parameters = new Hashtable();
-			parameters.Add("method", "rtm.tasks.addTags");
-			parameters.Add("photo_id", photoId);
-			parameters.Add("tags", tags);
+			Hashtable parameters = new Hashtable ();
+			parameters.Add ("method", "rtm.tasks.addTags");
+			parameters.Add ("timeline", timeline);
+			parameters.Add ("list_id", listID);
+			parameters.Add ("taskseries_id", taskSeriesID);
+			parameters.Add ("task_id", taskID);
+			parameters.Add ("tags", tags);
 
-			RtmNet.Response response = GetResponse(parameters);
+			RtmNet.Response response = GetResponse (parameters);
 
-			if( response.Status == ResponseStatus.OK )
-			{
+			if (response.Status == ResponseStatus.OK) {
 				return;
+			} else {
+				throw new RtmApiException (response.Error);
 			}
-			else
-			{
-				throw new RtmApiException(response.Error);
+		}
+		
+		public void TasksRemoveTags (string timeline, string listID, string taskSeriesID, string taskID, string tags)
+		{
+			Hashtable parameters = new Hashtable ();
+			parameters.Add ("method", "rtm.tasks.removeTags");
+			parameters.Add ("timeline", timeline);
+			parameters.Add ("list_id", listID);
+			parameters.Add ("taskseries_id", taskSeriesID);
+			parameters.Add ("task_id", taskID);
+			parameters.Add ("tags", tags);
+
+			RtmNet.Response response = GetResponse (parameters);
+
+			if (response.Status == ResponseStatus.OK) {
+				return; 
+			} else {
+				throw new RtmApiException (response.Error);
 			}
 		}
  
@@ -1209,6 +1228,30 @@ namespace RtmNet
 			parameters.Add("taskseries_id", taskSeriesID);
 			parameters.Add("task_id", taskID);
 			parameters.Add("estimate", estimateTime);
+
+			RtmNet.Response response = GetResponse(parameters);
+
+			if( response.Status == ResponseStatus.OK )
+			{
+				return response.List;
+			}
+			else
+			{
+				throw new RtmApiException(response.Error);
+			}
+
+		}
+		
+		public List TasksSetLocation(string timeline, string listID, string taskSeriesID, string taskID, string locationID)
+		{
+			Hashtable parameters = new Hashtable();
+			parameters.Add("method", "rtm.tasks.setEstimate");
+			parameters.Add("timeline", timeline);
+			parameters.Add("list_id", listID);	
+			parameters.Add("taskseries_id", taskSeriesID);
+			parameters.Add("task_id", taskID);
+			if (!String.IsNullOrEmpty (locationID))
+				parameters.Add("location_id", locationID);
 
 			RtmNet.Response response = GetResponse(parameters);
 

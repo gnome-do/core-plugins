@@ -178,21 +178,22 @@ namespace RememberTheMilk
 			// attribute_list.Add (new RTMTaskAttributeItem ("Name", task.Name, task.Url, task.Icon));
 			
 			if (task.Due != DateTime.MinValue)
-				attribute_list.Add (new RTMTaskAttributeItem ("Due",
-				                                              task.Due.ToString ((task.HasDueTime != 0) ? "g" : "d"),
+				attribute_list.Add (new RTMTaskAttributeItem (task.Due.ToString ((task.HasDueTime != 0) ? "g" : "d"),
+				                                              "Due Date/Time",
 				                                              task.Url, "stock_calendar"));
 			if (!String.IsNullOrEmpty (task.TaskUrl))
-				attribute_list.Add (new RTMTaskAttributeItem ("URL", task.TaskUrl,
+				attribute_list.Add (new RTMTaskAttributeItem (task.TaskUrl, "URL",
 				                                              task.TaskUrl, "text-html"));
 			if (!String.IsNullOrEmpty (task.Estimate))
-				attribute_list.Add (new RTMTaskAttributeItem ("Time Estimate", task.Estimate,
+				attribute_list.Add (new RTMTaskAttributeItem (task.Estimate, "Time Estimate",
 				                                              task.Url, "stock_appointment-reminder"));
 			if (!String.IsNullOrEmpty (task.LocationId)) {
-				RTMLocationItem loc = locations [task.LocationId] as RTMLocationItem;
-				attribute_list.Add (new RTMTaskAttributeItem ("Location", 
-				                                              "[" + loc.Name + "] " + loc.Description,
-				                                              "http://maps.google.com/maps?q=" + loc.Latitude + "," + loc.Longitude,
-				                                              loc.Icon));
+				attribute_list.Add (locations [task.LocationId] as RTMLocationItem);
+//				RTMLocationItem loc = locations [task.LocationId] as RTMLocationItem;
+//				attribute_list.Add (new RTMTaskAttributeItem (loc.Description, 
+//				                                              "Location [" + loc.Name + "] ",
+//				                                              "http://maps.google.com/maps?q=" + loc.Latitude + "," + loc.Longitude,
+//				                                              loc.Icon));
 			}
 			
 			if (notes.ContainsKey (task.Id))
@@ -683,7 +684,7 @@ namespace RememberTheMilk
 			}
 		}
 		
-		public static void SetEstimateTime(string listId, string taskSeriesId, string taskId, string estimateTime)
+		public static void SetEstimateTime (string listId, string taskSeriesId, string taskId, string estimateTime)
 		{
 			try {
 				rtm.TasksSetEstimateTime(timeline, listId, taskSeriesId,
@@ -702,6 +703,27 @@ namespace RememberTheMilk
 				               Catalog.GetString ("The estimated time for the selected task has been reset."),
 				               taskId, listId);
 			}
+		}
+		
+		public static void SetLocation (string listId, string taskSeriesId, string taskId, string locationId)
+		{
+			try {
+				rtm.TasksSetLocation (timeline, listId, taskSeriesId, taskId, locationId);
+			} catch (RtmException e) {
+				Console.Error.WriteLine (e.Message);
+				return;
+			}
+			
+			if (string.IsNullOrEmpty (locationId)) {
+				ActionRoutine (Catalog.GetString ("Location Reset"),
+				               Catalog.GetString ("The location of the selected task has been cleared."),
+				               taskId, listId);
+			} else {
+				ActionRoutine (Catalog.GetString ("Location changed"),
+				               Catalog.GetString ("The location of the selected task has been successfully changed."),
+				               taskId, listId);
+			}
+			
 		}
 		
 		public static void UncompleteTask (string listId, string taskSeriesId, string taskId)

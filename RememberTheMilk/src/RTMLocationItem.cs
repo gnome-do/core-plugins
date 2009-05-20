@@ -24,46 +24,30 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	public class RTMLocationItem : Item
+	public class RTMLocationItem : RTMTaskAttributeItem
 	{
 		string id;
 		string longitude;
 		string latitude;
-		string name;
-		string address;
 		
-		public RTMLocationItem(string id, string name, string address, string longitude, string latitude)
-			//: base ("Location: "+name, address, "http://maps.google.com/maps?q="+latitude+","+longitude, "stock_internet")
+		public RTMLocationItem (string id, string name, string address, string longitude, string latitude)
+			: base (name, address, "http://maps.google.com/maps?q="+latitude+","+longitude, "stock_internet")
 		{
 			this.id = id;
-			this.name = name;
-			this.address = address;
 			this.latitude = latitude;
 			this.longitude = longitude;
 		}
-		
-		public string Id {
-			get { return id;}
-		}
-		
-		public override string Name {
-			get { return name; }
-		}
-		
-		public override string Description {
-			get { return address; }
-		}
-		
-		public override string Icon {
-			get { return "stock_internet"; }
-		}
-			
+				
 		public string Longitude {
 			get { return longitude; }
 		}
 			
 		public string Latitude {
 			get { return latitude; }
+		}
+		
+		public string Id {
+			get { return id;}
 		}
 	}
 }
