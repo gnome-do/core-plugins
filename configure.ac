@@ -244,6 +244,7 @@ Alias/Makefile
 AptURL/Makefile
 Archive/Makefile
 Banshee/Makefile
+Banshee/Resources/Banshee.addin.xml
 Bibtex/Makefile
 Cl.ickable/Makefile
 ClawsMail/Makefile

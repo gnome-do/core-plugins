@@ -1,5 +1,4 @@
-<Combine name="DoPlugins" fileversion="2.0" outputpath="build/bin/" releaseversion="0.4.9.9">
-  <Policies />
+<Combine fileversion="2.0" outputpath="build/bin/" name="DoPlugins" releaseversion="0.4.9.9">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Debug" />

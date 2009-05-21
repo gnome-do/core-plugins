@@ -11,6 +11,7 @@
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
+		<Import assembly="@BANSHEE_INDEXER_DLL@"/>
 	</Runtime>
 	
 	<Dependencies>

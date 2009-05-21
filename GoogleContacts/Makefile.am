@@ -12,7 +12,8 @@ FILES = \
 	src/GMailContactDetailItem.cs \
 	src/GMailContactItemSource.cs \
 	src/GMail.cs \
-	src/Preferences.cs
+	src/Preferences.cs \
+	src/RecentConversationsAction.cs
 
 RESOURCES = \
 	Resources/GoogleContacts.addin.xml \

@@ -6,7 +6,8 @@ FILES = \
 	src/PowerManagement.cs \
 	src/ScreenSaver.cs \
 	src/SessionCommandItem.cs \
-	src/SessionCommandsItemSource.cs
+	src/SessionCommandsItemSource.cs \
+	src/SystemManagement.cs
 
 RESOURCES = \
 	Resources/GNOME-Session.addin.xml
