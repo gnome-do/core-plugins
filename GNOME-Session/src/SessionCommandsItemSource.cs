@@ -60,7 +60,7 @@ namespace GNOME
 					Catalog.GetString ("Shutdown"),
 					Catalog.GetString ("Turn your computer off."),
 					"system-shutdown",
-					PowerManagement.Shutdown);
+					SystemManagement.Shutdown);
 
 				yield return new SessionCommandItem (
 					Catalog.GetString ("Hibernate"),
@@ -78,7 +78,7 @@ namespace GNOME
 					Catalog.GetString ("Restart"),
 					Catalog.GetString ("Restart your computer."),
 					"reload",
-					PowerManagement.Reboot);
+					SystemManagement.Restart);
 
 				yield return new SessionCommandItem (
 					Catalog.GetString ("Lock Screen"),

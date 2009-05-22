@@ -1,7 +1,7 @@
 <Addin 
 	id="GMail"
 	namespace= "Do"
-	version="1.5"
+	version="1.6"
 	name="Google Contacts"
 	description="Search your GMail contacts."
 	author="Alex Launi"
@@ -11,9 +11,6 @@
 
 	<Runtime>
 		<Import assembly="GoogleContacts.dll"/>
-		<Import assembly="Google.GData.Contacts.dll"/>
-		<Import assembly="Google.GData.Client.dll"/>
-		<Import assembly="Google.GData.Extensions.dll"/>
 	</Runtime>
 
 	<Dependencies>
@@ -22,5 +19,8 @@
 
 	<Extension path = "/Do/ItemSource">
 		<ItemSource type="GMail.GMailItemSource" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="GMail.RecentConversationsActions" />
 	</Extension>
 </Addin>

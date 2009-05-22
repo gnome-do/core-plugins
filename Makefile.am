@@ -19,6 +19,7 @@ SUBDIRS = \
 	EOG-Slideshow \
 	Epiphany \
 	Evolution \
+	Exaile \
 	File \
 	Firefox \
 	Flickr \
@@ -48,6 +49,7 @@ SUBDIRS = \
 	Putty \
 	Quote \
 	RememberTheMilk \
+	RemindMe \
 	RequestTracker \
 	Rhythmbox \
 	Riptide \

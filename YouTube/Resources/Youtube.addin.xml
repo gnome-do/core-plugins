@@ -11,9 +11,6 @@
 
 	<Runtime>
 		<Import assembly="YouTube.dll"/>
-		<Import assembly="Google.GData.YouTube.dll"/>
-		<Import assembly="Google.GData.Client.dll"/>
-		<Import assembly="Google.GData.Extensions.dll"/>
 	</Runtime>
 
 	<Dependencies>

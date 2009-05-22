@@ -27,6 +27,7 @@ FILES = \
 	src/Twitterizer/Twitterizer.Framework/MethodClasses/TwitterStatusMethods.cs \
 	src/Twitterizer/Twitterizer.Framework/MethodClasses/TwitterUserMethods.cs \
 	src/Twitterizer/Twitterizer.Framework/Properties/AssemblyInfo.cs \
+	src/Twitterizer/Twitterizer.Framework/Service.cs \
 	src/Twitterizer/Twitterizer.Framework/Twitter.cs \
 	src/Twitterizer/Twitterizer.Framework/TwitterizerException.cs \
 	src/Twitterizer/Twitterizer.Framework/TwitterRequest.cs \

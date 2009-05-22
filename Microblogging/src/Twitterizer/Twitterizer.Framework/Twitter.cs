@@ -27,39 +27,67 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+using System;
 namespace Twitterizer.Framework
 {
-	public enum Service {
-		Twitter = 0,
-		Identica,
-	}
-	
-    public class Twitter
-    {
-        public TwitterDirectMessageMethods DirectMessages;
-        public TwitterStatusMethods Status;
-        public TwitterUserMethods User;
-        internal static Urls Urls;
+	public class Twitter
+	{
+		public TwitterDirectMessageMethods DirectMessages;
+		public TwitterStatusMethods Status;
+		public TwitterUserMethods User;
 
-        public Twitter(string UserName, string Password) :			this (UserName, Password, Service.Twitter)
+		internal static Urls Urls;
+
+		public Twitter(string UserName, string Password) :
+			this(UserName, Password, Service.Twitter, "")
 		{
-        }
-        
-        public Twitter (string UserName, string Password, Service service)
-        {
-        	DirectMessages = new TwitterDirectMessageMethods(UserName, Password);
-            Status = new TwitterStatusMethods(UserName, Password);
-            User = new TwitterUserMethods(UserName, Password);
+		}
 
-            switch (service) {
-            case Service.Twitter:
-            	Urls = new TwitterUrls ();
-            	break;
-            case Service.Identica:
-            	Urls = new IdenticaUrls ();
-            	break;
-           	}
-        }
-    }
+		public Twitter(string UserName, string Password, string Source) :
+			this(UserName, Password, Service.Twitter, Source)
+		{
+		}
+
+		public Twitter(string UserName, string Password, Service ServiceName) :
+			this(UserName, Password, ServiceName, "")
+		{
+		}
+
+		public Twitter(string UserName, string Password, Service ServiceName , string Source)
+		{
+			DirectMessages = new TwitterDirectMessageMethods(UserName, Password);
+			Status = new TwitterStatusMethods(UserName, Password, Source);
+			User = new TwitterUserMethods(UserName, Password);
+
+			switch(ServiceName) {
+				case Service.Twitter:
+					Urls = new TwitterUrls();
+					break;
+				case Service.Identica:
+					Urls = new IdenticaUrls();
+					break;
+			}
+		}
+
+		public static bool VerifyCredentials(string username, string password)
+		{
+			TwitterRequest request = new TwitterRequest();
+			TwitterRequestData data = new TwitterRequestData();
+			data.UserName = username;
+			data.Password = password;
+			data.ActionUri = new Uri(Urls.VerifyCredentialsUrl);
+
+			try
+			{
+				data = request.PerformWebRequest(data, "GET");
+				if (data.Users[0].ScreenName == username)
+				{
+					return true;
+				}
+			}
+			catch { } // ignore exeptions - authentication failed
+
+			return false;
+		}
+	}
 }
