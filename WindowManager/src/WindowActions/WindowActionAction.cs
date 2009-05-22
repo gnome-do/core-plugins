@@ -52,7 +52,6 @@ namespace WindowManager
 		{
 			if (item is IApplicationItem) {
 				string application = (item as IApplicationItem).Exec;
-				application = application.Split (new char[] {' '})[0];
 			
 				return WindowUtils.WindowListForCmd (application).Any ();
 			} else if (item is IWindowItem) {
