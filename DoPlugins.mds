@@ -1,4 +1,8 @@
 <Combine fileversion="2.0" outputpath="build/bin/" name="DoPlugins" releaseversion="0.4.9.9">
+  <Policies>
+    <TextStylePolicy FileWidth="120" TabWidth="8" TabsToSpaces="False" NoTabsAfterNonTabs="False" RemoveTrailingWhitespace="False" EolMarker="Native" />
+    <StandardHeader Text="&#xA;${FileName}&#xA;&#xA;GNOME Do is the legal property of its developers. Please refer to the&#xA;COPYRIGHT file distributed with this&#xA;source distribution.&#xA;&#xA;This program is free software: you can redistribute it and/or modify&#xA;it under the terms of the GNU General Public License as published by&#xA;the Free Software Foundation, either version 3 of the License, or&#xA;(at your option) any later version.&#xA;&#xA;This program is distributed in the hope that it will be useful,&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xA;GNU General Public License for more details.&#xA;&#xA;You should have received a copy of the GNU General Public License&#xA;along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.&#xA;" inheritsSet="MITX11License" />
+  </Policies>
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
@@ -71,6 +75,7 @@
       <Entry build="True" name="Tracker" configuration="Debug" />
       <Entry build="True" name="YouTube" configuration="Debug" />
       <Entry build="True" name="Emesene" configuration="Debug" />
+      <Entry build="True" name="Dropbox" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -143,6 +148,7 @@
       <Entry build="True" name="Tracker" configuration="Release" />
       <Entry build="True" name="YouTube" configuration="Release" />
       <Entry build="True" name="Emesene" configuration="Release" />
+      <Entry build="True" name="Dropbox" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -216,6 +222,7 @@
     <Execute type="None" entry="Tracker" />
     <Execute type="None" entry="YouTube" />
     <Execute type="None" entry="Emesene" />
+    <Execute type="None" entry="Dropbox" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -289,5 +296,6 @@
     <Entry filename="Tracker/Tracker.mdp" />
     <Entry filename="YouTube/YouTube.mdp" />
     <Entry filename="Emesene/Emesene.mdp" />
+    <Entry filename="Dropbox/Dropbox.mdp" />
   </Entries>
 </Combine>
