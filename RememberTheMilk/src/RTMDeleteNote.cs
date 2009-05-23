@@ -25,38 +25,31 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	public class RTMRenameTask : Act
+	public class RTMDeleteNote : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Rename to..."); }
+			get { return Catalog.GetString ("Delete Note"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Give the seleted task a new name"); }
+			get { return Catalog.GetString ("Detele the selected note from the task."); }
 		}
 			
 		public override string Icon {
-			get { return "task-rename.png@" + GetType ().Assembly.FullName; }
+			get { return "note-delete.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (RTMTaskItem); }
-		}
-		
-		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { yield return typeof (ITextItem); }
-		}
-		
-		public override bool ModifierItemsOptional {
-			get { return false; }
+			get { yield return typeof (RTMNoteItem); }
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
-			Services.Application.RunOnThread (() => {
-				RTM.RenameTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				                (items.First () as RTMTaskItem).Id, (modifierItems.First () as ITextItem).Text);
-			});
+			if (items.Any())
+				Services.Application.RunOnThread (() => {
+					RTM.DeleteNote ((items.First () as RTMNoteItem).Id);
+				});
+				
 			yield break;
 		}
 	}

@@ -10,8 +10,9 @@ FILES = \
 	src/RTMAddTags.cs \
 	src/RTMCompleteTask.cs \
 	src/RTMDeleteList.cs \
-	src/RTMDeleteTask.cs \
+	src/RTMDeleteNote.cs \
 	src/RTMDeleteTags.cs \
+	src/RTMDeleteTask.cs \
 	src/RTMListItem.cs \
 	src/RTMListItemSource.cs \
 	src/RTMLocationItem.cs \

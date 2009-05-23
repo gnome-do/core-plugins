@@ -25,15 +25,21 @@ namespace RememberTheMilk
 	public class RTMNoteItem : RTMTaskAttributeItem
 	{
 		string note_id;
+		string task_id;
 		
-		public RTMNoteItem (string title, string text, string noteId, string url)
+		public RTMNoteItem (string title, string text, string noteId, string url, string task_id)
 			: base (title, text, url, "gnome-sticky-notes-applet", null)
 		{
 			this.note_id = noteId;
+			this.task_id = task_id;
 		}
 		
 		public string Id {
 			get { return note_id; }
+		}
+
+		public string TaskId {
+			get { return task_id; }
 		}
 	}
 }

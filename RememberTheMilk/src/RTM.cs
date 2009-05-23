@@ -29,12 +29,15 @@ namespace RememberTheMilk
 {
 	public static class RTM
 	{
+		#region [ Private Variable, Constant ]
+		
 		static Rtm rtm;
 		static List<Item> tasks;
 		static List<Item> lists;
 		static List<Item> tags;
 		static List<Item> locations;
 		static List<Item> priorities;
+		static List<Item> notes;
 		static object list_lock;
 		static object task_lock;
 		static object location_lock;
@@ -47,6 +50,8 @@ namespace RememberTheMilk
 		
 		const string ApiKey = "ee32c06f2d45baf935a2c046323457d8";
 		const string SharedSecret = "1b835b123a903938";
+
+		#endregion [ Private Properties, Constant ]
 		
 		static RTM ()
 		{
@@ -56,6 +61,7 @@ namespace RememberTheMilk
 			tags = new List<Item> ();
 			locations = new List<Item> ();
 			priorities = new List<Item> ();
+			notes = new List<Item> ();
 			list_lock = new object ();
 			task_lock = new object ();
 			location_lock = new object ();
@@ -63,40 +69,10 @@ namespace RememberTheMilk
 			last_sync = DateTime.MinValue;
 			Preferences = new RTMPreferences ();
 			filter = Preferences.Filter;
-
+			
 			UpdatePriorities ();
 			TryConnect ();
 		}
-		
-		static bool TryConnect ()
-		{
-			if (!String.IsNullOrEmpty (Preferences.Token)) {
-				Auth auth;
-				try {
-					auth = rtm.AuthCheckToken (Preferences.Token);
-				} catch (RtmException e) {
-					Log.Error (Catalog.GetString ("Token verification failed."), e.Message);
-					return false;
-				}
-				
-				rtm.AuthToken = auth.Token;
-				username = auth.User.Username;
-				
-				try {
-					timeline = rtm.TimelineCreate ();
-				} catch (RtmException e) {
-					Log.Error (Catalog.GetString ("Remember The Milk timeline creation failed."), e.Message);
-					return false;
-				}
-				
-				return true;
-			} else {
-				Log.Error (Catalog.GetString ("Not authorized to use an Remember The Milk account."));
-				return false;
-			}
-		}
-		
-		public static RTMPreferences Preferences { get; set; }
 		
 		#region [ Authentication ]
 		
@@ -133,6 +109,10 @@ namespace RememberTheMilk
 		
 		#endregion [ Authentication ]
 		
+		#region [ Public Properties ]
+		
+		public static RTMPreferences Preferences { get; set; }
+		
 		public static List<Item> Lists {
 			get {
 				if (lists.FindIndex (i => (i as RTMListItem).Id == "All Tasks") == -1)
@@ -152,17 +132,21 @@ namespace RememberTheMilk
 				return locations;
 			}
 		}
-
+		
 		public static List<Item> Tags {
 			get { return tags; }
 		}
-
+		
 		public static List<Item> Priorities
 		{
 			get {
 				return priorities;
 			}
 		}
+		
+		#endregion [ Public Properties ]
+		
+		#region [ Relational Search ]
 		
 		public static List<Item> TasksForList (string listId)
 		{
@@ -176,7 +160,7 @@ namespace RememberTheMilk
 		{
 			return tasks.FindAll (i => (i as RTMTaskItem).Tags.Contains (tag));
 		}
-
+		
 		public static List<Item> TasksForLocation (string locationId)
 		{
 			return tasks.FindAll (i => (i as RTMTaskItem).LocationId == locationId);
@@ -206,13 +190,18 @@ namespace RememberTheMilk
 				                                              task));
 			}
 			
-			if (task.Notes != null)
-				lock (note_lock) 
-					foreach (RTMNoteItem note in task.Notes)
-						attribute_list.Add (note);
-					
+			List<Item> note_list = notes.FindAll (i => (i as RTMNoteItem).TaskId == task.Id);
+			if (note_list.Any ())
+				lock (note_lock)
+					foreach (Item item in note_list)
+						attribute_list.Add (item);
+			
 			return attribute_list;
 		}
+		
+		#endregion [ Relational Search ]
+		
+		#region [ Methods for Data Update ]
 		
 		public static void UpdateLists ()
 		{
@@ -316,19 +305,6 @@ namespace RememberTheMilk
 								// delete one recurrent task will cause other deleted instances
 								// appear in the taskseries tag, so here we need to check again.
 								if (rtmTask.Deleted == DateTime.MinValue) {
-									// handle notes
-									List<RTMNoteItem> note_list = null;
-									if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
-										note_list = new List<RTMNoteItem> ();
-										foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection)
-											note_list.Add (new RTMNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID, 
-											                                    "http://www.rememberthemil.com/print/"
-											                                    + username + "/" 
-											                                    + rtmList.ID + "/" 
-											                                    + rtmTask.TaskID 
-											                                    + "/notes/"));                        
-									}
-	
 									// handle tags
 									string temp_tags = "";
 									if (rtmTaskSeries.Tags.TagCollection.Length > 0) {
@@ -340,6 +316,19 @@ namespace RememberTheMilk
 										temp_tags = temp_tags.Remove (temp_tags.Length-2);
 									}
 									
+									// handle notes
+									if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
+										foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection)
+											notes.Add (new RTMNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID, 
+											                            "http://www.rememberthemil.com/print/"
+											                            + username + "/" 
+											                            + rtmList.ID + "/" 
+											                            + rtmTask.TaskID 
+											                            + "/notes/",
+											                            rtmTask.TaskID));
+									}
+									
+									// add new task
 									RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
 									                                        rtmTaskSeries.TaskSeriesID,
 									                                        rtmTask.TaskID,
@@ -351,9 +340,7 @@ namespace RememberTheMilk
 									                                        rtmTask.HasDueTime,
 									                                        rtmTask.Estimate,
 									                                        rtmTaskSeries.LocationID,
-									                                        temp_tags,
-									                                        note_list);
-	
+									                                        temp_tags);
 									tasks.Add (new_task);
 								}
 							}
@@ -367,7 +354,7 @@ namespace RememberTheMilk
 			if (Preferences.OverdueNotification)
 				NotifyOverDueItems ();
         }
-
+		
 		static void UpdatePriorities ()
 		{
 			priorities.Add (new RTMPriorityItem (Catalog.GetString ("High"),
@@ -383,6 +370,8 @@ namespace RememberTheMilk
 			priorities.Add (new RTMPriorityItem (Catalog.GetString ("Down"),
 			                                     Catalog.GetString ("Decrease the priority")));
 		}
+		
+		#endregion [ Methods for Data Update ]
 		
 		#region [ Task Actions ]
 		
@@ -436,7 +425,7 @@ namespace RememberTheMilk
 			                        priority,
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime,
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].Estimate,
-			                        rtmList.TaskSeriesCollection[0].LocationID, "", null);
+			                        rtmList.TaskSeriesCollection[0].LocationID, "");
 		}
 		
 		public static void DeleteTask (string listId, string taskSeriesId, string taskId)
@@ -634,7 +623,7 @@ namespace RememberTheMilk
 		}
 		
 		#endregion [ Task Actions ]
-
+		
 		#region [ List Actions ]
 		
 		public static void NewList(string newListName)
@@ -692,6 +681,7 @@ namespace RememberTheMilk
 		
 		#endregion [ List Actions ]
 		
+		#region [ Note Actions ]
 		
 		public static void NewNote (string listId, string taskSeriesId, string taskId, string note)
 		{
@@ -725,9 +715,27 @@ namespace RememberTheMilk
 			}
 			
 			ActionRoutine (Catalog.GetString ("Note Added"),
-			               Catalog.GetString ("A note has been added to the selected Remember The Milk task"), taskId);
+			               Catalog.GetString ("A note has been added to the selected task"), taskId);
 		}
+		
+		public static void DeleteNote (string noteId)
+		{
+			try {
+				rtm.NotesDelete (timeline, noteId);
+			} catch (RtmException e) {
+				Log.Debug (e.Message);
+				return;
+			}
 
+			lock (note_lock)
+				notes.Remove (notes.Find (i => (i as RTMNoteItem).Id == noteId));
+			
+			ActionRoutine (Catalog.GetString ("Note Deleted"),
+			               Catalog.GetString ("The selected note has been deleted from the selected task"), 
+			               null);
+		}
+		
+		#endregion [ Note Actions ]
 		
 		#region [ Tag Actions ]
 		
@@ -768,6 +776,34 @@ namespace RememberTheMilk
 		#endregion [ Tag Actions ]
 		
 		#region [ Utilities ]
+
+		static bool TryConnect ()
+		{
+			if (!String.IsNullOrEmpty (Preferences.Token)) {
+				Auth auth;
+				try {
+					auth = rtm.AuthCheckToken (Preferences.Token);
+				} catch (RtmException e) {
+					Log.Error (Catalog.GetString ("Token verification failed."), e.Message);
+					return false;
+				}
+				
+				rtm.AuthToken = auth.Token;
+				username = auth.User.Username;
+				
+				try {
+					timeline = rtm.TimelineCreate ();
+				} catch (RtmException e) {
+					Log.Error (Catalog.GetString ("Remember The Milk timeline creation failed."), e.Message);
+					return false;
+				}
+				
+				return true;
+			} else {
+				Log.Error (Catalog.GetString ("Not authorized to use an Remember The Milk account."));
+				return false;
+			}
+		}
 		
 		static void UniverseRemoveTask (string taskId)
 		{

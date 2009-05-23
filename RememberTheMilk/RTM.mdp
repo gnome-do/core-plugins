@@ -108,6 +108,7 @@
     <File name="Resources/icons/tag-add.png" subtype="Code" buildaction="Nothing" />
     <File name="Resources/icons/tag-delete.png" subtype="Code" buildaction="Nothing" />
     <File name="src/RTMDeleteTags.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/RTMDeleteNote.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

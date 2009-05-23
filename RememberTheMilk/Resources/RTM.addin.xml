@@ -31,8 +31,9 @@
 		<Action type="RememberTheMilk.RTMNewNote" />
 		<Action type="RememberTheMilk.RTMNewTask" />
 		<Action type="RememberTheMilk.RTMDeleteList" />
-		<Action type="RememberTheMilk.RTMDeleteTask" />
+		<Action type="RememberTheMilk.RTMDeleteNote" />
 		<Action type="RememberTheMilk.RTMDeleteTags" />
+		<Action type="RememberTheMilk.RTMDeleteTask" />	
 		<Action type="RememberTheMilk.RTMCompleteTask" />
 		<Action type="RememberTheMilk.RTMSetPriority" />
 		<Action type="RememberTheMilk.RTMSetDue" />
