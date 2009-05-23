@@ -64,12 +64,16 @@ namespace RememberTheMilk
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
 		{
+			string tagline = String.Empty;
+			
 			if (item.First () is RTMTaskItem)
-				return (item.First () as RTMTaskItem).Tags.Contains ((modItem as RTMTagItem).Name);
+				tagline = (item.First () as RTMTaskItem).Tags;
 			else if (item.First () is RTMTaskAttributeItem)
-				return (item.First () as RTMTaskAttributeItem).Name.Contains ((modItem as RTMTagItem).Name);
-			else
-				return false;
+				tagline = (item.First () as RTMTaskAttributeItem).Name;
+			
+			List<string> tags = new List<string> (tagline.Split (new string[] {", "}, StringSplitOptions.None));
+			
+			return tags.FindIndex (i => i == (modItem as RTMTagItem).Name) != -1;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
