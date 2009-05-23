@@ -1245,13 +1245,12 @@ namespace RtmNet
 		public List TasksSetLocation(string timeline, string listID, string taskSeriesID, string taskID, string locationID)
 		{
 			Hashtable parameters = new Hashtable();
-			parameters.Add("method", "rtm.tasks.setEstimate");
+			parameters.Add("method", "rtm.tasks.setLocation");
 			parameters.Add("timeline", timeline);
 			parameters.Add("list_id", listID);	
 			parameters.Add("taskseries_id", taskSeriesID);
 			parameters.Add("task_id", taskID);
-			if (!String.IsNullOrEmpty (locationID))
-				parameters.Add("location_id", locationID);
+			parameters.Add("location_id", locationID);
 
 			RtmNet.Response response = GetResponse(parameters);
 

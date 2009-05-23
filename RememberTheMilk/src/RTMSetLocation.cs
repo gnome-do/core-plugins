@@ -49,15 +49,9 @@ namespace RememberTheMilk
 		    get { yield return typeof (RTMLocationItem); }
 		}
 		
-		// The API from RTM doesn't take no locationId as a reset operation currently, so we force to choose a location
-		public override bool ModifierItemsOptional {
-			get { return false; } 
-		}
-		
-		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
-			string locationId = null;
+			string locationId = String.Empty;
 			
 			if (modifierItems.Any ())
 				locationId = (modifierItems.First () as RTMLocationItem).Id;
