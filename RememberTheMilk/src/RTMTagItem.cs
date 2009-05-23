@@ -25,7 +25,7 @@ namespace RememberTheMilk
 	public class RTMTagItem : RTMTaskAttributeItem
 	{
 		public RTMTagItem (string text)
-			: base (text, "Remember The Milk Tag", "", "task-tag.png@")
+			: base (text, "Remember The Milk Tag", "", "task-tag.png@", null)
 		{
 		}
 	}

@@ -32,18 +32,20 @@ namespace RememberTheMilk
 		string description;
 		string icon;
 		string url;
+		RTMTaskItem parent;
 		
-		public RTMTaskAttributeItem (string name, string description, string url) :
-			this (name, description, url, "rtm.png@")
-		{			
+		public RTMTaskAttributeItem (string name, string description, string url, RTMTaskItem parent) :
+			this (name, description, url, "rtm.png@", parent)
+		{
 		}
 		
-		public RTMTaskAttributeItem (string name, string description, string url, string icon)
+		public RTMTaskAttributeItem (string name, string description, string url, string icon, RTMTaskItem parent)
 		{
 			this.name = name;
 			this.description = description;
 			this.url = url;
 			this.icon = icon;
+			this.parent = parent;
 		}
 		
 		public override string Name {
@@ -65,6 +67,10 @@ namespace RememberTheMilk
 		
 		public string Url {
 			get { return url; }
+		}
+
+		public RTMTaskItem Parent {
+			get { return parent; }
 		}
 	}
 }

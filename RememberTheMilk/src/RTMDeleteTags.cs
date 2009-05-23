@@ -42,7 +42,10 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (RTMTaskItem); }
+			get { 
+				yield return typeof (RTMTaskItem);
+				yield return typeof (RTMTaskAttributeItem);
+			}
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
@@ -50,24 +53,43 @@ namespace RememberTheMilk
 		}
 		
 		public override bool SupportsItem (Item item) {
-			return !String.IsNullOrEmpty ((item as RTMTaskItem).Tags);
+			if (item is RTMTaskItem)
+				return !String.IsNullOrEmpty ((item as RTMTaskItem).Tags);
+			else if (item is RTMTaskAttributeItem)
+				return (item as RTMTaskAttributeItem).Description == "Tags";
+			else
+				return false;
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
 		{
-			return  (item.First () as RTMTaskItem).Tags.Contains ((modItem as RTMTagItem).Name);
+			if (item.First () is RTMTaskItem)
+				return (item.First () as RTMTaskItem).Tags.Contains ((modItem as RTMTagItem).Name);
+			else if (item.First () is RTMTaskAttributeItem)
+				return (item.First () as RTMTaskAttributeItem).Name.Contains ((modItem as RTMTagItem).Name);
+			else
+				return false;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
+			RTMTaskItem task = null;
 			List<string> temp_tags = new List<string> ();
-			if (modifierItems.Any ()) {
+
+			if (items.Any()) {
+				if (items.First () is RTMTaskItem)
+					task = (items.First () as RTMTaskItem);
+				else if (items.First () is RTMTaskAttributeItem)
+					task = (items.First () as RTMTaskAttributeItem).Parent;
+			}
+			
+			if (modifierItems.Any () && task != null) {
 				foreach (Item item in modifierItems)
 					temp_tags.Add ((item as RTMTagItem).Name);
-
+				
 				Services.Application.RunOnThread (() => {
-					RTM.DeleteTags ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-					                (items.First () as RTMTaskItem).Id, String.Join (",", temp_tags.ToArray ()));
+					RTM.DeleteTags (task.ListId, task.TaskSeriesId,
+					                task.Id, String.Join (",", temp_tags.ToArray ()));
 				});
 			}
 			yield break;

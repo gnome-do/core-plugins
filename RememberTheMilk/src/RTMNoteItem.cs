@@ -27,7 +27,7 @@ namespace RememberTheMilk
 		string note_id;
 		
 		public RTMNoteItem (string title, string text, string noteId, string url)
-			: base (title, text, url, "gnome-sticky-notes-applet")
+			: base (title, text, url, "gnome-sticky-notes-applet", null)
 		{
 			this.note_id = noteId;
 		}

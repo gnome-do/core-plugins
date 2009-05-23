@@ -31,7 +31,7 @@ namespace RememberTheMilk
 		string latitude;
 		
 		public RTMLocationItem (string id, string name, string address, string longitude, string latitude)
-			: base (name, address, "http://maps.google.com/maps?q="+latitude+","+longitude, "stock_internet")
+			: base (name, address, "http://maps.google.com/maps?q="+latitude+","+longitude, "stock_internet", null)
 		{
 			this.id = id;
 			this.latitude = latitude;

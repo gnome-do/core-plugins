@@ -35,6 +35,9 @@ namespace RememberTheMilk
 		static List<Item> tags;
 		static List<Item> locations;
 		static List<Item> priorities;
+		static object list_lock;
+		static object task_lock;
+		static object location_lock;
 		static object note_lock;
 		static string timeline;
 		static DateTime last_sync;
@@ -53,6 +56,9 @@ namespace RememberTheMilk
 			tags = new List<Item> ();
 			locations = new List<Item> ();
 			priorities = new List<Item> ();
+			list_lock = new object ();
+			task_lock = new object ();
+			location_lock = new object ();
 			note_lock = new object ();
 			last_sync = DateTime.MinValue;
 			Preferences = new RTMPreferences ();
@@ -183,20 +189,21 @@ namespace RememberTheMilk
 			if (task.Due != DateTime.MinValue)
 				attribute_list.Add (new RTMTaskAttributeItem (task.Due.ToString ((task.HasDueTime != 0) ? "g" : "d"),
 				                                              "Due Date/Time",
-				                                              task.Url, "stock_calendar"));
+				                                              task.Url, "stock_calendar", task));
 			if (!String.IsNullOrEmpty (task.TaskUrl))
 				attribute_list.Add (new RTMTaskAttributeItem (task.TaskUrl, "URL",
-				                                              task.TaskUrl, "text-html"));
+				                                              task.TaskUrl, "text-html", task));
 			if (!String.IsNullOrEmpty (task.Estimate))
 				attribute_list.Add (new RTMTaskAttributeItem (task.Estimate, "Time Estimate",
-				                                              task.Url, "stock_appointment-reminder"));
+				                                              task.Url, "stock_appointment-reminder", task));
 			if (!String.IsNullOrEmpty (task.LocationId)) {
 				attribute_list.Add (locations.Find (i => (i as RTMLocationItem).Id == task.LocationId));
 			}
 			
 			if (!String.IsNullOrEmpty (task.Tags)) {
 				attribute_list.Add (new RTMTaskAttributeItem (task.Tags, "Tags", task.Url,
-				                                              "task-tag.png@" + typeof (RTMListItemSource).Assembly.FullName));
+				                                              "task-tag.png@" + typeof (RTMListItemSource).Assembly.FullName,
+				                                              task));
 			}
 			
 			if (task.Notes != null)
@@ -221,11 +228,13 @@ namespace RememberTheMilk
 				rtmLists = null;
 				return;
 			}
-			
-			lists.Clear ();
-			foreach (List rtmList in rtmLists.listCollection)
-				if (rtmList.Deleted == 0 && rtmList.Smart == 0)
-					lists.Add (new RTMListItem (rtmList.ID, rtmList.Name, rtmList.Locked, rtmList.Smart));
+
+			lock (list_lock) {
+				lists.Clear ();
+				foreach (List rtmList in rtmLists.listCollection)
+					if (rtmList.Deleted == 0 && rtmList.Smart == 0)
+						lists.Add (new RTMListItem (rtmList.ID, rtmList.Name, rtmList.Locked, rtmList.Smart));
+			}
 		}
 		
 		public static void UpdateLocations ()
@@ -242,15 +251,17 @@ namespace RememberTheMilk
 				rtmLocations = null;
 				return;
 			}
-			
-			locations.Clear ();
-			if (rtmLocations.locationCollection.Length > 0) {
-				foreach (Location rtmLocation in rtmLocations.locationCollection) {
-					locations.Add (new RTMLocationItem (rtmLocation.ID, 
-					                                    rtmLocation.Name, 
-					                                    rtmLocation.Address,
-					                                    rtmLocation.Longitude, 
-					                                    rtmLocation.Latitude));
+
+			lock (location_lock) {
+				locations.Clear ();
+				if (rtmLocations.locationCollection.Length > 0) {
+					foreach (Location rtmLocation in rtmLocations.locationCollection) {
+						locations.Add (new RTMLocationItem (rtmLocation.ID, 
+						                                    rtmLocation.Name, 
+						                                    rtmLocation.Address,
+						                                    rtmLocation.Longitude, 
+						                                    rtmLocation.Latitude));
+					}
 				}
 			}
 		}
@@ -299,50 +310,52 @@ namespace RememberTheMilk
 							UniverseRemoveTask (rtmTask.TaskID);
 				
 				if (rtmList.TaskSeriesCollection != null) {
-					foreach (TaskSeries rtmTaskSeries in rtmList.TaskSeriesCollection) {
-						foreach (Task rtmTask in rtmTaskSeries.TaskCollection) {
-							// delete one recurrent task will cause other deleted instances
-							// appear in the taskseries tag, so here we need to check again.
-							if (rtmTask.Deleted == DateTime.MinValue) {
-								// handle notes
-								List<RTMNoteItem> note_list = null;
-								if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
-									note_list = new List<RTMNoteItem> ();
-									foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection)
-										note_list.Add (new RTMNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID, 
-										                                    "http://www.rememberthemil.com/print/"
-										                                    + username + "/" 
-										                                    + rtmList.ID + "/" 
-										                                    + rtmTask.TaskID 
-										                                    + "/notes/"));                        
-								}
-
-								// handle tags
-								string temp_tags = "";
-								if (rtmTaskSeries.Tags.TagCollection.Length > 0) {
-									foreach (Tag rtmTag in rtmTaskSeries.Tags.TagCollection) {
-										if (tags.FindIndex (i => (i as RTMTagItem).Name == rtmTag.Text) == -1)
-											tags.Add (new RTMTagItem (rtmTag.Text));
-										temp_tags += rtmTag.Text + ", ";
+					lock (task_lock) {
+						foreach (TaskSeries rtmTaskSeries in rtmList.TaskSeriesCollection) {
+							foreach (Task rtmTask in rtmTaskSeries.TaskCollection) {
+								// delete one recurrent task will cause other deleted instances
+								// appear in the taskseries tag, so here we need to check again.
+								if (rtmTask.Deleted == DateTime.MinValue) {
+									// handle notes
+									List<RTMNoteItem> note_list = null;
+									if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
+										note_list = new List<RTMNoteItem> ();
+										foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection)
+											note_list.Add (new RTMNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID, 
+											                                    "http://www.rememberthemil.com/print/"
+											                                    + username + "/" 
+											                                    + rtmList.ID + "/" 
+											                                    + rtmTask.TaskID 
+											                                    + "/notes/"));                        
 									}
-									temp_tags = temp_tags.Remove (temp_tags.Length-2);
+	
+									// handle tags
+									string temp_tags = "";
+									if (rtmTaskSeries.Tags.TagCollection.Length > 0) {
+										foreach (Tag rtmTag in rtmTaskSeries.Tags.TagCollection) {
+											if (tags.FindIndex (i => (i as RTMTagItem).Name == rtmTag.Text) == -1)
+												tags.Add (new RTMTagItem (rtmTag.Text));
+											temp_tags += rtmTag.Text + ", ";
+										}
+										temp_tags = temp_tags.Remove (temp_tags.Length-2);
+									}
+									
+									RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
+									                                        rtmTaskSeries.TaskSeriesID,
+									                                        rtmTask.TaskID,
+									                                        rtmTaskSeries.Name,
+									                                        rtmTask.Due,
+									                                        rtmTask.Completed,
+									                                        rtmTaskSeries.TaskURL,
+									                                        rtmTask.Priority,
+									                                        rtmTask.HasDueTime,
+									                                        rtmTask.Estimate,
+									                                        rtmTaskSeries.LocationID,
+									                                        temp_tags,
+									                                        note_list);
+	
+									tasks.Add (new_task);
 								}
-								
-								RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
-								                                        rtmTaskSeries.TaskSeriesID,
-								                                        rtmTask.TaskID,
-								                                        rtmTaskSeries.Name,
-								                                        rtmTask.Due,
-								                                        rtmTask.Completed,
-								                                        rtmTaskSeries.TaskURL,
-								                                        rtmTask.Priority,
-								                                        rtmTask.HasDueTime,
-								                                        rtmTask.Estimate,
-								                                        rtmTaskSeries.LocationID,
-								                                        temp_tags,
-								                                        note_list);
-
-								tasks.Add (new_task);
 							}
 						}
 					}
@@ -483,9 +496,14 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Due Date/Time Changed"),
-			               Catalog.GetString ("The due date/time of the selected task in your "
-			                                  +"Remember The Milk task list has been changed."), taskId);
+			if (String.IsNullOrEmpty (due)) 
+				ActionRoutine (Catalog.GetString ("Due Date/Time Unset"),
+				               Catalog.GetString ("The due date/time of the selected task in your "
+				                                  +"Remember The Milk task list has been unset."), taskId);
+			else 
+				ActionRoutine (Catalog.GetString ("Due Date/Time Changed"),
+				               Catalog.GetString ("The due date/time of the selected task in your "
+				                                  +"Remember The Milk task list has been changed."), taskId);
 		}
 		
 		public static void MoveTask (string fromListId, string toListId, string taskSeriesId, string taskId)
@@ -575,13 +593,12 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			if (!string.IsNullOrEmpty(estimateTime)) {
+			if (String.IsNullOrEmpty(estimateTime))
+				ActionRoutine (Catalog.GetString ("Task Estimated Time Unset"),
+				               Catalog.GetString ("The estimated time for the selected task has been unset."), taskId);
+			else
 				ActionRoutine (Catalog.GetString ("Task Estimated Time Set"),
 				               Catalog.GetString ("The selected task has been assigned an estimated time."), taskId);
-			} else {
-				ActionRoutine (Catalog.GetString ("Task Estimated Time Reset"),
-				               Catalog.GetString ("The estimated time for the selected task has been reset."), taskId);
-			}
 		}
 		
 		public static void SetLocation (string listId, string taskSeriesId, string taskId, string locationId)
@@ -754,7 +771,9 @@ namespace RememberTheMilk
 		
 		static void UniverseRemoveTask (string taskId)
 		{
-			tasks.Remove (tasks.Find (i => (i as RTMTaskItem).Id == taskId));
+			lock (task_lock) {
+				tasks.Remove (tasks.Find (i => (i as RTMTaskItem).Id == taskId));
+			}
 		}
 		
 		/// <summary>

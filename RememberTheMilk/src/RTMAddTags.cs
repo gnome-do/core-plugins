@@ -43,7 +43,8 @@ namespace RememberTheMilk
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				yield return typeof (RTMTaskItem);	
+				yield return typeof (RTMTaskItem);
+				yield return typeof (RTMTaskAttributeItem);
 			}
 		}
 		
@@ -54,12 +55,29 @@ namespace RememberTheMilk
 			}
 		}
 		
+		public override bool SupportsItem (Item item) {
+			if (item is RTMTaskItem)
+				return true;
+			else if (item is RTMTaskAttributeItem)
+				return (item as RTMTaskAttributeItem).Description == "Tags";
+			else
+				return false;
+		}
+		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
+			RTMTaskItem task = null;
 			List<string> temp_tags = new List<string> ();
 			string s = null;
-
-			if (modifierItems.Any ()) {
+			
+			if (items.Any()) {
+				if (items.First () is RTMTaskItem)
+					task = (items.First () as RTMTaskItem);
+				else if (items.First () is RTMTaskAttributeItem)
+					task = (items.First () as RTMTaskAttributeItem).Parent;
+			}
+			
+			if (modifierItems.Any () && task != null) {
 				foreach (Item item in modifierItems) {
 					s = GetText (item);
 					if (!String.IsNullOrEmpty(s))
