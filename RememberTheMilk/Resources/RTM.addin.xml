@@ -21,10 +21,12 @@
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="RememberTheMilk.RTMListItemSource" />
 		<ItemSource type="RememberTheMilk.RTMTaskItemSource" />
+		<ItemSource type="RememberTheMilk.RTMTagItemSource" />
 		<ItemSource type="RememberTheMilk.RTMTaskAttributeNotesSource" />
 	</Extension>
 
 	<Extension path="/Do/Action">
+		<Action type="RememberTheMilk.RTMAddTags" />
 		<Action type="RememberTheMilk.RTMNewList" />
 		<Action type="RememberTheMilk.RTMNewNote" />
 		<Action type="RememberTheMilk.RTMNewTask" />

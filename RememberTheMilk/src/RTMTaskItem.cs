@@ -38,15 +38,16 @@ namespace RememberTheMilk
 		private int has_due_time;
 		private string estimate;
 		private string location_id;
+		private string tags;
 		
 		public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name) :
-			this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "", "")
+			this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "", "", "")
 		{
 		}
 		
 		public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name, 
 		                    DateTime due, DateTime completed, string taskUrl, 
-		                    string priority, int hasDueTime, string estimate, string locationId)
+		                    string priority, int hasDueTime, string estimate, string locationId, string tags)
 		{
 			this.list_id = listId;
 			this.taskseries_id = taskSeriesId;
@@ -59,14 +60,19 @@ namespace RememberTheMilk
 			this.has_due_time = hasDueTime;
 			this.estimate = estimate;
 			this.location_id = locationId;
+			this.tags = tags;
 		}
 
 		public override string Name { get { return name; } }
 		
 		public override string Description {
 			get {
+				string desc = "";
+				
+				if (!String.IsNullOrEmpty (tags))
+					desc += "[" + tags + "]  ";
+				
 				if (due != DateTime.MinValue) {
-					string desc = "";
 					//if (in_all_tasks)
 					//	desc += "[" + RTM.ListNameForList (list_id) + "] ";
 					
@@ -80,11 +86,10 @@ namespace RememberTheMilk
 					else if ((due > DateTime.MinValue) &&
 					         ((due < DateTime.Now && has_due_time == 1) || due.Date < DateTime.Today))
 						desc += " (overdue)";
-					return desc;
 				} else if (completed != DateTime.MinValue)
-					return "This task has been completed at " + completed.ToString ("g");
-				else
-					return ""; //"This task has no due date/time.";
+					desc += "Completed at " + completed.ToString ("g");
+				
+				return desc;
 			}
 		}
 		
@@ -155,6 +160,10 @@ namespace RememberTheMilk
 		
 		public string LocationId {
 			get { return location_id; }
+		}
+
+		public string Tags {
+			get { return tags; }
 		}
 	}
 }

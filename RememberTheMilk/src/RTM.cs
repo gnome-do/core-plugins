@@ -37,6 +37,7 @@ namespace RememberTheMilk
 		private static Dictionary<string,Item> lists;
 		private static Dictionary<string,Item> notes;
 		private static Dictionary<string,Item> locations;
+		private static List<Item> tags;
 		private static object lists_lock;
 		private static object lists_lock_at;
 		private static object dict_lock;
@@ -57,6 +58,7 @@ namespace RememberTheMilk
 			lists = new Dictionary<string,Item> ();
 			notes = new Dictionary<string,Item> ();
 			locations = new Dictionary<string,Item> ();
+			tags = new List<Item> ();
 			lists_lock = new object ();
 			lists_lock_at = new object ();
 			dict_lock = new object ();
@@ -174,6 +176,10 @@ namespace RememberTheMilk
 				return locations2;
 			}
 		}
+
+		public static List<Item> Tags {
+			get { return tags; }
+		}
 		
 		public static List<Item> TasksForList (string listId)
 		{
@@ -204,11 +210,21 @@ namespace RememberTheMilk
 //				                                              "http://maps.google.com/maps?q=" + loc.Latitude + "," + loc.Longitude,
 //				                                              loc.Icon));
 			}
+
+			if (!String.IsNullOrEmpty (task.Tags)) {
+				attribute_list.Add (new RTMTaskAttributeItem (task.Tags, "Tags", task.Url,
+				                                              "task-tag.png@" + typeof (RTMListItemSource).Assembly.FullName));
+			}
 			
 			if (notes.ContainsKey (task.Id))
 				attribute_list.Add (notes [task.Id] as RTMTaskAttributeItem);
 			
 			return attribute_list;
+		}
+
+		public static List<Item> TasksForTag (string tag)
+		{
+			return Tasks.FindAll (i => (i as RTMTaskItem).Tags.Contains (tag));
 		}
 		
 		public static string ListNameForList (string listId)
@@ -337,6 +353,16 @@ namespace RememberTheMilk
 										                           url,
 										                           note_list);
 								}
+
+								string temp_tags = "";
+								if (rtmTaskSeries.Tags.TagCollection.Length > 0) {
+									foreach (Tag rtmTag in rtmTaskSeries.Tags.TagCollection) {
+										if (tags.FindIndex (i => (i as RTMTagItem).Name == rtmTag.Text) == -1)
+											tags.Add (new RTMTagItem (rtmTag.Text));
+										temp_tags += rtmTag.Text + ", ";
+									}
+									temp_tags = temp_tags.Remove (temp_tags.Length-2);
+								}
 								
 								RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
 								                                        rtmTaskSeries.TaskSeriesID,
@@ -348,7 +374,8 @@ namespace RememberTheMilk
 								                                        rtmTask.Priority,
 								                                        rtmTask.HasDueTime,
 								                                        rtmTask.Estimate,
-								                                        rtmTaskSeries.LocationID);
+								                                        rtmTaskSeries.LocationID,
+								                                        temp_tags);
 								tasks [rtmList.ID].Add (new_task);
 								tasks ["All Tasks"].Add (new_task);
 							}
@@ -523,7 +550,7 @@ namespace RememberTheMilk
 			                        priority,
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime,
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].Estimate,
-			                        rtmList.TaskSeriesCollection[0].LocationID);
+			                        rtmList.TaskSeriesCollection[0].LocationID, "");
 		}
 		
 		public static void DeleteTask (string listId, string taskSeriesId, string taskId)
@@ -822,5 +849,22 @@ namespace RememberTheMilk
 			               taskId, listId);
 		}
 
+		public static void AddTags (string listId, string taskSeriesId, string taskId, string tags)
+		{
+			if (String.IsNullOrEmpty(tags)) {
+				Log.Debug ("Need content for adding tags.");
+			} else {
+				try {
+					rtm.TasksAddTags (timeline, listId, taskSeriesId, taskId, tags);
+				} catch (RtmException e) {
+					Log.Debug (e.Message);
+					return;
+				}
+				
+				ActionRoutine (Catalog.GetString ("Tags added"),
+				               Catalog.GetString ("New tags have been successfully added to the selected task."),
+				               taskId, listId);
+			}
+		}
 	}
 }

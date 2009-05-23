@@ -7,6 +7,7 @@ FILES = \
 	gtk-gui/generated.cs \
 	src/Configuration.cs \
 	src/RTM.cs \
+	src/RTMAddTags.cs \
 	src/RTMCompleteTask.cs \
 	src/RTMDeleteList.cs \
 	src/RTMDeleteTask.cs \
@@ -28,6 +29,8 @@ FILES = \
 	src/RTMSetLocation.cs \
 	src/RTMSetPriority.cs \
 	src/RTMSetRecurrence.cs \
+	src/RTMTagItem.cs \
+	src/RTMTagItemSource.cs \
 	src/RTMTaskAttributeItem.cs \
 	src/RTMTaskAttributeNotes.cs \
 	src/RTMTaskAttributeNotesSource.cs \
@@ -87,7 +90,8 @@ RESOURCES = \
 	Resources/icons/task-rename.png \
 	Resources/icons/task-repeat.png \
 	Resources/icons/task-setdue.png \
-	Resources/icons/task-seturl.png
+	Resources/icons/task-seturl.png \
+	Resources/icons/task-tag.png
 
 REFERENCES = \
 	System \

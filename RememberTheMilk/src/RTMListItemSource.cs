@@ -29,7 +29,7 @@ namespace RememberTheMilk
 	public class RTMListItemSource : ItemSource, IConfigurable
 	{		
 		public override string Name {
-			get { return "Remember The Milk Task Lists"; }
+			get { return "Remember The Milk Lists"; }
 		}
 		
 		public override string Description {

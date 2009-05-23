@@ -34,7 +34,7 @@ namespace RememberTheMilk
 		string url;
 		
 		public RTMTaskAttributeItem (string name, string description, string url) :
-			this (name, description, url, "rtm.png@" + typeof(RTMTaskAttributeItem).Assembly.FullName)
+			this (name, description, url, "rtm.png@")
 		{			
 		}
 		
@@ -55,7 +55,12 @@ namespace RememberTheMilk
 		}
 		
 		public override string Icon {
-			get { return icon; }
+			get {
+				if (icon.EndsWith("@"))
+					return icon + GetType ().Assembly.FullName;
+				else
+					return icon;
+			}
 		}
 		
 		public string Url {
