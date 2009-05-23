@@ -41,18 +41,6 @@ namespace RememberTheMilk
 			get { return "task-rename.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public bool IsValidListName(string newName) {
-			string[] invalidNames = {"Inbox", "Sent", "All Tasks"};
-			bool isValid = true;
-			
-			foreach(string name in invalidNames) {
-				if (newName == name)
-					isValid = false;
-			}
-			
-			return isValid;
-		}
-		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
 				return new Type[] {
@@ -74,36 +62,23 @@ namespace RememberTheMilk
 		}
 		
 		public override bool SupportsItem (Item item) {
-			return !RTM.IsProtectedList ((item as RTMListItem).Name);
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-		{
-			return true;
+			return !(item as RTMListItem).Locked;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
-			string newListName = ((modifierItems.FirstOrDefault() as ITextItem).Text);
-			
-			// Check if user is empty.
-			if (string.IsNullOrEmpty(newListName)) {
-				// Need new name.
-				Services.Notifications.Notify("Remember The Milk",
-				                              "No new list name provided.");
-				yield break;
+			if (modifierItems.Any ()) {
+				string newListName = (modifierItems.First () as ITextItem).Text;
+				if (String.IsNullOrEmpty (newListName)) {
+					Log.Debug ("[RememberTheMilk] No list name provided for RTMRenameList action");
+					yield break;
+				}
+				
+				Services.Application.RunOnThread (() => {
+					RTM.RenameList ((items.First () as RTMListItem).Id, newListName);
+				});
 			}
 			
-			if(RTM.IsProtectedList (newListName)) {
-				Services.Notifications.Notify("Remember The Milk",
-				                              "Invalid list name provided.");
-				yield break;
-			}
-			
-			Services.Application.RunOnThread (() => {
-				RTM.RenameList ((items.First () as RTMListItem).Id,
-				                newListName);
-			});
 			yield break;
 		}
 	}

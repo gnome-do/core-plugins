@@ -54,26 +54,18 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
-		{
-			string newListName = (items.First () as ITextItem).Text;
-			
-			// Check if user is empty.
-			if (string.IsNullOrEmpty(newListName)) {
-				// Need new name.
-				Services.Notifications.Notify ("Remember The Milk",
-				                              "No new list name provided.");
-				yield break;
+		{			
+			if (items.Any ()) {
+				string newListName = (items.First () as ITextItem).Text;
+				if (String.IsNullOrEmpty (newListName)) {
+					Log.Debug ("[RememberTheMilk] No list name provided for RTMNewList action");
+					yield break;
+				} else {
+					Services.Application.RunOnThread (() => {
+						RTM.NewList (newListName);
+					});
+				}
 			}
-			
-			if (RTM.IsProtectedList (newListName)) {
-				Services.Notifications.Notify ("Remember The Milk",
-				                              "Invalid list name provided.");
-				yield break;
-			}
-			
-			Services.Application.RunOnThread (() => {
-				RTM.NewList (newListName);
-			});
 			yield break;
 		}
 	}

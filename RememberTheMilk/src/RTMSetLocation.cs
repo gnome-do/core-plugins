@@ -28,7 +28,6 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	
-	
 	public class RTMSetLocation : Act
 	{
 		public override string Name {
@@ -64,20 +63,6 @@ namespace RememberTheMilk
 			get { return false; } 
 		}
 		
-		public override bool SupportsItem (Item item) 
-		{
-			return true;
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-		{
-			return true;
-		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-		{
-			return RTM.Locations;
-		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{

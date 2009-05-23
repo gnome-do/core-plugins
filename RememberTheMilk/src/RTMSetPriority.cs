@@ -75,7 +75,7 @@ namespace RememberTheMilk
         
         public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
         {
-            return RTM.GeneratePriorities ().ToArray ();
+            return RTM.Priorities;
         }
         
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 

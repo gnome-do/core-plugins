@@ -51,7 +51,7 @@ namespace RememberTheMilk
 		
 		public override bool SupportsItem (Item item) 
 		{
-			return !RTM.IsProtectedList ((item as RTMListItem).Name);
+			return !(item as RTMListItem).Locked;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 

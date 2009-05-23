@@ -27,60 +27,50 @@ namespace RememberTheMilk
 {
 	
 	
-	public class RTMAddTags : Act
+	public class RTMDeleteTags : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Add Tag(s)"); }
+			get { return Catalog.GetString ("Delete Tag(s)"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Add one or more tags to the task."); }
+			get { return Catalog.GetString ("Detele one or more tags from the task."); }
         }
 			
 		public override string Icon {
-			get { return "tag-add.png@" + GetType ().Assembly.FullName; }
+			get { return "tag-delete.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				yield return typeof (RTMTaskItem);	
-			}
+			get { yield return typeof (RTMTaskItem); }
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { 
-				yield return typeof (ITextItem);
-				yield return typeof (RTMTagItem);
-			}
+		    get { yield return typeof (RTMTagItem); }
+		}
+		
+		public override bool SupportsItem (Item item) {
+			return !String.IsNullOrEmpty ((item as RTMTaskItem).Tags);
+		}
+		
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
+		{
+			return  (item.First () as RTMTaskItem).Tags.Contains ((modItem as RTMTagItem).Name);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			List<string> temp_tags = new List<string> ();
-			string s = null;
-
 			if (modifierItems.Any ()) {
-				foreach (Item item in modifierItems) {
-					s = GetText (item);
-					if (!String.IsNullOrEmpty(s))
-						temp_tags.Add (s);
-				}
-				
+				foreach (Item item in modifierItems)
+					temp_tags.Add ((item as RTMTagItem).Name);
+
 				Services.Application.RunOnThread (() => {
-					RTM.AddTags ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-					             (items.First () as RTMTaskItem).Id, String.Join (",", temp_tags.ToArray ()));
+					RTM.DeleteTags ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
+					                (items.First () as RTMTaskItem).Id, String.Join (",", temp_tags.ToArray ()));
 				});
 			}
 			yield break;
-		}
-
-		protected string GetText (Item item)
-		{
-			if (item is ITextItem)
-				return (item as ITextItem).Text;
-			if (item is RTMTagItem)
-				return (item as RTMTagItem).Name;
-			throw new Exception ("Inappropriate Item type.");
 		}
 	}
 }

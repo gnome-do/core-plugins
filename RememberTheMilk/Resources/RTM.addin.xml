@@ -20,9 +20,9 @@
 	<!-- Extensions included in this assembly -->
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="RememberTheMilk.RTMListItemSource" />
+		<ItemSource type="RememberTheMilk.RTMLocationItemSource" />	
 		<ItemSource type="RememberTheMilk.RTMTaskItemSource" />
 		<ItemSource type="RememberTheMilk.RTMTagItemSource" />
-		<ItemSource type="RememberTheMilk.RTMTaskAttributeNotesSource" />
 	</Extension>
 
 	<Extension path="/Do/Action">
@@ -32,6 +32,7 @@
 		<Action type="RememberTheMilk.RTMNewTask" />
 		<Action type="RememberTheMilk.RTMDeleteList" />
 		<Action type="RememberTheMilk.RTMDeleteTask" />
+		<Action type="RememberTheMilk.RTMDeleteTags" />
 		<Action type="RememberTheMilk.RTMCompleteTask" />
 		<Action type="RememberTheMilk.RTMSetPriority" />
 		<Action type="RememberTheMilk.RTMSetDue" />

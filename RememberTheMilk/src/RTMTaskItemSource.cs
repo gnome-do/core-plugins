@@ -61,7 +61,9 @@ namespace RememberTheMilk
 
 		public override void UpdateItems ()
 		{
-			;
+			Thread updateTasks = new Thread (new ThreadStart (RTM.UpdateTasks));
+			updateTasks.IsBackground = true;
+			updateTasks.Start ();
 		}
 	}
 }

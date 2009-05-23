@@ -26,13 +26,21 @@ namespace RememberTheMilk
 {	
 	public class RTMListItem : Item, IUrlItem
 	{
-		private string list_id;
-		private string name;
+		string list_id;
+		string name;
+		int locked;
+		int smart;
 				
-		public RTMListItem (string listId, string name)
+		public RTMListItem (string listId, string name) : this (listId, name, 0, 0)
+		{
+		}
+
+		public RTMListItem (string listId, string name, int locked, int smart)
 		{
 			this.list_id = listId;
 			this.name = name;
+			this.locked = locked;
+			this.smart = smart;
 		}
 		
 		public override string Name {
@@ -63,6 +71,14 @@ namespace RememberTheMilk
 				else 
 					return "http://www.rememberthemilk.com/home/" + RTM.Preferences.Username + "/" + list_id;
 			}
+		}
+
+		public bool Locked {
+			get { return (locked == 1) ? true : false; }
+		}
+
+		public bool Smart {
+			get { return (smart == 1) ? true : false; }
 		}
 	}
 }

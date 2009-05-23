@@ -11,9 +11,11 @@ FILES = \
 	src/RTMCompleteTask.cs \
 	src/RTMDeleteList.cs \
 	src/RTMDeleteTask.cs \
+	src/RTMDeleteTags.cs \
 	src/RTMListItem.cs \
 	src/RTMListItemSource.cs \
 	src/RTMLocationItem.cs \
+	src/RTMLocationItemSource.cs \
 	src/RTMMoveTask.cs \
 	src/RTMNewList.cs \
 	src/RTMNewNote.cs \
@@ -32,9 +34,7 @@ FILES = \
 	src/RTMTagItem.cs \
 	src/RTMTagItemSource.cs \
 	src/RTMTaskAttributeItem.cs \
-	src/RTMTaskAttributeNotes.cs \
-	src/RTMTaskAttributeNotesSource.cs \
-	src/RTMTaskNoteItem.cs \
+	src/RTMNoteItem.cs \
 	src/RTMTaskItem.cs \
 	src/RTMTaskItemSource.cs \
 	src/RTMUncompleteTask.cs \
@@ -68,6 +68,8 @@ RESOURCES = \
 	Resources/icons/note-add.png \
 	Resources/icons/note-delete.png \
 	Resources/icons/rtm.png \
+	Resources/icons/tag-add.png \
+	Resources/icons/tag-delete.png \
 	Resources/icons/task-add.png \
 	Resources/icons/task-complete.png \
 	Resources/icons/task-delete.png \

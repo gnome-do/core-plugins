@@ -64,14 +64,6 @@ namespace RememberTheMilk
 			Thread updateLists = new Thread (new ThreadStart (RTM.UpdateLists));
 			updateLists.IsBackground = true;
 			updateLists.Start ();
-			
-			Thread updateTasks = new Thread (new ThreadStart (RTM.UpdateTasks));
-			updateTasks.IsBackground = true;
-			updateTasks.Start ();
-			
-			Thread updateLocations = new Thread (new ThreadStart (RTM.UpdateLocations));
-			updateLocations.IsBackground = true;
-			updateLocations.Start ();
 		}
 		
 		public Gtk.Bin GetConfiguration ()

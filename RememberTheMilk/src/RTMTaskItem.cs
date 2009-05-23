@@ -27,27 +27,29 @@ namespace RememberTheMilk
 	
 	public class RTMTaskItem : Item, IUrlItem
 	{
-		private string list_id;
-		private string taskseries_id;
-		private string task_id;
-		private string name;
-		private DateTime due;
-		private DateTime completed;
-		private string task_url;
-		private string priority;
-		private int has_due_time;
-		private string estimate;
-		private string location_id;
-		private string tags;
+		string list_id;
+		string taskseries_id;
+		string task_id;
+		string name;
+		DateTime due;
+		DateTime completed;
+		string task_url;
+		string priority;
+		int has_due_time;
+		string estimate;
+		string location_id;
+		string tags;
+		List<RTMNoteItem> notes;
 		
 		public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name) :
-			this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "", "", "")
+			this (listId, taskSeriesId, taskId, name, DateTime.MinValue, DateTime.MinValue, "", "N", 0, "", "", "", null)
 		{
 		}
 		
 		public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name, 
 		                    DateTime due, DateTime completed, string taskUrl, 
-		                    string priority, int hasDueTime, string estimate, string locationId, string tags)
+		                    string priority, int hasDueTime, string estimate, string locationId, string tags,
+		                    List<RTMNoteItem> notes)
 		{
 			this.list_id = listId;
 			this.taskseries_id = taskSeriesId;
@@ -61,6 +63,7 @@ namespace RememberTheMilk
 			this.estimate = estimate;
 			this.location_id = locationId;
 			this.tags = tags;
+			this.notes = notes;
 		}
 
 		public override string Name { get { return name; } }
@@ -73,9 +76,6 @@ namespace RememberTheMilk
 					desc += "[" + tags + "]  ";
 				
 				if (due != DateTime.MinValue) {
-					//if (in_all_tasks)
-					//	desc += "[" + RTM.ListNameForList (list_id) + "] ";
-					
 					desc += "Due " + due.ToString ((has_due_time != 0) ? "g" : "d");
 					
 					if (completed != DateTime.MinValue)
@@ -164,6 +164,10 @@ namespace RememberTheMilk
 
 		public string Tags {
 			get { return tags; }
+		}
+
+		public List<RTMNoteItem> Notes {
+			get { return notes; }
 		}
 	}
 }

@@ -17,23 +17,24 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Threading;
 using Mono.Unix;
 
-using Do.Platform.Linux;
 using Do.Universe;
+using Do.Platform;
 
 namespace RememberTheMilk
 {
 	
-	public class RTMTagItemSource : ItemSource
+	
+	public class RTMLocationItemSource : ItemSource
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Remember The Milk Tags"); }
+			get { return Catalog.GetString ("Remember The Milk Locations"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Tags used by your Remember The Milk tasks."); }
+			get { return Catalog.GetString ("Locations associated with your Remember The Milk tasks."); }
 		}
 		
 		public override string Icon {
@@ -42,22 +43,24 @@ namespace RememberTheMilk
 		
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get { yield return typeof (RTMTagItem); }
+			get { yield return typeof (RTMLocationItem); }
 		}
 		
 		public override IEnumerable<Item> Items
 		{
-			get { return RTM.Tags; }
+			get { return RTM.Locations; }
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			return RTM.TasksForTag ((parent as RTMTagItem).Name);
+			return RTM.TasksForLocation ((parent as RTMLocationItem).Id);
 		}
 
 		public override void UpdateItems ()
 		{
-			;
+			Thread updateLocations = new Thread (new ThreadStart (RTM.UpdateLocations));
+			updateLocations.IsBackground = true;
+			updateLocations.Start ();
 		}
 	}
 }
