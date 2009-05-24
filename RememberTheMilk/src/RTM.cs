@@ -263,7 +263,7 @@ namespace RememberTheMilk
 					return;
 			
 			Tasks rtmTasks;
-
+			
 			// if settings have changed, reset the synchronization state;
 			if (filter != Preferences.Filter || username != Preferences.Username)
 				last_sync = DateTime.MinValue;
@@ -294,10 +294,10 @@ namespace RememberTheMilk
 			
 			foreach (List rtmList in rtmTasks.ListCollection) {
 				
-				 if (rtmList.DeletedTaskSeries != null)
+				if (rtmList.DeletedTaskSeries != null)
 					foreach (TaskSeries rtmTaskSeries in rtmList.DeletedTaskSeries.TaskSeriesCollection)
 						foreach (Task rtmTask in rtmTaskSeries.TaskCollection)
-							UniverseRemoveTask (rtmTask.TaskID);
+							TryRemoveTask (rtmTask.TaskID);
 				
 				if (rtmList.TaskSeriesCollection != null) {
 					lock (task_lock) {
@@ -342,6 +342,8 @@ namespace RememberTheMilk
 									                                        rtmTask.Estimate,
 									                                        rtmTaskSeries.LocationID,
 									                                        temp_tags);
+									if (last_sync != DateTime.MinValue)
+										TryRemoveTask (rtmTask.TaskID);
 									tasks.Add (new_task);
 								}
 							}
@@ -413,9 +415,9 @@ namespace RememberTheMilk
 				}
 			}
 			
-			ActionRoutine (Catalog.GetString ("New Task Created"),
-			               Catalog.GetString ("The task has been successully added to your"
-			                                  + "Remember The milk task list."), null);
+			TryNotify (Catalog.GetString ("New Task Created"),
+			           Catalog.GetString ("The task has been successully added to your"
+			                              + "Remember The milk task list."));
 			
 			return new RTMTaskItem (rtmList.ID, rtmList.TaskSeriesCollection[0].TaskSeriesID,
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
@@ -438,9 +440,9 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Task Deleted"),
-			               Catalog.GetString ("The selected task has been successfully deleted"
-			                                  +" from your Remember The Milk task list"), null);
+			TryNotify (Catalog.GetString ("Task Deleted"),
+			           Catalog.GetString ("The selected task has been successfully deleted"
+			                              +" from your Remember The Milk task list"));
 		}
 
 		public static void CompleteTask (string listId, string taskSeriesId, string taskId)
@@ -452,9 +454,9 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Task Completed"),
-			               Catalog.GetString ("The selected task in your Remember The Milk"
-			                                  +" task list has been marked as completed."), taskId);
+			TryNotify (Catalog.GetString ("Task Completed"),
+			           Catalog.GetString ("The selected task in your Remember The Milk"
+			                              +" task list has been marked as completed."));
 		}
 		
 		public static void SetTaskPriority (string listId, string taskSeriesId, string taskId, string priority)
@@ -469,9 +471,9 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Priority Changed"),
-			               Catalog.GetString ("The priority of the selected task in your"
-			                                  +" Remember The Milk task list has been changed."), taskId);
+			TryNotify (Catalog.GetString ("Priority Changed"),
+			           Catalog.GetString ("The priority of the selected task in your"
+			                              +" Remember The Milk task list has been changed."));
 		}
 		
 		public static void SetDueDateTime (string listId, string taskSeriesId, string taskId, string due)
@@ -487,13 +489,13 @@ namespace RememberTheMilk
 			}
 			
 			if (String.IsNullOrEmpty (due)) 
-				ActionRoutine (Catalog.GetString ("Due Date/Time Unset"),
-				               Catalog.GetString ("The due date/time of the selected task in your "
-				                                  +"Remember The Milk task list has been unset."), taskId);
+				TryNotify (Catalog.GetString ("Due Date/Time Unset"),
+				           Catalog.GetString ("The due date/time of the selected task in your "
+				                              +"Remember The Milk task list has been unset."));
 			else 
-				ActionRoutine (Catalog.GetString ("Due Date/Time Changed"),
-				               Catalog.GetString ("The due date/time of the selected task in your "
-				                                  +"Remember The Milk task list has been changed."), taskId);
+				TryNotify (Catalog.GetString ("Due Date/Time Changed"),
+				           Catalog.GetString ("The due date/time of the selected task in your "
+				                              +"Remember The Milk task list has been changed."));
 		}
 		
 		public static void MoveTask (string fromListId, string toListId, string taskSeriesId, string taskId)
@@ -505,12 +507,11 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Task Moved"),
-			               Catalog.GetString (String.Format ("The selected task has been moved from"
-			                                                 + " Remember The Milk list \"{0}\" to list \"{1}\".",
-			                                                 lists.Find (i => (i as RTMListItem).Id == fromListId).Name,
-			                                                 lists.Find (i => (i as RTMListItem).Id == toListId).Name)),
-			               taskId);
+			TryNotify (Catalog.GetString ("Task Moved"),
+			           Catalog.GetString (String.Format ("The selected task has been moved from"
+			                                             + " Remember The Milk list \"{0}\" to list \"{1}\".",
+			                                             lists.Find (i => (i as RTMListItem).Id == fromListId).Name,
+			                                             lists.Find (i => (i as RTMListItem).Id == toListId).Name)));
 		}
 		
 		public static void RenameTask (string listId, string taskSeriesId, string taskId, string newName)
@@ -522,9 +523,9 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Task Renamed"),
-			               Catalog.GetString (String.Format ("The selected task has"
-			                                                 + " been renamed to \"{0}\".", newName)), taskId);
+			TryNotify (Catalog.GetString ("Task Renamed"),
+			           Catalog.GetString (String.Format ("The selected task has"
+			                                             + " been renamed to \"{0}\".", newName)));
 		}
 		
 		public static void PostponeTask (string listId, string taskSeriesId, string taskId)
@@ -536,9 +537,9 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Task Postponed"),
-			               Catalog.GetString ("The selected task in your Remember The Milk task"
-			                                  + " list has been postponed"), taskId);
+			TryNotify (Catalog.GetString ("Task Postponed"),
+			           Catalog.GetString ("The selected task in your Remember The Milk task"
+			                              + " list has been postponed"));
 		}
 		
 		public static void SetRecurrence (string listId, string taskSeriesId, string taskId, string repeat)
@@ -550,9 +551,9 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Recurrence Pattern Changed"),
-			               Catalog.GetString ("The recurrence pattern of the selected task in your"
-			                                  + " Remember The Milk task list has been changed."), taskId);
+			TryNotify (Catalog.GetString ("Recurrence Pattern Changed"),
+			           Catalog.GetString ("The recurrence pattern of the selected task in your"
+			                              + " Remember The Milk task list has been changed."));
 		}
 		
 		public static void SetURL(string listId, string taskSeriesId, string taskId, string url)
@@ -565,11 +566,11 @@ namespace RememberTheMilk
 			}
 			
 			if (!string.IsNullOrEmpty(url)) {
-				ActionRoutine (Catalog.GetString ("Task URL Set"),
-				               Catalog.GetString ("The selected task has been assigned a URL."), taskId);
+				TryNotify (Catalog.GetString ("Task URL Set"),
+				           Catalog.GetString ("The selected task has been assigned a URL."));
 			} else {
-				ActionRoutine (Catalog.GetString ("Task URL Reset"),
-				               Catalog.GetString ("The URL for the selected task has been reset."), taskId);
+				TryNotify (Catalog.GetString ("Task URL Reset"),
+				           Catalog.GetString ("The URL for the selected task has been reset."));
 			}
 		}
 		
@@ -584,11 +585,11 @@ namespace RememberTheMilk
 			}
 			
 			if (String.IsNullOrEmpty(estimateTime))
-				ActionRoutine (Catalog.GetString ("Task Estimated Time Unset"),
-				               Catalog.GetString ("The estimated time for the selected task has been unset."), taskId);
+				TryNotify (Catalog.GetString ("Task Estimated Time Unset"),
+				           Catalog.GetString ("The estimated time for the selected task has been unset."));
 			else
-				ActionRoutine (Catalog.GetString ("Task Estimated Time Set"),
-				               Catalog.GetString ("The selected task has been assigned an estimated time."), taskId);
+				TryNotify (Catalog.GetString ("Task Estimated Time Set"),
+				           Catalog.GetString ("The selected task has been assigned an estimated time."));
 		}
 		
 		public static void SetLocation (string listId, string taskSeriesId, string taskId, string locationId)
@@ -601,11 +602,11 @@ namespace RememberTheMilk
 			}
 			
 			if (string.IsNullOrEmpty (locationId)) {
-				ActionRoutine (Catalog.GetString ("Location Reset"),
-				               Catalog.GetString ("The location of the selected task has been cleared."), taskId);
+				TryNotify (Catalog.GetString ("Location Reset"),
+				           Catalog.GetString ("The location of the selected task has been cleared."));
 			} else {
-				ActionRoutine (Catalog.GetString ("Location changed"),
-				               Catalog.GetString ("The location of the selected task has been successfully changed."), taskId);
+				TryNotify (Catalog.GetString ("Location changed"),
+				           Catalog.GetString ("The location of the selected task has been successfully changed."));
 			}
 			
 		}
@@ -619,8 +620,8 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Task Uncompleted"),
-			               Catalog.GetString ("The selected task has been marked as \"incomplete\"."), taskId);
+			TryNotify (Catalog.GetString ("Task Uncompleted"),
+			           Catalog.GetString ("The selected task has been marked as \"incomplete\"."));
 		}
 		
 		#endregion [ Task Actions ]
@@ -642,9 +643,8 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("New List Created"),
-			               Catalog.GetString (String.Format ("A new task"
-			                                                + " list named \"{0}\" has been created.", newListName)));
+			TryNotify (Catalog.GetString ("New List Created"),
+			           Catalog.GetString (String.Format ("A new task list named \"{0}\" has been created.", newListName)));
 		}
 		
 		public static void DeleteList(string listId)
@@ -655,10 +655,9 @@ namespace RememberTheMilk
 				Log.Debug (e.Message);
 				return;
 			}
-
-			// if a list is deleted, tasks in that list get moved to 'inbox', so we need to update tasks
-			ActionRoutine (Catalog.GetString("List Deleted"),
-			               Catalog.GetString("The selected task list has been deleted."), null);
+			
+			TryNotify (Catalog.GetString("List Deleted"),
+			           Catalog.GetString("The selected task list has been deleted."));
 		}      
 		
 		public static void RenameList(string listId, string newListName)
@@ -675,9 +674,9 @@ namespace RememberTheMilk
 				Log.Debug (e.Message);
 				return;
 			}
-			ActionRoutine (Catalog.GetString("Task List Renamed"),
-			               Catalog.GetString(String.Format ("The selected task"
-			                                                + " list has been renamed to \"{0}\".", newListName)));
+			TryNotify (Catalog.GetString("Task List Renamed"),
+			           Catalog.GetString(String.Format ("The selected task"
+			                                            + " list has been renamed to \"{0}\".", newListName)));
 		}
 		
 		#endregion [ List Actions ]
@@ -715,8 +714,8 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Note Added"),
-			               Catalog.GetString ("A note has been added to the selected task"), taskId);
+			TryNotify (Catalog.GetString ("Note Added"),
+			           Catalog.GetString ("A note has been added to the selected task"));
 		}
 		
 		public static void DeleteNote (string noteId)
@@ -731,9 +730,8 @@ namespace RememberTheMilk
 			lock (note_lock)
 				notes.Remove (notes.Find (i => (i as RTMNoteItem).Id == noteId));
 			
-			ActionRoutine (Catalog.GetString ("Note Deleted"),
-			               Catalog.GetString ("The selected note has been deleted from the selected task"), 
-			               null);
+			TryNotify (Catalog.GetString ("Note Deleted"),
+			           Catalog.GetString ("The selected note has been deleted from the selected task"));
 		}
 		
 		#endregion [ Note Actions ]
@@ -752,8 +750,8 @@ namespace RememberTheMilk
 					return;
 				}
 				
-				ActionRoutine (Catalog.GetString ("Tags Added"),
-				               Catalog.GetString ("New tags have been successfully added to the selected task."), taskId);
+				TryNotify (Catalog.GetString ("Tags Added"),
+				           Catalog.GetString ("New tags have been successfully added to the selected task."));
 			}
 		}
 
@@ -769,8 +767,8 @@ namespace RememberTheMilk
 					return;
 				}
 				
-				ActionRoutine (Catalog.GetString ("Tags Deleted"),
-				               Catalog.GetString ("Selected tags have been successfully removed from the selected task."), taskId);
+				TryNotify (Catalog.GetString ("Tags Deleted"),
+				           Catalog.GetString ("Selected tags have been successfully removed from the selected task."));
 			}
 		}
 		
@@ -806,11 +804,12 @@ namespace RememberTheMilk
 			}
 		}
 		
-		static void UniverseRemoveTask (string taskId)
+		static void TryRemoveTask (string taskId)
 		{
-			lock (task_lock) {
-				tasks.Remove (tasks.Find (i => (i as RTMTaskItem).Id == taskId));
-			}
+			Item task = tasks.Find (i => (i as RTMTaskItem).Id == taskId);
+			if (task != null)
+				lock (task_lock) 
+					tasks.Remove (task);
 		}
 		
 		/// <summary>
@@ -854,37 +853,11 @@ namespace RememberTheMilk
 			return false;
 		}
 		
-		/// <summary>
-		/// A wrapper function to complete several common tasks for most action methods:
-		/// 1. display notification if user choose to
-		/// 2. clear modified task from 'tasks' list
-		/// 3. update tasks
-		/// </summary>
-		/// <param name="title">
-		/// A <see cref="System.String"/> for the title of the notification message.
-		/// </param>
-		/// <param name="body">
-		/// A <see cref="System.String"/> for the content of the notification message.
-		/// </param>
-		/// <param name="taskId">
-		/// A <see cref="System.String"/>, if exist, will be passed to <see cref="UniverseRemoveTask"/>
-		/// </param>
-		static void ActionRoutine (string title, string body, string taskId)
+		static void TryNotify (string title, string body)
 		{
 			if (Preferences.ActionNotification) {
-				Do.Platform.Services.Notifications.Notify(new Do.Platform.Notification (title, body, RTMIconPath));
+				Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification (title, body, RTMIconPath));
 			}
-			if (taskId != null)
-				UniverseRemoveTask (taskId);
-			UpdateTasks ();
-		}
-		
-		static void ActionRoutine (string title, string body)
-		{
-			if (Preferences.ActionNotification) {
-				Do.Platform.Services.Notifications.Notify(new Do.Platform.Notification (title, body, RTMIconPath));
-			}
-			UpdateLists ();
 		}
 		
 		#endregion [ Utilities ]
