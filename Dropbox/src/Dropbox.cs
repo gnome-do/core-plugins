@@ -37,6 +37,7 @@ namespace Dropbox
 		public static string PublicPath;
 		public static string DoSharedPath;
 		
+		private static string cli_path = "/usr/bin/dropbox";
 		private static string db_url = "https://www.getdropbox.com/";
 		
 		static Dropbox ()
@@ -51,6 +52,12 @@ namespace Dropbox
 		public static bool IsRunning {
 			get {
 				return !Exec ("status").StartsWith ("Dropbox isn't running!");
+			}
+		}
+		
+		public static bool HasCli {
+			get {
+				return File.Exists (cli_path);
 			}
 		}
 		
@@ -93,7 +100,7 @@ namespace Dropbox
 			
 			try {
 				ProcessStartInfo cmd = new ProcessStartInfo ();
-				cmd.FileName = "dropbox";
+				cmd.FileName = cli_path;
 				cmd.Arguments = args; 
 				cmd.UseShellExecute = false;
 				cmd.RedirectStandardOutput = true;

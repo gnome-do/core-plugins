@@ -52,6 +52,7 @@ namespace Dropbox
 			string path = GetPath(item);
 			
 			return File.Exists (path) && 
+				Dropbox.HasCli && 
 				(path.StartsWith (Dropbox.PublicPath) || 
 				HasLink (path));
 		}
