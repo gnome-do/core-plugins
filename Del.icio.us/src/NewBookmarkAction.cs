@@ -96,7 +96,7 @@ namespace Delicious
 		
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 		
 		public bool ModifierItemsOptional {
@@ -121,7 +121,7 @@ namespace Delicious
 				newBookmark.IsBackground = true;
 				newBookmark.Start ((object) url);
 			}
-			return null;
+			yield break;
 		}
 	}
 }
