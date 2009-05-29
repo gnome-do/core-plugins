@@ -27,15 +27,19 @@ namespace RtmNet
 	{
 #region [ Private Variables ]
 		private const string AuthUrl = "http://api.rememberthemilk.com/services/auth/";
-		private const string BaseUrl = "http://api.rememberthemilk.com/services/rest";
-
+		private const string BaseUrl = "http://api.rememberthemilk.com/services/rest/";
+		
+		
+		private object throttlingLock;
 		private string apiKey;
 		private string apiToken;
 		private string sharedSecret;
 		private int timeout = 30000;
-		private const string UserAgent = "Mozilla/4.0 RtmNet API (compatible; MSIE 6.0; Windows NT 5.1)";
+		private const string UserAgent = "Mozilla/4.0 FlickrNet API (compatible; MSIE 6.0; Windows NT 5.1)";
 		private string lastRequest;
 		private string lastResponse;
+		private DateTime lastRequestTime;
+		private TimeSpan throttling;
 
 		private WebProxy proxy;// = WebProxy.GetDefaultProxy();
 
@@ -194,6 +198,9 @@ namespace RtmNet
 			this.apiKey = apiKey;
 			this.sharedSecret = sharedSecret;
 			this.apiToken = token;
+			this.lastRequestTime = DateTime.MinValue;
+			this.throttlingLock = new object ();
+			this.throttling = TimeSpan.FromSeconds (1.0);
 		}
 #endregion
 
@@ -340,11 +347,24 @@ namespace RtmNet
 			string variables = UrlStringBuilder.ToString();
 			lastRequest = url;
 			lastResponse = string.Empty;
-
-			string responseXml = DoGetResponse(url, variables);
-			if (debug) Console.WriteLine (responseXml);
-
-			lastResponse = responseXml;
+			string responseXml = String.Empty;
+			
+			lock (throttlingLock) {
+				TimeSpan timeSinceLastRequest = DateTime.Now - lastRequestTime;
+				if (timeSinceLastRequest < throttling) {
+					TimeSpan wait = throttling - timeSinceLastRequest;
+					Thread.Sleep (wait);
+				}
+				responseXml = DoGetResponse(url, variables);
+				lastRequestTime = DateTime.Now;
+				lastResponse = responseXml;
+			}
+			
+			if (debug) {
+				Console.WriteLine ("Remember The Milk response XML:");
+				Console.WriteLine (responseXml);
+			}
+			
 			return Utils.Deserialize(responseXml);
 		}
 

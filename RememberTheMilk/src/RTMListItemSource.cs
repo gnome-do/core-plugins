@@ -56,7 +56,7 @@ namespace RememberTheMilk
 
 		public override void UpdateItems ()
 		{
-			Thread updateLists = new Thread (new ThreadStart (RTM.Update));
+			Thread updateLists = new Thread (new ThreadStart (RTM.UpdateLists));
 			updateLists.IsBackground = true;
 			updateLists.Start ();
 		}

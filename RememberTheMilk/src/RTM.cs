@@ -313,19 +313,21 @@ namespace RememberTheMilk
 
 			// Since RTM may send us truncated XML if we grab all tasks (in case there are a lot) together
 			// we break down the download by lists and wait 1 second between each operation.
-			lock (list_lock) {
-				foreach (Item item in lists) {
-					if ((item as RTMListItem).Smart)
-						continue;
-					Thread.Sleep (1000);
+			//lock (list_lock) {
+			//	foreach (Item item in lists) {
+			//		if ((item as RTMListItem).Smart)
+			//			continue;
+			//		Thread.Sleep (1000);
 					try {
 						// If first time sync, get full list of incompleted tasks
 						// otherwise, only do incremental sync.
 						if (last_sync == DateTime.MinValue)
-							rtmTasks = rtm.TasksGetList ((item as RTMListItem).Id, null, filter);
+							//rtmTasks = rtm.TasksGetList ((item as RTMListItem).Id, null, filter);
+							rtmTasks = rtm.TasksGetList (null, null, filter);
 						else
-							rtmTasks = rtm.TasksGetList ((item as RTMListItem).Id, 
-							                             last_sync.ToUniversalTime ().ToString ("u"), filter);
+//							rtmTasks = rtm.TasksGetList ((item as RTMListItem).Id, 
+//							                             last_sync.ToUniversalTime ().ToString ("u"), filter);
+							rtmTasks = rtm.TasksGetList (null, last_sync.ToUniversalTime ().ToString ("u"), filter);
 				} catch (RtmException e) {
 						rtmTasks = null;
 						last_sync = DateTime.MinValue;
@@ -394,8 +396,8 @@ namespace RememberTheMilk
 							}
 						}
 					}
-				}
-			}
+//				}
+//			}
 				
 			last_sync = DateTime.Now;
 			

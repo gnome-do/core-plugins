@@ -59,9 +59,9 @@ namespace RememberTheMilk
 
 		public override void UpdateItems ()
 		{
-//			Thread updateLocations = new Thread (new ThreadStart (RTM.UpdateLocations));
-//			updateLocations.IsBackground = true;
-//			updateLocations.Start ();
+			Thread updateLocations = new Thread (new ThreadStart (RTM.UpdateLocations));
+			updateLocations.IsBackground = true;
+			updateLocations.Start ();
 		}
 	}
 }
