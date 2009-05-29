@@ -208,7 +208,7 @@ namespace RtmNet
 			catch (System.Xml.XmlException ex)
 			{
 				// Serialization error occurred!
-				throw new ResponseXmlException("An Xml Exception is thrown from RtmNet.Utils.Deserializ.", ex);
+				throw new ResponseXmlException("Fail to deserialize response stream.", ex);
 			}
 		}
 

@@ -55,7 +55,7 @@ namespace RememberTheMilk
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
 		{
 			if (modItem is RTMListItem)
-				return !(modItem as RTMListItem).Name.Equals ("All Tasks");
+				return !(modItem as RTMListItem).Smart;
 			
 			return true;
 		}

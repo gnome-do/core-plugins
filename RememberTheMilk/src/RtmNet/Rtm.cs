@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Serialization;
 using System.Text;
+using System.Threading;
 using System.Collections;
 using System.Collections.Specialized;
 
@@ -257,7 +258,7 @@ namespace RtmNet
 					throw new RtmWebException (ex.Message, ex);
 				}
 			}
-
+			
 			try
 			{
 				// Get response from the internet
@@ -275,14 +276,16 @@ namespace RtmNet
 				}
 				throw new RtmWebException(ex.Message, ex);
 			}
-
+			
 			string responseString = string.Empty;
-
-			using (StreamReader sr = new StreamReader(res.GetResponseStream()))
+			
+			using (StreamReader sr = new StreamReader (res.GetResponseStream ()))
 			{
 				responseString = sr.ReadToEnd();
 			}
-
+			
+			res.Close ();
+			
 			return responseString;
 		}
 
