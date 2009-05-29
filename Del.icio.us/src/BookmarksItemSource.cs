@@ -59,7 +59,7 @@ namespace Delicious
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 		
 		public override void UpdateItems ()

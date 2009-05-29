@@ -51,7 +51,7 @@ namespace TSClient
 		}
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent) {
-			return null;
+			yield break;
 		}
 
 		public override void UpdateItems () {
