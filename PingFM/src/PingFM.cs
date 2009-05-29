@@ -57,7 +57,7 @@ namespace PingFM
 			return true;
 		}
 		
-		public static IEnumerable<PingFMServiceItem> Services {
+		public static IEnumerable<Item> Services {
 			get { return client.Services; }
 		}
 		
@@ -66,14 +66,10 @@ namespace PingFM
 			client.UpdateServices ();
 		}
 		
-		public static void Post (string body, PingFMServiceItem serviceItem)
+		public static void Post (string method, string body, string service, 
+		                         string media, string icon)
 		{
-			client.Post (body, serviceItem);
-		}
-		
-		public static bool CheckLength (string message)
-		{
-			return client.CheckLength (message);
+			client.Post (method, body, service, media, icon);
 		}
 		
 		static void Connect (string appKey) 

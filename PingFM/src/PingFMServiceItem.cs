@@ -29,44 +29,54 @@ namespace PingFM
 {	
 	public class PingFMServiceItem : Item, IUrlItem
 	{		
-		private string service_name;
-		private string service_id;
-		private string service_method;
-		private string service_url;
+		string name;
+		string id;
+		string method;
+		string url;
+		string trigger;
 		
-		public PingFMServiceItem (string name, string id, string method, string url)
+		public PingFMServiceItem (string name, string id, string method, string url, string trigger)
 		{
-			service_name = name;
-			service_id = id;
-			service_method = method;
-			service_url = url;
+			this.name = name;
+			this.id = id;
+			this.method = method;
+			this.url = url;
+			this.trigger = trigger;
 		}
 		
 		public override string Name {
-			get { return service_name;}
+			get { return name; }
 		}
 		
 		public override string Description {
 			get { 
-				return (service_id == "pingfm") ? Catalog.GetString ("Web service group supported by Ping.FM") : 
-					Catalog.GetString ("Web service supported by Ping.FM");
+				string desc = (id == "pingfm") ? 
+					String.Format (Catalog.GetString ("Post message to multiple {0} services."), method) :
+					Catalog.GetString ("Service supported by Ping.FM");
+				if (!String.IsNullOrEmpty (trigger))
+				    desc += " (" + trigger + ")";
+				return desc;
 			}
 		}
 		
 		public override string Icon {
-			get { return service_id.Replace (".", "") + ".png@" + GetType().Assembly.FullName; }
+			get { return id.Replace (".", "") + ".png@" + GetType().Assembly.FullName; }
 		}
 		
 		public string Id {
-			get { return service_id;}
+			get { return id;}
 		}
 		
 		public string Method {
-			get { return service_method;}
+			get { return method;}
 		}
 		
 		public string Url {
-			get { return service_url; }
+			get { return url; }
+		}
+
+		public string Trigger {
+			get { return trigger; }
 		}
 	}
 }
