@@ -49,7 +49,6 @@ namespace RememberTheMilk
 		static string username;
 		static string filter;
 		static string RTMIconPath = "rtm.png@" + typeof (RTMListItemSource).Assembly.FullName;
-		static string last_completed;
 		
 		const string ApiKey = "ee32c06f2d45baf935a2c046323457d8";
 		const string SharedSecret = "1b835b123a903938";
@@ -72,8 +71,6 @@ namespace RememberTheMilk
 			last_sync = DateTime.MinValue;
 			Preferences = new RTMPreferences ();
 			filter = Preferences.Filter;
-			last_completed = String.Empty;
-			
 			UpdatePriorities ();
 			TryConnect ();
 		}
@@ -116,22 +113,34 @@ namespace RememberTheMilk
 		#region [ Public Properties ]
 		
 		public static RTMPreferences Preferences { get; set; }
-		
+
+		// If not the initial updating of the universe, we'd like the universe manager
+		// to pick up the new items only after the update functions have done their jobs
+		// so locks are used to ensure the synchronization between threads.
 		public static List<Item> Lists {
 			get {
-				return lists;
+				if (last_sync == DateTime.MinValue)
+					return lists;
+				else
+					lock (list_lock) return lists;
 			}
 		}
 		
 		public static List<Item> Tasks {
 			get {
-				return tasks;
+				if (last_sync == DateTime.MinValue)
+					return tasks;
+				else
+					lock (task_lock) return tasks;
 			}
 		}
 		
 		public static List<Item> Locations {
 			get {
-				return locations;
+				if (last_sync == DateTime.MinValue)
+					return locations;
+				else
+					lock (location_lock) return locations;
 			}
 		}
 		
@@ -213,30 +222,23 @@ namespace RememberTheMilk
 		
 		#region [ Methods for Data Update ]
 		
-		public static void Update ()
-		{
-			UpdateLists ();
-			UpdateLocations ();
-			UpdateTasks ();
-		}
-		
 		public static void UpdateLists ()
 		{
-			if (!IsAuthenticated)
-				if (!TryConnect ())
-					return;
-			
-			Lists rtmLists;
-			try {
-				rtmLists = rtm.ListsGetList ();
-			} catch (RtmException e) {
-				Log.Debug (Catalog.GetString ("[RememberTheMilk] An error occured when updating RTM lists: {0}"), 
-				           e.Message);
-				rtmLists = null;
-				return;
-			}
-
 			lock (list_lock) {
+				if (!IsAuthenticated)
+					if (!TryConnect ())
+						return;
+				
+				Lists rtmLists;
+				try {
+					rtmLists = rtm.ListsGetList ();
+				} catch (RtmException e) {
+					Log.Debug (Catalog.GetString ("[RememberTheMilk] An error occured when updating RTM lists: {0}"), 
+					           e.Message);
+					rtmLists = null;
+					return;
+				}
+				
 				lists.Clear ();
 				
 				lists.Add (new RTMListItem ("all", "All Tasks", 1, 1));
@@ -249,26 +251,25 @@ namespace RememberTheMilk
 					if (rtmList.Deleted == 0 && rtmList.Smart == 0)
 						lists.Add (new RTMListItem (rtmList.ID, rtmList.Name, rtmList.Locked, rtmList.Smart));
 			}
-
 			Log.Debug ("[RememberTheMilk] Received {0} lists.", lists.ToArray ().Length);
 		}
 		
 		public static void UpdateLocations ()
 		{
-			if (!IsAuthenticated)
-				if (!TryConnect ())
-					return;
-			
-			Locations rtmLocations;
-			try {
-				rtmLocations = rtm.LocationsGetList ();
-			} catch (RtmException e) {
-				Log.Debug (Catalog.GetString ("An error happend when updating RTM locations: {0}"), e.Message);
-				rtmLocations = null;
-				return;
-			}
-
 			lock (location_lock) {
+				if (!IsAuthenticated)
+					if (!TryConnect ())
+						return;
+			
+				Locations rtmLocations;
+				try {
+					rtmLocations = rtm.LocationsGetList ();
+				} catch (RtmException e) {
+					Log.Debug (Catalog.GetString ("An error happend when updating RTM locations: {0}"), e.Message);
+					rtmLocations = null;
+					return;
+				}
+				
 				locations.Clear ();
 				if (rtmLocations.locationCollection.Length > 0) {
 					foreach (Location rtmLocation in rtmLocations.locationCollection) {
@@ -280,134 +281,130 @@ namespace RememberTheMilk
 					}
 				}
 			}
-
 			Log.Debug ("[RememberTheMilk] Received {0} locations.", locations.ToArray ().Length);
 		}
 		
 		public static void UpdateTasks ()
 		{
-			if (!IsAuthenticated)
-				if (!TryConnect ())
-					return;
-			
-			Tasks rtmTasks;
-			
-			// if settings have changed, reset the synchronization state;
-			if (filter != Preferences.Filter || username != Preferences.Username)
-				last_sync = DateTime.MinValue;
-			
-			if (last_sync == DateTime.MinValue) {
-				tasks.Clear ();
-			}
-
-			if (!String.IsNullOrEmpty (last_completed)) {
-				TryRemoveTask (last_completed);
-				last_completed = String.Empty;
-			}
-			
-			filter = Preferences.Filter;
-			if (String.IsNullOrEmpty (filter))
-				filter = "status:incomplete";
-			else if (!filter.Contains ("status:"))
-				filter = "status:incomplete OR (" + filter + ")";
-
-			// Since RTM may send us truncated XML if we grab all tasks (in case there are a lot) together
-			// we break down the download by lists and wait 1 second between each operation.
-			//lock (list_lock) {
-			//	foreach (Item item in lists) {
-			//		if ((item as RTMListItem).Smart)
-			//			continue;
-			//		Thread.Sleep (1000);
-					try {
-						// If first time sync, get full list of incompleted tasks
-						// otherwise, only do incremental sync.
-						if (last_sync == DateTime.MinValue)
-							//rtmTasks = rtm.TasksGetList ((item as RTMListItem).Id, null, filter);
-							rtmTasks = rtm.TasksGetList (null, null, filter);
-						else
-//							rtmTasks = rtm.TasksGetList ((item as RTMListItem).Id, 
-//							                             last_sync.ToUniversalTime ().ToString ("u"), filter);
-							rtmTasks = rtm.TasksGetList (null, last_sync.ToUniversalTime ().ToString ("u"), filter);
-				} catch (RtmException e) {
-						rtmTasks = null;
-						last_sync = DateTime.MinValue;
-						Log.Debug (Catalog.GetString ("[RememberTheMilk] An error occured when updating RTM tasks: {0}"), 
-						           e.Message);
+			lock (task_lock) {
+				if (!IsAuthenticated)
+					if (!TryConnect ())
 						return;
+				
+				Tasks rtmTasks;
+				Tasks rtmTasks_sync;
+				
+				// if settings have changed, reset the synchronization state;
+				if (filter != Preferences.Filter || username != Preferences.Username)
+					last_sync = DateTime.MinValue;
+				
+				if (last_sync == DateTime.MinValue) {
+					tasks.Clear ();
+				}
+				
+				filter = Preferences.Filter;
+				if (String.IsNullOrEmpty (filter))
+					filter = "status:incomplete";
+				else if (!filter.Contains ("status:"))
+					filter = "status:incomplete OR (" + filter + ")";
+				
+				try {
+					// If first time sync, get full list of incompleted tasks
+					// otherwise, only do incremental sync.
+					if (last_sync == DateTime.MinValue) {
+						rtmTasks = rtm.TasksGetList (null, null, filter);
+						rtmTasks_sync = null;
+					} else {
+						rtmTasks_sync = rtm.TasksGetList (null, last_sync.ToUniversalTime ().ToString ("u"), null);
+						rtmTasks = rtm.TasksGetList (null, last_sync.ToUniversalTime ().ToString ("u"), filter);
 					}
-					
-					foreach (List rtmList in rtmTasks.ListCollection) {
+				} catch (RtmException e) {
+					rtmTasks = null;
+					rtmTasks_sync = null;
+					last_sync = DateTime.MinValue;
+					Log.Debug (Catalog.GetString ("[RememberTheMilk] An error occured when updating RTM tasks: {0}"), 
+					           e.Message);
+					return;
+				}
+				
+				// if not first sync, delete all changed tasks (using the list with nothing filtered)
+				if (last_sync != DateTime.MinValue) {
+					foreach (List rtmList in rtmTasks_sync.ListCollection) {
 						if (rtmList.DeletedTaskSeries != null)
 							foreach (TaskSeries rtmTaskSeries in rtmList.DeletedTaskSeries.TaskSeriesCollection)
 								foreach (Task rtmTask in rtmTaskSeries.TaskCollection)
 									TryRemoveTask (rtmTask.TaskID);
 						
-						if (rtmList.TaskSeriesCollection != null) {
-							lock (task_lock) {
-								foreach (TaskSeries rtmTaskSeries in rtmList.TaskSeriesCollection) {
-									foreach (Task rtmTask in rtmTaskSeries.TaskCollection) {
-										// delete one recurrent task will cause other deleted instances
-										// appear in the taskseries tag, so here we need to check again.
-										if (rtmTask.Deleted == DateTime.MinValue) {
-											// if not first time download data, try to remove old item first
-											if (last_sync != DateTime.MinValue)
-												TryRemoveTask (rtmTask.TaskID);
-											
-											// handle tags
-											string temp_tags = "";
-											if (rtmTaskSeries.Tags.TagCollection.Length > 0) {
-												foreach (Tag rtmTag in rtmTaskSeries.Tags.TagCollection) {
-													if (tags.FindIndex (i => (i as RTMTagItem).Name == rtmTag.Text) == -1)
-														tags.Add (new RTMTagItem (rtmTag.Text));
-													temp_tags += rtmTag.Text + ", ";
-												}
-												temp_tags = temp_tags.Remove (temp_tags.Length-2);
-											}
-											
-											// handle notes
-											if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
-												foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection)
-													notes.Add (new RTMNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID, 
-													                            "http://www.rememberthemil.com/print/"
-													                            + username + "/" 
-													                            + rtmList.ID + "/" 
-													                            + rtmTask.TaskID 
-													                            + "/notes/",
-													                            rtmTask.TaskID));
-											}
-											
-											// add new task
-											RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
-											                                        rtmTaskSeries.TaskSeriesID,
-											                                        rtmTask.TaskID,
-											                                        rtmTaskSeries.Name,
-											                                        rtmTask.Due,
-											                                        rtmTask.Completed,
-											                                        rtmTaskSeries.TaskURL,
-											                                        rtmTask.Priority,
-											                                        rtmTask.HasDueTime,
-											                                        rtmTask.Estimate,
-											                                        rtmTaskSeries.LocationID,
-											                                        temp_tags);
-											tasks.Add (new_task);
-										}
-									}
+						if (rtmList.TaskSeriesCollection.Any ()) {
+							foreach (TaskSeries rtmTaskSeries in rtmList.TaskSeriesCollection) {
+								foreach (Task rtmTask in rtmTaskSeries.TaskCollection) {
+									TryRemoveTask (rtmTask.TaskID);
 								}
 							}
 						}
 					}
-//				}
-//			}
+				}
 				
-			last_sync = DateTime.Now;
+				// add changed tasks from the list with filter used.
+				foreach (List rtmList in rtmTasks.ListCollection) {
+					if (rtmList.TaskSeriesCollection.Any ()) {
+						foreach (TaskSeries rtmTaskSeries in rtmList.TaskSeriesCollection) {
+							foreach (Task rtmTask in rtmTaskSeries.TaskCollection) {
+								// delete one recurrent task will cause other deleted instances
+								// appear in the taskseries tag, so here we need to check again.
+								if (rtmTask.Deleted == DateTime.MinValue) {
+									// handle tags
+									string temp_tags = "";
+									if (rtmTaskSeries.Tags.TagCollection.Length > 0) {
+										foreach (Tag rtmTag in rtmTaskSeries.Tags.TagCollection) {
+											if (tags.FindIndex (i => (i as RTMTagItem).Name == rtmTag.Text) == -1)
+												tags.Add (new RTMTagItem (rtmTag.Text));
+											temp_tags += rtmTag.Text + ", ";
+										}
+										temp_tags = temp_tags.Remove (temp_tags.Length-2);
+									}
+									
+									// handle notes
+									if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
+										foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection)
+											notes.Add (new RTMNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID, 
+											                            "http://www.rememberthemil.com/print/"
+											                            + username + "/" 
+											                            + rtmList.ID + "/" 
+											                            + rtmTask.TaskID 
+											                            + "/notes/",
+											                            rtmTask.TaskID));
+									}
+									
+									// add new task
+									RTMTaskItem new_task = new RTMTaskItem (rtmList.ID,
+									                                        rtmTaskSeries.TaskSeriesID,
+									                                        rtmTask.TaskID,
+									                                        rtmTaskSeries.Name,
+									                                        rtmTask.Due,
+									                                        rtmTask.Completed,
+									                                        rtmTaskSeries.TaskURL,
+									                                        rtmTask.Priority,
+									                                        rtmTask.HasDueTime,
+									                                        rtmTask.Estimate,
+									                                        rtmTaskSeries.LocationID,
+									                                        temp_tags);
+									tasks.Add (new_task);
+								}
+							}
+						}
+					}
+				}
+				last_sync = DateTime.Now;
+			}
 			
 			if (Preferences.OverdueNotification)
 				NotifyOverDueItems ();
-
+			
 			Log.Debug ("[RememberTheMilk] Received {0} tasks.", tasks.ToArray ().Length);
 			Log.Debug ("[RememberTheMilk] Received {0} notes.", notes.ToArray ().Length);
 			Log.Debug ("[RememberTheMilk] Received {0} tags.", tags.ToArray ().Length);
-        }
+		}
 		
 		static void UpdatePriorities ()
 		{
@@ -504,10 +501,6 @@ namespace RememberTheMilk
 				Log.Debug (e.Message);
 				return;
 			}
-			
-			// Completed task won't be always sent back when getting task list the next time,
-			// so we relay the deletion.
-			last_completed = taskId;
 			
 			FinalizeAction (Catalog.GetString ("Task Completed"),
 			                Catalog.GetString ("The selected task in your Remember The Milk"
