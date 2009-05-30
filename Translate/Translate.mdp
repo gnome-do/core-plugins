@@ -64,6 +64,13 @@
     <File name="Resources/icons/ukranian.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/vietnamese.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/TranslateEngine.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/icons/albanian.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/estonian.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/galician.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/hungarian.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/maltese.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/thai.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/turkish.png" subtype="Code" buildaction="Nothing" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
