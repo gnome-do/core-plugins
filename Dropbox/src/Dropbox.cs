@@ -23,8 +23,6 @@ using System;
 using System.IO;
 using System.Diagnostics;
 
-using Mono.Unix;
-
 using Do.Platform;
 
 namespace Dropbox
@@ -109,10 +107,9 @@ namespace Dropbox
 				run.WaitForExit ();
 				
 				stdout = run.StandardOutput.ReadLine ();
-				Log.Debug (stdout);
 				
 			} catch (Exception e) {
-				Log.Error ("Error running dropbox {0}: {2}", args, e.Message);
+				Log.Error ("Error running dropbox {0}: {1}", args, e.Message);
 				Log.Debug (e.StackTrace);
 			}
 			

@@ -24,8 +24,6 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
-
 using Do.Universe;
 using Do.Platform;
 
@@ -49,39 +47,26 @@ namespace Dropbox
 			Services.Notifications.Notify (notification);
 		}
 		
+		protected string ReadLink (string link_name)
+		{
+			return RunProcess ("readlink", string.Format ("\"{0}\"", link_name));
+		}
+		
 		protected bool MakeLink (string target, string link_name)
 		{
-			bool result = true;
+			string result = RunProcess ("ln", 
+				string.Format ("-s \"{0}\" \"{1}\"", target, link_name));
 			
-			Services.Application.RunOnThread (() => {
-				try {
-					RunProcess ("ln", "-s " + 
-						string.Format ("\"{0}\" \"{1}\"", target, link_name));
-				} catch (Exception e) {
-					Log.Error ("Could not link {0} to {1}: {2}", link_name, target, e.Message);
-					Log.Debug (e.StackTrace);
-					result = false;
-				}
-			});
-			
-			return result;
+			return result != null;
+	
 		}
 		
 		protected bool Unlink (string link_name)
 		{
-			bool result = true;
-			
-			Services.Application.RunOnThread (() => {
-				try {
-					RunProcess ("unlink", string.Format ("\"{0}\"", link_name));
-				} catch (Exception e) {
-					Log.Error ("Could not unlink {0}: {2}", link_name, e.Message);
-					Log.Debug (e.StackTrace);
-					result = false;
-				}
-			});
-			
-			return result;
+			string result = RunProcess ("unlink", 
+				string.Format ("\"{0}\"", link_name));
+
+			return result != null;
 		}
 		
 		protected string GetLink (string target)
@@ -95,16 +80,9 @@ namespace Dropbox
 			if (!Directory.Exists (directory))
 				return null;
 			
-			UnixSymbolicLinkInfo link;
-			UnixDirectoryInfo dir = new UnixDirectoryInfo (directory);
-			
-			foreach (UnixFileSystemInfo file in dir.GetFileSystemEntries ()) {
-				if (!file.IsSymbolicLink) continue;
-				
-				link = new UnixSymbolicLinkInfo (file.FullName);
-				if (link.HasContents && link.ContentsPath == target) 
-					return file.FullName;
-			}
+			foreach (string file in Directory.GetFiles (directory)) 
+				if (ReadLink (file) == target) 
+					return file;
 
 			return null;
 		}
@@ -139,10 +117,29 @@ namespace Dropbox
 				Environment.GetFolderPath (Environment.SpecialFolder.Personal));
 		}
 		
-		protected void RunProcess (string command, string args)
+		protected string RunProcess (string command, string args) 
 		{
-			Process ps = Process.Start (command, args);
-			ps.WaitForExit ();
+			try {
+				ProcessStartInfo cmd = new ProcessStartInfo ();
+				cmd.FileName = command;
+				cmd.Arguments = args; 
+				cmd.UseShellExecute = false;
+				cmd.RedirectStandardOutput = true;
+				
+				Process ps = Process.Start (cmd);
+				ps.WaitForExit ();
+				
+				string stdout = ps.StandardOutput.ReadLine ();
+				
+				if (stdout == null) return string.Empty;
+				return stdout;
+				
+			} catch (Exception e) {
+				Log.Error ("Error running {0} {1} : {2}", command, args, e.Message);
+				Log.Debug (e.StackTrace);
+				
+				return null;
+			}
 		}
 	}
 }
