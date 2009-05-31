@@ -1,8 +1,7 @@
-/* PauseAction.cs 
+/* ShelfExploreShelfAction.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,36 +18,34 @@
  */
 
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 using Mono.Unix;
-
-using Do.Platform;
 using Do.Universe;
 
-namespace Banshee
-{	
-	public class PauseAction : AbstractPlayerAction
+namespace Shelf
+{
+	public class ShelfExploreAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+			get { return Catalog.GetString ("Explore Shelf"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
+			get { return Catalog.GetString ("Get a list of everything in your shelf"); }
 		}
 
 		public override string Icon {
-			get { return "media-playback-pause"; }
+			get { return "folder-saved-search"; }
 		}
-
-		protected override bool IsAvailable()
-		{
-			return Banshee.IsPlaying;
+		
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { yield return typeof (ShelfItem);} 
 		}
-
-		protected override void Perform ()
+		
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Banshee.Pause ();
+			return (items.First () as ShelfItem).Items.ToArray ();
 		}
 	}
 }

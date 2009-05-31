@@ -1,8 +1,7 @@
-/* PauseAction.cs 
+/* RequestTrackerItem.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this
- * source distribution.
+ * COPYRIGHT file distributed with this source distribution.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,36 +18,43 @@
  */
 
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Web;
+using System.Text.RegularExpressions;
 
 using Mono.Unix;
 
-using Do.Platform;
 using Do.Universe;
+using Do.Platform;
 
-namespace Banshee
-{	
-	public class PauseAction : AbstractPlayerAction
+namespace RequestTracker
+{
+	
+	
+	public class RequestTrackerItem : Item
 	{
+		string name, description;
+		
+		public RequestTrackerItem (string name, string description, string url)
+		{
+			this.name = Catalog.GetString (name);
+			this.description = Catalog.GetString (description);
+			this.URL = url;
+		}
+		
+		public string URL { get; private set; }
+		
 		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+			get { return name; }
 		}
-
+		
 		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
+			get { return description; }
 		}
 
-		public override string Icon {
-			get { return "media-playback-pause"; }
-		}
-
-		protected override bool IsAvailable()
-		{
-			return Banshee.IsPlaying;
-		}
-
-		protected override void Perform ()
-		{
-			Banshee.Pause ();
+		public override string Icon { 
+			get { return "rt.png@" + GetType ().Assembly.FullName; }
 		}
 	}
 }

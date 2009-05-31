@@ -53,10 +53,11 @@ namespace Banshee
 		{
 			if (index_mutex.ThreadState == ThreadState.Running)
 				return;
-			if (index_mutex.ThreadState == ThreadState.Unstarted)
+			else if (index_mutex.ThreadState == ThreadState.Unstarted)
 				index_mutex.Start ();
-			else
+			else {
 				index_mutex = MakeIndexerThread ();
+			}
 		}
 
 		public static bool IsPlaying {

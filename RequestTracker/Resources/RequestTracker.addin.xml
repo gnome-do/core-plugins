@@ -1,0 +1,24 @@
+<Addin 
+	id="RequestTracker" 
+	namespace="Do"
+	version="1.0"
+	name="Request Tracker"
+	description="Show tickets from Request Tracker."
+	author="Chris Jones"
+	category="Community"
+	>
+
+	<Runtime>
+		<Import assembly="RequestTracker.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/Action">
+		<Action type="RequestTracker.RTAction" />
+	</Extension>
+
+</Addin>
