@@ -59,6 +59,9 @@ namespace RememberTheMilk
 		protected virtual void OnOverdueChkbtnClicked (object sender, System.EventArgs e)
 		{
 			RTM.Preferences.OverdueNotification = overdue_chkbtn.Active;
+			overdue_interval_spinbtn.Sensitive = overdue_chkbtn.Active;
+			overdue_interval_spinbtn.Value = RTM.Preferences.OverdueInterval;
+			
 		}
 		
 		protected virtual void OnReturnNewChkBtnClicked (object sender, System.EventArgs e)
@@ -74,8 +77,8 @@ namespace RememberTheMilk
 			     + " the authrozation by clicking the button below.");
 			RTM.Preferences.Token = "";
 			RTM.Preferences.Username = "";
-			//notification_frm.Visible = false;
-			//filter_frm.Visible = false;
+			notification_frm.Sensitive = false;
+			filter_frm.Sensitive = false;
 			Widget image = auth_btn.Image;
 			auth_btn.Label = Catalog.GetString ("Complete authorization");
 			auth_btn.Image = image;
@@ -106,12 +109,14 @@ namespace RememberTheMilk
 			authinfo_lbl.Text = String.Format (Catalog.GetString ("Thank you {0}, "
 			    + "RTM plugin is now authorized to operate on your account."), RTM.Preferences.Username);
 			auth_btn.Label = "Sign in as a different user";
-			notification_frm.Visible = true;
-			filter_frm.Visible = true;
+			notification_frm.Sensitive = true;
+			filter_frm.Sensitive = true;
 			confirm_chkbtn.Active = RTM.Preferences.ActionNotification;
 			overdue_chkbtn.Active = RTM.Preferences.OverdueNotification;
+			overdue_interval_spinbtn.Sensitive = overdue_chkbtn.Active;
+			overdue_interval_spinbtn.Value = RTM.Preferences.OverdueInterval;
 			returnnew_chkbtn.Active = RTM.Preferences.ReturnNewTask;
-			filter_entry.Text = RTM.Preferences.Filter;	
+			filter_entry.Text = RTM.Preferences.Filter;
 		}
 
 		protected virtual void OnFilterEntryChanged (object sender, System.EventArgs e)
@@ -122,6 +127,11 @@ namespace RememberTheMilk
 		protected virtual void OnRtmRefBtnClicked (object sender, EventArgs e)
 		{
 			Do.Platform.Services.Environment.OpenUrl("http://www.rememberthemilk.com/help/answers/search/advanced.rtm");
+		}
+
+		protected virtual void OnOverdueIntervalChanged (object sender, System.EventArgs e)
+		{
+			RTM.Preferences.OverdueInterval = overdue_interval_spinbtn.Value;
 		}
 	}
 }

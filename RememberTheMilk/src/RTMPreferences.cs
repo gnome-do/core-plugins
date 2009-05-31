@@ -27,6 +27,7 @@ namespace RememberTheMilk
 		const string UsernameKey = "Username";
 		const string FilterKey = "Filter";
 		const string OverdueNotificationKey = "OverdueNotification";
+		const string OverdueIntervalKey = "OverdueInterval";
 		const string ActionNotificationKey = "ActionNotification";
 		const string ReturnNewTaskKey = "ReturnNewTask";
 		
@@ -55,6 +56,11 @@ namespace RememberTheMilk
 		public bool OverdueNotification {
 			get { return prefs.Get<bool> (OverdueNotificationKey, true); }
 			set { prefs.Set<bool> (OverdueNotificationKey, value); }
+		}
+
+		public double OverdueInterval {
+			get { return prefs.Get<double> (OverdueIntervalKey, 15); }
+			set { prefs.Set<double> (OverdueIntervalKey, value); }
 		}
 		
 		public bool ActionNotification {

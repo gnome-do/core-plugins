@@ -5,9 +5,10 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
+    <widget-library name="Do.Platform.Linux, Version=0.9.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/RTM.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="RememberTheMilk.Configuration" design-size="407 390">
+  <widget class="Gtk.Bin" id="RememberTheMilk.Configuration" design-size="476 435">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox1">
@@ -128,7 +129,7 @@
         <child>
           <widget class="Gtk.Frame" id="notification_frm">
             <property name="MemberName" />
-            <property name="Visible">False</property>
+            <property name="Sensitive">False</property>
             <property name="ShadowType">None</property>
             <property name="BorderWidth">2</property>
             <child>
@@ -143,14 +144,80 @@
                     <property name="Spacing">6</property>
                     <property name="BorderWidth">5</property>
                     <child>
-                      <widget class="Gtk.CheckButton" id="overdue_chkbtn">
+                      <widget class="Gtk.Table" id="table1">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="Label" translatable="yes">Show notification for overdue task(s)</property>
-                        <property name="DrawIndicator">True</property>
-                        <property name="HasLabel">True</property>
-                        <property name="UseUnderline">True</property>
-                        <signal name="Clicked" handler="OnOverdueChkbtnClicked" />
+                        <property name="NColumns">3</property>
+                        <property name="RowSpacing">6</property>
+                        <property name="ColumnSpacing">6</property>
+                        <child>
+                          <widget class="Gtk.Label" id="minute_lbl">
+                            <property name="MemberName" />
+                            <property name="LabelProp" translatable="yes">minute(s)</property>
+                          </widget>
+                          <packing>
+                            <property name="LeftAttach">2</property>
+                            <property name="RightAttach">3</property>
+                            <property name="AutoSize">True</property>
+                            <property name="XOptions">Fill</property>
+                            <property name="YOptions">Fill</property>
+                            <property name="XExpand">False</property>
+                            <property name="XFill">True</property>
+                            <property name="XShrink">False</property>
+                            <property name="YExpand">False</property>
+                            <property name="YFill">True</property>
+                            <property name="YShrink">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.CheckButton" id="overdue_chkbtn">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Label" translatable="yes">Notify overdue task(s) every</property>
+                            <property name="DrawIndicator">True</property>
+                            <property name="HasLabel">True</property>
+                            <property name="UseUnderline">True</property>
+                            <signal name="Clicked" handler="OnOverdueChkbtnClicked" />
+                          </widget>
+                          <packing>
+                            <property name="AutoSize">False</property>
+                            <property name="XOptions">Shrink, Fill</property>
+                            <property name="YOptions">Fill</property>
+                            <property name="XExpand">False</property>
+                            <property name="XFill">True</property>
+                            <property name="XShrink">True</property>
+                            <property name="YExpand">False</property>
+                            <property name="YFill">True</property>
+                            <property name="YShrink">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.SpinButton" id="overdue_interval_spinbtn">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Lower">1</property>
+                            <property name="Upper">9999</property>
+                            <property name="PageIncrement">10</property>
+                            <property name="StepIncrement">1</property>
+                            <property name="ClimbRate">1</property>
+                            <property name="Numeric">True</property>
+                            <property name="Value">1</property>
+                            <signal name="ValueChanged" handler="OnOverdueIntervalChanged" />
+                          </widget>
+                          <packing>
+                            <property name="LeftAttach">1</property>
+                            <property name="RightAttach">2</property>
+                            <property name="XPadding">5</property>
+                            <property name="AutoSize">False</property>
+                            <property name="XOptions">Shrink, Fill</property>
+                            <property name="YOptions">Fill</property>
+                            <property name="XExpand">False</property>
+                            <property name="XFill">True</property>
+                            <property name="XShrink">True</property>
+                            <property name="YExpand">False</property>
+                            <property name="YFill">True</property>
+                            <property name="YShrink">False</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
                         <property name="Position">0</property>
@@ -218,7 +285,7 @@
         <child>
           <widget class="Gtk.Frame" id="filter_frm">
             <property name="MemberName" />
-            <property name="Visible">False</property>
+            <property name="Sensitive">False</property>
             <property name="ShadowType">None</property>
             <property name="BorderWidth">2</property>
             <child>

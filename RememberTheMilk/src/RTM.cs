@@ -48,8 +48,9 @@ namespace RememberTheMilk
 		static DateTime last_sync;
 		static string username;
 		static string filter;
+		static TimeSpan overdue_notify_timeout;
+		static Thread overdue_notify_thread;
 		static string RTMIconPath = "rtm.png@" + typeof (RTMListItemSource).Assembly.FullName;
-		
 		const string ApiKey = "ee32c06f2d45baf935a2c046323457d8";
 		const string SharedSecret = "1b835b123a903938";
 
@@ -70,9 +71,12 @@ namespace RememberTheMilk
 			note_lock = new object ();
 			last_sync = DateTime.MinValue;
 			Preferences = new RTMPreferences ();
-			filter = Preferences.Filter;
+			overdue_notify_thread = new Thread (new ThreadStart (OverdueNotificationLoop));
+			overdue_notify_thread.IsBackground = true;
+			overdue_notify_thread.Priority = ThreadPriority.Lowest;
 			UpdatePriorities ();
 			TryConnect ();
+			
 		}
 		
 		#region [ Authentication ]
@@ -397,9 +401,6 @@ namespace RememberTheMilk
 				}
 				last_sync = DateTime.Now;
 			}
-			
-			if (Preferences.OverdueNotification)
-				NotifyOverDueItems ();
 			
 			Log.Debug ("[RememberTheMilk] Received {0} tasks.", tasks.ToArray ().Length);
 			Log.Debug ("[RememberTheMilk] Received {0} notes.", notes.ToArray ().Length);
@@ -845,6 +846,9 @@ namespace RememberTheMilk
 					return false;
 				}
 				
+				if (Preferences.OverdueNotification && !overdue_notify_thread.IsAlive)
+					overdue_notify_thread.Start ();
+				
 				return true;
 			} else {
 				Log.Error (Catalog.GetString ("Not authorized to use an Remember The Milk account."));
@@ -864,25 +868,32 @@ namespace RememberTheMilk
 		/// Check if there is overdue task in All Tasks list,
 		/// when user chooses to be notified, display the information.
 		/// </summary>
-		static void NotifyOverDueItems ()
+		static void OverdueNotificationLoop ()
 		{
-			List<Item> overdue_tasks;
-			object list_lock = new object ();
-			overdue_tasks = new List<Item> ();
-			overdue_tasks = tasks.FindAll (i => IsOverdue (i as RTMTaskItem));      
-			
-			int len = overdue_tasks.ToArray ().Length;
-			if (len > 0) {
-				string title;
-				title = String.Format (Catalog.GetPluralString ("{0} Task Overdue",
-				                                                "{0} Tasks Overdue", len), len);
+			while (true) {
+				overdue_notify_timeout = TimeSpan.FromMinutes (Preferences.OverdueInterval);
+				Thread.Sleep (overdue_notify_timeout);
+				if (!Preferences.OverdueNotification)
+					continue;
+				List<Item> overdue_tasks;
+				object list_lock = new object ();
+				overdue_tasks = new List<Item> ();
+				lock (task_lock)
+					overdue_tasks = tasks.FindAll (i => IsOverdue (i as RTMTaskItem));      
 				
-				string body = "";
-				lock (list_lock) {
-					foreach (Item item in overdue_tasks)
-						body += ("- " + (item as RTMTaskItem).Name +"\n");
+				int len = overdue_tasks.ToArray ().Length;
+				if (len > 0) {
+					string title;
+					title = String.Format (Catalog.GetPluralString ("{0} Task Overdue",
+					                                                "{0} Tasks Overdue", len), len);
+					
+					string body = "";
+					lock (list_lock) {
+						foreach (Item item in overdue_tasks)
+							body += ("- " + (item as RTMTaskItem).Name +"\n");
+					}
+					Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification( title, body, "task-overdue.png@" + typeof(RTMTaskItem).Assembly.FullName));
 				}
-				Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification( title, body, "task-overdue.png@" + typeof(RTMTaskItem).Assembly.FullName));
 			}
 		}
 
