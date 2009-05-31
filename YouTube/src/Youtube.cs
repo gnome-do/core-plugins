@@ -55,6 +55,8 @@ namespace YouTube
 		private static int favUpdate;
 		private static int ownUpdate;
 		
+		private static bool favError = false;
+		
 		public static YouTubePreferences Preferences { get; private set; }
 		
 		static Youtube()
@@ -75,7 +77,7 @@ namespace YouTube
 		{
 			favUpdate++;
 			Log<Youtube>.Debug("Update favorites videos tries = {0} - favorite.Count : {1}", favUpdate, Youtube.favorites.Count);
-			if (Youtube.favorites.Count == 0 || favUpdate%20 == 0){
+			if (favError == false || (Youtube.favorites.Count == 0 || favUpdate%20 == 0)){
 				Youtube.favorites.Clear();
 				int maxResults = 50;
 				int startIndex = 1;
@@ -85,14 +87,19 @@ namespace YouTube
 				Log<Youtube>.Debug("feedUrl for favorites videos: {0}", feedUrl);
 				try{
 					YouTubeFeed videoFeed = service.Query(query);
-					while(videoFeed.Entries.Count > 0){				
+
+					while(videoFeed.Entries.Count > 0){
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    //Log<Youtube>.Debug("Video #{0}, Title: {1}", ++i, entry.Title.Text);
-							string url = ("http://www.youtube.com/watch?v="+entry.VideoId);
-							//Log<Youtube>.Debug("Video url: {0}", url);
-							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
-							favorites.Add(video);
+							try
+							{
+						    	//Log<Youtube>.Debug("Video #{0}, Title: {1}", ++i, entry.Title.
+								string url = ("http://www.youtube.com/watch?v="+entry.VideoId);
+								//Log<Youtube>.Debug("Video url: {0}", url);
+								YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
+								favorites.Add(video);
+							}
+							catch(Exception e){ continue;}
 						}
 						startIndex += maxResults;
 						feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/favorites?start-index="+ startIndex +"&max-results="+maxResults;
@@ -102,6 +109,7 @@ namespace YouTube
 					startIndex = 1;
 					Log<Youtube>.Debug("Finished updating favorite videos");
 				}catch(Exception e) {
+					favError = true;
 					Log<Youtube>.Error ("Error getting favorites videos - {0}", e.Message);
     				Log<Youtube>.Debug (e.StackTrace);
 				}
