@@ -135,8 +135,8 @@ namespace Dropbox
 				return stdout;
 				
 			} catch (Exception e) {
-				Log.Error ("Error running {0} {1} : {2}", command, args, e.Message);
-				Log.Debug (e.StackTrace);
+				Log<DropboxAbstractAction>.Error ("Error running {0} {1} : {2}", command, args, e.Message);
+				Log<DropboxAbstractAction>.Debug (e.StackTrace);
 				
 				return null;
 			}

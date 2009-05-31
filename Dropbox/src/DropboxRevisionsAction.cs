@@ -67,7 +67,7 @@ namespace Dropbox
 			
 			Services.Environment.OpenUrl (url);
 			
-			return null;
+			yield break;
 		}
 
 	}

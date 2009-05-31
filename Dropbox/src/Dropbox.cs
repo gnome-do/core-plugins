@@ -42,9 +42,9 @@ namespace Dropbox
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			
-			BasePath = home + "/Dropbox";
-			PublicPath = BasePath + "/Public";
-			DoSharedPath = PublicPath + "/Do Shared Files";
+			BasePath = Path.Combine (home, "Dropbox");
+			PublicPath = Path.Combine (BasePath, "Public");
+			DoSharedPath = Path.Combine (PublicPath, "Do Shared Files");
 		}
 		
 		public static bool IsRunning {

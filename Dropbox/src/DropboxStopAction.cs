@@ -58,7 +58,7 @@ namespace Dropbox
 		{
 			Dropbox.Stop ();
 			
-			return null;
+			yield break;
 		}
 
 	}

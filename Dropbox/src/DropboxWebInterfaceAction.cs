@@ -48,10 +48,8 @@ namespace Dropbox
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (IApplicationItem),
-					typeof (IFileItem)
-				};
+				yield return typeof (IApplicationItem);
+				yield return typeof (IFileItem);
 			}
 
 		}
@@ -81,7 +79,7 @@ namespace Dropbox
 			
 			Services.Environment.OpenUrl (url);
 			
-			return null;
+			yield break;
 		}
 	}
 }

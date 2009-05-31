@@ -57,14 +57,16 @@ namespace Dropbox
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string path = GetPath(items.First ());
-			string link_path = GetLink (path);
+			foreach (Item item in items) {
+				string path = GetPath (item);
+				string link_path = GetLink (path);
+				
+				Unlink (link_path);
+				
+				Notify (String.Format ("Stopped sharing \"{0}\"", path));
+			}
 			
-			Unlink (link_path);
-			
-			Notify (String.Format ("Stopped sharing \"{0}\"", path));
-			
-			return null;
+			yield break;
 		}
 
 	}
