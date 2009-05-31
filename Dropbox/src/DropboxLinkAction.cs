@@ -54,14 +54,14 @@ namespace Dropbox
 		{
 			string path = GetPath (item);
 			
-			return !path.StartsWith (Dropbox.BasePath);
+			return !path.StartsWith (dropbox.BasePath);
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
 		{
 			string path = GetPath (modItem);
 			
-			return Directory.Exists (path) && path.StartsWith (Dropbox.BasePath);
+			return Directory.Exists (path) && path.StartsWith (dropbox.BasePath);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)

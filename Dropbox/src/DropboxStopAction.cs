@@ -32,6 +32,8 @@ namespace Dropbox
 	
 	public class DropboxStopAction : Act
 	{
+	
+		private static Dropbox dropbox = new Dropbox ();
 		
 		public override string Name {
 			get { return "Stop Dropbox";  }
@@ -51,12 +53,12 @@ namespace Dropbox
 		
 		public override bool SupportsItem (Item item) 
 		{
-			return item.Name == "Dropbox" && Dropbox.HasCli && Dropbox.IsRunning;
+			return item.Name == "Dropbox" && dropbox.HasCli && dropbox.IsRunning;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Dropbox.Stop ();
+			dropbox.Stop ();
 			
 			yield break;
 		}

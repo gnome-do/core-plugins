@@ -52,8 +52,8 @@ namespace Dropbox
 			string path = GetPath(item);
 			
 			return File.Exists (path) && 
-				Dropbox.HasCli && 
-				(path.StartsWith (Dropbox.PublicPath) || 
+				dropbox.HasCli && 
+				(path.StartsWith (dropbox.PublicPath) || 
 				HasLink (path));
 		}
 		
@@ -61,10 +61,10 @@ namespace Dropbox
 		{
 			string path = GetPath(items.First ());
 			
-			if (!path.StartsWith (Dropbox.PublicPath)) 
+			if (!path.StartsWith (dropbox.PublicPath)) 
 				path = GetLink (path);
 
-			string url = Dropbox.GetPubUrl (path);
+			string url = dropbox.GetPubUrl (path);
 			
 			yield return new BookmarkItem (url, url);
 		}

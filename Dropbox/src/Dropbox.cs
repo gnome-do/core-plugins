@@ -29,16 +29,16 @@ namespace Dropbox
 {
 	
 	
-	public static class Dropbox
+	public class Dropbox
 	{
-		public static string BasePath;
-		public static string PublicPath;
-		public static string DoSharedPath;
+		public string BasePath;
+		public string PublicPath;
+		public string DoSharedPath;
 		
-		private static string cli_path = "/usr/bin/dropbox";
-		private static string db_url = "https://www.getdropbox.com/";
+		private string cli_path = "/usr/bin/dropbox";
+		private string db_url = "https://www.getdropbox.com/";
 		
-		static Dropbox ()
+		public Dropbox ()
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			
@@ -47,29 +47,29 @@ namespace Dropbox
 			DoSharedPath = Path.Combine (PublicPath, "Do Shared Files");
 		}
 		
-		public static bool IsRunning {
+		public bool IsRunning {
 			get {
 				return !Exec ("status").StartsWith ("Dropbox isn't running!");
 			}
 		}
 		
-		public static bool HasCli {
+		public bool HasCli {
 			get {
 				return File.Exists (cli_path);
 			}
 		}
 		
-		public static void Start ()
+		public void Start ()
 		{
 			Exec ("start -i");
 		}
 		
-		public static void Stop ()
+		public void Stop ()
 		{
 			Exec ("stop");
 		}
 		
-		public static string GetPubUrl (string path)
+		public string GetPubUrl (string path)
 		{
 			string url = Exec (String.Format ("puburl \"{0}\"", path));
 			if (!url.StartsWith ("http")) { url = null; }
@@ -77,22 +77,22 @@ namespace Dropbox
 			return url;
 		}
 		
-		public static string GetWebUrl ()
+		public string GetWebUrl ()
 		{
 			return db_url + "home#";
 		}
 		
-		public static string GetWebUrl (string path)
+		public string GetWebUrl (string path)
 		{
 			return GetWebUrl () + path.Substring (BasePath.Length);
 		}
 		
-		public static string GetRevisionsUrl (string path)
+		public string GetRevisionsUrl (string path)
 		{
 			return db_url + "revisions" + path.Substring (BasePath.Length);
 		}
 		
-		private static string Exec (string args) 
+		private string Exec (string args) 
 		{
 			string stdout = "";
 			
@@ -109,8 +109,8 @@ namespace Dropbox
 				stdout = run.StandardOutput.ReadLine ();
 				
 			} catch (Exception e) {
-				Log.Error ("Error running dropbox {0}: {1}", args, e.Message);
-				Log.Debug (e.StackTrace);
+				Log<Dropbox>.Error ("Error running dropbox {0}: {1}", args, e.Message);
+				Log<Dropbox>.Debug (e.StackTrace);
 			}
 			
 			return stdout;
