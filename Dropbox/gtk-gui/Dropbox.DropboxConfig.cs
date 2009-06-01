@@ -13,15 +13,85 @@ namespace Dropbox {
     
     public partial class DropboxConfig {
         
+        private Gtk.VBox vbox2;
+        
+        private Gtk.Frame frame2;
+        
+        private Gtk.Alignment GtkAlignment;
+        
+        private Gtk.HBox hbox2;
+        
+        private Gtk.Entry entry1;
+        
+        private Gtk.Button button5;
+        
+        private Gtk.Label GtkLabel1;
+        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget Dropbox.DropboxConfig
             Stetic.BinContainer.Attach(this);
             this.Name = "Dropbox.DropboxConfig";
+            // Container child Dropbox.DropboxConfig.Gtk.Container+ContainerChild
+            this.vbox2 = new Gtk.VBox();
+            this.vbox2.Name = "vbox2";
+            this.vbox2.Spacing = 6;
+            // Container child vbox2.Gtk.Box+BoxChild
+            this.frame2 = new Gtk.Frame();
+            this.frame2.Name = "frame2";
+            this.frame2.ShadowType = ((Gtk.ShadowType)(0));
+            // Container child frame2.Gtk.Container+ContainerChild
+            this.GtkAlignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
+            this.GtkAlignment.Name = "GtkAlignment";
+            this.GtkAlignment.LeftPadding = ((uint)(2));
+            this.GtkAlignment.TopPadding = ((uint)(8));
+            this.GtkAlignment.RightPadding = ((uint)(8));
+            this.GtkAlignment.BottomPadding = ((uint)(8));
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            this.hbox2 = new Gtk.HBox();
+            this.hbox2.Name = "hbox2";
+            this.hbox2.Spacing = 6;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.entry1 = new Gtk.Entry();
+            this.entry1.Sensitive = false;
+            this.entry1.CanFocus = true;
+            this.entry1.Name = "entry1";
+            this.entry1.IsEditable = false;
+            this.entry1.InvisibleChar = '●';
+            this.hbox2.Add(this.entry1);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox2[this.entry1]));
+            w1.Position = 0;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.button5 = new Gtk.Button();
+            this.button5.CanFocus = true;
+            this.button5.Name = "button5";
+            this.button5.UseStock = true;
+            this.button5.UseUnderline = true;
+            this.button5.Label = "gtk-open";
+            this.hbox2.Add(this.button5);
+            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox2[this.button5]));
+            w2.Position = 1;
+            w2.Expand = false;
+            w2.Fill = false;
+            this.GtkAlignment.Add(this.hbox2);
+            this.frame2.Add(this.GtkAlignment);
+            this.GtkLabel1 = new Gtk.Label();
+            this.GtkLabel1.Name = "GtkLabel1";
+            this.GtkLabel1.LabelProp = Mono.Unix.Catalog.GetString("Dropbox Location");
+            this.GtkLabel1.UseMarkup = true;
+            this.frame2.LabelWidget = this.GtkLabel1;
+            this.vbox2.Add(this.frame2);
+            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox2[this.frame2]));
+            w5.Position = 0;
+            w5.Expand = false;
+            w5.Fill = false;
+            w5.Padding = ((uint)(5));
+            this.Add(this.vbox2);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.Hide();
+            this.button5.Clicked += new System.EventHandler(this.OnOpenBtnClicked);
         }
     }
 }

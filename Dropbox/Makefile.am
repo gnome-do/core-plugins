@@ -24,6 +24,7 @@ RESOURCES = \
 REFERENCES = \
   System \
   System.Core \
+  Mono.Posix \
   $(DO_PLATFORM_LINUX_LIBS) \
   $(DO_UNIVERSE_LIBS) \
   $(GTK_SHARP_20_LIBS)

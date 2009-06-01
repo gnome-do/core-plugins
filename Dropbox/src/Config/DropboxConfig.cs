@@ -9,11 +9,18 @@ using Do.Platform;
 namespace Dropbox
 {
 	
+	[System.ComponentModel.Category("File")]
+	[System.ComponentModel.ToolboxItem(true)]
 	public partial class DropboxConfig : Gtk.Bin
 	{
 	
 		static IPreferences prefs;
-		
+
+		protected virtual void OnOpenBtnClicked (object sender, System.EventArgs e)
+		{
+			Log.Debug ("clicked");
+		}
+			
 		public DropboxConfig()
 		{
 			this.Build();
@@ -23,5 +30,6 @@ namespace Dropbox
 		{
 			prefs = Services.Preferences.Get<DropboxConfig> ();
 		}
+		
 	}
 }
