@@ -1,14 +1,14 @@
-<Project name="Dropbox" fileversion="2.0" language="C#" targetFramework="2.0" ctype="DotNetProject">
+<Project name="Dropbox" fileversion="2.0" language="C#" targetFramework="3.5" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Dropbox" />
-      <Build debugmode="True" target="Exe" />
+      <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assembly="Dropbox" />
-      <Build debugmode="False" target="Exe" />
+      <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
@@ -27,5 +27,20 @@
     <File name="src/DropboxUnshareAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/DropboxLinkAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/DropboxAbstractAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/Dropbox.DropboxConfig.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Config/DropboxConfig.cs" subtype="Code" buildaction="Compile" />
   </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../../usr/local/lib/gnome-do/Do.exe" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../../usr/local/lib/gnome-do/Do.Platform.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../../usr/local/lib/gnome-do/Do.Universe.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../../../../../usr/local/lib/gnome-do/Do.Platform.Linux.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </References>
 </Project>

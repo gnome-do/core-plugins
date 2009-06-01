@@ -3,6 +3,9 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Dropbox
 
 FILES = \
+  gtk-gui/Dropbox.DropboxConfig.cs \
+  gtk-gui/generated.cs \
+  src/Config/DropboxConfig.cs \
   src/DropboxWebInterfaceAction.cs \
   src/DropboxAbstractAction.cs \
   src/DropboxRevisionsAction.cs \
@@ -15,10 +18,12 @@ FILES = \
   src/Dropbox.cs
 
 RESOURCES = \
-  Resources/Dropbox.addin.xml
+  Resources/Dropbox.addin.xml \
+  gtk-gui/gui.stetic
 
 REFERENCES = \
   System \
   System.Core \
-  $(DO_PLATFORM_LIBS) \
-  $(DO_UNIVERSE_LIBS)
+  $(DO_PLATFORM_LINUX_LIBS) \
+  $(DO_UNIVERSE_LIBS) \
+  $(GTK_SHARP_20_LIBS)

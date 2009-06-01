@@ -23,14 +23,16 @@ using System.Linq;
 using System.Collections.Generic;
  
 using Do.Universe;
+using Do.Universe.Common;
 using Do.Platform;
+using Do.Platform.Linux;
 
 
 namespace Dropbox
 {
 	
 	
-	public class DropboxStartAction : Act
+	public class DropboxStartAction : Act, IConfigurable
 	{
 		
 		public override string Name {
@@ -59,6 +61,11 @@ namespace Dropbox
 			Dropbox.Start ();
 			
 			yield break;
+		}
+		
+		public Gtk.Bin GetConfiguration ()
+		{
+			return new DropboxConfig();
 		}
 
 	}

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <configuration>
+    <images-root-path>..</images-root-path>
+    <target-gtk-version>2.12</target-gtk-version>
+  </configuration>
+  <import>
+    <widget-library name="../../../../../../../../usr/local/lib/gnome-do/Do.exe" />
+    <widget-library name="../../../../../../../../usr/local/lib/gnome-do/Do.Platform.Linux.dll" />
+    <widget-library name="../bin/Debug/Dropbox.dll" internal="true" />
+  </import>
+  <widget class="Gtk.Bin" id="Dropbox.DropboxConfig" design-size="300 300">
+    <property name="MemberName" />
+    <property name="Visible">False</property>
+    <child>
+      <placeholder />
+    </child>
+  </widget>
+</stetic-interface>
