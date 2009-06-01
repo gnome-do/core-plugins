@@ -48,9 +48,10 @@ namespace RememberTheMilk
 		static DateTime last_sync;
 		static string username;
 		static string filter;
-		static TimeSpan overdue_notify_timeout;
-		static Thread overdue_notify_thread;
+		static uint overdue_timer;
+		
 		static string RTMIconPath = "rtm.png@" + typeof (RTMListItemSource).Assembly.FullName;
+		
 		const string ApiKey = "ee32c06f2d45baf935a2c046323457d8";
 		const string SharedSecret = "1b835b123a903938";
 
@@ -69,14 +70,18 @@ namespace RememberTheMilk
 			task_lock = new object ();
 			location_lock = new object ();
 			note_lock = new object ();
-			last_sync = DateTime.MinValue;
-			Preferences = new RTMPreferences ();
-			overdue_notify_thread = new Thread (new ThreadStart (OverdueNotificationLoop));
-			overdue_notify_thread.IsBackground = true;
-			overdue_notify_thread.Priority = ThreadPriority.Lowest;
-			UpdatePriorities ();
-			TryConnect ();
 			
+			RTMPreferences.AccountChanged += HandleAccountChanged;
+			RTMPreferences.FilterChanged += HandleFilterChanged;
+			RTMPreferences.OverdueIntervalChanged += HandleOverdueIntervalChanged;
+			RTMPreferences.OverdueNotificationChanged += HandleOverdueNotificationChanged;
+			
+			Services.Core.UniverseInitialized += HandleInitialized;
+			
+			ResetLastSync ();
+			ResetFilter ();
+			
+			TryConnect ();
 		}
 		
 		#region [ Authentication ]
@@ -116,8 +121,6 @@ namespace RememberTheMilk
 		
 		#region [ Public Properties ]
 		
-		public static RTMPreferences Preferences { get; set; }
-
 		// If not the initial updating of the universe, we'd like the universe manager
 		// to pick up the new items only after the update functions have done their jobs
 		// so locks are used to ensure the synchronization between threads.
@@ -203,15 +206,13 @@ namespace RememberTheMilk
 			if (!String.IsNullOrEmpty (task.Estimate))
 				attribute_list.Add (new RTMTaskAttributeItem (task.Estimate, "Time Estimate",
 				                                              task.Url, "stock_appointment-reminder", task));
-			if (!String.IsNullOrEmpty (task.LocationId)) {
+			if (!String.IsNullOrEmpty (task.LocationId))
 				attribute_list.Add (locations.Find (i => (i as RTMLocationItem).Id == task.LocationId));
-			}
 			
-			if (!String.IsNullOrEmpty (task.Tags)) {
+			if (!String.IsNullOrEmpty (task.Tags))
 				attribute_list.Add (new RTMTaskAttributeItem (task.Tags, "Tags", task.Url,
 				                                              "task-tag.png@" + typeof (RTMListItemSource).Assembly.FullName,
 				                                              task));
-			}
 			
 			List<Item> note_list = notes.FindAll (i => (i as RTMNoteItem).TaskId == task.Id);
 			if (note_list.Any ())
@@ -298,22 +299,12 @@ namespace RememberTheMilk
 				Tasks rtmTasks;
 				Tasks rtmTasks_sync;
 				
-				// if settings have changed, reset the synchronization state;
-				if (filter != Preferences.Filter || username != Preferences.Username)
-					last_sync = DateTime.MinValue;
-				
 				if (last_sync == DateTime.MinValue) {
 					tasks.Clear ();
 				}
 				
-				filter = Preferences.Filter;
-				if (String.IsNullOrEmpty (filter))
-					filter = "status:incomplete";
-				else if (!filter.Contains ("status:"))
-					filter = "status:incomplete OR (" + filter + ")";
-				
 				try {
-					// If first time sync, get full list of incompleted tasks
+					// If first time sync, get full list of tasks restricted by filter
 					// otherwise, only do incremental sync.
 					if (last_sync == DateTime.MinValue) {
 						rtmTasks = rtm.TasksGetList (null, null, filter);
@@ -331,7 +322,7 @@ namespace RememberTheMilk
 					return;
 				}
 				
-				// if not first sync, delete all changed tasks (using the list with nothing filtered)
+				// if not first time sync, delete all changed tasks (using the list with nothing filtered)
 				if (last_sync != DateTime.MinValue) {
 					foreach (List rtmList in rtmTasks_sync.ListCollection) {
 						if (rtmList.DeletedTaskSeries != null)
@@ -827,10 +818,10 @@ namespace RememberTheMilk
 
 		static bool TryConnect ()
 		{
-			if (!String.IsNullOrEmpty (Preferences.Token)) {
+			if (!String.IsNullOrEmpty (RTMPreferences.Token)) {
 				Auth auth;
 				try {
-					auth = rtm.AuthCheckToken (Preferences.Token);
+					auth = rtm.AuthCheckToken (RTMPreferences.Token);
 				} catch (RtmException e) {
 					Log.Error (Catalog.GetString ("Token verification failed."), e.Message);
 					return false;
@@ -845,9 +836,6 @@ namespace RememberTheMilk
 					Log.Error (Catalog.GetString ("Remember The Milk timeline creation failed."), e.Message);
 					return false;
 				}
-				
-				if (Preferences.OverdueNotification && !overdue_notify_thread.IsAlive)
-					overdue_notify_thread.Start ();
 				
 				return true;
 			} else {
@@ -865,38 +853,33 @@ namespace RememberTheMilk
 		}
 		
 		/// <summary>
-		/// Check if there is overdue task in All Tasks list,
-		/// when user chooses to be notified, display the information.
+		/// Show a notification if there is any overdue task.
 		/// </summary>
-		static void OverdueNotificationLoop ()
+		static void NotifyOverdueTasks ()
 		{
-			while (true) {
-				overdue_notify_timeout = TimeSpan.FromMinutes (Preferences.OverdueInterval);
-				Thread.Sleep (overdue_notify_timeout);
-				if (!Preferences.OverdueNotification)
-					continue;
-				List<Item> overdue_tasks;
-				object list_lock = new object ();
-				overdue_tasks = new List<Item> ();
-				lock (task_lock)
-					overdue_tasks = tasks.FindAll (i => IsOverdue (i as RTMTaskItem));      
+			if (!RTMPreferences.OverdueNotification)
+				return;
+			List<Item> overdue_tasks;
+			object list_lock = new object ();
+			overdue_tasks = new List<Item> ();
+			lock (task_lock)
+				overdue_tasks = tasks.FindAll (i => IsOverdue (i as RTMTaskItem));      
+			
+			int len = overdue_tasks.ToArray ().Length;
+			if (len > 0) {
+				string title;
+				title = String.Format (Catalog.GetPluralString ("{0} Task Overdue",
+				                                                "{0} Tasks Overdue", len), len);
 				
-				int len = overdue_tasks.ToArray ().Length;
-				if (len > 0) {
-					string title;
-					title = String.Format (Catalog.GetPluralString ("{0} Task Overdue",
-					                                                "{0} Tasks Overdue", len), len);
-					
-					string body = "";
-					lock (list_lock) {
-						foreach (Item item in overdue_tasks)
-							body += ("- " + (item as RTMTaskItem).Name +"\n");
-					}
-					Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification( title, body, "task-overdue.png@" + typeof(RTMTaskItem).Assembly.FullName));
+				string body = "";
+				lock (list_lock) {
+					foreach (Item item in overdue_tasks)
+						body += ("- " + (item as RTMTaskItem).Name +"\n");
 				}
+				Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification( title, body, "task-overdue.png@" + typeof(RTMTaskItem).Assembly.FullName));
 			}
 		}
-
+		
 		static bool IsOverdue (RTMTaskItem item)
 		{
 			return (item.Completed == DateTime.MinValue &&
@@ -936,7 +919,7 @@ namespace RememberTheMilk
 		static void FinalizeAction (string title, string body, 
 		                            bool updateTasks, bool updateLists, bool updateLocations)
 		{
-			if (Preferences.ActionNotification) {
+			if (RTMPreferences.ActionNotification) {
 				Do.Platform.Services.Notifications.Notify (new Do.Platform.Notification (title, body, RTMIconPath));
 			}
 			
@@ -953,7 +936,63 @@ namespace RememberTheMilk
 			FinalizeAction (title, body, false, false, false);
 		}
 		
+		static void ResetOverdueTimer ()
+		{
+			if (overdue_timer != 0)
+				GLib.Source.Remove (overdue_timer);
+			if (RTMPreferences.OverdueNotification)
+				overdue_timer = GLib.Timeout.Add ((uint) RTMPreferences.OverdueInterval * 60 * 1000,
+				                                  () => { NotifyOverdueTasks (); return true; });
+		}
+
+		static void ResetFilter ()
+		{
+			filter = RTMPreferences.Filter;
+			
+			if (String.IsNullOrEmpty (filter))
+				filter = "status:incomplete";
+			else if (!filter.Contains ("status:"))
+				filter = "status:incomplete OR (" + filter + ")";
+		}
+
+		static void ResetLastSync ()
+		{
+			last_sync = DateTime.MinValue;
+		}
+		
 		#endregion [ Utilities ]
+		
+		#region [ Event Handlers ]
+		
+		static void HandleAccountChanged (object sender, EventArgs e)
+		{
+			ResetLastSync ();
+		}
+		
+		static void HandleFilterChanged (object sender, EventArgs e)
+		{
+			ResetLastSync ();
+			ResetFilter ();
+		}
+
+		static void HandleOverdueIntervalChanged (object sender, EventArgs e)
+		{
+			ResetOverdueTimer ();
+		}
+		
+		static void HandleOverdueNotificationChanged (object sender, EventArgs e)
+		{
+			ResetOverdueTimer ();
+		}
+		
+		static void HandleInitialized (object sender, EventArgs e)
+		{
+			Services.Core.UniverseInitialized -= HandleInitialized;
+			UpdatePriorities ();
+			ResetOverdueTimer ();
+		}
+		
+		#endregion
 		
 	}
 }

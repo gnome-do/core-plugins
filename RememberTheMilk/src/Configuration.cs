@@ -42,7 +42,7 @@ namespace RememberTheMilk
 			wInt.Position = 1;
 			rtm_ref_btn.Clicked += OnRtmRefBtnClicked;
 			
-			if (!System.String.IsNullOrEmpty (RTM.Preferences.Token)) {
+			if (!System.String.IsNullOrEmpty (RTMPreferences.Token)) {
 				SetStateComplete ();
 			}
 		}
@@ -53,20 +53,20 @@ namespace RememberTheMilk
 
 		protected virtual void OnConfirmChkbtnClicked (object sender, System.EventArgs e)
 		{
-			RTM.Preferences.ActionNotification = confirm_chkbtn.Active;
+			RTMPreferences.ActionNotification = confirm_chkbtn.Active;
 		}
 
 		protected virtual void OnOverdueChkbtnClicked (object sender, System.EventArgs e)
 		{
-			RTM.Preferences.OverdueNotification = overdue_chkbtn.Active;
+			RTMPreferences.OverdueNotification = overdue_chkbtn.Active;
 			overdue_interval_spinbtn.Sensitive = overdue_chkbtn.Active;
-			overdue_interval_spinbtn.Value = RTM.Preferences.OverdueInterval;
+			overdue_interval_spinbtn.Value = RTMPreferences.OverdueInterval;
 			
 		}
 		
 		protected virtual void OnReturnNewChkBtnClicked (object sender, System.EventArgs e)
 		{
-			RTM.Preferences.ReturnNewTask = returnnew_chkbtn.Active;
+			RTMPreferences.ReturnNewTask = returnnew_chkbtn.Active;
 		}
 		
 		protected virtual void OnAuthBtnClicked (object sender, System.EventArgs e)
@@ -75,8 +75,8 @@ namespace RememberTheMilk
 			authinfo_lbl.Text = Catalog.GetString ("A webpage from Remember The Milk should be opened"
 			     + " in your web browser now. Please follow the instructions there and come back to complete"
 			     + " the authrozation by clicking the button below.");
-			RTM.Preferences.Token = "";
-			RTM.Preferences.Username = "";
+			RTMPreferences.Token = "";
+			RTMPreferences.Username = "";
 			notification_frm.Sensitive = false;
 			filter_frm.Sensitive = false;
 			Widget image = auth_btn.Image;
@@ -91,8 +91,8 @@ namespace RememberTheMilk
 			Auth auth;
 			auth = RTM.AuthComplete (frob);
 			if (auth != null ) {
-				RTM.Preferences.Token = auth.Token;
-				RTM.Preferences.Username = auth.User.Username;
+				RTMPreferences.Token = auth.Token;
+				RTMPreferences.Username = auth.User.Username;
 				auth_btn.Clicked -= new EventHandler (OnCompleteBtnClicked);
 				auth_btn.Clicked += new EventHandler (OnAuthBtnClicked);
 				SetStateComplete ();
@@ -107,21 +107,21 @@ namespace RememberTheMilk
 		private void SetStateComplete ()
 		{
 			authinfo_lbl.Text = String.Format (Catalog.GetString ("Thank you {0}, "
-			    + "RTM plugin is now authorized to operate on your account."), RTM.Preferences.Username);
+			    + "RTM plugin is now authorized to operate on your account."), RTMPreferences.Username);
 			auth_btn.Label = "Sign in as a different user";
 			notification_frm.Sensitive = true;
 			filter_frm.Sensitive = true;
-			confirm_chkbtn.Active = RTM.Preferences.ActionNotification;
-			overdue_chkbtn.Active = RTM.Preferences.OverdueNotification;
+			confirm_chkbtn.Active = RTMPreferences.ActionNotification;
+			overdue_chkbtn.Active = RTMPreferences.OverdueNotification;
 			overdue_interval_spinbtn.Sensitive = overdue_chkbtn.Active;
-			overdue_interval_spinbtn.Value = RTM.Preferences.OverdueInterval;
-			returnnew_chkbtn.Active = RTM.Preferences.ReturnNewTask;
-			filter_entry.Text = RTM.Preferences.Filter;
+			overdue_interval_spinbtn.Value = RTMPreferences.OverdueInterval;
+			returnnew_chkbtn.Active = RTMPreferences.ReturnNewTask;
+			filter_entry.Text = RTMPreferences.Filter;
 		}
 
 		protected virtual void OnFilterEntryChanged (object sender, System.EventArgs e)
 		{
-			RTM.Preferences.Filter = filter_entry.Text;
+			RTMPreferences.Filter = filter_entry.Text;
 		}
 
 		protected virtual void OnRtmRefBtnClicked (object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace RememberTheMilk
 
 		protected virtual void OnOverdueIntervalChanged (object sender, System.EventArgs e)
 		{
-			RTM.Preferences.OverdueInterval = overdue_interval_spinbtn.Value;
+			RTMPreferences.OverdueInterval = overdue_interval_spinbtn.Value;
 		}
 	}
 }

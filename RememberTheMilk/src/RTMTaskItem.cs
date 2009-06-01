@@ -111,7 +111,7 @@ namespace RememberTheMilk
 		public string Url {
 			get {
 				return "http://www.rememberthemilk.com/home/" +
-					RTM.Preferences.Username + "/" + list_id + "/" + task_id;
+					RTMPreferences.Username + "/" + list_id + "/" + task_id;
 			}
 		}
 		

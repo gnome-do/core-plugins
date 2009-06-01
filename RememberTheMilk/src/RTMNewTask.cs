@@ -73,7 +73,7 @@ namespace RememberTheMilk
 			if (modifierItems.FirstOrDefault () != null)
 				listId = (modifierItems.FirstOrDefault () as RTMListItem).Id;
 			
-			if (RTM.Preferences.ReturnNewTask)
+			if (RTMPreferences.ReturnNewTask)
 				yield return RTM.NewTask (listId, taskData);
 			else {
 				Services.Application.RunOnThread (() => {
