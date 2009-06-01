@@ -52,7 +52,7 @@ namespace Dropbox
 			string path = GetPath(item);
 			
 			return File.Exists (path) && 
-				(path.StartsWith (dropbox.BasePath) || 
+				(path.StartsWith (Dropbox.BasePath) || 
 				HasLink (path));
 		}
 		
@@ -60,10 +60,10 @@ namespace Dropbox
 		{
 			string path = GetPath(items.First ());
 			
-			if (!path.StartsWith (dropbox.BasePath)) 
+			if (!path.StartsWith (Dropbox.BasePath)) 
 				path = GetLink (path);
 			
-			string url = dropbox.GetRevisionsUrl (path);
+			string url = Dropbox.GetRevisionsUrl (path);
 			
 			Services.Environment.OpenUrl (url);
 			

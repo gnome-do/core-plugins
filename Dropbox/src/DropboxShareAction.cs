@@ -53,7 +53,7 @@ namespace Dropbox
 			string path = GetPath (item);
 			
 			return File.Exists (path) && 
-				!path.StartsWith (dropbox.PublicPath) && 
+				!path.StartsWith (Dropbox.PublicPath) && 
 				!HasLink (path);
 		}
 		
@@ -63,14 +63,14 @@ namespace Dropbox
 				string target = GetPath (item);
 				string extension = Path.GetExtension (target);
 				string filename = Path.GetFileNameWithoutExtension (target);
-				string link_name = Path.Combine (dropbox.DoSharedPath, 
+				string link_name = Path.Combine (Dropbox.DoSharedPath, 
 					String.Format ("{0}-{1}{2}", filename, rand.Next (), extension));
 				
-				Directory.CreateDirectory (dropbox.DoSharedPath);
+				Directory.CreateDirectory (Dropbox.DoSharedPath);
 				
 				if (MakeLink (target, link_name)) {
 					
-					string url = dropbox.GetPubUrl (link_name);	
+					string url = Dropbox.GetPubUrl (link_name);	
 					yield return new BookmarkItem (url, url);
 				
 				}

@@ -35,8 +35,6 @@ namespace Dropbox
 	{
 		
 		protected static Random rand = new Random ();
-		
-		protected static Dropbox dropbox = new Dropbox ();
 	
 	
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -73,7 +71,7 @@ namespace Dropbox
 		
 		protected string GetLink (string target)
 		{
-			return GetLink (target, dropbox.DoSharedPath);
+			return GetLink (target, Dropbox.DoSharedPath);
 		}
 		
 		protected string GetLink (string target, string directory)
@@ -137,8 +135,8 @@ namespace Dropbox
 				return stdout;
 				
 			} catch (Exception e) {
-				Log<Dropbox>.Error ("Error running {0} {1} : {2}", command, args, e.Message);
-				Log<Dropbox>.Debug (e.StackTrace);
+				Log<DropboxAbstractAction>.Error ("Error running {0} {1} : {2}", command, args, e.Message);
+				Log<DropboxAbstractAction>.Debug (e.StackTrace);
 				
 				return null;
 			}

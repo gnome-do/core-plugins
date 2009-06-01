@@ -34,8 +34,6 @@ namespace Dropbox
 	public class DropboxWebInterfaceAction : Act
 	{
 		
-		private static Dropbox dropbox = new Dropbox ();
-		
 		public override string Name {
 			get { return "Dropbox web interface";  }
 		}
@@ -62,7 +60,7 @@ namespace Dropbox
 				return item.Name == "Dropbox";
 			} else {
 				string path = (item as IFileItem).Path;
-				return path.StartsWith (dropbox.BasePath) &&
+				return path.StartsWith (Dropbox.BasePath) &&
 					Directory.Exists (path);
 			}
 		}
@@ -73,10 +71,10 @@ namespace Dropbox
 			Item item = items.First ();
 			
 			if (item is IApplicationItem) {
-				url = dropbox.GetWebUrl ();
+				url = Dropbox.GetWebUrl ();
 			} else {
 				path = (item as IFileItem).Path;
-				url = dropbox.GetWebUrl (path);
+				url = Dropbox.GetWebUrl (path);
 			}
 			
 			Services.Environment.OpenUrl (url);
