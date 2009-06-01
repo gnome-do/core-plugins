@@ -73,15 +73,8 @@ namespace RememberTheMilk
 				
 				if (due != DateTime.MinValue) {
 					desc += "Due " + due.ToString ((has_due_time != 0) ? "g" : "d");
-					
 					if (completed != DateTime.MinValue)
 						desc += " (completed at " + completed.ToString ("g") + ")";
-					else if ((due < DateTime.Now.AddDays (1.0) && due >= DateTime.Now && has_due_time == 1)
-					    || (due.Date == DateTime.Today && has_due_time == 0))
-						desc += " (in 1 day)";
-					else if ((due > DateTime.MinValue) &&
-					         ((due < DateTime.Now && has_due_time == 1) || due.Date < DateTime.Today))
-						desc += " (overdue)";
 				} else if (completed != DateTime.MinValue)
 					desc += "Completed at " + completed.ToString ("g");
 				

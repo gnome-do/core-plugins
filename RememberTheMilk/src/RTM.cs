@@ -245,11 +245,11 @@ namespace RememberTheMilk
 				
 				lists.Clear ();
 				
-				lists.Add (new RTMListItem ("all", "All Tasks", 1, 1));
-				lists.Add (new RTMListItem ("today", "Today's Tasks", 1, 1));
-				lists.Add (new RTMListItem ("tomorrow", "Tomorrow's Tasks", 1, 1));
-				lists.Add (new RTMListItem ("week", "Tasks in 1 Week", 1, 1));
-				lists.Add (new RTMListItem ("overdue", "Overdue Tasks", 1, 1));
+				//lists.Add (new RTMListItem ("all", "All Tasks", 1, 1));
+				lists.Add (new RTMListItem ("today", "Today", 1, 1));
+				lists.Add (new RTMListItem ("tomorrow", "Tomorrow", 1, 1));
+				lists.Add (new RTMListItem ("week", "In a Week", 1, 1));
+				lists.Add (new RTMListItem ("overdue", "Overdue", 1, 1));
 				
 				foreach (List rtmList in rtmLists.listCollection)
 					if (rtmList.Deleted == 0 && rtmList.Smart == 0)
