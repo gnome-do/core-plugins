@@ -34,7 +34,7 @@
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
-                      <widget class="Gtk.Entry" id="entry1">
+                      <widget class="Gtk.Entry" id="base_path_entry">
                         <property name="MemberName" />
                         <property name="Sensitive">False</property>
                         <property name="CanFocus">True</property>
@@ -47,13 +47,13 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Button" id="button5">
+                      <widget class="Gtk.Button" id="base_path_button">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="UseStock">True</property>
                         <property name="Type">StockItem</property>
                         <property name="StockId">gtk-open</property>
-                        <signal name="Clicked" handler="OnOpenBtnClicked" />
+                        <signal name="Clicked" handler="OnBasePathBtnClicked" />
                         <property name="label">gtk-open</property>
                       </widget>
                       <packing>

@@ -21,9 +21,9 @@ namespace Dropbox {
         
         private Gtk.HBox hbox2;
         
-        private Gtk.Entry entry1;
+        private Gtk.Entry base_path_entry;
         
-        private Gtk.Button button5;
+        private Gtk.Button base_path_button;
         
         private Gtk.Label GtkLabel1;
         
@@ -52,24 +52,24 @@ namespace Dropbox {
             this.hbox2.Name = "hbox2";
             this.hbox2.Spacing = 6;
             // Container child hbox2.Gtk.Box+BoxChild
-            this.entry1 = new Gtk.Entry();
-            this.entry1.Sensitive = false;
-            this.entry1.CanFocus = true;
-            this.entry1.Name = "entry1";
-            this.entry1.IsEditable = false;
-            this.entry1.InvisibleChar = '●';
-            this.hbox2.Add(this.entry1);
-            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox2[this.entry1]));
+            this.base_path_entry = new Gtk.Entry();
+            this.base_path_entry.Sensitive = false;
+            this.base_path_entry.CanFocus = true;
+            this.base_path_entry.Name = "base_path_entry";
+            this.base_path_entry.IsEditable = false;
+            this.base_path_entry.InvisibleChar = '●';
+            this.hbox2.Add(this.base_path_entry);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox2[this.base_path_entry]));
             w1.Position = 0;
             // Container child hbox2.Gtk.Box+BoxChild
-            this.button5 = new Gtk.Button();
-            this.button5.CanFocus = true;
-            this.button5.Name = "button5";
-            this.button5.UseStock = true;
-            this.button5.UseUnderline = true;
-            this.button5.Label = "gtk-open";
-            this.hbox2.Add(this.button5);
-            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox2[this.button5]));
+            this.base_path_button = new Gtk.Button();
+            this.base_path_button.CanFocus = true;
+            this.base_path_button.Name = "base_path_button";
+            this.base_path_button.UseStock = true;
+            this.base_path_button.UseUnderline = true;
+            this.base_path_button.Label = "gtk-open";
+            this.hbox2.Add(this.base_path_button);
+            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox2[this.base_path_button]));
             w2.Position = 1;
             w2.Expand = false;
             w2.Fill = false;
@@ -91,7 +91,7 @@ namespace Dropbox {
                 this.Child.ShowAll();
             }
             this.Hide();
-            this.button5.Clicked += new System.EventHandler(this.OnOpenBtnClicked);
+            this.base_path_button.Clicked += new System.EventHandler(this.OnBasePathBtnClicked);
         }
     }
 }
