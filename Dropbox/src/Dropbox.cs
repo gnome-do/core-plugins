@@ -29,7 +29,7 @@ namespace Dropbox
 {
 	
 	
-	public static class Dropbox
+	public class Dropbox
 	{
 		public static string BasePath;
 		public static string PublicPath;
@@ -107,8 +107,8 @@ namespace Dropbox
 				stdout = run.StandardOutput.ReadLine ();
 				
 			} catch (Exception e) {
-				Log.Error ("Error running dropbox {0}: {1}", args, e.Message);
-				Log.Debug (e.StackTrace);
+				Log<Dropbox>.Error ("Error running dropbox {0}: {1}", args, e.Message);
+				Log<Dropbox>.Debug (e.StackTrace);
 			}
 			
 			return stdout;
