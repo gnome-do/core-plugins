@@ -29,6 +29,9 @@ using Do.Universe;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Contrller class to handle all RTM operations.
+	/// </summary>
 	public static class RTM
 	{
 		#region [ Private Variable, Constant ]
@@ -86,10 +89,20 @@ namespace RememberTheMilk
 		
 		#region [ Authentication ]
 		
+		//// <value>
+		/// If we are authorized to communicate with RTM server.
+		/// </value>
 		public static bool IsAuthenticated {
 			get { return  (rtm.IsAuthenticated && !String.IsNullOrEmpty (rtm.AuthToken)); }
 		}
 		
+		/// <summary>
+		/// Initialize the authorization, open a URL where the user can agree 
+		/// the operation this plugin will perform on his/her RTM account.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/> indicating the frob value.
+		/// </returns>
 		public static string AuthInit ()
 		{
 			string frob;
@@ -103,6 +116,15 @@ namespace RememberTheMilk
 			return frob;
 		}
 		
+		/// <summary>
+		/// Complete the authorization, check the frob, retrieve and store the token as preference.
+		/// </summary>
+		/// <param name="frob">
+		/// A <see cref="System.String"/> indicating the frab value.
+		/// </param>
+		/// <returns>
+		/// A <see cref="Auth"/>
+		/// </returns>
 		public static Auth AuthComplete (string frob)
 		{
 			Auth auth;
@@ -124,6 +146,10 @@ namespace RememberTheMilk
 		// If not the initial updating of the universe, we'd like the universe manager
 		// to pick up the new items only after the update functions have done their jobs
 		// so locks are used to ensure the synchronization between threads.
+
+		/// <value>
+		/// All list retrieved from the RTM account plus 4 meta list
+		/// </value>
 		public static List<Item> Lists {
 			get {
 				if (last_sync == DateTime.MinValue)
@@ -133,6 +159,9 @@ namespace RememberTheMilk
 			}
 		}
 		
+		/// <value>
+		/// All tasks retrieved from the RTM account
+		/// </value>
 		public static List<Item> Tasks {
 			get {
 				if (last_sync == DateTime.MinValue)
@@ -142,6 +171,9 @@ namespace RememberTheMilk
 			}
 		}
 		
+		/// <value>
+		/// All locations retrieved from the RTM account.
+		/// </value>
 		public static List<Item> Locations {
 			get {
 				if (last_sync == DateTime.MinValue)
@@ -151,10 +183,16 @@ namespace RememberTheMilk
 			}
 		}
 		
+		/// <value>
+		/// All tags retrieved from the RTM account.
+		/// </value>
 		public static List<Item> Tags {
 			get { return tags; }
 		}
 		
+		/// <value>
+		/// A preset list of <see cref="RTMPriorityItem"/>
+		/// </value>
 		public static List<Item> Priorities
 		{
 			get {
@@ -166,6 +204,15 @@ namespace RememberTheMilk
 		
 		#region [ Relational Search ]
 		
+		/// <summary>
+		/// Finds all tasks in a given list indicated by the list's Id.
+		/// </summary>
+		/// <param name="listId">
+		/// A <see cref="System.String"/> indicating the Id of the list.
+		/// </param>
+		/// <returns>
+		/// A <see cref="List"/> of <see cref="Item"/> containing the found tasks.
+		/// </returns>
 		public static List<Item> TasksForList (string listId)
 		{
 			if (listId == "all")
@@ -182,16 +229,43 @@ namespace RememberTheMilk
 				return tasks.FindAll (i => (i as RTMTaskItem).ListId == listId);
 		}
 		
+		/// <summary>
+		/// Finds all tasks that have a given tag.
+		/// </summary>
+		/// <param name="tag">
+		/// A <see cref="System.String"/> indicating the tag to be searched for.
+		/// </param>
+		/// <returns>
+		/// A <see cref="List"/> of <see cref="Item"/> containing the found tasks.
+		/// </returns>
 		public static List<Item> TasksForTag (string tag)
 		{
 			return tasks.FindAll (i => (i as RTMTaskItem).Tags.Contains (tag));
 		}
 		
+		/// <summary>
+		/// Finds all tasks that are associated with a given location.
+		/// </summary>
+		/// <param name="locationId">
+		/// A <see cref="System.String"/> indicating the Id of the location.
+		/// </param>
+		/// <returns>
+		/// A <see cref="List"/> of <see cref="Item"/> containing the found tasks.
+		/// </returns>
 		public static List<Item> TasksForLocation (string locationId)
 		{
 			return tasks.FindAll (i => (i as RTMTaskItem).LocationId == locationId);
 		}
 		
+		/// <summary>
+		/// Generates all <see cref="RTMTaskAttributeItem"/>s based on the available properties of a task.
+		/// </summary>
+		/// <param name="task">
+		/// A <see cref="RTMTaskItem"/> indicating the task.
+		/// </param>
+		/// <returns>
+		/// A <see cref="List"/> of <see cref="Item"/> containing the generated attributes.
+		/// </returns>
 		public static List<Item> AttributesForTask (RTMTaskItem task)
 		{
 			List<Item> attribute_list = new List<Item> ();
@@ -227,6 +301,11 @@ namespace RememberTheMilk
 		
 		#region [ Methods for Data Update ]
 		
+		/// <summary>
+		/// Retrieves the list of task lists as <see cref="RTMListIem"/>s from RTM server.
+		/// Also adds 4 meta lists for easy access to overdue tasks, 
+		/// and tasks due today/tomorrow/in a week.
+		/// </summary>
 		public static void UpdateLists ()
 		{
 			lock (list_lock) {
@@ -259,6 +338,9 @@ namespace RememberTheMilk
 			Log.Debug ("[RememberTheMilk] Received {0} lists.", lists.ToArray ().Length);
 		}
 		
+		/// <summary>
+		/// Retrieves the list of locations as <see cref="RTMLocationItem"/>s from the RTM server.
+		/// </summary>
 		public static void UpdateLocations ()
 		{
 			lock (location_lock) {
@@ -289,6 +371,10 @@ namespace RememberTheMilk
 			Log.Debug ("[RememberTheMilk] Received {0} locations.", locations.ToArray ().Length);
 		}
 		
+		/// <summary>
+		/// Updates the list of tasks as <see cref="RTMTaskItem"/>s from the RTM server.
+		/// Also collects all the notes and tags during the update.
+		/// </summary>
 		public static void UpdateTasks ()
 		{
 			lock (task_lock) {
@@ -398,6 +484,9 @@ namespace RememberTheMilk
 			Log.Debug ("[RememberTheMilk] Received {0} tags.", tags.ToArray ().Length);
 		}
 		
+		/// <summary>
+		/// Manully generates a list containing all the <see cref="RTMPrioirtyItem"/>s.
+		/// </summary>
 		static void UpdatePriorities ()
 		{
 			priorities.Add (new RTMPriorityItem (Catalog.GetString ("High"),
@@ -815,7 +904,15 @@ namespace RememberTheMilk
 		#endregion [ Tag Actions ]
 		
 		#region [ Utilities ]
-
+		
+		/// <summary>
+		/// Initializes the connection to RTM server.
+		/// Verify the stored token with RTM server and if valid also creates the timeline.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.Boolean"/>, true if the connection is successfully established,
+		/// false if there is a problem during verfication or timeline creation.
+		/// </returns>
 		static bool TryConnect ()
 		{
 			if (!String.IsNullOrEmpty (RTMPreferences.Token)) {
@@ -839,11 +936,18 @@ namespace RememberTheMilk
 				
 				return true;
 			} else {
-				Log.Error (Catalog.GetString ("Not authorized to use an Remember The Milk account."));
+				Log.Error (Catalog.GetString ("Not authorized to use a Remember The Milk account."));
 				return false;
 			}
 		}
 		
+		/// <summary>
+		/// Try to remove a <see cref="RTMTaskItem"/> from the task list. 
+		/// All <see cref="RTMNoteItem"/>s related to the task are also removed from the note list.
+		/// </summary>
+		/// <param name="taskId">
+		/// A <see cref="System.String"/> indicating the Id of the task to be removed.
+		/// </param>
 		static void TryRemoveTask (string taskId)
 		{
 			lock (task_lock)
@@ -880,6 +984,15 @@ namespace RememberTheMilk
 			}
 		}
 		
+		/// <summary>
+		/// Check if a task is overdue.
+		/// </summary>
+		/// <param name="item">
+		/// A <see cref="RTMTaskItem"/> indicating the task to be checked.
+		/// </param>
+		/// <returns>
+		/// Ignored
+		/// </returns>
 		static bool IsOverdue (RTMTaskItem item)
 		{
 			return (item.Completed == DateTime.MinValue &&
@@ -887,19 +1000,46 @@ namespace RememberTheMilk
 			        ((item.HasDueTime == 1 && item.Due < DateTime.Now) || 
 			         item.Due.Date < DateTime.Today));
 		}
-
+		
+		/// <summary>
+		/// Check if a task is due today
+		/// </summary>
+		/// <param name="item">
+		/// A <see cref="RTMTaskItem"/> indicating the task to be checked
+		/// </param>
+		/// <returns>
+		/// Ignored
+		/// </returns>
 		static bool IsDueToday (RTMTaskItem item)
 		{
 			return (item.Completed == DateTime.MinValue && 
 			        item.Due.Date == DateTime.Today);
 		}
-
+		
+		/// <summary>
+		/// Check if a task is due tomorrow
+		/// </summary>
+		/// <param name="item">
+		/// A <see cref="RTMTaskItem"/> indicating the task to be checked
+		/// </param>
+		/// <returns>
+		/// Ignored
+		/// </returns>
 		static bool IsDueTomorrow (RTMTaskItem item)
 		{
 			return (item.Completed == DateTime.MinValue && 
 			        item.Due.Date == DateTime.Today.AddDays (1.0));
 		}
 		
+		/// <summary>
+		/// Check if a task is due in next 7 days.
+		/// </summary>
+		/// <param name="item">
+		/// A <see cref="RTMTaskItem"/> indicating the task to be checked.
+		/// </param>
+		/// <returns>
+		/// Ignored
+		/// </returns>
 		static bool IsDueInAWeek (RTMTaskItem item)
 		{
 			return (item.Completed == DateTime.MinValue &&
@@ -907,6 +1047,15 @@ namespace RememberTheMilk
 			        item.Due.Date <= DateTime.Today.AddDays (6.0));
 		}
 		
+		/// <summary>
+		/// Check if the give list name is protected from assigning to other list.
+		/// </summary>
+		/// <param name="listName">
+		/// A <see cref="System.String"/> indicating the list name to be checked .
+		/// </param>
+		/// <returns>
+		/// Ignored
+		/// </returns>
 		static bool IsProtectedList (string listName)
 		{
 			Item item = lists.Find (i => (i as RTMListItem).Name == listName);
@@ -935,7 +1084,10 @@ namespace RememberTheMilk
 		{
 			FinalizeAction (title, body, false, false, false);
 		}
-		
+
+		/// <summary>
+		/// Reset the timer for notifying overdue task.
+		/// </summary>
 		static void ResetOverdueTimer ()
 		{
 			if (overdue_timer != 0)
@@ -944,7 +1096,11 @@ namespace RememberTheMilk
 				overdue_timer = GLib.Timeout.Add ((uint) RTMPreferences.OverdueInterval * 60 * 1000,
 				                                  () => { NotifyOverdueTasks (); return true; });
 		}
-
+		
+		/// <summary>
+		/// Reset the <see cref="filter"/> to the current preference setting,
+		/// make sure we have 'status' defined in the string.
+		/// </summary>
 		static void ResetFilter ()
 		{
 			filter = RTMPreferences.Filter;
@@ -954,7 +1110,10 @@ namespace RememberTheMilk
 			else if (!filter.Contains ("status:"))
 				filter = "status:incomplete OR (" + filter + ")";
 		}
-
+		
+		/// <summary>
+		/// Reset the last synchronization timestamp.
+		/// </summary>
 		static void ResetLastSync ()
 		{
 			last_sync = DateTime.MinValue;
@@ -963,28 +1122,73 @@ namespace RememberTheMilk
 		#endregion [ Utilities ]
 		
 		#region [ Event Handlers ]
-		
+
+		/// <summary>
+		/// Handles when RTM account is changed
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		static void HandleAccountChanged (object sender, EventArgs e)
 		{
 			ResetLastSync ();
 		}
-		
+
+		/// <summary>
+		/// Handles when Filter preference is changed.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		static void HandleFilterChanged (object sender, EventArgs e)
 		{
 			ResetLastSync ();
 			ResetFilter ();
 		}
-
+		
+		/// <summary>
+		/// Handles when overdue notification interval preference is changed.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		static void HandleOverdueIntervalChanged (object sender, EventArgs e)
 		{
 			ResetOverdueTimer ();
 		}
 		
+		/// <summary>
+		/// Handles when show overdue notification preference is changed.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		static void HandleOverdueNotificationChanged (object sender, EventArgs e)
 		{
 			ResetOverdueTimer ();
 		}
 		
+		/// <summary>
+		/// Handles when the <see cref="UniverseManger"/> is initialized.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		static void HandleInitialized (object sender, EventArgs e)
 		{
 			Services.Core.UniverseInitialized -= HandleInitialized;
