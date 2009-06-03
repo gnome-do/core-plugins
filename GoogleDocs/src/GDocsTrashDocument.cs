@@ -63,7 +63,7 @@ namespace GDocs
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
         {						
             GDocs.TrashDocument (items.First () as GDocsItem);
-			return null;
+			yield break;
         }
 	}
 }

@@ -39,7 +39,7 @@ namespace Do.Addins.xmms2{
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems){
 			string command = string.Format("playlist load {0}", items.First ().Name);	
 			xmms2.Client(command, true);
-			return null;
+			yield break;
 		}
 	}
 	
@@ -74,7 +74,7 @@ namespace Do.Addins.xmms2{
 					xmms2.Client (string.Format ("shuffle {0}", item.Name));
 				}
 			}).Start ();
-			return null;
+			yield break;
 		}
 	}
 	
@@ -109,7 +109,7 @@ namespace Do.Addins.xmms2{
 					xmms2.Client(string.Format("coll attr Playlists/{0} jumplist {0}", item.Name));
 				}//unfortunately, there is no way to turn off repeat
 			}).Start();
-			return null;
+			yield break;
 		}
 	}
 	
@@ -144,7 +144,7 @@ namespace Do.Addins.xmms2{
 					xmms2.Client(string.Format("playlist create {0}", item.Name));
 				}
 			}).Start();
-			return null;
+			yield break;
 		}
 	}
 	public class xmms2RemovePlaylistAction : Act{
@@ -178,7 +178,7 @@ namespace Do.Addins.xmms2{
 					xmms2.Client(string.Format("playlist remove {0}", item.Name));
 				}
 			}).Start();
-			return null;
+			yield break;
 		}
 	}
 }

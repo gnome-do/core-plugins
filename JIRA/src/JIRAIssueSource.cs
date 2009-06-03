@@ -131,7 +131,7 @@ namespace JIRA
 		/// </summary>
 		public override IEnumerable<Item> ChildrenOfItem( Item parent )
 		{
-			return null;  
+			yield break;
 		}
 		
 		/// <summary>
