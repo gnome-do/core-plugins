@@ -22,7 +22,10 @@ using Do.Universe;
 using Do.Platform;
 
 namespace RememberTheMilk
-{	
+{
+	/// <summary>
+	/// Item class for the Remember The Milk Note, derived from <see cref="RTMTaskAttributeItem"/>.
+	/// </summary>
 	public class RTMNoteItem : RTMTaskAttributeItem
 	{
 		string note_id;

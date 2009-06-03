@@ -26,6 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "New Task" action.
+	/// </summary>
 	public class RTMNewTask : Act
 	{
 		public override string Name {

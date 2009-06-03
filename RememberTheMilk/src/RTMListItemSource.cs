@@ -24,7 +24,10 @@ using Do.Platform.Linux;
 using Do.Universe;
 
 namespace RememberTheMilk
-{	
+{
+	/// <summary>
+	/// ItemSource class for the Remember The Milk lists
+	/// </summary>
 	public class RTMListItemSource : ItemSource, IConfigurable
 	{		
 		public override string Name {

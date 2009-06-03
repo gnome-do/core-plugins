@@ -21,17 +21,16 @@ using System;
 using Do.Universe;
 
 namespace RememberTheMilk
-{	
+{
+	/// <summary>
+	/// Item class for the the Remember The Milk list
+	/// </summary>
 	public class RTMListItem : Item, IUrlItem
 	{
 		string list_id;
 		string name;
 		int locked;
 		int smart;
-				
-		public RTMListItem (string listId, string name) : this (listId, name, 0, 0)
-		{
-		}
 		
 		public RTMListItem (string listId, string name, int locked, int smart)
 		{

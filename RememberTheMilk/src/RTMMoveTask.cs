@@ -26,14 +26,17 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Move Task" action.
+	/// </summary>
 	public class RTMMoveTask : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Move to..."); }
+			get { return Catalog.GetString ("Move to ..."); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Move a seleted task from one list to another"); }
+			get { return Catalog.GetString ("Move the seleted task to another list"); }
 		}
 			
 		public override string Icon {

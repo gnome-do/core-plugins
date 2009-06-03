@@ -26,7 +26,9 @@ using Do.Universe;
 
 namespace RememberTheMilk
 {
-	
+	/// <summary>
+	/// ItemSource class for the tags used by tasks
+	/// </summary>
 	public class RTMTagItemSource : ItemSource
 	{
 		public override string Name {

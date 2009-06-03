@@ -23,6 +23,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Item class for the Remember The Milk location
+	/// </summary>
 	public class RTMLocationItem : RTMTaskAttributeItem
 	{
 		string id;

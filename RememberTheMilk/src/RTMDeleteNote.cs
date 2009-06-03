@@ -26,16 +26,19 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class to provide the "Delete Note" action.
+	/// </summary>
 	public class RTMDeleteNote : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Delete Note"); }
-		}		
-				
-		public override string Description {
-			get { return Catalog.GetString ("Detele the selected note from the task."); }
 		}
-			
+		
+		public override string Description {
+			get { return Catalog.GetString ("Detele the a note from a task."); }
+		}
+		
 		public override string Icon {
 			get { return "note-delete.png@" + GetType ().Assembly.FullName; }
 		}
@@ -50,7 +53,7 @@ namespace RememberTheMilk
 				Services.Application.RunOnThread (() => {
 					RTM.DeleteNote ((items.First () as RTMNoteItem).Id);
 				});
-				
+			
 			yield break;
 		}
 	}

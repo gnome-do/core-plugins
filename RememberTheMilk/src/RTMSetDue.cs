@@ -26,6 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Set Due Date/Time" action
+	/// </summary>
 	public class RTMSetDue : Act
 	{
 		public override string Name {
@@ -33,7 +36,7 @@ namespace RememberTheMilk
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Set the due date/time of a task"); }
+			get { return Catalog.GetString ("Set or change the due date/time of a task"); }
 		}
 			
 		public override string Icon {

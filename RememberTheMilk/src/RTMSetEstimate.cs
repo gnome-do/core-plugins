@@ -27,6 +27,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Set Estimated Time" action.
+	/// </summary>
 	public class RTMSetEstimate : Act
 	{
 		public override string Name {
@@ -42,21 +45,14 @@ namespace RememberTheMilk
 		}
 				
 		public bool CheckValidTime(string timeEntered) {
-			// These are the valid time values specified by the RTM API.
-			// See if the user has entered one of them.
-			string[] times = {"minute", "minutes", "hour",
-						"hours", "day", "days"};
-			bool hasValidTime = false;
+			// RTM API supports units of days, hours and minutes
+			string[] times = {
+				"min", "mins", "minute", "minutes",
+				"h", "hr", "hrs", "hour", "hours", 
+				"d", "day", "days"
+			};
 			
-			foreach(string timeValue in times)
-			{
-				if(timeEntered.IndexOf(timeValue) != -1) {
-					hasValidTime = true;
-					break;
-				}
-			}
-			
-			return hasValidTime;
+			return times.Any (t => timeEntered.EndsWith (t));
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -103,8 +99,9 @@ namespace RememberTheMilk
 			
 			if (!string.IsNullOrEmpty(est)) {
 				if (!CheckValidTime(est)) {
-					Services.Notifications.Notify("Remember The Milk",
-						"Invalid estimated time provided.");
+					Services.Notifications.Notify ("Invalid Time format",
+					                               "The estimated time entered cannot be understood.",
+					                               "rtm.png@" + GetType ().Assembly.FullName);
 					yield break;
 				}
 			}

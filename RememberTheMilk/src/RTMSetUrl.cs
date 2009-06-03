@@ -27,6 +27,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Set URL" action
+	/// </summary>
 	public class RTMSetUrl : Act
 	{
 		// URL regex taken from http://www.osix.net/modules/article/?id=586
@@ -46,7 +49,7 @@ namespace RememberTheMilk
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Set or reset the URL of a task."); }
+			get { return Catalog.GetString ("Set or change the URL of a task."); }
         	}
 			
 		public override string Icon {

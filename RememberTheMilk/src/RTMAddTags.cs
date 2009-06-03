@@ -26,17 +26,18 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
-	
+	/// <summary>
+	/// Class to provide the "Add Tag(s)" action
+	/// </summary>
 	public class RTMAddTags : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Add Tag(s)"); }
-		}		
-				
+		}
+		
 		public override string Description {
-			get { return Catalog.GetString ("Add one or more tags to the task."); }
-        }
+			get { return Catalog.GetString ("Add one or more tags to a task."); }
+		}
 			
 		public override string Icon {
 			get { return "tag-add.png@" + GetType ().Assembly.FullName; }
@@ -92,7 +93,7 @@ namespace RememberTheMilk
 			}
 			yield break;
 		}
-
+		
 		protected string GetText (Item item)
 		{
 			if (item is ITextItem)

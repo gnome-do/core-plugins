@@ -23,7 +23,9 @@ using Do.Universe;
 
 namespace RememberTheMilk
 {
-	
+	/// <summary>
+	/// Item class for the Remember The Milk tasks.
+	/// </summary>
 	public class RTMTaskItem : Item, IUrlItem
 	{
 		string list_id;

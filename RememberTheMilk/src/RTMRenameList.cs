@@ -26,14 +26,17 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Rename List to ..." action
+	/// </summary>
 	public class RTMRenameList : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Rename List"); }
+			get { return Catalog.GetString ("Rename List to ..."); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Sets a new name for a task list."); }
+			get { return Catalog.GetString ("Give a list a new name."); }
 		}
 		
 		public override string Icon {

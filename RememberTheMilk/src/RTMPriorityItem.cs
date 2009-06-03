@@ -20,6 +20,9 @@ using Do.Universe;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Item class for the Remember The Milk priorities
+	/// </summary>
 	public class RTMPriorityItem : Item
 	{
 		private string name;

@@ -26,8 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
-	
+	/// <summary>
+	/// Class to provide the "Delete Task" action.
+	/// </summary>
 	public class RTMDeleteTask : Act
 	{
 		public override string Name {
@@ -35,7 +36,7 @@ namespace RememberTheMilk
 		}		
 		
 		public override string Description {
-			get { return Catalog.GetString ("Delete a selected task from Remember The Milk"); }
+			get { return Catalog.GetString ("Delete a task from Remember The Milk"); }
 		}
 		
 		public override string Icon {

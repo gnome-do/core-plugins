@@ -74,15 +74,15 @@ namespace RememberTheMilk
 			location_lock = new object ();
 			note_lock = new object ();
 			
+			ResetLastSync ();
+			ResetFilter ();
+			
 			RTMPreferences.AccountChanged += HandleAccountChanged;
 			RTMPreferences.FilterChanged += HandleFilterChanged;
 			RTMPreferences.OverdueIntervalChanged += HandleOverdueIntervalChanged;
 			RTMPreferences.OverdueNotificationChanged += HandleOverdueNotificationChanged;
 			
 			Services.Core.UniverseInitialized += HandleInitialized;
-			
-			ResetLastSync ();
-			ResetFilter ();
 			
 			TryConnect ();
 		}
@@ -961,8 +961,6 @@ namespace RememberTheMilk
 		/// </summary>
 		static void NotifyOverdueTasks ()
 		{
-			if (!RTMPreferences.OverdueNotification)
-				return;
 			List<Item> overdue_tasks;
 			object list_lock = new object ();
 			overdue_tasks = new List<Item> ();

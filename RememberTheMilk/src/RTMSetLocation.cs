@@ -26,7 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
+	/// <summary>
+	/// Class for the "Set Location" action
+	/// </summary>
 	public class RTMSetLocation : Act
 	{
 		public override string Name {
@@ -34,7 +36,7 @@ namespace RememberTheMilk
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Set the location of a task"); }
+			get { return Catalog.GetString ("Set or change the location of a task"); }
         }
 			
 		public override string Icon {

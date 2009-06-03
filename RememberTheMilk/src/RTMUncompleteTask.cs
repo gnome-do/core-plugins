@@ -26,6 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Uncomplete" action.
+	/// </summary>
 	public class RTMUncompleteTask : Act
 	{
 		public override string Name {
@@ -33,7 +36,7 @@ namespace RememberTheMilk
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Mark a selected task as \"incomplete\"."); }
+			get { return Catalog.GetString ("Mark a task as \"incomplete\"."); }
 		}
 			
 		public override string Icon {

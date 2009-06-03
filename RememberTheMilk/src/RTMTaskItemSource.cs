@@ -24,7 +24,10 @@ using Do.Platform.Linux;
 using Do.Universe;
 
 namespace RememberTheMilk
-{	
+{
+	/// <summary>
+	/// ItemSource class for the Remember The Milk tasks.
+	/// </summary>
 	public class RTMTaskItemSource : ItemSource
 	{		
 		public override string Name {

@@ -27,15 +27,17 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "New Note" action
+	/// </summary>
 	public class RTMNewNote : Act
-	{	
-		
+	{
 		public override string Name {
-			get { return Catalog.GetString ("Add Note"); }
+			get { return Catalog.GetString ("New Note"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Add a new note to the selected task."); }
+			get { return Catalog.GetString ("Add a new note to a task."); }
 		}
 			
 		public override string Icon {

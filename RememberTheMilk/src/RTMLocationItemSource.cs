@@ -26,8 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
-	
+	/// <summary>
+	/// ItemSource class for the Remember The Milk locations
+	/// </summary>
 	public class RTMLocationItemSource : ItemSource
 	{
 		public override string Name {

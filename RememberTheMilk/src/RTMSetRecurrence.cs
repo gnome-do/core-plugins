@@ -26,6 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Set Recurrence" action
+	/// </summary>
 	public class RTMSetRecurrence : Act
 	{
 		public override string Name {
@@ -33,7 +36,7 @@ namespace RememberTheMilk
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Sets a recurrence pattern for a task."); }
+			get { return Catalog.GetString ("Set a recurrence pattern for a task."); }
 		}
 			
 		public override string Icon {

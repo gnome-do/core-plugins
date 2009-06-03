@@ -26,6 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class to provide the "Delete List" action.
+	/// </summary>
 	public class RTMDeleteList : Act
 	{
 		public override string Name {
@@ -33,7 +36,7 @@ namespace RememberTheMilk
 		}		
 		
 		public override string Description {
-			get { return Catalog.GetString ("Delete the selected task list from Remember The Milk"); }
+			get { return Catalog.GetString ("Delete a task list from Remember The Milk"); }
 		}
 		
 		public override string Icon {
@@ -41,11 +44,7 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (RTMListItem),
-				};
-			}
+			get { yield return typeof (RTMListItem); }
 		}
 		
 		public override bool SupportsItem (Item item) 
@@ -60,6 +59,7 @@ namespace RememberTheMilk
 			Services.Application.RunOnThread (() => {
 				RTM.DeleteList (listname);
 			});
+			
 			yield break;
 		}
 	}

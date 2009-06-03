@@ -23,6 +23,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Item class for the tags used by tasks, inheritated from <see cref="RTMTaskAttributeItem"/>
+	/// </summary>
 	public class RTMTagItem : RTMTaskAttributeItem
 	{
 		public RTMTagItem (string text)

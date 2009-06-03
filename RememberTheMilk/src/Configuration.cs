@@ -23,15 +23,20 @@ using Do.Platform;
 
 using Gtk;
 
-
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// (Partial) class for the preference dialog
+	/// </summary>
 	public partial class Configuration : Gtk.Bin
 	{
-		//private static IPreferences prefs;
 		private LinkButton rtm_ref_btn;
 		private string frob;
 		
+		/// <summary>
+		/// Constructor. Creates a new link button point to the help page for filter
+		/// Initialize the UI.
+		/// </summary>
 		public Configuration ()
 		{
 			this.Build();
@@ -50,12 +55,30 @@ namespace RememberTheMilk
 		static Configuration ()
 		{
 		}
-
+		
+		/// <summary>
+		/// Called when the user checks to receive notification after each action
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnConfirmChkbtnClicked (object sender, System.EventArgs e)
 		{
 			RTMPreferences.ActionNotification = confirm_chkbtn.Active;
 		}
-
+		
+		/// <summary>
+		/// Called when the user checkr the "Notfiy overdue tasks option"
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnOverdueChkbtnClicked (object sender, System.EventArgs e)
 		{
 			RTMPreferences.OverdueNotification = overdue_chkbtn.Active;
@@ -64,11 +87,29 @@ namespace RememberTheMilk
 			
 		}
 		
+		/// <summary>
+		/// Called when the user checks the "Return the newly created task" option.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnReturnNewChkBtnClicked (object sender, System.EventArgs e)
 		{
 			RTMPreferences.ReturnNewTask = returnnew_chkbtn.Active;
 		}
 		
+		/// <summary>
+		/// Called when the "Authorize" button is clicked. Initializes the authentication.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnAuthBtnClicked (object sender, System.EventArgs e)
 		{
 			frob = RTM.AuthInit ();
@@ -86,6 +127,15 @@ namespace RememberTheMilk
 			auth_btn.Clicked += new EventHandler (OnCompleteBtnClicked);
 		}
 		
+		/// <summary>
+		/// Called when user returns from the authentication webpage and clicks the "Complete" button.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnCompleteBtnClicked (object sender, EventArgs e)
 		{
 			Auth auth;
@@ -104,6 +154,9 @@ namespace RememberTheMilk
 			}
 		}
 		
+		/// <summary>
+		/// Initialize the state of various UI components.
+		/// </summary>
 		private void SetStateComplete ()
 		{
 			authinfo_lbl.Text = String.Format (Catalog.GetString ("Thank you {0}, "
@@ -118,17 +171,44 @@ namespace RememberTheMilk
 			returnnew_chkbtn.Active = RTMPreferences.ReturnNewTask;
 			filter_entry.Text = RTMPreferences.Filter;
 		}
-
+		
+		/// <summary>
+		/// Called when the Filter entry is changed by user.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnFilterEntryChanged (object sender, System.EventArgs e)
 		{
 			RTMPreferences.Filter = filter_entry.Text;
 		}
-
+		
+		/// <summary>
+		/// Called when the link button to RTM reference page is clicked by user.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnRtmRefBtnClicked (object sender, EventArgs e)
 		{
 			Do.Platform.Services.Environment.OpenUrl("http://www.rememberthemilk.com/help/answers/search/advanced.rtm");
 		}
-
+		
+		/// <summary>
+		/// Called when user changes the interval spin button.
+		/// </summary>
+		/// <param name="sender">
+		/// Ignored
+		/// </param>
+		/// <param name="e">
+		/// Ignored
+		/// </param>
 		protected virtual void OnOverdueIntervalChanged (object sender, System.EventArgs e)
 		{
 			RTMPreferences.OverdueInterval = overdue_interval_spinbtn.Value;

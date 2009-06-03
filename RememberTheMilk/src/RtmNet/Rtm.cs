@@ -25,10 +25,9 @@ namespace RtmNet
 	//[System.Net.WebPermission(System.Security.Permissions.SecurityAction.Demand, ConnectPattern="http://www.Rtm.com/.*")]
 	public class Rtm
 	{
-#region [ Private Variables ]
+		#region [ Private Variables ]
 		private const string AuthUrl = "http://api.rememberthemilk.com/services/auth/";
 		private const string BaseUrl = "http://api.rememberthemilk.com/services/rest/";
-		
 		
 		private object throttlingLock;
 		private string apiKey;
@@ -40,12 +39,12 @@ namespace RtmNet
 		private string lastResponse;
 		private DateTime lastRequestTime;
 		private TimeSpan throttling;
-
+		
 		private WebProxy proxy;// = WebProxy.GetDefaultProxy();
-
-#endregion
-
-#region [ Public Properties ]
+		
+		#endregion
+		
+		#region [ Public Properties ]
 		/// <summary>
 		/// Get or set the API Key to be used by all calls. API key is mandatory for all 
 		/// calls to Rtm.
@@ -53,9 +52,9 @@ namespace RtmNet
 		public string ApiKey 
 		{ 
 			get { return apiKey; } 
-			set { apiKey = (value==null||value.Length==0?null:value); }
+			set { apiKey = (value == null || value.Length == 0 ? null : value); }
 		}
-
+		
 		/// <summary>
 		/// API shared secret is required for all calls that require signing, which includes
 		/// all methods that require authentication, as well as the actual Rtm.auth.* calls.
@@ -63,7 +62,7 @@ namespace RtmNet
 		public string ApiSecret
 		{
 			get { return sharedSecret; }
-			set { sharedSecret = (value==null||value.Length==0?null:value); }
+			set { sharedSecret = (value == null || value.Length == 0 ? null : value); }
 		}
 
 		/// <summary>
@@ -78,12 +77,12 @@ namespace RtmNet
 		/// (their own, or others).
 		/// </remarks>
 		[Obsolete("Renamed to AuthToken to be more consistent with the Rtm API")]
-			public string ApiToken 
-			{
-				get { return apiToken; }
-				set { apiToken = (value==null||value.Length==0?null:value); }
-			}
-
+		public string ApiToken 
+		{
+			get { return apiToken; }
+			set { apiToken = (value == null || value.Length == 0 ? null : value); }
+		}
+		
 		/// <summary>
 		/// The authentication token is required for all calls that require authentication.
 		/// A <see cref="RtmException"/> will be raised by Rtm if the authentication token is
@@ -98,9 +97,9 @@ namespace RtmNet
 		public string AuthToken 
 		{
 			get { return apiToken; }
-			set { apiToken = (value==null||value.Length==0?null:value); }
+			set { apiToken = (value == null || value.Length == 0 ? null : value); }
 		}
-
+		
 		/// <summary>
 		/// The default service to use for new Rtm instances
 		/// </summary>
@@ -108,7 +107,7 @@ namespace RtmNet
 		{
 			get { return SupportedService.Rtm; }
 		}
-
+		
 		/// <summary>
 		/// The current service that the Rtm API is using.
 		/// </summary>
@@ -116,7 +115,7 @@ namespace RtmNet
 		{
 			get { return SupportedService.Rtm; } 
 		}
-
+		
 		/// <summary>
 		/// Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
 		/// </summary>
@@ -125,7 +124,7 @@ namespace RtmNet
 			get { return timeout; } 
 			set { timeout = value; }
 		}
-
+		
 		/// <summary>
 		/// Checks to see if a shared secret and an api token are stored in the object.
 		/// Does not check if these values are valid values.
@@ -134,7 +133,7 @@ namespace RtmNet
 		{
 			get { return (sharedSecret != null && apiToken != null); }
 		}
-
+		
 		/// <summary>
 		/// Returns the raw XML returned from the last response.
 		/// Only set it the response was not returned from cache.
@@ -143,7 +142,7 @@ namespace RtmNet
 		{
 			get { return lastResponse; }
 		}
-
+		
 		/// <summary>
 		/// Returns the last URL requested. Includes API signing.
 		/// </summary>
@@ -151,16 +150,19 @@ namespace RtmNet
 		{
 			get { return lastRequest; }
 		}
-
+		
 		/// <summary>
 		/// You can set the <see cref="WebProxy"/> or alter its properties.
 		/// It defaults to your internet explorer proxy settings.
 		/// </summary>
-		public WebProxy Proxy { get { return proxy; } set { proxy = value; } }
-#endregion
-
-#region [ Constructors ]
-
+		public WebProxy Proxy {
+			get { return proxy; } 
+			set { proxy = value; } 
+		}
+		#endregion
+		
+		#region [ Constructors ]
+		
 		/// <summary>
 		/// Constructor loads configuration settings from app.config or web.config file if they exist.
 		/// </summary>
@@ -202,9 +204,9 @@ namespace RtmNet
 			this.throttlingLock = new object ();
 			this.throttling = TimeSpan.FromSeconds (1.0);
 		}
-#endregion
-
-#region [ Private Methods ]
+		#endregion
+		
+		#region [ Private Methods ]
 		/// <summary>
 		/// A private method which performs the actual HTTP web request if
 		/// the details are not found within the cache.
@@ -218,19 +220,19 @@ namespace RtmNet
 		{
 			HttpWebRequest req = null;
 			HttpWebResponse res = null;
-
+			
 			if( variables.Length < 2000 )
 			{
 				url += "?" + variables;
 				variables = "";
 			}
-
+			
 			// Initialise the web request
 			req = (HttpWebRequest)HttpWebRequest.Create(url);
 			req.Method = "POST";
-
+			
 			if (req.Method == "POST") req.ContentLength = variables.Length;
-
+			
 			req.UserAgent = UserAgent;
 			if( Proxy != null ) req.Proxy = Proxy;
 			req.Timeout = HttpTimeout;
@@ -298,7 +300,7 @@ namespace RtmNet
 
 #endregion
 
-#region [ GetResponse methods ]
+		#region [ GetResponse methods ]
 		private Response GetResponse(Hashtable parameters)
 		{
 			return GetResponse (parameters, false);
@@ -306,34 +308,34 @@ namespace RtmNet
 		private Response GetResponse(Hashtable parameters, bool debug)
 		{
 			CheckApiKey();
-
+			
 			// Calulate URL 
 			string url = BaseUrl;
 			
 			StringBuilder UrlStringBuilder = new StringBuilder("", 2 * 1024);
 			StringBuilder HashStringBuilder = new StringBuilder(sharedSecret, 2 * 1024);
-
+			
 			parameters["api_key"] = apiKey;
-
+			
 			if( apiToken != null && apiToken.Length > 0 )
 			{
 				parameters["auth_token"] = apiToken;
 			}
-
+			
 			string[] keys = new string[parameters.Keys.Count];
 			parameters.Keys.CopyTo(keys, 0);
 			Array.Sort(keys);
-
-			foreach(string key in keys)
+			
+			foreach (string key in keys)
 			{
-				if( UrlStringBuilder.Length > 0 ) UrlStringBuilder.Append("&");
+				if (UrlStringBuilder.Length > 0) UrlStringBuilder.Append("&");
 				UrlStringBuilder.Append(key);
 				UrlStringBuilder.Append("=");
 				UrlStringBuilder.Append(Utils.UrlEncode(Convert.ToString(parameters[key])));
 				HashStringBuilder.Append(key);
 				HashStringBuilder.Append(parameters[key]);
 			}
-
+			
 			if (sharedSecret != null && sharedSecret.Length > 0) 
 			{
 				if (UrlStringBuilder.Length > BaseUrl.Length + 1)
@@ -343,7 +345,7 @@ namespace RtmNet
 				UrlStringBuilder.Append("api_sig=");
 				UrlStringBuilder.Append(Md5Hash(HashStringBuilder.ToString()));
 			}
-
+			
 			string variables = UrlStringBuilder.ToString();
 			lastRequest = url;
 			lastResponse = string.Empty;
@@ -367,9 +369,8 @@ namespace RtmNet
 			
 			return Utils.Deserialize(responseXml);
 		}
-
-#endregion
-
+		
+		#endregion
 
 #region [ Auth ]
 		/// <summary>

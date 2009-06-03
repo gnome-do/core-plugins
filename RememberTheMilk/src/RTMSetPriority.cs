@@ -26,8 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
-	
+	/// <summary>
+	/// Class for the "Set Prioirty" action
+	/// </summary>
 	public class RTMSetPriority : Act
 	{
 		public override string Name {
@@ -35,50 +36,32 @@ namespace RememberTheMilk
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Set the priority of a task"); }
-        }
-			
+			get { return Catalog.GetString ("Set or change the priority of a task"); }
+		}
+		
 		public override string Icon {
 			get { return "task-priority.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (RTMTaskItem),
-				};
-			}
+			get { yield return typeof (RTMTaskItem); }
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { 
-				return new Type[] {
-					typeof (RTMPriorityItem),
-				};
-			}
-        }
-        
-        public override bool ModifierItemsOptional {
-            get { return false; }
-        }
-        
-        public override bool SupportsItem (Item item) 
-        {
-            return true;
-        }
-        
-        public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-        {
-			return true;
-        }
-        
-        public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
-        {
-            return RTM.Priorities;
-        }
-        
-        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
-        {
+			get { yield return typeof (RTMPriorityItem); }
+		}
+		
+		public override bool ModifierItemsOptional {
+			get { return false; }
+		}
+		
+		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item) 
+		{
+			return RTM.Priorities;
+		}
+		
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+		{
 			Services.Application.RunOnThread (() => {
 				RTM.SetTaskPriority ( (items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 				                     (items.First () as RTMTaskItem).Id, (modifierItems.First () as RTMPriorityItem).Priority);

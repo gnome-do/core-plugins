@@ -26,6 +26,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Postpone" action
+	/// </summary>
 	public class RTMPostponeTask : Act
 	{
 		public override string Name {

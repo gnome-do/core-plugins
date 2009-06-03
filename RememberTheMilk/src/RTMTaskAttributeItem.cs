@@ -23,7 +23,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
+	/// <summary>
+	/// Item class for all the generic task attributes.
+	/// </summary>
 	public class RTMTaskAttributeItem : Item, IUrlItem
 	{
 		string name;

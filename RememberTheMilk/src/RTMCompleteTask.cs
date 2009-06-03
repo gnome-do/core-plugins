@@ -26,42 +26,39 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
-	
+	/// <summary>
+	/// Class to provide the "Complete Task" action.
+	/// </summary>
 	public class RTMCompleteTask : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Complete"); }
-		}		
-				
+		}
+		
 		public override string Description {
-			get { return Catalog.GetString ("Complete a selected task"); }
-        }
-			
+			get { return Catalog.GetString ("Complete a task"); }
+		}
+		
 		public override string Icon {
 			get { return "task-complete.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (RTMTaskItem),
-				};
-			}
+			get { yield return typeof (RTMTaskItem); }
 		}
-        
-        public override bool SupportsItem (Item item) 
-        {
-            return (item as RTMTaskItem).Completed == DateTime.MinValue;
-        }
-        
-        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
-        {
+		
+		public override bool SupportsItem (Item item) 
+		{
+			return (item as RTMTaskItem).Completed == DateTime.MinValue;
+		}
+		
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+		{
 			Services.Application.RunOnThread (() => {
 				RTM.CompleteTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
 				                  (items.First () as RTMTaskItem).Id);
 			});
-            yield break;
-        }
+			yield break;
+		}
 	}
 }

@@ -26,18 +26,19 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
-	
-	
+	/// <summary>
+	/// Class to provide the "Delete Tags" action.
+	/// </summary>
 	public class RTMDeleteTags : Act
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Delete Tag(s)"); }
-		}		
-				
+		}
+		
 		public override string Description {
-			get { return Catalog.GetString ("Detele one or more tags from the task."); }
-        }
-			
+			get { return Catalog.GetString ("Detele one or more tags from a task."); }
+		}
+		
 		public override string Icon {
 			get { return "tag-delete.png@" + GetType ().Assembly.FullName; }
 		}
@@ -50,7 +51,7 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { yield return typeof (RTMTagItem); }
+			get { yield return typeof (RTMTagItem); }
 		}
 		
 		public override bool SupportsItem (Item item) {
@@ -80,7 +81,7 @@ namespace RememberTheMilk
 		{
 			RTMTaskItem task = null;
 			List<string> temp_tags = new List<string> ();
-
+			
 			if (items.Any()) {
 				if (items.First () is RTMTaskItem)
 					task = (items.First () as RTMTaskItem);
