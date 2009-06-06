@@ -283,6 +283,7 @@ Pastebin/Makefile
 Pidgin/Makefile
 PingFM/Makefile
 Putty/Makefile
+Qalculate/Makefile
 Quote/Makefile
 RememberTheMilk/Makefile
 RemindMe/Makefile

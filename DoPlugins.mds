@@ -72,6 +72,7 @@
       <Entry build="True" name="YouTube" configuration="Debug" />
       <Entry build="True" name="Emesene" configuration="Debug" />
       <Entry build="True" name="RemindMe" configuration="Debug" />
+      <Entry build="True" name="Qalculate" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -145,6 +146,7 @@
       <Entry build="True" name="YouTube" configuration="Release" />
       <Entry build="True" name="Emesene" configuration="Release" />
       <Entry build="True" name="RemindMe" configuration="Release" />
+      <Entry build="True" name="Qalculate" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -219,6 +221,7 @@
     <Execute type="None" entry="YouTube" />
     <Execute type="None" entry="Emesene" />
     <Execute type="None" entry="RemindMe" />
+    <Execute type="None" entry="Qalculate" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -293,5 +296,6 @@
     <Entry filename="YouTube/YouTube.mdp" />
     <Entry filename="Emesene/Emesene.mdp" />
     <Entry filename="RemindMe/RemindMe.mdp" />
+    <Entry filename="Qalculate/Qalculate.mdp" />
   </Entries>
 </Combine>
