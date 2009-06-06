@@ -61,14 +61,21 @@ namespace Dropbox
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string path = GetPath(items.First ());
+			string path;
 			
-			if (!path.StartsWith (Dropbox.PublicPath)) 
-				path = GetLink (path);
-
-			string url = Dropbox.GetPubUrl (path);
+			foreach (Item i in items)
+			{
+				path = GetPath(i);
 			
-			yield return new BookmarkItem (pub_url_title, url);
+				if (!path.StartsWith (Dropbox.PublicPath)) 
+					path = GetLink (path);
+	
+				string url = Dropbox.GetPubUrl (path);
+				
+				yield return new BookmarkItem (pub_url_title, url);
+			}
+			
+			yield break;
 		}
 
 	}

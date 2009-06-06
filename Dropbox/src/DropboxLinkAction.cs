@@ -68,15 +68,20 @@ namespace Dropbox
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			string target = GetPath (items.First ());
-			string folder = GetPath (modItems.First ());
-			string link_name = Path.Combine (folder, Path.GetFileName (target));
-			
-			if (MakeLink (target, link_name))
-				yield return Services.UniverseFactory.NewFileItem (link_name) as Item;
+			string target, folder, link_name;
+
+			foreach (Item i in items) {
+				target = GetPath (i);
+				folder = GetPath (modItems.First ());
+				link_name = Path.Combine (folder, Path.GetFileName (target));
+
+				if (MakeLink (target, link_name))
+					yield return Services.UniverseFactory.NewFileItem (link_name) as Item;
+			}
 			
 			yield break;
 		}
+
 
 	}
 }
