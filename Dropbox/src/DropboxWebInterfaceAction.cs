@@ -24,22 +24,23 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
+using Mono.Unix;
+
 using Do.Universe;
 using Do.Platform;
 
 namespace Dropbox
 {
 	
-	
 	public class DropboxWebInterfaceAction : Act
 	{
 		
 		public override string Name {
-			get { return "Dropbox web interface";  }
+			get { return Catalog.GetString ("Dropbox web interface");  }
 		}
 		
 		public override string Description {
-			get { return "Views folder in Dropbox web interface."; }
+			get { return Catalog.GetString ("Views folder in Dropbox web interface."); }
 		}
 		
 		public override string Icon {

@@ -24,6 +24,8 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 
+using Mono.Unix;
+
 using Do.Universe;
 using Do.Platform;
 
@@ -35,6 +37,7 @@ namespace Dropbox
 	{
 		
 		protected static Random rand = new Random ();
+		protected string pub_url_title = Catalog.GetString ("URL of your shared file");
 	
 	
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -43,7 +46,7 @@ namespace Dropbox
 		
 		protected void Notify (string message)
 		{
-			Notification notification = new Notification ("Dropbox", message, "dropbox");
+			Notification notification = new Notification (Catalog.GetString ("Dropbox"), message, "dropbox");
 			Services.Notifications.Notify (notification);
 		}
 		

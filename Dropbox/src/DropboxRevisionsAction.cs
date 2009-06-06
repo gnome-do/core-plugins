@@ -22,6 +22,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+
+using Mono.Unix;
  
 using Do.Universe;
 using Do.Universe.Common;
@@ -36,11 +38,11 @@ namespace Dropbox
 	{
 				
 		public override string Name {
-			get { return "View revisions";  }
+			get { return Catalog.GetString ("View revisions");  }
 		}
 		
 		public override string Description {
-			get { return "Views file history in Dropbox web interface."; }
+			get { return Catalog.GetString ("Views file history in Dropbox web interface."); }
 		}
 		
 		public override string Icon {

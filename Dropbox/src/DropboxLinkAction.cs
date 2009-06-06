@@ -23,7 +23,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
- 
+
+using Mono.Unix;
+
 using Do.Universe;
 using Do.Universe.Common;
 using Do.Platform;
@@ -35,11 +37,11 @@ namespace Dropbox
 	{
 				
 		public override string Name {
-			get { return "Add to Dropbox...";  }
+			get { return Catalog.GetString ("Add to Dropbox...");  }
 		}
 		
 		public override string Description {
-			get { return "Links a file or folder to your Dropbox."; }
+			get { return Catalog.GetString ("Links a file or folder to your Dropbox."); }
 		}
 		
 		public override string Icon {

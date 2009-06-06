@@ -21,7 +21,9 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
- 
+
+using Mono.Unix;
+
 using Do.Universe;
 using Do.Platform;
 
@@ -34,11 +36,11 @@ namespace Dropbox
 	{
 		
 		public override string Name {
-			get { return "Stop Dropbox";  }
+			get { return Catalog.GetString ("Stop Dropbox");  }
 		}
 		
 		public override string Description {
-			get { return "Stops the Dropbox daemon."; }
+			get { return Catalog.GetString ("Stops the Dropbox daemon."); }
 		}
 		
 		public override string Icon {

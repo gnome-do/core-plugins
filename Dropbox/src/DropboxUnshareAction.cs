@@ -23,6 +23,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+
+using Mono.Unix;
  
 using Do.Universe;
 using Do.Universe.Common;
@@ -32,16 +34,15 @@ using Do.Platform;
 namespace Dropbox
 {
 	
-	
 	public class DropboxUnshareAction : DropboxAbstractAction
 	{
 	
 		public override string Name {
-			get { return "Stop sharing with Dropbox";  }
+			get { return Catalog.GetString ("Stop sharing with Dropbox");  }
 		}
 		
 		public override string Description {
-			get { return "Unlinks a file from your Dropbox public folder."; }
+			get { return Catalog.GetString ("Unlinks a file from your Dropbox public folder."); }
 		}
 		
 		public override string Icon {
@@ -63,7 +64,7 @@ namespace Dropbox
 				
 				Unlink (link_path);
 				
-				Notify (String.Format ("Stopped sharing \"{0}\"", path));
+				Notify (String.Format (Catalog.GetString ("Stopped sharing") + " {0}", path));
 			}
 			
 			yield break;

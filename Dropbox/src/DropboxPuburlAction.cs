@@ -22,7 +22,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
- 
+
+using Mono.Unix;
+
 using Do.Universe;
 using Do.Universe.Common;
 using Do.Platform;
@@ -36,11 +38,11 @@ namespace Dropbox
 	{
 				
 		public override string Name {
-			get { return "Get public URL";  }
+			get { return Catalog.GetString ("Get public URL");  }
 		}
 		
 		public override string Description {
-			get { return "Gets public URL of a shared Dropbox file."; }
+			get { return Catalog.GetString ("Gets public URL of a shared Dropbox file."); }
 		}
 		
 		public override string Icon {
@@ -66,7 +68,7 @@ namespace Dropbox
 
 			string url = Dropbox.GetPubUrl (path);
 			
-			yield return new BookmarkItem (url, url);
+			yield return new BookmarkItem (pub_url_title, url);
 		}
 
 	}
