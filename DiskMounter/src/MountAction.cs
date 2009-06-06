@@ -61,7 +61,7 @@ namespace DiskMounter
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			(items.First () as DriveItem).Mount ();
-			return null;
+			yield break;
 		}
 	}
 }

@@ -70,6 +70,7 @@ namespace WindowManager
 
 		public WindowItemSource ()
 		{
+			WindowUtils.Initialize ();
 			items = new List<Item> ();
 			items.Add (new CurrentApplicationItem ());
 			items.Add (new CurrentWindowItem ());

@@ -50,6 +50,11 @@ namespace WindowManager
 				return "desktop";
 			}
 		}
+		
+		public ScreenItemSource ()
+		{
+			ScreenUtils.Initialize ();
+		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {

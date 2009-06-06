@@ -66,7 +66,7 @@ namespace Skype {
       get { return items; }
     }
     public override IEnumerable<Item> ChildrenOfItem (Item item) {
-      return null;
+      yield break;
     }
     public override IEnumerable<Type> SupportedItemTypes {
       get { return new Type[] { typeof (AbstractChatItem), }; }
@@ -87,7 +87,7 @@ namespace Skype {
     public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
       AbstractChatItem i = items.First () as AbstractChatItem;
       SkypeAPI.Instance.OpenChat(i.ChatID);
-      return null;
+      yield break;
     }
   }
 
@@ -175,7 +175,7 @@ namespace Skype {
       } else {
         SkypeAPI.Instance.OpenChat(i.ChatID);
       }
-      return null;
+      yield break;
     }
   }
 

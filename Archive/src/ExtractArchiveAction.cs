@@ -77,7 +77,7 @@ namespace Archive {
                 public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
                 {
                         ExtractArchive ( (items.First () as IFileItem), (modItems.First () as IFileItem));
-                        return null;
+                        yield break;
                 }
 
                 private bool IsArchive (IFileItem item)

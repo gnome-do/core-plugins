@@ -118,7 +118,7 @@ namespace Delicious
 		
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 		
 	}
