@@ -27,6 +27,7 @@ using NDesk.DBus;
 using org.freedesktop.DBus;
 
 using Do.Platform;
+using Do.Universe;
 
 namespace PidginPlugin
 {
@@ -84,6 +85,11 @@ namespace PidginPlugin
 
 		public static string ChatIcon {
 			get { return "internet-group-chat.svg@" + typeof (Pidgin).Assembly.FullName; }
+		}
+		
+		public static bool IsPidgin (Item item) 
+		{
+			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("pidgin"));
 		}
 
 		public static string GetProtocolIcon (string proto)
