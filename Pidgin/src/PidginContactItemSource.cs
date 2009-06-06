@@ -55,7 +55,11 @@ namespace PidginPlugin
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (ContactItem); }
+			get { 
+				yield return typeof (ContactItem); 
+				yield return typeof (IApplicationItem);
+				yield return typeof (PidginBrowseBuddyItem);
+			}
 		}
 		
 		public override string Name {
@@ -81,16 +85,28 @@ namespace PidginPlugin
 				: new PidginHandleContactDetailItem (proto, buddy[proto]);
 		}
 		
+
+		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			ContactItem buddy = item as ContactItem;
-			
-			IEnumerable<string> icons = buddy.Details.Where (d => d.StartsWith (iconPrefix+"prpl-"));
-
-			return buddy.Details
-						.Where (d => d.StartsWith ("prpl-")) 
-						.Select (d => MakeChildren (buddy, d, icons))
-					    .OfType<Item> ();
+			if (Pidgin.IsPidgin (item)) {
+				yield return new PidginBrowseBuddyItem ();
+			} else if (item is PidginBrowseBuddyItem) {
+				foreach (ContactItem buddy in buddies)
+					yield return buddy;
+			} else if (item is ContactItem) {
+				ContactItem buddy = item as ContactItem;
+				
+				IEnumerable<string> icons = buddy.Details.Where (d => d.StartsWith (iconPrefix+"prpl-"));
+	
+				IEnumerable<Item> details = buddy.Details
+							.Where (d => d.StartsWith ("prpl-")) 
+							.Select (d => MakeChildren (buddy, d, icons))
+						    .OfType<Item> ();
+				
+				foreach (Item detail in details)
+					yield return detail;
+			}
 		}
 		
 		public override void UpdateItems ()

@@ -50,7 +50,21 @@ namespace PidginPlugin
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (PidginAccountItem); }
+			get { 
+				yield return typeof (PidginAccountItem); 
+				yield return typeof (IApplicationItem);
+				yield return typeof (PidginBrowseAccountItem);
+			}
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			if (Pidgin.IsPidgin (item)) {
+				yield return new PidginBrowseAccountItem ();
+			} else if (item is PidginBrowseAccountItem) {
+				foreach (PidginAccountItem account in items)
+					yield return account;
+			}
 		}
 		
 		public override IEnumerable<Item> Items {

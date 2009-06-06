@@ -59,6 +59,18 @@ namespace PidginPlugin
 			get { 
 				yield return typeof (PidginSavedStatusItem);
 				yield return typeof (PidginStatusTypeItem);
+				yield return typeof (IApplicationItem);
+				yield return typeof (PidginBrowseStatusItem);
+			}
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			if (Pidgin.IsPidgin (item)) {
+				yield return new PidginBrowseStatusItem ();
+			} else if (item is PidginBrowseStatusItem) {
+				foreach (Item status in statuses)
+					yield return status;
 			}
 		}
 		

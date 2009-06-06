@@ -13,7 +13,10 @@ FILES = \
 	src/PidginAccountItem.cs \
 	src/PidginSetStatusAction.cs \
 	src/PidginStatusTypeItem.cs \
-	src/PidginAccountActions.cs
+	src/PidginAccountActions.cs \
+	src/PidginBrowseBuddyItem.cs \
+	src/PidginBrowseAccountItem.cs \
+	src/PidginBrowseStatusItem.cs
 
 RESOURCES = \
 	Resources/Pidgin.addin.xml \
