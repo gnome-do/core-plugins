@@ -54,7 +54,9 @@ namespace Dropbox
 		
 		public override bool SupportsItem (Item item) 
 		{
-			return true;
+			string path = GetPath (item);
+			
+			return !path.StartsWith (Dropbox.BasePath);
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem)
@@ -69,19 +71,8 @@ namespace Dropbox
 			string target, folder, link_name;
 
 			foreach (Item i in items) {
-				
 				target = GetPath (i);
-				if (target.StartsWith (Dropbox.BasePath)) {
-					Notify (Catalog.GetString ("Ignoring file already in Dropbox: ") + target);
-					continue;
-				}
-				
 				folder = GetPath (modItems.First ());
-				if (File.Exists (folder)) {
-					Notify (Catalog.GetString ("Cannot replace existing file: ") + folder);
-					continue;
-				}
-				
 				link_name = Path.Combine (folder, Path.GetFileName (target));
 
 				if (MakeLink (target, link_name))
