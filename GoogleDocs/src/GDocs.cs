@@ -1,22 +1,19 @@
 // GDocs.cs
-//
-// GNOME Do is the legal property of its developers. Please refer to the
-// COPYRIGHT file distributed with this source distribution.
-//
+// 
+// Copyright (C) 2009 GNOME Do
+// 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
-
 
 using System;
 using System.Net;
@@ -36,26 +33,26 @@ using Do.Platform;
 
 namespace GDocs
 {
-
-	public static class GDocs
+	
+	public class GDocs
 	{
-
-		const string FeedUri =
-			"http://docs.google.com/feeds/documents/private/full";
+		
+		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
 		public const string GAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
 		
 		static List<Item> docs;
+		static object docs_lock;
 		static GDocsPreferences prefs;
 		static DocumentsService service;
 		
 		static GDocs ()
 		{
 			docs = new List<Item> ();
+			docs_lock = new object ();
 			prefs = new GDocsPreferences ();
-
+			
 			// Google works over SSL, we need accept the cert.
 			System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
-
 			Connect (Preferences.Username, Preferences.Password);
 		}
 		
@@ -65,49 +62,52 @@ namespace GDocs
 				service = new DocumentsService (GAppName);
 				service.setUserCredentials (username, password);
 			} catch (Exception e) {
-				Log.Error (e.Message);
+				Log<GDocs>.Error (e.Message);
 				return false;
 			}
 			return true;
 		}
-
+		
 		internal static GDocsPreferences Preferences {
 			get { return prefs; }
 		}
 		
 		public static List<Item> Docs {
-			get { return docs; }
+			get { 
+				lock (docs_lock)
+					return docs; 
+			}
 		}
 		
 		public static void UpdateDocs ()
 		{
-			DocumentsFeed docsFeed;
-			DocumentsListQuery query = new DocumentsListQuery ();
-			query.Uri = new Uri (FeedUri);
-			
-			try {
-				docsFeed = service.Query (query);
-			} catch (Exception e) {
-				docsFeed = null;
-				Log.Error (e.Message);
-				return;
-			}
-			
-			lock (docs) {				
-				docs.Clear ();				
-				foreach (DocumentEntry doc in docsFeed.Entries) {					
-					GDocsItem item = MaybeItemFromEntry (doc);
+			lock (docs_lock) {
+				DocumentsFeed docsFeed;
+				DocumentsListQuery query = new DocumentsListQuery ();
+				query.Uri = new Uri (FeedUri);
+				
+				try {
+					docsFeed = service.Query (query);
+				} catch (Exception e) {
+					docsFeed = null;
+					Log<GDocs>.Error (e.Message);
+					return;
+				}
+				
+				docs.Clear ();
+				foreach (DocumentEntry doc in docsFeed.Entries) {
+					GDocsAbstractItem item = MaybeItemFromEntry (doc);
 					if (item != null)
-						docs.Add (item);					
+						docs.Add (item);
 				}
 			}
 		}
-
-		static GDocsItem MaybeItemFromEntry (DocumentEntry doc)
+		
+		static GDocsAbstractItem MaybeItemFromEntry (DocumentEntry doc)
 		{
 				string url = doc.AlternateUri.Content;
 				string title = doc.Title.Text;
-
+			
 				if (doc.IsDocument) 
 					return new GDocsDocumentItem (title, url);
 				else if (doc.IsSpreadsheet) 
@@ -115,7 +115,7 @@ namespace GDocs
 				else if (doc.IsPresentation) 
 					return new GDocsPresentationItem (title, url);
 				else if (doc.IsPDF)
-					return new GDocsPDFItem (title, url);					
+					return new GDocsPDFItem (title, url);
 				else
 					return null;
 		}
@@ -123,26 +123,19 @@ namespace GDocs
 		public static Item UploadDocument (string fileName, string documentName)
 		{
 			DocumentEntry newDoc;
-			GDocsItem newDocItem;
 			
 			try {
 				newDoc = service.UploadDocument (fileName, documentName);
 			} catch (Exception e) {
 				newDoc = null;
-				Log.Error (e.Message);
+				Log<GDocs>.Error (e.Message);
 				Services.Notifications.Notify (GetUploadFailedNotification ());
 				return null; 
-			}		
-			
-			newDocItem = MaybeItemFromEntry (newDoc);
-			if (newDocItem != null) {
-				lock (docs) {
-					docs.Add (newDocItem);
-				}
 			}
-			return newDocItem;
+			
+			return  MaybeItemFromEntry (newDoc);
 		}
-
+		
 		static Notification GetUploadFailedNotification ()
 		{
 			return new Notification (
@@ -150,7 +143,7 @@ namespace GDocs
 				Catalog.GetString ("An error occurred when uploading files to Google Docs."), 
 				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
 		}
-
+		
 		static Notification GetDeleteDocumentFailedNotification ()
 		{
 			return new Notification (
@@ -158,7 +151,7 @@ namespace GDocs
 				Catalog.GetString ("An error occurred when deleting the document at Google Docs."), 
 				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
 		}
-
+		
 		static Notification GetDocumentDeletedNotification (string documentTitle)
 		{
 			return new Notification (
@@ -167,7 +160,7 @@ namespace GDocs
 				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
 		}
 		
-		public static void TrashDocument (GDocsItem item)
+		public static void TrashDocument (GDocsAbstractItem item)
 		{
 			// Search for document(s) having exactly the title,
 			// Delete the one with matching AlternateUri
@@ -177,9 +170,9 @@ namespace GDocs
 			DocumentsFeed docFeed = service.Query (query);	
 			DocumentEntry document =
 				docFeed.Entries.FirstOrDefault (e => e.AlternateUri == item.URL) as DocumentEntry;
-
+			
 			if (document == null) return;
-
+			
 			try {
 				document.Delete ();
 			} catch (Exception e) {
@@ -187,12 +180,8 @@ namespace GDocs
 				Services.Notifications.Notify (GetDeleteDocumentFailedNotification ());
 				return;
 			}
-
+			
 			Services.Notifications.Notify (GetDocumentDeletedNotification (item.Name));
-			lock (docs) {						
-				docs.Remove (item);
-			}
 		}
-
 	}
 }

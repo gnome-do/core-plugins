@@ -8,8 +8,8 @@ FILES = \
 	src/CertHandler.cs \
 	src/Configuration.cs \
 	src/GDocs.cs \
+	src/GDocsAbstractItem.cs \
 	src/GDocsDocumentItem.cs \
-	src/GDocsItem.cs \
 	src/GDocsItemSource.cs \
 	src/GDocsPDFItem.cs \
 	src/GDocsPresentationItem.cs \
