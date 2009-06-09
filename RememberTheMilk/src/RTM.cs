@@ -32,7 +32,7 @@ namespace RememberTheMilk
 	/// <summary>
 	/// Contrller class to handle all RTM operations.
 	/// </summary>
-	public static class RTM
+	public class RTM
 	{
 		#region [ Private Variable, Constant ]
 		
@@ -59,6 +59,10 @@ namespace RememberTheMilk
 		const string SharedSecret = "1b835b123a903938";
 
 		#endregion [ Private Properties, Constant ]
+		
+		RTM ()
+		{
+		}
 		
 		static RTM ()
 		{
@@ -109,7 +113,7 @@ namespace RememberTheMilk
 			try {
 				frob = rtm.AuthGetFrob ();
 			} catch (RtmException e) {
-				Log.Error (Catalog.GetString ("Failed to initialize authentication."), e.Message);
+				Log<RTM>.Error (Catalog.GetString ("Failed to initialize authentication."), e.Message);
 				return "";
 			}
 			Do.Platform.Services.Environment.OpenUrl(rtm.AuthCalcUrl (frob, AuthLevel.Delete));
@@ -131,7 +135,7 @@ namespace RememberTheMilk
 			try {
 				auth = rtm.AuthGetToken (frob);
 			} catch (RtmException e) {
-				Log.Error (Catalog.GetString("Failed to complete authentication."), e.Message);
+				Log<RTM>.Error (Catalog.GetString("Failed to complete authentication."), e.Message);
 				return null;
 			}
 			rtm.AuthToken = auth.Token;
@@ -317,7 +321,7 @@ namespace RememberTheMilk
 				try {
 					rtmLists = rtm.ListsGetList ();
 				} catch (RtmException e) {
-					Log.Debug (Catalog.GetString ("[RememberTheMilk] An error occured when updating RTM lists: {0}"), 
+					Log<RTM>.Debug (Catalog.GetString ("An error occured when updating RTM lists: {0}"), 
 					           e.Message);
 					rtmLists = null;
 					return;
@@ -335,7 +339,7 @@ namespace RememberTheMilk
 					if (rtmList.Deleted == 0 && rtmList.Smart == 0)
 						lists.Add (new RTMListItem (rtmList.ID, rtmList.Name, rtmList.Locked, rtmList.Smart));
 			}
-			Log.Debug ("[RememberTheMilk] Received {0} lists.", lists.ToArray ().Length);
+			Log<RTM>.Debug ("Received {0} lists.", lists.ToArray ().Length);
 		}
 		
 		/// <summary>
@@ -352,7 +356,7 @@ namespace RememberTheMilk
 				try {
 					rtmLocations = rtm.LocationsGetList ();
 				} catch (RtmException e) {
-					Log.Debug (Catalog.GetString ("An error happend when updating RTM locations: {0}"), e.Message);
+					Log<RTM>.Debug (Catalog.GetString ("An error happend when updating RTM locations: {0}"), e.Message);
 					rtmLocations = null;
 					return;
 				}
@@ -368,7 +372,7 @@ namespace RememberTheMilk
 					}
 				}
 			}
-			Log.Debug ("[RememberTheMilk] Received {0} locations.", locations.ToArray ().Length);
+			Log<RTM>.Debug ("Received {0} locations.", locations.ToArray ().Length);
 		}
 		
 		/// <summary>
@@ -387,6 +391,8 @@ namespace RememberTheMilk
 				
 				if (last_sync == DateTime.MinValue) {
 					tasks.Clear ();
+					tags.Clear ();
+					notes.Clear ();
 				}
 				
 				try {
@@ -403,7 +409,7 @@ namespace RememberTheMilk
 					rtmTasks = null;
 					rtmTasks_sync = null;
 					last_sync = DateTime.MinValue;
-					Log.Debug (Catalog.GetString ("[RememberTheMilk] An error occured when updating RTM tasks: {0}"), 
+					Log<RTM>.Debug (Catalog.GetString ("An error occured when updating RTM tasks: {0}"), 
 					           e.Message);
 					return;
 				}
@@ -479,9 +485,9 @@ namespace RememberTheMilk
 				last_sync = DateTime.Now;
 			}
 			
-			Log.Debug ("[RememberTheMilk] Received {0} tasks.", tasks.ToArray ().Length);
-			Log.Debug ("[RememberTheMilk] Received {0} notes.", notes.ToArray ().Length);
-			Log.Debug ("[RememberTheMilk] Received {0} tags.", tags.ToArray ().Length);
+			Log<RTM>.Debug ("Received {0} tasks.", tasks.ToArray ().Length);
+			Log<RTM>.Debug ("Received {0} notes.", notes.ToArray ().Length);
+			Log<RTM>.Debug ("Received {0} tags.", tags.ToArray ().Length);
 		}
 		
 		/// <summary>
@@ -528,7 +534,7 @@ namespace RememberTheMilk
 			try {
 				rtmList = rtm.TasksAdd (timeline, taskData, listId, parse);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return null;
 			}
 			
@@ -540,7 +546,7 @@ namespace RememberTheMilk
 					                      rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
 					                      priority);
 				} catch (RtmException e) {
-					Log.Debug (e.Message);
+					Log<RTM>.Debug (e.Message);
 				}
 			}
 			
@@ -565,7 +571,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksDelete (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -579,7 +585,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksComplete (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -596,7 +602,7 @@ namespace RememberTheMilk
 				else
 					rtm.TasksSetPriority (timeline, listId, taskSeriesId, taskId, priority);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -613,7 +619,7 @@ namespace RememberTheMilk
 				else
 					rtm.TasksSetDueDateParse (timeline, listId, taskSeriesId, taskId, due);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -632,7 +638,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksMoveTo (timeline, fromListId, toListId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -648,7 +654,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetName (timeline, listId, taskSeriesId, taskId, newName);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -662,7 +668,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksPostpone (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -676,7 +682,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetRecurrence (timeline, listId, taskSeriesId, taskId, repeat);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -690,7 +696,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetUrl(timeline, listId, taskSeriesId, taskId, url);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -709,7 +715,7 @@ namespace RememberTheMilk
 				rtm.TasksSetEstimateTime(timeline, listId, taskSeriesId,
 				                         taskId, estimateTime);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -726,7 +732,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksSetLocation (timeline, listId, taskSeriesId, taskId, locationId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -745,7 +751,7 @@ namespace RememberTheMilk
 			try {
 				rtm.TasksUncomplete (timeline, listId, taskSeriesId, taskId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -768,7 +774,7 @@ namespace RememberTheMilk
 			try {
 				rtm.ListsNew(timeline, newListName);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -781,7 +787,7 @@ namespace RememberTheMilk
 			try {
 				rtm.ListsDelete(timeline, listId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -800,7 +806,7 @@ namespace RememberTheMilk
 			try {
 				rtm.ListsRename(timeline, listId, newListName);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			FinalizeAction (Catalog.GetString("Task List Renamed"),
@@ -829,7 +835,7 @@ namespace RememberTheMilk
 			} 
 			
 			if (string.IsNullOrEmpty (note) || ((has_separator || has_newline) && parts != null && parts.Length < 2)) {
-				Log.Debug ("Entered text cannot be used as a note.");
+				Log<RTM>.Debug ("Entered text cannot be used as a note.");
 				return;
 			} else {
 				note_title = (has_separator || has_newline) ? parts[0].Trim () : "Untitled Note";
@@ -839,7 +845,7 @@ namespace RememberTheMilk
 			try {
 				rtm.NotesAdd (timeline, listId, taskSeriesId, taskId, note_title, note_body);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 			
@@ -852,7 +858,7 @@ namespace RememberTheMilk
 			try {
 				rtm.NotesDelete (timeline, noteId);
 			} catch (RtmException e) {
-				Log.Debug (e.Message);
+				Log<RTM>.Debug (e.Message);
 				return;
 			}
 
@@ -870,12 +876,12 @@ namespace RememberTheMilk
 		public static void AddTags (string listId, string taskSeriesId, string taskId, string tags)
 		{
 			if (String.IsNullOrEmpty (tags)) {
-				Log.Debug ("[RememberTheMilk] Tags to add is empty or null string.");
+				Log<RTM>.Debug ("Tags to add is empty or null string.");
 			} else {
 				try {
 					rtm.TasksAddTags (timeline, listId, taskSeriesId, taskId, tags);
 				} catch (RtmException e) {
-					Log.Debug (e.Message);
+					Log<RTM>.Debug (e.Message);
 					return;
 				}
 				
@@ -887,12 +893,12 @@ namespace RememberTheMilk
 		public static void DeleteTags (string listId, string taskSeriesId, string taskId, string tags)
 		{
 			if (String.IsNullOrEmpty (tags)) {
-				Log.Debug ("[RememberTheMilk] Tags to delete is empty or null string.");
+				Log<RTM>.Debug ("[RememberTheMilk] Tags to delete is empty or null string.");
 			} else {
 				try {
 					rtm.TasksRemoveTags (timeline, listId, taskSeriesId, taskId, tags);
 				} catch (RtmException e) {
-					Log.Debug (e.Message);
+					Log<RTM>.Debug (e.Message);
 					return;
 				}
 				
@@ -920,7 +926,7 @@ namespace RememberTheMilk
 				try {
 					auth = rtm.AuthCheckToken (RTMPreferences.Token);
 				} catch (RtmException e) {
-					Log.Error (Catalog.GetString ("Token verification failed."), e.Message);
+					Log<RTM>.Error (Catalog.GetString ("Token verification failed."), e.Message);
 					return false;
 				}
 				
@@ -930,13 +936,13 @@ namespace RememberTheMilk
 				try {
 					timeline = rtm.TimelineCreate ();
 				} catch (RtmException e) {
-					Log.Error (Catalog.GetString ("Remember The Milk timeline creation failed."), e.Message);
+					Log<RTM>.Error (Catalog.GetString ("Remember The Milk timeline creation failed."), e.Message);
 					return false;
 				}
 				
 				return true;
 			} else {
-				Log.Error (Catalog.GetString ("Not authorized to use a Remember The Milk account."));
+				Log<RTM>.Error (Catalog.GetString ("Not authorized to use a Remember The Milk account."));
 				return false;
 			}
 		}

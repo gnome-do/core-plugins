@@ -56,7 +56,7 @@ namespace RememberTheMilk
 			if (items.Any ()) {
 				string newListName = (items.First () as ITextItem).Text;
 				if (String.IsNullOrEmpty (newListName)) {
-					Log.Debug ("[RememberTheMilk] No list name provided for RTMNewList action");
+					Log<RTM>.Debug ("[RememberTheMilk] No list name provided for RTMNewList action");
 					yield break;
 				} else {
 					Services.Application.RunOnThread (() => {
