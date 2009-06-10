@@ -14,6 +14,7 @@ SUBDIRS = \
 	Confluence \
 	Del.icio.us \
 	DiskMounter \
+	Dropbox \
 	Emesene \
 	EOG-Slideshow \
 	Epiphany \

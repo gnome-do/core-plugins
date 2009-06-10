@@ -71,6 +71,7 @@
       <Entry build="True" name="Tracker" configuration="Debug" />
       <Entry build="True" name="YouTube" configuration="Debug" />
       <Entry build="True" name="Emesene" configuration="Debug" />
+      <Entry build="True" name="Dropbox" configuration="Debug" />
       <Entry build="True" name="RemindMe" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
@@ -144,6 +145,7 @@
       <Entry build="True" name="Tracker" configuration="Release" />
       <Entry build="True" name="YouTube" configuration="Release" />
       <Entry build="True" name="Emesene" configuration="Release" />
+      <Entry build="True" name="Dropbox" configuration="Release" />
       <Entry build="True" name="RemindMe" configuration="Release" />
     </Configuration>
   </Configurations>
@@ -218,6 +220,7 @@
     <Execute type="None" entry="Tracker" />
     <Execute type="None" entry="YouTube" />
     <Execute type="None" entry="Emesene" />
+    <Execute type="None" entry="Dropbox" />
     <Execute type="None" entry="RemindMe" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
@@ -292,6 +295,7 @@
     <Entry filename="Tracker/Tracker.mdp" />
     <Entry filename="YouTube/YouTube.mdp" />
     <Entry filename="Emesene/Emesene.mdp" />
+    <Entry filename="Dropbox/Dropbox.mdp" />
     <Entry filename="RemindMe/RemindMe.mdp" />
   </Entries>
 </Combine>
