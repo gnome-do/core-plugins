@@ -61,20 +61,21 @@ namespace Dropbox
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
+			string target, extension, filename, linkName, url;
+			
 			foreach (Item item in items) {
-				string target = GetPath (item);
-				string extension = Path.GetExtension (target);
-				string filename = Path.GetFileNameWithoutExtension (target);
-				string link_name = Path.Combine (Dropbox.DoSharedPath, 
+				target = GetPath (item);
+				extension = Path.GetExtension (target);
+				filename = Path.GetFileNameWithoutExtension (target);
+				linkName = Path.Combine (Dropbox.DoSharedPath, 
 					String.Format ("{0}-{1}{2}", filename, rand.Next (), extension));
 				
 				Directory.CreateDirectory (Dropbox.DoSharedPath);
 				
-				if (MakeLink (target, link_name)) {
+				if (MakeLink (target, linkName)) {
 					
-					string url = Dropbox.GetPubUrl (link_name);	
+					url = Dropbox.GetPubUrl (linkName);	
 					yield return new BookmarkItem (pub_url_title, url);
-				
 				}
 			}
 		}

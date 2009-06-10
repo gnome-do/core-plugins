@@ -51,7 +51,7 @@ namespace Dropbox
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { yield return typeof (IFileItem); }
 		}
-		
+	
 		public override bool SupportsItem (Item item) 
 		{
 			string path = GetPath (item);

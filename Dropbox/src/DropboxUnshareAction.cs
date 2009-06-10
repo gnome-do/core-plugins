@@ -52,7 +52,7 @@ namespace Dropbox
 		public override bool SupportsItem (Item item) 
 		{
 			string path = GetPath(item);
-			
+
 			return File.Exists (path) && HasLink (path);
 		}
 		

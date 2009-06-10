@@ -61,7 +61,6 @@ namespace Dropbox
 				string.Format ("-s \"{0}\" \"{1}\"", target, link_name));
 			
 			return result != null;
-	
 		}
 		
 		protected bool Unlink (string link_name)
@@ -79,7 +78,6 @@ namespace Dropbox
 		
 		protected string GetLink (string target, string directory)
 		{
-			
 			if (!Directory.Exists (directory))
 				return null;
 			

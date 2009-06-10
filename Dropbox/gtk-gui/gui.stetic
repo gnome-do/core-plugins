@@ -5,8 +5,6 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../../../../../../../usr/local/lib/gnome-do/Do.exe" />
-    <widget-library name="../../../../../../../../usr/local/lib/gnome-do/Do.Platform.Linux.dll" />
     <widget-library name="../bin/Debug/Dropbox.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Dropbox.DropboxConfig" design-size="300 300">

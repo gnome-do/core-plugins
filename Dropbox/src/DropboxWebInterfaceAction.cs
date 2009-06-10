@@ -40,7 +40,7 @@ namespace Dropbox
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Views folder in Dropbox web interface."); }
+			get { return Catalog.GetString ("View folder in Dropbox web interface."); }
 		}
 		
 		public override string Icon {
