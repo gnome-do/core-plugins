@@ -10,6 +10,7 @@ FILES = \
 	src/SearchNotesAction.cs \
 	gtk-gui/generated.cs \
 	src/TomboyConfiguration.cs \
+	src/TomboyBrowseNotesItem.cs \
 	gtk-gui/Tomboy.TomboyConfiguration.cs
 
 RESOURCES = \

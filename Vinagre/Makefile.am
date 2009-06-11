@@ -5,6 +5,7 @@ ASSEMBLY=Vinagre
 FILES = \
 	src/Vinagre.cs \
 	src/VNCHost.cs \
+	src/VinagreBrowseBookmarksItem.cs \
 	src/VNCHostSource.cs
 
 RESOURCES = \

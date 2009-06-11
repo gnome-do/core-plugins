@@ -56,11 +56,28 @@ namespace VinagreVNC
 			get {
 				yield return typeof (HostItem);
 				yield return typeof (VNCHostItem);
+				yield return typeof (IApplicationItem);
+				yield return typeof (VinagrgeBrowseBookmarksItem);
 			}
 		}
 
 		public override IEnumerable<Item> Items {
 			get { return items; }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			if (IsVinagre (item)) {
+				yield return new VinagrgeBrowseBookmarksItem ();
+			} else if (item is VinagrgeBrowseBookmarksItem) {
+				foreach (Item host in Items)
+					yield return host;
+			}
+		}
+		
+		bool IsVinagre (Item item) 
+		{
+			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("vinagre"));
 		}
 
 		public override void UpdateItems ()
