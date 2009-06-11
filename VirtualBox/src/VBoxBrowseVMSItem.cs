@@ -36,7 +36,7 @@ namespace VirtualBox
 		}
 		
 		public override string Icon {
-			get { return "VirtualBox_64px.png@"+GetType ().Assembly.FullName; }
+			get { return "VirtualBox_64px.png@" + GetType ().Assembly.FullName; }
 		}
 	}
 }

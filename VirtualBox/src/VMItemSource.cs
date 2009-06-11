@@ -50,7 +50,7 @@ public class VMItemSource : ItemSource {
 		
 		public override string Icon { 
 			get { 
-				return "VirtualBox_64px.png@"+GetType ().Assembly.FullName; 
+				return "VirtualBox_64px.png@" + GetType ().Assembly.FullName; 
 			} 
 		}
 
@@ -88,7 +88,7 @@ public class VMItemSource : ItemSource {
 				XmlNodeList MachineEntries = VboxXML.GetElementsByTagName ("MachineEntry");
 				//add each VM as a VMItem
 				foreach (XmlNode Machine in MachineEntries)
-					items.Add(new VMItem (Machine.Attributes));	
+					items.Add (new VMItem (Machine.Attributes));	
 			} catch (Exception e) {
 				//meltdown
 				Log<VMItemSource>.Error ("Error parsing VBox XML file.");
