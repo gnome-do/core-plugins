@@ -38,19 +38,19 @@ public class VMItemSource : ItemSource {
 		
 		public override string Name { 
 			get { 
-				return Catalog.GetString("VirtualBox VMs"); 
+				return Catalog.GetString ("VirtualBox VMs"); 
 			} 
 		}
 		
 		public override string Description { 
 			get { 
-				return Catalog.GetString("Virtual Machines created with VirtualBox"); 
+				return Catalog.GetString ("Virtual Machines created with VirtualBox"); 
 			} 
 		}
 		
 		public override string Icon { 
 			get { 
-				return "VirtualBox_64px.png@"+GetType().Assembly.FullName; 
+				return "VirtualBox_64px.png@"+GetType ().Assembly.FullName; 
 			} 
 		}
 
@@ -79,19 +79,19 @@ public class VMItemSource : ItemSource {
 
 		public override void UpdateItems ()
 		{
-			items.Clear();
-			try	{
+			items.Clear ();
+			try {
 				string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-				string xml_file = Path.Combine(home, ".VirtualBox/VirtualBox.xml");
+				string xml_file = Path.Combine (home, ".VirtualBox/VirtualBox.xml");
 				XmlDocument VboxXML = new XmlDocument();
-				VboxXML.Load(xml_file);
-				XmlNodeList MachineEntries = VboxXML.GetElementsByTagName("MachineEntry");
+				VboxXML.Load (xml_file);
+				XmlNodeList MachineEntries = VboxXML.GetElementsByTagName ("MachineEntry");
 				//add each VM as a VMItem
 				foreach (XmlNode Machine in MachineEntries)
-					items.Add(new VMItem(Machine.Attributes));	
+					items.Add(new VMItem (Machine.Attributes));	
 			} catch (Exception e) {
 				//meltdown
-				Log<VMItemSource>.Error("Error parsing VBox XML file.");
+				Log<VMItemSource>.Error ("Error parsing VBox XML file.");
 				Log<VMItemSource>.Debug (e.ToString ());
 			}
 		}
