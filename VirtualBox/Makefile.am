@@ -14,6 +14,7 @@ FILES = \
 	src/VMItem.cs \
 	src/VMItemSource.cs \
 	src/VMThread.cs  \
+	src/VBoxBrowseVMSItem.cs \
 	src/IconMap.cs
 
 RESOURCES = \
