@@ -37,6 +37,18 @@ namespace Twitterizer.Framework
 		public TwitterUserMethods User;
 
 		internal static Urls Urls;
+		
+		public static void SetService (Service service)
+		{
+			switch(service) {
+			case Service.Twitter:
+				Urls = new TwitterUrls();
+				break;
+			case Service.Identica:
+				Urls = new IdenticaUrls();
+				break;
+			}
+		}
 
 		public Twitter(string UserName, string Password) :
 			this(UserName, Password, Service.Twitter, "")
@@ -59,27 +71,31 @@ namespace Twitterizer.Framework
 			Status = new TwitterStatusMethods(UserName, Password, Source);
 			User = new TwitterUserMethods(UserName, Password);
 
-			switch(ServiceName) {
-				case Service.Twitter:
-					Urls = new TwitterUrls();
-					break;
-				case Service.Identica:
-					Urls = new IdenticaUrls();
-					break;
-			}
+			SetService (ServiceName);
 		}
 
 		public static bool VerifyCredentials(string username, string password)
 		{
+			if (string.IsNullOrEmpty (username))
+				Console.Error.WriteLine ("username empty");
+			
+			if (string.IsNullOrEmpty (password))
+				Console.Error.WriteLine ("password empty");
+			
 			TwitterRequest request = new TwitterRequest();
 			TwitterRequestData data = new TwitterRequestData();
 			data.UserName = username;
 			data.Password = password;
-			data.ActionUri = new Uri(Urls.VerifyCredentialsUrl);
+			data.ActionUri = new Uri (Urls.VerifyCredentialsUrl);
 
 			try
 			{
 				data = request.PerformWebRequest(data, "GET");
+				if (data == null) {
+					Console.Error.WriteLine ("DATA IS NULL ABORT");
+					return false;
+				}
+				
 				if (data.Users[0].ScreenName == username)
 				{
 					return true;
