@@ -103,7 +103,7 @@ namespace Microblogging
 			UpdateStatus (status, null);
 		}
 		
-		public void UpdateStatus (string status, Nullable<int> inReplyToID)
+		public void UpdateStatus (string status, Nullable<long> inReplyToID)
 		{
 			string errorMessage = "";
 			try {
