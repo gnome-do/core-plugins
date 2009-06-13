@@ -8,7 +8,7 @@ namespace Microblogging
 	
 	public class MicroblogStatus : Item
 	{				
-		public MicroblogStatus (int id, string status, string owner, DateTime time)
+		public MicroblogStatus (long id, string status, string owner, DateTime time)
 		{
 			Id = id;
 			Owner = owner;
@@ -28,7 +28,7 @@ namespace Microblogging
 			get { return "microblogging.svg@" + GetType ().Assembly.FullName; }
 		}
 		
-		public int Id { get; private set; }
+		public long Id { get; private set; }
 		public string Owner { get; private set; }
 		public string Status { get; private set; }
 		public DateTime Created { get; private set; }
@@ -36,13 +36,13 @@ namespace Microblogging
 	
 	public class MicroblogStatusReply
 	{
-		public MicroblogStatusReply (Nullable<int> inReplyToID, string status)
+		public MicroblogStatusReply (Nullable<long> inReplyToID, string status)
 		{
 			Status = status;
 			InReplyToId = inReplyToID;			
 		}
 	
-		public Nullable<int> InReplyToId { get; private set; }
+		public Nullable<long> InReplyToId { get; private set; }
 		public string Status { get; private set; }
 	}
 }
