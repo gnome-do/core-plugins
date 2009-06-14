@@ -19,7 +19,14 @@ FILES = \
 
 RESOURCES = \
   Resources/Dropbox.addin.xml \
-  gtk-gui/gui.stetic
+  gtk-gui/gui.stetic \
+  Resources/icons/dropbox-add.png \
+  Resources/icons/dropbox-remove.png \
+  Resources/icons/dropbox-revisions.png \
+  Resources/icons/dropbox-share.png \
+  Resources/icons/dropbox-start.png \
+  Resources/icons/dropbox-stop.png \
+  Resources/icons/dropbox-web.png
 
 REFERENCES = \
   System \
