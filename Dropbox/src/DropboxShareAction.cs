@@ -75,7 +75,7 @@ namespace Dropbox
 				if (MakeLink (target, linkName)) {
 					
 					url = Dropbox.GetPubUrl (linkName);	
-					yield return new BookmarkItem (pub_url_title, url);
+					yield return new BookmarkItem (url, url);
 				}
 			}
 		}

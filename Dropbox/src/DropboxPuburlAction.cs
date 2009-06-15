@@ -72,7 +72,7 @@ namespace Dropbox
 	
 				string url = Dropbox.GetPubUrl (path);
 				
-				yield return new BookmarkItem (pub_url_title, url);
+				yield return new BookmarkItem (url, url);
 			}
 			
 			yield break;
