@@ -552,7 +552,7 @@ namespace RememberTheMilk
 			
 			FinalizeAction (Catalog.GetString ("New Task Created"),
 			                Catalog.GetString ("The task has been successully added to your"
-			                                   + "Remember The milk task list."));
+			                                   + " Remember The milk task list."));
 			
 			return new RTMTaskItem (rtmList.ID, rtmList.TaskSeriesCollection[0].TaskSeriesID,
 			                        rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID,
