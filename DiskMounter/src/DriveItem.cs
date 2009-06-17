@@ -44,11 +44,15 @@ namespace DiskMounter
 				return drive.DeviceType.ToString () + " (" + status + ")";
 			}
 		}
-		
+
+		// It seems only the Icon property from obsolete MountedVolume can depict a mounted drive,
+		// Drive.Icon shows the same icon when the drive is umounted or mounted.
 		public override string Icon {
 			get { return IsMounted ? drive.MountedVolume.Icon : drive.Icon; }
 		}
-		
+
+		// It seems only the ActivationUri property from obsolete MountedVolume can return a valid URI,
+		// Drive.ActivationUri only returns null
 		public string Uri {
 			get { return IsMounted ? drive.MountedVolume.ActivationUri : ""; }
 		}
