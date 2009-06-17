@@ -71,6 +71,7 @@ namespace Do.FilesAndFolders {
 				yield return typeof (IFileItem);
 				yield return typeof (ITextItem);
 				yield return typeof (IApplicationItem);
+				yield return typeof (IUriItem);
 			}
 		}
 		
@@ -96,6 +97,8 @@ namespace Do.FilesAndFolders {
 				file = Plugin.NewFileItem ((item as ITextItem).Text);
 			else if (item is IFileItem)
 				file = item as IFileItem;
+			else if (item is IUriItem && (item as IUriItem).Uri.StartsWith ("file://"))
+				file = Plugin.NewFileItem ((item as IUriItem).Uri.Replace ("file://", ""));
 			else if (item is IApplicationItem)
 				return Enumerable.Empty<Item> ();
 			

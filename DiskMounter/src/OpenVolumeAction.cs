@@ -58,9 +58,9 @@ namespace DiskMounter
 			try {
 				if (!drive.IsMounted)
 					drive.Mount ();
-				Services.Environment.OpenPath (drive.Path);
+				Services.Environment.OpenPath (drive.Uri);
 			} catch (Exception e) {
-				Log.Error ("Error opening {0} - {1}", drive.Path, e.Message);
+				Log.Error ("Error opening {0} - {1}", drive.Uri, e.Message);
 				Log.Debug (e.StackTrace);
 			}
 			yield break;

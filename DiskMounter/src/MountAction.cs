@@ -19,10 +19,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Gnome.Vfs;
 using Mono.Unix;
 
 using Do.Universe;
+using Do.Platform;
 
 namespace DiskMounter
 {
@@ -41,11 +41,7 @@ namespace DiskMounter
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (DriveItem),
-				};
-			}
+			get { yield return typeof (DriveItem); }
 		}
                 
 		public override bool SupportsItem (Item item) 
@@ -60,7 +56,9 @@ namespace DiskMounter
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			(items.First () as DriveItem).Mount ();
+			Services.Application.RunOnThread (() => {
+				(items.First () as DriveItem).Mount ();
+			});
 			yield break;
 		}
 	}

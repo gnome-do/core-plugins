@@ -27,48 +27,44 @@ namespace DiskMounter {
 	public class DriveItemSource : ItemSource {
 
 		List<Item> items;
-		private static Gnome.Vfs.VolumeMonitor monitor;
-
+		private static VolumeMonitor monitor;
+		
 		public DriveItemSource ()
 		{
 			Vfs.Initialize ();
 			monitor = Gnome.Vfs.VolumeMonitor.Get ();
 			items = new List<Item> ();
 		}
-
+		
 		public override string Name {
 			get { return "Drives"; }
 		}
-
+		
 		public override string Description {
 			get { return "Available mounted and unmounted drives."; }
 		}
-
+		
 		public override string Icon {
 			get { return "harddrive"; }
 		}
-
+		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (DriveItem),
-				};
-			}
+			get { yield return typeof (DriveItem); }
 		}
-
+		
 		public override IEnumerable<Item> Items {
 			get { return items; }
 		}
-
+		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			yield break;
 		}
-
+		
 		public override void UpdateItems ()
 		{
 			items.Clear ();
-
+			
 			foreach (Drive drive in monitor.ConnectedDrives){
 				items.Add (new DriveItem (drive));              
 			}

@@ -17,13 +17,15 @@
 //
 
 using System;
+
 using Do.Universe;
+using Do.Platform;
 
 using Gnome.Vfs;
 
 namespace DiskMounter
 {
-	public class DriveItem : Item
+	public class DriveItem : Item, IUriItem
 	{
 		private Drive drive;
 		
@@ -33,52 +35,75 @@ namespace DiskMounter
 		}
 		
 		public override string Name {
-			get { return drive.DisplayName; }		
+			get { return drive.DisplayName; }
 		}
 		
 		public override string Description {
-			get { return String.Format("{0}",drive.DeviceType); }
+			get {
+				string status = IsMounted ? Uri : "Unmounted";
+				return drive.DeviceType.ToString () + " (" + status + ")";
+			}
 		}
 		
 		public override string Icon {
-			get { return drive.Icon; }
+			get { return IsMounted ? drive.MountedVolume.Icon : drive.Icon; }
 		}
 		
-		public string Path {
-			get { return drive.ActivationUri.ToString(); }
+		public string Uri {
+			get { return IsMounted ? drive.MountedVolume.ActivationUri : ""; }
 		}
 		
 		public void Unmount ()
 		{
 			try {
-				drive.Unmount (VolumeOpCallback);
-			} catch
-			{    // error message will be handled by VolumeOpCallback                                                     
+				if (drive.NeedsEject ())
+					drive.Eject (new VolumeOpCallback (OnEject));
+				else 
+					drive.Unmount (new VolumeOpCallback (OnUnmount));
+			} catch {
+			    // error message will be handled by VolumeOpCallback                                                     
 			}
 		}
 		
 		public void Mount ()
 		{
 			try {
-				drive.Mount (VolumeOpCallback);
-			} catch
-			{  // error message will be handled by VolumeOpCallback    
+				drive.Mount (new VolumeOpCallback (OnMount));
+			} catch (Exception ex) {
+				Log.Debug ("An error occurred while executing the Mount operation.");
+				Log.Error (ex.Message);
 			}
 		}
 		
 		public bool IsMounted
 		{
 			get {
-				return drive.IsMounted;
+				return drive.IsMounted && drive.MountedVolumes.Count > 0;
 			}
 		}
-                			
-		public void VolumeOpCallback (bool succeeded, string error, string detailed_error)
+		
+		void OnMount (bool succeeded, string error, string detailed_error)
 		{
-			if ( succeeded )
-				Console.WriteLine("Unmount operation succeeded");
+			if (succeeded)
+				Log.Debug ("Mount operation succeeded");
 			else
-				Console.Error.WriteLine("Unmount operation failed {0}, detail : {1}" , error, detailed_error );
+				Log.Error ("Mountt operation failed {0}, detail: {1}", error, detailed_error);
+		}
+
+		void OnUnmount (bool succeeded, string error, string detailed_error)
+		{
+			if (succeeded)
+				Log.Debug ("Unmount operation succeeded");
+			else
+				Log.Error ("Unmount operation failed {0}, detail: {1}", error, detailed_error);
+		}
+		
+		void OnEject (bool succeeded, string error, string detailed_error)
+		{
+			if (succeeded)
+				Log.Debug ("Eject operation succeeded");
+			else
+				Log.Error ("Eject operation failed {0}, detail: {1}", error, detailed_error);
 		}
 	}
 }
