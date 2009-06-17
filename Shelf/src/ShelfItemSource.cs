@@ -46,7 +46,7 @@ namespace Shelf
 
 			public Item MaybeGetItem ()
 			{
-				return Services.Core.GetElement (UniqueId) as Item;
+				return Services.Core.GetItem (UniqueId);
 			}
 		}
 		

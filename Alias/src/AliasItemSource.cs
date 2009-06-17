@@ -49,7 +49,7 @@ namespace Alias
 
 			public AliasItem MaybeGetItem ()
 			{
-				Item item = Services.Core.GetElement (UniqueId) as Item;
+				Item item = Services.Core.GetItem (UniqueId) as Item;
 				return item == null ? null : new AliasItem (item, Alias);
 			}
 		}
