@@ -46,7 +46,7 @@ namespace Dropbox
 		}
 		
 		public override string Icon {
-			get { return "dropbox"; }
+			get { return ("dropbox-web.png@") + GetType ().Assembly.FullName; }
 		}
 		
 		public override bool SupportsItem (Item item) 
@@ -72,7 +72,7 @@ namespace Dropbox
 	
 				string url = Dropbox.GetPubUrl (path);
 				
-				yield return new BookmarkItem (pub_url_title, url);
+				yield return new BookmarkItem (url, url);
 			}
 			
 			yield break;

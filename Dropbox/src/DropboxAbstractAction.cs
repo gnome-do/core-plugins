@@ -37,8 +37,7 @@ namespace Dropbox
 	{
 		
 		protected static Random rand = new Random ();
-		protected string pub_url_title = Catalog.GetString ("URL of your shared file");
-	
+		
 	
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (IFileItem); }

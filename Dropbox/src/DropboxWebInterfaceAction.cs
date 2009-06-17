@@ -44,7 +44,7 @@ namespace Dropbox
 		}
 		
 		public override string Icon {
-			get { return "dropbox"; }
+			get { return ("dropbox-web.png@") + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
