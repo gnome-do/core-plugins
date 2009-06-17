@@ -1,4 +1,4 @@
-// GDocsPDFItem.cs
+// GDocsAbstractItem.cs
 // 
 // Copyright (C) 2009 GNOME Do
 // 
@@ -17,25 +17,43 @@
 
 using System;
 using System.Text;
+
 using Mono.Unix;
 
-
 using Do.Universe;
+using Do.Platform;
 
 namespace GDocs
 {
-	public class GDocsPDFItem : GDocsAbstractItem
+	public class GDocsAbstractItem : Item, IOpenableItem
 	{
+		string name, url;
 		
-		public GDocsPDFItem (string name, string url) : base (name, url) {}
+		public GDocsAbstractItem (string name, string url)
+		{
+			this.name = name;
+			this.url = url;
+		}
+		
+		public override string Name {
+			get { return name; }
+		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Google Docs PDF Document"); }
+			get { return Catalog.GetString ("Google Docs Generic Document"); }
+		}
+		
+		public virtual string URL {
+			get { return url; }
 		}
 		
 		public override string Icon {
-			get { return "gnome-mime-application-pdf"; }
+			get { return "x-office-document"; }
 		}
 		
+		public void Open ()
+		{
+			Services.Environment.OpenUrl (url);
+		}
 	}
 }
