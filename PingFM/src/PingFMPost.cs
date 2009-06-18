@@ -51,9 +51,6 @@ namespace PingFM
 		    get { yield return typeof (PingFMServiceItem); }
 		}
 		
-		// Although Ping.Fm provides a "default" method, I think the so-called "default" method
-		// should be the most frequently used one, which in Do's interface will be the first selected
-		// item. This is the reason why ModifierItem is not set as optional.
 		public override bool ModifierItemsOptional {
 			get { return false; }
 		}
@@ -61,7 +58,6 @@ namespace PingFM
 		public override bool SupportsItem (Item item) 
 		{
 			return GetMessageLength ((item as ITextItem).Text) < 200;
-			
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modItem) 
@@ -116,10 +112,15 @@ namespace PingFM
 		
 		string FindTrigger (string message)
 		{
-			if (!message.StartsWith ("@"))
+			const string TriggerPattern = @"^@[\S]{1,2}\s";
+			string trigger = String.Empty;
+			Match match = Regex.Match (message, TriggerPattern);
+			
+			if (match.Success)
+				trigger = match.Value.Trim ();
+			else
 				return String.Empty;
 			
-			string trigger = message.Substring (0, message.IndexOf (' '));
 			if (PingFM.Services.Any (s => (s as PingFMServiceItem).Trigger == trigger))
 				return trigger;
 			else

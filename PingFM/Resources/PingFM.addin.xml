@@ -1,7 +1,7 @@
 <Addin 
 	id="PingFM" 
 	namespace= "Do" 
-	version="1.0"
+	version="1.1"
 	name="Ping.FM"
 	description="Post microblog/status updates via Ping.FM"
 	author="Peng Deng"

@@ -64,9 +64,9 @@ namespace PingFM
 			
 			services.Clear ();
 			services.Add (new PingFMServiceItem (Catalog.GetString ("Microblog"), 
-			                                     "pingfm", "microblog", "http://ping.fm", ""));
+			                                     "pingfm", "microblog", "http://ping.fm", "@m"));
 			services.Add (new PingFMServiceItem (Catalog.GetString ("Status"),
-			                                     "pingfm", "status", "http://ping.fm", ""));
+			                                     "pingfm", "status", "http://ping.fm", "@s"));
 			
 			// If a service has method "microblog" and/or "status", include it in the service_items list
 			// when both methods are available, use "microblog", because to an individual service
