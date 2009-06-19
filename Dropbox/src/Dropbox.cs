@@ -31,18 +31,18 @@ namespace Dropbox
 	
 	public class Dropbox
 	{
-		public static string BasePath;
-		public static string PublicPath;
-		public static string DoSharedPath;
+		public readonly static string BasePath;
+		public readonly static string PublicPath;
+		public readonly static string DoSharedPath;
 		
-		private static string cli_path = "/usr/bin/dropbox";
-		private static string db_url = "https://www.getdropbox.com/";
+		private const string cli_path = "/usr/bin/dropbox";
+		private const string db_url = "https://www.getdropbox.com/";
 		
 		static Dropbox ()
 		{
 			BasePath = DropboxConfig.BasePath;
 			PublicPath = Path.Combine (BasePath, "Public");
-			DoSharedPath = Path.Combine (PublicPath, "Do Shared Files");
+			DoSharedPath = Path.Combine (PublicPath, "Files Shared from GNOME Do");
 		}
 		
 		public static bool IsRunning {
