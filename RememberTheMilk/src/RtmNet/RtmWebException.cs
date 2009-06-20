@@ -7,7 +7,7 @@ namespace RtmNet
 	/// </summary>
 	public class RtmWebException : RtmException
 	{
-		internal RtmWebException(string message, Exception innerException) : base(message, innerException)
+		internal RtmWebException (string message, Exception innerException) : base (message, innerException)
 		{
 		}
 	}

@@ -8,27 +8,27 @@ namespace RtmNet
 	/// <summary>
 	/// Provides details of a particular group.
 	/// </summary>
-	/// <remarks>Used by <see cref="Rtm.GroupsBrowse()"/> and
-	/// <see cref="Rtm.GroupsBrowse(string)"/>.</remarks>
+	/// <remarks>Used by <see cref="Rtm.GroupsBrowse ()"/> and
+	/// <see cref="Rtm.GroupsBrowse (string)"/>.</remarks>
 	[System.Serializable]
 	public class Group
 	{
 		/// <summary>
 		/// The id of the group.
 		/// </summary>
-		[XmlAttribute("nsid", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("nsid", Form = XmlSchemaForm.Unqualified)]
 		public string GroupId;
     
 		/// <summary>
 		/// The name of the group
 		/// </summary>
-		[XmlAttribute("name", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("name", Form = XmlSchemaForm.Unqualified)]
 		public string GroupName;
 
 		/// <summary>
 		/// The number of memebers of the group.
 		/// </summary>
-		[XmlAttribute("members", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("members", Form = XmlSchemaForm.Unqualified)]
 		public long Members;
 	}
 
@@ -43,33 +43,32 @@ namespace RtmNet
 	[System.Serializable]
 	public class GroupFullInfo
 	{
-		internal GroupFullInfo()
+		internal GroupFullInfo ()
 		{
 		}
 
-		internal GroupFullInfo(XmlNode node)
+		internal GroupFullInfo (XmlNode node)
 		{
-			if( node.Attributes.GetNamedItem("id") != null )
-				GroupId = node.Attributes.GetNamedItem("id").Value;
-			if( node.SelectSingleNode("name") != null )
-				GroupName = node.SelectSingleNode("name").InnerText;
-			if( node.SelectSingleNode("description") != null )
-				Description = node.SelectSingleNode("description").InnerXml;
-			if( node.SelectSingleNode("members") != null )
-				Members = int.Parse(node.SelectSingleNode("members").InnerText);
-			if( node.SelectSingleNode("privacy") != null )
-				Privacy = (PoolPrivacy)int.Parse(node.SelectSingleNode("privacy").InnerText);
+			if (node.Attributes.GetNamedItem ("id") != null)
+				GroupId = node.Attributes.GetNamedItem ("id").Value;
+			if (node.SelectSingleNode ("name") != null)
+				GroupName = node.SelectSingleNode ("name").InnerText;
+			if (node.SelectSingleNode ("description") != null)
+				Description = node.SelectSingleNode ("description").InnerXml;
+			if (node.SelectSingleNode ("members") != null)
+				Members = int.Parse (node.SelectSingleNode ("members").InnerText);
+			if (node.SelectSingleNode ("privacy") != null)
+				Privacy = (PoolPrivacy)int.Parse (node.SelectSingleNode ("privacy").InnerText);
 
-			if( node.SelectSingleNode("throttle") != null )
-			{
-				XmlNode throttle = node.SelectSingleNode("throttle");
-				ThrottleInfo = new GroupThrottleInfo();
-				if( throttle.Attributes.GetNamedItem("count") != null )
-					ThrottleInfo.Count = int.Parse(throttle.Attributes.GetNamedItem("count").Value);
-				if( throttle.Attributes.GetNamedItem("mode") != null )
-					ThrottleInfo.setMode(throttle.Attributes.GetNamedItem("mode").Value);
-				if( throttle.Attributes.GetNamedItem("remaining") != null )
-					ThrottleInfo.Remaining = int.Parse(throttle.Attributes.GetNamedItem("remaining").Value);
+			if (node.SelectSingleNode ("throttle") != null) {
+				XmlNode throttle = node.SelectSingleNode ("throttle");
+				ThrottleInfo = new GroupThrottleInfo ();
+				if (throttle.Attributes.GetNamedItem ("count") != null)
+					ThrottleInfo.Count = int.Parse (throttle.Attributes.GetNamedItem ("count").Value);
+				if (throttle.Attributes.GetNamedItem ("mode") != null)
+					ThrottleInfo.setMode (throttle.Attributes.GetNamedItem ("mode").Value);
+				if (throttle.Attributes.GetNamedItem ("remaining") != null)
+					ThrottleInfo.Remaining = int.Parse(throttle.Attributes.GetNamedItem ("remaining").Value);
 			}
 		}
 
@@ -97,9 +96,9 @@ namespace RtmNet
 		/// </summary>
 		/// <param name="groupInfo">The incoming object.</param>
 		/// <returns>The <see cref="Group"/> instance.</returns>
-		public static implicit operator Group( GroupFullInfo groupInfo )	
+		public static implicit operator Group (GroupFullInfo groupInfo)
 		{
-			Group g = new Group();
+			Group g = new Group ();
 			g.GroupId = groupInfo.GroupId;
 			g.GroupName = groupInfo.GroupName;
 			g.Members = groupInfo.Members;
@@ -112,9 +111,9 @@ namespace RtmNet
 		/// <see cref="Group"/> class.
 		/// </summary>
 		/// <returns>A <see cref="Group"/> instance.</returns>
-		public Group ToGroup()
+		public Group ToGroup ()
 		{
-			return (Group)this;
+			return (Group) this;
 		}
 
 	}
@@ -134,10 +133,9 @@ namespace RtmNet
 		/// </summary>
 		public GroupThrottleMode Mode;
 
-		internal void setMode(string mode)
+		internal void setMode (string mode)
 		{
-			switch(mode)
-			{
+			switch (mode) {
 				case "day":
 					Mode = GroupThrottleMode.PerDay;
 					break;
@@ -157,7 +155,7 @@ namespace RtmNet
 					Mode = GroupThrottleMode.Disabled;
 					break;
 				default:
-					throw new ArgumentException(string.Format("Unknown mode found {0}", mode), "mode");
+					throw new ArgumentException (string.Format ("Unknown mode found {0}", mode), "mode");
 			}
 		}
 
@@ -204,30 +202,29 @@ namespace RtmNet
 	/// </summary>
 	public class MemberGroupInfo
 	{
-		internal static MemberGroupInfo[] GetMemberGroupInfo(XmlNode node)
+		internal static MemberGroupInfo[] GetMemberGroupInfo (XmlNode node)
 		{
-			XmlNodeList list = node.SelectNodes("//group");
-			MemberGroupInfo[] infos = new MemberGroupInfo[list.Count];
-			for(int i = 0; i < infos.Length; i++)
-			{
-				infos[i] = new MemberGroupInfo(list[i]);
+			XmlNodeList list = node.SelectNodes ("//group");
+			MemberGroupInfo[] infos = new MemberGroupInfo [list.Count];
+			for (int i = 0; i < infos.Length; i++) {
+				infos[i] = new MemberGroupInfo (list[i]);
 			}
 			return infos;
 		}
 
-		internal MemberGroupInfo(XmlNode node)
+		internal MemberGroupInfo (XmlNode node)
 		{
-			if( node.Attributes["nsid"] != null )
+			if (node.Attributes["nsid"] != null)
 				_groupId = node.Attributes["nsid"].Value;
-			if( node.Attributes["name"] != null )
+			if (node.Attributes["name"] != null)
 				_groupName = node.Attributes["name"].Value;
-			if( node.Attributes["admin"] != null )
-				_isAdmin = node.Attributes["admin"].Value=="1";
-			if( node.Attributes["privacy"] != null )
-				_privacy = (PoolPrivacy)Enum.Parse(typeof(PoolPrivacy),node.Attributes["privacy"].Value, true);
-			if( node.Attributes["photos"] != null )
+			if (node.Attributes["admin"] != null)
+				_isAdmin = node.Attributes["admin"].Value == "1";
+			if (node.Attributes["privacy"] != null)
+				_privacy = (PoolPrivacy) Enum.Parse (typeof (PoolPrivacy),node.Attributes["privacy"].Value, true);
+			if (node.Attributes["photos"] != null)
 				_numberOfPhotos = Int32.Parse(node.Attributes["photos"].Value);
-			if( node.Attributes["iconserver"] != null )
+			if (node.Attributes["iconserver"] != null)
 				_iconServer = node.Attributes["iconserver"].Value;
 		}
 
@@ -236,16 +233,14 @@ namespace RtmNet
 		/// <summary>
 		/// Property which returns the group id for the group.
 		/// </summary>
-		public string GroupId
-		{
+		public string GroupId {
 			get { return _groupId; }
 		}
 
 		private string _groupName;
 
 		/// <summary>The group name.</summary>
-		public string GroupName
-		{
+		public string GroupName {
 			get { return _groupName; }
 		}
 
@@ -254,8 +249,7 @@ namespace RtmNet
 		/// <summary>
 		/// True if the user is the admin for the group, false if they are not.
 		/// </summary>
-		public bool IsAdmin
-		{
+		public bool IsAdmin {
 			get { return _isAdmin; }
 		}
 	
@@ -264,8 +258,7 @@ namespace RtmNet
 		/// <summary>
 		/// The number of photos currently in the group pool.
 		/// </summary>
-		public long NumberOfPhotos
-		{ 
+		public long NumberOfPhotos { 
 			get { return _numberOfPhotos; }
 		}
 
@@ -274,8 +267,7 @@ namespace RtmNet
 		/// <summary>
 		/// The privacy of the pool (see <see cref="PoolPrivacy"/>).
 		/// </summary>
-		public PoolPrivacy Privacy
-		{
+		public PoolPrivacy Privacy {
 			get { return _privacy; }
 		}
 
@@ -284,25 +276,22 @@ namespace RtmNet
 		/// <summary>
 		/// The server number for the group icon.
 		/// </summary>
-		public string IconServer
-		{
+		public string IconServer {
 			get { return _iconServer; }
 		}
 
 		/// <summary>
 		/// The URL for the group icon.
 		/// </summary>
-		public Uri GroupIconUrl
-		{
-			get { return new Uri(String.Format("http://static.Rtm.com/{0}/buddyicons/{1}.jpg", IconServer, GroupId)); }
+		public Uri GroupIconUrl {
+			get { return new Uri (String.Format ("http://static.Rtm.com/{0}/buddyicons/{1}.jpg", IconServer, GroupId)); }
 		}
 
 		/// <summary>
 		/// The URL for the group web page.
 		/// </summary>
-		public Uri GroupUrl
-		{
-			get { return new Uri(String.Format("http://www.Rtm.com/groups/{0}/", GroupId)); }
+		public Uri GroupUrl {
+			get { return new Uri (String.Format ("http://www.Rtm.com/groups/{0}/", GroupId)); }
 		}
 
 	}
@@ -313,27 +302,26 @@ namespace RtmNet
 	[System.Serializable]
 	public class PublicGroupInfo
 	{
-		internal static PublicGroupInfo[] GetPublicGroupInfo(XmlNode node)
+		internal static PublicGroupInfo[] GetPublicGroupInfo (XmlNode node)
 		{
-			XmlNodeList list = node.SelectNodes("//group");
-			PublicGroupInfo[] infos = new PublicGroupInfo[list.Count];
-			for(int i = 0; i < infos.Length; i++)
-			{
-				infos[i] = new PublicGroupInfo(list[i]);
+			XmlNodeList list = node.SelectNodes ("//group");
+			PublicGroupInfo[] infos = new PublicGroupInfo [list.Count];
+			for(int i = 0; i < infos.Length; i++) {
+				infos[i] = new PublicGroupInfo (list[i]);
 			}
 			return infos;
 		}
 
-		internal PublicGroupInfo(XmlNode node)
+		internal PublicGroupInfo (XmlNode node)
 		{
-			if( node.Attributes["nsid"] != null )
+			if (node.Attributes["nsid"] != null)
 				_groupId = node.Attributes["nsid"].Value;
-			if( node.Attributes["name"] != null )
+			if (node.Attributes["name"] != null)
 				_groupName = node.Attributes["name"].Value;
-			if( node.Attributes["admin"] != null )
-				_isAdmin = node.Attributes["admin"].Value=="1";
-			if( node.Attributes["eighteenplus"] != null )
-				_isEighteenPlus = node.Attributes["eighteenplus"].Value=="1";
+			if (node.Attributes["admin"] != null)
+				_isAdmin = node.Attributes["admin"].Value == "1";
+			if (node.Attributes["eighteenplus"] != null)
+				_isEighteenPlus = node.Attributes["eighteenplus"].Value == "1";
 		}
 
 		private string _groupId;
@@ -341,16 +329,14 @@ namespace RtmNet
 		/// <summary>
 		/// Property which returns the group id for the group.
 		/// </summary>
-		public string GroupId
-		{
+		public string GroupId {
 			get { return _groupId; }
 		}
 
 		private string _groupName;
 
 		/// <summary>The group name.</summary>
-		public string GroupName
-		{
+		public string GroupName {
 			get { return _groupName; }
 		}
 
@@ -359,8 +345,7 @@ namespace RtmNet
 		/// <summary>
 		/// True if the user is the admin for the group, false if they are not.
 		/// </summary>
-		public bool IsAdmin
-		{
+		public bool IsAdmin {
 			get { return _isAdmin; }
 		}
 
@@ -369,16 +354,14 @@ namespace RtmNet
 		/// <summary>
 		/// Will contain 1 if the group is restricted to people who are 18 years old or over, 0 if it is not.
 		/// </summary>
-		public bool EighteenPlus
-		{
+		public bool EighteenPlus {
 			get { return _isEighteenPlus; }
 		}
 
 		/// <summary>
 		/// The URL for the group web page.
 		/// </summary>
-		public Uri GroupUrl
-		{
+		public Uri GroupUrl {
 			get { return new Uri(String.Format("http://www.Rtm.com/groups/{0}/", GroupId)); }
 		}
 	}

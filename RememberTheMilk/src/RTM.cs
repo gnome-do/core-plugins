@@ -921,6 +921,9 @@ namespace RememberTheMilk
 		/// </returns>
 		static bool TryConnect ()
 		{
+			if (!Services.Network.IsConnected)
+				return false;
+			
 			if (!String.IsNullOrEmpty (RTMPreferences.Token)) {
 				Auth auth;
 				try {

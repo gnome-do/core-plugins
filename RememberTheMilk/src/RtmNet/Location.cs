@@ -14,8 +14,8 @@ namespace RtmNet
 		/// <summary>
 		/// An array of <see cref="Location"/> items for the user.
 		/// </summary>
-		[XmlElement("location", Form=XmlSchemaForm.Unqualified)]
-		public Location[] locationCollection = new Location[0];
+		[XmlElement ("location", Form = XmlSchemaForm.Unqualified)]
+		public Location[] locationCollection = new Location [0];
 	}
 	
 	/// <summary>
@@ -27,45 +27,43 @@ namespace RtmNet
 		/// <summary>
 		/// The id of the location.
 		/// </summary>
-		[XmlAttribute("id", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("id", Form = XmlSchemaForm.Unqualified)]
 		public string ID;
-    
+		
 		/// <summary>
 		/// The name of the location
 		/// </summary>
-		[XmlAttribute("name", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("name", Form = XmlSchemaForm.Unqualified)]
 		public string Name;
-    
+		
 		/// <summary>
 		/// The longitude of the location
 		/// </summary>
-		[XmlAttribute("longitude", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("longitude", Form = XmlSchemaForm.Unqualified)]
 		public string Longitude;
-    
+		
 		/// <summary>
 		/// The latitute of the location
 		/// </summary>
-		[XmlAttribute("latitude", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("latitude", Form = XmlSchemaForm.Unqualified)]
 		public string Latitude;
-    
+		
 		/// <summary>
 		/// The zoom level of the location
 		/// </summary>
-		[XmlAttribute("zoom", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("zoom", Form = XmlSchemaForm.Unqualified)]
 		public int Zoom;
 		
 		/// <summary>
 		/// The address string of the location
 		/// </summary>
-		[XmlAttribute("address", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("address", Form = XmlSchemaForm.Unqualified)]
 		public string Address;
 		
 		/// <summary>
 		/// The viewable attribute of the location
 		/// </summary>
-		[XmlAttribute("viewable", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("viewable", Form = XmlSchemaForm.Unqualified)]
 		public int Viewable;
-		
 	}
-
 }
