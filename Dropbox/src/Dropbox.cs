@@ -23,6 +23,8 @@ using System;
 using System.IO;
 using System.Diagnostics;
 
+using Mono.Unix;
+
 using Do.Platform;
 
 namespace Dropbox
@@ -41,8 +43,8 @@ namespace Dropbox
 		static Dropbox ()
 		{
 			BasePath = DropboxConfig.BasePath;
-			PublicPath = Path.Combine (BasePath, "Public");
-			DoSharedPath = Path.Combine (PublicPath, "Files Shared from GNOME Do");
+			PublicPath = Path.Combine (BasePath, Catalog.GetString ("Public"));
+			DoSharedPath = Path.Combine (PublicPath, Catalog.GetString ("Files Shared from GNOME Do"));
 		}
 		
 		public static bool IsRunning {
