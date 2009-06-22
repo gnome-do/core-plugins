@@ -20,7 +20,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -74,7 +74,7 @@ namespace Exaile
 		public override string Description
 		{
 			get {
-				return string.Format (Catalog.GetString ("All music by") + " {0}", artist);
+				return string.Format (AddinManager.CurrentLocalizer.GetString ("All music by") + " {0}", artist);
 			}
 		}
 	}

@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -37,12 +37,12 @@ namespace Google
 	public class MapAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Map"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Map"); }
 		}
 		
 		public override string Description
 		{
-			get { return Catalog.GetString ("Map a location or route in Google maps."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Map a location or route in Google maps."); }
 		}
 		
 		public override string Icon

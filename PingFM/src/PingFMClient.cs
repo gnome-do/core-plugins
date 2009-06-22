@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -32,12 +32,12 @@ namespace PingFM
 {	
 	public class PingFMClient
 	{
-		readonly string ErrorInMethod = Catalog.GetString ("An error has occurred in {0}");
-		readonly string PostSuccessTitle = Catalog.GetString ("Message posted");
-		readonly string PostErrorTitle = Catalog.GetString ("Message posting failed");
-		readonly string PostErrorMessage = Catalog.GetString ("Cannot connect to the Ping.FM API server, or the server responds with an error.");
-		readonly string SinglePostSuccess = Catalog.GetString ("Your {0} message has been successfully posted to {1}");
-		readonly string MultiPostSuccess = Catalog.GetString ("Your message has been successfully posted to all {0} services");
+		readonly string ErrorInMethod = AddinManager.CurrentLocalizer.GetString ("An error has occurred in {0}");
+		readonly string PostSuccessTitle = AddinManager.CurrentLocalizer.GetString ("Message posted");
+		readonly string PostErrorTitle = AddinManager.CurrentLocalizer.GetString ("Message posting failed");
+		readonly string PostErrorMessage = AddinManager.CurrentLocalizer.GetString ("Cannot connect to the Ping.FM API server, or the server responds with an error.");
+		readonly string SinglePostSuccess = AddinManager.CurrentLocalizer.GetString ("Your {0} message has been successfully posted to {1}");
+		readonly string MultiPostSuccess = AddinManager.CurrentLocalizer.GetString ("Your message has been successfully posted to all {0} services");
 		
 		PingFMApi pingfm;
 		List<PingFMServiceItem> services;
@@ -64,8 +64,8 @@ namespace PingFM
 			}
 			
 			services.Clear ();			
-			services.Add (new PingFMServiceItem (Catalog.GetString ("Microblog"), "pingfm", "microblog", "http://ping.fm"));
-			services.Add (new PingFMServiceItem (Catalog.GetString ("Status"), "pingfm", "status", "http://ping.fm"));
+			services.Add (new PingFMServiceItem (AddinManager.CurrentLocalizer.GetString ("Microblog"), "pingfm", "microblog", "http://ping.fm"));
+			services.Add (new PingFMServiceItem (AddinManager.CurrentLocalizer.GetString ("Status"), "pingfm", "status", "http://ping.fm"));
 			
 			// If a service has method "microblog" and/or "status", include it in the service_items list
 			// when both methods are available, use "microblog", because to an individual service
@@ -79,7 +79,7 @@ namespace PingFM
 					}
 				}
 			} else {
-				Log.Error (ErrorInMethod, "UpdateServices", Catalog.GetString ("Error occurred in service response"));
+				Log.Error (ErrorInMethod, "UpdateServices", AddinManager.CurrentLocalizer.GetString ("Error occurred in service response"));
 			}
 		}
 		

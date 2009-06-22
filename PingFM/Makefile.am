@@ -53,7 +53,6 @@ REFERENCES = \
 	System.Data \
 	System.Web \
 	System.Xml \
-	Mono.Posix \
 	$(GNOME_KEYRING_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \

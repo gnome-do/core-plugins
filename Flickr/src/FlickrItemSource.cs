@@ -21,7 +21,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform.Linux;
@@ -31,7 +31,7 @@ namespace Flickr
 	public class FlickrItemSource : ItemSource, IConfigurable
 	{	
 		public override string Name {
-			get { return Catalog.GetString ("Account"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Account"); }
 		}
 		
 		public override string Description {

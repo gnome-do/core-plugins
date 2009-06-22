@@ -31,7 +31,7 @@ namespace RememberTheMilk
 	/// ItemSource class for the Remember The Milk tasks.
 	/// </summary>
 	public class RTMTaskItemSource : ItemSource
-	{		
+	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Remember The Milk Tasks"); }
 		}

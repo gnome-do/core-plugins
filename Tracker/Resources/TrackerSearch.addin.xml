@@ -13,6 +13,8 @@
 		<Import assembly="TrackerSearch.dll"/>
 	</Runtime>
 
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
 	<Dependencies>
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>

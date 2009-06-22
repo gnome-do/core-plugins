@@ -1,5 +1,5 @@
 <objects attr-sync="on">
-  <object type="Do.Addins.Bibtex.Configuration" palette-category="Bibtex" allow-children="false" base-type="Gtk.Bin">
+  <object type="Bibtex.Configuration" palette-category="Bibtex" allow-children="false" base-type="Gtk.Bin">
     <itemgroups>
       <itemgroup label="Configuration Properties">
         <property name="BibtexFilePath" />

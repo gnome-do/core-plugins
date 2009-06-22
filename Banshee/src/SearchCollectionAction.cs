@@ -23,7 +23,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -33,11 +33,11 @@ namespace Banshee
 	public class SearchCollectionAction : Act
 	{	
 		public override string Name {
-			get { return Catalog.GetString ("Search Banshee Media"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search Banshee Media"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Search your entire Banshee collection"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search your entire Banshee collection"); }
 		}
 
 		public override string Icon {

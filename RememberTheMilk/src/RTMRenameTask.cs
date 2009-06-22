@@ -32,13 +32,13 @@ namespace RememberTheMilk
 	public class RTMRenameTask : Act
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Rename Task to ..."); }
-		}		
-				
+			get { return AddinManager.CurrentLocalizer.GetString ("Rename"); }
+		}
+		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Give the seleted task a new name"); }
 		}
-			
+		
 		public override string Icon {
 			get { return "task-rename.png@" + GetType ().Assembly.FullName; }
 		}
@@ -48,7 +48,7 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { yield return typeof (ITextItem); }
+			get { yield return typeof (ITextItem); }
 		}
 		
 		public override bool ModifierItemsOptional {
@@ -58,8 +58,10 @@ namespace RememberTheMilk
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			Services.Application.RunOnThread (() => {
-				RTM.RenameTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				                (items.First () as RTMTaskItem).Id, (modifierItems.First () as ITextItem).Text);
+				RTM.RenameTask ((items.First () as RTMTaskItem).ListId, 
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id, 
+					(modifierItems.First () as ITextItem).Text);
 			});
 			yield break;
 		}

@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 using Mono.Unix;
+using Mono.Addins;
 
 namespace SystemServices {
 	
@@ -68,10 +69,10 @@ namespace SystemServices {
 		protected virtual void OnBtnSelectFileClicked (object sender, System.EventArgs e)
 		{
 			Gtk.FileChooserDialog fc = new Gtk.FileChooserDialog (
-					Catalog.GetString ("Choose the file to open"), new Dialog(),
+					AddinManager.CurrentLocalizer.GetString ("Choose the file to open"), new Dialog(),
 					Gtk.FileChooserAction.Open, 
-					Catalog.GetString ("Cancel"), ResponseType.Cancel,
-					Catalog.GetString ("Open"), ResponseType.Accept);
+					AddinManager.CurrentLocalizer.GetString ("Cancel"), ResponseType.Cancel,
+					AddinManager.CurrentLocalizer.GetString ("Open"), ResponseType.Accept);
 
 			if (!string.IsNullOrEmpty (this.eCommand.Text)) {
 				fc.SetFilename(this.eCommand.Text);
@@ -85,7 +86,7 @@ namespace SystemServices {
 					
 					MessageDialog md = new MessageDialog (new Dialog(), 
 							DialogFlags.DestroyWithParent, MessageType.Error, ButtonsType.Close, 
-							Catalog.GetString ("Selected invalid file!\nShould be executable."));
+							AddinManager.CurrentLocalizer.GetString ("Selected invalid file!\nShould be executable."));
 					md.Run ();
 					md.Destroy();
 				} else {

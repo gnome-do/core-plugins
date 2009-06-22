@@ -24,7 +24,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -68,7 +68,7 @@ namespace Do.FilesAndFolders
 
 		protected virtual bool SupportsItem (ITextItem item)
 		{
-			string path = item.Text.Replace ("~", Plugin.ImportantFolders.UserHome);
+			string path = Plugin.UnwrapHomeFolder (item.Text);
 			return path.Length < MaxPathLength && (File.Exists (path) || Directory.Exists (path));
 		}
 		
@@ -109,7 +109,7 @@ namespace Do.FilesAndFolders
 
 		protected string GetPath (ITextItem item)
 		{
-			return item.Text.Replace ("~", Plugin.ImportantFolders.UserHome);
+			return Plugin.UnwrapHomeFolder (item.Text);
 		}
 
 		protected virtual IEnumerable<Item> Perform (string source, string destination)

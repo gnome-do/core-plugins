@@ -54,9 +54,10 @@ namespace RememberTheMilk
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
-			Services.Application.RunOnThread (() => {	
-				RTM.UncompleteTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				                    (items.First () as RTMTaskItem).Id);
+			Services.Application.RunOnThread (() => {
+				RTM.UncompleteTask ((items.First () as RTMTaskItem).ListId, 
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id);
 			});
 			yield break;
 		}

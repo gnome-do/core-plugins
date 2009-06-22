@@ -19,7 +19,7 @@
  */
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 
 using Gtk;
 

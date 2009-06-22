@@ -122,6 +122,6 @@
     <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.9.0.0, Culture=neutral" />
     <ProjectReference type="Gac" localcopy="True" refto="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
-    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </References>
+  <GtkDesignInfo gettextClass="Mono.Addins.AddinManager.CurrentLocalizer" />
 </Project>

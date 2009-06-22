@@ -33,8 +33,8 @@ namespace RememberTheMilk
 	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set Priority"); }
-		}		
-				
+		}
+		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the priority of a task"); }
 		}
@@ -63,10 +63,12 @@ namespace RememberTheMilk
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			Services.Application.RunOnThread (() => {
-				RTM.SetTaskPriority ( (items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				                     (items.First () as RTMTaskItem).Id, (modifierItems.First () as RTMPriorityItem).Priority);
+				RTM.SetTaskPriority ((items.First () as RTMTaskItem).ListId,
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id, 
+					(modifierItems.First () as RTMPriorityItem).Priority);
 			});
 			yield break;
-        }
+		}
 	}
 }

@@ -20,7 +20,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -29,11 +29,11 @@ namespace Banshee
 	public class NextAction : AbstractPlayerAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Next"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Next"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Play next track"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Play next track"); }
 		}
 
 		public override string Icon {

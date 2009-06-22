@@ -33,12 +33,12 @@ namespace RememberTheMilk
 	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set Recurrence"); }
-		}		
-				
+		}
+		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set a recurrence pattern for a task."); }
 		}
-			
+		
 		public override string Icon {
 			get { return "task-repeat.png@" + GetType ().Assembly.FullName; }
 		}
@@ -54,8 +54,10 @@ namespace RememberTheMilk
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			Services.Application.RunOnThread (() => {
-				RTM.SetRecurrence ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				                   (items.First () as RTMTaskItem).Id, (modifierItems.FirstOrDefault () as ITextItem).Text);
+				RTM.SetRecurrence ((items.First () as RTMTaskItem).ListId,
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id, 
+					(modifierItems.FirstOrDefault () as ITextItem).Text);
 			});
 			yield break;
 		}

@@ -32,7 +32,7 @@ namespace RememberTheMilk
 	public class RTMRenameList : Act
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Rename List to ..."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Rename"); }
 		}
 		
 		public override string Description {
@@ -64,7 +64,7 @@ namespace RememberTheMilk
 			if (modifierItems.Any ()) {
 				string newListName = (modifierItems.First () as ITextItem).Text;
 				if (String.IsNullOrEmpty (newListName)) {
-					Log<RTM>.Debug ("[RememberTheMilk] No list name provided for RTMRenameList action");
+					Log<RTM>.Debug ("No list name provided for RTMRenameList action");
 					yield break;
 				}
 				

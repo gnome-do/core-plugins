@@ -21,7 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -44,11 +44,11 @@ namespace PidginPlugin
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Pidgin Statuses"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pidgin Statuses"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Saved Pidgin statuses"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Saved Pidgin statuses"); }
 		}
 
 		public override string Icon {
@@ -59,6 +59,18 @@ namespace PidginPlugin
 			get { 
 				yield return typeof (PidginSavedStatusItem);
 				yield return typeof (PidginStatusTypeItem);
+				yield return typeof (IApplicationItem);
+				yield return typeof (PidginBrowseStatusItem);
+			}
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			if (Pidgin.IsPidgin (item)) {
+				yield return new PidginBrowseStatusItem ();
+			} else if (item is PidginBrowseStatusItem) {
+				foreach (Item status in statuses)
+					yield return status;
 			}
 		}
 		

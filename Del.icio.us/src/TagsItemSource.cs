@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -31,11 +31,11 @@ namespace Delicious
 	public class TagsItemSource : ItemSource
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Del.icio.us Tags"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Del.icio.us Tags"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Organizes your del.icio.us bookmarks by tag"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Organizes your del.icio.us bookmarks by tag"); }
 		}
 		
 		public override string Icon {

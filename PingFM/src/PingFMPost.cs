@@ -21,7 +21,7 @@ using System;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 using PingFM.API;
 
 
@@ -32,11 +32,11 @@ namespace PingFM
 	public sealed class PingFMPost : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Post via Ping.FM"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Post via Ping.FM"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Post a text message as microblog or status update to your social network"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Post a text message as microblog or status update to your social network"); }
         }
 			
 		public override  string Icon {

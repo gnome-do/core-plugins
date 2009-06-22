@@ -24,7 +24,7 @@ using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -41,11 +41,11 @@ namespace VinagreVNC
 	        }
 
 		public override string Name { 
-			get { return Catalog.GetString ("Vinagre Bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Vinagre Bookmarks"); }
 		}
 
 		public override string Description { 
-			get { return Catalog.GetString ("Indexes your Vinagre Bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Vinagre Bookmarks"); }
 		}
 
 		public override string Icon {
@@ -56,11 +56,28 @@ namespace VinagreVNC
 			get {
 				yield return typeof (HostItem);
 				yield return typeof (VNCHostItem);
+				yield return typeof (IApplicationItem);
+				yield return typeof (VinagrgeBrowseBookmarksItem);
 			}
 		}
 
 		public override IEnumerable<Item> Items {
 			get { return items; }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			if (IsVinagre (item)) {
+				yield return new VinagrgeBrowseBookmarksItem ();
+			} else if (item is VinagrgeBrowseBookmarksItem) {
+				foreach (Item host in Items)
+					yield return host;
+			}
+		}
+		
+		bool IsVinagre (Item item) 
+		{
+			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("vinagre"));
 		}
 
 		public override void UpdateItems ()

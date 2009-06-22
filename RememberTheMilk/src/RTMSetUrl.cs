@@ -50,12 +50,12 @@ namespace RememberTheMilk
 		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the URL of a task."); }
-        	}
+		}
 			
 		public override string Icon {
 			get { return "task-seturl.png@" + GetType ().Assembly.FullName; }
 		}
-
+		
 		public bool CheckValidURL(string url) {
 			Regex url_regex;
 			url_regex = new Regex (UrlPattern, RegexOptions.Compiled);
@@ -116,11 +116,11 @@ namespace RememberTheMilk
 				if (!CheckValidURL(url)) {
 					// Error in entered URL.
 					Services.Notifications.Notify("Remember The Milk",
-					                              "Invalid URL provided.");
+						AddinManager.CurrentLocalizer.GetString ("Invalid URL provided."));
 					yield break;
 				}
 			}
-
+			
 			if (task != null)
 				Services.Application.RunOnThread (() => {
 					RTM.SetURL (task.ListId, task.TaskSeriesId, task.Id, url);

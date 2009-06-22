@@ -21,7 +21,7 @@
 
 using System;
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Delicious
 {
@@ -42,9 +42,9 @@ namespace Delicious
 		public override string Description {
 			get { 
 				if (tag.Equals ("Untagged"))
-					return Catalog.GetString ("Untagged del.ico.us bookmarks");				
+					return AddinManager.CurrentLocalizer.GetString ("Untagged del.ico.us bookmarks");				
 				return string.Format (
-					Catalog.GetString ("del.icio.us bookmarks tagged with {0}"), Name);
+					AddinManager.CurrentLocalizer.GetString ("del.icio.us bookmarks tagged with {0}"), Name);
 			}
 		}
 		

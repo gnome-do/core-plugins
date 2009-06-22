@@ -20,7 +20,7 @@
  */
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace GMail
@@ -38,15 +38,15 @@ namespace GMail
 		public override string Name {
 			get {
 				switch (type.ToLower ()) {
-				case "email.gmail": return Catalog.GetString ("Primary Email");
-				case "phone.gmail": return Catalog.GetString ("Primary Phone");
-				case "email.gmail.home": return Catalog.GetString ("Home Email");
-				case "email.gmail.work": return Catalog.GetString ("Work Email");
-				case "phone.gmail.home": return Catalog.GetString ("Home Phone");
-				case "phone.gmail.work": return Catalog.GetString ("Work Phone");
-				case "address.gmail": return Catalog.GetString ("Primary Address");
-				case "address.gmail.home": return Catalog.GetString ("Home Address");
-				case "address.gmail.work": return Catalog.GetString ("Work Address");
+				case "email.gmail": return AddinManager.CurrentLocalizer.GetString ("Primary Email");
+				case "phone.gmail": return AddinManager.CurrentLocalizer.GetString ("Primary Phone");
+				case "email.gmail.home": return AddinManager.CurrentLocalizer.GetString ("Home Email");
+				case "email.gmail.work": return AddinManager.CurrentLocalizer.GetString ("Work Email");
+				case "phone.gmail.home": return AddinManager.CurrentLocalizer.GetString ("Home Phone");
+				case "phone.gmail.work": return AddinManager.CurrentLocalizer.GetString ("Work Phone");
+				case "address.gmail": return AddinManager.CurrentLocalizer.GetString ("Primary Address");
+				case "address.gmail.home": return AddinManager.CurrentLocalizer.GetString ("Home Address");
+				case "address.gmail.work": return AddinManager.CurrentLocalizer.GetString ("Work Address");
 				default: return "Other " + DetailRoot (type);
 				}
 			}

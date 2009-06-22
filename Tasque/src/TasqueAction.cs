@@ -22,7 +22,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using GConf;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -39,11 +39,11 @@ namespace Tasque
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Create a new task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a new task"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Create a new task in Tasque"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a new task in Tasque"); }
 		}
 
 		public override string Icon {

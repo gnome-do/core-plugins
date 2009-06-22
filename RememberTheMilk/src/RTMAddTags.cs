@@ -88,7 +88,7 @@ namespace RememberTheMilk
 				
 				Services.Application.RunOnThread (() => {
 					RTM.AddTags ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-					             (items.First () as RTMTaskItem).Id, String.Join (",", temp_tags.ToArray ()));
+						(items.First () as RTMTaskItem).Id, String.Join (",", temp_tags.ToArray ()));
 				});
 			}
 			yield break;

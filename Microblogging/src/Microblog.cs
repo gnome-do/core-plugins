@@ -24,7 +24,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -33,7 +33,7 @@ namespace Microblogging
 {
 	public static class Microblog
 	{
-		static readonly string MissingCredentialsMsg = Catalog.GetString ("Missing login credentials. Please set login "
+		static readonly string MissingCredentialsMsg = AddinManager.CurrentLocalizer.GetString ("Missing login credentials. Please set login "
 			+ "information in plugin configuration.");
 		
 		static MicroblogClient client;

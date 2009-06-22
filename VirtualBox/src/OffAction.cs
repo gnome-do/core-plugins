@@ -23,7 +23,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -37,11 +37,11 @@ namespace VirtualBox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString("Power Off Virtual Machine"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Power Off Virtual Machine"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString("Powers off the selected Virtual Machine"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Powers off the selected Virtual Machine"); }
 		}
 
 		public override string Icon {
@@ -69,8 +69,8 @@ namespace VirtualBox
 			VMItem vm = (item as VMItem);
 			
 			DynItems.Add(
-			             new VMDynItm(Catalog.GetString("Discard State"),
-			                          Catalog.GetString("Restore VM state to current Snapshot"),
+			             new VMDynItm(AddinManager.CurrentLocalizer.GetString("Discard State"),
+			                          AddinManager.CurrentLocalizer.GetString("Restore VM state to current Snapshot"),
 			                          "vm_discard_32px.png@"+GetType().Assembly.FullName,
 			                          VMState.off
 			                          )

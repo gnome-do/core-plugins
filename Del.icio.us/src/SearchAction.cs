@@ -26,7 +26,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
@@ -44,11 +44,11 @@ namespace Delicious
 	public class SearchAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Search del.icio.us"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search del.icio.us"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("del.icio.us tag search"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("del.icio.us tag search"); }
 		}
 		
 		public override string Icon {

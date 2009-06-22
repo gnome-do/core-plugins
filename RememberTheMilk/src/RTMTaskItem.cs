@@ -47,8 +47,8 @@ namespace RememberTheMilk
 		}
 		
 		public RTMTaskItem (string listId, string taskSeriesId, string taskId, string name, 
-		                    DateTime due, DateTime completed, string taskUrl, 
-		                    string priority, int hasDueTime, string estimate, string locationId, string tags)
+		                    DateTime due, DateTime completed, string taskUrl, string priority,
+		                    int hasDueTime, string estimate, string locationId, string tags)
 		{
 			this.list_id = listId;
 			this.taskseries_id = taskSeriesId;
@@ -63,8 +63,10 @@ namespace RememberTheMilk
 			this.location_id = locationId;
 			this.tags = tags;
 		}
-
-		public override string Name { get { return name; } }
+		
+		public override string Name { 
+			get { return name; } 
+		}
 		
 		public override string Description {
 			get {
@@ -98,9 +100,9 @@ namespace RememberTheMilk
 						iconName = "task-high";
 					else
 						iconName = "task";
-
+					
 					if ((due < DateTime.Now.AddDays (1.0) && due >= DateTime.Now && has_due_time == 1)
-					    || (due.Date == DateTime.Today && has_due_time == 0))
+						|| (due.Date == DateTime.Today && has_due_time == 0))
 						iconName += "-due";
 					else if ((due > DateTime.MinValue) &&
 					         ((due < DateTime.Now && has_due_time == 1) || due.Date < DateTime.Today))
@@ -112,8 +114,7 @@ namespace RememberTheMilk
 		
 		public string Url {
 			get {
-				return String.Format ("http://www.rememberthemilk.com/home/{0}/{1}/{2}", 
-				                      RTMPreferences.Username, list_id, task_id);
+				return String.Format ("http://www.rememberthemilk.com/home/{0}/{1}/{2}", RTMPreferences.Username, list_id, task_id);
 			}
 		}
 		
@@ -152,7 +153,7 @@ namespace RememberTheMilk
 		public string LocationId {
 			get { return location_id; }
 		}
-
+		
 		public string Tags {
 			get { return tags; }
 		}

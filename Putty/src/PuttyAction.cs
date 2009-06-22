@@ -23,7 +23,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -37,11 +37,11 @@ namespace Putty
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("Connect with PuTTY"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Connect with PuTTY"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Create new conenction with PuTTY"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create new conenction with PuTTY"); }
 		}
 		
 		public override string Icon {

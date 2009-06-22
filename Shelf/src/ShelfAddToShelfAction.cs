@@ -20,7 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Platform;
 using Do.Universe;
 
@@ -29,11 +29,11 @@ namespace Shelf
 	public class ShelfAddToShelfAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Add To Shelf"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add To Shelf"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Add Selected Item to one Shelf"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add Selected Item to one Shelf"); }
 		}
 
 		public override string Icon {

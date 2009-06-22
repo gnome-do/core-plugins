@@ -10,7 +10,6 @@ RESOURCES = \
 
 REFERENCES = \
 	System \
-	Mono.Posix \
 	System.Core \
 	System.Web \
 	$(DO_PLATFORM_LIBS) \

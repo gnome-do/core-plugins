@@ -51,9 +51,7 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get {
-				yield return typeof (ITextItem);
-			}
+			get { yield return typeof (ITextItem); }
 		}
 		
 		public override bool ModifierItemsOptional {

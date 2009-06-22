@@ -21,7 +21,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using GLib;
 
@@ -42,11 +42,11 @@ namespace RemindMe
 		{
 			
 			public override string Name {
-				get { return Catalog.GetString ("Allow Snooze"); }
+				get { return AddinManager.CurrentLocalizer.GetString ("Allow Snooze"); }
 			}
 			
 			public override string Description {
-				get { return Catalog.GetString ("Allows this reminder to be snoozed."); }
+				get { return AddinManager.CurrentLocalizer.GetString ("Allows this reminder to be snoozed."); }
 			}
 			
 			public override string Icon {
@@ -58,11 +58,11 @@ namespace RemindMe
 		{
 			
 			public override string Name {
-				get { return Catalog.GetString ("No Snooze Allowed"); }
+				get { return AddinManager.CurrentLocalizer.GetString ("No Snooze Allowed"); }
 			}
 			
 			public override string Description {
-				get { return Catalog.GetString ("This reminder cannot be snoozed."); }
+				get { return AddinManager.CurrentLocalizer.GetString ("This reminder cannot be snoozed."); }
 			}
 			
 			public override string Icon {
@@ -72,17 +72,17 @@ namespace RemindMe
 		
 		public RemindMe ()
 		{
-			remindMessageHourMin = Catalog.GetString ("You will be reminded in {0} hours, {0} minutes.");
-			remindMessageMin = Catalog.GetString ("You will be reminded in {0} minutes");
-			timeKeyWords = new string[] {Catalog.GetString ("in"), Catalog.GetString ("at")};
+			remindMessageHourMin = AddinManager.CurrentLocalizer.GetString ("You will be reminded in {0} hours, {0} minutes.");
+			remindMessageMin = AddinManager.CurrentLocalizer.GetString ("You will be reminded in {0} minutes");
+			timeKeyWords = new string[] {AddinManager.CurrentLocalizer.GetString ("in"), AddinManager.CurrentLocalizer.GetString ("at")};
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Remind Me"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Remind Me"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Simple Reminders"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Simple Reminders"); }
 		}
 
 		public override string Icon {

@@ -23,7 +23,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
@@ -55,7 +55,7 @@ namespace Translate
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Translate"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Translate"); }
 		}
 
 		public override string Icon {
@@ -63,7 +63,7 @@ namespace Translate
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Translates text"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Translates text"); }
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {

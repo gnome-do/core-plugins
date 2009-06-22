@@ -66,8 +66,8 @@ namespace RememberTheMilk
 			
 			Services.Application.RunOnThread (() => {
 				RTM.NewNote ((items.First () as RTMTaskItem).ListId,
-				             (items.First () as RTMTaskItem).TaskSeriesId,
-				             (items.First () as RTMTaskItem).Id, note);
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id, note);
 			});
 			yield break;
 		}

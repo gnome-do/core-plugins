@@ -1,7 +1,7 @@
 <Addin
 	id="GoogleDocs"
 	namespace= "Do"
-	version="1.0"
+	version="1.2"
 	name="Google Docs"
 	description="Search documents, spreadsheets, and presentations on Google Docs."
 	author="Peng Deng"
@@ -12,6 +12,8 @@
 	<Runtime>
 		<Import assembly="GoogleDocs.dll"/>
 	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
 
 	<Dependencies>
 		<Addin id="Universe" version="1.0" />

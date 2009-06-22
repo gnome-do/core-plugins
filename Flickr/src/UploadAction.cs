@@ -24,7 +24,7 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -37,11 +37,11 @@ namespace Flickr
 		const string ImageExtensions = ".jpg .jpeg .gif .png .tiff";
 	
 		public override string Name {
-			get { return Catalog.GetString ("Upload photo"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload photo"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Upload one or more photos to Flickr"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload one or more photos to Flickr"); }
 		}
 		
 		/*

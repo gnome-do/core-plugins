@@ -22,7 +22,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -36,11 +36,11 @@ namespace VirtualBox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString("Pause Virtual Machine"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Pause Virtual Machine"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString("Pauses the selected Virtual Machine"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Pauses the selected Virtual Machine"); }
 		}
 
 		public override string Icon {

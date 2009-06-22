@@ -10,7 +10,6 @@ RESOURCES = \
 	Resources/Woof.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(NDESK_DBUS_10_LIBS) \

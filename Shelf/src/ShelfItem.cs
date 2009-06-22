@@ -19,7 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace Shelf
@@ -50,13 +50,13 @@ namespace Shelf
 		}
 		
 		public override string Name {
-			get { return this.name + Catalog.GetString (" Shelf"); }
+			get { return this.name + AddinManager.CurrentLocalizer.GetString (" Shelf"); }
 		}
 		
 		public override string Description {
 			get {
 				return string.Format (
-						Catalog.GetString ("Your {0} shelf items."), this.name);
+						AddinManager.CurrentLocalizer.GetString ("Your {0} shelf items."), this.name);
 			}
 		}
 

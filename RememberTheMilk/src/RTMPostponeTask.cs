@@ -33,8 +33,8 @@ namespace RememberTheMilk
 	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Postpone"); }
-		}		
-				
+		}
+		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Postpone a selected task in Remember The Milk"); }
         }
@@ -50,8 +50,9 @@ namespace RememberTheMilk
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			Services.Application.RunOnThread (() => {
-				RTM.PostponeTask ((items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				                  (items.First () as RTMTaskItem).Id);
+				RTM.PostponeTask ((items.First () as RTMTaskItem).ListId, 
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id);
 			});
 			yield break;
 		}

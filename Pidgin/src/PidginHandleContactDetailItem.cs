@@ -19,7 +19,7 @@
 //
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -40,7 +40,7 @@ namespace PidginPlugin
 			this.proto = proto;
 			this.handle = handle;
 			this.custom_icon = custom_icon;
-			this.online = (Pidgin.BuddyIsOnline (handle)) ? Catalog.GetString ("Online") : Catalog.GetString ("Offline");
+			this.online = (Pidgin.BuddyIsOnline (handle)) ? AddinManager.CurrentLocalizer.GetString ("Online") : AddinManager.CurrentLocalizer.GetString ("Offline");
 		}
 
 		public override string Name {
@@ -51,7 +51,7 @@ namespace PidginPlugin
 
 		public override string Description {
 			get {
-				return string.Format ("{0} {1} ({2})", ReadableProto (proto), Catalog.GetString ("Handle"), online);
+				return string.Format ("{0} {1} ({2})", ReadableProto (proto), AddinManager.CurrentLocalizer.GetString ("Handle"), online);
 			}
 		}
 

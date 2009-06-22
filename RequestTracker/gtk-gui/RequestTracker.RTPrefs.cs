@@ -41,7 +41,7 @@ namespace RequestTracker {
             // Container child vbox1.Gtk.Box+BoxChild
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Use the list below to add/configure your Request Tracker sites.\n\n<i>The ticket number will be inserted into the URL at the place specified by the string: {0}</i>");
+            this.label1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Use the list below to add/configure your Request Tracker sites.\n\n<i>The ticket number will be inserted into the URL at the place specified by the string: {0}</i>");
             this.label1.UseMarkup = true;
             this.label1.Wrap = true;
             this.label1.Justify = ((Gtk.Justification)(2));

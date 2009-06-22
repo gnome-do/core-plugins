@@ -43,7 +43,7 @@ namespace SystemServices {
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
             this.label1.Xalign = 0F;
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Command for start/stop services (gksudo, etc):");
+            this.label1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Command for start/stop services (gksudo, etc):");
             this.vbox1.Add(this.label1);
             Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox1[this.label1]));
             w1.Position = 0;
@@ -69,7 +69,7 @@ namespace SystemServices {
             this.btnSelectFile.CanFocus = true;
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.UseUnderline = true;
-            this.btnSelectFile.Label = Mono.Unix.Catalog.GetString("...");
+            this.btnSelectFile.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("...");
             this.hbox1.Add(this.btnSelectFile);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox1[this.btnSelectFile]));
             w4.Position = 1;
@@ -84,7 +84,7 @@ namespace SystemServices {
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
             this.label2.Xalign = 0F;
-            this.label2.LabelProp = Mono.Unix.Catalog.GetString("Services to control:");
+            this.label2.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Services to control:");
             this.vbox1.Add(this.label2);
             Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.vbox1[this.label2]));
             w6.Position = 2;

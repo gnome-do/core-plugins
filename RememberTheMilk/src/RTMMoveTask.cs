@@ -59,15 +59,16 @@ namespace RememberTheMilk
 		{
 			if (modItem is RTMListItem)
 				return !(modItem as RTMListItem).Smart;
-			
 			return true;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			Services.Application.RunOnThread (() => {
-				RTM.MoveTask ((items.First () as RTMTaskItem).ListId, (modifierItems.First () as RTMListItem).Id,
-				              (items.First () as RTMTaskItem).TaskSeriesId, (items.First () as RTMTaskItem).Id);
+				RTM.MoveTask ((items.First () as RTMTaskItem).ListId,
+					(modifierItems.First () as RTMListItem).Id,
+					(items.First () as RTMTaskItem).TaskSeriesId, 
+					(items.First () as RTMTaskItem).Id);
 			});
 			yield break;
 		}

@@ -11,7 +11,6 @@ RESOURCES = \
 	Resources/Putty.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Web \
 	System.Core \

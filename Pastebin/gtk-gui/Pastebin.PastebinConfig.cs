@@ -69,7 +69,7 @@ namespace Pastebin {
             // Container child hbox1.Gtk.Box+BoxChild
             this.lblCodes = new Gtk.Label();
             this.lblCodes.Name = "lblCodes";
-            this.lblCodes.LabelProp = Mono.Unix.Catalog.GetString("Supported Codes\t\t\t");
+            this.lblCodes.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Supported Codes\t\t\t");
             this.hbox1.Add(this.lblCodes);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox1[this.lblCodes]));
             w2.Position = 0;
@@ -98,7 +98,7 @@ namespace Pastebin {
             this.frame1.Add(this.GtkAlignment);
             this.GtkLabel3 = new Gtk.Label();
             this.GtkLabel3.Name = "GtkLabel3";
-            this.GtkLabel3.LabelProp = Mono.Unix.Catalog.GetString("<b>Pastebin Provider</b>");
+            this.GtkLabel3.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("<b>Pastebin Provider</b>");
             this.GtkLabel3.UseMarkup = true;
             this.frame1.LabelWidget = this.GtkLabel3;
             this.vbox1.Add(this.frame1);

@@ -1,4 +1,4 @@
-/* GDocsItem.cs
+/* EpiphanyBrowseBookmarksItem.cs
  *
  * GNOME Do is the legal property of its developers. Please refer to the
  * COPYRIGHT file distributed with this
@@ -17,46 +17,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 using System;
-using System.Text;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
-using Do.Platform;
 
-namespace GDocs
+namespace Epiphany
 {
-    public class GDocsItem : Item, IOpenableItem
-    {
-        string name, url;
-		
-		public GDocsItem (string name, string url)
-        {
-            this.name = name;
-            this.url = url;
-        }
-
-        public override string Name {
-            get { return name; }
-        }
-				
-        public override string Description {
-            get { return Catalog.GetString ("Google Docs Generic Document"); }
-        }
-		
-		public virtual string URL {
-			get { return url; }
-		}
-
-        public override string Icon {
-            get { return "x-office-document"; }
+	public class EpiphanyBrowseBookmarksItem : Item
+	{
+		public override string Name {
+			get { return AddinManager.CurrentLocalizer.GetString ("Bookmarks"); }
 		}
 		
-		public void Open ()
-		{
-			Services.Environment.OpenUrl (url);
+		public override string Description {
+			get { return AddinManager.CurrentLocalizer.GetString ("Browse Bookmarks"); } 
 		}
-	}	
+		
+		public override string Icon {
+			get { return "gnome-web-browser"; }
+		}
+	}
 }

@@ -19,7 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 using System.Linq;
 using Do.Universe;
 
@@ -33,11 +33,11 @@ namespace Shelf
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Rename a Shelf"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Rename a Shelf"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Changes a shelf's name"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Changes a shelf's name"); }
 		}
 
 		public override string Icon {

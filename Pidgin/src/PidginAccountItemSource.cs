@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -38,11 +38,11 @@ namespace PidginPlugin
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Pidgin Accounts"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pidgin Accounts"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Available Pidgin IM Accounts"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Available Pidgin IM Accounts"); }
 		}
 
 		public override string Icon {
@@ -50,7 +50,21 @@ namespace PidginPlugin
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (PidginAccountItem); }
+			get { 
+				yield return typeof (PidginAccountItem); 
+				yield return typeof (IApplicationItem);
+				yield return typeof (PidginBrowseAccountItem);
+			}
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			if (Pidgin.IsPidgin (item)) {
+				yield return new PidginBrowseAccountItem ();
+			} else if (item is PidginBrowseAccountItem) {
+				foreach (PidginAccountItem account in items)
+					yield return account;
+			}
 		}
 		
 		public override IEnumerable<Item> Items {

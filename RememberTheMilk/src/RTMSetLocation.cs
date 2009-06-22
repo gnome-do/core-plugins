@@ -33,12 +33,12 @@ namespace RememberTheMilk
 	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set Location"); }
-		}		
-				
+		}
+		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the location of a task"); }
-        }
-			
+		}
+		
 		public override string Icon {
 			get { return "task-seturl.png@" + GetType ().Assembly.FullName; }
 		}
@@ -59,8 +59,9 @@ namespace RememberTheMilk
 				locationId = (modifierItems.First () as RTMLocationItem).Id;
 			
 			Services.Application.RunOnThread (() => {
-				RTM.SetLocation ( (items.First () as RTMTaskItem).ListId, (items.First () as RTMTaskItem).TaskSeriesId,
-				                 (items.First () as RTMTaskItem).Id, locationId);
+				RTM.SetLocation ((items.First () as RTMTaskItem).ListId, 
+					(items.First () as RTMTaskItem).TaskSeriesId,
+					(items.First () as RTMTaskItem).Id, locationId);
 			});
 			yield break;
 		}

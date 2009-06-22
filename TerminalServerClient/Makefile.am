@@ -10,7 +10,6 @@ RESOURCES = \
 	Resources/TerminalServerClient.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Xml \

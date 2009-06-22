@@ -33,8 +33,8 @@ namespace RememberTheMilk
 	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("New Task"); }
-		}		
-				
+		}
+		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Create a new task in Remember The Milk"); }
 		}
@@ -52,7 +52,7 @@ namespace RememberTheMilk
 		}
         
 		public override bool ModifierItemsOptional {
-			get {return true; }
+			get { return true; }
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
@@ -69,7 +69,8 @@ namespace RememberTheMilk
 			string taskData = (items.First () as ITextItem).Text;
 			
 			if (string.IsNullOrEmpty(taskData)) {
-				Services.Notifications.Notify ("Remember The Milk", "No title provided for new task.");
+				Services.Notifications.Notify ("Remember The Milk", 
+					AddinManager.CurrentLocalizer.GetString ("No title provided for new task."));
 				yield break;
 			}
 			

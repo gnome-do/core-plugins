@@ -95,7 +95,7 @@ namespace RememberTheMilk
 				
 				Services.Application.RunOnThread (() => {
 					RTM.DeleteTags (task.ListId, task.TaskSeriesId,
-					                task.Id, String.Join (",", temp_tags.ToArray ()));
+						task.Id, String.Join (",", temp_tags.ToArray ()));
 				});
 			}
 			yield break;

@@ -19,7 +19,7 @@
  */
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 
 using Gtk;
 
@@ -45,7 +45,7 @@ namespace Do.FilesAndFolders
 			cell = new CellRendererText ();
 			(cell as CellRendererText).Width = 310;
 			(cell as CellRendererText).Ellipsize = Pango.EllipsizeMode.Middle;
-			AppendColumn (Catalog.GetString ("Folder"), cell, "text", Column.Path);
+			AppendColumn (AddinManager.CurrentLocalizer.GetString ("Folder"), cell, "text", Column.Path);
 			
 			Refresh ();
 		}

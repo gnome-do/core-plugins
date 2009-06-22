@@ -33,7 +33,7 @@ namespace RememberTheMilk
 	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Delete List"); }
-		}		
+		}
 		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Delete a task list from Remember The Milk"); }

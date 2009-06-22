@@ -23,7 +23,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -32,11 +32,11 @@ namespace WindowManager
 	public class WindowMinimizeAction : WindowActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Minimize/Restore"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Minimize/Restore"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Minimize/Restore a Window"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Minimize/Restore a Window"); }
 		}
 
 		public override string Icon {

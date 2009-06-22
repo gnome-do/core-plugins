@@ -34,16 +34,16 @@ namespace RememberTheMilk
 	{
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set Estimated Time"); }
-		}		
-				
+		}
+		
 		public override string Description {
 			get { return AddinManager.CurrentLocalizer.GetString ("Set or reset the estimated time for a task"); }
 		}
-			
+		
 		public override string Icon {
 			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
 		}
-				
+		
 		public bool CheckValidTime(string timeEntered) {
 			// RTM API supports units of days, hours and minutes
 			string[] times = {
@@ -67,11 +67,11 @@ namespace RememberTheMilk
 				yield return typeof (ITextItem);
 			}
 		}
-
+		
 		public override bool ModifierItemsOptional {
 			get { return false; }
 		}
-        
+		
 		public override bool SupportsItem (Item item) 
 		{
 			if (item is RTMTaskItem)
@@ -99,9 +99,9 @@ namespace RememberTheMilk
 			
 			if (!string.IsNullOrEmpty(est)) {
 				if (!CheckValidTime(est)) {
-					Services.Notifications.Notify ("Invalid Time format",
-					                               "The estimated time entered cannot be understood.",
-					                               "rtm.png@" + GetType ().Assembly.FullName);
+					Services.Notifications.Notify (AddinManager.CurrentLocalizer.GetString ("Invalid Time format"),
+						AddinManager.CurrentLocalizer.GetString ("The estimated time entered cannot be understood."),
+						"rtm.png@" + GetType ().Assembly.FullName);
 					yield break;
 				}
 			}

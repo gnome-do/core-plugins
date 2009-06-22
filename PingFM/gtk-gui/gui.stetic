@@ -2,7 +2,7 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.1</target-gtk-version>
+    <target-gtk-version>2.12.9</target-gtk-version>
   </configuration>
   <widget class="Gtk.Bin" id="PingFM.Configuration" design-size="300 300">
     <property name="MemberName" />

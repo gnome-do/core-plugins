@@ -11,7 +11,6 @@ RESOURCES = \
 	Resources/SSH.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(GCONF_SHARP_20_LIBS) \

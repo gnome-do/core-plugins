@@ -19,7 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 
 using Do.Universe;
@@ -48,8 +48,8 @@ namespace PingFM
 		
 		public override string Description {
 			get { 
-				return (service_id == "pingfm") ? Catalog.GetString ("Web service group supported by Ping.FM") : 
-					Catalog.GetString ("Web service supported by Ping.FM");
+				return (service_id == "pingfm") ? AddinManager.CurrentLocalizer.GetString ("Web service group supported by Ping.FM") : 
+					AddinManager.CurrentLocalizer.GetString ("Web service supported by Ping.FM");
 			}
 		}
 		

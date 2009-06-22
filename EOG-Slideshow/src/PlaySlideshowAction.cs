@@ -23,7 +23,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -37,11 +37,11 @@ namespace EOG
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Play Slideshow"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Play Slideshow"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Plays a slideshow of images in a folder."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Plays a slideshow of images in a folder."); }
 		}
 
 		public override string Icon {

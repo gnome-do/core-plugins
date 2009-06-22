@@ -11,7 +11,6 @@ RESOURCES = \
 	Resources/Archive.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(DO_UNIVERSE_LIBS)

@@ -22,7 +22,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -38,11 +38,11 @@ namespace PidginPlugin
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Chat"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Chat"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Send an instant message to a friend."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Send an instant message to a friend."); }
 		}
 		
 		public override string Icon {

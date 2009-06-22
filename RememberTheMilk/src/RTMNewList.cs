@@ -52,11 +52,11 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
-		{			
+		{
 			if (items.Any ()) {
 				string newListName = (items.First () as ITextItem).Text;
 				if (String.IsNullOrEmpty (newListName)) {
-					Log<RTM>.Debug ("No list name provided for RTMNewList action");
+					Log<RTM>.Debug (AddinManager.CurrentLocalizer.GetString ("No list name provided for RTMNewList action"));
 					yield break;
 				} else {
 					Services.Application.RunOnThread (() => {

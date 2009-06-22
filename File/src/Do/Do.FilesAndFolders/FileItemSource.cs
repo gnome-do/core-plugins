@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -71,16 +71,17 @@ namespace Do.FilesAndFolders {
 				yield return typeof (IFileItem);
 				yield return typeof (ITextItem);
 				yield return typeof (IApplicationItem);
+				yield return typeof (IUriItem);
 			}
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Files and Folders"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Files and Folders"); }
 		}
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Catalogs important files and folders for quick access.");
+				return AddinManager.CurrentLocalizer.GetString ("Catalogs important files and folders for quick access.");
 			}
 		}
 		
@@ -96,6 +97,8 @@ namespace Do.FilesAndFolders {
 				file = Plugin.NewFileItem ((item as ITextItem).Text);
 			else if (item is IFileItem)
 				file = item as IFileItem;
+			else if (item is IUriItem && (item as IUriItem).Uri.StartsWith ("file://"))
+				file = Plugin.NewFileItem ((item as IUriItem).Uri.Replace ("file://", ""));
 			else if (item is IApplicationItem)
 				return Enumerable.Empty<Item> ();
 			

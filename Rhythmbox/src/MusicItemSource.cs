@@ -21,7 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -41,11 +41,11 @@ namespace Do.Rhythmbox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Rhythmbox Music"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Rhythmbox Music"); }
 		}
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Provides access to artists and albums from Rhythmbox."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Provides access to artists and albums from Rhythmbox."); }
 		}
 		
 		public override string Icon {
