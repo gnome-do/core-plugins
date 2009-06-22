@@ -25,7 +25,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Twitterizer.Framework;
 
@@ -39,10 +39,10 @@ namespace Microblogging
 	{
 		#region Class constants, error messages
 		
-		readonly string DownloadFailedMsg = Catalog.GetString ("Failed to fetch file from {0}");
-		readonly string GenericErrorMsg = Catalog.GetString ("Twitter encountered an error in {0}. {1}");
+		readonly string DownloadFailedMsg = AddinManager.CurrentLocalizer.GetString ("Failed to fetch file from {0}");
+		readonly string GenericErrorMsg = AddinManager.CurrentLocalizer.GetString ("Twitter encountered an error in {0}. {1}");
 		
-		readonly string FailedPostMsg = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
+		readonly string FailedPostMsg = AddinManager.CurrentLocalizer.GetString ("Unable to post tweet. Check your login settings. If you "
 			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
 
 		const int UpdateTimelineTimeout = 60 * 1000; // every 60 seconds

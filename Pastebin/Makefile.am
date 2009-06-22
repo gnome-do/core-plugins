@@ -28,7 +28,6 @@ RESOURCES = \
 	Resources/Monoport.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

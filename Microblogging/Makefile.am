@@ -40,7 +40,6 @@ RESOURCES = \
 	Resources/icons/microblogging.svg
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

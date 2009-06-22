@@ -24,7 +24,7 @@ using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -41,11 +41,11 @@ namespace VinagreVNC
 	        }
 
 		public override string Name { 
-			get { return Catalog.GetString ("Vinagre Bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Vinagre Bookmarks"); }
 		}
 
 		public override string Description { 
-			get { return Catalog.GetString ("Indexes your Vinagre Bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Vinagre Bookmarks"); }
 		}
 
 		public override string Icon {

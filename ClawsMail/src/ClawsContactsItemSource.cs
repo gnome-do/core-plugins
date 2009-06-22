@@ -23,7 +23,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 using Do.Platform;
 
@@ -50,11 +50,11 @@ namespace Claws
 		#region std properties
 		
 		public override string Name {
-			get { return Catalog.GetString ("ClawsMail contacts"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("ClawsMail contacts"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Contacts in ClawsMail address book"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Contacts in ClawsMail address book"); }
 		}
 
 		public override string Icon {

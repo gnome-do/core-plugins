@@ -19,7 +19,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -28,11 +28,11 @@ namespace Tomboy
 	public class TomboyBrowseNotesItem : Item
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Notes"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Notes"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Browse Tomboy Notes"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Browse Tomboy Notes"); } 
 		}
 		
 		public override string Icon {

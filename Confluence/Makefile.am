@@ -17,7 +17,6 @@ RESOURCES = \
 	gtk-gui/objects.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

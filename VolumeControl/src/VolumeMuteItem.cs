@@ -21,18 +21,18 @@
 using System;
 
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace VolumeControl
 {
 	public class VolumeMuteItem : AbstractVolumeItem
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Mute Volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Mute Volume"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Mute system volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Mute system volume"); }
 		}
 		
 		public override string Icon {

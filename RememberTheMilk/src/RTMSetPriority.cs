@@ -20,7 +20,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMSetPriority : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Set Priority"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set Priority"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Set the priority of a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set the priority of a task"); }
         }
 			
 		public override string Icon {

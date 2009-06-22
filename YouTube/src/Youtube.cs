@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Net;
-using Mono.Unix;
+using Mono.Addins;
 using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform;
@@ -15,10 +15,10 @@ namespace Do.Universe
 	public class Youtube
 	{
 
-		static readonly string ConnectionErrorMessage = Catalog.GetString ("An error occurred connecting to YouTube, "
+		static readonly string ConnectionErrorMessage = AddinManager.CurrentLocalizer.GetString ("An error occurred connecting to YouTube, "
 			+ "are your credentials valid?");
 			
-		static readonly string MissingCredentialsMessage = Catalog.GetString ("Missing login credentials. Please set "
+		static readonly string MissingCredentialsMessage = AddinManager.CurrentLocalizer.GetString ("Missing login credentials. Please set "
 			+ "login information in YouTube plugin configuration.");
 		
 		public const string appName = "luismmontielg-gnomeDoYoutubePlugin0.1";

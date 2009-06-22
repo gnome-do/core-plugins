@@ -77,7 +77,7 @@ namespace Dropbox {
             this.frame2.Add(this.GtkAlignment);
             this.GtkLabel1 = new Gtk.Label();
             this.GtkLabel1.Name = "GtkLabel1";
-            this.GtkLabel1.LabelProp = Mono.Unix.Catalog.GetString("Dropbox Location");
+            this.GtkLabel1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Dropbox Location");
             this.GtkLabel1.UseMarkup = true;
             this.frame2.LabelWidget = this.GtkLabel1;
             this.vbox2.Add(this.frame2);

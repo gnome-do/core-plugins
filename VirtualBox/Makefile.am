@@ -81,7 +81,6 @@ RESOURCES = \
 	Resources/icons/take_snapshot_22px.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Xml \
 	System.Core \

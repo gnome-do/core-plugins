@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform.Linux;
 using Do.Universe;
@@ -32,11 +32,11 @@ namespace PingFM
 	public sealed class PingFMServiceItemSource : ItemSource, IConfigurable
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Ping.FM Services");}
+			get { return AddinManager.CurrentLocalizer.GetString ("Ping.FM Services");}
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Web services suppported by Ping.FM"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Web services suppported by Ping.FM"); }
 		}
 		
 		public override string Icon {

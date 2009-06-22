@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -137,11 +137,11 @@ namespace Alias
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Alias items"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Alias items"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Aliased items from Do's universe."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Aliased items from Do's universe."); }
 		}
 
 		public override string Icon {

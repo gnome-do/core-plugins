@@ -19,7 +19,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -32,11 +32,11 @@ namespace GDocs
 	public sealed class GDocsTrashDocument : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Delete Document"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete Document"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Move a document into Trash at Google Docs"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Move a document into Trash at Google Docs"); }
 		}
 			
 		public override string Icon {

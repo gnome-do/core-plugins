@@ -24,7 +24,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -45,7 +45,7 @@ namespace Dropbox
 		
 		protected void Notify (string message)
 		{
-			Notification notification = new Notification (Catalog.GetString ("Dropbox"), message, "dropbox");
+			Notification notification = new Notification (AddinManager.CurrentLocalizer.GetString ("Dropbox"), message, "dropbox");
 			Services.Notifications.Notify (notification);
 		}
 		

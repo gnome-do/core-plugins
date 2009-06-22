@@ -20,7 +20,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMMoveTask : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Move to..."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Move to..."); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Move a seleted task from one list to another"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Move a seleted task from one list to another"); }
         }
 			
 		public override string Icon {

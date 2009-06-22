@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -30,11 +30,11 @@ namespace DiskMounter
 	public class UnmountAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Unmount"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmount"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Unmount or eject a volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmount or eject a volume"); }
 		}
 		
 		public override string Icon {

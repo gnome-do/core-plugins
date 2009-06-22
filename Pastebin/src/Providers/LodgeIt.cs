@@ -24,7 +24,7 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 
@@ -74,7 +74,7 @@ namespace Pastebin
 			string url = urlMatch.Groups[1].Value;
 			if (url == string.Empty) {
 				Log<LodgeIt>.Debug (responseText);
-				throw new Exception (Catalog.GetString ("Parsed url was empty. Lodge It has probably changed its format."));
+				throw new Exception (AddinManager.CurrentLocalizer.GetString ("Parsed url was empty. Lodge It has probably changed its format."));
 			}
 			
 			return url_root + url;

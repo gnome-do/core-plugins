@@ -28,7 +28,7 @@ using Do.Platform.Common;
 using Do.Universe;
 using Do.Universe.Common;
 
-using Mono.Unix;
+using Mono.Addins;
 using Mono.Data.SqliteClient;
 	
 namespace Firefox
@@ -66,11 +66,11 @@ namespace Firefox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Firefox Places"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Firefox Places"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Search your bookmarks and history."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search your bookmarks and history."); }
 		}
 
 		public override string Icon {
@@ -246,7 +246,7 @@ namespace Firefox
 							 * parent for all other directories. It doesn't have a name,
 							 * so we'll give it one. */							
 							if (id == 1)
-								yield return new FolderItem (Catalog.GetString ("Mozilla Bookmarks"), id, parent);
+								yield return new FolderItem (AddinManager.CurrentLocalizer.GetString ("Mozilla Bookmarks"), id, parent);
 							/* Firefox uses another field that doesn't have a name.
 							 * It references portions of their menu that generate
 							 * information dynamically from History, Tags, etc.

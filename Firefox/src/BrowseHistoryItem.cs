@@ -20,7 +20,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -29,11 +29,11 @@ namespace Firefox
 	public class BrowseHistoryItem : Item 
 	{
 		public override string Name {
-			get { return Catalog.GetString ("History"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("History"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Browse Firefox History"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Browse Firefox History"); } 
 		}
 		
 		public override string Icon {

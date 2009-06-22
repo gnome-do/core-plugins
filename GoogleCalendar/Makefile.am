@@ -22,7 +22,6 @@ RESOURCES = \
 	Resources/icons/calIcon.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Xml \

@@ -22,7 +22,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 using Tasque.DBus;
-using Mono.Unix;
+using Mono.Addins;
 
 
 namespace Tasque
@@ -44,7 +44,7 @@ namespace Tasque
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Category");
+				return AddinManager.CurrentLocalizer.GetString ("Category");
 			}
 		}
 		

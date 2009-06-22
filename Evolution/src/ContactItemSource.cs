@@ -26,7 +26,7 @@ using Do.Universe;
 using Do.Universe.Common;
 using Do.Platform;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Evolution
 {
@@ -55,8 +55,8 @@ namespace Evolution
 			get { yield return typeof (ContactItem); }
 		}
 		
-		public override string Name { get { return Catalog.GetString ("Evolution Contacts"); } }
-		public override string Description { get { return Catalog.GetString ("Evolution Contacts"); } }
+		public override string Name { get { return AddinManager.CurrentLocalizer.GetString ("Evolution Contacts"); } }
+		public override string Description { get { return AddinManager.CurrentLocalizer.GetString ("Evolution Contacts"); } }
 		public override string Icon { get { return "evolution"; } }
 		
 		public override IEnumerable<Item> Items {

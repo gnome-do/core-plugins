@@ -16,7 +16,6 @@ RESOURCES = \
 	Resources/icons/rt.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

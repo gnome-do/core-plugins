@@ -17,7 +17,7 @@
 //
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -29,11 +29,11 @@ namespace Cl.ickable
 		const string WebClipsURL = "http://cl.ickable.com/clips/";
 		
 		public override string Name {
-			get { return Catalog.GetString ("Cl.ickable Clips"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Cl.ickable Clips"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Opens your cl.ickable clips"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Opens your cl.ickable clips"); }
 		}
 		
 		public override string Icon {

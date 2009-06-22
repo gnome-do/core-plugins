@@ -10,7 +10,6 @@ RESOURCES = \
 	Resources/icons/stock.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(DO_PLATFORM_LIBS) \

@@ -23,7 +23,7 @@ using System.Text.RegularExpressions;
 
 using Gtk;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform.Linux;
 
@@ -39,7 +39,7 @@ namespace GCalendar
         
 		public Configuration() : base ("Google Calendar", Uri)
 		{
-			UsernameLabel = Catalog.GetString ("E-Mail:");
+			UsernameLabel = AddinManager.CurrentLocalizer.GetString ("E-Mail:");
 			Username = GCal.Preferences.Username;
 			Password = GCal.Preferences.Password;
 		}

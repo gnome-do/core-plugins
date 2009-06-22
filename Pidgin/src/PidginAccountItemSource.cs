@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -38,11 +38,11 @@ namespace PidginPlugin
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Pidgin Accounts"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pidgin Accounts"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Available Pidgin IM Accounts"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Available Pidgin IM Accounts"); }
 		}
 
 		public override string Icon {

@@ -19,7 +19,7 @@
  */
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace GNOME
@@ -34,12 +34,12 @@ namespace GNOME
 		}
 
 		public override string Name {
-			get { return string.Format (Catalog.GetString ("{0}-second delay"), Seconds); }
+			get { return string.Format (AddinManager.CurrentLocalizer.GetString ("{0}-second delay"), Seconds); }
 		}
 
 		public override string Description {
 			get {
-				string waitString = Catalog.GetPluralString (
+				string waitString = AddinManager.CurrentLocalizer.GetPluralString (
 				    "Wait {0} second before taking the screenshot.",
 				    "Wait {0} seconds before taking the screenshot.", Seconds);
 				return string.Format (waitString, Seconds);

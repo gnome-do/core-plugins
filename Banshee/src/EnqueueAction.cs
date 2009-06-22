@@ -24,7 +24,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -34,11 +34,11 @@ namespace Banshee
 	public class EnqueueAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Add to Play Queue"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add to Play Queue"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Add media to play queue"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add media to play queue"); }
 		}
 
 		public override string Icon {

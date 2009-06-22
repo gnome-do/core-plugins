@@ -20,7 +20,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -36,11 +36,11 @@ namespace SystemServices {
 		List<Item> items;
 		
 		public override string Name {
-			get { return Catalog.GetString ("System Services"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("System Services"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("List of all System Services"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("List of all System Services"); }
 		}
 
 		public override string Icon {

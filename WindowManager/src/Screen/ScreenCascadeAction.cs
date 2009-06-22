@@ -25,7 +25,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -34,11 +34,11 @@ namespace WindowManager
 	public class ScreenCascadeAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Cascade Windows"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Cascade Windows"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Cascade your Windows"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Cascade your Windows"); }
 		}
 		
 		public override string Icon {

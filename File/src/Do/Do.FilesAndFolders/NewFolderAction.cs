@@ -21,7 +21,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace Do.FilesAndFolders
 	public class NewFolderAction : NewFileAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Create New Folder"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create New Folder"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Creates an new folder."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Creates an new folder."); }
 		}
 		
 		public override string Icon {

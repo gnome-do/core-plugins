@@ -26,7 +26,7 @@ using Do.Platform;
 using System.Diagnostics;
 
 using GConf;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace SSH {
 	
@@ -34,13 +34,13 @@ namespace SSH {
 		
 		public override string Name {
 			get {
-				return Catalog.GetString ("Connect with SSH");
+				return AddinManager.CurrentLocalizer.GetString ("Connect with SSH");
 			}
 		}
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Connect with SSH");
+				return AddinManager.CurrentLocalizer.GetString ("Connect with SSH");
 			}
 		}
 		

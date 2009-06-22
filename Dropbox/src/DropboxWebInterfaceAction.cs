@@ -24,7 +24,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -36,11 +36,11 @@ namespace Dropbox
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("Dropbox web interface");  }
+			get { return AddinManager.CurrentLocalizer.GetString ("Dropbox web interface");  }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("View folder in Dropbox web interface."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("View folder in Dropbox web interface."); }
 		}
 		
 		public override string Icon {

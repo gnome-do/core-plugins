@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace GNOME.Terminal
@@ -35,12 +35,12 @@ namespace GNOME.Terminal
 
 		public override string Name
 		{
-			get { return Catalog.GetString ("Open Terminal Here"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Open Terminal Here"); }
 		}
 
 		public override string Description
 		{
-			get { return Catalog.GetString ("Opens a GNOME Terminal in a given location."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Opens a GNOME Terminal in a given location."); }
 		}
 		
 		public override string Icon

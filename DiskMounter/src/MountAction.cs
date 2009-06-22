@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -29,11 +29,11 @@ namespace DiskMounter
 	public class MountAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Mount"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Mount"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Mount volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Mount volume"); }
 		}
 		
 		public override string Icon {

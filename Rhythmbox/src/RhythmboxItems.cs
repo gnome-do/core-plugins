@@ -21,7 +21,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -47,8 +47,8 @@ namespace Do.Rhythmbox
 	class BrowseArtistsMusicItem : BrowseMusicItem
 	{
 		public BrowseArtistsMusicItem ():
-			base (Catalog.GetString ("Browse Artists"), 
-				Catalog.GetString ("Browse Rhythmbox Music by Artist"))
+			base (AddinManager.CurrentLocalizer.GetString ("Browse Artists"), 
+				AddinManager.CurrentLocalizer.GetString ("Browse Rhythmbox Music by Artist"))
 		{
 		}
 	}
@@ -56,8 +56,8 @@ namespace Do.Rhythmbox
 	class BrowseAlbumsMusicItem : BrowseMusicItem
 	{
 		public BrowseAlbumsMusicItem ():
-			base (Catalog.GetString ("Browse Albums"), 
-				Catalog.GetString ("Browse Rhythmbox Music by Album"))
+			base (AddinManager.CurrentLocalizer.GetString ("Browse Albums"), 
+				AddinManager.CurrentLocalizer.GetString ("Browse Rhythmbox Music by Album"))
 		{
 		}
 	}
@@ -66,32 +66,32 @@ namespace Do.Rhythmbox
 	{
 		public static readonly IEnumerable<RhythmboxRunnableItem> Items = new [] {
 			new RhythmboxRunnableItem (
-				Catalog.GetString ("Show Current Track"),
-				Catalog.GetString ("Show Notification of Current Track in Rhythmbox"),
+				AddinManager.CurrentLocalizer.GetString ("Show Current Track"),
+				AddinManager.CurrentLocalizer.GetString ("Show Notification of Current Track in Rhythmbox"),
 				"gnome-mime-audio",
 				"--notify"),
 
 			new RhythmboxRunnableItem (
-				Catalog.GetString ("Mute"),
-				Catalog.GetString ("Mute Rhythmbox Playback"),
+				AddinManager.CurrentLocalizer.GetString ("Mute"),
+				AddinManager.CurrentLocalizer.GetString ("Mute Rhythmbox Playback"),
 				"audio-volume-muted",
 				"--mute"),
 
 			new RhythmboxRunnableItem (
-				Catalog.GetString ("Unmute"),
-				Catalog.GetString ("Unmute Rhythmbox Playback"),
+				AddinManager.CurrentLocalizer.GetString ("Unmute"),
+				AddinManager.CurrentLocalizer.GetString ("Unmute Rhythmbox Playback"),
 				"audio-volume-high",
 				"--unmute"),
 
 			new RhythmboxRunnableItem (
-				Catalog.GetString ("Volume Up"),
-				Catalog.GetString ("Increase Rhythmbox Playback Volume"),
+				AddinManager.CurrentLocalizer.GetString ("Volume Up"),
+				AddinManager.CurrentLocalizer.GetString ("Increase Rhythmbox Playback Volume"),
 				"audio-volume-high",
 				"--volume-up"),
 
 			new RhythmboxRunnableItem (
-				Catalog.GetString ("Volume Down"),
-				Catalog.GetString ("Decrease Rhythmbox Playback Volume"),
+				AddinManager.CurrentLocalizer.GetString ("Volume Down"),
+				AddinManager.CurrentLocalizer.GetString ("Decrease Rhythmbox Playback Volume"),
 				"audio-volume-low",
 				"--volume-down"),
 			};

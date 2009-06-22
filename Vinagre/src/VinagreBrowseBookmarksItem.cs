@@ -19,7 +19,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -28,11 +28,11 @@ namespace VinagreVNC
 	public class VinagrgeBrowseBookmarksItem : Item
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Bookmarks"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Browse Vinagre Bookmarks"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Browse Vinagre Bookmarks"); } 
 		}
 		
 		public override string Icon {

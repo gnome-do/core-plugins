@@ -22,18 +22,18 @@
 using System;
 
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace VolumeControl
 {
 	public class VolumeUnmuteItem : AbstractVolumeItem
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Unmute Volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmute Volume"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Unmute system volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmute system volume"); }
 		}
 		
 		public override string Icon {

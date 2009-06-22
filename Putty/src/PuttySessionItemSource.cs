@@ -23,7 +23,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -37,11 +37,11 @@ namespace Putty
 		List<Item> items;
 		
 		public override string Name {
-			get {return Catalog.GetString("PuTTY sessions"); }
+			get {return AddinManager.CurrentLocalizer.GetString("PuTTY sessions"); }
 		}
 
 		public override string Description {
-			get {return Catalog.GetString("PuTTY saved sessions");}
+			get {return AddinManager.CurrentLocalizer.GetString("PuTTY saved sessions");}
 		}
 
 		public override string Icon {

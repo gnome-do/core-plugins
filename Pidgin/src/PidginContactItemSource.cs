@@ -23,7 +23,7 @@ using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -63,11 +63,11 @@ namespace PidginPlugin
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Pidgin Buddies"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pidgin Buddies"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Buddies on your Pidgin buddy list."); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Buddies on your Pidgin buddy list."); } 
 		}
 		
 		public override string Icon {

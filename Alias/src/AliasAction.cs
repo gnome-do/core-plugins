@@ -21,7 +21,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -33,11 +33,11 @@ namespace Alias
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("Assign Alias...");  }
+			get { return AddinManager.CurrentLocalizer.GetString ("Assign Alias...");  }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Give an item an alternate name."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Give an item an alternate name."); }
 		}
 
 		public override string Icon {

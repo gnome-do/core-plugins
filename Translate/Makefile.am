@@ -64,7 +64,6 @@ RESOURCES = \
 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

@@ -23,7 +23,6 @@ RESOURCES = \
 REFERENCES = \
 	System \
 	System.Core \
-	Mono.Posix \
 	$(GDATA_SHARP_CONTACTS_LIBS) \
 	$(GDATA_SHARP_YOUTUBE_LIBS) \
 	$(DO_PLATFORM_LIBS) \

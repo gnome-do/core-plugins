@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -46,7 +46,7 @@ namespace Putty {
 		}
 
 		public override string Description {
-			get { return String.Format (Catalog.GetString ("Start new PuTTY session (host {0})"), host); }
+			get { return String.Format (AddinManager.CurrentLocalizer.GetString ("Start new PuTTY session (host {0})"), host); }
 		}
 		
 		public string Session {

@@ -22,7 +22,7 @@ using System;
 using System.IO; 
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -35,16 +35,16 @@ namespace Locate
 		
 		bool allowHidden = false;
 		const uint maxResults = 500;
-		string Error = Catalog.GetString ("Locate found 0 files for: ");
+		string Error = AddinManager.CurrentLocalizer.GetString ("Locate found 0 files for: ");
 		
 		public override string Name
 		{
-			get { return Catalog.GetString ("Locate Files"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Locate Files"); }
 		}
 		
 		public override string Description
 		{
-			get { return Catalog.GetString ("Search your filesystem using locate."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search your filesystem using locate."); }
 		}
 		
 		public override string Icon

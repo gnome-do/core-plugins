@@ -22,7 +22,6 @@ RESOURCES = \
 REFERENCES = \
 	System \
 	System.Core \
-	Mono.Posix \
 	System.Web.Services \
 	System.Xml \
 	$(DO_PLATFORM_LIBS) \

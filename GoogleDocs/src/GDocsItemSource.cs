@@ -19,7 +19,7 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -30,11 +30,11 @@ namespace GDocs
 	public sealed class GDocsItemSource : ItemSource, IConfigurable
     {
 		public override string Name {
-			get { return Catalog.GetString ("Google Docs"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Google Docs"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Indexes your documents stored at Google Docs"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your documents stored at Google Docs"); }
 		}
 		
 		public override string Icon {

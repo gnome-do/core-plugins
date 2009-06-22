@@ -27,7 +27,7 @@ using Do.Platform;
 using Do.Universe;
 using Do.Universe.Common;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Quote
 {
@@ -37,11 +37,11 @@ namespace Quote
 		const string TimeStampRegexp = @"\n\s*\S?\d\d:\d\d(:\d\d)?\S?\s*|^\s*\S?\d\d:\d\d(:\d\d)?\S?\s*";
 		
 		public override string Name {
-			get { return Catalog.GetString ("Submit Quote"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Submit Quote"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Sends text to Quote service."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Sends text to Quote service."); }
 		}
 		
 		public override string Icon {

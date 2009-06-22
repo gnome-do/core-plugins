@@ -21,7 +21,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -53,11 +53,11 @@ namespace Tomboy
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
 		public override string Name {
-			get { return Catalog.GetString ("Tomboy Notes"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Tomboy Notes"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Loads Tomboy notes for searching."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Loads Tomboy notes for searching."); }
 		}
 		
 		public override string Icon {

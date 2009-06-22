@@ -12,7 +12,6 @@ RESOURCES = \
 	Resources/Vinagre.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Xml \
 	System.Core \

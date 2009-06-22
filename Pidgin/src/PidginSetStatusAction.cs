@@ -21,7 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -38,11 +38,11 @@ namespace PidginPlugin
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Set status"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set status"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Set pidgin status message"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set pidgin status message"); }
 		}
 
 		public override string Icon {

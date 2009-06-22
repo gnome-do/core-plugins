@@ -21,7 +21,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -36,11 +36,11 @@ namespace Zim
 	public class ZimOpenPageAction: Act {
 	
 		public override string Name {
-			get { return Catalog.GetString ("Open Zim page"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Open Zim page"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString("Open selected page in Zim"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Open selected page in Zim"); }
 		}
 		
 		public override string Icon {

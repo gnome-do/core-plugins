@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -19,7 +19,7 @@ namespace Microblogging
 		SortedList<DateTime, MicroblogStatus> statuses;
 		
 		public FriendItem (int id, string name) : 
-			this (id, name, new MicroblogStatus (-1, Catalog.GetString ("No Status"), name, DateTime.MinValue))
+			this (id, name, new MicroblogStatus (-1, AddinManager.CurrentLocalizer.GetString ("No Status"), name, DateTime.MinValue))
 		{
 		}
 		
