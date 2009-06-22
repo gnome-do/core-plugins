@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMNewList : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("New List"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("New List"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Create a new task list."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a new task list."); }
 		}
 		
 		public override string Icon {
@@ -56,7 +56,7 @@ namespace RememberTheMilk
 			if (items.Any ()) {
 				string newListName = (items.First () as ITextItem).Text;
 				if (String.IsNullOrEmpty (newListName)) {
-					Log<RTM>.Debug ("[RememberTheMilk] No list name provided for RTMNewList action");
+					Log<RTM>.Debug ("No list name provided for RTMNewList action");
 					yield break;
 				} else {
 					Services.Application.RunOnThread (() => {

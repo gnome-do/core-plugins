@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMUncompleteTask : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Uncomplete"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Uncomplete"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Mark a task as \"incomplete\"."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Mark a task as \"incomplete\"."); }
 		}
 			
 		public override string Icon {

@@ -18,6 +18,8 @@
 
 using System;
 
+using Mono.Addins;
+
 using Do.Universe;
 using Do.Platform;
 
@@ -29,7 +31,8 @@ namespace RememberTheMilk
 	public class RTMTagItem : RTMTaskAttributeItem
 	{
 		public RTMTagItem (string text)
-			: base (text, "Remember The Milk Tag", "", "task-tag.png@", null)
+			: base (text, AddinManager.CurrentLocalizer.GetString ("Remember The Milk Tag"),
+			        "", "task-tag.png@", null)
 		{
 		}
 	}

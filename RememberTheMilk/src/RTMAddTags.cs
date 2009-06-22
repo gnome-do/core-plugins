@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMAddTags : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Add Tag(s)"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add Tag(s)"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Add one or more tags to a task."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add one or more tags to a task."); }
 		}
 			
 		public override string Icon {
@@ -51,7 +51,7 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-		    get { 
+			get { 
 				yield return typeof (ITextItem);
 				yield return typeof (RTMTagItem);
 			}

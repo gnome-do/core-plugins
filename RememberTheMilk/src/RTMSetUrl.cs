@@ -20,7 +20,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -45,11 +45,11 @@ namespace RememberTheMilk
 			+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?) *$";
 		
 		public override string Name {
-			get { return Catalog.GetString ("Set URL"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set URL"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Set or change the URL of a task."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the URL of a task."); }
         	}
 			
 		public override string Icon {

@@ -17,7 +17,7 @@
 // 
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 using RtmNet;
 using Do.Platform;
 
@@ -113,7 +113,7 @@ namespace RememberTheMilk
 		protected virtual void OnAuthBtnClicked (object sender, System.EventArgs e)
 		{
 			frob = RTM.AuthInit ();
-			authinfo_lbl.Text = Catalog.GetString ("A webpage from Remember The Milk should be opened"
+			authinfo_lbl.Text = AddinManager.CurrentLocalizer.GetString ("A webpage from Remember The Milk should be opened"
 			     + " in your web browser now. Please follow the instructions there and come back to complete"
 			     + " the authrozation by clicking the button below.");
 			RTMPreferences.Token = "";
@@ -121,7 +121,7 @@ namespace RememberTheMilk
 			notification_frm.Sensitive = false;
 			filter_frm.Sensitive = false;
 			Widget image = auth_btn.Image;
-			auth_btn.Label = Catalog.GetString ("Complete authorization");
+			auth_btn.Label = AddinManager.CurrentLocalizer.GetString ("Complete authorization");
 			auth_btn.Image = image;
 			auth_btn.Clicked -= new EventHandler (OnAuthBtnClicked);
 			auth_btn.Clicked += new EventHandler (OnCompleteBtnClicked);
@@ -147,10 +147,10 @@ namespace RememberTheMilk
 				auth_btn.Clicked += new EventHandler (OnAuthBtnClicked);
 				SetStateComplete ();
 			} else {
-				authinfo_lbl.Text = Catalog.GetString ("Fail to complete authorization.");
+				authinfo_lbl.Text = AddinManager.CurrentLocalizer.GetString ("Fail to complete authorization.");
 				auth_btn.Clicked -= new EventHandler (OnCompleteBtnClicked);
 				auth_btn.Clicked += new EventHandler (OnAuthBtnClicked);
-				auth_btn.Label = Catalog.GetString ("Authorize again");
+				auth_btn.Label = AddinManager.CurrentLocalizer.GetString ("Authorize again");
 			}
 		}
 		
@@ -159,8 +159,8 @@ namespace RememberTheMilk
 		/// </summary>
 		private void SetStateComplete ()
 		{
-			authinfo_lbl.Text = String.Format (Catalog.GetString ("Thank you {0}, "
-			    + "RTM plugin is now authorized to operate on your account."), RTMPreferences.Username);
+			authinfo_lbl.Text = String.Format (AddinManager.CurrentLocalizer.GetString ("Thank you {0}, RTM plugin is now authorized to operate on your account."), 
+			                                   RTMPreferences.Username);
 			auth_btn.Label = "Sign in as a different user";
 			notification_frm.Sensitive = true;
 			filter_frm.Sensitive = true;

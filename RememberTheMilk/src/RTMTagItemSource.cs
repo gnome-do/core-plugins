@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform.Linux;
 using Do.Universe;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMTagItemSource : ItemSource
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Remember The Milk Tags"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Remember The Milk Tags"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Tags used by your Remember The Milk tasks."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Tags used by your Remember The Milk tasks."); }
 		}
 		
 		public override string Icon {
@@ -57,10 +57,9 @@ namespace RememberTheMilk
 		{
 			return RTM.TasksForTag ((parent as RTMTagItem).Name);
 		}
-
+		
 		public override void UpdateItems ()
 		{
-			;
 		}
 	}
 }

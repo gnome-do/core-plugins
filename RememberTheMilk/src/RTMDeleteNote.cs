@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMDeleteNote : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Delete Note"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete Note"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Detele the a note from a task."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Detele the a note from a task."); }
 		}
 		
 		public override string Icon {

@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMDeleteTask : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Delete"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete"); }
 		}		
 		
 		public override string Description {
-			get { return Catalog.GetString ("Delete a task from Remember The Milk"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete a task from Remember The Milk"); }
 		}
 		
 		public override string Icon {

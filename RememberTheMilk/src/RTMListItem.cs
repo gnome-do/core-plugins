@@ -18,6 +18,8 @@
 
 using System;
 
+using Mono.Addins;
+
 using Do.Universe;
 
 namespace RememberTheMilk
@@ -45,7 +47,7 @@ namespace RememberTheMilk
 		}
 		
 		public override string Description {
-			get { return "Remember The Milk Task List"; }
+			get { return AddinManager.CurrentLocalizer.GetString ("Remember The Milk Task List"); }
 		}
 		
 		public override string Icon {
@@ -64,9 +66,9 @@ namespace RememberTheMilk
 		public string Url {
 			get {
 				if (list_id == "All Tasks")
-					return "http://www.rememberthemilk.com/home/" + RTMPreferences.Username;
+					return String.Format ("http://www.rememberthemilk.com/home/{0}", RTMPreferences.Username);
 				else 
-					return "http://www.rememberthemilk.com/home/" + RTMPreferences.Username + "/" + list_id;
+					return String.Format ("http://www.rememberthemilk.com/home/{0}/{1}", RTMPreferences.Username, list_id);
 			}
 		}
 		

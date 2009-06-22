@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMLocationItemSource : ItemSource
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Remember The Milk Locations"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Remember The Milk Locations"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Locations associated with your Remember The Milk tasks."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Locations associated with your Remember The Milk tasks."); }
 		}
 		
 		public override string Icon {

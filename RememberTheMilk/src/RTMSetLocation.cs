@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMSetLocation : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Set Location"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set Location"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Set or change the location of a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the location of a task"); }
         }
 			
 		public override string Icon {

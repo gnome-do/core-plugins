@@ -20,6 +20,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
+using Mono.Addins;
+
 using Do.Platform.Linux;
 using Do.Universe;
 
@@ -31,11 +33,11 @@ namespace RememberTheMilk
 	public class RTMTaskItemSource : ItemSource
 	{		
 		public override string Name {
-			get { return "Remember The Milk Tasks"; }
+			get { return AddinManager.CurrentLocalizer.GetString ("Remember The Milk Tasks"); }
 		}
 		
 		public override string Description {
-			get { return "All the tasks in your Remember The Milk account."; }
+			get { return AddinManager.CurrentLocalizer.GetString ("All the tasks in your Remember The Milk account."); }
 		}
 		
 		public override string Icon {

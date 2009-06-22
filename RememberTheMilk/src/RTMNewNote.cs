@@ -20,7 +20,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -33,11 +33,11 @@ namespace RememberTheMilk
 	public class RTMNewNote : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("New Note"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("New Note"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Add a new note to a task."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add a new note to a task."); }
 		}
 			
 		public override string Icon {

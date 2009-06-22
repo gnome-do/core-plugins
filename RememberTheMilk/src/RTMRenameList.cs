@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMRenameList : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Rename List to ..."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Rename List to ..."); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Give a list a new name."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Give a list a new name."); }
 		}
 		
 		public override string Icon {

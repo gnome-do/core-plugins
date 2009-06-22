@@ -19,7 +19,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,11 +32,11 @@ namespace RememberTheMilk
 	public class RTMPostponeTask : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Postpone"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Postpone"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Postpone a selected task in Remember The Milk"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Postpone a selected task in Remember The Milk"); }
         }
 			
 		public override string Icon {

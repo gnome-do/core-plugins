@@ -20,7 +20,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -33,11 +33,11 @@ namespace RememberTheMilk
 	public class RTMSetEstimate : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Set Estimated Time"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set Estimated Time"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Set or reset the estimated time for a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set or reset the estimated time for a task"); }
 		}
 			
 		public override string Icon {
