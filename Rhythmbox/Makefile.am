@@ -22,7 +22,6 @@ REFERENCES = \
 	System \
 	System.Core \
 	System.Xml \
-	Mono.Posix \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)

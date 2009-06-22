@@ -135,7 +135,6 @@ RESOURCES = \
 REFERENCES = \
 	System \
 	System.Core \
-	Mono.Posix \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_LIBS) \
 	$(DO_PLATFORM_LIBS) \

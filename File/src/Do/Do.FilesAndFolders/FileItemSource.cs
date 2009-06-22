@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -76,12 +76,12 @@ namespace Do.FilesAndFolders {
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Files and Folders"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Files and Folders"); }
 		}
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Catalogs important files and folders for quick access.");
+				return AddinManager.CurrentLocalizer.GetString ("Catalogs important files and folders for quick access.");
 			}
 		}
 		

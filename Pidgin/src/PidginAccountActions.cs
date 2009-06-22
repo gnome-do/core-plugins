@@ -21,7 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -34,11 +34,11 @@ namespace PidginPlugin
 		const string gtkGaim = "gtk-gaim";
 
 		public override string Name {
-			get { return Catalog.GetString ("Sign on"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Sign on"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Enable pidgin account"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Enable pidgin account"); }
 		}
 
 		public override string Icon {
@@ -88,11 +88,11 @@ namespace PidginPlugin
 		const string gtkGaim = "gtk-gaim";
 		
 		public override string Name {
-			get { return Catalog.GetString ("Sign off"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Sign off"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Disble pidgin account"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Disble pidgin account"); }
 		}
 
 		public override string Icon {

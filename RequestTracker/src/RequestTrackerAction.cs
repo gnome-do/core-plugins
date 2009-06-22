@@ -30,7 +30,7 @@ using Do.Platform.Linux;
 using Do.Universe;
 using Do.Universe.Common;
 
-using Mono.Unix;
+using Mono.Addins;
 
 
 namespace RequestTracker
@@ -43,11 +43,11 @@ namespace RequestTracker
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("Request Tracker"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Request Tracker"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Display tickets from Request Tracker."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Display tickets from Request Tracker."); }
 		}
 		
 		public override string Icon	{

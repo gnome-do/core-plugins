@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace Archive {
@@ -37,11 +37,11 @@ namespace Archive {
                 }
                 
                 public override string Name {
-                        get { return Catalog.GetString ("Extract archive"); }
+                        get { return AddinManager.CurrentLocalizer.GetString ("Extract archive"); }
                 }
                 
                 public override string Description {
-                        get { return Catalog.GetString ("Extract an archive to a given folder"); }
+                        get { return AddinManager.CurrentLocalizer.GetString ("Extract an archive to a given folder"); }
                 }
         
                 public override string Icon {

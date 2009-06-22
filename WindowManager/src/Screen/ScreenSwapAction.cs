@@ -25,7 +25,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -35,11 +35,11 @@ namespace WindowManager
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("Swap With..."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Swap With..."); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Swap all windows on desktops"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Swap all windows on desktops"); }
 		}
 
 		public override string Icon {

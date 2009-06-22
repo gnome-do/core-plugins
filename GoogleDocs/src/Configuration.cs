@@ -19,7 +19,7 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Platform.Linux;
@@ -35,7 +35,7 @@ namespace GDocs
 
 		public Configuration () : base ("Google Docs", Uri)
 		{
-			UsernameLabel = Catalog.GetString ("E-Mail:");
+			UsernameLabel = AddinManager.CurrentLocalizer.GetString ("E-Mail:");
 			Username = GDocs.Preferences.Username;
 			Password = GDocs.Preferences.Password;
 		}

@@ -23,7 +23,7 @@ using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
@@ -41,10 +41,10 @@ namespace Epiphany
 			items = new List<Item> ();
 		}
 
-		public override string Name { get { return Catalog.GetString ("Epiphany Bookmarks"); } }
+		public override string Name { get { return AddinManager.CurrentLocalizer.GetString ("Epiphany Bookmarks"); } }
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Indexes your Epiphany bookmarks."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Epiphany bookmarks."); }
 		}
 		
 		public override string Icon { get { return "gnome-web-browser"; } }

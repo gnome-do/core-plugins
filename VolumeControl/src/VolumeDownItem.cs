@@ -21,18 +21,18 @@
 using System;
 
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace VolumeControl
 {
 	public class VolumeDownItem : AbstractVolumeItem
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Volume Down"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Volume Down"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Decrease system volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Decrease system volume"); }
 		}
 		
 		public override string Icon {

@@ -53,7 +53,7 @@ namespace Microblogging {
             this.show_updates_chk = new Gtk.CheckButton();
             this.show_updates_chk.CanFocus = true;
             this.show_updates_chk.Name = "show_updates_chk";
-            this.show_updates_chk.Label = Mono.Unix.Catalog.GetString("Show friend status updates");
+            this.show_updates_chk.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Show friend status updates");
             this.show_updates_chk.Active = true;
             this.show_updates_chk.DrawIndicator = true;
             this.show_updates_chk.UseUnderline = true;
@@ -67,7 +67,7 @@ namespace Microblogging {
             this.show_dms_chk = new Gtk.CheckButton();
             this.show_dms_chk.CanFocus = true;
             this.show_dms_chk.Name = "show_dms_chk";
-            this.show_dms_chk.Label = Mono.Unix.Catalog.GetString("Show direct messages");
+            this.show_dms_chk.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Show direct messages");
             this.show_dms_chk.Active = true;
             this.show_dms_chk.DrawIndicator = true;
             this.show_dms_chk.UseUnderline = true;
@@ -80,7 +80,7 @@ namespace Microblogging {
             this.frame1.Add(this.GtkAlignment);
             this.GtkLabel1 = new Gtk.Label();
             this.GtkLabel1.Name = "GtkLabel1";
-            this.GtkLabel1.LabelProp = Mono.Unix.Catalog.GetString("<b>General</b>");
+            this.GtkLabel1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("<b>General</b>");
             this.GtkLabel1.UseMarkup = true;
             this.frame1.LabelWidget = this.GtkLabel1;
             this.vbox1.Add(this.frame1);

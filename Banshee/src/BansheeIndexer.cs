@@ -28,7 +28,7 @@ using System.Collections.Generic;
 
 using Banshee.Collection.Indexer.RemoteHelper;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;

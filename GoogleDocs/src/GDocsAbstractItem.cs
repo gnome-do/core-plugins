@@ -18,7 +18,7 @@
 using System;
 using System.Text;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -40,7 +40,7 @@ namespace GDocs
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Google Docs Generic Document"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Google Docs Generic Document"); }
 		}
 		
 		public virtual string URL {

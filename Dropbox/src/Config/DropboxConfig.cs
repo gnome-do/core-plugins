@@ -22,7 +22,7 @@
 using System;
 using System.IO;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Gtk;
 
@@ -65,7 +65,7 @@ namespace Dropbox
 		protected virtual void OnBasePathBtnClicked (object sender, System.EventArgs e)
 		{
 			FileChooserDialog chooser = new FileChooserDialog (
-			    Catalog.GetString ("Select location of Dropbox folder"),
+			    AddinManager.CurrentLocalizer.GetString ("Select location of Dropbox folder"),
 				new Dialog (), FileChooserAction.SelectFolder,
 			    Gtk.Stock.Cancel, ResponseType.Cancel,
 			    Gtk.Stock.Open, ResponseType.Accept);

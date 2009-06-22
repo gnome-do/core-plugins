@@ -22,7 +22,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -39,14 +39,14 @@ namespace ManPages {
 		/// 	The name of the action
 		/// </value>
 		public override string Name {
-			get { return Catalog.GetString ("Read manual page (man)"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Read manual page (man)"); }
 		}
 
 		/// <value>
 		/// 	Action's description
 		/// </value>
 		public override string Description {
-			get { return Catalog.GetString ("Look up and read a manual page."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Look up and read a manual page."); }
 		}
 
 		/// <value>

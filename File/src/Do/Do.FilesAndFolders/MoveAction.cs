@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -34,11 +34,11 @@ namespace Do.FilesAndFolders
 	{
 
 		public override string Name {
-			get { return Catalog.GetString ("Move to..."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Move to..."); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Moves a file or folder to another location."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Moves a file or folder to another location."); }
 		}
 		
 		public override string Icon {

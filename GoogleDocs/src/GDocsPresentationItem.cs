@@ -17,7 +17,7 @@
 
 using System;
 using System.Text;
-using Mono.Unix;
+using Mono.Addins;
 
 
 using Do.Universe;
@@ -30,7 +30,7 @@ namespace GDocs
 		public GDocsPresentationItem (string name, string url) : base (name, url) {}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Google Docs Presentation"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Google Docs Presentation"); }
 		}
 		
 		public override string Icon {

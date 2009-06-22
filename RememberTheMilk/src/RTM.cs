@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Mono.Unix;
+using Mono.Addins;
 using RtmNet;
 
 
@@ -276,12 +276,12 @@ namespace RememberTheMilk
 			int len = overdue_tasks.ToArray ().Length;
 			if (len > 0) {
 				string title;
-				title = String.Format (Catalog.GetPluralString ("{0} Task Overdue", 
+				title = String.Format (AddinManager.CurrentLocalizer.GetPluralString ("{0} Task Overdue", 
 				                                                "{0} Tasks Overdue", len), len);
 //				if (len > 1)
-//					title = Catalog.GetString (String.Format ("{0} Tasks overdue", len));
+//					title = AddinManager.CurrentLocalizer.GetString (String.Format ("{0} Tasks overdue", len));
 //				else
-//					title = Catalog.GetString ("1 Task Overdue");
+//					title = AddinManager.CurrentLocalizer.GetString ("1 Task Overdue");
 				
 				string body = "";
 				foreach (string name in overdue_tasks) // TODO: missing lock
@@ -377,8 +377,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Task Deleted"),
-			               Catalog.GetString ("The selected task has been successfully deleted"
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task Deleted"),
+			               AddinManager.CurrentLocalizer.GetString ("The selected task has been successfully deleted"
 			                                  +" from your Remember The Milk task list"),
 			               null, null);
         }
@@ -392,8 +392,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Task Completed"),
-			               Catalog.GetString ("The selected task in your Remember The Milk"
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task Completed"),
+			               AddinManager.CurrentLocalizer.GetString ("The selected task in your Remember The Milk"
 			                                  +" task list has been marked as completed."),
 			               taskId, listId);
         }
@@ -401,18 +401,18 @@ namespace RememberTheMilk
         public static List<Item> GeneratePriorities ()
         {
             List<Item> priorities = new List<Item> ();
-            priorities.Add (new RTMPriorityItem (Catalog.GetString ("High"), 
-			                                     Catalog.GetString ("High Priority")));
-            priorities.Add (new RTMPriorityItem (Catalog.GetString ("Medium"), 
-			                                     Catalog.GetString ("Medium Priority")));
-            priorities.Add (new RTMPriorityItem (Catalog.GetString ("Low"), 
-			                                     Catalog.GetString ("Low Priority")));
-            priorities.Add (new RTMPriorityItem (Catalog.GetString ("None"), 
-			                                     Catalog.GetString ("No Priority")));
-            priorities.Add (new RTMPriorityItem (Catalog.GetString ("Up"), 
-			                                     Catalog.GetString ("Increase the priority")));
-            priorities.Add (new RTMPriorityItem (Catalog.GetString ("Down"), 
-			                                     Catalog.GetString ("Decrease the priority")));
+            priorities.Add (new RTMPriorityItem (AddinManager.CurrentLocalizer.GetString ("High"), 
+			                                     AddinManager.CurrentLocalizer.GetString ("High Priority")));
+            priorities.Add (new RTMPriorityItem (AddinManager.CurrentLocalizer.GetString ("Medium"), 
+			                                     AddinManager.CurrentLocalizer.GetString ("Medium Priority")));
+            priorities.Add (new RTMPriorityItem (AddinManager.CurrentLocalizer.GetString ("Low"), 
+			                                     AddinManager.CurrentLocalizer.GetString ("Low Priority")));
+            priorities.Add (new RTMPriorityItem (AddinManager.CurrentLocalizer.GetString ("None"), 
+			                                     AddinManager.CurrentLocalizer.GetString ("No Priority")));
+            priorities.Add (new RTMPriorityItem (AddinManager.CurrentLocalizer.GetString ("Up"), 
+			                                     AddinManager.CurrentLocalizer.GetString ("Increase the priority")));
+            priorities.Add (new RTMPriorityItem (AddinManager.CurrentLocalizer.GetString ("Down"), 
+			                                     AddinManager.CurrentLocalizer.GetString ("Decrease the priority")));
             return priorities;
         }
 
@@ -428,8 +428,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Priority Changed"),
-			               Catalog.GetString ("The priority of the selected task in your"
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Priority Changed"),
+			               AddinManager.CurrentLocalizer.GetString ("The priority of the selected task in your"
 			                                  +" Remember The Milk task list has been changed."),
 			               taskId, listId);
         }
@@ -446,8 +446,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Due Date/Time Changed"),
-			               Catalog.GetString ("The due date/time of the selected task in your "
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Due Date/Time Changed"),
+			               AddinManager.CurrentLocalizer.GetString ("The due date/time of the selected task in your "
 			                                  +"Remember The Milk task list has been changed."),
 			               taskId, listId);
         }
@@ -461,8 +461,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Task Moved"),
-			               Catalog.GetString (String.Format ("The selected task has been moved from"
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task Moved"),
+			               AddinManager.CurrentLocalizer.GetString (String.Format ("The selected task has been moved from"
 			                                                 + " Remember The Milk list \"{0}\" to list \"{1}\".",
 			                                                 lists [fromListId].Name, lists [toListId].Name)),
 			               taskId, fromListId);
@@ -477,8 +477,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Task Renamed"),
-			               Catalog.GetString (String.Format ("The selected task has"
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task Renamed"),
+			               AddinManager.CurrentLocalizer.GetString (String.Format ("The selected task has"
 			                                                + " been renamed to \"{0}\".", newName)),
 			               taskId, listId);
         }
@@ -492,8 +492,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Task Postponed"),
-			               Catalog.GetString ("The selected task in your Remember The Milk task"
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task Postponed"),
+			               AddinManager.CurrentLocalizer.GetString ("The selected task in your Remember The Milk task"
 			                                  + " list has been postponed"),
 			               taskId, listId);
 		}
@@ -507,8 +507,8 @@ namespace RememberTheMilk
                 return;
             }
 
-            ActionRoutine (Catalog.GetString ("Recurrence Pattern Changed"),
-			               Catalog.GetString ("The recurrence pattern of the selected task in your"
+            ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Recurrence Pattern Changed"),
+			               AddinManager.CurrentLocalizer.GetString ("The recurrence pattern of the selected task in your"
 			                                  + " Remember The Milk task list has been changed."), 
 			               taskId, listId);
         }
@@ -523,12 +523,12 @@ namespace RememberTheMilk
 			}
 		
 			if (!string.IsNullOrEmpty(url)) {
-				ActionRoutine (Catalog.GetString ("Task URL Set"),
-					Catalog.GetString ("The selected task has been assigned a URL."),
+				ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task URL Set"),
+					AddinManager.CurrentLocalizer.GetString ("The selected task has been assigned a URL."),
 						taskId, listId);
 			} else {
-				ActionRoutine (Catalog.GetString ("Task URL Reset"),
-					Catalog.GetString ("The URL for the selected task has been reset."),
+				ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task URL Reset"),
+					AddinManager.CurrentLocalizer.GetString ("The URL for the selected task has been reset."),
 						taskId, listId);
 			}
         }
@@ -542,8 +542,8 @@ namespace RememberTheMilk
 				return;
 			}
 			
-			ActionRoutine (Catalog.GetString ("Task Uncompleted"),
-			               Catalog.GetString ("The selected task has been marked as \"incomplete\"."),
+			ActionRoutine (AddinManager.CurrentLocalizer.GetString ("Task Uncompleted"),
+			               AddinManager.CurrentLocalizer.GetString ("The selected task has been marked as \"incomplete\"."),
 			               taskId, listId);
 		}
     }

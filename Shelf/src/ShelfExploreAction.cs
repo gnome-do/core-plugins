@@ -20,7 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace Shelf
@@ -28,11 +28,11 @@ namespace Shelf
 	public class ShelfExploreAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Explore Shelf"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Explore Shelf"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Get a list of everything in your shelf"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Get a list of everything in your shelf"); }
 		}
 
 		public override string Icon {

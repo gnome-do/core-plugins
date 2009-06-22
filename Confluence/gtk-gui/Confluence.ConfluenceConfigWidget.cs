@@ -51,7 +51,7 @@ namespace Confluence {
             w1.SetTip(this._entryBaseUrl, "The base url location to your Confluence install. ie. http://opensource.atlassian.com/confluence/spring", "The base url location to your Confluence install. ie. http://opensource.atlassian.com/confluence/spring");
             this._entryBaseUrl.CanFocus = true;
             this._entryBaseUrl.Name = "_entryBaseUrl";
-            this._entryBaseUrl.Text = Mono.Unix.Catalog.GetString("http://opensource.atlassian.com/confluence/spring");
+            this._entryBaseUrl.Text = Mono.Addins.AddinManager.CurrentLocalizer.GetString("http://opensource.atlassian.com/confluence/spring");
             this._entryBaseUrl.IsEditable = true;
             this._entryBaseUrl.WidthChars = 40;
             this._entryBaseUrl.InvisibleChar = '●';
@@ -94,7 +94,7 @@ namespace Confluence {
             this._entryUsername = new Gtk.Entry();
             this._entryUsername.CanFocus = true;
             this._entryUsername.Name = "_entryUsername";
-            this._entryUsername.Text = Mono.Unix.Catalog.GetString("username1");
+            this._entryUsername.Text = Mono.Addins.AddinManager.CurrentLocalizer.GetString("username1");
             this._entryUsername.IsEditable = true;
             this._entryUsername.InvisibleChar = '●';
             this.table1.Add(this._entryUsername);

@@ -22,7 +22,7 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform.Linux;
@@ -35,11 +35,11 @@ namespace GMail
 		{
 		}
 		public override string Name { 
-			get { return Catalog.GetString ("GMail Contacts"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("GMail Contacts"); }
 		}
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Index your GMail contacts"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Index your GMail contacts"); }
 		}
 		
 		public override string Icon { 

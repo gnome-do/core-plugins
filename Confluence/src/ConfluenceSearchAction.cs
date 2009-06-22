@@ -21,7 +21,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform.Linux;
-using Mono.Unix;
+using Mono.Addins;
 
 
 /// <summary>
@@ -82,7 +82,7 @@ namespace Confluence
 		/// </value>
 		public override string Name 
 		{
-			get { return Catalog.GetString ("Search Confluence"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search Confluence"); }
 		}
 		
 		/// <value>
@@ -90,7 +90,7 @@ namespace Confluence
 		/// </value>
 		public override string Description 
 		{
-			get { return Catalog.GetString ("Searches Confluence and returns results to Do"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Searches Confluence and returns results to Do"); }
 		}
 		
 		/// <value>

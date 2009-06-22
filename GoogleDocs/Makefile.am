@@ -25,7 +25,6 @@ RESOURCES = \
 	Resources/icons/gDocsUploadIcon.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Xml \

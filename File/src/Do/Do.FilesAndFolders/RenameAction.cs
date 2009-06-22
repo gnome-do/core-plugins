@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -34,11 +34,11 @@ namespace Do.FilesAndFolders
 	{
 		
 		public override string Name { 
-			get { return Catalog.GetString ("Rename file..."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Rename file..."); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Renames a file."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Renames a file."); }
 		}
 		
 		public override string Icon {

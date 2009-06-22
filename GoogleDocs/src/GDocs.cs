@@ -22,7 +22,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Google.GData.Client;
 using Google.GData.Documents;
@@ -139,24 +139,24 @@ namespace GDocs
 		static Notification GetUploadFailedNotification ()
 		{
 			return new Notification (
-				Catalog.GetString ("Uploading failed."), 
-				Catalog.GetString ("An error occurred when uploading files to Google Docs."), 
+				AddinManager.CurrentLocalizer.GetString ("Uploading failed."), 
+				AddinManager.CurrentLocalizer.GetString ("An error occurred when uploading files to Google Docs."), 
 				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
 		}
 		
 		static Notification GetDeleteDocumentFailedNotification ()
 		{
 			return new Notification (
-				Catalog.GetString ("Deleting failed."), 
-				Catalog.GetString ("An error occurred when deleting the document at Google Docs."), 
+				AddinManager.CurrentLocalizer.GetString ("Deleting failed."), 
+				AddinManager.CurrentLocalizer.GetString ("An error occurred when deleting the document at Google Docs."), 
 				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
 		}
 		
 		static Notification GetDocumentDeletedNotification (string documentTitle)
 		{
 			return new Notification (
-				Catalog.GetString ("Document deleted."), 
-				string.Format (Catalog.GetString ("The document '{0}' has been successfully moved into Trash at Google Docs."), documentTitle), 
+				AddinManager.CurrentLocalizer.GetString ("Document deleted."), 
+				string.Format (AddinManager.CurrentLocalizer.GetString ("The document '{0}' has been successfully moved into Trash at Google Docs."), documentTitle), 
 				"gDocsIcon.png@" + typeof (GDocsItemSource).Assembly.FullName);
 		}
 		

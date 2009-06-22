@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Gnome.Vfs;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -37,11 +37,11 @@ namespace DiskMounter
         }
                 
 		public override string Name {
-			get { return Catalog.GetString ("Open"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Open"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Open a removable volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Open a removable volume"); }
 		}
 		
 		public override string Icon {

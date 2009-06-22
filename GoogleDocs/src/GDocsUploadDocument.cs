@@ -20,7 +20,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -34,11 +34,11 @@ namespace GDocs
 		const string ExtPattern = @"\.(txt|doc|docx|html|htm|odt|rtf|xls|xlsx|ods|csv|tsv|tsb|ppt|pps|sxw|pdf)$";
 				
 		public override string Name {
-			get { return Catalog.GetString ("Upload Document"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload Document"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Upload a document to Google Docs"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload a document to Google Docs"); }
 		}
 			
 		public override string Icon {

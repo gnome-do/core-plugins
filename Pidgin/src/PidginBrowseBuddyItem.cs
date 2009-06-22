@@ -19,7 +19,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -28,11 +28,11 @@ namespace PidginPlugin
 	public class PidginBrowseBuddyItem : Item
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Buddies"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Buddies"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Browse Pidgin Buddies"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Browse Pidgin Buddies"); } 
 		}
 		
 		public override string Icon {

@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Platform;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Launchpad
 {
@@ -33,11 +33,11 @@ namespace Launchpad
 	{
 
 		public override string Name {
-			get { return Catalog.GetString ("Search Launchpad"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search Launchpad"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Search Launchpad properties."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search Launchpad properties."); }
 		}
 
 		public override string Icon { 

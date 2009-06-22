@@ -17,6 +17,5 @@ REFERENCES = \
 	System.Core \
 	System.Data \
 	Mono.Data.SqliteClient \
-	Mono.Posix \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)

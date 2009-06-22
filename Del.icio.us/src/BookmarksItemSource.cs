@@ -27,18 +27,18 @@ using Do.Universe.Common;
 
 using Do.Platform.Linux;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Delicious
 {	
 	public class BookmarksItemSource : ItemSource, IConfigurable
 	{
 		public override string Name  {
-			get { return Catalog.GetString ("Del.icio.us bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Del.icio.us bookmarks"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Indexes your del.icio.us bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your del.icio.us bookmarks"); }
 		}
 		
 		public override string Icon {

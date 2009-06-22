@@ -26,7 +26,7 @@ using System.Text.RegularExpressions;
 using Do.Platform;
 using Do.Universe;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace SSH
 {
@@ -40,8 +40,8 @@ namespace SSH
 			items = new List<Item> ();
 		}
 
-		public override string Name { get { return Catalog.GetString ("SSH Hosts"); } }
-		public override string Description { get { return Catalog.GetString ("Parses ssh-config"); } }
+		public override string Name { get { return AddinManager.CurrentLocalizer.GetString ("SSH Hosts"); } }
+		public override string Description { get { return AddinManager.CurrentLocalizer.GetString ("Parses ssh-config"); } }
 		public override string Icon { get { return "network-server"; } }
 
 		public override IEnumerable<Type> SupportedItemTypes {

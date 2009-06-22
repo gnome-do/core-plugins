@@ -23,7 +23,6 @@ RESOURCES = \
 	Resources/icons/flickr.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(GTK_SHARP_20_LIBS) \

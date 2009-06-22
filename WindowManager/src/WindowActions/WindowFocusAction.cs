@@ -23,7 +23,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -31,11 +31,11 @@ namespace WindowManager
 	public class WindowFocusAction : WindowActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Focus"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Focus"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Focus selected windows."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Focus selected windows."); }
 		}
 
 		public override string Icon {

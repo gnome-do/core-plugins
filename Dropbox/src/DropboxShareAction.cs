@@ -24,7 +24,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
  
 using Do.Universe;
 using Do.Universe.Common;
@@ -39,11 +39,11 @@ namespace Dropbox
 	{
 				
 		public override string Name {
-			get { return Catalog.GetString ("Share with Dropbox");  }
+			get { return AddinManager.CurrentLocalizer.GetString ("Share with Dropbox");  }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Links a file to your Dropbox public folder."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Links a file to your Dropbox public folder."); }
 		}
 		
 		public override string Icon {

@@ -23,7 +23,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -37,11 +37,11 @@ namespace VirtualBox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString("Discard State"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Discard State"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString("Restore VM state to current Snapshot"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Restore VM state to current Snapshot"); }
 		}
 
 		public override string Icon {

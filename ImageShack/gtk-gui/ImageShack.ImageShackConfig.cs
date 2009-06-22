@@ -66,7 +66,7 @@ namespace ImageShack {
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
             this.label2.Xalign = 0F;
-            this.label2.LabelProp = Mono.Unix.Catalog.GetString("If you have an ImageShack account, a registration code allows you to save images to the My Images sections of your account.\n\nPlease log-in to your ImageShack account before getting your registration code.");
+            this.label2.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("If you have an ImageShack account, a registration code allows you to save images to the My Images sections of your account.\n\nPlease log-in to your ImageShack account before getting your registration code.");
             this.label2.Wrap = true;
             this.hbox1.Add(this.label2);
             Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox1[this.label2]));
@@ -87,7 +87,7 @@ namespace ImageShack {
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
             this.label1.Xalign = 0F;
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("_Registration Code");
+            this.label1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_Registration Code");
             this.label1.UseUnderline = true;
             this.hbox2.Add(this.label1);
             Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.hbox2[this.label1]));
@@ -121,7 +121,7 @@ namespace ImageShack {
             this.RegistrationButton.Name = "RegistrationButton";
             this.RegistrationButton.UseUnderline = true;
             this.RegistrationButton.Xalign = 0F;
-            this.RegistrationButton.Label = Mono.Unix.Catalog.GetString("_Get Registration Code");
+            this.RegistrationButton.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_Get Registration Code");
             this.hbox3.Add(this.RegistrationButton);
             Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.hbox3[this.RegistrationButton]));
             w6.Position = 0;
@@ -137,7 +137,7 @@ namespace ImageShack {
             this.GtkLabel1 = new Gtk.Label();
             this.GtkLabel1.Name = "GtkLabel1";
             this.GtkLabel1.Xalign = 0F;
-            this.GtkLabel1.LabelProp = Mono.Unix.Catalog.GetString("<b>Registration Code</b>");
+            this.GtkLabel1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("<b>Registration Code</b>");
             this.GtkLabel1.UseMarkup = true;
             this.frame1.LabelWidget = this.GtkLabel1;
             this.vbox1.Add(this.frame1);

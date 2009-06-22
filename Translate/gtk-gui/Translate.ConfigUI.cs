@@ -71,7 +71,7 @@ namespace Translate {
             // Container child hbox1.Gtk.Box+BoxChild
             this.lblProvider = new Gtk.Label();
             this.lblProvider.Name = "lblProvider";
-            this.lblProvider.LabelProp = Mono.Unix.Catalog.GetString("Translation Provider");
+            this.lblProvider.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Translation Provider");
             this.hbox1.Add(this.lblProvider);
             Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox1[this.lblProvider]));
             w1.Position = 0;
@@ -98,7 +98,7 @@ namespace Translate {
             // Container child hbox2.Gtk.Box+BoxChild
             this.lblDefaultSource = new Gtk.Label();
             this.lblDefaultSource.Name = "lblDefaultSource";
-            this.lblDefaultSource.LabelProp = Mono.Unix.Catalog.GetString("Default Source Language");
+            this.lblDefaultSource.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Default Source Language");
             this.hbox2.Add(this.lblDefaultSource);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox2[this.lblDefaultSource]));
             w4.Position = 0;
@@ -125,7 +125,7 @@ namespace Translate {
             // Container child hbox3.Gtk.Box+BoxChild
             this.lblDefaultIface = new Gtk.Label();
             this.lblDefaultIface.Name = "lblDefaultIface";
-            this.lblDefaultIface.LabelProp = Mono.Unix.Catalog.GetString("Default Web Interface Language");
+            this.lblDefaultIface.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Default Web Interface Language");
             this.hbox3.Add(this.lblDefaultIface);
             Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.hbox3[this.lblDefaultIface]));
             w7.Position = 0;
@@ -148,7 +148,7 @@ namespace Translate {
             // Container child vbox2.Gtk.Box+BoxChild
             this.lblEnabled = new Gtk.Label();
             this.lblEnabled.Name = "lblEnabled";
-            this.lblEnabled.LabelProp = Mono.Unix.Catalog.GetString("Supported Languages");
+            this.lblEnabled.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Supported Languages");
             this.vbox2.Add(this.lblEnabled);
             Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.vbox2[this.lblEnabled]));
             w10.Position = 3;

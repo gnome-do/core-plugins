@@ -19,7 +19,7 @@
  */
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -28,11 +28,11 @@ namespace Epiphany
 	public class EpiphanyBrowseBookmarksItem : Item
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Bookmarks"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Browse Bookmarks"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Browse Bookmarks"); } 
 		}
 		
 		public override string Icon {

@@ -29,7 +29,6 @@ RESOURCES = \
 	Resources/WindowManager.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(WNCK_SHARP_10_LIBS) \

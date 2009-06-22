@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -21,11 +21,11 @@ namespace Opera
 		}
 		
 		public override string Name { 
-			get { return Catalog.GetString ("Opera Bookmarks"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Opera Bookmarks"); } 
 		}
 
 		public override string Description { 
-			get { return Catalog.GetString ("Indexes your Opera 6 bookmarks"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Opera 6 bookmarks"); } 
 		}
 
 		public override string Icon { 

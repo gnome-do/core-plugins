@@ -11,7 +11,6 @@ RESOURCES = \
 	Resources/Cl.ickable.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

@@ -19,7 +19,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -28,11 +28,11 @@ namespace VirtualBox
 	public class VBoxBrowseVMSItem : Item
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Virtual Machines"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Virtual Machines"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Browse Virtual Machines"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Browse Virtual Machines"); } 
 		}
 		
 		public override string Icon {

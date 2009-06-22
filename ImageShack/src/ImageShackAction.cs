@@ -27,7 +27,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Platform.Linux;
@@ -51,11 +51,11 @@ namespace ImageShack
 			
 		
 		public override string Name {
-			get { return Catalog.GetString ("Upload to ImageShack"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload to ImageShack"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Uploads the image to ImageShack."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Uploads the image to ImageShack."); }
 		}
 		
 		public override string Icon {
@@ -99,7 +99,7 @@ namespace ImageShack
 			
 		private static bool FileIsValidForUpload (string file)
 		{
-			string fileSizeError = Catalog.GetString ("File size exceeds ImageShack's 1.5MB limit.");
+			string fileSizeError = AddinManager.CurrentLocalizer.GetString ("File size exceeds ImageShack's 1.5MB limit.");
 			
 			FileInfo fi = new FileInfo(file);
 			long fileSize = fi.Length;	

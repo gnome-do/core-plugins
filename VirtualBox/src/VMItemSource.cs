@@ -21,7 +21,7 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 
 using Do.Universe;
@@ -38,13 +38,13 @@ public class VMItemSource : ItemSource {
 		
 		public override string Name { 
 			get { 
-				return Catalog.GetString ("VirtualBox VMs"); 
+				return AddinManager.CurrentLocalizer.GetString ("VirtualBox VMs"); 
 			} 
 		}
 		
 		public override string Description { 
 			get { 
-				return Catalog.GetString ("Virtual Machines created with VirtualBox"); 
+				return AddinManager.CurrentLocalizer.GetString ("Virtual Machines created with VirtualBox"); 
 			} 
 		}
 		

@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -33,11 +33,11 @@ namespace VinagreVNC
 	{
        
 		public override string Name { 
-			get { return Catalog.GetString ("Connect with VNC"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Connect with VNC"); }
 		}
 
 		public override string Description {
-	            get { return Catalog.GetString ("Connect with VNC"); }
+	            get { return AddinManager.CurrentLocalizer.GetString ("Connect with VNC"); }
 	        }
 
 		public override string Icon {
