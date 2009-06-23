@@ -99,7 +99,6 @@ namespace Flickr {
             w7.Position = 0;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbuttonbox1 = new Gtk.HButtonBox();
-            this.hbuttonbox1.Name = "hbuttonbox1";
             // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
             this.auth_btn = new Gtk.Button();
             this.auth_btn.CanFocus = true;
