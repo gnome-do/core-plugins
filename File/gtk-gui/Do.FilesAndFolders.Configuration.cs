@@ -135,7 +135,7 @@ namespace Do.FilesAndFolders {
             w4.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w5 = new Gtk.Image();
-            w5.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 20);
+            w5.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 16);
             w4.Add(w5);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w7 = new Gtk.Label();
@@ -252,7 +252,7 @@ namespace Do.FilesAndFolders {
             w30.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w31 = new Gtk.Image();
-            w31.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 20);
+            w31.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 16);
             w30.Add(w31);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w33 = new Gtk.Label();
