@@ -25,9 +25,9 @@ using Do.Universe;
 using PingFM.API;
 
 namespace PingFM
-{	
+{
 	public class PingFMServiceItem : Item, IUrlItem
-	{		
+	{
 		string name;
 		string id;
 		string method;
@@ -50,10 +50,10 @@ namespace PingFM
 		public override string Description {
 			get { 
 				string desc = (id == "pingfm") ? 
-					String.Format (Catalog.GetString ("Post message to multiple {0} services."), method) :
+					String.Format (AddinManager.CurrentLocalizer.GetString ("Post message to multiple {0} services."), method) :
 					AddinManager.CurrentLocalizer.GetString ("Service supported by Ping.FM");
 				if (!String.IsNullOrEmpty (trigger))
-				    desc += " (" + trigger + ")";
+					desc += " (" + trigger + ")";
 				return desc;
 			}
 		}
@@ -73,7 +73,7 @@ namespace PingFM
 		public string Url {
 			get { return url; }
 		}
-
+		
 		public string Trigger {
 			get { return trigger; }
 		}

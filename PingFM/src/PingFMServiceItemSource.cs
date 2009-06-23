@@ -40,19 +40,15 @@ namespace PingFM
 		public override string Icon {
 			get { return "pingfm.png@" + GetType ().Assembly.FullName; }
 		}
-
+		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type [] {
-					typeof (PingFMServiceItem),
-				};
-			}
+			get { yield return typeof (PingFMServiceItem); }
 		}
-
+		
 		public override IEnumerable<Item> Items {
 			get { return PingFM.Services.Cast<Item> (); }
 		}
-
+		
 		public override void UpdateItems ()
 		{
 			Thread updateServices = new Thread (new ThreadStart (PingFM.UpdateServices));

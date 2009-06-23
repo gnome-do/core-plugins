@@ -48,23 +48,23 @@ namespace PingFM.API
 		{
 			this.user_application_key = user_application_key;
 		}
-
+		
 		private static Version mVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 		public static Version Version
 		{
 			get { return mVersion; }
 		}
-
+		
 		/// <summary>Ping.FM Developer API Key.	 See http://ping.fm/developers/</summary>
 		public static string api_key = "bc4f5d28442893476d066e2e1be9129b";
-
+		
 		/// <summary>User Application Key.
 		/// The end user will need to enter this. see http://ping.fm/key/
 		/// </summary>
 		public string user_application_key;
-
+		
 		#region XML Serialization Classes
-
+		
 		public class ServiceMethods
 		{
 			[XmlAttribute("id")]	public string ID;
@@ -170,14 +170,14 @@ namespace PingFM.API
 			[XmlArray("services"), XmlArrayItem("service", typeof(ServiceMethods))]
 			public List<ServiceMethods> Services;
 		}
-
+		
 		[XmlRoot("rsp")]
 		public class TriggerResponse : PingResponse
 		{
 			[XmlArray("triggers"), XmlArrayItem("trigger", typeof(Trigger))]
 			public List<Trigger> Triggers;
 		}
-
+		
 		[XmlRoot("rsp")]
 		public class LatestResponse : PingResponse
 		{
@@ -190,7 +190,7 @@ namespace PingFM.API
 					m.Decode();
 			}
 		}
-
+		
 		[XmlRoot("rsp")]
 		public class MessageResponse : PingResponse
 		{
@@ -199,7 +199,7 @@ namespace PingFM.API
 			[XmlElement("message")]
 			public new Message Message;
 		}
-
+		
 		// private bool SerializeObject(XmlTextWriter writer, object o)
 //		  {
 //			  try
@@ -230,9 +230,9 @@ namespace PingFM.API
 				return null;
 			}
 		}
-
+		
 		#endregion
-
+		
 		private HttpWebRequest CreateHttpWebRequest(string url)
 		{
 			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -241,7 +241,7 @@ namespace PingFM.API
 			request.UserAgent = "PingFM.dll " + Version.ToString(2);
 			return request;
 		}
-
+		
 		private string GetWebResponse(string url, string PostData)
 		{
 //			Console.WriteLine ("[Ping.FM] Request URL:  {0}", url);
@@ -294,17 +294,17 @@ namespace PingFM.API
 			}
 			return html;
 		}
-
+		
 		private PingResponse mLastResponse;
 		/// <summary>Gets the last PingResponse</summary>
 		public PingResponse LastResponse { get { return mLastResponse; } }
-
+		
 		/// <summary>If a web server error occurs, the exception will be stored here for reference.</summary>
 		public Exception WebException;
-
+		
 		/// <summary>If an error occurs during deserialization, the exception will be stored here for reference.</summary>
 		public Exception DeserializeException;
-
+		
 		/// <summary>Clears the LastResponse, WebException, and DeserializeException</summary>
 		public void Reset()
 		{
@@ -312,7 +312,7 @@ namespace PingFM.API
 			WebException = null;
 			DeserializeException = null;
 		}
-
+		
 		/// <summary>Validates the given user's application key.</summary>
 		public PingResponse Validate()
 		{
@@ -326,7 +326,7 @@ namespace PingFM.API
 			mLastResponse = r;
 			return r;
 		}
-
+		
 		/// <summary>Returns a list of services the particular user has set up through Ping.fm.</summary>
 		public ServicesResponse GetServices()
 		{
@@ -340,7 +340,7 @@ namespace PingFM.API
 			mLastResponse = r;
 			return r;
 		}
-
+		
 		/// <summary>Validates the given user's application key.</summary>
 		public TriggerResponse GetTriggers()
 		{
@@ -354,7 +354,7 @@ namespace PingFM.API
 			mLastResponse = r;
 			return r;
 		}
-
+		
 		/// <summary>Returns the last 25 messages a user has posted through Ping.fm.</summary>
 		public LatestResponse GetLatest()
 		{
@@ -378,7 +378,7 @@ namespace PingFM.API
 			mLastResponse = r;
 			return r;
 		}
-
+		
 		/// <summary>Returns data for the specified MessageID.</summary>
 		/// <param name="MessageID">MessageID to query</param>
 		[Obsolete("Use user.latest to get a recent message history", true)]
@@ -395,7 +395,7 @@ namespace PingFM.API
 			mLastResponse = r;
 			return r;
 		}
-
+		
 		/// <summary>Posts a message to the user's Ping.fm services.</summary>
 		public PingResponse Post(string Body)
 		{
@@ -432,7 +432,7 @@ namespace PingFM.API
 			mLastResponse = r;
 			return r;
 		}
-
+		
 		/// <summary>Posts a message to the user's Ping.fm services using one of their custom triggers.</summary>
 		public PingResponse TPost(string Trigger, string Body)
 		{
@@ -458,7 +458,7 @@ namespace PingFM.API
 			mLastResponse = r;
 			return r;
 		}
-
+		
 		public static string Base64Encode(string ToEncode)
 		{
 			if (string.IsNullOrEmpty(ToEncode)) return ToEncode;
@@ -474,7 +474,7 @@ namespace PingFM.API
 				return ToEncode;
 			}
 		}
-
+		
 		public static string Base64Decode(string ToDecode)
 		{
 			try
@@ -483,11 +483,10 @@ namespace PingFM.API
 			}
 			catch { return ToDecode; }
 		}
-
+		
 		private static string UrlEncode(string text)
 		{
 			return System.Web.HttpUtility.UrlEncode(text, Encoding.Default);
 		}
-
 	}
 }

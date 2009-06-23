@@ -24,9 +24,9 @@ using Do.Universe;
 using Do.Platform;
 
 namespace PingFM
-{	
+{
 	public static class PingFM
-	{		
+	{
 		static readonly string ConnectionErrorMessage = 
 			AddinManager.CurrentLocalizer.GetString ("Failed to connect to Ping.FM service");
 		
@@ -65,8 +65,7 @@ namespace PingFM
 			client.UpdateServices ();
 		}
 		
-		public static void Post (string method, string body, string service, 
-		                         string media, string icon)
+		public static void Post (string method, string body, string service, string media, string icon)
 		{
 			client.Post (method, body, service, media, icon);
 		}

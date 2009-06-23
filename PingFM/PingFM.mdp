@@ -60,6 +60,11 @@
     <File name="Resources/icons/yahoo360.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/yammer.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/youare.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/gtalk.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/radar.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/seesmic.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/shoutem.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/vox.png" subtype="Code" buildaction="Nothing" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />

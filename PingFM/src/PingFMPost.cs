@@ -126,7 +126,7 @@ namespace PingFM
 			else
 				return String.Empty;
 		}
-
+		
 		string MessageWithoutTrigger (string message)
 		{
 			string trigger = FindTrigger (message);
