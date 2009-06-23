@@ -19,7 +19,7 @@
  */
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace Claws {
@@ -68,18 +68,18 @@ namespace Claws {
 				
 				string remark = type.Substring (type.LastIndexOf (".") + 1);
 				if (type.StartsWith (ClawsContactsItemSource.ClawsPrimaryEmailPrefix)) {
-					name = Catalog.GetString ("Primary Email") + " " + remark;
+					name = AddinManager.CurrentLocalizer.GetString ("Primary Email") + " " + remark;
 				} else {
 					if (remark.Length > 0) {
-						name = Catalog.GetString ("Email") + " " + remark;
+						name = AddinManager.CurrentLocalizer.GetString ("Email") + " " + remark;
 					} else {
-						name = Catalog.GetString ("Other email");
+						name = AddinManager.CurrentLocalizer.GetString ("Other email");
 					}
 				}
 				
 			} else {				
 				icon = IconForOthers;
-				name = Catalog.GetString ("Other");
+				name = AddinManager.CurrentLocalizer.GetString ("Other");
 			}
 		}
 

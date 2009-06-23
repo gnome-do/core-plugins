@@ -23,7 +23,7 @@ using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
@@ -41,20 +41,35 @@ namespace Epiphany
 			items = new List<Item> ();
 		}
 
-		public override string Name { get { return Catalog.GetString ("Epiphany Bookmarks"); } }
+		public override string Name { get { return AddinManager.CurrentLocalizer.GetString ("Epiphany Bookmarks"); } }
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Indexes your Epiphany bookmarks."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Epiphany bookmarks."); }
 		}
 		
 		public override string Icon { get { return "gnome-web-browser"; } }
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (BookmarkItem); }
+			get {
+				yield return typeof (BookmarkItem); 
+				yield return typeof (IApplicationItem);
+				yield return typeof (EpiphanyBrowseBookmarksItem);
+			}
 		}
 
 		public override IEnumerable<Item> Items {
 			get { return items; }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
+		{
+			if (parent is IApplicationItem && (parent as IApplicationItem).Exec.Contains ("epiphany-browser"))
+				yield return new EpiphanyBrowseBookmarksItem ();
+			if (parent is EpiphanyBrowseBookmarksItem) {
+				foreach (BookmarkItem item in Items)
+					yield return item;
+			}
+			yield break;
 		}
 
 		public override void UpdateItems ()

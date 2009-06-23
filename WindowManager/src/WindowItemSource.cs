@@ -28,7 +28,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -38,13 +38,13 @@ namespace WindowManager
 		
 		public override string Name {
 			get {
-				return Catalog.GetString ("Generic Window Items");
+				return AddinManager.CurrentLocalizer.GetString ("Generic Window Items");
 			}
 		}
 
 		public override string Description {
 			get {
-				return Catalog.GetString ("Useful Generically Understood Window Items");
+				return AddinManager.CurrentLocalizer.GetString ("Useful Generically Understood Window Items");
 			}
 		}
 
@@ -70,6 +70,7 @@ namespace WindowManager
 
 		public WindowItemSource ()
 		{
+			WindowUtils.Initialize ();
 			items = new List<Item> ();
 			items.Add (new CurrentApplicationItem ());
 			items.Add (new CurrentWindowItem ());

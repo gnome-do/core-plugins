@@ -17,7 +17,6 @@ RESOURCES = \
 	Resources/GoogleSearch.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

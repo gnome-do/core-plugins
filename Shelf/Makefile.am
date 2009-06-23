@@ -16,7 +16,6 @@ RESOURCES = \
 	Resources/Shelf.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(DO_PLATFORM_LIBS) \

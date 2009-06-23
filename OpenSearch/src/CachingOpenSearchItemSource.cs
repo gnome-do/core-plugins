@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do;
 using Do.Platform;

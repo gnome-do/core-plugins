@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace GNOME
@@ -48,12 +48,12 @@ namespace GNOME
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Define"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Define"); }
 		}
 		
 		public override string Description
 		{
-			get { return Catalog.GetString ("Define a given word."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Define a given word."); }
 		}
 		
 		public override string Icon

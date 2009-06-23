@@ -24,7 +24,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -41,11 +41,11 @@ namespace Microblogging
 		}
 		
 		public override string Name {
-			get { return string.Format (Catalog.GetString ("Post to {0}"), Microblog.Preferences.MicroblogService); }
+			get { return string.Format (AddinManager.CurrentLocalizer.GetString ("Post to {0}"), Microblog.Preferences.MicroblogService); }
 		}
 		
 		public override string Description {
-			get { return string.Format (Catalog.GetString ("Update {0} status"), Microblog.Preferences.MicroblogService); }
+			get { return string.Format (AddinManager.CurrentLocalizer.GetString ("Update {0} status"), Microblog.Preferences.MicroblogService); }
 		}
 		
 		public override string Icon {

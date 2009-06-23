@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -38,8 +38,8 @@ namespace RequestTracker
 		
 		public RequestTrackerItem (string name, string description, string url)
 		{
-			this.name = Catalog.GetString (name);
-			this.description = Catalog.GetString (description);
+			this.name = AddinManager.CurrentLocalizer.GetString (name);
+			this.description = AddinManager.CurrentLocalizer.GetString (description);
 			this.URL = url;
 		}
 		

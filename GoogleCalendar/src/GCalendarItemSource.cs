@@ -23,7 +23,7 @@ using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform.Linux;
@@ -37,11 +37,11 @@ namespace GCalendar
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Google Calendars"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Google Calendars"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Indexes your Google Calendars"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Google Calendars"); }
 		}
 		
 		public override string Icon {

@@ -25,7 +25,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -34,11 +34,11 @@ namespace WindowManager
 	public class ScreenTileAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Tile Windows"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Tile Windows"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Tile All Windows in Current Viewport"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Tile All Windows in Current Viewport"); }
 		}
 
 		public override string Icon {

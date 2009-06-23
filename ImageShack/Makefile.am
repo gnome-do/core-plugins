@@ -16,7 +16,6 @@ RESOURCES = \
 	Resources/ImageShack.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

@@ -20,7 +20,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -30,11 +30,11 @@ namespace RememberTheMilk
 	public class RTMSetDue : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Set Due Date/Time"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set Due Date/Time"); }
 		}		
 				
 		public override string Description {
-			get { return Catalog.GetString ("Set the due date/time of a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set the due date/time of a task"); }
         }
 			
 		public override string Icon {

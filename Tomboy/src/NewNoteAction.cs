@@ -22,7 +22,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform.Linux;
@@ -34,11 +34,11 @@ namespace Tomboy
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("New Tomboy Note"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("New Tomboy Note"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Create a new Tomboy note."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a new Tomboy note."); }
 		}
 		
 		public override string Icon {

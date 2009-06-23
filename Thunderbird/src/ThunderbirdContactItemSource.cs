@@ -73,7 +73,7 @@ namespace Do.Addins.Thunderbird
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 		
 		void _UpdateItems ()

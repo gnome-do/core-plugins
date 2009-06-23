@@ -23,7 +23,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -39,11 +39,11 @@ namespace Exaile
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pause"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Pause music in Exaile."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pause music in Exaile."); }
 		}
 
 		public override string Icon {

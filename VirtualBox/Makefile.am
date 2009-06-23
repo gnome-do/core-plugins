@@ -14,6 +14,7 @@ FILES = \
 	src/VMItem.cs \
 	src/VMItemSource.cs \
 	src/VMThread.cs  \
+	src/VBoxBrowseVMSItem.cs \
 	src/IconMap.cs
 
 RESOURCES = \
@@ -80,7 +81,6 @@ RESOURCES = \
 	Resources/icons/take_snapshot_22px.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Xml \
 	System.Core \

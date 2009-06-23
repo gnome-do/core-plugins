@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -34,11 +34,11 @@ namespace Do.FilesAndFolders
 	{
 
 		public override string Name {
-			get { return Catalog.GetString ("Create New File"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create New File"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Creates an new, empty file."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Creates an new, empty file."); }
 		}
 		
 		public override string Icon {
@@ -146,7 +146,7 @@ namespace Do.FilesAndFolders
 			if (!Directory.Exists (parent))
 				throw new FileNotFoundException ("Parent directory must exist", "parent");
 			
-			return GetNewFileName (parent, Catalog.GetString ("Untitled"), 0);
+			return GetNewFileName (parent, AddinManager.CurrentLocalizer.GetString ("Untitled"), 0);
 		}
 
 		static string GetNewFileName (string parent, string name, uint suffix)

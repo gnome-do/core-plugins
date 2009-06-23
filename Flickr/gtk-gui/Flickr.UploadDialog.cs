@@ -33,7 +33,7 @@ namespace Flickr {
             Stetic.Gui.Initialize(this);
             // Widget Flickr.UploadDialog
             this.Name = "Flickr.UploadDialog";
-            this.Title = Mono.Unix.Catalog.GetString("Flickr Upload");
+            this.Title = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Flickr Upload");
             this.Icon = Gdk.Pixbuf.LoadFromResource("flickr.png");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
             this.Resizable = false;
@@ -118,7 +118,7 @@ namespace Flickr {
             w10.Add(w11);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w13 = new Gtk.Label();
-            w13.LabelProp = Mono.Unix.Catalog.GetString("_Hide");
+            w13.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_Hide");
             w13.UseUnderline = true;
             w10.Add(w13);
             w9.Add(w10);
@@ -143,7 +143,7 @@ namespace Flickr {
             w19.Add(w20);
             // Container child GtkHBox1.Gtk.Container+ContainerChild
             Gtk.Label w22 = new Gtk.Label();
-            w22.LabelProp = Mono.Unix.Catalog.GetString("_OK");
+            w22.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_OK");
             w22.UseUnderline = true;
             w19.Add(w22);
             w18.Add(w19);

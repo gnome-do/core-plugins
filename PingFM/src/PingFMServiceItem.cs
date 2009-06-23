@@ -17,10 +17,11 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
 
+using Mono.Addins;
 
 using Do.Universe;
+
 using PingFM.API;
 
 namespace PingFM
@@ -50,7 +51,7 @@ namespace PingFM
 			get { 
 				string desc = (id == "pingfm") ? 
 					String.Format (Catalog.GetString ("Post message to multiple {0} services."), method) :
-					Catalog.GetString ("Service supported by Ping.FM");
+					AddinManager.CurrentLocalizer.GetString ("Service supported by Ping.FM");
 				if (!String.IsNullOrEmpty (trigger))
 				    desc += " (" + trigger + ")";
 				return desc;

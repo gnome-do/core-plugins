@@ -21,7 +21,7 @@ using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -35,11 +35,11 @@ namespace Cl.ickable
 		const string ClipPostURL = "http://cl.ickable.com/cgi-bin/SaveClip.cgi";
 		
 	    public override string Name {
-			get { return Catalog.GetString ("Clip"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Clip"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Create a clip with Cl.ickable"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a clip with Cl.ickable"); }
 		}
 		
 		public override string Icon {

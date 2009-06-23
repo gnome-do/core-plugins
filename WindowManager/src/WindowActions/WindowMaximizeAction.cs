@@ -23,7 +23,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -32,11 +32,11 @@ namespace WindowManager
 	public class WindowMaximizeAction : WindowActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Maximize"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Maximize"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Make a window consume the whole screen"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Make a window consume the whole screen"); }
 		}
 
 		public override string Icon {

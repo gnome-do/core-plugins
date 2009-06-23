@@ -22,7 +22,7 @@ using System;
 using System.Linq;
 
 using Gtk;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Do.FilesAndFolders
 {	
@@ -32,8 +32,8 @@ namespace Do.FilesAndFolders
 	{
 		PathNodeView[] nodeViews = new PathNodeView[2];
 		
-		string indexDialog = Catalog.GetString ("Choose a folder to index");
-		string ignoreDialog = Catalog.GetString ("Choose a folder to ignore");
+		string indexDialog = AddinManager.CurrentLocalizer.GetString ("Choose a folder to index");
+		string ignoreDialog = AddinManager.CurrentLocalizer.GetString ("Choose a folder to ignore");
 			
 		public Configuration ()
 		{			

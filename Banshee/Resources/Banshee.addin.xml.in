@@ -11,8 +11,10 @@
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
-		<Import assembly="@BANSHEE_INDEXER_DLL@"/>
+		<Import assembly="/usr/lib/banshee-1/Banshee.CollectionIndexer.dll"/>
 	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
 	
 	<Dependencies>
 		<Addin id="Universe" version="1.0" />

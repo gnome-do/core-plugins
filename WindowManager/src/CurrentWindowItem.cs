@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Wnck;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Interface.Wink;
@@ -31,13 +31,13 @@ namespace WindowManager
 	{
 		public override string Name {
 			get {
-				return Catalog.GetString ("Current Window");
+				return AddinManager.CurrentLocalizer.GetString ("Current Window");
 			}
 		}
 
 		public override string Description {
 			get {
-				return Catalog.GetString ("Current Focused Window");
+				return AddinManager.CurrentLocalizer.GetString ("Current Focused Window");
 			}
 		}
 		

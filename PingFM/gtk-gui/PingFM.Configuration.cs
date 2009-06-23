@@ -67,7 +67,7 @@ namespace PingFM {
             this.appkey_lbl = new Gtk.Label();
             this.appkey_lbl.Name = "appkey_lbl";
             this.appkey_lbl.Ypad = 5;
-            this.appkey_lbl.LabelProp = Mono.Unix.Catalog.GetString("Application Key");
+            this.appkey_lbl.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Application Key");
             this.table1.Add(this.appkey_lbl);
             Gtk.Table.TableChild w2 = ((Gtk.Table.TableChild)(this.table1[this.appkey_lbl]));
             w2.XOptions = ((Gtk.AttachOptions)(4));
@@ -84,7 +84,7 @@ namespace PingFM {
             // Container child vbox2.Gtk.Box+BoxChild
             this.validate_lbl = new Gtk.Label();
             this.validate_lbl.Name = "validate_lbl";
-            this.validate_lbl.LabelProp = Mono.Unix.Catalog.GetString("<i>Verify and save your account information</i>");
+            this.validate_lbl.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("<i>Verify and save your account information</i>");
             this.validate_lbl.UseMarkup = true;
             this.vbox2.Add(this.validate_lbl);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox2[this.validate_lbl]));

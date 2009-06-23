@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using Do.Universe;
 using Do.Interface.Wink;
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -35,13 +35,13 @@ namespace WindowManager
 	{
 		public override string Name {
 			get {
-				return Catalog.GetString ("Window Screen Items");
+				return AddinManager.CurrentLocalizer.GetString ("Window Screen Items");
 			}
 		}
 
 		public override string Description {
 			get {
-				return Catalog.GetString ("Screens and viewports on your desktop.");
+				return AddinManager.CurrentLocalizer.GetString ("Screens and viewports on your desktop.");
 			}
 		}
 
@@ -49,6 +49,11 @@ namespace WindowManager
 			get {
 				return "desktop";
 			}
+		}
+		
+		public ScreenItemSource ()
+		{
+			ScreenUtils.Initialize ();
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {

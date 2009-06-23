@@ -23,7 +23,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -31,11 +31,11 @@ namespace WindowManager
 	public class WindowCloseAction : WindowActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Close"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Close"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Close selected windows."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Close selected windows."); }
 		}
 
 		public override string Icon {

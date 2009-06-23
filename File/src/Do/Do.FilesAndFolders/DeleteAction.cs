@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -34,11 +34,11 @@ namespace Do.FilesAndFolders
 	{
 
 		public override string Name {
-			get { return Catalog.GetString ("Delete File"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete File"); }
 		}
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Deletes a file or folder."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Deletes a file or folder."); }
 		}
 		
 		public override string Icon {

@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Do.Platform;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Translate
 {
@@ -127,7 +127,7 @@ namespace Translate
 			const int scale_height = 20;
 			string[] Icon = null;
 			if (Translator.SupportsAutoDetect)
-				SourceList.AppendValues (null, Catalog.GetString ("Auto Detect (Recommended)"), Translator.AutoDetectCode);
+				SourceList.AppendValues (null, AddinManager.CurrentLocalizer.GetString ("Auto Detect (Recommended)"), Translator.AutoDetectCode);
 			foreach (LanguageItem Lang in Translator.SupportedLanguages)
 			{
 				Icon = Lang.Icon.Split (new char[] {'@'});

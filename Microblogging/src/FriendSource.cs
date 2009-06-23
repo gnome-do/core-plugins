@@ -23,7 +23,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -43,11 +43,11 @@ namespace Microblogging
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Microblog friends"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Microblog friends"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Indexes your microblog friends"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your microblog friends"); }
 		}
 		
 		public override string Icon {

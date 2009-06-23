@@ -3,13 +3,13 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Epiphany
 
 FILES = \
-	src/EpiphanyBookmarkItemSource.cs
+	src/EpiphanyBookmarkItemSource.cs \
+	src/EpiphanyBrowseBookmarksItem.cs
 
 RESOURCES = \
 	Resources/Epiphany.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Xml \

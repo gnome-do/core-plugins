@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace Archive {
@@ -38,11 +38,11 @@ namespace Archive {
                 }
                 
                 public override string Name {
-                        get { return Catalog.GetString ("Create archive"); }
+                        get { return AddinManager.CurrentLocalizer.GetString ("Create archive"); }
                 }
                 
                 public override string Description {
-                        get { return Catalog.GetString ("Create an archive with the selected item"); }
+                        get { return AddinManager.CurrentLocalizer.GetString ("Create an archive with the selected item"); }
                 }
         
                 public override string Icon {

@@ -23,7 +23,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -46,11 +46,11 @@ namespace GNOME.Terminal
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("GNOME Terminal Profiles"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("GNOME Terminal Profiles"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Indexes your GNOME Terminal profiles."); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your GNOME Terminal profiles."); } 
 		}
 
 		public override string Icon {

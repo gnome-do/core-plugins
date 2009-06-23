@@ -17,7 +17,7 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -35,7 +35,7 @@ namespace Zim
 		}
 
 		public override string Description {
-			get { return Catalog.GetString("Zim page in notebook: ") + notebook; }
+			get { return AddinManager.CurrentLocalizer.GetString("Zim page in notebook: ") + notebook; }
 		}
 		
 		public string Notebook {

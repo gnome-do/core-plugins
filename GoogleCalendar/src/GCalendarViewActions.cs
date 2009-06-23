@@ -22,7 +22,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -38,11 +38,11 @@ namespace GCalendar
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("View Event"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("View Event"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Open event in browser"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Open event in browser"); }
 		}
 
 		public override string Icon {
@@ -69,11 +69,11 @@ namespace GCalendar
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("View Calendar"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("View Calendar"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Open calendar in browser"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Open calendar in browser"); }
 		}
 
 		public override string Icon {

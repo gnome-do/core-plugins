@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Wnck;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Interface.Wink;

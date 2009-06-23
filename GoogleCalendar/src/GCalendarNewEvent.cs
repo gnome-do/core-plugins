@@ -22,7 +22,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 
 
 using Do.Universe;
@@ -35,11 +35,11 @@ namespace GCalendar
 	public sealed class GCalendarNewEvent : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("New Event"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("New Event"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Create a new event in Google Calendar"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a new event in Google Calendar"); }
         }
 			
 		public override string Icon {

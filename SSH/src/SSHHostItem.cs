@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace SSH {
 
@@ -36,7 +36,7 @@ namespace SSH {
 		}
 
 		public override string Name { get { return this.Host; } }
-		public override string Description { get { return Catalog.GetString ("SSH Host"); } }
+		public override string Description { get { return AddinManager.CurrentLocalizer.GetString ("SSH Host"); } }
 		public override string Icon { get { return "gnome-globe"; } }
 
 		public string Host { get; private set; }

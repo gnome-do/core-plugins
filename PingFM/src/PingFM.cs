@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -27,7 +27,8 @@ namespace PingFM
 {	
 	public static class PingFM
 	{		
-		static readonly string ConnectionErrorMessage = Catalog.GetString ("Failed to connect to Ping.FM server.");
+		static readonly string ConnectionErrorMessage = 
+			AddinManager.CurrentLocalizer.GetString ("Failed to connect to Ping.FM service");
 		
 		static PingFMClient client;
 		
