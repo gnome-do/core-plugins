@@ -7,7 +7,7 @@ namespace RtmNet
 	/// </summary>
 	public class AuthenticationRequiredException : RtmException
 	{
-		internal AuthenticationRequiredException() : base("Method requires authentication but no token supplied.")
+		internal AuthenticationRequiredException () : base ("Method requires authentication but no token supplied.")
 		{
 		}
 	}

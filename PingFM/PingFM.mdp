@@ -1,10 +1,11 @@
-<Project name="PingFM" fileversion="2.0" language="C#" DefaultNamespace="Do.Addins.PingFM" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
+<Project name="PingFM" fileversion="2.0" language="C#" DefaultNamespace="PingFM" clr-version="Net_2_0" targetFramework="3.5" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="PingFM" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+      <EnvironmentVariables />
+      <CodeGeneration compiler="Mcs" warninglevel="3" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assembly="PingFM" />
@@ -59,6 +60,11 @@
     <File name="Resources/icons/yahoo360.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/yammer.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/youare.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/gtalk.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/radar.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/seesmic.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/shoutem.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/vox.png" subtype="Code" buildaction="Nothing" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
@@ -69,8 +75,10 @@
     <ProjectReference type="Gac" localcopy="True" refto="System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </References>
+  <GtkDesignInfo gettextClass="Mono.Addins.AddinManager.CurrentLocalizer" />
 </Project>
