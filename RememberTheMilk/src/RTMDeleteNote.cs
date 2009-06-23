@@ -1,4 +1,4 @@
-// RTMCompleteTask.cs
+// RTMDeleteNote.cs
 // 
 // Copyright (C) 2009 GNOME Do
 // 
@@ -27,38 +27,33 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	/// <summary>
-	/// Class to provide the "Complete Task" action.
+	/// Class to provide the "Delete Note" action.
 	/// </summary>
-	public class RTMCompleteTask : Act
+	public class RTMDeleteNote : Act
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete Note"); }
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Detele the a note from a task."); }
 		}
 		
 		public override string Icon {
-			get { return "task-complete.png@" + GetType ().Assembly.FullName; }
+			get { return "note-delete.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (RTMTaskItem); }
-		}
-		
-		public override bool SupportsItem (Item item) 
-		{
-			return (item as RTMTaskItem).Completed == DateTime.MinValue;
+			get { yield return typeof (RTMNoteItem); }
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
-			Services.Application.RunOnThread (() => {
-				RTM.CompleteTask ((items.First () as RTMTaskItem).ListId, 
-					(items.First () as RTMTaskItem).TaskSeriesId,
-					(items.First () as RTMTaskItem).Id);
-			});
+			if (items.Any())
+				Services.Application.RunOnThread (() => {
+					RTM.DeleteNote ((items.First () as RTMNoteItem).Id);
+				});
+			
 			yield break;
 		}
 	}

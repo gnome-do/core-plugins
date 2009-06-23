@@ -1,4 +1,4 @@
-// RTMSetDue.cs
+// RTMSetEstimate.cs
 // 
 // Copyright (C) 2009 GNOME Do
 // 
@@ -16,6 +16,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -27,20 +28,31 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	/// <summary>
-	/// Class for the "Set Due Date/Time" action
+	/// Class for the "Set Estimated Time" action.
 	/// </summary>
-	public class RTMSetDue : Act
+	public class RTMSetEstimate : Act
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Set Due Date/Time"); }
-		}		
-				
-		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the due date/time of a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set Estimated Time"); }
 		}
-			
+		
+		public override string Description {
+			get { return AddinManager.CurrentLocalizer.GetString ("Set or reset the estimated time for a task"); }
+		}
+		
 		public override string Icon {
 			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
+		}
+		
+		public bool CheckValidTime(string timeEntered) {
+			// RTM API supports units of days, hours and minutes
+			string[] times = {
+				"min", "mins", "minute", "minutes",
+				"h", "hr", "hrs", "hour", "hours", 
+				"d", "day", "days"
+			};
+			
+			return times.Any (t => timeEntered.EndsWith (t));
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -51,11 +63,13 @@ namespace RememberTheMilk
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (ITextItem); }
+			get {
+				yield return typeof (ITextItem);
+			}
 		}
 		
 		public override bool ModifierItemsOptional {
-			get { return true; }
+			get { return false; }
 		}
 		
 		public override bool SupportsItem (Item item) 
@@ -63,7 +77,7 @@ namespace RememberTheMilk
 			if (item is RTMTaskItem)
 				return true;
 			else if (item is RTMTaskAttributeItem)
-				return (item as RTMTaskAttributeItem).Description == "Due Date/Time";
+				return (item as RTMTaskAttributeItem).Description == "Time Estimate";
 			else
 				return false;
 		}
@@ -71,7 +85,7 @@ namespace RememberTheMilk
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			RTMTaskItem task = null;
-			string due = String.Empty;
+			string est = String.Empty;
 			
 			if (items.Any ()) {
 				if (items.First () is RTMTaskItem)
@@ -81,11 +95,20 @@ namespace RememberTheMilk
 			}
 			
 			if (modifierItems.Any ())
-				due = (modifierItems.First () as ITextItem).Text;
+				est = ((modifierItems.First () as ITextItem).Text);
+			
+			if (!string.IsNullOrEmpty(est)) {
+				if (!CheckValidTime(est)) {
+					Services.Notifications.Notify (AddinManager.CurrentLocalizer.GetString ("Invalid Time format"),
+						AddinManager.CurrentLocalizer.GetString ("The estimated time entered cannot be understood."),
+						"rtm.png@" + GetType ().Assembly.FullName);
+					yield break;
+				}
+			}
 			
 			if (task != null)
 				Services.Application.RunOnThread (() => {
-					RTM.SetDueDateTime (task.ListId, task.TaskSeriesId, task.Id, due);
+					RTM.SetEstimateTime (task.ListId, task.TaskSeriesId, task.Id, est);
 				});
 			
 			yield break;

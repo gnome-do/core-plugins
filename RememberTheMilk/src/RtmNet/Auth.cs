@@ -38,8 +38,7 @@ namespace RtmNet
 		/// <summary>
 		/// The authentication token returned by the <see cref="Rtm.AuthGetToken"/> or <see cref="Rtm.AuthCheckToken"/> methods.
 		/// </summary>
-		public string Token
-		{
+		public string Token {
 			get { return _token; }
 			set { _token = value; }
 		}
@@ -47,8 +46,7 @@ namespace RtmNet
 		/// <summary>
 		/// The permissions the current token allows the application to perform.
 		/// </summary>
-		public AuthLevel Permissions
-		{
+		public AuthLevel Permissions {
 			get { return _permissions; }
 			set { _permissions = value; }
 		}
@@ -56,24 +54,23 @@ namespace RtmNet
 		/// <summary>
 		/// The <see cref="User"/> object associated with the token. Readonly.
 		/// </summary>
-		public FoundUser User
-		{
+		public FoundUser User {
 			get { return _user; }
 		}
 
 		/// <summary>
 		/// Creates a new instance of the <see cref="Auth"/> class.
 		/// </summary>
-		public Auth()
+		public Auth ()
 		{
 		}
 
-		internal Auth(System.Xml.XmlElement element)
+		internal Auth (System.Xml.XmlElement element)
 		{
-			Token = element.SelectSingleNode("token").InnerText;
-			Permissions = (AuthLevel)Enum.Parse(typeof(AuthLevel), element.SelectSingleNode("perms").InnerText, true);
-			System.Xml.XmlNode node = element.SelectSingleNode("user");
-			_user = new FoundUser(node);
+			Token = element.SelectSingleNode ("token").InnerText;
+			Permissions = (AuthLevel)Enum.Parse (typeof (AuthLevel), element.SelectSingleNode ("perms").InnerText, true);
+			System.Xml.XmlNode node = element.SelectSingleNode ("user");
+			_user = new FoundUser (node);
 		}
 	}
 }

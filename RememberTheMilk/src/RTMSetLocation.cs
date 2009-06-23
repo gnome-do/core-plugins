@@ -1,4 +1,4 @@
-// RTMCompleteTask.cs
+// RTMSetLocation.cs
 // 
 // Copyright (C) 2009 GNOME Do
 // 
@@ -27,37 +27,41 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	/// <summary>
-	/// Class to provide the "Complete Task" action.
+	/// Class for the "Set Location" action
 	/// </summary>
-	public class RTMCompleteTask : Act
+	public class RTMSetLocation : Act
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set Location"); }
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the location of a task"); }
 		}
 		
 		public override string Icon {
-			get { return "task-complete.png@" + GetType ().Assembly.FullName; }
+			get { return "task-seturl.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (RTMTaskItem); }
 		}
 		
-		public override bool SupportsItem (Item item) 
-		{
-			return (item as RTMTaskItem).Completed == DateTime.MinValue;
+		public override IEnumerable<Type> SupportedModifierItemTypes {
+		    get { yield return typeof (RTMLocationItem); }
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
+			string locationId = String.Empty;
+			
+			if (modifierItems.Any ())
+				locationId = (modifierItems.First () as RTMLocationItem).Id;
+			
 			Services.Application.RunOnThread (() => {
-				RTM.CompleteTask ((items.First () as RTMTaskItem).ListId, 
+				RTM.SetLocation ((items.First () as RTMTaskItem).ListId, 
 					(items.First () as RTMTaskItem).TaskSeriesId,
-					(items.First () as RTMTaskItem).Id);
+					(items.First () as RTMTaskItem).Id, locationId);
 			});
 			yield break;
 		}

@@ -19,7 +19,7 @@ namespace RtmNet
 		/// <summary>
 		/// An array of <see cref="Contact"/> items for the user.
 		/// </summary>
-		[XmlElement("note", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("note", Form = XmlSchemaForm.Unqualified)]
 		public Note[] NoteCollection = new Note[0];
 	}
 
@@ -30,24 +30,23 @@ namespace RtmNet
 		private string id;
 		private string rawCreated;
 		private string rawModified;
-		private string title;	
-		private string text;		
+		private string title;
+		private string text;
 		private DateTime created = DateTime.MinValue;
 		private DateTime modified = DateTime.MinValue;
 
 		/// <remarks/>
-		[XmlAttribute("id", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("id", Form = XmlSchemaForm.Unqualified)]
 		public string ID { get { return id; } set { id = value; } }
     
 		/// <remarks/>
-		[XmlAttribute("created", Form=XmlSchemaForm.Unqualified)]
-		public string RawCreated
-		{
+		[XmlAttribute ("created", Form = XmlSchemaForm.Unqualified)]
+		public string RawCreated {
 			get { return rawCreated; }
 			set {
-				if(value.Length > 0) {
+				if (value.Length > 0) {
 					rawCreated = value;
-					created = Utils.DateStringToDateTime(rawCreated);
+					created = Utils.DateStringToDateTime (rawCreated);
 				}
 			}
 		}
@@ -56,21 +55,19 @@ namespace RtmNet
 		/// Converts the raw created field to a <see cref="DateTime"/>.
 		/// </summary>	
 		[XmlIgnore]
-		public DateTime Created
-		{
+		public DateTime Created {
 			get { return created; }
 			set { created = value; }
 		}
 
 		/// <remarks/>
-		[XmlAttribute("modified", Form=XmlSchemaForm.Unqualified)]
-		public string RawModified
-		{
+		[XmlAttribute ("modified", Form = XmlSchemaForm.Unqualified)]
+		public string RawModified {
 			get { return rawModified; }
 			set {
-				if(value.Length > 0) {
+				if (value.Length > 0) {
 					rawModified = value;
-					modified = Utils.DateStringToDateTime(rawModified);
+					modified = Utils.DateStringToDateTime (rawModified);
 				}
 			}
 		}
@@ -78,8 +75,7 @@ namespace RtmNet
 		/// Converts the raw modified field to a <see cref="DateTime"/>.
 		/// </summary>	
 		[XmlIgnore]
-		public DateTime Modified
-		{
+		public DateTime Modified {
 			get { return modified; }
 			set { modified = value; }
 		}
@@ -88,7 +84,7 @@ namespace RtmNet
 		/// <summary>
 		/// Is this contact marked as a friend contact?
 		/// </summary>
-		[XmlAttribute("title", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("title", Form = XmlSchemaForm.Unqualified)]
 		public string Title { get { return title; } set { title = value; } }		
 
 
@@ -96,7 +92,7 @@ namespace RtmNet
 		/// <summary>
 		/// The text of the note
 		/// </summary>
-		[XmlText()]
+		[XmlText ()]
 		public string Text { get { return text; } set { text = value; } }		
 
 	}

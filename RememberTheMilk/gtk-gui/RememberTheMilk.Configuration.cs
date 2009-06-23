@@ -41,7 +41,13 @@ namespace RememberTheMilk {
         
         private Gtk.VBox vbox3;
         
+        private Gtk.Table table1;
+        
+        private Gtk.Label minute_lbl;
+        
         private Gtk.CheckButton overdue_chkbtn;
+        
+        private Gtk.SpinButton overdue_interval_spinbtn;
         
         private Gtk.CheckButton confirm_chkbtn;
         
@@ -172,6 +178,7 @@ namespace RememberTheMilk {
             w17.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.notification_frm = new Gtk.Frame();
+            this.notification_frm.Sensitive = false;
             this.notification_frm.Name = "notification_frm";
             this.notification_frm.ShadowType = ((Gtk.ShadowType)(0));
             this.notification_frm.BorderWidth = ((uint)(2));
@@ -185,17 +192,51 @@ namespace RememberTheMilk {
             this.vbox3.Spacing = 6;
             this.vbox3.BorderWidth = ((uint)(5));
             // Container child vbox3.Gtk.Box+BoxChild
+            this.table1 = new Gtk.Table(((uint)(1)), ((uint)(3)), false);
+            this.table1.Name = "table1";
+            this.table1.RowSpacing = ((uint)(6));
+            this.table1.ColumnSpacing = ((uint)(6));
+            // Container child table1.Gtk.Table+TableChild
+            this.minute_lbl = new Gtk.Label();
+            this.minute_lbl.Name = "minute_lbl";
+            this.minute_lbl.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("minute(s)");
+            this.table1.Add(this.minute_lbl);
+            Gtk.Table.TableChild w18 = ((Gtk.Table.TableChild)(this.table1[this.minute_lbl]));
+            w18.LeftAttach = ((uint)(2));
+            w18.RightAttach = ((uint)(3));
+            w18.XOptions = ((Gtk.AttachOptions)(4));
+            w18.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table1.Gtk.Table+TableChild
             this.overdue_chkbtn = new Gtk.CheckButton();
             this.overdue_chkbtn.CanFocus = true;
             this.overdue_chkbtn.Name = "overdue_chkbtn";
-            this.overdue_chkbtn.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Show notification for overdue task(s)");
+            this.overdue_chkbtn.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Notify overdue task(s) every");
             this.overdue_chkbtn.DrawIndicator = true;
             this.overdue_chkbtn.UseUnderline = true;
-            this.vbox3.Add(this.overdue_chkbtn);
-            Gtk.Box.BoxChild w18 = ((Gtk.Box.BoxChild)(this.vbox3[this.overdue_chkbtn]));
-            w18.Position = 0;
-            w18.Expand = false;
-            w18.Fill = false;
+            this.table1.Add(this.overdue_chkbtn);
+            Gtk.Table.TableChild w19 = ((Gtk.Table.TableChild)(this.table1[this.overdue_chkbtn]));
+            w19.XOptions = ((Gtk.AttachOptions)(6));
+            w19.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table1.Gtk.Table+TableChild
+            this.overdue_interval_spinbtn = new Gtk.SpinButton(1, 9999, 1);
+            this.overdue_interval_spinbtn.CanFocus = true;
+            this.overdue_interval_spinbtn.Name = "overdue_interval_spinbtn";
+            this.overdue_interval_spinbtn.Adjustment.PageIncrement = 10;
+            this.overdue_interval_spinbtn.ClimbRate = 1;
+            this.overdue_interval_spinbtn.Numeric = true;
+            this.overdue_interval_spinbtn.Value = 1;
+            this.table1.Add(this.overdue_interval_spinbtn);
+            Gtk.Table.TableChild w20 = ((Gtk.Table.TableChild)(this.table1[this.overdue_interval_spinbtn]));
+            w20.LeftAttach = ((uint)(1));
+            w20.RightAttach = ((uint)(2));
+            w20.XPadding = ((uint)(5));
+            w20.XOptions = ((Gtk.AttachOptions)(6));
+            w20.YOptions = ((Gtk.AttachOptions)(4));
+            this.vbox3.Add(this.table1);
+            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.vbox3[this.table1]));
+            w21.Position = 0;
+            w21.Expand = false;
+            w21.Fill = false;
             // Container child vbox3.Gtk.Box+BoxChild
             this.confirm_chkbtn = new Gtk.CheckButton();
             this.confirm_chkbtn.CanFocus = true;
@@ -204,10 +245,10 @@ namespace RememberTheMilk {
             this.confirm_chkbtn.DrawIndicator = true;
             this.confirm_chkbtn.UseUnderline = true;
             this.vbox3.Add(this.confirm_chkbtn);
-            Gtk.Box.BoxChild w19 = ((Gtk.Box.BoxChild)(this.vbox3[this.confirm_chkbtn]));
-            w19.Position = 1;
-            w19.Expand = false;
-            w19.Fill = false;
+            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.vbox3[this.confirm_chkbtn]));
+            w22.Position = 1;
+            w22.Expand = false;
+            w22.Fill = false;
             // Container child vbox3.Gtk.Box+BoxChild
             this.returnnew_chkbtn = new Gtk.CheckButton();
             this.returnnew_chkbtn.CanFocus = true;
@@ -216,10 +257,10 @@ namespace RememberTheMilk {
             this.returnnew_chkbtn.DrawIndicator = true;
             this.returnnew_chkbtn.UseUnderline = true;
             this.vbox3.Add(this.returnnew_chkbtn);
-            Gtk.Box.BoxChild w20 = ((Gtk.Box.BoxChild)(this.vbox3[this.returnnew_chkbtn]));
-            w20.Position = 2;
-            w20.Expand = false;
-            w20.Fill = false;
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox3[this.returnnew_chkbtn]));
+            w23.Position = 2;
+            w23.Expand = false;
+            w23.Fill = false;
             this.GtkAlignment2.Add(this.vbox3);
             this.notification_frm.Add(this.GtkAlignment2);
             this.GtkLabel5 = new Gtk.Label();
@@ -228,12 +269,13 @@ namespace RememberTheMilk {
             this.GtkLabel5.UseMarkup = true;
             this.notification_frm.LabelWidget = this.GtkLabel5;
             this.vbox1.Add(this.notification_frm);
-            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox1[this.notification_frm]));
-            w23.Position = 1;
-            w23.Expand = false;
-            w23.Fill = false;
+            Gtk.Box.BoxChild w26 = ((Gtk.Box.BoxChild)(this.vbox1[this.notification_frm]));
+            w26.Position = 1;
+            w26.Expand = false;
+            w26.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.filter_frm = new Gtk.Frame();
+            this.filter_frm.Sensitive = false;
             this.filter_frm.Name = "filter_frm";
             this.filter_frm.ShadowType = ((Gtk.ShadowType)(0));
             this.filter_frm.BorderWidth = ((uint)(2));
@@ -253,20 +295,20 @@ namespace RememberTheMilk {
             this.filter_entry.IsEditable = true;
             this.filter_entry.InvisibleChar = '●';
             this.vbox4.Add(this.filter_entry);
-            Gtk.Box.BoxChild w24 = ((Gtk.Box.BoxChild)(this.vbox4[this.filter_entry]));
-            w24.Position = 0;
-            w24.Expand = false;
-            w24.Fill = false;
+            Gtk.Box.BoxChild w27 = ((Gtk.Box.BoxChild)(this.vbox4[this.filter_entry]));
+            w27.Position = 0;
+            w27.Expand = false;
+            w27.Fill = false;
             // Container child vbox4.Gtk.Box+BoxChild
             this.filter_desc_lbl = new Gtk.Label();
             this.filter_desc_lbl.Name = "filter_desc_lbl";
             this.filter_desc_lbl.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("You can enter some advanced search operators here to limit the tasks Do indexes. E.g. \"priority:1 AND status:incomplete\" will force Do to only index all incomplete tasks with high priority.");
             this.filter_desc_lbl.Wrap = true;
             this.vbox4.Add(this.filter_desc_lbl);
-            Gtk.Box.BoxChild w25 = ((Gtk.Box.BoxChild)(this.vbox4[this.filter_desc_lbl]));
-            w25.Position = 1;
-            w25.Expand = false;
-            w25.Fill = false;
+            Gtk.Box.BoxChild w28 = ((Gtk.Box.BoxChild)(this.vbox4[this.filter_desc_lbl]));
+            w28.Position = 1;
+            w28.Expand = false;
+            w28.Fill = false;
             // Container child vbox4.Gtk.Box+BoxChild
             this.info_hbox = new Gtk.HBox();
             this.info_hbox.Name = "info_hbox";
@@ -276,20 +318,20 @@ namespace RememberTheMilk {
             this.fixed3.Name = "fixed3";
             this.fixed3.HasWindow = false;
             this.info_hbox.Add(this.fixed3);
-            Gtk.Box.BoxChild w26 = ((Gtk.Box.BoxChild)(this.info_hbox[this.fixed3]));
-            w26.Position = 0;
+            Gtk.Box.BoxChild w29 = ((Gtk.Box.BoxChild)(this.info_hbox[this.fixed3]));
+            w29.Position = 0;
             // Container child info_hbox.Gtk.Box+BoxChild
             this.fixed4 = new Gtk.Fixed();
             this.fixed4.Name = "fixed4";
             this.fixed4.HasWindow = false;
             this.info_hbox.Add(this.fixed4);
-            Gtk.Box.BoxChild w27 = ((Gtk.Box.BoxChild)(this.info_hbox[this.fixed4]));
-            w27.Position = 2;
+            Gtk.Box.BoxChild w30 = ((Gtk.Box.BoxChild)(this.info_hbox[this.fixed4]));
+            w30.Position = 2;
             this.vbox4.Add(this.info_hbox);
-            Gtk.Box.BoxChild w28 = ((Gtk.Box.BoxChild)(this.vbox4[this.info_hbox]));
-            w28.Position = 2;
-            w28.Expand = false;
-            w28.Fill = false;
+            Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.vbox4[this.info_hbox]));
+            w31.Position = 2;
+            w31.Expand = false;
+            w31.Fill = false;
             this.GtkAlignment3.Add(this.vbox4);
             this.filter_frm.Add(this.GtkAlignment3);
             this.GtkLabel6 = new Gtk.Label();
@@ -298,18 +340,17 @@ namespace RememberTheMilk {
             this.GtkLabel6.UseMarkup = true;
             this.filter_frm.LabelWidget = this.GtkLabel6;
             this.vbox1.Add(this.filter_frm);
-            Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.vbox1[this.filter_frm]));
-            w31.Position = 2;
-            w31.Expand = false;
-            w31.Fill = false;
+            Gtk.Box.BoxChild w34 = ((Gtk.Box.BoxChild)(this.vbox1[this.filter_frm]));
+            w34.Position = 2;
+            w34.Expand = false;
+            w34.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.notification_frm.Hide();
-            this.filter_frm.Hide();
             this.Show();
             this.auth_btn.Clicked += new System.EventHandler(this.OnAuthBtnClicked);
+            this.overdue_interval_spinbtn.ValueChanged += new System.EventHandler(this.OnOverdueIntervalChanged);
             this.overdue_chkbtn.Clicked += new System.EventHandler(this.OnOverdueChkbtnClicked);
             this.confirm_chkbtn.Clicked += new System.EventHandler(this.OnConfirmChkbtnClicked);
             this.returnnew_chkbtn.Clicked += new System.EventHandler(this.OnReturnNewChkBtnClicked);

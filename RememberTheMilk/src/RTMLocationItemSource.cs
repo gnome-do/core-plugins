@@ -1,4 +1,4 @@
-// RTMCompleteTask.cs
+// RTMLocationItemSource.cs
 // 
 // Copyright (C) 2009 GNOME Do
 // 
@@ -17,8 +17,8 @@
 // 
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Threading;
 using Mono.Addins;
 
 using Do.Universe;
@@ -27,39 +27,42 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	/// <summary>
-	/// Class to provide the "Complete Task" action.
+	/// ItemSource class for the Remember The Milk locations
 	/// </summary>
-	public class RTMCompleteTask : Act
+	public class RTMLocationItemSource : ItemSource
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Remember The Milk Locations"); }
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Locations associated with your Remember The Milk tasks."); }
 		}
 		
 		public override string Icon {
-			get { return "task-complete.png@" + GetType ().Assembly.FullName; }
+			get { return "rtm.png@" + GetType ().Assembly.FullName; }
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (RTMTaskItem); }
-		}
-		
-		public override bool SupportsItem (Item item) 
+		public override IEnumerable<Type> SupportedItemTypes
 		{
-			return (item as RTMTaskItem).Completed == DateTime.MinValue;
+			get { yield return typeof (RTMLocationItem); }
 		}
 		
-		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
+		public override IEnumerable<Item> Items
 		{
-			Services.Application.RunOnThread (() => {
-				RTM.CompleteTask ((items.First () as RTMTaskItem).ListId, 
-					(items.First () as RTMTaskItem).TaskSeriesId,
-					(items.First () as RTMTaskItem).Id);
-			});
-			yield break;
+			get { return RTM.Locations; }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item parent)
+		{
+			return RTM.TasksForLocation ((parent as RTMLocationItem).Id);
+		}
+
+		public override void UpdateItems ()
+		{
+			Thread updateLocations = new Thread (new ThreadStart (RTM.UpdateLocations));
+			updateLocations.IsBackground = true;
+			updateLocations.Start ();
 		}
 	}
 }

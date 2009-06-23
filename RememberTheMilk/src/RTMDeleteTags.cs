@@ -1,4 +1,4 @@
-// RTMSetDue.cs
+// RTMDeleteTags.cs
 // 
 // Copyright (C) 2009 GNOME Do
 // 
@@ -27,67 +27,77 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	/// <summary>
-	/// Class for the "Set Due Date/Time" action
+	/// Class to provide the "Delete Tags" action.
 	/// </summary>
-	public class RTMSetDue : Act
+	public class RTMDeleteTags : Act
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Set Due Date/Time"); }
-		}		
-				
-		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the due date/time of a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete Tag(s)"); }
 		}
-			
+		
+		public override string Description {
+			get { return AddinManager.CurrentLocalizer.GetString ("Detele one or more tags from a task."); }
+		}
+		
 		public override string Icon {
-			get { return "task-setdue.png@" + GetType ().Assembly.FullName; }
+			get { return "tag-delete.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
+			get { 
 				yield return typeof (RTMTaskItem);
 				yield return typeof (RTMTaskAttributeItem);
 			}
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
-			get { yield return typeof (ITextItem); }
+			get { yield return typeof (RTMTagItem); }
 		}
 		
-		public override bool ModifierItemsOptional {
-			get { return true; }
-		}
-		
-		public override bool SupportsItem (Item item) 
-		{
+		public override bool SupportsItem (Item item) {
 			if (item is RTMTaskItem)
-				return true;
+				return !String.IsNullOrEmpty ((item as RTMTaskItem).Tags);
 			else if (item is RTMTaskAttributeItem)
-				return (item as RTMTaskAttributeItem).Description == "Due Date/Time";
+				return (item as RTMTaskAttributeItem).Description == "Tags";
 			else
 				return false;
+		}
+		
+		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
+		{
+			string tagline = String.Empty;
+			
+			if (item.First () is RTMTaskItem)
+				tagline = (item.First () as RTMTaskItem).Tags;
+			else if (item.First () is RTMTaskAttributeItem)
+				tagline = (item.First () as RTMTaskAttributeItem).Name;
+			
+			List<string> tags = new List<string> (tagline.Split (new string[] {", "}, StringSplitOptions.None));
+			
+			return tags.FindIndex (i => i == (modItem as RTMTagItem).Name) != -1;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
 			RTMTaskItem task = null;
-			string due = String.Empty;
+			List<string> temp_tags = new List<string> ();
 			
-			if (items.Any ()) {
+			if (items.Any()) {
 				if (items.First () is RTMTaskItem)
 					task = (items.First () as RTMTaskItem);
 				else if (items.First () is RTMTaskAttributeItem)
 					task = (items.First () as RTMTaskAttributeItem).Parent;
 			}
 			
-			if (modifierItems.Any ())
-				due = (modifierItems.First () as ITextItem).Text;
-			
-			if (task != null)
+			if (modifierItems.Any () && task != null) {
+				foreach (Item item in modifierItems)
+					temp_tags.Add ((item as RTMTagItem).Name);
+				
 				Services.Application.RunOnThread (() => {
-					RTM.SetDueDateTime (task.ListId, task.TaskSeriesId, task.Id, due);
+					RTM.DeleteTags (task.ListId, task.TaskSeriesId,
+						task.Id, String.Join (",", temp_tags.ToArray ()));
 				});
-			
+			}
 			yield break;
 		}
 	}

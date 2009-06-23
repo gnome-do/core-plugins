@@ -1,21 +1,20 @@
-/* RTMSetUrl.cs
- *
- * GNOME Do is the legal property of its developers. Please refer to the
- * COPYRIGHT file distributed with this source distribution.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// RTMSetUrl.cs
+// 
+// Copyright (C) 2009 GNOME Do
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// 
 
 using System;
 using System.Linq;
@@ -28,6 +27,9 @@ using Do.Platform;
 
 namespace RememberTheMilk
 {
+	/// <summary>
+	/// Class for the "Set URL" action
+	/// </summary>
 	public class RTMSetUrl : Act
 	{
 		// URL regex taken from http://www.osix.net/modules/article/?id=586
@@ -47,13 +49,13 @@ namespace RememberTheMilk
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Set the URL of a task."); }
-        	}
+			get { return AddinManager.CurrentLocalizer.GetString ("Set or change the URL of a task."); }
+		}
 			
 		public override string Icon {
 			get { return "task-seturl.png@" + GetType ().Assembly.FullName; }
 		}
-
+		
 		public bool CheckValidURL(string url) {
 			Regex url_regex;
 			url_regex = new Regex (UrlPattern, RegexOptions.Compiled);
@@ -62,43 +64,48 @@ namespace RememberTheMilk
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (RTMTaskItem),
-				};
+				yield return typeof (RTMTaskItem);
+				yield return typeof (RTMTaskAttributeItem);
 			}
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { 
-				return new Type[] {
-					typeof (ITextItem),
-				};
+				yield return typeof (ITextItem);
 			}
 		}
-        
+		
 		public override bool ModifierItemsOptional {
 			get { return true; }
 		}
 		
 		public override bool SupportsItem (Item item) {
-			return true;
-		}
-		
-		public override bool SupportsModifierItemForItems (IEnumerable<Item> item, Item modItem) 
-		{
-			return true;
+			if (item is RTMTaskItem)
+				return true;
+			else if (item is RTMTaskAttributeItem)
+				return (item as RTMTaskAttributeItem).Description == "URL";
+			else
+				return false;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
+			RTMTaskItem task = null;
 			string url = String.Empty;
+			
+			if (items.Any ()) {
+				if (items.First () is RTMTaskItem)
+					task = (items.First () as RTMTaskItem);
+				else if (items.First () is RTMTaskAttributeItem)
+					task = (items.First () as RTMTaskAttributeItem).Parent;
+			}
 			
 			if (modifierItems.FirstOrDefault() != null) {
 				url = ((modifierItems.FirstOrDefault() as ITextItem).Text);
 			}
 			
-                	// User may have entered explicit mode and entered a blank line.
-                	// To be safe; strip out all new line characters from input
+			// User may have entered explicit mode and entered a blank line.
+			// To be safe; strip out all new line characters from input
 			// for URL resetting.
 			url = url.Replace("\n", "");
 
@@ -109,16 +116,15 @@ namespace RememberTheMilk
 				if (!CheckValidURL(url)) {
 					// Error in entered URL.
 					Services.Notifications.Notify("Remember The Milk",
-					                              "Invalid URL provided.");
+						AddinManager.CurrentLocalizer.GetString ("Invalid URL provided."));
 					yield break;
 				}
 			}
 			
-            		Services.Application.RunOnThread (() => {
-				RTM.SetURL ((items.First () as RTMTaskItem).ListId,
-				            (items.First () as RTMTaskItem).TaskSeriesId,
-				            (items.First () as RTMTaskItem).Id, url);
-			});
+			if (task != null)
+				Services.Application.RunOnThread (() => {
+					RTM.SetURL (task.ListId, task.TaskSeriesId, task.Id, url);
+				});
 			yield break;
 		}
 	}

@@ -1,4 +1,4 @@
-// RTMCompleteTask.cs
+// RTMNewList.cs
 // 
 // Copyright (C) 2009 GNOME Do
 // 
@@ -27,38 +27,43 @@ using Do.Platform;
 namespace RememberTheMilk
 {
 	/// <summary>
-	/// Class to provide the "Complete Task" action.
+	/// Class for the "New List" action.
 	/// </summary>
-	public class RTMCompleteTask : Act
+	public class RTMNewList : Act
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("New List"); }
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Complete a task"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a new task list."); }
 		}
 		
 		public override string Icon {
-			get { return "task-complete.png@" + GetType ().Assembly.FullName; }
+			get { return "task-add.png@" + GetType ().Assembly.FullName; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (RTMTaskItem); }
+			get { yield return typeof (ITextItem); }
 		}
-		
-		public override bool SupportsItem (Item item) 
-		{
-			return (item as RTMTaskItem).Completed == DateTime.MinValue;
+				
+		public override bool SupportsItem (Item item) {
+			return true;
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems) 
 		{
-			Services.Application.RunOnThread (() => {
-				RTM.CompleteTask ((items.First () as RTMTaskItem).ListId, 
-					(items.First () as RTMTaskItem).TaskSeriesId,
-					(items.First () as RTMTaskItem).Id);
-			});
+			if (items.Any ()) {
+				string newListName = (items.First () as ITextItem).Text;
+				if (String.IsNullOrEmpty (newListName)) {
+					Log<RTM>.Debug (AddinManager.CurrentLocalizer.GetString ("No list name provided for RTMNewList action"));
+					yield break;
+				} else {
+					Services.Application.RunOnThread (() => {
+						RTM.NewList (newListName);
+					});
+				}
+			}
 			yield break;
 		}
 	}

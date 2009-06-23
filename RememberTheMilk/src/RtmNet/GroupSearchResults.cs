@@ -36,7 +36,7 @@ namespace RtmNet
 		/// </summary>
 		public int Total { get { return total; } }
 
-		private GroupSearchResultCollection groups = new GroupSearchResultCollection();
+		private GroupSearchResultCollection groups = new GroupSearchResultCollection ();
 
 		/// <summary>
 		/// The collection of groups returned for this search.
@@ -53,18 +53,17 @@ namespace RtmNet
 		/// </example>
 		public GroupSearchResultCollection Groups { get { return groups; } }
 
-		internal GroupSearchResults(XmlElement element)
+		internal GroupSearchResults (XmlElement element)
 		{
-			page = Convert.ToInt32(element.GetAttribute("page"));
-			pages = Convert.ToInt32(element.GetAttribute("pages"));
-			perPage = Convert.ToInt32(element.GetAttribute("perpage"));
-			total = Convert.ToInt32(element.GetAttribute("total"));
+			page = Convert.ToInt32 (element.GetAttribute ("page"));
+			pages = Convert.ToInt32 (element.GetAttribute ("pages"));
+			perPage = Convert.ToInt32 (element.GetAttribute ("perpage"));
+			total = Convert.ToInt32 (element.GetAttribute ("total"));
 
-			XmlNodeList gs = element.SelectNodes("group");
-			groups.Clear();
-			for(int i = 0; i < gs.Count; i++)
-			{
-				groups.Add(new GroupSearchResult(gs[i]));
+			XmlNodeList gs = element.SelectNodes ("group");
+			groups.Clear ();
+			for (int i = 0; i < gs.Count; i++) {
+				groups.Add (new GroupSearchResult (gs[i]));
 			}
 		}
 	}
@@ -78,9 +77,9 @@ namespace RtmNet
 		/// Method for adding a new <see cref="GroupSearchResult"/> to the collection.
 		/// </summary>
 		/// <param name="result"></param>
-		public void Add(GroupSearchResult result)
+		public void Add (GroupSearchResult result)
 		{
-			List.Add(result);
+			List.Add (result);
 		}
 
 		/// <summary>
@@ -88,28 +87,28 @@ namespace RtmNet
 		/// <see cref="GroupSearchResults"/> collection) to this collection.
 		/// </summary>
 		/// <param name="results"></param>
-		public void AddRange(GroupSearchResultCollection results)
+		public void AddRange (GroupSearchResultCollection results)
 		{
-			foreach(GroupSearchResult result in results)
-				List.Add(result);
+			foreach (GroupSearchResult result in results)
+				List.Add (result);
 		}
 
 		/// <summary>
 		/// Return a particular <see cref="GroupSearchResult"/> based on the index.
 		/// </summary>
-		public GroupSearchResult this[int index]
+		public GroupSearchResult this [int index]
 		{
-			get { return (GroupSearchResult)List[index]; }
-			set { List[index] = value; }
+			get { return (GroupSearchResult) List[index]; }
+			set { List [index] = value; }
 		}
 
 		/// <summary>
 		/// Removes the selected result from the collection.
 		/// </summary>
 		/// <param name="result">The result to remove.</param>
-		public void Remove(GroupSearchResult result)
+		public void Remove (GroupSearchResult result)
 		{
-			List.Remove(result);
+			List.Remove (result);
 		}
 
 		/// <summary>
@@ -117,9 +116,9 @@ namespace RtmNet
 		/// </summary>
 		/// <param name="result">The result to see if the collection contains.</param>
 		/// <returns>Returns true if the collecton contains the result, otherwise false.</returns>
-		public bool Contains(GroupSearchResult result)
+		public bool Contains (GroupSearchResult result)
 		{
-			return List.Contains(result);
+			return List.Contains (result);
 		}
 
 		/// <summary>
@@ -127,9 +126,9 @@ namespace RtmNet
 		/// </summary>
 		/// <param name="array"></param>
 		/// <param name="index"></param>
-		public void CopyTo(GroupSearchResult[] array, int index)
+		public void CopyTo (GroupSearchResult[] array, int index)
 		{
-			List.CopyTo(array, index);
+			List.CopyTo (array, index);
 		}
 	}
 
@@ -155,11 +154,11 @@ namespace RtmNet
 		/// </summary>
 		public bool EighteenPlus { get { return _eighteen; } }
 
-		internal GroupSearchResult(XmlNode node)
+		internal GroupSearchResult (XmlNode node)
 		{
 			_groupId = node.Attributes["nsid"].Value;
 			_groupName = node.Attributes["name"].Value;
-			_eighteen = Convert.ToInt32(node.Attributes["eighteenplus"].Value)==1;
+			_eighteen = Convert.ToInt32 (node.Attributes["eighteenplus"].Value) == 1;
 		}
 	}
 }
