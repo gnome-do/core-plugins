@@ -2,7 +2,7 @@
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
-    <target-gtk-version>2.12.9</target-gtk-version>
+    <target-gtk-version>2.12.8</target-gtk-version>
   </configuration>
   <widget class="Gtk.Bin" id="RememberTheMilk.Configuration" design-size="407 390">
     <property name="MemberName" />
