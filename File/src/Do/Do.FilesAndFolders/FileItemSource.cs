@@ -99,7 +99,10 @@ namespace Do.FilesAndFolders {
 				file = item as IFileItem;
 			else if (item is IUriItem && (item as IUriItem).Uri.StartsWith ("file://"))
 				file = Plugin.NewFileItem ((item as IUriItem).Uri.Replace ("file://", ""));
-			else if (item is IApplicationItem)
+			else if (item is IApplicationItem
+					&& item.Name == AddinManager.CurrentLocalizer.GetString ("Home Folder"))
+				file = Plugin.NewFileItem (Plugin.ImportantFolders.UserHome);
+			else
 				return Enumerable.Empty<Item> ();
 			
 			return RecursiveGetItems (file.Path, 1, Plugin.Preferences.IncludeHiddenFilesWhenBrowsing);
