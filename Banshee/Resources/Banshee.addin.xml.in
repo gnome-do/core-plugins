@@ -1,12 +1,13 @@
 <Addin 
 	id="Banshee"
-	namespace= "Do"
+	namespace="Do"
 	version="1.0"
 	name="Banshee Media Player"
 	description="Search your media collection and control playback."
 	author="Alex Launi"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Banshee_Plugin"
 >
  
 	<Runtime>
