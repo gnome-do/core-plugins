@@ -7,7 +7,6 @@
 	author="Karol Będkowski"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Putty_Plugin"
 	>
 
 	<Runtime>
