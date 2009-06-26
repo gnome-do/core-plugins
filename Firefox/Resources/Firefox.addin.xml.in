@@ -7,6 +7,7 @@
 	author="David Siegel, Neal Stewart, Alex Launi"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Firefox_Plugin"
 	>
 
 	<Runtime>
