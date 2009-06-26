@@ -1,12 +1,13 @@
 <Addin 
 	id="GoogleCalendar" 
-	namespace= "Do" 
+	namespace="Do" 
 	version="1.5"
 	name="Google Calendar"
 	description="Create, search, and browse Google calendar events."
 	author="Alex Launi"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Google_Calendar_Plugin"
 	>
 
 	<Runtime>
