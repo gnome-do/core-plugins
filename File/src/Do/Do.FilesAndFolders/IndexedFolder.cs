@@ -37,7 +37,7 @@ namespace Do.FilesAndFolders
 		{
 			if (path == null) throw new ArgumentNullException ("path");
 			
-			Path = Plugin.UnwrapHomeFolder (path);
+			Path = Services.Environment.ExpandPath (path);
 			Level = level;
 			Status = status;
 		}
