@@ -1,12 +1,13 @@
 <Addin 
 	id="GMail"
-	namespace= "Do"
+	namespace="Do"
 	version="1.6"
 	name="Google Contacts"
 	description="Search your GMail contacts."
 	author="Alex Launi"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/GMail_Contacts_Plugin"
 	>
 
 	<Runtime>
