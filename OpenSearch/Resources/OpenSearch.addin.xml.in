@@ -1,12 +1,13 @@
 <Addin
 	id="OpenSearch"
-	namespace= "Do"
+	namespace="Do"
 	version="1.2"
 	name="OpenSearch Web Search"
 	description="Search the web using your installed OpenSearch plugins."
 	author="Jason Jones"	
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/OpenSearch_Plugin"
 >
  
 	<Runtime>
