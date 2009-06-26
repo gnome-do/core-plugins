@@ -109,11 +109,20 @@ namespace Flickr
 			}
 		
 			Services.Application.RunOnThread ( () => {
-				using (UploadPool uploadQueue = new UploadPool (tags)) {
+				/* Mono 2.4 bug hack
+				 * This can't use using () due to some crazy-wierd scoping problem.
+				 * See https://bugzilla.novell.com/show_bug.cgi?id=516676 for details.
+				 * 
+				 */
+				IEnumerable<IFileItem> temp = uploads;
+				UploadPool uploadQueue = new UploadPool (tags);
+				try {
 					foreach (IFileItem photo in uploads)
 						uploadQueue.EnqueueUpload (photo);
-						
+					
 					uploadQueue.BeginUploads ();
+				} finally {
+					uploadQueue.Dispose ();
 				}
 			});
 
