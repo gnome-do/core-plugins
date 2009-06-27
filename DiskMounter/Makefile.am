@@ -13,7 +13,6 @@ RESOURCES = \
 	Resources/DiskMounter.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(GNOME_VFS_SHARP_20_LIBS) \

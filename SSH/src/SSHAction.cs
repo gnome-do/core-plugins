@@ -26,20 +26,21 @@ using Do.Platform;
 using System.Diagnostics;
 
 using GConf;
-using Mono.Unix;
+using Mono.Addins;
 
-namespace GnomeDoSSH {
+namespace SSH {
+	
 	public class SSHAction : Act {
 		
 		public override string Name {
 			get {
-				return Catalog.GetString ("Connect with SSH");
+				return AddinManager.CurrentLocalizer.GetString ("Connect with SSH");
 			}
 		}
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Connect with SSH");
+				return AddinManager.CurrentLocalizer.GetString ("Connect with SSH");
 			}
 		}
 		
@@ -50,12 +51,10 @@ namespace GnomeDoSSH {
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-            get {
-                return new Type[] {
-                    typeof(ITextItem),
-                    typeof(HostItem),
-                };
-            }
+			get {
+				yield return typeof (ITextItem);
+				yield return typeof (SSHHostItem);
+                }
 		}
 		
 		public override bool SupportsItem (Item item) {
@@ -63,6 +62,7 @@ namespace GnomeDoSSH {
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
+			
 			GConf.Client client = new GConf.Client ();
 
 			string exec;
@@ -73,22 +73,22 @@ namespace GnomeDoSSH {
 				exec = "gnome-terminal";
 			}
 			
-            string hostname;
+			string hostname;
 
-            if (items.First () is ITextItem) {
-                ITextItem textitem = items.First () as ITextItem;
-                hostname = textitem.Text;
-            }
-            else {
-                HostItem hostitem = items.First () as HostItem;
-                hostname = hostitem.Text;
-            }
+			if (items.First () is ITextItem) {
+				ITextItem textitem = items.First () as ITextItem;
+				hostname = textitem.Text;
+			}
+			else {
+				SSHHostItem hostitem = items.First () as SSHHostItem;
+				hostname = hostitem.Host;
+			}
 
 			Process term = new Process ();
 			term.StartInfo.FileName = exec;
 			term.StartInfo.Arguments = "-e 'ssh " + hostname + "'";
 			term.Start ();
-			return null;
+			yield break;
 		}
 	}
 }

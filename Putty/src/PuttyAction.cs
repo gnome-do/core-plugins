@@ -23,7 +23,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -37,11 +37,11 @@ namespace Putty
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("Connect with PuTTY"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Connect with PuTTY"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Create new conenction with PuTTY"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create new conenction with PuTTY"); }
 		}
 		
 		public override string Icon {
@@ -57,6 +57,11 @@ namespace Putty
 
 		void StartPuttySession (string session)
 		{
+			Process.Start ("putty", "-load " + session);
+		}
+		
+		void ConnectToHost (string session)
+		{
 			Process.Start ("putty", session);
 		}
 		
@@ -64,7 +69,7 @@ namespace Putty
 		{
 			foreach (Item item in items) {
 				 if (item is ITextItem)
-	                StartPuttySession ((item as ITextItem).Text);              
+	                ConnectToHost ((item as ITextItem).Text);              
 	            else if (item is PuttySession)
 	                StartPuttySession ((item as PuttySession).Session);
 			}

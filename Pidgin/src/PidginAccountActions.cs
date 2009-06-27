@@ -21,7 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -31,13 +31,14 @@ namespace PidginPlugin
 
 	public class PidginEnableAccount : Act
 	{
+		const string gtkGaim = "gtk-gaim";
 
 		public override string Name {
-			get { return Catalog.GetString ("Sign on"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Sign on"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Enable pidgin account"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Enable pidgin account"); }
 		}
 
 		public override string Icon {
@@ -63,10 +64,16 @@ namespace PidginPlugin
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			Pidgin.IPurpleObject prpl;
+			PidginAccountItem account = items.First () as PidginAccountItem;
+			
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountSetEnabled ((items.First () as PidginAccountItem).Id,
-					"gtk-gaim", 1);
+				try {
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (int) 1);
+				}
+				catch {
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (uint) 1);
+				}
 			} catch (Exception e) {
 				Log<PidginEnableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);
 				Log<PidginEnableAccount>.Debug (e.StackTrace);
@@ -78,12 +85,14 @@ namespace PidginPlugin
 	
 	public class PidginDisableAccount : Act
 	{
+		const string gtkGaim = "gtk-gaim";
+		
 		public override string Name {
-			get { return Catalog.GetString ("Sign off"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Sign off"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Disble pidgin account"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Disble pidgin account"); }
 		}
 
 		public override string Icon {
@@ -108,7 +117,12 @@ namespace PidginPlugin
 
 			try {
 				prpl = Pidgin.GetPurpleObject ();
-				prpl.PurpleAccountSetEnabled (account.Id, "gtk-gaim", 0);
+				try {
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (int) 0);
+				}
+				catch {
+					prpl.PurpleAccountSetEnabled (account.Id, gtkGaim, (uint) 0);
+				}
 			} catch (Exception e) {
 				Log<PidginDisableAccount>.Error ("Could not disable Pidgin account: {0}", e.Message);
 				Log<PidginDisableAccount>.Debug (e.StackTrace);

@@ -19,7 +19,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -47,7 +47,7 @@ namespace Tomboy
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Tomboy note"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Tomboy note"); } 
 		}
 		
 		public override string Icon {

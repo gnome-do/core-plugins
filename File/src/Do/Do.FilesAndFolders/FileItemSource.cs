@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -71,16 +71,17 @@ namespace Do.FilesAndFolders {
 				yield return typeof (IFileItem);
 				yield return typeof (ITextItem);
 				yield return typeof (IApplicationItem);
+				yield return typeof (IUriItem);
 			}
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Files and Folders"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Files and Folders"); }
 		}
 		
 		public override string Description {
 			get {
-				return Catalog.GetString ("Catalogs important files and folders for quick access.");
+				return AddinManager.CurrentLocalizer.GetString ("Catalogs important files and folders for quick access.");
 			}
 		}
 		
@@ -96,7 +97,12 @@ namespace Do.FilesAndFolders {
 				file = Plugin.NewFileItem ((item as ITextItem).Text);
 			else if (item is IFileItem)
 				file = item as IFileItem;
-			else if (item is IApplicationItem)
+			else if (item is IUriItem && (item as IUriItem).Uri.StartsWith ("file://"))
+				file = Plugin.NewFileItem ((item as IUriItem).Uri.Replace ("file://", ""));
+			else if (item is IApplicationItem
+					&& item.Name == AddinManager.CurrentLocalizer.GetString ("Home Folder"))
+				file = Plugin.NewFileItem (Plugin.ImportantFolders.UserHome);
+			else
 				return Enumerable.Empty<Item> ();
 			
 			return RecursiveGetItems (file.Path, 1, Plugin.Preferences.IncludeHiddenFilesWhenBrowsing);
@@ -104,15 +110,30 @@ namespace Do.FilesAndFolders {
 		
 		public override void UpdateItems ()
 		{
-			items = Plugin.FolderIndex
-				.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles))
-				.Take (Plugin.Preferences.MaximumFilesIndexed)
-				.ToArray ();
-
-			if (!maximum_files_warned && items.Count () == Plugin.Preferences.MaximumFilesIndexed) {
-				Log.Warn (MaximumFilesIndexedWarning);
-				Services.Notifications.Notify ("Do is indexing too many files.", MaximumFilesIndexedWarning);
-				maximum_files_warned = true;
+			try {
+				IEnumerable<IndexedFolder> ignored = Enumerable.Empty<IndexedFolder> ();
+				
+				ignored = Plugin.FolderIndex
+					.Where (folder => folder.Status == FolderStatus.Ignored);
+				
+				if (Plugin.Preferences.LimitMaxFilesIndexed)
+					items = Plugin.FolderIndex
+						.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles, ignored))
+						.Take (Plugin.Preferences.MaximumFilesIndexed)
+						.ToArray ();
+				else
+					items = Plugin.FolderIndex
+						.SelectMany (folder => RecursiveGetItems (folder.Path, folder.Level, Plugin.Preferences.IncludeHiddenFiles, ignored))
+						.ToArray ();
+								
+				if (!maximum_files_warned && items.Count () == Plugin.Preferences.MaximumFilesIndexed) {
+					Log.Warn (MaximumFilesIndexedWarning);
+					Services.Notifications.Notify ("Do is indexing too many files.", MaximumFilesIndexedWarning);
+					maximum_files_warned = true;
+				}
+			}
+			catch (Exception e) {
+				Console.WriteLine(e.ToString());
 			}
 		}
 
@@ -135,12 +156,18 @@ namespace Do.FilesAndFolders {
 		/// <returns>
 		/// A <see cref="IEnumerable"/>
 		/// </returns>
+		
 		static IEnumerable<Item> RecursiveGetItems (string path, uint levels, bool includeHidden)
+		{
+			return RecursiveGetItems(path, levels, includeHidden, Enumerable.Empty<IndexedFolder> ());
+		}
+		
+		static IEnumerable<Item> RecursiveGetItems (string path, uint levels, bool includeHidden, IEnumerable<IndexedFolder> ignored)
 		{
 			IEnumerable<string> files;
 			IEnumerable<Item> fileItems, applicationItems;
 			
-			files = RecursiveListFiles (path, levels, includeHidden);
+			files = RecursiveListFiles (path, levels, includeHidden, ignored);
 
 			fileItems = files
 				.Select (filepath => Plugin.NewFileItem (filepath))
@@ -154,7 +181,7 @@ namespace Do.FilesAndFolders {
 			return applicationItems.Concat (fileItems);
 		}
 		
-		static IEnumerable<string> RecursiveListFiles (string path, uint levels, bool includeHidden)
+		static IEnumerable<string> RecursiveListFiles (string path, uint levels, bool includeHidden, IEnumerable<IndexedFolder> ignored)
 		{
 			IEnumerable<string> results = null;
 
@@ -167,13 +194,13 @@ namespace Do.FilesAndFolders {
 				IEnumerable<string> files, directories, recursiveFiles;
 				
 				files = Directory.GetFiles (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, ignored));
 				directories = Directory.GetDirectories (path)
-					.Where (filepath => ShouldIndexPath (filepath, includeHidden));
+					.Where (filepath => ShouldIndexPath (filepath, includeHidden, ignored));
 				recursiveFiles = directories
-					.SelectMany (dir => RecursiveListFiles (dir, levels - 1, includeHidden));
-				
+					.SelectMany (dir => RecursiveListFiles (dir, levels - 1, includeHidden, ignored));
 				results = files.Concat (directories).Concat (recursiveFiles);
+				
 			} catch (Exception e) {
 				Log.Error ("Encountered an error while attempting to index {0}: {1}", path, e.Message);
 				Log.Debug (e.StackTrace);
@@ -182,11 +209,13 @@ namespace Do.FilesAndFolders {
 			return results;
 		}
 
-		static bool ShouldIndexPath (string path, bool includeHidden)
+		static bool ShouldIndexPath (string path, bool includeHidden, IEnumerable<IndexedFolder> ignored)
 		{
 			string filename = Path.GetFileName (path);
 			bool isForbidden = filename == "." || filename == ".." || filename.EndsWith ("~");
 			bool isHidden = filename.StartsWith (".");
+			if (ignored.Where (folder => path == folder.Path).Any ()) 
+				isForbidden = true;
 			return !isForbidden && (includeHidden || !isHidden);
 		}
 		

@@ -23,7 +23,7 @@ using System;
 using System.Threading;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 
@@ -55,11 +55,11 @@ namespace Delicious
 		}
         
 		public override string Name {
-			get { return Catalog.GetString ("New del.icio.us bookmark"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("New del.icio.us bookmark"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Create a new bookmark at del.icio.us"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Create a new bookmark at del.icio.us"); }
 		}
 		
 		public override string Icon {
@@ -96,7 +96,7 @@ namespace Delicious
 		
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 		
 		public bool ModifierItemsOptional {
@@ -121,7 +121,7 @@ namespace Delicious
 				newBookmark.IsBackground = true;
 				newBookmark.Start ((object) url);
 			}
-			return null;
+			yield break;
 		}
 	}
 }

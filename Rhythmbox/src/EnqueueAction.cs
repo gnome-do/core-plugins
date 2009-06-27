@@ -22,7 +22,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -33,11 +33,11 @@ namespace Do.Rhythmbox
 	{
 
 		public override string Name {
-			get { return Catalog.GetString ("Add to Play Queue"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add to Play Queue"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Add an item to Rhythmbox's play queue."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Add an item to Rhythmbox's play queue."); }
 		}
 
 		public override string Icon {

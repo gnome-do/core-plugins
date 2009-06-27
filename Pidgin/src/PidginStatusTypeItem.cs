@@ -19,7 +19,7 @@
 using System;
 using System.IO;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -29,25 +29,22 @@ namespace PidginPlugin
 
 	public class PidginStatusTypeItem : Item
 	{
-
 		const string IconBase = "/usr/share/pixmaps/pidgin/status/48";
-
-		uint status;
 		
-		public PidginStatusTypeItem (uint status)
+		public PidginStatusTypeItem (int status)
 		{
-			this.status = status;
+			this.Status = status;
 		}
 		
 		public override string Name {
 			get {
-				switch (status) {
-				case 1: return Catalog.GetString ("Offline");
-				case 2: return Catalog.GetString ("Available");
-				case 3: return Catalog.GetString ("Busy");
-				case 4: return Catalog.GetString ("Invisible");
-				case 5: return Catalog.GetString ("Away");
-				default: return Catalog.GetString ("Unknown Status");
+				switch (this.Status) {
+				case 1: return AddinManager.CurrentLocalizer.GetString ("Offline");
+				case 2: return AddinManager.CurrentLocalizer.GetString ("Available");
+				case 3: return AddinManager.CurrentLocalizer.GetString ("Busy");
+				case 4: return AddinManager.CurrentLocalizer.GetString ("Invisible");
+				case 5: return AddinManager.CurrentLocalizer.GetString ("Away");
+				default: return AddinManager.CurrentLocalizer.GetString ("Unknown Status");
 				}
 			}
 		}
@@ -58,7 +55,7 @@ namespace PidginPlugin
 		
 		public override string Icon { 
 			get  { 
-				switch (status) {
+				switch (this.Status) {
 				case 1: return Path.Combine (IconBase, "offline.png");
 				case 2: return Path.Combine (IconBase, "available.png");
 				case 3: return Path.Combine (IconBase, "busy.png");
@@ -70,8 +67,6 @@ namespace PidginPlugin
 			}
 		}
 		
-		public uint Status {
-			get { return status; }
-		}
+		public int Status { get; private set; }
 	}
 }

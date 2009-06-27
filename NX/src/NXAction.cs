@@ -26,7 +26,7 @@ using Do;
 using Do.Universe;
 using System.Diagnostics;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace NX 
 {
@@ -34,11 +34,11 @@ namespace NX
     {
 	
         public override string Name {
-            get { return Catalog.GetString ("Connect with NX"); }
+            get { return AddinManager.CurrentLocalizer.GetString ("Connect with NX"); }
         }
 	
         public override string Description {
-            get { return Catalog.GetString ("Connect with NX"); }
+            get { return AddinManager.CurrentLocalizer.GetString ("Connect with NX"); }
         }
 	
         public override string Icon {

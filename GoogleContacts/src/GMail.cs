@@ -23,7 +23,7 @@ using System.Net;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,10 +32,10 @@ namespace GMail
 {
 	public static class GMail
 	{
-		static readonly string ConnectionErrorMessage = Catalog.GetString ("An error occurred connecting to google, "
+		static readonly string ConnectionErrorMessage = AddinManager.CurrentLocalizer.GetString ("An error occurred connecting to google, "
 			+ "are your credentials valid?");
 			
-		static readonly string MissingCredentialsMessage = Catalog.GetString ("Missing login credentials. Please set "
+		static readonly string MissingCredentialsMessage = AddinManager.CurrentLocalizer.GetString ("Missing login credentials. Please set "
 			+ "login information in plugin configuration.");
 			
 		static GMailClient client;

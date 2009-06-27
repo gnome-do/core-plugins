@@ -10,13 +10,13 @@ FILES = \
 	src/SearchNotesAction.cs \
 	gtk-gui/generated.cs \
 	src/TomboyConfiguration.cs \
+	src/TomboyBrowseNotesItem.cs \
 	gtk-gui/Tomboy.TomboyConfiguration.cs
 
 RESOURCES = \
 	Resources/Tomboy.addin.xml 
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(NDESK_DBUS_10_LIBS) \

@@ -12,11 +12,11 @@ namespace RtmNet
 		{
 		}
 
-		internal RtmException(string message) : base(message)
+		internal RtmException (string message) : base(message)
 		{
 		}
 
-		internal RtmException(string message, Exception innerException) : base(message, innerException)
+		internal RtmException (string message, Exception innerException) : base (message, innerException)
 		{
 		}
 	}

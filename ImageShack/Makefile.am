@@ -16,10 +16,10 @@ RESOURCES = \
 	Resources/ImageShack.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \
+	System.Xml.Linq \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \
 	$(DO_UNIVERSE_LIBS)

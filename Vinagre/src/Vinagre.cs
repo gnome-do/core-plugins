@@ -22,53 +22,52 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Mono.Unix;
+
+using Mono.Addins;
 
 using Do.Universe;
 
-namespace VinagreVNC {
-    public class VNCAction : Act {
-        public override string Name { 
-            get { return Catalog.GetString ("Connect with VNC"); }
-        }
+namespace VinagreVNC 
+{
+	public class VNCAction : Act 
+	{
+       
+		public override string Name { 
+			get { return AddinManager.CurrentLocalizer.GetString ("Connect with VNC"); }
+		}
 
-        public override string Description {
-            get { return Catalog.GetString ("Connect with VNC"); }
-        }
+		public override string Description {
+	            get { return AddinManager.CurrentLocalizer.GetString ("Connect with VNC"); }
+	        }
 
-        public override string Icon {
-            get { return "vinagre"; }
-        }
+		public override string Icon {
+			get { return "vinagre"; }
+		}
 
-        public override IEnumerable<Type> SupportedItemTypes {
-            get { 
-                return new Type[] {
-                    typeof(HostItem),
-                    typeof(VNCHostItem),
-                    typeof(ITextItem),
-                };
-            }
-        }
+		public override IEnumerable<Type> SupportedItemTypes {
+			get { 
+				yield return typeof (HostItem);
+				yield return typeof (ITextItem);
+				yield return typeof (VNCHostItem);
+			}
+		}
 
-        public override bool SupportsItem (Item item) {
-            return true;
-        }
-
-        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {         
-            string hostname;
-            if (items.First () is ITextItem) {
-                ITextItem textitem = items.First () as ITextItem;
-                hostname = textitem.Text;
-            }
-            else {
-                HostItem hostitem = items.First () as HostItem;
-                hostname = hostitem.Description + ":" + hostitem.Port;
-            }
-            Process vinagre = new Process ();
-            vinagre.StartInfo.FileName = "vinagre";
-            vinagre.StartInfo.Arguments = hostname;
-            vinagre.Start ();
-            return null;
-        }
-    }
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {         
+			string hostname;
+            
+			if (items.First () is ITextItem) {
+				hostname = (items.First () as ITextItem).Text;
+			} else {
+				HostItem hostitem = items.First () as HostItem;
+				hostname = hostitem.Hostname + ":" + hostitem.Port;
+			}
+            
+			Process vinagre = new Process ();
+			vinagre.StartInfo.FileName = "vinagre";
+			vinagre.StartInfo.Arguments = hostname;
+			vinagre.Start ();
+            
+			yield break;
+		}
+	}
 }

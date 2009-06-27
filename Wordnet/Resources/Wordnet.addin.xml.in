@@ -1,0 +1,27 @@
+<Addin 
+	id="Wordnet" 
+	namespace="Do"
+	version="1.0"
+	name="Wordnet"
+	description="Define words on Wordnet."
+	author="Ankit Solanki"
+	category="Community"
+	defaultEnabled="false"
+	>
+
+	<Runtime>
+		<Import assembly="Wordnet.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/Action">
+		<Action type="Simulacra.WordnetAction" />
+	</Extension>
+
+</Addin>

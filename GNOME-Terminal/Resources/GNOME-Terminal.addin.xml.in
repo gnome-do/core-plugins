@@ -1,0 +1,29 @@
+<Addin
+	id="GNOMETerminal"
+	namespace= "Do"
+	version="1.1"
+	name="GNOME Terminal"
+	description="Run commands and open new terminals."
+	author="David Siegel, Tim McLaughlin"
+	category="Official"
+	defaultEnabled="false"
+>
+ 
+	<Runtime>
+		<Import assembly="GNOME-Terminal.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+	
+	<Extension path="/Do/Action">
+		<Action type="GNOME.Terminal.RunInTerminalAction" />
+		<Action type="GNOME.Terminal.OpenTerminalHereAction" />
+	</Extension>
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="GNOME.Terminal.ProfileItemSource" />
+	</Extension>
+</Addin>

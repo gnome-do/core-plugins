@@ -21,7 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -31,13 +31,12 @@ namespace Alias
 	
 	class DeleteAliasAction : Act
 	{
-		
 		public override string Name {
-			get { return Catalog.GetString ("Delete Alias"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Delete Alias"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Deletes an alias."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Deletes an alias."); }
 		}
 
 		public override string Icon {

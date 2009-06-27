@@ -19,7 +19,7 @@
 using System;
 using System.Diagnostics;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -43,11 +43,11 @@ namespace SystemServices {
 		}
 		
 		public override string Name {
-			get { return string.Format (Catalog.GetString ("{0} service"), name); }
+			get { return string.Format (AddinManager.CurrentLocalizer.GetString ("{0} service"), name); }
 		}
 
 		public override string Description {
-			get { return string.Format (Catalog.GetString ("Control system {0} service"), name); }
+			get { return string.Format (AddinManager.CurrentLocalizer.GetString ("Control system {0} service"), name); }
 		}
 
 		public override string Icon {

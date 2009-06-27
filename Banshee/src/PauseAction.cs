@@ -20,8 +20,9 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
+using Do.Platform;
 using Do.Universe;
 
 namespace Banshee
@@ -29,11 +30,11 @@ namespace Banshee
 	public class PauseAction : AbstractPlayerAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Pause"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pause"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Pause playing track"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pause playing track"); }
 		}
 
 		public override string Icon {

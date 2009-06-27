@@ -12,7 +12,7 @@ namespace RtmNet
 		/// <summary>
 		/// The name for the category.
 		/// </summary>
-		[XmlAttribute("name", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("name", Form=XmlSchemaForm.Unqualified)]
 		public string CategoryName;
     
 		/// <summary>
@@ -24,7 +24,7 @@ namespace RtmNet
 		/// <example>
 		/// Group Id 91, Romance will return "/Life/Romance" as the Path and "/90/91" as its PathIds
 		/// </example>
-		[XmlAttribute("path", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("path", Form=XmlSchemaForm.Unqualified)]
 		public string Path;
     
 		/// <summary>
@@ -36,19 +36,19 @@ namespace RtmNet
 		/// <example>
 		/// Group Id 91, Romance will return "/Life/Romance" as the Path and "/90/91" as its PathIds
 		/// </example>
-		[XmlAttribute("pathids", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("pathids", Form=XmlSchemaForm.Unqualified)]
 		public string PathIds;
 
 		/// <summary>
 		/// An array of <see cref="SubCategory"/> items.
 		/// </summary>
-		[XmlElement("subcat", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("subcat", Form=XmlSchemaForm.Unqualified)]
 		public SubCategory[] SubCategories;
 
 		/// <summary>
 		/// An array of <see cref="Group"/> items, listing the groups within this category.
 		/// </summary>
-		[XmlElement("group", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("group", Form=XmlSchemaForm.Unqualified)]
 		public Group[] Groups;
 	}
 
@@ -61,19 +61,19 @@ namespace RtmNet
 		/// <summary>
 		/// The id of the category.
 		/// </summary>
-		[XmlAttribute("id", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("id", Form=XmlSchemaForm.Unqualified)]
 		public long SubCategoryId;
     
 		/// <summary>
 		/// The name of the category.
 		/// </summary>
-		[XmlAttribute("name", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("name", Form=XmlSchemaForm.Unqualified)]
 		public string SubCategoryName;
     
 		/// <summary>
 		/// The number of groups found within the category.
 		/// </summary>
-		[XmlAttribute("count", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("count", Form=XmlSchemaForm.Unqualified)]
 		public long GroupCount;
 	}
 

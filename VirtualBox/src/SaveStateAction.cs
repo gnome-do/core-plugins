@@ -23,7 +23,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -37,11 +37,11 @@ namespace VirtualBox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString("Take Snapshot"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Take Snapshot"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString("Save the current state as a Snapshot"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Save the current state as a Snapshot"); }
 		}
 
 		public override string Icon {
@@ -70,7 +70,7 @@ namespace VirtualBox
 		public override IEnumerable<Type> SupportedModifierItemTypes
 		{
 			get {
-				return new Type[] { typeof (ITextItem) };
+				yield return typeof (ITextItem);
 			}
 		}
 
@@ -95,13 +95,13 @@ namespace VirtualBox
 			if (modItems.Any ())
 				SnapshotName = (modItems.First () as ITextItem).Text;
 			else
-				SnapshotName = Catalog.GetString("Snapshot (") + DateTime.Now + ")";
+				SnapshotName = AddinManager.CurrentLocalizer.GetString("Snapshot (") + DateTime.Now + ")";
 			
 			VMThread thread = new VMThread("VBoxManage", "snapshot " + vm.Uuid + " take '" + SnapshotName + "'", vm.Status, ref vm);
 			Thread t = new Thread (new ThreadStart(thread.DoAction));
 			t.IsBackground = true;
 			t.Start(); 
-			return null;
+			yield break;
 		}
 	}
 }

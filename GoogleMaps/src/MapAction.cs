@@ -20,7 +20,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using System.Web;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -36,12 +37,12 @@ namespace Google
 	public class MapAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Map"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Map"); }
 		}
 		
 		public override string Description
 		{
-			get { return Catalog.GetString ("Map a location or route in Google maps."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Map a location or route in Google maps."); }
 		}
 		
 		public override string Icon
@@ -125,8 +126,7 @@ namespace Google
 		
 		string GoogleMapsURLWithExpression (string e)
 		{
-			return "http://maps.google.com/maps?q=" + (e ?? "")
-				.Replace (" ", "+");
+			return "http://maps.google.com/maps?q=" + HttpUtility.UrlEncode (e ?? "");
 		}
 		
 		bool ContactSupportsAddress (ContactItem item)

@@ -83,7 +83,7 @@ namespace Skype {
     }
 		
     public override IEnumerable<Item> ChildrenOfItem (Item item) {
-      return null;
+      yield break;
     }
 		
     public override void UpdateItems () {
@@ -128,7 +128,7 @@ namespace Skype {
     public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
       UserStatusItem i = items.First () as UserStatusItem;
       SkypeAPI.Instance.SetUserStatus(i.Code);
-      return null;
+      yield break;
     }
 
   }

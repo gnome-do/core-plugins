@@ -1,14 +1,19 @@
+if HAVE_FLICKR
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=Flickr
 
 FILES = \
 	gtk-gui/Flickr.AccountConfig.cs \
 	gtk-gui/Flickr.UploadConfig.cs \
+	gtk-gui/Flickr.UploadDialog.cs \
 	gtk-gui/generated.cs \
 	src/AccountConfig.cs \
 	src/FlickrItemSource.cs \
 	src/UploadAction.cs \
+	src/UploadPool.cs \
+	src/UploadDialog.cs \
 	src/UploadConfig.cs
 
 RESOURCES = \
@@ -18,7 +23,6 @@ RESOURCES = \
 	Resources/icons/flickr.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(GTK_SHARP_20_LIBS) \

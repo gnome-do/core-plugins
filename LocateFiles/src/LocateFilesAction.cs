@@ -22,26 +22,29 @@ using System;
 using System.IO; 
 using System.Linq;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
+using Do.Universe;
+using Do.Universe.Common;
 
-namespace Do.Universe
+namespace Locate
 {
 	public class LocateFilesAction : Act
 	{
 		
 		bool allowHidden = false;
 		const uint maxResults = 500;
+		string Error = AddinManager.CurrentLocalizer.GetString ("Locate found 0 files for: ");
 		
 		public override string Name
 		{
-			get { return Catalog.GetString ("Locate Files"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Locate Files"); }
 		}
 		
 		public override string Description
 		{
-			get { return Catalog.GetString ("Search your filesystem using locate."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search your filesystem using locate."); }
 		}
 		
 		public override string Icon
@@ -52,9 +55,7 @@ namespace Do.Universe
 		public override IEnumerable<Type> SupportedItemTypes
 		{
 			get {
-				return new Type[] {
-					typeof (ITextItem)
-				};
+				yield return typeof (ITextItem);
 			}
 		}
 		
@@ -66,11 +67,19 @@ namespace Do.Universe
 				
 			files = new List<Item> ();
 			query = (items.First () as ITextItem).Text;
+
+			if (string.IsNullOrEmpty(query))
+			{
+				Services.Notifications.Notify("Locate Files",
+					"No text provided for searching.");
+				yield break;
+			}
 			
 			locate = new System.Diagnostics.Process ();
 			locate.StartInfo.FileName = "locate";
-			locate.StartInfo.Arguments = string.Format ("-i \"{0}\"", query);
+			locate.StartInfo.Arguments = string.Format ("-b -i \"{0}\"", query);
 			locate.StartInfo.RedirectStandardOutput = true;
+			locate.StartInfo.RedirectStandardError = true;
 			locate.StartInfo.UseShellExecute = false;
 			locate.Start ();
 
@@ -85,16 +94,18 @@ namespace Do.Universe
 						Path.GetDirectoryName (path).Contains ("/."))
 					continue;
 
-				// Only allow files that contain the query as a substring
-				// of the file name. It may be faster to use grep, but I've
-				// tested this and it seems prety snappy.
-				if (Path.GetFileName (path).ToLower().Contains (query)) {
-					results++;
-					files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
-				}
+				results++;
+				files.Add (Services.UniverseFactory.NewFileItem (path) as Item);
 			}
-			files.Sort (new IFileItemNameComparer (query));
-			return files;
+			
+			if (results > 0) {
+				files.Sort (new IFileItemNameComparer (query));
+				foreach (Item file in files)
+					yield return file;
+			} else {
+				Services.Notifications.Notify ("Locate Files", Error + query);
+				yield break;
+			}
 		}
 
 		// Order files by (A) position of query in the file name and

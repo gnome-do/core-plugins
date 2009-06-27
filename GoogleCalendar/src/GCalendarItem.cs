@@ -20,7 +20,7 @@
 
 using System;
 using System.Text;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -42,7 +42,7 @@ namespace GCalendar
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Google Calendar"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Google Calendar"); }
 		}
 		
 		public override string Icon {

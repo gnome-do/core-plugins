@@ -23,7 +23,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -37,11 +37,11 @@ namespace VirtualBox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString("Start Virtual Machine"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Start Virtual Machine"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString("Starts the selected Virtual Machine"); }
+			get { return AddinManager.CurrentLocalizer.GetString("Starts the selected Virtual Machine"); }
 		}
 
 		public override string Icon {
@@ -50,7 +50,7 @@ namespace VirtualBox
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] { typeof (VMItem) };
+				yield return typeof (VMItem);
 			}
 		}
 
@@ -67,15 +67,15 @@ namespace VirtualBox
 			List<Item> DynItems = new List<Item> ();
 			
 			DynItems.Add(
-			             new VMDynItm(Catalog.GetString("Open in GUI"),
-			                          Catalog.GetString("Open in VirtualBox GUI"),
+			             new VMDynItm(AddinManager.CurrentLocalizer.GetString("Open in GUI"),
+			                          AddinManager.CurrentLocalizer.GetString("Open in VirtualBox GUI"),
 			                          "VirtualBox_64px.png@"+GetType().Assembly.FullName,
 			                          VMState.on
 			                          )
 			             );
 			DynItems.Add(
-			             new VMDynItm(Catalog.GetString("Start Headless"),
-			                          Catalog.GetString("Start in Headless mode"),
+			             new VMDynItm(AddinManager.CurrentLocalizer.GetString("Start Headless"),
+			                          AddinManager.CurrentLocalizer.GetString("Start in Headless mode"),
 			                          "vrdp_16px.png@"+GetType().Assembly.FullName,
 			                          VMState.headless
 			                          )
@@ -122,7 +122,7 @@ namespace VirtualBox
 				t.IsBackground = true;
 				t.Start(); 
 			}		
-			return null;
+			yield break;
 		}
 	}
 }

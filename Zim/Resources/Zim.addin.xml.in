@@ -1,0 +1,29 @@
+<Addin 
+	id="Zim"
+	namespace="Do"
+	version="1.0"
+	name="Zim"
+	description="Access Zim pages."
+	author="Karol Będkowski"
+	category="Community"
+	defaultEnabled="false"
+	>
+
+	<Runtime>
+		<Import assembly="Zim.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Zim.ZimPagesItemSource" />
+	</Extension>
+	<Extension path="/Do/Action">
+		<Action type="Zim.ZimOpenPageAction" />
+		<Action type="Zim.ZimNewPageAction" />
+	</Extension>
+</Addin>

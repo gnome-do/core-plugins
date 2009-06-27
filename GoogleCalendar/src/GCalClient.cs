@@ -23,7 +23,7 @@ using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Google.GData.Client;
 using Google.GData.Calendar;
@@ -37,8 +37,8 @@ namespace GCalendar
 		
 	public class GCalClient
 	{
-		readonly string AllEventsCalName = Catalog.GetString ("All Events");
-		readonly string ErrorInMethod = Catalog.GetString ("An error has occurred in {0}");
+		readonly string AllEventsCalName = AddinManager.CurrentLocalizer.GetString ("All Events");
+		readonly string ErrorInMethod = AddinManager.CurrentLocalizer.GetString ("An error has occurred in {0}");
 
 		const int MonthsToIndex = 1;
 		const string GAppName = "alexLauni-gnomeDoGCalPlugin-1.5";

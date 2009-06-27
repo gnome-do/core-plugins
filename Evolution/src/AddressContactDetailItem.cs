@@ -19,7 +19,7 @@
 
 using System;
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Evolution
 {
@@ -31,7 +31,7 @@ namespace Evolution
 
 		public override string Name {
 			get {
-				return Catalog.GetString ("Address");
+				return AddinManager.CurrentLocalizer.GetString ("Address");
 				
 				/* // The home/other/work tags are not exact.
 				string desc = "";

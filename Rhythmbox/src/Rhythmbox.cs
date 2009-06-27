@@ -43,8 +43,15 @@ namespace Do.Rhythmbox
 
 		static Rhythmbox ()
 		{
+			string xdgDbFile;
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			MusicLibraryFile = Path.Combine (home, ".gnome2/rhythmbox/rhythmdb.xml");
+			
+			// this is for version compatibility, the new version of RB uses XDG dirs
+			xdgDbFile = Path.Combine (ReadXdgUserDir ("XDG_DATA_HOME", ".local/share"), "rhythmbox/rhythmdb.xml");
+			MusicLibraryFile = File.Exists (xdgDbFile) 
+				? xdgDbFile
+				: Path.Combine (home, ".gnome2/rhythmbox/rhythmdb.xml");
+
 			CoverArtDirectory = Path.Combine (ReadXdgUserDir ("XDG_CACHE_HOME", ".cache"), "rhythmbox/covers");
 
 			clear_songs_timer = new Timer (state =>

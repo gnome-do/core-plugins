@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -43,11 +43,11 @@ namespace Banshee
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Banshee Media"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Banshee Media"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Indexes Media from Banshee Media Player"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes Media from Banshee Media Player"); }
 		}
 		
 		public override string Icon {

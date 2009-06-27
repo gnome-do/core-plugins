@@ -24,7 +24,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -39,11 +39,11 @@ namespace GNOME.Terminal
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Run in Terminal"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Run in Terminal"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Runs a command in GNOME Terminal."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Runs a command in GNOME Terminal."); }
 		}
 
 		public override string Icon {

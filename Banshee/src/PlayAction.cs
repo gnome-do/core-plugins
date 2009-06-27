@@ -23,7 +23,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -32,11 +32,11 @@ namespace Banshee
 	public class PlayAction : AbstractPlayerAction
 	{		
 		public override string Name {
-			get { return Catalog.GetString ("Play"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Play"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Play from your Banshee Collection"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Play from your Banshee Collection"); }
 		}
 		
 		public override string Icon {
@@ -63,11 +63,16 @@ namespace Banshee
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			if (items.First () is MediaItem)
-				Banshee.Play (items.Cast<MediaItem> ().First ());
+				Banshee.Play (items.OfType<MediaItem> ().First ());
 			else 
 				Banshee.Play ();
 				
 			yield break;
+		}
+		
+		protected override bool IsAvailable ()
+		{
+			return !Banshee.IsPlaying;
 		}
 	}
 }

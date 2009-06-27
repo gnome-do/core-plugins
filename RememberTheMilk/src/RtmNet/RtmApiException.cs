@@ -10,7 +10,7 @@ namespace RtmNet
 		private int code;
 		private string msg = "";
 
-		internal RtmApiException(ResponseError error)
+		internal RtmApiException (ResponseError error)
 		{
 			code = error.Code;
 			msg = error.Message;
@@ -19,26 +19,22 @@ namespace RtmNet
 		/// <summary>
 		/// Get the code of the Rtm error.
 		/// </summary>
-		public int Code
-		{
+		public int Code {
 			get { return code; }
 		}
 
 		/// <summary>
 		/// Gets the verbose message returned by Rtm.
 		/// </summary>
-		public string Verbose
-		{
+		public string Verbose {
 			get { return msg; }
 		}
 		
 		/// <summary>
 		/// Overrides the message to return custom error message.
 		/// </summary>
-		public override string Message
-		{
-			get
-			{
+		public override string Message {
+			get {
 				return msg + " (" + code + ")";
 			}
 		}

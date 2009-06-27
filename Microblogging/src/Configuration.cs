@@ -54,11 +54,17 @@ namespace Microblogging
 			Username = Microblog.Preferences.Username;
 			Password = Microblog.Preferences.Password;
 			
+			Twitterizer.Framework.Twitter.SetService ((Service)services_combo.Active);
 		}
 		
 		protected override bool Validate (string username, string password)
 		{
-			return Microblog.Connect (username, password);
+			if (MicroblogClient.CredentialsValid (username, password)) {
+				Microblog.Connect (username, password);
+				return true;
+			}
+
+			return false;
 		}
 
 		protected override void SaveAccountData (string username, string password)

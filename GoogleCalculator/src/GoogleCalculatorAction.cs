@@ -23,8 +23,9 @@ using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Web;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -37,7 +38,7 @@ namespace Do.Plugins.Google
 	{
 
 		const string BeginCalculator = "<img src=/images/calc_img.gif";
-		const string BeginReply = "<td nowrap dir=ltr><h2 class=r><font size=+1><b>";
+		const string BeginReply = "<td nowrap ><h2 class=r style=\"font-size:138%\"><b>";
 		const string EndReply = "</b>";
 
 		public GoogleCalculatorAction ()
@@ -49,7 +50,7 @@ namespace Do.Plugins.Google
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Perform a calculation using Google Calculator."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Perform a calculation using Google Calculator."); }
 		}
 
 		public override string Icon {
@@ -89,21 +90,15 @@ namespace Do.Plugins.Google
 				// Strip HTML tags:
 				reply = Regex.Replace (reply, @"<[^>]+>", "");
 			} catch {
-				reply = Catalog.GetString ("Google Calculator could not evaluate the expression.");
+				reply = AddinManager.CurrentLocalizer.GetString ("Google Calculator could not evaluate the expression.");
 			}
 
-			yield return new TextItem (reply);
+			yield return new TextItem (HttpUtility.HtmlDecode(reply));
 		}
 
 		string GoogleCalculatorURLWithExpression (string e)
 		{
-			return "http://www.google.com/search?&q=" + (e ?? "")
-				.Replace ("+", "%2B")
-				.Replace ("(", "%28")
-				.Replace (")", "%29")
-				.Replace ("/", "%2F")
-				.Replace ("^", "%5E")
-				.Replace (" ", "+");
+			return "http://www.google.com/search?&q=" + HttpUtility.UrlEncode (e ?? "");
 		}
 
 		string GetWebpageContents (string url)
