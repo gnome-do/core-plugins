@@ -60,15 +60,15 @@ namespace XRandR
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			if (parent is OutputItem){
+			if (parent is OutputItem) {
 				OutputItem outputItem = parent as OutputItem;
-				foreach(ScreenResources res in External.ScreenResources())
-					foreach(XRROutputInfo output in res.Outputs.doWith(outputItem.Id)){
-						foreach(XRRModeInfo mode in res.ModesOfOutput(output))
-							yield return new OutputModeItem(outputItem.Id,mode);
+				foreach(ScreenResources res in External.ScreenResources ())
+					foreach(XRROutputInfo output in res.Outputs.DoWith (outputItem.Id)){
+						foreach(XRRModeInfo mode in res.ModesOfOutput (output))
+							yield return new OutputModeItem (outputItem.Id, mode);
 						
 						if (output.crtc_id != 0)
-							yield return new OutputModeItem(outputItem.Id,0,Catalog.GetString("Off"));
+							yield return new OutputModeItem (outputItem.Id, 0, Catalog.GetString ("Off"));
 					}
 			}
 			else
@@ -79,15 +79,15 @@ namespace XRandR
 		{
 			try{
 				items.Clear ();
-				foreach(ScreenResources res in External.ScreenResources()){
-					res.Outputs.AllWithId(delegate(int id,XRROutputInfo output){
-						Do.Platform.Log<XRandRItemSource>.Debug("Found output: 0x{0:x} - {1}",id,output.name); 
-						items.Add (new OutputItem(id,output,output.connection==0));
+				foreach(ScreenResources res in External.ScreenResources ()){
+					res.Outputs.AllWithId (delegate(int id, XRROutputInfo output){
+						Do.Platform.Log<XRandRItemSource>.Debug ("Found output: 0x{0:x} - {1}", id, output.name); 
+						items.Add (new OutputItem (id, output, output.connection==0));
 					});
 				}
 			}catch(Exception e){
 				// Necessary, since Do.Universe.SafeElement.LogSafeError does not output a StackTrace 
-				Do.Platform.Log<XRandRItemSource>.Error("Error in UpdateItems: {0}\n{1}",e.Message,e.StackTrace);
+				Do.Platform.Log<XRandRItemSource>.Error ("Error in UpdateItems: {0}\n{1}", e.Message, e.StackTrace);
 				throw e;
 			}
 		}

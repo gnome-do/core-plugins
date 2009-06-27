@@ -30,7 +30,7 @@ namespace XRandR
 		string name;
 		int id;
 		bool connected;
-		public OutputItem(int id,XRROutputInfo output,bool connected)
+		public OutputItem(int id, XRROutputInfo output, bool connected)
 		{
 			this.name = output.name;
 			this.id = id;

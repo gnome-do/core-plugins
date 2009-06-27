@@ -30,13 +30,14 @@ namespace XRandR
 		int output_id;
 		string name;
 		int mode_id;
-		public OutputModeItem(int output_id,XRRModeInfo mode)
+		public OutputModeItem(int output_id, XRRModeInfo mode)
 		{
 			this.output_id = output_id;
-			this.name = mode.name + " "+mode.dotClock.ToInt64()/mode.vTotal/mode.hTotal + "Hz";
-			this.mode_id = mode.id.ToInt32();
+			this.name = mode.name + " "+mode.dotClock.ToInt64 ()/mode.vTotal/mode.hTotal + "Hz";
+			this.mode_id = mode.id.ToInt32 ();
 		}
-		public OutputModeItem(int output_id,int mode_id, string name){
+		public OutputModeItem(int output_id, int mode_id, string name)
+		{
 			this.output_id = output_id;
 			this.mode_id = mode_id;
 			this.name = name;
@@ -53,9 +54,10 @@ namespace XRandR
 			get { return "system-config-display"; }
 		}
 		
-		public void Run () {
-			foreach(ScreenResources res in External.ScreenResources())
-				res.setMode(output_id,mode_id);
+		public void Run () 
+		{
+			foreach(ScreenResources res in External.ScreenResources ())
+				res.setMode (output_id, mode_id);
 		}
 	}
 }
