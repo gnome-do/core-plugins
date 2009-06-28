@@ -4,6 +4,7 @@ ASSEMBLY=XRandR
 
 FILES = \
 	src/XRandR.cs \
+	src/XRandRLib.cs \
 	src/OutputItem.cs \
 	src/OutputModeItem.cs \
 	src/XRandRItemSource.cs

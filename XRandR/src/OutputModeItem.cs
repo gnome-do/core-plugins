@@ -60,7 +60,7 @@ namespace XRandR
 		
 		public void Run () 
 		{
-			foreach (ScreenResources res in External.ScreenResources ())
+			foreach (ScreenResources res in Wrapper.ScreenResources ())
 				res.setMode (output_id, mode_id);
 		}
 	}

@@ -29,145 +29,9 @@ namespace XRandR
 {
 	public delegate void ResourceAction<T> (T res);
 	public delegate void ResourceActionWithId<T> (int id, T res);
-	
-	[StructLayout (LayoutKind.Sequential)]
-	public struct XRROutputInfo {
-	    public IntPtr timestamp;
-	    
-	    public int	    crtc_id;
 
-	    public string	name;
-	    public int		nameLen;
-
-		public IntPtr   mm_width;
-	    public IntPtr   mm_height;
-
-		public short	connection;
-	    public short    subpixel_order;
-
-		public int		ncrtc;
-	    public IntPtr	crtcs;
-
-		public int		nclone;
-		public IntPtr   clones;
-	    
-		public int		nmode;
-	    public int		npreferred;
-	    public IntPtr	modes;
-	};
-
-	[StructLayout (LayoutKind.Sequential)]
-	public struct XErrorEvent{
-        public int type;
-        public IntPtr display;   /* Display the event was read from */
-		public long serial;/* serial number of failed request */
-        public byte error_code;/* error code of failed request */
-        public byte request_code;/* Major op-code of failed request */
-        public byte minor_code;/* Minor op-code of failed request */
-        public int resourceid;     /* resource id */
-	};
-	
-	[StructLayout (LayoutKind.Sequential)]
-	public struct XRRModeInfo {
-		public IntPtr	id;
-		public int	width;
-		public int	height;
-		public IntPtr	dotClock;
-		public int	hSyncStart;
-		public int	hSyncEnd;
-		public int	hTotal;
-		public int	hSkew;
-		public int	vSyncStart;
-		public int	vSyncEnd;
-		public int	vTotal;
-		public string  name;
-		public int	nameLength;
-		public IntPtr	modeFlags;
-	};
-	
-	[StructLayout (LayoutKind.Sequential)]
-	public struct XRRCrtcInfo {
-		public IntPtr timestamp;
-		public int x;
-		public int y;
-		public int width, height;
-		public IntPtr mode;
-		public short rotation;
-
-		public int noutput;
-		public IntPtr outputs;
-		
-		public int rotations;
-		
-		public int npossible;
-		public IntPtr possible;
-	};
-	
-	[StructLayout(LayoutKind.Sequential)]
-	public struct XRRScreenResources{
-		public IntPtr	timestamp;
-		public IntPtr	configTimestamp;
-
-		public int	ncrtc;
-		public IntPtr	crtcs;
-		
-		public int	noutput;
-		public IntPtr   outputs;
-		
-		public int	nmode;
-		public IntPtr	modes;
-	}
-	
-	public class External{
-		[DllImport("libX11")]
-		public static extern IntPtr XOpenDisplay([MarshalAs(UnmanagedType.LPTStr)] string name);
-		[DllImport("libX11")]
-        public static extern int XCloseDisplay(IntPtr display);
-		[DllImport("libX11")]
-		public static extern IntPtr XRootWindow(IntPtr display,int screen);
-		
-		public delegate IntPtr ErrorHandler(IntPtr display,IntPtr ev);
-		[DllImport("libX11")]
-		public static extern IntPtr XSetErrorHandler(IntPtr handler);
-		
-		[DllImport("libX11")]
-		public static extern int XGetErrorText(IntPtr display, int code, StringBuilder sb,
-              int length);
-		
-		[DllImport("libXrandr")]
-		public static extern IntPtr XRRGetScreenResources (IntPtr dpy, IntPtr window);
-		
-		[DllImport("libXrandr")]
-		public static extern void XRRFreeScreenResources (IntPtr resources);
-
-		[DllImport("libXrandr")]
-		public static extern IntPtr XRRGetOutputInfo (IntPtr dpy, IntPtr resources, int output_id);
-		
-		[DllImport("libXrandr")]
-		public static extern void XRRFreeOutputInfo (IntPtr outputInfo);
-		
-		[DllImport("libXrandr")]
-		public static extern IntPtr XRRGetCrtcInfo (IntPtr dpy, IntPtr resources, int crtc_id);
-		
-		[DllImport("libXrandr")]
-		public static extern void XRRFreeCrtcInfo (IntPtr crtcInfo);
-		
-		[DllImport("libXrandr")]
-		public static extern int XRRSetCrtcConfig (IntPtr dpy,
-		                                           IntPtr resources,
-		                                           IntPtr crtc_id,
-		                                           IntPtr timestamp,
-		                                           int x, int y,
-		                                           IntPtr mode_id,
-		                                           int rotation,
-		                                           IntPtr outputs,
-		                                           int noutputs);
-		
-		[DllImport("libXrandr")]
-		public static extern void XRRSetScreenSize (IntPtr dpy, IntPtr window,
-		                                            int width, int height,
-		                                            int mmWidth, int mmHeight);
-		
+	public class Tools
+	{
 		public static T Structure<T> (IntPtr ptr) 
 		{
 			return (T) Marshal.PtrToStructure (ptr, typeof(T));
@@ -262,13 +126,14 @@ namespace XRandR
 		{
 			Type t = o.GetType ();
 			
-			Do.Platform.Log<XRandR.External>.Debug ("Dumping object of type {0} Size: {1}", t.Name, Marshal.SizeOf (t));
+			Do.Platform.Log<XRandR.Tools>.Debug ("Dumping object of type {0} Size: {1}", t.Name, Marshal.SizeOf (t));
 
 			foreach(System.Reflection.FieldInfo fi in t.GetFields ())
-				Do.Platform.Log<XRandR.External>.Debug ("\t{0} (+ {2}) = {1}", fi.Name, fi.GetValue(o), Marshal.OffsetOf (t,fi.Name));
+				Do.Platform.Log<XRandR.Tools>.Debug ("\t{0} (+ {2}) = {1}", fi.Name, fi.GetValue(o), Marshal.OffsetOf (t,fi.Name));
 		}
 		
-		public class XErrorException:Exception {
+		public class XErrorException:Exception
+		{
 			XErrorEvent xevent;
 			string error_text;
 			internal XErrorException(XErrorEvent xevent, string text){
@@ -287,7 +152,7 @@ namespace XRandR
 		public static string GetErrorText (IntPtr display, XErrorEvent xevent)
 		{
 			StringBuilder sb = new StringBuilder (1000);
-			XGetErrorText (display, xevent.error_code, sb, sb.Capacity);
+			Native.XGetErrorText (display, xevent.error_code, sb, sb.Capacity);
 			return sb.ToString ();			
 		}
 		public static IntPtr IgnoreErrorHandler (IntPtr display, IntPtr ev)
@@ -296,12 +161,15 @@ namespace XRandR
 			string text = GetErrorText (display, xevent);
 			XErrorException excp = new XErrorException (xevent, text);
 			
-			Do.Platform.Log<XRandR.External>.Debug ("XRandR plugin: {0}\n{1}", excp.ToString (), Environment.StackTrace);
+			Do.Platform.Log<XRandR.Tools>.Debug ("XRandR plugin: {0}\n{1}", excp.ToString (), Environment.StackTrace);
 
 			// don't know if it is a good idea to throw an exception out 
 			// of unmanaged code? But seems to work well. 
 			throw excp;
 		}
+	}
+	public class Wrapper
+	{
 		public static void DoWithDefaultDisplay (ResourceAction<IntPtr> func)
 		{
 			foreach(IntPtr display in DefaultDisplay ())
@@ -311,14 +179,14 @@ namespace XRandR
 		// It is the reponsibility of the user to don't leak any pointers outside of the foreach block.
 		public static IEnumerable<IntPtr> DefaultDisplay()
 		{
-			IntPtr oldHandler = XSetErrorHandler (Marshal.GetFunctionPointerForDelegate (new ErrorHandler (IgnoreErrorHandler)));
-			IntPtr display = XOpenDisplay (null);
+			IntPtr oldHandler = Native.XSetErrorHandler (Marshal.GetFunctionPointerForDelegate (new Native.ErrorHandler (Tools.IgnoreErrorHandler)));
+			IntPtr display = Native.XOpenDisplay (null);
 			try{
 				yield return display;
 			}
 			finally{
-				XCloseDisplay (display);
-				XSetErrorHandler (oldHandler);
+				Native.XCloseDisplay (display);
+				Native.XSetErrorHandler (oldHandler);
 			}
 		}
 		public static void DoWithScreenResources (IntPtr display, ResourceAction<ScreenResources> func)
@@ -328,10 +196,10 @@ namespace XRandR
 		}
 		public static IEnumerable<ScreenResources> ScreenResources (IntPtr display)
 		{
-			IntPtr w = External.XRootWindow (display, 0);
-			IntPtr res = External.XRRGetScreenResources (display, w);
+			IntPtr w = Native.XRootWindow (display, 0);
+			IntPtr res = Native.XRRGetScreenResources (display, w);
 			yield return new ScreenResources (display, res);
-			External.XRRFreeScreenResources (res);
+			Native.XRRFreeScreenResources (res);
 		}
 		public static void DoWithScreenResources (ResourceAction<ScreenResources> func)
 		{
@@ -344,7 +212,7 @@ namespace XRandR
 					yield return res;
 		}
 	}
-	public class ScreenResources{
+	public class ScreenResources {
 		IntPtr display;
 		IntPtr presources;
 		XRRScreenResources resources;
@@ -352,32 +220,32 @@ namespace XRandR
 		
 		internal ScreenResources(IntPtr d, IntPtr presources)
 		{
-			this.resources = External.Structure<XRRScreenResources> (presources);
-			External.LogStructure (this.resources);
+			this.resources = Tools.Structure<XRRScreenResources> (presources);
+			Tools.LogStructure (this.resources);
 			this.presources = presources;
 			this.display = d;
 			
-			foreach(XRRModeInfo mode in External.PtrToStructureArray<XRRModeInfo>(resources.modes,resources.nmode)){
+			foreach(XRRModeInfo mode in Tools.PtrToStructureArray<XRRModeInfo>(resources.modes,resources.nmode)){
 				modes[mode.id.ToInt32()] = mode;
 			}
 		}
 
-		public External.Accessor<XRROutputInfo> Outputs {
+		public Tools.Accessor<XRROutputInfo> Outputs {
 			get{
-				return new External.AccessorImpl<XRROutputInfo> (delegate (int id) {
-					                                      return External.XRRGetOutputInfo (display, presources,id);
+				return new Tools.AccessorImpl<XRROutputInfo> (delegate (int id) {
+					                                      return Native.XRRGetOutputInfo (display, presources,id);
 				                                       }
-				                                       ,External.XRRFreeOutputInfo
-				                                       ,External.PtrToIntArray (resources.outputs, resources.noutput));
+				                                       ,Native.XRRFreeOutputInfo
+				                                       ,Tools.PtrToIntArray (resources.outputs, resources.noutput));
 			}
 		}
-		public External.Accessor<XRRCrtcInfo> Crtcs {
+		public Tools.Accessor<XRRCrtcInfo> Crtcs {
 			get{
-				return new External.AccessorImpl<XRRCrtcInfo> (delegate (int id) {
-					                                      return External.XRRGetCrtcInfo (display, presources, id);
+				return new Tools.AccessorImpl<XRRCrtcInfo> (delegate (int id) {
+					                                      return Native.XRRGetCrtcInfo (display, presources, id);
 				                                       }
-				                                       ,External.XRRFreeCrtcInfo
-				                                       ,External.PtrToIntArray (resources.crtcs, resources.ncrtc));
+				                                       ,Native.XRRFreeCrtcInfo
+				                                       ,Tools.PtrToIntArray (resources.crtcs, resources.ncrtc));
 			}
 		}
 		
@@ -391,7 +259,7 @@ namespace XRandR
 		}
 		public IEnumerable<XRRModeInfo> ModesOfOutput(XRROutputInfo output)
 		{
-			foreach(int mode_id in External.PtrToIntArray (output.modes, output.nmode))
+			foreach(int mode_id in Tools.PtrToIntArray (output.modes, output.nmode))
 				yield return GetMode (mode_id);
 		}
 		
@@ -407,11 +275,11 @@ namespace XRandR
 				IntPtr ptr = Marshal.AllocHGlobal (sizeof(int) * outputs.Length);
 				for(int i=0;i<outputs.Length;i++)
 					Marshal.WriteInt32 (ptr, sizeof(int)*i, outputs[i]);
-				External.XRRSetCrtcConfig (display, res, crtc_id, timestamp, x, y, mode_id, rotation, ptr, outputs.Length);
+				Native.XRRSetCrtcConfig (display, res, crtc_id, timestamp, x, y, mode_id, rotation, ptr, outputs.Length);
 			    Marshal.FreeHGlobal (ptr);
 			}
-			catch(External.XErrorException excp){
-				Do.Platform.Log<XRandR.External>.Debug ("Error when calling XRRSetCtrcConfig: 0x{0:x},{1},{2},{3},0x{4:x},{5},[{6}]"
+			catch(Tools.XErrorException excp){
+				Do.Platform.Log<XRandR.Tools>.Debug ("Error when calling XRRSetCtrcConfig: 0x{0:x},{1},{2},{3},0x{4:x},{5},[{6}]"
 				                  ,crtc_id
 				                  ,timestamp
 				                  ,x
@@ -431,7 +299,7 @@ namespace XRandR
 			//  - finding a good CRTC allocation
 			string cmd = string.Format ("xrandr --output 0x{0:x} --mode 0x{1:x}", output_id, mode_id);
 			
-			Do.Platform.Log<XRandR.External>.Debug ("Setting mode using: '{0}'", cmd);
+			Do.Platform.Log<XRandR.Tools>.Debug ("Setting mode using: '{0}'", cmd);
 
 			System.Diagnostics.Process.Start (cmd);
 			/*foreach(XRROutputInfo output in Outputs.doWith(output_id)){
@@ -439,7 +307,7 @@ namespace XRandR
 
 				if (mode_id != 0){
 					if (crtc_id == 0) // if output is switched off, output has no crtc defined, so we use 1st one
-						crtc_id = External.PtrToIntArray(output.crtcs,output.ncrtc)[0];
+						crtc_id = Tools.PtrToIntArray(output.crtcs,output.ncrtc)[0];
 						
 					foreach(XRRCrtcInfo crtc in Crtcs.doWith(crtc_id))
 						safeSetConfig(display,presources,crtc_id,0,crtc.x,crtc.y,mode_id,crtc.rotation,new[]{output_id});
@@ -450,6 +318,7 @@ namespace XRandR
 		}
 	}
 	
+	// for testing purposes
 	class MainClass
 	{
 		public static void PrintModeInfo (XRRModeInfo mode)
@@ -462,10 +331,10 @@ namespace XRandR
 		}
 		public static void Main(string[] args)
 		{
-			External.LogStructure (new XRRScreenResources());
-			External.LogStructure (new XRRCrtcInfo());
-			External.LogStructure (new XRRModeInfo());
-			External.LogStructure (new XRROutputInfo());
+			Tools.LogStructure (new XRRScreenResources());
+			Tools.LogStructure (new XRRCrtcInfo());
+			Tools.LogStructure (new XRRModeInfo());
+			Tools.LogStructure (new XRROutputInfo());
 		}
 	}
 }
