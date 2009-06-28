@@ -19,17 +19,17 @@
  */
 
 using System;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace GNOME {
 
 	class WholeScreenScreenshotItem : ScreenshotItem {
 		public override string Name {
-			get { return Catalog.GetString ("Whole screen"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Whole screen"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Take a screenshot of the entire screen."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Take a screenshot of the entire screen."); }
 		}
 		
 		public override string Icon {

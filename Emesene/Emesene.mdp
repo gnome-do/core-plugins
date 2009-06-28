@@ -1,0 +1,52 @@
+<Project name="Emesene" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="3.5" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Emesene" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Emesene" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="." subtype="Directory" buildaction="Compile" />
+    <File name="src/Emesene.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneAvatarItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneAvatarItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneChangeAvatarAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneChangeNickAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneChangePSMAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneChangeStatusAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneChatAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneContactItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneOpenAvatarHistoryAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneOpenConversationHistoryAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneStatusItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/EmeseneStatusItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/Emesene.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/away.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/brb.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/busy.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/idle.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/invisible.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/lunch.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/offline.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/online.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/statusIcons/phone.png" subtype="Code" buildaction="EmbedAsResource" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="NDesk.DBus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099" />
+    <ProjectReference type="Gac" localcopy="True" refto="NDesk.DBus.GLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.9.0.0, Culture=neutral" />
+  </References>
+</Project>

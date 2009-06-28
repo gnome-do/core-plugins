@@ -21,7 +21,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -53,11 +53,11 @@ namespace Tomboy
 		/// A <see cref="ICollection`1"/>
 		/// </returns>
 		public override string Name {
-			get { return Catalog.GetString ("Tomboy Note Indexer"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Tomboy Notes"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Loads Tomboy notes for searching."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Loads Tomboy notes for searching."); }
 		}
 		
 		public override string Icon {
@@ -65,7 +65,11 @@ namespace Tomboy
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (NoteItem); }
+			get { 
+				yield return typeof (NoteItem); 
+				yield return typeof (IApplicationItem);
+				yield return typeof (TomboyBrowseNotesItem);
+			}
 		}
 
 		/// <summary>
@@ -79,6 +83,21 @@ namespace Tomboy
 		/// </returns>
 		public override IEnumerable<Item> Items {
 			get { return notes; }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			if (IsTomboy (item)) {
+				yield return new TomboyBrowseNotesItem ();
+			} else if (item is TomboyBrowseNotesItem) {
+				foreach (NoteItem note in Items)
+					yield return note;
+			}
+		}
+		
+		bool IsTomboy (Item item) 
+		{
+			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("tomboy"));
 		}
 		
 		/// <summary>

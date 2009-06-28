@@ -25,8 +25,9 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Xml.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Platform.Linux;
@@ -37,28 +38,24 @@ namespace ImageShack
 {
 	public class ImageShackAction : Act, IConfigurable
 	{
-		Dictionary<string, string> image_mime_type_mapping;
-			
-		public ImageShackAction()
+		static readonly Dictionary<string, string> image_mime_type_mapping = new Dictionary<string,string>
 		{
-			image_mime_type_mapping = new Dictionary<string,string>
-			{
-				{".jpg", "image/jpeg"},
-				{".jpeg", "image/jpeg"},
-				{".png", "image/png"}, 
-				{".gif", "image/gif"}, 
-				{".bmp", "image/bmp"}, 
-				{".tif", "image/tiff"}, 
-				{".tiff", "image/tiff"}
-			};
-		}
+			{".jpg", "image/jpeg"},
+			{".jpeg", "image/jpeg"},
+			{".png", "image/png"}, 
+			{".gif", "image/gif"}, 
+			{".bmp", "image/bmp"}, 
+			{".tif", "image/tiff"}, 
+			{".tiff", "image/tiff"}
+		};
+			
 		
 		public override string Name {
-			get { return Catalog.GetString ("Upload to ImageShack"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload to ImageShack"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Uploads the image to ImageShack."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Uploads the image to ImageShack."); }
 		}
 		
 		public override string Icon {
@@ -84,36 +81,25 @@ namespace ImageShack
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{								
-			try {
-				List<Item> imageUrls = new List<Item> ();	
-
-				foreach (Item item in items) {	
-					IFileItem imageFile = item as IFileItem;
-						
-					if (!FileIsValidForUpload (imageFile.Path)) continue;
-					    
-					UploadNotification notification = new UploadNotification(imageFile.Path);
-					Services.Notifications.Notify (notification);
-					
-					string mimeType = image_mime_type_mapping[Path.GetExtension (imageFile.Path)];
-					string url = PostToImageShack (imageFile.Path, mimeType);
-					imageUrls.Add (new TextItem (url));
-				}
+			try {			
+				return items.Cast<IFileItem> ()
+				.Where (imageFile => FileIsValidForUpload (imageFile.Path))
+				.Select (imageFile => new TextItem (PostToImageShack (imageFile.Path)) as Item);
 				
-				return imageUrls;
 			}
 			catch (Exception e) {
-				Console.Error.WriteLine (Catalog.GetString ("ImageShack exception: ") + e.Message);			
+				Log<ImageShackAction>.Error ("Error uploading to ImageShack: {0}", e.Message);
+				Log<ImageShackAction>.Debug (e.StackTrace);				
 				GeneralErrorNotification notification = new GeneralErrorNotification();
 				Services.Notifications.Notify (notification);				
-			}				
+			}	
 			
-			return null;
+			return new List<Item> ();	
 		}		
 			
 		private static bool FileIsValidForUpload (string file)
 		{
-			string fileSizeError = Catalog.GetString ("File size exceeds ImageShack's 1.5MB limit.");
+			string fileSizeError = AddinManager.CurrentLocalizer.GetString ("File size exceeds ImageShack's 1.5MB limit.");
 			
 			FileInfo fi = new FileInfo(file);
 			long fileSize = fi.Length;	
@@ -127,8 +113,13 @@ namespace ImageShack
 			return true;
 		}
 			
-		private static string PostToImageShack (string file, string contentType)
+		private static string PostToImageShack (string file)
 		{		
+			UploadNotification notification = new UploadNotification(file);
+			Services.Notifications.Notify (notification);	
+			
+			string contentType = image_mime_type_mapping[Path.GetExtension (file)];		
+						
 			string boundary = "----------" + DateTime.Now.Ticks.ToString ("x");
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://www.imageshack.us/index.php");
 			request.Method = "POST";
@@ -138,15 +129,21 @@ namespace ImageShack
 				request.CookieContainer = new CookieContainer ();
 				Cookie imageshackCookie = new Cookie ("myimages", ImageShackConfig.RegistrationCode, "/", ".imageshack.us");
 				request.CookieContainer.Add (imageshackCookie);
-			}
-
+			}		
             StringBuilder sb = new StringBuilder ();
+			sb.Append ("--");
+            sb.Append (boundary);
+			sb.Append ("\r\n");
+			sb.Append("Content-Disposition: form-data; name=\"xml\"");
+			sb.Append ("\r\n");
+			sb.Append ("\r\n");
+			sb.Append ("true");		
+			sb.Append ("\r\n");
             sb.Append ("--");
             sb.Append (boundary);
             sb.Append ("\r\n");
-            sb.Append ("Content-Disposition: form-data; name=\"");
-            sb.Append ("fileupload");
-            sb.Append ("\"; filename=\"");
+            sb.Append ("Content-Disposition: form-data; name=\"fileupload\";");
+            sb.Append ("filename=\"");
             sb.Append (Path.GetFileName(file));
             sb.Append ("\"");
             sb.Append ("\r\n");
@@ -187,15 +184,9 @@ namespace ImageShack
 			
 		private static string GetUrlFromResponseText (string responseText) 
 		{
-			Regex directUrlPattern = new Regex ("<input type=\"text\" onClick=\"track\\('direct'\\).*? value=\"(.*?)\"/>"); 
-			Match directUrl = directUrlPattern.Match (responseText);
-				
-			string url = directUrl.Groups[1].Value;
-				
-			if (url == string.Empty) {
-				throw new Exception (Catalog.GetString ("Parsed url was empty. ImageShack has probably changed its format."));
-			}
-				
+			XDocument responseXml = XDocument.Parse (responseText);
+			string url = responseXml.Element("links").Element("image_link").Value;
+			
 			return url;
 		}
 		
@@ -205,5 +196,3 @@ namespace ImageShack
 		}
 	}
 }
-
-

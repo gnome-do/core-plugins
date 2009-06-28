@@ -23,7 +23,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
@@ -31,8 +31,8 @@ using Do.Universe.Common;
 namespace Text {	
 	public class AppendTextAction : Act {
 
-		public override string Name { get { return Catalog.GetString ("Append to..."); } }
-		public override string Description { get { return Catalog.GetString ("Appends text to a selected file."); } }
+		public override string Name { get { return AddinManager.CurrentLocalizer.GetString ("Append to..."); } }
+		public override string Description { get { return AddinManager.CurrentLocalizer.GetString ("Appends text to a selected file."); } }
 		public override string Icon { get { return "text-editor"; } }
 
 		public override IEnumerable<Type> SupportedItemTypes {

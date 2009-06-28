@@ -10,7 +10,7 @@ namespace RtmNet
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public ApiKeyRequiredException() : base("API Key is required for all method calls")
+		public ApiKeyRequiredException () : base ("API Key is required for all method calls")
 		{
 		}
 	}

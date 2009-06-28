@@ -23,7 +23,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -39,11 +39,11 @@ namespace Do.Rhythmbox
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Play"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Play"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Play music in Rhythmbox."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Play music in Rhythmbox."); }
 		}
 
 		public override string Icon {

@@ -1,4 +1,4 @@
-<Combine releaseversion="0.4.9.9" name="DoPlugins" fileversion="2.0" outputpath="build/bin/">
+<Combine fileversion="2.0" outputpath="build/bin/" name="DoPlugins" releaseversion="0.4.9.9">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
@@ -64,11 +64,16 @@
       <Entry build="True" name="GoogleContacts" configuration="Debug" />
       <Entry build="True" name="GoogleSearch" configuration="Debug" />
       <Entry build="True" name="Stock Quote" configuration="Debug" />
+      <Entry build="True" name="RequestTracker" configuration="Debug" />
       <Entry build="True" name="TerminalServerClient" configuration="Debug" />
       <Entry build="True" name="xmms2" configuration="Debug" />
       <Entry build="True" name="TinyUrl" configuration="Debug" />
       <Entry build="True" name="Tracker" configuration="Debug" />
       <Entry build="True" name="XRandR" configuration="Debug" />
+      <Entry build="True" name="YouTube" configuration="Debug" />
+      <Entry build="True" name="Emesene" configuration="Debug" />
+      <Entry build="True" name="Dropbox" configuration="Debug" />
+      <Entry build="True" name="RemindMe" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -134,11 +139,17 @@
       <Entry build="True" name="GoogleContacts" configuration="Release" />
       <Entry build="True" name="GoogleSearch" configuration="Release" />
       <Entry build="True" name="Stock Quote" configuration="Release" />
+      <Entry build="True" name="RequestTracker" configuration="Release" />
       <Entry build="True" name="TerminalServerClient" configuration="Release" />
       <Entry build="True" name="xmms2" configuration="Release" />
       <Entry build="True" name="TinyUrl" configuration="Release" />
       <Entry build="True" name="Tracker" configuration="Release" />
+
       <Entry build="True" name="XRandR" configuration="Release" />
+      <Entry build="True" name="YouTube" configuration="Release" />
+      <Entry build="True" name="Emesene" configuration="Release" />
+      <Entry build="True" name="Dropbox" configuration="Release" />
+      <Entry build="True" name="RemindMe" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -205,11 +216,16 @@
     <Execute type="None" entry="GoogleContacts" />
     <Execute type="None" entry="GoogleSearch" />
     <Execute type="None" entry="Stock Quote" />
+    <Execute type="None" entry="RequestTracker" />
     <Execute type="None" entry="TerminalServerClient" />
     <Execute type="None" entry="xmms2" />
     <Execute type="None" entry="TinyUrl" />
     <Execute type="None" entry="Tracker" />
     <Execute type="None" entry="XRandR" />
+    <Execute type="None" entry="YouTube" />
+    <Execute type="None" entry="Emesene" />
+    <Execute type="None" entry="Dropbox" />
+    <Execute type="None" entry="RemindMe" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -276,10 +292,15 @@
     <Entry filename="GoogleContacts/GMailContacts.mdp" />
     <Entry filename="GoogleSearch/GoogleSearch.mdp" />
     <Entry filename="StockQuote/Stock Quote.mdp" />
+    <Entry filename="RequestTracker/RequestTracker.mdp" />
     <Entry filename="TerminalServerClient/TerminalServerClient.mdp" />
     <Entry filename="Xmms2/xmms2.mdp" />
     <Entry filename="TinyUrl/TinyUrl.mdp" />
     <Entry filename="Tracker/Tracker.mdp" />
     <Entry filename="XRandR/XRandR.mdp" />
+    <Entry filename="YouTube/YouTube.mdp" />
+    <Entry filename="Emesene/Emesene.mdp" />
+    <Entry filename="Dropbox/Dropbox.mdp" />
+    <Entry filename="RemindMe/RemindMe.mdp" />
   </Entries>
 </Combine>

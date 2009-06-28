@@ -1,4 +1,6 @@
+if HAVE_GMAIL
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=GoogleContacts
 
@@ -10,7 +12,8 @@ FILES = \
 	src/GMailContactDetailItem.cs \
 	src/GMailContactItemSource.cs \
 	src/GMail.cs \
-	src/Preferences.cs
+	src/Preferences.cs \
+	src/RecentConversationsAction.cs
 
 RESOURCES = \
 	Resources/GoogleContacts.addin.xml \
@@ -20,12 +23,10 @@ RESOURCES = \
 	Resources/icons/phone.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Security \
 	$(GTK_SHARP_20_LIBS) \
-	$(GDATA_SHARP_ACL_LIBS) \
 	$(GDATA_SHARP_CONTACTS_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \
 	$(DO_UNIVERSE_LIBS)

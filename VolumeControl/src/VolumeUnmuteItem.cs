@@ -22,27 +22,26 @@
 using System;
 
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace VolumeControl
 {
-	public class VolumeUnmuteItem : Item, IRunnableItem
+	public class VolumeUnmuteItem : AbstractVolumeItem
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Unmute Volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmute Volume"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Unmute system volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmute system volume"); }
 		}
 		
 		public override string Icon {
 			get { return "audio-volume-medium"; }
 		}
-		
-		public void Run ()
-		{
-			System.Diagnostics.Process.Start ("amixer set Master 50% > /dev/null");
+
+		protected override string VolumeArgument {
+			get { return "50%"; }
 		}
 	}
 }

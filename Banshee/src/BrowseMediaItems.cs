@@ -21,7 +21,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -53,8 +53,8 @@ namespace Banshee
 	public class BrowseArtistMusicItem : BrowseMediaItem
 	{
 		public BrowseArtistMusicItem () :
-			base (Catalog.GetString ("Browse Artists"),
-				Catalog.GetString ("Browse Music by Artist"))
+			base (AddinManager.CurrentLocalizer.GetString ("Browse Artists"),
+				AddinManager.CurrentLocalizer.GetString ("Browse Music by Artist"))
 		{
 		}
 			
@@ -66,24 +66,24 @@ namespace Banshee
 	public class BrowseAlbumsMusicItem : BrowseMediaItem
 	{
 		public BrowseAlbumsMusicItem () :
-			base (Catalog.GetString ("Browse Albums"), 
-				Catalog.GetString ("Browse Music by Album"))
+			base (AddinManager.CurrentLocalizer.GetString ("Browse Albums"), 
+				AddinManager.CurrentLocalizer.GetString ("Browse Music by Album"))
 		{
 		}
 	}
 	
 	public class BrowsePublisherPodcastItem : BrowseMediaItem
 	{
-		public BrowsePublisherPodcastItem () : base (Catalog.GetString ("Browse Podcasts"),
-			Catalog.GetString ("Browse Podcasts by Publisher"))
+		public BrowsePublisherPodcastItem () : base (AddinManager.CurrentLocalizer.GetString ("Browse Podcasts"),
+			AddinManager.CurrentLocalizer.GetString ("Browse Podcasts by Publisher"))
 		{
 		}
 	}
 	
 	public class BrowseVideoItem : BrowseMediaItem
 	{
-		public BrowseVideoItem () : base (Catalog.GetString ("Browse Videos"),
-			Catalog.GetString ("Browse All Videos"))
+		public BrowseVideoItem () : base (AddinManager.CurrentLocalizer.GetString ("Browse Videos"),
+			AddinManager.CurrentLocalizer.GetString ("Browse All Videos"))
 		{
 		}
 	}

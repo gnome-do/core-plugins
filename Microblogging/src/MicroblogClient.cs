@@ -25,7 +25,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Twitterizer.Framework;
 
@@ -39,15 +39,15 @@ namespace Microblogging
 	{
 		#region Class constants, error messages
 		
-		readonly string DownloadFailedMsg = Catalog.GetString ("Failed to fetch file from {0}");
-		readonly string GenericErrorMsg = Catalog.GetString ("Twitter encountered an error in {0}. {1}");
+		readonly string DownloadFailedMsg = AddinManager.CurrentLocalizer.GetString ("Failed to fetch file from {0}");
+		readonly string GenericErrorMsg = AddinManager.CurrentLocalizer.GetString ("Twitter encountered an error in {0}. {1}");
 		
-		readonly string FailedPostMsg = Catalog.GetString ("Unable to post tweet. Check your login settings. If you "
+		readonly string FailedPostMsg = AddinManager.CurrentLocalizer.GetString ("Unable to post tweet. Check your login settings. If you "
 			+ "are behind a proxy make sure that the settings in /system/http_proxy are correct.");
 
-		const int UpdateTimelineTimeout = 30 * 1000;
-		const int UpdateContactsTimeout = 10 * 60 * 1000;
-		const int CheckForMessagesTimeout = 5 * 60 * 1000;
+		const int UpdateTimelineTimeout = 60 * 1000; // every 60 seconds
+		const int UpdateContactsTimeout = 30 * 1000 * 60; // every 30 minutes
+		const int CheckForMessagesTimeout = 5 * 1000 * 60; // every 5 minutes
 
 		#endregion
 
@@ -57,18 +57,26 @@ namespace Microblogging
 
 		Timer [] timers;
 
-		readonly string PhotoDirectory;
+		public IEnumerable<FriendItem> Contacts { get; private set; }
+		
+		static MicroblogClient ()
+		{
+			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
+		}
 
-		public IEnumerable<Item> Contacts { get; private set; }
+
+		public static bool CredentialsValid (string username, string password)
+		{
+			return Twitter.VerifyCredentials (username, password);
+		}
 		
 		public MicroblogClient (string username, string password, Service service)
 		{
 			timers = new Timer [3];
 			this.username = username;
-			Contacts = Enumerable.Empty<Item> ();
-			blog = new Twitter (username, password, service);
+			Contacts = Enumerable.Empty<FriendItem> ();
+			blog = new Twitter (username, password, service, "Do");
 			timeline_last_updated = messages_last_updated = DateTime.UtcNow;
-			PhotoDirectory = new [] { Services.Paths.UserDataDirectory, "Microblogging", "photos"}.Aggregate (Path.Combine);
 
 			timers [0] = new Timer (UpdateContacts, null, 1 * 1000, UpdateContactsTimeout);
 			timers [1] = new Timer (UpdateTimeline, null, 60 *1000, UpdateTimelineTimeout);
@@ -81,6 +89,8 @@ namespace Microblogging
 		public static string ContactKeyName {
 			get { return "microblog.screenname"; }
 		}
+		
+		public static readonly string PhotoDirectory;
 
 		/// <summary>
 		/// Update your miroblogging status
@@ -90,48 +100,51 @@ namespace Microblogging
 		/// </param>
 		public void UpdateStatus (string status)
 		{
+			UpdateStatus (status, null);
+		}
+		
+		public void UpdateStatus (string status, Nullable<long> inReplyToID)
+		{
 			string errorMessage = "";
 			try {
-				blog.Status.Update (status);
-				
+				blog.Status.Update (status, inReplyToID);
 			} catch (TwitterizerException e) {
 				errorMessage = FailedPostMsg;
 				Log<MicroblogClient>.Debug (GenericErrorMsg, "Post", e.Message);
 			}
 
 			OnStatusUpdated (status, errorMessage);
-		}
+		}	
 
 		void UpdateContacts (object o)
 		{
-			Log.Debug ("Microblogging: Updating contacts");
-			
-			ContactItem newContact;
-			List<Item> newContacts;
+			FriendItem newContact;
+			MicroblogStatus status;
+			List<FriendItem> newContacts;
 			TwitterUserCollection friends;
 			
 			try {
-				newContacts = new List<Item> ();
+				newContacts = new List<FriendItem> ();
 				friends = blog.User.Friends ();
 			} catch (TwitterizerException e) {
+				Log.Error("{0} {1}", e.RequestData.ResponseException.Message, e.RequestData.ResponseException.StackTrace);
 				Log<MicroblogClient>.Debug (GenericErrorMsg, "UpdateContacts", e.Message);
 				return;
 			}
-				
+			
 			foreach (TwitterUser friend in friends) {
-				newContact = ContactItem.Create (friend.ScreenName);
-				newContact[ContactKeyName] = friend.ScreenName;
-				
-				if (File.Exists (Path.Combine (PhotoDirectory, "" + friend.ID)))
-					newContact["photo"] = Path.Combine (PhotoDirectory,  "" + friend.ID);
-				else
-					DownloadBuddyIcon (friend.ProfileImageUri, friend.ID);
+				if (friend.Status != null) {
+					status = new MicroblogStatus (friend.Status.ID, friend.Status.Text, friend.ScreenName, friend.Status.Created);
+					newContact = new FriendItem (friend.ID, friend.ScreenName, status);
+				} else {
+					newContact = new FriendItem (friend.ID, friend.ScreenName);
+				}			
 				
 				newContacts.Add (newContact);
 			}
-
+			
 			Contacts = newContacts;
-			Log.Debug ("Microblogging: Found {0} contacts", Contacts.Count ());
+			Log<MicroblogClient>.Debug ("Found {0} contacts", Contacts.Count ());
 			return;
 		}
 
@@ -140,19 +153,24 @@ namespace Microblogging
 			string icon = "";
 			TwitterStatus tweet;
 			TwitterParameters parameters;
-
+			
 			try {
 				// get the most recent update
 				parameters = new TwitterParameters ();
 				parameters.Add (TwitterParameterNames.Count, 1);
 				tweet = blog.Status.FriendsTimeline (parameters) [0];
 
-				if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= timeline_last_updated) return;
+				if (tweet.TwitterUser.ScreenName.Equals (username) || tweet.Created <= timeline_last_updated)
+					return;
 			
-				icon = FindIconForUser (tweet.TwitterUser.ProfileImageUri, tweet.TwitterUser.ID);
+				icon = FindIconForUser (tweet.TwitterUser);
 				timeline_last_updated = tweet.Created;
-			
+				
 				OnTimelineUpdated (tweet.TwitterUser.ScreenName, tweet.Text, icon);
+
+				Contacts.Where (contact => contact.Id == tweet.TwitterUser.ID)
+					.First ()
+					.AddStatus (new MicroblogStatus (tweet.ID, tweet.Text, tweet.TwitterUser.ScreenName, tweet.Created));
 			} catch (Exception e) {
 				Log<MicroblogClient>.Debug (GenericErrorMsg, "UpdateTimeline", e.Message);
 			}
@@ -172,8 +190,8 @@ namespace Microblogging
 				
 				if (message.Created <= messages_last_updated) return;
 
-				icon = FindIconForUser (message.TwitterUser.ProfileImageUri, message.TwitterUser.ID);
 				messages_last_updated = message.Created;
+				icon = FindIconForUser (message.TwitterUser);
 
 				OnMessageFound (message.TwitterUser.ScreenName, message.Text, icon);
 			} catch (Exception e) {
@@ -181,30 +199,32 @@ namespace Microblogging
 			}
 		}
 		
-		string FindIconForUser (Uri profileUri, int userId)
+		string FindIconForUser (TwitterUser user)
 		{
 			string icon = "";			
 			
-			if (File.Exists (Path.Combine (PhotoDirectory, "" + userId)))
-				icon = Path.Combine (PhotoDirectory, "" + userId);
+			if (File.Exists (Path.Combine (PhotoDirectory, "" + user.ID)))
+				icon = Path.Combine (PhotoDirectory, "" + user.ID);
 			else
-				DownloadBuddyIcon (profileUri, userId);
+				DownloadBuddyIcon (user);
 
 			return icon;
 		}
 
-		void DownloadBuddyIcon (Uri imageUri, int userId)
+		void DownloadBuddyIcon (TwitterUser user)
 		{
 			string imageDestination;
-			imageDestination = Path.Combine (PhotoDirectory, "" + userId);
+			imageDestination = Path.Combine (PhotoDirectory, "" + user.ID);
+			
+			if (File.Exists (imageDestination)) return;
 			if (!Directory.Exists (PhotoDirectory)) Directory.CreateDirectory (PhotoDirectory);
 			
 			using (WebClient client = new WebClient ()) 
 			{
 				try {
-					client.DownloadFile (imageUri.AbsoluteUri, imageDestination);
+					client.DownloadFile (user.ProfileImageUri.AbsoluteUri, imageDestination);
 				} catch (Exception e) {
-					Log.Error (string.Format (DownloadFailedMsg, imageUri.AbsoluteUri), e.Message);
+					Log.Error (string.Format (DownloadFailedMsg, user.ProfileImageUri.AbsoluteUri), e.Message);
 					Log.Debug (e.StackTrace);
 				}
 			}
@@ -227,10 +247,10 @@ namespace Microblogging
 			if (MessageFound != null)
 				Gtk.Application.Invoke ((o, e) => MessageFound (this, new TimelineUpdatedEventArgs (screenname, status, icon)));
 		}
-		
-		public event StatusUpdatedDelegate StatusUpdated;
-		public event TimelineUpdatedDelegate TimelineUpdated;
+
+  		public event StatusUpdatedDelegate StatusUpdated;
 		public event TimelineUpdatedDelegate MessageFound;
+		public event TimelineUpdatedDelegate TimelineUpdated;
 		
 		public delegate void StatusUpdatedDelegate (object sender, StatusUpdatedEventArgs args);
 		public delegate void TimelineUpdatedDelegate (object sender, TimelineUpdatedEventArgs args);

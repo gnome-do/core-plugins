@@ -20,10 +20,10 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace XRandR
 {
@@ -36,24 +36,24 @@ namespace XRandR
 	    
 	    public int	    crtc_id;
 
-	    public string	    name;
+	    public string	name;
 	    public int		nameLen;
 
 		public IntPtr   mm_width;
 	    public IntPtr   mm_height;
 
-		public short	    connection;
-	    public short   subpixel_order;
+		public short	connection;
+	    public short    subpixel_order;
 
-		public int		    ncrtc;
-	    public IntPtr	    crtcs;
+		public int		ncrtc;
+	    public IntPtr	crtcs;
 
-		public int		    nclone;
-		public IntPtr   	clones;
+		public int		nclone;
+		public IntPtr   clones;
 	    
-		public int		    nmode;
-	    public int		    npreferred;
-	    public IntPtr	    modes;
+		public int		nmode;
+	    public int		npreferred;
+	    public IntPtr	modes;
 	};
 
 	[StructLayout (LayoutKind.Sequential)]
@@ -462,23 +462,10 @@ namespace XRandR
 		}
 		public static void Main(string[] args)
 		{
-			External.LogStructure(new XRRScreenResources());
-			External.LogStructure(new XRRCrtcInfo());
-			External.LogStructure(new XRRModeInfo());
-			External.LogStructure(new XRROutputInfo());
-			/*foreach(ScreenResources res in External.ScreenResources()){
-				foreach(XRRModeInfo mode in res.Modes())
-					printModeInfo(mode);
-				
-				res.Outputs.AllWithId(printOutputInfo);
-				
-				foreach(XRROutputInfo output in res.Outputs.All){
-					Console.WriteLine("Modes for "+output.name);
-					foreach (XRRModeInfo mode in res.ModesOfOutput(output))
-						printModeInfo(mode);
-				}
-				res.setMode(0x3c,0x5d);
-			};*/
+			External.LogStructure (new XRRScreenResources());
+			External.LogStructure (new XRRCrtcInfo());
+			External.LogStructure (new XRRModeInfo());
+			External.LogStructure (new XRROutputInfo());
 		}
 	}
 }

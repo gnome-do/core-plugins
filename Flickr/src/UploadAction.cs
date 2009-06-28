@@ -24,29 +24,24 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
 using Do.Platform.Linux;
 
-using FlickrNet;
-
 namespace Flickr
 {	
 	public class UploadAction : Act, IConfigurable
-	{
-		static object count_lock = new object ();
-		static int upload_num;
-		
-		const string ImageExtensions = ".jpg .jpef .gif .png .tiff";
-		
+	{			
+		const string ImageExtensions = ".jpg .jpeg .gif .png .tiff";
+	
 		public override string Name {
-			get { return Catalog.GetString ("Upload photo"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload photo"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Upload one or more photos to Flickr"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload one or more photos to Flickr"); }
 		}
 		
 		/*
@@ -59,13 +54,13 @@ namespace Flickr
 		
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { 
-				return new Type [] { typeof (IFileItem) };
+				yield return typeof (IFileItem);
 			}
 		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get {
-				return new Type [] { typeof (ITextItem) };
+				yield return typeof (ITextItem);
 			}
 		}
 		
@@ -82,6 +77,8 @@ namespace Flickr
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
 			string tags;
+			List<IFileItem> uploads;
+				
 			tags = AccountConfig.Tags + " ";
 			
 			if (modItems.Any ()) {
@@ -90,55 +87,46 @@ namespace Flickr
 					tags += tag.Text + " ";
 				}
 			}
-			
+						
 			//Build a list of all of the files to upload.
-			List<IFileItem> uploads = new List<IFileItem> ();
+			uploads = new List<IFileItem> ();
+			
 			foreach (Item item in items) {
 				IFileItem file = item as IFileItem;
+				
+				if (file == null)
+					continue;
+				
 				if (Directory.Exists (file.Path)) {
 					DirectoryInfo dinfo = new DirectoryInfo (file.Path);
-					FileInfo [] finfo = dinfo.GetFiles ();
-					foreach (FileInfo f in finfo) {
+					foreach (FileInfo f in dinfo.GetFiles ()) {
 						if (FileIsPicture (f.FullName))
 							uploads.Add (Services.UniverseFactory.NewFileItem (f.FullName));
 					}
 				} else {
 					uploads.Add (file);
 				}
-				upload_num = 1;
-				foreach (IFileItem photo in uploads) {
-					AsyncUploadToFlickr (photo, tags, uploads.Count);
-				}
 			}
-			
-			return null;
-		}
 		
-		public static void AsyncUploadToFlickr (IFileItem photo, string tags, int num)
-		{			
-			FlickrNet.Flickr flickr = new FlickrNet.Flickr (AccountConfig.ApiKey,
-				AccountConfig.ApiSecret, AccountConfig.AuthToken);
-				
-			new Thread ((ThreadStart) delegate {
+			Services.Application.RunOnThread ( () => {
+				/* Mono 2.4 bug hack
+				 * This can't use using () due to some crazy-wierd scoping problem.
+				 * See https://bugzilla.novell.com/show_bug.cgi?id=516676 for details.
+				 * 
+				 */
+				IEnumerable<IFileItem> temp = uploads;
+				UploadPool uploadQueue = new UploadPool (tags);
 				try {
-					int thisUpload;
+					foreach (IFileItem photo in uploads)
+						uploadQueue.EnqueueUpload (photo);
 					
-					flickr.UploadPicture (photo.Path, photo.Name, "", tags,
-						AccountConfig.IsPublic, AccountConfig.FamilyAllowed,
-						AccountConfig.FriendsAllowed);
-					
-					lock (count_lock) {
-						thisUpload = upload_num;
-						upload_num++;
-					}
-					
-					Services.Notifications.Notify ("Flickr",
-						String.Format ("Uploaded {0}. ({1} of {2})", photo.Name,
-						thisUpload, num), photo.Path); 
-				} catch (FlickrNet.FlickrException e) {
-					Console.Error.WriteLine (e.Message);
+					uploadQueue.BeginUploads ();
+				} finally {
+					uploadQueue.Dispose ();
 				}
-			}).Start ();
+			});
+
+			yield break;
 		}
 		
 		public Gtk.Bin GetConfiguration ()

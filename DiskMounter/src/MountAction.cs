@@ -19,21 +19,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Gnome.Vfs;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
+using Do.Platform;
 
 namespace DiskMounter
 {
 	public class MountAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Mount"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Mount"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Mount volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Mount volume"); }
 		}
 		
 		public override string Icon {
@@ -41,11 +41,7 @@ namespace DiskMounter
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (DriveItem),
-				};
-			}
+			get { yield return typeof (DriveItem); }
 		}
                 
 		public override bool SupportsItem (Item item) 
@@ -60,8 +56,10 @@ namespace DiskMounter
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			(items.First () as DriveItem).Mount ();
-			return null;
+			Services.Application.RunOnThread (() => {
+				(items.First () as DriveItem).Mount ();
+			});
+			yield break;
 		}
 	}
 }

@@ -20,32 +20,36 @@
  */
 
 using System;
-using Do.Universe;
+
 using Mono.Unix;
+
+using Do.Universe;
 
 namespace XRandR
 {
 	public class OutputModeItem:Item,IRunnableItem
 	{
-		int output_id;
 		string name;
-		int mode_id;
+		int output_id, mode_id;
+	
 		public OutputModeItem(int output_id, XRRModeInfo mode)
 		{
 			this.output_id = output_id;
-			this.name = mode.name + " "+mode.dotClock.ToInt64 ()/mode.vTotal/mode.hTotal + "Hz";
 			this.mode_id = mode.id.ToInt32 ();
+			this.name = mode.name + " " + mode.dotClock.ToInt64 () / mode.vTotal / mode.hTotal + "Hz";
 		}
+		
 		public OutputModeItem(int output_id, int mode_id, string name)
 		{
-			this.output_id = output_id;
-			this.mode_id = mode_id;
 			this.name = name;
+			this.mode_id = mode_id;
+			this.output_id = output_id;
 		}			
 		
 		public override string Name {
 			get { return name; }
 		}
+		
 		public override string Description {
 			get { return Catalog.GetString ("Set your resolution"); }
 		}
@@ -56,7 +60,7 @@ namespace XRandR
 		
 		public void Run () 
 		{
-			foreach(ScreenResources res in External.ScreenResources ())
+			foreach (ScreenResources res in External.ScreenResources ())
 				res.setMode (output_id, mode_id);
 		}
 	}

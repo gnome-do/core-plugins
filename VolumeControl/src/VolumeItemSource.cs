@@ -21,7 +21,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace VolumeControl
@@ -36,11 +36,11 @@ namespace VolumeControl
 		}
 			
 		public override string Name {
-			get { return Catalog.GetString ("Volume Actions"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Volume Actions"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Adjust your system volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Adjust your system volume"); }
 		}
 		
 		public override string Icon {
@@ -50,6 +50,7 @@ namespace VolumeControl
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { return new Type [] {
 				typeof (VolumeDownItem),
+				typeof (VolumeMaximizeItem),
 				typeof (VolumeMuteItem),
 				typeof (VolumeUnmuteItem),
 				typeof (VolumeUpItem), };
@@ -71,6 +72,7 @@ namespace VolumeControl
 		private Item [] VolumeItems {
 			get { return new Item [] {
 				new VolumeDownItem (),
+				new VolumeMaximizeItem(),
 				new VolumeMuteItem (),
 				new VolumeUnmuteItem (),
 				new VolumeUpItem (), };

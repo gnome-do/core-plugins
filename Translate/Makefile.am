@@ -11,7 +11,6 @@ FILES = \
 	src/Provider/TranslateProviderFactory.cs \
 	src/TranslateAction.cs \
 	src/UI/ConfigUI.cs \
-	src/UI/LanguageNode.cs \
 	src/TranslateEngine.cs
 
 RESOURCES = \
@@ -33,7 +32,6 @@ RESOURCES = \
 	Resources/icons/french.png \
 	Resources/icons/german.png \
 	Resources/icons/globe.png \
-	Resources/icons/google.ico \
 	Resources/icons/google.png \
 	Resources/icons/greek.png \
 	Resources/icons/hebrew.png \
@@ -55,10 +53,17 @@ RESOURCES = \
 	Resources/icons/spanish.png \
  	Resources/icons/swedish.png \
 	Resources/icons/ukranian.png \
-	Resources/icons/vietnamese.png 
+	Resources/icons/vietnamese.png  \
+	Resources/icons/albanian.png \
+	Resources/icons/estonian.png \
+	Resources/icons/galician.png \
+	Resources/icons/hungarian.png \
+	Resources/icons/maltese.png \
+	Resources/icons/thai.png \
+	Resources/icons/turkish.png
+
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

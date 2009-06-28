@@ -24,7 +24,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -33,7 +33,7 @@ namespace Microblogging
 {
 	public static class Microblog
 	{
-		static readonly string MissingCredentialsMsg = Catalog.GetString ("Missing login credentials. Please set login "
+		static readonly string MissingCredentialsMsg = AddinManager.CurrentLocalizer.GetString ("Missing login credentials. Please set login "
 			+ "information in plugin configuration.");
 		
 		static MicroblogClient client;
@@ -47,28 +47,28 @@ namespace Microblogging
 			Configuration.ServiceChanged += ServiceChanged;
 		}
 
-		public static bool Connect (string username, string password)
+		public static void Connect (string username, string password)
 		{
 			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
 				Log.Error (MissingCredentialsMsg);
-				return false;
+				return;
 			}
 			
 			client = new MicroblogClient (username, password, prefs.ActiveService);
 			client.StatusUpdated += OnStatusUpdated;
-			client.TimelineUpdated += OnTimelineUpdated;
 			client.MessageFound += DirectMessageFound;
-			
-			return true;
+			client.TimelineUpdated += OnTimelineUpdated;
 		}
 			
-		public static IEnumerable<Item> Friends {
+		public static IEnumerable<FriendItem> Friends {
 			get { return client.Contacts; }
 		}
 
 		public static void UpdateStatus (object status)
 		{
-			client.UpdateStatus (status.ToString ());
+			MicroblogStatusReply reply = status as MicroblogStatusReply;
+			if (reply != null)
+				client.UpdateStatus (reply.Status, reply.InReplyToId);
 		}
 		
 		internal static MicroblogPreferences Preferences {
@@ -86,12 +86,14 @@ namespace Microblogging
 
 		static void OnTimelineUpdated (object sender, TimelineUpdatedEventArgs args)
 		{
+			if (!Preferences.ShowNotifications) return;
 			notifications.Notify (new TimelineNotification (args.Screenname, args.Status, args.Icon));
 		}
 
 		static void DirectMessageFound (object sender, TimelineUpdatedEventArgs args)
 		{
-			notifications.Notify (new DirectMessageNotification (args.Screenname, args.Screenname, args.Icon));
+			if (!Preferences.ShowDirectMessages) return;
+			notifications.Notify (new DirectMessageNotification (args.Screenname, args.Status, args.Icon));
 		}
 		
 		static void ServiceChanged (object sender, EventArgs args)

@@ -19,7 +19,7 @@
  */
 using System;
 using System.Threading;
-using Mono.Unix;
+using Mono.Addins;
 
 using Gtk;
 using FlickrNet;
@@ -88,7 +88,7 @@ namespace Flickr
 			Frob = flickr.AuthGetFrob ();
 			Services.Environment.OpenUrl (flickr.AuthCalcUrl (Frob, AuthLevel.Write));
 			Widget image = auth_btn.Image;
-			auth_btn.Label = Catalog.GetString ("Click to compete authorization");
+			auth_btn.Label = AddinManager.CurrentLocalizer.GetString ("Click to compete authorization");
 			auth_btn.Image = image; 
 			auth_btn.Clicked -= new EventHandler (OnAuthBtnClicked);
 			auth_btn.Clicked += new EventHandler (OnCompleteBtnClicked);
@@ -109,7 +109,7 @@ namespace Flickr
 		
 		private void SetBtnStateComplete ()
 		{
-			status_lbl.Text = String.Format (Catalog.GetString ("Thank you {0} "
+			status_lbl.Text = String.Format (AddinManager.CurrentLocalizer.GetString ("Thank you {0} "
 				+ "for allowing Do access to Flickr."), Username);
 		  	auth_btn.Label = "Sign in as a different user";
 		  	auth_btn.Clicked -= new EventHandler (OnCompleteBtnClicked);

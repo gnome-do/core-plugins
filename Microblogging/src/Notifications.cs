@@ -21,7 +21,7 @@
 using System;
 using System.Threading;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 
@@ -37,7 +37,7 @@ namespace Microblogging
 
 	public class DirectMessageNotification : Notification
 	{
-		readonly string NewMessageFormat = Catalog.GetString ("New direct message from {0}");
+		readonly string NewMessageFormat = AddinManager.CurrentLocalizer.GetString ("New direct message from {0}");
 
 		string user;
 
@@ -54,10 +54,10 @@ namespace Microblogging
 
 	public class StatusUpdatedNotification : Notification
 	{
-		readonly string FailedPostTitle = Catalog.GetString ("Post failed");
-		readonly string SuccessfulPostTitle = Catalog.GetString ("Post Successful");
-		readonly string FailFormat = Catalog.GetString ("Failed to post '{0}' to {1}");
-		readonly string SuccessFormat = Catalog.GetString ("'{0}' sucessfully posted to {1}");
+		readonly string FailedPostTitle = AddinManager.CurrentLocalizer.GetString ("Post failed");
+		readonly string SuccessfulPostTitle = AddinManager.CurrentLocalizer.GetString ("Post Successful");
+		readonly string FailFormat = AddinManager.CurrentLocalizer.GetString ("Failed to post '{0}' to {1}");
+		readonly string SuccessFormat = AddinManager.CurrentLocalizer.GetString ("'{0}' successfully posted to {1}");
 
 		bool success;
 		string status;

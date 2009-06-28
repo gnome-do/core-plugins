@@ -21,32 +21,37 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Wnck;
 
+using Mono.Addins;
+
 using Do.Universe;
+using Do.Interface.Wink;
 
 namespace WindowManager
 {	
 	public class WindowItem : Item, IWindowItem
 	{
-		Wnck.Window window;
+		List<Wnck.Window> windows;
 		string icon;
 		
 		public override string Name {
 			get {
-				return window.Name;
+				return windows.First ().Name;
 			}
 		}
 
 		public override string Description {
 			get {
-				return window.Name;
+				return windows.First ().Name;
 			}
 		}
 		
-		public Wnck.Window Window {
+		public IEnumerable<Wnck.Window> Windows {
 			get {
-				return window;
+				return windows;
 			}
 		}
 
@@ -58,40 +63,15 @@ namespace WindowManager
 		
 		public WindowItem(Window w, string icon)
 		{
-			this.window = w;
 			this.icon = icon;
+			windows = new List<Window> ();
+			windows.Add (w);
 		}
 		
-	}
-	
-	public class ScreenItem : Item, IScreenItem
-	{
-		string name, description, icon;
-		
-		public override string Name {
-			get {
-				return name;
-			}
-		}
-
-		public override string Description {
-			get {
-				return description;
-			}
-		}
-
-		public override string Icon {
-			get {
-				return icon;
-			}
-		}
-
-		
-		public ScreenItem (string name, string description, string icon) 
+		public WindowItem(IEnumerable<Window> w, string icon)
 		{
-			this.name = name;
 			this.icon = icon;
-			this.description = description;
+			windows = new List<Window> (w);
 		}
 	}
 }

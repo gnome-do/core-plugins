@@ -56,7 +56,7 @@ namespace Do.Addins.xmms2{
 			return true;
 		}
 		public override IEnumerable<Item> DynamicModifierItemsForItem (Item item){
-			return null;
+			yield break;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems){
@@ -86,7 +86,7 @@ namespace Do.Addins.xmms2{
 				}
 
 			}).Start ();
-			return null;
+			yield break;
 		}
 
 	}

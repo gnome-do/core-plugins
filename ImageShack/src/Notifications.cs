@@ -20,7 +20,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 
@@ -28,8 +28,8 @@ namespace ImageShack
 {
 	public class UploadNotification : Notification
 	{
-		static readonly string message_title = Catalog.GetString ("ImageShack");
-		static readonly string upload_message = Catalog.GetString ("Do is uploading your image... Please wait a moment...");
+		static readonly string message_title = AddinManager.CurrentLocalizer.GetString ("ImageShack");
+		static readonly string upload_message = AddinManager.CurrentLocalizer.GetString ("Do is uploading your image... Please wait a moment...");
 		
 		public UploadNotification (string icon) 
 			: base (message_title, upload_message, icon)
@@ -39,8 +39,8 @@ namespace ImageShack
 	
 	public class GeneralErrorNotification : Notification
 	{
-		static readonly string message_title = Catalog.GetString ("ImageShack");
-		static readonly string error_message = Catalog.GetString ("Unable to upload image to ImageShack at this time.");
+		static readonly string message_title = AddinManager.CurrentLocalizer.GetString ("ImageShack");
+		static readonly string error_message = AddinManager.CurrentLocalizer.GetString ("Unable to upload image to ImageShack at this time.");
 		
 		public GeneralErrorNotification () 
 			: base (message_title, error_message, "")
@@ -50,7 +50,7 @@ namespace ImageShack
 	
 	public class InvalidFileNotification : Notification
 	{
-		static readonly string message_title = Catalog.GetString ("ImageShack");
+		static readonly string message_title = AddinManager.CurrentLocalizer.GetString ("ImageShack");
 		
 		public InvalidFileNotification (string message) 
 			: base (message_title, message, "")

@@ -1,0 +1,25 @@
+<Addin
+	id="ImageShack"
+	namespace="Do"
+	version="1.1"
+	name="ImageShack"
+	description="Upload images to ImageShack."
+	author="Jason Jones"
+	category="Official"
+	defaultEnabled="false"
+>
+ 
+	<Runtime>
+		<Import assembly="ImageShack.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+	
+	<Extension path= "/Do/Action">
+		<Action type="ImageShack.ImageShackAction" />
+	</Extension>
+</Addin>

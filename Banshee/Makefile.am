@@ -1,4 +1,6 @@
+if HAVE_BANSHEE
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=Banshee
 
@@ -21,7 +23,6 @@ RESOURCES = \
 	Resources/Banshee.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(BANSHEE_INDEXER_LIBS) \

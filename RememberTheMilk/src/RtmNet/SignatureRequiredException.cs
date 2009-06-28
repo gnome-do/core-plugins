@@ -7,7 +7,7 @@ namespace RtmNet
 	/// </summary>
 	public class SignatureRequiredException : RtmException
 	{
-		internal SignatureRequiredException() : base("Method requires signing but no shared secret supplied.")
+		internal SignatureRequiredException () : base ("Method requires signing but no shared secret supplied.")
 		{
 		}
 	}

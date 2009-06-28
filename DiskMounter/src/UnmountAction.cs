@@ -20,31 +20,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
+
 using Do.Universe;
+using Do.Platform;
 
 namespace DiskMounter
 {
 	public class UnmountAction : Act
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Unmount"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmount"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Unmount volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Unmount or eject a volume"); }
 		}
 		
 		public override string Icon {
-			get { return "hdd_unmount"; }
+			get { return "media-eject"; }
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] {
-					typeof (DriveItem),
-				};
-			}
+			get { yield return typeof (DriveItem); }
 		}
                 
 		public override bool SupportsItem (Item item) 
@@ -59,9 +57,10 @@ namespace DiskMounter
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			(items.First ()
-			 as DriveItem).Unmount ();
-			return null;
+			Services.Application.RunOnThread (() => {
+				(items.First () as DriveItem).Unmount ();
+			});
+			yield break;
 		}
 	}
 }

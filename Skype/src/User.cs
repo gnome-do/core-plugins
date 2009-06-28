@@ -60,7 +60,7 @@ namespace Skype {
     }
 		
     public override IEnumerable<Item> ChildrenOfItem (Item item) {
-      return null;
+      yield break;
     }
 		
     public override void UpdateItems () {
@@ -121,7 +121,7 @@ namespace Skype {
     public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
       ContactItem i = items.First () as ContactItem;
       SkypeAPI.Instance.StartChat (i ["skype.handle"]);
-      return null;
+      yield break;
     }
 
   }
@@ -142,27 +142,26 @@ namespace Skype {
     public override string Icon {
       get { return SkypeAPI.RES("CallStart_128x128.png"); }
     }
+		
+	private string stripchars (string input) {
+		string[] elim = {"(", ")", ".", "-", " "};
+		foreach (string bad in elim)
+			input = input.Replace (bad, "");
+		return input;
+	}
+		
     
-    public override bool SupportsItem (Item item) {
-			if (item is ITextItem)
-			{
-				Match m = Regex.Match((item as ITextItem).Text,"^[+]?\\d*$");
-				if (m.Success)
-					return true;
-				else
-					return false;
-			}
-			else if (item is ContactItem)
-				return null != (item as ContactItem) ["skype.handle"];
-			else if (item is IContactDetailItem)
-			{
-				Match m = Regex.Match((item as IContactDetailItem).Description,"^[+]?\\d*$");
-				if (m.Success)
-					return true;
-				else
-					return false;
-			}
-			else return false;
+    public override bool SupportsItem (Item item) {		if (item is ITextItem) {
+			Match m = Regex.Match (stripchars ((item as ITextItem).Text), "^[+]?\\d*$");
+			return (m.Success) ? true : false;
+		}
+		if (item is ContactItem)
+			return null != (item as ContactItem) ["skype.handle"];
+		if (item is IContactDetailItem) {
+			Match m = Regex.Match (stripchars ((item as IContactDetailItem).Description), "^[+]?\\d*$");
+			return (m.Success) ? true : false;
+		}
+		return false;
     }
     
     public override IEnumerable<Type> SupportedItemTypes {
@@ -177,27 +176,27 @@ namespace Skype {
 
     public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
 			string number = "";
-			
-		foreach (Item item in items) {
-			if (item is ITextItem) {
-				number = (item as ITextItem).Text;
-				if (number[0] != '+')
-					number = "+" + number;
-				SkypeAPI.Instance.StartCall (number);
-			}
-			else if (item is ContactItem) {
-				ContactItem i = item as ContactItem;
-				SkypeAPI.Instance.StartCall (i ["skype.handle"]);
-			}
-			else if (item is IContactDetailItem) {
-				IContactDetailItem i = item as IContactDetailItem;
-				number = i.Description;
-				if (number[0] != '+')
-					number = "+" + number;
-				SkypeAPI.Instance.StartCall (number);
-			}
+		
+			Item item = items.First ();
+		
+		if (item is ITextItem) {
+			number = stripchars ((item as ITextItem).Text);
+			if (number[0] != '+')
+				number = "+" + number;
+			SkypeAPI.Instance.StartCall (number);
 		}
-      return null;
+		if (item is ContactItem) {
+			ContactItem i = item as ContactItem;
+			SkypeAPI.Instance.StartCall (i ["skype.handle"]);
+		}
+		if (item is IContactDetailItem) {
+			IContactDetailItem i = item as IContactDetailItem;
+			number = stripchars (i.Description);
+			if (number[0] != '+')
+				number = "+" + number;
+			SkypeAPI.Instance.StartCall (number);
+		}
+      yield break;
     }
 
   }

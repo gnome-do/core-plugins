@@ -32,184 +32,190 @@ using System.Web;
 
 namespace Twitterizer.Framework
 {
-    public class TwitterStatusMethods
-    {
-        private readonly string userName;
-        private readonly string password;
+	public class TwitterStatusMethods
+	{
+		private readonly string userName;
+		private readonly string password;
+		private readonly string source;
 
-        public TwitterStatusMethods(string UserName, string Password)
-        {
-            userName = UserName;
-            password = Password;
-        }
+		public TwitterStatusMethods(string UserName, string Password, string Source)
+		{
+			userName = UserName;
+			password = Password;
+			source = Source;
+		}
 
-        /// <summary>
-        /// Returns the 20 most recent statuses posted from the authenticating user.
-        /// </summary>
-        /// <returns></returns>
-        public TwitterStatusCollection UserTimeline()
-        {
-            return UserTimeline(null);
-        }
+		/// <summary>
+		/// Returns the 20 most recent statuses posted from the authenticating user.
+		/// </summary>
+		/// <returns></returns>
+		public TwitterStatusCollection UserTimeline()
+		{
+			return UserTimeline(null);
+		}
 
-        /// <summary>
-        /// Returns the 20 most recent statuses posted from the authenticating user.
-        /// </summary>
-        /// <param name="Parameters">Accepts Count, Since, SinceID, and Page parameters.</param>
-        /// <returns></returns>
-        public TwitterStatusCollection UserTimeline(TwitterParameters Parameters)
-        {
-            TwitterRequest Request = new TwitterRequest();
-            TwitterRequestData Data = new TwitterRequestData();
+		/// <summary>
+		/// Returns the 20 most recent statuses posted from the authenticating user.
+		/// </summary>
+		/// <param name="Parameters">Accepts Count, Since, SinceID, and Page parameters.</param>
+		/// <returns></returns>
+		public TwitterStatusCollection UserTimeline(TwitterParameters Parameters)
+		{
+			TwitterRequest Request = new TwitterRequest();
+			TwitterRequestData Data = new TwitterRequestData();
+			Data.UserName = userName;
+			Data.Password = password;
 
-            string actionUri = (Parameters == null ? Twitter.Urls.UserTimelineUrl : Parameters.BuildActionUri(Twitter.Urls.UserTimelineUrl));
-            Data.ActionUri = new Uri(actionUri);
+			string actionUri = (Parameters == null ? Twitter.Urls.UserTimelineUrl : Parameters.BuildActionUri(Twitter.Urls.RootUrl));
+			Data.ActionUri = new Uri(actionUri);
 
-            Data = Request.PerformWebRequest(Data);
+			Data = Request.PerformWebRequest(Data);
 
-            return Data.Statuses;
-        }
+			return Data.Statuses;
+		}
 
-        /// <summary>
-        /// Returns the 20 most recent statuses from non-protected users who have set a custom user icon.  Does not require authentication.
-        /// </summary>
-        /// <returns></returns>
-        public TwitterStatusCollection PublicTimeline()
-        {
-            TwitterRequest Request = new TwitterRequest();
-            TwitterRequestData Data = new TwitterRequestData();
+		/// <summary>
+		/// Returns the 20 most recent statuses from non-protected users who have set a custom user icon.  Does not require authentication.
+		/// </summary>
+		/// <returns></returns>
+		public TwitterStatusCollection PublicTimeline()
+		{
+			TwitterRequest Request = new TwitterRequest();
+			TwitterRequestData Data = new TwitterRequestData();
 
-            Data.ActionUri = new Uri(Twitter.Urls.PublicTimelineUrl);
+			Data.ActionUri = new Uri(Twitter.Urls.PublicTimelineUrl);
 
-            Data = Request.PerformWebRequest(Data);
+			Data = Request.PerformWebRequest(Data);
 
-            return Data.Statuses;
-        }
+			return Data.Statuses;
+		}
 
-        /// <summary>
-        /// Returns the 20 most recent statuses posted by the authenticating user and that user's friends. This is the equivalent of /home on the Web.
-        /// </summary>
-        /// <returns></returns>
-        public TwitterStatusCollection FriendsTimeline()
-        {
-            return FriendsTimeline(null);
-        }
+		/// <summary>
+		/// Returns the 20 most recent statuses posted by the authenticating user and that user's friends. This is the equivalent of /home on the Web.
+		/// </summary>
+		/// <returns></returns>
+		public TwitterStatusCollection FriendsTimeline()
+		{
+			return FriendsTimeline(null);
+		}
 
-        /// <summary>
-        /// Returns the 20 most recent statuses posted by the authenticating user and that user's friends. This is the equivalent of /home on the Web.
-        /// </summary>
-        /// <param name="Parameters">Accepts Since, SinceID, Count, and Page parameters.</param>
-        /// <returns></returns>
-        public TwitterStatusCollection FriendsTimeline(TwitterParameters Parameters)
-        {
-            TwitterRequest Request = new TwitterRequest();
-            TwitterRequestData Data = new TwitterRequestData();
-            Data.UserName = userName;
-            Data.Password = password;
+		/// <summary>
+		/// Returns the 20 most recent statuses posted by the authenticating user and that user's friends. This is the equivalent of /home on the Web.
+		/// </summary>
+		/// <param name="Parameters">Accepts Since, SinceID, Count, and Page parameters.</param>
+		/// <returns></returns>
+		public TwitterStatusCollection FriendsTimeline(TwitterParameters Parameters)
+		{
+			TwitterRequest Request = new TwitterRequest();
+			TwitterRequestData Data = new TwitterRequestData();
+			Data.UserName = userName;
+			Data.Password = password;
 
-            string actionUri = (Parameters == null ? Twitter.Urls.FriendsTimelineUrl : Parameters.BuildActionUri(Twitter.Urls.FriendsTimelineUrl));
-            Data.ActionUri = new Uri(actionUri);
+			string actionUri = (Parameters == null ? Twitter.Urls.FriendsTimelineUrl : Parameters.BuildActionUri(Twitter.Urls.FriendsTimelineUrl));
+			Data.ActionUri = new Uri(actionUri);
 
-            Data = Request.PerformWebRequest(Data);
+			Data = Request.PerformWebRequest(Data);
 
-            return Data.Statuses;
-        }
+			return Data.Statuses;
+		}
 
-        /// <summary>
-        /// Updates the authenticating user's status.
-        /// </summary>
-        /// <param name="Status">Required.  The text of your status update.</param>
-        /// <returns></returns>
-        public TwitterStatus Update(string Status)
-        {
-            return Update(Status, null);
-        }
+		/// <summary>
+		/// Updates the authenticating user's status.
+		/// </summary>
+		/// <param name="Status">Required.  The text of your status update.</param>
+		/// <returns></returns>
+		public TwitterStatus Update(string Status)
+		{
+			return Update(Status, null);
+		}
 
-        /// <summary>
-        /// Updates the authenticating user's status.
-        /// </summary>
-        /// <param name="Status">Required.  The text of your status update.</param>
-        /// <param name="InReplyToStatusID">Optional.  The ID of an existing status that the status to be posted is in reply to.</param>
-        /// <returns></returns>
-        public TwitterStatus Update(string Status, int? InReplyToStatusID)
-        {
-            TwitterRequest Request = new TwitterRequest();
-            TwitterRequestData Data = new TwitterRequestData();
-            Data.UserName = userName;
-            Data.Password = password;
+		/// <summary>
+		/// Updates the authenticating user's status.
+		/// </summary>
+		/// <param name="Status">Required.  The text of your status update.</param>
+		/// <param name="InReplyToStatusID">Optional.  The ID of an existing status that the status to be posted is in reply to.</param>
+		/// <returns></returns>
+		public TwitterStatus Update(string Status, long? InReplyToStatusID)
+		{
+			TwitterRequest Request = new TwitterRequest();
+			TwitterRequestData Data = new TwitterRequestData();
+			Data.UserName = userName;
+			Data.Password = password;
+			Data.Source = source;
+			
+			Data.ActionUri = new Uri(
+				string.Format(Twitter.Urls.UpdateUrl, HttpUtility.UrlEncode(Status), source, 
+					InReplyToStatusID.HasValue ? InReplyToStatusID.Value.ToString () : ""));
 
-            Data.ActionUri = new Uri(
-                string.Format(Twitter.Urls.UpdateUrl, HttpUtility.UrlEncode(Status), InReplyToStatusID));
+			Data = Request.PerformWebRequest(Data, "POST");
 
-            Data = Request.PerformWebRequest(Data);
+			return Data.Statuses[0];
+		}
 
-            return Data.Statuses[0];
-        }
+		/// <summary>
+		/// Destroys the status specified by the required ID parameter.  The authenticating user must be the author of the specified status.
+		/// </summary>
+		/// <param name="ID">Required.  The ID of the status to destroy.</param>
+		public void Destroy(int ID)
+		{
+			TwitterRequest Request = new TwitterRequest();
+			TwitterRequestData Data = new TwitterRequestData();
+			Data.UserName = userName;
+			Data.Password = password;
 
-        /// <summary>
-        /// Destroys the status specified by the required ID parameter.  The authenticating user must be the author of the specified status.
-        /// </summary>
-        /// <param name="ID">Required.  The ID of the status to destroy.</param>
-        public void Destroy(int ID)
-        {
-            TwitterRequest Request = new TwitterRequest();
-            TwitterRequestData Data = new TwitterRequestData();
-            Data.UserName = userName;
-            Data.Password = password;
+			Data.ActionUri = new Uri(
+					string.Format(Twitter.Urls.DestroyStatusUrl, ID));
 
-            Data.ActionUri = new Uri(
-                string.Format(Twitter.Urls.DestroyStatusUrl, ID));
+			Request.PerformWebRequest(Data);
+		}
 
-            Request.PerformWebRequest(Data);
-        }
+		/// <summary>
+		/// Returns a single status, specified by the id parameter
+		/// </summary>
+		/// <param name="ID">id.  Required.  The numerical ID of the status you're trying to retrieve.</param>
+		/// <returns></returns>
+		public TwitterUser Show(string ID)
+		{
+			TwitterRequest Request = new TwitterRequest();
+			TwitterRequestData Data = new TwitterRequestData();
+			Data.UserName = userName;
+			Data.Password = password;
 
-        /// <summary>
-        /// Returns a single status, specified by the id parameter
-        /// </summary>
-        /// <param name="ID">id.  Required.  The numerical ID of the status you're trying to retrieve.</param>
-        /// <returns></returns>
-        public TwitterUser Show(string ID)
-        {
-            TwitterRequest Request = new TwitterRequest();
-            TwitterRequestData Data = new TwitterRequestData();
-            Data.UserName = userName;
-            Data.Password = password;
+			Data.ActionUri = new Uri(
+					string.Format(Twitter.Urls.ShowStatusUrl, ID));
 
-            Data.ActionUri = new Uri(
-                string.Format(Twitter.Urls.ShowStatusUrl, ID));
+			Data = Request.PerformWebRequest(Data, "GET");
 
-            Data = Request.PerformWebRequest(Data, "GET");
+			return Data.Users[0];
+		}
 
-            return Data.Users[0];
-        }
+		/// <summary>
+		/// Returns the 20 most recent @replies (status updates prefixed with @username) for the authenticating user.
+		/// </summary>
+		/// <returns></returns>
+		public TwitterStatusCollection Replies()
+		{
+			return Replies(null);
+		}
 
-        /// <summary>
-        /// Returns the 20 most recent @replies (status updates prefixed with @username) for the authenticating user.
-        /// </summary>
-        /// <returns></returns>
-        public TwitterStatusCollection Replies()
-        {
-            return Replies(null);
-        }
+		/// <summary>
+		/// Returns the 20 most recent @replies (status updates prefixed with @username) for the authenticating user.
+		/// </summary>
+		/// <param name="Parameters">Optional. Accepts Page, Since, and SinceID parameters.</param>
+		/// <returns></returns>
+		public TwitterStatusCollection Replies(TwitterParameters Parameters)
+		{
+			TwitterRequest Request = new TwitterRequest();
+			TwitterRequestData Data = new TwitterRequestData();
+			Data.UserName = userName;
+			Data.Password = password;
 
-        /// <summary>
-        /// Returns the 20 most recent @replies (status updates prefixed with @username) for the authenticating user.
-        /// </summary>
-        /// <param name="Parameters">Optional. Accepts Page, Since, and SinceID parameters.</param>
-        /// <returns></returns>
-        public TwitterStatusCollection Replies(TwitterParameters Parameters)
-        {
-            TwitterRequest Request = new TwitterRequest();
-            TwitterRequestData Data = new TwitterRequestData();
-            Data.UserName = userName;
-            Data.Password = password;
+			string actionUri = (Parameters == null ? Twitter.Urls.RepliesUrl : Parameters.BuildActionUri(Twitter.Urls.RepliesUrl));
+			Data.ActionUri = new Uri(actionUri);
 
-            string actionUri = (Parameters == null ? Twitter.Urls.RepliesUrl : Parameters.BuildActionUri(Twitter.Urls.RepliesUrl));
-            Data.ActionUri = new Uri(actionUri);
+			Data = Request.PerformWebRequest(Data);
 
-            Data = Request.PerformWebRequest(Data);
-
-            return Data.Statuses;
-        }
-    }
+			return Data.Statuses;
+		}
+	}
 }

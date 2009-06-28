@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Do.Platform;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Translate
 {
@@ -58,6 +58,7 @@ namespace Translate
 			treeEnableLang.AppendColumn (LanguageCol);
 			LanguageCol.AddAttribute (text, "text", 1);
 			
+			/*
 			Gtk.TreeViewColumn IsEnabled = new Gtk.TreeViewColumn ();
 			Gtk.CellRendererToggle EnabledToggle = new Gtk.CellRendererToggle ();
 			EnabledToggle.Activatable = true;
@@ -72,6 +73,7 @@ namespace Translate
 			DummyCol.PackStart (DummyText, true);
 			treeEnableLang.AppendColumn (DummyCol);
 			DummyCol.AddAttribute (DummyText, "text", 3);
+			*/
 		}
 		public void FillProviderCmb ()
 		{		
@@ -125,7 +127,7 @@ namespace Translate
 			const int scale_height = 20;
 			string[] Icon = null;
 			if (Translator.SupportsAutoDetect)
-				SourceList.AppendValues (null, Catalog.GetString ("Auto Detect (Recommended)"), Translator.AutoDetectCode);
+				SourceList.AppendValues (null, AddinManager.CurrentLocalizer.GetString ("Auto Detect (Recommended)"), Translator.AutoDetectCode);
 			foreach (LanguageItem Lang in Translator.SupportedLanguages)
 			{
 				Icon = Lang.Icon.Split (new char[] {'@'});
@@ -185,38 +187,21 @@ namespace Translate
 		
 		private void FillEnableBox(ITranslateProvider Translator)
 		{
-			Gtk.ListStore LanguageList = new Gtk.ListStore (typeof (Gdk.Pixbuf), typeof (string), typeof (bool), typeof (string), typeof (LanguageNode));
+			Gtk.ListStore LanguageList = new Gtk.ListStore (typeof (Gdk.Pixbuf), typeof (string));
 			const int scale_height = 25;
 			Gdk.Pixbuf LanguageFlag = null;
 			string[] Icon = null;
-			LanguageNode LanguageTreeNode = null;
-
+			
 			foreach (LanguageItem Lang in Translator.SupportedLanguages) {
 				Icon = Lang.Icon.Split (new char[] {'@'});
 				using (Gdk.Pixbuf temp = Gdk.Pixbuf.LoadFromResource(Icon[0])) {
 					LanguageFlag = temp.ScaleSimple ((scale_height * temp.Width) / temp.Height, scale_height, Gdk.InterpType.Bilinear);
 				}
-				LanguageTreeNode = new LanguageNode (LanguageFlag, Lang.Name, Lang.Code);
-				LanguageList.AppendValues (LanguageTreeNode.Icon, LanguageTreeNode.Name, LanguageTreeNode.IsEnabled, string.Empty, LanguageTreeNode);
+				LanguageList.AppendValues (LanguageFlag, Lang.Name);
 			}
 
 			treeEnableLang.HeadersVisible = false;
 			treeEnableLang.Model = LanguageList;
-		}
-		
-		private void CheckEnable(object sender, Gtk.ToggledArgs e)
-		{
-			Gtk.TreeIter iter;
-			Gtk.TreeModel model = treeEnableLang.Model;
-			
-			if (model.GetIter (out iter, new Gtk.TreePath (e.Path))) {
-				LanguageNode SelectedLanguage = (LanguageNode)model.GetValue (iter, 4);
-				if (SelectedLanguage.Name != "Auto Detect Language") {
-					bool currentState = SelectedLanguage.IsEnabled;
-					SelectedLanguage.IsEnabled = !currentState;
-					model.SetValue(iter, 2, SelectedLanguage.IsEnabled);
-				}
-			}
 		}
 
 		public bool SearchCombobox (out Gtk.TreeIter ti, Gtk.ComboBox box, string val, int col)

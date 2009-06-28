@@ -30,7 +30,7 @@ using Do.Universe.Common;
 using Do.Platform;
 using Do.Platform.Linux;
 
-using Mono.Unix;
+using Mono.Addins;
 
 /// <summary>
 /// Do plug-in that returns search results from google back to gnome-do for 
@@ -78,7 +78,7 @@ namespace InlineGoogleSearch {
 		/// </value>
 		public override string Name {
 			get { 
-				return Catalog.GetString ("Search Google"); 
+				return AddinManager.CurrentLocalizer.GetString ("Search Google"); 
 			}
 		}
 		
@@ -87,7 +87,7 @@ namespace InlineGoogleSearch {
 		/// </value>
 		public override string Description {
 			get { 
-				return Catalog.GetString ("Allows you to perform Google Searches from Do"); 
+				return AddinManager.CurrentLocalizer.GetString ("Allows you to perform Google Searches from Do"); 
 			}
 		}
 		
@@ -152,7 +152,7 @@ namespace InlineGoogleSearch {
 			}
 			
 			foreach (GoogleSearchResult result in results) {
-				yield return new BookmarkItem (result.titleNoFormatting, result.url);
+				yield return new BookmarkItem (result.titleNoFormatting, HttpUtility.UrlDecode (result.url));
 			}
 		}
 

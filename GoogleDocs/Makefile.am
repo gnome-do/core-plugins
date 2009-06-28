@@ -1,4 +1,6 @@
+if HAVE_GDOCS
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=GoogleDocs
 
@@ -6,8 +8,8 @@ FILES = \
 	src/CertHandler.cs \
 	src/Configuration.cs \
 	src/GDocs.cs \
+	src/GDocsAbstractItem.cs \
 	src/GDocsDocumentItem.cs \
-	src/GDocsItem.cs \
 	src/GDocsItemSource.cs \
 	src/GDocsPDFItem.cs \
 	src/GDocsPresentationItem.cs \
@@ -23,11 +25,9 @@ RESOURCES = \
 	Resources/icons/gDocsUploadIcon.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Xml \
-	$(GDATA_SHARP_ACL_LIBS) \
 	$(GDATA_SHARP_DOCUMENTS_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \

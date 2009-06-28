@@ -20,8 +20,9 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Web;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -43,8 +44,8 @@ namespace Launchpad
 
 		public LaunchpadItem (string name, string description, string iconFile, string url)
 		{
-			this.name = Catalog.GetString (name);
-			this.description = Catalog.GetString (description);
+			this.name = AddinManager.CurrentLocalizer.GetString (name);
+			this.description = AddinManager.CurrentLocalizer.GetString (description);
 			this.icon_file = iconFile;
 			this.url = url;
 		}
@@ -69,7 +70,7 @@ namespace Launchpad
 
 		public virtual void Perform (ITextItem item)
 		{
-			string query = item.Text.Replace (" ",  "+");
+			string query = HttpUtility.UrlEncode (item.Text);
 			Services.Environment.OpenUrl (FormatUrl (url, query));
 		}
 

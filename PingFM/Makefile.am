@@ -24,6 +24,7 @@ RESOURCES = \
 	Resources/icons/flickr.png \
 	Resources/icons/friendfeed.png \
 	Resources/icons/friendster.png \
+	Resources/icons/gtalk.png \
 	Resources/icons/hi5.png \
 	Resources/icons/identica.png \
 	Resources/icons/jaiku.png \
@@ -39,8 +40,12 @@ RESOURCES = \
 	Resources/icons/plurk.png \
 	Resources/icons/pownce.png \
 	Resources/icons/rejaw.png \
+	Resources/icons/seesmic.png \
+	Resources/icons/shoutem.png \
 	Resources/icons/tumblr.png \
 	Resources/icons/twitter.png \
+	Resources/icons/utterli.png \
+	Resources/icons/vox.png \
 	Resources/icons/wordpress.png \
 	Resources/icons/xanga.png \
 	Resources/icons/yahoo360.png \
@@ -53,7 +58,6 @@ REFERENCES = \
 	System.Data \
 	System.Web \
 	System.Xml \
-	Mono.Posix \
 	$(GNOME_KEYRING_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \

@@ -20,9 +20,11 @@
  */
 
 using System;
-using Do.Universe;
 using System.Collections.Generic;
+
 using Mono.Unix;
+
+using Do.Universe;
 
 namespace XRandR
 {
@@ -48,9 +50,8 @@ namespace XRandR
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { return new Type [] {
-					typeof (OutputItem)
-				};
+			get { 
+				yield return typeof (OutputItem);
 			}
 		}
 		
@@ -62,30 +63,32 @@ namespace XRandR
 		{
 			if (parent is OutputItem) {
 				OutputItem outputItem = parent as OutputItem;
-				foreach(ScreenResources res in External.ScreenResources ())
+				foreach(ScreenResources res in External.ScreenResources ()) {
 					foreach(XRROutputInfo output in res.Outputs.DoWith (outputItem.Id)){
-						foreach(XRRModeInfo mode in res.ModesOfOutput (output))
+						foreach(XRRModeInfo mode in res.ModesOfOutput (output)) {
 							yield return new OutputModeItem (outputItem.Id, mode);
+						}
 						
 						if (output.crtc_id != 0)
 							yield return new OutputModeItem (outputItem.Id, 0, Catalog.GetString ("Off"));
 					}
+				}
 			}
-			else
-				yield break;
+			
+			yield break;
 		}
 		
 		public override void UpdateItems ()
 		{
-			try{
+			try {
 				items.Clear ();
-				foreach(ScreenResources res in External.ScreenResources ()){
-					res.Outputs.AllWithId (delegate(int id, XRROutputInfo output){
+				foreach (ScreenResources res in External.ScreenResources ()){
+					res.Outputs.AllWithId (delegate (int id, XRROutputInfo output){
 						Do.Platform.Log<XRandRItemSource>.Debug ("Found output: 0x{0:x} - {1}", id, output.name); 
-						items.Add (new OutputItem (id, output, output.connection==0));
+						items.Add (new OutputItem (id, output, output.connection == 0));
 					});
 				}
-			}catch(Exception e){
+			} catch (Exception e) {
 				// Necessary, since Do.Universe.SafeElement.LogSafeError does not output a StackTrace 
 				Do.Platform.Log<XRandRItemSource>.Error ("Error in UpdateItems: {0}\n{1}", e.Message, e.StackTrace);
 				throw e;

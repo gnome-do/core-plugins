@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Text.RegularExpressions;
 
 using Do.Platform;
 using Do.Universe;
@@ -48,7 +49,7 @@ namespace Do.FilesAndFolders
 
 		public static IFileItem NewFileItem (string path)
 		{
-			return Services.UniverseFactory.NewFileItem (path);
+			return Services.UniverseFactory.NewFileItem (Services.Environment.ExpandPath (path));
 		}
 
 		public static IApplicationItem NewApplicationItem (string path)

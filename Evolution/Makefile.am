@@ -1,4 +1,6 @@
+if HAVE_EVOLUTION
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=Evolution
 
@@ -15,7 +17,6 @@ RESOURCES = \
 	Resources/icons/phone.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(EVOLUTION_SHARP_LIBS) \

@@ -21,7 +21,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
@@ -36,11 +36,11 @@ namespace Do.FilesAndFolders
 			Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), "Trash/files");
 
 		public override string Name {
-			get { return Catalog.GetString ("Move to Trash"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Move to Trash"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Moves a file or folder to the trash"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Moves a file or folder to the trash"); }
 		}
 		
 		public override string Icon {

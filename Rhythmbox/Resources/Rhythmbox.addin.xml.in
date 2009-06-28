@@ -1,0 +1,33 @@
+<Addin
+	id="Rhythmbox"
+	namespace="Do"
+	version="2.1"
+	name="Rhythmbox"
+	description="Search and play music in Rhythmbox."
+	author="David Siegel"
+	category="Official"
+	defaultEnabled="false"
+	>
+
+	<Runtime>
+		<Import assembly="Rhythmbox.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Do.Rhythmbox.MusicItemSource" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="Do.Rhythmbox.EnqueueAction" />
+		<Action type="Do.Rhythmbox.PlayAction" />
+		<Action type="Do.Rhythmbox.PlayItemAction" />
+		<Action type="Do.Rhythmbox.PauseAction" />
+		<Action type="Do.Rhythmbox.NextAction" />
+		<Action type="Do.Rhythmbox.PreviousAction" />
+	</Extension>
+</Addin>

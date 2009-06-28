@@ -20,20 +20,23 @@
  */
 
 using System;
-using Do.Universe;
+
 using Mono.Unix;
+
+using Do.Universe;
 
 namespace XRandR
 {
 	public class OutputItem : Item
 	{
-		string name;
 		int id;
+		string name;
 		bool connected;
+		
 		public OutputItem(int id, XRROutputInfo output, bool connected)
 		{
-			this.name = output.name;
 			this.id = id;
+			this.name = output.name;
 			this.connected = connected;
 		}
 		

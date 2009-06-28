@@ -19,9 +19,7 @@
  */
 
 using System;
-using System.IO;
-
-using Mono.Unix;
+using Mono.Addins;
 
 using Gtk;
 
@@ -29,61 +27,37 @@ namespace Do.FilesAndFolders
 {
 	
 	// TODO: update this class to use spin buttons,
-	public class PathNodeView : NodeView
+	public abstract class PathNodeView : NodeView
 	{
-		enum Column {
-			Path = 0,
-			Depth,
-			NumColumns
-		}
+
 		
 		public PathNodeView () : base ()
 		{
-			CellRenderer cell;
-			RulesHint = true;
-			HeadersVisible = true;
-			
-			Model = new ListStore (typeof (string), typeof (uint));
-
-			cell = new CellRendererText ();
-			(cell as CellRendererText).Width = 310;
-			(cell as CellRendererText).Ellipsize = Pango.EllipsizeMode.Middle;
-			AppendColumn (Catalog.GetString ("Folder"), cell, "text", Column.Path);
-			
-			cell = new CellRendererText ();
-			(cell as CellRendererText).Editable = true;
-			(cell as CellRendererText).Edited += OnDepthEdited;
-			(cell as CellRendererText).Alignment = Pango.Alignment.Right;
-			AppendColumn (Catalog.GetString ("Depth"), cell, "text", Column.Depth);
-						
-			Refresh ();
 		}
 
-		public void Refresh ()
+		public void Refresh (bool indexed)
 		{
 			ListStore store = Model as ListStore;
-			store.Clear ();
-			foreach (IndexedFolder pair in Plugin.FolderIndex)
-				store.AppendValues (pair.Path, pair.Level);
-		}
-		                    
-		void OnDepthEdited (object o, EditedArgs e)
-		{
-			uint depth;
-			string path;
-			TreeIter iter;
-			ListStore store;
-
-			store = Model as ListStore;
-			store.GetIter (out iter, new TreePath (e.Path));
-			path = store.GetValue (iter, (int)Column.Path) as string;
-			depth = uint.Parse (e.NewText);
-			Plugin.FolderIndex.UpdateIndexedFolder (path, path, depth);
-			
-			Refresh ();
+			//try to keep the currently selected row across refreshes
+			Gtk.TreePath selected = null;
+			try {
+				selected = this.Selection.GetSelectedRows ()[0];
+			}
+			catch {	}
+			finally {
+				store.Clear ();
+				foreach (IndexedFolder pair in Plugin.FolderIndex) {
+					if (indexed && pair.Status == FolderStatus.Indexed)
+						store.AppendValues (pair.Path, pair.Level);
+					else if (!indexed && pair.Status == FolderStatus.Ignored)
+						store.AppendValues (pair.Path);
+				}
+				if (selected != null)
+					this.Selection.SelectPath (selected);
+			}
 		}
 
-		public void OnRemoveSelected (object sender, EventArgs e)
+		public virtual void OnRemoveSelected (object sender, EventArgs e)
 		{
 			string path;
 			TreeIter iter;
@@ -91,11 +65,10 @@ namespace Do.FilesAndFolders
 
 			store = Model as ListStore;
 			Selection.GetSelected (out iter);
-			path = store.GetValue (iter, (int)Column.Path) as string;
+			path = store.GetValue (iter, 0) as string;
 			Plugin.FolderIndex.RemoveIndexedFolder (path);
 			store.Remove (ref iter);
 			
-			Refresh ();
 		}
 		
 	}

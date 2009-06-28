@@ -1,9 +1,10 @@
-<Project name="Shelf" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="2.0" ctype="DotNetProject">
+<Project name="Shelf" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="3.5" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="Shelf" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <EnvironmentVariables />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
@@ -15,16 +16,21 @@
   </Configurations>
   <Contents>
     <File name="src" subtype="Directory" buildaction="Compile" />
-    <File name="src/ShelfActions.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfExploreAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/ShelfItemSource.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Shelf.addin.xml" subtype="Code" buildaction="Nothing" />
+    <File name="src/ShelfItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfRemoveFromShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfAddToShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfCreateShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfRenameShelfAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/ShelfDeleteShelfAction.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
-    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </References>
-  <GtkDesignInfo />
 </Project>

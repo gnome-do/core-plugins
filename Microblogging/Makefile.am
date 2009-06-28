@@ -6,10 +6,12 @@ FILES = \
 	gtk-gui/generated.cs \
 	gtk-gui/Microblogging.GenConfig.cs \
 	src/Configuration.cs \
+	src/FriendItem.cs \
 	src/FriendSource.cs \
 	src/GenConfig.cs \
-	src/MicroblogClient.cs \
 	src/Microblog.cs \
+	src/MicroblogClient.cs \
+	src/MicroblogStatus.cs \
 	src/Notifications.cs \
 	src/PostAction.cs \
 	src/Preferences.cs \
@@ -25,6 +27,7 @@ FILES = \
 	src/Twitterizer/Twitterizer.Framework/MethodClasses/TwitterStatusMethods.cs \
 	src/Twitterizer/Twitterizer.Framework/MethodClasses/TwitterUserMethods.cs \
 	src/Twitterizer/Twitterizer.Framework/Properties/AssemblyInfo.cs \
+	src/Twitterizer/Twitterizer.Framework/Service.cs \
 	src/Twitterizer/Twitterizer.Framework/Twitter.cs \
 	src/Twitterizer/Twitterizer.Framework/TwitterizerException.cs \
 	src/Twitterizer/Twitterizer.Framework/TwitterRequest.cs \
@@ -37,7 +40,6 @@ RESOURCES = \
 	Resources/icons/microblogging.svg
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

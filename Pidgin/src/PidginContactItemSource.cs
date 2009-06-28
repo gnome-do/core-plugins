@@ -23,7 +23,7 @@ using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -34,14 +34,17 @@ namespace PidginPlugin
 	public class PidginContactItemSource : ItemSource
 	{
 
+		const string iconPrefix = "icon-";
 		static readonly string BuddyListFile;
 		static readonly string BuddyIconDirectory;
 		
 		static PidginContactItemSource ()
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			BuddyListFile = Path.Combine (home, ".purple/blist.xml");
-			BuddyIconDirectory = Path.Combine (home, ".purple/icons");
+			string[] blist_parts = new string[] {home, ".purple", "blist.xml"};
+		 	BuddyListFile = blist_parts.Aggregate ((aggregation, val) => Path.Combine (aggregation, val));
+			string[] icondir_parts = new string[] {home, ".purple", "icons"};
+			BuddyIconDirectory = icondir_parts.Aggregate ((aggregation, val) => Path.Combine (aggregation, val));
 		}
 		
 		List<Item> buddies;
@@ -52,15 +55,19 @@ namespace PidginPlugin
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (ContactItem); }
+			get { 
+				yield return typeof (ContactItem); 
+				yield return typeof (IApplicationItem);
+				yield return typeof (PidginBrowseBuddyItem);
+			}
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Pidgin Buddies"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Pidgin Buddies"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Buddies on your Pidgin buddy list."); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Buddies on your Pidgin buddy list."); } 
 		}
 		
 		public override string Icon {
@@ -71,13 +78,35 @@ namespace PidginPlugin
 			get { return buddies; }
 		}
 		
+		private PidginHandleContactDetailItem MakeChildren (ContactItem buddy, string proto, IEnumerable<string> icons)
+		{
+			return (icons.Contains (iconPrefix+proto)) 
+				? new PidginHandleContactDetailItem (proto, buddy[proto], buddy[iconPrefix+proto])
+				: new PidginHandleContactDetailItem (proto, buddy[proto]);
+		}
+		
+
+		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			ContactItem buddy = item as ContactItem;
-			return buddy.Details
-				.Where (d => d.StartsWith ("prpl-"))
-				.Select (d => new PidginHandleContactDetailItem (d, buddy [d]))
-				.Cast<Item> ();
+			if (Pidgin.IsPidgin (item)) {
+				yield return new PidginBrowseBuddyItem ();
+			} else if (item is PidginBrowseBuddyItem) {
+				foreach (ContactItem buddy in buddies)
+					yield return buddy;
+			} else if (item is ContactItem) {
+				ContactItem buddy = item as ContactItem;
+				
+				IEnumerable<string> icons = buddy.Details.Where (d => d.StartsWith (iconPrefix+"prpl-"));
+	
+				IEnumerable<Item> details = buddy.Details
+							.Where (d => d.StartsWith ("prpl-")) 
+							.Select (d => MakeChildren (buddy, d, icons))
+						    .OfType<Item> ();
+				
+				foreach (Item detail in details)
+					yield return detail;
+			}
 		}
 		
 		public override void UpdateItems ()
@@ -86,23 +115,47 @@ namespace PidginPlugin
 			// Add buddies as they are encountered to this hash so we don't create duplicates.
 			Dictionary<ContactItem, bool> buddies_seen;
 			
+			//remove pidgin related keys from the buddies
+			foreach (ContactItem buddy in buddies) {
+				foreach (string key in buddy.Details.Where (d => d.Contains ("prpl")).ToArray ())
+					buddy[key] = "";
+			}
+			
 			buddies.Clear ();
 			buddies_seen = new Dictionary<ContactItem, bool> ();
+			
+			//load buddies from xml file
 			blist = new XmlDocument ();
 			try {
 				blist.Load (BuddyListFile);
 
-				foreach (XmlNode contact_node in blist.GetElementsByTagName ("contact"))
-					foreach (XmlNode buddy_node in contact_node.ChildNodes) {
-						ContactItem buddy;		
-						
-						buddy = ContactItemFromBuddyXmlNode (buddy_node);
-						if (buddy == null) continue;
-						buddies_seen[buddy] = true;
-					}
-				
+				foreach (XmlNode contact_node in blist.GetElementsByTagName ("contact")) {
+					ContactItem buddy;
+					
+					buddy = CreateBuddy (contact_node);
+					if (buddy == null) 
+						continue;
+					buddies_seen[buddy] = true;
+				}
+
 			} catch (Exception e) {
-				Log<PidginContactItemSource>.Error ("Could not read Pidgin buddy list file: {0}", e.Message);
+				Log<PidginContactItemSource>.Error ("Error reading Pidgin buddy list file: {0}", e.Message);
+				Log<PidginContactItemSource>.Debug (e.StackTrace);
+			}
+			//if Pidgin is running, find bonjour buddies from dbus
+			//link-local (bonjour) buddies do not get added to the xml file
+			try {
+				int bonjourAccount = Pidgin.GetAccountID ("","prpl-bonjour");
+				if (bonjourAccount != -1) {
+					foreach (int buddyID in Pidgin.FindBuddies (bonjourAccount, "")) {
+						ContactItem buddy;
+						
+						buddy = CreateBuddy (buddyID);
+						buddies_seen [buddy] = true;
+					}			
+				}
+			} catch (Exception e) { 
+				Log<PidginContactItemSource>.Error ("Error reading Bonjour buddies: {0}", e.Message);
 				Log<PidginContactItemSource>.Debug (e.StackTrace);
 			}
 			foreach (ContactItem buddy in buddies_seen.Keys) {
@@ -110,45 +163,117 @@ namespace PidginPlugin
 			}
 		}
 		
-		ContactItem ContactItemFromBuddyXmlNode (XmlNode buddy_node)
+		//We're only using this to get link-local (bonjour) buddies
+		ContactItem CreateBuddy (int buddyID)
 		{
 			ContactItem buddy;
-			string proto, name, alias, icon;
+			string alias, proto, icon, accountAlias;
 			
+			proto = "prpl-bonjour";
+			icon = Pidgin.GetBuddyIconPath (buddyID);
+			alias = Pidgin.GetBuddyServerAlias(buddyID);
+			accountAlias = Pidgin.GetBuddyLocalAlias (buddyID);
+			buddy = ContactItem.Create (alias);
+			
+			//if for some reason this buddy has multiple prpl-bonjour accounts associated with it
+			//make sure we add them all in this fashion: prpl-bonjour, prpl-bonjour-1, etc.
+			int similarProtos = buddy.Details.Where (k => k.StartsWith (proto)).Count ();
+			if (similarProtos > 0)
+				proto = string.Format ("{0}-{1}", proto, similarProtos.ToString ());
+
+			buddy[proto] = accountAlias;
+			if (!string.IsNullOrEmpty (icon))
+				buddy[iconPrefix+proto] = icon;
+			if (string.IsNullOrEmpty (buddy["photo"]))
+			    buddy["photo"] = icon;
+
+			return buddy;
+		}
+		
+		
+		ContactItem CreateBuddy(XmlNode buddyNode)
+		{
+			ContactItem buddy;
+			string name, alias, proto;
+			
+			Dictionary<string, string> icons = new Dictionary<string, string> ();
+			Dictionary<string, string> protos = new Dictionary<string, string> ();
+
+			alias = name = null;
+			
+			//we favor aliases in this order: metacontact alias, local alias, server alias
+			//metacontact alias
 			try {
-				name = alias = icon = null;
-				// The messaging protocol (e.g. "prpl-jabber" for Jabber).
-				proto = buddy_node.Attributes.GetNamedItem ("proto").Value;
-				foreach (XmlNode attr in buddy_node.ChildNodes) {
-					switch (attr.Name) {
-					// The screen name.
-					case "name":
-						name = attr.InnerText;
-						break;
-					// The alias, or real name.
-					case "alias":
-						alias = attr.InnerText;
-						break;
-					// Buddy icon image file.
-					case "setting":
-						if (attr.Attributes.GetNamedItem ("name").Value == "buddy_icon") {
-							icon = Path.Combine (BuddyIconDirectory, attr.InnerText);
-						}
-						break;
-					}
-				}
-			} catch {
-				// Bad buddy.
-				return null;
+				alias = buddyNode.Attributes.GetNamedItem ("alias").Value;
 			}
+			catch {}
+			
+			foreach (XmlNode node in buddyNode.ChildNodes)
+			{
+				switch (node.Name) {
+				case "buddy":
+					proto = node.Attributes.GetNamedItem ("proto").Value;
+					//for metacontacts, add similar protocol keys like this:
+					// prpl-msn, prpl-msn-1, prpl-msn-2 etc.
+					int similarProtos = protos.Keys.Where (k => k.StartsWith (proto)).Count ();
+					if (similarProtos > 0)
+						proto = string.Format ("{0}-{1}", proto, similarProtos.ToString ());
+					foreach (XmlNode attr in node.ChildNodes) {
+						switch (attr.Name) {
+						// The screen name.
+						case "name":
+							protos[proto] = attr.InnerText;
+							break;
+						// The alias, or real name, only if one isn't set yet.
+						case "alias":
+							if (string.IsNullOrEmpty (alias))
+							    alias = attr.InnerText;
+							break;
+						// Buddy icon image file.
+						case "setting":
+							if (attr.Attributes.GetNamedItem ("name").Value == "buddy_icon") {
+								icons[iconPrefix+proto] = Path.Combine (BuddyIconDirectory, attr.InnerText);
+								if (!icons.Keys.Contains ("default"))
+									icons["default"] = icons[iconPrefix+proto];
+							}
+							break;
+						}
+					}
+					//if the alias is still null, let's try to get the server alias
+					if (string.IsNullOrEmpty (alias))
+					    alias = Pidgin.GetBuddyServerAlias (protos[proto]) ?? null;
+					break;
+				//let's pick up the custom icon as the metacontact's icon
+				case "setting":
+					if (node.Attributes.GetNamedItem ("name").Value == "custom_buddy_icon") {
+						icons["default"] = Path.Combine (BuddyIconDirectory, node.InnerText);
+					}
+					break;
+				}
+			}
+			
+			//in case we don't have an alias, take one of the proto values for the name
+			name = alias ?? protos.Values.FirstOrDefault ();
+
 			// If crucial details are missing, we can't make a buddy.
-			if (name == null || proto == null) return null;
+			if (name == null || protos.Values.Count () <= 0) 
+				return null;
 			
 			// Create a new buddy, add the details we have.
 			buddy = ContactItem.Create (alias ?? name);
-			if (icon != null)
-				buddy["photo"] = icon;
-			buddy[proto] = name;
+			
+			//assign the default buddy icon as the ContactItem's photo
+			if (icons.Keys.Contains ("default"))
+				buddy["photo"] = icons["default"];
+
+			//add all of the protocol handles we found for this buddy
+			//skip bonjour keys, they'll get picked up later
+			foreach (string k in protos.Keys.Where (k => !k.Contains ("bonjour")))
+				buddy[k] = protos[k];
+			
+			//add the icons keys to create individual icons for childitems
+			foreach (string k in icons.Keys.Where (k => k != "default" && !k.Contains ("bonjour")))
+				buddy[k] = icons[k];
 
 			return buddy;
 		}

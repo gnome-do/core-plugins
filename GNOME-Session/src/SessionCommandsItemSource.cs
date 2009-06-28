@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -38,11 +38,11 @@ namespace GNOME
 		}
 
 		public override string Name { 
-			get { return Catalog.GetString ("GNOME Session Commands"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("GNOME Session Commands"); } 
 		}
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Log out, Shutdown, Restart, etc."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Log out, Shutdown, Restart, etc."); }
 		}
 		
 		public override string Icon { get { return "system-log-out"; } }
@@ -51,38 +51,38 @@ namespace GNOME
 		{
 			get {
 				yield return new SessionCommandItem (
-					Catalog.GetString ("Log Out"),
-					Catalog.GetString ("Close your session and return to the login screen."),
+					AddinManager.CurrentLocalizer.GetString ("Log Out"),
+					AddinManager.CurrentLocalizer.GetString ("Close your session and return to the login screen."),
 					"system-log-out",
 					PowerManagement.Logout);
 
 				yield return new SessionCommandItem (
-					Catalog.GetString ("Shutdown"),
-					Catalog.GetString ("Turn your computer off."),
+					AddinManager.CurrentLocalizer.GetString ("Shutdown"),
+					AddinManager.CurrentLocalizer.GetString ("Turn your computer off."),
 					"system-shutdown",
-					PowerManagement.Shutdown);
+					SystemManagement.Shutdown);
 
 				yield return new SessionCommandItem (
-					Catalog.GetString ("Hibernate"),
-					Catalog.GetString ("Put your computer into hibernation mode."),
+					AddinManager.CurrentLocalizer.GetString ("Hibernate"),
+					AddinManager.CurrentLocalizer.GetString ("Put your computer into hibernation mode."),
 					"gnome-session-hibernate",
 					PowerManagement.Hibernate);
 
 				yield return new SessionCommandItem (
-					Catalog.GetString ("Suspend"),
-					Catalog.GetString ("Put your computer into suspend mode."),
+					AddinManager.CurrentLocalizer.GetString ("Suspend"),
+					AddinManager.CurrentLocalizer.GetString ("Put your computer into suspend mode."),
 					"gnome-session-suspend",
 					PowerManagement.Suspend);
 
 				yield return new SessionCommandItem (
-					Catalog.GetString ("Restart"),
-					Catalog.GetString ("Restart your computer."),
+					AddinManager.CurrentLocalizer.GetString ("Restart"),
+					AddinManager.CurrentLocalizer.GetString ("Restart your computer."),
 					"reload",
-					PowerManagement.Reboot);
+					SystemManagement.Restart);
 
 				yield return new SessionCommandItem (
-					Catalog.GetString ("Lock Screen"),
-					Catalog.GetString ("Lock your screen."),
+					AddinManager.CurrentLocalizer.GetString ("Lock Screen"),
+					AddinManager.CurrentLocalizer.GetString ("Lock your screen."),
 					"system-lock-screen",
 					ScreenSaver.Lock);
 			}
@@ -90,7 +90,7 @@ namespace GNOME
 
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			return null;
+			yield break;
 		}
 
 		public override void UpdateItems ()

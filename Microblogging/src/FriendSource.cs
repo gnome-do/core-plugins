@@ -23,7 +23,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -37,18 +37,17 @@ namespace Microblogging
 	/// </summary>
 	public sealed class FriendSource : ItemSource, IConfigurable
 	{
-	
 		public FriendSource()
 		{
 			Microblog.Connect (Microblog.Preferences.Username, Microblog.Preferences.Password);
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Microblog friends"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Microblog friends"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Indexes your microblog friends"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your microblog friends"); }
 		}
 		
 		public override string Icon {
@@ -56,7 +55,16 @@ namespace Microblogging
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (ContactItem); }
+			get { yield return typeof (FriendItem); }
+		}
+		
+		public override IEnumerable<Item> Items {
+			get { return Microblog.Friends.OfType<Item> (); }
+		}
+		
+		public override IEnumerable<Item> ChildrenOfItem (Item item)
+		{
+			return (item as FriendItem).Statuses.Where (status => status.Id > 0).OfType<Item> ();
 		}
 
 		public Gtk.Bin GetConfiguration () 

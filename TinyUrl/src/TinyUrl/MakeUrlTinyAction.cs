@@ -25,7 +25,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
@@ -59,11 +59,11 @@ namespace TinyUrl
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Make Tiny Url"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Make Tiny Url"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Creates a TinyUrl from an unwieldy mess."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Creates a TinyUrl from an unwieldy mess."); }
 		}
 		
 		public override string Icon {

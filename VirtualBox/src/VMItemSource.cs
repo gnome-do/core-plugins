@@ -18,9 +18,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 
 using Do.Universe;
@@ -35,13 +36,29 @@ public class VMItemSource : ItemSource {
 			items = new List<Item> ();
 		}
 		
-		public override string Name { get { return Catalog.GetString("VirtualBox VMs"); } }
-		public override string Description { get { return Catalog.GetString("Virtual Machines created with VirtualBox"); } }
-		public override string Icon { get { return "VirtualBox_64px.png@"+GetType().Assembly.FullName; } }
+		public override string Name { 
+			get { 
+				return AddinManager.CurrentLocalizer.GetString ("VirtualBox VMs"); 
+			} 
+		}
+		
+		public override string Description { 
+			get { 
+				return AddinManager.CurrentLocalizer.GetString ("Virtual Machines created with VirtualBox"); 
+			} 
+		}
+		
+		public override string Icon { 
+			get { 
+				return "VirtualBox_64px.png@" + GetType ().Assembly.FullName; 
+			} 
+		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] { typeof (VMItem) };
+				yield return typeof (VMItem);
+				yield return typeof (IApplicationItem);
+				yield return typeof (VBoxBrowseVMSItem);
 			}
 		}
 
@@ -51,28 +68,31 @@ public class VMItemSource : ItemSource {
 
 		public override IEnumerable<Item> ChildrenOfItem (Item parent)
 		{
-			yield break; 
+			if (parent is IApplicationItem && (parent as IApplicationItem).Exec.Contains ("VirtualBox"))
+				yield return new VBoxBrowseVMSItem ();
+			if (parent is VBoxBrowseVMSItem) {
+				foreach (VMItem item in Items)
+					yield return item;
+			}
+			yield break;
 		}
 
 		public override void UpdateItems ()
 		{
-			items.Clear();
-			try
-			{
+			items.Clear ();
+			try {
 				string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-				string xml_file = "~/.VirtualBox/VirtualBox.xml".Replace ("~", home);
+				string xml_file = Path.Combine (home, ".VirtualBox/VirtualBox.xml");
 				XmlDocument VboxXML = new XmlDocument();
-				VboxXML.Load(xml_file);
-				XmlNodeList MachineEntries = VboxXML.GetElementsByTagName("MachineEntry");
+				VboxXML.Load (xml_file);
+				XmlNodeList MachineEntries = VboxXML.GetElementsByTagName ("MachineEntry");
 				//add each VM as a VMItem
 				foreach (XmlNode Machine in MachineEntries)
-					items.Add(new VMItem(Machine.Attributes));	
-			}
-			catch (Exception e)
-			{
+					items.Add (new VMItem (Machine.Attributes));	
+			} catch (Exception e) {
 				//meltdown
-				Log.Error("Error parsing VBox XML file.");
-				Log.Debug (e.ToString ());
+				Log<VMItemSource>.Error ("Error parsing VBox XML file.");
+				Log<VMItemSource>.Debug (e.ToString ());
 			}
 		}
 	}

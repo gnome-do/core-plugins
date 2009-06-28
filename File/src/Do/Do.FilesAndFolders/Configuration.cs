@@ -22,7 +22,7 @@ using System;
 using System.Linq;
 
 using Gtk;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Do.FilesAndFolders
 {	
@@ -30,51 +30,96 @@ namespace Do.FilesAndFolders
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class Configuration : Gtk.Bin
 	{
-		PathNodeView nview;
+		PathNodeView[] nodeViews = new PathNodeView[2];
 		
+		string indexDialog = AddinManager.CurrentLocalizer.GetString ("Choose a folder to index");
+		string ignoreDialog = AddinManager.CurrentLocalizer.GetString ("Choose a folder to ignore");
+			
 		public Configuration ()
-		{
+		{			
 			Build ();
 			
-			nview = new PathNodeView ();
-			nview.Selection.Changed += OnPathNodeViewSelectionChange;
-			node_scroll.Add (nview);
+			nodeViews[0] = new IndexPathNodeView ();
+			nodeViews[1] = new IgnorePathNodeView ();
+
+			foreach (PathNodeView nodeView in nodeViews)
+				nodeView.Selection.Changed += OnPathNodeViewSelectionChange;
+			
+			index_node_scroll.Add (nodeViews[0]);
+			ignore_node_scroll.Add (nodeViews[1]);
 			
 			show_hidden_chk.Active = Plugin.Preferences.IncludeHiddenFiles;
-			remove_btn.Sensitive = false;
-		}
 
+			index_remove_btn.Sensitive = false;
+			ignore_remove_btn.Sensitive = false;
+			
+			notebook1.Page = 0;
+			
+		}
+		
+		private PathNodeView GetCurrentView ()
+		{
+			return nodeViews[this.notebook1.CurrentPage];
+		}
+		
+		private void RefreshCurrentView ()
+		{
+			PathNodeView curr = GetCurrentView ();
+			if (curr is IndexPathNodeView)
+				curr.Refresh (true);
+			else
+				curr.Refresh (false);
+		}
+			
+		
 		protected virtual void OnAddBtnClicked (object sender, System.EventArgs e)
 		{
 			FileChooserDialog chooser;
-
-			chooser = new FileChooserDialog (
-			    Catalog.GetString ("Choose a folder to index"),
-				new Dialog (), FileChooserAction.SelectFolder,
-				Catalog.GetString ("Cancel"), ResponseType.Cancel,
-				Catalog.GetString ("Choose folder"), ResponseType.Accept);
-					
+			string dialogTitle;
+			FolderStatus status;
+			uint depth;
 			
+			if (GetCurrentView() is IndexPathNodeView) {
+				dialogTitle = indexDialog;
+				status = FolderStatus.Indexed;
+				depth = 1;
+			}
+			else {
+				dialogTitle = ignoreDialog;
+				status = FolderStatus.Ignored;
+				depth = 0;
+			}
+			
+			chooser = new FileChooserDialog (
+			    dialogTitle,
+				new Dialog (), FileChooserAction.SelectFolder,
+			    Gtk.Stock.Cancel, ResponseType.Cancel,
+			    Gtk.Stock.Add, ResponseType.Accept);
+				
 			if (chooser.Run () == (int) ResponseType.Accept) {
-				Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, 1));
-				nview.Refresh ();
+				if (!Plugin.FolderIndex.ContainsFolder (chooser.Filename))
+				    Plugin.FolderIndex.Add (new IndexedFolder (chooser.Filename, depth, status));
+				RefreshCurrentView ();
 			}
 			chooser.Destroy ();
 		}
 
 		protected virtual void OnRemoveBtnClicked (object sender, EventArgs e)
 		{
-			nview.OnRemoveSelected (sender, e);
+			GetCurrentView ().OnRemoveSelected (sender, e);
+			RefreshCurrentView ();
 		}
 		
 		protected void OnPathNodeViewSelectionChange (object sender, EventArgs e)
 		{
-			remove_btn.Sensitive = nview.Selection.GetSelectedRows ().Any ();
+			index_remove_btn.Sensitive = nodeViews[0].Selection.GetSelectedRows ().Any ();
+			ignore_remove_btn.Sensitive = nodeViews[1].Selection.GetSelectedRows ().Any ();
 		}
 
 		protected virtual void OnShowHiddenChkClicked (object sender, EventArgs e)
 		{
 			Plugin.Preferences.IncludeHiddenFiles = show_hidden_chk.Active;
 		}
+		
 	}
 }
