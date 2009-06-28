@@ -3,8 +3,8 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=XRandR
 
 FILES = \
-	src/XRandR.cs \
 	src/XRandRLib.cs \
+	src/XRandRWrapper.cs \
 	src/OutputItem.cs \
 	src/OutputModeItem.cs \
 	src/XRandRItemSource.cs
