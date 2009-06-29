@@ -124,10 +124,6 @@ namespace Firefox
 			places = LoadPlaceItems ().ToArray ();
 			folders = LoadFolderItems ().ToArray ();
 			
-			Console.WriteLine (places.Count ());
-			Console.WriteLine (folders.Count ());
-			Console.WriteLine ();
-			
 			items.Clear();
 
 			items.Add (new BrowseHistoryItem ());
