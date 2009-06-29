@@ -88,7 +88,7 @@ namespace Baconator
 					? (item as IUrlItem).Url
 					: (item as ITextItem).Text;
 				
-				yield return new TextItem (toBaconate);
+				yield return new TextItem (BaconUrl + toBaconate);
 			}
 		}
 	}
