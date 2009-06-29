@@ -120,8 +120,13 @@ namespace Firefox
 		
 		public override void UpdateItems ()
 		{
-			places = LoadPlaceItems ();
-			folders = LoadFolderItems ();
+			// evaluate immediate to allow sql connections to close
+			places = LoadPlaceItems ().ToArray ();
+			folders = LoadFolderItems ().ToArray ();
+			
+			Console.WriteLine (places.Count ());
+			Console.WriteLine (folders.Count ());
+			Console.WriteLine ();
 			
 			items.Clear();
 
@@ -300,6 +305,7 @@ namespace Firefox
 						}
 					}
 				}
+				dbcon.Close ();
 			}
 		}
 	}
