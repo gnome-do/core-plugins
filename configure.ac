@@ -246,6 +246,8 @@ AptURL/Makefile
 AptURL/Resources/AptURL.addin.xml
 Archive/Makefile
 Archive/Resources/Archive.addin.xml
+Baconator/Makefile
+Baconator/Resources/Baconator.addin.xml
 Banshee/Makefile
 Banshee/Resources/Banshee.addin.xml
 Bibtex/Makefile
