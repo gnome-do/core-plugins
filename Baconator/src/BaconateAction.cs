@@ -31,7 +31,7 @@ namespace Baconator
 	public class BaconateAction : Act
 	{
 		// URL regex taken from http://www.osix.net/modules/article/?id=586
-		const string UrlPattern = "^(https?://)"
+		const string UrlPattern = "^(http://)"
 		       + "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //user@
 		       + @"(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP- 199.194.52.184
 		       + "|" // allows either IP or domain
@@ -88,7 +88,10 @@ namespace Baconator
 					? (item as IUrlItem).Url
 					: (item as ITextItem).Text;
 				
-				yield return new TextItem (BaconUrl + toBaconate);
+				if (!toBaconate.StartsWith ("http://"))
+					toBaconate = "http://" + toBaconate;
+				
+				yield return new BookmarkItem (toBaconate + " but greasier", BaconUrl + toBaconate);
 			}
 		}
 	}
