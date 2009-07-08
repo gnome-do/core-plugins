@@ -82,10 +82,10 @@ namespace OpenSearch
 					templateUrl += node.Attributes["name"].Value + "=" + node.Attributes["value"].Value + "&";
 				}
 					             
-				templateUrl = templateUrl.TrimEnd (new char [] {'&','?'});	
+				templateUrl = templateUrl.TrimEnd (new [] {'&', '?'});	
 			}
 			
-			return new OpenSearchItem (shortName.InnerText, "OpenSearch plugin: " + description.InnerText, templateUrl);
+			return new OpenSearchItem (shortName.InnerText, description.InnerText, templateUrl);
 		}			
 		
 		/// <summary>
