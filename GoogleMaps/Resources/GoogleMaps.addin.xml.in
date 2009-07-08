@@ -8,6 +8,7 @@
 	contributer="Chris Szikszoy"
 	category="Community"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Google_Maps_Plugin"
 >
  
 	<Runtime>

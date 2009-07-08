@@ -1,12 +1,13 @@
 <Addin 
 	id="GNOMEDictionary"
-	namespace= "Do"
+	namespace="Do"
 	version="1.0"
 	name="GNOME Dictionary"
 	description="Look up word definitions in GNOME Dictionary."
 	author="David Siegel"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/GNOME_Dictionary_Plugin"
 >
  
 	<Runtime>

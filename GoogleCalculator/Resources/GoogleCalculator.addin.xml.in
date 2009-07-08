@@ -1,12 +1,13 @@
 <Addin
 	id="GoogleCalculator"
-	namespace= "Do"
+	namespace="Do"
 	version="1.0"
 	name="Google Calculator"
 	description="Perform calculations, and currency/quantity conversions."
 	author="David Siegel"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Google_Calculator_Plugin"
 >
  
 	<Runtime>
