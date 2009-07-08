@@ -27,19 +27,19 @@ using Do.Universe;
 
 namespace XRandR
 {
-	public class OutputModeItem:Item,IRunnableItem
+	public class OutputModeItem : Item,IRunnableItem
 	{
 		string name;
 		int output_id, mode_id;
 	
-		public OutputModeItem(int output_id, XRRModeInfo mode)
+		public OutputModeItem (int output_id, XRRModeInfo mode)
 		{
 			this.output_id = output_id;
 			this.mode_id = mode.id.ToInt32 ();
 			this.name = mode.name + " " + mode.dotClock.ToInt64 () / mode.vTotal / mode.hTotal + "Hz";
 		}
 		
-		public OutputModeItem(int output_id, int mode_id, string name)
+		public OutputModeItem (int output_id, int mode_id, string name)
 		{
 			this.name = name;
 			this.mode_id = mode_id;
