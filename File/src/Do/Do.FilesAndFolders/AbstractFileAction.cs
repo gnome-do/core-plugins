@@ -68,7 +68,7 @@ namespace Do.FilesAndFolders
 
 		protected virtual bool SupportsItem (ITextItem item)
 		{
-			string path = Plugin.UnwrapHomeFolder (item.Text);
+			string path = Services.Environment.ExpandPath (item.Text);
 			return path.Length < MaxPathLength && (File.Exists (path) || Directory.Exists (path));
 		}
 		
@@ -109,7 +109,7 @@ namespace Do.FilesAndFolders
 
 		protected string GetPath (ITextItem item)
 		{
-			return Plugin.UnwrapHomeFolder (item.Text);
+			return Services.Environment.ExpandPath (item.Text);
 		}
 
 		protected virtual IEnumerable<Item> Perform (string source, string destination)

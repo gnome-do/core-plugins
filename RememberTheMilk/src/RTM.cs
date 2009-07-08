@@ -423,7 +423,7 @@ namespace RememberTheMilk
 							}
 						}
 						
-						if (rtmList.TaskSeriesCollection.Any ()) {
+						if (rtmList.TaskSeriesCollection != null) {
 							foreach (TaskSeries rtmTaskSeries in rtmList.TaskSeriesCollection) {
 								foreach (Task rtmTask in rtmTaskSeries.TaskCollection)
 									TryRemoveTask (rtmTask.TaskID);
@@ -434,7 +434,7 @@ namespace RememberTheMilk
 				
 				// add changed tasks from the list with filter used.
 				foreach (List rtmList in rtmTasks.ListCollection) {
-					if (rtmList.TaskSeriesCollection.Any ()) {
+					if (rtmList.TaskSeriesCollection != null) {
 						foreach (TaskSeries rtmTaskSeries in rtmList.TaskSeriesCollection) {
 							foreach (Task rtmTask in rtmTaskSeries.TaskCollection) {
 								// delete one recurrent task will cause other deleted instances

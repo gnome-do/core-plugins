@@ -49,7 +49,7 @@ namespace Do.FilesAndFolders
 
 		public static IFileItem NewFileItem (string path)
 		{
-			return Services.UniverseFactory.NewFileItem (UnwrapHomeFolder (path));
+			return Services.UniverseFactory.NewFileItem (Services.Environment.ExpandPath (path));
 		}
 
 		public static IApplicationItem NewApplicationItem (string path)
@@ -60,11 +60,6 @@ namespace Do.FilesAndFolders
 		public static ITextItem NewTextItem (string text)
 		{
 			return new TextItem (text);
-		}
-
-		public static string UnwrapHomeFolder (string path)
-		{
-			return Regex.Replace (path, @"^~\/", ImportantFolders.UserHome + "/");
 		}
 	}
 }

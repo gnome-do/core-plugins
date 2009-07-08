@@ -2,7 +2,7 @@ dnl vim: set sw=4 sts=4 ts=4 noet ft=config foldmethod=marker foldmarker={{{,}}}
 
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.8.1.3])
+AC_INIT([gnome-do-plugins], [0.8.2])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
@@ -246,6 +246,8 @@ AptURL/Makefile
 AptURL/Resources/AptURL.addin.xml
 Archive/Makefile
 Archive/Resources/Archive.addin.xml
+Baconator/Makefile
+Baconator/Resources/Baconator.addin.xml
 Banshee/Makefile
 Banshee/Resources/Banshee.addin.xml
 Bibtex/Makefile

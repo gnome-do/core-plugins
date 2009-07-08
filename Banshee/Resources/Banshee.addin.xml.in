@@ -12,7 +12,7 @@
  
 	<Runtime>
 		<Import assembly="Banshee.dll"/>
-		<Import assembly="/usr/lib/banshee-1/Banshee.CollectionIndexer.dll"/>
+		<Import assembly="@BANSHEE_INDEXER_DLL@"/>
 	</Runtime>
 
 	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />

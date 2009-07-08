@@ -65,24 +65,24 @@ namespace SSH
 			try {
 				string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 				string hostsFile = Path.Combine(home, ".ssh/config");
-				FileStream fs = new FileStream (hostsFile, FileMode.Open, FileAccess.Read);
 				
-				Regex NameRegex = new Regex ("^\\s*Host\\s+(.+)\\s*$");
-				
-				using (StreamReader reader = new StreamReader (fs))
-				{
-					string s;
-					while ((s = reader.ReadLine ()) != null) {
-						Match NameMatch = NameRegex.Match (s);
-						if (NameMatch.Groups.Count != 2) continue;
-						
-						string line = NameMatch.Groups[1].ToString();
-						string[] hosts = line.Split(new string[] { " " }, StringSplitOptions.None);
-						foreach (string host in hosts)
-							items.Add (new SSHHostItem (host));
+				using (FileStream fs = new FileStream (hostsFile, FileMode.Open, FileAccess.Read)) {
+					Regex NameRegex = new Regex ("^\\s*Host\\s+(.+)\\s*$");
+					
+					using (StreamReader reader = new StreamReader (fs))
+					{
+						string s;
+						while ((s = reader.ReadLine ()) != null) {
+							Match NameMatch = NameRegex.Match (s);
+							if (NameMatch.Groups.Count != 2) continue;
+							
+							string line = NameMatch.Groups[1].ToString();
+							string[] hosts = line.Split(new string[] { " " }, StringSplitOptions.None);
+							foreach (string host in hosts)
+								items.Add (new SSHHostItem (host));
+						}
 					}
 				}
-				fs.Dispose ();
 			} catch { }
 		}
 	}
