@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 
+using Mono.Addins;
 using Mono.Unix;
 
 using Do.Universe;
@@ -38,11 +39,11 @@ namespace XRandR
 		}		
 		
 		public override string Name {
-			get { return Catalog.GetString ("Displays"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Displays"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Set your resolution"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Set your resolution"); }
 		}
 		
 		public override string Icon {
@@ -70,7 +71,7 @@ namespace XRandR
 						}
 						
 						if (output.crtc_id != 0)
-							yield return new OutputModeItem (outputItem.Id, 0, Catalog.GetString ("Off"));
+							yield return new OutputModeItem (outputItem.Id, 0, AddinManager.CurrentLocalizer.GetString ("Off"));
 					}
 				}
 			}

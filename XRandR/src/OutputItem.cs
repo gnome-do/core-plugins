@@ -21,6 +21,7 @@
 
 using System;
 
+using Mono.Addins;
 using Mono.Unix;
 
 using Do.Universe;
@@ -48,7 +49,10 @@ namespace XRandR
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString (connected ? "Set your resolution" : "Not connected"); }
+			get { return connected ? 
+					AddinManager.CurrentLocalizer.GetString ("Set your resolution") : 
+					AddinManager.CurrentLocalizer.GetString ("Not connected"); 
+			}
 		}
 		
 		public override string Icon {
