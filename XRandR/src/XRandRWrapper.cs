@@ -50,7 +50,7 @@ namespace XRandR
 		
 		public delegate void FreeFunc (IntPtr element);
 		
-		public class AccessorImpl<T> : Accessor<T>
+		internal class AccessorImpl<T> : Accessor<T>
 		{
 			private FreeFunc freeF;
 			private RetrieveFunc getF;
