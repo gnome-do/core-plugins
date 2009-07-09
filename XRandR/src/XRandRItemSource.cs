@@ -64,7 +64,7 @@ namespace XRandR
 			if (parent is OutputItem) {
 				OutputItem outputItem = parent as OutputItem;
 				foreach(ScreenResources res in Wrapper.ScreenResources ()) {
-					foreach(XRROutputInfo output in res.Outputs.DoWith (outputItem.Id)){
+					foreach(XRROutputInfo output in res.Outputs.DoWith (outputItem.Id)) {
 						foreach(XRRModeInfo mode in res.ModesOfOutput (output)) {
 							yield return new OutputModeItem (outputItem.Id, mode);
 						}
@@ -83,10 +83,13 @@ namespace XRandR
 			try {
 				items.Clear ();
 				foreach (ScreenResources res in Wrapper.ScreenResources ()){
-					res.Outputs.AllWithId (delegate (int id, XRROutputInfo output){
-						Do.Platform.Log<XRandRItemSource>.Debug ("Found output: 0x{0:x} - {1}", id, output.name); 
-						items.Add (new OutputItem (id, output, output.connection == 0));
-					});
+					res.Outputs.AllWithId (
+						delegate (int id, XRROutputInfo output)
+						{
+							Do.Platform.Log<XRandRItemSource>.Debug ("Found output: 0x{0:x} - {1}", id, output.name); 
+							items.Add (new OutputItem (id, output, output.connection == 0));
+						}
+					);
 				}
 			} catch (Exception e) {
 				// Necessary, since Do.Universe.SafeElement.LogSafeError does not output a StackTrace 
