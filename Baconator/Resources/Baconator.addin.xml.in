@@ -1,17 +1,17 @@
 <Addin
-	id="Tasque"
+	id="Baconator"
 	namespace="Do"
 	version="1.0"
-	name="Tasque"
-	description="Create new tasks in Tasque."
-	author="Guillaume Béland"
+	name="Baconator"
+	description="Bacon bacon beef, bacon beef"
+	author="Alex Launi"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Tasque_Plugin"
+   url="http://bacolicio.us/http://do.davebsd.com/wiki/Baconator_Plugin"
 	>
 
 	<Runtime>
-		<Import assembly="Tasque.dll"/>
+		<Import assembly="Baconator.dll"/>
 	</Runtime>
 
 	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
@@ -20,9 +20,7 @@
 		<Addin id="Universe" version="1.0" />
 	</Dependencies>
 
-	<!-- Extensions included in this assembly -->
-	<!-- Sources -->
 	<Extension path = "/Do/Action">
-		<Action type="Tasque.TasqueCreateTask" />
+		<Action type="Baconator.BaconateAction" />
 	</Extension>
 </Addin>

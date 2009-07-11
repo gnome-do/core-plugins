@@ -74,6 +74,7 @@
       <Entry build="True" name="Emesene" configuration="Debug" />
       <Entry build="True" name="Dropbox" configuration="Debug" />
       <Entry build="True" name="RemindMe" configuration="Debug" />
+      <Entry build="True" name="Baconator" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -150,6 +151,7 @@
       <Entry build="True" name="Emesene" configuration="Release" />
       <Entry build="True" name="Dropbox" configuration="Release" />
       <Entry build="True" name="RemindMe" configuration="Release" />
+      <Entry build="True" name="Baconator" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -226,6 +228,7 @@
     <Execute type="None" entry="Emesene" />
     <Execute type="None" entry="Dropbox" />
     <Execute type="None" entry="RemindMe" />
+    <Execute type="None" entry="Baconator" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -302,5 +305,6 @@
     <Entry filename="Emesene/Emesene.mdp" />
     <Entry filename="Dropbox/Dropbox.mdp" />
     <Entry filename="RemindMe/RemindMe.mdp" />
+    <Entry filename="Baconator/Baconator.mdp" />
   </Entries>
 </Combine>

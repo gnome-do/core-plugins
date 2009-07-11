@@ -1,12 +1,13 @@
 <Addin
 	id="GNOMESession"
-	namespace= "Do"
+	namespace="Do"
 	version="1.6"
 	name="GNOME Session Management"
 	description="Log out, lock your screen, shutdown, suspend, etc."
 	author="David Siegel"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/GNOME_Session_Plugin"
 >
  
 	<Runtime>

@@ -1,12 +1,13 @@
 <Addin 
 	id="VinagreVNC" 
-	namespace= "Do" 
+	namespace="Do" 
 	version="1.1"
 	name="Vinagre VNC"
 	description="Browse your VNC Viewer bookmarks and connect to remote servers."
 	author="Alex Launi"
 	category="Official"
 	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Vinagre_Plugin"
 	>
 
 	<Runtime>

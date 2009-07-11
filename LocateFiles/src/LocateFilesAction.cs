@@ -32,9 +32,6 @@ namespace Locate
 {
 	public class LocateFilesAction : Act
 	{
-		
-		bool allowHidden = false;
-		const uint maxResults = 500;
 		string Error = AddinManager.CurrentLocalizer.GetString ("Locate found 0 files for: ");
 		
 		public override string Name
@@ -54,9 +51,19 @@ namespace Locate
 		
 		public override IEnumerable<Type> SupportedItemTypes
 		{
-			get {
-				yield return typeof (ITextItem);
-			}
+			get { yield return typeof (ITextItem); }
+		}
+		
+		string Arguments {
+			get { return Services.Preferences.Get<LocateFilesAction> ().Get<string> ("Arguments", "-b -i"); }
+		}
+		
+		bool AllowHidden {
+			get { return Services.Preferences.Get<LocateFilesAction> ().Get<bool> ("AllowHidden", true); }
+		}
+		
+		uint MaxResults {
+			get { return (uint) Services.Preferences.Get<LocateFilesAction> ().Get<int> ("MaxResults", 500); }
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
@@ -68,16 +75,15 @@ namespace Locate
 			files = new List<Item> ();
 			query = (items.First () as ITextItem).Text;
 
-			if (string.IsNullOrEmpty(query))
-			{
-				Services.Notifications.Notify("Locate Files",
-					"No text provided for searching.");
+			if (string.IsNullOrEmpty(query)) {
+				Services.Notifications.Notify(AddinManager.CurrentLocalizer.GetString ("Locate Files"),
+					AddinManager.CurrentLocalizer.GetString ("No text provided for searching."));
 				yield break;
 			}
 			
 			locate = new System.Diagnostics.Process ();
 			locate.StartInfo.FileName = "locate";
-			locate.StartInfo.Arguments = string.Format ("-b -i \"{0}\"", query);
+			locate.StartInfo.Arguments = string.Format ("{0} -l {1} \"{2}\"", Arguments, MaxResults, query);
 			locate.StartInfo.RedirectStandardOutput = true;
 			locate.StartInfo.RedirectStandardError = true;
 			locate.StartInfo.UseShellExecute = false;
@@ -86,12 +92,10 @@ namespace Locate
 			string path;
 			uint results = 0;
 			query = query.ToLower ();
-			while (results < maxResults &&
-				       null != (path = locate.StandardOutput.ReadLine ())) {
+			while (null != (path = locate.StandardOutput.ReadLine ())) {
 				// Disallow hidden directories in the absolute path.
 				// This gets rid of messy .svn directories and their contents.
-				if (!allowHidden &&
-						Path.GetDirectoryName (path).Contains ("/."))
+				if (!AllowHidden && Path.GetDirectoryName (path).Contains ("/."))
 					continue;
 
 				results++;
@@ -103,7 +107,8 @@ namespace Locate
 				foreach (Item file in files)
 					yield return file;
 			} else {
-				Services.Notifications.Notify ("Locate Files", Error + query);
+				Services.Notifications.Notify (AddinManager.CurrentLocalizer.GetString ("Locate Files"),
+					Error + query);
 				yield break;
 			}
 		}
@@ -134,8 +139,8 @@ namespace Locate
 
 				if (a_score == b_score)
 					return a_name_lower.Length - b_name_lower.Length;
-				else
-					return a_score - b_score;
+
+				return a_score - b_score;
 			}
 		}
 	}
