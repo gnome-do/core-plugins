@@ -76,6 +76,7 @@ SUBDIRS = \
 	Woof \
 	Wordnet \
 	Xmms2 \
+	XRandR \
 	YouTube \
 	Zim \
 	.

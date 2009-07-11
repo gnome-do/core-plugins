@@ -69,6 +69,7 @@
       <Entry build="True" name="xmms2" configuration="Debug" />
       <Entry build="True" name="TinyUrl" configuration="Debug" />
       <Entry build="True" name="Tracker" configuration="Debug" />
+      <Entry build="True" name="XRandR" configuration="Debug" />
       <Entry build="True" name="YouTube" configuration="Debug" />
       <Entry build="True" name="Emesene" configuration="Debug" />
       <Entry build="True" name="Dropbox" configuration="Debug" />
@@ -144,6 +145,8 @@
       <Entry build="True" name="xmms2" configuration="Release" />
       <Entry build="True" name="TinyUrl" configuration="Release" />
       <Entry build="True" name="Tracker" configuration="Release" />
+
+      <Entry build="True" name="XRandR" configuration="Release" />
       <Entry build="True" name="YouTube" configuration="Release" />
       <Entry build="True" name="Emesene" configuration="Release" />
       <Entry build="True" name="Dropbox" configuration="Release" />
@@ -220,6 +223,7 @@
     <Execute type="None" entry="xmms2" />
     <Execute type="None" entry="TinyUrl" />
     <Execute type="None" entry="Tracker" />
+    <Execute type="None" entry="XRandR" />
     <Execute type="None" entry="YouTube" />
     <Execute type="None" entry="Emesene" />
     <Execute type="None" entry="Dropbox" />
@@ -296,6 +300,7 @@
     <Entry filename="Xmms2/xmms2.mdp" />
     <Entry filename="TinyUrl/TinyUrl.mdp" />
     <Entry filename="Tracker/Tracker.mdp" />
+    <Entry filename="XRandR/XRandR.mdp" />
     <Entry filename="YouTube/YouTube.mdp" />
     <Entry filename="Emesene/Emesene.mdp" />
     <Entry filename="Dropbox/Dropbox.mdp" />

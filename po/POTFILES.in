@@ -265,6 +265,9 @@ WindowManager/src/WindowActions/WindowFocusAction.cs
 WindowManager/src/WindowActions/WindowMaximizeAction.cs
 WindowManager/src/WindowActions/WindowMinimizeAction.cs
 WindowManager/src/WindowItemSource.cs
+XRandR/src/OutputItem.cs
+XRandR/src/OutputModeItem.cs
+XRandR/src/XRandRItemSource.cs
 YouTube/src/Youtube.cs
 Zim/src/ZimNewPageAction.cs
 Zim/src/ZimOpenPageAction.cs

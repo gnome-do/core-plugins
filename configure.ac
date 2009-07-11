@@ -384,6 +384,8 @@ Wordnet/Makefile
 Wordnet/Resources/Wordnet.addin.xml
 Xmms2/Makefile
 Xmms2/Resources/xmms2.addin.xml
+XRandR/Makefile
+XRandR/Resources/XRandR.addin.xml
 YouTube/Makefile
 YouTube/Resources/Youtube.addin.xml
 Zim/Makefile
