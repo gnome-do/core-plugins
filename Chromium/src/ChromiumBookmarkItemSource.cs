@@ -11,11 +11,11 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.	If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
 using System.IO;
@@ -52,7 +52,7 @@ namespace Chromium
 			get { return "chromium-browser"; } 
 		}
 		
-		public override  IEnumerable<Type> SupportedItemTypes {
+		public override	IEnumerable<Type> SupportedItemTypes {
 			get { yield return typeof (BookmarkItem); }
 		}
 		public override IEnumerable<Item> Items	{
@@ -63,33 +63,33 @@ namespace Chromium
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			string bookmarksFile = "~/.config/chromium/Default/Bookmarks".Replace ("~", home);
-      try {
-        FileStream fs = new FileStream(bookmarksFile,FileMode.Open,FileAccess.Read);
-        StreamReader reader = new StreamReader(fs);
-        Regex RE = new Regex("(\"([^\"]*)\" *: *\"([^\"]*)\")|[{}]", RegexOptions.Multiline);
-        String type="",name="",url="";
-        items.Clear();
-        foreach(Match m in RE.Matches(reader.ReadToEnd()))
-        {
-          if(m.Value=="{"){
-            type="";
-            name="";
-            url="";
-          }
-          if(m.Value=="}" && type=="url"){
+			try {
+				FileStream fs = new FileStream(bookmarksFile,FileMode.Open,FileAccess.Read);
+				StreamReader reader = new StreamReader(fs);
+				Regex RE = new Regex("(\"([^\"]*)\" *: *\"([^\"]*)\")|[{}]", RegexOptions.Multiline);
+				String type="",name="",url="";
+				items.Clear();
+				foreach(Match m in RE.Matches(reader.ReadToEnd()))
+				{
+					if(m.Value=="{"){
+						type="";
+						name="";
+						url="";
+					}
+					if(m.Value=="}" && type=="url"){
 						items.Add (new BookmarkItem (name, url));						
-          }
-          if(m.Value.StartsWith("\"")){
-            if(m.Groups[2].Value=="url")
-              url=m.Groups[3].Value;
-            if(m.Groups[2].Value=="name")
-              name=m.Groups[3].Value;
-            if(m.Groups[2].Value=="type")
-              type=m.Groups[3].Value;
-          }
-        }
-      }
-      catch (Exception e) {
+					}
+					if(m.Value.StartsWith("\"")){
+						if(m.Groups[2].Value=="url")
+							url=m.Groups[3].Value;
+						if(m.Groups[2].Value=="name")
+							name=m.Groups[3].Value;
+						if(m.Groups[2].Value=="type")
+							type=m.Groups[3].Value;
+					}
+				}
+			}
+			catch (Exception e) {
 				Log.Error ("Could not read Chromium Bookmarks file {0}: {1}", bookmarksFile, e.Message);
 				Log.Debug (e.StackTrace);
 			}
