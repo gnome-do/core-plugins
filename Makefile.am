@@ -13,6 +13,7 @@ SUBDIRS = \
 	Cl.ickable \
 	ClawsMail \
 	Confluence \
+  Chromium \
 	Del.icio.us \
 	DiskMounter \
 	Dropbox \
