@@ -1,0 +1,26 @@
+<Addin
+	id="Firefox"
+	namespace="Do"
+	version="3.0"
+	name="Firefox"
+	description="Search Firefox 3 bookmarks, bookmark directories, and history."
+	author="David Siegel, Neal Stewart, Alex Launi"
+	category="Official"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Firefox_Plugin"
+	>
+
+	<Runtime>
+		<Import assembly="Firefox.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Firefox.PlacesItemSource" />
+	</Extension>
+</Addin>

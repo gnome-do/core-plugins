@@ -17,7 +17,6 @@ RESOURCES = \
 	Resources/icons/phone.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(EVOLUTION_SHARP_LIBS) \

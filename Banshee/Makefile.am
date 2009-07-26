@@ -23,7 +23,6 @@ RESOURCES = \
 	Resources/Banshee.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(BANSHEE_INDEXER_LIBS) \

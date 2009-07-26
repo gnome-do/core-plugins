@@ -1,0 +1,41 @@
+<Addin 
+	id="WindowManager" 
+	namespace= "Do" 
+	version="1.2"
+	name="Window Manager"
+	description="Control your windows or groups of windows with Do."
+	author="Jason Smith"
+	category="Official"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Window_Manager_Plugin"
+	>
+
+	<Runtime>
+		<Import assembly="WindowManager.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/Action">
+		<Action type="WindowManager.WindowMinimizeAction" />
+		<Action type="WindowManager.WindowMaximizeAction" />
+		<Action type="WindowManager.WindowCloseAction" />
+		<Action type="WindowManager.WindowFocusAction" />
+		<Action type="WindowManager.WindowMoveAction" />
+		<Action type="WindowManager.ScreenTileAction" />
+		<Action type="WindowManager.ScreenCascadeAction" />
+		<Action type="WindowManager.ScreenRestoreAction" />
+		<Action type="WindowManager.ScreenSwapAction" />
+		<Action type="WindowManager.ShowDesktopAction" />
+	</Extension>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="WindowManager.ScreenItemSource" />
+		<ItemSource type="WindowManager.WindowItemSource" />
+	</Extension>
+</Addin>

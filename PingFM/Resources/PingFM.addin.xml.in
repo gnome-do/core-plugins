@@ -1,0 +1,30 @@
+<Addin 
+	id="PingFM" 
+	namespace= "Do" 
+	version="1.1"
+	name="Ping.FM"
+	description="Post microblog/status updates via Ping.FM"
+	author="Peng Deng"
+	category="Community"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Ping.FM_Plugin"
+>
+
+	<Runtime>
+		<Import assembly="PingFM.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="PingFM.PingFMServiceItemSource" />
+	</Extension>
+
+	<Extension path="/Do/Action">
+		<Action type="PingFM.PingFMPost" />
+	</Extension>
+</Addin>

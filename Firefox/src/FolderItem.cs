@@ -20,7 +20,7 @@
 
 using System;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -48,7 +48,7 @@ namespace Firefox
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("A Firefox Bookmarks Directory"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("A Firefox Bookmarks Directory"); }
 		}
 		
 		public override string Icon {

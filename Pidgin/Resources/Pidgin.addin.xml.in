@@ -1,0 +1,36 @@
+<Addin
+	id="Pidgin"
+	namespace="Do"
+	version="2.1"
+	name="Pidgin"
+	description="Search buddies and initiate chats in Pidgin."
+	author="David Siegel, Alex Launi, Chris Szikszoy"
+	category="Official"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Pidgin_Plugin"
+>
+ 
+	<Runtime>
+		<Import assembly="Pidgin.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+	
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="PidginPlugin.PidginContactItemSource" />
+		<ItemSource type="PidginPlugin.PidginAccountItemSource" />
+		<ItemSource type="PidginPlugin.PidginSavedStatusItemSource" />
+	</Extension>
+
+	<Extension path= "/Do/Action">
+		<Action type="PidginPlugin.PidginChatAction" />
+		<Action type="PidginPlugin.PidginSetStatusAction" />
+		<Action type="PidginPlugin.PidginEnableAccount" />
+		<Action type="PidginPlugin.PidginDisableAccount" />
+	</Extension>
+
+</Addin>

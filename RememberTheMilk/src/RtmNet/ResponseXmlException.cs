@@ -7,11 +7,11 @@ namespace RtmNet
 	/// </summary>
 	public class ResponseXmlException : RtmException
 	{
-		internal ResponseXmlException(string message) : base(message)
+		internal ResponseXmlException (string message) : base (message)
 		{
 		}
 
-		internal ResponseXmlException(string message, Exception innerException) : base(message, innerException)
+		internal ResponseXmlException (string message, Exception innerException) : base (message, innerException)
 		{
 		}
 	}

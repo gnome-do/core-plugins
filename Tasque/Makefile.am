@@ -14,7 +14,6 @@ RESOURCES = \
 REFERENCES = \
 	System \
 	System.Core \
-	Mono.Posix \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_LIBS) \
 	$(GCONF_SHARP_20_LIBS) \

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Do.Platform;
 using Do.Universe;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace TrackerSearch
 {
@@ -14,11 +14,11 @@ namespace TrackerSearch
 		const int maxResults = 100;
 
 		public override string Name {
-			get { return Catalog.GetString ("Search with Tracker"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search with Tracker"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Launches Tracker with the given query."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Launches Tracker with the given query."); }
 		}
 
 		public override string Icon {

@@ -1,0 +1,29 @@
+<Addin 
+	id="GMail"
+	namespace="Do"
+	version="1.6"
+	name="Google Contacts"
+	description="Search your GMail contacts."
+	author="Alex Launi"
+	category="Official"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/GMail_Contacts_Plugin"
+	>
+
+	<Runtime>
+		<Import assembly="GoogleContacts.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="GMail.GMailItemSource" />
+	</Extension>
+	<Extension path= "/Do/Action">
+		<Action type="GMail.RecentConversationsActions" />
+	</Extension>
+</Addin>

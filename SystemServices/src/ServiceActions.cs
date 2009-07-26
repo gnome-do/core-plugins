@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -34,11 +34,11 @@ namespace SystemServices {
 		ServiceActionType action;
 		
 		public override string Name {
-			get { return Catalog.GetString (name); }
+			get { return AddinManager.CurrentLocalizer.GetString (name); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString (description); }
+			get { return AddinManager.CurrentLocalizer.GetString (description); }
 		}
 
 		public override string Icon {
@@ -50,8 +50,8 @@ namespace SystemServices {
 		}
  		
 		public BaseServiceAction (string name, string description, ServiceActionType action) {
-			this.name = Catalog.GetString (name);
-			this.description = Catalog.GetString (description);
+			this.name = AddinManager.CurrentLocalizer.GetString (name);
+			this.description = AddinManager.CurrentLocalizer.GetString (description);
 			this.action = action;			
 		}
 

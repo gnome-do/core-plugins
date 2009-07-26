@@ -7,21 +7,37 @@ FILES = \
 	gtk-gui/generated.cs \
 	src/Configuration.cs \
 	src/RTM.cs \
+	src/RTMAddTags.cs \
 	src/RTMCompleteTask.cs \
+	src/RTMDeleteList.cs \
+	src/RTMDeleteNote.cs \
+	src/RTMDeleteTags.cs \
 	src/RTMDeleteTask.cs \
 	src/RTMListItem.cs \
 	src/RTMListItemSource.cs \
+	src/RTMLocationItem.cs \
+	src/RTMLocationItemSource.cs \
 	src/RTMMoveTask.cs \
+	src/RTMNewList.cs \
+	src/RTMNewNote.cs \
 	src/RTMNewTask.cs \
 	src/RTMPostponeTask.cs \
 	src/RTMPreferences.cs \
 	src/RTMPriorityItem.cs \
+	src/RTMRenameList.cs \
 	src/RTMRenameTask.cs \
 	src/RTMSetDue.cs \
+	src/RTMSetEstimate.cs \
 	src/RTMSetUrl.cs \
+	src/RTMSetLocation.cs \
 	src/RTMSetPriority.cs \
 	src/RTMSetRecurrence.cs \
+	src/RTMTagItem.cs \
+	src/RTMTagItemSource.cs \
+	src/RTMTaskAttributeItem.cs \
+	src/RTMNoteItem.cs \
 	src/RTMTaskItem.cs \
+	src/RTMTaskItemSource.cs \
 	src/RTMUncompleteTask.cs \
 	src/RtmNet/ApiKeyRequiredException.cs \
 	src/RtmNet/Auth.cs \
@@ -33,6 +49,7 @@ FILES = \
 	src/RtmNet/Groups.cs \
 	src/RtmNet/GroupSearchResults.cs \
 	src/RtmNet/List.cs \
+	src/RtmNet/Location.cs \
 	src/RtmNet/Methods.cs \
 	src/RtmNet/Note.cs \
 	src/RtmNet/Response.cs \
@@ -49,7 +66,11 @@ FILES = \
 
 RESOURCES = \
 	Resources/RTM.addin.xml \
+	Resources/icons/note-add.png \
+	Resources/icons/note-delete.png \
 	Resources/icons/rtm.png \
+	Resources/icons/tag-add.png \
+	Resources/icons/tag-delete.png \
 	Resources/icons/task-add.png \
 	Resources/icons/task-complete.png \
 	Resources/icons/task-delete.png \
@@ -72,7 +93,8 @@ RESOURCES = \
 	Resources/icons/task-rename.png \
 	Resources/icons/task-repeat.png \
 	Resources/icons/task-setdue.png \
-	Resources/icons/task-seturl.png
+	Resources/icons/task-seturl.png \
+	Resources/icons/task-tag.png
 
 REFERENCES = \
 	System \
@@ -80,7 +102,6 @@ REFERENCES = \
 	System.Data \
 	System.Web \
 	System.Xml \
-	Mono.Posix \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_PLATFORM_LINUX_LIBS) \

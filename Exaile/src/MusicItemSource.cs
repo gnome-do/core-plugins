@@ -21,7 +21,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -41,11 +41,11 @@ namespace Exaile
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Exaile Music"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Exaile Music"); }
 		}
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Provides access to artists and albums from Exaile."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Provides access to artists and albums from Exaile."); }
 		}
 		
 		public override string Icon {

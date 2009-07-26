@@ -64,7 +64,7 @@ namespace Flickr {
             // Container child vbox2.Gtk.Box+BoxChild
             this.status_lbl = new Gtk.Label();
             this.status_lbl.Name = "status_lbl";
-            this.status_lbl.LabelProp = Mono.Unix.Catalog.GetString("Do needs your authorization in order to upload photos to your flickr account. Press the \"Authorize\" button to open a web browser and give Do authorization. ");
+            this.status_lbl.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Do needs your authorization in order to upload photos to your flickr account. Press the \"Authorize\" button to open a web browser and give Do authorization. ");
             this.status_lbl.Wrap = true;
             this.vbox2.Add(this.status_lbl);
             Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox2[this.status_lbl]));
@@ -91,7 +91,7 @@ namespace Flickr {
             this.frame1.Add(this.GtkAlignment);
             this.auth_lbl = new Gtk.Label();
             this.auth_lbl.Name = "auth_lbl";
-            this.auth_lbl.LabelProp = Mono.Unix.Catalog.GetString("<b>Account</b>");
+            this.auth_lbl.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("<b>Account</b>");
             this.auth_lbl.UseMarkup = true;
             this.frame1.LabelWidget = this.auth_lbl;
             this.vbox1.Add(this.frame1);
@@ -99,7 +99,6 @@ namespace Flickr {
             w7.Position = 0;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbuttonbox1 = new Gtk.HButtonBox();
-            this.hbuttonbox1.Name = "hbuttonbox1";
             // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
             this.auth_btn = new Gtk.Button();
             this.auth_btn.CanFocus = true;
@@ -116,7 +115,7 @@ namespace Flickr {
             w9.Add(w10);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w12 = new Gtk.Label();
-            w12.LabelProp = Mono.Unix.Catalog.GetString("_Authorize");
+            w12.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_Authorize");
             w12.UseUnderline = true;
             w9.Add(w12);
             w8.Add(w9);

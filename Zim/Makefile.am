@@ -13,7 +13,6 @@ RESOURCES = \
 	Resources/Zim.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Xml \

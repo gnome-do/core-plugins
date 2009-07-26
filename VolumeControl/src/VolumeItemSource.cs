@@ -21,7 +21,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 using Do.Universe;
 
 namespace VolumeControl
@@ -36,11 +36,11 @@ namespace VolumeControl
 		}
 			
 		public override string Name {
-			get { return Catalog.GetString ("Volume Actions"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Volume Actions"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Adjust your system volume"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Adjust your system volume"); }
 		}
 		
 		public override string Icon {

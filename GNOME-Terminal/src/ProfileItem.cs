@@ -23,7 +23,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 
 using GConf;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -33,8 +33,8 @@ namespace GNOME.Terminal
 
 	public class ProfileItem : Item, IOpenableItem
 	{
-		readonly new string DefaultName = Catalog.GetString ("Unnamed Profile");
-		readonly new string DefaultDescription = Catalog.GetString ("GNOME Terminal Profile");
+		readonly new string DefaultName = AddinManager.CurrentLocalizer.GetString ("Unnamed Profile");
+		readonly new string DefaultDescription = AddinManager.CurrentLocalizer.GetString ("GNOME Terminal Profile");
 
 		string name, description;
 

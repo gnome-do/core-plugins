@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -28,11 +28,11 @@ namespace Cl.ickable
 	{
 		
 		public override string Name {
-			get { return Catalog.GetString ("Cl.ickable Items"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Cl.ickable Items"); }
 		}
 		
 		public override string Description { 
-			get { return Catalog.GetString ("Usefull Cl.ickable Items"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Usefull Cl.ickable Items"); }
 		}
 		
 		public override string Icon {

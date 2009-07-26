@@ -1,0 +1,36 @@
+<Addin 
+	id="File"
+	namespace="Do"
+	version="2.5"
+	name="Files and Folders"
+	description="Search, browse, and perform other actions on files and folders."
+	author="David Siegel, Alex Launi, Ankit Solanki, Chris Szikszoy"
+	category="Official"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/File_Plugin"
+	>
+
+	<Runtime>
+		<Import assembly="File.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Do.FilesAndFolders.FileItemSource" />
+		<ItemSource type="Do.FilesAndFolders.RecentFileItemSource" />
+	</Extension>
+
+	<Extension path="/Do/Action">
+		<Action type="Do.FilesAndFolders.NewFileAction" />
+		<Action type="Do.FilesAndFolders.NewFolderAction" />
+		<Action type="Do.FilesAndFolders.CopyAction" />
+		<Action type="Do.FilesAndFolders.MoveAction" />
+		<Action type="Do.FilesAndFolders.RenameAction" />
+		<Action type="Do.FilesAndFolders.MoveToTrashAction" />
+	</Extension>
+</Addin>

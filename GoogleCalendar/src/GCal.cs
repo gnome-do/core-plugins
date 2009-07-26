@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -31,7 +31,7 @@ namespace GCalendar
 	
 	public static class GCal
 	{
-		static readonly string ConnectionErrorMessage = Catalog.GetString ("Failed to connect to GCal service");
+		static readonly string ConnectionErrorMessage = AddinManager.CurrentLocalizer.GetString ("Failed to connect to GCal service");
 		static GCalClient client;
 		
 		static GCal()

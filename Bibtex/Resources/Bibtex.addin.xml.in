@@ -1,0 +1,29 @@
+<Addin
+	id="Bibtex"
+	namespace="Do"
+	version="1.8"
+	name="Bibtex"
+	description="Quickly open documents linked from BibTeX files."
+	author="Niall Murphy"
+	category="Community"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Bibtex_Plugin"
+>
+
+	<Runtime>
+		<Import assembly="Bibtex.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path = "/Do/Action">
+		<Action type="Bibtex.BibtexCiteAction" />
+	</Extension>
+	<Extension path = "/Do/ItemSource">
+		<ItemSource type="Bibtex.BibtexItemSource" />
+	</Extension>
+</Addin>

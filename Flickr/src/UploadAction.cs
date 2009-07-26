@@ -24,7 +24,7 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -37,11 +37,11 @@ namespace Flickr
 		const string ImageExtensions = ".jpg .jpeg .gif .png .tiff";
 	
 		public override string Name {
-			get { return Catalog.GetString ("Upload photo"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload photo"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Upload one or more photos to Flickr"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Upload one or more photos to Flickr"); }
 		}
 		
 		/*
@@ -109,11 +109,20 @@ namespace Flickr
 			}
 		
 			Services.Application.RunOnThread ( () => {
-				using (UploadPool uploadQueue = new UploadPool (tags)) {
+				/* Mono 2.4 bug hack
+				 * This can't use using () due to some crazy-wierd scoping problem.
+				 * See https://bugzilla.novell.com/show_bug.cgi?id=516676 for details.
+				 * 
+				 */
+				IEnumerable<IFileItem> temp = uploads;
+				UploadPool uploadQueue = new UploadPool (tags);
+				try {
 					foreach (IFileItem photo in uploads)
 						uploadQueue.EnqueueUpload (photo);
-						
+					
 					uploadQueue.BeginUploads ();
+				} finally {
+					uploadQueue.Dispose ();
 				}
 			});
 

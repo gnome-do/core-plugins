@@ -1,0 +1,29 @@
+<Addin
+	id="GoogleSearch"
+	namespace="Do"
+	version="1.5"
+	name="Google Search"
+	description="Perform Google Searches from Do."
+	author="Brian Lucas"
+	category="Community"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Google_Search_Plugin"
+>
+ 
+	<Runtime>
+		<Import assembly="GoogleSearch.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+	
+	<!-- Extensions included in this assembly -->
+	<!-- Sources -->
+	<Extension path = "/Do/Action">
+		<Action type="InlineGoogleSearch.InlineGoogleSearch" />
+		<Action type="InlineGoogleSearch.ImFeelingLucky" />
+	</Extension>
+</Addin>

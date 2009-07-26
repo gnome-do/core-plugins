@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
  
+using Mono.Addins;
+
 using Do.Universe;
 using Do.Platform;
 using Do.Universe.Common;
@@ -16,7 +18,7 @@ namespace Do.Plugins {
         }
  
         public override string Description {
-            get { return "Perform a calculation using Qalculate"; }
+            get { return AddinManager.CurrentLocalizer.GetString ("Perform a calculation using Qalculate."); }
         }
  
         public override string Icon {

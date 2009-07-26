@@ -22,7 +22,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Platform;
 using Do.Universe;
@@ -36,11 +36,11 @@ namespace GMail
 		const string url = "https://mail.google.com/mail/?shva=1#search/from:({0})+OR+to:({0})";
 		
 		public override string Name {
-			get { return Catalog.GetString ("View recent conversations"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("View recent conversations"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("View recent emails and chat logs with a friend"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("View recent emails and chat logs with a friend"); }
 		}
 
 		public override string Icon {

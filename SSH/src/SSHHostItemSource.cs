@@ -26,7 +26,7 @@ using System.Text.RegularExpressions;
 using Do.Platform;
 using Do.Universe;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace SSH
 {
@@ -40,8 +40,8 @@ namespace SSH
 			items = new List<Item> ();
 		}
 
-		public override string Name { get { return Catalog.GetString ("SSH Hosts"); } }
-		public override string Description { get { return Catalog.GetString ("Parses ssh-config"); } }
+		public override string Name { get { return AddinManager.CurrentLocalizer.GetString ("SSH Hosts"); } }
+		public override string Description { get { return AddinManager.CurrentLocalizer.GetString ("Parses ssh-config"); } }
 		public override string Icon { get { return "network-server"; } }
 
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -65,24 +65,24 @@ namespace SSH
 			try {
 				string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 				string hostsFile = Path.Combine(home, ".ssh/config");
-				FileStream fs = new FileStream (hostsFile, FileMode.Open, FileAccess.Read);
 				
-				Regex NameRegex = new Regex ("^\\s*Host\\s+(.+)\\s*$");
-				
-				using (StreamReader reader = new StreamReader (fs))
-				{
-					string s;
-					while ((s = reader.ReadLine ()) != null) {
-						Match NameMatch = NameRegex.Match (s);
-						if (NameMatch.Groups.Count != 2) continue;
-						
-						string line = NameMatch.Groups[1].ToString();
-						string[] hosts = line.Split(new string[] { " " }, StringSplitOptions.None);
-						foreach (string host in hosts)
-							items.Add (new SSHHostItem (host));
+				using (FileStream fs = new FileStream (hostsFile, FileMode.Open, FileAccess.Read)) {
+					Regex NameRegex = new Regex ("^\\s*Host\\s+(.+)\\s*$");
+					
+					using (StreamReader reader = new StreamReader (fs))
+					{
+						string s;
+						while ((s = reader.ReadLine ()) != null) {
+							Match NameMatch = NameRegex.Match (s);
+							if (NameMatch.Groups.Count != 2) continue;
+							
+							string line = NameMatch.Groups[1].ToString();
+							string[] hosts = line.Split(new string[] { " " }, StringSplitOptions.None);
+							foreach (string host in hosts)
+								items.Add (new SSHHostItem (host));
+						}
 					}
 				}
-				fs.Dispose ();
 			} catch { }
 		}
 	}

@@ -20,7 +20,7 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -37,11 +37,11 @@ namespace GNOME {
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("GNOME Screenshot Items"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("GNOME Screenshot Items"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Whole screen or current window."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Whole screen or current window."); }
 		}
 		
 		public override string Icon {

@@ -7,13 +7,16 @@ SUBDIRS = \
 	Alias \
 	AptURL \
 	Archive \
+	Baconator \
 	Banshee \
 	Bibtex \
 	Cl.ickable \
 	ClawsMail \
 	Confluence \
+	Chromium \
 	Del.icio.us \
 	DiskMounter \
+	Dropbox \
 	Emesene \
 	EOG-Slideshow \
 	Epiphany \
@@ -75,6 +78,7 @@ SUBDIRS = \
 	Woof \
 	Wordnet \
 	Xmms2 \
+	XRandR \
 	YouTube \
 	Zim \
 	.

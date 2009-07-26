@@ -22,7 +22,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 
@@ -31,11 +31,11 @@ namespace GNOME {
 	public class TakeScreenshotAction : Act {
 
 		public override string Name {
-			get { return Catalog.GetString ("Take screenshot"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Take screenshot"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Takes a screenshot with optional delay."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Takes a screenshot with optional delay."); }
 		}
 
 		public override string Icon {

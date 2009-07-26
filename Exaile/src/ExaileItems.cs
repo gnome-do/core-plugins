@@ -21,7 +21,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -47,7 +47,7 @@ namespace Exaile
 	class BrowseArtistsMusicItem : BrowseMusicItem
 	{
 		public BrowseArtistsMusicItem ():
-			base (Catalog.GetString ("Browse Artists"), Catalog.GetString ("Browse Exaile Music by Artist"))
+			base (AddinManager.CurrentLocalizer.GetString ("Browse Artists"), AddinManager.CurrentLocalizer.GetString ("Browse Exaile Music by Artist"))
 		{
 		}
 	}
@@ -55,7 +55,7 @@ namespace Exaile
 	class BrowseAlbumsMusicItem : BrowseMusicItem
 	{
 		public BrowseAlbumsMusicItem ():
-			base (Catalog.GetString ("Browse Albums"), Catalog.GetString ("Browse Exaile Music by Album"))
+			base (AddinManager.CurrentLocalizer.GetString ("Browse Albums"), AddinManager.CurrentLocalizer.GetString ("Browse Exaile Music by Album"))
 		{
 		}
 	}
@@ -64,20 +64,20 @@ namespace Exaile
 	{
 		public static readonly IEnumerable<ExaileRunnableItem> Items = new [] {
 			new ExaileRunnableItem (
-				Catalog.GetString ("Show Current Track"),
-				Catalog.GetString ("Show Notification of Current Track in Exaile"),
+				AddinManager.CurrentLocalizer.GetString ("Show Current Track"),
+				AddinManager.CurrentLocalizer.GetString ("Show Notification of Current Track in Exaile"),
 				"gnome-mime-audio",
 				"--gui-query"),
 
 			new ExaileRunnableItem (
-				Catalog.GetString ("Volume Up"),
-				Catalog.GetString ("Increase Exaile Playback Volume"),
+				AddinManager.CurrentLocalizer.GetString ("Volume Up"),
+				AddinManager.CurrentLocalizer.GetString ("Increase Exaile Playback Volume"),
 				"audio-volume-high",
 				"--increase_vol=10"),
 
 			new ExaileRunnableItem (
-				Catalog.GetString ("Volume Down"),
-				Catalog.GetString ("Decrease Exaile Playback Volume"),
+				AddinManager.CurrentLocalizer.GetString ("Volume Down"),
+				AddinManager.CurrentLocalizer.GetString ("Decrease Exaile Playback Volume"),
 				"audio-volume-low",
 				"--decrease_vol=10"),
 			};

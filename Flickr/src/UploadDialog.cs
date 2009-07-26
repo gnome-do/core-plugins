@@ -1,5 +1,5 @@
 using System;
-using Mono.Unix;
+using Mono.Addins;
 
 using Gtk;
 using Gdk;
@@ -29,17 +29,17 @@ namespace Flickr
 			
 			this.CurrentUpload = 0;
 			this.IsDestroyed = false;
-			UploadingLabel = Catalog.GetString ("Uploading {0}...");
-			ProgressLabel = Catalog.GetString ("Uploading {0} of {1}...");
-			FinishedUploadLabel = Catalog.GetString ("Finished uploading images to Flickr.");
-			FinishedProgressLabel = Catalog.GetString ("Uploaded {0} images");
-			ContinuationText = Catalog.GetString ("Your images are still being uploaded.");
+			UploadingLabel = AddinManager.CurrentLocalizer.GetString ("Uploading {0}...");
+			ProgressLabel = AddinManager.CurrentLocalizer.GetString ("Uploading {0} of {1}...");
+			FinishedUploadLabel = AddinManager.CurrentLocalizer.GetString ("Finished uploading images to Flickr.");
+			FinishedProgressLabel = AddinManager.CurrentLocalizer.GetString ("Uploaded {0} images");
+			ContinuationText = AddinManager.CurrentLocalizer.GetString ("Your images are still being uploaded.");
 		
 			using (Pixbuf FlickrPix = Pixbuf.LoadFromResource ("flickr.png"))
 				FlickrImage.Pixbuf = FlickrPix.ScaleSimple (75, 75, Gdk.InterpType.Bilinear);
 			
-			TextLabel.Text = Catalog.GetString ("Your images are being uploaded to Flickr.");
-			uploadProgress.Text = Catalog.GetString (string.Format (ProgressLabel, CurrentUpload, TotalUploads));
+			TextLabel.Text = AddinManager.CurrentLocalizer.GetString ("Your images are being uploaded to Flickr.");
+			uploadProgress.Text = AddinManager.CurrentLocalizer.GetString (string.Format (ProgressLabel, CurrentUpload, TotalUploads));
 		}
 		
 		public int TotalUploads {get; set; }

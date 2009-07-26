@@ -1,0 +1,53 @@
+<Addin
+	id="RememberTheMilk"
+	namespace= "Do"
+	version="2.0"
+	name="Remember The Milk"
+	description="Manage tasks with Remember The Milk."
+	author="Peng Deng, Jonathan Davies"
+	category="Community"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Remember_The_Milk_Plugin"
+>
+
+	<Runtime>
+		<Import assembly="RTM.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="RememberTheMilk.RTMListItemSource" />
+		<ItemSource type="RememberTheMilk.RTMLocationItemSource" />	
+		<ItemSource type="RememberTheMilk.RTMTaskItemSource" />
+		<ItemSource type="RememberTheMilk.RTMTagItemSource" />
+	</Extension>
+
+	<Extension path="/Do/Action">
+		<Action type="RememberTheMilk.RTMAddTags" />
+		<Action type="RememberTheMilk.RTMNewList" />
+		<Action type="RememberTheMilk.RTMNewNote" />
+		<Action type="RememberTheMilk.RTMNewTask" />
+		<Action type="RememberTheMilk.RTMDeleteList" />
+		<Action type="RememberTheMilk.RTMDeleteNote" />
+		<Action type="RememberTheMilk.RTMDeleteTags" />
+		<Action type="RememberTheMilk.RTMDeleteTask" />	
+		<Action type="RememberTheMilk.RTMCompleteTask" />
+		<Action type="RememberTheMilk.RTMSetPriority" />
+		<Action type="RememberTheMilk.RTMSetDue" />
+		<Action type="RememberTheMilk.RTMSetUrl" />
+		<Action type="RememberTheMilk.RTMRenameList" />
+		<Action type="RememberTheMilk.RTMMoveTask" />
+		<Action type="RememberTheMilk.RTMRenameTask" />
+		<Action type="RememberTheMilk.RTMPostponeTask" />
+		<Action type="RememberTheMilk.RTMSetEstimate" />
+		<Action type="RememberTheMilk.RTMSetLocation" />
+		<Action type="RememberTheMilk.RTMSetRecurrence" />
+		<Action type="RememberTheMilk.RTMUncompleteTask" />
+	</Extension>
+</Addin>

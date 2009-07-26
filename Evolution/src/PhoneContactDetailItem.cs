@@ -19,7 +19,7 @@
 
 using System;
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Evolution
 {
@@ -31,9 +31,9 @@ namespace Evolution
 
 		public override string Name {
 			get {
-				if (Key.Contains (".work")) return Catalog.GetString ("Work Phone");
-				if (Key.Contains (".home")) return Catalog.GetString ("Home Phone");
-				if (Key.Contains (".mobile")) return Catalog.GetString ("Mobile Phone");
+				if (Key.Contains (".work")) return AddinManager.CurrentLocalizer.GetString ("Work Phone");
+				if (Key.Contains (".home")) return AddinManager.CurrentLocalizer.GetString ("Home Phone");
+				if (Key.Contains (".mobile")) return AddinManager.CurrentLocalizer.GetString ("Mobile Phone");
 				return "Phone";
 			}
 		}

@@ -23,7 +23,6 @@ RESOURCES = \
 	Resources/icons/phone.png
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Security \

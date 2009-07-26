@@ -30,18 +30,18 @@ using Do.Platform.Linux;
 using Do.Universe;
 using Do.Universe.Common;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Pastebin
 {
 	public class PastebinAction : Act, IConfigurable
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Send to Pastebin"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Send to Pastebin"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Sends the text to Pastebin."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Sends the text to Pastebin."); }
 		}
 		
 		public override string Icon {

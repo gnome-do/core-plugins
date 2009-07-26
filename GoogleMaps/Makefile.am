@@ -9,7 +9,6 @@ RESOURCES = \
 	Resources/GoogleMaps.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	System.Web \

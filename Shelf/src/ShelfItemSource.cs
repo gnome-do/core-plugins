@@ -25,7 +25,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Do.Platform;
 using Do.Universe;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Shelf
 {		
@@ -46,7 +46,7 @@ namespace Shelf
 
 			public Item MaybeGetItem ()
 			{
-				return Services.Core.GetElement (UniqueId) as Item;
+				return Services.Core.GetItem (UniqueId);
 			}
 		}
 		
@@ -169,11 +169,11 @@ namespace Shelf
 		}
 		
 		public override string Name {
-			get { return Catalog.GetString ("Shelves"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Shelves"); }
 		}
 
 		public override string Description {
-			get { return Catalog.GetString ("Your Shelves"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Your Shelves"); }
 		}
 
 		public override string Icon {

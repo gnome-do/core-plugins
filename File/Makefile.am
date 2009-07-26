@@ -32,7 +32,6 @@ RESOURCES = \
 	Resources/File.addin.xml
 
 REFERENCES = \
-	Mono.Posix \
 	System \
 	System.Core \
 	$(GTK_SHARP_20_LIBS) \

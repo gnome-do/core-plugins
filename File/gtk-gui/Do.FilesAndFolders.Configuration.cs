@@ -135,7 +135,7 @@ namespace Do.FilesAndFolders {
             w4.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w5 = new Gtk.Image();
-            w5.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 20);
+            w5.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 16);
             w4.Add(w5);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w7 = new Gtk.Label();
@@ -183,7 +183,7 @@ namespace Do.FilesAndFolders {
             this.show_hidden_chk = new Gtk.CheckButton();
             this.show_hidden_chk.CanFocus = true;
             this.show_hidden_chk.Name = "show_hidden_chk";
-            this.show_hidden_chk.Label = Mono.Unix.Catalog.GetString("Show hidden files");
+            this.show_hidden_chk.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Show hidden files");
             this.show_hidden_chk.DrawIndicator = true;
             this.show_hidden_chk.UseUnderline = true;
             this.show_hidden_chk.BorderWidth = ((uint)(5));
@@ -200,7 +200,7 @@ namespace Do.FilesAndFolders {
             // Notebook tab
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Indexed Folders");
+            this.label1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Indexed Folders");
             this.notebook1.SetTabLabel(this.vbox4, this.label1);
             this.label1.ShowAll();
             // Container child notebook1.Gtk.Notebook+NotebookChild
@@ -252,7 +252,7 @@ namespace Do.FilesAndFolders {
             w30.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w31 = new Gtk.Image();
-            w31.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 20);
+            w31.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-remove", Gtk.IconSize.Button, 16);
             w30.Add(w31);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w33 = new Gtk.Label();
@@ -308,7 +308,7 @@ namespace Do.FilesAndFolders {
             // Notebook tab
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
-            this.label2.LabelProp = Mono.Unix.Catalog.GetString("Ignored Folders");
+            this.label2.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Ignored Folders");
             this.notebook1.SetTabLabel(this.vbox5, this.label2);
             this.label2.ShowAll();
             this.vbox1.Add(this.notebook1);

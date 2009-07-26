@@ -1,0 +1,26 @@
+<Addin
+	id="Baconator"
+	namespace="Do"
+	version="1.0"
+	name="Baconator"
+	description="Bacon bacon beef, bacon beef"
+	author="Alex Launi"
+	category="Community"
+	defaultEnabled="false"
+   url="http://bacolicio.us/http://do.davebsd.com/wiki/Baconator_Plugin"
+	>
+
+	<Runtime>
+		<Import assembly="Baconator.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path = "/Do/Action">
+		<Action type="Baconator.BaconateAction" />
+	</Extension>
+</Addin>

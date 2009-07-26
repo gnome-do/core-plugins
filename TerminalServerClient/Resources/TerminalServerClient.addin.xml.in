@@ -1,0 +1,28 @@
+<Addin 
+	id="TerminalServerClient" 
+	namespace="Do"
+	version="1.1"
+	name="Terminal Server Client"
+	description="Search and open Terminal Server Client connections."
+	author="Ankit Solanki"
+	category="Community"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Terminal_Server_Client_Plugin"
+	>
+
+	<Runtime>
+		<Import assembly="TerminalServerClient.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<!-- Extensions included in this assembly -->
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="TSClient.TSClientItemSource" />
+	</Extension>
+
+</Addin>

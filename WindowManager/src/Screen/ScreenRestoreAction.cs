@@ -30,7 +30,7 @@ using Do.Universe;
 using Do.Interface.Wink;
 
 using Wnck;
-using Mono.Unix;
+using Mono.Addins;
 
 namespace WindowManager
 {
@@ -38,11 +38,11 @@ namespace WindowManager
 	public class ScreenRestoreAction : ScreenActionAction
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Restore Windows"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Restore Windows"); }
 		}
 		
 		public override string Description {
-			get { return Catalog.GetString ("Restore Windows to their Previous Positions"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Restore Windows to their Previous Positions"); }
 		}
 
 		public override string Icon {

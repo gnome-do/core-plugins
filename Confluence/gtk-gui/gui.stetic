@@ -5,6 +5,7 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
+    <widget-library name="Do.Platform.Linux, Version=0.9.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Confluence.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Confluence.ConfluenceConfigWidget" design-size="460 184">

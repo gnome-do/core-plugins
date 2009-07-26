@@ -21,7 +21,7 @@
 using System;
 using Do.Universe;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace Banshee
 {
@@ -188,7 +188,7 @@ namespace Banshee
 		
 		public override string Description {
 			get { return string.Format ("{0} {1} {2}", 
-				Catalog.GetString ("All Music by"), artist, Year); }
+				AddinManager.CurrentLocalizer.GetString ("All Music by"), artist, Year); }
 		}
 		
 		public override string Icon {

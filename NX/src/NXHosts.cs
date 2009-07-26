@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-using Mono.Unix;
+using Mono.Addins;
 
 namespace NX {
 
@@ -43,7 +43,7 @@ namespace NX {
         }
                 
         public override string Description { 
-        	get { return Catalog.GetString ("NX Host"); }
+        	get { return AddinManager.CurrentLocalizer.GetString ("NX Host"); }
         }
         
         public override string Icon {
@@ -64,11 +64,11 @@ namespace NX {
         }
         
         public override string Name { 
-        	get { return Catalog.GetString ("NX Hosts"); } 
+        	get { return AddinManager.CurrentLocalizer.GetString ("NX Hosts"); } 
         }
         
         public override string Description { 
-        	get { return Catalog.GetString ("Parses nx sessions"); } 
+        	get { return AddinManager.CurrentLocalizer.GetString ("Parses nx sessions"); } 
         }
         
         public override string Icon { 

@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Mono.Unix;
+using Mono.Addins;
 
 using Do.Universe;
 using Do.Platform;
@@ -32,12 +32,12 @@ namespace OpenSearch
 	{		
 		public override string Name
 		{
-			get { return Catalog.GetString ("Search Web"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search Web"); }
 		}
 		
 		public override string Description
 		{
-			get { return Catalog.GetString ("Searches the web using OpenSearch plugins."); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Searches the web using OpenSearch plugins."); }
 		}
 		
 		public override string Icon

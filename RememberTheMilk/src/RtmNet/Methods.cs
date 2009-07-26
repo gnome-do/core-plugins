@@ -14,12 +14,11 @@ namespace RtmNet
 		{
 		}
 
-		internal static string[] GetMethods(XmlElement element)
+		internal static string[] GetMethods (XmlElement element)
 		{
-			XmlNodeList nodes = element.SelectNodes("method");
-			string[] _methods = new string[nodes.Count];
-			for(int i = 0; i < nodes.Count; i++)
-			{
+			XmlNodeList nodes = element.SelectNodes ("method");
+			string[] _methods = new string [nodes.Count];
+			for (int i = 0; i < nodes.Count; i++) {
 				_methods[i] = nodes[i].Value;
 			}
 			return _methods;
@@ -39,45 +38,45 @@ namespace RtmNet
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public Method()
+		public Method ()
 		{
 		}
 
 		/// <summary>
 		/// The name of the method.
 		/// </summary>
-		[XmlAttribute("name", Form=XmlSchemaForm.Unqualified)]
+		[XmlAttribute ("name", Form = XmlSchemaForm.Unqualified)]
 		public string Name;
 
 		/// <summary>
 		/// The description of the method.
 		/// </summary>
-		[XmlElement("description", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("description", Form = XmlSchemaForm.Unqualified)]
 		public string Description;
 
 		/// <summary>
 		/// An example response for the method.
 		/// </summary>
-		[XmlElement("response", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("response", Form = XmlSchemaForm.Unqualified)]
 		public string Response;
 
 		/// <summary>
 		/// An explanation of the example response for the method.
 		/// </summary>
-		[XmlElement("explanation", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("explanation", Form = XmlSchemaForm.Unqualified)]
 		public string Explanation;
 
 		/// <summary>
 		/// The arguments of the method.
 		/// </summary>
-		[XmlElement("arguments", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("arguments", Form = XmlSchemaForm.Unqualified)]
 		public Arguments Arguments;
 
 		/// <summary>
 		/// The possible errors that could be returned by the method.
 		/// </summary>
-		[XmlArray()]
-		[XmlArrayItem("error", typeof(MethodError), Form=XmlSchemaForm.Unqualified)]
+		[XmlArray ()]
+		[XmlArrayItem ("error", typeof (MethodError), Form = XmlSchemaForm.Unqualified)]
 		public MethodError[] Errors;
 
 	}
@@ -91,7 +90,7 @@ namespace RtmNet
 		/// <summary>
 		/// A collection of <see cref="Argument"/> instances.
 		/// </summary>
-		[XmlElement("argument", Form=XmlSchemaForm.Unqualified)]
+		[XmlElement ("argument", Form = XmlSchemaForm.Unqualified)]
 		public Argument[] ArgumentCollection;
 	}
 
@@ -104,19 +103,19 @@ namespace RtmNet
 		/// <summary>
 		/// The name of the argument.
 		/// </summary>
-		[XmlElement("name")]
+		[XmlElement ("name")]
 		public string ArgumentName;
 
 		/// <summary>
 		/// Is the argument optional or not.
 		/// </summary>
-		[XmlElement("optional")]
+		[XmlElement ("optional")]
 		public int Optional;
 
 		/// <summary>
 		/// The description of the argument.
 		/// </summary>
-		[XmlText()]
+		[XmlText ()]
 		public string ArgumentDescription;
 	}
 
@@ -129,7 +128,7 @@ namespace RtmNet
 		/// <summary>
 		/// The code for the error.
 		/// </summary>
-		[XmlElement("code")]
+		[XmlElement ("code")]
 		public int Code;
 
 	}

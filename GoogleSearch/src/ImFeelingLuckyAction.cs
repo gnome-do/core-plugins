@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Do.Universe;
 using Do.Platform;
-using Mono.Unix;
+using Mono.Addins;
 
 /// <summary>
 /// Action that immediately takes you to the first result provided by Google
@@ -42,7 +42,7 @@ namespace InlineGoogleSearch {
 		/// </value>
 		public override string Name {
 			get { 
-				return Catalog.GetString ("I'm Feeling Lucky!"); 
+				return AddinManager.CurrentLocalizer.GetString ("I'm Feeling Lucky!"); 
 			}
 		}
 		
@@ -51,7 +51,7 @@ namespace InlineGoogleSearch {
 		/// </value>
 		public override string Description {
 			get { 
-				return Catalog.GetString ("Searches Google and takes you to the first result"); 
+				return AddinManager.CurrentLocalizer.GetString ("Searches Google and takes you to the first result"); 
 			}
 		}
 		

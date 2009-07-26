@@ -35,6 +35,10 @@ OUTPUT_FILES = \
 plugindir = ${libdir}/gnome-do/plugins
 plugin_DATA = $(OUTPUT_FILES)
 
+# All plugins should be translatable; every plugin will need to link to
+# Mono.Addins for this.
+COMPONENT_REFERENCES = $(MONO_ADDINS_LIBS)
+
 MCS_FLAGS = $(MCS_LINQ_FLAG) -noconfig -codepage:utf8 -warn:4
 
 if ENABLE_DEBUG
