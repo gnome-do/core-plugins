@@ -13,14 +13,12 @@
 
 using System;
 using System.Collections.Generic;
-
-
 using Do.Universe;
 
 namespace SqueezeCenter
 {
 
-	public abstract class RadioItem : Item
+	public abstract class RadioItem : SqueezeCenterItem
 	{
 		protected RadioSubItem[] children;
 				
@@ -39,6 +37,9 @@ namespace SqueezeCenter
 		{
 			get { return "radio.png@" + this.GetType ().Assembly.FullName; }			
 		}		
+		
+		public override abstract string Name { get; }
+		public override abstract string Description { get; }
 	}
 		
 	public class RadioSuperItem : RadioItem
