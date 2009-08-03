@@ -13,11 +13,20 @@ FILES = \
 	src/MusicItem.cs \
 	src/NetworkStreamTextReader.cs \
 	src/PlayCommand.cs \
-	src/PlayerCommands.cs \
+	src/Player commands/Next.cs \
+	src/Player commands/Pause.cs \
+	src/Player commands/Play.cs \
+	src/Player commands/PlayerCommand.cs \
+	src/Player commands/Prev.cs \
+	src/Player commands/Sync.cs \
+	src/Player commands/TurnOff.cs \
+	src/Player commands/TurnOn.cs \
+	src/Player commands/Unsync.cs \
 	src/Player.cs \
 	src/RadioItem.cs \
 	src/Server.cs \
 	src/Settings.cs \
+	src/SqueezeCenterItem.cs \
 	src/Util.cs
 
 RESOURCES = \
@@ -27,8 +36,7 @@ RESOURCES = \
 	Resources/icons/SB_off.png \
 	Resources/icons/SB_on.png \
 	Resources/icons/sync.png \
-	Resources/icons/unsync.png \
-	Resources/SqueezeCenter.addin.xml
+	Resources/icons/unsync.png
 
 REFERENCES = \
 	System \
