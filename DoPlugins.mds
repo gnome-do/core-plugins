@@ -74,6 +74,7 @@
       <Entry build="True" name="Emesene" configuration="Debug" />
       <Entry build="True" name="Dropbox" configuration="Debug" />
       <Entry build="True" name="RemindMe" configuration="Debug" />
+      <Entry build="True" name="Qalculate" configuration="Debug" />
       <Entry build="True" name="Baconator" configuration="Debug" />
       <Entry build="True" name="Chromium" configuration="Debug" />
     </Configuration>
@@ -151,6 +152,7 @@
       <Entry build="True" name="Emesene" configuration="Release" />
       <Entry build="True" name="Dropbox" configuration="Release" />
       <Entry build="True" name="RemindMe" configuration="Release" />
+      <Entry build="True" name="Qalculate" configuration="Release" />
       <Entry build="True" name="Baconator" configuration="Release" />
       <Entry build="True" name="Chromium" configuration="Release" />
     </Configuration>
@@ -229,6 +231,7 @@
     <Execute type="None" entry="Emesene" />
     <Execute type="None" entry="Dropbox" />
     <Execute type="None" entry="RemindMe" />
+    <Execute type="None" entry="Qalculate" />
     <Execute type="None" entry="Baconator" />
     <Execute type="None" entry="Chromium" />
   </StartMode>
@@ -307,6 +310,7 @@
     <Entry filename="Emesene/Emesene.mdp" />
     <Entry filename="Dropbox/Dropbox.mdp" />
     <Entry filename="RemindMe/RemindMe.mdp" />
+    <Entry filename="Qalculate/Qalculate.mdp" />
     <Entry filename="Baconator/Baconator.mdp" />
     <Entry filename="Chromium/Chromium.mdp" />
   </Entries>
