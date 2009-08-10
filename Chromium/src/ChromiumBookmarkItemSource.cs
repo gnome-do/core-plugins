@@ -19,8 +19,8 @@
  */
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Text.RegularExpressions;
 
 using Mono.Addins;
@@ -45,7 +45,7 @@ namespace Chromium
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Chromium bookmarks"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Search your Chromium bookmarks"); }
 		}
 		
 		public override string Icon {
@@ -60,11 +60,13 @@ namespace Chromium
 			get { return items; }
 		}
 		
-		static string UnescapeUTF8 (string s) {
+		static string UnescapeUTF8 (string s) 
+		{
 			foreach (Match m in Regex.Matches (s, @"\\u([0-9A-F]{4})")) {
-				char c = (char) int.Parse (m.Groups[1].Value, NumberStyles.HexNumber);
-				s = s.Replace (m.Groups[0].Value, c.ToString());
+				char c = (char) int.Parse (m.Groups [1].Value, NumberStyles.HexNumber);
+				s = s.Replace (m.Groups [0].Value, c.ToString());
 			}
+			
 			return s;
 		}
 		
@@ -74,7 +76,8 @@ namespace Chromium
 			string type = "", name = "", url = "";
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			string bookmarksFile = "~/.config/chromium/Default/Bookmarks".Replace ("~", home);
-			try {				
+			
+			try {
 				Regex RE = new Regex ("(\"([^\"]*)\" *: *\"([^\"]*)\")|[{}]", RegexOptions.Multiline);
 				FileStream fs = new FileStream (bookmarksFile, FileMode.Open, FileAccess.Read);
 				StreamReader reader = new StreamReader (fs);
@@ -88,7 +91,7 @@ namespace Chromium
 						name = "";
 					}
 					else if (m.Value == "}" && type == "url" && !string.IsNullOrEmpty (name) && !string.IsNullOrEmpty (url)) {
-						items.Add (new BookmarkItem (UnescapeUTF8(name), url));
+						items.Add (new BookmarkItem (UnescapeUTF8 (name), url));
 					}
 					else if (m.Value.StartsWith ("\"")) {
 						if (m.Groups [2].Value == "url")
