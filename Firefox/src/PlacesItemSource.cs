@@ -257,6 +257,8 @@ namespace Firefox
 						}
 					}
 				}
+				// this shouldn't be necessary, but: https://bugzilla.novell.com/show_bug.cgi?id=499864
+				dbcon.Close ();
 			}
 		}
 		
@@ -276,7 +278,8 @@ namespace Firefox
 					dbcmd.CommandText =  "SELECT moz_places.title, moz_places.url, moz_bookmarks.parent, moz_bookmarks.title "
 						+ "FROM moz_places LEFT OUTER JOIN moz_bookmarks "
 						+ "ON moz_places.id=moz_bookmarks.fk "
-						+ "ORDER BY moz_places.frecency DESC";
+						+ "ORDER BY moz_places.frecency DESC "
+						+ "LIMIT 500";
 						
 					using (IDataReader reader = dbcmd.ExecuteReader ()) {
 						while (reader.Read () ) {				
@@ -301,6 +304,7 @@ namespace Firefox
 						}
 					}
 				}
+				// this shouldn't be necessary, but: https://bugzilla.novell.com/show_bug.cgi?id=499864
 				dbcon.Close ();
 			}
 		}
