@@ -3,10 +3,17 @@ include $(top_srcdir)/build.rules.mk
 ASSEMBLY=Skype
 
 FILES = \
-	src/SkypeMain.cs \
-	src/User.cs \
-	src/Chat.cs \
-	src/UserStatus.cs
+	src/StatusItem.cs \
+	src/SkypeContactItemSource.cs \
+	src/SkypeContactDetailItem.cs \
+	src/SkypeBrowseBuddyItem.cs \
+	src/SkypeBrowseStatusItem.cs \
+	src/SkypeCallAction.cs \
+	src/SkypeChatAction.cs \
+	src/PhoneContactDetailItem.cs \
+	src/SkypeStatusItemSource.cs \
+	src/SkypeSetStatusAction.cs \
+	src/Skype.cs
 
 RESOURCES = \
 	Resources/Skype.addin.xml \
@@ -130,6 +137,7 @@ RESOURCES = \
 	Resources/icons/StatusDoNotDisturb_128x128.png \
 	Resources/icons/FindText_128x128.png \
 	Resources/icons/Message_128x128.png \
+	Resources/icons/phone.png \
 	Resources/icons/SkypeBlueError_128x128.png
 
 REFERENCES = \

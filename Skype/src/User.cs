@@ -35,7 +35,11 @@ namespace Skype {
 
     public UserItemSource () {
       items = new List<Item> ();
-    }
+			// testing...
+			foreach (string s in Skype.BuddyHandles) {
+				Console.WriteLine (s);
+			}
+		}
                 
     public override string Name {
       get { return "Skype Users"; }
