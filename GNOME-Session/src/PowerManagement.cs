@@ -30,21 +30,21 @@ namespace GNOME
 
 	class PowerManagement
 	{
-		[Interface ("org.freedesktop.PowerManagement")]
+		[Interface ("org.freedesktop.DeviceKit.Power")]
 		interface IPowerManagementProxy
 		{
 			void Hibernate ();
 			void Suspend ();
 		}
 
-		const string BusName = "org.freedesktop.PowerManagement";
-		const string ObjectPath = "/org/freedesktop/PowerManagement";
+		const string BusName = "org.freedesktop.DeviceKit.Power";
+		const string ObjectPath = "/org/freedesktop/DeviceKit/Power";
 
 		static IPowerManagementProxy BusInstance
 		{
 			get {
 				try {
-					return Bus.Session.GetObject<IPowerManagementProxy> (BusName, new ObjectPath (ObjectPath));
+					return Bus.System.GetObject<IPowerManagementProxy> (BusName, new ObjectPath (ObjectPath));
 				} catch (Exception e) {
 					Log<PowerManagement>.Error ("Could not get PowerManagement bus object: {0}", e.Message);
 					Log<PowerManagement>.Debug (e.StackTrace);

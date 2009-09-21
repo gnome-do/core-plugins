@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using Mono.Addins;
 
 using Do.Universe;
+using Do.Platform;
 
 namespace Putty
 {
@@ -57,12 +58,16 @@ namespace Putty
 
 		void StartPuttySession (string session)
 		{
-			Process.Start ("putty", "-load " + session);
+			string sessionDecoded = System.Web.HttpUtility.UrlDecode (session);
+			Log.Debug ("StartPuttySession: putty -load '" + sessionDecoded + "'");
+			Process.Start ("putty", "-load '" + sessionDecoded + "'");
 		}
 		
 		void ConnectToHost (string session)
 		{
-			Process.Start ("putty", session);
+			string sessionDecoded = System.Web.HttpUtility.UrlDecode (session);
+			Log.Debug ("ConnectToHost: putty " + sessionDecoded);
+			Process.Start ("putty", sessionDecoded);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
