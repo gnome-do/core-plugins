@@ -328,6 +328,8 @@ PingFM/Makefile
 PingFM/Resources/PingFM.addin.xml
 Putty/Makefile
 Putty/Resources/Putty.addin.xml
+Qalculate/Makefile
+Qalculate/Resources/Qalculate.addin.xml
 Quote/Makefile
 Quote/Resources/Quote.addin.xml
 RememberTheMilk/Makefile
