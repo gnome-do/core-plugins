@@ -40,7 +40,7 @@ namespace Skype
 		}
 		
 		public override string Icon {
-			get { return string.Format ("{0}@{1}", "CallStart.png", typeof (Skype).Assembly.FullName); }
+			get { return "skype"; }
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
