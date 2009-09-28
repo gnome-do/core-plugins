@@ -20,9 +20,13 @@
 	</Dependencies>
 
 	<Extension path="/Do/Action">
+		<Action type="Skype.SkypeCallAction" />
+		<Action type="Skype.SkypeChatAction" />
+		<Action type="Skype.SkypeSetStatusAction" />
 	</Extension>
 
 	<Extension path="/Do/ItemSource">
 		<ItemSource type="Skype.SkypeContactItemSource" />
+		<ItemSource type="Skype.SkypeStatusItemSource" />
 	</Extension>
 </Addin>

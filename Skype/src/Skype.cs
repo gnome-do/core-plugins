@@ -1,3 +1,21 @@
+//  Skype.cs
+//
+//  GNOME Do is the legal property of its developers, whose names are too numerous
+//  to list here.  Please refer to the COPYRIGHT file distributed with this
+//  source distribution.
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Linq;
@@ -44,16 +62,16 @@ namespace Skype
 		static Skype ()
 		{
 			Statuses = new Dictionary<OnlineStatus, StatusItem> () {
-				{ OnlineStatus.Unknown, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Unknown"), "UNKNOWN", "StatusPending_128x128.png", false) },
-				{ OnlineStatus.Online, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Online"), "ONLINE", "StatusOnline_128x128.png") },
-				{ OnlineStatus.Offline, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Offline"), "OFFLINE", "StatusOffline_128x128.png") },
-				{ OnlineStatus.SkypeMe, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Skype Me"), "SKYPEME", "StatusSkypeMe_128x128.png") },
-				{ OnlineStatus.Away, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Away"), "AWAY", "StatusAway_128x128.png") },
-				{ OnlineStatus.NotAvailable, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Not Available"), "NA", "StatusNotAvailable_128x128.png") },
-				{ OnlineStatus.DoNotDisturb, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Do Not Disturb"), "DND", "StatusDoNotDisturb_128x128.png") },
-				{ OnlineStatus.Invisible, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Invisible"), "INVISIBLE", "StatusInvisible_128x128.png") },
-				{ OnlineStatus.LoggedOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Logged Out"), "LOGGEDOUT", "StatusOffline_128x128.png", false) },
-				{ OnlineStatus.SkypeOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Skype Out"), "SKYPEOUT", "SkypeOut_128x128.png", false) },
+				{ OnlineStatus.Unknown, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Unknown"), "UNKNOWN", "StatusPending.png", false) },
+				{ OnlineStatus.Online, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Online"), "ONLINE", "StatusOnline.png") },
+				{ OnlineStatus.Offline, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Offline"), "OFFLINE", "StatusOffline.png") },
+				{ OnlineStatus.SkypeMe, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Skype Me"), "SKYPEME", "StatusSkypeMe.png") },
+				{ OnlineStatus.Away, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Away"), "AWAY", "StatusAway.png") },
+				{ OnlineStatus.NotAvailable, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Not Available"), "NA", "StatusNotAvailable.png") },
+				{ OnlineStatus.DoNotDisturb, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Do Not Disturb"), "DND", "StatusDoNotDisturb.png") },
+				{ OnlineStatus.Invisible, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Invisible"), "INVISIBLE", "StatusInvisible.png") },
+				{ OnlineStatus.LoggedOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Logged Out"), "LOGGEDOUT", "StatusOffline.png", false) },
+				{ OnlineStatus.SkypeOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Skype Out"), "SKYPEOUT", "SkypeOut.png", false) },
 
 			};			
 			
