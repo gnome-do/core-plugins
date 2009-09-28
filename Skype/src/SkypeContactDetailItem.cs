@@ -12,7 +12,6 @@ namespace Skype
 	
 	public class SkypeContactDetailItem : Item
 	{
-		ContactItem owner;
 		StatusItem status;
 		
 		public SkypeContactDetailItem (ContactItem owner, string handle)

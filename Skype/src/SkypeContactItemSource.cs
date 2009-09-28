@@ -24,8 +24,9 @@ using System.Collections.Generic;
 
 using Mono.Addins;
 
-using Do.Universe;
 using Do.Platform;
+using Do.Universe;
+using Do.Universe.Common;
 
 namespace Skype
 {
@@ -84,14 +85,12 @@ namespace Skype
 					else if (detail.StartsWith ("phone"))
 						yield return new PhoneContactDetailItem (contact, detail);
 				}
-				
 			}
 			yield break;
 		}
 		
 		public override void UpdateItems ()
 		{
-			//remove pidgin related keys from the buddies
 			foreach (ContactItem buddy in contacts) {
 				foreach (string key in buddy.Details.Where (d => d.Contains ("skype")).ToArray ())
 					buddy[key] = "";

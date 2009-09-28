@@ -11,10 +11,16 @@ namespace Skype
 	{
 		string name, icon;
 		public StatusItem (string name, string code, string icon)
+			: this (name, code, icon, true)
+		{
+		}		
+		
+		public StatusItem (string name, string code, string icon, bool show)
 		{
 			this.name = name;
 			this.icon = icon;
 			this.Code = code;
+			this.Showable = show;
 		}
 		
 		public override string Name {
@@ -30,5 +36,7 @@ namespace Skype
 		}
 		
 		public string Code { get; private set; }
+		
+		public bool Showable { get; private set; }
 	}
 }

@@ -35,7 +35,7 @@ namespace Skype
 		public SkypeStatusItemSource ()
 		{
 			statuses = new List<Item> ();
-			Skype.Statuses.Values.Where (st => st.Code != "UNKNOWN" || st.Code != "LOGGEDOUT" || st.Code != "SKYPEOUT")
+			Skype.Statuses.Values.Where (st => st.Showable == true)
 				.ForEach (status => statuses.Add (status));
 		}
 		
@@ -52,8 +52,9 @@ namespace Skype
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
+			get {
 				yield return typeof (StatusItem);
+				yield return typeof (IApplicationItem);
 				yield return typeof (SkypeBrowseStatusItem);
 			}
 		}

@@ -44,7 +44,7 @@ namespace Skype
 		static Skype ()
 		{
 			Statuses = new Dictionary<OnlineStatus, StatusItem> () {
-				{ OnlineStatus.Unknown, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Unknown"), "UNKNOWN", "StatusPending_128x128.png") },
+				{ OnlineStatus.Unknown, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Unknown"), "UNKNOWN", "StatusPending_128x128.png", false) },
 				{ OnlineStatus.Online, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Online"), "ONLINE", "StatusOnline_128x128.png") },
 				{ OnlineStatus.Offline, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Offline"), "OFFLINE", "StatusOffline_128x128.png") },
 				{ OnlineStatus.SkypeMe, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Skype Me"), "SKYPEME", "StatusSkypeMe_128x128.png") },
@@ -52,12 +52,10 @@ namespace Skype
 				{ OnlineStatus.NotAvailable, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Not Available"), "NA", "StatusNotAvailable_128x128.png") },
 				{ OnlineStatus.DoNotDisturb, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Do Not Disturb"), "DND", "StatusDoNotDisturb_128x128.png") },
 				{ OnlineStatus.Invisible, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Invisible"), "INVISIBLE", "StatusInvisible_128x128.png") },
-				{ OnlineStatus.LoggedOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Logged Out"), "LOGGEDOUT", "StatusOffline_128x128.png") },
-				{ OnlineStatus.SkypeOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Skype Out"), "SKYPEOUT", "SkypeOut_128x128.png") },
+				{ OnlineStatus.LoggedOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Logged Out"), "LOGGEDOUT", "StatusOffline_128x128.png", false) },
+				{ OnlineStatus.SkypeOut, new StatusItem (AddinManager.CurrentLocalizer.GetString ("Skype Out"), "SKYPEOUT", "SkypeOut_128x128.png", false) },
 
-			};
-			
-			SkypeApplicationItem = Services.UniverseFactory.MaybeApplicationItemFromCommand ("skype");
+			};			
 			
 			TryGetSkypeObject ();
 		}
@@ -69,14 +67,13 @@ namespace Skype
 		public static Dictionary<OnlineStatus, StatusItem> Statuses { get; private set; }
 			
 		static ISkype SkypeObject;
-		static IApplicationItem SkypeApplicationItem;
 		
 		private static void TryGetSkypeObject ()
 		{
 			SkypeObject = GetSkypeObject ();
 		}
 		
-		public static ISkype GetSkypeObject ()
+		private static ISkype GetSkypeObject ()
 		{
 			if (SkypeObject != null)
 				return SkypeObject;
@@ -100,30 +97,41 @@ namespace Skype
 		
 		public static bool IsSkype (Item item) 
 		{
-			return item.Equals (SkypeApplicationItem);
+			return item.Equals (Services.UniverseFactory.MaybeApplicationItemFromCommand ("skype"));
 		}
 		
 		public static bool InstanceIsRunning
 		{
 			get {
-				Process pidof;
-				ProcessStartInfo pidofInfo = new ProcessStartInfo ("pidof", "skype.real");
-				pidofInfo.UseShellExecute = false;
-				pidofInfo.RedirectStandardError = true;
-				pidofInfo.RedirectStandardOutput = true;
-								
+				// skype.real matches the old skype
+				// where 'skype' will match the new skype
+				
 				try {
-					// Use pidof command to look for the skype process. Exit
-					// status is 0 if at least one matching process is found.
-					// If there's any error, just assume some Purple client
-					// is running.
-					pidof = Process.Start (pidofInfo);
-					pidof.WaitForExit ();
-					return pidof.ExitCode == 0;
+					if (PidOf ("skype") == 0 || PidOf ("skype.real") == 0)
+						return true;
+					return false;
 				} catch {
 					return true;
 				}
 			}
+		}
+		
+		private static int PidOf (string proc)
+		{
+			Process pidof;
+
+			ProcessStartInfo pidofInfo = new ProcessStartInfo ("pidof", proc);
+			pidofInfo.UseShellExecute = false;
+			pidofInfo.RedirectStandardError = true;
+			pidofInfo.RedirectStandardOutput = true;
+			
+			// Use pidof command to look for the skype process. Exit
+			// status is 0 if at least one matching process is found.
+			// If there's any error, just assume some Skype client
+			// is running.
+			pidof = Process.Start (pidofInfo);
+			pidof.WaitForExit ();
+			return pidof.ExitCode;
 		}
 
 		public static void StartIfNecessary ()

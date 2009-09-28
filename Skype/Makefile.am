@@ -10,7 +10,6 @@ FILES = \
 	src/SkypeBrowseStatusItem.cs \
 	src/SkypeCallAction.cs \
 	src/SkypeChatAction.cs \
-	src/PhoneContactDetailItem.cs \
 	src/SkypeStatusItemSource.cs \
 	src/SkypeSetStatusAction.cs \
 	src/Skype.cs

@@ -5,16 +5,11 @@ endif
 ASSEMBLY=Evolution
 
 FILES = \
-	src/AddressContactDetailItem.cs \
-	src/ContactDetailItem.cs \
-	src/ContactItemSource.cs \
-	src/EmailContactDetailItem.cs \
-	src/PhoneContactDetailItem.cs \
-	src/AddressContactDetailItem.cs 
+	src/ContactItemSource.cs
+
 
 RESOURCES = \
-	Resources/Evolution.addin.xml \
-	Resources/icons/phone.png
+	Resources/Evolution.addin.xml
 
 REFERENCES = \
 	System \
