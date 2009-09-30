@@ -18,12 +18,7 @@ namespace SqueezeCenter
 {	
 	public static class Util
 	{		
-		public static IEnumerable<Ttarget> Cast<Tsource, Ttarget> (IEnumerable<Tsource> items)
-		{						
-			foreach (object i in items)
-				yield return (Ttarget)i;
-		}
-		
+
 		public static string UriDecode (string s)
 		{
 			int i = 0;

@@ -16,28 +16,81 @@ using System.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Linq;
 using Do.Universe;
 
 namespace SqueezeCenter
 {
 	
-	public class Player : Item
+	public class Player : SqueezeCenterItem
 	{
+		static Dictionary<string, Player> players = new Dictionary<string, Player> ();
+		
+		public static void CreatePlayer (string id, string name, string model, bool connected, bool poweredOn, bool canPowerOff)
+		{
+			// check if player was created before
+			lock (Player.players)
+			{
+				Player p;
+				if (!Player.players.TryGetValue (id, out p))
+				{
+#if VERBOSE_OUTPUT
+					Console.WriteLine("SQC: New player " + name);
+#endif
+					p = new Player(id);	
+					Player.players.Add (id, p);
+				}
+				p.name = name;
+				p.model = model;				
+				p.canPowerOff = canPowerOff;
+				
+				if (!connected)
+					p.Status = PlayerStatus.Disconnected;
+				else {
+					if (!poweredOn)
+						p.Status = PlayerStatus.TurnedOff;					
+					else 
+						p.Status = PlayerStatus.Stopped; // this we don't know, but it'll be updated later.
+				}
+				p.syncedWith.Clear();
+				p.Available = true;
+#if VERBOSE_OUTPUT
+				Console.WriteLine("SQC: Existing player " + name);
+#endif
+			}
+		}
+		
+		public static Player GetFromId(string id)
+		{
+			Player p;
+			lock (Player.players)
+				if (!Player.players.TryGetValue(id, out p))
+					p = null;
+			return p;
+		}
+		
+		public static Player[] GetAllPlayers()
+		{			
+			lock (Player.players)
+				return Player.players.Values.Where (p => p.Available).ToArray ();
+		}
+		
+		public static Player[] GetAllConnectedPlayers()
+		{			
+			lock (Player.players)
+				return Player.players.Values.Where (p => p.Available && p.Status != PlayerStatus.Disconnected).ToArray();
+		}
+		
 		string id, name, model;
-		bool connected, poweredOn, canPowerOff;
+		bool canPowerOff;
 		List<Player> syncedWith;
 		string syncedWithStr;
+		PlayerStatus status;
 		
-		public Player(string id, string name, string model, bool connected, bool poweredOn, bool canPowerOff)
+		Player(string id)
 		{
 			this.id = id;
-			this.name = name;
-			this.model = model;
-			this.connected = connected;
-			this.poweredOn = poweredOn;
-			this.canPowerOff = canPowerOff;
 			this.syncedWith = new List<Player> ();
-			//Console.WriteLine( "Created: " + name);
 		}
 		
 		public string Id 
@@ -45,20 +98,19 @@ namespace SqueezeCenter
 			get {
 				return id;
 			}
-		}
-		
+		}	
+
 		public override string Name 
 		{
 			get {
 				return name;
 			}
 		}
-		
-		
+				
 		public override string Icon 
 		{
 			get {
-				return (this.poweredOn ? "SB_on" : "SB_off") + ".png@" + this.GetType ().Assembly.FullName;				
+				return (this.PoweredOn ? "SB_on" : "SB_off") + ".png@" + this.GetType ().Assembly.FullName;				
 			}
 		}		
 		
@@ -70,18 +122,24 @@ namespace SqueezeCenter
 				
 				return string.Format("{0} ({1}){2}", 
 				                     this.model, 
-				                     this.poweredOn ? "On" : "Off", 
+				                     this.PoweredOn ? "On" : "Off", 
 				                     syncStr == null ? string.Empty : " synced with " + syncStr);
 			}
 		}
 		
 		public bool PoweredOn 
 		{
-			get {				
-				return this.poweredOn;
-			}
-			set {
-				this.poweredOn = value;				
+			get {			
+				
+				switch (this.status)
+				{
+				case PlayerStatus.Disconnected:
+				case PlayerStatus.TurnedOff:
+					return false;
+					
+				default :
+					return true;
+				}
 			}
 		}
 		
@@ -94,14 +152,14 @@ namespace SqueezeCenter
 				this.canPowerOff = value;
 			}
 		}
-		
-		public bool Connected
+				
+		public PlayerStatus Status
 		{
 			get {
-				return this.connected;
+				return this.status;
 			}
 			set {
-				this.connected = value;
+				this.status = value;
 			}
 		}
 		
@@ -136,8 +194,19 @@ namespace SqueezeCenter
 		{
 			get {
 				lock (this.syncedWith) 
-					return this.syncedWith.Count > 0;
+					return this.syncedWith.Any ();
 			}
-		}	
+		}		
+	}
+	
+	public enum PlayerStatus
+	{
+		Disconnected,
+		TurnedOff,
+		
+		// one of the following means the player is turned on
+		Stopped,
+		Paused,
+		Playing
 	}
 }

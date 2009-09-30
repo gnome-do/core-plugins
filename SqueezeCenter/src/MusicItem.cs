@@ -19,21 +19,25 @@ using Do.Universe;
 
 namespace SqueezeCenter
 {	
-	public abstract class MusicItem : Item
+
+	public abstract class MusicItem : SqueezeCenterItem
 	{	
+		
 		public readonly int Id;
 
 		public MusicItem (int id)
 		{
-			this.Id = id;
+			this.Id = id;			
 		}
 		
 		public abstract string SqueezeCenterIdKey { get; }
-		
+		public override abstract string Name { get; }
+		public override abstract string Description { get; }
+		public override abstract string Icon { get; }
 	}
 
 	public class AlbumMusicItem : MusicItem
-	{
+	{		
 		public readonly string Album, Year;
 		readonly ArtistMusicItem artist;
 		readonly int firstSongId;

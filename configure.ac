@@ -252,8 +252,6 @@ Banshee/Makefile
 Banshee/Resources/Banshee.addin.xml
 Bibtex/Makefile
 Bibtex/Resources/Bibtex.addin.xml
-Chromium/Makefile
-Chromium/Resources/Chromium.addin.xml
 Cl.ickable/Makefile
 Cl.ickable/Resources/Cl.ickable.addin.xml
 ClawsMail/Makefile
