@@ -1,7 +1,7 @@
 <Addin
 	id="RememberTheMilk"
 	namespace= "Do"
-	version="2.0"
+	version="2.1"
 	name="Remember The Milk"
 	description="Manage tasks with Remember The Milk."
 	author="Peng Deng, Jonathan Davies"
