@@ -505,36 +505,12 @@ namespace RememberTheMilk
 		public static RTMTaskItem NewTask (string listId, string taskData)
 		{
 			List rtmList;
-			bool parse = true;
-			string priority = "N";
-			
-			// Task string starting with "@" won't be parsed for date/time information
-			if (taskData.StartsWith ("@")) {
-				taskData = taskData.Remove (0, 1).Trim ();
-				parse = false;
-			}
-			
-			// Task string starting with "![123]" contains priority information
-			if (Regex.IsMatch (taskData, @"^![123]\s")) {
-				priority = taskData.Substring (1,1);
-				taskData = taskData.Remove (0, 3);
-			}
 			
 			try {
-				rtmList = rtm.TasksAdd (timeline, taskData, listId, parse);
+				rtmList = rtm.TasksAdd (timeline, taskData, listId, true);
 			} catch (RtmException e) {
 				Log<RTM>.Debug (e.Message);
 				return null;
-			}
-			
-			
-			if (priority != "N") {
-				try {
-					rtm.TasksSetPriority (timeline, rtmList.ID, rtmList.TaskSeriesCollection[0].TaskSeriesID,
-						rtmList.TaskSeriesCollection[0].TaskCollection[0].TaskID, priority);
-				} catch (RtmException e) {
-					Log<RTM>.Debug (e.Message);
-				}
 			}
 			
 			FinalizeAction (AddinManager.CurrentLocalizer.GetString ("New Task Created"),
@@ -546,7 +522,7 @@ namespace RememberTheMilk
 				rtmList.TaskSeriesCollection[0].TaskCollection[0].Due,
 				rtmList.TaskSeriesCollection[0].TaskCollection[0].Completed,
 				rtmList.TaskSeriesCollection[0].TaskURL,
-				priority,
+				rtmList.TaskSeriesCollection[0].TaskCollection[0].Priority,
 				rtmList.TaskSeriesCollection[0].TaskCollection[0].HasDueTime,
 				rtmList.TaskSeriesCollection[0].TaskCollection[0].Estimate,
 				rtmList.TaskSeriesCollection[0].LocationID, "");
