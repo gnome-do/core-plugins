@@ -55,7 +55,7 @@ namespace SqueezeCenter
 			
 			if (this.disconnected)
 			{
-				//throw new System.IO.IOException ("Connection closed");
+				throw new System.IO.IOException ("Connection closed");
 			}
 			
 			// return first line of data or null if no data is available

@@ -45,10 +45,8 @@ namespace SqueezeCenter
 				
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (MusicItem),
-					typeof (RadioSubItem)
-						};					
+				yield return typeof (MusicItem);
+				yield return typeof (RadioSubItem);
 			}	
 		}
 					
@@ -56,17 +54,10 @@ namespace SqueezeCenter
 		public override bool ModifierItemsOptional
 		{
 			get {
-				return Server.Instance.GetConnectedPlayers ().Count == 0; 
+				return !Player.GetAllConnectedPlayers ().Any (); 
 			}
 		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem(Item item) 
-		{
-			// this converts converts the list of players to an array of Item
-			IEnumerable<Item> result = Server.Instance.GetConnectedPlayersAsItem ().ToArray ();			
-			return result;
-		}
-		
+	
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modifier)
 		{
 			return true;
@@ -75,15 +66,13 @@ namespace SqueezeCenter
 		public override IEnumerable<Type> SupportedModifierItemTypes 
 		{				
 			get {					
-				return new Type[] {
-					typeof (Player),
-				};		
+				yield return typeof (Player);
 			}
 		}
 		
 		public override bool SupportsItem (Item item)
 		{
-			return (item is MusicItem) || (item is RadioSubItem /*&& !(item as RadioSubItem).HasItems*/);			
+			return (item is MusicItem || item is RadioSubItem) && (item is SqueezeCenterItem && ((SqueezeCenterItem)item).Available);			
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
@@ -95,7 +84,7 @@ namespace SqueezeCenter
 			}
 				
 			else {
-				List<Player> availablePlayers = Server.Instance.GetConnectedPlayers ();
+				IList<Player> availablePlayers = Player.GetAllConnectedPlayers ();
 				if (availablePlayers.Count > 0) {
 					player = availablePlayers[0];				
 				}
@@ -105,7 +94,7 @@ namespace SqueezeCenter
 			}
 				
 			if (items.First () is MusicItem) {
-					Server.Instance.LoadItemsToPlayer (player, Util.Cast<Item, MusicItem> (items));
+					Server.Instance.LoadItemsToPlayer (player, items.OfType<MusicItem> ());
 			}
 			else if (items.First () is RadioSubItem) {
 				Server.Instance.ExecuteCommand (string.Format ("{0} {1} playlist play item_id:{2}",

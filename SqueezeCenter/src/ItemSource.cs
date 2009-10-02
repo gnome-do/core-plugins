@@ -15,7 +15,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
-
+using System.Linq;
 
 using Do.Universe;
 using Do.Platform.Linux;
@@ -48,12 +48,10 @@ namespace SqueezeCenter
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (MusicItem),
-					typeof (RadioItem),
-					typeof (BrowseMusicItem),
-					typeof (IApplicationItem),
-				};
+				yield return typeof (MusicItem);
+				yield return typeof (RadioItem);
+				yield return typeof (BrowseMusicItem);
+				yield return typeof (IApplicationItem);				
 			}
 		}
 
@@ -115,7 +113,8 @@ namespace SqueezeCenter
 			}			
 
 			// Add players
-			items.AddRange (Server.Instance.GetConnectedPlayersAsItem ());
+			items.AddRange (Player.GetAllConnectedPlayers ().Cast<Item> ());
+
 
 			// Add browse features
 			items.Add (new BrowseAlbumsMusicItem ());
@@ -127,5 +126,6 @@ namespace SqueezeCenter
 			foreach (Item album in albums) items.Add (album);
 			foreach (Item artist in artists) items.Add (artist);
 		}	
+		
 	}
 }

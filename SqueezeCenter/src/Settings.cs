@@ -24,6 +24,7 @@ namespace SqueezeCenter
 		
 		public static void ReadSettings (string filename, ICollection<Setting> settings, bool storeMissingValues) 
 		{
+			// Console.WriteLine("Reading settings from " + filename);
 
 			string line, key, val;
 			int i;

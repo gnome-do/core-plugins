@@ -49,7 +49,6 @@ SUBDIRS = \
 	Pidgin \
 	PingFM \
 	Putty \
-	Qalculate \
 	Quote \
 	RememberTheMilk \
 	RemindMe \

@@ -41,23 +41,15 @@ namespace SqueezeCenter
 
 		public override IEnumerable<Type> SupportedItemTypes {
 			get {
-				return new Type[] {
-					typeof (MusicItem),
-				};
+				yield return typeof (MusicItem);
 			}
 		}
 		
 		public override bool ModifierItemsOptional
 		{
 			get {
-				return Server.Instance.GetConnectedPlayers ().Count == 0; 
+				return !Player.GetAllConnectedPlayers().Any (); 
 			}
-		}
-		
-		public override IEnumerable<Item> DynamicModifierItemsForItem(Item item) 
-		{
-			// this converts converts the list of players to an array of Item
-			return Server.Instance.GetConnectedPlayersAsItem ().ToArray ();
 		}
 		
 		public override bool SupportsModifierItemForItems (IEnumerable<Item> items, Item modifier)
@@ -68,27 +60,25 @@ namespace SqueezeCenter
 		public override IEnumerable<Type> SupportedModifierItemTypes 
 		{
 			get {
-				return new Type[] {
-					typeof (Player),
-				};		
+				yield return typeof (Player);	
 			}
 		}
 		
 		public override bool SupportsItem (Item item)
 		{
-			return (item is MusicItem);
+			return item is MusicItem && ((MusicItem)item).Available;
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
 		{
-			Player player;			
-						
+			SqueezeCenter.Player player;
+			
 			if (modItems.Any ()) {
 				player = modItems.First () as Player;
 			}
 			else {
-				List<Player> availablePlayers = Server.Instance.GetConnectedPlayers ();
-				if (availablePlayers.Count > 0) {
+				Player[] availablePlayers = Player.GetAllConnectedPlayers ();
+				if (availablePlayers.Length > 0) {
 					player = availablePlayers[0];				
 				}
 				else {
@@ -96,7 +86,7 @@ namespace SqueezeCenter
 				}
 			}
 
-			Server.Instance.AddItemsToPlayer (player, Util.Cast<Item, MusicItem>(items));			
+			Server.Instance.AddItemsToPlayer (player, items.Cast<MusicItem>());			
 			return null;
 		}
 	}

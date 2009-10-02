@@ -27,21 +27,31 @@
     <File name="src/NetworkStreamTextReader.cs" subtype="Code" buildaction="Compile" />
     <File name="src/PlayCommand.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Player.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/PlayerCommands.cs" subtype="Code" buildaction="Compile" />
     <File name="src/RadioItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Server.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Settings.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Util.cs" subtype="Code" buildaction="Compile" />
-    <File name="Resources/SqueezeCenter.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="src/SqueezeCenterItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands" subtype="Directory" buildaction="Compile" />
+    <File name="src/Player commands/PlayerCommand.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/TurnOn.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/TurnOff.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/Pause.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/Sync.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/Unsync.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/Prev.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/Next.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Player commands/Play.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/SqueezeCenter.addin.xml.in" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/artist.svg" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/radio.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/icons/radio.xcf" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/icons/squeezebox.xcf" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/radio.xcf" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/squeezebox.xcf" subtype="Code" buildaction="Nothing" />
     <File name="Resources/icons/sync.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/unsync.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/icons/unsync.xcf" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/icons/SB_off.png" subtype="Code" buildaction="Nothing" />
-    <File name="Resources/icons/SB_on.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/unsync.xcf" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/SB_off.png" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/icons/SB_on.png" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/icons/sync_sb.xcf" subtype="Code" buildaction="Nothing" />
   </Contents>
   <References>
