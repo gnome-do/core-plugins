@@ -100,17 +100,24 @@ namespace Skype
 			
 			try {
 				skype = Bus.Session.GetObject<ISkype>
-					(SkypeServiceBusName, new ObjectPath (SkypeObjectPath));
-				if (skype.Invoke ("NAME GNOME_Do_Skype") != "OK")
-					throw new Exception ("Skype did not return OK");
-				if (skype.Invoke ("PROTOCOL 7") != "PROTOCOL 7")
-				    throw new Exception ("Skype did not accept protocol 7");
-				return skype;
+					(SkypeServiceBusName, new ObjectPath (SkypeObjectPath));				
 			} catch (Exception e) {
 				Log<Skype>.Error ("Skype DBUS initialization error: {0}", e.Message);
 				Log<Skype>.Debug (e.StackTrace);
 				return null;
 			}
+			
+			if (skype.Invoke ("NAME GNOME_Do_Skype") != "OK") {
+				Log<Skype>.Error ("Skype did not return OK");
+				return null;
+			}
+			
+			if (skype.Invoke ("PROTOCOL 7") != "PROTOCOL 7") {
+			    Log<Skype>.Error ("Skype did not accept protocol 7");
+				return null;
+			}
+			
+			return skype;
 		}
 		
 		public static bool IsSkype (Item item) 
