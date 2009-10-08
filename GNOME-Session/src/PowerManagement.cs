@@ -30,21 +30,44 @@ namespace GNOME
 
 	class PowerManagement
 	{
-		[Interface ("org.freedesktop.DeviceKit.Power")]
-		interface IPowerManagementProxy
+		[Interface (DeviceKitPowerName)]
+		interface IDeviceKitPower
 		{
 			void Hibernate ();
 			void Suspend ();
 		}
 
-		const string BusName = "org.freedesktop.DeviceKit.Power";
-		const string ObjectPath = "/org/freedesktop/DeviceKit/Power";
+		[Interface (PowerManagementName)]
+		interface IPowerManagement
+		{
+			void Hibernate ();
+			void Suspend ();
+		}
+		
+		const string DeviceKitPowerName = "org.freedesktop.DeviceKit.Power";
+		const string DeviceKitPowerPath = "/org/freedesktop/DeviceKit/Power";
+		const string PowerManagementName = "org.freedesktop.PowerManagement";
+		const string PowerManagementPath = "/org/freedesktop/PowerManagement";
+		
+		static PowerManagement ()
+		{
+			try {
+				BusG.Init ();
+			} catch (Exception e) {
+				Log<PowerManagement>.Error ("Could not initialize the bus: {0}", e.Message);
+				Log<PowerManagement>.Debug (e.StackTrace);
+			}
+		}
 
-		static IPowerManagementProxy BusInstance
+		static object BusInstance
 		{
 			get {
 				try {
-					return Bus.System.GetObject<IPowerManagementProxy> (BusName, new ObjectPath (ObjectPath));
+					if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
+						return Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
+					} else if (Bus.Session.NameHasOwner (PowerManagementName)) {
+						return Bus.Session.GetObject<IPowerManagement> (PowerManagementName, new ObjectPath (PowerManagementPath));
+					}
 				} catch (Exception e) {
 					Log<PowerManagement>.Error ("Could not get PowerManagement bus object: {0}", e.Message);
 					Log<PowerManagement>.Debug (e.StackTrace);
@@ -57,7 +80,11 @@ namespace GNOME
 		public static void Hibernate ()
 		{
 			try {
-				BusInstance.Hibernate ();
+				object instance = BusInstance;
+				if (instance is IDeviceKitPower)
+					(instance as IDeviceKitPower).Hibernate ();
+				else if (instance is IPowerManagement)
+					(instance as IPowerManagement).Hibernate ();
 			} catch (Exception e) {
 				Log<PowerManagement>.Error ("Could not hibernate: {0}", e.Message);
 				Log<PowerManagement>.Debug (e.StackTrace);
@@ -67,7 +94,11 @@ namespace GNOME
 		public static void Suspend ()
 		{
 			try {
-				BusInstance.Suspend ();
+				object instance = BusInstance;
+				if (instance is IDeviceKitPower)
+					(instance as IDeviceKitPower).Suspend ();
+				else if (instance is IPowerManagement)
+					(instance as IPowerManagement).Suspend ();
 			} catch (Exception e) {
 				Log<PowerManagement>.Error ("Could not suspend: {0}", e.Message);
 				Log<PowerManagement>.Debug (e.StackTrace);
