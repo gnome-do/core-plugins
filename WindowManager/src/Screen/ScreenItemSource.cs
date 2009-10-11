@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 
 using Do.Universe;
-using Do.Interface.Wink;
+using WindowManager.Wink;
 using Wnck;
 using Mono.Addins;
 

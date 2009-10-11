@@ -23,7 +23,7 @@ using Wnck;
 
 using Do.Platform;
 using Do.Universe;
-using Do.Interface.Wink;
+using WindowManager.Wink;
 
 namespace WindowManager
 {

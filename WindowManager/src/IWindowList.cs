@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using Wnck;
 
 using Do.Universe;
-using Do.Interface.Wink;
+using WindowManager.Wink;
 
 namespace WindowManager
 {

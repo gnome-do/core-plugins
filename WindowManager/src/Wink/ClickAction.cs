@@ -16,35 +16,16 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
-using Do.Universe;
-using WindowManager.Wink;
-
-using Wnck;
-using Mono.Addins;
-
-namespace WindowManager
+namespace WindowManager.Wink
 {
 	
-	public class WindowCloseAction : WindowActionAction
+	
+	public enum ClickAction
 	{
-		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Close"); }
-		}
-		
-		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Close selected windows."); }
-		}
-
-		public override string Icon {
-			get { return Gtk.Stock.Quit; }
-		}
-
-		public override void Action (IEnumerable<Window> windows)
-		{
-			WindowControl.CloseWindows (windows);
-		}
+		Focus,
+		Minimize,
+		Restore,
+		None,
 	}
 }

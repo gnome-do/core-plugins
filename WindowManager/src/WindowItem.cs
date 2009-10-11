@@ -28,7 +28,7 @@ using Wnck;
 using Mono.Addins;
 
 using Do.Universe;
-using Do.Interface.Wink;
+using WindowManager.Wink;
 
 namespace WindowManager
 {	

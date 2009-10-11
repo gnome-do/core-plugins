@@ -22,7 +22,7 @@ using System.Diagnostics;
 using System.Threading;
 
 using Do.Universe;
-using Do.Interface.Wink;
+using WindowManager.Wink;
 
 using Wnck;
 using Mono.Addins;
