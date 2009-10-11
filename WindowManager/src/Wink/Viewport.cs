@@ -138,19 +138,7 @@ namespace WindowManager.Wink
 			}
 		}
 		
-		public bool WindowVisibleInVeiwport (Wnck.Window window)
-		{
-			if (!window.IsOnWorkspace (parent))
-				return false;
-			
-			Rectangle geo = window.EasyGeometry ();
-			geo.X += parent.ViewportX;
-			geo.Y += parent.ViewportY;
-			
-			return area.IntersectsWith (geo);
-		}
-		
-		public bool WindowCenterInViewport (Wnck.Window window)
+		bool WindowCenterInViewport (Wnck.Window window)
 		{
 			if (!window.IsOnWorkspace (parent))
 				return false;

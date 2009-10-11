@@ -127,60 +127,6 @@ namespace WindowManager.Wink
 			FocusWindows (new [] {window});
 		}
 		
-		public static void IntelligentFocusOffViewportWindow (Window targetWindow, IEnumerable<Window> additionalWindows)
-		{
-			foreach (Window window in additionalWindows.Reverse ()) {
-				if (!window.IsMinimized && WindowsShareViewport (targetWindow, window)) {
-					window.CenterAndFocusWindow ();
-					System.Threading.Thread.Sleep (SleepTime);
-				}
-			}
-			
-			targetWindow.CenterAndFocusWindow ();
-			
-			if (additionalWindows.Count () <= 1)
-				return;
-			
-			// we do this to make sure our active window is also at the front... Its a tricky thing to do.
-			// sometimes compiz plays badly.  This hacks around it
-			uint time = Gtk.Global.CurrentEventTime + FocusDelay;
-			GLib.Timeout.Add (FocusDelay, delegate {
-				targetWindow.Activate (time);
-				return false;
-			});
-		}
-		
-		static bool WindowsShareViewport (Wnck.Window first, Wnck.Window second)
-		{
-			if (first == null || second == null) return false;
-			
-			Wnck.Workspace wksp = first.Workspace ?? second.Workspace;
-			if (wksp == null) return false;
-			
-			Gdk.Rectangle firstGeo, secondGeo;
-			
-			first.GetGeometry (out firstGeo.X, out firstGeo.Y, out firstGeo.Width, out firstGeo.Height);
-			second.GetGeometry (out secondGeo.X, out secondGeo.Y, out secondGeo.Width, out secondGeo.Height);
-			
-			firstGeo.X += wksp.ViewportX;
-			firstGeo.Y += wksp.ViewportY;
-			
-			secondGeo.X += wksp.ViewportX;
-			secondGeo.Y += wksp.ViewportY;
-			
-			int viewportWidth, viewportHeight;
-			viewportWidth = first.Screen.Width;
-			viewportHeight = first.Screen.Height;
-			
-			int firstViewportX = ((firstGeo.X + firstGeo.Width / 2) / viewportWidth) * viewportWidth;
-			int firstViewportY = ((firstGeo.Y + firstGeo.Height / 2) / viewportHeight) * viewportHeight;
-			
-			Gdk.Rectangle viewpRect = new Gdk.Rectangle (firstViewportX, firstViewportY, 
-			                                             viewportWidth, viewportHeight);
-			
-			return viewpRect.IntersectsWith (secondGeo);
-		}
-		
 		public static void CloseWindows (IEnumerable<Window> windows)
 		{
 			foreach (Window window in windows.Where (w => !w.IsSkipTasklist))
@@ -200,17 +146,6 @@ namespace WindowManager.Wink
 		public static void MaximizeWindow (Window window)
 		{
 			window.Maximize ();
-		}
-		
-		public static void MoveToWorkspace (Window window, Workspace workspace)
-		{
-			MoveToWorkspace (new [] {window}, workspace);
-		}
-		
-		public static void MoveToWorkspace (IEnumerable<Window> windows, Workspace workspace)
-		{
-			foreach (Window window in windows.Where (w => w.Workspace != workspace))
-				window.MoveToWorkspace (workspace);
 		}
 		
 		/// <summary>

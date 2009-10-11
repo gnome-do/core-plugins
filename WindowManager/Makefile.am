@@ -23,7 +23,6 @@ FILES = \
 	src/WindowActions/WindowMaximizeAction.cs \
 	src/WindowActions/WindowMinimizeAction.cs \
 	src/WindowActions/WindowMoveAction.cs \
-	src/Wink/ClickAction.cs \
 	src/Wink/ScreenUtils.cs \
 	src/Wink/WindowControl.cs \
 	src/Wink/WnckWindow_Extensions.cs \

@@ -218,20 +218,6 @@ namespace WindowManager.Wink
 			
 			last_update = DateTime.UtcNow;
 		}
-		
-		static ClickAction GetClickAction (IEnumerable<Window> windows)
-		{
-			if (!windows.Any ())
-				return ClickAction.None;
-			
-			if (windows.Any (w => w.IsMinimized && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)))
-				return ClickAction.Restore;
-			
-			if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)))
-				return ClickAction.Minimize;
-			
-			return ClickAction.Focus;
-		}
 		#endregion
 		
 		#region Public Methods
@@ -338,7 +324,7 @@ namespace WindowManager.Wink
 		/// <returns>
 		/// A <see cref="System.String"/>
 		/// </returns>
-		public static string ProcessExecString (string exec)
+		static string ProcessExecString (string exec)
 		{
 			if (string.IsNullOrEmpty (exec))
 				return exec;
@@ -409,44 +395,6 @@ namespace WindowManager.Wink
 				}
 			}
 			return null;
-		}
-		
-		/// <summary>
-		/// Performs the "logical" click action on an entire group of applications
-		/// </summary>
-		/// <param name="apps">
-		/// A <see cref="IEnumerable"/>
-		/// </param>
-		public static void PerformLogicalClick (IEnumerable<Window> windows)
-		{
-			List<Window> stack = new List<Window> (Wnck.Screen.Default.WindowsStacked);
-			windows = windows.OrderByDescending (w => stack.IndexOf (w));
-			
-			bool not_in_viewport = !windows.Any (w => !w.IsSkipTasklist && w.IsInViewport (w.Screen.ActiveWorkspace));
-			bool urgent = windows.Any (w => w.NeedsAttention ());
-			
-			if (not_in_viewport || urgent) {
-				foreach (Wnck.Window window in windows) {
-					if (urgent && !window.NeedsAttention ())
-						continue;
-					if (!window.IsSkipTasklist) {
-						WindowControl.IntelligentFocusOffViewportWindow (window, windows);
-						return;
-					}
-				}
-			}
-			
-			switch (GetClickAction (windows)) {
-			case ClickAction.Focus:
-				WindowControl.FocusWindows (windows);
-				break;
-			case ClickAction.Minimize:
-				WindowControl.MinimizeWindows (windows);
-				break;
-			case ClickAction.Restore:
-				WindowControl.RestoreWindows (windows);
-				break;
-			}
 		}
 		
 		#endregion
