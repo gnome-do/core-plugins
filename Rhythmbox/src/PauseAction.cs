@@ -53,7 +53,7 @@ namespace Do.Rhythmbox
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			new Thread ((ThreadStart) delegate {
-				Rhythmbox.Client ("--pause --no-start");
+				Rhythmbox.Client ("--play-pause --no-start");
 			}).Start ();
 			return null;
 		}
