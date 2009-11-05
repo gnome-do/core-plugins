@@ -81,10 +81,12 @@ namespace GNOME
 		{
 			try {
 				object instance = BusInstance;
-				if (instance is IDeviceKitPower)
+				if (instance is IDeviceKitPower) {
+					ScreenSaver.Lock ();
 					(instance as IDeviceKitPower).Hibernate ();
-				else if (instance is IPowerManagement)
+				} else if (instance is IPowerManagement) {
 					(instance as IPowerManagement).Hibernate ();
+				}
 			} catch (Exception e) {
 				Log<PowerManagement>.Error ("Could not hibernate: {0}", e.Message);
 				Log<PowerManagement>.Debug (e.StackTrace);
@@ -95,10 +97,12 @@ namespace GNOME
 		{
 			try {
 				object instance = BusInstance;
-				if (instance is IDeviceKitPower)
+				if (instance is IDeviceKitPower) {
+					ScreenSaver.Lock ();
 					(instance as IDeviceKitPower).Suspend ();
-				else if (instance is IPowerManagement)
+				} else if (instance is IPowerManagement) {
 					(instance as IPowerManagement).Suspend ();
+				}
 			} catch (Exception e) {
 				Log<PowerManagement>.Error ("Could not suspend: {0}", e.Message);
 				Log<PowerManagement>.Debug (e.StackTrace);

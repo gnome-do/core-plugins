@@ -1,10 +1,10 @@
 <Addin 
 	id="Chromium"
 	namespace="Do"
-	version="1.0"
+	version="1.1"
 	name="Chromium"
-	description="Search your Chromium bookmarks."
-	author="Jonathan Lambrechts"
+	description="Search your Google Chrome, and Chromium bookmarks."
+	author="Jonathan Lambrechts, Alex Launi"
 	category="Community"
 	defaultEnabled="false"
 >

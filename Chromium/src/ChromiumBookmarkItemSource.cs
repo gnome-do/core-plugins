@@ -73,41 +73,47 @@ namespace Chromium
 		
 		public override void UpdateItems ()
 		{
+			string[] chromes = {"chromium", "google-chrome"};
+			
 			string type = "", name = "", url = "";
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			string bookmarksFile = "~/.config/chromium/Default/Bookmarks".Replace ("~", home);
+			string bookmarksFileFormat = "~/.config/{0}/Default/Bookmarks".Replace ("~", home);
 			
-			try {
-				Regex RE = new Regex ("(\"([^\"]*)\" *: *\"([^\"]*)\")|[{}]", RegexOptions.Multiline);
-				FileStream fs = new FileStream (bookmarksFile, FileMode.Open, FileAccess.Read);
-				StreamReader reader = new StreamReader (fs);
+			foreach (string app in chromes) {
+				string bookmarksFile = string.Format (bookmarksFileFormat, app);
 				
-				items.Clear ();
-				
-				foreach (Match m in RE.Matches (reader.ReadToEnd ())) {
-					if (m.Value == "{") {
-						url = "";
-						type = "";
-						name = "";
+				try {
+					Regex RE = new Regex ("(\"([^\"]*)\" *: *\"([^\"]*)\")|[{}]", RegexOptions.Multiline);
+					FileStream fs = new FileStream (bookmarksFile, FileMode.Open, FileAccess.Read);
+					StreamReader reader = new StreamReader (fs);
+					
+					items.Clear ();
+					
+					foreach (Match m in RE.Matches (reader.ReadToEnd ())) {
+						if (m.Value == "{") {
+							url = "";
+							type = "";
+							name = "";
+						}
+						else if (m.Value == "}" && type == "url" && !string.IsNullOrEmpty (name) && !string.IsNullOrEmpty (url)) {
+							items.Add (new BookmarkItem (UnescapeUTF8 (name), url));
+						}
+						else if (m.Value.StartsWith ("\"")) {
+							if (m.Groups [2].Value == "url")
+								url = m.Groups [3].Value;
+							else if (m.Groups [2].Value == "name")
+								name = m.Groups [3].Value;
+							else if (m.Groups [2].Value == "type")
+								type = m.Groups [3].Value;
+						}
 					}
-					else if (m.Value == "}" && type == "url" && !string.IsNullOrEmpty (name) && !string.IsNullOrEmpty (url)) {
-						items.Add (new BookmarkItem (UnescapeUTF8 (name), url));
-					}
-					else if (m.Value.StartsWith ("\"")) {
-						if (m.Groups [2].Value == "url")
-							url = m.Groups [3].Value;
-						else if (m.Groups [2].Value == "name")
-							name = m.Groups [3].Value;
-						else if (m.Groups [2].Value == "type")
-							type = m.Groups [3].Value;
-					}
+					fs.Dispose ();
+					reader.Dispose ();
 				}
-				fs.Dispose ();
-				reader.Dispose ();
-			}
-			catch (Exception e) {
-				Log.Error ("Could not read Chromium Bookmarks file {0}: {1}", bookmarksFile, e.Message);
-				Log.Debug (e.StackTrace);
+				catch (Exception e) {
+					Log.Error ("Could not read {0} Bookmarks file {1}: {2}", app, bookmarksFile, e.Message);
+					Log.Debug (e.StackTrace);
+				}
 			}
 		}
 	}
