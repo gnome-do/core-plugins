@@ -77,6 +77,7 @@
       <Entry build="True" name="Qalculate" configuration="Debug" />
       <Entry build="True" name="Baconator" configuration="Debug" />
       <Entry build="True" name="Chromium" configuration="Debug" />
+      <Entry build="True" name="GNOME-Calculator" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Rhythmbox" configuration="Release" />
@@ -155,6 +156,7 @@
       <Entry build="True" name="Qalculate" configuration="Release" />
       <Entry build="True" name="Baconator" configuration="Release" />
       <Entry build="True" name="Chromium" configuration="Release" />
+      <Entry build="True" name="GNOME-Calculator" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
@@ -234,6 +236,7 @@
     <Execute type="None" entry="Qalculate" />
     <Execute type="None" entry="Baconator" />
     <Execute type="None" entry="Chromium" />
+    <Execute type="None" entry="GNOME-Calculator" />
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
@@ -313,5 +316,6 @@
     <Entry filename="Qalculate/Qalculate.mdp" />
     <Entry filename="Baconator/Baconator.mdp" />
     <Entry filename="Chromium/Chromium.mdp" />
+    <Entry filename="GNOME-Calculator/GNOME-Calculator.mdp" />
   </Entries>
 </Combine>

@@ -1,0 +1,26 @@
+<Addin
+	id="GNOME-Calculator"
+	namespace="Do"
+	version="0.1"
+	name="GNOME Calculator"
+	description="Perform calculations."
+	author="Marco Antonio Villegas Vega"
+	category="Community"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/GNOME_Calculator_Plugin"
+>
+ 
+	<Runtime>
+		<Import assembly="GNOME-Calculator.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="/usr/local/share/locale" />
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+	
+	<Extension path= "/Do/Action">
+		<Action type="GNOME.GCalcTool.GCalcToolAction" />
+	</Extension>
+</Addin>

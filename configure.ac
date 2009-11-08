@@ -282,6 +282,8 @@ Firefox/Makefile
 Firefox/Resources/Firefox.addin.xml
 Flickr/Makefile
 Flickr/Resources/Flickr.addin.xml
+GNOME-Calculator/Makefile
+GNOME-Calculator/Resources/GNOME-Calculator.addin.xml
 GNOME-Dictionary/Makefile
 GNOME-Dictionary/Resources/GNOME-Dictionary.addin.xml
 GNOME-Screenshot/Makefile
