@@ -52,13 +52,7 @@ namespace GNOME.GCalcTool {
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
             string expression = (items.First () as ITextItem).Text;
             string result = "";
-            string error = AddinManager.CurrentLocalizer.GetString("Sorry I couldn't understand your expression, try another way");
-
-            //TODO found something that works
-            //string pattern = @"([\(]*([\(]*[\-][-]*[0-9]*[\.\,]*[0-9]([\+\-/\*\^][\-][-]*[0-9]*[\.\,]*[0-9])+[\)]*)+([\+\-/\*\^]([\(]*[\-][-]*[0-9]*[\.\,]*[0-9]([\+\-/\*\^][\-][-]*[0-9]*[\.\,]*[0-9])+[\)]*)+)+[\)]*)+";
-            //if (!Regex.IsMatch(expression, pattern)) {
-            //	yield return new TextItem (error);
-            //}
+            string error = AddinManager.CurrentLocalizer.GetString ("Sorry I couldn't understand your expression, try another way");
 
             ProcessStartInfo ps = new ProcessStartInfo ("gcalctool", "-s " + expression);
             ps.UseShellExecute = false;
