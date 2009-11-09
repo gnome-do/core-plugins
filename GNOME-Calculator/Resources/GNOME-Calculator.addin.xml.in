@@ -3,7 +3,7 @@
 	namespace="Do"
 	version="0.1"
 	name="GNOME Calculator"
-	description="Perform calculations."
+	description="Add, subtract, multiply, and more."
 	author="Marco Antonio Villegas Vega"
 	category="Community"
 	defaultEnabled="false"
@@ -21,6 +21,6 @@
 	</Dependencies>
 	
 	<Extension path= "/Do/Action">
-		<Action type="GNOME.GCalcTool.GCalcToolAction" />
+		<Action type="GnomeCalculator.Calculate" />
 	</Extension>
 </Addin>

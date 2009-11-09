@@ -15,41 +15,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
-
-using Mono.Addins;
 
 using Do.Universe;
 using Do.Universe.Common;
+using Mono.Addins;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace GNOME.GCalcTool {
+namespace GnomeCalculator
+{
 
-    public class GCalcToolAction : Act {
+    public class Calculate : Act
+    {
 
-        public GCalcToolAction() {
+        public Calculate()
+        {
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return "GNOME Calculator";  }
         }
 
-        public override string Description {
+        public override string Description
+        {
             get { return AddinManager.CurrentLocalizer.GetString ("Use GNOME Calculator to make simple calculations."); }
         }
 
-        public override string Icon {
+        public override string Icon
+        {
             get { return "accessories-calculator"; }
         }
 
-        public override IEnumerable<Type> SupportedItemTypes {
+        public override IEnumerable<Type> SupportedItemTypes
+        {
             get { yield return typeof (ITextItem); }
         }
 
-        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
+        public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
+        {
             string expression = (items.First () as ITextItem).Text;
             string result = "";
             string error = AddinManager.CurrentLocalizer.GetString ("Sorry I couldn't understand your expression, try another way");
