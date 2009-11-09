@@ -16,9 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
-using System.IO;
-using System.Web;
-using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -55,6 +52,13 @@ namespace GNOME.GCalcTool {
         public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems) {
             string expression = (items.First () as ITextItem).Text;
             string result = "";
+            string error = AddinManager.CurrentLocalizer.GetString("Sorry I couldn't understand your expression, try another way");
+
+            //TODO found something that works
+            //string pattern = @"([\(]*([\(]*[\-][-]*[0-9]*[\.\,]*[0-9]([\+\-/\*\^][\-][-]*[0-9]*[\.\,]*[0-9])+[\)]*)+([\+\-/\*\^]([\(]*[\-][-]*[0-9]*[\.\,]*[0-9]([\+\-/\*\^][\-][-]*[0-9]*[\.\,]*[0-9])+[\)]*)+)+[\)]*)+";
+            //if (!Regex.IsMatch(expression, pattern)) {
+            //	yield return new TextItem (error);
+            //}
 
             ProcessStartInfo ps = new ProcessStartInfo ("gcalctool", "-s " + expression);
             ps.UseShellExecute = false;
@@ -63,6 +67,9 @@ namespace GNOME.GCalcTool {
 
             result = p.StandardOutput.ReadToEnd ();
             p.WaitForExit ();
+            if (p.ExitCode != 0) {
+                result = error;
+            }
 
             yield return new TextItem (result);
         }
