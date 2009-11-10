@@ -60,14 +60,12 @@ namespace GnomeCalculator
             string result = "";
             string error = AddinManager.CurrentLocalizer.GetString ("Sorry I couldn't understand your expression, try another way");
 	    
-	    Log<Calculate>.Debug (expression);
             ProcessStartInfo ps = new ProcessStartInfo ("gcalctool", "-s \"" + expression + "\"");
             ps.UseShellExecute = false;
             ps.RedirectStandardOutput = true;
             Process p = Process.Start (ps);
 
             result = p.StandardOutput.ReadToEnd ();
-	    Log<Calculate>.Debug (result);
             p.WaitForExit ();
             if (p.ExitCode != 0) {
                 result = error;
