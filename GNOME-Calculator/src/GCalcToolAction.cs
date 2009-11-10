@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 
 using Mono.Addins;
 
+using Do.Platform;
 using Do.Universe;
 using Do.Universe.Common;
 
@@ -58,13 +59,15 @@ namespace GnomeCalculator
             string expression = (items.First () as ITextItem).Text;
             string result = "";
             string error = AddinManager.CurrentLocalizer.GetString ("Sorry I couldn't understand your expression, try another way");
-
-            ProcessStartInfo ps = new ProcessStartInfo ("gcalctool", "-s " + expression);
+	    
+	    Log<Calculate>.Debug (expression);
+            ProcessStartInfo ps = new ProcessStartInfo ("gcalctool", "-s \"" + expression + "\"");
             ps.UseShellExecute = false;
             ps.RedirectStandardOutput = true;
             Process p = Process.Start (ps);
 
             result = p.StandardOutput.ReadToEnd ();
+	    Log<Calculate>.Debug (result);
             p.WaitForExit ();
             if (p.ExitCode != 0) {
                 result = error;
