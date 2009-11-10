@@ -37,23 +37,19 @@ namespace GnomeCalculator
         {
         }
 
-        public override string Name
-        {
-            get { return "GNOME Calculator";  }
+        public override string Name {
+            get { return AddinManager.CurrentLocalizer.GetString ("Calculate");  }
         }
 
-        public override string Description
-        {
+        public override string Description {
             get { return AddinManager.CurrentLocalizer.GetString ("Use GNOME Calculator to make simple calculations."); }
         }
 
-        public override string Icon
-        {
+        public override string Icon {
             get { return "accessories-calculator"; }
         }
 
-        public override IEnumerable<Type> SupportedItemTypes
-        {
+        public override IEnumerable<Type> SupportedItemTypes {
             get { yield return typeof (ITextItem); }
         }
 
