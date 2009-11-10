@@ -16,14 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Do.Universe;
-using Do.Universe.Common;
-using Mono.Addins;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+
+using Mono.Addins;
+
+using Do.Universe;
+using Do.Universe.Common;
 
 namespace GnomeCalculator
 {
