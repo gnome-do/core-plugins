@@ -25,6 +25,7 @@ SUBDIRS = \
 	File \
 	Firefox \
 	Flickr \
+	GNOME-Calculator \
 	GNOME-Dictionary \
 	GNOME-Screenshot \
 	GNOME-Session \
