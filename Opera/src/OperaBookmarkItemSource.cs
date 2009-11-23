@@ -25,7 +25,7 @@ namespace Opera
 		}
 
 		public override string Description { 
-			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Opera 6 bookmarks"); } 
+			get { return AddinManager.CurrentLocalizer.GetString ("Indexes your Opera bookmarks"); } 
 		}
 
 		public override string Icon { 
@@ -42,29 +42,33 @@ namespace Opera
 		public override void UpdateItems ()
 		{
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			string path = "~/.opera/opera6.adr".Replace ("~", home);
+			string[] paths = {"~/.opera/opera6.adr".Replace ("~", home),
+							"~/.opera/bookmarks.adr".Replace ("~", home)};
 			
 			items.Clear();
-			try {
-				using (StreamReader streamReader = new StreamReader (path)) {
-					string strName;
-					string strURL;
-					while((strName = streamReader.ReadLine ()) != null) {
-						if (!strName.Contains ("NAME")) continue;
+			foreach (string path in paths) {
+				if (File.Exists (path)) {
+					try {
+						using (StreamReader streamReader = new StreamReader (path)) {
+							string strName;
+							string strURL;
+							while((strName = streamReader.ReadLine ()) != null) {
+								if (!strName.Contains ("NAME")) continue;
 
-						strURL = streamReader.ReadLine ();
+								strURL = streamReader.ReadLine ();
 
-						if (string.IsNullOrEmpty (strURL) || !strURL.Contains ("URL")) continue;
+								if (string.IsNullOrEmpty (strURL) || !strURL.Contains ("URL")) continue;
 
-						strName = strName.Replace ("NAME=", "");
-						strURL = strURL.Replace ("URL=", "");
-						items.Add (new BookmarkItem (strName, strURL));						
+								strName = strName.Replace ("NAME=", "");
+								strURL = strURL.Replace ("URL=", "");
+								items.Add (new BookmarkItem (strName, strURL));						
+							}
+						}
+					} catch (Exception e) {
+						Log.Error ("Could not read Opera Bookmarks file {0}: {1}", path, e.Message);
+						Log.Debug (e.StackTrace);
 					}
 				}
-			}
-			catch (Exception e) {
-				Log.Error ("Could not read Opera Bookmarks file {0}: {1}", path, e.Message);
-				Log.Debug (e.StackTrace);
 			}
 		}
 	}
