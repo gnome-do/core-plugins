@@ -78,13 +78,23 @@ namespace Do.Addins.Thunderbird
 		
 		void _UpdateItems ()
 		{
-			MorkDatabase database;
+		  MorkDatabase database, history;
 		
 			contacts.Clear ();
 			database = new MorkDatabase (GetThunderbirdAddressBookFilePath ());
 			database.Read ();
 			database.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
 
+			history = new MorkDatabase (GetThunderbirdHistoryFilePath ());
+			history.Read ();
+			history.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
+
+			addContacts(history);
+			addContacts(database);			
+		}
+
+		void addContacts(MorkDatabase database)
+		{
 			foreach (string id in database) {
 				Hashtable contact_row;
 				ContactItem contact;
@@ -120,15 +130,15 @@ namespace Do.Addins.Thunderbird
 			
 			return contact;
 		}
-		
-		string GetThunderbirdAddressBookFilePath ()
+
+		string GetThuderbirdDefaultProfilePath()
 		{
 			string home, path, profile;
 			StreamReader reader;
 
 			profile = null;
 			home = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-			path = System.IO.Path.Combine (home, ".mozilla-thunderbird/profiles.ini");
+			path = System.IO.Path.Combine (home, ".thunderbird/profiles.ini");
 			try {
 				reader = System.IO.File.OpenText (path);
 			} catch {
@@ -148,15 +158,31 @@ namespace Do.Addins.Thunderbird
 				}
 			}
 			reader.Close ();
-			
-			if (profile == null) {
-				return null;
-			}
-			path = System.IO.Path.Combine (home, ".mozilla-thunderbird");
-			path = System.IO.Path.Combine (path, profile);
-			path = System.IO.Path.Combine (path, "abook.mab");
-			return path;
-			
+			return profile;
+		}
+
+		string GetThunderbirdFilePath (string filename)
+		{
+		  string path, home, profile;
+		  home = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
+		  profile = GetThuderbirdDefaultProfilePath();
+		  if (profile == null) {
+			return null;
+		  }
+		  path = System.IO.Path.Combine (home, ".thunderbird");
+		  path = System.IO.Path.Combine (path, profile);
+		  path = System.IO.Path.Combine (path, filename);
+		  return path;
+		}
+		
+		string GetThunderbirdHistoryFilePath ()
+		{
+		  return GetThunderbirdFilePath("history.mab");
+		}
+
+		string GetThunderbirdAddressBookFilePath ()
+		{
+ 		  return GetThunderbirdFilePath("abook.mab");
 		}
 		
 	}
