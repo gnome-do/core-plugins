@@ -34,44 +34,51 @@ namespace Do.Addins.Thunderbird
 	public class ThunderbirdContactItemSource : ItemSource
 	{
 
-	  // public class EmailContactDetail: Item
-	  // {
-	  // 	string emailNo, email;
-	  // 	public  EmailContactDetail(string emailNo, string email)
-	  // 	  {
-	  // 		this.emailNo = emailNo;
-	  // 		this.email = email;
-	  // 	  }
+	  public class EmailContactDetail: Item, IContactDetailItem
+	  {
+	  	readonly string detail;
+		readonly ContactItem owner;
 
-	  // 	public override string Name 
-	  // 	{
-	  // 	  get { return emailNo; }
-	  // 	}
+	  	public  EmailContactDetail(ContactItem owner, string detail)
+	  	{
+	  		this.owner  = owner;
+	  		this.detail = detail;
+	  	}
 
-	  // 	public override string Description
-	  // 	{
-	  // 	  get { return emailNo; }
-	  // 	}
+	  	public override string Name 
+	  	{
+		  get
+		  {
+			return owner[detail];
+			// return AddinManager.CurrentLocalizer.GetString ("Email");
+		  }
+	  	}
 
-	  // 	public override string Icon
-	  // 	{
-	  // 	  get { return "thunderbird"; }
-	  // 	}
+	  	public override string Description
+	  	{
+	  	  get { return Value; }
+	  	}
 
+	  	public override string Icon
+	  	{
+		  get { return "thunderbird"; }
+	  	  // get { return "stock_person"; }
+	  	  // get { return "stock_mail-compose"; }
+	  	}
 
-	  // 	public string Key {
-	  // 	  get {return emailNo; }
-	  // 	}
+	  	public string Key {
+	  	  get { return detail; }
+	  	}
 
-	  // 	public string Value {
-	  // 	  get {return email; }
-	  // 	}
-
-
-	  // }
+	  	public string Value {
+	  	  get { return owner[detail]; }
+	  	}
+	  }
 		
-		const string BeginProfileName = "Path=";
+		const string BeginProfileName    = "Path=";
 		const string BeginDefaultProfile = "Name=default";
+		const string EMAIL_COUNTER       = "thunderbird.counter";
+		const string THUNDERBIRD_EMAIL   = "email.thunderbird";
 		
 		Dictionary<string, Item> contacts; // name => ContactItem
 		
@@ -109,18 +116,23 @@ namespace Do.Addins.Thunderbird
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-		  // ContactItem contact = item as ContactItem;
-		  // Console.Error.WriteLine("ParentItem: {0}[\"email\"]/{1}", contact["name"], contact["email"]);
-		  // foreach (string detail in contact.Details)
-		  // {
-		  // 	if (detail.StartsWith("email"))// && detail != "email")
-		  // 	  {
-		  // 		// ContactItem nextEmail = ContactItem.CreateWithName(contact["name"]);
-		  // 		// nextEmail["email"] = contact[detail];
-		  // 		Console.Error.WriteLine("ChildItem: {0}[{1}]={2}", contact["name"], detail, contact[detail]);
-		  // 		yield return new EmailContactDetail(contact[detail], contact[detail]);
-		  // 	  }
-		  // }
+		  ContactItem contact = item as ContactItem;
+		  Console.Error.WriteLine("ParentItem: {0}[\"email\"]/{1}", contact["name"], contact["email"]);
+		  foreach (string detail in contact.Details)
+			{
+			  Console.Error.WriteLine("{0} = {1}", detail, contact[detail]);
+			}
+
+		  foreach (string detail in contact.Details)
+		  {
+		  	if (detail.StartsWith(THUNDERBIRD_EMAIL))// && detail != "email")
+		  	  {
+		  		// ContactItem nextEmail = ContactItem.CreateWithName(contact["name"]);
+		  		// nextEmail["email"] = contact[detail];
+		  		Console.Error.WriteLine("ChildItem: {0}[{1}]={2}", contact["name"], detail, contact[detail]);
+		  		yield return new EmailContactDetail(contact, detail);
+		  	  }
+		  }
 		  yield break;
 		}
 		
@@ -168,13 +180,13 @@ namespace Do.Addins.Thunderbird
 				// 	email != null && email != string.Empty)
 				// {
 				//     contact = contacts[name] as ContactItem;
-				// 	i = Convert.ToUInt16(contact["num_emails"]) + 1;
-				// 	contact["num_emails"] = i.ToString();
+				// 	i = Convert.ToUInt16(contact[EMAIL_COUNTER]) + 1;
+				// 	contact[EMAIL_COUNTER] = i.ToString();
 				// 	name = name + " " + i;
 				// 	contact = ContactItem.CreateWithName(name);
 				// 	contact["email"] = email;
-				// 	Console.Error.WriteLine("About to add {0}[{1}]/{2}, num_emails={3}",
-				// 							name, i, email, contact["num_emails"]);
+				// 	Console.Error.WriteLine("About to add {0}[{1}]/{2}, EMAIL_COUNTER={3}",
+				// 							name, i, email, contact[EMAIL_COUNTER]);
 				// 	// int i = 0;
 				// 	// foreach (string detail in contact.Details) {
 				// 	//   if (detail.StartsWith("email"))
@@ -183,8 +195,11 @@ namespace Do.Addins.Thunderbird
 				// 	// string detailN = "email." + i;
 				// 	// contact[detailN] = email;
 				// }
-				contacts.Add(name.ToLower(), contact);
-				Console.Error.WriteLine("Added: {0}[{1}]/{2}", name, contact["num_emails"], email);
+				if (!contacts.ContainsKey(name.ToLower()))
+				  {
+					contacts.Add(name.ToLower(), contact);
+				  }
+				Console.Error.WriteLine("Added: {0}[{1}]/{2}", name, contact[EMAIL_COUNTER], email);
 				// if (contacts.ContainsKey(name))
 				// {
 				//     contact = contacts[name] as ContactItem;
@@ -229,26 +244,31 @@ namespace Do.Addins.Thunderbird
 			  name = email;
 
 			int i = 0;
-			Item sameContact;
-			contacts.TryGetValue(name.ToLower(), out sameContact);
-			contact = sameContact as ContactItem;
-			if (null != contact && 
-				contact["email"] != null && contact["email"] != string.Empty)
-			  {
-				Console.Error.WriteLine("Found {0}, num_email={1}", name, contact["num_emails"]);
-				i = Convert.ToUInt16(contact["num_emails"]) + 1;
-				contact["num_emails"] = i.ToString();
-				name = name + " " + i;
-				// contact = ContactItem.CreateWithName(name);
-				// contact["email"] = email;
-			  }
-
-			Console.Error.WriteLine("Creating: {0}[{1}]/{2}", name, i, email);
+			// Item sameContact;
+			// contacts.TryGetValue(name.ToLower(), out sameContact);
+			// contact = sameContact as ContactItem;
 			contact = ContactItem.Create (name);
-			if (email != null && email != string.Empty)
-				contact["email"] = email;
+			// string detail = "email";
+			// if (null != contact)//  && 
+			// 	// contact["email"] != null && contact["email"] != string.Empty)
+			//   {
 
-			// contact["num_emails"] = i.ToString();
+			Console.Error.WriteLine("Found {0}, num_email={1}", name, contact[EMAIL_COUNTER]);
+			i = Convert.ToUInt16(contact[EMAIL_COUNTER]) + 1;
+			contact[EMAIL_COUNTER] = i.ToString();
+
+				// name = name + " " + i;
+			  // }
+			string detail = THUNDERBIRD_EMAIL + "." + i;
+
+			Console.Error.WriteLine("Creating: {0}[{1}]/{2}", name, detail, email);
+			if (email != null && email != string.Empty)
+			{
+			  contact[detail] = email;
+			  // if (null == contact["email"] || string.Empty == contact["email"])
+			  // 	contact["email"] = email;
+			}
+			// contact[EMAIL_COUNTER] = i.ToString();
 			
 			return contact;
 		}
