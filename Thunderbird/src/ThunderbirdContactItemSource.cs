@@ -34,46 +34,46 @@ namespace Do.Addins.Thunderbird
 	public class ThunderbirdContactItemSource : ItemSource
 	{
 
-	  public class EmailContactDetail: Item, IContactDetailItem
-	  {
-	  	readonly string detail;
-		readonly ContactItem owner;
+		public class EmailContactDetail: Item, IContactDetailItem
+		{
+			readonly string detail;
+			readonly ContactItem owner;
 
-	  	public  EmailContactDetail(ContactItem owner, string detail)
-	  	{
-	  		this.owner  = owner;
-	  		this.detail = detail;
-	  	}
+			public  EmailContactDetail(ContactItem owner, string detail)
+			{
+				this.owner  = owner;
+				this.detail = detail;
+			}
 
-	  	public override string Name 
-	  	{
-		  get
-		  {
-			return owner[detail];
-			// return AddinManager.CurrentLocalizer.GetString ("Email");
-		  }
-	  	}
+			public override string Name 
+			{
+				get
+				{
+					return owner[detail];
+					// return AddinManager.CurrentLocalizer.GetString ("Email");
+				}
+			}
 
-	  	public override string Description
-	  	{
-	  	  get { return Value; }
-	  	}
+			public override string Description
+			{
+				get { return Value; }
+			}
 
-	  	public override string Icon
-	  	{
-		  get { return "thunderbird"; }
-	  	  // get { return "stock_person"; }
-	  	  // get { return "stock_mail-compose"; }
-	  	}
+			public override string Icon
+			{
+				get { return "thunderbird"; }
+			}
 
-	  	public string Key {
-	  	  get { return detail; }
-	  	}
+			public string Key 
+			{
+				get { return detail; }
+			}
 
-	  	public string Value {
-	  	  get { return owner[detail]; }
-	  	}
-	  }
+			public string Value
+			{
+				get { return owner[detail]; }
+			}
+		}
 		
 		const string BeginProfileName    = "Path=";
 		const string BeginDefaultProfile = "Name=default";
@@ -118,32 +118,28 @@ namespace Do.Addins.Thunderbird
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-		  ContactItem contact = item as ContactItem;
-		  Console.Error.WriteLine("ParentItem: {0}[\"email\"]/{1}", contact["name"], contact["email"]);
-		  foreach (string detail in contact.Details)
+			ContactItem contact = item as ContactItem;
+			Console.Error.WriteLine("ParentItem: {0}[\"email\"]/{1}", contact["name"], contact["email"]);
+			foreach (string detail in contact.Details)
 			{
-			  Console.Error.WriteLine("{0} = {1}", detail, contact[detail]);
+				Console.Error.WriteLine("{0} = {1}", detail, contact[detail]);
 			}
 
-		  foreach (string detail in contact.Details)
-		  {
-		  	if (detail.StartsWith(THUNDERBIRD_EMAIL))// && detail != "email")
-		  	  {
-		  		// ContactItem nextEmail = ContactItem.CreateWithName(contact["name"]);
-		  		// nextEmail["email"] = contact[detail];
-		  		Console.Error.WriteLine("ChildItem: {0}[{1}]={2}", contact["name"], detail, contact[detail]);
-		  		yield return new EmailContactDetail(contact, detail);
-		  	  }
-		  }
-		  yield break;
+			foreach (string detail in contact.Details)
+			{
+				if (detail.StartsWith(THUNDERBIRD_EMAIL))// && detail != "email")
+				{
+					Console.Error.WriteLine("ChildItem: {0}[{1}]={2}", contact["name"], detail, contact[detail]);
+					yield return new EmailContactDetail(contact, detail);
+				}
+			}
+			yield break;
 		}
 		
 		void _UpdateItems ()
 		{
  		    Console.Error.WriteLine("_UpdateItems");
 		    MorkDatabase database, history;
-
-			contacts.Clear ();
 
 			database = new MorkDatabase (GetThunderbirdAddressBookFilePath ());
 			database.Read ();
@@ -153,15 +149,16 @@ namespace Do.Addins.Thunderbird
 			history.Read ();
 			history.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
 
+			contacts.Clear ();
 			addContacts(history);
 			addContacts(database);
 			foreach (ContactItem item in contacts.Values)
-			  {
+			{
 				foreach (string detail in item.Details)
-				  {
+				{
 					Console.Error.WriteLine("{0} = {1}", detail, item[detail]);
-				  }
-			  }
+				}
+			}
 		}
 
 		void addContacts(MorkDatabase database)
@@ -173,58 +170,20 @@ namespace Do.Addins.Thunderbird
 				contact_row = database.Compile (id, database.EnumNamespace);
 				contact = CreateThunderbirdContactItem (contact_row);
 				if (contact == null)
-				  continue;
+					continue;
 				
 				string name  = contact["name"];
 				string email = contact["email"];
-				// int i = 0;
-				// if (contacts.ContainsKey(name) && 
-				// 	email != null && email != string.Empty)
-				// {
-				//     contact = contacts[name] as ContactItem;
-				// 	i = Convert.ToUInt16(contact[EMAIL_COUNTER]) + 1;
-				// 	contact[EMAIL_COUNTER] = i.ToString();
-				// 	name = name + " " + i;
-				// 	contact = ContactItem.CreateWithName(name);
-				// 	contact["email"] = email;
-				// 	Console.Error.WriteLine("About to add {0}[{1}]/{2}, EMAIL_COUNTER={3}",
-				// 							name, i, email, contact[EMAIL_COUNTER]);
-				// 	// int i = 0;
-				// 	// foreach (string detail in contact.Details) {
-				// 	//   if (detail.StartsWith("email"))
-				// 	// 	i++;
-				// 	// }
-				// 	// string detailN = "email." + i;
-				// 	// contact[detailN] = email;
-				// }
 				if (!contacts.ContainsKey(name.ToLower()))
-				  {
+				{
 					contacts.Add(name.ToLower(), contact);
-				  }
+				}
 				Console.Error.WriteLine("Added: {0}[{1}]/{2}", name, contact[EMAIL_COUNTER], email);
-				// if (contacts.ContainsKey(name))
-				// {
-				//     contact = contacts[name] as ContactItem;
-				// 	int i = 0;
-				// 	foreach (string detail in contact.Details) {
-				// 	  if (detail.StartsWith("email"))
-				// 		i++;
-				// 	}
-				// 	string detailN = "email." + i;
-				// 	contact[detailN] = email;
-				// 	Console.Error.WriteLine("Added: {0}[{1}]/{2}", name, i, contact[detailN]);
-				// }
-				// else
-				// {
-				//   contacts.Add(name, contact);
-				//   // Console.Error.WriteLine("First contact: {0}", name ?? "unknown");
-				//   Console.Error.WriteLine("Added: {0}[0]/{1}", name, contact["email"]);
-				// }
 			}
 		}
 	
 		ContactItem CreateThunderbirdContactItem (Hashtable row) {
-		  ContactItem contact;
+			ContactItem contact;
 			string name, email;
 			
 //			foreach (object o in row.Keys)
@@ -243,45 +202,28 @@ namespace Do.Addins.Thunderbird
 			email = row["PrimaryEmail"] as string;
 			
 			if (name == null || name.Trim() == string.Empty)
-			  name = email;
+			    name = email;
 
 			if (string.IsNullOrEmpty(email))
-			  return null;
+			    return null;
 
-			// Item sameContact;
-			// contacts.TryGetValue(name.ToLower(), out sameContact);
-			// contact = sameContact as ContactItem;
 			contact = ContactItem.Create (name);
-			// string detail = "email";
-			// if (null != contact)//  && 
-			// 	// contact["email"] != null && contact["email"] != string.Empty)
-			//   {
+			if (!emails.ContainsKey(name))
+			{
+				emails[name] = new List<string> ();
+			}
+			if (!emails[name].Contains(email))
+			{
+				int i = Convert.ToUInt16(contact[EMAIL_COUNTER]) + 1;
+				contact[EMAIL_COUNTER] = i.ToString();
+				string detail = THUNDERBIRD_EMAIL + "." + i;
 
-				// name = name + " " + i;
-			  // }
+				contact[detail] = email;
+				emails[name].Add(email);
 
-
-			// Console.Error.WriteLine("Creating: {0}[{1}]/{2}", name, detail, email);
-			// if (!string.IsNullOrEmpty(email))// != null && email != string.Empty)
-			// {
-			  if (!emails.ContainsKey(name))
-				{
-				  emails[name] = new List<string> ();
-				}
-			  if (!emails[name].Contains(email))
-				{
-				  int i = Convert.ToUInt16(contact[EMAIL_COUNTER]) + 1;
-				  contact[EMAIL_COUNTER] = i.ToString();
-				  string detail = THUNDERBIRD_EMAIL + "." + i;
-
-				  contact[detail] = email;
-				  emails[name].Add(email);
-
-				  Console.Error.WriteLine("Added {0}/{1}, num_email={2}",
-										  name, email, contact[EMAIL_COUNTER]);
-				}
-			// }
-			// contact[EMAIL_COUNTER] = i.ToString();
+				Console.Error.WriteLine("Added {0}/{1}, num_email={2}",
+										name, email, contact[EMAIL_COUNTER]);
+			}
 			
 			return contact;
 		}
@@ -318,27 +260,26 @@ namespace Do.Addins.Thunderbird
 
 		string GetThunderbirdFilePath (string filename)
 		{
-		  string path, home, profile;
-		  home = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-		  profile = GetThuderbirdDefaultProfilePath();
-		  if (profile == null) {
-			return null;
-		  }
-		  path = System.IO.Path.Combine (home, ".thunderbird");
-		  path = System.IO.Path.Combine (path, profile);
-		  path = System.IO.Path.Combine (path, filename);
-		  return path;
+			string path, home, profile;
+			home = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
+			profile = GetThuderbirdDefaultProfilePath();
+			if (profile == null) {
+				return null;
+			}
+			path = System.IO.Path.Combine (home, ".thunderbird");
+			path = System.IO.Path.Combine (path, profile);
+			path = System.IO.Path.Combine (path, filename);
+			return path;
 		}
 		
 		string GetThunderbirdHistoryFilePath ()
 		{
-		  return GetThunderbirdFilePath("history.mab");
+			return GetThunderbirdFilePath("history.mab");
 		}
 
 		string GetThunderbirdAddressBookFilePath ()
 		{
- 		  return GetThunderbirdFilePath("abook.mab");
+			return GetThunderbirdFilePath("abook.mab");
 		}
-		
 	}
 }
