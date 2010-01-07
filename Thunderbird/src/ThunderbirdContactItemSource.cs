@@ -81,10 +81,12 @@ namespace Do.Addins.Thunderbird
 		const string THUNDERBIRD_EMAIL   = "email.thunderbird";
 		
 		Dictionary<string, Item> contacts; // name => ContactItem
+		Dictionary<string, List<string> > emails; // name => list of emails
 		
 		public ThunderbirdContactItemSource ()
 		{
 		    contacts = new Dictionary<string, Item> ();
+			emails   = new Dictionary<string, List<string>> ();
 			// UpdateItems ();
 		}
 		
@@ -243,7 +245,9 @@ namespace Do.Addins.Thunderbird
 			if (name == null || name.Trim() == string.Empty)
 			  name = email;
 
-			int i = 0;
+			if (string.IsNullOrEmpty(email))
+			  return null;
+
 			// Item sameContact;
 			// contacts.TryGetValue(name.ToLower(), out sameContact);
 			// contact = sameContact as ContactItem;
@@ -253,21 +257,30 @@ namespace Do.Addins.Thunderbird
 			// 	// contact["email"] != null && contact["email"] != string.Empty)
 			//   {
 
-			Console.Error.WriteLine("Found {0}, num_email={1}", name, contact[EMAIL_COUNTER]);
-			i = Convert.ToUInt16(contact[EMAIL_COUNTER]) + 1;
-			contact[EMAIL_COUNTER] = i.ToString();
-
 				// name = name + " " + i;
 			  // }
-			string detail = THUNDERBIRD_EMAIL + "." + i;
 
-			Console.Error.WriteLine("Creating: {0}[{1}]/{2}", name, detail, email);
-			if (email != null && email != string.Empty)
-			{
-			  contact[detail] = email;
-			  // if (null == contact["email"] || string.Empty == contact["email"])
-			  // 	contact["email"] = email;
-			}
+
+			// Console.Error.WriteLine("Creating: {0}[{1}]/{2}", name, detail, email);
+			// if (!string.IsNullOrEmpty(email))// != null && email != string.Empty)
+			// {
+			  if (!emails.ContainsKey(name))
+				{
+				  emails[name] = new List<string> ();
+				}
+			  if (!emails[name].Contains(email))
+				{
+				  int i = Convert.ToUInt16(contact[EMAIL_COUNTER]) + 1;
+				  contact[EMAIL_COUNTER] = i.ToString();
+				  string detail = THUNDERBIRD_EMAIL + "." + i;
+
+				  contact[detail] = email;
+				  emails[name].Add(email);
+
+				  Console.Error.WriteLine("Added {0}/{1}, num_email={2}",
+										  name, email, contact[EMAIL_COUNTER]);
+				}
+			// }
 			// contact[EMAIL_COUNTER] = i.ToString();
 			
 			return contact;
