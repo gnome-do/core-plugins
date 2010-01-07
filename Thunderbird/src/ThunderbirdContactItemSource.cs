@@ -36,27 +36,26 @@ namespace Do.Addins.Thunderbird
 
 		public class EmailContactDetail: Item, IContactDetailItem
 		{
-			readonly string detail;
+			readonly string      detail, description;
 			readonly ContactItem owner;
 
 			public  EmailContactDetail(ContactItem owner, string detail)
 			{
 				this.owner  = owner;
 				this.detail = detail;
+                description = string.IsNullOrEmpty(owner["name"]) 
+                              ? owner[detail]
+                              : owner["name"];
 			}
 
 			public override string Name 
 			{
-				get
-				{
-					return owner[detail];
-					// return AddinManager.CurrentLocalizer.GetString ("Email");
-				}
+				get	{ return owner[detail]; }
 			}
 
 			public override string Description
 			{
-				get { return Value; }
+				get { return description; }
 			}
 
 			public override string Icon
@@ -71,23 +70,42 @@ namespace Do.Addins.Thunderbird
 
 			public string Value
 			{
-				get { return owner[detail]; }
+                get { return owner[detail]; }
 			}
 		}
-		
+
+        public class EmailList
+        {
+            private Dictionary<string, byte> set;
+
+            public EmailList() { set = new Dictionary<string, byte> (); }
+
+            public void Add(string email)
+            {
+                if (!set.ContainsKey(email))
+                {
+                    set.Add(email, 0);
+                }
+            }
+
+            public bool Contains(string email)
+            {
+                return set.ContainsKey(email);
+            }
+        }
+
 		const string BeginProfileName    = "Path=";
 		const string BeginDefaultProfile = "Name=default";
 		const string EMAIL_COUNTER       = "thunderbird.counter";
 		const string THUNDERBIRD_EMAIL   = "email.thunderbird";
-		
+
 		Dictionary<string, Item> contacts; // name => ContactItem
-		Dictionary<string, List<string> > emails; // name => list of emails
+		Dictionary<string, EmailList> emails; // name => list of emails
 		
 		public ThunderbirdContactItemSource ()
 		{
 		    contacts = new Dictionary<string, Item> ();
-			emails   = new Dictionary<string, List<string>> ();
-			// UpdateItems ();
+			emails   = new Dictionary<string, EmailList> ();
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -127,7 +145,7 @@ namespace Do.Addins.Thunderbird
 
 			foreach (string detail in contact.Details)
 			{
-				if (detail.StartsWith(THUNDERBIRD_EMAIL))// && detail != "email")
+				if (detail.StartsWith(THUNDERBIRD_EMAIL))
 				{
 					Console.Error.WriteLine("ChildItem: {0}[{1}]={2}", contact["name"], detail, contact[detail]);
 					yield return new EmailContactDetail(contact, detail);
@@ -139,11 +157,11 @@ namespace Do.Addins.Thunderbird
 		void _UpdateItems ()
 		{
  		    Console.Error.WriteLine("_UpdateItems");
-		    MorkDatabase database, history;
+		    MorkDatabase abook, history;
 
-			database = new MorkDatabase (GetThunderbirdAddressBookFilePath ());
-			database.Read ();
-			database.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
+			abook = new MorkDatabase (GetThunderbirdAddressBookFilePath ());
+			abook.Read ();
+			abook.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
 
 			history = new MorkDatabase (GetThunderbirdHistoryFilePath ());
 			history.Read ();
@@ -151,7 +169,7 @@ namespace Do.Addins.Thunderbird
 
 			contacts.Clear ();
 			addContacts(history);
-			addContacts(database);
+			addContacts(abook);
 			foreach (ContactItem item in contacts.Values)
 			{
 				foreach (string detail in item.Details)
@@ -210,7 +228,7 @@ namespace Do.Addins.Thunderbird
 			contact = ContactItem.Create (name);
 			if (!emails.ContainsKey(name))
 			{
-				emails[name] = new List<string> ();
+				emails[name] = new EmailList ();
 			}
 			if (!emails[name].Contains(email))
 			{
