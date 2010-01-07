@@ -33,16 +33,52 @@ namespace Do.Addins.Thunderbird
 
 	public class ThunderbirdContactItemSource : ItemSource
 	{
+
+	  // public class EmailContactDetail: Item
+	  // {
+	  // 	string emailNo, email;
+	  // 	public  EmailContactDetail(string emailNo, string email)
+	  // 	  {
+	  // 		this.emailNo = emailNo;
+	  // 		this.email = email;
+	  // 	  }
+
+	  // 	public override string Name 
+	  // 	{
+	  // 	  get { return emailNo; }
+	  // 	}
+
+	  // 	public override string Description
+	  // 	{
+	  // 	  get { return emailNo; }
+	  // 	}
+
+	  // 	public override string Icon
+	  // 	{
+	  // 	  get { return "thunderbird"; }
+	  // 	}
+
+
+	  // 	public string Key {
+	  // 	  get {return emailNo; }
+	  // 	}
+
+	  // 	public string Value {
+	  // 	  get {return email; }
+	  // 	}
+
+
+	  // }
 		
 		const string BeginProfileName = "Path=";
 		const string BeginDefaultProfile = "Name=default";
 		
-		List<Item> contacts;
+		Dictionary<string, Item> contacts; // name => ContactItem
 		
 		public ThunderbirdContactItemSource ()
 		{
-			contacts = new List<Item> ();
-			UpdateItems ();
+		    contacts = new Dictionary<string, Item> ();
+			// UpdateItems ();
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -68,19 +104,33 @@ namespace Do.Addins.Thunderbird
 		}
 		
 		public override IEnumerable<Item> Items {
-			get { return contacts; }
+			get { return contacts.Values; }
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			yield break;
+		  // ContactItem contact = item as ContactItem;
+		  // Console.Error.WriteLine("ParentItem: {0}[\"email\"]/{1}", contact["name"], contact["email"]);
+		  // foreach (string detail in contact.Details)
+		  // {
+		  // 	if (detail.StartsWith("email"))// && detail != "email")
+		  // 	  {
+		  // 		// ContactItem nextEmail = ContactItem.CreateWithName(contact["name"]);
+		  // 		// nextEmail["email"] = contact[detail];
+		  // 		Console.Error.WriteLine("ChildItem: {0}[{1}]={2}", contact["name"], detail, contact[detail]);
+		  // 		yield return new EmailContactDetail(contact[detail], contact[detail]);
+		  // 	  }
+		  // }
+		  yield break;
 		}
 		
 		void _UpdateItems ()
 		{
-		  MorkDatabase database, history;
-		
+ 		    Console.Error.WriteLine("_UpdateItems");
+		    MorkDatabase database, history;
+
 			contacts.Clear ();
+
 			database = new MorkDatabase (GetThunderbirdAddressBookFilePath ());
 			database.Read ();
 			database.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
@@ -90,7 +140,14 @@ namespace Do.Addins.Thunderbird
 			history.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
 
 			addContacts(history);
-			addContacts(database);			
+			addContacts(database);
+			foreach (ContactItem item in contacts.Values)
+			  {
+				foreach (string detail in item.Details)
+				  {
+					Console.Error.WriteLine("{0} = {1}", detail, item[detail]);
+				  }
+			  }
 		}
 
 		void addContacts(MorkDatabase database)
@@ -101,13 +158,56 @@ namespace Do.Addins.Thunderbird
 				
 				contact_row = database.Compile (id, database.EnumNamespace);
 				contact = CreateThunderbirdContactItem (contact_row);
-				if (contact != null)
-					contacts.Add (contact);
+				if (contact == null)
+				  continue;
+				
+				string name  = contact["name"];
+				string email = contact["email"];
+				// int i = 0;
+				// if (contacts.ContainsKey(name) && 
+				// 	email != null && email != string.Empty)
+				// {
+				//     contact = contacts[name] as ContactItem;
+				// 	i = Convert.ToUInt16(contact["num_emails"]) + 1;
+				// 	contact["num_emails"] = i.ToString();
+				// 	name = name + " " + i;
+				// 	contact = ContactItem.CreateWithName(name);
+				// 	contact["email"] = email;
+				// 	Console.Error.WriteLine("About to add {0}[{1}]/{2}, num_emails={3}",
+				// 							name, i, email, contact["num_emails"]);
+				// 	// int i = 0;
+				// 	// foreach (string detail in contact.Details) {
+				// 	//   if (detail.StartsWith("email"))
+				// 	// 	i++;
+				// 	// }
+				// 	// string detailN = "email." + i;
+				// 	// contact[detailN] = email;
+				// }
+				contacts.Add(name.ToLower(), contact);
+				Console.Error.WriteLine("Added: {0}[{1}]/{2}", name, contact["num_emails"], email);
+				// if (contacts.ContainsKey(name))
+				// {
+				//     contact = contacts[name] as ContactItem;
+				// 	int i = 0;
+				// 	foreach (string detail in contact.Details) {
+				// 	  if (detail.StartsWith("email"))
+				// 		i++;
+				// 	}
+				// 	string detailN = "email." + i;
+				// 	contact[detailN] = email;
+				// 	Console.Error.WriteLine("Added: {0}[{1}]/{2}", name, i, contact[detailN]);
+				// }
+				// else
+				// {
+				//   contacts.Add(name, contact);
+				//   // Console.Error.WriteLine("First contact: {0}", name ?? "unknown");
+				//   Console.Error.WriteLine("Added: {0}[0]/{1}", name, contact["email"]);
+				// }
 			}
 		}
 	
 		ContactItem CreateThunderbirdContactItem (Hashtable row) {
-			ContactItem contact;
+		  ContactItem contact;
 			string name, email;
 			
 //			foreach (object o in row.Keys)
@@ -121,12 +221,34 @@ namespace Do.Addins.Thunderbird
 			name = row["DisplayName"] as string;
 			if (name == null || name == string.Empty)
 				name = string.Format ("{0} {1}", row["FirstName"], row["LastName"]);
-			contact = ContactItem.Create (name);
 			
 			// Email
 			email = row["PrimaryEmail"] as string;
+			
+			if (name == null || name.Trim() == string.Empty)
+			  name = email;
+
+			int i = 0;
+			Item sameContact;
+			contacts.TryGetValue(name.ToLower(), out sameContact);
+			contact = sameContact as ContactItem;
+			if (null != contact && 
+				contact["email"] != null && contact["email"] != string.Empty)
+			  {
+				Console.Error.WriteLine("Found {0}, num_email={1}", name, contact["num_emails"]);
+				i = Convert.ToUInt16(contact["num_emails"]) + 1;
+				contact["num_emails"] = i.ToString();
+				name = name + " " + i;
+				// contact = ContactItem.CreateWithName(name);
+				// contact["email"] = email;
+			  }
+
+			Console.Error.WriteLine("Creating: {0}[{1}]/{2}", name, i, email);
+			contact = ContactItem.Create (name);
 			if (email != null && email != string.Empty)
 				contact["email"] = email;
+
+			// contact["num_emails"] = i.ToString();
 			
 			return contact;
 		}
