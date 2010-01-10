@@ -17,14 +17,13 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-// 
-
 using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
 using Do.Universe;
+using Do.Platform;
 
 using Beagle.Util;
 
@@ -154,7 +153,7 @@ namespace Do.Addins.Thunderbird
 			try {
 				_UpdateItems ();
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Cannot index Thunderbird contacts because a {0} was thrown: {1}", e.GetType (), e.Message);
+				Log<ThunderbirdContactItemSource>.Error ("Cannot index Thunderbird contacts because a {0} was thrown: {1}", e.GetType (), e.Message);
 				return;
 			}
 		}
@@ -166,17 +165,11 @@ namespace Do.Addins.Thunderbird
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
 			ContactItem contact = item as ContactItem;
-			Console.Error.WriteLine ("ParentItem: {0}[\"email\"]/{1}", contact["name"], contact["email"]);
-			foreach (string detail in contact.Details)
-			{
-				Console.Error.WriteLine ("{0} = {1}", detail, contact[detail]);
-			}
 
 			foreach (string detail in contact.Details)
 			{
 				if (detail.StartsWith (THUNDERBIRD_EMAIL))
 				{
-					Console.Error.WriteLine ("ChildItem: {0}[{1}]={2}", contact["name"], detail, contact[detail]);
 					yield return new EmailContactDetail (contact, detail);
 				}
 			}
@@ -185,7 +178,6 @@ namespace Do.Addins.Thunderbird
 		
 		void _UpdateItems ()
 		{
-			Console.Error.WriteLine ("_UpdateItems");
 			MorkDatabase abook, history;
 
 			abook = new MorkDatabase (GetThunderbirdAddressBookFilePath ());
@@ -199,40 +191,20 @@ namespace Do.Addins.Thunderbird
 			contacts.Clear ();
 			emails.Clear ();
 
-			Console.WriteLine ("adding history");
 			addEmails (history);
-			Console.WriteLine ("adding address book");
 			addEmails (abook);
 
-			Console.WriteLine ("adding contacts");
 			foreach (string name in emails.Keys)
 			{
 				CreateThunderbirdContactItem (name, emails[name]);
-			}
-
-			foreach (ContactItem item in contacts.Values)
-			{
-				foreach (string detail in item.Details)
-				{
-					Console.Error.WriteLine ("{0} = {1}", detail, item[detail]);
-				}
 			}
 		}
 
 		void addEmails (MorkDatabase database)
 		{
-			foreach (string id in database) {
-				Hashtable contact_row;
-				
-				contact_row = database.Compile (id, database.EnumNamespace);
-
-				Console.WriteLine ("mork row:");
-				foreach (var key in contact_row.Keys)
-				{
-					Console.Write ("{0}={1}, ", key, contact_row[key]);
-				}
-				Console.WriteLine ();
-
+			foreach (string id in database)
+			{
+				Hashtable contact_row = database.Compile (id, database.EnumNamespace);
 				AddThunderbirdEmail (contact_row);
 			}
 		}
@@ -292,10 +264,6 @@ namespace Do.Addins.Thunderbird
 			{
 				string detail	= THUNDERBIRD_EMAIL + "." + i;
 				contact[detail] = sortedEmails[i].email;
-
-				Console.Error.WriteLine ("Added {0}[{1}]={2}, popularity={3}",
-										 name, detail, contact[detail],
-										 sortedEmails[i].popularity);
 			}
 
 			if (!contacts.ContainsKey (name.ToLower ()))
