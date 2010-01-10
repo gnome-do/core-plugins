@@ -304,7 +304,7 @@ namespace Do.Addins.Thunderbird
 			}
 		}
 
-		string GetThuderbirdDefaultProfilePath ()
+		string GetThunderbirdDefaultProfilePath ()
 		{
 			string home, path, profile;
 			StreamReader reader;
@@ -338,7 +338,7 @@ namespace Do.Addins.Thunderbird
 		{
 			string path, home, profile;
 			home = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-			profile = GetThuderbirdDefaultProfilePath ();
+			profile = GetThunderbirdDefaultProfilePath ();
 			if (profile == null) {
 				return null;
 			}
