@@ -34,7 +34,7 @@ namespace Do.Addins.Thunderbird
 	public class ThunderbirdContactItemSource : ItemSource
 	{
 
-		public class EmailContactDetail: Item, IContactDetailItem
+		class EmailContactDetail: Item, IContactDetailItem
 		{
 			readonly string      detail, description;
 			readonly ContactItem owner;
@@ -74,17 +74,21 @@ namespace Do.Addins.Thunderbird
 			}
 		}
 
-        public class EmailList
+        class EmailList
         {
-            private Dictionary<string, byte> set;
+            private Dictionary<string, uint> set;
 
-            public EmailList () { set = new Dictionary<string, byte> (); }
+            public EmailList () { set = new Dictionary<string, uint> (); }
 
-            public void Add (string email)
+            public void Add (string email, uint popularity)
             {
                 if (!set.ContainsKey (email))
                 {
-                    set.Add (email, 0);
+                    set.Add (email, popularity);
+                }
+                else
+                {
+                    set[email] += popularity;
                 }
             }
 
@@ -92,11 +96,36 @@ namespace Do.Addins.Thunderbird
             {
                 return set.ContainsKey (email);
             }
+
+            public uint this [string email]
+            {
+                get { return set[email]; }
+            }
+
+            public int Count {
+                get { return set.Count; }
+            }
+
+            public ICollection<string> Keys {
+                get { return set.Keys; }
+            }
         }
+
+        class ThunderbirdEmail
+        {
+            public readonly string email;
+            public readonly uint   popularity;
+
+            public ThunderbirdEmail (string email, uint popularity)
+            {
+                this.email      = email;
+                this.popularity = popularity;
+            }
+        }
+
 
 		const string BeginProfileName    = "Path=";
 		const string BeginDefaultProfile = "Name=default";
-		const string EMAIL_COUNTER       = "thunderbird.counter";
 		const string THUNDERBIRD_EMAIL   = "email.thunderbird";
 
 		Dictionary<string, Item> contacts; // name => ContactItem
@@ -168,8 +197,19 @@ namespace Do.Addins.Thunderbird
 			history.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
 
 			contacts.Clear ();
-			addContacts (history);
-			addContacts (abook);
+			emails.Clear ();
+
+			Console.WriteLine ("adding history");
+			addEmails (history);
+			Console.WriteLine ("adding address book");
+			addEmails (abook);
+
+			Console.WriteLine ("adding contacts");
+			foreach (string name in emails.Keys)
+			{
+				CreateThunderbirdContactItem (name, emails[name]);
+			}
+
 			foreach (ContactItem item in contacts.Values)
 			{
 				foreach (string detail in item.Details)
@@ -179,37 +219,32 @@ namespace Do.Addins.Thunderbird
 			}
 		}
 
-		void addContacts (MorkDatabase database)
+		void addEmails (MorkDatabase database)
 		{
 			foreach (string id in database) {
 				Hashtable contact_row;
-				ContactItem contact;
 				
 				contact_row = database.Compile (id, database.EnumNamespace);
-				contact = CreateThunderbirdContactItem (contact_row);
-				if (contact == null)
-					continue;
-				
-				string name  = contact["name"];
-				string email = contact["email"];
-				if (!contacts.ContainsKey (name.ToLower ()))
+
+				Console.WriteLine ("mork row:");
+				foreach (var key in contact_row.Keys)
 				{
-					contacts.Add (name.ToLower (), contact);
+					Console.Write ("{0}={1}, ", key, contact_row[key]);
 				}
-				Console.Error.WriteLine ("Added: {0}[{1}]/{2}", name, contact[EMAIL_COUNTER], email);
+				Console.WriteLine ();
+
+                AddThunderbirdEmail (contact_row);
 			}
 		}
 	
-		ContactItem CreateThunderbirdContactItem (Hashtable row) {
-			ContactItem contact;
+		void AddThunderbirdEmail (Hashtable row)
+        {
 			string name, email;
-			
-//			foreach (object o in row.Keys)
-//				Console.WriteLine ("\t{0} --> {1}", o, row[o]);
+            uint popularity;
 			
 			// I think this will detect deleted contacts... Hmm...
 			if (row["table"] == null || row["table"] as string == "C6")
-				return null;
+				return;
 			
 			// Name
 			name = row["DisplayName"] as string;
@@ -217,33 +252,56 @@ namespace Do.Addins.Thunderbird
 				name = string.Format ("{0} {1}", row["FirstName"], row["LastName"]);
 			
 			// Email
-			email = row["PrimaryEmail"] as string;
+			email	 = row["PrimaryEmail"] as string;
+			string p = row["PopularityIndex"] as string;
+			try {
+				popularity =  UInt32.Parse (p, System.Globalization.NumberStyles.HexNumber);
+			}
+			catch (Exception) {
+				popularity = 0;
+			}
 			
 			if (name == null || name.Trim () == string.Empty)
 			    name = email;
 
 			if (string.IsNullOrEmpty (email))
-			    return null;
+			    return;
 
-			contact = ContactItem.Create (name);
 			if (!emails.ContainsKey (name))
 			{
 				emails[name] = new EmailList ();
 			}
-			if (!emails[name].Contains (email))
-			{
-				int i = Convert.ToUInt16 (contact[EMAIL_COUNTER]) + 1;
-				contact[EMAIL_COUNTER] = i.ToString ();
-				string detail = THUNDERBIRD_EMAIL + "." + i;
+            emails[name].Add (email, popularity);
+        }
 
-				contact[detail] = email;
-				emails[name].Add (email);
+		void CreateThunderbirdContactItem (string name, EmailList emails)
+        {
+            int emailCount = emails.Count;
+            ThunderbirdEmail[] sortedEmails = new ThunderbirdEmail[emailCount];
 
-				Console.Error.WriteLine ("Added {0}/{1}, num_email={2}",
-                                         name, email, contact[EMAIL_COUNTER]);
-			}
-			
-			return contact;
+            int i = 0;
+            foreach (string key in emails.Keys)
+            {
+                sortedEmails[i] = new ThunderbirdEmail (key, emails[key]);
+                i++;
+            }
+            Array.Sort (sortedEmails, (x, y) => (int) (y.popularity - x.popularity));
+
+            ContactItem contact = ContactItem.Create (name);
+            for (i = 0; i < emailCount; i++)
+            {
+				string detail   = THUNDERBIRD_EMAIL + "." + i;
+				contact[detail] = sortedEmails[i].email;
+
+				Console.Error.WriteLine ("Added {0}[{1}]={2}, popularity={3}",
+                                         name, detail, contact[detail],
+                                         sortedEmails[i].popularity);
+            }
+
+            if (!contacts.ContainsKey (name.ToLower ()))
+            {
+                contacts.Add (name.ToLower (), contact);
+            }
 		}
 
 		string GetThuderbirdDefaultProfilePath ()
