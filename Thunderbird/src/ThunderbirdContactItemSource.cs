@@ -128,12 +128,10 @@ namespace Do.Addins.Thunderbird
 		const string THUNDERBIRD_EMAIL	 = "email.thunderbird";
 
 		Dictionary<string, Item> contacts; // name => ContactItem
-		Dictionary<string, EmailList> emails; // name => list of emails
 		
 		public ThunderbirdContactItemSource ()
 		{
 			contacts = new Dictionary<string, Item> ();
-			emails	 = new Dictionary<string, EmailList> ();
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -141,7 +139,7 @@ namespace Do.Addins.Thunderbird
 				return new Type[] {
 					typeof (ContactItem),
 				};
-			}
+            }
 		}
 		
 		public override string Name { get { return "Thunderbird Contacts"; } }
@@ -179,6 +177,7 @@ namespace Do.Addins.Thunderbird
 		void _UpdateItems ()
 		{
 			MorkDatabase abook, history;
+			Dictionary<string, EmailList> emails = new Dictionary<string, EmailList> ();
 
 			abook = new MorkDatabase (GetThunderbirdAddressBookFilePath ());
 			abook.Read ();
@@ -188,28 +187,26 @@ namespace Do.Addins.Thunderbird
 			history.Read ();
 			history.EnumNamespace = "ns:addrbk:db:row:scope:card:all";
 
+			addEmails (emails, history);
+			addEmails (emails, abook);
+
 			contacts.Clear ();
-			emails.Clear ();
-
-			addEmails (history);
-			addEmails (abook);
-
 			foreach (string name in emails.Keys)
 			{
 				CreateThunderbirdContactItem (name, emails[name]);
 			}
 		}
 
-		void addEmails (MorkDatabase database)
+		void addEmails (Dictionary<string, EmailList> emails, MorkDatabase database)
 		{
 			foreach (string id in database)
 			{
 				Hashtable contact_row = database.Compile (id, database.EnumNamespace);
-				AddThunderbirdEmail (contact_row);
+				AddThunderbirdEmail (emails, contact_row);
 			}
 		}
 	
-		void AddThunderbirdEmail (Hashtable row)
+		void AddThunderbirdEmail (Dictionary<string, EmailList> emails, Hashtable row)
 		{
 			string name, email;
 			uint popularity;
