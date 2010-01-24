@@ -33,7 +33,6 @@
     <File name="src/TextSyntax/TextSyntaxItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/LodgeIt.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/Pastebin.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/Providers/Monoport.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/AbstractPastebinProvider.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/LodgeIt.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/Monoport.xml" subtype="Code" buildaction="EmbedAsResource" />

@@ -41,6 +41,7 @@ namespace Pastebin
 			Name = "paste.pocoo.org";
 			BaseUrl = url_root;
 			ShouldAllowAutoRedirect = false;
+			Expect100Continue = false;
 			
 			Parameters[content_key] = "";
 			Parameters[syntax_key] = "text";
