@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 using Mono.Addins;
@@ -51,7 +52,7 @@ namespace OpenSearch
 		
 		public static void UpdateItems ()
 		{
-			foreach (string filePath in GetUnprocessedOpenSearchFiles ()) {
+			foreach (string filePath in GetUnprocessedOpenSearchFiles (firefox_provider.OpenSearchPluginDirectories)) {
 				try {
 					OpenSearchItem item = OpenSearchParser.Create (filePath);
 					if (item != null) {
@@ -66,22 +67,38 @@ namespace OpenSearch
 			}
 		}	
 		
-		private static IEnumerable<string> GetUnprocessedOpenSearchFiles ()
+		private static IEnumerable<string> GetUnprocessedOpenSearchFiles (IEnumerable<string> directoriesToProcess)
 		{
-			foreach (string path in firefox_provider.OpenSearchPluginDirectories) {
+			List<string> unprocessedFiles = new List<string> ();
+			
+			foreach (string path in directoriesToProcess) {
+
 				if(!Directory.Exists (path))
 					continue;
-				
-				string [] filePaths = Directory.GetFiles (path);
+
+				IEnumerable<string> filePaths = Directory.GetFiles (path).Concat (Directory.GetDirectories (path));
+
 				foreach (string filePath in filePaths) {
+					// It's a trap! The firefox-addons/searchplugins folder stashes some of its plugins in folders
+					// so we need to recurse...but it also has a symlink called common which links to it's containing 
+					// folder, which means if we blindly recurse, we'll keep following it. So let's just skip it.
+					if((File.GetAttributes(filePath) & FileAttributes.ReparsePoint) == FileAttributes.ReparsePoint) {
+						Log<CachingOpenSearchItemSource>.Debug ("Skipping symlink: {0}", filePath);
+						continue;		
+					}
+					if (Directory.Exists(filePath)) {
+						Log<CachingOpenSearchItemSource>.Debug ("Recursing into: {0}",filePath);
+					    unprocessedFiles.AddRange (GetUnprocessedOpenSearchFiles (new[]{filePath}));
+					}
 					if (cached_items.ContainsKey (filePath))
 						continue;
 					if (!Regex.IsMatch (filePath, valid_file_pattern))
-						continue;			
-					yield return filePath;
+						continue;		
+					
+					unprocessedFiles.Add (filePath);
 				}
 			}
+			return unprocessedFiles;
 		}
-
 	}
 }
