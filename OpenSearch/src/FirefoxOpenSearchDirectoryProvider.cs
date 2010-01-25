@@ -57,6 +57,12 @@ namespace OpenSearch
 				Log<FirefoxOpenSearchDirectoryProvider>.Debug ("Library plugin search path: {0}", firefoxLibPath);
 				openSearchPluginDirectories.Add (firefoxLibPath);	
 			}
+			
+			string firefoxAddonsPath = GetAddonsSearchPluginsPath ();
+			if (firefoxAddonsPath != null) {
+				Log<FirefoxOpenSearchDirectoryProvider>.Debug ("Addons plugin search path: {0}", firefoxAddonsPath);
+				openSearchPluginDirectories.Add (firefoxAddonsPath);	
+			}
 		}
 		
 		/// <value>
@@ -154,6 +160,18 @@ namespace OpenSearch
 			}
 				
 			return null;
+		}
+		
+		/// <summary>
+		/// Retrieves the firefox-addons search plugin directory, which
+		/// is where the default OpenSearch plugins are installed.
+		/// </summary>
+		/// <returns>
+		/// The full path to the firefox-addons searchplugins directory.
+		/// </returns>
+		private string GetAddonsSearchPluginsPath ()
+		{
+			return "/usr/lib/firefox-addons/searchplugins";
 		}
 	}
 }
