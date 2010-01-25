@@ -37,6 +37,7 @@ namespace Pastebin
 			BaseUrl = url_root + "/new-paste";
 							
 			ShouldAllowAutoRedirect = false;
+			Expect100Continue = false;
 			
 			Parameters[syntax_key] = "text";
 			Parameters["description"] = "";
