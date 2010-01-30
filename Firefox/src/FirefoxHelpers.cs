@@ -1,4 +1,4 @@
-//  BrowseBookmarkItem.cs
+//  FirefoxHelpers.cs
 //  GNOME Do is the legal property of its developers, whose names are too
 //  numerous to list here.  Please refer to the COPYRIGHT file distributed with
 //  this source distribution.
@@ -17,25 +17,38 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-
-using Mono.Addins;
-
-using Do.Universe;
+using Gtk;
 
 namespace Firefox
 {
-	public class BrowseBookmarkItem : Item 
+	public static class FirefoxHelpers
 	{
-		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Bookmarks"); } 
-		}
+		public static string IconName {get; private set;}
 		
-		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Browse Firefox Bookmarks"); } 
-		}
-		
-		public override string Icon {
-			get { return FirefoxHelpers.IconName; }
+		static FirefoxHelpers ()
+		{
+			// List a whole bunch of possible names for the firefox icon.
+			string[] iconNames = new string [] {
+				"firefox",
+				"iceweasel",
+				"firefox-4.0",
+				"firefox-3.9",
+				"firefox-3.8",
+				"firefox-3.7",
+				"firefox-3.6",
+				"firefox-3.5",
+				"firefox-3.0",
+			};
+			
+			// Start with "firefox".  If we can't find an icon in the theme,
+			// at least "firefox" makes our intent clear.
+			IconName = "firefox";
+			foreach (string iconName in iconNames) {
+				if (IconTheme.Default.HasIcon (iconName)) {
+					IconName = iconName;
+					break;
+				}
+			}
 		}
 	}
 }

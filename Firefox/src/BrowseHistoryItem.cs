@@ -37,7 +37,7 @@ namespace Firefox
 		}
 		
 		public override string Icon {
-			get { return "firefox-3.0"; }
+			get { return FirefoxHelpers.IconName; }
 		}
 	}
 }
