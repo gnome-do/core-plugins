@@ -22,13 +22,6 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
-dnl We need mautil (at least for now)
-AC_PATH_PROG(MAUTIL, mautil, no)
-if test "x$MAUTIL" = "xno" ; then
-   	AC_MSG_ERROR([You need to install mautil (from mono-addins)])
-fi
-AC_SUBST([MAUTIL])
-
 AC_PROG_INSTALL
 
 top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
