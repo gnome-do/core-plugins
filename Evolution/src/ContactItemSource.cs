@@ -32,8 +32,8 @@ namespace Evolution
 {
 	public struct ContactAttribute
 	{
-		public string Detail { get; protected set; }
-		public string Key { get; protected set; }
+		public string Detail { get; private set; }
+		public string Key { get; private set; }
 		
 		public ContactAttribute (string key, string detail)
 		{
