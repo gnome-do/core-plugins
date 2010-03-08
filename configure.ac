@@ -159,13 +159,32 @@ if test "x$enable_youtube" != "xno"; then
    	PKG_CHECK_MODULES([GDATA_SHARP_YOUTUBE], [gdata-sharp-youtube], HAVE_YOUTUBE=yes, HAVE_YOUTUBE=no)
 
    	if test "x$enable_youtube" = "xyes" -a "x$HAVE_YOUTUBE" = "no"; then
-   		AC_MSG_ERROR([YouTube support explicitly requested but dependencies no found])
+   		AC_MSG_ERROR([YouTube support explicitly requested but dependencies not found])
 	fi
 fi
 
 AM_CONDITIONAL(HAVE_YOUTUBE, test "x$HAVE_YOUTUBE" = "xyes")
 
 AC_SUBST([GDATA_SHARP_YOUTUBE_LIBS])
+dnl}}}
+
+dnl {{{ check for Wnck libraries
+AC_ARG_ENABLE(wnck,
+	AC_HELP_STRING([--enable-window-manager], [Build plugin to control window (default: auto]),
+	enable_wnck=$enableval,
+	enable_wnck=auto)
+
+if test "x$enable_wnck" != "xno"; then
+   	PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0], HAVE_WNCK=yes, HAVE_WNCK=no)
+
+	if test "x$enable_wnck" = "xyes" -a "x$HAVE_WNCK" = "no"; then
+   		AC_MSG_ERROR([Window manager support explicitly requested but dependencies not found])
+	fi
+fi
+
+AM_CONDITIONAL(HAVE_WNCK, test "x$HAVE_WNCK" = "xyes")
+
+AC_SUBST([WNCK_SHARP_10_LIBS])
 dnl}}}
 
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
@@ -182,7 +201,7 @@ PKG_CHECK_MODULES([MONO_ADDINS_SETUP], [mono-addins-setup])
 PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
 PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
 PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
-PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
+
 
 AC_SUBST([GCONF_SHARP_20_LIBS])
 AC_SUBST([GLADE_SHARP_20_LIBS])
@@ -198,18 +217,15 @@ AC_SUBST([MONO_ADDINS_SETUP_LIBS])
 AC_SUBST([NDESK_DBUS_10_LIBS])
 AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
-AC_SUBST([WNCK_SHARP_10_LIBS])
 
 dnl Do core references
 PKG_CHECK_MODULES([DO_PLATFORM], [do.platform >= 0.8])
 PKG_CHECK_MODULES([DO_PLATFORM_LINUX], [do.platform.linux >= 0.8])
 PKG_CHECK_MODULES([DO_UNIVERSE], [do.universe >= 0.8])
-PKG_CHECK_MODULES([DO_INTERFACE_WINK], [do.interface.wink >= 0.8])
 
 AC_SUBST([DO_PLATFORM_LIBS])
 AC_SUBST([DO_PLATFORM_LINUX_LIBS])
 AC_SUBST([DO_UNIVERSE_LIBS])
-AC_SUBST([DO_INTERFACE_WINK_LIBS])
 
 AC_ARG_ENABLE(debug,
 	AC_HELP_STRING([--enable-debug],
@@ -414,6 +430,7 @@ ${PACKAGE}-${VERSION}
     Google Calendar:   ${HAVE_GCAL}
     Google Contacts:   ${HAVE_GMAIL}
     Google Docs:       ${HAVE_GDOCS}
+    Window Manager:    ${HAVE_WNCK}
     YouTube:           ${HAVE_YOUTUBE}
 
   Build/Development:

@@ -1,4 +1,6 @@
+if HAVE_WNCK
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=WindowManager
 
@@ -22,7 +24,17 @@ FILES = \
 	src/WindowActions/WindowFocusAction.cs \
 	src/WindowActions/WindowMaximizeAction.cs \
 	src/WindowActions/WindowMinimizeAction.cs \
-	src/WindowActions/WindowMoveAction.cs
+	src/WindowActions/WindowMoveAction.cs \
+	src/Wink/ScreenUtils.cs \
+	src/Wink/WindowControl.cs \
+	src/Wink/WnckWindow_Extensions.cs \
+	src/Wink/Position.cs \
+	src/Wink/Viewport.cs \
+	src/Wink/WindowUtils.cs \
+	src/Xlib/X11Atoms.cs \
+	src/Xlib/Xlib.cs      
+
+
 
 
 RESOURCES = \
@@ -31,10 +43,10 @@ RESOURCES = \
 REFERENCES = \
 	System \
 	System.Core \
+	Mono.Posix \
 	$(WNCK_SHARP_10_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GNOME_DESKTOP_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
-	$(DO_UNIVERSE_LIBS) \
-	$(DO_INTERFACE_WINK_LIBS)
+	$(DO_UNIVERSE_LIBS)
