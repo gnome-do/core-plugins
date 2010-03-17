@@ -53,13 +53,13 @@ namespace GNOME
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Log Out"),
 					AddinManager.CurrentLocalizer.GetString ("Close your session and return to the login screen."),
-					"system-log-out",
+					"gnome-session-logout",
 					PowerManagement.Logout);
 
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Shutdown"),
 					AddinManager.CurrentLocalizer.GetString ("Turn your computer off."),
-					"system-shutdown",
+					"gnome-session-halt",
 					SystemManagement.Shutdown);
 
 				yield return new SessionCommandItem (
@@ -77,7 +77,7 @@ namespace GNOME
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Restart"),
 					AddinManager.CurrentLocalizer.GetString ("Restart your computer."),
-					"reload",
+					"gnome-session-reboot",
 					SystemManagement.Restart);
 
 				yield return new SessionCommandItem (
