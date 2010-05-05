@@ -73,7 +73,11 @@ namespace Do.FilesAndFolders
 			store.GetIter (out iter, new TreePath (e.Path));
 			
 			path = store.GetValue (iter, (int) Column.Path) as string;
-			depth = uint.Parse (e.NewText);
+			try {
+				depth = uint.Parse (e.NewText);
+			} catch {
+				depth = 1;
+			}
 			Plugin.FolderIndex.UpdateIndexedFolder (path, path, depth, FolderStatus.Indexed);
 			
 			Refresh ();
