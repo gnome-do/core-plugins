@@ -99,7 +99,7 @@ namespace Do.Universe
 					contactsFile = Environment.GetFolderPath
 							(Environment.SpecialFolder.Personal)+
 							"/.config/emesene1.0/"+contactsFile.Replace("@","_")+
-								"/cache/"+Emesene.getCurrentEmeseneUser()+"_di.xml";
+								"/cache/"+Emesene.getCurrentEmeseneUser()+"_ml.xml";
 					//Log<EmeseneContactItemSource>.Debug (" ------------------EmeseneContactItemSource------------------");
 					Log<EmeseneContactItemSource>.Debug ("XML file with contacts: {0}", contactsFile);					
 					XmlDocument blist;
@@ -113,7 +113,7 @@ namespace Do.Universe
 						int i = 0 ;
 						int withDP = 0;
 						string photo;
-						foreach (XmlNode buddy_node in blist.GetElementsByTagName ("passportName"))
+						foreach (XmlNode buddy_node in blist.GetElementsByTagName ("PassportName"))
 						{
 							i++;
 							mail = buddy_node.InnerText;
