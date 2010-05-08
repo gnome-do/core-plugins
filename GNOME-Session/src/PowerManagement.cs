@@ -44,6 +44,15 @@ namespace GNOME
 			void Suspend ();
 		}
 		
+		[Interface (UPowerName)]
+		interface IUPower : org.freedesktop.DBus.Properties
+		{
+			void Hibernate ();
+			void Suspend ();
+		}
+		
+		const string UPowerName = "org.freedesktop.UPower";
+		const string UPowerPath = "/org/freedesktop/UPower";
 		const string DeviceKitPowerName = "org.freedesktop.DeviceKit.Power";
 		const string DeviceKitPowerPath = "/org/freedesktop/DeviceKit/Power";
 		const string PowerManagementName = "org.freedesktop.PowerManagement";
@@ -63,7 +72,9 @@ namespace GNOME
 		{
 			get {
 				try {
-					if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
+					if (Bus.System.NameHasOwner (UPowerName)) {
+						return Bus.System.GetObject<IUPower> (UPowerName, new ObjectPath (UPowerPath));
+					} else if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
 						return Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
 					} else if (Bus.Session.NameHasOwner (PowerManagementName)) {
 						return Bus.Session.GetObject<IPowerManagement> (PowerManagementName, new ObjectPath (PowerManagementPath));
@@ -81,7 +92,10 @@ namespace GNOME
 		{
 			try {
 				object instance = BusInstance;
-				if (instance is IDeviceKitPower) {
+				if (instance is IUPower) {
+					ScreenSaver.Lock ();
+					(instance as IUPower).Hibernate ();
+				} else if (instance is IDeviceKitPower) {
 					ScreenSaver.Lock ();
 					(instance as IDeviceKitPower).Hibernate ();
 				} else if (instance is IPowerManagement) {
@@ -97,7 +111,10 @@ namespace GNOME
 		{
 			try {
 				object instance = BusInstance;
-				if (instance is IDeviceKitPower) {
+				if (instance is IUPower) {
+					ScreenSaver.Lock ();
+					(instance as IUPower).Suspend ();
+				} else if (instance is IDeviceKitPower) {
 					ScreenSaver.Lock ();
 					(instance as IDeviceKitPower).Suspend ();
 				} else if (instance is IPowerManagement) {
