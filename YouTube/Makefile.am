@@ -13,7 +13,8 @@ FILES = \
 	src/YouTubeSearchAction.cs \
 	src/YouTubeSubscriptionItem.cs \
 	src/YouTubeSubscriptionItemSource.cs \
-	src/YoutubeVideoItem.cs
+	src/YoutubeVideoItem.cs \
+	src/CertHandler.cs
 
 RESOURCES = \
 	Resources/Youtube.addin.xml \

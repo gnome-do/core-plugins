@@ -1,7 +1,7 @@
 <Addin 
 	id="YouTube"
 	namespace= "Do"
-	version="1.0"
+	version="1.1"
 	name="YouTube"
 	description="Search your favorites, subscriptions, uploaded videos, and more."
 	author="Luis Miguel Montiel G"

@@ -21,19 +21,26 @@ namespace Do.Universe
 		static readonly string MissingCredentialsMessage = AddinManager.CurrentLocalizer.GetString ("Missing login credentials. Please set "
 			+ "login information in YouTube plugin configuration.");
 		
-		public const string appName = "luismmontielg-gnomeDoYoutubePlugin0.1";
-		public const string searchUrl = "http://www.youtube.com/results?search_query=";
-		public static string clientID = "ytapi-lmg-test-ojd8d285-0";
-		public static string developerKey = "AI39si5c61jYzQLvzEDjAnU1HOQIf-DzyzvIBXAkGJ82NlXoMg10RDW1sRz5Uyodv9_ETPzmJXdfFqVRNt51yGkkNo2YW0BdxQ";
+		private static const string appName = "gnome-do-plugin";
+		private static const string searchUrl = "http://www.youtube.com/results?search_query=";
+		private static const string clientID = "gnome-do-client";
+		private static const string developerKey = "AI39si5utjLEVOmAty2JLxz8KlixVQkwbSsEZqUXVUV-hUK1zDctrUbujGL2kWJBs47a7CaO-LOf_FXUiyuvQ9j7pbq8YO9wsA";
+
 		public static List<Item> favorites;
 		public static List<Item> subscriptions;
 		public static List<Item> own;
+
 		private static YouTubeService service;
 		private static string username;
 		private static string password;
+
 		private static int subUpdate;
 		private static int favUpdate;
 		private static int ownUpdate;
+
+                private static const string favoritesQueryTemplate = "http://gdata.youtube.com/feeds/api/users/default/favorites?start-index={0}&max-results={1}";
+                private static const string QueryTemplate = "http://gdata.youtube.com/feeds/api/users/default/favorites?start-index={0}&max-results={1}";
+                private static const string youtubeWatchUrlTemplate = "http://www.youtube.com/watch?v={0}";
 		
 		public static YouTubePreferences Preferences { get; private set; }
 		
@@ -42,12 +49,16 @@ namespace Do.Universe
 			Youtube.favorites = new List<Item>();
 			Youtube.own = new List<Item>();
 			Youtube.subscriptions = new List<Item>();
+
 			Preferences = new YouTubePreferences ();
+
 			subUpdate = 0;
 			favUpdate = 0;
 			ownUpdate = 0;
+
 			username = Preferences.Username;
 			password = Preferences.Password;
+
 			Connect (username, password);
 		}
 		
@@ -55,35 +66,47 @@ namespace Do.Universe
 		{
 			favUpdate++;
 			Log<Youtube>.Debug("Update favorites videos tries = {0} - favorite.Count : {1}", favUpdate, Youtube.favorites.Count);
-			if (Youtube.favorites.Count == 0 || favUpdate%20 == 0){
+			if (Youtube.favorites.Count == 0 || favUpdate%20 == 0)
+                        {
 				Youtube.favorites.Clear();
 				int maxResults = 50;
 				int startIndex = 1;
 				
-				string feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/favorites?start-index="+ startIndex +"&max-results="+maxResults;
+				string feedUrl = String.Format(favoritesQueryTemplate, startIndex, maxResults);
 				YouTubeQuery query = new YouTubeQuery(feedUrl);
-				Log<Youtube>.Debug("feedUrl for favorites videos: {0}", feedUrl);
-				try{
-					YouTubeFeed videoFeed = service.Query(query);
-					while(videoFeed.Entries.Count > 0){				
+                                YouTubeFeed videoFeed = null;
+                                string description = "";
+                                string url = null;
+				try
+                                {
+					videoFeed = service.Query(query);
+					while(videoFeed.Entries.Count > 0)
+                                        {
 						foreach (YouTubeEntry entry in videoFeed.Entries) 
 						{
-						    //Log<Youtube>.Debug("Video #{0}, Title: {1}", ++i, entry.Title.Text);
-							string url = ("http://www.youtube.com/watch?v="+entry.VideoId);
+                                                        description = "";
+							url = Stirng.Format(youtubeWatchUrlTemplate, entry.VideoId);
+					                //Log<Youtube>.Debug("Video Title: {0}", entry.Title.Text);
 							//Log<Youtube>.Debug("Video url: {0}", url);
-							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, entry.Media.Description.Value);
+                                                        if (entry.Media.Description != null)
+                                                        {
+                                                            description = entry.Media.Description.Value;
+                                                        }
+							YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, description);
 							favorites.Add(video);
 						}
 						startIndex += maxResults;
-						feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/favorites?start-index="+ startIndex +"&max-results="+maxResults;
+                                                feedUrl = String.Format(favoritesQueryTemplate, startIndex, maxResults);
 						query = new YouTubeQuery(feedUrl);
 						videoFeed = service.Query(query);
 					}
 					startIndex = 1;
 					Log<Youtube>.Debug("Finished updating favorite videos");
-				}catch(Exception e) {
+				}
+                                catch(Exception e)
+                                {
 					Log<Youtube>.Error ("Error getting favorites videos - {0}", e.Message);
-    				Log<Youtube>.Debug (e.StackTrace);
+    				        Log<Youtube>.Debug (e.StackTrace);
 				}
 			}
 		}
@@ -99,7 +122,6 @@ namespace Do.Universe
 				
 				string feedUrl = "http://gdata.youtube.com/feeds/api/users/"+ username +"/uploads?start-index="+ startIndex +"&max-results="+maxResults;
 				YouTubeQuery query = new YouTubeQuery(feedUrl);
-				Log<Youtube>.Debug("feedUrl for own videos: {0}", feedUrl);
 				try{
 					YouTubeFeed videoFeed = service.Query(query);
 					while(videoFeed.Entries.Count > 0){				
@@ -180,6 +202,7 @@ namespace Do.Universe
 			try {
 				service = new YouTubeService (appName, clientID, developerKey);
 				service.setUserCredentials (username, password);
+                                ServicePointManager.CertificatePolicy = new CertHandler ();
 			} catch (Exception e) {
 				Log<Youtube>.Error (ConnectionErrorMessage);
 			}
