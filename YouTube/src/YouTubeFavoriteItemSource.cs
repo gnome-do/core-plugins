@@ -6,7 +6,7 @@ using Do.Universe;
 using Do.Platform.Linux;
 using System.Threading;
 
-namespace Do.Universe
+namespace Youtube
 {
 	public class YouTubeFavoriteItemSource : ItemSource, IConfigurable
 	{

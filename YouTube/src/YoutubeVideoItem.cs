@@ -1,7 +1,7 @@
 using System;
 using Do.Universe;
 
-namespace Do.Universe
+namespace Youtube
 {		
 	public class YoutubeVideoItem : Item, IUrlItem
 	{

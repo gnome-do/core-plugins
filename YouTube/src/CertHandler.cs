@@ -23,7 +23,7 @@ using System.Net;
 using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Do.Universe
+namespace Youtube
 {	
 	
 	public class CertHandler : ICertificatePolicy

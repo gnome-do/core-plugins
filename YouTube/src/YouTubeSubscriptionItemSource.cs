@@ -4,7 +4,7 @@ using Mono.Addins;
 using System.Threading;
 using Do.Universe;
 
-namespace Do.Universe
+namespace Youtube
 {	
 	public class YouTubeSubscriptionItemSource : ItemSource
 	{
