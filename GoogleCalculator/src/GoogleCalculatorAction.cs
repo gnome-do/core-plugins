@@ -33,12 +33,10 @@ using Do.Universe.Common;
 
 namespace Do.Plugins.Google
 {
-
 	public class GoogleCalculatorAction : Act
 	{
-
 		const string BeginCalculator = "<img src=/images/calc_img.gif";
-		const string BeginReply = "<td nowrap ><h2 class=r style=\"font-size:138%\"><b>";
+		const string BeginReply = "<h2 class=r style=\"font-size:138%\"><b>";
 		const string EndReply = "</b>";
 
 		public GoogleCalculatorAction ()
@@ -98,7 +96,7 @@ namespace Do.Plugins.Google
 
 		string GoogleCalculatorURLWithExpression (string e)
 		{
-			return "http://www.google.com/search?&q=" + HttpUtility.UrlEncode (e ?? "");
+			return "http://www.google.com/search?q=" + HttpUtility.UrlEncode (e ?? "");
 		}
 
 		string GetWebpageContents (string url)
