@@ -17,10 +17,8 @@
 //
 
 using System;
-using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 using Mono.Addins;
 
@@ -60,9 +58,7 @@ namespace ManPages {
 		/// 	List of supported items (ITextItem)
 		/// </value>
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				yield return typeof (ITextItem);
-			}
+			get { yield return typeof (ITextItem); }
 		}
 
 		/// <summary>
@@ -85,8 +81,8 @@ namespace ManPages {
 				keyword = (i as ITextItem).Text;
 				if (!string.IsNullOrEmpty (keyword)) {
 					Process term = new Process ();
-					term.StartInfo.FileName = "yelp";
-					term.StartInfo.Arguments = " 'man:"+keyword+"' ";				
+					term.StartInfo.FileName = "xdg-open";
+					term.StartInfo.Arguments = "'man:" + keyword + "'";
 					term.Start ();
 				}
 			}
