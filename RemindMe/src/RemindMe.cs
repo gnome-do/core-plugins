@@ -72,7 +72,7 @@ namespace RemindMe
 		
 		public RemindMe ()
 		{
-			remindMessageHourMin = AddinManager.CurrentLocalizer.GetString ("You will be reminded in {0} hours, {0} minutes.");
+			remindMessageHourMin = AddinManager.CurrentLocalizer.GetString ("You will be reminded in {0} hours, {1} minutes.");
 			remindMessageMin = AddinManager.CurrentLocalizer.GetString ("You will be reminded in {0} minutes");
 			timeKeyWords = new string[] {AddinManager.CurrentLocalizer.GetString ("in"), AddinManager.CurrentLocalizer.GetString ("at")};
 		}
