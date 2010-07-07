@@ -1,0 +1,37 @@
+<Addin
+	id="Transmission"
+	namespace="Do"
+	version="0.1"
+	name="Transmission"
+	description="Control Transmission torrent client."
+	author="Mikhail Trishchenkov"
+	category="Community"
+	defaultEnabled="true"
+    url="http://do.davebsd.com/wiki/Transmission_Plugin"
+	>
+
+	<Runtime>
+		<Import assembly="Transmission.dll"/>
+	</Runtime>
+
+	<!--Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" /-->
+
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="Transmission.TorrentItemSource" />
+	</Extension>
+	<Extension path="/Do/Action">
+		<Action type="Transmission.TorrentStopAction" />
+		<Action type="Transmission.TorrentStartAction" />
+		<Action type="Transmission.TorrentVerifyAction" />
+		<Action type="Transmission.TorrentLimitDownloadSpeedAction" />
+		<Action type="Transmission.TorrentLimitUploadSpeedAction" />
+		<Action type="Transmission.TorrentFileSetPriorityAction" />
+		<Action type="Transmission.TorrentMarkForDownloadAction" />
+		<Action type="Transmission.TorrentUnmarkForDownloadAction" />
+		<Action type="Transmission.TorrentOperateAction" />
+	</Extension>
+</Addin>

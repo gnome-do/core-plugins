@@ -1,1 +1,6 @@
 Emesene.addin.xml
+Transmission/Makefile
+Transmission/Makefile.in
+Transmission/Transmission.pidb
+Transmission/bin
+Transmission/Resources/Transmission.addin.xml

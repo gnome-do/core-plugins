@@ -383,6 +383,8 @@ Tracker/Makefile
 Tracker/Resources/TrackerSearch.addin.xml
 Translate/Makefile
 Translate/Resources/Translate.addin.xml
+Transmission/Makefile
+Transmission/Resources/Transmission.addin.xml
 Tomboy/Makefile
 Tomboy/Resources/Tomboy.addin.xml
 Vinagre/Makefile

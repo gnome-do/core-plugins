@@ -1,0 +1,60 @@
+<Project name="Transmission" fileversion="2.0" language="C#" targetFramework="3.5" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Transmission" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Transmission" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="src" subtype="Directory" buildaction="Compile" />
+    <File name="Resources" subtype="Directory" buildaction="Compile" />
+    <File name="Resources/Transmission.addin.xml" subtype="Code" buildaction="Nothing" />
+    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/Transmission.TransmissionConfig.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Config/TransmissionConfig.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/icons" subtype="Directory" buildaction="Compile" />
+    <File name="Resources/icons/transmission-add.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/transmission-remove.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/transmission-revisions.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/transmission-share.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/transmission-start.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/transmission-stop.png" subtype="Code" buildaction="Nothing" />
+    <File name="Resources/icons/transmission-web.png" subtype="Code" buildaction="Nothing" />
+    <File name="src/ITorrentEntry.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/JsonCollectionImporter.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentDirectoryItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentFileItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentFileSetPriorityAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentLimitDownloadSpeedAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentMarkForDownloadAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentStartAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentStopAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentUnmarkForDownloadAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentVerifyAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TransmissionAPI.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TransmissionPlugin.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform.Linux, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="lib/Jayrock.Json.dll" />
+  </References>
+  <GtkDesignInfo gettextClass="Mono.Addins.AddinManager.CurrentLocalizer" />
+</Project>

@@ -70,6 +70,7 @@ SUBDIRS = \
 	TinyUrl \
 	Tracker \
 	Translate \
+	Transmission \
 	Tomboy \
 	Vinagre \
 	VirtualBox \
