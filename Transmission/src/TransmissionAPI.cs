@@ -22,18 +22,21 @@ namespace Transmission {
 		};
 
 		/// <summary>
-		/// Operation on file.
+		/// Operation on individual file from torrent.
 		/// </summary>
+		/// <remarks>
+		/// All fields are nullable, <c>null</c> means "don't change current value".
+		/// </remarks>
 		public struct FileOperation {
 			public FileOperation(bool? download, FilePriority? priority) {
 				this.download = download;
 				this.priority = priority;
 			}
 
-			/// <summary>
-			///
-			/// </summary>
+			/// <summary>Whether it is needed to download this file</summary>
 			public bool? download;
+
+			/// <summary>Priority relative to other files of the same torrent</summary>
 			public FilePriority? priority;
 		};
 
@@ -62,19 +65,26 @@ namespace Transmission {
 
 		private delegate void ResultReader(JsonReader json);
 
+		/// <summary>Response handler which does nothing</summary>
+		/// <remarks>Prefer using <see cref="Call(string, IDictionary<string, object>)"/> instead</remarks>
 		private void NullHandler(JsonReader json) {}
 
 		/// <summary>
 		/// Create API client.
 		/// </summary>
 		/// <param name="url">Transmission API-RPC URL</param>
+		/// <param name="username">Username for authentication</param>
+		/// <param name="password">Password for authentication</param>
+		/// <remarks>Pass <c>null</c> for both <paramref="username"/> and <paramref="username"/> is
+		/// authentication isn't needed.</remarks>
 		public TransmissionAPI(string url, string username, string password) {
 			_url = url;
 			_username = username;
 			_password = password;
 		}
 
-		private string ComposeRequest(string method, IDictionary<string, object> arguments) {
+		/// <summary>Compose request JSON string</summary>
+		protected string ComposeRequest(string method, IDictionary<string, object> arguments) {
 			StringWriter sw = new StringWriter();
 
 			using (JsonWriter json = new JsonTextWriter(sw)) {
@@ -100,27 +110,32 @@ namespace Transmission {
 			return sw.ToString();
 		}
 
-		private string MakeRequest(byte[] payload) {
-			// Connect to Transmission.
+		/// <summary></summary>
+		/// <param name="payload">HTTP POST request content</param>
+		/// <returns>HTTP response content</returns>
+		/// <exception cref="System.Net.WebException"/>
+		protected string PerformRequest(byte[] payload) {
+			// Prepare request.
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
 			request.Method = "POST";
 			request.ContentType = "application/x-www-form-urlencoded";
 			request.Headers[SESSION_HEADER] = _session_id;
 			request.ContentLength = payload.Length;
 
+			// Authenticate if credentials are given.
 			if (_username != null && _password != null) {
 				string auth = Convert.ToBase64String(Encoding.Default.GetBytes(_username + ":" + _password));
 				request.Headers["Authorization"] = "Basic " + auth;
 			}
 
+			// Perform request.
 			using (Stream stream = request.GetRequestStream()) {
 				stream.Write(payload, 0, payload.Length);
 			}
 
+			// Get response.
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-			string resp = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8).ReadToEnd();
-			return resp;
+			return new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8).ReadToEnd();
 		}
 
 		/// <summary>
@@ -140,7 +155,7 @@ namespace Transmission {
 
 				string resp = null;
 				try {
-					resp = MakeRequest(reqb);
+					resp = PerformRequest(reqb);
 
 				} catch (System.Net.WebException err) {
 					HttpWebResponse response = (HttpWebResponse)err.Response;
@@ -154,15 +169,13 @@ namespace Transmission {
 						response.StatusCode == HttpStatusCode.Conflict
 					) {
 						_session_id = response.Headers[SESSION_HEADER];
-						resp = MakeRequest(reqb);
+						resp = PerformRequest(reqb);
 
 					} else {
 						throw;
 					}
 				}
 
-				//System.Console.WriteLine(resp);
-				//JsonReader json_reader = new JsonTextReader(new StreamReader(response.GetResponseStream()));
 				JsonReader json_reader = new JsonTextReader(new StringReader(resp));
 
 				json_reader.ReadToken(JsonTokenClass.Object);
@@ -188,16 +201,14 @@ namespace Transmission {
 				}
 				json_reader.ReadToken(JsonTokenClass.EndObject);
 				json_reader.ReadToken(JsonTokenClass.EOF);
+
 			} catch (System.Net.WebException err) {
 				throw new TransmissionAPIError("Cannot access Transmission RPC service", err);
 			}
 		}
 
-		/// <summary>
-		/// Call API method and ignore return value.
-		///
-		/// This is equivalent to <c>Call(method, arguments, NullHandler)</c>.
-		/// </summary>
+		/// <summary>Call API method and ignore return value</summary>
+		/// <remarks>This is equivalent to <c>Call(method, arguments, NullHandler)</c>.</remarks>
 		private void Call(string method, IDictionary<string, object> arguments) {
 			Call(method, arguments, NullHandler);
 		}
@@ -409,11 +420,8 @@ namespace Transmission {
 			public FilePriority Priority;
 		};
 
-		/// <summary>
-		/// Get information about all torrents.
-		///
-		/// This is equivalent to <c>GetTorrents(null)</c>.
-		/// </summary>
+		/// <summary>Get information about all torrents.</summary>
+		/// <remarks>This is equivalent to <c>GetTorrents(null)</c>.</remarks>
 		public IEnumerable<TorrentInfo> GetAllTorrents() {
 			return GetTorrents(null);
 		}
