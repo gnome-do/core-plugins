@@ -11,15 +11,12 @@ namespace Transmission {
 		private TorrentItem _torrent;
 		private TorrentDirectoryItem _parent;
 		private string _name;
-		private long _size, _downloaded;
 		private IList<Item> _files;
 
 		public TorrentDirectoryItem(TorrentItem torrent, TorrentDirectoryItem parent, string name) {
 			_torrent = torrent;
 			_parent = parent;
 			_name = name;
-			_size = 0;
-			_downloaded = 0;
 			_files = new List<Item>();
 		}
 
@@ -38,7 +35,7 @@ namespace Transmission {
 		}
 
 		public override string Description {
-			get { return string.Format("{0} b of {1} b", _downloaded, _size); }
+			get { return string.Empty; }
 		}
 
 		public override string Icon {

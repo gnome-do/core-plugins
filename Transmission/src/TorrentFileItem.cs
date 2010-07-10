@@ -16,6 +16,7 @@ namespace Transmission {
 		private TorrentDirectoryItem _parent;
 		private string _name;
 		private long _size, _downloaded;
+		private bool _wanted;
 		private TransmissionAPI.FilePriority _priority;
 
 		public TorrentFileItem(TorrentItem torrent, int index, TorrentDirectoryItem parent, TransmissionAPI.TorrentFileInfo info) {
@@ -27,6 +28,7 @@ namespace Transmission {
 			_size = info.Length;
 			_downloaded = info.BytesCompleted;
 
+			_wanted = info.Wanted;
 			_priority = info.Priority;
 		}
 
@@ -51,7 +53,29 @@ namespace Transmission {
 		}
 
 		public override string Description {
-			get { return string.Format("{0} of {1}", Utils.FormatSize(_downloaded), Utils.FormatSize(_size)); }
+			get {
+				// I don't use special percentage format string, because it rounds
+				// value and I don't want to get "100%" until file is really downloaded.
+				// High precision isn't needed, because info is mostly out-of-date.
+
+				if (_downloaded == _size)
+					return string.Format("Complete, {0}", Utils.FormatSize(_size));
+
+				else if (_wanted)
+					return string.Format("{0} of {1} complete ({2:0}%)",
+						Utils.FormatSize(_downloaded), Utils.FormatSize(_size),
+						Math.Floor(100.0 * _downloaded / _size)
+					);
+
+				else if (_downloaded != 0)
+					return string.Format("Skipped, {0} of {1} complete ({2:0}%)",
+						Utils.FormatSize(_downloaded),Utils.FormatSize(_size),
+						Math.Floor(100.0 * _downloaded / _size)
+					);
+
+				else
+					return string.Format("Skipped, {0}", Utils.FormatSize(_size));
+			}
 		}
 
 		public override string Icon {

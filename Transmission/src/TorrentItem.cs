@@ -11,6 +11,7 @@ namespace Transmission {
 		private string _name;
 		private string _comment;
 		private string _hash_string;
+		private long _size;
 		private TransmissionAPI.TorrentStatus _status;
 		private int _download_speed_limit, _upload_speed_limit;
 		private TorrentDirectoryItem _root;
@@ -20,6 +21,7 @@ namespace Transmission {
 			_name = info.Name;
 			_comment = info.Comment;
 			_status = info.Status;
+			_size = info.TotalSize;
 			_download_speed_limit = info.DownloadLimit;
 			_upload_speed_limit = info.UploadLimit;
 			_root = new TorrentDirectoryItem(this, null, info.DownloadDir);
@@ -40,7 +42,7 @@ namespace Transmission {
 				case TransmissionAPI.TorrentStatus.Stopped:   status_text = "Stopped"; break;
 				}
 
-				return status_text;
+				return string.Format("{0}, {1}", Utils.FormatSize(_size), status_text);
 			}
 		}
 
