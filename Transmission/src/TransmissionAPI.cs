@@ -11,6 +11,7 @@ namespace Transmission {
 
 	/// <summary>
 	/// Transmission API client.
+	/// Compatible with RPC version 5 to 10 (release version 1.60 to 2.10).
 	/// </summary>
 	public class TransmissionAPI {
 
@@ -309,21 +310,21 @@ namespace Transmission {
 
 			if (limit_download.HasValue) {
 				if (limit_download.Value) {
-					arguments.Add("speed-limit-down-enabled", true);
+					arguments.Add("downloadLimited", true);
 					if (download_speed_limit.HasValue)
-						arguments.Add("speed-limit-down", download_speed_limit.Value);
+						arguments.Add("downloadLimit", download_speed_limit.Value);
 				} else {
-					arguments.Add("speed-lmit-down-enabled", false);
+					arguments.Add("downloadLimited", false);
 				}
 			}
 
 			if (limit_upload.HasValue) {
 				if (limit_upload.Value) {
-					arguments.Add("speed-limit-up-enabled", true);
+					arguments.Add("uploadLimited", true);
 					if (upload_speed_limit.HasValue)
-						arguments.Add("speed-limit-up", upload_speed_limit.Value);
+						arguments.Add("uploadLimit", upload_speed_limit.Value);
 				} else {
-					arguments.Add("speed-lmit-up-enabled", false);
+					arguments.Add("uploadLimited", false);
 				}
 			}
 
@@ -340,21 +341,21 @@ namespace Transmission {
 
 			if (limit_download.HasValue) {
 				if (limit_download.Value) {
-					arguments.Add("speed-limit-down-enabled", true);
+					arguments.Add("downloadLimited", true);
 					if (download_speed_limit.HasValue)
-						arguments.Add("speed-limit-down", download_speed_limit.Value);
+						arguments.Add("downloadLimit", download_speed_limit.Value);
 				} else {
-					arguments.Add("speed-lmit-down-enabled", false);
+					arguments.Add("downloadLimited", false);
 				}
 			}
 
 			if (limit_upload.HasValue) {
 				if (limit_upload.Value) {
-					arguments.Add("speed-limit-up-enabled", true);
+					arguments.Add("uploadLimited", true);
 					if (upload_speed_limit.HasValue)
-						arguments.Add("speed-limit-up", upload_speed_limit.Value);
+						arguments.Add("uploadLimit", upload_speed_limit.Value);
 				} else {
-					arguments.Add("speed-lmit-up-enabled", false);
+					arguments.Add("uploadLimited", false);
 				}
 			}
 
@@ -406,10 +407,10 @@ namespace Transmission {
 			public TorrentStatus Status;
 			public long TotalSize;
 
-			public int DownloadLimitMode;
 			public int DownloadLimit;
-			public int UploadLimitMode;
+			public bool DownloadLimited;
 			public int UploadLimit;
+			public bool UploadLimited;
 		};
 
 		public class TorrentFileInfo {
@@ -429,7 +430,7 @@ namespace Transmission {
 		public IEnumerable<TorrentInfo> GetTorrents(IEnumerable<string> torrent_hashes) {
 			Dictionary<string, object> arguments = new Dictionary<string, object>();
 			if (torrent_hashes != null) arguments.Add("ids", torrent_hashes);
-			arguments.Add("fields", new string[] {"comment", "downloadDir", "files", "hashString", "id", "name", "priorities", "status", "totalSize", "wanted", "downloadLimitMode", "downloadLimit", "uploadLimitMode", "uploadLimit"});
+			arguments.Add("fields", new string[] {"comment", "downloadDir", "files", "hashString", "id", "name", "priorities", "status", "totalSize", "wanted", "downloadLimited", "downloadLimit", "uploadLimited", "uploadLimit"});
 
 			List<TorrentInfo> torrents = new List<TorrentInfo>();
 
@@ -463,9 +464,9 @@ namespace Transmission {
 								case "wanted": wanted = (IList<int>)jsonctx.Import(typeof(List<int>), json); break;
 								case "priorities": priorities = (IList<int>)jsonctx.Import(typeof(List<int>), json); break;
 								case "files": files = jsonctx.Import(typeof(List<TorrentFileInfo>), json) as IList<TorrentFileInfo>; break;
-								case "downloadLimitMode": torrent.DownloadLimitMode = json.ReadNumber().ToInt32(); break;
+								case "downloadLimited": torrent.DownloadLimited = json.ReadBoolean(); break;
 								case "downloadLimit": torrent.DownloadLimit = json.ReadNumber().ToInt32(); break;
-								case "uploadLimitMode": torrent.UploadLimitMode = json.ReadNumber().ToInt32(); break;
+								case "uploadLimited": torrent.UploadLimited = json.ReadBoolean(); break;
 								case "uploadLimit": torrent.UploadLimit = json.ReadNumber().ToInt32(); break;
 								}
 							}
@@ -545,21 +546,21 @@ namespace Transmission {
 
 			if (limit_download.HasValue) {
 				if (limit_download.Value) {
-					arguments.Add("speed-limit-down-enabled", true);
+					arguments.Add("downloadLimited", true);
 					if (download_speed_limit.HasValue)
-						arguments.Add("speed-limit-down", download_speed_limit.Value);
+						arguments.Add("downloadLimit", download_speed_limit.Value);
 				} else {
-					arguments.Add("speed-lmit-down-enabled", false);
+					arguments.Add("downloadLimited", false);
 				}
 			}
 
 			if (limit_upload.HasValue) {
 				if (limit_upload.Value) {
-					arguments.Add("speed-limit-up-enabled", true);
+					arguments.Add("uploadLimited", true);
 					if (upload_speed_limit.HasValue)
-						arguments.Add("speed-limit-up", upload_speed_limit.Value);
+						arguments.Add("uploadLimit", upload_speed_limit.Value);
 				} else {
-					arguments.Add("speed-lmit-up-enabled", false);
+					arguments.Add("uploadLimited", false);
 				}
 			}
 
