@@ -14,6 +14,7 @@ FILES = \
   src/TorrentFileSetPriorityAction.cs \
   src/TorrentItem.cs \
   src/TorrentItemSource.cs \
+  src/TorrentAbstractLimitSpeedAction.cs \
   src/TorrentLimitDownloadSpeedAction.cs \
   src/TorrentLimitUploadSpeedAction.cs \
   src/TorrentMarkForDownloadAction.cs \

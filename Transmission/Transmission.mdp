@@ -36,6 +36,7 @@
     <File name="src/TorrentFileSetPriorityAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TorrentItem.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TorrentItemSource.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/TorrentAbstractLimitSpeedAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TorrentLimitDownloadSpeedAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TorrentMarkForDownloadAction.cs" subtype="Code" buildaction="Compile" />
     <File name="src/TorrentStartAction.cs" subtype="Code" buildaction="Compile" />
