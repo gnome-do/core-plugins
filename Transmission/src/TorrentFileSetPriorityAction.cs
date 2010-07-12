@@ -78,16 +78,29 @@ namespace Transmission {
 		}
 
 		public override IEnumerable<Item> Perform(IEnumerable<Item> items, IEnumerable<Item> modItems) {
-			ITorrentEntry entry = items.First() as ITorrentEntry;
 			TransmissionAPI.FilePriority priority = (modItems.First() as PriorityItem).Value;
 
-			TorrentItem torrent = entry.Torrent;
-
 			TransmissionAPI.FileOperation operation = new TransmissionAPI.FileOperation(null, priority);
-			Dictionary<int, TransmissionAPI.FileOperation> operations = entry.GetFiles().ToDictionary(f => f.Index, f => operation);
+
+			// Group torrent entries by torrent.
+			var files_by_torrent = items
+				.Cast<ITorrentEntry>()
+				.GroupBy(
+					item => item.Torrent,
+					(torrent, entries) => new {
+						Torrent = torrent,
+						Files = entries.SelectMany(entry => entry.GetFiles())
+					}
+				);
 
 			TransmissionAPI api = TransmissionPlugin.getTransmission();
-			api.SetTorrent(torrent.HashString, null, null, null, null, null, operations);
+
+			// Expand entries for each torrent into set of torrent file entries.
+			// Perform action for each torrent separately.
+			foreach (var group in files_by_torrent) {
+				var operations = group.Files.ToDictionary(f => f.Index, f => operation);
+				api.SetTorrent(group.Torrent.HashString, null, null, null, null, null, operations);
+			}
 
 			yield break;
 		}

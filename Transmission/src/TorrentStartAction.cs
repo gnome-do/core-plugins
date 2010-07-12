@@ -31,10 +31,10 @@ namespace Transmission {
 		}
     
 		public override IEnumerable<Item> Perform(IEnumerable<Item> items, IEnumerable<Item> modItems) {
-			TorrentItem item = items.First() as TorrentItem;
-			
 			TransmissionAPI api = TransmissionPlugin.getTransmission();
-			api.StartTorrents(new string[] {item.HashString});
+
+			var hashes = items.Cast<TorrentItem>().Select(t => t.HashString);
+			api.StartTorrents(hashes);
 			
 			return null;
 		}

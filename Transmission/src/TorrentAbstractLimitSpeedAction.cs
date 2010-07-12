@@ -39,11 +39,9 @@ namespace Transmission {
 				yield return speed;
 		}
 
-		protected abstract void SetSpeedLimit(TransmissionAPI api, TorrentItem torrent, int speed);
+		protected abstract void SetSpeedLimit(TransmissionAPI api, IEnumerable<TorrentItem> torrents, int speed);
 
 		public override IEnumerable<Item> Perform(IEnumerable<Item> items, IEnumerable<Item> modItems) {
-			TorrentItem item = items.First() as TorrentItem;
-
 			int? speed = null;
 
 			// Get speed item, it can be either ITextItem or PredefinedSpeed.
@@ -72,7 +70,8 @@ namespace Transmission {
 			// If speed is recognized successfully, set speed limit and update item.
 			if (speed.HasValue) {
 				TransmissionAPI api = TransmissionPlugin.getTransmission();
-				SetSpeedLimit(api, item, speed.Value);
+				IEnumerable<TorrentItem> torrents = items.Cast<TorrentItem>();
+				SetSpeedLimit(api, torrents, speed.Value);
 			}
 
 			yield break;

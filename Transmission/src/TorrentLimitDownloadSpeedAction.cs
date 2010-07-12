@@ -34,11 +34,13 @@ namespace Transmission {
 			);
 		}
 
-		protected override void SetSpeedLimit(TransmissionAPI api, TorrentItem torrent, int speed) {
+		protected override void SetSpeedLimit(TransmissionAPI api, IEnumerable<TorrentItem> torrents, int speed) {
 			bool limit_speed = (speed != 0);
 			int? limit = (speed == 0 ? (int?)null : speed);
-			api.SetTorrents(new string[] {torrent.HashString}, null, limit_speed, limit, null, null);
-			torrent.DownloadSpeedLimit = speed;
+			api.SetTorrents(torrents.Select(t => t.HashString), null, limit_speed, limit, null, null);
+
+			foreach (TorrentItem torrent in torrents)
+				torrent.DownloadSpeedLimit = speed;
 		}
 
 	}
