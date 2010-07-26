@@ -15,25 +15,15 @@ namespace Transmission {
         
         private Gtk.Alignment alignment108;
         
-        private Gtk.VBox vbox2;
-        
-        private Gtk.Frame frame2;
-        
-        private Gtk.Alignment GtkAlignment;
-        
-        private Gtk.VBox vbox4;
-        
-        private Gtk.Label remote_control_disabled_warning_label;
-        
-        private Gtk.Button turn_control_on_button;
-        
-        private Gtk.RadioButton use_local_option;
-        
-        private Gtk.Frame frame3;
-        
-        private Gtk.Alignment GtkAlignment1;
-        
         private Gtk.Table table1;
+        
+        private Gtk.HBox hbox1;
+        
+        private Gtk.Entry address_entry;
+        
+        private Gtk.Label remote_port_label;
+        
+        private Gtk.Entry port_entry;
         
         private Gtk.Label label1;
         
@@ -43,11 +33,7 @@ namespace Transmission {
         
         private Gtk.Entry password_entry;
         
-        private Gtk.Entry remote_address_entry;
-        
         private Gtk.Entry user_name_entry;
-        
-        private Gtk.RadioButton use_remote_option;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -58,69 +44,49 @@ namespace Transmission {
             this.alignment108 = new Gtk.Alignment(0.5F, 0F, 1F, 0F);
             this.alignment108.Name = "alignment108";
             // Container child alignment108.Gtk.Container+ContainerChild
-            this.vbox2 = new Gtk.VBox();
-            this.vbox2.Name = "vbox2";
-            this.vbox2.Spacing = 6;
-            // Container child vbox2.Gtk.Box+BoxChild
-            this.frame2 = new Gtk.Frame();
-            this.frame2.Name = "frame2";
-            // Container child frame2.Gtk.Container+ContainerChild
-            this.GtkAlignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
-            this.GtkAlignment.Name = "GtkAlignment";
-            this.GtkAlignment.LeftPadding = ((uint)(12));
-            this.GtkAlignment.BorderWidth = ((uint)(4));
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
-            this.vbox4 = new Gtk.VBox();
-            this.vbox4.Name = "vbox4";
-            this.vbox4.Spacing = 6;
-            // Container child vbox4.Gtk.Box+BoxChild
-            this.remote_control_disabled_warning_label = new Gtk.Label();
-            this.remote_control_disabled_warning_label.Name = "remote_control_disabled_warning_label";
-            this.remote_control_disabled_warning_label.Xalign = 0F;
-            this.remote_control_disabled_warning_label.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Transmission remote control isn't turned on");
-            this.remote_control_disabled_warning_label.Wrap = true;
-            this.vbox4.Add(this.remote_control_disabled_warning_label);
-            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox4[this.remote_control_disabled_warning_label]));
-            w1.Position = 0;
-            w1.Expand = false;
-            w1.Fill = false;
-            // Container child vbox4.Gtk.Box+BoxChild
-            this.turn_control_on_button = new Gtk.Button();
-            this.turn_control_on_button.CanFocus = true;
-            this.turn_control_on_button.Name = "turn_control_on_button";
-            this.turn_control_on_button.UseUnderline = true;
-            this.turn_control_on_button.Label = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Turn Transmission remote control on");
-            this.vbox4.Add(this.turn_control_on_button);
-            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox4[this.turn_control_on_button]));
-            w2.Position = 1;
-            w2.Expand = false;
-            w2.Fill = false;
-            this.GtkAlignment.Add(this.vbox4);
-            this.frame2.Add(this.GtkAlignment);
-            this.use_local_option = new Gtk.RadioButton(Mono.Addins.AddinManager.CurrentLocalizer.GetString("Use local Transmission"));
-            this.use_local_option.Name = "use_local_option";
-            this.use_local_option.DrawIndicator = true;
-            this.use_local_option.UseUnderline = true;
-            this.use_local_option.Group = new GLib.SList(System.IntPtr.Zero);
-            this.frame2.LabelWidget = this.use_local_option;
-            this.vbox2.Add(this.frame2);
-            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox2[this.frame2]));
-            w5.Position = 0;
-            w5.Expand = false;
-            w5.Fill = false;
-            // Container child vbox2.Gtk.Box+BoxChild
-            this.frame3 = new Gtk.Frame();
-            this.frame3.Name = "frame3";
-            // Container child frame3.Gtk.Container+ContainerChild
-            this.GtkAlignment1 = new Gtk.Alignment(0F, 0F, 1F, 1F);
-            this.GtkAlignment1.Name = "GtkAlignment1";
-            this.GtkAlignment1.LeftPadding = ((uint)(12));
-            this.GtkAlignment1.BorderWidth = ((uint)(4));
-            // Container child GtkAlignment1.Gtk.Container+ContainerChild
             this.table1 = new Gtk.Table(((uint)(3)), ((uint)(2)), false);
             this.table1.Name = "table1";
             this.table1.RowSpacing = ((uint)(6));
             this.table1.ColumnSpacing = ((uint)(6));
+            // Container child table1.Gtk.Table+TableChild
+            this.hbox1 = new Gtk.HBox();
+            this.hbox1.Name = "hbox1";
+            this.hbox1.Spacing = 6;
+            // Container child hbox1.Gtk.Box+BoxChild
+            this.address_entry = new Gtk.Entry();
+            this.address_entry.CanFocus = true;
+            this.address_entry.Name = "address_entry";
+            this.address_entry.IsEditable = true;
+            this.address_entry.InvisibleChar = '●';
+            this.hbox1.Add(this.address_entry);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox1[this.address_entry]));
+            w1.Position = 0;
+            // Container child hbox1.Gtk.Box+BoxChild
+            this.remote_port_label = new Gtk.Label();
+            this.remote_port_label.Name = "remote_port_label";
+            this.remote_port_label.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("Port");
+            this.hbox1.Add(this.remote_port_label);
+            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox1[this.remote_port_label]));
+            w2.Position = 1;
+            w2.Expand = false;
+            w2.Fill = false;
+            // Container child hbox1.Gtk.Box+BoxChild
+            this.port_entry = new Gtk.Entry();
+            this.port_entry.CanFocus = true;
+            this.port_entry.Name = "port_entry";
+            this.port_entry.IsEditable = true;
+            this.port_entry.WidthChars = 5;
+            this.port_entry.MaxLength = 5;
+            this.port_entry.InvisibleChar = '●';
+            this.hbox1.Add(this.port_entry);
+            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.hbox1[this.port_entry]));
+            w3.Position = 2;
+            w3.Expand = false;
+            this.table1.Add(this.hbox1);
+            Gtk.Table.TableChild w4 = ((Gtk.Table.TableChild)(this.table1[this.hbox1]));
+            w4.LeftAttach = ((uint)(1));
+            w4.RightAttach = ((uint)(2));
+            w4.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
@@ -128,9 +94,9 @@ namespace Transmission {
             this.label1.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_Address");
             this.label1.UseUnderline = true;
             this.table1.Add(this.label1);
-            Gtk.Table.TableChild w6 = ((Gtk.Table.TableChild)(this.table1[this.label1]));
-            w6.XOptions = ((Gtk.AttachOptions)(4));
-            w6.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w5 = ((Gtk.Table.TableChild)(this.table1[this.label1]));
+            w5.XOptions = ((Gtk.AttachOptions)(4));
+            w5.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
@@ -138,11 +104,11 @@ namespace Transmission {
             this.label2.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_Password");
             this.label2.UseUnderline = true;
             this.table1.Add(this.label2);
-            Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table1[this.label2]));
-            w7.TopAttach = ((uint)(2));
-            w7.BottomAttach = ((uint)(3));
-            w7.XOptions = ((Gtk.AttachOptions)(4));
-            w7.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w6 = ((Gtk.Table.TableChild)(this.table1[this.label2]));
+            w6.TopAttach = ((uint)(2));
+            w6.BottomAttach = ((uint)(3));
+            w6.XOptions = ((Gtk.AttachOptions)(4));
+            w6.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.label3 = new Gtk.Label();
             this.label3.Name = "label3";
@@ -150,35 +116,25 @@ namespace Transmission {
             this.label3.LabelProp = Mono.Addins.AddinManager.CurrentLocalizer.GetString("_Login");
             this.label3.UseUnderline = true;
             this.table1.Add(this.label3);
-            Gtk.Table.TableChild w8 = ((Gtk.Table.TableChild)(this.table1[this.label3]));
-            w8.TopAttach = ((uint)(1));
-            w8.BottomAttach = ((uint)(2));
-            w8.XOptions = ((Gtk.AttachOptions)(4));
-            w8.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table1[this.label3]));
+            w7.TopAttach = ((uint)(1));
+            w7.BottomAttach = ((uint)(2));
+            w7.XOptions = ((Gtk.AttachOptions)(4));
+            w7.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.password_entry = new Gtk.Entry();
             this.password_entry.CanFocus = true;
             this.password_entry.Name = "password_entry";
             this.password_entry.IsEditable = true;
+            this.password_entry.Visibility = false;
             this.password_entry.InvisibleChar = '●';
             this.table1.Add(this.password_entry);
-            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table1[this.password_entry]));
-            w9.TopAttach = ((uint)(2));
-            w9.BottomAttach = ((uint)(3));
-            w9.LeftAttach = ((uint)(1));
-            w9.RightAttach = ((uint)(2));
-            w9.YOptions = ((Gtk.AttachOptions)(4));
-            // Container child table1.Gtk.Table+TableChild
-            this.remote_address_entry = new Gtk.Entry();
-            this.remote_address_entry.CanFocus = true;
-            this.remote_address_entry.Name = "remote_address_entry";
-            this.remote_address_entry.IsEditable = true;
-            this.remote_address_entry.InvisibleChar = '●';
-            this.table1.Add(this.remote_address_entry);
-            Gtk.Table.TableChild w10 = ((Gtk.Table.TableChild)(this.table1[this.remote_address_entry]));
-            w10.LeftAttach = ((uint)(1));
-            w10.RightAttach = ((uint)(2));
-            w10.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w8 = ((Gtk.Table.TableChild)(this.table1[this.password_entry]));
+            w8.TopAttach = ((uint)(2));
+            w8.BottomAttach = ((uint)(3));
+            w8.LeftAttach = ((uint)(1));
+            w8.RightAttach = ((uint)(2));
+            w8.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.user_name_entry = new Gtk.Entry();
             this.user_name_entry.CanFocus = true;
@@ -186,37 +142,20 @@ namespace Transmission {
             this.user_name_entry.IsEditable = true;
             this.user_name_entry.InvisibleChar = '●';
             this.table1.Add(this.user_name_entry);
-            Gtk.Table.TableChild w11 = ((Gtk.Table.TableChild)(this.table1[this.user_name_entry]));
-            w11.TopAttach = ((uint)(1));
-            w11.BottomAttach = ((uint)(2));
-            w11.LeftAttach = ((uint)(1));
-            w11.RightAttach = ((uint)(2));
-            w11.YOptions = ((Gtk.AttachOptions)(4));
-            this.GtkAlignment1.Add(this.table1);
-            this.frame3.Add(this.GtkAlignment1);
-            this.use_remote_option = new Gtk.RadioButton(Mono.Addins.AddinManager.CurrentLocalizer.GetString("Use remote Transmission"));
-            this.use_remote_option.Name = "use_remote_option";
-            this.use_remote_option.DrawIndicator = true;
-            this.use_remote_option.UseUnderline = true;
-            this.use_remote_option.Group = this.use_local_option.Group;
-            this.frame3.LabelWidget = this.use_remote_option;
-            this.vbox2.Add(this.frame3);
-            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.vbox2[this.frame3]));
-            w14.PackType = ((Gtk.PackType)(1));
-            w14.Position = 1;
-            w14.Expand = false;
-            w14.Fill = false;
-            this.alignment108.Add(this.vbox2);
+            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table1[this.user_name_entry]));
+            w9.TopAttach = ((uint)(1));
+            w9.BottomAttach = ((uint)(2));
+            w9.LeftAttach = ((uint)(1));
+            w9.RightAttach = ((uint)(2));
+            w9.YOptions = ((Gtk.AttachOptions)(4));
+            this.alignment108.Add(this.table1);
             this.Add(this.alignment108);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.Hide();
-            this.turn_control_on_button.Clicked += new System.EventHandler(this.OnTurnControlOnButtonClicked);
             this.user_name_entry.Changed += new System.EventHandler(this.OnUserNameEntryChanged);
-            this.remote_address_entry.Changed += new System.EventHandler(this.OnRemoteAddressEntryChanged);
             this.password_entry.Changed += new System.EventHandler(this.OnPasswordEntryChanged);
-            this.use_remote_option.Toggled += new System.EventHandler(this.OnUseRemoteOptionToggled);
         }
     }
 }
