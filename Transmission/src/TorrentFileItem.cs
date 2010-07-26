@@ -19,12 +19,15 @@ namespace Transmission {
 		private bool _wanted;
 		private TransmissionAPI.FilePriority _priority;
 
-		public TorrentFileItem(TorrentItem torrent, int index, TorrentDirectoryItem parent, TransmissionAPI.TorrentFileInfo info) {
+		public TorrentFileItem(
+			TorrentItem torrent, int index, TorrentDirectoryItem parent,
+			string name, TransmissionAPI.TorrentFileInfo info
+		) {
 			_torrent = torrent;
 			_index = index;
 
 			_parent = parent;
-			_name = info.Name;
+			_name = name;
 			_size = info.Length;
 			_downloaded = info.BytesCompleted;
 

@@ -58,7 +58,7 @@ namespace Transmission {
 					Log<TorrentItemSource>.Debug("File {0} in dir {1}", name, path);
 					TorrentDirectoryItem dir = FindOrCreateDirectory(path, dirs);
 
-					dir.Files.Add(new TorrentFileItem(torrent, index, dir, f));
+					dir.Files.Add(new TorrentFileItem(torrent, index, dir, name, f));
 
 					++index;
 				}
