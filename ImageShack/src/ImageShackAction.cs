@@ -68,9 +68,8 @@ namespace ImageShack
 			
 		public override bool SupportsItem (Item item)
 		{	
-			if (item is IFileItem) {
+			if (item is IFileItem)
 				return IsImageFile((item as IFileItem));
-			}
 			return false;
 		}
 			
@@ -118,7 +117,7 @@ namespace ImageShack
 			UploadNotification notification = new UploadNotification(file);
 			Services.Notifications.Notify (notification);	
 			
-			string contentType = image_mime_type_mapping[Path.GetExtension (file)];		
+			string contentType = image_mime_type_mapping[Path.GetExtension (file).ToLower ()];		
 						
 			string boundary = "----------" + DateTime.Now.Ticks.ToString ("x");
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://www.imageshack.us/index.php");
@@ -192,7 +191,7 @@ namespace ImageShack
 		
 		private bool IsImageFile (IFileItem file)
 		{
-			return image_mime_type_mapping.ContainsKey (Path.GetExtension (file.Path));
+			return image_mime_type_mapping.ContainsKey (Path.GetExtension (file.Path).ToLower ());
 		}
 	}
 }
