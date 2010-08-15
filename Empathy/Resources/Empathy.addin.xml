@@ -1,0 +1,37 @@
+<Addin
+	id="Empathy"
+	namespace="Do"
+	version="0.1"
+	name="Empathy"
+	description="Search contacts and initiate chats in Empathy."
+	author="Xavier Calland"
+	category="Community"
+	defaultEnabled="false"
+    url="http://do.davebsd.com/wiki/Empathy_Plugin"
+>
+ 
+	<Runtime>
+		<Import assembly="Empathy.dll"/>
+		<Import assembly="telepathy-sharp.dll"/>
+	</Runtime>
+
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="/usr/local/share/locale" />
+	
+	<Dependencies>
+		<Addin id="Universe" version="1.0" />
+	</Dependencies>
+	
+	<Extension path="/Do/ItemSource">
+		<ItemSource type="EmpathyPlugin.EmpathyContactItemSource" />
+		<ItemSource type="EmpathyPlugin.EmpathyAccountItemSource" />
+		<ItemSource type="EmpathyPlugin.EmpathySavedStatusItemSource" />
+	</Extension>
+
+	<Extension path= "/Do/Action">
+		<Action type="EmpathyPlugin.EmpathyChatAction" />
+		<Action type="EmpathyPlugin.EmpathySetStatusAction" />
+		<Action type="EmpathyPlugin.EmpathyEnableAccount" />
+		<Action type="EmpathyPlugin.EmpathyDisableAccount" />
+	</Extension>
+
+</Addin>
