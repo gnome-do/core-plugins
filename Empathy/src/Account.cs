@@ -169,7 +169,8 @@ namespace EmpathyPlugin
 					string[] strTab = channelInfo.Channel.ToString().Split("/".ToCharArray());
 					if(strTab[strTab.Length - 1] == "subscribe") 
 					{
-						foreach (UInt32 i in (UInt32[])contactGroupProperties.Get (EmpathyPlugin.CHANNEL_GROUP_IFACE, "Members")) {
+						foreach (UInt32 i in (UInt32[])contactGroupProperties.Get (EmpathyPlugin.CHANNEL_GROUP_IFACE, "Members"))
+						{
 							Contact contact = new Contact(i, this);
 							res.Add(contact);
 						}

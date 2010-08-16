@@ -70,7 +70,10 @@ namespace EmpathyPlugin
 			string[] itf = (string[])connectionProperties.Get (EmpathyPlugin.CONNECTION_CONTACT_IFACE, "ContactAttributeInterfaces");
 			// FIXME: cette interface fait planter DBus avec MSN, on remet un interface bidon
 			int idx = Array.IndexOf(itf, EmpathyPlugin.CONNECTION_CAPABILITIES_IFACE);
-			itf[idx] = EmpathyPlugin.CONNECTION_IFACE;
+			if(idx != -1) 
+			{
+				itf[idx] = EmpathyPlugin.CONNECTION_IFACE;
+			}
 			
 			IDictionary<uint, IDictionary<string, object>> allAttributes = 
 				contacts.GetContactAttributes (new uint[] { ContactUInt }, itf, false);

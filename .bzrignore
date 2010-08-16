@@ -23,3 +23,4 @@ po/.intltool-merge-cache
 *.addin.xml
 *.gmo
 m4/intltool.m4
+src/Main.cs
