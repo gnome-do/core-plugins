@@ -66,8 +66,9 @@ namespace EmpathyPlugin
 		{
 			EmpathyAccountItem account = items.First () as EmpathyAccountItem;
 			account.Account.EnableAccount();
+			
 			yield break;
-		}		
+		}
 	}
 	
 	public class EmpathyDisableAccount : Act

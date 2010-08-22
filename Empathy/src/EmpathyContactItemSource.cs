@@ -25,13 +25,13 @@ using System.Collections.Generic;
 using Mono.Addins;
 using Do.Universe;
 using Do.Platform;
+using Do.Platform.ServiceStack;
 
 namespace EmpathyPlugin
 {
 
 	public class EmpathyContactItemSource : ItemSource
 	{
-
 		const string iconPrefix = "icon-";
 		
 		List<Item> contacts;
@@ -41,35 +41,44 @@ namespace EmpathyPlugin
 			contacts = new List<Item> ();
 		}
 		
-		public override IEnumerable<Type> SupportedItemTypes {
-			get { 
+		public override IEnumerable<Type> SupportedItemTypes
+		{
+			get
+			{ 
 				yield return typeof (ContactItem); 
 				yield return typeof (IApplicationItem);
 				yield return typeof (EmpathyBrowseBuddyItem);
 			}
 		}
 		
-		public override string Name {
+		public override string Name
+		{
 			get { return AddinManager.CurrentLocalizer.GetString ("Empathy Contacts"); }
 		}
 		
-		public override string Description {
+		public override string Description
+		{
 			get { return AddinManager.CurrentLocalizer.GetString ("Contacts on your Empathy contact alist."); } 
 		}
 		
-		public override string Icon {
+		public override string Icon
+		{
 			get { return "empathy"; }
 		}
 		
-		public override IEnumerable<Item> Items {
+		public override IEnumerable<Item> Items 
+		{
 			get { return contacts; }
 		}
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			if (EmpathyPlugin.IsTelepathy (item)) {
+			if (EmpathyPlugin.IsTelepathy (item))
+			{
 				yield return new EmpathyBrowseBuddyItem ();
-			} else if (item is EmpathyBrowseBuddyItem) {
+			}
+			else if (item is EmpathyBrowseBuddyItem)
+			{
 				foreach (ContactItem contact in contacts)
 				{
 					yield return contact;
@@ -77,13 +86,17 @@ namespace EmpathyPlugin
 			}
 		}
 
-		public override void UpdateItems ()
-		{	
-			if (EmpathyPlugin.InstanceIsRunning) {
+		public void ForceUpdateItems ()
+		{
+			Console.WriteLine("EmpathyContactItemSource.ForceUpdateItems");
+			if (EmpathyPlugin.InstanceIsRunning)
+			{
 				contacts.Clear ();
-				try {
+				try
+				{
 						
-					foreach (Contact contact in EmpathyPlugin.GetAllContacts) {
+					foreach (Contact contact in EmpathyPlugin.GetAllContacts)
+					{
 							ContactItem contactItem = ContactItem.Create (contact.Alias);
 							contactItem["email"] = contact.ContactId;
 						contactItem["is-empathy"] = "true";
@@ -94,11 +107,18 @@ namespace EmpathyPlugin
 						}
 						contacts.Add (contactItem);	
 					}
-				} catch (Exception e) { 
+				}
+				catch (Exception e)
+				{ 
 					Log<EmpathyContactItemSource>.Error ("Could not get Empathy contacts: {0}", e.Message);
 					Log<EmpathyContactItemSource>.Error (e.StackTrace);
 				}
 			}
+		}
+		
+		public override void UpdateItems ()
+		{	
+			ForceUpdateItems();
 		}
 	}
 }

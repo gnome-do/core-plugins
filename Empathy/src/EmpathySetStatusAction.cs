@@ -56,21 +56,24 @@ namespace EmpathyPlugin
 			get { return "empathy"; }
 		}
 
-		public override IEnumerable<Type> SupportedItemTypes {
+		public override IEnumerable<Type> SupportedItemTypes
+		{
 			get {
 				yield return typeof (EmpathyStatusItem);
 				yield return typeof (ITextItem);
 			}
 		}
 
-		public override IEnumerable<Type> SupportedModifierItemTypes {
+		public override IEnumerable<Type> SupportedModifierItemTypes
+		{
 			get { 
 				yield return typeof (ITextItem); 
 				yield return typeof (EmpathyStatusItem);
 			}
 		}
 
-		public override bool ModifierItemsOptional {
+		public override bool ModifierItemsOptional
+		{
 			get { return true; }
 		}
 
@@ -89,7 +92,8 @@ namespace EmpathyPlugin
 		{
 			ConnectionPresenceType status;
 			string message = "";
-			try {
+			try
+			{
 
 				if (items.First () is EmpathySavedStatusItem)
 				{
@@ -113,11 +117,12 @@ namespace EmpathyPlugin
 					message = (items.First () as ITextItem).Text;
 					EmpathyPlugin.SetAvailabilityStatus(status, message);
 				}
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				Log<EmpathySetStatusAction>.Error ("Could not set Empathy status: {0}", e.Message);
 				Log<EmpathySetStatusAction>.Debug (e.StackTrace);
-			}
-
+			} 
 			yield break;
 		}
 	}

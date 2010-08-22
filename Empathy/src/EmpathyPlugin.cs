@@ -83,15 +83,19 @@ namespace EmpathyPlugin
 			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("empathy"));
 		}
 		
-		public static List<Account> ConnectedAccounts {
-			get {
+		public static List<Account> ConnectedAccounts
+		{
+			get
+			{
 				List<Account> res = new List<Account>();
 				IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
 				ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
 				
-				foreach(ObjectPath accountPath in accountPathArray) {
+				foreach(ObjectPath accountPath in accountPathArray)
+				{
 					Account account = new Account(accountPath);
-					if(account.IsConnected()) {
+					if(account.IsConnected())
+					{
 						res.Add(account);
 					}
 				}
@@ -99,13 +103,16 @@ namespace EmpathyPlugin
 			}
 		}
 		
-		public static List<Account> GetAllAccounts {
-			get {
+		public static List<Account> GetAllAccounts
+		{
+			get
+			{
 				List<Account> res = new List<Account>();
 				IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
 				ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
 				
-				foreach(ObjectPath accountPath in accountPathArray) {
+				foreach(ObjectPath accountPath in accountPathArray)
+				{
 					Account account = new Account(accountPath);
 					
 					res.Add(account);
@@ -114,12 +121,16 @@ namespace EmpathyPlugin
 			}
 		}
 		
-		public static List<Contact> GetAllContacts {
-			get {
+		public static List<Contact> GetAllContacts
+		{
+			get
+			{
 				List<Contact> res = new List<Contact>();
-				foreach(Account account in ConnectedAccounts) {
+				foreach(Account account in ConnectedAccounts)
+				{
 					
-					foreach(Contact contact in account.FindContact()) {
+					foreach(Contact contact in account.FindContact())
+					{
 						res.Add(contact);
 					}
 				}

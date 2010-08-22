@@ -63,10 +63,14 @@ namespace EmpathyPlugin
 		
 		public override IEnumerable<Item> ChildrenOfItem (Item item)
 		{
-			if (EmpathyPlugin.IsTelepathy (item)) {
+			if (EmpathyPlugin.IsTelepathy (item))
+			{
 				yield return new EmpathyBrowseAccountItem ();
-			} else if (item is EmpathyBrowseAccountItem) {
-				foreach (EmpathyAccountItem account in items) {
+			}
+			else if (item is EmpathyBrowseAccountItem)
+			{
+				foreach (EmpathyAccountItem account in items)
+				{
 					yield return account;
 				}
 			}

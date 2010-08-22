@@ -78,6 +78,7 @@ namespace EmpathyPlugin
 				yield return typeof (EmpathySavedStatusItem);
 				yield return typeof (EmpathyStatusItem);
 				yield return typeof (EmpathyBrowseStatusItem);
+				yield return typeof (IApplicationItem);
 			}
 		}
 		
@@ -94,12 +95,16 @@ namespace EmpathyPlugin
 			}
 		}
 		
-		public override IEnumerable<Item> Items {
+		public override IEnumerable<Item> Items
+		{
 			get { return statuses; }
 		}
 		
 		public override void UpdateItems () 
-		{			
+		{
+			// suppression des preset status déja lus
+			statuses.RemoveAll(new System.Predicate<Item>( delegate(Item val) { return (val is EmpathySavedStatusItem); }));
+			
 			// lire les status enregistrés
 			XmlDocument statusList = new XmlDocument ();
 			try {
