@@ -88,7 +88,6 @@ namespace EmpathyPlugin
 
 		public void ForceUpdateItems ()
 		{
-			Console.WriteLine("EmpathyContactItemSource.ForceUpdateItems");
 			if (EmpathyPlugin.InstanceIsRunning)
 			{
 				contacts.Clear ();
