@@ -51,7 +51,7 @@ namespace AptURL {
         {
             string package = (items.First () as ITextItem).Text;
 
-            System.Diagnostics.Process.Start ("apturl apt:" + package);
+            System.Diagnostics.Process.Start ("apturl", "apt:" + package);
             return null;
         }
     }
