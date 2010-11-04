@@ -25,7 +25,6 @@ using Do.Platform;
 
 namespace Do.FilesAndFolders
 {
-
 	[Serializable]
 	struct IndexedFolder : IEquatable<IndexedFolder>
 	{
@@ -33,7 +32,7 @@ namespace Do.FilesAndFolders
 		public uint Level { get; private set; }
 		public FolderStatus Status { get; private set; }
 		
-		public IndexedFolder (string path, uint level, FolderStatus status)
+		public IndexedFolder (string path, uint level, FolderStatus status) : this ()
 		{
 			if (path == null) throw new ArgumentNullException ("path");
 			

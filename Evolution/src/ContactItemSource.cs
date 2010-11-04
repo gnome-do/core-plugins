@@ -35,7 +35,7 @@ namespace Evolution
 		public string Detail { get; private set; }
 		public string Key { get; private set; }
 		
-		public ContactAttribute (string key, string detail)
+		public ContactAttribute (string key, string detail) : this ()
 		{
 			Key = key;
 			Detail = detail;
@@ -87,9 +87,8 @@ namespace Evolution
 			// Disallow updating due to memory leak.
 			if (contacts.Any ()) return;
 			
-			using (SourceList sources = new SourceList ("/apps/evolution/addressbook/sources")) {
+			using (SourceList sources = new SourceList ("/apps/evolution/addressbook/sources"))
 				contacts = GetContactItems (sources).ToArray ();
-			}
 		}
 
 		IEnumerable<ContactItem> GetContactItems (SourceList sources)
@@ -111,9 +110,8 @@ namespace Evolution
 			if (!source.IsLocal ())
 				return Enumerable.Empty<ContactItem> ();
 			
-			using (Book book = new Book (source)) {
+			using (Book book = new Book (source))
 				return GetContactItems (book);
-			}
 		}
 
 		IEnumerable<ContactItem> GetContactItems (Book book)
@@ -184,10 +182,9 @@ namespace Evolution
 					contact["name"], e.Message);
 				Console.Error.WriteLine (e.StackTrace);
 		   	}
-			//add the details to the contact
-			foreach (ContactAttribute c in ContactDetails) {
+			// add the details to the contact
+			foreach (ContactAttribute c in ContactDetails)
 				MaybeAddDetail(contact,c.Key,c.Detail);
-			}
 			return contact;
 		}
 	
