@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using Mono.Addins;
+
 using Do.Universe;
 
 namespace GNOME
@@ -74,7 +75,7 @@ namespace GNOME
 		/// Use wordRegex to determine whether item is definable.
 		/// </summary>
 		/// <param name="item">
-		/// A <see cref="Item"/> to define.
+		/// An <see cref="Item"/> to define.
 		/// </param>
 		/// <returns>
 		/// A <see cref="System.Boolean"/> indicating whether or not Item
@@ -82,26 +83,24 @@ namespace GNOME
 		/// </returns>
 		public override bool SupportsItem (Item item)
 		{
-			string word;
+			string word = null;
 
-			word = null;
-			if (item is ITextItem) {
+			if (item is ITextItem)
 				word = (item as ITextItem).Text;
-			}
+
 			return !string.IsNullOrEmpty (word) && wordRegex.IsMatch (word);
 		}
 		
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
-			string word, cmd;
+			string args;
+
 			foreach (Item item in items) {
-				if (item is ITextItem) {
-					word = (item as ITextItem).Text;
-				} else {
+				if (!(item is ITextItem))
 					continue;
-				}
-				cmd = string.Format ("gnome-dictionary --look-up \"{0}\"", word);
-				System.Diagnostics.Process.Start (cmd);
+
+				args = string.Format ("--look-up \"{0}\"", (item as ITextItem).Text);
+				System.Diagnostics.Process.Start ("gnome-dictionary", args);
 			}
 			return null;
 		}
