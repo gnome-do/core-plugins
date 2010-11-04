@@ -241,7 +241,7 @@ namespace PidginPlugin
 					}
 					//if the alias is still null, let's try to get the server alias
 					if (string.IsNullOrEmpty (alias))
-					    alias = Pidgin.GetBuddyServerAlias (protos[proto]) ?? null;
+					    alias = (string) Pidgin.GetBuddyServerAlias (protos[proto]) ?? null;
 					break;
 				//let's pick up the custom icon as the metacontact's icon
 				case "setting":
