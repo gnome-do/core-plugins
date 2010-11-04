@@ -407,7 +407,6 @@ Zim/Makefile
 Zim/Resources/Zim.addin.xml
 Makefile
 po/Makefile.in
-BundledLibraries/Makefile
 ])
 
 AC_OUTPUT
