@@ -67,7 +67,7 @@ namespace Microblogging
 		public static void UpdateStatus (object status)
 		{
 			MicroblogStatusReply reply = status as MicroblogStatusReply;
-			if (reply != null)
+			if (reply != null && client != null)
 				client.UpdateStatus (reply.Status, reply.InReplyToId);
 		}
 		
