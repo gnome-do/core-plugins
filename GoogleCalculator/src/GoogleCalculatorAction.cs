@@ -22,6 +22,7 @@ using System.IO;
 using System.Net;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -35,10 +36,6 @@ namespace Do.Plugins.Google
 {
 	public class GoogleCalculatorAction : Act
 	{
-		const string BeginCalculator = "<img src=\"/images/icons/onebox/calculator-40.gif";
-		const string BeginReply = "<h2 class=r style=\"font-size:138%\"><b>";
-		const string EndReply = "</b>";
-
 		public override string Name {
 			get { return "GCalculate"; }
 		}
@@ -58,29 +55,23 @@ namespace Do.Plugins.Google
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
 		{
 			string expression, url, page, reply;
-			int beginCalculator, beginReply, endReply;
 		 
 			expression = (items.First () as ITextItem).Text;
 			url	= GoogleCalculatorURLWithExpression (expression);
 			try {
 				page = GetWebpageContents (url);
-
-				// Make sure the page contains a calculation result by
-				// checking for the presence of the Calculator image:
-				beginCalculator = page.IndexOf (BeginCalculator);
-				if (beginCalculator < 0)
-					throw new Exception ();
-				page = page.Substring (beginCalculator);
 				
-				// Try to extract the reply:
-				beginReply = page.IndexOf (BeginReply);
-				if (beginReply < 0)
+				IDictionary<string, string> dict = new Dictionary<string, string> ();
+				
+				foreach (string s in page.Replace ("}", "").Replace ("{", "").Split (',')) {
+					string[] parts = s.Split(':');
+					dict [parts [0]] = parts [1].Replace ("\"", "").Trim ();
+				}
+				
+				if (dict ["error"] != "")
 					throw new Exception ();
-				reply = page.Substring (beginReply + BeginReply.Length);
-				endReply = reply.IndexOf (EndReply); 
-				reply = reply.Substring (0, endReply);
-				// Strip HTML tags:
-				reply = Regex.Replace (reply, @"<[^>]+>", "");
+				
+				reply = dict ["lhs"] + " = " + dict ["rhs"];
 			} catch {
 				reply = AddinManager.CurrentLocalizer.GetString ("Google Calculator could not evaluate the expression.");
 			}
@@ -90,7 +81,7 @@ namespace Do.Plugins.Google
 
 		string GoogleCalculatorURLWithExpression (string e)
 		{
-			return "http://www.google.com/search?q=" + HttpUtility.UrlEncode (e ?? "");
+			return "http://www.google.com/ig/calculator?q=" + HttpUtility.UrlEncode (e ?? "");
 		}
 
 		string GetWebpageContents (string url)
