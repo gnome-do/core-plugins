@@ -35,13 +35,9 @@ namespace Do.Plugins.Google
 {
 	public class GoogleCalculatorAction : Act
 	{
-		const string BeginCalculator = "<img src=/images/calc_img.gif";
+		const string BeginCalculator = "<img src=\"/images/icons/onebox/calculator-40.gif";
 		const string BeginReply = "<h2 class=r style=\"font-size:138%\"><b>";
 		const string EndReply = "</b>";
-
-		public GoogleCalculatorAction ()
-		{
-		}
 
 		public override string Name {
 			get { return "GCalculate"; }
@@ -72,16 +68,14 @@ namespace Do.Plugins.Google
 				// Make sure the page contains a calculation result by
 				// checking for the presence of the Calculator image:
 				beginCalculator = page.IndexOf (BeginCalculator);
-				if (beginCalculator < 0) {
+				if (beginCalculator < 0)
 					throw new Exception ();
-				}
 				page = page.Substring (beginCalculator);
 				
 				// Try to extract the reply:
 				beginReply = page.IndexOf (BeginReply);
-				if (beginReply < 0) {
+				if (beginReply < 0)
 					throw new Exception ();
-				}
 				reply = page.Substring (beginReply + BeginReply.Length);
 				endReply = reply.IndexOf (EndReply); 
 				reply = reply.Substring (0, endReply);
