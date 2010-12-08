@@ -1,20 +1,20 @@
 //  EmapthyStatusItem.cs
-//  
+//
 //  Author:
 //       Xavier Calland <xavier.calland@gmail.com>
-//  
-//  Copyright (c) 2010 
-// 
+//
+//  Copyright © 2010
+//
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
-// 
+//
 //  This program is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU Lesser General Public License for more details.
-// 
+//
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -30,28 +30,26 @@ using Telepathy;
 
 namespace EmpathyPlugin
 {
-
 	public class EmpathyStatusItem : Item
 	{
-
 		public EmpathyStatusItem (ConnectionPresenceType status)
 		{
 			this.Status = status;
 		}
-				
+
 		public EmpathyStatusItem (ConnectionPresenceType status, string message)
 		{
 			this.Status = status;
 		}
-		
+
 		public override string Name {
 			get {
 				return Description;
 			}
 		}
-		
+
 		public override string Description {
-			get { 				
+			get {
 				switch (this.Status) {
 				case ConnectionPresenceType.Offline: return AddinManager.CurrentLocalizer.GetString ("Offline");
 				case ConnectionPresenceType.Available: return AddinManager.CurrentLocalizer.GetString ("Available");
@@ -62,7 +60,7 @@ namespace EmpathyPlugin
 				}
 			}
 		}
-		
+
 		public override string Icon { 
 			get  { 
 				switch (this.Status) {
@@ -75,7 +73,7 @@ namespace EmpathyPlugin
 				}
 			}
 		}
-		
+
 		public ConnectionPresenceType Status { get; private set; }
 	}
 }

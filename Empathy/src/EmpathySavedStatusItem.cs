@@ -3,7 +3,7 @@
 //  Author:
 //       Xavier Calland <xavier.calland@gmail.com>
 //  
-//  Copyright (c) 2010 
+//  Copyright © 2010
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -35,17 +35,15 @@ namespace EmpathyPlugin
 			Message = message;
 		}
 
-		
 		public override string Name {
 			get { return StripHTML(Message); }
 		}
-		
+
 		public string Message { get; private set; }
-		
+
 		string StripHTML (string message)
 		{
 			return Regex.Replace(message, @"<(.|\n)*?>", string.Empty);
 		}
 	}
-
 }
