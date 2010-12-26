@@ -29,7 +29,7 @@ using Do.Universe;
 using Do.Universe.Common;
 
 using Mono.Addins;
-using Mono.Data.SqliteClient;
+using Mono.Data.Sqlite;
 	
 namespace Firefox
 {
