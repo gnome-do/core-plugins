@@ -22,7 +22,6 @@ using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 
-
 using Do.Universe;
 using Do.Platform;
 
@@ -37,13 +36,13 @@ namespace TSClient
 		}
 
 		public override string Name { get { return "Terminal Server Connection Items"; } }
+
 		public override string Description { get { return "Parses Connections in ~/.tsclient"; } }
+
 		public override string Icon { get { return "network-server"; } }
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get {
-				return new Type[] { typeof (TSClientItem) };
-			}
+			get { return new Type[] { typeof (TSClientItem) }; }
 		}
 
 		public override IEnumerable<Item> Items {
@@ -62,7 +61,7 @@ namespace TSClient
 				List<string> clients = GetFilesRecursive(tsclientDir);
 				
 				foreach (string file in clients) {
-					string name = file.Replace (".rdp", "");
+					string name = file.Substring (file.LastIndexOf("/") + 1);
 					items.Add (new TSClientItem (name, file));
 					Log<TSClientItemSource>.Debug ("rdp file '{0}' indexed.", file);
 				}
@@ -83,14 +82,11 @@ namespace TSClient
 
 	                foreach (string dn in Directory.GetDirectories (dir))
 	                    stack.Push (dn);
-	            }
-	            catch {
+	            } catch {
 					Log<TSClientItemSource>.Error ("Could not open directory '{0}'", dir);
 	            }
 	        }
 	        return result;
 	    }
-
 	}
-
 }
