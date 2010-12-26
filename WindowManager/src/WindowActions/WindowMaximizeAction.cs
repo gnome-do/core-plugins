@@ -32,11 +32,11 @@ namespace WindowManager
 	public class WindowMaximizeAction : WindowActionAction
 	{
 		public override string Name {
-			get { return AddinManager.CurrentLocalizer.GetString ("Maximize"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("(Un)Maximize"); }
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Make a window consume the whole screen"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Make a window consume the whole screen or revert to its normal size"); }
 		}
 
 		public override string Icon {
@@ -47,7 +47,11 @@ namespace WindowManager
 		{
 			if (!windows.Any ())
 				return;
-			WindowControl.MaximizeWindow (windows.First ());
+			Window window = windows.First ();
+			if (window.IsMaximized)
+				WindowControl.UnmaximizeWindow (window);
+			else
+				WindowControl.MaximizeWindow (window);
 		}
 	}
 }

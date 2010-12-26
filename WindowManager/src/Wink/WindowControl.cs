@@ -148,6 +148,11 @@ namespace WindowManager.Wink
 			window.Maximize ();
 		}
 		
+		public static void UnmaximizeWindow (Window window)
+		{
+			window.Unmaximize ();
+		}
+		
 		/// <summary>
 		/// Moves the current viewport to the selected window and then raises it
 		/// </summary>
