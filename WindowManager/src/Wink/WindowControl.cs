@@ -24,11 +24,8 @@ using Wnck;
 
 namespace WindowManager.Wink
 {
-	
-	
 	public static class WindowControl
 	{
-		
 		const int SleepTime = 10;
 		const int FocusDelay = 200;
 		
@@ -99,7 +96,7 @@ namespace WindowManager.Wink
 			
 			if (windows.Any (w => w.IsInViewport (w.Screen.ActiveWorkspace))) {
 				foreach (Window window in windows.Reverse ()) {
-					if (window.IsInViewport (window.Screen.ActiveWorkspace) && !window.IsMinimized) {
+					if (window.IsInViewport (window.Screen.ActiveWorkspace)) {
 						window.CenterAndFocusWindow ();
 						System.Threading.Thread.Sleep (SleepTime);
 					}
@@ -168,7 +165,6 @@ namespace WindowManager.Wink
 			uint time = Gtk.Global.CurrentEventTime;
 			if (w.Workspace != null && w.Workspace != w.Screen.ActiveWorkspace) 
 				w.Workspace.Activate (time);
-			
 			
 			if (w.IsMinimized) 
 				w.Unminimize (time);
