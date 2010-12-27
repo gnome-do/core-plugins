@@ -47,21 +47,19 @@ namespace Do.FilesAndFolders
 		void OnRecentChanged (object sender, EventArgs e)
 		{
 			// We update Files here because this is called on the main thread.
-			// We call ToArray to that Files is immutable and safe to enumerate.
+			// We call ToArray so that Files is immutable and safe to enumerate.
 			items = GetRecentFiles ().OfType<Item> ().ToArray ();
 		}
 
 		IEnumerable<IFileItem> GetRecentFiles ()
 		{
-			/*
-			These lines always cause mono to blow up:
-			
-			foreach (Gtk.RecentInfo info in Gtk.RecentManager.Default.Items) {
-				Console.WriteLine(info);
+			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
+			foreach (Gtk.RecentInfo info in recent_items.Cast<Gtk.RecentInfo> ().Where (it => it.Exists ())) {
 				yield return Services.UniverseFactory.NewFileItem (info.Uri);
+				info.Dispose ();
 			}
-			*/
-			return Enumerable.Empty<IFileItem> ();
+			recent_items.Dispose ();
+			yield break;
 		}
 		
 		public override IEnumerable<Type> SupportedItemTypes {
@@ -79,7 +77,5 @@ namespace Do.FilesAndFolders
 		public override string Icon {
 			get { return "document"; }
 		}
-		
 	}
-
 }
