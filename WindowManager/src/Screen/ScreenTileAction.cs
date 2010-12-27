@@ -29,8 +29,6 @@ using Mono.Addins;
 
 namespace WindowManager
 {
-	
-	
 	public class ScreenTileAction : ScreenActionAction
 	{
 		public override string Name {
@@ -38,7 +36,7 @@ namespace WindowManager
 		}
 		
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Tile All Windows in Current Viewport"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Tile All Windows in a Viewport"); }
 		}
 
 		public override string Icon {
@@ -52,6 +50,5 @@ namespace WindowManager
 			
 			return null;
 		}
-
 	}
 }
