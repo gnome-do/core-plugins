@@ -27,8 +27,6 @@ using Mono.Addins;
 
 namespace WindowManager
 {
-	
-	
 	public class WindowMaximizeAction : WindowActionAction
 	{
 		public override string Name {
@@ -47,11 +45,7 @@ namespace WindowManager
 		{
 			if (!windows.Any ())
 				return;
-			Window window = windows.First ();
-			if (window.IsMaximized)
-				WindowControl.UnmaximizeWindow (window);
-			else
-				WindowControl.MaximizeWindow (window);
+			WindowControl.MaximizeWindow (windows.First ());
 		}
 	}
 }

@@ -145,12 +145,13 @@ namespace WindowManager.Wink
 		
 		public static void MaximizeWindow (Window window)
 		{
-			window.Maximize ();
-		}
-		
-		public static void UnmaximizeWindow (Window window)
-		{
-			window.Unmaximize ();
+			if (window.IsMinimized) 
+				window.Unminimize (Gtk.Global.CurrentEventTime);
+
+			if (window.IsMaximized)
+				window.Unmaximize ();
+			else
+				window.Maximize ();
 		}
 		
 		/// <summary>
