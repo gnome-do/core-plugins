@@ -19,7 +19,6 @@ using Do.Universe;
 
 namespace SqueezeCenter
 {
-	
 	public abstract class SqueezeCenterItem : Do.Universe.Item
 	{
 		public SqueezeCenterItem()
@@ -29,13 +28,12 @@ namespace SqueezeCenter
 		bool available = true;
 		public bool Available
 		{
-			get { return this.available; }
-			set { this.available = value; }
+			get { return available; }
+			set { available = value; }
 		}
 		
 		public override abstract string Name { get; }
 		public override abstract string Icon { get; }
 		public override abstract string Description { get; }
-		
 	}
 }

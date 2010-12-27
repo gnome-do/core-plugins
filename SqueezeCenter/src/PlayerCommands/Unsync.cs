@@ -20,14 +20,14 @@ using Do.Universe;
 
 namespace SqueezeCenter.PlayerCommands
 {	
-	
 	public class Unsync : PlayerCommand		
 	{		
 		public Unsync () : base(
 		                        "Unsync", "Stop synchronizing this player with another", 
 		                        "unsync.png@" + typeof (Unsync).Assembly.FullName,		                        
-		                        new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped, PlayerStatus.TurnedOff}
-		) {}
+		                        new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped, PlayerStatus.TurnedOff})
+		{
+		}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
@@ -43,7 +43,6 @@ namespace SqueezeCenter.PlayerCommands
 		{
 			return base.SupportsItem (item) && (item as Player).IsSynced;
 		}
- 
 		
 		public override bool ModifierItemsOptional
 		{

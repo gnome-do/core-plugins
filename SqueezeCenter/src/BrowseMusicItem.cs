@@ -15,12 +15,10 @@ using System;
 using System.Threading;
 using System.Diagnostics;
 
-
 using Do.Universe;
 
 namespace SqueezeCenter
 {
-
 	abstract class BrowseMusicItem: Item
 	{
 		string name, description;

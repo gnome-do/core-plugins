@@ -19,17 +19,16 @@ using Do.Universe;
 
 namespace SqueezeCenter.PlayerCommands
 {
-	
 	public class TurnOff : PlayerCommand 
 	{		
 		public TurnOff () : base("Turn off", "Turn off the player", "gnome-shutdown", 
-		                         new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped}
-		) {}
+		                         new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped})
+		{
+		}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
 			return string.Format ("{0} power 0", player.Id);
 		}
-		
 	}
 }

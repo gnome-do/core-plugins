@@ -21,7 +21,6 @@ using Do.Universe;
 
 namespace SqueezeCenter
 {
-	
 	public class Player : SqueezeCenterItem
 	{
 		static Dictionary<string, Player> players = new Dictionary<string, Player> ();
@@ -29,30 +28,28 @@ namespace SqueezeCenter
 		public static void CreatePlayer (string id, string name, string model, bool connected, bool poweredOn, bool canPowerOff)
 		{
 			// check if player was created before
-			lock (Player.players)
-			{
+			lock (Player.players) {
 				Player p;
-				if (!Player.players.TryGetValue (id, out p))
-				{
+				if (!Player.players.TryGetValue (id, out p)) {
 #if VERBOSE_OUTPUT
 					Console.WriteLine("SQC: New player " + name);
 #endif
-					p = new Player(id);	
+					p = new Player (id);	
 					Player.players.Add (id, p);
 				}
 				p.name = name;
 				p.model = model;				
 				p.canPowerOff = canPowerOff;
 				
-				if (!connected)
+				if (!connected) {
 					p.Status = PlayerStatus.Disconnected;
-				else {
+				} else {
 					if (!poweredOn)
 						p.Status = PlayerStatus.TurnedOff;					
 					else 
 						p.Status = PlayerStatus.Stopped; // this we don't know, but it'll be updated later.
 				}
-				p.syncedWith.Clear();
+				p.syncedWith.Clear ();
 				p.Available = true;
 #if VERBOSE_OUTPUT
 				Console.WriteLine("SQC: Existing player " + name);
@@ -64,7 +61,7 @@ namespace SqueezeCenter
 		{
 			Player p;
 			lock (Player.players)
-				if (!Player.players.TryGetValue(id, out p))
+				if (!Player.players.TryGetValue (id, out p))
 					p = null;
 			return p;
 		}
@@ -110,7 +107,7 @@ namespace SqueezeCenter
 		public override string Icon 
 		{
 			get {
-				return (this.PoweredOn ? "SB_on" : "SB_off") + ".png@" + this.GetType ().Assembly.FullName;				
+				return (PoweredOn ? "SB_on" : "SB_off") + ".png@" + this.GetType ().Assembly.FullName;				
 			}
 		}		
 		
@@ -118,11 +115,11 @@ namespace SqueezeCenter
 		{
 			get {
 				// make local copy of synchedWithStr, as it is set from a thread
-				string syncStr = this.syncedWithStr;
+				string syncStr = syncedWithStr;
 				
 				return string.Format("{0} ({1}){2}", 
-				                     this.model, 
-				                     this.PoweredOn ? "On" : "Off", 
+				                     model, 
+				                     PoweredOn ? "On" : "Off", 
 				                     syncStr == null ? string.Empty : " synced with " + syncStr);
 			}
 		}
@@ -130,8 +127,7 @@ namespace SqueezeCenter
 		public bool PoweredOn 
 		{
 			get {			
-				
-				switch (this.status)
+				switch (status)
 				{
 				case PlayerStatus.Disconnected:
 				case PlayerStatus.TurnedOff:
@@ -146,29 +142,28 @@ namespace SqueezeCenter
 		public bool CanPowerOff
 		{
 			get {
-				return this.canPowerOff;
+				return canPowerOff;
 			}
 			set {
-				this.canPowerOff = value;
+				canPowerOff = value;
 			}
 		}
 				
 		public PlayerStatus Status
 		{
 			get {
-				return this.status;
+				return status;
 			}
 			set {
-				this.status = value;
+				status = value;
 			}
 		}
 		
 		public Player[] SyncedPlayers
 		{
 			get {
-				lock (this.syncedWith) {
-					return this.syncedWith.ToArray ();
-				}
+				lock (syncedWith)
+					return syncedWith.ToArray ();
 			}
 		}
 		
@@ -176,16 +171,15 @@ namespace SqueezeCenter
 			
 			StringBuilder syncStr = new StringBuilder ();
 			
-			lock (this.syncedWith) {
-				this.syncedWith.Clear ();
+			lock (syncedWith) {
+				syncedWith.Clear ();
 				if (players != null)
-					this.syncedWith.AddRange (players);
+					syncedWith.AddRange (players);
 								
-				foreach (Player p in this.syncedWith) {
+				foreach (Player p in syncedWith)
 					syncStr.AppendFormat ("{0}, ", p.name);
-				}
 				
-				System.Threading.Interlocked.Exchange<string> (ref this.syncedWithStr, 
+				System.Threading.Interlocked.Exchange<string> (ref syncedWithStr, 
 				                                               syncStr.Length == 0 ? null : syncStr.ToString (0, syncStr.Length-2));
 			}
 		}
@@ -193,8 +187,8 @@ namespace SqueezeCenter
 		public bool IsSynced
 		{
 			get {
-				lock (this.syncedWith) 
-					return this.syncedWith.Any ();
+				lock (syncedWith) 
+					return syncedWith.Any ();
 			}
 		}		
 	}

@@ -19,18 +19,17 @@ using Do.Universe;
 
 namespace SqueezeCenter.PlayerCommands
 {
-	
 	public class Prev : PlayerCommand 
 	{
 		public Prev () : base(
 		                      "Previous", "Previous track", "gtk-media-previous-ltr",
-		                      new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped}
-		) {}
+		                      new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped})
+		{
+		}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
 			return string.Format ("{0} playlist index -1", player.Id);
 		}
-		
 	}
 }

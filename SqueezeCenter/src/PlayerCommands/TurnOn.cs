@@ -19,12 +19,13 @@ using Do.Universe;
 
 namespace SqueezeCenter.PlayerCommands
 {	
-	
 	public class TurnOn : PlayerCommand 
 	{		
 		public TurnOn () : base(
 		                        "Turn on", "Turn on the player", "sunny", 
-		                        new PlayerStatus[] {PlayerStatus.TurnedOff}) {}
+		                        new PlayerStatus[] {PlayerStatus.TurnedOff})
+		{
+		}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{

@@ -21,10 +21,8 @@ using Do.Universe;
 
 namespace SqueezeCenter
 {
-
 	public class Play : Act
 	{
-		
 		public Play ()
 		{
 		}
@@ -49,7 +47,6 @@ namespace SqueezeCenter
 				yield return typeof (RadioSubItem);
 			}	
 		}
-					
 		
 		public override bool ModifierItemsOptional
 		{
@@ -81,28 +78,22 @@ namespace SqueezeCenter
 			
 			if (modItems.Any ()) {
 				player = modItems.First () as Player;
-			}
-				
-			else {
+			} else {
 				IList<Player> availablePlayers = Player.GetAllConnectedPlayers ();
-				if (availablePlayers.Count > 0) {
+				if (availablePlayers.Count > 0)
 					player = availablePlayers[0];				
-				}
-				else {
+				else
 					throw new Exception("Could not play items. No player found");
-				}
 			}
 				
-			if (items.First () is MusicItem) {
-					Server.Instance.LoadItemsToPlayer (player, items.OfType<MusicItem> ());
-			}
-			else if (items.First () is RadioSubItem) {
+			if (items.First () is MusicItem)
+				Server.Instance.LoadItemsToPlayer (player, items.OfType<MusicItem> ());
+			else if (items.First () is RadioSubItem)
 				Server.Instance.ExecuteCommand (string.Format ("{0} {1} playlist play item_id:{2}",
 				                                                 player.Id,
 				                                                 (items.First () as RadioSubItem).GetSuper ().Command,
 				                                                 (items.First () as RadioSubItem).IdPath));
-			}
-				
+			
 			return null;
 		}
 	}

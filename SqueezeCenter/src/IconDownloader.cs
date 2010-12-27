@@ -20,7 +20,6 @@ using Do.Platform;
 
 namespace SqueezeCenter
 {
-		
 	public static class IconDownloader
 	{
 		const string couldNotDownloadIcon = "gtk-cdrom";
@@ -62,12 +61,10 @@ namespace SqueezeCenter
 					result = Services.Paths.GetTemporaryFilePath();
 					File.WriteAllBytes (result, buffer);				
 				}
-			} catch (Exception) {				
-			}
+			} catch (Exception) { }
 			
 			downloadedIcons.Add (name, result);
 			return result;
 		}
-		
 	}
 }

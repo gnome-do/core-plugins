@@ -19,10 +19,8 @@ using Do.Universe;
 
 namespace SqueezeCenter
 {
-
 	public class Enqueue : Act
 	{
-
 		public Enqueue ()
 		{
 		}
@@ -75,15 +73,12 @@ namespace SqueezeCenter
 			
 			if (modItems.Any ()) {
 				player = modItems.First () as Player;
-			}
-			else {
+			} else {
 				Player[] availablePlayers = Player.GetAllConnectedPlayers ();
-				if (availablePlayers.Length > 0) {
+				if (availablePlayers.Length > 0)
 					player = availablePlayers[0];				
-				}
-				else {
+				else
 					throw new Exception("Could not enqueue items. No player found");
-				}
 			}
 
 			Server.Instance.AddItemsToPlayer (player, items.Cast<MusicItem>());			

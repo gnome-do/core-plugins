@@ -21,14 +21,14 @@ using Do.Universe;
 
 namespace SqueezeCenter.PlayerCommands
 {
-		
 	public class Sync : PlayerCommand 
 	{		
 		public Sync () : base(
 		                      "Sync with", "Synchronize this player with another", 
 		                      "sync.png@" + typeof (Sync).Assembly.FullName,		
-		                      new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped, PlayerStatus.TurnedOff}
-		) {}
+		                      new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped, PlayerStatus.TurnedOff})
+		{
+		}
 		
 		public override IEnumerable<Type> SupportedModifierItemTypes {
 			get { 				

@@ -19,10 +19,8 @@ using Do.Universe;
 
 namespace SqueezeCenter
 {	
-
 	public abstract class MusicItem : SqueezeCenterItem
 	{	
-		
 		public readonly int Id;
 
 		public MusicItem (int id)
@@ -67,18 +65,17 @@ namespace SqueezeCenter
 		public override string Icon 
 		{
 			get {				
-				if (this.firstSongId >= 0) {
-					return IconDownloader.GetIcon (Server.Instance.GetCoverUrl (this.firstSongId));					
-				}
+				if (firstSongId >= 0)
+					return IconDownloader.GetIcon (Server.Instance.GetCoverUrl (firstSongId));					
 				// default:
-				return "gtk-cdrom";								
+				return "gtk-cdrom";
 			}
 		}
 		
 		public override string Name 
 		{
 			get {
-				return this.Album;
+				return Album;
 			}
 		}
 			
@@ -98,14 +95,13 @@ namespace SqueezeCenter
 		
 		public override int GetHashCode ()
 		{
-			return this.Id.GetHashCode();
+			return Id.GetHashCode();
 		}
 		
 		public override bool Equals (object o)
 		{
-			return this.Id == (o as AlbumMusicItem).Id;
+			return Id == (o as AlbumMusicItem).Id;
 		}
-
 	}
 
 	public class ArtistMusicItem : MusicItem
@@ -128,7 +124,7 @@ namespace SqueezeCenter
 		public override string Name
 		{
 			get {
-				return this.Artist;
+				return Artist;
 			}
 		}
 		

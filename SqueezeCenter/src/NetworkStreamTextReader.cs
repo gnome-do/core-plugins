@@ -33,17 +33,14 @@ namespace SqueezeCenter
 		private void CB (IAsyncResult ar)
 		{
 			int numberOfBytesRead = stream.EndRead (ar);
-			if (numberOfBytesRead == 0)
-			{
+			if (numberOfBytesRead == 0) {
 				// disconnected
-				this.disconnected = true;
+				disconnected = true;
 				return;
 			}
 
-			lock (this.data)
-			{
+			lock (data)
 				data.Append (Encoding.ASCII.GetString (readBuffer, 0, numberOfBytesRead));
-			}
 
 			// read again
 			stream.BeginRead (readBuffer, 0, readBuffer.Length, new System.AsyncCallback (CB), null);
@@ -53,28 +50,23 @@ namespace SqueezeCenter
 		{						
 			int i = 0;
 			
-			if (this.disconnected)
-			{
+			if (disconnected)
 				throw new System.IO.IOException ("Connection closed");
-			}
 			
 			// return first line of data or null if no data is available
-			lock (this.data)
-			{
+			lock (data) {
 				if (data.Length == 0)
 					return null;
 				
 				i = data.ToString().IndexOf ('\n');
-				if (i>=0) {
+				if (i >= 0) {
 					string result = data.ToString (0, i);
-					data = data.Remove (0, i+1);
+					data = data.Remove (0, i + 1);
 					return result;
-				}
-				else {
+				} else {
 					return null;
 				}		
 			}
 		}
-		
 	}
 }

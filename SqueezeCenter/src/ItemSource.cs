@@ -22,7 +22,6 @@ using Do.Platform.Linux;
 
 namespace SqueezeCenter
 {
-	
 	public class ItemSource : Do.Universe.ItemSource,  IConfigurable
 	{
 		List<Item> items;		
@@ -55,10 +54,8 @@ namespace SqueezeCenter
 			}
 		}
 
-		public override IEnumerable<Item> Items 
-		{ 
-			get 
-			{			
+		public override IEnumerable<Item> Items {
+			get {
 				return items; 
 			} 
 		}
@@ -67,24 +64,20 @@ namespace SqueezeCenter
 		{
 			List<Item> children = new List<Item> ();
 			
-			if (parent is IApplicationItem && parent.Name == this.Name) {
+			if (parent is IApplicationItem && parent.Name == Name) {
 				children.Add (new BrowseAlbumsMusicItem ());
 				children.Add (new BrowseArtistsMusicItem ());
-			}
-			else if (parent is ArtistMusicItem) {
+			} else if (parent is ArtistMusicItem) {
 				foreach (AlbumMusicItem album in albums)
 					if(album.Artist == parent)
 						children.Add (album);
-			}
-			else if (parent is BrowseAlbumsMusicItem) {
+			} else if (parent is BrowseAlbumsMusicItem) {
 				foreach (AlbumMusicItem album in albums)
 					children.Add (album);
-			}
-			else if (parent is BrowseArtistsMusicItem) {
+			} else if (parent is BrowseArtistsMusicItem) {
 				foreach (ArtistMusicItem album in artists)
 					children.Add (album);
-			}
-			else if (parent is RadioItem) {
+			} else if (parent is RadioItem) {
 				children.AddRange ((parent as RadioItem).Children);
 			}
 			
@@ -123,9 +116,10 @@ namespace SqueezeCenter
 										
 			// Add artists and albums to items
 			items.Capacity = Math.Max (items.Capacity, items.Count + albums.Count + artists.Count);
-			foreach (Item album in albums) items.Add (album);
-			foreach (Item artist in artists) items.Add (artist);
+			foreach (Item album in albums)
+				items.Add (album);
+			foreach (Item artist in artists)
+				items.Add (artist);
 		}	
-		
 	}
 }

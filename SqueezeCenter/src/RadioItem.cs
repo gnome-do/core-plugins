@@ -17,17 +17,15 @@ using Do.Universe;
 
 namespace SqueezeCenter
 {
-
 	public abstract class RadioItem : SqueezeCenterItem
 	{
 		protected RadioSubItem[] children;
 				
 		public virtual RadioSubItem[] Children
 		{
-			get { return this.children; }
-			set 
-			{
-				System.Threading.Interlocked.Exchange<RadioSubItem[]> (ref this.children, value);				
+			get { return children; }
+			set {
+				System.Threading.Interlocked.Exchange<RadioSubItem[]> (ref children, value);				
 			}
 		}
 		
@@ -56,13 +54,13 @@ namespace SqueezeCenter
 		
 		public string Command {
 			get {				
-				return this.cmd;
+				return cmd;
 			}
 		}
 						
 		public override string Name {
 			get {
-				return this.name;
+				return name;
 			}
 		}
 			
@@ -74,23 +72,20 @@ namespace SqueezeCenter
 		
 		public override RadioSubItem[] Children {
 			get { return base.Children; }
-			set 
-			{ 
+			set {
 				base.Children = value;
-				this.childrenSet = true;
+				childrenSet = true;
 			}
 		}
 
 		public bool IsLoadedRecursive
 		{
-			get
-			{
-				if (!this.childrenSet)
+			get {
+				if (!childrenSet)
 					return false;
-				foreach (RadioSubItem rmi in this.children) {
+				foreach (RadioSubItem rmi in children)
 					if (!rmi.IsLoadedRecursive)
 						return false;
-				}
 				return true;
 			}
 		}
@@ -129,7 +124,7 @@ namespace SqueezeCenter
 						
 		public override string Name {
 			get {
-				return this.name;
+				return name;
 			}
 		}
 			
@@ -147,17 +142,17 @@ namespace SqueezeCenter
 
 		public override RadioItem Parent
 		{
-			get { return this.parent; }
+			get { return parent; }
 		}
 		
 		public int Id
 		{
-			get { return this.id; }
+			get { return id; }
 		}
 
 		public bool HasItems
 		{
-			get { return this.hasItems; }
+			get { return hasItems; }
 		}
 		
 		public RadioSuperItem GetSuper ()
@@ -174,10 +169,9 @@ namespace SqueezeCenter
 		public string IdPath
 		{
 			get {
-				if (! (this.parent is RadioSubItem)) {					
-					return this.Id.ToString ();
-				}
-				return string.Format ("{0}.{1}", (this.parent as RadioSubItem).IdPath, this.Id); 				
+				if (!(parent is RadioSubItem))
+					return Id.ToString ();
+				return string.Format ("{0}.{1}", (parent as RadioSubItem).IdPath, Id); 				
 			}
 		}
 		
@@ -191,15 +185,11 @@ namespace SqueezeCenter
 		
 		public bool IsLoadedRecursive
 		{
-			get
-			{
-				if (this.hasItems) {					
-					foreach (RadioSubItem rmi in this.children) {
-						if (!rmi.IsLoadedRecursive) {
+			get {
+				if (hasItems)
+					foreach (RadioSubItem rmi in children)
+						if (!rmi.IsLoadedRecursive)
 							return false;
-						}
-					}
-				}
 				return true;
 			}
 		}

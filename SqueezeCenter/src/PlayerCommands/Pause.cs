@@ -19,18 +19,17 @@ using Do.Universe;
 
 namespace SqueezeCenter.PlayerCommands
 {
-
 	public class Pause : PlayerCommand 
 	{
 		public Pause () : base (
 		                        "Pause", "Toggle pause on the player", "gtk-media-pause", 
-		                        new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped}
-		) {}
+		                        new PlayerStatus[] {PlayerStatus.Playing, PlayerStatus.Paused, PlayerStatus.Stopped})
+		{
+		}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
 			return string.Format ("{0} pause", player.Id);
 		}
-		
 	}
 }

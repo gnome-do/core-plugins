@@ -18,10 +18,8 @@ using System;
 
 namespace SqueezeCenter
 {
-	
 	public partial class Preferences : Gtk.Bin
 	{
-		
 		public Preferences()
 		{
 			this.Build();
@@ -32,14 +30,13 @@ namespace SqueezeCenter
 		{
 			SqueezeCenter.Settings.ReadSettings ("SqueezeCenter", Server.settings.Values, true);
 			
-			this.txtHost.Text = Server.settings["host"].Value; 
+			txtHost.Text = Server.settings["host"].Value; 
 		}
 
 		protected virtual void OnButtonOkClicked (object sender, System.EventArgs e)
 		{
-			Server.settings["host"].Value = this.txtHost.Text.Trim();
+			Server.settings["host"].Value = txtHost.Text.Trim();
 			SqueezeCenter.Settings.SaveSettings ("SqueezeCenter", Server.settings.Values);
 		}
-		
 	}
 }

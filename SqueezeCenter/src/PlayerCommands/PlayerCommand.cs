@@ -18,7 +18,6 @@ using System.Collections.Generic;
 
 namespace SqueezeCenter.PlayerCommands
 {
-	
 	public abstract class PlayerCommand : Act
 	{
 		string name;
@@ -55,7 +54,7 @@ namespace SqueezeCenter.PlayerCommands
 		public override bool SupportsItem (Item item)
 		{
 			Player player = (Player) item;
-			return player.Available && this.requiredPlayerStatus.Contains (player.Status);	
+			return player.Available && requiredPlayerStatus.Contains (player.Status);	
 		}
 		
 		public abstract string GetCommand (Player player, Item modifierItem);

@@ -18,7 +18,6 @@ using System.Collections.Generic;
 
 namespace SqueezeCenter
 {
-	
 	public abstract class PlayerCommand : Act
 	{
 		string name;
@@ -70,11 +69,8 @@ namespace SqueezeCenter
 		}
 	}
 	
-	
-	
 	public class TurnOn : PlayerCommand 
 	{
-		
 		public TurnOn () : base("Turn on", "Turn on the player", "sunny", PlayerStatus.Off) {}
 		
 		public override string GetCommand (Player player, Item modifierItem)
@@ -85,31 +81,26 @@ namespace SqueezeCenter
 	
 	public class TurnOff : PlayerCommand 
 	{
-		
 		public TurnOff () : base("Turn off", "Turn off the player", "gnome-shutdown", PlayerStatus.On) {}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
 			return string.Format ("{0} power 0", player.Id);
 		}
-		
 	}
 	
 	public class Pause : PlayerCommand 
 	{
-		
 		public Pause () : base ("Pause", "Toggle pause on the player", "gtk-media-pause", PlayerStatus.On) {}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
 			return string.Format ("{0} pause", player.Id);
 		}
-		
 	}
 	
 	public class Sync : PlayerCommand 
 	{
-		
 		public Sync () : base("Sync with", "Synchronize this player with another", 
 		                      "sync.png@" + typeof (Sync).Assembly.FullName,		
 		                      PlayerStatus.Any) {}
@@ -143,7 +134,6 @@ namespace SqueezeCenter
 	
 	public class Unsync : PlayerCommand		
 	{
-		
 		public Unsync () : base("Unsync", "Stop synchronizing this player with another", 
 		                        "unsync.png@" + typeof (Unsync).Assembly.FullName, 
 		                        //"unsync.png@SqueezeCenterPlugin",
@@ -163,7 +153,6 @@ namespace SqueezeCenter
 		{
 			return base.SupportsItem (item) && (item as Player).IsSynced;
 		}
- 
 		
 		public override bool ModifierItemsOptional
 		{
@@ -175,26 +164,22 @@ namespace SqueezeCenter
 	
 	public class Prev : PlayerCommand 
 	{
-		
 		public Prev () : base("Previous", "Previous track", "previous", PlayerStatus.On) {}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
 			return string.Format ("{0} playlist index -1", player.Id);
 		}
-		
 	}
 	
 	public class Next : PlayerCommand 
 	{
-		
 		public Next () : base("Next", "Next track", "next", PlayerStatus.On) {}
 		
 		public override string GetCommand (Player player, Item modifierItem)
 		{
 			return string.Format ("{0} playlist index +1", player.Id);
 		}
-		
 	}	
 	
 	public enum PlayerStatus : int 
@@ -203,5 +188,4 @@ namespace SqueezeCenter
 		Off = 2,
 		Any = On | Off
 	}
-	
 }

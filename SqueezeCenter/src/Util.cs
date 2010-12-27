@@ -18,34 +18,24 @@ namespace SqueezeCenter
 {	
 	public static class Util
 	{		
-
 		public static string UriDecode (string s)
 		{
 			int i = 0;
 			List<byte> buff = new List<byte> (s.Length);
 			
-			while (i < s.Length)
-			{
-				if (s[i] == '%')
-				{
-					if (i + 2 < s.Length)
-					{
-						buff.Add (Byte.Parse(s.Substring (i+1, 2), System.Globalization.NumberStyles.HexNumber));
-						i+=3;
-					}
-					else
-					{
+			while (i < s.Length) {
+				if (s[i] == '%') {
+					if (i + 2 < s.Length) {
+						buff.Add (Byte.Parse(s.Substring (i + 1, 2), System.Globalization.NumberStyles.HexNumber));
+						i += 3;
+					} else {
 						break;
 					}
-				}
-				else
-				{
+				} else {
 					buff.Add ((byte)s[i++]);
 				}
 			}
 			return System.Text.Encoding.UTF8.GetString (buff.ToArray ());
 		}
-		
 	}
-	
 }

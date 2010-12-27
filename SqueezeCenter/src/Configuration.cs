@@ -15,47 +15,43 @@ using System;
 
 namespace SqueezeCenter
 {
-	
 	public partial class Configuration : Gtk.Bin
 	{
-		
 		public Configuration()
 		{
-			this.Build();
-			this.LoadSettingsFromFile ();
+			Build();
+			LoadSettingsFromFile ();
 		}
 		
 		void LoadSettingsFromFile ()
 		{
 			SqueezeCenter.Settings.ReadSettings (Server.ConfigFile, Server.settings.Values, true);
 			
-			this.txtHost.Text = Server.settings["Host"].Value;
-			this.txtPortCli.Text = Server.settings["CLIPort"].ValueAsInt.ToString ();
-			this.txtPortWeb.Text = Server.settings["WebPort"].ValueAsInt.ToString ();
-			this.chkLoadInBackground.Active = Server.settings["LoadInBackground"].ValueAsBool;
-			this.txtRadios.Text = Server.settings["Radios"].Value;			
+			txtHost.Text = Server.settings["Host"].Value;
+			txtPortCli.Text = Server.settings["CLIPort"].ValueAsInt.ToString ();
+			txtPortWeb.Text = Server.settings["WebPort"].ValueAsInt.ToString ();
+			chkLoadInBackground.Active = Server.settings["LoadInBackground"].ValueAsBool;
+			txtRadios.Text = Server.settings["Radios"].Value;			
 		}
 
 		protected virtual void OntbnSaveClicked (object sender, System.EventArgs e)		
 		{
 			int i;
-			if (!int.TryParse (this.txtPortCli.Text.Trim (), out i) )
-			{
+			if (!int.TryParse (txtPortCli.Text.Trim (), out i)) {
 				ShowErrorMessage ("CLI port must be an integer!");
 				return;
 			}
 			
-			if (!int.TryParse (this.txtPortWeb.Text.Trim (), out i) )
-			{
+			if (!int.TryParse (txtPortWeb.Text.Trim (), out i)) {
 				ShowErrorMessage ("Web port must be an integer!");
 				return;
 			}
 			
-			Server.settings["Host"].Value = this.txtHost.Text.Trim ();
-			Server.settings["CLIPort"].ValueAsInt = int.Parse (this.txtPortCli.Text.Trim ());
-			Server.settings["WebPort"].ValueAsInt = int.Parse (this.txtPortWeb.Text.Trim ());
-			Server.settings["LoadInBackground"].ValueAsBool = this.chkLoadInBackground.Active;
-			Server.settings["Radios"].Value = this.txtRadios.Text.Trim ();
+			Server.settings["Host"].Value = txtHost.Text.Trim ();
+			Server.settings["CLIPort"].ValueAsInt = int.Parse (txtPortCli.Text.Trim ());
+			Server.settings["WebPort"].ValueAsInt = int.Parse (txtPortWeb.Text.Trim ());
+			Server.settings["LoadInBackground"].ValueAsBool = chkLoadInBackground.Active;
+			Server.settings["Radios"].Value = txtRadios.Text.Trim ();
 			
 			SqueezeCenter.Settings.SaveSettings (Server.ConfigFile, Server.settings.Values);			
 			
@@ -74,6 +70,5 @@ namespace SqueezeCenter
 			md.Run ();
 			md.Destroy ();
 		}
-		
 	}
 }
