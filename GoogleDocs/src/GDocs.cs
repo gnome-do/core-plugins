@@ -33,11 +33,9 @@ using Do.Platform;
 
 namespace GDocs
 {
-	
 	public class GDocs
 	{
-		
-		const string FeedUri = "http://docs.google.com/feeds/documents/private/full";
+		const string FeedUri = "https://docs.google.com/feeds/documents/private/full";
 		public const string GAppName = "pengDeng-gnomeDoGDocsPlugin-1.0";
 		
 		static List<Item> docs;
@@ -105,19 +103,18 @@ namespace GDocs
 		
 		static GDocsAbstractItem MaybeItemFromEntry (DocumentEntry doc)
 		{
-				string url = doc.AlternateUri.Content;
-				string title = doc.Title.Text;
-			
-				if (doc.IsDocument) 
-					return new GDocsDocumentItem (title, url);
-				else if (doc.IsSpreadsheet) 
-					return new GDocsSpreadsheetItem (title, url);
-				else if (doc.IsPresentation) 
-					return new GDocsPresentationItem (title, url);
-				else if (doc.IsPDF)
-					return new GDocsPDFItem (title, url);
-				else
-					return null;
+			string url = doc.AlternateUri.Content;
+			string title = doc.Title.Text;
+		
+			if (doc.IsDocument) 
+				return new GDocsDocumentItem (title, url);
+			else if (doc.IsSpreadsheet) 
+				return new GDocsSpreadsheetItem (title, url);
+			else if (doc.IsPresentation) 
+				return new GDocsPresentationItem (title, url);
+			else if (doc.IsPDF)
+				return new GDocsPDFItem (title, url);
+			return null;
 		}
 		
 		public static Item UploadDocument (string fileName, string documentName)
