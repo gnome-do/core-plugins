@@ -25,7 +25,7 @@ using Do.Universe;
 
 namespace TSClient
 {
-	public class TSClientItem : Item, IOpenableItem
+	public class TSClientItem : Item, IOpenableItem, IFileItem
 	{
 		string name;
 		string path;
@@ -37,6 +37,7 @@ namespace TSClient
 
 		public override string Name { get { return name; } }
 		public string Path { get { return path; } }
+		public string Uri { get { return System.Uri.EscapeUriString ("file://" + Path); } }
 		public override string Description { get { return "Remote Desktop host"; } }
 		public override string Icon { get { return "tsclient"; } }
 
