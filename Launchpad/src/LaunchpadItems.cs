@@ -61,7 +61,7 @@ namespace Launchpad
 				"Bug Report",
 				"Report a bug at Launchpad",
 				"LaunchpadBugs.png",
-				"https://launchpad.net/{0}/+filebug"),
+				"https://bugs.launchpad.net/{0}/+filebug"),
 			new LaunchpadItem (
 				"Project Bugs",
 				"Show open bugs in a project at Launchpad",
