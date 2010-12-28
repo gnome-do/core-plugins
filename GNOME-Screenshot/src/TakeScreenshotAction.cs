@@ -84,7 +84,7 @@ namespace GNOME {
 			if (modItems.Any ())
 				seconds = (modItems.First () as ScreenshotDelayItem).Seconds;
 				
-			Process.Start (string.Format ("gnome-screenshot {0} --delay={1}", window, seconds));
+			Process.Start ("gnome-screenshot", string.Format ("{0} --delay={1}", window, seconds));
 			return null;
 		}
 	}
