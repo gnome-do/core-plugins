@@ -82,7 +82,7 @@ namespace EmpathyPlugin
 			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("empathy"));
 		}
 
-		public static List<Account> ConnectedAccounts ()
+		public static List<Account> GetConnectedAccounts ()
 		{
 			List<Account> res = new List<Account>();
 			IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
@@ -116,7 +116,7 @@ namespace EmpathyPlugin
 		public static List<Contact> GetAllContacts ()
 		{
 			List<Contact> res = new List<Contact>();
-			foreach(Account account in ConnectedAccounts ())
+			foreach(Account account in GetConnectedAccounts ())
 			{
 				foreach(Contact contact in account.FindContact())
 				{
@@ -158,7 +158,7 @@ namespace EmpathyPlugin
 			account_out = null;
 
 			try {
-				foreach (Account account in ConnectedAccounts ()) {
+				foreach (Account account in GetConnectedAccounts ()) {
 					if (account.HasContact(contactName) )
 					{
 						account_out = account;
@@ -197,7 +197,7 @@ namespace EmpathyPlugin
 
 		public static void SetAvailabilityStatus(ConnectionPresenceType status, string message)
 		{
-			foreach (Account account in ConnectedAccounts ()) {
+			foreach (Account account in GetConnectedAccounts ()) {
 				account.SetStatus(status, message);
 			} 
 		}
