@@ -88,7 +88,7 @@ namespace EmpathyPlugin
 
 		public void ForceUpdateItems ()
 		{
-			if (EmpathyPlugin.InstanceIsRunning ())
+			if (EmpathyPlugin.IsInstanceRunning ())
 			{
 				contacts.Clear ();
 				try

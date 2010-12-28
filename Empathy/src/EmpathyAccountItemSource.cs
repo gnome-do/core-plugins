@@ -82,7 +82,7 @@ namespace EmpathyPlugin
 
 		public override void UpdateItems ()
 		{
-			if (EmpathyPlugin.InstanceIsRunning ()) {
+			if (EmpathyPlugin.IsInstanceRunning ()) {
 				items.Clear ();
 				try {
 					foreach (Account account in EmpathyPlugin.GetAllAccounts ()) {

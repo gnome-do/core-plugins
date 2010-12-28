@@ -126,7 +126,7 @@ namespace EmpathyPlugin
 			return res;
 		}
 
-		public static bool InstanceIsRunning ()
+		public static bool IsInstanceRunning ()
 		{
 			Process pidof;
 			ProcessStartInfo pidofInfo = new ProcessStartInfo ("pidof", "empathy");
