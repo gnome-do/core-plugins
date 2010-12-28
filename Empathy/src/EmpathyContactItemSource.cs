@@ -88,12 +88,12 @@ namespace EmpathyPlugin
 
 		public void ForceUpdateItems ()
 		{
-			if (EmpathyPlugin.InstanceIsRunning)
+			if (EmpathyPlugin.InstanceIsRunning ())
 			{
 				contacts.Clear ();
 				try
 				{
-					foreach (Contact contact in EmpathyPlugin.GetAllContacts)
+					foreach (Contact contact in EmpathyPlugin.GetAllContacts ())
 					{
 						ContactItem contactItem = ContactItem.Create (contact.Alias);
 						contactItem["email"] = contact.ContactId;

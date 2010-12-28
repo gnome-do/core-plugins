@@ -82,79 +82,68 @@ namespace EmpathyPlugin
 			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("empathy"));
 		}
 
-		public static List<Account> ConnectedAccounts
+		public static List<Account> ConnectedAccounts ()
 		{
-			get
+			List<Account> res = new List<Account>();
+			IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
+			ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
+			
+			foreach(ObjectPath accountPath in accountPathArray)
 			{
-				List<Account> res = new List<Account>();
-				IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
-				ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
-
-				foreach(ObjectPath accountPath in accountPathArray)
+				Account account = new Account(accountPath);
+				if(account.IsConnected())
 				{
-					Account account = new Account(accountPath);
-					if(account.IsConnected())
-					{
-						res.Add(account);
-					}
-				}
-				return res;
-			}
-		}
-
-		public static List<Account> GetAllAccounts
-		{
-			get
-			{
-				List<Account> res = new List<Account>();
-				IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
-				ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
-
-				foreach(ObjectPath accountPath in accountPathArray)
-				{
-					Account account = new Account(accountPath);
 					res.Add(account);
 				}
-				return res;
 			}
+			return res;
 		}
-
-		public static List<Contact> GetAllContacts
+		
+		public static List<Account> GetAllAccounts ()
 		{
-			get
+			List<Account> res = new List<Account>();
+			IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
+			ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
+			
+			foreach(ObjectPath accountPath in accountPathArray)
 			{
-				List<Contact> res = new List<Contact>();
-				foreach(Account account in ConnectedAccounts)
-				{
-					foreach(Contact contact in account.FindContact())
-					{
-						res.Add(contact);
-					}
-				}
-				return res;
+				Account account = new Account(accountPath);
+				res.Add(account);
 			}
+			return res;
 		}
 
-		public static bool InstanceIsRunning
+		public static List<Contact> GetAllContacts ()
 		{
-			get {
-				Process pidof;
-				ProcessStartInfo pidofInfo = new ProcessStartInfo ("pidof", "empathy");
-				pidofInfo.UseShellExecute = false;
-				pidofInfo.RedirectStandardError = true;
-				pidofInfo.RedirectStandardOutput = true;
-
-				try {
-					// Use pidof command to look for empathy process. Exit
-					// status is 0 if at least one matching process is found.
-					// If there's any error, just assume some Purple client
-					// is running.
-					pidof = Process.Start (pidofInfo);
-					pidof.WaitForExit ();
-					return pidof.ExitCode == 0;
-				} catch {
-					return true;
+			List<Contact> res = new List<Contact>();
+			foreach(Account account in ConnectedAccounts ())
+			{
+				foreach(Contact contact in account.FindContact())
+				{
+					res.Add(contact);
 				}
+			}
+			return res;
+		}
+
+		public static bool InstanceIsRunning ()
+		{
+			Process pidof;
+			ProcessStartInfo pidofInfo = new ProcessStartInfo ("pidof", "empathy");
+			pidofInfo.UseShellExecute = false;
+			pidofInfo.RedirectStandardError = true;
+			pidofInfo.RedirectStandardOutput = true;
+			
+			try {
+				// Use pidof command to look for empathy process. Exit
+				// status is 0 if at least one matching process is found.
+				// If there's any error, just assume some Purple client
+				// is running.
+				pidof = Process.Start (pidofInfo);
+				pidof.WaitForExit ();
+				return pidof.ExitCode == 0;
+			} catch {
+				return true;
 			}
 		}
 
@@ -169,7 +158,7 @@ namespace EmpathyPlugin
 			account_out = null;
 
 			try {
-				foreach (Account account in ConnectedAccounts) {
+				foreach (Account account in ConnectedAccounts ()) {
 					if (account.HasContact(contactName) )
 					{
 						account_out = account;
@@ -208,7 +197,7 @@ namespace EmpathyPlugin
 
 		public static void SetAvailabilityStatus(ConnectionPresenceType status, string message)
 		{
-			foreach (Account account in ConnectedAccounts) {
+			foreach (Account account in ConnectedAccounts ()) {
 				account.SetStatus(status, message);
 			} 
 		}

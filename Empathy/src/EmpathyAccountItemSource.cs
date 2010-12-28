@@ -82,10 +82,10 @@ namespace EmpathyPlugin
 
 		public override void UpdateItems ()
 		{
-			if (EmpathyPlugin.InstanceIsRunning) {
+			if (EmpathyPlugin.InstanceIsRunning ()) {
 				items.Clear ();
 				try {
-					foreach (Account account in EmpathyPlugin.GetAllAccounts) {
+					foreach (Account account in EmpathyPlugin.GetAllAccounts ()) {
 						items.Add (new EmpathyAccountItem (account));
 					}
 				} catch (Exception e) { 
