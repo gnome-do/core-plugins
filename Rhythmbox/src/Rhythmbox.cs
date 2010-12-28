@@ -156,41 +156,30 @@ namespace Do.Rhythmbox
 			
 			// Song list is not cached. Load songs from database.
 			try {
+				XmlDocument xml = new XmlDocument ();
 				using (XmlReader reader = XmlReader.Create (MusicLibraryFile)) {
-					while (reader.ReadToFollowing ("entry")) {
-						SongMusicItem song;
-						string song_file, song_name, album_name, artist_name, year, cover;
-						int song_track = 0; //set to 0 for default
-						
-						if (reader.GetAttribute ("type") != "song") {
-							reader.ReadToFollowing ("entry");
+					xml.Load (reader);
+					XmlNodeList nodeList = xml.SelectNodes ("//entry");
+					for (int i = 0; i < nodeList.Count; i++) {
+						XmlNode node = nodeList.Item (i);
+
+						if (!GetNodeText (node.Attributes ["type"]).Equals ("song"))
 							continue;
-						}
 
-						reader.ReadToFollowing ("title");
-						song_name = reader.ReadString ();						
-						
-						reader.ReadToFollowing ("artist");
-						artist_name = reader.ReadString ();	
-						
-						reader.ReadToFollowing ("album");
-						album_name = reader.ReadString ();
-						
-						reader.ReadToFollowing ("track-number");
-						if (!Int32.TryParse (reader.ReadString (), out song_track))
-						    song_track = 0;
-						    
-						reader.ReadToFollowing ("location");
-						song_file = reader.ReadString ();
-						
-						reader.ReadToFollowing ("date");
-						year = reader.ReadString ();
+						string song_name = GetNodeText (node.SelectSingleNode ("title"));
+						string artist_name = GetNodeText (node.SelectSingleNode ("artist"));
+						string album_name = GetNodeText (node.SelectSingleNode ("album"));
+						string song_file = GetNodeText (node.SelectSingleNode ("location"));
+						string year = GetNodeText (node.SelectSingleNode ("date"));
 
-						cover = string.Format ("{0} - {1}.jpg", artist_name, album_name);
-						cover = Path.Combine (CoverArtDirectory, cover); 
-						if (!File.Exists (cover)) cover = null; 
+						int song_track = 0;
+						Int32.TryParse (GetNodeText (node.SelectSingleNode ("track-number")), out song_track);
 
-						song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
+						string cover = Path.Combine (CoverArtDirectory, string.Format ("{0} - {1}.jpg", artist_name, album_name)); 
+						if (!File.Exists (cover))
+							cover = null; 
+
+						SongMusicItem song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
 						songs.Add (song);
 					}
 				}
@@ -198,6 +187,13 @@ namespace Do.Rhythmbox
 				Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
 			}
 			return songs;
+		}
+
+		static string GetNodeText (XmlNode node)
+		{
+			if (node == null)
+				return "";
+			return node.InnerText;
 		}
 
 		public static void StartIfNeccessary ()
