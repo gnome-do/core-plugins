@@ -91,11 +91,11 @@ namespace Archive {
                 private void ExtractArchive ( IFileItem archive, IFileItem where)
                 {
                         if ( archive.Name.EndsWith ("tar.gz"))
-                                Process.Start (String.Format ("tar -xzf {0} -C {1}", EscapeString(archive.Path), EscapeString(where.Path)));  
+                                Process.Start ("tar", string.Format ("-xzf {0} -C {1}", EscapeString(archive.Path), EscapeString(where.Path)));  
                         else if ( archive.Name.EndsWith ("tar.bz2"))
-                                Process.Start (String.Format ("tar -xjf {0} -C {1}", EscapeString(archive.Path), EscapeString(where.Path)));
+                                Process.Start ("tar", string.Format ("-xjf {0} -C {1}", EscapeString(archive.Path), EscapeString(where.Path)));
                         else if (archive.Name.EndsWith ("tar"))
-                                Process.Start (String.Format ("tar -xf {0} -C {1}", EscapeString (archive.Path), EscapeString(where.Path)));
+                                Process.Start ("tar", string.Format ("-xf {0} -C {1}", EscapeString (archive.Path), EscapeString(where.Path)));
                                                
                 }
 

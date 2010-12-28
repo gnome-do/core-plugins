@@ -122,19 +122,19 @@ namespace Archive {
 
                         switch (archiveType) {
                                 case (int)ArchiveType.GZIP:
-                                        Process.Start (string.Format ("tar -czf {0} -C {1} {2}", String.Concat (item.Name ,".tar.gz"), path, file));  
+                                        Process.Start ("tar", string.Format ("-czf {0} -C {1} {2}", String.Concat (item.Name ,".tar.gz"), path, file));  
                                         break;
                                 case (int)ArchiveType.BZIP2:
-                                        Process.Start (string.Format ("tar -cjf {0} -C {1} {2}", String.Concat (item.Name ,".tar.bz2"), path, file));
+                                        Process.Start ("tar", string.Format ("-cjf {0} -C {1} {2}", String.Concat (item.Name ,".tar.bz2"), path, file));
                                         break;
                                 case (int)ArchiveType.TAR:
-                                        Process.Start (string.Format ("tar -cf {0} -C {1} {2}", String.Concat (item.Name ,".tar"), path, file));
+                                        Process.Start ("tar", string.Format ("-cf {0} -C {1} {2}", String.Concat (item.Name ,".tar"), path, file));
                                         break;
                                 case (int)ArchiveType.ZIP:
-                                        Process.Start (string.Format ("zip {0} {1} ", file , path));
+                                        Process.Start ("zip", string.Format ("{0} {1} ", file , path));
                                         break;
                                 default:
-                                        Process.Start (string.Format ("tar -czf {0} {1} ", String.Concat (file,".tar.gz"), file));
+                                        Process.Start ("tar", string.Format ("-czf {0} {1} ", String.Concat (file,".tar.gz"), file));
                                         break;
                         }
                 }
