@@ -66,10 +66,12 @@ namespace Pastebin
 		
 		public override bool SupportsItem (Item item)
 		{
-			if (item is ITextItem) return true;
+			if (item is ITextItem)
+				return true;
 			if (item is IFileItem) {
 				IFileItem file = item as IFileItem;
-				if (Directory.Exists (file.Path)) return false;
+				if (Directory.Exists (file.Path))
+					return false;
 				long kbSize = new FileInfo (file.Path).Length / 1024;
 				return kbSize < 100;
 			}
@@ -89,8 +91,7 @@ namespace Pastebin
 			
 			foreach (Item item in items) {
 				if (item is IFileItem)
-					titem = new TextItem (File.ReadAllText (
-						(item as IFileItem).Path));
+					titem = new TextItem (File.ReadAllText ((item as IFileItem).Path));
 				else
 					titem = new TextItem ((item as ITextItem).Text);
 				text += titem.Text;
@@ -104,12 +105,10 @@ namespace Pastebin
 			
 			IPastebinProvider pastebinProvider = null;
 					
-			if (modifierItems.Any ()) {
+			if (modifierItems.Any ())
 				pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences (text, (modifierItems.First () as ITextSyntaxItem).Syntax);
-			}
-			else {
+			else
 				pastebinProvider = PastebinProviderFactory.GetProviderFromPreferences (text);		
-			}
 					
 			string url = Pastebin.PostUsing (pastebinProvider);	
 			
@@ -123,5 +122,3 @@ namespace Pastebin
 		}				
 	}
 }
-
-

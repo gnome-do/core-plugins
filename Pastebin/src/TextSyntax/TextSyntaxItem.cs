@@ -46,7 +46,5 @@ namespace Pastebin
 		public string SerializableDescription { get; set; }
 		
 		public string SerializableIcon { get; set; }
-		
-		
 	}
 }

@@ -63,11 +63,9 @@ namespace Pastebin
 		public override string GetPasteUrlFromResponse (HttpWebResponse response)
 		{				
 			string responseText;
-			using (Stream responseStream = response.GetResponseStream ()) {
-				using (StreamReader reader = new StreamReader (responseStream)) {
+			using (Stream responseStream = response.GetResponseStream ())
+				using (StreamReader reader = new StreamReader (responseStream))
 					responseText = reader.ReadToEnd ();
-				}
-			}
 			
 			Regex urlPattern = new Regex ("<a href=\"(.*?)\">"); 
 			Match urlMatch = urlPattern.Match (responseText);

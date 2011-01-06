@@ -23,6 +23,7 @@
     <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="src/Providers" subtype="Directory" buildaction="Compile" />
     <File name="src/Providers/PastebinCA.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Providers/PastebinCOM.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/IPastebinProvider.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/Paste2.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Config" subtype="Directory" buildaction="Compile" />
@@ -37,6 +38,7 @@
     <File name="Resources/LodgeIt.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/Paste2.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/PastebinCA.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/Pastebin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

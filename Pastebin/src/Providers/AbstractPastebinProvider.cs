@@ -58,14 +58,12 @@ namespace Pastebin
 		
 		protected List<TextSyntaxItem> PopulateTextSyntaxItemsFromXml (string resourceName)
 		{
-			try
-			{				
+			try {
 				string textSyntaxItemXml;
-				using (Stream resourceStream = Assembly.GetAssembly (this.GetType ()).GetManifestResourceStream (resourceName)) {
-					using (StreamReader reader = new StreamReader (resourceStream)) {
+				using (Stream resourceStream = Assembly.GetAssembly (this.GetType ()).GetManifestResourceStream (resourceName))
+					using (StreamReader reader = new StreamReader (resourceStream))
 						textSyntaxItemXml = reader.ReadToEnd ();
-					}
-				}
+				
 				using (StringReader reader = new StringReader (textSyntaxItemXml)) {
 					XmlSerializer serializer = new XmlSerializer (typeof (List<TextSyntaxItem>));
 					return (List<TextSyntaxItem>) serializer.Deserialize (reader);

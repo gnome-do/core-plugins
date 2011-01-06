@@ -33,8 +33,7 @@ namespace Pastebin
 		public static string PostUsing (IPastebinProvider pastebin)
 		{
 			string url = null;
-			try
-			{
+			try {
 				string postQueryString = CreateQueryString (pastebin.Parameters);
 				
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (pastebin.BaseUrl);
@@ -53,17 +52,11 @@ namespace Pastebin
 				request.ContentLength = data.Length;
 				
 				using (Stream newStream = request.GetRequestStream ())
-				{
 					newStream.Write(data, 0, data.Length);
-				}
 				
 				using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-				{			
 					url = pastebin.GetPasteUrlFromResponse (response);
-				}
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				Log<Pastebin>.Error (e.ToString ());
 				Services.Notifications.Notify ("Pastebin", "An error occured while pasting.");
 				url = null;
@@ -75,8 +68,7 @@ namespace Pastebin
 		private static string CreateQueryString (NameValueCollection query)
 		{
 			StringBuilder queryString = new StringBuilder ();
-			foreach (string key in query.Keys)
-			{
+			foreach (string key in query.Keys) {
 				queryString.Append (HttpUtility.UrlEncode(key));
 				queryString.Append ("=");
 				queryString.Append (HttpUtility.UrlEncode(query[key]));

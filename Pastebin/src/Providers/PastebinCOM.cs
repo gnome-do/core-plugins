@@ -1,4 +1,4 @@
-//  PastebinCA.cs
+//  PastebinCOM.cs
 //
 //  GNOME Do is the legal property of its developers, whose names are too
 //  numerous to list here.  Please refer to the COPYRIGHT file distributed with
@@ -27,54 +27,50 @@ using Do.Platform;
 
 namespace Pastebin
 {
-	public class PastebinCA : AbstractPastebinProvider
+	public class PastebinCOM : AbstractPastebinProvider
 	{
-		const string url_root = "http://pastebin.ca";
-		const string content_key = "content";
-		const string syntax_key = "type";
+		const string url_root = "http://pastebin.com";
+		const string content_key = "paste_code";
+		const string syntax_key = "paste_format";
 		
-		public PastebinCA ()
+		public PastebinCOM ()
 		{
-			Name = "pastebin.ca";
-			BaseUrl = url_root + "/quiet-paste.php";
+			Name = "pastebin.com";
+			BaseUrl = url_root + "/api_public.php";
 			Expect100Continue = false;
 			
 			Parameters = new NameValueCollection();
-			Parameters["api"] = "4xPQUdtxHQ9wxlAJ9t/ztpv36MM/ZE9G";
-			Parameters[syntax_key] = "1";
-			Parameters["description"] = "";
+			Parameters[syntax_key] = "text";
 			Parameters[content_key] = "";
-			Parameters["name"] = "";
-			Parameters["expiry"] = "1 month";
+			Parameters["paste_expire_date"] = "1M";
 			
-			SupportedLanguages = PopulateTextSyntaxItemsFromXml ("PastebinCA.xml");
+			SupportedLanguages = PopulateTextSyntaxItemsFromXml ("Pastebin.xml");
 		}
 		
-		public PastebinCA(string content, string syntax) : this()
+		public PastebinCOM(string content, string syntax) : this()
 		{
 			Parameters[syntax_key] = syntax;
 			Parameters[content_key] = content;
 		}
 		
-		public PastebinCA(string content) : this()
+		public PastebinCOM(string content) : this()
 		{
 			Parameters[content_key] = content;
 		}
 		
 		public override string GetPasteUrlFromResponse(HttpWebResponse response)
 		{
-			string responseText;
+			string responseText = String.Empty;
 			using (Stream responseStream = response.GetResponseStream ())
 				using (StreamReader reader = new StreamReader (responseStream))
 					responseText = reader.ReadToEnd ();
 			
-			string url = String.Empty;
-			if (responseText.Contains ("SUCCESS"))
-				url = url_root + "/" + responseText.Split (new string[]{":"}, StringSplitOptions.RemoveEmptyEntries)[1];
-			else
-				Log<PastebinCA>.Debug (responseText);
+			if (responseText.Contains ("ERROR")) {
+				Log<PastebinCOM>.Debug (responseText);
+				return String.Empty;
+			}
 			
-			return url;
+			return responseText;
 		}
 	}
 }

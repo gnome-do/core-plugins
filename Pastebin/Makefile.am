@@ -13,6 +13,7 @@ FILES = \
 	src/Providers/LodgeIt.cs \
 	src/Providers/Paste2.cs \
 	src/Providers/PastebinCA.cs \
+	src/Providers/PastebinCOM.cs \
 	src/Providers/PastebinProviderFactory.cs \
 	src/TextSyntax/ITextSyntaxItem.cs \
 	src/TextSyntax/TextSyntaxItem.cs
@@ -23,7 +24,8 @@ RESOURCES = \
 	Resources/Pastebin.addin.xml \
 	Resources/LodgeIt.xml \
 	Resources/Paste2.xml \
-	Resources/PastebinCA.xml
+	Resources/PastebinCA.xml \
+	Resources/Pastebin.xml
 
 REFERENCES = \
 	System \

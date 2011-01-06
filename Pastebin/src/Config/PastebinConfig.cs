@@ -68,7 +68,7 @@ namespace Pastebin
 		{ 
 			cmbProvider.Clear ();
 			
-	        	Gtk.CellRendererText cell = new Gtk.CellRendererText ();
+			Gtk.CellRendererText cell = new Gtk.CellRendererText ();
 			cmbProvider.PackStart (cell, true);
 			cmbProvider.AddAttribute (cell, "text" , 0);
 			
@@ -80,9 +80,8 @@ namespace Pastebin
 				where type.GetInterface ("Pastebin.IPastebinProvider") != null && type.IsAbstract == false
 				select Activator.CreateInstance (type);
 
-			foreach (IPastebinProvider provider in providers) {
+			foreach (IPastebinProvider provider in providers)
 				ProvidersList.AppendValues (provider.Name, provider.GetType ().ToString ());
-			}
 			
 			cmbProvider.Model = ProvidersList;
 			//set selection to what's in GConf, if we can
@@ -94,8 +93,7 @@ namespace Pastebin
 		public bool SearchCombobox (out Gtk.TreeIter ti, Gtk.ComboBox box, string val, int col)
 		{		
 			box.Model.GetIterFirst (out ti);
-			do 
-			{
+			do {
 				if ((string)box.Model.GetValue (ti,col) == val)
 					return true;
 			} while (box.Model.IterNext (ref ti));
@@ -113,8 +111,7 @@ namespace Pastebin
 			//Gdk.Pixbuf temp = null;
 			//string[] Icon = null;
 
-			foreach (TextSyntaxItem syntax in paster.SupportedLanguages)
-			{
+			foreach (TextSyntaxItem syntax in paster.SupportedLanguages) {
 				/*
 				//first determine if this icon is built in - or - comes from resource
 				Icon = syntax.Icon.Split (new char[] {'@'});

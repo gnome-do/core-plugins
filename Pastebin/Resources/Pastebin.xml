@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTextSyntaxItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TextSyntaxItem>
+    <SerializableName>Plain Text</SerializableName>
+    <SerializableDescription>Plain Text</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>1</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ABAP</SerializableName>
+    <SerializableDescription>ABAP</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>abap</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ActionScript</SerializableName>
+    <SerializableDescription>ActionScript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>actionscript</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ActionScript 3</SerializableName>
+    <SerializableDescription>ActionScript 3</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>actionscript3</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Ada</SerializableName>
+    <SerializableDescription>Ada</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>ada</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Apache Log</SerializableName>
+    <SerializableDescription>Apache Log</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>apache</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>AppleScript</SerializableName>
+    <SerializableDescription>AppleScript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>applescript</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>APT Sources</SerializableName>
+    <SerializableDescription>APT Sources</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>apt_sources</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ASM (NASM)</SerializableName>
+    <SerializableDescription>ASM (NASM)</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>asm</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ASP</SerializableName>
+    <SerializableDescription>ASP</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>asp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>AutoIt</SerializableName>
+    <SerializableDescription>AutoIt</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>autoit</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Avisynth</SerializableName>
+    <SerializableDescription>Avisynth</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>avisynth</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Bash</SerializableName>
+    <SerializableDescription>Bash</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>bash</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Basic4GL</SerializableName>
+    <SerializableDescription>Basic4GL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>basic4gl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>BibTeX</SerializableName>
+    <SerializableDescription>BibTeX</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>bibtex</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Blitz Basic</SerializableName>
+    <SerializableDescription>Blitz Basic</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>blitzbasic</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>BNF</SerializableName>
+    <SerializableDescription>BNF</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>bnf</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>BOO</SerializableName>
+    <SerializableDescription>BOO</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>boo</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>BrainFuck</SerializableName>
+    <SerializableDescription>BrainFuck</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>bf</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C</SerializableName>
+    <SerializableDescription>C</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>c</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C for Macs</SerializableName>
+    <SerializableDescription>C for Macs</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>c_mac</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C Intermediate Language</SerializableName>
+    <SerializableDescription>C Intermediate Language</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>cill</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C#</SerializableName>
+    <SerializableDescription>C#</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>csharp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>C++</SerializableName>
+    <SerializableDescription>C++</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>cpp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>CAD DCL</SerializableName>
+    <SerializableDescription>CAD DCL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>caddcl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>CAD Lisp</SerializableName>
+    <SerializableDescription>CAD Lisp</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>cadlisp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>CFDG</SerializableName>
+    <SerializableDescription>CFDG</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>cfdg</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Clone C</SerializableName>
+    <SerializableDescription>Clone C</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>klonec</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Clone C++</SerializableName>
+    <SerializableDescription>Clone C++</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>klonecpp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>CMake</SerializableName>
+    <SerializableDescription>CMake</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>cmake</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>COBOL</SerializableName>
+    <SerializableDescription>COBOL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>cobol</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ColdFusion</SerializableName>
+    <SerializableDescription>ColdFusion</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>cfm</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>CSS</SerializableName>
+    <SerializableDescription>CSS</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>css</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>D</SerializableName>
+    <SerializableDescription>D</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>d</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>DCS</SerializableName>
+    <SerializableDescription>DCS</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>dcs</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Delphi</SerializableName>
+    <SerializableDescription>Delphi</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>delphi</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Diff</SerializableName>
+    <SerializableDescription>Diff</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>dff</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>DIV</SerializableName>
+    <SerializableDescription>DIV</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>div</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>DOS</SerializableName>
+    <SerializableDescription>DOS</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>dos</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>DOT</SerializableName>
+    <SerializableDescription>DOT</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>dot</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Eiffel</SerializableName>
+    <SerializableDescription>Eiffel</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>eiffel</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Email</SerializableName>
+    <SerializableDescription>Email</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>email</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Erlang</SerializableName>
+    <SerializableDescription>Erlang</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>erlang</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>FO Language</SerializableName>
+    <SerializableDescription>FO Language</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>fo</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Fortran</SerializableName>
+    <SerializableDescription>Fortran</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>fortran</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>FreeBasic</SerializableName>
+    <SerializableDescription>FreeBasic</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>freebasic</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Game Maker</SerializableName>
+    <SerializableDescription>Game Maker</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>gml</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Genero</SerializableName>
+    <SerializableDescription>Genero</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>genero</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>GetText</SerializableName>
+    <SerializableDescription>GetText</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>gettext</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Groovy</SerializableName>
+    <SerializableDescription>Groovy</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>groovy</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Haskell</SerializableName>
+    <SerializableDescription>Haskell</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>haskell</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>HQ9 Plus</SerializableName>
+    <SerializableDescription>HQ9 Plus</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>hq9plus</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>HTML</SerializableName>
+    <SerializableDescription>HTML</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>html4strict</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>IDL</SerializableName>
+    <SerializableDescription>IDL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>idl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>INI file</SerializableName>
+    <SerializableDescription>INI file</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>ini</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Inno Script</SerializableName>
+    <SerializableDescription>Inno Script</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>inno</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>INTERCAL</SerializableName>
+    <SerializableDescription>INTERCAL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>intercal</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>IO</SerializableName>
+    <SerializableDescription>IO</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>io</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Java</SerializableName>
+    <SerializableDescription>Java</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>java</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Java 5</SerializableName>
+    <SerializableDescription>Java 5</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>java5</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>JavaScript</SerializableName>
+    <SerializableDescription>JavaScript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>javascript</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>KiXtart</SerializableName>
+    <SerializableDescription>KiXtart</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>kixtart</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Latex</SerializableName>
+    <SerializableDescription>Latex</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>latex</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Linden Scripting</SerializableName>
+    <SerializableDescription>Linden Scripting</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>lsl2</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Lisp</SerializableName>
+    <SerializableDescription>Lisp</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>lisp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Loco Basic</SerializableName>
+    <SerializableDescription>Loco Basic</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>locobasic</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>LOL Code</SerializableName>
+    <SerializableDescription>LOL Code</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>lolcode</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Lotus Formulas</SerializableName>
+    <SerializableDescription>Lotus Formulas</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>lotusformulas</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Lotus Script</SerializableName>
+    <SerializableDescription>Lotus Script</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>lotusscript</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>LScript</SerializableName>
+    <SerializableDescription>LScript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>lscript</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Lua</SerializableName>
+    <SerializableDescription>Lua</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>lua</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>M68000 Assembler</SerializableName>
+    <SerializableDescription>M68000 Assembler</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>m68k</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Make</SerializableName>
+    <SerializableDescription>Make</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>make</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>MatLab</SerializableName>
+    <SerializableDescription>MatLab</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>matlab</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>MatLab</SerializableName>
+    <SerializableDescription>MatLab</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>matlab</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>mIRC</SerializableName>
+    <SerializableDescription>mIRC</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>mirc</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Modula 3</SerializableName>
+    <SerializableDescription>Modula 3</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>modula3</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>MPASM</SerializableName>
+    <SerializableDescription>MPASM</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>mpasm</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>MXML</SerializableName>
+    <SerializableDescription>MXML</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>mxml</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>MySQL</SerializableName>
+    <SerializableDescription>MySQL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>mysql</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>None</SerializableName>
+    <SerializableDescription>None</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>text</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>NullSoft Installer</SerializableName>
+    <SerializableDescription>NullSoft Installer</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>nsis</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Oberon 2</SerializableName>
+    <SerializableDescription>Oberon 2</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>oberon2</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Objective C</SerializableName>
+    <SerializableDescription>Objective C</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>objc</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>OCalm Brief</SerializableName>
+    <SerializableDescription>OCalm Brief</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>ocaml-brief</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>OCaml</SerializableName>
+    <SerializableDescription>OCaml</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>ocaml</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>OpenGL Shading</SerializableName>
+    <SerializableDescription>OpenGL Shading</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>glsl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Openoffice BASIC</SerializableName>
+    <SerializableDescription>Openoffice BASIC</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>oobas</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Oracle 11</SerializableName>
+    <SerializableDescription>Oracle 11</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>oracle11</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Oracle 8</SerializableName>
+    <SerializableDescription>Oracle 8</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>oracle8</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Pascal</SerializableName>
+    <SerializableDescription>Pascal</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>pascal</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>PAWN</SerializableName>
+    <SerializableDescription>PAWN</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>pawn</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Per</SerializableName>
+    <SerializableDescription>Per</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>per</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Perl</SerializableName>
+    <SerializableDescription>Perl</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>perl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>PHP</SerializableName>
+    <SerializableDescription>PHP</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>php</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>PHP Brief</SerializableName>
+    <SerializableDescription>PHP Brief</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>php-brief</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Pic 16</SerializableName>
+    <SerializableDescription>Pic 16</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>pic16</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Pixel Bender</SerializableName>
+    <SerializableDescription>Pixel Bender</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>pixelbender</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>PL/SQL</SerializableName>
+    <SerializableDescription>PL/SQL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>plsql</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>POV-Ray</SerializableName>
+    <SerializableDescription>POV-Ray</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>povray</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Power Shell</SerializableName>
+    <SerializableDescription>Power Shell</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>powershell</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Progress</SerializableName>
+    <SerializableDescription>Progress</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>progress</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Prolog</SerializableName>
+    <SerializableDescription>Prolog</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>prolog</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Properties</SerializableName>
+    <SerializableDescription>Properties</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>properties</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>ProvideX</SerializableName>
+    <SerializableDescription>ProvideX</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>providex</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Python</SerializableName>
+    <SerializableDescription>Python</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>python</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>QBasic</SerializableName>
+    <SerializableDescription>QBasic</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>qbasic</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Rails</SerializableName>
+    <SerializableDescription>Rails</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>rails</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>REBOL</SerializableName>
+    <SerializableDescription>REBOL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>rebol</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>REG</SerializableName>
+    <SerializableDescription>REG</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>reg</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Robots</SerializableName>
+    <SerializableDescription>Robots</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>robots</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Ruby</SerializableName>
+    <SerializableDescription>Ruby</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>ruby</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Ruby Gnuplot</SerializableName>
+    <SerializableDescription>Ruby Gnuplot</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>gnuplot</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>SAS</SerializableName>
+    <SerializableDescription>SAS</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>sas</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Scala</SerializableName>
+    <SerializableDescription>Scala</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>scala</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Scheme</SerializableName>
+    <SerializableDescription>Scheme</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>scheme</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Scilab</SerializableName>
+    <SerializableDescription>Scilab</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>scilab</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>SdlBasic</SerializableName>
+    <SerializableDescription>SdlBasic</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>sdlbasic</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Smalltalk</SerializableName>
+    <SerializableDescription>Smalltalk</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>smalltalk</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Smarty</SerializableName>
+    <SerializableDescription>Smarty</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>smarty</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>SQL</SerializableName>
+    <SerializableDescription>SQL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>sql</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>T-SQL</SerializableName>
+    <SerializableDescription>T-SQL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>tsql</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>TCL</SerializableName>
+    <SerializableDescription>TCL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>tcl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>TCL</SerializableName>
+    <SerializableDescription>TCL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>tcl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Tera Term</SerializableName>
+    <SerializableDescription>Tera Term</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>teraterm</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>thinBasic</SerializableName>
+    <SerializableDescription>thinBasic</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>thinbasic</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>TypoScript</SerializableName>
+    <SerializableDescription>TypoScript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>typoscript</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>unrealScript</SerializableName>
+    <SerializableDescription>unrealScript</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>unreal</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>VB.NET</SerializableName>
+    <SerializableDescription>VB.NET</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>vbnet</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>VeriLog</SerializableName>
+    <SerializableDescription>VeriLog</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>verilog</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>VHDL</SerializableName>
+    <SerializableDescription>VHDL</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>vhdl</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>VIM</SerializableName>
+    <SerializableDescription>VIM</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>vim</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Visual Pro Log</SerializableName>
+    <SerializableDescription>Visual Pro Log</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>visualprolog</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>VisualBasic</SerializableName>
+    <SerializableDescription>VisualBasic</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>vb</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>VisualFoxPro</SerializableName>
+    <SerializableDescription>VisualFoxPro</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>visualfoxpro</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>WhiteSpace</SerializableName>
+    <SerializableDescription>WhiteSpace</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>whitespace</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>WHOIS</SerializableName>
+    <SerializableDescription>WHOIS</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>whois</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Win Batch</SerializableName>
+    <SerializableDescription>Win Batch</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>winbatch</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>XML</SerializableName>
+    <SerializableDescription>XML</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>xml</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Xorg Config</SerializableName>
+    <SerializableDescription>Xorg Config</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>xorg_conf</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>XPP</SerializableName>
+    <SerializableDescription>XPP</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>xpp</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
+    <SerializableName>Z80 Assembler</SerializableName>
+    <SerializableDescription>Z80 Assembler</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>z80</Syntax>
+  </TextSyntaxItem>
+</ArrayOfTextSyntaxItem>
