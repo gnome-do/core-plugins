@@ -26,6 +26,7 @@
     <File name="src/Providers/PastebinCOM.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/IPastebinProvider.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/Paste2.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/Providers/PasteUbuntu.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Config" subtype="Directory" buildaction="Compile" />
     <File name="src/Config/PastebinConfig.cs" subtype="Code" buildaction="Compile" />
     <File name="src/Providers/PastebinProviderFactory.cs" subtype="Code" buildaction="Compile" />
@@ -37,6 +38,7 @@
     <File name="src/Providers/AbstractPastebinProvider.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/LodgeIt.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/Paste2.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Resources/PasteUbuntu.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/PastebinCA.xml" subtype="Code" buildaction="EmbedAsResource" />
     <File name="Resources/Pastebin.xml" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>

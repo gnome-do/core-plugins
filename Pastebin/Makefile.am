@@ -12,6 +12,7 @@ FILES = \
 	src/Providers/AbstractPastebinProvider.cs \
 	src/Providers/LodgeIt.cs \
 	src/Providers/Paste2.cs \
+	src/Providers/PasteUbuntu.cs \
 	src/Providers/PastebinCA.cs \
 	src/Providers/PastebinCOM.cs \
 	src/Providers/PastebinProviderFactory.cs \
@@ -24,6 +25,7 @@ RESOURCES = \
 	Resources/Pastebin.addin.xml \
 	Resources/LodgeIt.xml \
 	Resources/Paste2.xml \
+	Resources/PasteUbuntu.xml \
 	Resources/PastebinCA.xml \
 	Resources/Pastebin.xml
 
