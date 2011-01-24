@@ -27,84 +27,77 @@ using Do.Universe;
 
 namespace Simulacra
 {
-        /// <summary>
-        /// Given an ITextItem, WordnetAcion will look up the Text
-        /// contents of the ITextItem using the gnome-dictionary.
-        /// </summary>
-        public class WordnetAction : Act
-        {
-                /// <summary>
-                /// Should match those and only those strings that can be
-                /// looked up in a dictionary.
-                /// YES: "war", "peace", "hoi polloi"
-                /// NO: "war9", "2 + 4", "___1337__"
-                /// </summary>
-                const string wordPattern = @"^([^\W0-9_]+([ -][^\W0-9_]+)?)$";
+	/// <summary>
+	/// Given an ITextItem, WordnetAcion will look up the Text
+	/// contents of the ITextItem using the gnome-dictionary.
+	/// </summary>
+	public class WordnetAction : Act
+	{
+		/// <summary>
+		/// Should match those and only those strings that can be
+		/// looked up in a dictionary.
+		/// YES: "war", "peace", "hoi polloi"
+		/// NO: "war9", "2 + 4", "___1337__"
+		/// </summary>
+		const string wordPattern = @"^([^\W0-9_]+([ -][^\W0-9_]+)?)$";
 
-                Regex wordRegex;
+		Regex wordRegex;
 
-                public WordnetAction ()
-                {
-                        wordRegex = new Regex (wordPattern, RegexOptions.Compiled);
-                }
+		public WordnetAction ()
+		{
+			wordRegex = new Regex (wordPattern, RegexOptions.Compiled);
+		}
 
-                public override string Name {
-                        get { return "Wordnet"; }
-                }
+		public override string Name {
+			get { return "Wordnet"; }
+		}
 
-                public override string Description
-                {
-                        get { return "Get the Wordnet overview for the given word."; }
-                }
+		public override string Description
+		{
+			get { return "Get the Wordnet overview for the given word."; }
+		}
 
-                public override string Icon
-                {
-                        get { return "accessories-dictionary"; }
-                }
+		public override string Icon
+		{
+			get { return "accessories-dictionary"; }
+		}
 
-                public override IEnumerable<Type> SupportedItemTypes
-                {
-                        get {
-                                return new Type[] {
-                                        typeof (ITextItem),
-                                };
-                        }
-                }
+		public override IEnumerable<Type> SupportedItemTypes
+		{
+			get { return new Type[] { typeof (ITextItem) }; }
+		}
 
-                /// <summary>
-                /// Use wordRegex to determine whether item is definable.
-                /// </summary>
-                /// <param name="item">
-                /// A <see cref="IItem"/> to define.
-                /// </param>
-                /// <returns>
-                /// A <see cref="System.Boolean"/> indicating whether or not IITem
-                /// can be defined.
-                /// </returns>
-                public override bool SupportsItem (Item item)
-                {
-                        string word;
+		/// <summary>
+		/// Use wordRegex to determine whether item is definable.
+		/// </summary>
+		/// <param name="item">
+		/// A <see cref="IItem"/> to define.
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/> indicating whether or not IITem
+		/// can be defined.
+		/// </returns>
+		public override bool SupportsItem (Item item)
+		{
+			string word;
 
-                        word = null;
-                        if (item is ITextItem) {
-                                word = (item as ITextItem).Text;
-                        }
-                        return !string.IsNullOrEmpty (word) && wordRegex.IsMatch (word);
-                }
+			word = null;
+			if (item is ITextItem)
+				word = (item as ITextItem).Text;
+			
+			return !string.IsNullOrEmpty (word) && wordRegex.IsMatch (word);
+		}
 
-                public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
-                {
-                        string word, cmd;
-                        foreach (Item item in items) {
-                                if (item is ITextItem) {
-                                        word = (item as ITextItem).Text;
-                                } else {
-                                        continue;
-                                }
-                                cmd = string.Format ("wnb \"{0}\"", word);
-                                System.Diagnostics.Process.Start (cmd);
-                        }
-                        return null;
-                }
-        }
+		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modifierItems)
+		{
+			foreach (Item item in items) {
+				if (!(item is ITextItem))
+					continue;
+				
+				System.Diagnostics.Process.Start ("wnb", (item as ITextItem).Text);
+			}
+			
+			return null;
+		}
+	}
 }
