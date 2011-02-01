@@ -29,7 +29,7 @@ namespace Bibtex {
 
 	public class BibtexItemSource : ItemSource, IConfigurable {
 		
-		Regex fileRegex = new Regex (@"file\s=\s\{(.*?)\}",
+		Regex fileRegex = new Regex (@"file\s*=\s*\{(.*?)\}",
 		                             RegexOptions.IgnoreCase
 		                             | RegexOptions.Singleline);
 		
@@ -37,12 +37,12 @@ namespace Bibtex {
 		                             RegexOptions.IgnoreCase
 		                             | RegexOptions.Singleline);	
 		
-		Regex authorRegex = new Regex (@"author\s+=\s+\{(.*?)\},",
+		Regex authorRegex = new Regex (@"author\s*=\s*\{(.*?)\},",
 									   RegexOptions.IgnoreCase
 									   | RegexOptions.Singleline);
 		
 		//\b means that we wont match "booktitle" if it appears first in entry
-		Regex titleRegex = new Regex (@"\btitle\s+=\s+\{(.*?)\},",
+		Regex titleRegex = new Regex (@"\btitle\s*=\s*\{(.*?)\},",
 									  RegexOptions.IgnoreCase 
 									  | RegexOptions.Singleline);
 
