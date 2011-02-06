@@ -1,32 +1,33 @@
-<Project name="YouTube" fileversion="2.0" language="C#" clr-version="Net_2_0" targetFramework="3.5" ctype="DotNetProject">
+<Project name="YouTube" fileversion="2.0" DefaultNamespace="YouTube" language="C#" clr-version="Net_2_0" targetFramework="3.5" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="YouTube" />
       <Build debugmode="True" target="Library" />
-      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <Execution consolepause="False" runwithwarnings="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assembly="YouTube" />
       <Build debugmode="False" target="Library" />
-      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <Execution consolepause="False" runwithwarnings="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="." subtype="Directory" buildaction="Compile" />
-    <File name="Resources/Youtube.addin.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/youtube_logo.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="Resources/youtube_user.png" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="src/Preferences.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/Youtube.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/YoutubeConfig.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/YouTubeFavoriteItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/YouTubeOwnVideosItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/YouTubeSearchAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/YouTubeSubscriptionItem.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/YouTubeSubscriptionItemSource.cs" subtype="Code" buildaction="Compile" />
-    <File name="src/YoutubeVideoItem.cs" subtype="Code" buildaction="Compile" />
+    <File subtype="Directory" buildaction="Compile" name="." />
+    <File subtype="Code" buildaction="EmbedAsResource" name="Resources/Youtube.addin.xml" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="Resources/youtube_logo.png" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="Resources/youtube_user.png" />
+    <File subtype="Code" buildaction="Compile" name="src/Preferences.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/Youtube.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/YoutubeConfig.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/YouTubeFavoriteItemSource.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/YouTubeOwnVideosItemSource.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/YouTubeSearchAction.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/YouTubeSubscriptionItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/YouTubeSubscriptionItemSource.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/YoutubeVideoItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/CertHandler.cs" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
