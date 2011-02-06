@@ -28,26 +28,25 @@ namespace Youtube
 {
 	public class YouTubeSearchAction : Act
 	{
-					
 		public YouTubeSearchAction()
 		{
 		}
-		 
+
 		public override string Name
 		{
 			get { return "Search in YouTube"; }
 		}
-		
+
 		public override string Description
 		{
 			get { return "Searches in YouTube"; }
 		}
-		
+
 		public override string Icon
 		{
 			get { return "youtube_logo.png@" + GetType ().Assembly.FullName; }
 		}
-		
+
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { yield return	typeof (ITextItem); }
 		}
@@ -56,9 +55,9 @@ namespace Youtube
 		{
 			return (item is ITextItem);
 		}
-	
+
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
-		{				
+		{
 			string search = (items.First() as ITextItem).Text; 
 			search = search.Replace (" ", "%20");
 			Services.Environment.OpenUrl(String.Format(Youtube.searchUrl, search));

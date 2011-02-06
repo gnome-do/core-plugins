@@ -58,9 +58,9 @@ namespace Youtube
 		private static int favUpdate;
 		private static int ownUpdate;
 
-                private const string favoritesQueryTemplate = "http://gdata.youtube.com/feeds/api/users/default/favorites?start-index={0}&max-results={1}";
-                private const string ownQueryTemplate = "http://gdata.youtube.com/feeds/api/users/default/uploads?start-index={0}&max-results={1}";
-                private const string youtubeWatchUrlTemplate = "http://www.youtube.com/watch?v={0}";
+		private const string favoritesQueryTemplate = "http://gdata.youtube.com/feeds/api/users/default/favorites?start-index={0}&max-results={1}";
+		private const string ownQueryTemplate = "http://gdata.youtube.com/feeds/api/users/default/uploads?start-index={0}&max-results={1}";
+		private const string youtubeWatchUrlTemplate = "http://www.youtube.com/watch?v={0}";
 
 		public static YouTubePreferences Preferences { get; private set; }
 
@@ -82,85 +82,84 @@ namespace Youtube
 			Connect (username, password);
 		}
 
-                private static void parseFeed(YouTubeFeed feed, List<Item> videos)
-                {
-                    string description = "";
-                    string url = null;
-                    foreach(YouTubeEntry entry in feed.Entries) 
-                    {
-                        description = "";
-                        url = String.Format(youtubeWatchUrlTemplate, entry.VideoId);
-                        if (entry.Media.Description != null)
-                        {
-                            description = entry.Media.Description.Value;
-                        }
-                        YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, description);
-                        videos.Add(video);
-                    }
-                }
+		private static void parseFeed(YouTubeFeed feed, List<Item> videos)
+		{
+			string description = "";
+			string url = null;
+			foreach(YouTubeEntry entry in feed.Entries)
+			{
+				description = "";
+				url = String.Format(youtubeWatchUrlTemplate, entry.VideoId);
+				if (entry.Media.Description != null)
+				{
+					description = entry.Media.Description.Value;
+				}
+				YoutubeVideoItem video = new YoutubeVideoItem(entry.Title.Text, url, description);
+				videos.Add(video);
+			}
+		}
 
-                private static void update(string queryTemplate, List<Item> videos, ref int counter, string category)
-                {
-                    if (videos.Count != 0 || (counter % 20 != 0 && counter != 0))
-                    {
-                        counter = counter + 1;
-                        return;
-                    }
+		private static void update(string queryTemplate, List<Item> videos, ref int counter, string category)
+		{
+			if (videos.Count != 0 || (counter % 20 != 0 && counter != 0))
+			{
+				counter = counter + 1;
+				return;
+			}
 
-                    counter = counter + 1;
+			counter = counter + 1;
 
-                    videos.Clear();
-                    int maxResults = 50;
-                    int startIndex = 1;
+			videos.Clear();
+			int maxResults = 50;
+			int startIndex = 1;
 
-                    string feedUrl = String.Format(queryTemplate, startIndex, maxResults);
+			string feedUrl = String.Format(queryTemplate, startIndex, maxResults);
 
-                    YouTubeQuery query = new YouTubeQuery(feedUrl);
-                    YouTubeFeed videoFeed = null;
+			YouTubeQuery query = new YouTubeQuery(feedUrl);
+			YouTubeFeed videoFeed = null;
 
-                    try
-                    {
-                        videoFeed = service.Query(query);
-                        while(videoFeed.Entries.Count > 0)
-                        {
-                            parseFeed(videoFeed, videos);
+			try
+			{
+				videoFeed = service.Query(query);
+				while(videoFeed.Entries.Count > 0)
+				{
+					parseFeed(videoFeed, videos);
 
-                            startIndex += maxResults;
-                            feedUrl = String.Format(queryTemplate, startIndex, maxResults);
-                            query = new YouTubeQuery(feedUrl);
-                            videoFeed = service.Query(query);
-                        }
-                        startIndex = 1;
-                        Log<Youtube>.Debug("Finished updating {0} videos", category);
-                    }
-                    catch(Exception e)
-                    {
-                        Log<Youtube>.Error ("Error getting {0} videos - {1}", category, e.Message);
-                        Log<Youtube>.Debug (e.StackTrace);
-                    }
-
-                }
+					startIndex += maxResults;
+					feedUrl = String.Format(queryTemplate, startIndex, maxResults);
+					query = new YouTubeQuery(feedUrl);
+					videoFeed = service.Query(query);
+				}
+				startIndex = 1;
+				Log<Youtube>.Debug("Finished updating {0} videos", category);
+			}
+			catch(Exception e)
+			{
+				Log<Youtube>.Error ("Error getting {0} videos - {1}", category, e.Message);
+				Log<Youtube>.Debug (e.StackTrace);
+			}
+		}
 
 		public static void updateFavorites()
 		{
-                        update (favoritesQueryTemplate, Youtube.favorites, ref favUpdate, "favorites");
+			update (favoritesQueryTemplate, Youtube.favorites, ref favUpdate, "favorites");
 		}
 
 		public static void updateOwn()
 		{
-                        update (ownQueryTemplate, Youtube.own, ref ownUpdate, "own youtube");
-                }
+			update (ownQueryTemplate, Youtube.own, ref ownUpdate, "own youtube");
+		}
 
 		public static void updateSubscriptions()
 		{
 			subUpdate++;
 			Log<Youtube>.Debug("Update subscriptions tries = {0} - subscriptions.Count - {1}", subUpdate, Youtube.subscriptions.Count);
-			if (Youtube.subscriptions.Count == 0 || subUpdate%20==0){
+			if (Youtube.subscriptions.Count == 0 || subUpdate%20==0) {
 				Youtube.subscriptions.Clear();
-				
+
 				string feedUrl = "http://gdata.youtube.com/feeds/api/users/default/subscriptions";
 				YouTubeQuery query = new YouTubeQuery(feedUrl);
-				Log<Youtube>.Debug("feedUrl for subscriptions: {0}", feedUrl);				
+				Log<Youtube>.Debug("feedUrl for subscriptions: {0}", feedUrl);
 				SubscriptionFeed subFeed = null;
 				string url = "http://www.youtube.com/user/{0}";
 				try
@@ -170,7 +169,7 @@ namespace Youtube
 						foreach (SubscriptionEntry entry in subFeed.Entries)
 						{
 							YouTubeSubscriptionItem subscription = 
-                                                            new YouTubeSubscriptionItem(entry.UserName, String.Format(url, entry.UserName), entry.Title.Text);
+								new YouTubeSubscriptionItem(entry.UserName, String.Format(url, entry.UserName), entry.Title.Text);
 							Youtube.subscriptions.Add(subscription);
 						}
 					}
@@ -178,13 +177,11 @@ namespace Youtube
 				}
 				catch(Exception e) 
 				{
-                                    Log<Youtube>.Error ("Error getting subscriptions - {0}", e.Message);
-                                    Log<Youtube>.Debug (e.StackTrace);
+					Log<Youtube>.Error ("Error getting subscriptions - {0}", e.Message);
+					Log<Youtube>.Debug (e.StackTrace);
 				}
 			}
 		}
-
-
 
 		public static bool TryConnect (string username, string password)
 		{
@@ -198,19 +195,19 @@ namespace Youtube
 			}
 			
 			return true;
-		}		
-		
+		}
+
 		private static void Connect (string username, string password) 
 		{
 			if (string.IsNullOrEmpty (username) || string.IsNullOrEmpty (password)) {
 				Log<Youtube>.Error (MissingCredentialsMessage);
 				return;
 			}
-			
+
 			try {
 				service = new YouTubeService (appName, clientID, developerKey);
 				service.setUserCredentials (username, password);
-                                ServicePointManager.CertificatePolicy = new CertHandler ();
+				ServicePointManager.CertificatePolicy = new CertHandler ();
 			} catch (Exception e) {
 				Log<Youtube>.Error (ConnectionErrorMessage);
 				Log<Youtube>.Error (e.Message);

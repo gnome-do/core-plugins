@@ -26,34 +26,31 @@ using Do.Universe;
 
 namespace Youtube
 {
-	
-	
 	public class YouTubeOwnVideosItemSource : ItemSource
 	{
 		public YouTubeOwnVideosItemSource()
 		{
 		}
-		
+
 		public override IEnumerable<Type> SupportedItemTypes 
 		{
 			get { yield return typeof (YoutubeVideoItem);}
 		}
-		
+
 		public override string Name { get { return "YouTube Videos"; } }
 		public override string Description { get { return "Your own YouTube videos"; } }
 		public override string Icon {get { return "youtube_logo.png@" + GetType ().Assembly.FullName; } }
-		
+
 		public override IEnumerable<Item> Items 
 		{
 			get { return Youtube.own; }
 		}
-		
+
 		public override void UpdateItems ()
 		{
 			Thread t = new Thread((ThreadStart) Youtube.updateOwn);
 			t.IsBackground = true;
 			t.Start();
 		}
-		
 	}
 }

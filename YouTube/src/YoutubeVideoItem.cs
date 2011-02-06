@@ -22,7 +22,7 @@ using System;
 using Do.Universe;
 
 namespace Youtube
-{		
+{
 	public class YoutubeVideoItem : Item, IUrlItem
 	{
 		protected string name;
