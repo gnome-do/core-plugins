@@ -1,6 +1,7 @@
 <Combine fileversion="2.0" outputpath="build/bin/" name="DoPlugins" releaseversion="0.4.9.9">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="Empathy" configuration="Debug" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
       <Entry build="True" name="Epiphany" configuration="Debug" />
       <Entry build="True" name="Evolution" configuration="Debug" />
@@ -80,6 +81,7 @@
       <Entry build="True" name="GNOME-Calculator" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="Empathy" configuration="Release" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
       <Entry build="True" name="Epiphany" configuration="Release" />
       <Entry build="True" name="Evolution" configuration="Release" />
@@ -160,6 +162,7 @@
     </Configuration>
   </Configurations>
   <StartMode startupentry="Rhythmbox" single="True">
+    <Execute type="None" entry="Empathy" />
     <Execute type="None" entry="Rhythmbox" />
     <Execute type="None" entry="Epiphany" />
     <Execute type="None" entry="Evolution" />
@@ -240,6 +243,7 @@
   </StartMode>
   <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="UpdateNearestChangeLog" />
   <Entries>
+    <Entry filename="Empathy/Empathy.mdp" />
     <Entry filename="Rhythmbox/Rhythmbox.mdp" />
     <Entry filename="Epiphany/Epiphany.mdp" />
     <Entry filename="Evolution/Evolution.mdp" />

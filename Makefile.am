@@ -2,6 +2,7 @@ ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 
 SUBDIRS = \
+	BundledLibraries \
 	po \
 	Alias \
 	AptURL \
@@ -17,6 +18,7 @@ SUBDIRS = \
 	DiskMounter \
 	Dropbox \
 	Emesene \
+	Empathy \
 	EOG-Slideshow \
 	Epiphany \
 	Evolution \

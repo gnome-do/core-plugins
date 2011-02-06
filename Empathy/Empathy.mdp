@@ -1,0 +1,55 @@
+<Project name="Empathy" fileversion="2.0" DefaultNamespace="EmpathyPlugin" language="C#" targetFramework="3.5" ctype="DotNetProject">
+  <Policies>
+    <StandardHeader inheritsSet="LGPLv3License" />
+    <TextStylePolicy FileWidth="120" TabWidth="4" inheritsSet="Mono" inheritsScope="text/plain" scope="text/x-csharp" />
+    <CSharpFormattingPolicy inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+  </Policies>
+  <Deployment.LinuxDeployData scriptName="empathy" />
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Empathy" />
+      <Build debugmode="True" target="Library" />
+      <Execution consolepause="False" runwithwarnings="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Empathy" />
+      <Build debugmode="False" target="Library" />
+      <Execution consolepause="False" runwithwarnings="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File subtype="Code" buildaction="Compile" name="src/AccountManagerQuery.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyPlugin.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyChatAction.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyAccountItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyAccountItemSource.cs" />
+    <File subtype="Directory" buildaction="Compile" name="Resources" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="Resources/Empathy.addin.xml" />
+    <File subtype="Code" buildaction="Compile" name="src/Account.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyBrowseAccountItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyContactItemSource.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyBrowseBuddyItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/Contact.cs" />
+    <File subtype="Code" buildaction="Nothing" name="telepathy-sharp.dll" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathySetStatusAction.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyStatusItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathySavedStatusItemSource.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyBrowseStatusItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/Status.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathySavedStatusItem.cs" />
+    <File subtype="Code" buildaction="Compile" name="src/EmpathyAccountActions.cs" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Platform, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="Do.Universe, Version=0.9.0.0, Culture=neutral" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference specificVersion="False" type="Assembly" localcopy="True" refto="telepathy-sharp.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="dbus-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5675b0c3093115b5" />
+    <ProjectReference type="Gac" localcopy="True" refto="dbus-sharp-glib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5675b0c3093115b5" />
+  </References>
+</Project>
