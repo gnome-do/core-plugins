@@ -187,6 +187,34 @@ AM_CONDITIONAL(HAVE_WNCK, test "x$HAVE_WNCK" = "xyes")
 AC_SUBST([WNCK_SHARP_10_LIBS])
 dnl}}}
 
+dnl {{{
+# Temporarily check for dbus-sharp only in Empathy build
+# The DBus-Sharp fork is relatively new, and probably not ubiquitous yet.
+AC_ARG_ENABLE(empathy,
+	AC_HELP_STRING([--enable-empathy], [Build plugin to control window (default: auto]),
+	enable_empathy=$enableval,
+	enable_empathy=auto)
+
+if test "x$enable_empathy" != "xno"; then
+   	PKG_CHECK_MODULES([DBUS_SHARP], [dbus-sharp-1.0], HAVE_EMPATHY=yes, HAVE_EMPATHY=no)
+	if test "x$HAVE_EMPATHY" == "xyes" ; then
+		PKG_CHECK_MODULES([DBUS_SHARP_GLIB], [dbus-sharp-glib-1.0], HAVE_EMPATHY=yes, HAVE_EMPATHY=no)
+	fi
+
+	if test "x$enable_empathy" = "xyes" -a "x$HAVE_EMPATHY" = "no"; then
+   		AC_MSG_ERROR([Empathy plugin explicitly requested but dbus-sharp dependencies not found])
+	fi
+fi
+AC_SUBST([DBUS_SHARP_LIBS])
+AC_SUBST([DBUS_SHARP_GLIB_LIBS])
+
+AM_CONDITIONAL(HAVE_EMPATHY, test "x$HAVE_EMPATHY" = "xyes")
+
+# We need a bundled telepathy-sharp until there's an actual upstream for it
+TELEPATHY_SHARP_LIBS=-r:$(pwd)/build/telepathy-sharp.dll
+AC_SUBST([TELEPATHY_SHARP_LIBS])
+dnl }}}
+
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
@@ -277,6 +305,8 @@ Dropbox/Makefile
 Dropbox/Resources/Dropbox.addin.xml
 Emesene/Makefile
 Emesene/Resources/Emesene.addin.xml
+Empathy/Makefile
+Empathy/Resources/Empathy.addin.xml
 EOG-Slideshow/Makefile
 EOG-Slideshow/Resources/EOG-Slideshow.addin.xml
 Epiphany/Makefile
@@ -408,6 +438,7 @@ Zim/Resources/Zim.addin.xml
 Makefile
 po/Makefile.in
 BundledLibraries/Makefile
+BundledLibraries/telepathy-sharp/Makefile
 ])
 
 AC_OUTPUT
@@ -425,6 +456,7 @@ ${PACKAGE}-${VERSION}
 
   Optional plugins:
     Banshee:           ${HAVE_BANSHEE}
+    Empathy:	       ${HAVE_EMPATHY}
     Evolution:         ${HAVE_EVOLUTION}
     Flickr:            ${HAVE_FLICKR}
     Google Calendar:   ${HAVE_GCAL}

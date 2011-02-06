@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "telepathy-sharp", "telepathy-sharp\telepathy-sharp.csproj", "{FF88083E-0D8D-4D84-8162-F822AA56022D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{65D6779B-201D-48A8-9499-FE5F15AE45B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65D6779B-201D-48A8-9499-FE5F15AE45B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D6779B-201D-48A8-9499-FE5F15AE45B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D6779B-201D-48A8-9499-FE5F15AE45B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D6779B-201D-48A8-9499-FE5F15AE45B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF88083E-0D8D-4D84-8162-F822AA56022D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF88083E-0D8D-4D84-8162-F822AA56022D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF88083E-0D8D-4D84-8162-F822AA56022D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF88083E-0D8D-4D84-8162-F822AA56022D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		version = 0.1
+		StartupItem = telepathy-sharp\telepathy-sharp.csproj
+	EndGlobalSection
+EndGlobal

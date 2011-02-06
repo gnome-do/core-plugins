@@ -1,0 +1,10 @@
+There appear to be at least four separate forks of Telepathy♯, and no canonical
+upstream.
+
+This code is a fork of the ndesk-ng fork.  The upstream repository, such it is,
+can be found at:
+git://github.com/nloko/telepathy-sharp.git
+
+This upstream source has been modified for Do:
+* NDesk.DBus has been replaced by the (actually maintained!) DBus-Sharp library
+* Bare-minimum autotools build system.

@@ -18,6 +18,7 @@ SUBDIRS = \
 	DiskMounter \
 	Dropbox \
 	Emesene \
+	Empathy \
 	EOG-Slideshow \
 	Epiphany \
 	Evolution \

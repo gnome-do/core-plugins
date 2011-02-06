@@ -1,5 +1,9 @@
 bundledir = ${libdir}/gnome-do/plugins
 
+if HAVE_EMPATHY
+SUBDIRS=telepathy-sharp
+endif
+
 install-data-hook:
 	if test -n "$(BANSHEE_INDEXER_DLL)"; then \
 		$(INSTALL) -d $(DESTDIR)/$(bundledir) && \

@@ -15,7 +15,7 @@
 		<Import assembly="telepathy-sharp.dll"/>
 	</Runtime>
 
-	<Localizer type="Gettext" catalog="gnome-do-plugins" location="/home/chris/.local/share/locale" />
+	<Localizer type="Gettext" catalog="gnome-do-plugins" location="@expanded_datadir@/locale" />
 	
 	<Dependencies>
 		<Addin id="Universe" version="1.0" />
