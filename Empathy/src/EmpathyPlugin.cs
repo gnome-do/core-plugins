@@ -83,48 +83,23 @@ namespace EmpathyPlugin
 			return item.Equals (Do.Platform.Services.UniverseFactory.MaybeApplicationItemFromCommand ("empathy"));
 		}
 
-		public static List<Account> GetConnectedAccounts ()
+		public static IEnumerable<Account> GetAllAccounts ()
 		{
-			List<Account> res = new List<Account>();
-			IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
+			IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));
+			;
 			ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
 			
-			foreach(ObjectPath accountPath in accountPathArray)
-			{
-				Account account = new Account(accountPath);
-				if(account.IsConnected())
-				{
-					res.Add(account);
-				}
-			}
-			return res;
-		}
-		
-		public static List<Account> GetAllAccounts ()
-		{
-			List<Account> res = new List<Account>();
-			IAccountManagerQuery iAccountManagerQueryBus = Bus.Session.GetObject<IAccountManagerQuery> (ACCOUNTMANAGER_IFACE, new ObjectPath (ACCOUNTMANAGER_PATH));;
-			ObjectPath[] accountPathArray = iAccountManagerQueryBus.FindAccounts (new Dictionary<string, object> ());
-			
-			foreach(ObjectPath accountPath in accountPathArray)
-			{
-				Account account = new Account(accountPath);
-				res.Add(account);
-			}
-			return res;
+			return accountPathArray.Select (accountPath => new Account (accountPath));
 		}
 
-		public static List<Contact> GetAllContacts ()
+		public static IEnumerable<Account> GetConnectedAccounts ()
 		{
-			List<Contact> res = new List<Contact>();
-			foreach(Account account in GetConnectedAccounts ())
-			{
-				foreach(Contact contact in account.FindContact())
-				{
-					res.Add(contact);
-				}
-			}
-			return res;
+			return GetAllAccounts ().Where (account => account.IsConnected());
+		}
+
+		public static IEnumerable<Contact> GetAllContacts ()
+		{
+			return GetConnectedAccounts ().SelectMany (account => account.FindContact ());
 		}
 
 		public static bool IsInstanceRunning ()
