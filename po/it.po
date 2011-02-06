@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-03-10 18:45+0000\n"
-"Last-Translator: Claudio Arseni <claudio.arseni@gmail.com>\n"
+"PO-Revision-Date: 2010-02-03 15:32+0000\n"
+"Last-Translator: Sergio Zanchetta <primes2h@ubuntu.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -76,11 +76,11 @@ msgstr "Sfoglia musica per album"
 
 #: ../Banshee/src/BrowseMediaItems.cs:77
 msgid "Browse Podcasts"
-msgstr "Sfoglia podcast"
+msgstr "Sfoglia i podcast"
 
 #: ../Banshee/src/BrowseMediaItems.cs:78
 msgid "Browse Podcasts by Publisher"
-msgstr "Sfoglia podcast per autore"
+msgstr "Sfoglia i podcast per autore"
 
 #: ../Banshee/src/BrowseMediaItems.cs:85
 msgid "Browse Videos"
@@ -300,7 +300,7 @@ msgstr "Esegui slideshow"
 
 #: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
 msgid "Plays a slideshow of images in a folder."
-msgstr "Eseguii uno slideshow di immagini in una cartella."
+msgstr "Esegui uno slideshow di immagini in una cartella."
 
 #: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:44
 msgid "Epiphany Bookmarks"
@@ -421,7 +421,7 @@ msgstr "File e cartelle"
 
 #: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
 msgid "Catalogs important files and folders for quick access."
-msgstr "Cataloghi importanti file e cartelle per un rapido accesso."
+msgstr "Cataloga importanti file e cartelle per un rapido accesso."
 
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
 msgid "Create New File"
@@ -536,7 +536,7 @@ msgstr "Cattura una schermata della finestra corrente."
 
 #: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
 msgid "Whole screen"
-msgstr "Tutto lo schermo"
+msgstr "Schermo intero"
 
 #: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
 msgid "Take a screenshot of the entire screen."
@@ -868,7 +868,7 @@ msgstr "Vai direttamente alla pagina di ricerca di Google"
 #. Container child vbox4.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:87
 msgid "Show search results in Do"
-msgstr "Mostra i risultati della ricercs in DO"
+msgstr "Mostra i risultati della ricerca in DO"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:106
 msgid "Show Search page link as first result"
@@ -2079,11 +2079,11 @@ msgstr "Traduci in Ebraico"
 
 #: ../Translate/src/Provider/Google.cs:99
 msgid "Hindi"
-msgstr "Indiano"
+msgstr "Hindi"
 
 #: ../Translate/src/Provider/Google.cs:100
 msgid "Translate to Hindi"
-msgstr "Traduci in Indiano"
+msgstr "Traduci in hindi"
 
 #: ../Translate/src/Provider/Google.cs:103
 msgid "Indonesian"

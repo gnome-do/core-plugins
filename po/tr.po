@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-04-09 21:33+0000\n"
-"Last-Translator: Mustafa VELİOĞLU <mustinet@mustinet.org>\n"
+"PO-Revision-Date: 2009-08-16 11:14+0000\n"
+"Last-Translator: Mert Dirik <mertdirik@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -159,7 +159,7 @@ msgstr "BibTeX dosyası seç"
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
 msgid "Select A File"
-msgstr "Bir Dosya Seç"
+msgstr "Bir Dosya Seçin"
 
 #. Container child table1.Gtk.Table+TableChild
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
@@ -1684,44 +1684,44 @@ msgstr "Bellek süresi (dakika)"
 
 #: ../Shelf/src/ShelfActions.cs:33
 msgid "Explore Shelf"
-msgstr "Sergeni Araştır"
+msgstr "Rafa Bak"
 
 #: ../Shelf/src/ShelfActions.cs:37
 msgid "Get a list of everything in your shelf"
-msgstr "Sergeninizdeki her şeyin bir listesini alın"
+msgstr "Raftaki her şeyin bir listesini al"
 
 #: ../Shelf/src/ShelfActions.cs:60
 msgid "Remove From Shelf"
-msgstr "Sergenden Kaldır"
+msgstr "Raftan Kaldır"
 
 #: ../Shelf/src/ShelfActions.cs:64
 msgid "Remove Selected Item From Shelf"
-msgstr "Seçilen Öğeyi Sergenden Kaldır"
+msgstr "Seçilen Ögeyi Raftan Kaldır"
 
 #: ../Shelf/src/ShelfActions.cs:101
 msgid "Add To Shelf"
-msgstr "Sergene Ekle"
+msgstr "Rafa Kaldır"
 
 #: ../Shelf/src/ShelfActions.cs:105
 msgid "Add Selected Item to Shelf"
-msgstr "Seçilen Öğeyi Sergene Ekle"
+msgstr "Seçilen Ögeyi Rafa Kaldır"
 
 #: ../Shelf/src/ShelfItemSource.cs:56
 msgid " Shelf"
-msgstr " Sergen"
+msgstr " Raf"
 
 #: ../Shelf/src/ShelfItemSource.cs:62
 #, csharp-format
 msgid "Your {0} shelf items."
-msgstr "{0} sergen öğeniz."
+msgstr "{0} rafınız"
 
 #: ../Shelf/src/ShelfItemSource.cs:90
 msgid "Shelf Items"
-msgstr "Sergen Öğeleri"
+msgstr "Raf Ögeleri"
 
 #: ../Shelf/src/ShelfItemSource.cs:94
 msgid "Your Shelf Items"
-msgstr "Sergen Öğeleriniz"
+msgstr "Raftaki Ögeleriniz"
 
 #: ../Shelf/src/ShelfItemSource.cs:126
 msgid "Default"

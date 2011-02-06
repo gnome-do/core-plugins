@@ -8,20 +8,24 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-06-02 18:38+0000\n"
-"Last-Translator: Tomasz Trębski <kornicameister@gmail.com>\n"
+"PO-Revision-Date: 2010-12-28 10:04+0000\n"
+"Last-Translator: Adam Czabara <kolofaza@o2.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
 msgstr "Przypisz Alias..."
+
+#: ../Alias/src/AliasAction.cs:40
+msgid "Give an item an alternate name."
+msgstr "Nadaj elementowi alternatywną nazwę."
 
 #: ../Alias/src/DeleteAliasAction.cs:36
 msgid "Delete Alias"
@@ -30,6 +34,14 @@ msgstr "Usuń Alias"
 #: ../Alias/src/DeleteAliasAction.cs:40
 msgid "Deletes an alias."
 msgstr "Usuwa Alias"
+
+#: ../Alias/src/AliasItemSource.cs:140
+msgid "Alias items"
+msgstr "Aliasy"
+
+#: ../Alias/src/AliasItemSource.cs:144
+msgid "Aliased items from Do's universe."
+msgstr ""
 
 #: ../Archive/src/ExtractArchiveAction.cs:40
 msgid "Extract archive"
@@ -63,6 +75,14 @@ msgstr "Przeglądaj albumy"
 msgid "Browse Music by Album"
 msgstr "Przeglądaj utwory według albumu"
 
+#: ../Banshee/src/BrowseMediaItems.cs:77
+msgid "Browse Podcasts"
+msgstr "Przeglądaj podcasty"
+
+#: ../Banshee/src/BrowseMediaItems.cs:78
+msgid "Browse Podcasts by Publisher"
+msgstr "Przeglądaj podcasty wg wydawcy"
+
 #: ../Banshee/src/BrowseMediaItems.cs:85
 msgid "Browse Videos"
 msgstr "Przeglądaj Filmy"
@@ -74,6 +94,22 @@ msgstr "Przeglądaj Wszystkie Filmy"
 #: ../Banshee/src/EnqueueAction.cs:37 ../Rhythmbox/src/EnqueueAction.cs:36
 msgid "Add to Play Queue"
 msgstr "Dodaj do kolejki utworów"
+
+#: ../Banshee/src/EnqueueAction.cs:41
+msgid "Add media to play queue"
+msgstr "Dodaj muzykę to kolejki"
+
+#: ../Banshee/src/MediaItemSource.cs:46
+msgid "Banshee Media"
+msgstr "Banshee"
+
+#: ../Banshee/src/MediaItemSource.cs:50
+msgid "Indexes Media from Banshee Media Player"
+msgstr "Indeksuje multimedia z odtwarzacza Banshee"
+
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr "Cała Muzyka"
 
 #: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
 msgid "Next"
@@ -87,10 +123,18 @@ msgstr "Odtwórz następny utwór"
 msgid "Pause"
 msgstr "Pauza"
 
+#: ../Banshee/src/PauseAction.cs:36
+msgid "Pause playing track"
+msgstr "Pauza"
+
 #: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
 #: ../Rhythmbox/src/PlayAction.cs:40
 msgid "Play"
 msgstr "Odtwarzaj"
+
+#: ../Banshee/src/PlayAction.cs:39
+msgid "Play from your Banshee Collection"
+msgstr "Odtwarzaj z kolekcji Banshee"
 
 #: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
 msgid "Previous"
@@ -100,11 +144,40 @@ msgstr "Poprzedni"
 msgid "Play previous track"
 msgstr "Odtwórz poprzedni utwór"
 
+#: ../Banshee/src/SearchCollectionAction.cs:36
+msgid "Search Banshee Media"
+msgstr "Szukaj w kolekcji Banshee"
+
+#: ../Banshee/src/SearchCollectionAction.cs:40
+msgid "Search your entire Banshee collection"
+msgstr "Szukaj w całej kolekcji Banshee"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+msgid "Choose BibTeX file"
+msgstr "Wybierz plik BibTeX"
+
 #. Container child table1.Gtk.Table+TableChild
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
 msgid "Select A File"
 msgstr "Wybierz plik"
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+msgid "Select your documents folder"
+msgstr "Wskaż folder Dokumenty"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+msgid "Choose documents folder"
+msgstr "Wybierz folder Dokumenty"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr "Kontakty ClawsMail"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr "Kontakty w książce adresowej ClawsMail"
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:71
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:41
@@ -115,6 +188,87 @@ msgstr "Główny e-mail"
 #: ../Evolution/src/EmailContactDetailItem.cs:34
 msgid "Email"
 msgstr "E-mail"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
+msgid "Other email"
+msgstr "Inny email"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
+msgid "Other"
+msgstr "Inne"
+
+#: ../Cl.ickable/src/ClipAction.cs:38
+msgid "Clip"
+msgstr "Clip"
+
+#: ../Cl.ickable/src/ClipAction.cs:42
+msgid "Create a clip with Cl.ickable"
+msgstr "Utwórz wycinek w serwisie Cl.ickable"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:32
+msgid "Cl.ickable Clips"
+msgstr "Wycinki w serwisie Cl.ickable"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:36
+msgid "Opens your cl.ickable clips"
+msgstr "Otwiera wycinki użytkownia w Cl.ickable"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Elementy klikalne"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr "Użyteczne elementy klikalne"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+msgid "http://opensource.atlassian.com/confluence/spring"
+msgstr "http://opensource.atlassian.com/confluence/spring"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+msgid "username1"
+msgstr "nazwa użytkownika 1"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:85
+msgid "Search Confluence"
+msgstr "Szukaj w Confluence"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:93
+msgid "Searches Confluence and returns results to Do"
+msgstr "Szuka w Confluence i wyświetla wyniki w Do"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr "Tagi del.icio.us"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.bookmarks by tag"
+msgstr ""
+
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr "Nie otagowane zakładki del.ico.us"
+
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr "zakładki w Delicious z etykietą {0}"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:37
+msgid "Del.icio.us bookmarks"
+msgstr "Del.icio.us zakładki"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:41
+msgid "Indexes your del.icio.us bookmarks"
+msgstr "Indeksuje Twoje zakładki del.icio.us"
+
+#: ../Del.icio.us/src/SearchAction.cs:47
+msgid "Search del.icio.us"
+msgstr "Szukaj w del.icio.us"
+
+#: ../Del.icio.us/src/SearchAction.cs:51
+msgid "del.icio.us tag search"
+msgstr "wyszukiwanie etykiet w Delicious"
 
 #: ../DiskMounter/src/OpenVolumeAction.cs:40
 #: ../SystemServices/src/SystemServicesConfig.cs:74
@@ -136,6 +290,18 @@ msgstr "Odmontuj wolumen"
 #: ../DiskMounter/src/MountAction.cs:32
 msgid "Mount"
 msgstr "Montuj"
+
+#: ../DiskMounter/src/MountAction.cs:36
+msgid "Mount volume"
+msgstr "Zamontuj wolumen"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
+msgid "Play Slideshow"
+msgstr "Pokaz slajdów"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
+msgid "Plays a slideshow of images in a folder."
+msgstr "Pokaz slajdów z folderu"
 
 #: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:44
 msgid "Epiphany Bookmarks"
@@ -164,6 +330,10 @@ msgstr "Telefon komórkowy"
 msgid "Evolution Contacts"
 msgstr "Kontakty Evolution"
 
+#: ../Evolution/src/AddressContactDetailItem.cs:34
+msgid "Address"
+msgstr "Adresy"
+
 #: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
 msgid "Show hidden files"
 msgstr "Pokaż ukryte pliki"
@@ -171,6 +341,10 @@ msgstr "Pokaż ukryte pliki"
 #: ../File/src/PathNodeView.cs:51
 msgid "Folder"
 msgstr "Katalog"
+
+#: ../File/src/PathNodeView.cs:57
+msgid "Depth"
+msgstr "Głębokość"
 
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
 msgid "Delete File"
@@ -246,6 +420,10 @@ msgstr "Kopiuje plik lub folder do innego położenia"
 msgid "Files and Folders"
 msgstr "Pliki i foldery"
 
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
+msgid "Catalogs important files and folders for quick access."
+msgstr "Kataloguje ważne pliki i katalogi dla szybkiego dostępu"
+
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
 msgid "Create New File"
 msgstr "Stwórz Nowy Plik"
@@ -253,6 +431,10 @@ msgstr "Stwórz Nowy Plik"
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
 msgid "Creates an new, empty file."
 msgstr "Tworzy nowy, pusty plik."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
+msgid "Untitled"
+msgstr "Bez tytułu"
 
 #: ../Firefox/src/BookmarkItemSource.cs:55
 msgid "Firefox Bookmarks"
@@ -332,9 +514,18 @@ msgstr "Konto"
 msgid "Click to compete authorization"
 msgstr "Kliknij by ukończyć autoryzację"
 
+#: ../Flickr/src/AccountConfig.cs:112
+#, csharp-format
+msgid "Thank you {0} for allowing Do access to Flickr."
+msgstr "Dziękujemy za udzielenie Do dostępu do Flickra, {0}"
+
 #: ../GNOME-Dictionary/src/DefineAction.cs:51
 msgid "Define"
 msgstr "Definiuj"
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:56
+msgid "Define a given word."
+msgstr "Zdefiniuj podane słowo."
 
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:28
 msgid "Current window"
@@ -373,9 +564,17 @@ msgstr "Pobierz zrzut ekranu"
 msgid "Takes a screenshot with optional delay."
 msgstr "Zrób zrzut ekranu z opcjonalnym opóźnieniem."
 
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
+msgid "GNOME Screenshot Items"
+msgstr ""
+
 #: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
 msgid "Whole screen or current window."
 msgstr "Cały ekran lub bieżące okno"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
+msgid "GNOME Session Commands"
+msgstr ""
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:45
 msgid "Log out, Shutdown, Restart, etc."
@@ -433,9 +632,17 @@ msgstr "Zablokuj ekran"
 msgid "Open Profile"
 msgstr "Otwórz profil"
 
+#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
+msgid "Opens a GNOME Terminal with the selected profile."
+msgstr "Otwiera konsolę ze wskazanym profilem"
+
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
 msgid "Open Terminal Here"
 msgstr "Otwórz tutaj terminal"
+
+#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
+msgid "Opens a GNOME Terminal in a given location."
+msgstr ""
 
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
 msgid "Run in Terminal"
@@ -444,6 +651,22 @@ msgstr "Uruchom w terminalu"
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:46
 msgid "Runs a command in GNOME Terminal."
 msgstr "Wykonaj polecenie w Terminalu GNOME."
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
+msgid "GNOME Terminal Profiles"
+msgstr ""
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
+msgid "Indexes your GNOME Terminal profiles."
+msgstr ""
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:33
+msgid "Unnamed Profile"
+msgstr "Nienazwany profil"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:34
+msgid "GNOME Terminal Profile"
+msgstr ""
 
 #: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
 msgid "Perform a calculation using Google Calculator."
@@ -483,6 +706,14 @@ msgstr "Zobacz zdarzenie"
 msgid "Open event in browser"
 msgstr "Otwórz zdarzenie w przeglądarce"
 
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
+msgid "View Calendar"
+msgstr "Zobacz kalendarz"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
+msgid "Open calendar in browser"
+msgstr "Otwórz kalendarz w przeglądarce."
+
 #: ../GoogleCalendar/src/GCalendarItem.cs:45
 msgid "Google Calendar"
 msgstr "Kalendarz Google"
@@ -490,6 +721,14 @@ msgstr "Kalendarz Google"
 #: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
 msgid "Search Events"
 msgstr "Przeszukaj wydarzenia"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
+msgid "Search Google Calendar for Events"
+msgstr "Szukaj wydarzeń w Kalendarzu Google"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr "Błąd przy łączeniu z usługą GCal"
 
 #: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
 msgid "New Event"
@@ -523,516 +762,34 @@ msgstr "Adres domowy"
 msgid "Work Address"
 msgstr "Adres służbowy"
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:38
-msgid "GMail Contacts"
-msgstr "Kontakty GMail"
-
-#: ../GoogleMaps/src/MapAction.cs:39
-msgid "Map"
-msgstr "Mapa"
-
-#: ../GoogleSearch/src/InlineGoogleSearch.cs:81
-msgid "Search Google"
-msgstr "Przeszukaj Google"
-
-#: ../LocateFiles/src/LocateFilesAction.cs:44
-msgid "Search your filesystem using locate."
-msgstr "Przeszukaj system plików używając locate."
-
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
-msgid "<b>General</b>"
-msgstr "<b>Ogólne</b>"
-
-#: ../OpenSearch/src/OpenSearchAction.cs:40
-msgid "Searches the web using OpenSearch plugins."
-msgstr "Przeszukaj sieć web używając pluginów OpenSearch."
-
-#: ../Pidgin/src/PidginSetStatusAction.cs:48
-msgid "Set status"
-msgstr "Ustaw status"
-
-#: ../Pidgin/src/PidginSetStatusAction.cs:52
-msgid "Set pidgin status message"
-msgstr "Ustaw opis statusu w Pidgin"
-
-#: ../Pidgin/src/PidginAccountItemSource.cs:41
-msgid "Pidgin Accounts"
-msgstr "Konta Pidgin"
-
-#: ../Pidgin/src/PidginAccountActions.cs:40
-msgid "Enable pidgin account"
-msgstr "Włącz konto Pidgin"
-
-#: ../Pidgin/src/PidginAccountActions.cs:86
-msgid "Disble pidgin account"
-msgstr "Wyłącz konto Pidgin"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:45
-msgid "Offline"
-msgstr "Rozłączony"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:46
-msgid "Available"
-msgstr "Dostępny"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:47
-msgid "Busy"
-msgstr "Zajęty"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:48
-msgid "Invisible"
-msgstr "Niewidoczny"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:49
-msgid "Away"
-msgstr "Nieobecny"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:50
-msgid "Unknown Status"
-msgstr "Nieznany status"
-
-#: ../Pidgin/src/PidginChatAction.cs:41
-msgid "Chat"
-msgstr "Czat"
-
-#: ../RememberTheMilk/src/RTMRenameTask.cs:33
-msgid "Rename to..."
-msgstr "Zmień nazwę na..."
-
-#: ../Rhythmbox/src/EnqueueAction.cs:40
-msgid "Add an item to Rhythmbox's play queue."
-msgstr "Dodaj element do kolejki odtwarzania Rhythmbox-a."
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:49
-msgid "Browse Rhythmbox Music by Artist"
-msgstr "Przeglądaj muzykę Rhythmbox-a wg wykonawców"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:58
-msgid "Browse Rhythmbox Music by Album"
-msgstr "Przeglądaj muzykę Rhythmbox-a wg albumów"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:93
-msgid "Mute"
-msgstr "Wycisz"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:103
-#: ../VolumeControl/src/VolumeUpItem.cs:31
-msgid "Volume Up"
-msgstr "Zwiększ głośność"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:108
-#: ../VolumeControl/src/VolumeDownItem.cs:31
-msgid "Volume Down"
-msgstr "Zmniejsz głośność"
-
-#: ../Rhythmbox/src/MusicItemSource.cs:45
-msgid "Rhythmbox Music"
-msgstr "Muzyka Rhythmbox"
-
-#: ../Rhythmbox/src/MusicItemSource.cs:49
-msgid "Provides access to artists and albums from Rhythmbox."
-msgstr "Dostarcza dostęp do artystów i albumów w Rhythmbox."
-
-#: ../Shelf/src/ShelfItemSource.cs:126
-msgid "Default"
-msgstr "Domyślny"
-
-#: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
-msgid "Connect with SSH"
-msgstr "Połącz przez SSH"
-
-#: ../SSH/src/SSHHosts.cs:42
-msgid "SSH Host"
-msgstr "Host SSH"
-
-#: ../SSH/src/SSHHosts.cs:62
-msgid "SSH Hosts"
-msgstr "Hosty SSH"
-
-#: ../SSH/src/SSHHosts.cs:63
-msgid "Parses ssh-config"
-msgstr "Parsuje ssh-config"
-
-#: ../Tasque/src/TasqueCategoryItem.cs:47
-msgid "Category"
-msgstr "Kategoria"
-
-#: ../Tasque/src/TasqueAction.cs:42
-msgid "Create a new task"
-msgstr "Tworzy nowe zadanie"
-
-#: ../Text/src/AppendTextAction.cs:34
-msgid "Append to..."
-msgstr "Dopisz do..."
-
-#: ../Text/src/AppendTextAction.cs:35
-msgid "Appends text to a selected file."
-msgstr "Dopisz tekst do wybranego pliku."
-
-#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
-msgid "<b>Default New Note Title</b>"
-msgstr "<b>Domyślny tytuł nowej notatki</b>"
-
-#: ../Vinagre/src/VNCHostSource.cs:39
-msgid "Vinagre Bookmarks"
-msgstr "Zakładki Vinagre"
-
-#: ../Vinagre/src/VNCHostSource.cs:43
-msgid "Indexes your Vinagre Bookmarks"
-msgstr "Indeksuje twoje zakładki w Vinagre"
-
-#: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
-msgid "Connect with VNC"
-msgstr "Połącz przez VNC"
-
-#: ../VolumeControl/src/VolumeDownItem.cs:35
-msgid "Decrease system volume"
-msgstr "Zmniejsz głośność systemu"
-
-#: ../VolumeControl/src/VolumeUpItem.cs:35
-msgid "Increase system volume"
-msgstr "Zwiększ głośność systemu"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:31
-msgid "Mute Volume"
-msgstr "Wyłącz dźwięk"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:35
-msgid "Mute system volume"
-msgstr "Wyłącz dźwięk w systemie"
-
-#: ../VolumeControl/src/VolumeItemSource.cs:43
-msgid "Adjust your system volume"
-msgstr "Dopasuj głośność systemu"
-
-#: ../VolumeControl/src/VolumeUnmuteItem.cs:32
-msgid "Unmute Volume"
-msgstr "Włącz dźwięk"
-
-#: ../VolumeControl/src/VolumeUnmuteItem.cs:36
-msgid "Unmute system volume"
-msgstr "Włącz dźwięk w systemie"
-
-#: ../WindowManager/src/WindowListAction.cs:246
-msgid "Close your current window."
-msgstr "Zamknij bieżące okno"
-
-#: ../WindowManager/src/ScreenListAction.cs:277
-msgid "Tile Windows"
-msgstr "Rozmieść równomiernie"
-
-#: ../WindowManager/src/ScreenListAction.cs:346
-msgid "Cascade Windows"
-msgstr "Okna kaskadowo"
-
-#: ../WindowManager/src/ScreenListAction.cs:404
-msgid "Restore Windows"
-msgstr "Przywróc okna"
-
-#: ../WindowManager/src/ScreenListAction.cs:408
-msgid "Restore Windows to their Previous Positions"
-msgstr "Przywróć okna do poprzednich położeń"
-
-#: ../WindowManager/src/ScreenItemSource.cs:65
-msgid "Current Desktop"
-msgstr "Bieżący pulpit"
-
-#: ../WindowManager/src/ScreenItemSource.cs:66
-msgid "Everything on the Current Desktop"
-msgstr "Wszystko na bieżącym pulpicie"
-
-#: ../WindowManager/src/WindowItemSource.cs:71
-msgid "Current Window"
-msgstr "Bieżące okno"
-
-#: ../WindowManager/src/WindowItemSource.cs:72
-msgid "The Currently Active Window"
-msgstr "Aktualnie aktywne okno"
-
-#: ../WindowManager/src/WindowItemSource.cs:75
-msgid "Current Application"
-msgstr "Bieżąca aplikacja"
-
-#: ../WindowManager/src/WindowItemSource.cs:76
-msgid "The Currently Active Application"
-msgstr "Aktualnie aktywna aplikacja"
-
-#: ../WindowManager/src/WindowItemSource.cs:79
-msgid "Previous Window"
-msgstr "Poprzednie okno"
-
-#: ../WindowManager/src/WindowItemSource.cs:80
-msgid "The Previously Active Window"
-msgstr "Poprzednio aktywne okno"
-
-#: ../WindowManager/src/WindowItemSource.cs:83
-msgid "Previous Application"
-msgstr "Poprzednia aplikacja"
-
-#: ../WindowManager/src/WindowItemSource.cs:84
-msgid "The Previously Active Application"
-msgstr "Poprzednio aktywna aplikacja"
-
-#: ../Alias/src/AliasAction.cs:40
-msgid "Give an item an alternate name."
-msgstr ""
-
-#: ../Alias/src/AliasItemSource.cs:140
-msgid "Alias items"
-msgstr ""
-
-#: ../Alias/src/AliasItemSource.cs:144
-msgid "Aliased items from Do's universe."
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:77
-msgid "Browse Podcasts"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:78
-msgid "Browse Podcasts by Publisher"
-msgstr ""
-
-#: ../Banshee/src/EnqueueAction.cs:41
-msgid "Add media to play queue"
-msgstr "Dodaj muzykę to kolejki"
-
-#: ../Banshee/src/MediaItemSource.cs:46
-msgid "Banshee Media"
-msgstr "Banshee"
-
-#: ../Banshee/src/MediaItemSource.cs:50
-msgid "Indexes Media from Banshee Media Player"
-msgstr ""
-
-#: ../Banshee/src/MediaItems.cs:191
-msgid "All Music by"
-msgstr ""
-
-#: ../Banshee/src/PauseAction.cs:36
-msgid "Pause playing track"
-msgstr ""
-
-#: ../Banshee/src/PlayAction.cs:39
-msgid "Play from your Banshee Collection"
-msgstr "Odtwarzaj z kolekcji Banshee"
-
-#: ../Banshee/src/SearchCollectionAction.cs:36
-msgid "Search Banshee Media"
-msgstr ""
-
-#: ../Banshee/src/SearchCollectionAction.cs:40
-msgid "Search your entire Banshee collection"
-msgstr "Szukaj w całej kolekcji Banshee"
-
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
-msgid "Choose BibTeX file"
-msgstr ""
-
-#. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
-msgid "Select your documents folder"
-msgstr ""
-
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
-msgid "Choose documents folder"
-msgstr ""
-
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
-msgid "ClawsMail contacts"
-msgstr "Kontakty ClawsMail"
-
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
-msgid "Contacts in ClawsMail address book"
-msgstr "Kontakty w książce adresowej ClawsMail"
-
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
-msgid "Other email"
-msgstr ""
-
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
-msgid "Other"
-msgstr "Inne"
-
-#: ../Cl.ickable/src/ClipAction.cs:38
-msgid "Clip"
-msgstr ""
-
-#: ../Cl.ickable/src/ClipAction.cs:42
-msgid "Create a clip with Cl.ickable"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:32
-msgid "Cl.ickable Clips"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:36
-msgid "Opens your cl.ickable clips"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:31
-msgid "Cl.ickable Items"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:35
-msgid "Usefull Cl.ickable Items"
-msgstr ""
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
-msgid "http://opensource.atlassian.com/confluence/spring"
-msgstr "http://opensource.atlassian.com/confluence/spring"
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
-msgid "username1"
-msgstr "nazwa użytkownika 1"
-
-#: ../Confluence/src/ConfluenceSearchAction.cs:85
-msgid "Search Confluence"
-msgstr "Szukaj w Confluence"
-
-#: ../Confluence/src/ConfluenceSearchAction.cs:93
-msgid "Searches Confluence and returns results to Do"
-msgstr ""
-
-#: ../Del.icio.us/src/TagsItemSource.cs:34
-msgid "Del.icio.us Tags"
-msgstr "Tagi del.icio.us"
-
-#: ../Del.icio.us/src/TagsItemSource.cs:38
-msgid "Organizes your del.icio.bookmarks by tag"
-msgstr ""
-
-#: ../Del.icio.us/src/TagItem.cs:45
-msgid "Untagged del.ico.us bookmarks"
-msgstr "Nie otagowane zakładki del.ico.us"
-
-#: ../Del.icio.us/src/TagItem.cs:47
-#, csharp-format
-msgid "del.icio.us bookmarks tagged with {0}"
-msgstr ""
-
-#: ../Del.icio.us/src/BookmarksItemSource.cs:37
-msgid "Del.icio.us bookmarks"
-msgstr "Del.icio.us zakładki"
-
-#: ../Del.icio.us/src/BookmarksItemSource.cs:41
-msgid "Indexes your del.icio.us bookmarks"
-msgstr "Indeksuje Twoje zakładki del.icio.us"
-
-#: ../Del.icio.us/src/SearchAction.cs:47
-msgid "Search del.icio.us"
-msgstr "Szukaj w del.icio.us"
-
-#: ../Del.icio.us/src/SearchAction.cs:51
-msgid "del.icio.us tag search"
-msgstr ""
-
-#: ../DiskMounter/src/MountAction.cs:36
-msgid "Mount volume"
-msgstr ""
-
-#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
-msgid "Play Slideshow"
-msgstr "Pokaz slajdów"
-
-#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
-msgid "Plays a slideshow of images in a folder."
-msgstr "Pokaz slajdów z folderu"
-
-#: ../Evolution/src/AddressContactDetailItem.cs:34
-msgid "Address"
-msgstr "Adresy"
-
-#: ../File/src/PathNodeView.cs:57
-msgid "Depth"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
-msgid "Catalogs important files and folders for quick access."
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
-msgid "Untitled"
-msgstr ""
-
-#: ../Flickr/src/AccountConfig.cs:112
-#, csharp-format
-msgid "Thank you {0} for allowing Do access to Flickr."
-msgstr ""
-
-#: ../GNOME-Dictionary/src/DefineAction.cs:56
-msgid "Define a given word."
-msgstr "Zdefiniuj podane słowo."
-
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
-msgid "GNOME Screenshot Items"
-msgstr ""
-
-#: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
-msgid "GNOME Session Commands"
-msgstr ""
-
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
-msgid "Opens a GNOME Terminal with the selected profile."
-msgstr ""
-
-#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
-msgid "Opens a GNOME Terminal in a given location."
-msgstr ""
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
-msgid "GNOME Terminal Profiles"
-msgstr ""
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
-msgid "Indexes your GNOME Terminal profiles."
-msgstr ""
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:33
-msgid "Unnamed Profile"
-msgstr "Nienazwany profil"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:34
-msgid "GNOME Terminal Profile"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
-msgid "View Calendar"
-msgstr "Zobacz kalendarz"
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
-msgid "Open calendar in browser"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
-msgid "Search Google Calendar for Events"
-msgstr "Szukaj wydarzeń w Kalendarzu Google"
-
-#: ../GoogleCalendar/src/GCal.cs:34
-msgid "Failed to connect to GCal service"
-msgstr "Błąd przy łączeniu z usługą GCal"
-
 #: ../GoogleContacts/src/GMail.cs:35
 msgid "An error occurred connecting to google, are your credentials valid?"
 msgstr ""
+"Wystąpił błąd podczas łączenia się z Google, czy podane dane są prawidłowe?"
 
 #: ../GoogleContacts/src/GMail.cs:38 ../Microblogging/src/Microblog.cs:36
 msgid ""
 "Missing login credentials. Please set login information in plugin "
 "configuration."
 msgstr ""
+"Brakuje danych wymaganych do zalogowania. Proszę je podać w konfiguracji "
+"wtyczki."
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:38
+msgid "GMail Contacts"
+msgstr "Kontakty GMail"
 
 #: ../GoogleContacts/src/GMailContactItemSource.cs:42
 msgid "Index your GMail contacts"
-msgstr ""
+msgstr "Indeksuj kontakty GMail"
 
 #: ../GoogleDocs/src/GDocs.cs:149
 msgid "Uploading failed."
-msgstr ""
+msgstr "Wysyłanie nie powiodło się."
 
 #: ../GoogleDocs/src/GDocs.cs:150
 msgid "An error occurred when uploading files to Google Docs."
-msgstr ""
+msgstr "Wystąpił błąd podczas wysyłania plików do Google Docs."
 
 #: ../GoogleDocs/src/GDocs.cs:157
 msgid "Deleting failed."
@@ -1062,11 +819,11 @@ msgstr "Google Docs"
 
 #: ../GoogleDocs/src/GDocsItemSource.cs:40
 msgid "Indexes your documents stored at Google Docs"
-msgstr ""
+msgstr "Indeksuj dokumentu w Google Docs"
 
 #: ../GoogleDocs/src/GDocsItem.cs:46
 msgid "Google Docs Generic Document"
-msgstr ""
+msgstr "Dokument Google Docs"
 
 #: ../GoogleDocs/src/GDocsDocumentItem.cs:36
 msgid "Google Docs Text Document"
@@ -1094,16 +851,20 @@ msgstr "Wgraj dokument do Google Docs"
 
 #: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
 msgid "Google Docs Spreadsheet"
-msgstr ""
+msgstr "Arkusz Google Docs"
+
+#: ../GoogleMaps/src/MapAction.cs:39
+msgid "Map"
+msgstr "Mapa"
 
 #: ../GoogleMaps/src/MapAction.cs:44
 msgid "Map a location or route in Google maps."
-msgstr ""
+msgstr "Mapa lub trasa w Mapach Google."
 
 #. Container child vbox4.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
 msgid "Go directly to Google Search page"
-msgstr ""
+msgstr "Idź prosto do strony wyszukiwania Google"
 
 #. Container child vbox4.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:87
@@ -1112,11 +873,11 @@ msgstr "Pokaż wyniki wyszukiwania w Do"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:106
 msgid "Show Search page link as first result"
-msgstr ""
+msgstr "Strona wyszukiwania jako pierwszy wynik"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:120
 msgid "<b>Google Search</b>"
-msgstr ""
+msgstr "<b>Szukaj w Google</b>"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
 msgid "Apply to Google Search page link"
@@ -1130,28 +891,32 @@ msgstr "Nie filtruj wyników wyszukiwania."
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
 msgid "Use moderate filtering"
-msgstr ""
+msgstr "Użyj umiarkowanego filtrowania"
 
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
 msgid "Use strict filtering"
-msgstr ""
+msgstr "Użyj ścisłego filtrowania"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
 msgid "<b>SafeSearch Preferences</b>"
-msgstr ""
+msgstr "Ustawienia filtru SafeSearch"
+
+#: ../GoogleSearch/src/InlineGoogleSearch.cs:81
+msgid "Search Google"
+msgstr "Przeszukaj Google"
 
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:90
 msgid "Allows you to perform Google Searches from Do"
-msgstr ""
+msgstr "Pozwala na wyszukiwanie w Google za pośrednictwem Do"
 
 #: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
 msgid "I'm Feeling Lucky!"
-msgstr ""
+msgstr "Szczęśliwy traf"
 
 #: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
 msgid "Searches Google and takes you to the first result"
-msgstr ""
+msgstr "Wyszukuje w Google i zabiera użytkownika do pierwszego wyniku"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
 msgid ""
@@ -1161,6 +926,9 @@ msgid ""
 "Please log-in to your ImageShack account before getting your registration "
 "code."
 msgstr ""
+"Jeśli posiadasz konto ImageShack, kod rejestracji umożliwia zapisywanie "
+"zdjęć w sekcji Moje zdjęcia na swoim koncie.\n"
+"Zaloguj się do swojego konta ImageShack aby uzyskać kod rejestracji."
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:90
 msgid "_Registration Code"
@@ -1219,17 +987,21 @@ msgstr ""
 msgid "Locate Files"
 msgstr ""
 
+#: ../LocateFiles/src/LocateFilesAction.cs:44
+msgid "Search your filesystem using locate."
+msgstr "Przeszukaj system plików używając locate."
+
 #: ../ManLookUp/src/ManualPageItemSource.cs:50
 msgid "Manual pages (man)"
-msgstr ""
+msgstr "Strony pomocy man"
 
 #: ../ManLookUp/src/ManualPageItemSource.cs:57
 msgid "Search and read help documentation (man)"
-msgstr ""
+msgstr "Wyszukuje i wyświetla pliki dokumentacji (man)"
 
 #: ../ManLookUp/src/ReadManualPageAction.cs:42
 msgid "Read manual page (man)"
-msgstr ""
+msgstr "Wyświetl podręcznik (man)"
 
 #: ../ManLookUp/src/ReadManualPageAction.cs:49
 msgid "Look up and read a manual page."
@@ -1238,6 +1010,10 @@ msgstr ""
 #: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
 msgid "Show friend status updates"
 msgstr ""
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
+msgid "<b>General</b>"
+msgstr "<b>Ogólne</b>"
 
 #: ../Microblogging/src/MicroblogClient.cs:42
 #, csharp-format
@@ -1302,11 +1078,11 @@ msgstr ""
 
 #: ../NX/src/NXHosts.cs:46
 msgid "NX Host"
-msgstr ""
+msgstr "Host NX"
 
 #: ../NX/src/NXHosts.cs:67
 msgid "NX Hosts"
-msgstr ""
+msgstr "Hosty NX"
 
 #: ../NX/src/NXHosts.cs:71
 msgid "Parses nx sessions"
@@ -1314,7 +1090,11 @@ msgstr ""
 
 #: ../OpenSearch/src/OpenSearchAction.cs:35
 msgid "Search Web"
-msgstr ""
+msgstr "Szukaj w Internecie"
+
+#: ../OpenSearch/src/OpenSearchAction.cs:40
+msgid "Searches the web using OpenSearch plugins."
+msgstr "Przeszukaj sieć web używając pluginów OpenSearch."
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:24
 msgid "Opera Bookmarks"
@@ -1322,7 +1102,7 @@ msgstr "Zakładki Opery"
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:28
 msgid "Indexes your Opera 6 bookmarks"
-msgstr ""
+msgstr "Indeksuje zakładki programu Opera 6"
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
 msgid "Supported Codes\t\t\t"
@@ -1338,27 +1118,39 @@ msgstr "Wyślij do Pastebin"
 
 #: ../Pastebin/src/PastebinAction.cs:44
 msgid "Sends the text to Pastebin."
-msgstr ""
+msgstr "Wysyła tekst do usługi Pastebin"
 
 #: ../Pastebin/src/Providers/LodgeIt.cs:77
 msgid "Parsed url was empty. Lodge It has probably changed its format."
 msgstr ""
 
+#: ../Pidgin/src/PidginSetStatusAction.cs:48
+msgid "Set status"
+msgstr "Ustaw status"
+
+#: ../Pidgin/src/PidginSetStatusAction.cs:52
+msgid "Set pidgin status message"
+msgstr "Ustaw opis statusu w Pidgin"
+
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
 msgid "Pidgin Statuses"
-msgstr ""
+msgstr "Statusy Pidgina"
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
 msgid "Saved Pidgin statuses"
-msgstr ""
+msgstr "Zapisane statusy Pidgina"
 
 #: ../Pidgin/src/PidginContactItemSource.cs:59
 msgid "Pidgin Buddies"
-msgstr ""
+msgstr "Znajomi"
 
 #: ../Pidgin/src/PidginContactItemSource.cs:63
 msgid "Buddies on your Pidgin buddy list."
-msgstr ""
+msgstr "Znajomi na liście kontaktów Pidgina."
+
+#: ../Pidgin/src/PidginAccountItemSource.cs:41
+msgid "Pidgin Accounts"
+msgstr "Konta Pidgin"
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:45
 msgid "Available Pidgin IM Accounts"
@@ -1368,13 +1160,49 @@ msgstr ""
 msgid "Sign on"
 msgstr "Zarejestruj się"
 
+#: ../Pidgin/src/PidginAccountActions.cs:40
+msgid "Enable pidgin account"
+msgstr "Włącz konto Pidgin"
+
 #: ../Pidgin/src/PidginAccountActions.cs:82
 msgid "Sign off"
 msgstr "Wyrejestruj się"
 
+#: ../Pidgin/src/PidginAccountActions.cs:86
+msgid "Disble pidgin account"
+msgstr "Wyłącz konto Pidgin"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:45
+msgid "Offline"
+msgstr "Rozłączony"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46
+msgid "Available"
+msgstr "Dostępny"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:47
+msgid "Busy"
+msgstr "Zajęty"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:48
+msgid "Invisible"
+msgstr "Niewidoczny"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:49
+msgid "Away"
+msgstr "Nieobecny"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:50
+msgid "Unknown Status"
+msgstr "Nieznany status"
+
+#: ../Pidgin/src/PidginChatAction.cs:41
+msgid "Chat"
+msgstr "Czat"
+
 #: ../Pidgin/src/PidginChatAction.cs:45
 msgid "Send an instant message to a friend."
-msgstr ""
+msgstr "Wyślij wiadomość znajomemu"
 
 #: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
 msgid "Application Key"
@@ -1452,7 +1280,7 @@ msgstr ""
 #: ../Putty/src/PuttySession.cs:49
 #, csharp-format
 msgid "Start new PuTTY session (host {0})"
-msgstr ""
+msgstr "Otwórz nową sesję PuTTY (host {0})"
 
 #: ../Putty/src/PuttySessionItemSource.cs:40
 msgid "PuTTY sessions"
@@ -1464,7 +1292,7 @@ msgstr ""
 
 #: ../Putty/src/PuttyAction.cs:40
 msgid "Connect with PuTTY"
-msgstr ""
+msgstr "Połącz się przez PuTTY"
 
 #: ../Putty/src/PuttyAction.cs:44
 msgid "Create new conenction with PuTTY"
@@ -1695,6 +1523,10 @@ msgstr ""
 msgid "Complete a selected task"
 msgstr ""
 
+#: ../RememberTheMilk/src/RTMRenameTask.cs:33
+msgid "Rename to..."
+msgstr "Zmień nazwę na..."
+
 #: ../RememberTheMilk/src/RTMRenameTask.cs:37
 msgid "Give the seleted task a new name"
 msgstr ""
@@ -1735,53 +1567,87 @@ msgstr ""
 msgid "All music by"
 msgstr ""
 
+#: ../Rhythmbox/src/EnqueueAction.cs:40
+msgid "Add an item to Rhythmbox's play queue."
+msgstr "Dodaj element do kolejki odtwarzania Rhythmbox-a."
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:49
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "Przeglądaj muzykę Rhythmbox-a wg wykonawców"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:58
+msgid "Browse Rhythmbox Music by Album"
+msgstr "Przeglądaj muzykę Rhythmbox-a wg albumów"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:69
 msgid "Play Current Track in Rhythmbox"
-msgstr ""
+msgstr "Odtwórz aktualny utwór w Rhythmboksie"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:74
 msgid "Pause Rhythmbox Playback"
-msgstr ""
+msgstr "Zatrzymaj odtwarzanie w Rhythmboksie"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:79
 msgid "Play Next Track in Rhythmbox"
-msgstr ""
+msgstr "Przejdź do następnego utworu w Rhythmboksie"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:84
 msgid "Play Previous Track in Rhythmbox"
-msgstr ""
+msgstr "Przejdź do poprzedniego utworu w Rhythmboksie"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:88
 msgid "Show Current Track"
-msgstr ""
+msgstr "Wyświetl aktualny utwór"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:89
 msgid "Show Notification of Current Track in Rhythmbox"
 msgstr ""
 
+#: ../Rhythmbox/src/RhythmboxItems.cs:93
+msgid "Mute"
+msgstr "Wycisz"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:94
 msgid "Mute Rhythmbox Playback"
-msgstr ""
+msgstr "Wycisz Rhythmboksa"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:98
 msgid "Unmute"
-msgstr ""
+msgstr "Włącz dźwięk"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:99
 msgid "Unmute Rhythmbox Playback"
-msgstr ""
+msgstr "Włącz dźwięk w Rhythmboksie"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:103
+#: ../VolumeControl/src/VolumeUpItem.cs:31
+msgid "Volume Up"
+msgstr "Zwiększ głośność"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:104
 msgid "Increase Rhythmbox Playback Volume"
-msgstr ""
+msgstr "Zgłośnij Rhythmboksa"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:108
+#: ../VolumeControl/src/VolumeDownItem.cs:31
+msgid "Volume Down"
+msgstr "Zmniejsz głośność"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:109
 msgid "Decrease Rhythmbox Playback Volume"
-msgstr ""
+msgstr "Ścisz Rhythmboksa"
 
 #: ../Rhythmbox/src/PlayAction.cs:44
 msgid "Play an item in Rhythmbox."
-msgstr ""
+msgstr "Odtwórz utwór w Rhytmboksie"
+
+#: ../Rhythmbox/src/MusicItemSource.cs:45
+msgid "Rhythmbox Music"
+msgstr "Muzyka Rhythmbox"
+
+#: ../Rhythmbox/src/MusicItemSource.cs:49
+msgid "Provides access to artists and albums from Rhythmbox."
+msgstr "Dostarcza dostęp do artystów i albumów w Rhythmbox."
 
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
 msgid "OPML feed file"
@@ -1836,6 +1702,10 @@ msgstr ""
 msgid "Your Shelf Items"
 msgstr ""
 
+#: ../Shelf/src/ShelfItemSource.cs:126
+msgid "Default"
+msgstr "Domyślny"
+
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
 msgstr ""
@@ -1862,6 +1732,22 @@ msgid ""
 "If set to unchecked, these items are loaded when DO is loading causing a "
 "delay until all items are loaded."
 msgstr ""
+
+#: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
+msgid "Connect with SSH"
+msgstr "Połącz przez SSH"
+
+#: ../SSH/src/SSHHosts.cs:42
+msgid "SSH Host"
+msgstr "Host SSH"
+
+#: ../SSH/src/SSHHosts.cs:62
+msgid "SSH Hosts"
+msgstr "Hosty SSH"
+
+#: ../SSH/src/SSHHosts.cs:63
+msgid "Parses ssh-config"
+msgstr "Parsuje ssh-config"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
 msgid "Command for start/stop services (gksudo, etc):"
@@ -1903,9 +1789,25 @@ msgid ""
 "Should be executable."
 msgstr ""
 
+#: ../Tasque/src/TasqueCategoryItem.cs:47
+msgid "Category"
+msgstr "Kategoria"
+
+#: ../Tasque/src/TasqueAction.cs:42
+msgid "Create a new task"
+msgstr "Tworzy nowe zadanie"
+
 #: ../Tasque/src/TasqueAction.cs:46
 msgid "Create a new task in Tasque"
 msgstr ""
+
+#: ../Text/src/AppendTextAction.cs:34
+msgid "Append to..."
+msgstr "Dopisz do..."
+
+#: ../Text/src/AppendTextAction.cs:35
+msgid "Appends text to a selected file."
+msgstr "Dopisz tekst do wybranego pliku."
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
 msgid "Make Tiny Url"
@@ -1918,6 +1820,10 @@ msgstr ""
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
 msgid "Use note content as note title when no title is specified."
 msgstr ""
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
+msgid "<b>Default New Note Title</b>"
+msgstr "<b>Domyślny tytuł nowej notatki</b>"
 
 #. Container child vbox3.Gtk.Box+BoxChild
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:101
@@ -2281,6 +2187,18 @@ msgstr ""
 msgid "Translate to Vietnamese"
 msgstr ""
 
+#: ../Vinagre/src/VNCHostSource.cs:39
+msgid "Vinagre Bookmarks"
+msgstr "Zakładki Vinagre"
+
+#: ../Vinagre/src/VNCHostSource.cs:43
+msgid "Indexes your Vinagre Bookmarks"
+msgstr "Indeksuje twoje zakładki w Vinagre"
+
+#: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
+msgid "Connect with VNC"
+msgstr "Połącz przez VNC"
+
 #: ../VirtualBox/src/SaveStateAction.cs:40
 msgid "Take Snapshot"
 msgstr ""
@@ -2367,9 +2285,37 @@ msgstr ""
 msgid "Resume the selected Virtual Machine"
 msgstr ""
 
+#: ../VolumeControl/src/VolumeDownItem.cs:35
+msgid "Decrease system volume"
+msgstr "Zmniejsz głośność systemu"
+
+#: ../VolumeControl/src/VolumeUpItem.cs:35
+msgid "Increase system volume"
+msgstr "Zwiększ głośność systemu"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:31
+msgid "Mute Volume"
+msgstr "Wyłącz dźwięk"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:35
+msgid "Mute system volume"
+msgstr "Wyłącz dźwięk w systemie"
+
 #: ../VolumeControl/src/VolumeItemSource.cs:39
 msgid "Volume Actions"
 msgstr ""
+
+#: ../VolumeControl/src/VolumeItemSource.cs:43
+msgid "Adjust your system volume"
+msgstr "Dopasuj głośność systemu"
+
+#: ../VolumeControl/src/VolumeUnmuteItem.cs:32
+msgid "Unmute Volume"
+msgstr "Włącz dźwięk"
+
+#: ../VolumeControl/src/VolumeUnmuteItem.cs:36
+msgid "Unmute system volume"
+msgstr "Włącz dźwięk w systemie"
 
 #: ../WindowManager/src/WindowListAction.cs:65
 msgid "Action Window"
@@ -2399,13 +2345,33 @@ msgstr "Minimalizuj/Przywróc okno"
 msgid "Close All"
 msgstr "Zamknij wszystkie"
 
+#: ../WindowManager/src/WindowListAction.cs:246
+msgid "Close your current window."
+msgstr "Zamknij bieżące okno"
+
+#: ../WindowManager/src/ScreenListAction.cs:277
+msgid "Tile Windows"
+msgstr "Rozmieść równomiernie"
+
 #: ../WindowManager/src/ScreenListAction.cs:281
 msgid "Tile All Windows in Current Viewport"
 msgstr ""
 
+#: ../WindowManager/src/ScreenListAction.cs:346
+msgid "Cascade Windows"
+msgstr "Okna kaskadowo"
+
 #: ../WindowManager/src/ScreenListAction.cs:350
 msgid "Cascade your Windows"
 msgstr ""
+
+#: ../WindowManager/src/ScreenListAction.cs:404
+msgid "Restore Windows"
+msgstr "Przywróc okna"
+
+#: ../WindowManager/src/ScreenListAction.cs:408
+msgid "Restore Windows to their Previous Positions"
+msgstr "Przywróć okna do poprzednich położeń"
 
 #: ../WindowManager/src/ScreenItemSource.cs:37
 msgid "Window Screen Items"
@@ -2415,6 +2381,14 @@ msgstr ""
 msgid "Actions you can do to your screens."
 msgstr ""
 
+#: ../WindowManager/src/ScreenItemSource.cs:65
+msgid "Current Desktop"
+msgstr "Bieżący pulpit"
+
+#: ../WindowManager/src/ScreenItemSource.cs:66
+msgid "Everything on the Current Desktop"
+msgstr "Wszystko na bieżącym pulpicie"
+
 #: ../WindowManager/src/WindowItemSource.cs:38
 msgid "Generic Window Items"
 msgstr ""
@@ -2422,6 +2396,38 @@ msgstr ""
 #: ../WindowManager/src/WindowItemSource.cs:44
 msgid "Useful Generically Understood Window Items"
 msgstr ""
+
+#: ../WindowManager/src/WindowItemSource.cs:71
+msgid "Current Window"
+msgstr "Bieżące okno"
+
+#: ../WindowManager/src/WindowItemSource.cs:72
+msgid "The Currently Active Window"
+msgstr "Aktualnie aktywne okno"
+
+#: ../WindowManager/src/WindowItemSource.cs:75
+msgid "Current Application"
+msgstr "Bieżąca aplikacja"
+
+#: ../WindowManager/src/WindowItemSource.cs:76
+msgid "The Currently Active Application"
+msgstr "Aktualnie aktywna aplikacja"
+
+#: ../WindowManager/src/WindowItemSource.cs:79
+msgid "Previous Window"
+msgstr "Poprzednie okno"
+
+#: ../WindowManager/src/WindowItemSource.cs:80
+msgid "The Previously Active Window"
+msgstr "Poprzednio aktywne okno"
+
+#: ../WindowManager/src/WindowItemSource.cs:83
+msgid "Previous Application"
+msgstr "Poprzednia aplikacja"
+
+#: ../WindowManager/src/WindowItemSource.cs:84
+msgid "The Previously Active Application"
+msgstr "Poprzednio aktywna aplikacja"
 
 #: ../Zim/src/ZimPage.cs:38
 msgid "Zim page in notebook: "

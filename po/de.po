@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-04-08 09:12+0000\n"
-"Last-Translator: MicSK <Unknown>\n"
+"PO-Revision-Date: 2011-01-08 22:18+0000\n"
+"Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -96,7 +96,7 @@ msgstr "In die Abspielliste hinzufügen"
 
 #: ../Banshee/src/EnqueueAction.cs:41
 msgid "Add media to play queue"
-msgstr "Ein Medium in die Abspielliste hinzufügen"
+msgstr "Medien zur Warteschlange hinzufügen"
 
 #: ../Banshee/src/MediaItemSource.cs:46
 msgid "Banshee Media"
@@ -188,9 +188,45 @@ msgstr "E-Mail (Primär)"
 msgid "Email"
 msgstr "E-Mail"
 
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
+msgid "Other email"
+msgstr "Sonstige Email"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
+msgid "Other"
+msgstr "Andere"
+
+#: ../Cl.ickable/src/ClipAction.cs:38
+msgid "Clip"
+msgstr "Clip"
+
+#: ../Cl.ickable/src/ClipAction.cs:42
+msgid "Create a clip with Cl.ickable"
+msgstr "Einen Clip mit Cl.ickable erstellen"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:32
+msgid "Cl.ickable Clips"
+msgstr "Cl.ickable-Clips"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:36
+msgid "Opens your cl.ickable clips"
+msgstr "Ihre Cl.ickable-Clips öffnen"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Cl.ickable-Objekte"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr ""
+
 #: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
 msgid "http://opensource.atlassian.com/confluence/spring"
 msgstr "http://opensource.atlassian.com/confluence/spring"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+msgid "username1"
+msgstr "Benutzername1"
 
 #: ../Confluence/src/ConfluenceSearchAction.cs:85
 msgid "Search Confluence"
@@ -395,6 +431,10 @@ msgstr "Neue Datei anlegen"
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
 msgid "Creates an new, empty file."
 msgstr "Legt eine neue, leere Datei an."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
+msgid "Untitled"
+msgstr "Unbenannt"
 
 #: ../Firefox/src/BookmarkItemSource.cs:55
 msgid "Firefox Bookmarks"
@@ -1047,6 +1087,18 @@ msgstr "{0} Status aktualisieren"
 msgid "Connect with NX"
 msgstr "Mit NX verbinden"
 
+#: ../NX/src/NXHosts.cs:46
+msgid "NX Host"
+msgstr "NX-Rechner"
+
+#: ../NX/src/NXHosts.cs:67
+msgid "NX Hosts"
+msgstr "NX-Rechner"
+
+#: ../NX/src/NXHosts.cs:71
+msgid "Parses nx sessions"
+msgstr ""
+
 #: ../OpenSearch/src/OpenSearchAction.cs:35
 msgid "Search Web"
 msgstr "Suchen im Internet"
@@ -1094,15 +1146,15 @@ msgstr "Pidgin Statusnachricht setzen"
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
 msgid "Pidgin Statuses"
-msgstr "Pidgin Statuse"
+msgstr "Pidgin Status"
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
 msgid "Saved Pidgin statuses"
-msgstr "Gespeicherte Pidgin Statuse"
+msgstr "Gespeicherte Pidgin Status"
 
 #: ../Pidgin/src/PidginContactItemSource.cs:59
 msgid "Pidgin Buddies"
-msgstr "Pidgin Buddys"
+msgstr "Pidgin-Buddys"
 
 #: ../Pidgin/src/PidginContactItemSource.cs:63
 msgid "Buddies on your Pidgin buddy list."
@@ -1210,6 +1262,14 @@ msgstr "Status"
 msgid "Error occurred in service response"
 msgstr "Fehler in Dienst-Antwort aufgetreten"
 
+#: ../PingFM/src/PingFMServiceItem.cs:51
+msgid "Web service group supported by Ping.FM"
+msgstr ""
+
+#: ../PingFM/src/PingFMServiceItem.cs:52
+msgid "Web service supported by Ping.FM"
+msgstr ""
+
 #: ../PingFM/src/PingFMPost.cs:35
 msgid "Post via Ping.FM"
 msgstr "Senden via Ping.FM"
@@ -1228,6 +1288,10 @@ msgstr "Verbindung zum Ping.FM-Dienst fehlgeschlagen"
 #: ../PingFM/src/PingFMServiceItemSource.cs:35
 msgid "Ping.FM Services"
 msgstr "Ping.FM-Dienste"
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:39
+msgid "Web services suppported by Ping.FM"
+msgstr "Von Ping.FM unterstützte Webdienste"
 
 #: ../Putty/src/PuttySession.cs:49
 #, csharp-format
@@ -1680,89 +1744,25 @@ msgstr "Ihre Ablagen Objekte"
 msgid "Default"
 msgstr "Standard"
 
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
-msgid "Other email"
-msgstr ""
-
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
-msgid "Other"
-msgstr ""
-
-#: ../Cl.ickable/src/ClipAction.cs:38
-msgid "Clip"
-msgstr ""
-
-#: ../Cl.ickable/src/ClipAction.cs:42
-msgid "Create a clip with Cl.ickable"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:32
-msgid "Cl.ickable Clips"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:36
-msgid "Opens your cl.ickable clips"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:31
-msgid "Cl.ickable Items"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:35
-msgid "Usefull Cl.ickable Items"
-msgstr ""
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
-msgid "username1"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
-msgid "Untitled"
-msgstr ""
-
-#: ../NX/src/NXHosts.cs:46
-msgid "NX Host"
-msgstr ""
-
-#: ../NX/src/NXHosts.cs:67
-msgid "NX Hosts"
-msgstr ""
-
-#: ../NX/src/NXHosts.cs:71
-msgid "Parses nx sessions"
-msgstr ""
-
-#: ../PingFM/src/PingFMServiceItem.cs:51
-msgid "Web service group supported by Ping.FM"
-msgstr ""
-
-#: ../PingFM/src/PingFMServiceItem.cs:52
-msgid "Web service supported by Ping.FM"
-msgstr ""
-
-#: ../PingFM/src/PingFMServiceItemSource.cs:39
-msgid "Web services suppported by Ping.FM"
-msgstr ""
-
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
-msgstr ""
+msgstr "Objekte im Hintergrund laden"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:83
 msgid "Comma-seperated list of radios to load"
-msgstr ""
+msgstr "Durch Kommata getrennte zu ladende Liste von Radios"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:94
 msgid "Host-name of SqueezeCenter server"
-msgstr ""
+msgstr "Rechnername des SqueezeCenter-Servers"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:103
 msgid "Port of the SqueezeCenter server cli interface"
-msgstr ""
+msgstr "Port der Befehlszeilenschnittstelle des SqueezeCenter-Servers"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:114
 msgid "Port of the SqueezeCenter server web interface"
-msgstr ""
+msgstr "Port der Web-Schnittstelle des SqueezeCenter-Servers"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:125
 msgid ""
@@ -1770,18 +1770,21 @@ msgid ""
 "If set to unchecked, these items are loaded when DO is loading causing a "
 "delay until all items are loaded."
 msgstr ""
+"Beim Laden von DO Künstler, Alben und Radios im Hintergrund laden.  \n"
+"Falls deaktiviert, werden diese Objekte beim Laden von DO geladen, was eine "
+"Verzögerung verursacht."
 
 #: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
 msgid "Connect with SSH"
-msgstr ""
+msgstr "Über SSH verbinden"
 
 #: ../SSH/src/SSHHosts.cs:42
 msgid "SSH Host"
-msgstr ""
+msgstr "SSH-Rechner"
 
 #: ../SSH/src/SSHHosts.cs:62
 msgid "SSH Hosts"
-msgstr ""
+msgstr "SSH-Rechner"
 
 #: ../SSH/src/SSHHosts.cs:63
 msgid "Parses ssh-config"
@@ -1789,28 +1792,28 @@ msgstr ""
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
 msgid "Command for start/stop services (gksudo, etc):"
-msgstr ""
+msgstr "Befehl zum Starten/Stoppen von Diensten (gksudo usw.):"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
 msgid "..."
-msgstr ""
+msgstr "…"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
 msgid "Services to control:"
-msgstr ""
+msgstr "Zu steuernde Dienste:"
 
 #: ../SystemServices/src/ServiceItemSource.cs:39
 msgid "System Services"
-msgstr ""
+msgstr "Systemdienste"
 
 #: ../SystemServices/src/ServiceItemSource.cs:43
 msgid "List of all System Services"
-msgstr ""
+msgstr "Ein liste mit allen Bedienungen"
 
 #: ../SystemServices/src/Service.cs:46
 #, csharp-format
 msgid "{0} service"
-msgstr ""
+msgstr "{0} Bedienung"
 
 #: ../SystemServices/src/Service.cs:50
 #, csharp-format
@@ -1819,49 +1822,53 @@ msgstr ""
 
 #: ../SystemServices/src/SystemServicesConfig.cs:71
 msgid "Choose the file to open"
-msgstr ""
+msgstr "Datei zum Öffnen auswählen"
 
 #: ../SystemServices/src/SystemServicesConfig.cs:88
 msgid ""
 "Selected invalid file!\n"
 "Should be executable."
 msgstr ""
+"Dateiauswahl ist ungültig!\n"
+"Datei sollte ausführbar sein."
 
 #: ../Tasque/src/TasqueCategoryItem.cs:47
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: ../Tasque/src/TasqueAction.cs:42
 msgid "Create a new task"
-msgstr ""
+msgstr "Eine neue Aufgabe anlegen"
 
 #: ../Tasque/src/TasqueAction.cs:46
 msgid "Create a new task in Tasque"
-msgstr ""
+msgstr "Eine neue Aufgabe in Tasque anlegen"
 
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
-msgstr ""
+msgstr "Anhängen an ..."
 
 #: ../Text/src/AppendTextAction.cs:35
 msgid "Appends text to a selected file."
-msgstr ""
+msgstr "Text an ausgewählte Datei anhängen."
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
 msgid "Make Tiny Url"
-msgstr ""
+msgstr "Kurzadresse erstellen"
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:66
 msgid "Creates a TinyUrl from an unwieldy mess."
 msgstr ""
+"Generiert eine kurze Adresse aus einer langen, unübersichtlichen Adresse."
 
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
 msgid "Use note content as note title when no title is specified."
 msgstr ""
+"Inhalt der Notiz als Titel verwenden, wenn kein Titel angegeben wird."
 
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
 msgid "<b>Default New Note Title</b>"
-msgstr ""
+msgstr "<b>Vorgabetitel für neue Notizen</b>"
 
 #. Container child vbox3.Gtk.Box+BoxChild
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:101
@@ -1879,481 +1886,482 @@ msgstr ""
 
 #: ../Tomboy/src/NewNoteAction.cs:37
 msgid "New Tomboy Note"
-msgstr ""
+msgstr "Neue Tomboy Notiz"
 
 #: ../Tomboy/src/NewNoteAction.cs:41
 msgid "Create a new Tomboy note."
-msgstr ""
+msgstr "Eine neue Tomboy Notiz erstellen"
 
 #: ../Tomboy/src/NotesItemSource.cs:56
 msgid "Tomboy Note Indexer"
-msgstr ""
+msgstr "Indizierung von Tomboy-Notizen"
 
 #: ../Tomboy/src/NotesItemSource.cs:60
 msgid "Loads Tomboy notes for searching."
-msgstr ""
+msgstr "Tomboy-Notizen werden zum Durchsuchen geladen."
 
 #: ../Tomboy/src/SearchNotesAction.cs:36
 msgid "Search Tomboy Notes"
-msgstr ""
+msgstr "Tomboy-Notizen durchsuchen"
 
 #: ../Tomboy/src/SearchNotesAction.cs:40
 msgid "Searches contents of Tomboy notes."
-msgstr ""
+msgstr "Durchsucht den Inhalt von Tomboy-Notizen."
 
 #: ../Tomboy/src/TomboyItem.cs:50
 msgid "Tomboy note"
-msgstr ""
+msgstr "Tomboy Notiz"
 
 #: ../Tracker/src/TrackerSearch.cs:38
 msgid "Search with Tracker"
-msgstr ""
+msgstr "Mit Tracker suchen"
 
 #: ../Tracker/src/TrackerSearch.cs:42
 msgid "Launches Tracker with the given query."
-msgstr ""
+msgstr "Startet Tracker mit der angegebenen Abfrage."
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:58
 msgid "Translation Plugin Options"
-msgstr ""
+msgstr "Optionen der Übersetzungs-Erweiterung"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:71
 msgid "Translation Provider"
-msgstr ""
+msgstr "Übersetzungsanbieter"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
 msgid "Default Source Language"
-msgstr ""
+msgstr "Standard-Quell-Sprache"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
 msgid "Default Web Interface Language"
-msgstr ""
+msgstr "Standard-Web-Benutzeroberflächen-Sprache"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
 msgid "Enable / Disable Language"
-msgstr ""
+msgstr "Sprache aktivieren/deaktivieren"
 
 #: ../Translate/src/TranslateAction.cs:58
 msgid "Translate"
-msgstr ""
+msgstr "Übersetzen"
 
 #: ../Translate/src/TranslateAction.cs:66
 msgid "Translates text"
-msgstr ""
+msgstr "Text übersetzen"
 
 #: ../Translate/src/UI/ConfigUI.cs:128
 msgid "Auto Detect (Recommended)"
-msgstr ""
+msgstr "Automatisch erkennen (empfohlen)"
 
 #: ../Translate/src/Provider/Google.cs:35
 msgid "Arabic"
-msgstr ""
+msgstr "Arabisch"
 
 #: ../Translate/src/Provider/Google.cs:36
 msgid "Translate to Arabic"
-msgstr ""
+msgstr "Ins Arabische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:39
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bulgarisch"
 
 #: ../Translate/src/Provider/Google.cs:40
 msgid "Translate to Bulgarian"
-msgstr ""
+msgstr "Ins Bulgarische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:43
 msgid "Catalon"
-msgstr ""
+msgstr "Katalanisch"
 
 #: ../Translate/src/Provider/Google.cs:44
 msgid "Translate to Catalon"
-msgstr ""
+msgstr "Ins Katalanische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:47
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Chinesisch (vereinfacht)"
 
 #: ../Translate/src/Provider/Google.cs:48
 msgid "Translate to Chinese (Simplified)"
-msgstr ""
+msgstr "Ins vereinfachte Chinesische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:51
 msgid "Chinese (Traditional)"
-msgstr ""
+msgstr "Chinesisch (traditionell)"
 
 #: ../Translate/src/Provider/Google.cs:52
 msgid "Translate to Chinese (Traditional)"
-msgstr ""
+msgstr "Ins traditionelle Chinesische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:55
 msgid "Croatian"
-msgstr ""
+msgstr "Kroatisch"
 
 #: ../Translate/src/Provider/Google.cs:56
 msgid "Translate to Croatian"
-msgstr ""
+msgstr "Ins Kroatische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:59
 msgid "Czech"
-msgstr ""
+msgstr "Tschechisch"
 
 #: ../Translate/src/Provider/Google.cs:60
 msgid "Translate to Czech"
-msgstr ""
+msgstr "Ins Tschechische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:63
 msgid "Danish"
-msgstr ""
+msgstr "Dänisch"
 
 #: ../Translate/src/Provider/Google.cs:64
 msgid "Translate to Danish"
-msgstr ""
+msgstr "Ins Dänische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:67
 msgid "Dutch"
-msgstr ""
+msgstr "Niederländisch"
 
 #: ../Translate/src/Provider/Google.cs:68
 msgid "Translate to Dutch"
-msgstr ""
+msgstr "Ins Niederländische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:71
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 #: ../Translate/src/Provider/Google.cs:72
 msgid "Translate to English"
-msgstr ""
+msgstr "Ins Englische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:75
 msgid "Filipino"
-msgstr ""
+msgstr "Filipinisch"
 
 #: ../Translate/src/Provider/Google.cs:76
 msgid "Translate to Filipino"
-msgstr ""
+msgstr "Ins Filipinische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:79
 msgid "Finnish"
-msgstr ""
+msgstr "Finnisch"
 
 #: ../Translate/src/Provider/Google.cs:80
 msgid "Translate to Finnish"
-msgstr ""
+msgstr "Ins Finnische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:83
 msgid "French"
-msgstr ""
+msgstr "Französisch"
 
 #: ../Translate/src/Provider/Google.cs:84
 msgid "Translate to French"
-msgstr ""
+msgstr "Ins Französische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:87
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
 #: ../Translate/src/Provider/Google.cs:88
 msgid "Translate to German"
-msgstr ""
+msgstr "Ins Deutsche übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:91
 msgid "Greek"
-msgstr ""
+msgstr "Griechisch"
 
 #: ../Translate/src/Provider/Google.cs:92
 msgid "Translate to Greek"
-msgstr ""
+msgstr "Ins Griechische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:95
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebräisch"
 
 #: ../Translate/src/Provider/Google.cs:96
 msgid "Translate to Hebrew"
-msgstr ""
+msgstr "Ins Hebräische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:99
 msgid "Hindi"
-msgstr ""
+msgstr "Hindi"
 
 #: ../Translate/src/Provider/Google.cs:100
 msgid "Translate to Hindi"
-msgstr ""
+msgstr "In Hindi übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:103
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesisch"
 
 #: ../Translate/src/Provider/Google.cs:104
 msgid "Translate to Indonesian"
-msgstr ""
+msgstr "In Indonesisch übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:107
 msgid "Italian"
-msgstr ""
+msgstr "Italienisch"
 
 #: ../Translate/src/Provider/Google.cs:108
 msgid "Translate to Italian"
-msgstr ""
+msgstr "Ins Italienische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:111
 msgid "Japanese"
-msgstr ""
+msgstr "Japanisch"
 
 #: ../Translate/src/Provider/Google.cs:112
 msgid "Translate to Japanese"
-msgstr ""
+msgstr "Ins Japanische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:115
 msgid "Korean"
-msgstr ""
+msgstr "Koreanisch"
 
 #: ../Translate/src/Provider/Google.cs:116
 msgid "Translate to Korean"
-msgstr ""
+msgstr "Ins Koreanische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:119
 msgid "Latvian"
-msgstr ""
+msgstr "Lettisch"
 
 #: ../Translate/src/Provider/Google.cs:120
 msgid "Translate to Latvian"
-msgstr ""
+msgstr "Ins Lettische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:123
 msgid "Lithuanian"
-msgstr ""
+msgstr "Litauisch"
 
 #: ../Translate/src/Provider/Google.cs:124
 msgid "Translate to Lithuanian"
-msgstr ""
+msgstr "Ins Litauische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:127
 msgid "Norwegian"
-msgstr ""
+msgstr "Norwegisch"
 
 #: ../Translate/src/Provider/Google.cs:128
 msgid "Translate to Norwegian"
-msgstr ""
+msgstr "Ins Norwegische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:131
 msgid "Polish"
-msgstr ""
+msgstr "Polnisch"
 
 #: ../Translate/src/Provider/Google.cs:132
 msgid "Translate to Polish"
-msgstr ""
+msgstr "Ins Polnische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:135
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugiesisch"
 
 #: ../Translate/src/Provider/Google.cs:136
 msgid "Translate to Portuguese"
-msgstr ""
+msgstr "Ins Portugiesische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:139
 msgid "Romanian"
-msgstr ""
+msgstr "Rumänisch"
 
 #: ../Translate/src/Provider/Google.cs:140
 msgid "Translate to Romanian"
-msgstr ""
+msgstr "Ins Rumänische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:143
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 #: ../Translate/src/Provider/Google.cs:144
 msgid "Translate to Russian"
-msgstr ""
+msgstr "Ins Russische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:147
 msgid "Serbian"
-msgstr ""
+msgstr "Serbisch"
 
 #: ../Translate/src/Provider/Google.cs:148
 msgid "Translate to Serbian"
-msgstr ""
+msgstr "Ins Serbische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:151
 msgid "Slovak"
-msgstr ""
+msgstr "Slowakisch"
 
 #: ../Translate/src/Provider/Google.cs:152
 msgid "Translate to Slovak"
-msgstr ""
+msgstr "Ins Slowakische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:155
 msgid "Slovenian"
-msgstr ""
+msgstr "Slowenisch"
 
 #: ../Translate/src/Provider/Google.cs:156
 msgid "Translate to Slovenian"
-msgstr ""
+msgstr "Ins Slowenische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:159
 msgid "Spanish"
-msgstr ""
+msgstr "Spanisch"
 
 #: ../Translate/src/Provider/Google.cs:160
 msgid "Translate to Spanish"
-msgstr ""
+msgstr "Ins Spanische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:163
 msgid "Swedish"
-msgstr ""
+msgstr "Schwedisch"
 
 #: ../Translate/src/Provider/Google.cs:164
 msgid "Translate to Swedish"
-msgstr ""
+msgstr "Ins Schwedische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:167
 msgid "Ukranian"
-msgstr ""
+msgstr "Ukrainisch"
 
 #: ../Translate/src/Provider/Google.cs:168
 msgid "Translate to Ukranian"
-msgstr ""
+msgstr "Ins Ukrainische übersetzen"
 
 #: ../Translate/src/Provider/Google.cs:171
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamesisch"
 
 #: ../Translate/src/Provider/Google.cs:172
 msgid "Translate to Vietnamese"
-msgstr ""
+msgstr "Ins Vietnamesiche übersetzen"
 
 #: ../Vinagre/src/VNCHostSource.cs:39
 msgid "Vinagre Bookmarks"
-msgstr ""
+msgstr "Vinagre-Lesezeichen"
 
 #: ../Vinagre/src/VNCHostSource.cs:43
 msgid "Indexes your Vinagre Bookmarks"
-msgstr ""
+msgstr "Indizierung Ihrer Vinagre-Lesezeichen"
 
 #: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
 msgid "Connect with VNC"
-msgstr ""
+msgstr "Mit VNC verbinden"
 
 #: ../VirtualBox/src/SaveStateAction.cs:40
 msgid "Take Snapshot"
-msgstr ""
+msgstr "Schnappschuss erstellen"
 
 #: ../VirtualBox/src/SaveStateAction.cs:44
 msgid "Save the current state as a Snapshot"
-msgstr ""
+msgstr "Aktuellen Zustand als Schnappschuss speichern"
 
 #: ../VirtualBox/src/SaveStateAction.cs:98
 msgid "Snapshot ("
-msgstr ""
+msgstr "Schnappschuss ("
 
 #: ../VirtualBox/src/OffAction.cs:40
 msgid "Power Off Virtual Machine"
-msgstr ""
+msgstr "Virtuelle Maschine ausschalten"
 
 #: ../VirtualBox/src/OffAction.cs:44
 msgid "Powers off the selected Virtual Machine"
-msgstr ""
+msgstr "Schaltet die ausgewählte virtuelle Maschine aus"
 
 #: ../VirtualBox/src/OffAction.cs:72
 #: ../VirtualBox/src/RestoreStateAction.cs:40
 msgid "Discard State"
-msgstr ""
+msgstr "Zustand verwerfen"
 
 #: ../VirtualBox/src/OffAction.cs:73
 #: ../VirtualBox/src/RestoreStateAction.cs:44
 msgid "Restore VM state to current Snapshot"
 msgstr ""
+"Virtuelle Maschine auf den Zustand des letzten Snapshots wiederherstellen"
 
 #: ../VirtualBox/src/PauseAction.cs:39
 msgid "Pause Virtual Machine"
-msgstr ""
+msgstr "Virtuelle Maschine anhalten"
 
 #: ../VirtualBox/src/PauseAction.cs:43
 msgid "Pauses the selected Virtual Machine"
-msgstr ""
+msgstr "Hält die ausgewählte Virtuelle Maschine an"
 
 #: ../VirtualBox/src/SaveAction.cs:39
 msgid "Save Virtual Machine State"
-msgstr ""
+msgstr "Den Status der Virtuellen Maschine speichern"
 
 #: ../VirtualBox/src/SaveAction.cs:43
 msgid "Saves the state of the selected Virtual Machine"
-msgstr ""
+msgstr "Speichert den Status der ausgewählten Virtuellen Maschine"
 
 #: ../VirtualBox/src/VMItemSource.cs:38
 msgid "VirtualBox VMs"
-msgstr ""
+msgstr "VirtualBox VMs"
 
 #: ../VirtualBox/src/VMItemSource.cs:39
 msgid "Virtual Machines created with VirtualBox"
-msgstr ""
+msgstr "Mit VirtualBox erstellte Virtuelle Maschinen"
 
 #: ../VirtualBox/src/StartAction.cs:40
 msgid "Start Virtual Machine"
-msgstr ""
+msgstr "Virtuelle Maschine starten"
 
 #: ../VirtualBox/src/StartAction.cs:44
 msgid "Starts the selected Virtual Machine"
-msgstr ""
+msgstr "Ausgewählte virtuelle Maschine starten"
 
 #: ../VirtualBox/src/StartAction.cs:70
 msgid "Open in GUI"
-msgstr ""
+msgstr "In Benutzeroberfläche öffnen"
 
 #: ../VirtualBox/src/StartAction.cs:71
 msgid "Open in VirtualBox GUI"
-msgstr ""
+msgstr "In der VirtualBox-Benutzeroberfläche öffnen"
 
 #: ../VirtualBox/src/StartAction.cs:77
 msgid "Start Headless"
-msgstr ""
+msgstr "Headless starten"
 
 #: ../VirtualBox/src/StartAction.cs:78
 msgid "Start in Headless mode"
-msgstr ""
+msgstr "Im Headless-Modus starten"
 
 #: ../VirtualBox/src/ResumeAction.cs:39
 msgid "Resume Virtual Machine"
-msgstr ""
+msgstr "Virtuelle Maschine fortsetzen"
 
 #: ../VirtualBox/src/ResumeAction.cs:43
 msgid "Resume the selected Virtual Machine"
-msgstr ""
+msgstr "Die ausgewählte Virtuelle Maschine fortsetzen"
 
 #: ../VolumeControl/src/VolumeDownItem.cs:35
 msgid "Decrease system volume"
-msgstr ""
+msgstr "Systemlautstärke verringern"
 
 #: ../VolumeControl/src/VolumeUpItem.cs:35
 msgid "Increase system volume"
-msgstr ""
+msgstr "Systemlautstärke erhöhen"
 
 #: ../VolumeControl/src/VolumeMuteItem.cs:31
 msgid "Mute Volume"
-msgstr ""
+msgstr "Stummschaltung"
 
 #: ../VolumeControl/src/VolumeMuteItem.cs:35
 msgid "Mute system volume"
-msgstr ""
+msgstr "Systemlautstärke stummschalten"
 
 #: ../VolumeControl/src/VolumeItemSource.cs:39
 msgid "Volume Actions"
-msgstr ""
+msgstr "Lautstärkeaktionen"
 
 #: ../VolumeControl/src/VolumeItemSource.cs:43
 msgid "Adjust your system volume"
-msgstr ""
+msgstr "Anpassen Ihrer Systemlautstärke"
 
 #: ../VolumeControl/src/VolumeUnmuteItem.cs:32
 msgid "Unmute Volume"
-msgstr ""
+msgstr "Stummschaltung aufheben"
 
 #: ../VolumeControl/src/VolumeUnmuteItem.cs:36
 msgid "Unmute system volume"
-msgstr ""
+msgstr "Stummschaltung der Systemlautstärke aufheben"
 
 #: ../WindowManager/src/WindowListAction.cs:65
 msgid "Action Window"
@@ -2365,27 +2373,27 @@ msgstr ""
 
 #: ../WindowManager/src/WindowListAction.cs:190
 msgid "Maximize"
-msgstr ""
+msgstr "Maximieren"
 
 #: ../WindowManager/src/WindowListAction.cs:194
 msgid "Make a window consume the whole screen"
-msgstr ""
+msgstr "Ein Fenster auf dem gesamten Bildschirm ausbreiten"
 
 #: ../WindowManager/src/WindowListAction.cs:217
 msgid "Minimize/Restore"
-msgstr ""
+msgstr "Minimieren/wiederherstellen"
 
 #: ../WindowManager/src/WindowListAction.cs:221
 msgid "Minimize/Restore a Window"
-msgstr ""
+msgstr "Ein Fenster minimieren oder wiederherstellen"
 
 #: ../WindowManager/src/WindowListAction.cs:242
 msgid "Close All"
-msgstr ""
+msgstr "Alle schließen"
 
 #: ../WindowManager/src/WindowListAction.cs:246
 msgid "Close your current window."
-msgstr ""
+msgstr "Ihr aktuelles Fenster schließen"
 
 #: ../WindowManager/src/ScreenListAction.cs:277
 msgid "Tile Windows"
@@ -2397,19 +2405,19 @@ msgstr ""
 
 #: ../WindowManager/src/ScreenListAction.cs:346
 msgid "Cascade Windows"
-msgstr ""
+msgstr "Fenster stufenförmig anordnen"
 
 #: ../WindowManager/src/ScreenListAction.cs:350
 msgid "Cascade your Windows"
-msgstr ""
+msgstr "Stufenförmige Anordnung Ihrer Fenster"
 
 #: ../WindowManager/src/ScreenListAction.cs:404
 msgid "Restore Windows"
-msgstr ""
+msgstr "Fenster wiederherstellen"
 
 #: ../WindowManager/src/ScreenListAction.cs:408
 msgid "Restore Windows to their Previous Positions"
-msgstr ""
+msgstr "Fenster an ihren vorherigen Positionen wiederherstellen"
 
 #: ../WindowManager/src/ScreenItemSource.cs:37
 msgid "Window Screen Items"
@@ -2421,11 +2429,11 @@ msgstr ""
 
 #: ../WindowManager/src/ScreenItemSource.cs:65
 msgid "Current Desktop"
-msgstr ""
+msgstr "Aktuelle Arbeitsfläche"
 
 #: ../WindowManager/src/ScreenItemSource.cs:66
 msgid "Everything on the Current Desktop"
-msgstr ""
+msgstr "Alles auf dem momentanen Arbeitsplatz"
 
 #: ../WindowManager/src/WindowItemSource.cs:38
 msgid "Generic Window Items"
@@ -2437,35 +2445,35 @@ msgstr ""
 
 #: ../WindowManager/src/WindowItemSource.cs:71
 msgid "Current Window"
-msgstr ""
+msgstr "Aktuelles Fenster"
 
 #: ../WindowManager/src/WindowItemSource.cs:72
 msgid "The Currently Active Window"
-msgstr ""
+msgstr "Das gegenwärtig aktive Fenster"
 
 #: ../WindowManager/src/WindowItemSource.cs:75
 msgid "Current Application"
-msgstr ""
+msgstr "Aktuelle Anwendung"
 
 #: ../WindowManager/src/WindowItemSource.cs:76
 msgid "The Currently Active Application"
-msgstr ""
+msgstr "Die gegenwärtig aktive Anwendung"
 
 #: ../WindowManager/src/WindowItemSource.cs:79
 msgid "Previous Window"
-msgstr ""
+msgstr "Vorheriges Fenster"
 
 #: ../WindowManager/src/WindowItemSource.cs:80
 msgid "The Previously Active Window"
-msgstr ""
+msgstr "Das vorher aktive Fenster"
 
 #: ../WindowManager/src/WindowItemSource.cs:83
 msgid "Previous Application"
-msgstr ""
+msgstr "Vorherige Anwendung"
 
 #: ../WindowManager/src/WindowItemSource.cs:84
 msgid "The Previously Active Application"
-msgstr ""
+msgstr "Die vorher aktive Anwendung"
 
 #: ../Zim/src/ZimPage.cs:38
 msgid "Zim page in notebook: "
@@ -2473,23 +2481,23 @@ msgstr ""
 
 #: ../Zim/src/ZimNewPageAction.cs:37
 msgid "New Zim page"
-msgstr ""
+msgstr "Neue Zim Seite"
 
 #: ../Zim/src/ZimNewPageAction.cs:41
 msgid "Create new page in Zim"
-msgstr ""
+msgstr "Neue Zim Seite anlegen"
 
 #: ../Zim/src/ZimOpenPageAction.cs:39
 msgid "Open Zim page"
-msgstr ""
+msgstr "Zim-Seite öffnen"
 
 #: ../Zim/src/ZimOpenPageAction.cs:43
 msgid "Open selected page in Zim"
-msgstr ""
+msgstr "Ausgewählte Seite in Zim öffnen"
 
 #: ../Zim/src/ZimPagesItemSource.cs:38
 msgid "Zim pages"
-msgstr ""
+msgstr "Zim seiten"
 
 #: ../Zim/src/ZimPagesItemSource.cs:42
 msgid "Zim Desktop Wiki pages"

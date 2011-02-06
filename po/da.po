@@ -8,15 +8,39 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-06-18 20:29+0000\n"
-"Last-Translator: pkslot <pkslot@gmail.com>\n"
+"PO-Revision-Date: 2010-03-30 21:42+0000\n"
+"Last-Translator: AJenbo <anders@jenbo.dk>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
+
+#: ../Alias/src/AliasAction.cs:36
+msgid "Assign Alias..."
+msgstr "Tilknyt alias"
+
+#: ../Alias/src/AliasAction.cs:40
+msgid "Give an item an alternate name."
+msgstr "Giv et objekt et alternativt navn"
+
+#: ../Alias/src/DeleteAliasAction.cs:36
+msgid "Delete Alias"
+msgstr "Slet alias"
+
+#: ../Alias/src/DeleteAliasAction.cs:40
+msgid "Deletes an alias."
+msgstr "Sletter et alias"
+
+#: ../Alias/src/AliasItemSource.cs:140
+msgid "Alias items"
+msgstr ""
+
+#: ../Alias/src/AliasItemSource.cs:144
+msgid "Aliased items from Do's universe."
+msgstr ""
 
 #: ../Archive/src/ExtractArchiveAction.cs:40
 msgid "Extract archive"
@@ -38,20 +62,68 @@ msgstr "Opret et arkiv med det valgte objekt"
 msgid "Browse Artists"
 msgstr "Gennemsøg kunstnere"
 
+#: ../Banshee/src/BrowseMediaItems.cs:57
+msgid "Browse Music by Artist"
+msgstr "Gennemsøg musik efter kunstner"
+
 #: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
 msgid "Browse Albums"
 msgstr "Gennemsøg albums"
+
+#: ../Banshee/src/BrowseMediaItems.cs:70
+msgid "Browse Music by Album"
+msgstr "Gennemsøg musik after album"
+
+#: ../Banshee/src/BrowseMediaItems.cs:77
+msgid "Browse Podcasts"
+msgstr "Gennemsøg podcasts"
+
+#: ../Banshee/src/BrowseMediaItems.cs:78
+msgid "Browse Podcasts by Publisher"
+msgstr "Gennemsøg podcasts efter udgiver"
+
+#: ../Banshee/src/BrowseMediaItems.cs:85
+msgid "Browse Videos"
+msgstr "Gennemsøg videoer"
+
+#: ../Banshee/src/BrowseMediaItems.cs:86
+msgid "Browse All Videos"
+msgstr "Gennemsøg alle videoer"
 
 #: ../Banshee/src/EnqueueAction.cs:37 ../Rhythmbox/src/EnqueueAction.cs:36
 msgid "Add to Play Queue"
 msgstr "Tilføj til afspilningskøen"
 
+#: ../Banshee/src/EnqueueAction.cs:41
+msgid "Add media to play queue"
+msgstr "Tilføj medie til afspilningskø"
+
+#: ../Banshee/src/MediaItemSource.cs:46
+msgid "Banshee Media"
+msgstr "Banshee Media"
+
+#: ../Banshee/src/MediaItemSource.cs:50
+msgid "Indexes Media from Banshee Media Player"
+msgstr "indekserer medier fra Banshee medie afspilleren"
+
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr "Alt musik fra"
+
 #: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
 msgid "Next"
 msgstr "Næste"
 
+#: ../Banshee/src/NextAction.cs:36
+msgid "Play next track"
+msgstr "Næste"
+
 #: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
 msgid "Pause"
+msgstr "Pause"
+
+#: ../Banshee/src/PauseAction.cs:36
+msgid "Pause playing track"
 msgstr "Pause"
 
 #: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
@@ -59,15 +131,52 @@ msgstr "Pause"
 msgid "Play"
 msgstr "Afspil"
 
+#: ../Banshee/src/PlayAction.cs:39
+msgid "Play from your Banshee Collection"
+msgstr "Afspil fra Banshee samlingen"
+
 #: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
 msgid "Previous"
 msgstr "Forrige"
+
+#: ../Banshee/src/PreviousAction.cs:36
+msgid "Play previous track"
+msgstr "Forrige"
+
+#: ../Banshee/src/SearchCollectionAction.cs:36
+msgid "Search Banshee Media"
+msgstr "Søg i Banshee medier"
+
+#: ../Banshee/src/SearchCollectionAction.cs:40
+msgid "Search your entire Banshee collection"
+msgstr "Søg i hele din Banshee samling"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+msgid "Choose BibTeX file"
+msgstr "Vælg BibTeX fil"
 
 #. Container child table1.Gtk.Table+TableChild
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
 msgid "Select A File"
 msgstr "Vælg en fil"
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+msgid "Select your documents folder"
+msgstr "Vælg din dokument mappe"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+msgid "Choose documents folder"
+msgstr "Vælg dokument mappen"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr "ClawsMail kontakter"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr "kontakter i ClawsMail adressebog"
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:71
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:41
@@ -78,6 +187,87 @@ msgstr "Primær e-mail"
 #: ../Evolution/src/EmailContactDetailItem.cs:34
 msgid "Email"
 msgstr "Email"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
+msgid "Other email"
+msgstr "Andre emails"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
+msgid "Other"
+msgstr "andre"
+
+#: ../Cl.ickable/src/ClipAction.cs:38
+msgid "Clip"
+msgstr "klip"
+
+#: ../Cl.ickable/src/ClipAction.cs:42
+msgid "Create a clip with Cl.ickable"
+msgstr "Lav et klip med Cl.ickable"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:32
+msgid "Cl.ickable Clips"
+msgstr "Cl.ickable klip"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:36
+msgid "Opens your cl.ickable clips"
+msgstr "Åbner dine cl.ickable klip"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Cl.ickable Objekter"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr "Nyttige Cl.ickable Objekter"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+msgid "http://opensource.atlassian.com/confluence/spring"
+msgstr "http://opensource.atlassian.com/confluence/spring"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+msgid "username1"
+msgstr "Brugernavn1"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:85
+msgid "Search Confluence"
+msgstr "Søg Confluence"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:93
+msgid "Searches Confluence and returns results to Do"
+msgstr "Søger Confluence og returnerer resultaterne til Do"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr "Del.icio.us Mærker"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.bookmarks by tag"
+msgstr "Organiserer dine Del.icio.us bogmærker efter mærker"
+
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr "Umarkerede del.ico.us bogmærker"
+
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr "del.icio.us bogmærker mærket med {0}"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:37
+msgid "Del.icio.us bookmarks"
+msgstr "Del.icio.us bogmærker"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:41
+msgid "Indexes your del.icio.us bookmarks"
+msgstr "Indekserer dine del.icio.us bogmærker"
+
+#: ../Del.icio.us/src/SearchAction.cs:47
+msgid "Search del.icio.us"
+msgstr "Søg del.icio.us"
+
+#: ../Del.icio.us/src/SearchAction.cs:51
+msgid "del.icio.us tag search"
+msgstr ""
 
 #: ../DiskMounter/src/OpenVolumeAction.cs:40
 #: ../SystemServices/src/SystemServicesConfig.cs:74
@@ -103,6 +293,14 @@ msgstr "Montér"
 #: ../DiskMounter/src/MountAction.cs:36
 msgid "Mount volume"
 msgstr "Montér disken"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
+msgid "Play Slideshow"
+msgstr "Afspil Slideshow"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
+msgid "Plays a slideshow of images in a folder."
+msgstr "Afspiller et slideshow af billederne i en mappe"
 
 #: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:44
 msgid "Epiphany Bookmarks"
@@ -131,9 +329,21 @@ msgstr "Mobiltelefon"
 msgid "Evolution Contacts"
 msgstr "Evolution Kontakter"
 
+#: ../Evolution/src/AddressContactDetailItem.cs:34
+msgid "Address"
+msgstr "Adresse"
+
 #: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
 msgid "Show hidden files"
 msgstr "Vis skjulte filer"
+
+#: ../File/src/PathNodeView.cs:51
+msgid "Folder"
+msgstr "Mappe"
+
+#: ../File/src/PathNodeView.cs:57
+msgid "Depth"
+msgstr "Dybde"
 
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
 msgid "Delete File"
@@ -142,6 +352,35 @@ msgstr "Slet fil"
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:41
 msgid "Deletes a file or folder."
 msgstr "Sletter en fil eller mappe"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
+msgid "Choose a folder to index"
+msgstr "Vælg en mappe at indeksere"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
+#: ../SystemServices/src/SystemServicesConfig.cs:73
+msgid "Cancel"
+msgstr "Fortryd"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
+msgid "Choose folder"
+msgstr "Vælg mappe"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
+msgid "Rename file..."
+msgstr "Omdøb fil"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
+msgid "Renames a file."
+msgstr "Omdøber en fil"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
+msgid "Create New Folder"
+msgstr "Ny mappe"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
+msgid "Creates an new folder."
+msgstr "Laver ny mappe"
 
 #: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
 #: ../RememberTheMilk/src/RTMMoveTask.cs:35
@@ -155,6 +394,10 @@ msgstr "Flytter en fil eller mappe til et andet sted."
 #: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:39
 msgid "Move to Trash"
 msgstr "Flyt til papirkurv"
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:43
+msgid "Moves a file or folder to the trash"
+msgstr "Flytter en fil eller mappe i skraldespanden"
 
 #: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
 msgid "Recent Files"
@@ -171,6 +414,26 @@ msgstr "Kopier til..."
 #: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
 msgid "Copies a file or folder to another location."
 msgstr "Kopierer en fil eller mappe til et andet sted"
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
+msgid "Files and Folders"
+msgstr "Filer og mapper"
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
+msgid "Catalogs important files and folders for quick access."
+msgstr "Katalogiserer vigtige filer og mapper for hurtig adgang"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
+msgid "Create New File"
+msgstr "Ny fil"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
+msgid "Creates an new, empty file."
+msgstr "Laver en ny, tom fil"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
+msgid "Untitled"
+msgstr "Unavngivet"
 
 #: ../Firefox/src/BookmarkItemSource.cs:55
 msgid "Firefox Bookmarks"
@@ -300,6 +563,10 @@ msgstr "Tag skærmbillede"
 msgid "Takes a screenshot with optional delay."
 msgstr "Tager et skærmbillede med valgfri ventetid."
 
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
+msgid "GNOME Screenshot Items"
+msgstr "GNOME Skærmbillede filer"
+
 #: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
 msgid "Whole screen or current window."
 msgstr "Hele skærmen eller nuværende vindue"
@@ -384,6 +651,22 @@ msgstr "Kør i terminal"
 msgid "Runs a command in GNOME Terminal."
 msgstr "Kør en kommando i GNOME Terminalen"
 
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
+msgid "GNOME Terminal Profiles"
+msgstr "GNOME terminal profiler"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
+msgid "Indexes your GNOME Terminal profiles."
+msgstr "Indekserer dine GNOME Terminal profiler"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:33
+msgid "Unnamed Profile"
+msgstr "Unavngivet Profil"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:34
+msgid "GNOME Terminal Profile"
+msgstr "GNOME Terminal Profil"
+
 #: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
 msgid "Perform a calculation using Google Calculator."
 msgstr "Lav en udregning med Google Calculator"
@@ -392,6 +675,11 @@ msgstr "Lav en udregning med Google Calculator"
 msgid "Google Calculator could not evaluate the expression."
 msgstr "Google Lommeregner kunne ikke forstå det skrevne."
 
+#: ../GoogleCalendar/src/Configuration.cs:42
+#: ../GoogleDocs/src/Configuration.cs:41
+msgid "E-Mail:"
+msgstr "Email:"
+
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:40
 msgid "Google Calendars"
 msgstr "Google Kalendere"
@@ -399,6 +687,31 @@ msgstr "Google Kalendere"
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:44
 msgid "Indexes your Google Calendars"
 msgstr "Indekserer dine Google Kalendere"
+
+#: ../GoogleCalendar/src/GCalClient.cs:40
+msgid "All Events"
+msgstr "Alle begivenheder"
+
+#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
+#, csharp-format
+msgid "An error has occurred in {0}"
+msgstr "Der er sket en fejl i {0}"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:41
+msgid "View Event"
+msgstr "Se begivenhed"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:45
+msgid "Open event in browser"
+msgstr "Åben begivenhed i browser"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
+msgid "View Calendar"
+msgstr "Se kalender"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
+msgid "Open calendar in browser"
+msgstr "Åben kalender i browser"
 
 #: ../GoogleCalendar/src/GCalendarItem.cs:45
 msgid "Google Calendar"
@@ -411,6 +724,10 @@ msgstr "Søg i Begivenheder"
 #: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
 msgid "Search Google Calendar for Events"
 msgstr "Søg Google Kalender for begivenheder"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr "Kunne ikke skabe forbindelse til GCal service"
 
 #: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
 msgid "New Event"
@@ -444,9 +761,94 @@ msgstr "Hjemmeadresse"
 msgid "Work Address"
 msgstr "Arbejdsadresse"
 
+#: ../GoogleContacts/src/GMail.cs:35
+msgid "An error occurred connecting to google, are your credentials valid?"
+msgstr ""
+
+#: ../GoogleContacts/src/GMail.cs:38 ../Microblogging/src/Microblog.cs:36
+msgid ""
+"Missing login credentials. Please set login information in plugin "
+"configuration."
+msgstr ""
+
 #: ../GoogleContacts/src/GMailContactItemSource.cs:38
 msgid "GMail Contacts"
 msgstr "Gmail Kontakter"
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:42
+msgid "Index your GMail contacts"
+msgstr "Indekserér dine GMail kontakter"
+
+#: ../GoogleDocs/src/GDocs.cs:149
+msgid "Uploading failed."
+msgstr "Upload mislykkedes"
+
+#: ../GoogleDocs/src/GDocs.cs:150
+msgid "An error occurred when uploading files to Google Docs."
+msgstr "Der skete en fejl ved upload af filer til Google Docs"
+
+#: ../GoogleDocs/src/GDocs.cs:157
+msgid "Deleting failed."
+msgstr "Sletning mislykkedes"
+
+#: ../GoogleDocs/src/GDocs.cs:158
+msgid "An error occurred when deleting the document at Google Docs."
+msgstr "Der skete en fej ved sletning af dokumentet i Google Docs"
+
+#: ../GoogleDocs/src/GDocs.cs:165
+msgid "Document deleted."
+msgstr "Dokument slettet"
+
+#: ../GoogleDocs/src/GDocs.cs:166
+#, csharp-format
+msgid ""
+"The document '{0}' has been successfully moved into Trash at Google Docs."
+msgstr ""
+"Dokumentet '{0}' er med succees blevet smidt i papirkurven, i Google Docs."
+
+#: ../GoogleDocs/src/GDocsPresentationItem.cs:36
+msgid "Google Docs Presentation"
+msgstr "Google Docs Presentation"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:36
+msgid "Google Docs"
+msgstr "Google Docs"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:40
+msgid "Indexes your documents stored at Google Docs"
+msgstr "Indexserer dine dokumenter gemt i Google Docs"
+
+#: ../GoogleDocs/src/GDocsItem.cs:46
+msgid "Google Docs Generic Document"
+msgstr "Google Docs Generisk Dokument"
+
+#: ../GoogleDocs/src/GDocsDocumentItem.cs:36
+msgid "Google Docs Text Document"
+msgstr "Google Docs Text Dokument"
+
+#: ../GoogleDocs/src/GDocsPDFItem.cs:36
+msgid "Google Docs PDF Document"
+msgstr "Google Docs PDF Dokument"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:38
+msgid "Delete Document"
+msgstr "Slet dokument"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:42
+msgid "Move a document into Trash at Google Docs"
+msgstr "Flyt et dokument i papirkurven, i Google Docs"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
+msgid "Upload Document"
+msgstr "Upload Dokument"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:45
+msgid "Upload a document to Google Docs"
+msgstr "Upload et dokument til Google Docs"
+
+#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
+msgid "Google Docs Spreadsheet"
+msgstr "Google Docs regneark"
 
 #: ../GoogleMaps/src/MapAction.cs:39
 msgid "Map"
@@ -455,6 +857,28 @@ msgstr "Kort"
 #: ../GoogleMaps/src/MapAction.cs:44
 msgid "Map a location or route in Google maps."
 msgstr "Kortlæg et sted eller rute i Google Maps."
+
+#. Container child vbox4.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
+msgid "Go directly to Google Search page"
+msgstr "Gå direkte til Googles søgeside"
+
+#. Container child vbox4.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:87
+msgid "Show search results in Do"
+msgstr "Vis søgeresultater i Do"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:106
+msgid "Show Search page link as first result"
+msgstr "Vis søgeside link som første resultat"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:120
+msgid "<b>Google Search</b>"
+msgstr "<b>Google søgning</b>"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
+msgid "Apply to Google Search page link"
+msgstr ""
 
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
@@ -471,9 +895,87 @@ msgstr "Brug let filtrering"
 msgid "Use strict filtering"
 msgstr "Brug streng filtrering"
 
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
+msgid "<b>SafeSearch Preferences</b>"
+msgstr "<b>SafeSearch Indstillinger</b>"
+
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:81
 msgid "Search Google"
 msgstr "Søg på Google"
+
+#: ../GoogleSearch/src/InlineGoogleSearch.cs:90
+msgid "Allows you to perform Google Searches from Do"
+msgstr "Giver dig mulighed for at udføre Google søgninger fra Do"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
+msgid "I'm Feeling Lucky!"
+msgstr "Jeg føler mig heldig!"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
+msgid "Searches Google and takes you to the first result"
+msgstr "Søger google og fører dig til det første resultat"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
+msgid ""
+"If you have an ImageShack account, a registration code allows you to save "
+"images to the My Images sections of your account.\n"
+"\n"
+"Please log-in to your ImageShack account before getting your registration "
+"code."
+msgstr ""
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:90
+msgid "_Registration Code"
+msgstr "_registreringskode"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:124
+msgid "_Get Registration Code"
+msgstr "_Få registreringskode"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:140
+msgid "<b>Registration Code</b>"
+msgstr "<b>registreringskode</b>"
+
+#: ../ImageShack/src/ImageShackAction.cs:57
+msgid "Upload to ImageShack"
+msgstr "Upload til ImageShack"
+
+#: ../ImageShack/src/ImageShackAction.cs:61
+msgid "Uploads the image to ImageShack."
+msgstr "Uploader billedet til ImageShack."
+
+#: ../ImageShack/src/ImageShackAction.cs:106
+msgid "ImageShack exception: "
+msgstr ""
+
+#: ../ImageShack/src/ImageShackAction.cs:116
+msgid "File size exceeds ImageShack's 1.5MB limit."
+msgstr "Filstørrelsen overskrider ImageShacks 1.5MB grænse"
+
+#: ../ImageShack/src/ImageShackAction.cs:196
+msgid "Parsed url was empty. ImageShack has probably changed its format."
+msgstr ""
+
+#: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
+#: ../ImageShack/src/Notifications.cs:53
+msgid "ImageShack"
+msgstr "ImageShack"
+
+#: ../ImageShack/src/Notifications.cs:32
+msgid "Do is uploading your image... Please wait a moment..."
+msgstr "Do uploader dit billede... vent venligst et øjeblik..."
+
+#: ../ImageShack/src/Notifications.cs:43
+msgid "Unable to upload image to ImageShack at this time."
+msgstr "Kan ikke uploade billedet til ImageShack i øjeblikket"
+
+#: ../Launchpad/src/LaunchpadAction.cs:36
+msgid "Search Launchpad"
+msgstr "Søg Launchpad"
+
+#: ../Launchpad/src/LaunchpadAction.cs:40
+msgid "Search Launchpad properties."
+msgstr "Søg Launchpad egenskaber"
 
 #: ../LocateFiles/src/LocateFilesAction.cs:39
 msgid "Locate Files"
@@ -483,9 +985,104 @@ msgstr "Find Filer"
 msgid "Search your filesystem using locate."
 msgstr "Søg dit filsystem med locate"
 
+#: ../ManLookUp/src/ManualPageItemSource.cs:50
+msgid "Manual pages (man)"
+msgstr "Manual sider (man)"
+
+#: ../ManLookUp/src/ManualPageItemSource.cs:57
+msgid "Search and read help documentation (man)"
+msgstr "Søg og læs hjælp dokumentation (man)"
+
+#: ../ManLookUp/src/ReadManualPageAction.cs:42
+msgid "Read manual page (man)"
+msgstr "Læs manual side"
+
+#: ../ManLookUp/src/ReadManualPageAction.cs:49
+msgid "Look up and read a manual page."
+msgstr "Find og læs en manual side"
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
+msgid "Show friend status updates"
+msgstr "Vis venne status opdateringer"
+
 #: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
 msgid "<b>General</b>"
 msgstr "<b>Generelt</b>"
+
+#: ../Microblogging/src/MicroblogClient.cs:42
+#, csharp-format
+msgid "Failed to fetch file from {0}"
+msgstr "Kunne ikke hente filen fra {0}"
+
+#: ../Microblogging/src/MicroblogClient.cs:43
+#, csharp-format
+msgid "Twitter encountered an error in {0}. {1}"
+msgstr "Twitter fandt en fejl i {0}. {1}"
+
+#: ../Microblogging/src/MicroblogClient.cs:45
+msgid ""
+"Unable to post tweet. Check your login settings. If you are behind a proxy "
+"make sure that the settings in /system/http_proxy are correct."
+msgstr ""
+"Kunne ikke sende tweet. Tjek dine login indstillinger. Hvis du er bag en "
+"proxy, så sørg for at indstillingerne i /system/http_proxy er korrekte."
+
+#: ../Microblogging/src/FriendSource.cs:47
+msgid "Microblog friends"
+msgstr "Microblog venner"
+
+#: ../Microblogging/src/FriendSource.cs:51
+msgid "Indexes your microblog friends"
+msgstr "Indekserer dine microblog venner"
+
+#: ../Microblogging/src/Notifications.cs:40
+#, csharp-format
+msgid "New direct message from {0}"
+msgstr "Ny direkte besked fra {0}"
+
+#: ../Microblogging/src/Notifications.cs:57
+msgid "Post failed"
+msgstr "Post mislykkedes"
+
+#: ../Microblogging/src/Notifications.cs:58
+msgid "Post Successful"
+msgstr "Post lykkedes"
+
+#: ../Microblogging/src/Notifications.cs:59
+#, csharp-format
+msgid "Failed to post '{0}' to {1}"
+msgstr "Kunne ikke poste '{0}' til {1}"
+
+#: ../Microblogging/src/Notifications.cs:60
+#, csharp-format
+msgid "'{0}' sucessfully posted to {1}"
+msgstr ""
+
+#: ../Microblogging/src/PostAction.cs:44
+#, csharp-format
+msgid "Post to {0}"
+msgstr ""
+
+#: ../Microblogging/src/PostAction.cs:48
+#, csharp-format
+msgid "Update {0} status"
+msgstr "Opdatér {0} status"
+
+#: ../NX/src/NXAction.cs:37 ../NX/src/NXAction.cs:41
+msgid "Connect with NX"
+msgstr "Forbind til NX"
+
+#: ../NX/src/NXHosts.cs:46
+msgid "NX Host"
+msgstr "NX Host"
+
+#: ../NX/src/NXHosts.cs:67
+msgid "NX Hosts"
+msgstr "NX Hosts"
+
+#: ../NX/src/NXHosts.cs:71
+msgid "Parses nx sessions"
+msgstr ""
 
 #: ../OpenSearch/src/OpenSearchAction.cs:35
 msgid "Search Web"
@@ -494,6 +1091,34 @@ msgstr "Søg på Internettet"
 #: ../OpenSearch/src/OpenSearchAction.cs:40
 msgid "Searches the web using OpenSearch plugins."
 msgstr "Søg på internettet med OpenSearch plugins"
+
+#: ../Opera/src/OperaBookmarkItemSource.cs:24
+msgid "Opera Bookmarks"
+msgstr "Opera bogmærker"
+
+#: ../Opera/src/OperaBookmarkItemSource.cs:28
+msgid "Indexes your Opera 6 bookmarks"
+msgstr "Indekserer dine Opera 6 bogmærker"
+
+#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
+msgid "Supported Codes\t\t\t"
+msgstr "Understøttede koder\t\t\t"
+
+#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:101
+msgid "<b>Pastebin Provider</b>"
+msgstr ""
+
+#: ../Pastebin/src/PastebinAction.cs:40
+msgid "Send to Pastebin"
+msgstr ""
+
+#: ../Pastebin/src/PastebinAction.cs:44
+msgid "Sends the text to Pastebin."
+msgstr ""
+
+#: ../Pastebin/src/Providers/LodgeIt.cs:77
+msgid "Parsed url was empty. Lodge It has probably changed its format."
+msgstr ""
 
 #: ../Pidgin/src/PidginSetStatusAction.cs:48
 msgid "Set status"
@@ -575,724 +1200,6 @@ msgstr "Chat"
 msgid "Send an instant message to a friend."
 msgstr "Send en direkte besked til en ven."
 
-#: ../RememberTheMilk/src/RTMRenameTask.cs:33
-msgid "Rename to..."
-msgstr "Omd&oslash;b til..."
-
-#: ../Rhythmbox/src/MusicItems.cs:77
-msgid "All music by"
-msgstr "Alt musik af"
-
-#: ../Rhythmbox/src/EnqueueAction.cs:40
-msgid "Add an item to Rhythmbox's play queue."
-msgstr "Tilføj et objekt til Rhythmbox' afspilningskø."
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:49
-msgid "Browse Rhythmbox Music by Artist"
-msgstr "Browse Rhythmbox Musik efter Kunstner"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:58
-msgid "Browse Rhythmbox Music by Album"
-msgstr "Browse Rhythmbox Music efter Album"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:69
-msgid "Play Current Track in Rhythmbox"
-msgstr "Afspil nuværende nummer i Rhythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:74
-msgid "Pause Rhythmbox Playback"
-msgstr "Sæt Rhythmbox afspilningen på pause"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:79
-msgid "Play Next Track in Rhythmbox"
-msgstr "Afspil næste nummer i Rhythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:84
-msgid "Play Previous Track in Rhythmbox"
-msgstr "Afspil forrige nummer i Rhythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:88
-msgid "Show Current Track"
-msgstr "Vis nuværende nummer"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:93
-msgid "Mute"
-msgstr "Tavs"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:98
-msgid "Unmute"
-msgstr "Aktiver lyd"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:103
-#: ../VolumeControl/src/VolumeUpItem.cs:31
-msgid "Volume Up"
-msgstr "Lydstyrke op"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:108
-#: ../VolumeControl/src/VolumeDownItem.cs:31
-msgid "Volume Down"
-msgstr "Lydstyrke Ned"
-
-#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
-msgid "OPML feed file"
-msgstr "OPML feed fil"
-
-#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:75
-msgid "Timeout (in seconds)"
-msgstr "Timeout (in sekunder)"
-
-#: ../Shelf/src/ShelfItemSource.cs:56
-msgid " Shelf"
-msgstr " Hylde"
-
-#: ../Shelf/src/ShelfItemSource.cs:126
-msgid "Default"
-msgstr "Standard"
-
-#: ../Tasque/src/TasqueCategoryItem.cs:47
-msgid "Category"
-msgstr "Kategori"
-
-#: ../Tasque/src/TasqueAction.cs:42
-msgid "Create a new task"
-msgstr "Opret en ny opgave"
-
-#: ../Tasque/src/TasqueAction.cs:46
-msgid "Create a new task in Tasque"
-msgstr "Opret en ny opgave i Tasque"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:31
-msgid "Mute Volume"
-msgstr "Slå lyd fra"
-
-#: ../WindowManager/src/ScreenListAction.cs:346
-msgid "Cascade Windows"
-msgstr "Stabl Vinduer"
-
-#: ../Alias/src/AliasAction.cs:36
-msgid "Assign Alias..."
-msgstr "Tilknyt alias"
-
-#: ../Alias/src/AliasAction.cs:40
-msgid "Give an item an alternate name."
-msgstr ""
-
-#: ../Alias/src/DeleteAliasAction.cs:36
-msgid "Delete Alias"
-msgstr "Slet alias"
-
-#: ../Alias/src/DeleteAliasAction.cs:40
-msgid "Deletes an alias."
-msgstr "Sletter et alias"
-
-#: ../Alias/src/AliasItemSource.cs:140
-msgid "Alias items"
-msgstr ""
-
-#: ../Alias/src/AliasItemSource.cs:144
-msgid "Aliased items from Do's universe."
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:57
-msgid "Browse Music by Artist"
-msgstr "Gennemsøg musik efter kunstner"
-
-#: ../Banshee/src/BrowseMediaItems.cs:70
-msgid "Browse Music by Album"
-msgstr "Gennemsøg musik after album"
-
-#: ../Banshee/src/BrowseMediaItems.cs:77
-msgid "Browse Podcasts"
-msgstr "Gennemsøg podcasts"
-
-#: ../Banshee/src/BrowseMediaItems.cs:78
-msgid "Browse Podcasts by Publisher"
-msgstr "Gennemsøg podcasts efter udgiver"
-
-#: ../Banshee/src/BrowseMediaItems.cs:85
-msgid "Browse Videos"
-msgstr "Gennemsøg videoer"
-
-#: ../Banshee/src/BrowseMediaItems.cs:86
-msgid "Browse All Videos"
-msgstr "Gennemsøg alle videoer"
-
-#: ../Banshee/src/EnqueueAction.cs:41
-msgid "Add media to play queue"
-msgstr "Tilføj medie til afspilningskø"
-
-#: ../Banshee/src/MediaItemSource.cs:46
-msgid "Banshee Media"
-msgstr "Banshee Media"
-
-#: ../Banshee/src/MediaItemSource.cs:50
-msgid "Indexes Media from Banshee Media Player"
-msgstr "indekserer medier fra Banshee medie afspilleren"
-
-#: ../Banshee/src/MediaItems.cs:191
-msgid "All Music by"
-msgstr "Alt musik fra"
-
-#: ../Banshee/src/NextAction.cs:36
-msgid "Play next track"
-msgstr "Næste"
-
-#: ../Banshee/src/PauseAction.cs:36
-msgid "Pause playing track"
-msgstr "Pause"
-
-#: ../Banshee/src/PlayAction.cs:39
-msgid "Play from your Banshee Collection"
-msgstr "Afspil fra Banshee samlingen"
-
-#: ../Banshee/src/PreviousAction.cs:36
-msgid "Play previous track"
-msgstr "Forrige"
-
-#: ../Banshee/src/SearchCollectionAction.cs:36
-msgid "Search Banshee Media"
-msgstr "Søg i Banshee medier"
-
-#: ../Banshee/src/SearchCollectionAction.cs:40
-msgid "Search your entire Banshee collection"
-msgstr "Søg i hele din Banshee samling"
-
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
-msgid "Choose BibTeX file"
-msgstr "Vælg BibTeX fil"
-
-#. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
-msgid "Select your documents folder"
-msgstr "Vælg din dokument mappe"
-
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
-msgid "Choose documents folder"
-msgstr "Vælg dokument mappen"
-
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
-msgid "ClawsMail contacts"
-msgstr "ClawsMail kontakter"
-
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
-msgid "Contacts in ClawsMail address book"
-msgstr "kontakter i ClawsMail adressebog"
-
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
-msgid "Other email"
-msgstr "Andre emails"
-
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
-msgid "Other"
-msgstr "andre"
-
-#: ../Cl.ickable/src/ClipAction.cs:38
-msgid "Clip"
-msgstr "klip"
-
-#: ../Cl.ickable/src/ClipAction.cs:42
-msgid "Create a clip with Cl.ickable"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:32
-msgid "Cl.ickable Clips"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:36
-msgid "Opens your cl.ickable clips"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:31
-msgid "Cl.ickable Items"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:35
-msgid "Usefull Cl.ickable Items"
-msgstr ""
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
-msgid "http://opensource.atlassian.com/confluence/spring"
-msgstr ""
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
-msgid "username1"
-msgstr "Brugernavn1"
-
-#: ../Confluence/src/ConfluenceSearchAction.cs:85
-msgid "Search Confluence"
-msgstr ""
-
-#: ../Confluence/src/ConfluenceSearchAction.cs:93
-msgid "Searches Confluence and returns results to Do"
-msgstr ""
-
-#: ../Del.icio.us/src/TagsItemSource.cs:34
-msgid "Del.icio.us Tags"
-msgstr ""
-
-#: ../Del.icio.us/src/TagsItemSource.cs:38
-msgid "Organizes your del.icio.bookmarks by tag"
-msgstr ""
-
-#: ../Del.icio.us/src/TagItem.cs:45
-msgid "Untagged del.ico.us bookmarks"
-msgstr "Umarkerede del.ico.us bogmærker"
-
-#: ../Del.icio.us/src/TagItem.cs:47
-#, csharp-format
-msgid "del.icio.us bookmarks tagged with {0}"
-msgstr "del.icio.us bogmærker mærket med {0}"
-
-#: ../Del.icio.us/src/BookmarksItemSource.cs:37
-msgid "Del.icio.us bookmarks"
-msgstr "Del.icio.us bogmærker"
-
-#: ../Del.icio.us/src/BookmarksItemSource.cs:41
-msgid "Indexes your del.icio.us bookmarks"
-msgstr "Indekserer dine del.icio.us bogmærker"
-
-#: ../Del.icio.us/src/SearchAction.cs:47
-msgid "Search del.icio.us"
-msgstr "Søg del.icio.us"
-
-#: ../Del.icio.us/src/SearchAction.cs:51
-msgid "del.icio.us tag search"
-msgstr ""
-
-#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
-msgid "Play Slideshow"
-msgstr ""
-
-#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
-msgid "Plays a slideshow of images in a folder."
-msgstr ""
-
-#: ../Evolution/src/AddressContactDetailItem.cs:34
-msgid "Address"
-msgstr "Adresse"
-
-#: ../File/src/PathNodeView.cs:51
-msgid "Folder"
-msgstr "Mappe"
-
-#: ../File/src/PathNodeView.cs:57
-msgid "Depth"
-msgstr "Dybde"
-
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
-msgid "Choose a folder to index"
-msgstr "Vælg en mappe at indeksere"
-
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
-#: ../SystemServices/src/SystemServicesConfig.cs:73
-msgid "Cancel"
-msgstr "Fortryd"
-
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
-msgid "Choose folder"
-msgstr "Vælg mappe"
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
-msgid "Rename file..."
-msgstr "Omdøb fil"
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
-msgid "Renames a file."
-msgstr "Omdøber en fil"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
-msgid "Create New Folder"
-msgstr "Ny mappe"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
-msgid "Creates an new folder."
-msgstr "Laver ny mappe"
-
-#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:43
-msgid "Moves a file or folder to the trash"
-msgstr "Flytter en fil eller mappe i skraldespanden"
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
-msgid "Files and Folders"
-msgstr "Filer og mapper"
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
-msgid "Catalogs important files and folders for quick access."
-msgstr "Katalogiserer vigtige filer og mapper for hurtig adgang"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
-msgid "Create New File"
-msgstr "Ny fil"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
-msgid "Creates an new, empty file."
-msgstr "Laver en ny, tom fil"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
-msgid "Untitled"
-msgstr "Unavngivet"
-
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
-msgid "GNOME Screenshot Items"
-msgstr "GNOME Skærmbillede filer"
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
-msgid "GNOME Terminal Profiles"
-msgstr "GNOME terminal profiler"
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
-msgid "Indexes your GNOME Terminal profiles."
-msgstr "Indekserer dine GNOME Terminal profiler"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:33
-msgid "Unnamed Profile"
-msgstr "Unavngivet Profil"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:34
-msgid "GNOME Terminal Profile"
-msgstr "GNOME Terminal Profil"
-
-#: ../GoogleCalendar/src/Configuration.cs:42
-#: ../GoogleDocs/src/Configuration.cs:41
-msgid "E-Mail:"
-msgstr "Email:"
-
-#: ../GoogleCalendar/src/GCalClient.cs:40
-msgid "All Events"
-msgstr "Alle begivenheder"
-
-#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
-#, csharp-format
-msgid "An error has occurred in {0}"
-msgstr "Der er sket en fejl i {0}"
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:41
-msgid "View Event"
-msgstr "Se begivenhed"
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:45
-msgid "Open event in browser"
-msgstr "Åben begivenhed i browser"
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
-msgid "View Calendar"
-msgstr "Se kalender"
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
-msgid "Open calendar in browser"
-msgstr "Åben kalender i browser"
-
-#: ../GoogleCalendar/src/GCal.cs:34
-msgid "Failed to connect to GCal service"
-msgstr "Kunne ikke skabe forbindelse til GCal service"
-
-#: ../GoogleContacts/src/GMail.cs:35
-msgid "An error occurred connecting to google, are your credentials valid?"
-msgstr ""
-
-#: ../GoogleContacts/src/GMail.cs:38 ../Microblogging/src/Microblog.cs:36
-msgid ""
-"Missing login credentials. Please set login information in plugin "
-"configuration."
-msgstr ""
-
-#: ../GoogleContacts/src/GMailContactItemSource.cs:42
-msgid "Index your GMail contacts"
-msgstr "Indekserér dine GMail kontakter"
-
-#: ../GoogleDocs/src/GDocs.cs:149
-msgid "Uploading failed."
-msgstr ""
-
-#: ../GoogleDocs/src/GDocs.cs:150
-msgid "An error occurred when uploading files to Google Docs."
-msgstr ""
-
-#: ../GoogleDocs/src/GDocs.cs:157
-msgid "Deleting failed."
-msgstr ""
-
-#: ../GoogleDocs/src/GDocs.cs:158
-msgid "An error occurred when deleting the document at Google Docs."
-msgstr ""
-
-#: ../GoogleDocs/src/GDocs.cs:165
-msgid "Document deleted."
-msgstr "Dokument slettet"
-
-#: ../GoogleDocs/src/GDocs.cs:166
-#, csharp-format
-msgid ""
-"The document '{0}' has been successfully moved into Trash at Google Docs."
-msgstr ""
-
-#: ../GoogleDocs/src/GDocsPresentationItem.cs:36
-msgid "Google Docs Presentation"
-msgstr "Google Docs Presentation"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:36
-msgid "Google Docs"
-msgstr "Google Docs"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:40
-msgid "Indexes your documents stored at Google Docs"
-msgstr "Indexserer dine dokumenter gemt i Google Docs"
-
-#: ../GoogleDocs/src/GDocsItem.cs:46
-msgid "Google Docs Generic Document"
-msgstr "Google Docs Generisk Dokument"
-
-#: ../GoogleDocs/src/GDocsDocumentItem.cs:36
-msgid "Google Docs Text Document"
-msgstr "Google Docs Text Dokument"
-
-#: ../GoogleDocs/src/GDocsPDFItem.cs:36
-msgid "Google Docs PDF Document"
-msgstr "Google Docs PDF Dokument"
-
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:38
-msgid "Delete Document"
-msgstr "Slet dokument"
-
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:42
-msgid "Move a document into Trash at Google Docs"
-msgstr ""
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
-msgid "Upload Document"
-msgstr "Upload Dokument"
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:45
-msgid "Upload a document to Google Docs"
-msgstr "Upload et dokument til Google Docs"
-
-#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
-msgid "Google Docs Spreadsheet"
-msgstr ""
-
-#. Container child vbox4.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
-msgid "Go directly to Google Search page"
-msgstr ""
-
-#. Container child vbox4.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:87
-msgid "Show search results in Do"
-msgstr "Vis søgeresultater i Do"
-
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:106
-msgid "Show Search page link as first result"
-msgstr "Vis søgeside link som første resultat"
-
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:120
-msgid "<b>Google Search</b>"
-msgstr "<b>Google søgning</b>"
-
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
-msgid "Apply to Google Search page link"
-msgstr ""
-
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
-msgid "<b>SafeSearch Preferences</b>"
-msgstr ""
-
-#: ../GoogleSearch/src/InlineGoogleSearch.cs:90
-msgid "Allows you to perform Google Searches from Do"
-msgstr "Giver dig mulighed for at udføre Google søgninger fra Do"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
-msgid "I'm Feeling Lucky!"
-msgstr "Jeg føler mig heldig!"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
-msgid "Searches Google and takes you to the first result"
-msgstr "Søger google og fører dig til det første resultat"
-
-#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
-msgid ""
-"If you have an ImageShack account, a registration code allows you to save "
-"images to the My Images sections of your account.\n"
-"\n"
-"Please log-in to your ImageShack account before getting your registration "
-"code."
-msgstr ""
-
-#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:90
-msgid "_Registration Code"
-msgstr "_registreringskode"
-
-#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:124
-msgid "_Get Registration Code"
-msgstr "_Få registreringskode"
-
-#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:140
-msgid "<b>Registration Code</b>"
-msgstr "<b>registreringskode</b>"
-
-#: ../ImageShack/src/ImageShackAction.cs:57
-msgid "Upload to ImageShack"
-msgstr "Upload til ImageShack"
-
-#: ../ImageShack/src/ImageShackAction.cs:61
-msgid "Uploads the image to ImageShack."
-msgstr "Uploader billedet til ImageShack."
-
-#: ../ImageShack/src/ImageShackAction.cs:106
-msgid "ImageShack exception: "
-msgstr ""
-
-#: ../ImageShack/src/ImageShackAction.cs:116
-msgid "File size exceeds ImageShack's 1.5MB limit."
-msgstr "Filstørrelsen overskrider ImageShacks 1.5MB grænse"
-
-#: ../ImageShack/src/ImageShackAction.cs:196
-msgid "Parsed url was empty. ImageShack has probably changed its format."
-msgstr ""
-
-#: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
-#: ../ImageShack/src/Notifications.cs:53
-msgid "ImageShack"
-msgstr "ImageShack"
-
-#: ../ImageShack/src/Notifications.cs:32
-msgid "Do is uploading your image... Please wait a moment..."
-msgstr "Do uploader dit billede... vent venligst et øjeblik..."
-
-#: ../ImageShack/src/Notifications.cs:43
-msgid "Unable to upload image to ImageShack at this time."
-msgstr "Kan ikke uploade billedet til ImageShack i øjeblikket"
-
-#: ../Launchpad/src/LaunchpadAction.cs:36
-msgid "Search Launchpad"
-msgstr "Søg Launchpad"
-
-#: ../Launchpad/src/LaunchpadAction.cs:40
-msgid "Search Launchpad properties."
-msgstr ""
-
-#: ../ManLookUp/src/ManualPageItemSource.cs:50
-msgid "Manual pages (man)"
-msgstr ""
-
-#: ../ManLookUp/src/ManualPageItemSource.cs:57
-msgid "Search and read help documentation (man)"
-msgstr ""
-
-#: ../ManLookUp/src/ReadManualPageAction.cs:42
-msgid "Read manual page (man)"
-msgstr ""
-
-#: ../ManLookUp/src/ReadManualPageAction.cs:49
-msgid "Look up and read a manual page."
-msgstr ""
-
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
-msgid "Show friend status updates"
-msgstr ""
-
-#: ../Microblogging/src/MicroblogClient.cs:42
-#, csharp-format
-msgid "Failed to fetch file from {0}"
-msgstr "Kunne ikke hente filen fra {0}"
-
-#: ../Microblogging/src/MicroblogClient.cs:43
-#, csharp-format
-msgid "Twitter encountered an error in {0}. {1}"
-msgstr ""
-
-#: ../Microblogging/src/MicroblogClient.cs:45
-msgid ""
-"Unable to post tweet. Check your login settings. If you are behind a proxy "
-"make sure that the settings in /system/http_proxy are correct."
-msgstr ""
-"Kunne ikke sende tweet. Tjek dine login indstillinger. Hvis du er bag en "
-"proxy, så sørg for at indstillingerne i /system/http_proxy er korrekte."
-
-#: ../Microblogging/src/FriendSource.cs:47
-msgid "Microblog friends"
-msgstr "Microblog venner"
-
-#: ../Microblogging/src/FriendSource.cs:51
-msgid "Indexes your microblog friends"
-msgstr "Indekserer dine microblog venner"
-
-#: ../Microblogging/src/Notifications.cs:40
-#, csharp-format
-msgid "New direct message from {0}"
-msgstr "Ny direkte besked fra {0}"
-
-#: ../Microblogging/src/Notifications.cs:57
-msgid "Post failed"
-msgstr ""
-
-#: ../Microblogging/src/Notifications.cs:58
-msgid "Post Successful"
-msgstr ""
-
-#: ../Microblogging/src/Notifications.cs:59
-#, csharp-format
-msgid "Failed to post '{0}' to {1}"
-msgstr ""
-
-#: ../Microblogging/src/Notifications.cs:60
-#, csharp-format
-msgid "'{0}' sucessfully posted to {1}"
-msgstr ""
-
-#: ../Microblogging/src/PostAction.cs:44
-#, csharp-format
-msgid "Post to {0}"
-msgstr ""
-
-#: ../Microblogging/src/PostAction.cs:48
-#, csharp-format
-msgid "Update {0} status"
-msgstr ""
-
-#: ../NX/src/NXAction.cs:37 ../NX/src/NXAction.cs:41
-msgid "Connect with NX"
-msgstr ""
-
-#: ../NX/src/NXHosts.cs:46
-msgid "NX Host"
-msgstr ""
-
-#: ../NX/src/NXHosts.cs:67
-msgid "NX Hosts"
-msgstr ""
-
-#: ../NX/src/NXHosts.cs:71
-msgid "Parses nx sessions"
-msgstr ""
-
-#: ../Opera/src/OperaBookmarkItemSource.cs:24
-msgid "Opera Bookmarks"
-msgstr "Opera bogmærker"
-
-#: ../Opera/src/OperaBookmarkItemSource.cs:28
-msgid "Indexes your Opera 6 bookmarks"
-msgstr "Indekserer dine Opera 6 bogmærker"
-
-#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
-msgid "Supported Codes\t\t\t"
-msgstr "Understøttede koder\t\t\t"
-
-#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:101
-msgid "<b>Pastebin Provider</b>"
-msgstr ""
-
-#: ../Pastebin/src/PastebinAction.cs:40
-msgid "Send to Pastebin"
-msgstr ""
-
-#: ../Pastebin/src/PastebinAction.cs:44
-msgid "Sends the text to Pastebin."
-msgstr ""
-
-#: ../Pastebin/src/Providers/LodgeIt.cs:77
-msgid "Parsed url was empty. Lodge It has probably changed its format."
-msgstr ""
-
 #: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
 msgid "Application Key"
 msgstr "Aplikation  nøgle"
@@ -1307,7 +1214,7 @@ msgstr "Besked sendt"
 
 #: ../PingFM/src/PingFMClient.cs:37
 msgid "Message posting failed"
-msgstr ""
+msgstr "Kunne ikke sende besked"
 
 #: ../PingFM/src/PingFMClient.cs:38
 msgid ""
@@ -1318,7 +1225,7 @@ msgstr ""
 #: ../PingFM/src/PingFMClient.cs:39
 #, csharp-format
 msgid "Your {0} message has been successfully posted to {1}"
-msgstr ""
+msgstr "Din {0} besked er blevet sendt til {1}"
 
 #: ../PingFM/src/PingFMClient.cs:40
 #, csharp-format
@@ -1347,16 +1254,17 @@ msgstr ""
 
 #: ../PingFM/src/PingFMPost.cs:35
 msgid "Post via Ping.FM"
-msgstr ""
+msgstr "Send via Ping.FM"
 
 #: ../PingFM/src/PingFMPost.cs:39
 msgid ""
 "Post a text message as microblog or status update to your social network"
 msgstr ""
+"Send en tekst som microblog eller status opdatering til dit sociale netværk"
 
 #: ../PingFM/src/PingFM.cs:32
 msgid "Failed to connect to Ping.FM service"
-msgstr ""
+msgstr "Kunne ikke forbinde til Ping.FM servicen"
 
 #: ../PingFM/src/PingFMServiceItemSource.cs:35
 msgid "Ping.FM Services"
@@ -1364,7 +1272,7 @@ msgstr ""
 
 #: ../PingFM/src/PingFMServiceItemSource.cs:39
 msgid "Web services suppported by Ping.FM"
-msgstr ""
+msgstr "Web service understøttet af Ping.FM"
 
 #: ../Putty/src/PuttySession.cs:49
 #, csharp-format
@@ -1577,12 +1485,13 @@ msgstr "Opgaven er omdøbt"
 
 #: ../RememberTheMilk/src/RTM.cs:483
 msgid "Task Postponed"
-msgstr ""
+msgstr "Opgaven er udsat"
 
 #: ../RememberTheMilk/src/RTM.cs:484
 msgid ""
 "The selected task in your Remember The Milk task list has been postponed"
 msgstr ""
+"Den valgte opgave i din Remember The Milk opgaveliste er blevet udsat"
 
 #: ../RememberTheMilk/src/RTM.cs:498
 msgid "Recurrence Pattern Changed"
@@ -1618,6 +1527,10 @@ msgstr "Fuldført"
 msgid "Complete a selected task"
 msgstr "Fuldfør en valgt opgave"
 
+#: ../RememberTheMilk/src/RTMRenameTask.cs:33
+msgid "Rename to..."
+msgstr "Omd&oslash;b til..."
+
 #: ../RememberTheMilk/src/RTMRenameTask.cs:37
 msgid "Give the seleted task a new name"
 msgstr "Omdøb den valgte opgave"
@@ -1632,11 +1545,11 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMPostponeTask.cs:33
 msgid "Postpone"
-msgstr ""
+msgstr "Udsæt"
 
 #: ../RememberTheMilk/src/RTMPostponeTask.cs:37
 msgid "Postpone a selected task in Remember The Milk"
-msgstr ""
+msgstr "Udsæt en opgave i Remember The Milk"
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:35
 msgid "Set Priority"
@@ -1654,21 +1567,75 @@ msgstr ""
 msgid "Set the due date/time of a task"
 msgstr ""
 
+#: ../Rhythmbox/src/MusicItems.cs:77
+msgid "All music by"
+msgstr "Alt musik af"
+
+#: ../Rhythmbox/src/EnqueueAction.cs:40
+msgid "Add an item to Rhythmbox's play queue."
+msgstr "Tilføj et objekt til Rhythmbox' afspilningskø."
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:49
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "Browse Rhythmbox Musik efter Kunstner"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:58
+msgid "Browse Rhythmbox Music by Album"
+msgstr "Browse Rhythmbox Music efter Album"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:69
+msgid "Play Current Track in Rhythmbox"
+msgstr "Afspil nuværende nummer i Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:74
+msgid "Pause Rhythmbox Playback"
+msgstr "Sæt Rhythmbox afspilningen på pause"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:79
+msgid "Play Next Track in Rhythmbox"
+msgstr "Afspil næste nummer i Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:84
+msgid "Play Previous Track in Rhythmbox"
+msgstr "Afspil forrige nummer i Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:88
+msgid "Show Current Track"
+msgstr "Vis nuværende nummer"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:89
 msgid "Show Notification of Current Track in Rhythmbox"
-msgstr ""
+msgstr "Vis notifikation om aktuelt nummer i Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:93
+msgid "Mute"
+msgstr "Tavs"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:94
 msgid "Mute Rhythmbox Playback"
 msgstr ""
 
+#: ../Rhythmbox/src/RhythmboxItems.cs:98
+msgid "Unmute"
+msgstr "Aktiver lyd"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:99
 msgid "Unmute Rhythmbox Playback"
 msgstr ""
 
+#: ../Rhythmbox/src/RhythmboxItems.cs:103
+#: ../VolumeControl/src/VolumeUpItem.cs:31
+msgid "Volume Up"
+msgstr "Lydstyrke op"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:104
 msgid "Increase Rhythmbox Playback Volume"
 msgstr ""
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:108
+#: ../VolumeControl/src/VolumeDownItem.cs:31
+msgid "Volume Down"
+msgstr "Lydstyrke Ned"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:109
 msgid "Decrease Rhythmbox Playback Volume"
@@ -1676,19 +1643,27 @@ msgstr ""
 
 #: ../Rhythmbox/src/PlayAction.cs:44
 msgid "Play an item in Rhythmbox."
-msgstr ""
+msgstr "Afspil et nummer i Rhythmbox"
 
 #: ../Rhythmbox/src/MusicItemSource.cs:45
 msgid "Rhythmbox Music"
-msgstr ""
+msgstr "Rhythmbox Musik"
 
 #: ../Rhythmbox/src/MusicItemSource.cs:49
 msgid "Provides access to artists and albums from Rhythmbox."
-msgstr ""
+msgstr "Giver adgang til kunstnere og albums fra Rhythmbox"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
+msgid "OPML feed file"
+msgstr "OPML feed fil"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:75
+msgid "Timeout (in seconds)"
+msgstr "Timeout (in sekunder)"
 
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:85
 msgid "Cache duration (in minutes)"
-msgstr ""
+msgstr "Cache varighed (i minutter)"
 
 #: ../Shelf/src/ShelfActions.cs:33
 msgid "Explore Shelf"
@@ -1714,6 +1689,10 @@ msgstr ""
 msgid "Add Selected Item to Shelf"
 msgstr ""
 
+#: ../Shelf/src/ShelfItemSource.cs:56
+msgid " Shelf"
+msgstr " Hylde"
+
 #: ../Shelf/src/ShelfItemSource.cs:62
 #, csharp-format
 msgid "Your {0} shelf items."
@@ -1726,6 +1705,10 @@ msgstr ""
 #: ../Shelf/src/ShelfItemSource.cs:94
 msgid "Your Shelf Items"
 msgstr ""
+
+#: ../Shelf/src/ShelfItemSource.cs:126
+msgid "Default"
+msgstr "Standard"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
@@ -1756,27 +1739,27 @@ msgstr ""
 
 #: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
 msgid "Connect with SSH"
-msgstr ""
+msgstr "Forbind med SSH"
 
 #: ../SSH/src/SSHHosts.cs:42
 msgid "SSH Host"
-msgstr ""
+msgstr "SSH Host"
 
 #: ../SSH/src/SSHHosts.cs:62
 msgid "SSH Hosts"
-msgstr ""
+msgstr "SSH Hosts"
 
 #: ../SSH/src/SSHHosts.cs:63
 msgid "Parses ssh-config"
-msgstr ""
+msgstr "Parser SSH-config"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
 msgid "Command for start/stop services (gksudo, etc):"
-msgstr ""
+msgstr "Kommande for start/stop service (gksudo, osv.):"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
 msgid "Services to control:"
@@ -1784,7 +1767,7 @@ msgstr ""
 
 #: ../SystemServices/src/ServiceItemSource.cs:39
 msgid "System Services"
-msgstr ""
+msgstr "System Services"
 
 #: ../SystemServices/src/ServiceItemSource.cs:43
 msgid "List of all System Services"
@@ -1793,12 +1776,12 @@ msgstr ""
 #: ../SystemServices/src/Service.cs:46
 #, csharp-format
 msgid "{0} service"
-msgstr ""
+msgstr "{0} service"
 
 #: ../SystemServices/src/Service.cs:50
 #, csharp-format
 msgid "Control system {0} service"
-msgstr ""
+msgstr "Kontrol system {0} service"
 
 #: ../SystemServices/src/SystemServicesConfig.cs:71
 msgid "Choose the file to open"
@@ -1810,6 +1793,18 @@ msgid ""
 "Should be executable."
 msgstr ""
 
+#: ../Tasque/src/TasqueCategoryItem.cs:47
+msgid "Category"
+msgstr "Kategori"
+
+#: ../Tasque/src/TasqueAction.cs:42
+msgid "Create a new task"
+msgstr "Opret en ny opgave"
+
+#: ../Tasque/src/TasqueAction.cs:46
+msgid "Create a new task in Tasque"
+msgstr "Opret en ny opgave i Tasque"
+
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
 msgstr ""
@@ -1820,7 +1815,7 @@ msgstr ""
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
 msgid "Make Tiny Url"
-msgstr ""
+msgstr "Lav Tiny Url"
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:66
 msgid "Creates a TinyUrl from an unwieldy mess."
@@ -1850,11 +1845,11 @@ msgstr ""
 
 #: ../Tomboy/src/NewNoteAction.cs:37
 msgid "New Tomboy Note"
-msgstr ""
+msgstr "Ny Tomboy Note"
 
 #: ../Tomboy/src/NewNoteAction.cs:41
 msgid "Create a new Tomboy note."
-msgstr ""
+msgstr "Lav en ny Tomboy note."
 
 #: ../Tomboy/src/NotesItemSource.cs:56
 msgid "Tomboy Note Indexer"
@@ -1866,19 +1861,19 @@ msgstr ""
 
 #: ../Tomboy/src/SearchNotesAction.cs:36
 msgid "Search Tomboy Notes"
-msgstr ""
+msgstr "Søg i Tomboy Noter"
 
 #: ../Tomboy/src/SearchNotesAction.cs:40
 msgid "Searches contents of Tomboy notes."
-msgstr ""
+msgstr "Søger i indholdet af Tomboy noter"
 
 #: ../Tomboy/src/TomboyItem.cs:50
 msgid "Tomboy note"
-msgstr ""
+msgstr "Tomboy note"
 
 #: ../Tracker/src/TrackerSearch.cs:38
 msgid "Search with Tracker"
-msgstr ""
+msgstr "Søg med Tracker"
 
 #: ../Tracker/src/TrackerSearch.cs:42
 msgid "Launches Tracker with the given query."
@@ -1902,307 +1897,307 @@ msgstr ""
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
 msgid "Enable / Disable Language"
-msgstr ""
+msgstr "Slå sprog Til / Fra"
 
 #: ../Translate/src/TranslateAction.cs:58
 msgid "Translate"
-msgstr ""
+msgstr "Oversæt"
 
 #: ../Translate/src/TranslateAction.cs:66
 msgid "Translates text"
-msgstr ""
+msgstr "Oversætter tekst"
 
 #: ../Translate/src/UI/ConfigUI.cs:128
 msgid "Auto Detect (Recommended)"
-msgstr ""
+msgstr "Auto Detektér (Anbefalet)"
 
 #: ../Translate/src/Provider/Google.cs:35
 msgid "Arabic"
-msgstr ""
+msgstr "Arabisk"
 
 #: ../Translate/src/Provider/Google.cs:36
 msgid "Translate to Arabic"
-msgstr ""
+msgstr "Oversæt til Arabisk"
 
 #: ../Translate/src/Provider/Google.cs:39
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bulgarsk"
 
 #: ../Translate/src/Provider/Google.cs:40
 msgid "Translate to Bulgarian"
-msgstr ""
+msgstr "Oversæt til Bulgarisk"
 
 #: ../Translate/src/Provider/Google.cs:43
 msgid "Catalon"
-msgstr ""
+msgstr "Catalon"
 
 #: ../Translate/src/Provider/Google.cs:44
 msgid "Translate to Catalon"
-msgstr ""
+msgstr "Oversæt til Catalon"
 
 #: ../Translate/src/Provider/Google.cs:47
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Kinesisk (simplificeret)"
 
 #: ../Translate/src/Provider/Google.cs:48
 msgid "Translate to Chinese (Simplified)"
-msgstr ""
+msgstr "Oversæt til Kinesisk (simplificeret)"
 
 #: ../Translate/src/Provider/Google.cs:51
 msgid "Chinese (Traditional)"
-msgstr ""
+msgstr "Kinesisk (traditionelt)"
 
 #: ../Translate/src/Provider/Google.cs:52
 msgid "Translate to Chinese (Traditional)"
-msgstr ""
+msgstr "Oversæt til Kinesisk (traditionelt)"
 
 #: ../Translate/src/Provider/Google.cs:55
 msgid "Croatian"
-msgstr ""
+msgstr "Kroatisk"
 
 #: ../Translate/src/Provider/Google.cs:56
 msgid "Translate to Croatian"
-msgstr ""
+msgstr "Oversæt til Kroatisk"
 
 #: ../Translate/src/Provider/Google.cs:59
 msgid "Czech"
-msgstr ""
+msgstr "Tjekkisk"
 
 #: ../Translate/src/Provider/Google.cs:60
 msgid "Translate to Czech"
-msgstr ""
+msgstr "Oversæt til Tjekkisk"
 
 #: ../Translate/src/Provider/Google.cs:63
 msgid "Danish"
-msgstr ""
+msgstr "Dansk"
 
 #: ../Translate/src/Provider/Google.cs:64
 msgid "Translate to Danish"
-msgstr ""
+msgstr "Oversæt til Dansk"
 
 #: ../Translate/src/Provider/Google.cs:67
 msgid "Dutch"
-msgstr ""
+msgstr "Hollandsk"
 
 #: ../Translate/src/Provider/Google.cs:68
 msgid "Translate to Dutch"
-msgstr ""
+msgstr "Oversæt til Hollandsk"
 
 #: ../Translate/src/Provider/Google.cs:71
 msgid "English"
-msgstr ""
+msgstr "Engelsk"
 
 #: ../Translate/src/Provider/Google.cs:72
 msgid "Translate to English"
-msgstr ""
+msgstr "Oversæt til Engelsk"
 
 #: ../Translate/src/Provider/Google.cs:75
 msgid "Filipino"
-msgstr ""
+msgstr "Filippinsk"
 
 #: ../Translate/src/Provider/Google.cs:76
 msgid "Translate to Filipino"
-msgstr ""
+msgstr "Oversæt til Filippinsk"
 
 #: ../Translate/src/Provider/Google.cs:79
 msgid "Finnish"
-msgstr ""
+msgstr "Finsk"
 
 #: ../Translate/src/Provider/Google.cs:80
 msgid "Translate to Finnish"
-msgstr ""
+msgstr "Oversæt til Finsk"
 
 #: ../Translate/src/Provider/Google.cs:83
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 #: ../Translate/src/Provider/Google.cs:84
 msgid "Translate to French"
-msgstr ""
+msgstr "Oversæt til Fransk"
 
 #: ../Translate/src/Provider/Google.cs:87
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
 #: ../Translate/src/Provider/Google.cs:88
 msgid "Translate to German"
-msgstr ""
+msgstr "Oversæt til Tysk"
 
 #: ../Translate/src/Provider/Google.cs:91
 msgid "Greek"
-msgstr ""
+msgstr "Græsk"
 
 #: ../Translate/src/Provider/Google.cs:92
 msgid "Translate to Greek"
-msgstr ""
+msgstr "Oversæt til Græsk"
 
 #: ../Translate/src/Provider/Google.cs:95
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebraisk"
 
 #: ../Translate/src/Provider/Google.cs:96
 msgid "Translate to Hebrew"
-msgstr ""
+msgstr "Oversæt til Hebraisk"
 
 #: ../Translate/src/Provider/Google.cs:99
 msgid "Hindi"
-msgstr ""
+msgstr "Hindi"
 
 #: ../Translate/src/Provider/Google.cs:100
 msgid "Translate to Hindi"
-msgstr ""
+msgstr "Oversæt til Hindi"
 
 #: ../Translate/src/Provider/Google.cs:103
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesisk"
 
 #: ../Translate/src/Provider/Google.cs:104
 msgid "Translate to Indonesian"
-msgstr ""
+msgstr "Oversæt til Indonesisk"
 
 #: ../Translate/src/Provider/Google.cs:107
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 #: ../Translate/src/Provider/Google.cs:108
 msgid "Translate to Italian"
-msgstr ""
+msgstr "Oversæt til Italiensk"
 
 #: ../Translate/src/Provider/Google.cs:111
 msgid "Japanese"
-msgstr ""
+msgstr "Japansk"
 
 #: ../Translate/src/Provider/Google.cs:112
 msgid "Translate to Japanese"
-msgstr ""
+msgstr "Oversæt til Japansk"
 
 #: ../Translate/src/Provider/Google.cs:115
 msgid "Korean"
-msgstr ""
+msgstr "Koreansk"
 
 #: ../Translate/src/Provider/Google.cs:116
 msgid "Translate to Korean"
-msgstr ""
+msgstr "Oversæt til Koreansk"
 
 #: ../Translate/src/Provider/Google.cs:119
 msgid "Latvian"
-msgstr ""
+msgstr "Lettisk"
 
 #: ../Translate/src/Provider/Google.cs:120
 msgid "Translate to Latvian"
-msgstr ""
+msgstr "Oversæt til Lettisk"
 
 #: ../Translate/src/Provider/Google.cs:123
 msgid "Lithuanian"
-msgstr ""
+msgstr "Litauisk"
 
 #: ../Translate/src/Provider/Google.cs:124
 msgid "Translate to Lithuanian"
-msgstr ""
+msgstr "Oversæt til Litauisk"
 
 #: ../Translate/src/Provider/Google.cs:127
 msgid "Norwegian"
-msgstr ""
+msgstr "Norsk"
 
 #: ../Translate/src/Provider/Google.cs:128
 msgid "Translate to Norwegian"
-msgstr ""
+msgstr "Oversæt til Norsk"
 
 #: ../Translate/src/Provider/Google.cs:131
 msgid "Polish"
-msgstr ""
+msgstr "Polsk"
 
 #: ../Translate/src/Provider/Google.cs:132
 msgid "Translate to Polish"
-msgstr ""
+msgstr "Oversæt til Polsk"
 
 #: ../Translate/src/Provider/Google.cs:135
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugisisk"
 
 #: ../Translate/src/Provider/Google.cs:136
 msgid "Translate to Portuguese"
-msgstr ""
+msgstr "Oversæt til Portugisisk"
 
 #: ../Translate/src/Provider/Google.cs:139
 msgid "Romanian"
-msgstr ""
+msgstr "Rumænsk"
 
 #: ../Translate/src/Provider/Google.cs:140
 msgid "Translate to Romanian"
-msgstr ""
+msgstr "Oversæt til Rumænsk"
 
 #: ../Translate/src/Provider/Google.cs:143
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 #: ../Translate/src/Provider/Google.cs:144
 msgid "Translate to Russian"
-msgstr ""
+msgstr "Oversæt til Russisk"
 
 #: ../Translate/src/Provider/Google.cs:147
 msgid "Serbian"
-msgstr ""
+msgstr "Serbisk"
 
 #: ../Translate/src/Provider/Google.cs:148
 msgid "Translate to Serbian"
-msgstr ""
+msgstr "Oversæt til Serbisk"
 
 #: ../Translate/src/Provider/Google.cs:151
 msgid "Slovak"
-msgstr ""
+msgstr "Slovakisk"
 
 #: ../Translate/src/Provider/Google.cs:152
 msgid "Translate to Slovak"
-msgstr ""
+msgstr "Oversæt til Slovakkisk"
 
 #: ../Translate/src/Provider/Google.cs:155
 msgid "Slovenian"
-msgstr ""
+msgstr "Slovensk"
 
 #: ../Translate/src/Provider/Google.cs:156
 msgid "Translate to Slovenian"
-msgstr ""
+msgstr "Oversæt til Slovensk"
 
 #: ../Translate/src/Provider/Google.cs:159
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
 #: ../Translate/src/Provider/Google.cs:160
 msgid "Translate to Spanish"
-msgstr ""
+msgstr "Oversæt til Spansk"
 
 #: ../Translate/src/Provider/Google.cs:163
 msgid "Swedish"
-msgstr ""
+msgstr "Svensk"
 
 #: ../Translate/src/Provider/Google.cs:164
 msgid "Translate to Swedish"
-msgstr ""
+msgstr "Oversæt til Svensk"
 
 #: ../Translate/src/Provider/Google.cs:167
 msgid "Ukranian"
-msgstr ""
+msgstr "Ukrainsk"
 
 #: ../Translate/src/Provider/Google.cs:168
 msgid "Translate to Ukranian"
-msgstr ""
+msgstr "Oversæt til Ukrainsk"
 
 #: ../Translate/src/Provider/Google.cs:171
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamesisk"
 
 #: ../Translate/src/Provider/Google.cs:172
 msgid "Translate to Vietnamese"
-msgstr ""
+msgstr "Oversæt til Vietnamesisk"
 
 #: ../Vinagre/src/VNCHostSource.cs:39
 msgid "Vinagre Bookmarks"
-msgstr ""
+msgstr "Vinagre Bogmærker"
 
 #: ../Vinagre/src/VNCHostSource.cs:43
 msgid "Indexes your Vinagre Bookmarks"
-msgstr ""
+msgstr "Indeksér dine Vinagre Bogmærker"
 
 #: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
 msgid "Connect with VNC"
@@ -2210,7 +2205,7 @@ msgstr ""
 
 #: ../VirtualBox/src/SaveStateAction.cs:40
 msgid "Take Snapshot"
-msgstr ""
+msgstr "Tag snapshot"
 
 #: ../VirtualBox/src/SaveStateAction.cs:44
 msgid "Save the current state as a Snapshot"
@@ -2218,15 +2213,15 @@ msgstr ""
 
 #: ../VirtualBox/src/SaveStateAction.cs:98
 msgid "Snapshot ("
-msgstr ""
+msgstr "Snapshot ("
 
 #: ../VirtualBox/src/OffAction.cs:40
 msgid "Power Off Virtual Machine"
-msgstr ""
+msgstr "Sluk for Virtual Machine"
 
 #: ../VirtualBox/src/OffAction.cs:44
 msgid "Powers off the selected Virtual Machine"
-msgstr ""
+msgstr "Sluk for den valgte Virtual Machine"
 
 #: ../VirtualBox/src/OffAction.cs:72
 #: ../VirtualBox/src/RestoreStateAction.cs:40
@@ -2236,23 +2231,23 @@ msgstr ""
 #: ../VirtualBox/src/OffAction.cs:73
 #: ../VirtualBox/src/RestoreStateAction.cs:44
 msgid "Restore VM state to current Snapshot"
-msgstr ""
+msgstr "Gendan VM state til nuværende Snapshot"
 
 #: ../VirtualBox/src/PauseAction.cs:39
 msgid "Pause Virtual Machine"
-msgstr ""
+msgstr "Pause Virtual Machine"
 
 #: ../VirtualBox/src/PauseAction.cs:43
 msgid "Pauses the selected Virtual Machine"
-msgstr ""
+msgstr "Sætter den valgte Virtual Machine på pause"
 
 #: ../VirtualBox/src/SaveAction.cs:39
 msgid "Save Virtual Machine State"
-msgstr ""
+msgstr "Gem Virtual Machine tilstand"
 
 #: ../VirtualBox/src/SaveAction.cs:43
 msgid "Saves the state of the selected Virtual Machine"
-msgstr ""
+msgstr "Gemmer tilstanden af den valgte Virtual Machine"
 
 #: ../VirtualBox/src/VMItemSource.cs:38
 msgid "VirtualBox VMs"
@@ -2260,23 +2255,23 @@ msgstr ""
 
 #: ../VirtualBox/src/VMItemSource.cs:39
 msgid "Virtual Machines created with VirtualBox"
-msgstr ""
+msgstr "Virtual Machines lavet med VirtualBox"
 
 #: ../VirtualBox/src/StartAction.cs:40
 msgid "Start Virtual Machine"
-msgstr ""
+msgstr "Start Virtual Machine"
 
 #: ../VirtualBox/src/StartAction.cs:44
 msgid "Starts the selected Virtual Machine"
-msgstr ""
+msgstr "Starter den valgte Virtual Machine"
 
 #: ../VirtualBox/src/StartAction.cs:70
 msgid "Open in GUI"
-msgstr ""
+msgstr "Åben i GUI"
 
 #: ../VirtualBox/src/StartAction.cs:71
 msgid "Open in VirtualBox GUI"
-msgstr ""
+msgstr "Åben i VirtualBox GUI"
 
 #: ../VirtualBox/src/StartAction.cs:77
 msgid "Start Headless"
@@ -2296,11 +2291,15 @@ msgstr ""
 
 #: ../VolumeControl/src/VolumeDownItem.cs:35
 msgid "Decrease system volume"
-msgstr ""
+msgstr "Skru ned for system lydstyrken"
 
 #: ../VolumeControl/src/VolumeUpItem.cs:35
 msgid "Increase system volume"
-msgstr ""
+msgstr "Skru op for system lydstyrken"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:31
+msgid "Mute Volume"
+msgstr "Slå lyd fra"
 
 #: ../VolumeControl/src/VolumeMuteItem.cs:35
 msgid "Mute system volume"
@@ -2312,7 +2311,7 @@ msgstr ""
 
 #: ../VolumeControl/src/VolumeItemSource.cs:43
 msgid "Adjust your system volume"
-msgstr ""
+msgstr "Justér din system lydstyrke"
 
 #: ../VolumeControl/src/VolumeUnmuteItem.cs:32
 msgid "Unmute Volume"
@@ -2332,7 +2331,7 @@ msgstr ""
 
 #: ../WindowManager/src/WindowListAction.cs:190
 msgid "Maximize"
-msgstr ""
+msgstr "Maksimér"
 
 #: ../WindowManager/src/WindowListAction.cs:194
 msgid "Make a window consume the whole screen"
@@ -2340,19 +2339,19 @@ msgstr ""
 
 #: ../WindowManager/src/WindowListAction.cs:217
 msgid "Minimize/Restore"
-msgstr ""
+msgstr "Minimér/Gendan"
 
 #: ../WindowManager/src/WindowListAction.cs:221
 msgid "Minimize/Restore a Window"
-msgstr ""
+msgstr "Minimér/Gendan et vindue"
 
 #: ../WindowManager/src/WindowListAction.cs:242
 msgid "Close All"
-msgstr ""
+msgstr "Luk alle"
 
 #: ../WindowManager/src/WindowListAction.cs:246
 msgid "Close your current window."
-msgstr ""
+msgstr "Luk dit nuværende vindue"
 
 #: ../WindowManager/src/ScreenListAction.cs:277
 msgid "Tile Windows"
@@ -2362,17 +2361,21 @@ msgstr ""
 msgid "Tile All Windows in Current Viewport"
 msgstr ""
 
+#: ../WindowManager/src/ScreenListAction.cs:346
+msgid "Cascade Windows"
+msgstr "Stabl Vinduer"
+
 #: ../WindowManager/src/ScreenListAction.cs:350
 msgid "Cascade your Windows"
 msgstr ""
 
 #: ../WindowManager/src/ScreenListAction.cs:404
 msgid "Restore Windows"
-msgstr ""
+msgstr "Gendan vinduer"
 
 #: ../WindowManager/src/ScreenListAction.cs:408
 msgid "Restore Windows to their Previous Positions"
-msgstr ""
+msgstr "Gendan vinduer til tidligere positioner"
 
 #: ../WindowManager/src/ScreenItemSource.cs:37
 msgid "Window Screen Items"
@@ -2384,11 +2387,11 @@ msgstr ""
 
 #: ../WindowManager/src/ScreenItemSource.cs:65
 msgid "Current Desktop"
-msgstr ""
+msgstr "Aktuelt skrivebord"
 
 #: ../WindowManager/src/ScreenItemSource.cs:66
 msgid "Everything on the Current Desktop"
-msgstr ""
+msgstr "Alt på det aktuelle skrivebord"
 
 #: ../WindowManager/src/WindowItemSource.cs:38
 msgid "Generic Window Items"
@@ -2400,35 +2403,35 @@ msgstr ""
 
 #: ../WindowManager/src/WindowItemSource.cs:71
 msgid "Current Window"
-msgstr ""
+msgstr "Nuværende vindue"
 
 #: ../WindowManager/src/WindowItemSource.cs:72
 msgid "The Currently Active Window"
-msgstr ""
+msgstr "Det nuværende aktive vindue"
 
 #: ../WindowManager/src/WindowItemSource.cs:75
 msgid "Current Application"
-msgstr ""
+msgstr "Nuværende aplikation"
 
 #: ../WindowManager/src/WindowItemSource.cs:76
 msgid "The Currently Active Application"
-msgstr ""
+msgstr "Den nuværende aktive aplikation"
 
 #: ../WindowManager/src/WindowItemSource.cs:79
 msgid "Previous Window"
-msgstr ""
+msgstr "Forrige vindue"
 
 #: ../WindowManager/src/WindowItemSource.cs:80
 msgid "The Previously Active Window"
-msgstr ""
+msgstr "Det forrige aktive vindue"
 
 #: ../WindowManager/src/WindowItemSource.cs:83
 msgid "Previous Application"
-msgstr ""
+msgstr "Forrige aplikation"
 
 #: ../WindowManager/src/WindowItemSource.cs:84
 msgid "The Previously Active Application"
-msgstr ""
+msgstr "Den forrige aktive aplikation"
 
 #: ../Zim/src/ZimPage.cs:38
 msgid "Zim page in notebook: "
@@ -2436,24 +2439,24 @@ msgstr ""
 
 #: ../Zim/src/ZimNewPageAction.cs:37
 msgid "New Zim page"
-msgstr ""
+msgstr "Ny Zim side"
 
 #: ../Zim/src/ZimNewPageAction.cs:41
 msgid "Create new page in Zim"
-msgstr ""
+msgstr "Lav ny side i Zim"
 
 #: ../Zim/src/ZimOpenPageAction.cs:39
 msgid "Open Zim page"
-msgstr ""
+msgstr "Åben Zim side"
 
 #: ../Zim/src/ZimOpenPageAction.cs:43
 msgid "Open selected page in Zim"
-msgstr ""
+msgstr "Åben valgte sider i Zim"
 
 #: ../Zim/src/ZimPagesItemSource.cs:38
 msgid "Zim pages"
-msgstr ""
+msgstr "Zim sider"
 
 #: ../Zim/src/ZimPagesItemSource.cs:42
 msgid "Zim Desktop Wiki pages"
-msgstr ""
+msgstr "Zim Desktop Wiki sider"

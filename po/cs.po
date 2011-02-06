@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-06-13 00:10+0000\n"
-"Last-Translator: Jan Hink <jan.hink@gmail.com>\n"
+"PO-Revision-Date: 2010-09-07 16:10+0000\n"
+"Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -24,7 +24,7 @@ msgstr "Přiřadit alias..."
 
 #: ../Alias/src/AliasAction.cs:40
 msgid "Give an item an alternate name."
-msgstr "Dát věcem alternativní název."
+msgstr "Dát položkám alternativní název."
 
 #: ../Alias/src/DeleteAliasAction.cs:36
 msgid "Delete Alias"
@@ -222,15 +222,15 @@ msgstr ""
 
 #: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
 msgid "http://opensource.atlassian.com/confluence/spring"
-msgstr ""
+msgstr "http://opensource.atlassian.com/confluence/spring"
 
 #: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
 msgid "username1"
-msgstr ""
+msgstr "uživatelskéjméno1"
 
 #: ../Confluence/src/ConfluenceSearchAction.cs:85
 msgid "Search Confluence"
-msgstr ""
+msgstr "Tok vyhledávání"
 
 #: ../Confluence/src/ConfluenceSearchAction.cs:93
 msgid "Searches Confluence and returns results to Do"
@@ -865,59 +865,59 @@ msgstr "Zobrazí místo nebo cestu v Mapách Google"
 #. Container child vbox4.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
 msgid "Go directly to Google Search page"
-msgstr ""
+msgstr "Jít přímo na stránku Google vyhledávání"
 
 #. Container child vbox4.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:87
 msgid "Show search results in Do"
-msgstr ""
+msgstr "Zobrazit výsledky hledání v Do"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:106
 msgid "Show Search page link as first result"
-msgstr ""
+msgstr "Zobrazit stránku vyhledávání jako první výsledek"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:120
 msgid "<b>Google Search</b>"
-msgstr ""
+msgstr "<b>Vyhledávač Google</b>"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
 msgid "Apply to Google Search page link"
-msgstr ""
+msgstr "Aplikovat na odkaz stránky Google vyhledávání"
 
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
 msgid "Do not filter my search results."
-msgstr ""
+msgstr "Nefiltrovat výsledky vyhledávání"
 
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
 msgid "Use moderate filtering"
-msgstr ""
+msgstr "Používat mírné filtrování"
 
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
 msgid "Use strict filtering"
-msgstr ""
+msgstr "Používat přísné filtrování"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
 msgid "<b>SafeSearch Preferences</b>"
-msgstr ""
+msgstr "<b>Nastavení bezpečnáho vyhledávání</b>"
 
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:81
 msgid "Search Google"
-msgstr ""
+msgstr "Vyhledávání Google"
 
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:90
 msgid "Allows you to perform Google Searches from Do"
-msgstr ""
+msgstr "Umožňuje provádět vyhledávání Googlem z Do"
 
 #: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
 msgid "I'm Feeling Lucky!"
-msgstr ""
+msgstr "Zkusím štěstí"
 
 #: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
 msgid "Searches Google and takes you to the first result"
-msgstr ""
+msgstr "Vyhledat Googlem a přejít na první výsledek"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
 msgid ""
@@ -930,23 +930,23 @@ msgstr ""
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:90
 msgid "_Registration Code"
-msgstr ""
+msgstr "_Registrační kód"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:124
 msgid "_Get Registration Code"
-msgstr ""
+msgstr "_Získat registrační kód"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:140
 msgid "<b>Registration Code</b>"
-msgstr ""
+msgstr "<b>Registrační kód</b>"
 
 #: ../ImageShack/src/ImageShackAction.cs:57
 msgid "Upload to ImageShack"
-msgstr ""
+msgstr "Nahrát na ImageShack"
 
 #: ../ImageShack/src/ImageShackAction.cs:61
 msgid "Uploads the image to ImageShack."
-msgstr ""
+msgstr "Nahrát obrázek na ImageShack"
 
 #: ../ImageShack/src/ImageShackAction.cs:106
 msgid "ImageShack exception: "
@@ -954,7 +954,7 @@ msgstr ""
 
 #: ../ImageShack/src/ImageShackAction.cs:116
 msgid "File size exceeds ImageShack's 1.5MB limit."
-msgstr ""
+msgstr "Velikost souboru je větší než limit 1,5 MB."
 
 #: ../ImageShack/src/ImageShackAction.cs:196
 msgid "Parsed url was empty. ImageShack has probably changed its format."
@@ -963,19 +963,19 @@ msgstr ""
 #: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
 #: ../ImageShack/src/Notifications.cs:53
 msgid "ImageShack"
-msgstr ""
+msgstr "ImageShack"
 
 #: ../ImageShack/src/Notifications.cs:32
 msgid "Do is uploading your image... Please wait a moment..."
-msgstr ""
+msgstr "Do nahrává váš obrázek... Prosím, počkejte chvilku..."
 
 #: ../ImageShack/src/Notifications.cs:43
 msgid "Unable to upload image to ImageShack at this time."
-msgstr ""
+msgstr "V současné době není možné na ImageShack nahrát obrázek."
 
 #: ../Launchpad/src/LaunchpadAction.cs:36
 msgid "Search Launchpad"
-msgstr ""
+msgstr "Vyhledávání Launchpad"
 
 #: ../Launchpad/src/LaunchpadAction.cs:40
 msgid "Search Launchpad properties."
@@ -983,7 +983,7 @@ msgstr ""
 
 #: ../LocateFiles/src/LocateFilesAction.cs:39
 msgid "Locate Files"
-msgstr ""
+msgstr "Najít soubory"
 
 #: ../LocateFiles/src/LocateFilesAction.cs:44
 msgid "Search your filesystem using locate."
@@ -999,7 +999,7 @@ msgstr ""
 
 #: ../ManLookUp/src/ReadManualPageAction.cs:42
 msgid "Read manual page (man)"
-msgstr ""
+msgstr "Číst stránku s manuálem (man)"
 
 #: ../ManLookUp/src/ReadManualPageAction.cs:49
 msgid "Look up and read a manual page."
@@ -1007,11 +1007,11 @@ msgstr ""
 
 #: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
 msgid "Show friend status updates"
-msgstr ""
+msgstr "Zobrazit aktualizace stavu přátel"
 
 #: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Obecné</b>"
 
 #: ../Microblogging/src/MicroblogClient.cs:42
 #, csharp-format
@@ -1040,15 +1040,15 @@ msgstr ""
 #: ../Microblogging/src/Notifications.cs:40
 #, csharp-format
 msgid "New direct message from {0}"
-msgstr ""
+msgstr "Nová přímá zpráva od {0}"
 
 #: ../Microblogging/src/Notifications.cs:57
 msgid "Post failed"
-msgstr ""
+msgstr "Odeslání selhalo"
 
 #: ../Microblogging/src/Notifications.cs:58
 msgid "Post Successful"
-msgstr ""
+msgstr "Úspěšně odesláno"
 
 #: ../Microblogging/src/Notifications.cs:59
 #, csharp-format
@@ -1068,11 +1068,11 @@ msgstr ""
 #: ../Microblogging/src/PostAction.cs:48
 #, csharp-format
 msgid "Update {0} status"
-msgstr ""
+msgstr "Aktualizovat {0} status"
 
 #: ../NX/src/NXAction.cs:37 ../NX/src/NXAction.cs:41
 msgid "Connect with NX"
-msgstr ""
+msgstr "Připojit s NX"
 
 #: ../NX/src/NXHosts.cs:46
 msgid "NX Host"
@@ -1088,7 +1088,7 @@ msgstr ""
 
 #: ../OpenSearch/src/OpenSearchAction.cs:35
 msgid "Search Web"
-msgstr ""
+msgstr "Webové vyhledávání"
 
 #: ../OpenSearch/src/OpenSearchAction.cs:40
 msgid "Searches the web using OpenSearch plugins."
@@ -1096,7 +1096,7 @@ msgstr ""
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:24
 msgid "Opera Bookmarks"
-msgstr ""
+msgstr "Záložky Opery"
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:28
 msgid "Indexes your Opera 6 bookmarks"
@@ -1104,7 +1104,7 @@ msgstr ""
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
 msgid "Supported Codes\t\t\t"
-msgstr ""
+msgstr "Podporované kódy\t\t\t"
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:101
 msgid "<b>Pastebin Provider</b>"
@@ -1112,11 +1112,11 @@ msgstr ""
 
 #: ../Pastebin/src/PastebinAction.cs:40
 msgid "Send to Pastebin"
-msgstr ""
+msgstr "Odeslat na Pastebin"
 
 #: ../Pastebin/src/PastebinAction.cs:44
 msgid "Sends the text to Pastebin."
-msgstr ""
+msgstr "Odeslat text na Pastebin"
 
 #: ../Pastebin/src/Providers/LodgeIt.cs:77
 msgid "Parsed url was empty. Lodge It has probably changed its format."
@@ -1124,19 +1124,19 @@ msgstr ""
 
 #: ../Pidgin/src/PidginSetStatusAction.cs:48
 msgid "Set status"
-msgstr ""
+msgstr "Nastavit status"
 
 #: ../Pidgin/src/PidginSetStatusAction.cs:52
 msgid "Set pidgin status message"
-msgstr ""
+msgstr "Nastavit status Pidginu"
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
 msgid "Pidgin Statuses"
-msgstr ""
+msgstr "Statusy Pidginu"
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
 msgid "Saved Pidgin statuses"
-msgstr ""
+msgstr "Uložené Pidgin statusy"
 
 #: ../Pidgin/src/PidginContactItemSource.cs:59
 msgid "Pidgin Buddies"
@@ -1148,19 +1148,19 @@ msgstr ""
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:41
 msgid "Pidgin Accounts"
-msgstr ""
+msgstr "Účty Pidgin"
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:45
 msgid "Available Pidgin IM Accounts"
-msgstr ""
+msgstr "Dostupné Pidgin IM účty"
 
 #: ../Pidgin/src/PidginAccountActions.cs:36
 msgid "Sign on"
-msgstr ""
+msgstr "Zaregistrovat se"
 
 #: ../Pidgin/src/PidginAccountActions.cs:40
 msgid "Enable pidgin account"
-msgstr ""
+msgstr "Zapnout pidgin účet"
 
 #: ../Pidgin/src/PidginAccountActions.cs:82
 msgid "Sign off"
@@ -1172,39 +1172,39 @@ msgstr ""
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:45
 msgid "Offline"
-msgstr ""
+msgstr "Odpojen"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:46
 msgid "Available"
-msgstr ""
+msgstr "K dispozici"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:47
 msgid "Busy"
-msgstr ""
+msgstr "Zaneprázdněno"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:48
 msgid "Invisible"
-msgstr ""
+msgstr "Neviditelný"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:49
 msgid "Away"
-msgstr ""
+msgstr "Nepřítomen"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:50
 msgid "Unknown Status"
-msgstr ""
+msgstr "Neznámý status"
 
 #: ../Pidgin/src/PidginChatAction.cs:41
 msgid "Chat"
-msgstr ""
+msgstr "Konverzace"
 
 #: ../Pidgin/src/PidginChatAction.cs:45
 msgid "Send an instant message to a friend."
-msgstr ""
+msgstr "Zaslat zprávu kamarádovi"
 
 #: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
 msgid "Application Key"
-msgstr ""
+msgstr "Aplikační klíč"
 
 #: ../PingFM/gtk-gui/PingFM.Configuration.cs:81
 msgid "<i>Verify and save your account information</i>"
@@ -1212,7 +1212,7 @@ msgstr ""
 
 #: ../PingFM/src/PingFMClient.cs:36
 msgid "Message posted"
-msgstr ""
+msgstr "Zpráva zveřejněna"
 
 #: ../PingFM/src/PingFMClient.cs:37
 msgid "Message posting failed"
@@ -1236,11 +1236,11 @@ msgstr ""
 
 #: ../PingFM/src/PingFMClient.cs:67
 msgid "Microblog"
-msgstr ""
+msgstr "Microblog"
 
 #: ../PingFM/src/PingFMClient.cs:68
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../PingFM/src/PingFMClient.cs:82
 msgid "Error occurred in service response"
@@ -1269,7 +1269,7 @@ msgstr ""
 
 #: ../PingFM/src/PingFMServiceItemSource.cs:35
 msgid "Ping.FM Services"
-msgstr ""
+msgstr "Ping.FM služby"
 
 #: ../PingFM/src/PingFMServiceItemSource.cs:39
 msgid "Web services suppported by Ping.FM"
@@ -1290,11 +1290,11 @@ msgstr ""
 
 #: ../Putty/src/PuttyAction.cs:40
 msgid "Connect with PuTTY"
-msgstr ""
+msgstr "Připojit s PuTTY"
 
 #: ../Putty/src/PuttyAction.cs:44
 msgid "Create new conenction with PuTTY"
-msgstr ""
+msgstr "Vytvořit nové připojení s PuTTY"
 
 #: ../Quote/src/QuoteAction.cs:40
 msgid "Submit Quote"
@@ -1343,7 +1343,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/Configuration.cs:76
 msgid "Complete authorization"
-msgstr ""
+msgstr "Kompletní autorizace"
 
 #: ../RememberTheMilk/src/Configuration.cs:93
 msgid "Fail to complete authorization."
@@ -1351,7 +1351,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/Configuration.cs:96
 msgid "Authorize again"
-msgstr ""
+msgstr "Znovu autorizovat"
 
 #: ../RememberTheMilk/src/Configuration.cs:102
 #, csharp-format
@@ -1361,7 +1361,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
 msgid "Uncomplete"
-msgstr ""
+msgstr "Nekompletní"
 
 #: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
 msgid "Mark a selected task as \"incomplete\"."
@@ -1369,7 +1369,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMDeleteTask.cs:35
 msgid "Delete"
-msgstr ""
+msgstr "Odstranit"
 
 #: ../RememberTheMilk/src/RTMDeleteTask.cs:39
 msgid "Delete a selected task from Remember The Milk"
@@ -1412,19 +1412,19 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:394
 msgid "Medium"
-msgstr ""
+msgstr "Střední"
 
 #: ../RememberTheMilk/src/RTM.cs:395
 msgid "Medium Priority"
-msgstr ""
+msgstr "Střední priorita"
 
 #: ../RememberTheMilk/src/RTM.cs:396
 msgid "Low"
-msgstr ""
+msgstr "Nízká"
 
 #: ../RememberTheMilk/src/RTM.cs:397
 msgid "Low Priority"
-msgstr ""
+msgstr "Nízká priorita"
 
 #: ../RememberTheMilk/src/RTM.cs:398
 msgid "None"
@@ -1432,27 +1432,27 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:399
 msgid "No Priority"
-msgstr ""
+msgstr "Žádná priorita"
 
 #: ../RememberTheMilk/src/RTM.cs:400
 msgid "Up"
-msgstr ""
+msgstr "Nahoru"
 
 #: ../RememberTheMilk/src/RTM.cs:401
 msgid "Increase the priority"
-msgstr ""
+msgstr "Zvýšit prioritu"
 
 #: ../RememberTheMilk/src/RTM.cs:402
 msgid "Down"
-msgstr ""
+msgstr "Dolů"
 
 #: ../RememberTheMilk/src/RTM.cs:403
 msgid "Decrease the priority"
-msgstr ""
+msgstr "Snížit prioritu"
 
 #: ../RememberTheMilk/src/RTM.cs:419
 msgid "Priority Changed"
-msgstr ""
+msgstr "Priorita změněna"
 
 #: ../RememberTheMilk/src/RTM.cs:420
 msgid ""
@@ -1515,7 +1515,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:35
 msgid "Complete"
-msgstr ""
+msgstr "Dokončit"
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:39
 msgid "Complete a selected task"
@@ -1523,7 +1523,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMRenameTask.cs:33
 msgid "Rename to..."
-msgstr ""
+msgstr "Přejmenovat na..."
 
 #: ../RememberTheMilk/src/RTMRenameTask.cs:37
 msgid "Give the seleted task a new name"
@@ -1547,7 +1547,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:35
 msgid "Set Priority"
-msgstr ""
+msgstr "Nastavit prioritu"
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:39
 msgid "Set the priority of a task"
@@ -1620,7 +1620,7 @@ msgstr ""
 #: ../Rhythmbox/src/RhythmboxItems.cs:103
 #: ../VolumeControl/src/VolumeUpItem.cs:31
 msgid "Volume Up"
-msgstr ""
+msgstr "Zvýšit hlasitost"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:104
 msgid "Increase Rhythmbox Playback Volume"
@@ -1629,7 +1629,7 @@ msgstr ""
 #: ../Rhythmbox/src/RhythmboxItems.cs:108
 #: ../VolumeControl/src/VolumeDownItem.cs:31
 msgid "Volume Down"
-msgstr ""
+msgstr "Snížit hlasitost"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:109
 msgid "Decrease Rhythmbox Playback Volume"
@@ -1753,7 +1753,7 @@ msgstr ""
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
 msgid "Services to control:"
@@ -1789,7 +1789,7 @@ msgstr ""
 
 #: ../Tasque/src/TasqueCategoryItem.cs:47
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: ../Tasque/src/TasqueAction.cs:42
 msgid "Create a new task"
@@ -2397,11 +2397,11 @@ msgstr ""
 
 #: ../WindowManager/src/WindowItemSource.cs:71
 msgid "Current Window"
-msgstr ""
+msgstr "Současné okno"
 
 #: ../WindowManager/src/WindowItemSource.cs:72
 msgid "The Currently Active Window"
-msgstr ""
+msgstr "Současné aktivní okno"
 
 #: ../WindowManager/src/WindowItemSource.cs:75
 msgid "Current Application"
@@ -2445,11 +2445,11 @@ msgstr ""
 
 #: ../Zim/src/ZimOpenPageAction.cs:43
 msgid "Open selected page in Zim"
-msgstr ""
+msgstr "Otevřít vybranou stránku v Zim"
 
 #: ../Zim/src/ZimPagesItemSource.cs:38
 msgid "Zim pages"
-msgstr ""
+msgstr "Zim stránky"
 
 #: ../Zim/src/ZimPagesItemSource.cs:42
 msgid "Zim Desktop Wiki pages"

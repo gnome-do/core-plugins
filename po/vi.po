@@ -9,14 +9,38 @@ msgstr ""
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
 "PO-Revision-Date: 2008-11-25 16:28+0000\n"
-"Last-Translator: khanh_coltech <phantrongkhanh87@gmail.com>\n"
+"Last-Translator: Phan Trọng Khanh <phantrongkhanh87@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
+
+#: ../Alias/src/AliasAction.cs:36
+msgid "Assign Alias..."
+msgstr ""
+
+#: ../Alias/src/AliasAction.cs:40
+msgid "Give an item an alternate name."
+msgstr ""
+
+#: ../Alias/src/DeleteAliasAction.cs:36
+msgid "Delete Alias"
+msgstr ""
+
+#: ../Alias/src/DeleteAliasAction.cs:40
+msgid "Deletes an alias."
+msgstr ""
+
+#: ../Alias/src/AliasItemSource.cs:140
+msgid "Alias items"
+msgstr ""
+
+#: ../Alias/src/AliasItemSource.cs:144
+msgid "Aliased items from Do's universe."
+msgstr ""
 
 #: ../Archive/src/ExtractArchiveAction.cs:40
 msgid "Extract archive"
@@ -34,10 +58,125 @@ msgstr "Tạo kho lưu"
 msgid "Create an archive with the selected item"
 msgstr "Tạo một kho lưu với mục được chọn"
 
+#: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
+msgid "Browse Artists"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:57
+msgid "Browse Music by Artist"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
+msgid "Browse Albums"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:70
+msgid "Browse Music by Album"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:77
+msgid "Browse Podcasts"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:78
+msgid "Browse Podcasts by Publisher"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:85
+msgid "Browse Videos"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:86
+msgid "Browse All Videos"
+msgstr ""
+
+#: ../Banshee/src/EnqueueAction.cs:37 ../Rhythmbox/src/EnqueueAction.cs:36
+msgid "Add to Play Queue"
+msgstr ""
+
+#: ../Banshee/src/EnqueueAction.cs:41
+msgid "Add media to play queue"
+msgstr ""
+
+#: ../Banshee/src/MediaItemSource.cs:46
+msgid "Banshee Media"
+msgstr ""
+
+#: ../Banshee/src/MediaItemSource.cs:50
+msgid "Indexes Media from Banshee Media Player"
+msgstr ""
+
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr ""
+
+#: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
+msgid "Next"
+msgstr ""
+
+#: ../Banshee/src/NextAction.cs:36
+msgid "Play next track"
+msgstr ""
+
+#: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
+msgid "Pause"
+msgstr ""
+
+#: ../Banshee/src/PauseAction.cs:36
+msgid "Pause playing track"
+msgstr ""
+
 #: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
 #: ../Rhythmbox/src/PlayAction.cs:40
 msgid "Play"
 msgstr "Phát"
+
+#: ../Banshee/src/PlayAction.cs:39
+msgid "Play from your Banshee Collection"
+msgstr ""
+
+#: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
+msgid "Previous"
+msgstr ""
+
+#: ../Banshee/src/PreviousAction.cs:36
+msgid "Play previous track"
+msgstr ""
+
+#: ../Banshee/src/SearchCollectionAction.cs:36
+msgid "Search Banshee Media"
+msgstr ""
+
+#: ../Banshee/src/SearchCollectionAction.cs:40
+msgid "Search your entire Banshee collection"
+msgstr ""
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+msgid "Choose BibTeX file"
+msgstr ""
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
+msgid "Select A File"
+msgstr ""
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+msgid "Select your documents folder"
+msgstr ""
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+msgid "Choose documents folder"
+msgstr ""
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr ""
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr ""
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:71
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:41
@@ -48,6 +187,87 @@ msgstr "Thư điện tử chính"
 #: ../Evolution/src/EmailContactDetailItem.cs:34
 msgid "Email"
 msgstr "Thư điện tử"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
+msgid "Other email"
+msgstr ""
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
+msgid "Other"
+msgstr ""
+
+#: ../Cl.ickable/src/ClipAction.cs:38
+msgid "Clip"
+msgstr ""
+
+#: ../Cl.ickable/src/ClipAction.cs:42
+msgid "Create a clip with Cl.ickable"
+msgstr ""
+
+#: ../Cl.ickable/src/WebClipsItem.cs:32
+msgid "Cl.ickable Clips"
+msgstr ""
+
+#: ../Cl.ickable/src/WebClipsItem.cs:36
+msgid "Opens your cl.ickable clips"
+msgstr ""
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr ""
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr ""
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+msgid "http://opensource.atlassian.com/confluence/spring"
+msgstr ""
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+msgid "username1"
+msgstr ""
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:85
+msgid "Search Confluence"
+msgstr ""
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:93
+msgid "Searches Confluence and returns results to Do"
+msgstr ""
+
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr ""
+
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.bookmarks by tag"
+msgstr ""
+
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr ""
+
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr ""
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:37
+msgid "Del.icio.us bookmarks"
+msgstr ""
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:41
+msgid "Indexes your del.icio.us bookmarks"
+msgstr ""
+
+#: ../Del.icio.us/src/SearchAction.cs:47
+msgid "Search del.icio.us"
+msgstr ""
+
+#: ../Del.icio.us/src/SearchAction.cs:51
+msgid "del.icio.us tag search"
+msgstr ""
 
 #: ../DiskMounter/src/OpenVolumeAction.cs:40
 #: ../SystemServices/src/SystemServicesConfig.cs:74
@@ -73,6 +293,14 @@ msgstr "Gắn kết"
 #: ../DiskMounter/src/MountAction.cs:36
 msgid "Mount volume"
 msgstr "Gắn vật chứa"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
+msgid "Play Slideshow"
+msgstr ""
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
+msgid "Plays a slideshow of images in a folder."
+msgstr ""
 
 #: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:44
 msgid "Epiphany Bookmarks"
@@ -101,9 +329,21 @@ msgstr "Điện thoại di động"
 msgid "Evolution Contacts"
 msgstr "Liên lạc của Evolution"
 
+#: ../Evolution/src/AddressContactDetailItem.cs:34
+msgid "Address"
+msgstr ""
+
 #: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
 msgid "Show hidden files"
 msgstr "Hiện tập tin ẩn"
+
+#: ../File/src/PathNodeView.cs:51
+msgid "Folder"
+msgstr ""
+
+#: ../File/src/PathNodeView.cs:57
+msgid "Depth"
+msgstr ""
 
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
 msgid "Delete File"
@@ -117,6 +357,31 @@ msgstr "Xóa một tệp hoặc thư mục."
 msgid "Choose a folder to index"
 msgstr "Chọn thư mục để tạo chỉ mục"
 
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
+#: ../SystemServices/src/SystemServicesConfig.cs:73
+msgid "Cancel"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
+msgid "Choose folder"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
+msgid "Rename file..."
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
+msgid "Renames a file."
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
+msgid "Create New Folder"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
+msgid "Creates an new folder."
+msgstr ""
+
 #: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
 #: ../RememberTheMilk/src/RTMMoveTask.cs:35
 msgid "Move to..."
@@ -129,6 +394,10 @@ msgstr "Di chuyển một tệp hoặc thư mục tới vị trí khác."
 #: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:39
 msgid "Move to Trash"
 msgstr "Chuyển vào Sọt rác"
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:43
+msgid "Moves a file or folder to the trash"
+msgstr ""
 
 #: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
 msgid "Recent Files"
@@ -145,6 +414,26 @@ msgstr "Sao chép tới..."
 #: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
 msgid "Copies a file or folder to another location."
 msgstr "Chép một tệp hoặc thư mục tới vị trí khác."
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
+msgid "Files and Folders"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
+msgid "Catalogs important files and folders for quick access."
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
+msgid "Create New File"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
+msgid "Creates an new, empty file."
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
+msgid "Untitled"
+msgstr ""
 
 #: ../Firefox/src/BookmarkItemSource.cs:55
 msgid "Firefox Bookmarks"
@@ -202,6 +491,10 @@ msgid ""
 msgstr ""
 "Thẻ mặc định sử dụng trên ảnh với Do. Dùng khoảng trắng để phân biệt các "
 "thẻ; một thẻ có nhiều từ sử dụng dấu nháy kép. Ví dụ: \"Thẻ nhiều từ\""
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:209
+msgid "<b>Tags</b>"
+msgstr ""
 
 #: ../Flickr/src/UploadAction.cs:45
 msgid "Upload photo"
@@ -356,6 +649,22 @@ msgstr "Chạy trong cửa sổ dòng lệnh"
 msgid "Runs a command in GNOME Terminal."
 msgstr "Chạy một lệnh trong Cửa sổ dòng lệnh GNOME"
 
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
+msgid "GNOME Terminal Profiles"
+msgstr ""
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
+msgid "Indexes your GNOME Terminal profiles."
+msgstr ""
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:33
+msgid "Unnamed Profile"
+msgstr ""
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:34
+msgid "GNOME Terminal Profile"
+msgstr ""
+
 #: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
 msgid "Perform a calculation using Google Calculator."
 msgstr "Thực hiện một phép tính sử dụng Máy tính Google."
@@ -364,6 +673,11 @@ msgstr "Thực hiện một phép tính sử dụng Máy tính Google."
 msgid "Google Calculator could not evaluate the expression."
 msgstr "Máy tính Google không thể ước lượng được biểu thức."
 
+#: ../GoogleCalendar/src/Configuration.cs:42
+#: ../GoogleDocs/src/Configuration.cs:41
+msgid "E-Mail:"
+msgstr ""
+
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:40
 msgid "Google Calendars"
 msgstr "Lịch Google"
@@ -371,6 +685,31 @@ msgstr "Lịch Google"
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:44
 msgid "Indexes your Google Calendars"
 msgstr "Đánh chỉ mục lịch Google của bạn"
+
+#: ../GoogleCalendar/src/GCalClient.cs:40
+msgid "All Events"
+msgstr ""
+
+#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
+#, csharp-format
+msgid "An error has occurred in {0}"
+msgstr ""
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:41
+msgid "View Event"
+msgstr ""
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:45
+msgid "Open event in browser"
+msgstr ""
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
+msgid "View Calendar"
+msgstr ""
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
+msgid "Open calendar in browser"
+msgstr ""
 
 #: ../GoogleCalendar/src/GCalendarItem.cs:45
 msgid "Google Calendar"
@@ -383,6 +722,10 @@ msgstr "Tìm kiếm sự kiện"
 #: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
 msgid "Search Google Calendar for Events"
 msgstr "Tìm kiếm sự kiện trong Lịch Google"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr ""
 
 #: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
 msgid "New Event"
@@ -416,392 +759,6 @@ msgstr "Địa chỉ nhà"
 msgid "Work Address"
 msgstr "Địa chỉ chỗ làm"
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:38
-msgid "GMail Contacts"
-msgstr "Danh bạ của Gmail"
-
-#: ../GoogleMaps/src/MapAction.cs:39
-msgid "Map"
-msgstr "Bản đồ"
-
-#: ../GoogleMaps/src/MapAction.cs:44
-msgid "Map a location or route in Google maps."
-msgstr "Xem bản độ một vị trí hoặc chỉ đường trong bản đồ Google."
-
-#. Container child safeSearchBox.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
-msgid "Do not filter my search results."
-msgstr "Không lọc kết quả tìm kiếm của tôi."
-
-#. Container child safeSearchBox.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
-msgid "Use moderate filtering"
-msgstr "Sử dụng bộ lọc vừa phải"
-
-#. Container child safeSearchBox.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
-msgid "Use strict filtering"
-msgstr "Sử dụng bộ lọc chính xác"
-
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
-msgid "<b>SafeSearch Preferences</b>"
-msgstr "<b>Cấu hình tìm kiếm an toàn</b>"
-
-#: ../GoogleSearch/src/InlineGoogleSearch.cs:81
-msgid "Search Google"
-msgstr "Tìm kiếm với Google"
-
-#: ../RememberTheMilk/src/RTMRenameTask.cs:33
-msgid "Rename to..."
-msgstr "Đổi tên thành..."
-
-#: ../Rhythmbox/src/MusicItems.cs:77
-msgid "All music by"
-msgstr "Tất cả nhạc bởi"
-
-#: ../Alias/src/AliasAction.cs:36
-msgid "Assign Alias..."
-msgstr ""
-
-#: ../Alias/src/AliasAction.cs:40
-msgid "Give an item an alternate name."
-msgstr ""
-
-#: ../Alias/src/DeleteAliasAction.cs:36
-msgid "Delete Alias"
-msgstr ""
-
-#: ../Alias/src/DeleteAliasAction.cs:40
-msgid "Deletes an alias."
-msgstr ""
-
-#: ../Alias/src/AliasItemSource.cs:140
-msgid "Alias items"
-msgstr ""
-
-#: ../Alias/src/AliasItemSource.cs:144
-msgid "Aliased items from Do's universe."
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
-msgid "Browse Artists"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:57
-msgid "Browse Music by Artist"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
-msgid "Browse Albums"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:70
-msgid "Browse Music by Album"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:77
-msgid "Browse Podcasts"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:78
-msgid "Browse Podcasts by Publisher"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:85
-msgid "Browse Videos"
-msgstr ""
-
-#: ../Banshee/src/BrowseMediaItems.cs:86
-msgid "Browse All Videos"
-msgstr ""
-
-#: ../Banshee/src/EnqueueAction.cs:37 ../Rhythmbox/src/EnqueueAction.cs:36
-msgid "Add to Play Queue"
-msgstr ""
-
-#: ../Banshee/src/EnqueueAction.cs:41
-msgid "Add media to play queue"
-msgstr ""
-
-#: ../Banshee/src/MediaItemSource.cs:46
-msgid "Banshee Media"
-msgstr ""
-
-#: ../Banshee/src/MediaItemSource.cs:50
-msgid "Indexes Media from Banshee Media Player"
-msgstr ""
-
-#: ../Banshee/src/MediaItems.cs:191
-msgid "All Music by"
-msgstr ""
-
-#: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
-msgid "Next"
-msgstr ""
-
-#: ../Banshee/src/NextAction.cs:36
-msgid "Play next track"
-msgstr ""
-
-#: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
-msgid "Pause"
-msgstr ""
-
-#: ../Banshee/src/PauseAction.cs:36
-msgid "Pause playing track"
-msgstr ""
-
-#: ../Banshee/src/PlayAction.cs:39
-msgid "Play from your Banshee Collection"
-msgstr ""
-
-#: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
-msgid "Previous"
-msgstr ""
-
-#: ../Banshee/src/PreviousAction.cs:36
-msgid "Play previous track"
-msgstr ""
-
-#: ../Banshee/src/SearchCollectionAction.cs:36
-msgid "Search Banshee Media"
-msgstr ""
-
-#: ../Banshee/src/SearchCollectionAction.cs:40
-msgid "Search your entire Banshee collection"
-msgstr ""
-
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
-msgid "Choose BibTeX file"
-msgstr ""
-
-#. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
-#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
-msgid "Select A File"
-msgstr ""
-
-#. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
-msgid "Select your documents folder"
-msgstr ""
-
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
-msgid "Choose documents folder"
-msgstr ""
-
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
-msgid "ClawsMail contacts"
-msgstr ""
-
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
-msgid "Contacts in ClawsMail address book"
-msgstr ""
-
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
-msgid "Other email"
-msgstr ""
-
-#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
-msgid "Other"
-msgstr ""
-
-#: ../Cl.ickable/src/ClipAction.cs:38
-msgid "Clip"
-msgstr ""
-
-#: ../Cl.ickable/src/ClipAction.cs:42
-msgid "Create a clip with Cl.ickable"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:32
-msgid "Cl.ickable Clips"
-msgstr ""
-
-#: ../Cl.ickable/src/WebClipsItem.cs:36
-msgid "Opens your cl.ickable clips"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:31
-msgid "Cl.ickable Items"
-msgstr ""
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:35
-msgid "Usefull Cl.ickable Items"
-msgstr ""
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
-msgid "http://opensource.atlassian.com/confluence/spring"
-msgstr ""
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
-msgid "username1"
-msgstr ""
-
-#: ../Confluence/src/ConfluenceSearchAction.cs:85
-msgid "Search Confluence"
-msgstr ""
-
-#: ../Confluence/src/ConfluenceSearchAction.cs:93
-msgid "Searches Confluence and returns results to Do"
-msgstr ""
-
-#: ../Del.icio.us/src/TagsItemSource.cs:34
-msgid "Del.icio.us Tags"
-msgstr ""
-
-#: ../Del.icio.us/src/TagsItemSource.cs:38
-msgid "Organizes your del.icio.bookmarks by tag"
-msgstr ""
-
-#: ../Del.icio.us/src/TagItem.cs:45
-msgid "Untagged del.ico.us bookmarks"
-msgstr ""
-
-#: ../Del.icio.us/src/TagItem.cs:47
-#, csharp-format
-msgid "del.icio.us bookmarks tagged with {0}"
-msgstr ""
-
-#: ../Del.icio.us/src/BookmarksItemSource.cs:37
-msgid "Del.icio.us bookmarks"
-msgstr ""
-
-#: ../Del.icio.us/src/BookmarksItemSource.cs:41
-msgid "Indexes your del.icio.us bookmarks"
-msgstr ""
-
-#: ../Del.icio.us/src/SearchAction.cs:47
-msgid "Search del.icio.us"
-msgstr ""
-
-#: ../Del.icio.us/src/SearchAction.cs:51
-msgid "del.icio.us tag search"
-msgstr ""
-
-#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
-msgid "Play Slideshow"
-msgstr ""
-
-#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
-msgid "Plays a slideshow of images in a folder."
-msgstr ""
-
-#: ../Evolution/src/AddressContactDetailItem.cs:34
-msgid "Address"
-msgstr ""
-
-#: ../File/src/PathNodeView.cs:51
-msgid "Folder"
-msgstr ""
-
-#: ../File/src/PathNodeView.cs:57
-msgid "Depth"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
-#: ../SystemServices/src/SystemServicesConfig.cs:73
-msgid "Cancel"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
-msgid "Choose folder"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
-msgid "Rename file..."
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
-msgid "Renames a file."
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
-msgid "Create New Folder"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
-msgid "Creates an new folder."
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:43
-msgid "Moves a file or folder to the trash"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
-msgid "Files and Folders"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
-msgid "Catalogs important files and folders for quick access."
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
-msgid "Create New File"
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
-msgid "Creates an new, empty file."
-msgstr ""
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
-msgid "Untitled"
-msgstr ""
-
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:209
-msgid "<b>Tags</b>"
-msgstr ""
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
-msgid "GNOME Terminal Profiles"
-msgstr ""
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
-msgid "Indexes your GNOME Terminal profiles."
-msgstr ""
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:33
-msgid "Unnamed Profile"
-msgstr ""
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:34
-msgid "GNOME Terminal Profile"
-msgstr ""
-
-#: ../GoogleCalendar/src/Configuration.cs:42
-#: ../GoogleDocs/src/Configuration.cs:41
-msgid "E-Mail:"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalClient.cs:40
-msgid "All Events"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
-#, csharp-format
-msgid "An error has occurred in {0}"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:41
-msgid "View Event"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:45
-msgid "Open event in browser"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
-msgid "View Calendar"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
-msgid "Open calendar in browser"
-msgstr ""
-
-#: ../GoogleCalendar/src/GCal.cs:34
-msgid "Failed to connect to GCal service"
-msgstr ""
-
 #: ../GoogleContacts/src/GMail.cs:35
 msgid "An error occurred connecting to google, are your credentials valid?"
 msgstr ""
@@ -811,6 +768,10 @@ msgid ""
 "Missing login credentials. Please set login information in plugin "
 "configuration."
 msgstr ""
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:38
+msgid "GMail Contacts"
+msgstr "Danh bạ của Gmail"
 
 #: ../GoogleContacts/src/GMailContactItemSource.cs:42
 msgid "Index your GMail contacts"
@@ -886,6 +847,14 @@ msgstr ""
 msgid "Google Docs Spreadsheet"
 msgstr ""
 
+#: ../GoogleMaps/src/MapAction.cs:39
+msgid "Map"
+msgstr "Bản đồ"
+
+#: ../GoogleMaps/src/MapAction.cs:44
+msgid "Map a location or route in Google maps."
+msgstr "Xem bản độ một vị trí hoặc chỉ đường trong bản đồ Google."
+
 #. Container child vbox4.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
 msgid "Go directly to Google Search page"
@@ -907,6 +876,29 @@ msgstr ""
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
 msgid "Apply to Google Search page link"
 msgstr ""
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
+msgid "Do not filter my search results."
+msgstr "Không lọc kết quả tìm kiếm của tôi."
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
+msgid "Use moderate filtering"
+msgstr "Sử dụng bộ lọc vừa phải"
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
+msgid "Use strict filtering"
+msgstr "Sử dụng bộ lọc chính xác"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
+msgid "<b>SafeSearch Preferences</b>"
+msgstr "<b>Cấu hình tìm kiếm an toàn</b>"
+
+#: ../GoogleSearch/src/InlineGoogleSearch.cs:81
+msgid "Search Google"
+msgstr "Tìm kiếm với Google"
 
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:90
 msgid "Allows you to perform Google Searches from Do"
@@ -1522,6 +1514,10 @@ msgstr ""
 msgid "Complete a selected task"
 msgstr ""
 
+#: ../RememberTheMilk/src/RTMRenameTask.cs:33
+msgid "Rename to..."
+msgstr "Đổi tên thành..."
+
 #: ../RememberTheMilk/src/RTMRenameTask.cs:37
 msgid "Give the seleted task a new name"
 msgstr ""
@@ -1557,6 +1553,10 @@ msgstr ""
 #: ../RememberTheMilk/src/RTMSetDue.cs:37
 msgid "Set the due date/time of a task"
 msgstr ""
+
+#: ../Rhythmbox/src/MusicItems.cs:77
+msgid "All music by"
+msgstr "Tất cả nhạc bởi"
 
 #: ../Rhythmbox/src/EnqueueAction.cs:40
 msgid "Add an item to Rhythmbox's play queue."

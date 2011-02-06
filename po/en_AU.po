@@ -9,37 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
 "PO-Revision-Date: 2008-08-25 06:42+0000\n"
-"Last-Translator: Chris Halse Rogers <chalserogers@gmail.com>\n"
+"Last-Translator: Chris Halse Rogers <raof@ubuntu.com>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-
-#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:39
-msgid "Move to Trash"
-msgstr "Move to Garbage"
-
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
-msgid ""
-"Do needs your authorization in order to upload photos to your flickr "
-"account. Press the \"Authorize\" button to open a web browser and give Do "
-"authorization. "
-msgstr ""
-"Do needs your authorisation in order to upload photos to your flickr "
-"account. Press the \"Authorise\" button to open a web browser and give Do "
-"authorisation. "
-
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
-msgid "_Authorize"
-msgstr "_Authorise"
-
-#: ../Flickr/src/AccountConfig.cs:91
-msgid "Click to compete authorization"
-msgstr "Click to compete authorisation"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -414,6 +391,10 @@ msgstr ""
 msgid "Moves a file or folder to another location."
 msgstr ""
 
+#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:39
+msgid "Move to Trash"
+msgstr "Move to Garbage"
+
 #: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:43
 msgid "Moves a file or folder to the trash"
 msgstr ""
@@ -462,10 +443,25 @@ msgstr ""
 msgid "Finds Firefox bookmarks in your default profile."
 msgstr ""
 
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
+msgid ""
+"Do needs your authorization in order to upload photos to your flickr "
+"account. Press the \"Authorize\" button to open a web browser and give Do "
+"authorization. "
+msgstr ""
+"Do needs your authorisation in order to upload photos to your flickr "
+"account. Press the \"Authorise\" button to open a web browser and give Do "
+"authorisation. "
+
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
 msgid "<b>Account</b>"
 msgstr ""
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
+msgid "_Authorize"
+msgstr "_Authorise"
 
 #. Container child vbox6.Gtk.Box+BoxChild
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:83
@@ -510,6 +506,10 @@ msgstr ""
 #: ../Flickr/src/FlickrItemSource.cs:34
 msgid "Account"
 msgstr ""
+
+#: ../Flickr/src/AccountConfig.cs:91
+msgid "Click to compete authorization"
+msgstr "Click to compete authorisation"
 
 #: ../Flickr/src/AccountConfig.cs:112
 #, csharp-format

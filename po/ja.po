@@ -8,473 +8,31 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2008-10-12 02:43+0000\n"
-"Last-Translator: nnakata <Unknown>\n"
+"PO-Revision-Date: 2010-04-02 21:55+0000\n"
+"Last-Translator: Nobuto MURATA <nobuto@nobuto-murata.org>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-
-#: ../Archive/src/ExtractArchiveAction.cs:44
-msgid "Extract an archive to a given folder"
-msgstr "書庫を指定したフォルダに展開します"
-
-#: ../Archive/src/CreateArchiveAction.cs:41
-msgid "Create archive"
-msgstr "Create archive"
-
-#: ../Archive/src/CreateArchiveAction.cs:45
-msgid "Create an archive with the selected item"
-msgstr "選択したアイテムで書庫を作成します"
-
-#. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
-#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
-msgid "Select A File"
-msgstr "ファイルを選択"
-
-#: ../DiskMounter/src/OpenVolumeAction.cs:44
-msgid "Open a removable volume"
-msgstr "リムーバブルボリュームを開きます"
-
-#: ../DiskMounter/src/UnmountAction.cs:35
-msgid "Unmount volume"
-msgstr "ボリュームをアンマウントします"
-
-#: ../DiskMounter/src/MountAction.cs:36
-msgid "Mount volume"
-msgstr "ボリュームをマウントします"
-
-#: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:47
-msgid "Indexes your Epiphany bookmarks."
-msgstr "Epiphanyブックマークをインデックスします"
-
-#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
-msgid "Show hidden files"
-msgstr "隠しファイルを表示する"
-
-#: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:41
-msgid "Deletes a file or folder."
-msgstr "ファイルやフォルダを削除します"
-
-#: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:41
-msgid "Moves a file or folder to another location."
-msgstr "ファイルやフォルダを別の場所へ移動します"
-
-#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
-msgid "Finds recently-opened files."
-msgstr "最近使ったファイルを検索します"
-
-#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
-msgid "Copies a file or folder to another location."
-msgstr "ファイルやフォルダを別の場所へコピーします"
-
-#: ../Firefox/src/BookmarkItemSource.cs:59
-msgid "Finds Firefox bookmarks in your default profile."
-msgstr "あなたのデフォルトプロファイルからFirefoxのブックマークを検索します"
-
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
-msgid ""
-"Do needs your authorization in order to upload photos to your flickr "
-"account. Press the \"Authorize\" button to open a web browser and give Do "
-"authorization. "
-msgstr ""
-"Doは写真をFlickrアカウントにアップロードするためにあなたの許可を必要とします。「許可」ボタンを押してウェブブラウザを開き、Doを許可してください。"
-" "
-
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
-msgid "<b>Account</b>"
-msgstr "<b>アカウント</b>"
-
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
-msgid "_Authorize"
-msgstr "認証(_A)"
-
-#. Container child vbox6.Gtk.Box+BoxChild
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:83
-msgid "Private"
-msgstr "非公開"
-
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:107
-msgid "Visible to friends"
-msgstr "友人に公開"
-
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:119
-msgid "Visible to family"
-msgstr "家族に公開"
-
-#. Container child vbox6.Gtk.Box+BoxChild
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
-msgid "Public"
-msgstr "公開"
-
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:149
-msgid "<b>Viewing permissions</b>"
-msgstr "<b>閲覧権限</b>"
-
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:182
-msgid ""
-"Default tags to use on images posted with Do. Seperate tags with a space; "
-"for multiple word tags use quotes. ex.) concert \"Mars Volta\" Omar"
-msgstr ""
-"Doでポストする画像に用いるデフォルトのタグです。空白文字でタグを分離します。複数単語のタグはダブルクォートで囲みます。例） concert "
-"\"Mars Volta\" Omar"
-
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:209
-msgid "<b>Tags</b>"
-msgstr "<b>タグ</b>"
-
-#: ../Flickr/src/UploadAction.cs:49
-msgid "Upload one or more photos to Flickr"
-msgstr "1つまたは複数の写真をFlickrにアップロードします"
-
-#: ../Flickr/src/AccountConfig.cs:91
-msgid "Click to compete authorization"
-msgstr "クリックして許可を完了してください"
-
-#: ../Flickr/src/AccountConfig.cs:112
-#, csharp-format
-msgid "Thank you {0} for allowing Do access to Flickr."
-msgstr "{0}さん、DoのFlickrへのアクセスを許可していただきありがとうございます。"
-
-#: ../GNOME-Dictionary/src/DefineAction.cs:56
-msgid "Define a given word."
-msgstr "与えられた単語を定義します"
-
-#: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
-msgid "Take a screenshot of the current window."
-msgstr "現在のウインドウのスクリーンショットを撮影します"
-
-#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
-msgid "Take a screenshot of the entire screen."
-msgstr "画面全体のスクリーンショットを撮影します"
-
-#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:37
-#, csharp-format
-msgid "{0}-second delay"
-msgstr "{0}秒の遅延"
-
-#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:43
-#, csharp-format
-msgid "Wait {0} second before taking the screenshot."
-msgid_plural "Wait {0} seconds before taking the screenshot."
-msgstr[0] "{0}秒後にスクリーンショットを撮影します"
-
-#: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:38
-msgid "Takes a screenshot with optional delay."
-msgstr "スクリーンショットを撮影します（遅延時間を指定可能）"
-
-#: ../GNOME-Session/src/SessionCommandsItemSource.cs:55
-msgid "Close your session and return to the login screen."
-msgstr "現在のセッションを閉じ、ログイン画面に戻ります。"
-
-#: ../GNOME-Session/src/SessionCommandsItemSource.cs:61
-msgid "Turn your computer off."
-msgstr "コンピュータの電源を切ります"
-
-#: ../GNOME-Session/src/SessionCommandsItemSource.cs:67
-msgid "Put your computer into hibernation mode."
-msgstr "コンピュータをハイバネート状態にします"
-
-#: ../GNOME-Session/src/SessionCommandsItemSource.cs:73
-msgid "Put your computer into suspend mode."
-msgstr "コンピュータをサスペンド状態にします"
-
-#: ../GNOME-Session/src/SessionCommandsItemSource.cs:79
-msgid "Restart your computer."
-msgstr "コンピュータを再起動します"
-
-#: ../GNOME-Session/src/SessionCommandsItemSource.cs:85
-msgid "Lock your screen."
-msgstr "画面をロックします"
-
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
-msgid "Opens a GNOME Terminal with the selected profile."
-msgstr "選択したプロファイルでGNOME端末を開きます"
-
-#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
-msgid "Opens a GNOME Terminal in a given location."
-msgstr "指定した場所でGNOME端末を開きます"
-
-#: ../GNOME-Terminal/src/RunInTerminalAction.cs:46
-msgid "Runs a command in GNOME Terminal."
-msgstr "コマンドをGNOME端末で実行します"
-
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
-msgid "Perform a calculation using Google Calculator."
-msgstr "Google電卓機能で計算を実行します"
-
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:92
-msgid "Google Calculator could not evaluate the expression."
-msgstr "Google電卓機能はこの数式を評価できません"
-
-#: ../GoogleCalendar/src/GCalendarItemSource.cs:44
-msgid "Indexes your Google Calendars"
-msgstr "Googleカレンダーをインデックスします"
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
-msgid "Search Google Calendar for Events"
-msgstr "Googleカレンダーのイベントを検索します"
-
-#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
-msgid "Create a new event in Google Calendar"
-msgstr "Googleカレンダーに新しいイベントを作成します"
-
-#: ../GoogleMaps/src/MapAction.cs:44
-msgid "Map a location or route in Google maps."
-msgstr "Googleマップで場所や経路を表示します"
-
-#. Container child safeSearchBox.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
-msgid "Do not filter my search results."
-msgstr "検索結果をフィルタリングしない"
-
-#. Container child safeSearchBox.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
-msgid "Use moderate filtering"
-msgstr "適度なフィルタリングを行う"
-
-#. Container child safeSearchBox.Gtk.Box+BoxChild
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
-msgid "Use strict filtering"
-msgstr "厳しいフィルタリングを行う"
-
-#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
-msgid "<b>SafeSearch Preferences</b>"
-msgstr "<b>セーフサーチ設定</b>"
-
-#: ../LocateFiles/src/LocateFilesAction.cs:44
-msgid "Search your filesystem using locate."
-msgstr "locateを使用してファイルシステムを検索します"
-
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
-msgid "Show friend status updates"
-msgstr "フレンドステータスの更新を表示する"
-
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
-msgid "<b>General</b>"
-msgstr "<b>全般</b>"
-
-#: ../OpenSearch/src/OpenSearchAction.cs:40
-msgid "Searches the web using OpenSearch plugins."
-msgstr "OpenSearchプラグインを使用してWebを検索します"
-
-#: ../Pastebin/src/PastebinAction.cs:44
-msgid "Sends the text to Pastebin."
-msgstr "テキストをPastebinに送信します"
-
-#: ../Pidgin/src/PidginSetStatusAction.cs:52
-msgid "Set pidgin status message"
-msgstr "Pidginの状態メッセージを設定します"
-
-#: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
-msgid "Saved Pidgin statuses"
-msgstr "Pidginの保存した状態"
-
-#: ../Pidgin/src/PidginContactItemSource.cs:63
-msgid "Buddies on your Pidgin buddy list."
-msgstr "Pidginの仲間リストに含まれる仲間"
-
-#: ../Pidgin/src/PidginAccountItemSource.cs:45
-msgid "Available Pidgin IM Accounts"
-msgstr "利用可能なPidginのアカウント"
-
-#: ../Pidgin/src/PidginAccountActions.cs:40
-msgid "Enable pidgin account"
-msgstr "Pidginのアカウントを有効にします"
-
-#: ../Pidgin/src/PidginAccountActions.cs:86
-msgid "Disble pidgin account"
-msgstr "Pidginのアカウントを無効にします"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:46
-msgid "Available"
-msgstr "利用可能"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:47
-msgid "Busy"
-msgstr "ビジー"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:48
-msgid "Invisible"
-msgstr "透明"
-
-#: ../Pidgin/src/PidginStatusTypeItem.cs:49
-msgid "Away"
-msgstr "Away"
-
-#: ../Pidgin/src/PidginChatAction.cs:45
-msgid "Send an instant message to a friend."
-msgstr "友人にインスタントメッセージを送信します"
-
-#: ../Rhythmbox/src/EnqueueAction.cs:40
-msgid "Add an item to Rhythmbox's play queue."
-msgstr "アイテムをRhythmboxの演奏キューに追加します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:49
-msgid "Browse Rhythmbox Music by Artist"
-msgstr "Rhythmboxの楽曲をアーティスト名で閲覧します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:58
-msgid "Browse Rhythmbox Music by Album"
-msgstr "Rhythmboxの楽曲をアルバム名で閲覧します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:69
-msgid "Play Current Track in Rhythmbox"
-msgstr "Rhythmboxの現在のトラックを演奏します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:74
-msgid "Pause Rhythmbox Playback"
-msgstr "Rhythmboxの演奏を一時停止します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:79
-msgid "Play Next Track in Rhythmbox"
-msgstr "Rhythmboxの次のトラックを演奏します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:84
-msgid "Play Previous Track in Rhythmbox"
-msgstr "Rhythmboxの前のトラックを演奏します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:89
-msgid "Show Notification of Current Track in Rhythmbox"
-msgstr "Rhythmboxの現在のトラックの通知を表示します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:94
-msgid "Mute Rhythmbox Playback"
-msgstr "Rhythmboxの再生をミュートにします"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:99
-msgid "Unmute Rhythmbox Playback"
-msgstr "Rhythmboxの再生のミュートを解除します"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:104
-msgid "Increase Rhythmbox Playback Volume"
-msgstr "Rhythmboxの再生音量を上げます"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:109
-msgid "Decrease Rhythmbox Playback Volume"
-msgstr "Rhythmboxの再生音量を下げます"
-
-#: ../Rhythmbox/src/PlayAction.cs:44
-msgid "Play an item in Rhythmbox."
-msgstr "Rhythmboxのアイテムを演奏します"
-
-#: ../Rhythmbox/src/MusicItemSource.cs:49
-msgid "Provides access to artists and albums from Rhythmbox."
-msgstr "Rhythmboxのアーティストとアルバムへのアクセスを提供します"
-
-#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
-msgid "OPML feed file"
-msgstr "OPMLフィードファイル"
-
-#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:75
-msgid "Timeout (in seconds)"
-msgstr "タイムアウト（秒）"
-
-#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:85
-msgid "Cache duration (in minutes)"
-msgstr "キャッシュ持続時間（秒）"
-
-#: ../Shelf/src/ShelfActions.cs:64
-msgid "Remove Selected Item From Shelf"
-msgstr "選択したアイテムをシェルフから削除します"
-
-#: ../SSH/src/SSHHosts.cs:63
-msgid "Parses ssh-config"
-msgstr "ssh-configをパースします"
-
-#: ../Tasque/src/TasqueAction.cs:46
-msgid "Create a new task in Tasque"
-msgstr "Tasqueに新しいタスクを作成します"
-
-#: ../Text/src/AppendTextAction.cs:35
-msgid "Appends text to a selected file."
-msgstr "テキストを選択されたファイルに追加します"
-
-#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
-msgid "Use note content as note title when no title is specified."
-msgstr "題名が指定されていない場合は内容を題名として使用する"
-
-#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
-msgid "<b>Default New Note Title</b>"
-msgstr "<b>新規メモのデフォルトの題名</b>"
-
-#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:129
-msgid "<b>New Note Title and Content Entry</b>"
-msgstr "<b>新規メモの題名と内容の記入</b>"
-
-#: ../Vinagre/src/VNCHostSource.cs:43
-msgid "Indexes your Vinagre Bookmarks"
-msgstr "リモートデスクトップビューアのブックマークをインデックスします"
-
-#: ../VolumeControl/src/VolumeDownItem.cs:35
-msgid "Decrease system volume"
-msgstr "システムの音量を下げます"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:35
-msgid "Mute system volume"
-msgstr "システムの音量をミュートにします"
-
-#: ../VolumeControl/src/VolumeItemSource.cs:43
-msgid "Adjust your system volume"
-msgstr "システムの音量を調節します"
-
-#: ../VolumeControl/src/VolumeUnmuteItem.cs:36
-msgid "Unmute system volume"
-msgstr "システムの音量のミュートを解除します"
-
-#: ../WindowManager/src/WindowListAction.cs:194
-msgid "Make a window consume the whole screen"
-msgstr "ウインドウを最大化します"
-
-#: ../WindowManager/src/WindowListAction.cs:221
-msgid "Minimize/Restore a Window"
-msgstr "ウインドウを最小化／復元します"
-
-#: ../WindowManager/src/WindowListAction.cs:246
-msgid "Close your current window."
-msgstr "現在のウインドウを閉じます"
-
-#: ../WindowManager/src/ScreenListAction.cs:281
-msgid "Tile All Windows in Current Viewport"
-msgstr "現在のビューポートにあるウインドウをタイル状に整列します"
-
-#: ../WindowManager/src/ScreenListAction.cs:350
-msgid "Cascade your Windows"
-msgstr "ウインドウを重ね整列します"
-
-#: ../WindowManager/src/ScreenListAction.cs:408
-msgid "Restore Windows to their Previous Positions"
-msgstr "ウインドウを前の位置に戻します"
-
-#: ../WindowManager/src/WindowItemSource.cs:80
-msgid "The Previously Active Window"
-msgstr "直前にアクティブだったウインドウ"
-
-#: ../WindowManager/src/WindowItemSource.cs:84
-msgid "The Previously Active Application"
-msgstr "直前にアクティブだったアプリケーション"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
-msgstr ""
+msgstr "Assign Alias...（エイリアスを割り当てる...）"
 
 #: ../Alias/src/AliasAction.cs:40
 msgid "Give an item an alternate name."
-msgstr ""
+msgstr "アイテムに別名をつけます。"
 
 #: ../Alias/src/DeleteAliasAction.cs:36
 msgid "Delete Alias"
-msgstr ""
+msgstr "Delete Alias（エイリアスを削除）"
 
 #: ../Alias/src/DeleteAliasAction.cs:40
 msgid "Deletes an alias."
-msgstr ""
+msgstr "エイリアスを削除します。"
 
 #: ../Alias/src/AliasItemSource.cs:140
 msgid "Alias items"
@@ -487,6 +45,18 @@ msgstr ""
 #: ../Archive/src/ExtractArchiveAction.cs:40
 msgid "Extract archive"
 msgstr ""
+
+#: ../Archive/src/ExtractArchiveAction.cs:44
+msgid "Extract an archive to a given folder"
+msgstr "書庫を指定したフォルダに展開します"
+
+#: ../Archive/src/CreateArchiveAction.cs:41
+msgid "Create archive"
+msgstr "Create archive"
+
+#: ../Archive/src/CreateArchiveAction.cs:45
+msgid "Create an archive with the selected item"
+msgstr "選択したアイテムで書庫を作成します"
 
 #: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
 msgid "Browse Artists"
@@ -584,6 +154,12 @@ msgstr ""
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
 msgid "Choose BibTeX file"
 msgstr ""
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
+msgid "Select A File"
+msgstr "ファイルを選択"
 
 #. Container child table1.Gtk.Table+TableChild
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
@@ -698,13 +274,25 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+#: ../DiskMounter/src/OpenVolumeAction.cs:44
+msgid "Open a removable volume"
+msgstr "リムーバブルボリュームを開きます"
+
 #: ../DiskMounter/src/UnmountAction.cs:31
 msgid "Unmount"
 msgstr ""
 
+#: ../DiskMounter/src/UnmountAction.cs:35
+msgid "Unmount volume"
+msgstr "ボリュームをアンマウントします"
+
 #: ../DiskMounter/src/MountAction.cs:32
 msgid "Mount"
 msgstr ""
+
+#: ../DiskMounter/src/MountAction.cs:36
+msgid "Mount volume"
+msgstr "ボリュームをマウントします"
 
 #: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
 msgid "Play Slideshow"
@@ -717,6 +305,10 @@ msgstr ""
 #: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:44
 msgid "Epiphany Bookmarks"
 msgstr ""
+
+#: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:47
+msgid "Indexes your Epiphany bookmarks."
+msgstr "Epiphanyブックマークをインデックスします"
 
 #: ../Evolution/src/PhoneContactDetailItem.cs:34
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:46
@@ -741,6 +333,10 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
+msgid "Show hidden files"
+msgstr "隠しファイルを表示する"
+
 #: ../File/src/PathNodeView.cs:51
 msgid "Folder"
 msgstr ""
@@ -752,6 +348,10 @@ msgstr ""
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
 msgid "Delete File"
 msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:41
+msgid "Deletes a file or folder."
+msgstr "ファイルやフォルダを削除します"
 
 #: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
 msgid "Choose a folder to index"
@@ -787,6 +387,10 @@ msgstr ""
 msgid "Move to..."
 msgstr ""
 
+#: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:41
+msgid "Moves a file or folder to another location."
+msgstr "ファイルやフォルダを別の場所へ移動します"
+
 #: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:39
 msgid "Move to Trash"
 msgstr ""
@@ -799,9 +403,17 @@ msgstr ""
 msgid "Recent Files"
 msgstr ""
 
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
+msgid "Finds recently-opened files."
+msgstr "最近使ったファイルを検索します"
+
 #: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
 msgid "Copy to..."
 msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
+msgid "Copies a file or folder to another location."
+msgstr "ファイルやフォルダを別の場所へコピーします"
 
 #: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
 msgid "Files and Folders"
@@ -827,29 +439,126 @@ msgstr ""
 msgid "Firefox Bookmarks"
 msgstr ""
 
+#: ../Firefox/src/BookmarkItemSource.cs:59
+msgid "Finds Firefox bookmarks in your default profile."
+msgstr "あなたのデフォルトプロファイルからFirefoxのブックマークを検索します"
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
+msgid ""
+"Do needs your authorization in order to upload photos to your flickr "
+"account. Press the \"Authorize\" button to open a web browser and give Do "
+"authorization. "
+msgstr ""
+"Doは写真をFlickrアカウントにアップロードするためにあなたの許可を必要とします。「許可」ボタンを押してウェブブラウザを開き、Doを許可してください。"
+" "
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
+msgid "<b>Account</b>"
+msgstr "<b>アカウント</b>"
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
+msgid "_Authorize"
+msgstr "認証(_A)"
+
+#. Container child vbox6.Gtk.Box+BoxChild
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:83
+msgid "Private"
+msgstr "非公開"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:107
+msgid "Visible to friends"
+msgstr "友人に公開"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:119
+msgid "Visible to family"
+msgstr "家族に公開"
+
+#. Container child vbox6.Gtk.Box+BoxChild
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
+msgid "Public"
+msgstr "公開"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:149
+msgid "<b>Viewing permissions</b>"
+msgstr "<b>閲覧権限</b>"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:182
+msgid ""
+"Default tags to use on images posted with Do. Seperate tags with a space; "
+"for multiple word tags use quotes. ex.) concert \"Mars Volta\" Omar"
+msgstr ""
+"Doでポストする画像に用いるデフォルトのタグです。空白文字でタグを分離します。複数単語のタグはダブルクォートで囲みます。例） concert "
+"\"Mars Volta\" Omar"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:209
+msgid "<b>Tags</b>"
+msgstr "<b>タグ</b>"
+
 #: ../Flickr/src/UploadAction.cs:45
 msgid "Upload photo"
 msgstr ""
+
+#: ../Flickr/src/UploadAction.cs:49
+msgid "Upload one or more photos to Flickr"
+msgstr "1つまたは複数の写真をFlickrにアップロードします"
 
 #: ../Flickr/src/FlickrItemSource.cs:34
 msgid "Account"
 msgstr ""
 
+#: ../Flickr/src/AccountConfig.cs:91
+msgid "Click to compete authorization"
+msgstr "クリックして許可を完了してください"
+
+#: ../Flickr/src/AccountConfig.cs:112
+#, csharp-format
+msgid "Thank you {0} for allowing Do access to Flickr."
+msgstr "{0}さん、DoのFlickrへのアクセスを許可していただきありがとうございます。"
+
 #: ../GNOME-Dictionary/src/DefineAction.cs:51
 msgid "Define"
 msgstr ""
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:56
+msgid "Define a given word."
+msgstr "与えられた単語を定義します"
 
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:28
 msgid "Current window"
 msgstr ""
 
+#: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
+msgid "Take a screenshot of the current window."
+msgstr "現在のウインドウのスクリーンショットを撮影します"
+
 #: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
 msgid "Whole screen"
 msgstr ""
 
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
+msgid "Take a screenshot of the entire screen."
+msgstr "画面全体のスクリーンショットを撮影します"
+
+#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:37
+#, csharp-format
+msgid "{0}-second delay"
+msgstr "{0}秒の遅延"
+
+#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:43
+#, csharp-format
+msgid "Wait {0} second before taking the screenshot."
+msgid_plural "Wait {0} seconds before taking the screenshot."
+msgstr[0] "{0}秒後にスクリーンショットを撮影します"
+
 #: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:34
 msgid "Take screenshot"
 msgstr ""
+
+#: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:38
+msgid "Takes a screenshot with optional delay."
+msgstr "スクリーンショットを撮影します（遅延時間を指定可能）"
 
 #: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
 msgid "GNOME Screenshot Items"
@@ -871,37 +580,73 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:55
+msgid "Close your session and return to the login screen."
+msgstr "現在のセッションを閉じ、ログイン画面に戻ります。"
+
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:60
 msgid "Shutdown"
 msgstr ""
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:61
+msgid "Turn your computer off."
+msgstr "コンピュータの電源を切ります"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:66
 msgid "Hibernate"
 msgstr ""
 
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:67
+msgid "Put your computer into hibernation mode."
+msgstr "コンピュータをハイバネート状態にします"
+
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:72
 msgid "Suspend"
 msgstr ""
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:73
+msgid "Put your computer into suspend mode."
+msgstr "コンピュータをサスペンド状態にします"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:78
 msgid "Restart"
 msgstr ""
 
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:79
+msgid "Restart your computer."
+msgstr "コンピュータを再起動します"
+
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:84
 msgid "Lock Screen"
 msgstr ""
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:85
+msgid "Lock your screen."
+msgstr "画面をロックします"
 
 #: ../GNOME-Terminal/src/OpenProfileAction.cs:39
 msgid "Open Profile"
 msgstr ""
 
+#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
+msgid "Opens a GNOME Terminal with the selected profile."
+msgstr "選択したプロファイルでGNOME端末を開きます"
+
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
 msgid "Open Terminal Here"
 msgstr ""
 
+#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
+msgid "Opens a GNOME Terminal in a given location."
+msgstr "指定した場所でGNOME端末を開きます"
+
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
 msgid "Run in Terminal"
 msgstr ""
+
+#: ../GNOME-Terminal/src/RunInTerminalAction.cs:46
+msgid "Runs a command in GNOME Terminal."
+msgstr "コマンドをGNOME端末で実行します"
 
 #: ../GNOME-Terminal/src/ProfileItemSource.cs:48
 msgid "GNOME Terminal Profiles"
@@ -919,6 +664,14 @@ msgstr ""
 msgid "GNOME Terminal Profile"
 msgstr ""
 
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
+msgid "Perform a calculation using Google Calculator."
+msgstr "Google電卓機能で計算を実行します"
+
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:92
+msgid "Google Calculator could not evaluate the expression."
+msgstr "Google電卓機能はこの数式を評価できません"
+
 #: ../GoogleCalendar/src/Configuration.cs:42
 #: ../GoogleDocs/src/Configuration.cs:41
 msgid "E-Mail:"
@@ -927,6 +680,10 @@ msgstr ""
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:40
 msgid "Google Calendars"
 msgstr ""
+
+#: ../GoogleCalendar/src/GCalendarItemSource.cs:44
+msgid "Indexes your Google Calendars"
+msgstr "Googleカレンダーをインデックスします"
 
 #: ../GoogleCalendar/src/GCalClient.cs:40
 msgid "All Events"
@@ -961,6 +718,10 @@ msgstr ""
 msgid "Search Events"
 msgstr ""
 
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
+msgid "Search Google Calendar for Events"
+msgstr "Googleカレンダーのイベントを検索します"
+
 #: ../GoogleCalendar/src/GCal.cs:34
 msgid "Failed to connect to GCal service"
 msgstr ""
@@ -968,6 +729,10 @@ msgstr ""
 #: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
 msgid "New Event"
 msgstr ""
+
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
+msgid "Create a new event in Google Calendar"
+msgstr "Googleカレンダーに新しいイベントを作成します"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:42
 msgid "Primary Phone"
@@ -1085,6 +850,10 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
+#: ../GoogleMaps/src/MapAction.cs:44
+msgid "Map a location or route in Google maps."
+msgstr "Googleマップで場所や経路を表示します"
+
 #. Container child vbox4.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
 msgid "Go directly to Google Search page"
@@ -1106,6 +875,25 @@ msgstr ""
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
 msgid "Apply to Google Search page link"
 msgstr ""
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
+msgid "Do not filter my search results."
+msgstr "検索結果をフィルタリングしない"
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
+msgid "Use moderate filtering"
+msgstr "適度なフィルタリングを行う"
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
+msgid "Use strict filtering"
+msgstr "厳しいフィルタリングを行う"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
+msgid "<b>SafeSearch Preferences</b>"
+msgstr "<b>セーフサーチ設定</b>"
 
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:81
 msgid "Search Google"
@@ -1179,15 +967,19 @@ msgstr ""
 
 #: ../Launchpad/src/LaunchpadAction.cs:36
 msgid "Search Launchpad"
-msgstr ""
+msgstr "Search Launchpad（Launchpadで検索）"
 
 #: ../Launchpad/src/LaunchpadAction.cs:40
 msgid "Search Launchpad properties."
-msgstr ""
+msgstr "Launchpad内の情報を検索します。"
 
 #: ../LocateFiles/src/LocateFilesAction.cs:39
 msgid "Locate Files"
 msgstr ""
+
+#: ../LocateFiles/src/LocateFilesAction.cs:44
+msgid "Search your filesystem using locate."
+msgstr "locateを使用してファイルシステムを検索します"
 
 #: ../ManLookUp/src/ManualPageItemSource.cs:50
 msgid "Manual pages (man)"
@@ -1204,6 +996,14 @@ msgstr ""
 #: ../ManLookUp/src/ReadManualPageAction.cs:49
 msgid "Look up and read a manual page."
 msgstr ""
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
+msgid "Show friend status updates"
+msgstr "フレンドステータスの更新を表示する"
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
+msgid "<b>General</b>"
+msgstr "<b>全般</b>"
 
 #: ../Microblogging/src/MicroblogClient.cs:42
 #, csharp-format
@@ -1282,6 +1082,10 @@ msgstr ""
 msgid "Search Web"
 msgstr ""
 
+#: ../OpenSearch/src/OpenSearchAction.cs:40
+msgid "Searches the web using OpenSearch plugins."
+msgstr "OpenSearchプラグインを使用してWebを検索します"
+
 #: ../Opera/src/OperaBookmarkItemSource.cs:24
 msgid "Opera Bookmarks"
 msgstr ""
@@ -1302,6 +1106,10 @@ msgstr ""
 msgid "Send to Pastebin"
 msgstr ""
 
+#: ../Pastebin/src/PastebinAction.cs:44
+msgid "Sends the text to Pastebin."
+msgstr "テキストをPastebinに送信します"
+
 #: ../Pastebin/src/Providers/LodgeIt.cs:77
 msgid "Parsed url was empty. Lodge It has probably changed its format."
 msgstr ""
@@ -1310,29 +1118,69 @@ msgstr ""
 msgid "Set status"
 msgstr ""
 
+#: ../Pidgin/src/PidginSetStatusAction.cs:52
+msgid "Set pidgin status message"
+msgstr "Pidginの状態メッセージを設定します"
+
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
 msgid "Pidgin Statuses"
 msgstr ""
+
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
+msgid "Saved Pidgin statuses"
+msgstr "Pidginの保存した状態"
 
 #: ../Pidgin/src/PidginContactItemSource.cs:59
 msgid "Pidgin Buddies"
 msgstr ""
 
+#: ../Pidgin/src/PidginContactItemSource.cs:63
+msgid "Buddies on your Pidgin buddy list."
+msgstr "Pidginの仲間リストに含まれる仲間"
+
 #: ../Pidgin/src/PidginAccountItemSource.cs:41
 msgid "Pidgin Accounts"
 msgstr ""
+
+#: ../Pidgin/src/PidginAccountItemSource.cs:45
+msgid "Available Pidgin IM Accounts"
+msgstr "利用可能なPidginのアカウント"
 
 #: ../Pidgin/src/PidginAccountActions.cs:36
 msgid "Sign on"
 msgstr ""
 
+#: ../Pidgin/src/PidginAccountActions.cs:40
+msgid "Enable pidgin account"
+msgstr "Pidginのアカウントを有効にします"
+
 #: ../Pidgin/src/PidginAccountActions.cs:82
 msgid "Sign off"
 msgstr ""
 
+#: ../Pidgin/src/PidginAccountActions.cs:86
+msgid "Disble pidgin account"
+msgstr "Pidginのアカウントを無効にします"
+
 #: ../Pidgin/src/PidginStatusTypeItem.cs:45
 msgid "Offline"
 msgstr ""
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46
+msgid "Available"
+msgstr "利用可能"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:47
+msgid "Busy"
+msgstr "ビジー"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:48
+msgid "Invisible"
+msgstr "透明"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:49
+msgid "Away"
+msgstr "Away"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:50
 msgid "Unknown Status"
@@ -1341,6 +1189,10 @@ msgstr ""
 #: ../Pidgin/src/PidginChatAction.cs:41
 msgid "Chat"
 msgstr ""
+
+#: ../Pidgin/src/PidginChatAction.cs:45
+msgid "Send an instant message to a friend."
+msgstr "友人にインスタントメッセージを送信します"
 
 #: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
 msgid "Application Key"
@@ -1705,31 +1557,99 @@ msgstr ""
 msgid "All music by"
 msgstr ""
 
+#: ../Rhythmbox/src/EnqueueAction.cs:40
+msgid "Add an item to Rhythmbox's play queue."
+msgstr "アイテムをRhythmboxの演奏キューに追加します"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:49
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "Rhythmboxの楽曲をアーティスト名で閲覧します"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:58
+msgid "Browse Rhythmbox Music by Album"
+msgstr "Rhythmboxの楽曲をアルバム名で閲覧します"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:69
+msgid "Play Current Track in Rhythmbox"
+msgstr "Rhythmboxの現在のトラックを演奏します"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:74
+msgid "Pause Rhythmbox Playback"
+msgstr "Rhythmboxの演奏を一時停止します"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:79
+msgid "Play Next Track in Rhythmbox"
+msgstr "Rhythmboxの次のトラックを演奏します"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:84
+msgid "Play Previous Track in Rhythmbox"
+msgstr "Rhythmboxの前のトラックを演奏します"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:88
 msgid "Show Current Track"
 msgstr ""
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:89
+msgid "Show Notification of Current Track in Rhythmbox"
+msgstr "Rhythmboxの現在のトラックの通知を表示します"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:93
 msgid "Mute"
 msgstr ""
 
+#: ../Rhythmbox/src/RhythmboxItems.cs:94
+msgid "Mute Rhythmbox Playback"
+msgstr "Rhythmboxの再生をミュートにします"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:98
 msgid "Unmute"
 msgstr ""
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:99
+msgid "Unmute Rhythmbox Playback"
+msgstr "Rhythmboxの再生のミュートを解除します"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:103
 #: ../VolumeControl/src/VolumeUpItem.cs:31
 msgid "Volume Up"
 msgstr ""
 
+#: ../Rhythmbox/src/RhythmboxItems.cs:104
+msgid "Increase Rhythmbox Playback Volume"
+msgstr "Rhythmboxの再生音量を上げます"
+
 #: ../Rhythmbox/src/RhythmboxItems.cs:108
 #: ../VolumeControl/src/VolumeDownItem.cs:31
 msgid "Volume Down"
 msgstr ""
 
+#: ../Rhythmbox/src/RhythmboxItems.cs:109
+msgid "Decrease Rhythmbox Playback Volume"
+msgstr "Rhythmboxの再生音量を下げます"
+
+#: ../Rhythmbox/src/PlayAction.cs:44
+msgid "Play an item in Rhythmbox."
+msgstr "Rhythmboxのアイテムを演奏します"
+
 #: ../Rhythmbox/src/MusicItemSource.cs:45
 msgid "Rhythmbox Music"
 msgstr ""
+
+#: ../Rhythmbox/src/MusicItemSource.cs:49
+msgid "Provides access to artists and albums from Rhythmbox."
+msgstr "Rhythmboxのアーティストとアルバムへのアクセスを提供します"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
+msgid "OPML feed file"
+msgstr "OPMLフィードファイル"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:75
+msgid "Timeout (in seconds)"
+msgstr "タイムアウト（秒）"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:85
+msgid "Cache duration (in minutes)"
+msgstr "キャッシュ持続時間（秒）"
 
 #: ../Shelf/src/ShelfActions.cs:33
 msgid "Explore Shelf"
@@ -1742,6 +1662,10 @@ msgstr ""
 #: ../Shelf/src/ShelfActions.cs:60
 msgid "Remove From Shelf"
 msgstr ""
+
+#: ../Shelf/src/ShelfActions.cs:64
+msgid "Remove Selected Item From Shelf"
+msgstr "選択したアイテムをシェルフから削除します"
 
 #: ../Shelf/src/ShelfActions.cs:101
 msgid "Add To Shelf"
@@ -1811,6 +1735,10 @@ msgstr ""
 msgid "SSH Hosts"
 msgstr ""
 
+#: ../SSH/src/SSHHosts.cs:63
+msgid "Parses ssh-config"
+msgstr "ssh-configをパースします"
+
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
 msgid "Command for start/stop services (gksudo, etc):"
 msgstr ""
@@ -1859,9 +1787,17 @@ msgstr ""
 msgid "Create a new task"
 msgstr ""
 
+#: ../Tasque/src/TasqueAction.cs:46
+msgid "Create a new task in Tasque"
+msgstr "Tasqueに新しいタスクを作成します"
+
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
 msgstr ""
+
+#: ../Text/src/AppendTextAction.cs:35
+msgid "Appends text to a selected file."
+msgstr "テキストを選択されたファイルに追加します"
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
 msgid "Make Tiny Url"
@@ -1870,6 +1806,14 @@ msgstr ""
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:66
 msgid "Creates a TinyUrl from an unwieldy mess."
 msgstr ""
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
+msgid "Use note content as note title when no title is specified."
+msgstr "題名が指定されていない場合は内容を題名として使用する"
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
+msgid "<b>Default New Note Title</b>"
+msgstr "<b>新規メモのデフォルトの題名</b>"
 
 #. Container child vbox3.Gtk.Box+BoxChild
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:101
@@ -1880,6 +1824,10 @@ msgstr ""
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:114
 msgid "First pane is title, second pane is content."
 msgstr ""
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:129
+msgid "<b>New Note Title and Content Entry</b>"
+msgstr "<b>新規メモの題名と内容の記入</b>"
 
 #: ../Tomboy/src/NewNoteAction.cs:37
 msgid "New Tomboy Note"
@@ -2233,6 +2181,10 @@ msgstr ""
 msgid "Vinagre Bookmarks"
 msgstr ""
 
+#: ../Vinagre/src/VNCHostSource.cs:43
+msgid "Indexes your Vinagre Bookmarks"
+msgstr "リモートデスクトップビューアのブックマークをインデックスします"
+
 #: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
 msgid "Connect with VNC"
 msgstr ""
@@ -2323,6 +2275,10 @@ msgstr ""
 msgid "Resume the selected Virtual Machine"
 msgstr ""
 
+#: ../VolumeControl/src/VolumeDownItem.cs:35
+msgid "Decrease system volume"
+msgstr "システムの音量を下げます"
+
 #: ../VolumeControl/src/VolumeUpItem.cs:35
 msgid "Increase system volume"
 msgstr ""
@@ -2331,13 +2287,25 @@ msgstr ""
 msgid "Mute Volume"
 msgstr ""
 
+#: ../VolumeControl/src/VolumeMuteItem.cs:35
+msgid "Mute system volume"
+msgstr "システムの音量をミュートにします"
+
 #: ../VolumeControl/src/VolumeItemSource.cs:39
 msgid "Volume Actions"
 msgstr ""
 
+#: ../VolumeControl/src/VolumeItemSource.cs:43
+msgid "Adjust your system volume"
+msgstr "システムの音量を調節します"
+
 #: ../VolumeControl/src/VolumeUnmuteItem.cs:32
 msgid "Unmute Volume"
 msgstr ""
+
+#: ../VolumeControl/src/VolumeUnmuteItem.cs:36
+msgid "Unmute system volume"
+msgstr "システムの音量のミュートを解除します"
 
 #: ../WindowManager/src/WindowListAction.cs:65
 msgid "Action Window"
@@ -2351,25 +2319,49 @@ msgstr ""
 msgid "Maximize"
 msgstr ""
 
+#: ../WindowManager/src/WindowListAction.cs:194
+msgid "Make a window consume the whole screen"
+msgstr "ウインドウを最大化します"
+
 #: ../WindowManager/src/WindowListAction.cs:217
 msgid "Minimize/Restore"
 msgstr ""
+
+#: ../WindowManager/src/WindowListAction.cs:221
+msgid "Minimize/Restore a Window"
+msgstr "ウインドウを最小化／復元します"
 
 #: ../WindowManager/src/WindowListAction.cs:242
 msgid "Close All"
 msgstr ""
 
+#: ../WindowManager/src/WindowListAction.cs:246
+msgid "Close your current window."
+msgstr "現在のウインドウを閉じます"
+
 #: ../WindowManager/src/ScreenListAction.cs:277
 msgid "Tile Windows"
 msgstr ""
+
+#: ../WindowManager/src/ScreenListAction.cs:281
+msgid "Tile All Windows in Current Viewport"
+msgstr "現在のビューポートにあるウインドウをタイル状に整列します"
 
 #: ../WindowManager/src/ScreenListAction.cs:346
 msgid "Cascade Windows"
 msgstr ""
 
+#: ../WindowManager/src/ScreenListAction.cs:350
+msgid "Cascade your Windows"
+msgstr "ウインドウを重ね整列します"
+
 #: ../WindowManager/src/ScreenListAction.cs:404
 msgid "Restore Windows"
 msgstr ""
+
+#: ../WindowManager/src/ScreenListAction.cs:408
+msgid "Restore Windows to their Previous Positions"
+msgstr "ウインドウを前の位置に戻します"
 
 #: ../WindowManager/src/ScreenItemSource.cs:37
 msgid "Window Screen Items"
@@ -2415,9 +2407,17 @@ msgstr ""
 msgid "Previous Window"
 msgstr ""
 
+#: ../WindowManager/src/WindowItemSource.cs:80
+msgid "The Previously Active Window"
+msgstr "直前にアクティブだったウインドウ"
+
 #: ../WindowManager/src/WindowItemSource.cs:83
 msgid "Previous Application"
 msgstr ""
+
+#: ../WindowManager/src/WindowItemSource.cs:84
+msgid "The Previously Active Application"
+msgstr "直前にアクティブだったアプリケーション"
 
 #: ../Zim/src/ZimPage.cs:38
 msgid "Zim page in notebook: "

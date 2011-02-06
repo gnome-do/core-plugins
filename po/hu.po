@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-05-13 12:19+0000\n"
-"Last-Translator: Gergely Szarka <gszarka@invitel.hu>\n"
+"PO-Revision-Date: 2010-02-28 12:44+0000\n"
+"Last-Translator: Krasznecz Zoltán <zoltan.krasznecz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
-msgstr ""
+msgstr "Álnév Hozzárendelése"
 
 #: ../Alias/src/AliasAction.cs:40
 msgid "Give an item an alternate name."
@@ -28,11 +28,11 @@ msgstr ""
 
 #: ../Alias/src/DeleteAliasAction.cs:36
 msgid "Delete Alias"
-msgstr ""
+msgstr "Álnév Törlése"
 
 #: ../Alias/src/DeleteAliasAction.cs:40
 msgid "Deletes an alias."
-msgstr ""
+msgstr "Álnév törlése"
 
 #: ../Alias/src/AliasItemSource.cs:140
 msgid "Alias items"
@@ -100,7 +100,7 @@ msgstr "Média hozzáadása a lejátszólistához"
 
 #: ../Banshee/src/MediaItemSource.cs:46
 msgid "Banshee Media"
-msgstr ""
+msgstr "Banshee média"
 
 #: ../Banshee/src/MediaItemSource.cs:50
 msgid "Indexes Media from Banshee Media Player"
@@ -153,22 +153,22 @@ msgstr "Keresés a Banshee gyűjteményében"
 
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
 msgid "Choose BibTeX file"
-msgstr ""
+msgstr "BibTeX fájl kiválasztása"
 
 #. Container child table1.Gtk.Table+TableChild
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
 msgid "Select A File"
-msgstr ""
+msgstr "Válasszon egy Fájlt"
 
 #. Container child table1.Gtk.Table+TableChild
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
 msgid "Select your documents folder"
-msgstr ""
+msgstr "Válaszd ki a Dokumentumok mappád"
 
 #: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
 msgid "Choose documents folder"
-msgstr ""
+msgstr "Válassza ki a Dokumentumok mappát"
 
 #: ../ClawsMail/src/ClawsContactsItemSource.cs:53
 msgid "ClawsMail contacts"
@@ -226,7 +226,7 @@ msgstr "http://opensource.atlassian.com/confluence/spring"
 
 #: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
 msgid "username1"
-msgstr ""
+msgstr "felhasználónév1"
 
 #: ../Confluence/src/ConfluenceSearchAction.cs:85
 msgid "Search Confluence"
@@ -364,7 +364,7 @@ msgstr "Mégse"
 
 #: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
 msgid "Choose folder"
-msgstr ""
+msgstr "Válassz mappát"
 
 #: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
 msgid "Rename file..."
@@ -401,7 +401,7 @@ msgstr "Áthelyez egy fájlt vagy mappát a kukába"
 
 #: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
 msgid "Recent Files"
-msgstr ""
+msgstr "Legutóbbi fájlok"
 
 #: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
 msgid "Finds recently-opened files."
@@ -441,7 +441,7 @@ msgstr "Firefox könyvjelzők"
 
 #: ../Firefox/src/BookmarkItemSource.cs:59
 msgid "Finds Firefox bookmarks in your default profile."
-msgstr ""
+msgstr "Firefox könyvjelzők keresése az alapméretezett profilból"
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
 msgid ""
@@ -453,12 +453,12 @@ msgstr ""
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
 msgid "<b>Account</b>"
-msgstr ""
+msgstr "<b>Felhasználói fiók</b>"
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
 msgid "_Authorize"
-msgstr ""
+msgstr "_Felhatalmazás"
 
 #. Container child vbox6.Gtk.Box+BoxChild
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:83
@@ -467,11 +467,11 @@ msgstr "Privát"
 
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:107
 msgid "Visible to friends"
-msgstr ""
+msgstr "Barátoknak látható"
 
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:119
 msgid "Visible to family"
-msgstr ""
+msgstr "Családnak látható"
 
 #. Container child vbox6.Gtk.Box+BoxChild
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
@@ -511,15 +511,15 @@ msgstr ""
 #: ../Flickr/src/AccountConfig.cs:112
 #, csharp-format
 msgid "Thank you {0} for allowing Do access to Flickr."
-msgstr ""
+msgstr "Köszönet {0}, hogy engedted a Do-nak Flickerhez a hozzáférést"
 
 #: ../GNOME-Dictionary/src/DefineAction.cs:51
 msgid "Define"
-msgstr ""
+msgstr "Meghatározás"
 
 #: ../GNOME-Dictionary/src/DefineAction.cs:56
 msgid "Define a given word."
-msgstr ""
+msgstr "Adott szó meghatározása"
 
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:28
 msgid "Current window"
@@ -623,11 +623,11 @@ msgstr "A képernyő zárolása."
 
 #: ../GNOME-Terminal/src/OpenProfileAction.cs:39
 msgid "Open Profile"
-msgstr ""
+msgstr "Profil megnyitása"
 
 #: ../GNOME-Terminal/src/OpenProfileAction.cs:43
 msgid "Opens a GNOME Terminal with the selected profile."
-msgstr ""
+msgstr "GNOME Terminal megnyitása a kiválasztott profillal."
 
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
 msgid "Open Terminal Here"
@@ -729,7 +729,7 @@ msgstr "Új esemény"
 
 #: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
 msgid "Create a new event in Google Calendar"
-msgstr ""
+msgstr "Új esemény létrehozása Google Kalendáriumban"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:42
 msgid "Primary Phone"
@@ -903,11 +903,11 @@ msgstr ""
 
 #: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
 msgid "I'm Feeling Lucky!"
-msgstr ""
+msgstr "Jó napom van"
 
 #: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
 msgid "Searches Google and takes you to the first result"
-msgstr ""
+msgstr "Google által talált első eredmény kidobja neked"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
 msgid ""
@@ -920,23 +920,23 @@ msgstr ""
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:90
 msgid "_Registration Code"
-msgstr ""
+msgstr "_Regisztrálciós Kód"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:124
 msgid "_Get Registration Code"
-msgstr ""
+msgstr "_Regisztrálciós Kód szerzése"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:140
 msgid "<b>Registration Code</b>"
-msgstr ""
+msgstr "<b>Regisztrálciós Kód</b>"
 
 #: ../ImageShack/src/ImageShackAction.cs:57
 msgid "Upload to ImageShack"
-msgstr ""
+msgstr "ImageShackre feltöltés"
 
 #: ../ImageShack/src/ImageShackAction.cs:61
 msgid "Uploads the image to ImageShack."
-msgstr ""
+msgstr "Feltölti a képet Imageshackre"
 
 #: ../ImageShack/src/ImageShackAction.cs:106
 msgid "ImageShack exception: "
@@ -953,11 +953,11 @@ msgstr ""
 #: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
 #: ../ImageShack/src/Notifications.cs:53
 msgid "ImageShack"
-msgstr ""
+msgstr "ImageShack"
 
 #: ../ImageShack/src/Notifications.cs:32
 msgid "Do is uploading your image... Please wait a moment..."
-msgstr ""
+msgstr "Feltöltés folyamatban...Kérem várjon..."
 
 #: ../ImageShack/src/Notifications.cs:43
 msgid "Unable to upload image to ImageShack at this time."
@@ -965,11 +965,11 @@ msgstr ""
 
 #: ../Launchpad/src/LaunchpadAction.cs:36
 msgid "Search Launchpad"
-msgstr ""
+msgstr "Keresés Lanchpadon"
 
 #: ../Launchpad/src/LaunchpadAction.cs:40
 msgid "Search Launchpad properties."
-msgstr ""
+msgstr "Keresés Lanchpad beállítások között"
 
 #: ../LocateFiles/src/LocateFilesAction.cs:39
 msgid "Locate Files"
@@ -1021,7 +1021,7 @@ msgstr ""
 
 #: ../Microblogging/src/FriendSource.cs:47
 msgid "Microblog friends"
-msgstr ""
+msgstr "Microblog barátok"
 
 #: ../Microblogging/src/FriendSource.cs:51
 msgid "Indexes your microblog friends"
@@ -1086,7 +1086,7 @@ msgstr ""
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:24
 msgid "Opera Bookmarks"
-msgstr ""
+msgstr "Opera Könyvjelzők"
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:28
 msgid "Indexes your Opera 6 bookmarks"
@@ -1162,27 +1162,27 @@ msgstr ""
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:45
 msgid "Offline"
-msgstr ""
+msgstr "Nem elérhető"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:46
 msgid "Available"
-msgstr ""
+msgstr "Elérhető"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:47
 msgid "Busy"
-msgstr ""
+msgstr "Elfoglalt"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:48
 msgid "Invisible"
-msgstr ""
+msgstr "Láthatatlan"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:49
 msgid "Away"
-msgstr ""
+msgstr "Távol"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:50
 msgid "Unknown Status"
-msgstr ""
+msgstr "Ismeretlen Státusz"
 
 #: ../Pidgin/src/PidginChatAction.cs:41
 msgid "Chat"
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
 msgid "Application Key"
-msgstr ""
+msgstr "Alkalmazás Kulcs"
 
 #: ../PingFM/gtk-gui/PingFM.Configuration.cs:81
 msgid "<i>Verify and save your account information</i>"
@@ -1280,11 +1280,11 @@ msgstr ""
 
 #: ../Putty/src/PuttyAction.cs:40
 msgid "Connect with PuTTY"
-msgstr ""
+msgstr "Kapcsolódás PuTTY-val"
 
 #: ../Putty/src/PuttyAction.cs:44
 msgid "Create new conenction with PuTTY"
-msgstr ""
+msgstr "Új kapcsolat létrehozása PuTTY-val"
 
 #: ../Quote/src/QuoteAction.cs:40
 msgid "Submit Quote"
@@ -1322,7 +1322,7 @@ msgstr ""
 
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:294
 msgid "<b>Filter</b>"
-msgstr ""
+msgstr "<b>Szűrő</b>"
 
 #: ../RememberTheMilk/src/Configuration.cs:68
 msgid ""
@@ -1442,7 +1442,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:419
 msgid "Priority Changed"
-msgstr ""
+msgstr "Prioritás Megváltoztatva"
 
 #: ../RememberTheMilk/src/RTM.cs:420
 msgid ""
@@ -1466,7 +1466,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:468
 msgid "Task Renamed"
-msgstr ""
+msgstr "Feladat átnevezve"
 
 #: ../RememberTheMilk/src/RTM.cs:483
 msgid "Task Postponed"
@@ -1513,7 +1513,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMRenameTask.cs:33
 msgid "Rename to..."
-msgstr ""
+msgstr "Átnevezés..."
 
 #: ../RememberTheMilk/src/RTMRenameTask.cs:37
 msgid "Give the seleted task a new name"
@@ -1541,7 +1541,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:39
 msgid "Set the priority of a task"
-msgstr ""
+msgstr "A feladat prioritásának megadása"
 
 #: ../RememberTheMilk/src/RTMSetDue.cs:33
 msgid "Set Due Date/Time"
@@ -1723,7 +1723,7 @@ msgstr ""
 
 #: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
 msgid "Connect with SSH"
-msgstr ""
+msgstr "Kapcsolódás SSH-val"
 
 #: ../SSH/src/SSHHosts.cs:42
 msgid "SSH Host"

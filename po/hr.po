@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2009-05-16 11:49+0000\n"
-"Last-Translator: kvaju <jukvamo@gmail.com>\n"
+"PO-Revision-Date: 2011-01-08 10:29+0000\n"
+"Last-Translator: student4 <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-06-20 02:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
+"X-Generator: Launchpad (build 12309)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -33,7 +33,7 @@ msgstr "Izbriši pseudonim"
 
 #: ../Alias/src/DeleteAliasAction.cs:40
 msgid "Deletes an alias."
-msgstr ""
+msgstr "Izbriši pseudonim"
 
 #: ../Alias/src/AliasItemSource.cs:140
 msgid "Alias items"
@@ -93,7 +93,7 @@ msgstr "Pretraži sav Video"
 
 #: ../Banshee/src/EnqueueAction.cs:37 ../Rhythmbox/src/EnqueueAction.cs:36
 msgid "Add to Play Queue"
-msgstr ""
+msgstr "Dodaj u Red Čekanja"
 
 #: ../Banshee/src/EnqueueAction.cs:41
 msgid "Add media to play queue"
@@ -281,7 +281,7 @@ msgstr "Otvori uklonjivi disk"
 
 #: ../DiskMounter/src/UnmountAction.cs:31
 msgid "Unmount"
-msgstr ""
+msgstr "Demontiraj"
 
 #: ../DiskMounter/src/UnmountAction.cs:35
 msgid "Unmount volume"
@@ -289,7 +289,7 @@ msgstr ""
 
 #: ../DiskMounter/src/MountAction.cs:32
 msgid "Mount"
-msgstr ""
+msgstr "Montiraj"
 
 #: ../DiskMounter/src/MountAction.cs:36
 msgid "Mount volume"
@@ -434,11 +434,11 @@ msgstr "Pravi novu, praznu datoteku."
 
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
 msgid "Untitled"
-msgstr ""
+msgstr "Bez naslova"
 
 #: ../Firefox/src/BookmarkItemSource.cs:55
 msgid "Firefox Bookmarks"
-msgstr ""
+msgstr "Firefox Knjižne Oznake"
 
 #: ../Firefox/src/BookmarkItemSource.cs:59
 msgid "Finds Firefox bookmarks in your default profile."
@@ -454,7 +454,7 @@ msgstr ""
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
 msgid "<b>Account</b>"
-msgstr ""
+msgstr "<b>Račun</b>"
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
@@ -464,24 +464,24 @@ msgstr ""
 #. Container child vbox6.Gtk.Box+BoxChild
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:83
 msgid "Private"
-msgstr ""
+msgstr "Privatno"
 
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:107
 msgid "Visible to friends"
-msgstr ""
+msgstr "Vidljivo prijateljima"
 
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:119
 msgid "Visible to family"
-msgstr ""
+msgstr "Vidljivo familiji"
 
 #. Container child vbox6.Gtk.Box+BoxChild
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
 msgid "Public"
-msgstr ""
+msgstr "Javni"
 
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:149
 msgid "<b>Viewing permissions</b>"
-msgstr ""
+msgstr "<b>Dozvole za gledanje</b>"
 
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:182
 msgid ""
@@ -495,15 +495,15 @@ msgstr ""
 
 #: ../Flickr/src/UploadAction.cs:45
 msgid "Upload photo"
-msgstr ""
+msgstr "Otpremi sliku"
 
 #: ../Flickr/src/UploadAction.cs:49
 msgid "Upload one or more photos to Flickr"
-msgstr ""
+msgstr "Otpremi jednu ili više slika na Flickr"
 
 #: ../Flickr/src/FlickrItemSource.cs:34
 msgid "Account"
-msgstr ""
+msgstr "Račun"
 
 #: ../Flickr/src/AccountConfig.cs:91
 msgid "Click to compete authorization"
@@ -516,15 +516,15 @@ msgstr ""
 
 #: ../GNOME-Dictionary/src/DefineAction.cs:51
 msgid "Define"
-msgstr ""
+msgstr "Definiraj"
 
 #: ../GNOME-Dictionary/src/DefineAction.cs:56
 msgid "Define a given word."
-msgstr ""
+msgstr "Definiraj zadanu riječ."
 
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:28
 msgid "Current window"
-msgstr ""
+msgstr "Aktivni prozor"
 
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
 msgid "Take a screenshot of the current window."
@@ -532,7 +532,7 @@ msgstr ""
 
 #: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
 msgid "Whole screen"
-msgstr ""
+msgstr "Cijeli zaslon"
 
 #: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
 msgid "Take a screenshot of the entire screen."
@@ -564,7 +564,7 @@ msgstr ""
 
 #: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
 msgid "Whole screen or current window."
-msgstr ""
+msgstr "Cijeli zaslon ili aktivni prozor."
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
 msgid "GNOME Session Commands"
@@ -576,7 +576,7 @@ msgstr ""
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:54
 msgid "Log Out"
-msgstr ""
+msgstr "Odjava"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:55
 msgid "Close your session and return to the login screen."
@@ -584,11 +584,11 @@ msgstr ""
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:60
 msgid "Shutdown"
-msgstr ""
+msgstr "Gašenje"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:61
 msgid "Turn your computer off."
-msgstr ""
+msgstr "Isključite vaše računalo."
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:66
 msgid "Hibernate"
@@ -600,27 +600,27 @@ msgstr ""
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:72
 msgid "Suspend"
-msgstr ""
+msgstr "Suspendiraj"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:73
 msgid "Put your computer into suspend mode."
-msgstr ""
+msgstr "Stavite vaše računalo u suspend mod."
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:78
 msgid "Restart"
-msgstr ""
+msgstr "Ponovo pokreni"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:79
 msgid "Restart your computer."
-msgstr ""
+msgstr "Ponovo pokrenite vaše računalo."
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:84
 msgid "Lock Screen"
-msgstr ""
+msgstr "Zaključaj Zaslon"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:85
 msgid "Lock your screen."
-msgstr ""
+msgstr "Zaključajte vaš zaslon."
 
 #: ../GNOME-Terminal/src/OpenProfileAction.cs:39
 msgid "Open Profile"
@@ -640,7 +640,7 @@ msgstr ""
 
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
 msgid "Run in Terminal"
-msgstr ""
+msgstr "Izvodi u Terminalu"
 
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:46
 msgid "Runs a command in GNOME Terminal."
@@ -648,7 +648,7 @@ msgstr ""
 
 #: ../GNOME-Terminal/src/ProfileItemSource.cs:48
 msgid "GNOME Terminal Profiles"
-msgstr ""
+msgstr "GNOME Terminal Profili"
 
 #: ../GNOME-Terminal/src/ProfileItemSource.cs:52
 msgid "Indexes your GNOME Terminal profiles."
@@ -656,11 +656,11 @@ msgstr ""
 
 #: ../GNOME-Terminal/src/ProfileItem.cs:33
 msgid "Unnamed Profile"
-msgstr ""
+msgstr "Neimenovani Profil"
 
 #: ../GNOME-Terminal/src/ProfileItem.cs:34
 msgid "GNOME Terminal Profile"
-msgstr ""
+msgstr "Profil GNOME Terminala"
 
 #: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
 msgid "Perform a calculation using Google Calculator."
@@ -673,11 +673,11 @@ msgstr ""
 #: ../GoogleCalendar/src/Configuration.cs:42
 #: ../GoogleDocs/src/Configuration.cs:41
 msgid "E-Mail:"
-msgstr ""
+msgstr "E-Mail:"
 
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:40
 msgid "Google Calendars"
-msgstr ""
+msgstr "Google Kalendari"
 
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:44
 msgid "Indexes your Google Calendars"
@@ -685,16 +685,16 @@ msgstr ""
 
 #: ../GoogleCalendar/src/GCalClient.cs:40
 msgid "All Events"
-msgstr ""
+msgstr "Svi Događaji"
 
 #: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
 #, csharp-format
 msgid "An error has occurred in {0}"
-msgstr ""
+msgstr "Dogodila se greška u {0}"
 
 #: ../GoogleCalendar/src/GCalendarViewActions.cs:41
 msgid "View Event"
-msgstr ""
+msgstr "Pogledaj Događaj"
 
 #: ../GoogleCalendar/src/GCalendarViewActions.cs:45
 msgid "Open event in browser"
@@ -702,15 +702,15 @@ msgstr ""
 
 #: ../GoogleCalendar/src/GCalendarViewActions.cs:72
 msgid "View Calendar"
-msgstr ""
+msgstr "Pogledaj Kalendar"
 
 #: ../GoogleCalendar/src/GCalendarViewActions.cs:76
 msgid "Open calendar in browser"
-msgstr ""
+msgstr "Otvori kalendar u pretraživaču"
 
 #: ../GoogleCalendar/src/GCalendarItem.cs:45
 msgid "Google Calendar"
-msgstr ""
+msgstr "Google Kalendar"
 
 #: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
 msgid "Search Events"
@@ -718,7 +718,7 @@ msgstr ""
 
 #: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
 msgid "Search Google Calendar for Events"
-msgstr ""
+msgstr "Pretraži Google Kalendar za Događaje"
 
 #: ../GoogleCalendar/src/GCal.cs:34
 msgid "Failed to connect to GCal service"
@@ -726,35 +726,35 @@ msgstr ""
 
 #: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
 msgid "New Event"
-msgstr ""
+msgstr "Novi Događaj"
 
 #: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
 msgid "Create a new event in Google Calendar"
-msgstr ""
+msgstr "Kreiraj novi događaj u Google Kalendaru"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:42
 msgid "Primary Phone"
-msgstr ""
+msgstr "Primarni Telefon"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:43
 msgid "Home Email"
-msgstr ""
+msgstr "Kućni E-mail"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:44
 msgid "Work Email"
-msgstr ""
+msgstr "Poslovni E-mail"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:47
 msgid "Primary Address"
-msgstr ""
+msgstr "Primarna Adresa"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:48
 msgid "Home Address"
-msgstr ""
+msgstr "Kućna Adresa"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:49
 msgid "Work Address"
-msgstr ""
+msgstr "Poslovna Adresa"
 
 #: ../GoogleContacts/src/GMail.cs:35
 msgid "An error occurred connecting to google, are your credentials valid?"
@@ -768,15 +768,15 @@ msgstr ""
 
 #: ../GoogleContacts/src/GMailContactItemSource.cs:38
 msgid "GMail Contacts"
-msgstr ""
+msgstr "GMail Kontakti"
 
 #: ../GoogleContacts/src/GMailContactItemSource.cs:42
 msgid "Index your GMail contacts"
-msgstr ""
+msgstr "indeksirajte svoje GMail kontakte"
 
 #: ../GoogleDocs/src/GDocs.cs:149
 msgid "Uploading failed."
-msgstr ""
+msgstr "Otprema neuspjela."
 
 #: ../GoogleDocs/src/GDocs.cs:150
 msgid "An error occurred when uploading files to Google Docs."
@@ -784,7 +784,7 @@ msgstr ""
 
 #: ../GoogleDocs/src/GDocs.cs:157
 msgid "Deleting failed."
-msgstr ""
+msgstr "Brisanje neuspjelo."
 
 #: ../GoogleDocs/src/GDocs.cs:158
 msgid "An error occurred when deleting the document at Google Docs."
@@ -792,7 +792,7 @@ msgstr ""
 
 #: ../GoogleDocs/src/GDocs.cs:165
 msgid "Document deleted."
-msgstr ""
+msgstr "Dokument obrisan."
 
 #: ../GoogleDocs/src/GDocs.cs:166
 #, csharp-format
@@ -802,11 +802,11 @@ msgstr ""
 
 #: ../GoogleDocs/src/GDocsPresentationItem.cs:36
 msgid "Google Docs Presentation"
-msgstr ""
+msgstr "Google Docs Prezentacija"
 
 #: ../GoogleDocs/src/GDocsItemSource.cs:36
 msgid "Google Docs"
-msgstr ""
+msgstr "Google Docs"
 
 #: ../GoogleDocs/src/GDocsItemSource.cs:40
 msgid "Indexes your documents stored at Google Docs"
@@ -814,19 +814,19 @@ msgstr ""
 
 #: ../GoogleDocs/src/GDocsItem.cs:46
 msgid "Google Docs Generic Document"
-msgstr ""
+msgstr "Google Docs Generični Dokument"
 
 #: ../GoogleDocs/src/GDocsDocumentItem.cs:36
 msgid "Google Docs Text Document"
-msgstr ""
+msgstr "Google Docs Tekst Dokument"
 
 #: ../GoogleDocs/src/GDocsPDFItem.cs:36
 msgid "Google Docs PDF Document"
-msgstr ""
+msgstr "Google Docs PDF Dokument"
 
 #: ../GoogleDocs/src/GDocsTrashDocument.cs:38
 msgid "Delete Document"
-msgstr ""
+msgstr "Obriši Dokument"
 
 #: ../GoogleDocs/src/GDocsTrashDocument.cs:42
 msgid "Move a document into Trash at Google Docs"
@@ -834,11 +834,11 @@ msgstr ""
 
 #: ../GoogleDocs/src/GDocsUploadDocument.cs:41
 msgid "Upload Document"
-msgstr ""
+msgstr "Otpremi Dokument"
 
 #: ../GoogleDocs/src/GDocsUploadDocument.cs:45
 msgid "Upload a document to Google Docs"
-msgstr ""
+msgstr "Otpremi dokument na Google Docs"
 
 #: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
 msgid "Google Docs Spreadsheet"
@@ -846,7 +846,7 @@ msgstr ""
 
 #: ../GoogleMaps/src/MapAction.cs:39
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 #: ../GoogleMaps/src/MapAction.cs:44
 msgid "Map a location or route in Google maps."
@@ -868,7 +868,7 @@ msgstr ""
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:120
 msgid "<b>Google Search</b>"
-msgstr ""
+msgstr "<b>Google Pretraga</b>"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
 msgid "Apply to Google Search page link"
@@ -877,17 +877,17 @@ msgstr ""
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
 msgid "Do not filter my search results."
-msgstr ""
+msgstr "Ne filtriraj moje rezultate pretrage."
 
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
 msgid "Use moderate filtering"
-msgstr ""
+msgstr "Koristi umjereno filtriranje"
 
 #. Container child safeSearchBox.Gtk.Box+BoxChild
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
 msgid "Use strict filtering"
-msgstr ""
+msgstr "Koristi strogo filtriranje"
 
 #: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
 msgid "<b>SafeSearch Preferences</b>"
@@ -895,7 +895,7 @@ msgstr ""
 
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:81
 msgid "Search Google"
-msgstr ""
+msgstr "Pretraži Google"
 
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:90
 msgid "Allows you to perform Google Searches from Do"
@@ -953,11 +953,11 @@ msgstr ""
 #: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
 #: ../ImageShack/src/Notifications.cs:53
 msgid "ImageShack"
-msgstr ""
+msgstr "ImageShack"
 
 #: ../ImageShack/src/Notifications.cs:32
 msgid "Do is uploading your image... Please wait a moment..."
-msgstr ""
+msgstr "Do otprema vašu sliku... Molimo pričekajte trenutak..."
 
 #: ../ImageShack/src/Notifications.cs:43
 msgid "Unable to upload image to ImageShack at this time."
@@ -965,15 +965,15 @@ msgstr ""
 
 #: ../Launchpad/src/LaunchpadAction.cs:36
 msgid "Search Launchpad"
-msgstr ""
+msgstr "Pretraži Launchpad"
 
 #: ../Launchpad/src/LaunchpadAction.cs:40
 msgid "Search Launchpad properties."
-msgstr ""
+msgstr "Pretraži Launchpad svojstva."
 
 #: ../LocateFiles/src/LocateFilesAction.cs:39
 msgid "Locate Files"
-msgstr ""
+msgstr "Lociraj Datoteke"
 
 #: ../LocateFiles/src/LocateFilesAction.cs:44
 msgid "Search your filesystem using locate."
@@ -1001,7 +1001,7 @@ msgstr ""
 
 #: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Općenito</b>"
 
 #: ../Microblogging/src/MicroblogClient.cs:42
 #, csharp-format
@@ -1034,11 +1034,11 @@ msgstr ""
 
 #: ../Microblogging/src/Notifications.cs:57
 msgid "Post failed"
-msgstr ""
+msgstr "Post Neuspješan"
 
 #: ../Microblogging/src/Notifications.cs:58
 msgid "Post Successful"
-msgstr ""
+msgstr "Post Uspješan"
 
 #: ../Microblogging/src/Notifications.cs:59
 #, csharp-format
@@ -1062,7 +1062,7 @@ msgstr ""
 
 #: ../NX/src/NXAction.cs:37 ../NX/src/NXAction.cs:41
 msgid "Connect with NX"
-msgstr ""
+msgstr "Spoji sa NX"
 
 #: ../NX/src/NXHosts.cs:46
 msgid "NX Host"
@@ -1078,7 +1078,7 @@ msgstr ""
 
 #: ../OpenSearch/src/OpenSearchAction.cs:35
 msgid "Search Web"
-msgstr ""
+msgstr "Pretraži Web"
 
 #: ../OpenSearch/src/OpenSearchAction.cs:40
 msgid "Searches the web using OpenSearch plugins."
@@ -1086,7 +1086,7 @@ msgstr ""
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:24
 msgid "Opera Bookmarks"
-msgstr ""
+msgstr "Opera Knjižne Oznake"
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:28
 msgid "Indexes your Opera 6 bookmarks"
@@ -1094,7 +1094,7 @@ msgstr ""
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
 msgid "Supported Codes\t\t\t"
-msgstr ""
+msgstr "Podržani Kodovi\t\t\t"
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:101
 msgid "<b>Pastebin Provider</b>"
@@ -1102,11 +1102,11 @@ msgstr ""
 
 #: ../Pastebin/src/PastebinAction.cs:40
 msgid "Send to Pastebin"
-msgstr ""
+msgstr "Pošalji u Pastebin"
 
 #: ../Pastebin/src/PastebinAction.cs:44
 msgid "Sends the text to Pastebin."
-msgstr ""
+msgstr "Pošalji tekst u Pastebin"
 
 #: ../Pastebin/src/Providers/LodgeIt.cs:77
 msgid "Parsed url was empty. Lodge It has probably changed its format."
@@ -1114,7 +1114,7 @@ msgstr ""
 
 #: ../Pidgin/src/PidginSetStatusAction.cs:48
 msgid "Set status"
-msgstr ""
+msgstr "Postavi status"
 
 #: ../Pidgin/src/PidginSetStatusAction.cs:52
 msgid "Set pidgin status message"
@@ -1122,11 +1122,11 @@ msgstr ""
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
 msgid "Pidgin Statuses"
-msgstr ""
+msgstr "Pidgin Statusi"
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
 msgid "Saved Pidgin statuses"
-msgstr ""
+msgstr "Spremljeni Pidgin statusi"
 
 #: ../Pidgin/src/PidginContactItemSource.cs:59
 msgid "Pidgin Buddies"
@@ -1138,7 +1138,7 @@ msgstr ""
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:41
 msgid "Pidgin Accounts"
-msgstr ""
+msgstr "Pidgin Računi"
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:45
 msgid "Available Pidgin IM Accounts"
@@ -1146,47 +1146,47 @@ msgstr ""
 
 #: ../Pidgin/src/PidginAccountActions.cs:36
 msgid "Sign on"
-msgstr ""
+msgstr "Pirjavi se"
 
 #: ../Pidgin/src/PidginAccountActions.cs:40
 msgid "Enable pidgin account"
-msgstr ""
+msgstr "Osposobi Pidgin račun"
 
 #: ../Pidgin/src/PidginAccountActions.cs:82
 msgid "Sign off"
-msgstr ""
+msgstr "Odjavi se"
 
 #: ../Pidgin/src/PidginAccountActions.cs:86
 msgid "Disble pidgin account"
-msgstr ""
+msgstr "Onesposobi Pidgin račun"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:45
 msgid "Offline"
-msgstr ""
+msgstr "Isključen"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:46
 msgid "Available"
-msgstr ""
+msgstr "Dostupan"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:47
 msgid "Busy"
-msgstr ""
+msgstr "Zauzet"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:48
 msgid "Invisible"
-msgstr ""
+msgstr "Nevidljiv"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:49
 msgid "Away"
-msgstr ""
+msgstr "Odsutan"
 
 #: ../Pidgin/src/PidginStatusTypeItem.cs:50
 msgid "Unknown Status"
-msgstr ""
+msgstr "Nepoznat Status"
 
 #: ../Pidgin/src/PidginChatAction.cs:41
 msgid "Chat"
-msgstr ""
+msgstr "Razgovor"
 
 #: ../Pidgin/src/PidginChatAction.cs:45
 msgid "Send an instant message to a friend."
@@ -1226,11 +1226,11 @@ msgstr ""
 
 #: ../PingFM/src/PingFMClient.cs:67
 msgid "Microblog"
-msgstr ""
+msgstr "Mikroblog"
 
 #: ../PingFM/src/PingFMClient.cs:68
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../PingFM/src/PingFMClient.cs:82
 msgid "Error occurred in service response"
@@ -1259,7 +1259,7 @@ msgstr ""
 
 #: ../PingFM/src/PingFMServiceItemSource.cs:35
 msgid "Ping.FM Services"
-msgstr ""
+msgstr "Ping.FM Servisi"
 
 #: ../PingFM/src/PingFMServiceItemSource.cs:39
 msgid "Web services suppported by Ping.FM"
@@ -1280,7 +1280,7 @@ msgstr ""
 
 #: ../Putty/src/PuttyAction.cs:40
 msgid "Connect with PuTTY"
-msgstr ""
+msgstr "Spoji sa PuTTY"
 
 #: ../Putty/src/PuttyAction.cs:44
 msgid "Create new conenction with PuTTY"
@@ -1311,7 +1311,7 @@ msgstr ""
 
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:224
 msgid "<b>Notification</b>"
-msgstr ""
+msgstr "<b>Obavještenje</b>"
 
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:260
 msgid ""
@@ -1322,7 +1322,7 @@ msgstr ""
 
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:294
 msgid "<b>Filter</b>"
-msgstr ""
+msgstr "<b>Filter</b>"
 
 #: ../RememberTheMilk/src/Configuration.cs:68
 msgid ""
@@ -1333,7 +1333,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/Configuration.cs:76
 msgid "Complete authorization"
-msgstr ""
+msgstr "Popuni autorizaciju"
 
 #: ../RememberTheMilk/src/Configuration.cs:93
 msgid "Fail to complete authorization."
@@ -1341,7 +1341,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/Configuration.cs:96
 msgid "Authorize again"
-msgstr ""
+msgstr "Autoriziraj ponovo"
 
 #: ../RememberTheMilk/src/Configuration.cs:102
 #, csharp-format
@@ -1351,15 +1351,15 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
 msgid "Uncomplete"
-msgstr ""
+msgstr "Nekompletno"
 
 #: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
 msgid "Mark a selected task as \"incomplete\"."
-msgstr ""
+msgstr "Označi odabrani zadatak kao \"nekompletan\"."
 
 #: ../RememberTheMilk/src/RTMDeleteTask.cs:35
 msgid "Delete"
-msgstr ""
+msgstr "Obriši"
 
 #: ../RememberTheMilk/src/RTMDeleteTask.cs:39
 msgid "Delete a selected task from Remember The Milk"
@@ -1374,7 +1374,7 @@ msgstr[1] ""
 
 #: ../RememberTheMilk/src/RTM.cs:368
 msgid "Task Deleted"
-msgstr ""
+msgstr "Zadatak Obrisan"
 
 #: ../RememberTheMilk/src/RTM.cs:369
 msgid ""
@@ -1384,7 +1384,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:383
 msgid "Task Completed"
-msgstr ""
+msgstr "Zadatak Kompletiran"
 
 #: ../RememberTheMilk/src/RTM.cs:384
 msgid ""
@@ -1394,55 +1394,55 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:392
 msgid "High"
-msgstr ""
+msgstr "Visok"
 
 #: ../RememberTheMilk/src/RTM.cs:393
 msgid "High Priority"
-msgstr ""
+msgstr "Visoki Prioritet"
 
 #: ../RememberTheMilk/src/RTM.cs:394
 msgid "Medium"
-msgstr ""
+msgstr "Umjeren"
 
 #: ../RememberTheMilk/src/RTM.cs:395
 msgid "Medium Priority"
-msgstr ""
+msgstr "Umjereni Prioritet"
 
 #: ../RememberTheMilk/src/RTM.cs:396
 msgid "Low"
-msgstr ""
+msgstr "Nizak"
 
 #: ../RememberTheMilk/src/RTM.cs:397
 msgid "Low Priority"
-msgstr ""
+msgstr "Niski Prioritet"
 
 #: ../RememberTheMilk/src/RTM.cs:398
 msgid "None"
-msgstr ""
+msgstr "Nijedan"
 
 #: ../RememberTheMilk/src/RTM.cs:399
 msgid "No Priority"
-msgstr ""
+msgstr "Bez Prioriteta"
 
 #: ../RememberTheMilk/src/RTM.cs:400
 msgid "Up"
-msgstr ""
+msgstr "Gore"
 
 #: ../RememberTheMilk/src/RTM.cs:401
 msgid "Increase the priority"
-msgstr ""
+msgstr "Povećaj prioritet"
 
 #: ../RememberTheMilk/src/RTM.cs:402
 msgid "Down"
-msgstr ""
+msgstr "Dolje"
 
 #: ../RememberTheMilk/src/RTM.cs:403
 msgid "Decrease the priority"
-msgstr ""
+msgstr "Smanji prioritet"
 
 #: ../RememberTheMilk/src/RTM.cs:419
 msgid "Priority Changed"
-msgstr ""
+msgstr "Prioritet je Promijenjen"
 
 #: ../RememberTheMilk/src/RTM.cs:420
 msgid ""
@@ -1462,15 +1462,15 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:452
 msgid "Task Moved"
-msgstr ""
+msgstr "Zadatak je Pomjeren"
 
 #: ../RememberTheMilk/src/RTM.cs:468
 msgid "Task Renamed"
-msgstr ""
+msgstr "Zadatak je Preimenovan"
 
 #: ../RememberTheMilk/src/RTM.cs:483
 msgid "Task Postponed"
-msgstr ""
+msgstr "Zadatak je Odložen"
 
 #: ../RememberTheMilk/src/RTM.cs:484
 msgid ""
@@ -1489,11 +1489,11 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:513
 msgid "Task Uncompleted"
-msgstr ""
+msgstr "Zadatak je Nekompletiran"
 
 #: ../RememberTheMilk/src/RTM.cs:514
 msgid "The selected task has been marked as \"incomplete\"."
-msgstr ""
+msgstr "Odabrani zadatak je označen kao \"nekompletan\"."
 
 #: ../RememberTheMilk/src/RTMNewTask.cs:37
 msgid "Create a new task in Remember The Milk"
@@ -1505,19 +1505,19 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:35
 msgid "Complete"
-msgstr ""
+msgstr "Završi"
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:39
 msgid "Complete a selected task"
-msgstr ""
+msgstr "Završi odabrani zadatak"
 
 #: ../RememberTheMilk/src/RTMRenameTask.cs:33
 msgid "Rename to..."
-msgstr ""
+msgstr "Preimenuj u..."
 
 #: ../RememberTheMilk/src/RTMRenameTask.cs:37
 msgid "Give the seleted task a new name"
-msgstr ""
+msgstr "Daj odabranom zadatku novo ime"
 
 #: ../RememberTheMilk/src/RTMSetRecurrence.cs:33
 msgid "Set Recurrence"
@@ -1529,7 +1529,7 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMPostponeTask.cs:33
 msgid "Postpone"
-msgstr ""
+msgstr "Odloži"
 
 #: ../RememberTheMilk/src/RTMPostponeTask.cs:37
 msgid "Postpone a selected task in Remember The Milk"
@@ -1537,11 +1537,11 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:35
 msgid "Set Priority"
-msgstr ""
+msgstr "Postavi Prioritet"
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:39
 msgid "Set the priority of a task"
-msgstr ""
+msgstr "Postavi prioritet zadatka"
 
 #: ../RememberTheMilk/src/RTMSetDue.cs:33
 msgid "Set Due Date/Time"
@@ -1593,7 +1593,7 @@ msgstr ""
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:93
 msgid "Mute"
-msgstr ""
+msgstr "Bezvučan"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:94
 msgid "Mute Rhythmbox Playback"
@@ -1610,7 +1610,7 @@ msgstr ""
 #: ../Rhythmbox/src/RhythmboxItems.cs:103
 #: ../VolumeControl/src/VolumeUpItem.cs:31
 msgid "Volume Up"
-msgstr ""
+msgstr "Pojačaj"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:104
 msgid "Increase Rhythmbox Playback Volume"
@@ -1619,7 +1619,7 @@ msgstr ""
 #: ../Rhythmbox/src/RhythmboxItems.cs:108
 #: ../VolumeControl/src/VolumeDownItem.cs:31
 msgid "Volume Down"
-msgstr ""
+msgstr "Utišaj"
 
 #: ../Rhythmbox/src/RhythmboxItems.cs:109
 msgid "Decrease Rhythmbox Playback Volume"
@@ -1631,7 +1631,7 @@ msgstr ""
 
 #: ../Rhythmbox/src/MusicItemSource.cs:45
 msgid "Rhythmbox Music"
-msgstr ""
+msgstr "Rhytmbox Glazba"
 
 #: ../Rhythmbox/src/MusicItemSource.cs:49
 msgid "Provides access to artists and albums from Rhythmbox."
@@ -1692,7 +1692,7 @@ msgstr ""
 
 #: ../Shelf/src/ShelfItemSource.cs:126
 msgid "Default"
-msgstr ""
+msgstr "Uobičajeno"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
@@ -1723,7 +1723,7 @@ msgstr ""
 
 #: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
 msgid "Connect with SSH"
-msgstr ""
+msgstr "Spoji sa SSH"
 
 #: ../SSH/src/SSHHosts.cs:42
 msgid "SSH Host"
@@ -1743,7 +1743,7 @@ msgstr ""
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
 msgid "Services to control:"
@@ -1751,16 +1751,16 @@ msgstr ""
 
 #: ../SystemServices/src/ServiceItemSource.cs:39
 msgid "System Services"
-msgstr ""
+msgstr "Sustavni Servisi"
 
 #: ../SystemServices/src/ServiceItemSource.cs:43
 msgid "List of all System Services"
-msgstr ""
+msgstr "Lista Sustavnih Servisa"
 
 #: ../SystemServices/src/Service.cs:46
 #, csharp-format
 msgid "{0} service"
-msgstr ""
+msgstr "{0} servis"
 
 #: ../SystemServices/src/Service.cs:50
 #, csharp-format
@@ -1769,7 +1769,7 @@ msgstr ""
 
 #: ../SystemServices/src/SystemServicesConfig.cs:71
 msgid "Choose the file to open"
-msgstr ""
+msgstr "Odaberi datoteku za otvoriti"
 
 #: ../SystemServices/src/SystemServicesConfig.cs:88
 msgid ""
@@ -1779,15 +1779,15 @@ msgstr ""
 
 #: ../Tasque/src/TasqueCategoryItem.cs:47
 msgid "Category"
-msgstr ""
+msgstr "Kategorija"
 
 #: ../Tasque/src/TasqueAction.cs:42
 msgid "Create a new task"
-msgstr ""
+msgstr "Kreiraj novi zadatak"
 
 #: ../Tasque/src/TasqueAction.cs:46
 msgid "Create a new task in Tasque"
-msgstr ""
+msgstr "Kreiraj novi zadatak u Tasque"
 
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
@@ -1829,11 +1829,11 @@ msgstr ""
 
 #: ../Tomboy/src/NewNoteAction.cs:37
 msgid "New Tomboy Note"
-msgstr ""
+msgstr "Nova Tomboy Zabilješka"
 
 #: ../Tomboy/src/NewNoteAction.cs:41
 msgid "Create a new Tomboy note."
-msgstr ""
+msgstr "Kreiraj novu Tomboy zabilješku"
 
 #: ../Tomboy/src/NotesItemSource.cs:56
 msgid "Tomboy Note Indexer"
@@ -1845,15 +1845,15 @@ msgstr ""
 
 #: ../Tomboy/src/SearchNotesAction.cs:36
 msgid "Search Tomboy Notes"
-msgstr ""
+msgstr "Pretraži Tomboy Zabilješke"
 
 #: ../Tomboy/src/SearchNotesAction.cs:40
 msgid "Searches contents of Tomboy notes."
-msgstr ""
+msgstr "Pretražuje sadržaje Tomboy zabilježaka."
 
 #: ../Tomboy/src/TomboyItem.cs:50
 msgid "Tomboy note"
-msgstr ""
+msgstr "Tomboy zabilješka"
 
 #: ../Tracker/src/TrackerSearch.cs:38
 msgid "Search with Tracker"
@@ -1873,23 +1873,23 @@ msgstr ""
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
 msgid "Default Source Language"
-msgstr ""
+msgstr "Zadani Jezik Izvora"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
 msgid "Default Web Interface Language"
-msgstr ""
+msgstr "Zadani Jezik Web Sučelja"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
 msgid "Enable / Disable Language"
-msgstr ""
+msgstr "Omogući / Onemogući Jezik"
 
 #: ../Translate/src/TranslateAction.cs:58
 msgid "Translate"
-msgstr ""
+msgstr "Prevedi"
 
 #: ../Translate/src/TranslateAction.cs:66
 msgid "Translates text"
-msgstr ""
+msgstr "Prevodi tekst"
 
 #: ../Translate/src/UI/ConfigUI.cs:128
 msgid "Auto Detect (Recommended)"
@@ -1897,199 +1897,199 @@ msgstr ""
 
 #: ../Translate/src/Provider/Google.cs:35
 msgid "Arabic"
-msgstr ""
+msgstr "Arapski"
 
 #: ../Translate/src/Provider/Google.cs:36
 msgid "Translate to Arabic"
-msgstr ""
+msgstr "Prevedi na Arapski"
 
 #: ../Translate/src/Provider/Google.cs:39
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bugarski"
 
 #: ../Translate/src/Provider/Google.cs:40
 msgid "Translate to Bulgarian"
-msgstr ""
+msgstr "Prevedi na Bugarski"
 
 #: ../Translate/src/Provider/Google.cs:43
 msgid "Catalon"
-msgstr ""
+msgstr "Katalonijski"
 
 #: ../Translate/src/Provider/Google.cs:44
 msgid "Translate to Catalon"
-msgstr ""
+msgstr "Prevedi na Katalonijski"
 
 #: ../Translate/src/Provider/Google.cs:47
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Kineski (Pojednostavljen)"
 
 #: ../Translate/src/Provider/Google.cs:48
 msgid "Translate to Chinese (Simplified)"
-msgstr ""
+msgstr "Prevedi na Kineski (Pojednostavljen)"
 
 #: ../Translate/src/Provider/Google.cs:51
 msgid "Chinese (Traditional)"
-msgstr ""
+msgstr "Kineski (Tradicionalni)"
 
 #: ../Translate/src/Provider/Google.cs:52
 msgid "Translate to Chinese (Traditional)"
-msgstr ""
+msgstr "Prevedi na Kineski (Tradicionalni)"
 
 #: ../Translate/src/Provider/Google.cs:55
 msgid "Croatian"
-msgstr ""
+msgstr "Hrvatski"
 
 #: ../Translate/src/Provider/Google.cs:56
 msgid "Translate to Croatian"
-msgstr ""
+msgstr "Prevedi na Hrvatski"
 
 #: ../Translate/src/Provider/Google.cs:59
 msgid "Czech"
-msgstr ""
+msgstr "Češki"
 
 #: ../Translate/src/Provider/Google.cs:60
 msgid "Translate to Czech"
-msgstr ""
+msgstr "Prevedi na Češki"
 
 #: ../Translate/src/Provider/Google.cs:63
 msgid "Danish"
-msgstr ""
+msgstr "Danski"
 
 #: ../Translate/src/Provider/Google.cs:64
 msgid "Translate to Danish"
-msgstr ""
+msgstr "Prevedi na Danski"
 
 #: ../Translate/src/Provider/Google.cs:67
 msgid "Dutch"
-msgstr ""
+msgstr "Holandski"
 
 #: ../Translate/src/Provider/Google.cs:68
 msgid "Translate to Dutch"
-msgstr ""
+msgstr "Prevedi naHolandski"
 
 #: ../Translate/src/Provider/Google.cs:71
 msgid "English"
-msgstr ""
+msgstr "Engleski"
 
 #: ../Translate/src/Provider/Google.cs:72
 msgid "Translate to English"
-msgstr ""
+msgstr "Prevedi na Engleski"
 
 #: ../Translate/src/Provider/Google.cs:75
 msgid "Filipino"
-msgstr ""
+msgstr "Filipinski"
 
 #: ../Translate/src/Provider/Google.cs:76
 msgid "Translate to Filipino"
-msgstr ""
+msgstr "Prevedi na Filipinski"
 
 #: ../Translate/src/Provider/Google.cs:79
 msgid "Finnish"
-msgstr ""
+msgstr "Finski"
 
 #: ../Translate/src/Provider/Google.cs:80
 msgid "Translate to Finnish"
-msgstr ""
+msgstr "Prevedi na Finski"
 
 #: ../Translate/src/Provider/Google.cs:83
 msgid "French"
-msgstr ""
+msgstr "Francuski"
 
 #: ../Translate/src/Provider/Google.cs:84
 msgid "Translate to French"
-msgstr ""
+msgstr "Prevedi na Francuski"
 
 #: ../Translate/src/Provider/Google.cs:87
 msgid "German"
-msgstr ""
+msgstr "Njemački"
 
 #: ../Translate/src/Provider/Google.cs:88
 msgid "Translate to German"
-msgstr ""
+msgstr "Prevedi na Njemački"
 
 #: ../Translate/src/Provider/Google.cs:91
 msgid "Greek"
-msgstr ""
+msgstr "Grčki"
 
 #: ../Translate/src/Provider/Google.cs:92
 msgid "Translate to Greek"
-msgstr ""
+msgstr "Prevedi na Grčki"
 
 #: ../Translate/src/Provider/Google.cs:95
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebrejski"
 
 #: ../Translate/src/Provider/Google.cs:96
 msgid "Translate to Hebrew"
-msgstr ""
+msgstr "Prevedi na Hebrejski"
 
 #: ../Translate/src/Provider/Google.cs:99
 msgid "Hindi"
-msgstr ""
+msgstr "Hindu"
 
 #: ../Translate/src/Provider/Google.cs:100
 msgid "Translate to Hindi"
-msgstr ""
+msgstr "Prevedi na Hindu"
 
 #: ../Translate/src/Provider/Google.cs:103
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonezijski"
 
 #: ../Translate/src/Provider/Google.cs:104
 msgid "Translate to Indonesian"
-msgstr ""
+msgstr "Prevedi na Indonezijski"
 
 #: ../Translate/src/Provider/Google.cs:107
 msgid "Italian"
-msgstr ""
+msgstr "Talijanski"
 
 #: ../Translate/src/Provider/Google.cs:108
 msgid "Translate to Italian"
-msgstr ""
+msgstr "Prevedi na Talijanski"
 
 #: ../Translate/src/Provider/Google.cs:111
 msgid "Japanese"
-msgstr ""
+msgstr "Japanski"
 
 #: ../Translate/src/Provider/Google.cs:112
 msgid "Translate to Japanese"
-msgstr ""
+msgstr "Prevedi na Japanski"
 
 #: ../Translate/src/Provider/Google.cs:115
 msgid "Korean"
-msgstr ""
+msgstr "Korejski"
 
 #: ../Translate/src/Provider/Google.cs:116
 msgid "Translate to Korean"
-msgstr ""
+msgstr "Prevedi na Korejski"
 
 #: ../Translate/src/Provider/Google.cs:119
 msgid "Latvian"
-msgstr ""
+msgstr "Latvijski"
 
 #: ../Translate/src/Provider/Google.cs:120
 msgid "Translate to Latvian"
-msgstr ""
+msgstr "Prevedi na Latvijski"
 
 #: ../Translate/src/Provider/Google.cs:123
 msgid "Lithuanian"
-msgstr ""
+msgstr "Litvanski"
 
 #: ../Translate/src/Provider/Google.cs:124
 msgid "Translate to Lithuanian"
-msgstr ""
+msgstr "Prevedi na Litvanski"
 
 #: ../Translate/src/Provider/Google.cs:127
 msgid "Norwegian"
-msgstr ""
+msgstr "Norveški"
 
 #: ../Translate/src/Provider/Google.cs:128
 msgid "Translate to Norwegian"
-msgstr ""
+msgstr "Prevedi na Norveški"
 
 #: ../Translate/src/Provider/Google.cs:131
 msgid "Polish"
-msgstr ""
+msgstr "Poljski"
 
 #: ../Translate/src/Provider/Google.cs:132
 msgid "Translate to Polish"
