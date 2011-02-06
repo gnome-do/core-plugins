@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
