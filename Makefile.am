@@ -21,7 +21,6 @@ SUBDIRS = \
 	Empathy \
 	EOG-Slideshow \
 	Epiphany \
-	Evolution \
 	Exaile \
 	File \
 	Firefox \

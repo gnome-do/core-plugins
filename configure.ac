@@ -54,25 +54,6 @@ BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-inde
 AC_SUBST([BANSHEE_INDEXER_DLL])
 dnl }}}
 
-dnl {{{ check for Evolution
-AC_ARG_ENABLE(evolution,
-	AC_HELP_STRING([--enable-evolution], [Build plugin to interact with Evolution (default: auto)]),
-	enable_evolution=$enableval,
-	enable_evolution=auto)
-
-if test "x$enable_evolution" != "xno"; then
-	PKG_CHECK_MODULES([EVOLUTION_SHARP], [evolution-sharp], HAVE_EVOLUTION=yes, HAVE_EVOLUTION=no)
-
-	if test "x$enable_evolution" = "xyes" -a "x$HAVE_EVOLUTION" = "xno"; then
-		AC_MSG_ERROR([Evolution support explicitly requestion but dependencies not found])
-	fi
-fi
-
-AM_CONDITIONAL(HAVE_EVOLUTION, test "x$HAVE_EVOLUTION" = "xyes")
-
-AC_SUBST([EVOLUTION_SHARP_LIBS])
-dnl }}}
-
 dnl {{{ check for Flickr
 AC_ARG_ENABLE(flickr,
 	AC_HELP_STRING([--enable-flickr], [Build plugin to interact with flickr using flickrnet (default: auto)]),
@@ -311,8 +292,6 @@ EOG-Slideshow/Makefile
 EOG-Slideshow/Resources/EOG-Slideshow.addin.xml
 Epiphany/Makefile
 Epiphany/Resources/Epiphany.addin.xml
-Evolution/Makefile
-Evolution/Resources/Evolution.addin.xml
 Exaile/Makefile
 Exaile/Resources/Exaile.addin.xml
 File/Makefile

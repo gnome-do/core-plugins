@@ -43,10 +43,6 @@ Dropbox/src/DropboxWebInterfaceAction.cs
 EOG-Slideshow/src/PlaySlideshowAction.cs
 Epiphany/src/EpiphanyBookmarkItemSource.cs
 Epiphany/src/EpiphanyBrowseBookmarksItem.cs
-Evolution/src/AddressContactDetailItem.cs
-Evolution/src/ContactItemSource.cs
-Evolution/src/EmailContactDetailItem.cs
-Evolution/src/PhoneContactDetailItem.cs
 Exaile/src/ExaileItems.cs
 Exaile/src/MusicItems.cs
 Exaile/src/MusicItemSource.cs
