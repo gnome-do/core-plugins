@@ -4,6 +4,7 @@ Alias/src/AliasItemSource.cs
 Alias/src/DeleteAliasAction.cs
 Archive/src/CreateArchiveAction.cs
 Archive/src/ExtractArchiveAction.cs
+Baconator/src/BaconateAction.cs
 Banshee/src/BrowseMediaItems.cs
 Banshee/src/EnqueueAction.cs
 Banshee/src/MediaItems.cs
@@ -14,6 +15,7 @@ Banshee/src/PlayAction.cs
 Banshee/src/PreviousAction.cs
 Banshee/src/SearchCollectionAction.cs
 Bibtex/gtk-gui/Bibtex.Configuration.cs
+Chromium/src/ChromiumBookmarkItemSource.cs
 ClawsMail/src/ClawsContactDetailItem.cs
 ClawsMail/src/ClawsContactsItemSource.cs
 Cl.ickable/src/ClickableItemSource.cs
@@ -40,6 +42,16 @@ Dropbox/src/DropboxStartAction.cs
 Dropbox/src/DropboxStopAction.cs
 Dropbox/src/DropboxUnshareAction.cs
 Dropbox/src/DropboxWebInterfaceAction.cs
+Empathy/src/EmpathyAccountActions.cs
+Empathy/src/EmpathyAccountItemSource.cs
+Empathy/src/EmpathyBrowseAccountItem.cs
+Empathy/src/EmpathyBrowseBuddyItem.cs
+Empathy/src/EmpathyBrowseStatusItem.cs
+Empathy/src/EmpathyChatAction.cs
+Empathy/src/EmpathyContactItemSource.cs
+Empathy/src/EmpathySavedStatusItemSource.cs
+Empathy/src/EmpathySetStatusAction.cs
+Empathy/src/EmpathyStatusItem.cs
 EOG-Slideshow/src/PlaySlideshowAction.cs
 Epiphany/src/EpiphanyBookmarkItemSource.cs
 Epiphany/src/EpiphanyBrowseBookmarksItem.cs
@@ -75,6 +87,7 @@ Flickr/src/AccountConfig.cs
 Flickr/src/FlickrItemSource.cs
 Flickr/src/UploadAction.cs
 Flickr/src/UploadDialog.cs
+GNOME-Calculator/src/GCalcToolAction.cs
 GNOME-Dictionary/src/DefineAction.cs
 GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs
 GNOME-Screenshot/src/ScreenshotDelayItem.cs
@@ -154,6 +167,7 @@ PingFM/src/PingFMServiceItemSource.cs
 Putty/src/PuttyAction.cs
 Putty/src/PuttySession.cs
 Putty/src/PuttySessionItemSource.cs
+Qalculate/src/QalculateAction.cs
 Quote/src/QuoteAction.cs
 RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs
 RememberTheMilk/src/Configuration.cs
@@ -206,6 +220,14 @@ Shelf/src/ShelfItem.cs
 Shelf/src/ShelfItemSource.cs
 Shelf/src/ShelfRemoveFromShelfAction.cs
 Shelf/src/ShelfRenameShelfAction.cs
+Skype/src/Skype.cs
+Skype/src/SkypeBrowseBuddyItem.cs
+Skype/src/SkypeBrowseStatusItem.cs
+Skype/src/SkypeCallAction.cs
+Skype/src/SkypeChatAction.cs
+Skype/src/SkypeContactItemSource.cs
+Skype/src/SkypeSetStatusAction.cs
+Skype/src/SkypeStatusItemSource.cs
 SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs
 SSH/src/SSHAction.cs
 SSH/src/SSHHostItem.cs
@@ -261,6 +283,7 @@ WindowManager/src/WindowActions/WindowFocusAction.cs
 WindowManager/src/WindowActions/WindowMaximizeAction.cs
 WindowManager/src/WindowActions/WindowMinimizeAction.cs
 WindowManager/src/WindowItemSource.cs
+WindowManager/src/Wink/ScreenUtils.cs
 XRandR/src/OutputItem.cs
 XRandR/src/OutputModeItem.cs
 XRandR/src/XRandRItemSource.cs
