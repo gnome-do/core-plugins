@@ -126,6 +126,7 @@ namespace Do.Addins.Thunderbird
 		const string BeginProfileName	 = "Path=";
 		const string BeginDefaultProfile = "Name=default";
 		const string THUNDERBIRD_EMAIL	 = "email.thunderbird";
+		static readonly char[] nameDelimiters      = { ' ', '\'', '"' };
 
 		Dictionary<string, Item> contacts; // name => ContactItem
 		
@@ -217,6 +218,9 @@ namespace Do.Addins.Thunderbird
 			
 			// Name
 			name = row["DisplayName"] as string;
+			if (name != null) {
+				name = name.Trim (nameDelimiters);
+			}
 			if (name == null || name == string.Empty)
 				name = string.Format ("{0} {1}", row["FirstName"], row["LastName"]);
 			
