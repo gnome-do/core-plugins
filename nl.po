@@ -1,0 +1,2489 @@
+# Dutch translation for do-plugins
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the do-plugins package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: do-plugins\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-01-26 08:04+1100\n"
+"PO-Revision-Date: 2010-06-16 21:01+0000\n"
+"Last-Translator: JW <jw00000@gmail.com>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2011-02-15 04:34+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+
+#: ../Alias/src/AliasAction.cs:36
+msgid "Assign Alias..."
+msgstr "Wijs alias toe..."
+
+#: ../Alias/src/AliasAction.cs:40
+msgid "Give an item an alternate name."
+msgstr "Geef een element een andere naam."
+
+#: ../Alias/src/DeleteAliasAction.cs:36
+msgid "Delete Alias"
+msgstr "Alias verwijderen"
+
+#: ../Alias/src/DeleteAliasAction.cs:40
+msgid "Deletes an alias."
+msgstr "Verwijdert een alias."
+
+#: ../Alias/src/AliasItemSource.cs:140
+msgid "Alias items"
+msgstr "Anders genoemde elementen"
+
+#: ../Alias/src/AliasItemSource.cs:144
+msgid "Aliased items from Do's universe."
+msgstr "Anders genoemde elementen uit het universum van Do."
+
+#: ../Archive/src/ExtractArchiveAction.cs:40
+msgid "Extract archive"
+msgstr "Archief uitpakken"
+
+#: ../Archive/src/ExtractArchiveAction.cs:44
+msgid "Extract an archive to a given folder"
+msgstr "Archief uitpakken naar opgegeven map"
+
+#: ../Archive/src/CreateArchiveAction.cs:41
+msgid "Create archive"
+msgstr "Creëer archief"
+
+#: ../Archive/src/CreateArchiveAction.cs:45
+msgid "Create an archive with the selected item"
+msgstr "Creëer archief met het geselecteerde bestand"
+
+#: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
+msgid "Browse Artists"
+msgstr "Artiesten doorbladeren"
+
+#: ../Banshee/src/BrowseMediaItems.cs:57
+msgid "Browse Music by Artist"
+msgstr "Blader door muziek per artiest"
+
+#: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
+msgid "Browse Albums"
+msgstr "Albums doorbladeren"
+
+#: ../Banshee/src/BrowseMediaItems.cs:70
+msgid "Browse Music by Album"
+msgstr "Blader door muziek per album"
+
+#: ../Banshee/src/BrowseMediaItems.cs:77
+msgid "Browse Podcasts"
+msgstr "Podcasts doorbladeren"
+
+#: ../Banshee/src/BrowseMediaItems.cs:78
+msgid "Browse Podcasts by Publisher"
+msgstr "Blader door podcasts per uitgever"
+
+#: ../Banshee/src/BrowseMediaItems.cs:85
+msgid "Browse Videos"
+msgstr "Video's doorbladeren"
+
+#: ../Banshee/src/BrowseMediaItems.cs:86
+msgid "Browse All Videos"
+msgstr "Blader door alle video's"
+
+#: ../Banshee/src/EnqueueAction.cs:37 ../Rhythmbox/src/EnqueueAction.cs:36
+msgid "Add to Play Queue"
+msgstr "Toevoegen aan afspeelwachtrij"
+
+#: ../Banshee/src/EnqueueAction.cs:41
+msgid "Add media to play queue"
+msgstr "Voeg media toe aan de afspeelwachtrij"
+
+#: ../Banshee/src/MediaItemSource.cs:46
+msgid "Banshee Media"
+msgstr "Banshee Media"
+
+#: ../Banshee/src/MediaItemSource.cs:50
+msgid "Indexes Media from Banshee Media Player"
+msgstr "Indexeert Media van je Basnhee Media Speler"
+
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr "Alle Muziek door"
+
+#: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
+msgid "Next"
+msgstr "Volgende"
+
+#: ../Banshee/src/NextAction.cs:36
+msgid "Play next track"
+msgstr "Speel volgend nummer"
+
+#: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
+msgid "Pause"
+msgstr "Pauzeren"
+
+#: ../Banshee/src/PauseAction.cs:36
+msgid "Pause playing track"
+msgstr "Pauzeer huidig nummer"
+
+#: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
+#: ../Rhythmbox/src/PlayAction.cs:40
+msgid "Play"
+msgstr "Afspelen"
+
+#: ../Banshee/src/PlayAction.cs:39
+msgid "Play from your Banshee Collection"
+msgstr "Speel nummer uit je Banshee Collectie"
+
+#: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
+msgid "Previous"
+msgstr "Vorige"
+
+#: ../Banshee/src/PreviousAction.cs:36
+msgid "Play previous track"
+msgstr "Speel vorig nummer"
+
+#: ../Banshee/src/SearchCollectionAction.cs:36
+msgid "Search Banshee Media"
+msgstr "Zoek door Banshee Media"
+
+#: ../Banshee/src/SearchCollectionAction.cs:40
+msgid "Search your entire Banshee collection"
+msgstr "Doorzoek uw hele Bansheecollectie"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+msgid "Choose BibTeX file"
+msgstr "Kies een BibTeX-bestand"
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
+msgid "Select A File"
+msgstr "Selecteer een bestand"
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+msgid "Select your documents folder"
+msgstr "Selecteer je documenten map"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+msgid "Choose documents folder"
+msgstr "Kies documenten map"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr "Clawsmail contacten"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr "Contacten in Clawsmail adres boek"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:71
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:41
+msgid "Primary Email"
+msgstr "Primair e-mailadres"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:74
+#: ../Evolution/src/EmailContactDetailItem.cs:34
+msgid "Email"
+msgstr "Email"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
+msgid "Other email"
+msgstr "Ander e-mailadres"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
+msgid "Other"
+msgstr "Andere"
+
+#: ../Cl.ickable/src/ClipAction.cs:38
+msgid "Clip"
+msgstr "Knippen"
+
+#: ../Cl.ickable/src/ClipAction.cs:42
+msgid "Create a clip with Cl.ickable"
+msgstr "Maak een knipsel met Cl.ickable"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:32
+msgid "Cl.ickable Clips"
+msgstr "Cl.ickable knipsels"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:36
+msgid "Opens your cl.ickable clips"
+msgstr "Open je Cl.ickable knipsels"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Cl.ickable objecten"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr "Bruikbare Cl.ickable objecten"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+msgid "http://opensource.atlassian.com/confluence/spring"
+msgstr "http://opensource.atlassian.com/confluence/spring"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+msgid "username1"
+msgstr "Gerbruikersnaam1"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:85
+msgid "Search Confluence"
+msgstr "Zoek samenvloeing"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:93
+msgid "Searches Confluence and returns results to Do"
+msgstr "Zoekt samenvloeingen en geeft resultaten terug aan Do"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr "Del.icio.us etiketten"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.bookmarks by tag"
+msgstr "Organiseert je Del.icio.us bladwijzers via etiketten"
+
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr "Del.icio.us bladwijzers zonder etiket"
+
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr "Del.icio.us bladwijzers met {0} etiket"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:37
+msgid "Del.icio.us bookmarks"
+msgstr "Del.icio.us bladwijzers"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:41
+msgid "Indexes your del.icio.us bookmarks"
+msgstr "Indexeert uw del.icio.us bladwijzers"
+
+#: ../Del.icio.us/src/SearchAction.cs:47
+msgid "Search del.icio.us"
+msgstr "Doorzoek del.icio.us"
+
+#: ../Del.icio.us/src/SearchAction.cs:51
+msgid "del.icio.us tag search"
+msgstr "Doorzoek Del.icio.us etiketten"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:40
+#: ../SystemServices/src/SystemServicesConfig.cs:74
+msgid "Open"
+msgstr "Openen"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:44
+msgid "Open a removable volume"
+msgstr "Open een verwisselbaar volume"
+
+#: ../DiskMounter/src/UnmountAction.cs:31
+msgid "Unmount"
+msgstr "Loskoppelen"
+
+#: ../DiskMounter/src/UnmountAction.cs:35
+msgid "Unmount volume"
+msgstr "Volume loskoppelen"
+
+#: ../DiskMounter/src/MountAction.cs:32
+msgid "Mount"
+msgstr "Aankoppelen"
+
+#: ../DiskMounter/src/MountAction.cs:36
+msgid "Mount volume"
+msgstr "Volume aankoppelen"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
+msgid "Play Slideshow"
+msgstr "Speel diavoorstelling af"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
+msgid "Plays a slideshow of images in a folder."
+msgstr "Speelt een slideshow van beelden in een map."
+
+#: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:44
+msgid "Epiphany Bookmarks"
+msgstr "Epiphany Bladwijzers"
+
+#: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:47
+msgid "Indexes your Epiphany bookmarks."
+msgstr "Indexeer je Epiphany Bladwijzers."
+
+#: ../Evolution/src/PhoneContactDetailItem.cs:34
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
+msgid "Work Phone"
+msgstr "Telefoon werk"
+
+#: ../Evolution/src/PhoneContactDetailItem.cs:35
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
+msgid "Home Phone"
+msgstr "Telefoon Thuis"
+
+#: ../Evolution/src/PhoneContactDetailItem.cs:36
+msgid "Mobile Phone"
+msgstr "Mobiele Telefoon"
+
+#: ../Evolution/src/ContactItemSource.cs:58
+#: ../Evolution/src/ContactItemSource.cs:59
+msgid "Evolution Contacts"
+msgstr "Evolution Contacten"
+
+#: ../Evolution/src/AddressContactDetailItem.cs:34
+msgid "Address"
+msgstr "Adres"
+
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
+msgid "Show hidden files"
+msgstr "Toon verborgen bestanden"
+
+#: ../File/src/PathNodeView.cs:51
+msgid "Folder"
+msgstr "Map"
+
+#: ../File/src/PathNodeView.cs:57
+msgid "Depth"
+msgstr "Diepte"
+
+#: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
+msgid "Delete File"
+msgstr "Bestand verwijderen"
+
+#: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:41
+msgid "Deletes a file or folder."
+msgstr "Verwijderd een bestand of map."
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
+msgid "Choose a folder to index"
+msgstr "Kies een folder om te indexeren"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
+#: ../SystemServices/src/SystemServicesConfig.cs:73
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
+msgid "Choose folder"
+msgstr "Kies een map"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
+msgid "Rename file..."
+msgstr "Wijzig bestandsnaam..."
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
+msgid "Renames a file."
+msgstr "Hernoemt een bestand."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
+msgid "Create New Folder"
+msgstr "Nieuwe map maken"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
+msgid "Creates an new folder."
+msgstr "Maakt nieuwe map."
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
+#: ../RememberTheMilk/src/RTMMoveTask.cs:35
+msgid "Move to..."
+msgstr "Verplaats naar..."
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:41
+msgid "Moves a file or folder to another location."
+msgstr "Verplaatst een bestand of map naar een ander locatie."
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:39
+msgid "Move to Trash"
+msgstr "Naar prullenbak verplaatsen"
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:43
+msgid "Moves a file or folder to the trash"
+msgstr "Verplaatst een bestand of map naar de prullenbak"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
+msgid "Recent Files"
+msgstr "Recente Bestanden"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
+msgid "Finds recently-opened files."
+msgstr "Zoekt recent geopende bestanden"
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
+msgid "Copy to..."
+msgstr "Kopieer naar..."
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
+msgid "Copies a file or folder to another location."
+msgstr "Kopieert een bestand of map naar een ander locatie"
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
+msgid "Files and Folders"
+msgstr "Bestanden en mappen"
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
+msgid "Catalogs important files and folders for quick access."
+msgstr "Inventariseert belangrijke bestanden of mappen voor snelle toegang."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
+msgid "Create New File"
+msgstr "Nieuw bestand aanmaken"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
+msgid "Creates an new, empty file."
+msgstr "Maakt een nieuw, leeg bestand."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
+msgid "Untitled"
+msgstr "Naamloos"
+
+#: ../Firefox/src/BookmarkItemSource.cs:55
+msgid "Firefox Bookmarks"
+msgstr "Firefox Bladwijzers"
+
+#: ../Firefox/src/BookmarkItemSource.cs:59
+msgid "Finds Firefox bookmarks in your default profile."
+msgstr "Vindt Firefox bladwijzers in je standaardprofiel."
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
+msgid ""
+"Do needs your authorization in order to upload photos to your flickr "
+"account. Press the \"Authorize\" button to open a web browser and give Do "
+"authorization. "
+msgstr ""
+"Do heeft je toestemming nodig om fotos naar je flickr profile te verzenden. "
+"Druk de \"Toestemmen\" knop om je web browser te openen en geef Do "
+"toestemming. "
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
+msgid "<b>Account</b>"
+msgstr "<b>Account</b>"
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
+msgid "_Authorize"
+msgstr "_Toestemmen"
+
+#. Container child vbox6.Gtk.Box+BoxChild
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:83
+msgid "Private"
+msgstr "Privé"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:107
+msgid "Visible to friends"
+msgstr "Zichtbaar voor vrienden"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:119
+msgid "Visible to family"
+msgstr "Zichtbaar voor familie"
+
+#. Container child vbox6.Gtk.Box+BoxChild
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
+msgid "Public"
+msgstr "Openbaar"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:149
+msgid "<b>Viewing permissions</b>"
+msgstr "<b>Permissies bekijken</b>"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:182
+msgid ""
+"Default tags to use on images posted with Do. Seperate tags with a space; "
+"for multiple word tags use quotes. ex.) concert \"Mars Volta\" Omar"
+msgstr ""
+"Standaard etiketten die door Do gebruikt worden op beelden. Scheidt deze met "
+"een spatie; voor etiketten met meerdere woorden gebruik aanhalingstekens "
+"vb.) concert \"Mars Volta\" Omar"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:209
+msgid "<b>Tags</b>"
+msgstr "<b>Etiketten</b>"
+
+#: ../Flickr/src/UploadAction.cs:45
+msgid "Upload photo"
+msgstr "Upload foto"
+
+#: ../Flickr/src/UploadAction.cs:49
+msgid "Upload one or more photos to Flickr"
+msgstr "Upload één of meer fotos naar Flickr"
+
+#: ../Flickr/src/FlickrItemSource.cs:34
+msgid "Account"
+msgstr "Account"
+
+#: ../Flickr/src/AccountConfig.cs:91
+msgid "Click to compete authorization"
+msgstr "Klik om authorisatie te bevestigen"
+
+#: ../Flickr/src/AccountConfig.cs:112
+#, csharp-format
+msgid "Thank you {0} for allowing Do access to Flickr."
+msgstr "Bedankt {0} om Do tostemming te geven van Flickr te gebruiken."
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:51
+msgid "Define"
+msgstr "Definieer"
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:56
+msgid "Define a given word."
+msgstr "Defineer het gegeven woord."
+
+#: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:28
+msgid "Current window"
+msgstr "Huidig venster"
+
+#: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
+msgid "Take a screenshot of the current window."
+msgstr "Neem een schermafdruk van het huidige scherm."
+
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
+msgid "Whole screen"
+msgstr "Volledig scherm"
+
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
+msgid "Take a screenshot of the entire screen."
+msgstr "Neem een schermafdruk van het volledige scherm."
+
+#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:37
+#, csharp-format
+msgid "{0}-second delay"
+msgstr "{0}--seconde vertraging"
+
+#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:43
+#, csharp-format
+msgid "Wait {0} second before taking the screenshot."
+msgid_plural "Wait {0} seconds before taking the screenshot."
+msgstr[0] "Wacht {0} seconde voor het nemen van de schermafdruk."
+msgstr[1] "Wacht {0} seconden voor het nemen van de schermafdruk."
+
+#: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:34
+msgid "Take screenshot"
+msgstr "Neem schermafdruk"
+
+#: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:38
+msgid "Takes a screenshot with optional delay."
+msgstr "Neem schermafdruk met eventuele vertraging."
+
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
+msgid "GNOME Screenshot Items"
+msgstr "GNOME schermafdruk onderdelen"
+
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
+msgid "Whole screen or current window."
+msgstr "Volledig scherm of huidig scherm."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
+msgid "GNOME Session Commands"
+msgstr "GNOME sessie commando's"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:45
+msgid "Log out, Shutdown, Restart, etc."
+msgstr "Log uit, Sluit af, Herstart, enz."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:54
+msgid "Log Out"
+msgstr "Afmelden"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:55
+msgid "Close your session and return to the login screen."
+msgstr "Je sessie afsluiten en het aanmeldingscherm tonen."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:60
+msgid "Shutdown"
+msgstr "Afsluiten"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:61
+msgid "Turn your computer off."
+msgstr "Je computer afsluiten"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:66
+msgid "Hibernate"
+msgstr "Slaapstand"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:67
+msgid "Put your computer into hibernation mode."
+msgstr "Zet je computer in de slaapstand"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:72
+msgid "Suspend"
+msgstr "Slaapstand"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:73
+msgid "Put your computer into suspend mode."
+msgstr "Zet je computer in de slaapstand"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:78
+msgid "Restart"
+msgstr "Herstart"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:79
+msgid "Restart your computer."
+msgstr "Herstart computer"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:84
+msgid "Lock Screen"
+msgstr "Scherm vergrendelen"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:85
+msgid "Lock your screen."
+msgstr "Zet je scherm vast."
+
+#: ../GNOME-Terminal/src/OpenProfileAction.cs:39
+msgid "Open Profile"
+msgstr "Profiel Openen"
+
+#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
+msgid "Opens a GNOME Terminal with the selected profile."
+msgstr "Opent een GNOME Terminal venster met geselecteerd profiel."
+
+#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
+msgid "Open Terminal Here"
+msgstr "Open Terminal venster hier"
+
+#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
+msgid "Opens a GNOME Terminal in a given location."
+msgstr "Opent een GNOME Terminal venster op een gegeven locatie."
+
+#: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
+msgid "Run in Terminal"
+msgstr "Start in Terminal venster"
+
+#: ../GNOME-Terminal/src/RunInTerminalAction.cs:46
+msgid "Runs a command in GNOME Terminal."
+msgstr "Start een commando in een GNOME Terminal venster."
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
+msgid "GNOME Terminal Profiles"
+msgstr "GNOME Terminal venster profielen"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
+msgid "Indexes your GNOME Terminal profiles."
+msgstr "Indexeer je GNOME Terminal venster profielen."
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:33
+msgid "Unnamed Profile"
+msgstr "Profiel zonder naam"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:34
+msgid "GNOME Terminal Profile"
+msgstr "GNOME Terminal venster profiel"
+
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
+msgid "Perform a calculation using Google Calculator."
+msgstr "Voer een berekening uit met Google Calculator."
+
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:92
+msgid "Google Calculator could not evaluate the expression."
+msgstr "Google Calculator kon je expressie niet evalueren."
+
+#: ../GoogleCalendar/src/Configuration.cs:42
+#: ../GoogleDocs/src/Configuration.cs:41
+msgid "E-Mail:"
+msgstr "E-Mail:"
+
+#: ../GoogleCalendar/src/GCalendarItemSource.cs:40
+msgid "Google Calendars"
+msgstr "Google Calendars"
+
+#: ../GoogleCalendar/src/GCalendarItemSource.cs:44
+msgid "Indexes your Google Calendars"
+msgstr "Indexeer je Google Calendars"
+
+#: ../GoogleCalendar/src/GCalClient.cs:40
+msgid "All Events"
+msgstr "Alle gebeurtenissen"
+
+#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
+#, csharp-format
+msgid "An error has occurred in {0}"
+msgstr "Een fout is voorgekomen in {0}"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:41
+msgid "View Event"
+msgstr "Bekijk gebeurtenis"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:45
+msgid "Open event in browser"
+msgstr "Open gebeurtenis in je browser"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
+msgid "View Calendar"
+msgstr "Bekijk Kalender"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
+msgid "Open calendar in browser"
+msgstr "Open Kalender in je browser"
+
+#: ../GoogleCalendar/src/GCalendarItem.cs:45
+msgid "Google Calendar"
+msgstr "Google Calendar"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
+msgid "Search Events"
+msgstr "Zoek gebeurtenissen"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
+msgid "Search Google Calendar for Events"
+msgstr "Zoek in Google Calendar naar gebeurtenissen"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr "Fout in het verbinden met de GCal dienst"
+
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
+msgid "New Event"
+msgstr "Nieuwe gebeurtenis"
+
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
+msgid "Create a new event in Google Calendar"
+msgstr "Maak een nieuwe gebeurtenis in Google Calendar"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:42
+msgid "Primary Phone"
+msgstr "Hoofd telefoonnummer"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:43
+msgid "Home Email"
+msgstr "Thuis Email"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:44
+msgid "Work Email"
+msgstr "Werk Email"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:47
+msgid "Primary Address"
+msgstr "Hoofdadres"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:48
+msgid "Home Address"
+msgstr "Thuisadres"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:49
+msgid "Work Address"
+msgstr "Werkadres"
+
+#: ../GoogleContacts/src/GMail.cs:35
+msgid "An error occurred connecting to google, are your credentials valid?"
+msgstr ""
+"Er gebeurde een fout in het verbinden met google, zijn je inloggegevens "
+"correct?"
+
+#: ../GoogleContacts/src/GMail.cs:38 ../Microblogging/src/Microblog.cs:36
+msgid ""
+"Missing login credentials. Please set login information in plugin "
+"configuration."
+msgstr ""
+"Je inloggegevens zijn niet ingevuld. Geef deze in in de plugin configuratie."
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:38
+msgid "GMail Contacts"
+msgstr "GMail Contacts"
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:42
+msgid "Index your GMail contacts"
+msgstr "Indexeer je GMail Contacts"
+
+#: ../GoogleDocs/src/GDocs.cs:149
+msgid "Uploading failed."
+msgstr "Upload faalde"
+
+#: ../GoogleDocs/src/GDocs.cs:150
+msgid "An error occurred when uploading files to Google Docs."
+msgstr ""
+"Er gebeurde een fout bij het uploaden van bestanden naar Google Docs."
+
+#: ../GoogleDocs/src/GDocs.cs:157
+msgid "Deleting failed."
+msgstr "Het wissen faalde."
+
+#: ../GoogleDocs/src/GDocs.cs:158
+msgid "An error occurred when deleting the document at Google Docs."
+msgstr ""
+"Er gebeurde een fout bij het verwijderen van het document op Google Docs."
+
+#: ../GoogleDocs/src/GDocs.cs:165
+msgid "Document deleted."
+msgstr "Document verwijderd"
+
+#: ../GoogleDocs/src/GDocs.cs:166
+#, csharp-format
+msgid ""
+"The document '{0}' has been successfully moved into Trash at Google Docs."
+msgstr ""
+"Document '{0}' is succesvol verplaatst in de prullenbak op Google Docs."
+
+#: ../GoogleDocs/src/GDocsPresentationItem.cs:36
+msgid "Google Docs Presentation"
+msgstr "Google Docs Presentatie"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:36
+msgid "Google Docs"
+msgstr "Google Docs"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:40
+msgid "Indexes your documents stored at Google Docs"
+msgstr "Indexeer je documenten die opgeslaan zijn op Google Docs"
+
+#: ../GoogleDocs/src/GDocsItem.cs:46
+msgid "Google Docs Generic Document"
+msgstr "Google Docs Algemeen Document"
+
+#: ../GoogleDocs/src/GDocsDocumentItem.cs:36
+msgid "Google Docs Text Document"
+msgstr "Google Docs Tekst Document"
+
+#: ../GoogleDocs/src/GDocsPDFItem.cs:36
+msgid "Google Docs PDF Document"
+msgstr "Google Docs PDF Document"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:38
+msgid "Delete Document"
+msgstr "Verwijder Document"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:42
+msgid "Move a document into Trash at Google Docs"
+msgstr "Verplaats een document in de prullenbak van Google Docs"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
+msgid "Upload Document"
+msgstr "Document uploaden"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:45
+msgid "Upload a document to Google Docs"
+msgstr "Document oploaden naar Google Docs"
+
+#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
+msgid "Google Docs Spreadsheet"
+msgstr "Google Docs Spreadsheet"
+
+#: ../GoogleMaps/src/MapAction.cs:39
+msgid "Map"
+msgstr "Kaart"
+
+#: ../GoogleMaps/src/MapAction.cs:44
+msgid "Map a location or route in Google maps."
+msgstr "Maak een locatie of route in Google maps."
+
+#. Container child vbox4.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
+msgid "Go directly to Google Search page"
+msgstr "Ga direct naar Google Search"
+
+#. Container child vbox4.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:87
+msgid "Show search results in Do"
+msgstr "Bekijk zoekresultaten in Do"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:106
+msgid "Show Search page link as first result"
+msgstr "Zoekpaginalink als eerste resultaat laten zien"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:120
+msgid "<b>Google Search</b>"
+msgstr "<b>Google Search</b>"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
+msgid "Apply to Google Search page link"
+msgstr "Toepassen op Google Zoeken-link"
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
+msgid "Do not filter my search results."
+msgstr "Filter mijn zoekresultaten niet."
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
+msgid "Use moderate filtering"
+msgstr "Gebruik standaard filter"
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
+msgid "Use strict filtering"
+msgstr "Gebruik streng filter"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
+msgid "<b>SafeSearch Preferences</b>"
+msgstr "<b>SafeSearch voorkeuren</b>"
+
+#: ../GoogleSearch/src/InlineGoogleSearch.cs:81
+msgid "Search Google"
+msgstr "Zoek met Google"
+
+#: ../GoogleSearch/src/InlineGoogleSearch.cs:90
+msgid "Allows you to perform Google Searches from Do"
+msgstr "Laat u Google zoekopdrachten vanuit Do uitvoeren"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
+msgid "I'm Feeling Lucky!"
+msgstr "Ik doe een gok"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
+msgid "Searches Google and takes you to the first result"
+msgstr "Zoek met  Google en meteen naar de eerste hit"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
+msgid ""
+"If you have an ImageShack account, a registration code allows you to save "
+"images to the My Images sections of your account.\n"
+"\n"
+"Please log-in to your ImageShack account before getting your registration "
+"code."
+msgstr ""
+"Als u een ImageShack account heeft, laat een registratiecode u afbeeldingen "
+"opslaan in het \"My Images\" onderdeel.\n"
+"\n"
+"U dient in te loggen bij ImageShack voordat u uw registratiecode krijgt."
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:90
+msgid "_Registration Code"
+msgstr "_Registratie code"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:124
+msgid "_Get Registration Code"
+msgstr "Aanvra_gen registratie code"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:140
+msgid "<b>Registration Code</b>"
+msgstr "<b>Registratie code</b>"
+
+#: ../ImageShack/src/ImageShackAction.cs:57
+msgid "Upload to ImageShack"
+msgstr "Uploaden naar ImageShack"
+
+#: ../ImageShack/src/ImageShackAction.cs:61
+msgid "Uploads the image to ImageShack."
+msgstr "Upload de afbeelding naar ImageShack"
+
+#: ../ImageShack/src/ImageShackAction.cs:106
+msgid "ImageShack exception: "
+msgstr "ImageShack uitzondering: "
+
+#: ../ImageShack/src/ImageShackAction.cs:116
+msgid "File size exceeds ImageShack's 1.5MB limit."
+msgstr "De bestandsgrootte is meer dan de 1.5MB die ImageShack toelaat."
+
+#: ../ImageShack/src/ImageShackAction.cs:196
+msgid "Parsed url was empty. ImageShack has probably changed its format."
+msgstr ""
+"Een lege respons. ImageShack heeft waarschijnlijk hun format aangepast."
+
+#: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
+#: ../ImageShack/src/Notifications.cs:53
+msgid "ImageShack"
+msgstr "ImageShack"
+
+#: ../ImageShack/src/Notifications.cs:32
+msgid "Do is uploading your image... Please wait a moment..."
+msgstr "Do is bezig met de afbeelding te uploaden... Een moment geduld..."
+
+#: ../ImageShack/src/Notifications.cs:43
+msgid "Unable to upload image to ImageShack at this time."
+msgstr "Kon de afbeelding niet uploaden naar ImageShack."
+
+#: ../Launchpad/src/LaunchpadAction.cs:36
+msgid "Search Launchpad"
+msgstr "Launchpad doorzoeken"
+
+#: ../Launchpad/src/LaunchpadAction.cs:40
+msgid "Search Launchpad properties."
+msgstr "Zoeken naar Launchpad eigenschappen"
+
+#: ../LocateFiles/src/LocateFilesAction.cs:39
+msgid "Locate Files"
+msgstr "Zoeken naar bestanden"
+
+#: ../LocateFiles/src/LocateFilesAction.cs:44
+msgid "Search your filesystem using locate."
+msgstr "Zoeken naar bestanden met behulp van locate."
+
+#: ../ManLookUp/src/ManualPageItemSource.cs:50
+msgid "Manual pages (man)"
+msgstr "Handleidingen (man)"
+
+#: ../ManLookUp/src/ManualPageItemSource.cs:57
+msgid "Search and read help documentation (man)"
+msgstr "Zoeken en lezen van handleidingen (man)"
+
+#: ../ManLookUp/src/ReadManualPageAction.cs:42
+msgid "Read manual page (man)"
+msgstr "Lezen handleiding (man)"
+
+#: ../ManLookUp/src/ReadManualPageAction.cs:49
+msgid "Look up and read a manual page."
+msgstr "Zoeken en lezen van een man pagina."
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
+msgid "Show friend status updates"
+msgstr "Statusupdates van vrienden laten zien"
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
+msgid "<b>General</b>"
+msgstr "<b>Algemeen</b>"
+
+#: ../Microblogging/src/MicroblogClient.cs:42
+#, csharp-format
+msgid "Failed to fetch file from {0}"
+msgstr "Ophalen van bestand van {0} is mislukt"
+
+#: ../Microblogging/src/MicroblogClient.cs:43
+#, csharp-format
+msgid "Twitter encountered an error in {0}. {1}"
+msgstr "Twitter heeft een fout teruggegeven {0}. {1}"
+
+#: ../Microblogging/src/MicroblogClient.cs:45
+msgid ""
+"Unable to post tweet. Check your login settings. If you are behind a proxy "
+"make sure that the settings in /system/http_proxy are correct."
+msgstr ""
+"Kan geen tweet posten. Controleer je inlog instellingen. Als je achter een "
+"proxy zit, controleer dan of de instellingen in /system/http_proxy juist "
+"zijn."
+
+#: ../Microblogging/src/FriendSource.cs:47
+msgid "Microblog friends"
+msgstr "Microblogging-vrienden"
+
+#: ../Microblogging/src/FriendSource.cs:51
+msgid "Indexes your microblog friends"
+msgstr "Indexeert microblogging-virenden"
+
+#: ../Microblogging/src/Notifications.cs:40
+#, csharp-format
+msgid "New direct message from {0}"
+msgstr "Nieuw bericht van {0}"
+
+#: ../Microblogging/src/Notifications.cs:57
+msgid "Post failed"
+msgstr "Post mislukt"
+
+#: ../Microblogging/src/Notifications.cs:58
+msgid "Post Successful"
+msgstr "Post gelukt"
+
+#: ../Microblogging/src/Notifications.cs:59
+#, csharp-format
+msgid "Failed to post '{0}' to {1}"
+msgstr "Niet gelukt om post '{0}' op {1} te plaatsen"
+
+#: ../Microblogging/src/Notifications.cs:60
+#, csharp-format
+msgid "'{0}' sucessfully posted to {1}"
+msgstr "'{0}' succesvol geplaatst op {1}"
+
+#: ../Microblogging/src/PostAction.cs:44
+#, csharp-format
+msgid "Post to {0}"
+msgstr "Versturen naar {0}"
+
+#: ../Microblogging/src/PostAction.cs:48
+#, csharp-format
+msgid "Update {0} status"
+msgstr "Update {0} status"
+
+#: ../NX/src/NXAction.cs:37 ../NX/src/NXAction.cs:41
+msgid "Connect with NX"
+msgstr "Verbinden met NX"
+
+#: ../NX/src/NXHosts.cs:46
+msgid "NX Host"
+msgstr "NX host"
+
+#: ../NX/src/NXHosts.cs:67
+msgid "NX Hosts"
+msgstr "NX hosts"
+
+#: ../NX/src/NXHosts.cs:71
+msgid "Parses nx sessions"
+msgstr ""
+
+#: ../OpenSearch/src/OpenSearchAction.cs:35
+msgid "Search Web"
+msgstr "Doorzoek het web"
+
+#: ../OpenSearch/src/OpenSearchAction.cs:40
+msgid "Searches the web using OpenSearch plugins."
+msgstr "Doorzoek het web met OpenSearch plugins."
+
+#: ../Opera/src/OperaBookmarkItemSource.cs:24
+msgid "Opera Bookmarks"
+msgstr "Opera favorieten"
+
+#: ../Opera/src/OperaBookmarkItemSource.cs:28
+msgid "Indexes your Opera 6 bookmarks"
+msgstr "Indexeert uw Opera 6 favorieten"
+
+#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
+msgid "Supported Codes\t\t\t"
+msgstr "Ondersteunde codes\t\t\t"
+
+#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:101
+msgid "<b>Pastebin Provider</b>"
+msgstr "<b>Pastebin-provider</b>"
+
+#: ../Pastebin/src/PastebinAction.cs:40
+msgid "Send to Pastebin"
+msgstr "Verstuur naar Pastebin"
+
+#: ../Pastebin/src/PastebinAction.cs:44
+msgid "Sends the text to Pastebin."
+msgstr "Verzend de tekst naar Pastebin"
+
+#: ../Pastebin/src/Providers/LodgeIt.cs:77
+msgid "Parsed url was empty. Lodge It has probably changed its format."
+msgstr ""
+
+#: ../Pidgin/src/PidginSetStatusAction.cs:48
+msgid "Set status"
+msgstr "Selecteer status"
+
+#: ../Pidgin/src/PidginSetStatusAction.cs:52
+msgid "Set pidgin status message"
+msgstr "Status bericht pidgin instellen"
+
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
+msgid "Pidgin Statuses"
+msgstr "Pidgin-statussen"
+
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
+msgid "Saved Pidgin statuses"
+msgstr "Opgeslagen Pidgin-statussen"
+
+#: ../Pidgin/src/PidginContactItemSource.cs:59
+msgid "Pidgin Buddies"
+msgstr "Pidgin Contacten"
+
+#: ../Pidgin/src/PidginContactItemSource.cs:63
+msgid "Buddies on your Pidgin buddy list."
+msgstr "Contacten in je Pidgin contacten lijst."
+
+#: ../Pidgin/src/PidginAccountItemSource.cs:41
+msgid "Pidgin Accounts"
+msgstr "Pidgin-accounts"
+
+#: ../Pidgin/src/PidginAccountItemSource.cs:45
+msgid "Available Pidgin IM Accounts"
+msgstr "Beschikbare Pidgin IM-accounts"
+
+#: ../Pidgin/src/PidginAccountActions.cs:36
+msgid "Sign on"
+msgstr "Aanmelden"
+
+#: ../Pidgin/src/PidginAccountActions.cs:40
+msgid "Enable pidgin account"
+msgstr "Activeer pidgin account."
+
+#: ../Pidgin/src/PidginAccountActions.cs:82
+msgid "Sign off"
+msgstr "Afmelden"
+
+#: ../Pidgin/src/PidginAccountActions.cs:86
+msgid "Disble pidgin account"
+msgstr "Deactiveer pidgin account"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:45
+msgid "Offline"
+msgstr "Offline"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46
+msgid "Available"
+msgstr "Beschikbaar"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:47
+msgid "Busy"
+msgstr "Bezet"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:48
+msgid "Invisible"
+msgstr "Offline weergeven"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:49
+msgid "Away"
+msgstr "Afwezig"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:50
+msgid "Unknown Status"
+msgstr "Status Onbekend"
+
+#: ../Pidgin/src/PidginChatAction.cs:41
+msgid "Chat"
+msgstr "Chat"
+
+#: ../Pidgin/src/PidginChatAction.cs:45
+msgid "Send an instant message to a friend."
+msgstr "Verstuur een expresbericht naar een vriend."
+
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
+msgid "Application Key"
+msgstr "Applicatie Sleutel"
+
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:81
+msgid "<i>Verify and save your account information</i>"
+msgstr "<i>Controleer en sla je account gegevens op</li>"
+
+#: ../PingFM/src/PingFMClient.cs:36
+msgid "Message posted"
+msgstr "Bericht verzonden."
+
+#: ../PingFM/src/PingFMClient.cs:37
+msgid "Message posting failed"
+msgstr "Bericht plaatsen mislukt."
+
+#: ../PingFM/src/PingFMClient.cs:38
+msgid ""
+"Cannot connect to the Ping.FM API server, or the server responds with an "
+"error."
+msgstr ""
+"Kan geen verbinding maken met de Ping.FM API server, of de server reageerde "
+"met een foutmelding."
+
+#: ../PingFM/src/PingFMClient.cs:39
+#, csharp-format
+msgid "Your {0} message has been successfully posted to {1}"
+msgstr "Je bericht {0} is succesvol geplaatst naar {1}"
+
+#: ../PingFM/src/PingFMClient.cs:40
+#, csharp-format
+msgid "Your message has been successfully posted to all {0} services"
+msgstr "Je bericht is succesvol gepost naar alle {0} services"
+
+#: ../PingFM/src/PingFMClient.cs:67
+msgid "Microblog"
+msgstr "Microblog"
+
+#: ../PingFM/src/PingFMClient.cs:68
+msgid "Status"
+msgstr "Status"
+
+#: ../PingFM/src/PingFMClient.cs:82
+msgid "Error occurred in service response"
+msgstr "Er is een fout ontstaan in de service response"
+
+#: ../PingFM/src/PingFMServiceItem.cs:51
+msgid "Web service group supported by Ping.FM"
+msgstr "Web service groep ondersteund door Ping.FM"
+
+#: ../PingFM/src/PingFMServiceItem.cs:52
+msgid "Web service supported by Ping.FM"
+msgstr "We service ondersteund door Ping.FM"
+
+#: ../PingFM/src/PingFMPost.cs:35
+msgid "Post via Ping.FM"
+msgstr "Plaats bericht via Ping.FM"
+
+#: ../PingFM/src/PingFMPost.cs:39
+msgid ""
+"Post a text message as microblog or status update to your social network"
+msgstr ""
+"Post een bericht als microblog of status update op je sociale netwerk"
+
+#: ../PingFM/src/PingFM.cs:32
+msgid "Failed to connect to Ping.FM service"
+msgstr "Kon geen verbinding maken met de Ping.FM service."
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:35
+msgid "Ping.FM Services"
+msgstr "Ping.FM Services"
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:39
+msgid "Web services suppported by Ping.FM"
+msgstr "Web services ondersteund door Ping.FM"
+
+#: ../Putty/src/PuttySession.cs:49
+#, csharp-format
+msgid "Start new PuTTY session (host {0})"
+msgstr "Start een nieuwe PuTTY sessie (host {0})"
+
+#: ../Putty/src/PuttySessionItemSource.cs:40
+msgid "PuTTY sessions"
+msgstr "PuTTY sessies"
+
+#: ../Putty/src/PuttySessionItemSource.cs:44
+msgid "PuTTY saved sessions"
+msgstr "Opgeslagen PuTTY sessies"
+
+#: ../Putty/src/PuttyAction.cs:40
+msgid "Connect with PuTTY"
+msgstr "Verbinding maken met PuTTY"
+
+#: ../Putty/src/PuttyAction.cs:44
+msgid "Create new conenction with PuTTY"
+msgstr "Maak een nieuwe verbinding met PuTTY"
+
+#: ../Quote/src/QuoteAction.cs:40
+msgid "Submit Quote"
+msgstr "Verstuur Quote"
+
+#: ../Quote/src/QuoteAction.cs:44
+msgid "Sends text to Quote service."
+msgstr "Verstuur bericht naar de Quote services."
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:96
+msgid ""
+"Do needs your authorization in order to manage tasks in your Remember The "
+"Milk account. Press the \"Authorize\" button to open a web browser and give "
+"Do authorization."
+msgstr ""
+"Do heeft jouw authorisatie nodig om taken in je Remember The Milk account te "
+"beheren. Klik op de \"Authorisatie\" knop om een web browser te openen en Do "
+"authorisatie te verlenen."
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:191
+msgid "For overdue task(s)"
+msgstr "Voor overschreden taken"
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:203
+msgid "When actions (e.g. rename) are completed"
+msgstr "Wanneer acties (bv. hernoemen) voltooid worden"
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:224
+msgid "<b>Notification</b>"
+msgstr "<b>Melding</b>"
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:260
+msgid ""
+"You can enter some advanced search operators here to limit the tasks Do "
+"indexes. E.g. \"priority:1 AND status:incomplete\" will force Do to only "
+"index all incomplete tasks with high priority."
+msgstr ""
+"Je kan hier geavanceerde zoekopties opgeven om de taken die Do indexeert te "
+"limiteren. Bv.: \"priority:1 AND status:incomplete\" zal ervoor zorgen dat "
+"Do enkel onvoltooide taken met hoge prioriteit indexeert."
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:294
+msgid "<b>Filter</b>"
+msgstr "<b>Filter</b>"
+
+#: ../RememberTheMilk/src/Configuration.cs:68
+msgid ""
+"A webpage from Remember The Milk should be opened in your web browser now. "
+"Please follow the instructions there and come back to complete the "
+"authrozation by clicking the button below."
+msgstr ""
+"Een webpagina van Remember The Milk zou nu geopend moeten worden in je "
+"webbrowser. Volg de instructies op deze webpagina en klik daarna op de knop "
+"hieronder om de autorisatie te voltooien."
+
+#: ../RememberTheMilk/src/Configuration.cs:76
+msgid "Complete authorization"
+msgstr "Authorisatie compleet"
+
+#: ../RememberTheMilk/src/Configuration.cs:93
+msgid "Fail to complete authorization."
+msgstr "Authorisatie mislukt."
+
+#: ../RememberTheMilk/src/Configuration.cs:96
+msgid "Authorize again"
+msgstr "Authoriseer nogmaals"
+
+#: ../RememberTheMilk/src/Configuration.cs:102
+#, csharp-format
+msgid ""
+"Thank you {0}, RTM plugin is now authorized to operate on your account."
+msgstr ""
+"Bedank {0}, de RTM plugin is nu geauthoriseerd om met jouw account te werken."
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
+msgid "Uncomplete"
+msgstr "Incompleet"
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
+msgid "Mark a selected task as \"incomplete\"."
+msgstr "Markeer geselecteerde taak als \"incompleet\""
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
+msgid "Delete"
+msgstr "Verwijder"
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
+msgid "Delete a selected task from Remember The Milk"
+msgstr "Verwijder de geselecteerde taak van Remember The Milk"
+
+#: ../RememberTheMilk/src/RTM.cs:268
+#, csharp-format
+msgid "{0} Task Overdue"
+msgid_plural "{0} Tasks Overdue"
+msgstr[0] "{0} taak overtijd"
+msgstr[1] "{0} taken overtijd"
+
+#: ../RememberTheMilk/src/RTM.cs:368
+msgid "Task Deleted"
+msgstr "Taak verwijderd"
+
+#: ../RememberTheMilk/src/RTM.cs:369
+msgid ""
+"The selected task has been successfully deleted from your Remember The Milk "
+"task list"
+msgstr ""
+"De geselecteerde taak is met succesvol verwijderd van je Remember The Milk "
+"takenlijst"
+
+#: ../RememberTheMilk/src/RTM.cs:383
+msgid "Task Completed"
+msgstr "Taak Voltooid"
+
+#: ../RememberTheMilk/src/RTM.cs:384
+msgid ""
+"The selected task in your Remember The Milk task list has been marked as "
+"completed."
+msgstr ""
+"The geselecteerde taak in je Remember The Milk takenlijst is gemarkeerd als "
+"voltooid."
+
+#: ../RememberTheMilk/src/RTM.cs:392
+msgid "High"
+msgstr "Hoog"
+
+#: ../RememberTheMilk/src/RTM.cs:393
+msgid "High Priority"
+msgstr "Hoge prioriteit"
+
+#: ../RememberTheMilk/src/RTM.cs:394
+msgid "Medium"
+msgstr "Medium"
+
+#: ../RememberTheMilk/src/RTM.cs:395
+msgid "Medium Priority"
+msgstr "Normale prioriteit"
+
+#: ../RememberTheMilk/src/RTM.cs:396
+msgid "Low"
+msgstr "Laag"
+
+#: ../RememberTheMilk/src/RTM.cs:397
+msgid "Low Priority"
+msgstr "Lage prioriteit"
+
+#: ../RememberTheMilk/src/RTM.cs:398
+msgid "None"
+msgstr "Geen"
+
+#: ../RememberTheMilk/src/RTM.cs:399
+msgid "No Priority"
+msgstr "Geen prioriteit"
+
+#: ../RememberTheMilk/src/RTM.cs:400
+msgid "Up"
+msgstr "Omhoog"
+
+#: ../RememberTheMilk/src/RTM.cs:401
+msgid "Increase the priority"
+msgstr "Verhoog de prioriteit"
+
+#: ../RememberTheMilk/src/RTM.cs:402
+msgid "Down"
+msgstr "Naar beneden"
+
+#: ../RememberTheMilk/src/RTM.cs:403
+msgid "Decrease the priority"
+msgstr "Verlaag de prioriteit"
+
+#: ../RememberTheMilk/src/RTM.cs:419
+msgid "Priority Changed"
+msgstr "Prioriteit veranderd"
+
+#: ../RememberTheMilk/src/RTM.cs:420
+msgid ""
+"The priority of the selected task in your Remember The Milk task list has "
+"been changed."
+msgstr ""
+"De prioriteit van de geselecteerde taken in jouw Remember The Milk "
+"takenlijst is aangepast."
+
+#: ../RememberTheMilk/src/RTM.cs:437
+msgid "Due Date/Time Changed"
+msgstr "Deadline gewijzigd"
+
+#: ../RememberTheMilk/src/RTM.cs:438
+msgid ""
+"The due date/time of the selected task in your Remember The Milk task list "
+"has been changed."
+msgstr ""
+"De deadline van de geselecteerde taak in je Remember The Milk takenlijstje "
+"is veranderd."
+
+#: ../RememberTheMilk/src/RTM.cs:452
+msgid "Task Moved"
+msgstr "Taak verplaatst"
+
+#: ../RememberTheMilk/src/RTM.cs:468
+msgid "Task Renamed"
+msgstr "Taak Hernoemd"
+
+#: ../RememberTheMilk/src/RTM.cs:483
+msgid "Task Postponed"
+msgstr "Taak Uitgesteld"
+
+#: ../RememberTheMilk/src/RTM.cs:484
+msgid ""
+"The selected task in your Remember The Milk task list has been postponed"
+msgstr ""
+"De geselecteerde taak in je Remember The Milk takenlijst is uitgesteld"
+
+#: ../RememberTheMilk/src/RTM.cs:498
+msgid "Recurrence Pattern Changed"
+msgstr "Herhalings Patroon Veranderd"
+
+#: ../RememberTheMilk/src/RTM.cs:499
+msgid ""
+"The recurrence pattern of the selected task in your Remember The Milk task "
+"list has been changed."
+msgstr ""
+"Het herhalingspatroon van de geselecteerde taak in jouw Remember The Milk "
+"takenlijst is veranderd."
+
+#: ../RememberTheMilk/src/RTM.cs:513
+msgid "Task Uncompleted"
+msgstr "Taak Incompleet"
+
+#: ../RememberTheMilk/src/RTM.cs:514
+msgid "The selected task has been marked as \"incomplete\"."
+msgstr "De geselecteerde taak is gemarkeerd als \"incompleet\"."
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:37
+msgid "Create a new task in Remember The Milk"
+msgstr "Maak een nieuwe taak in Remember The Milk"
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:39
+msgid "Move a seleted task from one list to another"
+msgstr "Verplaats een geselecteerde taak van een lijst naar een andere lijst"
+
+#: ../RememberTheMilk/src/RTMCompleteTask.cs:35
+msgid "Complete"
+msgstr "Voltooid"
+
+#: ../RememberTheMilk/src/RTMCompleteTask.cs:39
+msgid "Complete a selected task"
+msgstr "Voltooi de geselecteerde taak"
+
+#: ../RememberTheMilk/src/RTMRenameTask.cs:33
+msgid "Rename to..."
+msgstr "Hernoemen naar..."
+
+#: ../RememberTheMilk/src/RTMRenameTask.cs:37
+msgid "Give the seleted task a new name"
+msgstr "Geef de geselecteerde taak een nieuwe naam"
+
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:33
+msgid "Set Recurrence"
+msgstr "Maak Herhalingspatroon"
+
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:37
+msgid "Sets a recurrence pattern for a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:33
+msgid "Postpone"
+msgstr "Uitstellen"
+
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:37
+msgid "Postpone a selected task in Remember The Milk"
+msgstr "Stel een geselecteerde taak uit in Remember The Milk"
+
+#: ../RememberTheMilk/src/RTMSetPriority.cs:35
+msgid "Set Priority"
+msgstr "Prioriteit"
+
+#: ../RememberTheMilk/src/RTMSetPriority.cs:39
+msgid "Set the priority of a task"
+msgstr "Stel de prioriteit in van een taak"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:33
+msgid "Set Due Date/Time"
+msgstr "Deadline Datum/Tijd"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:37
+msgid "Set the due date/time of a task"
+msgstr "Stel de deadline van een taak in"
+
+#: ../Rhythmbox/src/MusicItems.cs:77
+msgid "All music by"
+msgstr "Alle muziek door"
+
+#: ../Rhythmbox/src/EnqueueAction.cs:40
+msgid "Add an item to Rhythmbox's play queue."
+msgstr "Voeg een item toe aan Rythmbox's afspeellijst"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:49
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "Doorloop Rhytmbox Muziek op Artiest"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:58
+msgid "Browse Rhythmbox Music by Album"
+msgstr "Doorloop Rhytmbox Muziek op Album"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:69
+msgid "Play Current Track in Rhythmbox"
+msgstr "Speel huidig nummer in Rhythmbox af"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:74
+msgid "Pause Rhythmbox Playback"
+msgstr "Pauzeer Rhythmbox Afspelen"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:79
+msgid "Play Next Track in Rhythmbox"
+msgstr "Speel volgende nummer in Rhythmbox af"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:84
+msgid "Play Previous Track in Rhythmbox"
+msgstr "Speel vorige nummer in Rhythmbox af"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:88
+msgid "Show Current Track"
+msgstr "Toon huidig nummer"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:89
+msgid "Show Notification of Current Track in Rhythmbox"
+msgstr "Toon Notificiate van het Huidige Nummer in Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:93
+msgid "Mute"
+msgstr "Dempen"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:94
+msgid "Mute Rhythmbox Playback"
+msgstr "Demp Rhythmbox-volume"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:98
+msgid "Unmute"
+msgstr "Herstel volume"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:99
+msgid "Unmute Rhythmbox Playback"
+msgstr "Herstel Rhythmbox-volume"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:103
+#: ../VolumeControl/src/VolumeUpItem.cs:31
+msgid "Volume Up"
+msgstr "Geluid harder"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:104
+msgid "Increase Rhythmbox Playback Volume"
+msgstr "Verhoog Rhythmbox afspeelvolume"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:108
+#: ../VolumeControl/src/VolumeDownItem.cs:31
+msgid "Volume Down"
+msgstr "Geluid zachter"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:109
+msgid "Decrease Rhythmbox Playback Volume"
+msgstr "Verlaag Rhythmbox afspeelvolume"
+
+#: ../Rhythmbox/src/PlayAction.cs:44
+msgid "Play an item in Rhythmbox."
+msgstr "Speel een bestand in Rhythmbox af."
+
+#: ../Rhythmbox/src/MusicItemSource.cs:45
+msgid "Rhythmbox Music"
+msgstr "Rhythmbox Muziek"
+
+#: ../Rhythmbox/src/MusicItemSource.cs:49
+msgid "Provides access to artists and albums from Rhythmbox."
+msgstr "Voorziet toegang tot artiesten en albums in Rhythmbox"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
+msgid "OPML feed file"
+msgstr ""
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:75
+msgid "Timeout (in seconds)"
+msgstr "Timeout (in seconden)"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:85
+msgid "Cache duration (in minutes)"
+msgstr "Duur van de cache (in minuten)"
+
+#: ../Shelf/src/ShelfActions.cs:33
+msgid "Explore Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfActions.cs:37
+msgid "Get a list of everything in your shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfActions.cs:60
+msgid "Remove From Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfActions.cs:64
+msgid "Remove Selected Item From Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfActions.cs:101
+msgid "Add To Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfActions.cs:105
+msgid "Add Selected Item to Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfItemSource.cs:56
+msgid " Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfItemSource.cs:62
+#, csharp-format
+msgid "Your {0} shelf items."
+msgstr ""
+
+#: ../Shelf/src/ShelfItemSource.cs:90
+msgid "Shelf Items"
+msgstr ""
+
+#: ../Shelf/src/ShelfItemSource.cs:94
+msgid "Your Shelf Items"
+msgstr ""
+
+#: ../Shelf/src/ShelfItemSource.cs:126
+msgid "Default"
+msgstr "Standaard"
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
+msgid "Load items in background"
+msgstr ""
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:83
+msgid "Comma-seperated list of radios to load"
+msgstr ""
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:94
+msgid "Host-name of SqueezeCenter server"
+msgstr ""
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:103
+msgid "Port of the SqueezeCenter server cli interface"
+msgstr ""
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:114
+msgid "Port of the SqueezeCenter server web interface"
+msgstr ""
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:125
+msgid ""
+"Load artist, albums and radio in the background when loading DO. \n"
+"If set to unchecked, these items are loaded when DO is loading causing a "
+"delay until all items are loaded."
+msgstr ""
+
+#: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
+msgid "Connect with SSH"
+msgstr "Maak verbinding met SSH"
+
+#: ../SSH/src/SSHHosts.cs:42
+msgid "SSH Host"
+msgstr ""
+
+#: ../SSH/src/SSHHosts.cs:62
+msgid "SSH Hosts"
+msgstr ""
+
+#: ../SSH/src/SSHHosts.cs:63
+msgid "Parses ssh-config"
+msgstr ""
+
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
+msgid "Command for start/stop services (gksudo, etc):"
+msgstr ""
+
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
+msgid "..."
+msgstr "..."
+
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
+msgid "Services to control:"
+msgstr ""
+
+#: ../SystemServices/src/ServiceItemSource.cs:39
+msgid "System Services"
+msgstr "Systeemdiensten"
+
+#: ../SystemServices/src/ServiceItemSource.cs:43
+msgid "List of all System Services"
+msgstr "Lijts van alle systeemdiensten"
+
+#: ../SystemServices/src/Service.cs:46
+#, csharp-format
+msgid "{0} service"
+msgstr ""
+
+#: ../SystemServices/src/Service.cs:50
+#, csharp-format
+msgid "Control system {0} service"
+msgstr ""
+
+#: ../SystemServices/src/SystemServicesConfig.cs:71
+msgid "Choose the file to open"
+msgstr ""
+
+#: ../SystemServices/src/SystemServicesConfig.cs:88
+msgid ""
+"Selected invalid file!\n"
+"Should be executable."
+msgstr ""
+
+#: ../Tasque/src/TasqueCategoryItem.cs:47
+msgid "Category"
+msgstr "Categorie"
+
+#: ../Tasque/src/TasqueAction.cs:42
+msgid "Create a new task"
+msgstr "Nieuwe taak aanmaken"
+
+#: ../Tasque/src/TasqueAction.cs:46
+msgid "Create a new task in Tasque"
+msgstr "Nieuwe taak aanmaken in Tasque"
+
+#: ../Text/src/AppendTextAction.cs:34
+msgid "Append to..."
+msgstr ""
+
+#: ../Text/src/AppendTextAction.cs:35
+msgid "Appends text to a selected file."
+msgstr ""
+
+#: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
+msgid "Make Tiny Url"
+msgstr "Maak TinyUrl"
+
+#: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:66
+msgid "Creates a TinyUrl from an unwieldy mess."
+msgstr ""
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
+msgid "Use note content as note title when no title is specified."
+msgstr ""
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
+msgid "<b>Default New Note Title</b>"
+msgstr ""
+
+#. Container child vbox3.Gtk.Box+BoxChild
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:101
+msgid "First pane is content, second pane is title."
+msgstr ""
+
+#. Container child vbox3.Gtk.Box+BoxChild
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:114
+msgid "First pane is title, second pane is content."
+msgstr ""
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:129
+msgid "<b>New Note Title and Content Entry</b>"
+msgstr ""
+
+#: ../Tomboy/src/NewNoteAction.cs:37
+msgid "New Tomboy Note"
+msgstr "Nieuwe Tomboy notitie"
+
+#: ../Tomboy/src/NewNoteAction.cs:41
+msgid "Create a new Tomboy note."
+msgstr "Maak een nieuwe Tomboy notitie"
+
+#: ../Tomboy/src/NotesItemSource.cs:56
+msgid "Tomboy Note Indexer"
+msgstr ""
+
+#: ../Tomboy/src/NotesItemSource.cs:60
+msgid "Loads Tomboy notes for searching."
+msgstr "Laad Tomboy notities voor zoekdoeleinden"
+
+#: ../Tomboy/src/SearchNotesAction.cs:36
+msgid "Search Tomboy Notes"
+msgstr "Doorzoek Tomboy notities"
+
+#: ../Tomboy/src/SearchNotesAction.cs:40
+msgid "Searches contents of Tomboy notes."
+msgstr "Doorzoek de inhoud van Tomboy notities."
+
+#: ../Tomboy/src/TomboyItem.cs:50
+msgid "Tomboy note"
+msgstr "Tomboy notitie"
+
+#: ../Tracker/src/TrackerSearch.cs:38
+msgid "Search with Tracker"
+msgstr "Doorzoek met Tracker"
+
+#: ../Tracker/src/TrackerSearch.cs:42
+msgid "Launches Tracker with the given query."
+msgstr ""
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:58
+msgid "Translation Plugin Options"
+msgstr "Vertaal Plugin Opties"
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:71
+msgid "Translation Provider"
+msgstr ""
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
+msgid "Default Source Language"
+msgstr ""
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
+msgid "Default Web Interface Language"
+msgstr ""
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
+msgid "Enable / Disable Language"
+msgstr "Taal in-/uitschakelen"
+
+#: ../Translate/src/TranslateAction.cs:58
+msgid "Translate"
+msgstr "Vertaal"
+
+#: ../Translate/src/TranslateAction.cs:66
+msgid "Translates text"
+msgstr "Vertaal tekst"
+
+#: ../Translate/src/UI/ConfigUI.cs:128
+msgid "Auto Detect (Recommended)"
+msgstr "Automatisch Dedecteren (Voorkeur)"
+
+#: ../Translate/src/Provider/Google.cs:35
+msgid "Arabic"
+msgstr "Arabisch"
+
+#: ../Translate/src/Provider/Google.cs:36
+msgid "Translate to Arabic"
+msgstr "Vertaal naar het Arabisch"
+
+#: ../Translate/src/Provider/Google.cs:39
+msgid "Bulgarian"
+msgstr "Bulgaars"
+
+#: ../Translate/src/Provider/Google.cs:40
+msgid "Translate to Bulgarian"
+msgstr "Vertaal naar het Bulgaars"
+
+#: ../Translate/src/Provider/Google.cs:43
+msgid "Catalon"
+msgstr "Catalaans"
+
+#: ../Translate/src/Provider/Google.cs:44
+msgid "Translate to Catalon"
+msgstr "Vertaal naar het Catalaans"
+
+#: ../Translate/src/Provider/Google.cs:47
+msgid "Chinese (Simplified)"
+msgstr "Chinees (Vereenvoudigd)"
+
+#: ../Translate/src/Provider/Google.cs:48
+msgid "Translate to Chinese (Simplified)"
+msgstr "Vertaal naar het Chinees  (Vereenvoudigd)"
+
+#: ../Translate/src/Provider/Google.cs:51
+msgid "Chinese (Traditional)"
+msgstr "Chinees (Traditioneel)"
+
+#: ../Translate/src/Provider/Google.cs:52
+msgid "Translate to Chinese (Traditional)"
+msgstr "Vertaal naar het Chinees (Traditioneel)"
+
+#: ../Translate/src/Provider/Google.cs:55
+msgid "Croatian"
+msgstr "Kroatisch"
+
+#: ../Translate/src/Provider/Google.cs:56
+msgid "Translate to Croatian"
+msgstr "Vertaal naar het Kroatisch"
+
+#: ../Translate/src/Provider/Google.cs:59
+msgid "Czech"
+msgstr "Tsjechisch"
+
+#: ../Translate/src/Provider/Google.cs:60
+msgid "Translate to Czech"
+msgstr "Vertaal naar het Tsjechisch"
+
+#: ../Translate/src/Provider/Google.cs:63
+msgid "Danish"
+msgstr "Deens"
+
+#: ../Translate/src/Provider/Google.cs:64
+msgid "Translate to Danish"
+msgstr "Vertaal naar het Deens"
+
+#: ../Translate/src/Provider/Google.cs:67
+msgid "Dutch"
+msgstr "Nederlands"
+
+#: ../Translate/src/Provider/Google.cs:68
+msgid "Translate to Dutch"
+msgstr "Vertaal naar het Nederlands"
+
+#: ../Translate/src/Provider/Google.cs:71
+msgid "English"
+msgstr "Engels"
+
+#: ../Translate/src/Provider/Google.cs:72
+msgid "Translate to English"
+msgstr "Vertaal naar het Engels"
+
+#: ../Translate/src/Provider/Google.cs:75
+msgid "Filipino"
+msgstr "Filipijns"
+
+#: ../Translate/src/Provider/Google.cs:76
+msgid "Translate to Filipino"
+msgstr "Vertaal naar het Filipijns"
+
+#: ../Translate/src/Provider/Google.cs:79
+msgid "Finnish"
+msgstr "Fins"
+
+#: ../Translate/src/Provider/Google.cs:80
+msgid "Translate to Finnish"
+msgstr "Vertaal naar het Fins"
+
+#: ../Translate/src/Provider/Google.cs:83
+msgid "French"
+msgstr "Frans"
+
+#: ../Translate/src/Provider/Google.cs:84
+msgid "Translate to French"
+msgstr "Vertaal naar het Frans"
+
+#: ../Translate/src/Provider/Google.cs:87
+msgid "German"
+msgstr "Duits"
+
+#: ../Translate/src/Provider/Google.cs:88
+msgid "Translate to German"
+msgstr "Vertaal naar het Duits"
+
+#: ../Translate/src/Provider/Google.cs:91
+msgid "Greek"
+msgstr "Grieks"
+
+#: ../Translate/src/Provider/Google.cs:92
+msgid "Translate to Greek"
+msgstr "Vertaal naar het Grieks"
+
+#: ../Translate/src/Provider/Google.cs:95
+msgid "Hebrew"
+msgstr "Hebreeuws"
+
+#: ../Translate/src/Provider/Google.cs:96
+msgid "Translate to Hebrew"
+msgstr "Vertaal naar het Hebreeuws"
+
+#: ../Translate/src/Provider/Google.cs:99
+msgid "Hindi"
+msgstr "Hindoestaans"
+
+#: ../Translate/src/Provider/Google.cs:100
+msgid "Translate to Hindi"
+msgstr "Vertaal naar het Hindoestaans"
+
+#: ../Translate/src/Provider/Google.cs:103
+msgid "Indonesian"
+msgstr "Indonesisch"
+
+#: ../Translate/src/Provider/Google.cs:104
+msgid "Translate to Indonesian"
+msgstr "Vertaal naar het Indonesisch"
+
+#: ../Translate/src/Provider/Google.cs:107
+msgid "Italian"
+msgstr "Italiaans"
+
+#: ../Translate/src/Provider/Google.cs:108
+msgid "Translate to Italian"
+msgstr "Vertaal naar het Italiaans"
+
+#: ../Translate/src/Provider/Google.cs:111
+msgid "Japanese"
+msgstr "Japans"
+
+#: ../Translate/src/Provider/Google.cs:112
+msgid "Translate to Japanese"
+msgstr "Vertaal naar het Japans"
+
+#: ../Translate/src/Provider/Google.cs:115
+msgid "Korean"
+msgstr "Koreaans"
+
+#: ../Translate/src/Provider/Google.cs:116
+msgid "Translate to Korean"
+msgstr "Vertaal naar het Koreaans"
+
+#: ../Translate/src/Provider/Google.cs:119
+msgid "Latvian"
+msgstr "Lets"
+
+#: ../Translate/src/Provider/Google.cs:120
+msgid "Translate to Latvian"
+msgstr "Vertaal naar het Lets"
+
+#: ../Translate/src/Provider/Google.cs:123
+msgid "Lithuanian"
+msgstr "Litouws"
+
+#: ../Translate/src/Provider/Google.cs:124
+msgid "Translate to Lithuanian"
+msgstr "Vertaal naar het Litouws"
+
+#: ../Translate/src/Provider/Google.cs:127
+msgid "Norwegian"
+msgstr "Noors"
+
+#: ../Translate/src/Provider/Google.cs:128
+msgid "Translate to Norwegian"
+msgstr "Vertaal naar het Noors"
+
+#: ../Translate/src/Provider/Google.cs:131
+msgid "Polish"
+msgstr "Pools"
+
+#: ../Translate/src/Provider/Google.cs:132
+msgid "Translate to Polish"
+msgstr "Vertaal naar het Pools"
+
+#: ../Translate/src/Provider/Google.cs:135
+msgid "Portuguese"
+msgstr "Portugees"
+
+#: ../Translate/src/Provider/Google.cs:136
+msgid "Translate to Portuguese"
+msgstr "Vertaal naar het Portugees"
+
+#: ../Translate/src/Provider/Google.cs:139
+msgid "Romanian"
+msgstr "Roemeens"
+
+#: ../Translate/src/Provider/Google.cs:140
+msgid "Translate to Romanian"
+msgstr "Vertaal naar het Roemeens"
+
+#: ../Translate/src/Provider/Google.cs:143
+msgid "Russian"
+msgstr "Russisch"
+
+#: ../Translate/src/Provider/Google.cs:144
+msgid "Translate to Russian"
+msgstr "Vertaal naar het Russisch"
+
+#: ../Translate/src/Provider/Google.cs:147
+msgid "Serbian"
+msgstr "Servisch"
+
+#: ../Translate/src/Provider/Google.cs:148
+msgid "Translate to Serbian"
+msgstr "Vertaal naar het Servisch"
+
+#: ../Translate/src/Provider/Google.cs:151
+msgid "Slovak"
+msgstr "Slowaaks"
+
+#: ../Translate/src/Provider/Google.cs:152
+msgid "Translate to Slovak"
+msgstr "Vertaal naar het Slowaaks"
+
+#: ../Translate/src/Provider/Google.cs:155
+msgid "Slovenian"
+msgstr "Sloveens"
+
+#: ../Translate/src/Provider/Google.cs:156
+msgid "Translate to Slovenian"
+msgstr "Vertaal naar het Sloveens"
+
+#: ../Translate/src/Provider/Google.cs:159
+msgid "Spanish"
+msgstr "Spaans"
+
+#: ../Translate/src/Provider/Google.cs:160
+msgid "Translate to Spanish"
+msgstr "Vertaal naar het Spaans"
+
+#: ../Translate/src/Provider/Google.cs:163
+msgid "Swedish"
+msgstr "Zweeds"
+
+#: ../Translate/src/Provider/Google.cs:164
+msgid "Translate to Swedish"
+msgstr "Vertaal naar het Zweeds"
+
+#: ../Translate/src/Provider/Google.cs:167
+msgid "Ukranian"
+msgstr "Oekraïens"
+
+#: ../Translate/src/Provider/Google.cs:168
+msgid "Translate to Ukranian"
+msgstr "Vertaal naar het Oekraïens"
+
+#: ../Translate/src/Provider/Google.cs:171
+msgid "Vietnamese"
+msgstr "Viëtnamees"
+
+#: ../Translate/src/Provider/Google.cs:172
+msgid "Translate to Vietnamese"
+msgstr "Vertaal naar het Viëtnamees"
+
+#: ../Vinagre/src/VNCHostSource.cs:39
+msgid "Vinagre Bookmarks"
+msgstr ""
+
+#: ../Vinagre/src/VNCHostSource.cs:43
+msgid "Indexes your Vinagre Bookmarks"
+msgstr ""
+
+#: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
+msgid "Connect with VNC"
+msgstr "Maak een verbinding met VNC"
+
+#: ../VirtualBox/src/SaveStateAction.cs:40
+msgid "Take Snapshot"
+msgstr "Neem Momentopname"
+
+#: ../VirtualBox/src/SaveStateAction.cs:44
+msgid "Save the current state as a Snapshot"
+msgstr ""
+
+#: ../VirtualBox/src/SaveStateAction.cs:98
+msgid "Snapshot ("
+msgstr "Snapshot ("
+
+#: ../VirtualBox/src/OffAction.cs:40
+msgid "Power Off Virtual Machine"
+msgstr "Schakel Virtuelel Machine uit"
+
+#: ../VirtualBox/src/OffAction.cs:44
+msgid "Powers off the selected Virtual Machine"
+msgstr "Schakelt de geselecteerde Virtuele Machine uit"
+
+#: ../VirtualBox/src/OffAction.cs:72
+#: ../VirtualBox/src/RestoreStateAction.cs:40
+msgid "Discard State"
+msgstr ""
+
+#: ../VirtualBox/src/OffAction.cs:73
+#: ../VirtualBox/src/RestoreStateAction.cs:44
+msgid "Restore VM state to current Snapshot"
+msgstr ""
+
+#: ../VirtualBox/src/PauseAction.cs:39
+msgid "Pause Virtual Machine"
+msgstr "Pauzeer Virtuele Machine"
+
+#: ../VirtualBox/src/PauseAction.cs:43
+msgid "Pauses the selected Virtual Machine"
+msgstr "Pauzeer de geselecteerde Virtuele Machine"
+
+#: ../VirtualBox/src/SaveAction.cs:39
+msgid "Save Virtual Machine State"
+msgstr "Bewaar de status van de Virtuele Machine"
+
+#: ../VirtualBox/src/SaveAction.cs:43
+msgid "Saves the state of the selected Virtual Machine"
+msgstr ""
+
+#: ../VirtualBox/src/VMItemSource.cs:38
+msgid "VirtualBox VMs"
+msgstr "VirtualBox VMs"
+
+#: ../VirtualBox/src/VMItemSource.cs:39
+msgid "Virtual Machines created with VirtualBox"
+msgstr "Virtuele Machines gecreërd met VirtualBox"
+
+#: ../VirtualBox/src/StartAction.cs:40
+msgid "Start Virtual Machine"
+msgstr "Start Virtuele Machine"
+
+#: ../VirtualBox/src/StartAction.cs:44
+msgid "Starts the selected Virtual Machine"
+msgstr "Start de geselecteerde Virtuele Machine"
+
+#: ../VirtualBox/src/StartAction.cs:70
+msgid "Open in GUI"
+msgstr ""
+
+#: ../VirtualBox/src/StartAction.cs:71
+msgid "Open in VirtualBox GUI"
+msgstr ""
+
+#: ../VirtualBox/src/StartAction.cs:77
+msgid "Start Headless"
+msgstr ""
+
+#: ../VirtualBox/src/StartAction.cs:78
+msgid "Start in Headless mode"
+msgstr ""
+
+#: ../VirtualBox/src/ResumeAction.cs:39
+msgid "Resume Virtual Machine"
+msgstr ""
+
+#: ../VirtualBox/src/ResumeAction.cs:43
+msgid "Resume the selected Virtual Machine"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeDownItem.cs:35
+msgid "Decrease system volume"
+msgstr "Verlaag systeemvolume"
+
+#: ../VolumeControl/src/VolumeUpItem.cs:35
+msgid "Increase system volume"
+msgstr "Verhoog systeemvolume"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:31
+msgid "Mute Volume"
+msgstr "Volume dempen"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:35
+msgid "Mute system volume"
+msgstr "Demp systeemvolume"
+
+#: ../VolumeControl/src/VolumeItemSource.cs:39
+msgid "Volume Actions"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeItemSource.cs:43
+msgid "Adjust your system volume"
+msgstr "Pas het systeemvolume aan"
+
+#: ../VolumeControl/src/VolumeUnmuteItem.cs:32
+msgid "Unmute Volume"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeUnmuteItem.cs:36
+msgid "Unmute system volume"
+msgstr ""
+
+#: ../WindowManager/src/WindowListAction.cs:65
+msgid "Action Window"
+msgstr ""
+
+#: ../WindowManager/src/WindowListAction.cs:69
+msgid "Action a Window."
+msgstr ""
+
+#: ../WindowManager/src/WindowListAction.cs:190
+msgid "Maximize"
+msgstr "Maximaliseren"
+
+#: ../WindowManager/src/WindowListAction.cs:194
+msgid "Make a window consume the whole screen"
+msgstr "Laat een venster het hele scherm gebruiken"
+
+#: ../WindowManager/src/WindowListAction.cs:217
+msgid "Minimize/Restore"
+msgstr "Minimaliseren/Herstellen"
+
+#: ../WindowManager/src/WindowListAction.cs:221
+msgid "Minimize/Restore a Window"
+msgstr "Minimaliseer/Herstel een Scherm"
+
+#: ../WindowManager/src/WindowListAction.cs:242
+msgid "Close All"
+msgstr "Alles sluiten"
+
+#: ../WindowManager/src/WindowListAction.cs:246
+msgid "Close your current window."
+msgstr "Sluit je huidige scherm."
+
+#: ../WindowManager/src/ScreenListAction.cs:277
+msgid "Tile Windows"
+msgstr ""
+
+#: ../WindowManager/src/ScreenListAction.cs:281
+msgid "Tile All Windows in Current Viewport"
+msgstr ""
+
+#: ../WindowManager/src/ScreenListAction.cs:346
+msgid "Cascade Windows"
+msgstr "Vensters trapsgewijs schikken"
+
+#: ../WindowManager/src/ScreenListAction.cs:350
+msgid "Cascade your Windows"
+msgstr ""
+
+#: ../WindowManager/src/ScreenListAction.cs:404
+msgid "Restore Windows"
+msgstr "Herstel vensters"
+
+#: ../WindowManager/src/ScreenListAction.cs:408
+msgid "Restore Windows to their Previous Positions"
+msgstr "Herstel vensters naar hun vorige posities"
+
+#: ../WindowManager/src/ScreenItemSource.cs:37
+msgid "Window Screen Items"
+msgstr ""
+
+#: ../WindowManager/src/ScreenItemSource.cs:43
+msgid "Actions you can do to your screens."
+msgstr ""
+
+#: ../WindowManager/src/ScreenItemSource.cs:65
+msgid "Current Desktop"
+msgstr "Huidig bureaublad"
+
+#: ../WindowManager/src/ScreenItemSource.cs:66
+msgid "Everything on the Current Desktop"
+msgstr ""
+
+#: ../WindowManager/src/WindowItemSource.cs:38
+msgid "Generic Window Items"
+msgstr ""
+
+#: ../WindowManager/src/WindowItemSource.cs:44
+msgid "Useful Generically Understood Window Items"
+msgstr ""
+
+#: ../WindowManager/src/WindowItemSource.cs:71
+msgid "Current Window"
+msgstr "Huidig Venster"
+
+#: ../WindowManager/src/WindowItemSource.cs:72
+msgid "The Currently Active Window"
+msgstr ""
+
+#: ../WindowManager/src/WindowItemSource.cs:75
+msgid "Current Application"
+msgstr "Huidige Applicatie"
+
+#: ../WindowManager/src/WindowItemSource.cs:76
+msgid "The Currently Active Application"
+msgstr "Het Huidige Actieve Applicatie"
+
+#: ../WindowManager/src/WindowItemSource.cs:79
+msgid "Previous Window"
+msgstr "Vorig venster"
+
+#: ../WindowManager/src/WindowItemSource.cs:80
+msgid "The Previously Active Window"
+msgstr "Het Vorige Actieve Venster"
+
+#: ../WindowManager/src/WindowItemSource.cs:83
+msgid "Previous Application"
+msgstr "Vorige Applicatie"
+
+#: ../WindowManager/src/WindowItemSource.cs:84
+msgid "The Previously Active Application"
+msgstr "Het Vorige Actieve Applicatie"
+
+#: ../Zim/src/ZimPage.cs:38
+msgid "Zim page in notebook: "
+msgstr ""
+
+#: ../Zim/src/ZimNewPageAction.cs:37
+msgid "New Zim page"
+msgstr "Nieuwe Zim pagina"
+
+#: ../Zim/src/ZimNewPageAction.cs:41
+msgid "Create new page in Zim"
+msgstr "Maak een nieuwe pagine in Zim"
+
+#: ../Zim/src/ZimOpenPageAction.cs:39
+msgid "Open Zim page"
+msgstr "Open Zim pagina"
+
+#: ../Zim/src/ZimOpenPageAction.cs:43
+msgid "Open selected page in Zim"
+msgstr "Open de geselecteerde pagina in Zim"
+
+#: ../Zim/src/ZimPagesItemSource.cs:38
+msgid "Zim pages"
+msgstr "Zim paginas"
+
+#: ../Zim/src/ZimPagesItemSource.cs:42
+msgid "Zim Desktop Wiki pages"
+msgstr ""

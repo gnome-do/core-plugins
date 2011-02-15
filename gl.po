@@ -1,0 +1,2496 @@
+# Galician translation for do-plugins
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the do-plugins package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: do-plugins\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-01-26 08:04+1100\n"
+"PO-Revision-Date: 2009-10-06 18:23+0000\n"
+"Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
+"Language-Team: Galician <gl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2011-02-15 04:34+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-Language: Galician\n"
+
+#: ../Alias/src/AliasAction.cs:36
+msgid "Assign Alias..."
+msgstr "Asignar alias..."
+
+#: ../Alias/src/AliasAction.cs:40
+msgid "Give an item an alternate name."
+msgstr "Darlle un nome alternativo ao elemento."
+
+#: ../Alias/src/DeleteAliasAction.cs:36
+msgid "Delete Alias"
+msgstr "Eliminar alias"
+
+#: ../Alias/src/DeleteAliasAction.cs:40
+msgid "Deletes an alias."
+msgstr "Elimina un alias."
+
+#: ../Alias/src/AliasItemSource.cs:140
+msgid "Alias items"
+msgstr "Alias dos elementos"
+
+#: ../Alias/src/AliasItemSource.cs:144
+msgid "Aliased items from Do's universe."
+msgstr "elementos con alias dende o universo de Do"
+
+#: ../Archive/src/ExtractArchiveAction.cs:40
+msgid "Extract archive"
+msgstr "Extraer ficheiro"
+
+#: ../Archive/src/ExtractArchiveAction.cs:44
+msgid "Extract an archive to a given folder"
+msgstr "Extrae un ficheiro ao cartafol proporcionado"
+
+#: ../Archive/src/CreateArchiveAction.cs:41
+msgid "Create archive"
+msgstr "Crear ficheiro"
+
+#: ../Archive/src/CreateArchiveAction.cs:45
+msgid "Create an archive with the selected item"
+msgstr "Crea un ficheiro co elemento seleccionado"
+
+#: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
+msgid "Browse Artists"
+msgstr "Navegar por artista"
+
+#: ../Banshee/src/BrowseMediaItems.cs:57
+msgid "Browse Music by Artist"
+msgstr "Navege na súa música por artista"
+
+#: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
+msgid "Browse Albums"
+msgstr "Navegar por álbumes"
+
+#: ../Banshee/src/BrowseMediaItems.cs:70
+msgid "Browse Music by Album"
+msgstr "Navege pola súa música por álbumes"
+
+#: ../Banshee/src/BrowseMediaItems.cs:77
+msgid "Browse Podcasts"
+msgstr "Navegar por podcasts"
+
+#: ../Banshee/src/BrowseMediaItems.cs:78
+msgid "Browse Podcasts by Publisher"
+msgstr "Navegar os podcasts por publicador"
+
+#: ../Banshee/src/BrowseMediaItems.cs:85
+msgid "Browse Videos"
+msgstr "Navegar polos vídeos"
+
+#: ../Banshee/src/BrowseMediaItems.cs:86
+msgid "Browse All Videos"
+msgstr "Navege por tódolos vídeos"
+
+#: ../Banshee/src/EnqueueAction.cs:37 ../Rhythmbox/src/EnqueueAction.cs:36
+msgid "Add to Play Queue"
+msgstr "Engadir á lista de reprodución"
+
+#: ../Banshee/src/EnqueueAction.cs:41
+msgid "Add media to play queue"
+msgstr "Engada ficheiros multimedia á lista de reproducción"
+
+#: ../Banshee/src/MediaItemSource.cs:46
+msgid "Banshee Media"
+msgstr "Multimedia en Banshee"
+
+#: ../Banshee/src/MediaItemSource.cs:50
+msgid "Indexes Media from Banshee Media Player"
+msgstr "Indexa multimedia dende o reproductor multimedia Banshee"
+
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr "Toda a música por"
+
+#: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
+msgid "Next"
+msgstr "Seguinte"
+
+#: ../Banshee/src/NextAction.cs:36
+msgid "Play next track"
+msgstr "Reproducir seguinte canción"
+
+#: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
+msgid "Pause"
+msgstr "Pausar"
+
+#: ../Banshee/src/PauseAction.cs:36
+msgid "Pause playing track"
+msgstr "Pausa a canción en reproducción"
+
+#: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
+#: ../Rhythmbox/src/PlayAction.cs:40
+msgid "Play"
+msgstr "Reproducir"
+
+#: ../Banshee/src/PlayAction.cs:39
+msgid "Play from your Banshee Collection"
+msgstr "Reproducir dende a colección do seu Banshee"
+
+#: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
+msgid "Previous"
+msgstr "Anterior"
+
+#: ../Banshee/src/PreviousAction.cs:36
+msgid "Play previous track"
+msgstr "Reproducri canción anterior"
+
+#: ../Banshee/src/SearchCollectionAction.cs:36
+msgid "Search Banshee Media"
+msgstr "Buscar no multimedia de Banshee"
+
+#: ../Banshee/src/SearchCollectionAction.cs:40
+msgid "Search your entire Banshee collection"
+msgstr "Buscar na súa colección enteira de Banshee"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+msgid "Choose BibTeX file"
+msgstr "Escolla un ficheiro BibTex"
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
+msgid "Select A File"
+msgstr "Seleccionar un ficheiro"
+
+#. Container child table1.Gtk.Table+TableChild
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+msgid "Select your documents folder"
+msgstr "Seleccione o seu cartafol de documentos"
+
+#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+msgid "Choose documents folder"
+msgstr "Escolla un cartafol de documentos"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr "Contactos de ClawsMail"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr "Contactos na axenda de enderezos de ClawsMail"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:71
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:41
+msgid "Primary Email"
+msgstr "Correo electrónico principal"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:74
+#: ../Evolution/src/EmailContactDetailItem.cs:34
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:76
+msgid "Other email"
+msgstr "Outro correo electrónico"
+
+#: ../ClawsMail/src/ClawsContactDetailItem.cs:82
+msgid "Other"
+msgstr "Outro"
+
+#: ../Cl.ickable/src/ClipAction.cs:38
+msgid "Clip"
+msgstr "Clip"
+
+#: ../Cl.ickable/src/ClipAction.cs:42
+msgid "Create a clip with Cl.ickable"
+msgstr "Crear un recorte con Cl.ickable"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:32
+msgid "Cl.ickable Clips"
+msgstr "Clips de son de Cl.ickable"
+
+#: ../Cl.ickable/src/WebClipsItem.cs:36
+msgid "Opens your cl.ickable clips"
+msgstr "Abrir os recortes de cl.ickable"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Elementos de Cl.ickable"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr "Elementos útiles de Cl.ickable"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+msgid "http://opensource.atlassian.com/confluence/spring"
+msgstr "http://opensource.atlassian.com/confluence/spring"
+
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+msgid "username1"
+msgstr "nomedeusuario1"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:85
+msgid "Search Confluence"
+msgstr "Buscar en Confluence"
+
+#: ../Confluence/src/ConfluenceSearchAction.cs:93
+msgid "Searches Confluence and returns results to Do"
+msgstr "Busca en Confluence e devolve os resultados a Do"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr "Etiquetas de Del.icio.us"
+
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.bookmarks by tag"
+msgstr "Organice os seus marcadores de del.icio.us por etiqueta"
+
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr "Marcadores de del.icio.us sen etiquetar"
+
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr "Marcadores de del.icio.us etiquetados con {0}"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:37
+msgid "Del.icio.us bookmarks"
+msgstr "Marcadores del.icio.us"
+
+#: ../Del.icio.us/src/BookmarksItemSource.cs:41
+msgid "Indexes your del.icio.us bookmarks"
+msgstr "Indexa os seus marcadores en del.icio.us"
+
+#: ../Del.icio.us/src/SearchAction.cs:47
+msgid "Search del.icio.us"
+msgstr "Buscar en  del.icio.us"
+
+#: ../Del.icio.us/src/SearchAction.cs:51
+msgid "del.icio.us tag search"
+msgstr "buscar por etiqueta en del.icio.us"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:40
+#: ../SystemServices/src/SystemServicesConfig.cs:74
+msgid "Open"
+msgstr "Abrir"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:44
+msgid "Open a removable volume"
+msgstr "Abre un volume externo"
+
+#: ../DiskMounter/src/UnmountAction.cs:31
+msgid "Unmount"
+msgstr "Desmontar"
+
+#: ../DiskMounter/src/UnmountAction.cs:35
+msgid "Unmount volume"
+msgstr "Desmontar volume"
+
+#: ../DiskMounter/src/MountAction.cs:32
+msgid "Mount"
+msgstr "Montar"
+
+#: ../DiskMounter/src/MountAction.cs:36
+msgid "Mount volume"
+msgstr "Montar volume"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
+msgid "Play Slideshow"
+msgstr "Reproducir diaporama"
+
+#: ../EOG-Slideshow/src/PlaySlideshowAction.cs:44
+msgid "Plays a slideshow of images in a folder."
+msgstr "Reproduce as imaxes dunha carpeta como un diaporamas"
+
+#: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:44
+msgid "Epiphany Bookmarks"
+msgstr "Marcadores de Epiphany"
+
+#: ../Epiphany/src/EpiphanyBookmarkItemSource.cs:47
+msgid "Indexes your Epiphany bookmarks."
+msgstr "Indexa os seus marcadores de Epiphany."
+
+#: ../Evolution/src/PhoneContactDetailItem.cs:34
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
+msgid "Work Phone"
+msgstr "Teléfono do traballo"
+
+#: ../Evolution/src/PhoneContactDetailItem.cs:35
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
+msgid "Home Phone"
+msgstr "Teléfono da casa"
+
+#: ../Evolution/src/PhoneContactDetailItem.cs:36
+msgid "Mobile Phone"
+msgstr "Teléfono móbil"
+
+#: ../Evolution/src/ContactItemSource.cs:58
+#: ../Evolution/src/ContactItemSource.cs:59
+msgid "Evolution Contacts"
+msgstr "Contactos de Evolution"
+
+#: ../Evolution/src/AddressContactDetailItem.cs:34
+msgid "Address"
+msgstr "Enderezo"
+
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
+msgid "Show hidden files"
+msgstr "Mostrar os ficheiros ocultos"
+
+#: ../File/src/PathNodeView.cs:51
+msgid "Folder"
+msgstr "Cartafol"
+
+#: ../File/src/PathNodeView.cs:57
+msgid "Depth"
+msgstr "Profundidade"
+
+#: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
+msgid "Delete File"
+msgstr "Eliminar ficheiro"
+
+#: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:41
+msgid "Deletes a file or folder."
+msgstr "Eliminar un ficheiro ou cartafol."
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
+msgid "Choose a folder to index"
+msgstr "Seleccione o cartafol a indexar"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
+#: ../SystemServices/src/SystemServicesConfig.cs:73
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
+msgid "Choose folder"
+msgstr "Seleccione un cartafol"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
+msgid "Rename file..."
+msgstr "Renomear ficheiro..."
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
+msgid "Renames a file."
+msgstr "Cambialle o nome a un ficheiro."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
+msgid "Create New Folder"
+msgstr "Crear Novo directorio"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
+msgid "Creates an new folder."
+msgstr "Crea un novo cartafol."
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
+#: ../RememberTheMilk/src/RTMMoveTask.cs:35
+msgid "Move to..."
+msgstr "Mover a..."
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:41
+msgid "Moves a file or folder to another location."
+msgstr "Move un arquivo ou cartafol a outra ubicación."
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:39
+msgid "Move to Trash"
+msgstr "Mover ao lixo"
+
+#: ../File/src/Do/Do.FilesAndFolders/MoveToTrashAction.cs:43
+msgid "Moves a file or folder to the trash"
+msgstr "Move un ficheiro ou cartafol ao lixo"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
+msgid "Recent Files"
+msgstr "Ficheiros recentes"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
+msgid "Finds recently-opened files."
+msgstr "Atopa os ficheiros recén abertos."
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
+msgid "Copy to..."
+msgstr "Copiar a..."
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
+msgid "Copies a file or folder to another location."
+msgstr "Copia un ficheiro ou cartafol a outra ubicación."
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
+msgid "Files and Folders"
+msgstr "Ficheiros e cartafoles"
+
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
+msgid "Catalogs important files and folders for quick access."
+msgstr "Cataloga ficheiro e cartafoles importantes para acceso rápido."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
+msgid "Create New File"
+msgstr "Crear un ficheiro novo"
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:41
+msgid "Creates an new, empty file."
+msgstr "Crear un ficheiro novo e baleiro."
+
+#: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:149
+msgid "Untitled"
+msgstr "Sen titulo"
+
+#: ../Firefox/src/BookmarkItemSource.cs:55
+msgid "Firefox Bookmarks"
+msgstr "Marcadores de Firefox"
+
+#: ../Firefox/src/BookmarkItemSource.cs:59
+msgid "Finds Firefox bookmarks in your default profile."
+msgstr "Busca nos favoritos de Firefox no seu perfil por defecto."
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
+msgid ""
+"Do needs your authorization in order to upload photos to your flickr "
+"account. Press the \"Authorize\" button to open a web browser and give Do "
+"authorization. "
+msgstr ""
+"Do necesita autorización para poder subir fotos á sua conta de Flickr. "
+"Presione o botón \"Autorizar\" para abrir o navegador web e autorizar a Do. "
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
+msgid "<b>Account</b>"
+msgstr "<b>Conta</b>"
+
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
+msgid "_Authorize"
+msgstr "_Autorizar"
+
+#. Container child vbox6.Gtk.Box+BoxChild
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:83
+msgid "Private"
+msgstr "Privado"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:107
+msgid "Visible to friends"
+msgstr "Visible aos amigos"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:119
+msgid "Visible to family"
+msgstr "Visible á familia"
+
+#. Container child vbox6.Gtk.Box+BoxChild
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
+msgid "Public"
+msgstr "Público"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:149
+msgid "<b>Viewing permissions</b>"
+msgstr "<b>Permisos de visualización</b>"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:182
+msgid ""
+"Default tags to use on images posted with Do. Seperate tags with a space; "
+"for multiple word tags use quotes. ex.) concert \"Mars Volta\" Omar"
+msgstr ""
+"Etiquetas por defecto a utilizar en imágenes subidas con Do. Separe as "
+"etiquetas con espazos; para etiquetas compostas, use comiñas. Exemplo: "
+"concerto \"Luar na Lubre\" Omar"
+
+#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:209
+msgid "<b>Tags</b>"
+msgstr "<b>Etiquetas</b>"
+
+#: ../Flickr/src/UploadAction.cs:45
+msgid "Upload photo"
+msgstr "Subir foto"
+
+#: ../Flickr/src/UploadAction.cs:49
+msgid "Upload one or more photos to Flickr"
+msgstr "Suba unha ou máis fotos a Flickr"
+
+#: ../Flickr/src/FlickrItemSource.cs:34
+msgid "Account"
+msgstr "Conta"
+
+#: ../Flickr/src/AccountConfig.cs:91
+msgid "Click to compete authorization"
+msgstr "Prema completar a autorización"
+
+#: ../Flickr/src/AccountConfig.cs:112
+#, csharp-format
+msgid "Thank you {0} for allowing Do access to Flickr."
+msgstr "Gracias {0} por permitir a Do acceder a Flickr."
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:51
+msgid "Define"
+msgstr "Definición"
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:56
+msgid "Define a given word."
+msgstr "Define unha palabra proporcionada."
+
+#: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:28
+msgid "Current window"
+msgstr "Xanela Actual"
+
+#: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
+msgid "Take a screenshot of the current window."
+msgstr "Fai unha captura da xanela actual."
+
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
+msgid "Whole screen"
+msgstr "Pantalla completa"
+
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
+msgid "Take a screenshot of the entire screen."
+msgstr "Fai unha captura da pantalla completa"
+
+#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:37
+#, csharp-format
+msgid "{0}-second delay"
+msgstr "{0}-segundos de demora"
+
+#: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:43
+#, csharp-format
+msgid "Wait {0} second before taking the screenshot."
+msgid_plural "Wait {0} seconds before taking the screenshot."
+msgstr[0] "Agarde {0} segundo antes de tomar a captura a pantalla."
+msgstr[1] "Espere {0} segundos antes de tomar a captura da pantalla."
+
+#: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:34
+msgid "Take screenshot"
+msgstr "Facer unha captura de pantalla"
+
+#: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:38
+msgid "Takes a screenshot with optional delay."
+msgstr "Capturar de pantalla con retraso opcional."
+
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
+msgid "GNOME Screenshot Items"
+msgstr "Elementos de captura de pantalla de GNOME"
+
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
+msgid "Whole screen or current window."
+msgstr "Pantalla completa ou xanela completa."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
+msgid "GNOME Session Commands"
+msgstr "Ordes de Sesión de GNOME"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:45
+msgid "Log out, Shutdown, Restart, etc."
+msgstr "Pechar sesión, apagar, reiniciar, etc."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:54
+msgid "Log Out"
+msgstr "Pechar sesión"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:55
+msgid "Close your session and return to the login screen."
+msgstr "Pecha a súa sesión e voltar á pantalla de inicio de sesión."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:60
+msgid "Shutdown"
+msgstr "Apagar"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:61
+msgid "Turn your computer off."
+msgstr "Apaga o computador"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:66
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:67
+msgid "Put your computer into hibernation mode."
+msgstr "Pon a sua computadora en modo hibernación."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:72
+msgid "Suspend"
+msgstr "Suspender"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:73
+msgid "Put your computer into suspend mode."
+msgstr "Pon a súa computadora en modo suspensión."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:78
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:79
+msgid "Restart your computer."
+msgstr "Reiniciar o teu computador."
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:84
+msgid "Lock Screen"
+msgstr "Bloquear pantalla"
+
+#: ../GNOME-Session/src/SessionCommandsItemSource.cs:85
+msgid "Lock your screen."
+msgstr "Bloquea a súa pantalla"
+
+#: ../GNOME-Terminal/src/OpenProfileAction.cs:39
+msgid "Open Profile"
+msgstr "Abrir Perfil"
+
+#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
+msgid "Opens a GNOME Terminal with the selected profile."
+msgstr "Usar o perfil actualmente seleccionado no terminal de Gnome"
+
+#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
+msgid "Open Terminal Here"
+msgstr "Abrir unha terminal aquí"
+
+#: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
+msgid "Opens a GNOME Terminal in a given location."
+msgstr "Abre unha terminal de GNOME na localización dada."
+
+#: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
+msgid "Run in Terminal"
+msgstr "Executar nunha terminal"
+
+#: ../GNOME-Terminal/src/RunInTerminalAction.cs:46
+msgid "Runs a command in GNOME Terminal."
+msgstr "Executa unha orde na terminal de GNOME."
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
+msgid "GNOME Terminal Profiles"
+msgstr "Perfiles de terminal de Gnome"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
+msgid "Indexes your GNOME Terminal profiles."
+msgstr "Indexa os seus perfiles de terminal de GNOME."
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:33
+msgid "Unnamed Profile"
+msgstr "Perfil sen nome"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:34
+msgid "GNOME Terminal Profile"
+msgstr "Perfil da terminal de GNOME"
+
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
+msgid "Perform a calculation using Google Calculator."
+msgstr "Facer un cálculo usando Google Calculator."
+
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:92
+msgid "Google Calculator could not evaluate the expression."
+msgstr "Google Calculator non puido evaluar a expresión"
+
+#: ../GoogleCalendar/src/Configuration.cs:42
+#: ../GoogleDocs/src/Configuration.cs:41
+msgid "E-Mail:"
+msgstr "Correo-e:"
+
+#: ../GoogleCalendar/src/GCalendarItemSource.cs:40
+msgid "Google Calendars"
+msgstr "Calendarios de Google"
+
+#: ../GoogleCalendar/src/GCalendarItemSource.cs:44
+msgid "Indexes your Google Calendars"
+msgstr "Indexa os seus Calendarios de Google"
+
+#: ../GoogleCalendar/src/GCalClient.cs:40
+msgid "All Events"
+msgstr "Todos os eventos"
+
+#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
+#, csharp-format
+msgid "An error has occurred in {0}"
+msgstr "Ocorreu un error en {0}"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:41
+msgid "View Event"
+msgstr "Ver evento"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:45
+msgid "Open event in browser"
+msgstr "Abrir evento no navegador"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:72
+msgid "View Calendar"
+msgstr "Ver calendario"
+
+#: ../GoogleCalendar/src/GCalendarViewActions.cs:76
+msgid "Open calendar in browser"
+msgstr "Abrir calendario no navegador"
+
+#: ../GoogleCalendar/src/GCalendarItem.cs:45
+msgid "Google Calendar"
+msgstr "Calendario de Google"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
+msgid "Search Events"
+msgstr "Buscar Eventos"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
+msgid "Search Google Calendar for Events"
+msgstr "Buscar eventos nos calendarios de Google"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr "Erro ao conectar co servizo GCal"
+
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
+msgid "New Event"
+msgstr "Novo evento"
+
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
+msgid "Create a new event in Google Calendar"
+msgstr "Crear un novo evento no Calendario de Google"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:42
+msgid "Primary Phone"
+msgstr "Teléfono principal"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:43
+msgid "Home Email"
+msgstr "Correo electrónico particular"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:44
+msgid "Work Email"
+msgstr "Correo electrónico do traballo"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:47
+msgid "Primary Address"
+msgstr "Enderezo principal"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:48
+msgid "Home Address"
+msgstr "Enderezo do fogar"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:49
+msgid "Work Address"
+msgstr "Enderezo do traballo"
+
+#: ../GoogleContacts/src/GMail.cs:35
+msgid "An error occurred connecting to google, are your credentials valid?"
+msgstr ""
+"Ocorreu un error ao conectar a google, ¿son válidas as suas credenciais?"
+
+#: ../GoogleContacts/src/GMail.cs:38 ../Microblogging/src/Microblog.cs:36
+msgid ""
+"Missing login credentials. Please set login information in plugin "
+"configuration."
+msgstr ""
+"Faltan as credenciais de acceso. Introduza a información de acceso na "
+"configuración do complemento."
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:38
+msgid "GMail Contacts"
+msgstr "Contactos de GMail"
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:42
+msgid "Index your GMail contacts"
+msgstr "Indexa os seus contactos de GMail"
+
+#: ../GoogleDocs/src/GDocs.cs:149
+msgid "Uploading failed."
+msgstr "Fallou a subida."
+
+#: ../GoogleDocs/src/GDocs.cs:150
+msgid "An error occurred when uploading files to Google Docs."
+msgstr "Ocurriu un erro ao subir ficheiros a Google Docs"
+
+#: ../GoogleDocs/src/GDocs.cs:157
+msgid "Deleting failed."
+msgstr "Borrado falido."
+
+#: ../GoogleDocs/src/GDocs.cs:158
+msgid "An error occurred when deleting the document at Google Docs."
+msgstr "Houbo un erro ao eliminar o documento en Google Docs."
+
+#: ../GoogleDocs/src/GDocs.cs:165
+msgid "Document deleted."
+msgstr "Documento eliminado."
+
+#: ../GoogleDocs/src/GDocs.cs:166
+#, csharp-format
+msgid ""
+"The document '{0}' has been successfully moved into Trash at Google Docs."
+msgstr "O documento '{0}' moveuse con éxito á papeleira de Google Docs."
+
+#: ../GoogleDocs/src/GDocsPresentationItem.cs:36
+msgid "Google Docs Presentation"
+msgstr "Presentación de Google Docs"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:36
+msgid "Google Docs"
+msgstr "Google Docs"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:40
+msgid "Indexes your documents stored at Google Docs"
+msgstr "Indexa os documentos almacenados en Google Docs"
+
+#: ../GoogleDocs/src/GDocsItem.cs:46
+msgid "Google Docs Generic Document"
+msgstr "Documento xenérico de Google Docs"
+
+#: ../GoogleDocs/src/GDocsDocumentItem.cs:36
+msgid "Google Docs Text Document"
+msgstr "Documento de texto de Google Docs"
+
+#: ../GoogleDocs/src/GDocsPDFItem.cs:36
+msgid "Google Docs PDF Document"
+msgstr "Documento PDF de Google Docs"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:38
+msgid "Delete Document"
+msgstr "Eliminar documento"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:42
+msgid "Move a document into Trash at Google Docs"
+msgstr "Move un documento á papeleira en Google Docs."
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
+msgid "Upload Document"
+msgstr "Subir documento"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:45
+msgid "Upload a document to Google Docs"
+msgstr "Sube un documento a Google Docs"
+
+#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
+msgid "Google Docs Spreadsheet"
+msgstr "Follas de cálculo Google Docs"
+
+#: ../GoogleMaps/src/MapAction.cs:39
+msgid "Map"
+msgstr "Mapa"
+
+#: ../GoogleMaps/src/MapAction.cs:44
+msgid "Map a location or route in Google maps."
+msgstr "Fai un mapa de unha ubicación ou ruta en Google maps."
+
+#. Container child vbox4.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:74
+msgid "Go directly to Google Search page"
+msgstr "Vai directamente á páxina de búsquedas de Google"
+
+#. Container child vbox4.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:87
+msgid "Show search results in Do"
+msgstr "Buscar resultados de búsquedas en Do"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:106
+msgid "Show Search page link as first result"
+msgstr "Mostrar ligazón á páxina de búsqueda como primeiro resultado"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:120
+msgid "<b>Google Search</b>"
+msgstr "<b>Búsquedas Google</b>"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:144
+msgid "Apply to Google Search page link"
+msgstr "Aplicar a ligazón de páxina de Google Search"
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:157
+msgid "Do not filter my search results."
+msgstr "Non filtrar os meus resultados de búsqueda."
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:170
+msgid "Use moderate filtering"
+msgstr "Usar filtrado moderado"
+
+#. Container child safeSearchBox.Gtk.Box+BoxChild
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:182
+msgid "Use strict filtering"
+msgstr "Usar filtrado estrito"
+
+#: ../GoogleSearch/gtk-gui/InlineGoogleSearch.InlineGoogleSearchConfig.cs:203
+msgid "<b>SafeSearch Preferences</b>"
+msgstr "<b>Preferencias do filtro seguro de búsqueda</b>"
+
+#: ../GoogleSearch/src/InlineGoogleSearch.cs:81
+msgid "Search Google"
+msgstr "Buscar en Google"
+
+#: ../GoogleSearch/src/InlineGoogleSearch.cs:90
+msgid "Allows you to perform Google Searches from Do"
+msgstr "Permítelle executar Búsquedas Google dende Do"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
+msgid "I'm Feeling Lucky!"
+msgstr "Vou ter sorte"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
+msgid "Searches Google and takes you to the first result"
+msgstr "Busca en Google e devólvelle o primeiro resultado"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
+msgid ""
+"If you have an ImageShack account, a registration code allows you to save "
+"images to the My Images sections of your account.\n"
+"\n"
+"Please log-in to your ImageShack account before getting your registration "
+"code."
+msgstr ""
+"Se ten unha conta ImageShack, un código de rexistro permitiralle gardar "
+"imaxes á sección My images da súa conta.\n"
+"\n"
+"Por favor, identifíquese coa súa conta de ImageShack antes de obter o seu "
+"código de rexistro."
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:90
+msgid "_Registration Code"
+msgstr "Código de _rexistro"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:124
+msgid "_Get Registration Code"
+msgstr "_Obter código de rexistro"
+
+#: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:140
+msgid "<b>Registration Code</b>"
+msgstr "<b>Código de rexistro</b>"
+
+#: ../ImageShack/src/ImageShackAction.cs:57
+msgid "Upload to ImageShack"
+msgstr "Subir a ImageShack"
+
+#: ../ImageShack/src/ImageShackAction.cs:61
+msgid "Uploads the image to ImageShack."
+msgstr "Sube a imaxe a ImageShack."
+
+#: ../ImageShack/src/ImageShackAction.cs:106
+msgid "ImageShack exception: "
+msgstr "Excepción de ImageShack: "
+
+#: ../ImageShack/src/ImageShackAction.cs:116
+msgid "File size exceeds ImageShack's 1.5MB limit."
+msgstr "O ficheiro excede o límite de 1'5MB de ImageShack."
+
+#: ../ImageShack/src/ImageShackAction.cs:196
+msgid "Parsed url was empty. ImageShack has probably changed its format."
+msgstr ""
+"O enderezo analizado estaba baleiro. Probablemente ImageShack cambiou o seu "
+"formato."
+
+#: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
+#: ../ImageShack/src/Notifications.cs:53
+msgid "ImageShack"
+msgstr "ImageShack"
+
+#: ../ImageShack/src/Notifications.cs:32
+msgid "Do is uploading your image... Please wait a moment..."
+msgstr "Do está subindo a súa imaxe... Por favor, espere un momento..."
+
+#: ../ImageShack/src/Notifications.cs:43
+msgid "Unable to upload image to ImageShack at this time."
+msgstr "Nestes momentos non se puido subir a súa imaxe a ImageShack."
+
+#: ../Launchpad/src/LaunchpadAction.cs:36
+msgid "Search Launchpad"
+msgstr "Buscar en Launchpad"
+
+#: ../Launchpad/src/LaunchpadAction.cs:40
+msgid "Search Launchpad properties."
+msgstr "Buscar en propiedades do Launchpad"
+
+#: ../LocateFiles/src/LocateFilesAction.cs:39
+msgid "Locate Files"
+msgstr "Localizar ficheiros"
+
+#: ../LocateFiles/src/LocateFilesAction.cs:44
+msgid "Search your filesystem using locate."
+msgstr "Busca polo seu sistema de ficheiros usando Locate."
+
+#: ../ManLookUp/src/ManualPageItemSource.cs:50
+msgid "Manual pages (man)"
+msgstr "Páxinas do manual (man)"
+
+#: ../ManLookUp/src/ManualPageItemSource.cs:57
+msgid "Search and read help documentation (man)"
+msgstr "Buscar e ler documentación de axuda (man)"
+
+#: ../ManLookUp/src/ReadManualPageAction.cs:42
+msgid "Read manual page (man)"
+msgstr "Ler páxina do manual (man)"
+
+#: ../ManLookUp/src/ReadManualPageAction.cs:49
+msgid "Look up and read a manual page."
+msgstr "Ollar e ler unha páxina do manual."
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
+msgid "Show friend status updates"
+msgstr "Mostrar actualizacións de estado de amigos"
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
+msgid "<b>General</b>"
+msgstr "<b>Xeral</b>"
+
+#: ../Microblogging/src/MicroblogClient.cs:42
+#, csharp-format
+msgid "Failed to fetch file from {0}"
+msgstr "Houbo un fallo ao obter o ficheiro dende {0}"
+
+#: ../Microblogging/src/MicroblogClient.cs:43
+#, csharp-format
+msgid "Twitter encountered an error in {0}. {1}"
+msgstr "Twitter encontrou un erro en {0}. {1}"
+
+#: ../Microblogging/src/MicroblogClient.cs:45
+msgid ""
+"Unable to post tweet. Check your login settings. If you are behind a proxy "
+"make sure that the settings in /system/http_proxy are correct."
+msgstr ""
+"Non se puido publicar o tweet. Compruebe as suas preferencias de "
+"autenticación. Se está detrás de un proxy asegúrese de que as preferencias "
+"en /system/http_proxy son as correctas."
+
+#: ../Microblogging/src/FriendSource.cs:47
+msgid "Microblog friends"
+msgstr "Amigos de microblog"
+
+#: ../Microblogging/src/FriendSource.cs:51
+msgid "Indexes your microblog friends"
+msgstr "Indexe os seus amigos de microblogging"
+
+#: ../Microblogging/src/Notifications.cs:40
+#, csharp-format
+msgid "New direct message from {0}"
+msgstr "Nova mensaxe directa de {0}"
+
+#: ../Microblogging/src/Notifications.cs:57
+msgid "Post failed"
+msgstr "Houbo un fallo na publicación"
+
+#: ../Microblogging/src/Notifications.cs:58
+msgid "Post Successful"
+msgstr "A publicación foi un éxito"
+
+#: ../Microblogging/src/Notifications.cs:59
+#, csharp-format
+msgid "Failed to post '{0}' to {1}"
+msgstr "Houbo un fallo ao enviar '{0}' to {1}"
+
+#: ../Microblogging/src/Notifications.cs:60
+#, csharp-format
+msgid "'{0}' sucessfully posted to {1}"
+msgstr "'{0}' enviado con éxito a {1}"
+
+#: ../Microblogging/src/PostAction.cs:44
+#, csharp-format
+msgid "Post to {0}"
+msgstr "Enviar a {0}"
+
+#: ../Microblogging/src/PostAction.cs:48
+#, csharp-format
+msgid "Update {0} status"
+msgstr "Estado {0} actualizado"
+
+#: ../NX/src/NXAction.cs:37 ../NX/src/NXAction.cs:41
+msgid "Connect with NX"
+msgstr "Conectar mediante NX"
+
+#: ../NX/src/NXHosts.cs:46
+msgid "NX Host"
+msgstr "Equipo NX"
+
+#: ../NX/src/NXHosts.cs:67
+msgid "NX Hosts"
+msgstr "Equipos NX"
+
+#: ../NX/src/NXHosts.cs:71
+msgid "Parses nx sessions"
+msgstr "Analiza sesións NX"
+
+#: ../OpenSearch/src/OpenSearchAction.cs:35
+msgid "Search Web"
+msgstr "Buscar na rede"
+
+#: ../OpenSearch/src/OpenSearchAction.cs:40
+msgid "Searches the web using OpenSearch plugins."
+msgstr "Buscar na rede usando complementos de OpenSearch."
+
+#: ../Opera/src/OperaBookmarkItemSource.cs:24
+msgid "Opera Bookmarks"
+msgstr "Marcadores de Opera"
+
+#: ../Opera/src/OperaBookmarkItemSource.cs:28
+msgid "Indexes your Opera 6 bookmarks"
+msgstr "Indexe os seus marcadores de Opera 6"
+
+#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
+msgid "Supported Codes\t\t\t"
+msgstr "Códigos copmatíbeis\t\t\t"
+
+#: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:101
+msgid "<b>Pastebin Provider</b>"
+msgstr "<b>Suministrador de Pastebin</b>"
+
+#: ../Pastebin/src/PastebinAction.cs:40
+msgid "Send to Pastebin"
+msgstr "Enviar a Pastebin"
+
+#: ../Pastebin/src/PastebinAction.cs:44
+msgid "Sends the text to Pastebin."
+msgstr "Envía o texto a Pastebin."
+
+#: ../Pastebin/src/Providers/LodgeIt.cs:77
+msgid "Parsed url was empty. Lodge It has probably changed its format."
+msgstr "A URL analizada está baleira. Pode ser que cambiara o seu formato."
+
+#: ../Pidgin/src/PidginSetStatusAction.cs:48
+msgid "Set status"
+msgstr "Establecer estado"
+
+#: ../Pidgin/src/PidginSetStatusAction.cs:52
+msgid "Set pidgin status message"
+msgstr "Cambiar mensaxe de estado de Pidgin"
+
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
+msgid "Pidgin Statuses"
+msgstr "Estados de Pidgin"
+
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
+msgid "Saved Pidgin statuses"
+msgstr "Estados gardados de Pidgin"
+
+#: ../Pidgin/src/PidginContactItemSource.cs:59
+msgid "Pidgin Buddies"
+msgstr "Amigos de Pidgin"
+
+#: ../Pidgin/src/PidginContactItemSource.cs:63
+msgid "Buddies on your Pidgin buddy list."
+msgstr "Amigos na súa lista de amigos de Pidgin"
+
+#: ../Pidgin/src/PidginAccountItemSource.cs:41
+msgid "Pidgin Accounts"
+msgstr "Contas de Pidgin"
+
+#: ../Pidgin/src/PidginAccountItemSource.cs:45
+msgid "Available Pidgin IM Accounts"
+msgstr "Cuentas de IM dispoñíbeis en Pidgin"
+
+#: ../Pidgin/src/PidginAccountActions.cs:36
+msgid "Sign on"
+msgstr "Iniciar sesión"
+
+#: ../Pidgin/src/PidginAccountActions.cs:40
+msgid "Enable pidgin account"
+msgstr "Activar conta de pidgin"
+
+#: ../Pidgin/src/PidginAccountActions.cs:82
+msgid "Sign off"
+msgstr "Pechar sesión"
+
+#: ../Pidgin/src/PidginAccountActions.cs:86
+msgid "Disble pidgin account"
+msgstr "Desactivar conta de pidgin"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:45
+msgid "Offline"
+msgstr "Sen conexión"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46
+msgid "Available"
+msgstr "Dispoñíbel"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:47
+msgid "Busy"
+msgstr "Ocupado"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:48
+msgid "Invisible"
+msgstr "Invisíbel"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:49
+msgid "Away"
+msgstr "Ausente"
+
+#: ../Pidgin/src/PidginStatusTypeItem.cs:50
+msgid "Unknown Status"
+msgstr "Estado descoñecido"
+
+#: ../Pidgin/src/PidginChatAction.cs:41
+msgid "Chat"
+msgstr "Conversa"
+
+#: ../Pidgin/src/PidginChatAction.cs:45
+msgid "Send an instant message to a friend."
+msgstr "Enviar unha mensaxe instantánea a un amigo."
+
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
+msgid "Application Key"
+msgstr "Chave do aplicativo"
+
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:81
+msgid "<i>Verify and save your account information</i>"
+msgstr "<i>Verifique e garde a información da súa conta</i>"
+
+#: ../PingFM/src/PingFMClient.cs:36
+msgid "Message posted"
+msgstr "Mensaxe enviada"
+
+#: ../PingFM/src/PingFMClient.cs:37
+msgid "Message posting failed"
+msgstr "Houbo un fallo ao enviar a mensaxe"
+
+#: ../PingFM/src/PingFMClient.cs:38
+msgid ""
+"Cannot connect to the Ping.FM API server, or the server responds with an "
+"error."
+msgstr ""
+"Non é posíbel conectarse á API do servidor de Ping.FM, ou o servidor "
+"respondeu con un erro."
+
+#: ../PingFM/src/PingFMClient.cs:39
+#, csharp-format
+msgid "Your {0} message has been successfully posted to {1}"
+msgstr "A súa mensaxe {0} foi enviada con éxito a {1}"
+
+#: ../PingFM/src/PingFMClient.cs:40
+#, csharp-format
+msgid "Your message has been successfully posted to all {0} services"
+msgstr "A súa mensaxe foi publicada correctamente nos {0} servizos"
+
+#: ../PingFM/src/PingFMClient.cs:67
+msgid "Microblog"
+msgstr "Microblog"
+
+#: ../PingFM/src/PingFMClient.cs:68
+msgid "Status"
+msgstr "Estado"
+
+#: ../PingFM/src/PingFMClient.cs:82
+msgid "Error occurred in service response"
+msgstr "Houbo un erro na resposta do servizo"
+
+#: ../PingFM/src/PingFMServiceItem.cs:51
+msgid "Web service group supported by Ping.FM"
+msgstr "Grupo de servizso web compatíbeis con Ping.FM"
+
+#: ../PingFM/src/PingFMServiceItem.cs:52
+msgid "Web service supported by Ping.FM"
+msgstr "Servizo web compatíbel con Ping.FM"
+
+#: ../PingFM/src/PingFMPost.cs:35
+msgid "Post via Ping.FM"
+msgstr "Publicar mediante Ping.FM"
+
+#: ../PingFM/src/PingFMPost.cs:39
+msgid ""
+"Post a text message as microblog or status update to your social network"
+msgstr ""
+"Publicar unha mensaxe a un microblog ou como o seu novo estado nunha rede "
+"social"
+
+#: ../PingFM/src/PingFM.cs:32
+msgid "Failed to connect to Ping.FM service"
+msgstr "Houbo un fallo ao conectar co servizo Ping.FM"
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:35
+msgid "Ping.FM Services"
+msgstr "Servizos de Ping.FM"
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:39
+msgid "Web services suppported by Ping.FM"
+msgstr "Servizos web compatíbeis con Ping.FM"
+
+#: ../Putty/src/PuttySession.cs:49
+#, csharp-format
+msgid "Start new PuTTY session (host {0})"
+msgstr "Iniciar nova sesión de PuTTY (equipo {0})"
+
+#: ../Putty/src/PuttySessionItemSource.cs:40
+msgid "PuTTY sessions"
+msgstr "Sesións de PuTTY"
+
+#: ../Putty/src/PuttySessionItemSource.cs:44
+msgid "PuTTY saved sessions"
+msgstr "Sesións gardadas de PuTTY"
+
+#: ../Putty/src/PuttyAction.cs:40
+msgid "Connect with PuTTY"
+msgstr "Conectar con PuTTY"
+
+#: ../Putty/src/PuttyAction.cs:44
+msgid "Create new conenction with PuTTY"
+msgstr "Crear nova conexión con PuTTY"
+
+#: ../Quote/src/QuoteAction.cs:40
+msgid "Submit Quote"
+msgstr "Enviar Quote"
+
+#: ../Quote/src/QuoteAction.cs:44
+msgid "Sends text to Quote service."
+msgstr "Envía texto ao servizo de Quote."
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:96
+msgid ""
+"Do needs your authorization in order to manage tasks in your Remember The "
+"Milk account. Press the \"Authorize\" button to open a web browser and give "
+"Do authorization."
+msgstr ""
+"Do precisa a súa autorización para xestionar as súas tarefas na súa conta de "
+"Remember The Milk. Prema o botón \"Autorizar\" para abrir un navegador web e "
+"darlle a autorización a Do."
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:191
+msgid "For overdue task(s)"
+msgstr "Para tarefa(s) co plazo vencido"
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:203
+msgid "When actions (e.g. rename) are completed"
+msgstr "Cando as accións (p.ex. renomear) se completen"
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:224
+msgid "<b>Notification</b>"
+msgstr "<b>Notificación</b>"
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:260
+msgid ""
+"You can enter some advanced search operators here to limit the tasks Do "
+"indexes. E.g. \"priority:1 AND status:incomplete\" will force Do to only "
+"index all incomplete tasks with high priority."
+msgstr ""
+"Vostede pode inserir algúns operadores de busca avanzada para limitar os "
+"índices de tarefas de Do. P.ex. \"priority:1 AND status:incomplete\" forzara "
+"a Do a indexar só as tarefas incompletas e con prioridade alta."
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:294
+msgid "<b>Filter</b>"
+msgstr "<b>Filtro</b>"
+
+#: ../RememberTheMilk/src/Configuration.cs:68
+msgid ""
+"A webpage from Remember The Milk should be opened in your web browser now. "
+"Please follow the instructions there and come back to complete the "
+"authrozation by clicking the button below."
+msgstr ""
+"Una páxina web de Remember The Milk abrirase no seu navegador. Siga as "
+"instruccións alí e volva para completar a autorización facendo clic no botón "
+"de abaixo."
+
+#: ../RememberTheMilk/src/Configuration.cs:76
+msgid "Complete authorization"
+msgstr "Autorización completada"
+
+#: ../RememberTheMilk/src/Configuration.cs:93
+msgid "Fail to complete authorization."
+msgstr "Houbo un fallo ao completar a autorización."
+
+#: ../RememberTheMilk/src/Configuration.cs:96
+msgid "Authorize again"
+msgstr "Autorizar de novo"
+
+#: ../RememberTheMilk/src/Configuration.cs:102
+#, csharp-format
+msgid ""
+"Thank you {0}, RTM plugin is now authorized to operate on your account."
+msgstr ""
+"Grazas {0}, o complemento RTM está autorizado para traballar coa súa conta."
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
+msgid "Uncomplete"
+msgstr "Incompleta"
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
+msgid "Mark a selected task as \"incomplete\"."
+msgstr "Marcar tarefa seleccionada como \"incompleta\"."
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
+msgid "Delete"
+msgstr "Eliminar"
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
+msgid "Delete a selected task from Remember The Milk"
+msgstr "Elimina a tarefa seleccionada dende Remember The Milk"
+
+#: ../RememberTheMilk/src/RTM.cs:268
+#, csharp-format
+msgid "{0} Task Overdue"
+msgid_plural "{0} Tasks Overdue"
+msgstr[0] "{0} tarefa vencida"
+msgstr[1] "{0} tarefas vencidas"
+
+#: ../RememberTheMilk/src/RTM.cs:368
+msgid "Task Deleted"
+msgstr "Tarefa eliminada"
+
+#: ../RememberTheMilk/src/RTM.cs:369
+msgid ""
+"The selected task has been successfully deleted from your Remember The Milk "
+"task list"
+msgstr ""
+"A tarefa seleccionada foi eliminada con éxito da súa lista de tarefas de "
+"Remember The Milk"
+
+#: ../RememberTheMilk/src/RTM.cs:383
+msgid "Task Completed"
+msgstr "Tarefa completada"
+
+#: ../RememberTheMilk/src/RTM.cs:384
+msgid ""
+"The selected task in your Remember The Milk task list has been marked as "
+"completed."
+msgstr ""
+"A tarefa seleccionada na súa lista de tarefas de Remember The Milk foi "
+"marcada como completada."
+
+#: ../RememberTheMilk/src/RTM.cs:392
+msgid "High"
+msgstr "Alta"
+
+#: ../RememberTheMilk/src/RTM.cs:393
+msgid "High Priority"
+msgstr "Prioridade alta"
+
+#: ../RememberTheMilk/src/RTM.cs:394
+msgid "Medium"
+msgstr "Media"
+
+#: ../RememberTheMilk/src/RTM.cs:395
+msgid "Medium Priority"
+msgstr "Prioridade media"
+
+#: ../RememberTheMilk/src/RTM.cs:396
+msgid "Low"
+msgstr "Baixa"
+
+#: ../RememberTheMilk/src/RTM.cs:397
+msgid "Low Priority"
+msgstr "Prioridade baixa"
+
+#: ../RememberTheMilk/src/RTM.cs:398
+msgid "None"
+msgstr "Ningunha"
+
+#: ../RememberTheMilk/src/RTM.cs:399
+msgid "No Priority"
+msgstr "Sen prioridade"
+
+#: ../RememberTheMilk/src/RTM.cs:400
+msgid "Up"
+msgstr "Arriba"
+
+#: ../RememberTheMilk/src/RTM.cs:401
+msgid "Increase the priority"
+msgstr "Incrementar a prioridade"
+
+#: ../RememberTheMilk/src/RTM.cs:402
+msgid "Down"
+msgstr "Baixar"
+
+#: ../RememberTheMilk/src/RTM.cs:403
+msgid "Decrease the priority"
+msgstr "Rebaixar a prioridade"
+
+#: ../RememberTheMilk/src/RTM.cs:419
+msgid "Priority Changed"
+msgstr "Prioridade cambiada"
+
+#: ../RememberTheMilk/src/RTM.cs:420
+msgid ""
+"The priority of the selected task in your Remember The Milk task list has "
+"been changed."
+msgstr ""
+"A prioridade da tarefa seleccionada na súa lista de tarefas de Remember The "
+"Milk foi cambiada."
+
+#: ../RememberTheMilk/src/RTM.cs:437
+msgid "Due Date/Time Changed"
+msgstr "Data/Duración límite cambiada"
+
+#: ../RememberTheMilk/src/RTM.cs:438
+msgid ""
+"The due date/time of the selected task in your Remember The Milk task list "
+"has been changed."
+msgstr ""
+"A duración/data límite da tarefa seleccionada na súa lista de tarefas de "
+"Remember The Milk cambiouse."
+
+#: ../RememberTheMilk/src/RTM.cs:452
+msgid "Task Moved"
+msgstr "Tarefa movida"
+
+#: ../RememberTheMilk/src/RTM.cs:468
+msgid "Task Renamed"
+msgstr "Tarefa renomeada"
+
+#: ../RememberTheMilk/src/RTM.cs:483
+msgid "Task Postponed"
+msgstr "Tarefa posposta"
+
+#: ../RememberTheMilk/src/RTM.cs:484
+msgid ""
+"The selected task in your Remember The Milk task list has been postponed"
+msgstr ""
+"A tarefa seleccionada na súa lista de tarefas de Remember The Milk foi "
+"posposta"
+
+#: ../RememberTheMilk/src/RTM.cs:498
+msgid "Recurrence Pattern Changed"
+msgstr "Cambiouse o patrón de recorrencia"
+
+#: ../RememberTheMilk/src/RTM.cs:499
+msgid ""
+"The recurrence pattern of the selected task in your Remember The Milk task "
+"list has been changed."
+msgstr ""
+"O patrón de recorrencia da tarefa seleccionada na súa lista de tarefas de "
+"Remember The Milk cambiouse."
+
+#: ../RememberTheMilk/src/RTM.cs:513
+msgid "Task Uncompleted"
+msgstr "Tarefa sen completar"
+
+#: ../RememberTheMilk/src/RTM.cs:514
+msgid "The selected task has been marked as \"incomplete\"."
+msgstr "A tarefa seleccionada marcouse como \"sen completar\"."
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:37
+msgid "Create a new task in Remember The Milk"
+msgstr "Crea unha nova tarefa en Remember The Milk"
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:39
+msgid "Move a seleted task from one list to another"
+msgstr "Move unha tarefa seleccionada dunha lista a outra"
+
+#: ../RememberTheMilk/src/RTMCompleteTask.cs:35
+msgid "Complete"
+msgstr "Completar"
+
+#: ../RememberTheMilk/src/RTMCompleteTask.cs:39
+msgid "Complete a selected task"
+msgstr "Completa a tarefa seleccionada"
+
+#: ../RememberTheMilk/src/RTMRenameTask.cs:33
+msgid "Rename to..."
+msgstr "Renomear a..."
+
+#: ../RememberTheMilk/src/RTMRenameTask.cs:37
+msgid "Give the seleted task a new name"
+msgstr "Darlle un novo nome á tarefa seleccionada"
+
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:33
+msgid "Set Recurrence"
+msgstr "Asignar recorrencia"
+
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:37
+msgid "Sets a recurrence pattern for a task."
+msgstr "Establece un patrón de recorrencia para unha tarefa."
+
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:33
+msgid "Postpone"
+msgstr "Adiar"
+
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:37
+msgid "Postpone a selected task in Remember The Milk"
+msgstr "Adía unha tarefa seleccionada en Remember The Milk"
+
+#: ../RememberTheMilk/src/RTMSetPriority.cs:35
+msgid "Set Priority"
+msgstr "Asignar prioridade"
+
+#: ../RememberTheMilk/src/RTMSetPriority.cs:39
+msgid "Set the priority of a task"
+msgstr "Asignar a prioridade da tarefa"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:33
+msgid "Set Due Date/Time"
+msgstr "Asignar data/duración límite"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:37
+msgid "Set the due date/time of a task"
+msgstr "Asignar data/duración límite de unha tarefa"
+
+#: ../Rhythmbox/src/MusicItems.cs:77
+msgid "All music by"
+msgstr "Toda a música por"
+
+#: ../Rhythmbox/src/EnqueueAction.cs:40
+msgid "Add an item to Rhythmbox's play queue."
+msgstr "Engade un elemento á lista de reprodución de Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:49
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "Navegar pola música de Rhythmbox polo autor"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:58
+msgid "Browse Rhythmbox Music by Album"
+msgstr "Navegar pola música de Rhythmbox por álbum"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:69
+msgid "Play Current Track in Rhythmbox"
+msgstr "Reproducir pista actual en Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:74
+msgid "Pause Rhythmbox Playback"
+msgstr "Pausar reproducción de Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:79
+msgid "Play Next Track in Rhythmbox"
+msgstr "Reproducir seguinte pista en Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:84
+msgid "Play Previous Track in Rhythmbox"
+msgstr "Reproducir pista anterior en Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:88
+msgid "Show Current Track"
+msgstr "Mostrar pista actual"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:89
+msgid "Show Notification of Current Track in Rhythmbox"
+msgstr "Mostrar notificación da pista actual en Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:93
+msgid "Mute"
+msgstr "Silenciar"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:94
+msgid "Mute Rhythmbox Playback"
+msgstr "Silenciar reproducción de Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:98
+msgid "Unmute"
+msgstr "Desactivar silencio"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:99
+msgid "Unmute Rhythmbox Playback"
+msgstr "Desactivar silencio na reproducción de Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:103
+#: ../VolumeControl/src/VolumeUpItem.cs:31
+msgid "Volume Up"
+msgstr "Subir volume"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:104
+msgid "Increase Rhythmbox Playback Volume"
+msgstr "Incrementar o volume de reproducción de Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:108
+#: ../VolumeControl/src/VolumeDownItem.cs:31
+msgid "Volume Down"
+msgstr "Baixar volume"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:109
+msgid "Decrease Rhythmbox Playback Volume"
+msgstr "Decrementar volume de reproducción de Rhythmbox"
+
+#: ../Rhythmbox/src/PlayAction.cs:44
+msgid "Play an item in Rhythmbox."
+msgstr "Reproducir un elemento en Rhythmbox"
+
+#: ../Rhythmbox/src/MusicItemSource.cs:45
+msgid "Rhythmbox Music"
+msgstr "Música de Rhythmbox"
+
+#: ../Rhythmbox/src/MusicItemSource.cs:49
+msgid "Provides access to artists and albums from Rhythmbox."
+msgstr "Proporciona acceso a autores e álbumes de Rhythmbox"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
+msgid "OPML feed file"
+msgstr "Ficheiro de canles de novas OPML"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:75
+msgid "Timeout (in seconds)"
+msgstr "Tempo de vencimento (en segundos)"
+
+#: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:85
+msgid "Cache duration (in minutes)"
+msgstr "Duración da caché (en minutos)"
+
+#: ../Shelf/src/ShelfActions.cs:33
+msgid "Explore Shelf"
+msgstr "Explorar Shelf"
+
+#: ../Shelf/src/ShelfActions.cs:37
+msgid "Get a list of everything in your shelf"
+msgstr "Obter unha lista de todo o que hai no seu Shelf"
+
+#: ../Shelf/src/ShelfActions.cs:60
+msgid "Remove From Shelf"
+msgstr "Eliminar do Shelf"
+
+#: ../Shelf/src/ShelfActions.cs:64
+msgid "Remove Selected Item From Shelf"
+msgstr "Eliminar elemento seleccionado do Shelf"
+
+#: ../Shelf/src/ShelfActions.cs:101
+msgid "Add To Shelf"
+msgstr "Engadir a Shelf"
+
+#: ../Shelf/src/ShelfActions.cs:105
+msgid "Add Selected Item to Shelf"
+msgstr "Engadir elemento seleccionado ao Shelf"
+
+#: ../Shelf/src/ShelfItemSource.cs:56
+msgid " Shelf"
+msgstr " Shelf"
+
+#: ../Shelf/src/ShelfItemSource.cs:62
+#, csharp-format
+msgid "Your {0} shelf items."
+msgstr "Os seus {0} elementos no Shelf."
+
+#: ../Shelf/src/ShelfItemSource.cs:90
+msgid "Shelf Items"
+msgstr "Elementos do Shelf"
+
+#: ../Shelf/src/ShelfItemSource.cs:94
+msgid "Your Shelf Items"
+msgstr "Os seus elementos do Shelf"
+
+#: ../Shelf/src/ShelfItemSource.cs:126
+msgid "Default"
+msgstr "Predefinido"
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
+msgid "Load items in background"
+msgstr "Cargar elementos polo fondo"
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:83
+msgid "Comma-seperated list of radios to load"
+msgstr "Lista separada por comas das radios a cargar"
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:94
+msgid "Host-name of SqueezeCenter server"
+msgstr "Nombre do equipo do servidor SqueezeCenter"
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:103
+msgid "Port of the SqueezeCenter server cli interface"
+msgstr "Porto da interface da liña de ordes do servidor SqueezeCenter"
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:114
+msgid "Port of the SqueezeCenter server web interface"
+msgstr "Porto á interface web do servidor SqueezeCenter"
+
+#: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:125
+msgid ""
+"Load artist, albums and radio in the background when loading DO. \n"
+"If set to unchecked, these items are loaded when DO is loading causing a "
+"delay until all items are loaded."
+msgstr ""
+"Carga artista, álbumes e radio polo fondo cando DO esté a cargarse.\n"
+"Se non está marcado, estes elementos cargaranse cando DO se cargue causando "
+"un retraso ata que todos terminen de cargarse."
+
+#: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
+msgid "Connect with SSH"
+msgstr "Conectar con SSH"
+
+#: ../SSH/src/SSHHosts.cs:42
+msgid "SSH Host"
+msgstr "Terminal SSH"
+
+#: ../SSH/src/SSHHosts.cs:62
+msgid "SSH Hosts"
+msgstr "Terminais SSH"
+
+#: ../SSH/src/SSHHosts.cs:63
+msgid "Parses ssh-config"
+msgstr "Analiza ssh-config"
+
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
+msgid "Command for start/stop services (gksudo, etc):"
+msgstr "Orde para iniciar/deter servizos (gksudo, etc):"
+
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
+msgid "..."
+msgstr "..."
+
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
+msgid "Services to control:"
+msgstr "Servicios a controlar:"
+
+#: ../SystemServices/src/ServiceItemSource.cs:39
+msgid "System Services"
+msgstr "Servizos do sistema"
+
+#: ../SystemServices/src/ServiceItemSource.cs:43
+msgid "List of all System Services"
+msgstr "Lista de todos os servizos do sistema"
+
+#: ../SystemServices/src/Service.cs:46
+#, csharp-format
+msgid "{0} service"
+msgstr "servizo {0}"
+
+#: ../SystemServices/src/Service.cs:50
+#, csharp-format
+msgid "Control system {0} service"
+msgstr "Control servizo do sistema {0}"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:71
+msgid "Choose the file to open"
+msgstr "Escoller ficheiro a abrir"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:88
+msgid ""
+"Selected invalid file!\n"
+"Should be executable."
+msgstr ""
+"¡O ficheiro seleccionado non é válido!\n"
+"Debe ser executábel."
+
+#: ../Tasque/src/TasqueCategoryItem.cs:47
+msgid "Category"
+msgstr "Categoría"
+
+#: ../Tasque/src/TasqueAction.cs:42
+msgid "Create a new task"
+msgstr "Crear unha nova tarefa"
+
+#: ../Tasque/src/TasqueAction.cs:46
+msgid "Create a new task in Tasque"
+msgstr "Crear una nova tarefa en Tasque"
+
+#: ../Text/src/AppendTextAction.cs:34
+msgid "Append to..."
+msgstr "Engadir a..."
+
+#: ../Text/src/AppendTextAction.cs:35
+msgid "Appends text to a selected file."
+msgstr "Engadir texto ao ficheiro seleccionado."
+
+#: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
+msgid "Make Tiny Url"
+msgstr "Facer unha Tiny Url"
+
+#: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:66
+msgid "Creates a TinyUrl from an unwieldy mess."
+msgstr "Crear unha TinyUrl dun enderezo lioso e pouco manexábel."
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
+msgid "Use note content as note title when no title is specified."
+msgstr "Usar contido de nota como título cando éste non se especifique."
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
+msgid "<b>Default New Note Title</b>"
+msgstr "<b>Título predefinido de nova nota</b>"
+
+#. Container child vbox3.Gtk.Box+BoxChild
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:101
+msgid "First pane is content, second pane is title."
+msgstr "O primeiro panel é o contido, o segundo o título."
+
+#. Container child vbox3.Gtk.Box+BoxChild
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:114
+msgid "First pane is title, second pane is content."
+msgstr "O primeiro panel é o título, o segundo o contido."
+
+#: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:129
+msgid "<b>New Note Title and Content Entry</b>"
+msgstr "<b>Novo título e contido de nota</b>"
+
+#: ../Tomboy/src/NewNoteAction.cs:37
+msgid "New Tomboy Note"
+msgstr "Nova nota de Tomboy"
+
+#: ../Tomboy/src/NewNoteAction.cs:41
+msgid "Create a new Tomboy note."
+msgstr "Crea unha nova nota de Tomboy"
+
+#: ../Tomboy/src/NotesItemSource.cs:56
+msgid "Tomboy Note Indexer"
+msgstr "Indexador de notas de Tomboy"
+
+#: ../Tomboy/src/NotesItemSource.cs:60
+msgid "Loads Tomboy notes for searching."
+msgstr "Carga notas de Tomboy para buscar."
+
+#: ../Tomboy/src/SearchNotesAction.cs:36
+msgid "Search Tomboy Notes"
+msgstr "Buscar nas notas de Tomboy"
+
+#: ../Tomboy/src/SearchNotesAction.cs:40
+msgid "Searches contents of Tomboy notes."
+msgstr "Busca no contido das notas de Tomboy."
+
+#: ../Tomboy/src/TomboyItem.cs:50
+msgid "Tomboy note"
+msgstr "Nota de Tomboy"
+
+#: ../Tracker/src/TrackerSearch.cs:38
+msgid "Search with Tracker"
+msgstr "Buscar con Tracker"
+
+#: ../Tracker/src/TrackerSearch.cs:42
+msgid "Launches Tracker with the given query."
+msgstr "Lanza Tracker con unha consulta dada."
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:58
+msgid "Translation Plugin Options"
+msgstr "Opcións de tradución dos complementos"
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:71
+msgid "Translation Provider"
+msgstr "Fornecedor de traducción"
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
+msgid "Default Source Language"
+msgstr "Idioma fonte predefinido"
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
+msgid "Default Web Interface Language"
+msgstr "Idioma de interfaz web predefinido"
+
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
+msgid "Enable / Disable Language"
+msgstr "Activar/Desactivar idioma"
+
+#: ../Translate/src/TranslateAction.cs:58
+msgid "Translate"
+msgstr "Traducir"
+
+#: ../Translate/src/TranslateAction.cs:66
+msgid "Translates text"
+msgstr "Traduce o texto"
+
+#: ../Translate/src/UI/ConfigUI.cs:128
+msgid "Auto Detect (Recommended)"
+msgstr "Autodetectar (recomendado)"
+
+#: ../Translate/src/Provider/Google.cs:35
+msgid "Arabic"
+msgstr "Árabe"
+
+#: ../Translate/src/Provider/Google.cs:36
+msgid "Translate to Arabic"
+msgstr "Traducir ao árabe"
+
+#: ../Translate/src/Provider/Google.cs:39
+msgid "Bulgarian"
+msgstr "Búlgaro"
+
+#: ../Translate/src/Provider/Google.cs:40
+msgid "Translate to Bulgarian"
+msgstr "Traducir ao búlgaro"
+
+#: ../Translate/src/Provider/Google.cs:43
+msgid "Catalon"
+msgstr "Catalon"
+
+#: ../Translate/src/Provider/Google.cs:44
+msgid "Translate to Catalon"
+msgstr "Traducir ao catalon"
+
+#: ../Translate/src/Provider/Google.cs:47
+msgid "Chinese (Simplified)"
+msgstr "Chinés (Simplificado)"
+
+#: ../Translate/src/Provider/Google.cs:48
+msgid "Translate to Chinese (Simplified)"
+msgstr "Traducir ao chino (simplificado)"
+
+#: ../Translate/src/Provider/Google.cs:51
+msgid "Chinese (Traditional)"
+msgstr "Chinés (tradicional)"
+
+#: ../Translate/src/Provider/Google.cs:52
+msgid "Translate to Chinese (Traditional)"
+msgstr "Traducir al chino (tradicional)"
+
+#: ../Translate/src/Provider/Google.cs:55
+msgid "Croatian"
+msgstr "Croata"
+
+#: ../Translate/src/Provider/Google.cs:56
+msgid "Translate to Croatian"
+msgstr "Traducir ao croata"
+
+#: ../Translate/src/Provider/Google.cs:59
+msgid "Czech"
+msgstr "Checo"
+
+#: ../Translate/src/Provider/Google.cs:60
+msgid "Translate to Czech"
+msgstr "Traducir ao checo"
+
+#: ../Translate/src/Provider/Google.cs:63
+msgid "Danish"
+msgstr "Danés"
+
+#: ../Translate/src/Provider/Google.cs:64
+msgid "Translate to Danish"
+msgstr "Traducir ao danés"
+
+#: ../Translate/src/Provider/Google.cs:67
+msgid "Dutch"
+msgstr "Neerlandés"
+
+#: ../Translate/src/Provider/Google.cs:68
+msgid "Translate to Dutch"
+msgstr "Traducir ao neerlandés"
+
+#: ../Translate/src/Provider/Google.cs:71
+msgid "English"
+msgstr "Inglés"
+
+#: ../Translate/src/Provider/Google.cs:72
+msgid "Translate to English"
+msgstr "Traducir ao inglés"
+
+#: ../Translate/src/Provider/Google.cs:75
+msgid "Filipino"
+msgstr "Filipino"
+
+#: ../Translate/src/Provider/Google.cs:76
+msgid "Translate to Filipino"
+msgstr "Traducir ao filipino"
+
+#: ../Translate/src/Provider/Google.cs:79
+msgid "Finnish"
+msgstr "Finés"
+
+#: ../Translate/src/Provider/Google.cs:80
+msgid "Translate to Finnish"
+msgstr "Traducir ao finés"
+
+#: ../Translate/src/Provider/Google.cs:83
+msgid "French"
+msgstr "Francés"
+
+#: ../Translate/src/Provider/Google.cs:84
+msgid "Translate to French"
+msgstr "Traducir ao francés"
+
+#: ../Translate/src/Provider/Google.cs:87
+msgid "German"
+msgstr "Alemán"
+
+#: ../Translate/src/Provider/Google.cs:88
+msgid "Translate to German"
+msgstr "Traducir ao alemán"
+
+#: ../Translate/src/Provider/Google.cs:91
+msgid "Greek"
+msgstr "Grego"
+
+#: ../Translate/src/Provider/Google.cs:92
+msgid "Translate to Greek"
+msgstr "Traducir ao grego"
+
+#: ../Translate/src/Provider/Google.cs:95
+msgid "Hebrew"
+msgstr "Hebreo"
+
+#: ../Translate/src/Provider/Google.cs:96
+msgid "Translate to Hebrew"
+msgstr "Traducir ao hebreo"
+
+#: ../Translate/src/Provider/Google.cs:99
+msgid "Hindi"
+msgstr "Hindi"
+
+#: ../Translate/src/Provider/Google.cs:100
+msgid "Translate to Hindi"
+msgstr "Traducir ao hindi"
+
+#: ../Translate/src/Provider/Google.cs:103
+msgid "Indonesian"
+msgstr "Indonesio"
+
+#: ../Translate/src/Provider/Google.cs:104
+msgid "Translate to Indonesian"
+msgstr "Traducir ao indonesio"
+
+#: ../Translate/src/Provider/Google.cs:107
+msgid "Italian"
+msgstr "Italiano"
+
+#: ../Translate/src/Provider/Google.cs:108
+msgid "Translate to Italian"
+msgstr "Traducir ao italiano"
+
+#: ../Translate/src/Provider/Google.cs:111
+msgid "Japanese"
+msgstr "Xaponés"
+
+#: ../Translate/src/Provider/Google.cs:112
+msgid "Translate to Japanese"
+msgstr "Traducir ao xaponés"
+
+#: ../Translate/src/Provider/Google.cs:115
+msgid "Korean"
+msgstr "Coreano"
+
+#: ../Translate/src/Provider/Google.cs:116
+msgid "Translate to Korean"
+msgstr "Traducir ao coreano"
+
+#: ../Translate/src/Provider/Google.cs:119
+msgid "Latvian"
+msgstr "Letón"
+
+#: ../Translate/src/Provider/Google.cs:120
+msgid "Translate to Latvian"
+msgstr "Traducir ao letón"
+
+#: ../Translate/src/Provider/Google.cs:123
+msgid "Lithuanian"
+msgstr "Lituano"
+
+#: ../Translate/src/Provider/Google.cs:124
+msgid "Translate to Lithuanian"
+msgstr "Traducir ao lituano"
+
+#: ../Translate/src/Provider/Google.cs:127
+msgid "Norwegian"
+msgstr "Noruego"
+
+#: ../Translate/src/Provider/Google.cs:128
+msgid "Translate to Norwegian"
+msgstr "Traducir ao noruego"
+
+#: ../Translate/src/Provider/Google.cs:131
+msgid "Polish"
+msgstr "Polaco"
+
+#: ../Translate/src/Provider/Google.cs:132
+msgid "Translate to Polish"
+msgstr "Traducir ao polaco"
+
+#: ../Translate/src/Provider/Google.cs:135
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: ../Translate/src/Provider/Google.cs:136
+msgid "Translate to Portuguese"
+msgstr "Traducir ao portugués"
+
+#: ../Translate/src/Provider/Google.cs:139
+msgid "Romanian"
+msgstr "Rumano"
+
+#: ../Translate/src/Provider/Google.cs:140
+msgid "Translate to Romanian"
+msgstr "Traducir ao rumano"
+
+#: ../Translate/src/Provider/Google.cs:143
+msgid "Russian"
+msgstr "Ruso"
+
+#: ../Translate/src/Provider/Google.cs:144
+msgid "Translate to Russian"
+msgstr "Traducir ao ruso"
+
+#: ../Translate/src/Provider/Google.cs:147
+msgid "Serbian"
+msgstr "Serbio"
+
+#: ../Translate/src/Provider/Google.cs:148
+msgid "Translate to Serbian"
+msgstr "Traducir al serbio"
+
+#: ../Translate/src/Provider/Google.cs:151
+msgid "Slovak"
+msgstr "Eslovaco"
+
+#: ../Translate/src/Provider/Google.cs:152
+msgid "Translate to Slovak"
+msgstr "Traducir ao eslovaco"
+
+#: ../Translate/src/Provider/Google.cs:155
+msgid "Slovenian"
+msgstr "Esloveno"
+
+#: ../Translate/src/Provider/Google.cs:156
+msgid "Translate to Slovenian"
+msgstr "Traducir ao esloveno"
+
+#: ../Translate/src/Provider/Google.cs:159
+msgid "Spanish"
+msgstr "Español"
+
+#: ../Translate/src/Provider/Google.cs:160
+msgid "Translate to Spanish"
+msgstr "Traducir ao español"
+
+#: ../Translate/src/Provider/Google.cs:163
+msgid "Swedish"
+msgstr "Sueco"
+
+#: ../Translate/src/Provider/Google.cs:164
+msgid "Translate to Swedish"
+msgstr "Traducir ao sueco"
+
+#: ../Translate/src/Provider/Google.cs:167
+msgid "Ukranian"
+msgstr "Ucraniano"
+
+#: ../Translate/src/Provider/Google.cs:168
+msgid "Translate to Ukranian"
+msgstr "Traducir ao ucraniano"
+
+#: ../Translate/src/Provider/Google.cs:171
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: ../Translate/src/Provider/Google.cs:172
+msgid "Translate to Vietnamese"
+msgstr "Traducir ao vietnamita"
+
+#: ../Vinagre/src/VNCHostSource.cs:39
+msgid "Vinagre Bookmarks"
+msgstr "Marcadores de Vinagre"
+
+#: ../Vinagre/src/VNCHostSource.cs:43
+msgid "Indexes your Vinagre Bookmarks"
+msgstr "Indexa os stus marcadores de Vinagre"
+
+#: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
+msgid "Connect with VNC"
+msgstr "Conectar con VNC"
+
+#: ../VirtualBox/src/SaveStateAction.cs:40
+msgid "Take Snapshot"
+msgstr "Tomar imaxe do sistema"
+
+#: ../VirtualBox/src/SaveStateAction.cs:44
+msgid "Save the current state as a Snapshot"
+msgstr "Gardar o estado actual como imaxe do sistema"
+
+#: ../VirtualBox/src/SaveStateAction.cs:98
+msgid "Snapshot ("
+msgstr "Imaxen do sistema ("
+
+#: ../VirtualBox/src/OffAction.cs:40
+msgid "Power Off Virtual Machine"
+msgstr "Apagar máquina virtual"
+
+#: ../VirtualBox/src/OffAction.cs:44
+msgid "Powers off the selected Virtual Machine"
+msgstr "Apaga a máquina virtual seleccionada"
+
+#: ../VirtualBox/src/OffAction.cs:72
+#: ../VirtualBox/src/RestoreStateAction.cs:40
+msgid "Discard State"
+msgstr "Descartar estado"
+
+#: ../VirtualBox/src/OffAction.cs:73
+#: ../VirtualBox/src/RestoreStateAction.cs:44
+msgid "Restore VM state to current Snapshot"
+msgstr "Restaurar estado da MV ao da imaxe de sistema actual"
+
+#: ../VirtualBox/src/PauseAction.cs:39
+msgid "Pause Virtual Machine"
+msgstr "Pausar máquina virtual"
+
+#: ../VirtualBox/src/PauseAction.cs:43
+msgid "Pauses the selected Virtual Machine"
+msgstr "Pausa a máquina virtual seleccionada"
+
+#: ../VirtualBox/src/SaveAction.cs:39
+msgid "Save Virtual Machine State"
+msgstr "Garda o estado da máquina virtual"
+
+#: ../VirtualBox/src/SaveAction.cs:43
+msgid "Saves the state of the selected Virtual Machine"
+msgstr "Garda o estado da máquina virtual seleccionada"
+
+#: ../VirtualBox/src/VMItemSource.cs:38
+msgid "VirtualBox VMs"
+msgstr "MVs de VirtualBox"
+
+#: ../VirtualBox/src/VMItemSource.cs:39
+msgid "Virtual Machines created with VirtualBox"
+msgstr "Máquinas virtuais creadas con VirtualBox"
+
+#: ../VirtualBox/src/StartAction.cs:40
+msgid "Start Virtual Machine"
+msgstr "Iniciar máquina virtual"
+
+#: ../VirtualBox/src/StartAction.cs:44
+msgid "Starts the selected Virtual Machine"
+msgstr "Inicia a máquina virtual seleccionada"
+
+#: ../VirtualBox/src/StartAction.cs:70
+msgid "Open in GUI"
+msgstr "Abrir no GUI"
+
+#: ../VirtualBox/src/StartAction.cs:71
+msgid "Open in VirtualBox GUI"
+msgstr "Abrir no GUI de VirtualBox"
+
+#: ../VirtualBox/src/StartAction.cs:77
+msgid "Start Headless"
+msgstr "Iniciar modo sen periféricos"
+
+#: ../VirtualBox/src/StartAction.cs:78
+msgid "Start in Headless mode"
+msgstr "Iniciar en modo sen periféricos"
+
+#: ../VirtualBox/src/ResumeAction.cs:39
+msgid "Resume Virtual Machine"
+msgstr "Reanudar máquina virtual"
+
+#: ../VirtualBox/src/ResumeAction.cs:43
+msgid "Resume the selected Virtual Machine"
+msgstr "Reanudar a máquina virtual seleccionada"
+
+#: ../VolumeControl/src/VolumeDownItem.cs:35
+msgid "Decrease system volume"
+msgstr "Decrementar volume do sistema"
+
+#: ../VolumeControl/src/VolumeUpItem.cs:35
+msgid "Increase system volume"
+msgstr "incrementar volume do sistema"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:31
+msgid "Mute Volume"
+msgstr "Silenciar volume"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:35
+msgid "Mute system volume"
+msgstr "Silenciar volumen do sistema"
+
+#: ../VolumeControl/src/VolumeItemSource.cs:39
+msgid "Volume Actions"
+msgstr "Accións de volume"
+
+#: ../VolumeControl/src/VolumeItemSource.cs:43
+msgid "Adjust your system volume"
+msgstr "Axustar o seu volume do sistema"
+
+#: ../VolumeControl/src/VolumeUnmuteItem.cs:32
+msgid "Unmute Volume"
+msgstr "Quitar silencio ao volume"
+
+#: ../VolumeControl/src/VolumeUnmuteItem.cs:36
+msgid "Unmute system volume"
+msgstr "Quitar silencio ao volume do sistema"
+
+#: ../WindowManager/src/WindowListAction.cs:65
+msgid "Action Window"
+msgstr "Xanela de acción"
+
+#: ../WindowManager/src/WindowListAction.cs:69
+msgid "Action a Window."
+msgstr "Accionar unha xanela"
+
+#: ../WindowManager/src/WindowListAction.cs:190
+msgid "Maximize"
+msgstr "Maximizar"
+
+#: ../WindowManager/src/WindowListAction.cs:194
+msgid "Make a window consume the whole screen"
+msgstr "Fai que a xanela ocupe toda a pantalla"
+
+#: ../WindowManager/src/WindowListAction.cs:217
+msgid "Minimize/Restore"
+msgstr "Minimizar/Restaurar"
+
+#: ../WindowManager/src/WindowListAction.cs:221
+msgid "Minimize/Restore a Window"
+msgstr "Minimiza/Restaura unha xanela"
+
+#: ../WindowManager/src/WindowListAction.cs:242
+msgid "Close All"
+msgstr "Pechar todo"
+
+#: ../WindowManager/src/WindowListAction.cs:246
+msgid "Close your current window."
+msgstr "Pecha a súa xanela actual."
+
+#: ../WindowManager/src/ScreenListAction.cs:277
+msgid "Tile Windows"
+msgstr "Crear mosaico das xanelas"
+
+#: ../WindowManager/src/ScreenListAction.cs:281
+msgid "Tile All Windows in Current Viewport"
+msgstr "Mosaico con todas as xanelas da vista actual"
+
+#: ../WindowManager/src/ScreenListAction.cs:346
+msgid "Cascade Windows"
+msgstr "Xanelas en cascada"
+
+#: ../WindowManager/src/ScreenListAction.cs:350
+msgid "Cascade your Windows"
+msgstr "Pon en cascada as súas xanelas"
+
+#: ../WindowManager/src/ScreenListAction.cs:404
+msgid "Restore Windows"
+msgstr "Restaurar xanelas"
+
+#: ../WindowManager/src/ScreenListAction.cs:408
+msgid "Restore Windows to their Previous Positions"
+msgstr "Restablecer posición anterior das xanelas"
+
+#: ../WindowManager/src/ScreenItemSource.cs:37
+msgid "Window Screen Items"
+msgstr "Elementos da xanela en pantalla"
+
+#: ../WindowManager/src/ScreenItemSource.cs:43
+msgid "Actions you can do to your screens."
+msgstr "Accións que vostede pode facer nas suas pantallas."
+
+#: ../WindowManager/src/ScreenItemSource.cs:65
+msgid "Current Desktop"
+msgstr "Escritorio actual"
+
+#: ../WindowManager/src/ScreenItemSource.cs:66
+msgid "Everything on the Current Desktop"
+msgstr "Todo no escritorio actual"
+
+#: ../WindowManager/src/WindowItemSource.cs:38
+msgid "Generic Window Items"
+msgstr "Elementos genéricos de ventana"
+
+#: ../WindowManager/src/WindowItemSource.cs:44
+msgid "Useful Generically Understood Window Items"
+msgstr "Elementos de xanelas entendidos como xeralmente útiles"
+
+#: ../WindowManager/src/WindowItemSource.cs:71
+msgid "Current Window"
+msgstr "Xanela actual"
+
+#: ../WindowManager/src/WindowItemSource.cs:72
+msgid "The Currently Active Window"
+msgstr "A xanela activa actual"
+
+#: ../WindowManager/src/WindowItemSource.cs:75
+msgid "Current Application"
+msgstr "Aplicativo actual"
+
+#: ../WindowManager/src/WindowItemSource.cs:76
+msgid "The Currently Active Application"
+msgstr "O aplicativo activo actual"
+
+#: ../WindowManager/src/WindowItemSource.cs:79
+msgid "Previous Window"
+msgstr "Xanela anterior"
+
+#: ../WindowManager/src/WindowItemSource.cs:80
+msgid "The Previously Active Window"
+msgstr "Xanela activa anterior"
+
+#: ../WindowManager/src/WindowItemSource.cs:83
+msgid "Previous Application"
+msgstr "Aplicativo anterior"
+
+#: ../WindowManager/src/WindowItemSource.cs:84
+msgid "The Previously Active Application"
+msgstr "O aplicativo activado anteriormente"
+
+#: ../Zim/src/ZimPage.cs:38
+msgid "Zim page in notebook: "
+msgstr "Página Zim na libreta: "
+
+#: ../Zim/src/ZimNewPageAction.cs:37
+msgid "New Zim page"
+msgstr "Nova páxina Zim"
+
+#: ../Zim/src/ZimNewPageAction.cs:41
+msgid "Create new page in Zim"
+msgstr "Crear unha nova páxina en Zim"
+
+#: ../Zim/src/ZimOpenPageAction.cs:39
+msgid "Open Zim page"
+msgstr "Abrir páxina en Zim"
+
+#: ../Zim/src/ZimOpenPageAction.cs:43
+msgid "Open selected page in Zim"
+msgstr "Abrir páxina seleccionada en Zim"
+
+#: ../Zim/src/ZimPagesItemSource.cs:38
+msgid "Zim pages"
+msgstr "Páxinas de Zim"
+
+#: ../Zim/src/ZimPagesItemSource.cs:42
+msgid "Zim Desktop Wiki pages"
+msgstr "Páginas wiki do escritorio Zim"
