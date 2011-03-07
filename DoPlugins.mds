@@ -4,7 +4,6 @@
       <Entry build="True" name="Empathy" configuration="Debug" />
       <Entry build="True" name="Rhythmbox" configuration="Debug" />
       <Entry build="True" name="Epiphany" configuration="Debug" />
-      <Entry build="True" name="Evolution" configuration="Debug" />
       <Entry build="True" name="GNOME-Session" configuration="Debug" />
       <Entry build="True" name="GoogleCalculator" configuration="Debug" />
       <Entry build="True" name="Launchpad" configuration="Debug" />
@@ -84,7 +83,6 @@
       <Entry build="True" name="Empathy" configuration="Release" />
       <Entry build="True" name="Rhythmbox" configuration="Release" />
       <Entry build="True" name="Epiphany" configuration="Release" />
-      <Entry build="True" name="Evolution" configuration="Release" />
       <Entry build="True" name="GNOME-Session" configuration="Release" />
       <Entry build="True" name="GoogleCalculator" configuration="Release" />
       <Entry build="False" name="Launchpad" configuration="Release" />
@@ -165,7 +163,6 @@
     <Execute type="None" entry="Empathy" />
     <Execute type="None" entry="Rhythmbox" />
     <Execute type="None" entry="Epiphany" />
-    <Execute type="None" entry="Evolution" />
     <Execute type="None" entry="GNOME-Session" />
     <Execute type="None" entry="GoogleCalculator" />
     <Execute type="None" entry="Launchpad" />
@@ -246,7 +243,6 @@
     <Entry filename="Empathy/Empathy.mdp" />
     <Entry filename="Rhythmbox/Rhythmbox.mdp" />
     <Entry filename="Epiphany/Epiphany.mdp" />
-    <Entry filename="Evolution/Evolution.mdp" />
     <Entry filename="GNOME-Session/GNOME-Session.mdp" />
     <Entry filename="GoogleCalculator/GoogleCalculator.mdp" />
     <Entry filename="Launchpad/Launchpad.mdp" />
