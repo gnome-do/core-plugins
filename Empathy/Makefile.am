@@ -1,4 +1,6 @@
+if HAVE_EMPATHY
 include $(top_srcdir)/build.rules.mk
+endif
 
 ASSEMBLY=Empathy
 

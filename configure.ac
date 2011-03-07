@@ -172,7 +172,7 @@ dnl {{{
 # Temporarily check for dbus-sharp only in Empathy build
 # The DBus-Sharp fork is relatively new, and probably not ubiquitous yet.
 AC_ARG_ENABLE(empathy,
-	AC_HELP_STRING([--enable-empathy], [Build plugin to control window (default: auto]),
+	AC_HELP_STRING([--enable-empathy], [Build plugin to Telepathy IM framework (default: auto]),
 	enable_empathy=$enableval,
 	enable_empathy=auto)
 
