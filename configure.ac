@@ -436,7 +436,6 @@ ${PACKAGE}-${VERSION}
   Optional plugins:
     Banshee:           ${HAVE_BANSHEE}
     Empathy:	       ${HAVE_EMPATHY}
-    Evolution:         ${HAVE_EVOLUTION}
     Flickr:            ${HAVE_FLICKR}
     Google Calendar:   ${HAVE_GCAL}
     Google Contacts:   ${HAVE_GMAIL}
