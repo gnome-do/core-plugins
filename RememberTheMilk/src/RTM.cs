@@ -455,7 +455,7 @@ namespace RememberTheMilk
 									if (rtmTaskSeries.Notes.NoteCollection.Length > 0) {
 										foreach (Note rtmNote in rtmTaskSeries.Notes.NoteCollection) {
 											notes.Add (new RTMNoteItem (rtmNote.Title, rtmNote.Text, rtmNote.ID,
-												String.Format ("http://www.rememberthemil.com/print/{0}/{1}/{2}/notes/",
+												String.Format ("http://www.rememberthemilk.com/print/{0}/{1}/{2}/notes/",
 													username, rtmList.ID, rtmTask.TaskID), rtmTask.TaskID));
 										}
 									}
