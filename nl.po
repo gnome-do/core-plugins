@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2010-06-16 21:01+0000\n"
-"Last-Translator: JW <jw00000@gmail.com>\n"
+"PO-Revision-Date: 2011-03-21 16:42+0000\n"
+"Last-Translator: Arien Lam <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-15 04:34+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-22 04:34+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -1093,7 +1093,7 @@ msgstr "NX hosts"
 
 #: ../NX/src/NXHosts.cs:71
 msgid "Parses nx sessions"
-msgstr ""
+msgstr "Leest nx sessies"
 
 #: ../OpenSearch/src/OpenSearchAction.cs:35
 msgid "Search Web"
@@ -1130,6 +1130,7 @@ msgstr "Verzend de tekst naar Pastebin"
 #: ../Pastebin/src/Providers/LodgeIt.cs:77
 msgid "Parsed url was empty. Lodge It has probably changed its format."
 msgstr ""
+"De gelezen url was leeg. Lodge It is waarschijnlijk van format veranderd."
 
 #: ../Pidgin/src/PidginSetStatusAction.cs:48
 msgid "Set status"
@@ -1568,7 +1569,7 @@ msgstr "Maak Herhalingspatroon"
 
 #: ../RememberTheMilk/src/RTMSetRecurrence.cs:37
 msgid "Sets a recurrence pattern for a task."
-msgstr ""
+msgstr "Stelt een herhalingspatroon in voor een taak"
 
 #: ../RememberTheMilk/src/RTMPostponeTask.cs:33
 msgid "Postpone"
@@ -1702,36 +1703,36 @@ msgstr ""
 
 #: ../Shelf/src/ShelfActions.cs:60
 msgid "Remove From Shelf"
-msgstr ""
+msgstr "Verwijder van de plank"
 
 #: ../Shelf/src/ShelfActions.cs:64
 msgid "Remove Selected Item From Shelf"
-msgstr ""
+msgstr "Verwijder het geselecteerde item van de plank"
 
 #: ../Shelf/src/ShelfActions.cs:101
 msgid "Add To Shelf"
-msgstr ""
+msgstr "Voeg toe aan de plank"
 
 #: ../Shelf/src/ShelfActions.cs:105
 msgid "Add Selected Item to Shelf"
-msgstr ""
+msgstr "Voeg het geselecteerde item toe aan de plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:56
 msgid " Shelf"
-msgstr ""
+msgstr " Plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:62
 #, csharp-format
 msgid "Your {0} shelf items."
-msgstr ""
+msgstr "Je {0} items op de plank."
 
 #: ../Shelf/src/ShelfItemSource.cs:90
 msgid "Shelf Items"
-msgstr ""
+msgstr "Items op de plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:94
 msgid "Your Shelf Items"
-msgstr ""
+msgstr "Jouw items op de plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:126
 msgid "Default"
@@ -1739,11 +1740,11 @@ msgstr "Standaard"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
-msgstr ""
+msgstr "Items laden in de achtergrond"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:83
 msgid "Comma-seperated list of radios to load"
-msgstr ""
+msgstr "Komma-gescheiden lijst van de te laden radio's"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:94
 msgid "Host-name of SqueezeCenter server"
@@ -1770,19 +1771,19 @@ msgstr "Maak verbinding met SSH"
 
 #: ../SSH/src/SSHHosts.cs:42
 msgid "SSH Host"
-msgstr ""
+msgstr "SSH Host"
 
 #: ../SSH/src/SSHHosts.cs:62
 msgid "SSH Hosts"
-msgstr ""
+msgstr "SSH Hosts"
 
 #: ../SSH/src/SSHHosts.cs:63
 msgid "Parses ssh-config"
-msgstr ""
+msgstr "Leest ssh-config"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
 msgid "Command for start/stop services (gksudo, etc):"
-msgstr ""
+msgstr "Commando voor start/stop services (gksudo enz.):"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
 msgid "..."
@@ -1812,7 +1813,7 @@ msgstr ""
 
 #: ../SystemServices/src/SystemServicesConfig.cs:71
 msgid "Choose the file to open"
-msgstr ""
+msgstr "Kies het bestand om te openen"
 
 #: ../SystemServices/src/SystemServicesConfig.cs:88
 msgid ""
@@ -1834,11 +1835,11 @@ msgstr "Nieuwe taak aanmaken in Tasque"
 
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
-msgstr ""
+msgstr "Toevoegen aan..."
 
 #: ../Text/src/AppendTextAction.cs:35
 msgid "Appends text to a selected file."
-msgstr ""
+msgstr "Voegt tekst to aan een geselecteerd bestand."
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
 msgid "Make Tiny Url"
@@ -1846,11 +1847,12 @@ msgstr "Maak TinyUrl"
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:66
 msgid "Creates a TinyUrl from an unwieldy mess."
-msgstr ""
+msgstr "Maakt een TinyUrl van een onhandelbare rommel."
 
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
 msgid "Use note content as note title when no title is specified."
 msgstr ""
+"De inhoud van de notitie gebruiken als titel wanneer geen titel gegeven is."
 
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
 msgid "<b>Default New Note Title</b>"
@@ -1880,7 +1882,7 @@ msgstr "Maak een nieuwe Tomboy notitie"
 
 #: ../Tomboy/src/NotesItemSource.cs:56
 msgid "Tomboy Note Indexer"
-msgstr ""
+msgstr "Tomby Notitie Indexeerder"
 
 #: ../Tomboy/src/NotesItemSource.cs:60
 msgid "Loads Tomboy notes for searching."
