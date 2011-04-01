@@ -769,6 +769,12 @@
     <Syntax>unreal</Syntax>
   </TextSyntaxItem>
   <TextSyntaxItem>
+    <SerializableName>Vala</SerializableName>
+    <SerializableDescription>Vala</SerializableDescription>
+    <SerializableIcon>file</SerializableIcon>
+    <Syntax>vala</Syntax>
+  </TextSyntaxItem>
+  <TextSyntaxItem>
     <SerializableName>VB.NET</SerializableName>
     <SerializableDescription>VB.NET</SerializableDescription>
     <SerializableIcon>file</SerializableIcon>
