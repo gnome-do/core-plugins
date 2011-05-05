@@ -228,7 +228,7 @@ AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
 
 dnl Do core references
-PKG_CHECK_MODULES([DO_PLATFORM], [do.platform >= 0.8])
+PKG_CHECK_MODULES([DO_PLATFORM], [do.platform >= 0.10])
 PKG_CHECK_MODULES([DO_PLATFORM_LINUX], [do.platform.linux >= 0.8])
 PKG_CHECK_MODULES([DO_UNIVERSE], [do.universe >= 0.8])
 

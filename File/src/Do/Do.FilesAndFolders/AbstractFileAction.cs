@@ -139,17 +139,18 @@ namespace Do.FilesAndFolders
 
 		protected string Move (string source, string destination)
 		{
-			Process mv = Process.Start ("mv",
-				QuoteBinaryArguments (source, destination));
-			mv.WaitForExit ();
+			//TODO: Eeeew.  This should definitely use GIO# instead.
+			using (Process mv = Services.Environment.ExecuteWithArguments ("mv", source, destination)) {
+				mv.WaitForExit ();
+			}
 			return Path.Combine (destination, Path.GetFileName (source));
 		}
 
 		protected string Copy (string source, string destination)
 		{
-			Process cp = Process.Start ("cp",
-				"-r " + QuoteBinaryArguments (source, destination));
-			cp.WaitForExit ();
+			using (Process cp = Services.Environment.ExecuteWithArguments ("cp", "-r", source, destination)) {
+				cp.WaitForExit ();
+			}
 			return Path.Combine (destination, Path.GetFileName (source));
 		}
 
