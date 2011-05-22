@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-26 08:04+1100\n"
-"PO-Revision-Date: 2010-06-16 21:01+0000\n"
+"PO-Revision-Date: 2011-04-08 20:43+0000\n"
 "Last-Translator: JW <jw00000@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
-"X-Generator: Launchpad (build 12309)\n"
+"X-Launchpad-Export-Date: 2011-04-09 04:33+0000\n"
+"X-Generator: Launchpad (build 12735)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -1093,7 +1093,7 @@ msgstr "NX hosts"
 
 #: ../NX/src/NXHosts.cs:71
 msgid "Parses nx sessions"
-msgstr ""
+msgstr "Leest nx sessies"
 
 #: ../OpenSearch/src/OpenSearchAction.cs:35
 msgid "Search Web"
@@ -1130,6 +1130,7 @@ msgstr "Verzend de tekst naar Pastebin"
 #: ../Pastebin/src/Providers/LodgeIt.cs:77
 msgid "Parsed url was empty. Lodge It has probably changed its format."
 msgstr ""
+"De gelezen url was leeg. Lodge It is waarschijnlijk van format veranderd."
 
 #: ../Pidgin/src/PidginSetStatusAction.cs:48
 msgid "Set status"
@@ -1568,7 +1569,7 @@ msgstr "Maak Herhalingspatroon"
 
 #: ../RememberTheMilk/src/RTMSetRecurrence.cs:37
 msgid "Sets a recurrence pattern for a task."
-msgstr ""
+msgstr "Stelt een herhalingspatroon in voor een taak"
 
 #: ../RememberTheMilk/src/RTMPostponeTask.cs:33
 msgid "Postpone"
@@ -1682,7 +1683,7 @@ msgstr "Voorziet toegang tot artiesten en albums in Rhythmbox"
 
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
 msgid "OPML feed file"
-msgstr ""
+msgstr "OPML-feedbestand"
 
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:75
 msgid "Timeout (in seconds)"
@@ -1694,44 +1695,44 @@ msgstr "Duur van de cache (in minuten)"
 
 #: ../Shelf/src/ShelfActions.cs:33
 msgid "Explore Shelf"
-msgstr ""
+msgstr "Verken Plank"
 
 #: ../Shelf/src/ShelfActions.cs:37
 msgid "Get a list of everything in your shelf"
-msgstr ""
+msgstr "Lijst van alles op je plank"
 
 #: ../Shelf/src/ShelfActions.cs:60
 msgid "Remove From Shelf"
-msgstr ""
+msgstr "Verwijder van de plank"
 
 #: ../Shelf/src/ShelfActions.cs:64
 msgid "Remove Selected Item From Shelf"
-msgstr ""
+msgstr "Verwijder het geselecteerde item van de plank"
 
 #: ../Shelf/src/ShelfActions.cs:101
 msgid "Add To Shelf"
-msgstr ""
+msgstr "Voeg toe aan de plank"
 
 #: ../Shelf/src/ShelfActions.cs:105
 msgid "Add Selected Item to Shelf"
-msgstr ""
+msgstr "Voeg het geselecteerde item toe aan de plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:56
 msgid " Shelf"
-msgstr ""
+msgstr " Plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:62
 #, csharp-format
 msgid "Your {0} shelf items."
-msgstr ""
+msgstr "Je {0} items op de plank."
 
 #: ../Shelf/src/ShelfItemSource.cs:90
 msgid "Shelf Items"
-msgstr ""
+msgstr "Items op de plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:94
 msgid "Your Shelf Items"
-msgstr ""
+msgstr "Jouw items op de plank"
 
 #: ../Shelf/src/ShelfItemSource.cs:126
 msgid "Default"
@@ -1739,23 +1740,23 @@ msgstr "Standaard"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
-msgstr ""
+msgstr "Items laden in de achtergrond"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:83
 msgid "Comma-seperated list of radios to load"
-msgstr ""
+msgstr "Komma-gescheiden lijst van de te laden radio's"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:94
 msgid "Host-name of SqueezeCenter server"
-msgstr ""
+msgstr "Hostname van de SqueezeCenter server"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:103
 msgid "Port of the SqueezeCenter server cli interface"
-msgstr ""
+msgstr "Poort van de SqueezeCenter server cli interface"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:114
 msgid "Port of the SqueezeCenter server web interface"
-msgstr ""
+msgstr "Poort van de SqueezeCenter server web interface"
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:125
 msgid ""
@@ -1770,19 +1771,19 @@ msgstr "Maak verbinding met SSH"
 
 #: ../SSH/src/SSHHosts.cs:42
 msgid "SSH Host"
-msgstr ""
+msgstr "SSH Host"
 
 #: ../SSH/src/SSHHosts.cs:62
 msgid "SSH Hosts"
-msgstr ""
+msgstr "SSH Hosts"
 
 #: ../SSH/src/SSHHosts.cs:63
 msgid "Parses ssh-config"
-msgstr ""
+msgstr "Leest ssh-config"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:46
 msgid "Command for start/stop services (gksudo, etc):"
-msgstr ""
+msgstr "Commando voor start/stop services (gksudo enz.):"
 
 #: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
 msgid "..."
@@ -1803,7 +1804,7 @@ msgstr "Lijts van alle systeemdiensten"
 #: ../SystemServices/src/Service.cs:46
 #, csharp-format
 msgid "{0} service"
-msgstr ""
+msgstr "{0} service"
 
 #: ../SystemServices/src/Service.cs:50
 #, csharp-format
@@ -1812,13 +1813,15 @@ msgstr ""
 
 #: ../SystemServices/src/SystemServicesConfig.cs:71
 msgid "Choose the file to open"
-msgstr ""
+msgstr "Kies het bestand om te openen"
 
 #: ../SystemServices/src/SystemServicesConfig.cs:88
 msgid ""
 "Selected invalid file!\n"
 "Should be executable."
 msgstr ""
+"U selecteerde een ongeldig bestand!\n"
+"Het moet een uitvoerbaar bestand zijn."
 
 #: ../Tasque/src/TasqueCategoryItem.cs:47
 msgid "Category"
@@ -1834,11 +1837,11 @@ msgstr "Nieuwe taak aanmaken in Tasque"
 
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
-msgstr ""
+msgstr "Toevoegen aan..."
 
 #: ../Text/src/AppendTextAction.cs:35
 msgid "Appends text to a selected file."
-msgstr ""
+msgstr "Voegt tekst to aan een geselecteerd bestand."
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:62
 msgid "Make Tiny Url"
@@ -1846,25 +1849,26 @@ msgstr "Maak TinyUrl"
 
 #: ../TinyUrl/src/TinyUrl/MakeUrlTinyAction.cs:66
 msgid "Creates a TinyUrl from an unwieldy mess."
-msgstr ""
+msgstr "Maakt een TinyUrl van een onhandelbare rommel."
 
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:66
 msgid "Use note content as note title when no title is specified."
 msgstr ""
+"De inhoud van de notitie gebruiken als titel wanneer geen titel gegeven is."
 
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:78
 msgid "<b>Default New Note Title</b>"
-msgstr ""
+msgstr "<b>Standaard titel voor een nieuwe notitie</b>"
 
 #. Container child vbox3.Gtk.Box+BoxChild
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:101
 msgid "First pane is content, second pane is title."
-msgstr ""
+msgstr "Het eerste paneel is de inhoud, het tweede paneel is de titel."
 
 #. Container child vbox3.Gtk.Box+BoxChild
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:114
 msgid "First pane is title, second pane is content."
-msgstr ""
+msgstr "Het eerste paneel is de titel, het tweede paneel is de inhoud."
 
 #: ../Tomboy/gtk-gui/Tomboy.TomboyConfiguration.cs:129
 msgid "<b>New Note Title and Content Entry</b>"
@@ -1880,7 +1884,7 @@ msgstr "Maak een nieuwe Tomboy notitie"
 
 #: ../Tomboy/src/NotesItemSource.cs:56
 msgid "Tomboy Note Indexer"
-msgstr ""
+msgstr "Tomby Notitie Indexeerder"
 
 #: ../Tomboy/src/NotesItemSource.cs:60
 msgid "Loads Tomboy notes for searching."
@@ -1916,11 +1920,11 @@ msgstr ""
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
 msgid "Default Source Language"
-msgstr ""
+msgstr "Standaard brontaal"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
 msgid "Default Web Interface Language"
-msgstr ""
+msgstr "Standaard taal voor webinterface"
 
 #: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
 msgid "Enable / Disable Language"
@@ -2294,11 +2298,11 @@ msgstr "Start de geselecteerde Virtuele Machine"
 
 #: ../VirtualBox/src/StartAction.cs:70
 msgid "Open in GUI"
-msgstr ""
+msgstr "In GUI openen"
 
 #: ../VirtualBox/src/StartAction.cs:71
 msgid "Open in VirtualBox GUI"
-msgstr ""
+msgstr "In VirtualBox GUI openen"
 
 #: ../VirtualBox/src/StartAction.cs:77
 msgid "Start Headless"
@@ -2310,11 +2314,11 @@ msgstr ""
 
 #: ../VirtualBox/src/ResumeAction.cs:39
 msgid "Resume Virtual Machine"
-msgstr ""
+msgstr "Virtuele Machine hervatten"
 
 #: ../VirtualBox/src/ResumeAction.cs:43
 msgid "Resume the selected Virtual Machine"
-msgstr ""
+msgstr "De geselecteerde Virtuele Machine hervatten"
 
 #: ../VolumeControl/src/VolumeDownItem.cs:35
 msgid "Decrease system volume"
