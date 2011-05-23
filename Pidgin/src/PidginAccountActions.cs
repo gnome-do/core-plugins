@@ -92,7 +92,7 @@ namespace PidginPlugin
 		}
 
 		public override string Description {
-			get { return AddinManager.CurrentLocalizer.GetString ("Disble pidgin account"); }
+			get { return AddinManager.CurrentLocalizer.GetString ("Disable Pidgin account"); }
 		}
 
 		public override string Icon {
