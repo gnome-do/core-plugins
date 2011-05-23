@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-01-26 08:04+1100\n"
+"POT-Creation-Date: 2011-05-22 18:49+1000\n"
 "PO-Revision-Date: 2009-10-08 14:28+0000\n"
 "Last-Translator: Håkan Hagman <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
-"X-Generator: Launchpad (build 12309)\n"
+"X-Launchpad-Export-Date: 2011-05-23 04:34+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -26,14 +26,6 @@ msgstr "Tilldela alias..."
 msgid "Give an item an alternate name."
 msgstr "Ge ett objekt ett alternativt namn."
 
-#: ../Alias/src/DeleteAliasAction.cs:36
-msgid "Delete Alias"
-msgstr "Ta bort alias"
-
-#: ../Alias/src/DeleteAliasAction.cs:40
-msgid "Deletes an alias."
-msgstr "Tar bort ett alias."
-
 #: ../Alias/src/AliasItemSource.cs:140
 msgid "Alias items"
 msgstr "Aliasobjekt"
@@ -42,13 +34,13 @@ msgstr "Aliasobjekt"
 msgid "Aliased items from Do's universe."
 msgstr "Aliasobjekt från Do:s universum."
 
-#: ../Archive/src/ExtractArchiveAction.cs:40
-msgid "Extract archive"
-msgstr "Packa upp arkiv"
+#: ../Alias/src/DeleteAliasAction.cs:35
+msgid "Delete Alias"
+msgstr "Ta bort alias"
 
-#: ../Archive/src/ExtractArchiveAction.cs:44
-msgid "Extract an archive to a given folder"
-msgstr "Packar upp ett arkiv till en given mapp."
+#: ../Alias/src/DeleteAliasAction.cs:39
+msgid "Deletes an alias."
+msgstr "Tar bort ett alias."
 
 #: ../Archive/src/CreateArchiveAction.cs:41
 msgid "Create archive"
@@ -58,7 +50,24 @@ msgstr "Skapa arkiv"
 msgid "Create an archive with the selected item"
 msgstr "Skapa ett arkiv med det valda objektet."
 
-#: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
+#: ../Archive/src/ExtractArchiveAction.cs:40
+msgid "Extract archive"
+msgstr "Packa upp arkiv"
+
+#: ../Archive/src/ExtractArchiveAction.cs:44
+msgid "Extract an archive to a given folder"
+msgstr "Packar upp ett arkiv till en given mapp."
+
+#: ../Baconator/src/BaconateAction.cs:55
+msgid "Baconate link"
+msgstr ""
+
+#: ../Baconator/src/BaconateAction.cs:59
+msgid "Bacon bacon beef, bacon beef"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:56 ../Exaile/src/ExaileItems.cs:50
+#: ../Rhythmbox/src/RhythmboxItems.cs:50
 msgid "Browse Artists"
 msgstr "Bläddra bland artister"
 
@@ -66,7 +75,8 @@ msgstr "Bläddra bland artister"
 msgid "Browse Music by Artist"
 msgstr "Bläddra musik efter artist"
 
-#: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
+#: ../Banshee/src/BrowseMediaItems.cs:69 ../Exaile/src/ExaileItems.cs:58
+#: ../Rhythmbox/src/RhythmboxItems.cs:59
 msgid "Browse Albums"
 msgstr "Blädra bland album"
 
@@ -98,6 +108,10 @@ msgstr "Lägg till i uppspelningskö"
 msgid "Add media to play queue"
 msgstr "Lägg till media till spelkö"
 
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr "All musik av"
+
 #: ../Banshee/src/MediaItemSource.cs:46
 msgid "Banshee Media"
 msgstr "Musikspelaren Banshee"
@@ -106,11 +120,8 @@ msgstr "Musikspelaren Banshee"
 msgid "Indexes Media from Banshee Media Player"
 msgstr "Indexerar media från Banshee Media Player"
 
-#: ../Banshee/src/MediaItems.cs:191
-msgid "All Music by"
-msgstr "All musik av"
-
-#: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
+#: ../Banshee/src/NextAction.cs:32 ../Exaile/src/NextAction.cs:42
+#: ../Rhythmbox/src/NextAction.cs:42
 msgid "Next"
 msgstr "Nästa"
 
@@ -118,16 +129,18 @@ msgstr "Nästa"
 msgid "Play next track"
 msgstr "Nästa låt"
 
-#: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
+#: ../Banshee/src/PauseAction.cs:33 ../Exaile/src/PauseAction.cs:42
+#: ../Rhythmbox/src/PauseAction.cs:42
 msgid "Pause"
 msgstr "Pausa"
 
-#: ../Banshee/src/PauseAction.cs:36
+#: ../Banshee/src/PauseAction.cs:37
 msgid "Pause playing track"
 msgstr "Pausa"
 
-#: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
-#: ../Rhythmbox/src/PlayAction.cs:40
+#: ../Banshee/src/PlayAction.cs:35 ../Exaile/src/PlayAction.cs:42
+#: ../Exaile/src/PlayItemAction.cs:41 ../Rhythmbox/src/PlayAction.cs:42
+#: ../Rhythmbox/src/PlayItemAction.cs:41
 msgid "Play"
 msgstr "Spela"
 
@@ -135,7 +148,8 @@ msgstr "Spela"
 msgid "Play from your Banshee Collection"
 msgstr "Spela låtar från din Bansheesamling"
 
-#: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
+#: ../Banshee/src/PreviousAction.cs:32 ../Exaile/src/PreviousAction.cs:42
+#: ../Rhythmbox/src/PreviousAction.cs:42
 msgid "Previous"
 msgstr "Föregående"
 
@@ -151,32 +165,32 @@ msgstr "Sök igenom musikspelaren Banshee"
 msgid "Search your entire Banshee collection"
 msgstr "Sök igenom din Bansheesamling"
 
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:44
 msgid "Choose BibTeX file"
 msgstr "Välj BibTeX-fil"
 
 #. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:50
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
 msgid "Select A File"
 msgstr "Välj en fil"
 
 #. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:58
 msgid "Select your documents folder"
 msgstr "Ange din dokumentkatalog"
 
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:70
 msgid "Choose documents folder"
 msgstr "Välj dokumentkatalog"
 
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
-msgid "ClawsMail contacts"
-msgstr "ClawsMail-kontakter"
+#: ../Chromium/src/ChromiumBookmarkItemSource.cs:44
+msgid "Chromium Bookmarks"
+msgstr ""
 
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
-msgid "Contacts in ClawsMail address book"
-msgstr "Kontakter i ClawsMail-adressbok"
+#: ../Chromium/src/ChromiumBookmarkItemSource.cs:48
+msgid "Search your Chromium bookmarks"
+msgstr ""
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:71
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:41
@@ -184,7 +198,6 @@ msgid "Primary Email"
 msgstr "Huvudsaklig mejladress"
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:74
-#: ../Evolution/src/EmailContactDetailItem.cs:34
 msgid "Email"
 msgstr "E-post"
 
@@ -195,6 +208,22 @@ msgstr "Annan epostadress"
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:82
 msgid "Other"
 msgstr "Övrigt"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr "ClawsMail-kontakter"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr "Kontakter i ClawsMail-adressbok"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Cl.ickable objekt"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr "Användbara Cl.ickable objekt"
 
 #: ../Cl.ickable/src/ClipAction.cs:38
 msgid "Clip"
@@ -212,19 +241,11 @@ msgstr "Cl.ickable klipp"
 msgid "Opens your cl.ickable clips"
 msgstr "Öppna dina Cl.ickable klipp"
 
-#: ../Cl.ickable/src/ClickableItemSource.cs:31
-msgid "Cl.ickable Items"
-msgstr "Cl.ickable objekt"
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:35
-msgid "Usefull Cl.ickable Items"
-msgstr "Användbara Cl.ickable objekt"
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:53
 msgid "http://opensource.atlassian.com/confluence/spring"
 msgstr "http://opensource.atlassian.com/confluence/spring"
 
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:96
 msgid "username1"
 msgstr "användarnamn1"
 
@@ -235,23 +256,6 @@ msgstr "Sök i Confluence"
 #: ../Confluence/src/ConfluenceSearchAction.cs:93
 msgid "Searches Confluence and returns results to Do"
 msgstr "Söker i Confluence och returnerar resultaten till Do"
-
-#: ../Del.icio.us/src/TagsItemSource.cs:34
-msgid "Del.icio.us Tags"
-msgstr "Del.icio.us taggar"
-
-#: ../Del.icio.us/src/TagsItemSource.cs:38
-msgid "Organizes your del.icio.bookmarks by tag"
-msgstr "Organiserar dina del.icio.us.bookmarks efter taggar"
-
-#: ../Del.icio.us/src/TagItem.cs:45
-msgid "Untagged del.ico.us bookmarks"
-msgstr "Icke taggade del.icio.us-bokmärken"
-
-#: ../Del.icio.us/src/TagItem.cs:47
-#, csharp-format
-msgid "del.icio.us bookmarks tagged with {0}"
-msgstr "del.icio.us-bokmärken taggade med {0}"
 
 #: ../Del.icio.us/src/BookmarksItemSource.cs:37
 msgid "Del.icio.us bookmarks"
@@ -269,22 +273,22 @@ msgstr "Sök i del.icio.us"
 msgid "del.icio.us tag search"
 msgstr "del.icio.us taggsökning"
 
-#: ../DiskMounter/src/OpenVolumeAction.cs:40
-#: ../SystemServices/src/SystemServicesConfig.cs:74
-msgid "Open"
-msgstr "Öppna"
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr "Icke taggade del.icio.us-bokmärken"
 
-#: ../DiskMounter/src/OpenVolumeAction.cs:44
-msgid "Open a removable volume"
-msgstr "Öppna en flyttningsbar volym"
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr "del.icio.us-bokmärken taggade med {0}"
 
-#: ../DiskMounter/src/UnmountAction.cs:31
-msgid "Unmount"
-msgstr "Avmontera"
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr "Del.icio.us taggar"
 
-#: ../DiskMounter/src/UnmountAction.cs:35
-msgid "Unmount volume"
-msgstr "Avmontera volym"
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.us bookmarks by tag"
+msgstr ""
 
 #: ../DiskMounter/src/MountAction.cs:32
 msgid "Mount"
@@ -293,6 +297,222 @@ msgstr "Montera"
 #: ../DiskMounter/src/MountAction.cs:36
 msgid "Mount volume"
 msgstr "Monteringsvolym"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:40
+#: ../SystemServices/src/SystemServicesConfig.cs:75
+msgid "Open"
+msgstr "Öppna"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:44
+msgid "Open a removable volume"
+msgstr "Öppna en flyttningsbar volym"
+
+#: ../DiskMounter/src/UnmountAction.cs:33
+msgid "Unmount"
+msgstr "Avmontera"
+
+#: ../DiskMounter/src/UnmountAction.cs:37
+msgid "Unmount or eject a volume"
+msgstr ""
+
+#: ../Dropbox/gtk-gui/Dropbox.DropboxConfig.cs:80
+msgid "Dropbox Location"
+msgstr ""
+
+#: ../Dropbox/src/Config/DropboxConfig.cs:68
+msgid "Select location of Dropbox folder"
+msgstr ""
+
+#: ../Dropbox/src/DropboxAbstractAction.cs:48
+msgid "Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxLinkAction.cs:40
+msgid "Add to Dropbox..."
+msgstr ""
+
+#: ../Dropbox/src/DropboxLinkAction.cs:44
+msgid "Links a file or folder to your Dropbox."
+msgstr ""
+
+#: ../Dropbox/src/DropboxPuburlAction.cs:41
+msgid "Get public URL"
+msgstr ""
+
+#: ../Dropbox/src/DropboxPuburlAction.cs:45
+msgid "Gets public URL of a shared Dropbox file."
+msgstr ""
+
+#: ../Dropbox/src/DropboxRevisionsAction.cs:41
+msgid "View revisions"
+msgstr ""
+
+#: ../Dropbox/src/DropboxRevisionsAction.cs:45
+msgid "Views file history in Dropbox web interface."
+msgstr ""
+
+#: ../Dropbox/src/DropboxShareAction.cs:42
+msgid "Share with Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxShareAction.cs:46
+msgid "Links a file to your Dropbox public folder."
+msgstr ""
+
+#: ../Dropbox/src/DropboxStartAction.cs:41
+msgid "Start Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxStartAction.cs:45
+msgid "Starts the Dropbox daemon."
+msgstr ""
+
+#: ../Dropbox/src/DropboxStopAction.cs:39
+msgid "Stop Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxStopAction.cs:43
+msgid "Stops the Dropbox daemon."
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:41
+msgid "Stop sharing with Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:45
+msgid "Unlinks a file from your Dropbox public folder."
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:67
+#, csharp-format
+msgid "Stopped sharing"
+msgstr ""
+
+#: ../Dropbox/src/DropboxWebInterfaceAction.cs:39
+msgid "Dropbox web interface"
+msgstr ""
+
+#: ../Dropbox/src/DropboxWebInterfaceAction.cs:43
+msgid "View folder in Dropbox web interface."
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountActions.cs:36
+#: ../Pidgin/src/PidginAccountActions.cs:37
+msgid "Sign on"
+msgstr "Logga in"
+
+#: ../Empathy/src/EmpathyAccountActions.cs:41
+msgid "Enable empathy account"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountActions.cs:77
+#: ../Pidgin/src/PidginAccountActions.cs:91
+msgid "Sign off"
+msgstr "Logga ut"
+
+#: ../Empathy/src/EmpathyAccountActions.cs:82
+msgid "Disable empathy account"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountItemSource.cs:41
+msgid "Empathy Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountItemSource.cs:46
+msgid "Available Empathy IM Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseAccountItem.cs:31
+#: ../Pidgin/src/PidginBrowseAccountItem.cs:31
+msgid "Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseAccountItem.cs:36
+msgid "Browse Empathy Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseBuddyItem.cs:30
+msgid "Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseBuddyItem.cs:35
+msgid "Browse Empathy Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseStatusItem.cs:33
+#: ../Pidgin/src/PidginBrowseStatusItem.cs:31
+#: ../Skype/src/SkypeBrowseStatusItem.cs:31
+msgid "Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseStatusItem.cs:38
+msgid "Browse Empathy Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathyChatAction.cs:39 ../Pidgin/src/PidginChatAction.cs:41
+#: ../Skype/src/SkypeChatAction.cs:35
+msgid "Chat"
+msgstr "Chatt"
+
+#: ../Empathy/src/EmpathyChatAction.cs:44 ../Pidgin/src/PidginChatAction.cs:45
+msgid "Send an instant message to a friend."
+msgstr "Skicika ett snabbmeddelande till en vän."
+
+#: ../Empathy/src/EmpathyContactItemSource.cs:56
+msgid "Empathy Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyContactItemSource.cs:61
+msgid "Contacts on your Empathy contact alist."
+msgstr ""
+
+#: ../Empathy/src/EmpathySavedStatusItemSource.cs:60
+msgid "Empathy Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathySavedStatusItemSource.cs:65
+msgid "Saved Empathy statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathySetStatusAction.cs:43
+#: ../Pidgin/src/PidginSetStatusAction.cs:41
+msgid "Set status"
+msgstr "Ställ in status"
+
+#: ../Empathy/src/EmpathySetStatusAction.cs:48
+msgid "Set empathy status message"
+msgstr ""
+
+#: ../Empathy/src/EmpathyStatusItem.cs:54
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43
+#: ../Pidgin/src/PidginStatusTypeItem.cs:42 ../Skype/src/Skype.cs:67
+msgid "Offline"
+msgstr "Frånkopplad"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:55
+#: ../Pidgin/src/PidginStatusTypeItem.cs:43
+msgid "Available"
+msgstr "Tillgänglig"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:56
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46 ../Skype/src/Skype.cs:69
+msgid "Away"
+msgstr "Inte vid datorn"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:57
+#: ../Pidgin/src/PidginStatusTypeItem.cs:45 ../Skype/src/Skype.cs:72
+msgid "Invisible"
+msgstr "Osynlig"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:58
+#: ../Pidgin/src/PidginStatusTypeItem.cs:44
+msgid "Busy"
+msgstr "Upptagen"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:59
+#: ../Pidgin/src/PidginStatusTypeItem.cs:47
+msgid "Unknown Status"
+msgstr "Okänd status"
 
 #: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
 msgid "Play Slideshow"
@@ -310,40 +530,109 @@ msgstr "Epiphany-bokmärken"
 msgid "Indexes your Epiphany bookmarks."
 msgstr "Indexterar dina Epiphany-bokmärken"
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:34
-#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
-msgid "Work Phone"
-msgstr "Jobbtelefon"
+#: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:31
+#: ../Firefox/src/BrowseBookmarkItem.cs:30
+#: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:31
+msgid "Bookmarks"
+msgstr ""
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:35
-#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
-msgid "Home Phone"
-msgstr "Hemtelefon"
+#: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:35
+msgid "Browse Bookmarks"
+msgstr ""
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:36
-msgid "Mobile Phone"
-msgstr "Mobiltelefon"
+#: ../Exaile/src/ExaileItems.cs:50
+msgid "Browse Exaile Music by Artist"
+msgstr ""
 
-#: ../Evolution/src/ContactItemSource.cs:58
-#: ../Evolution/src/ContactItemSource.cs:59
-msgid "Evolution Contacts"
-msgstr "Kontaker i Evolution"
+#: ../Exaile/src/ExaileItems.cs:58
+msgid "Browse Exaile Music by Album"
+msgstr ""
 
-#: ../Evolution/src/AddressContactDetailItem.cs:34
-msgid "Address"
-msgstr "Adress"
+#: ../Exaile/src/ExaileItems.cs:67 ../Rhythmbox/src/RhythmboxItems.cs:69
+msgid "Show Current Track"
+msgstr "Visa nuvarande spår"
 
-#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
+#: ../Exaile/src/ExaileItems.cs:68
+msgid "Show Notification of Current Track in Exaile"
+msgstr ""
+
+#: ../Exaile/src/ExaileItems.cs:73 ../Rhythmbox/src/RhythmboxItems.cs:87
+#: ../VolumeControl/src/VolumeUpItem.cs:31
+msgid "Volume Up"
+msgstr "Höj volymen"
+
+#: ../Exaile/src/ExaileItems.cs:74
+msgid "Increase Exaile Playback Volume"
+msgstr ""
+
+#: ../Exaile/src/ExaileItems.cs:79 ../Rhythmbox/src/RhythmboxItems.cs:93
+#: ../VolumeControl/src/VolumeDownItem.cs:31
+msgid "Volume Down"
+msgstr "Sänk volymen"
+
+#: ../Exaile/src/ExaileItems.cs:80
+msgid "Decrease Exaile Playback Volume"
+msgstr ""
+
+#: ../Exaile/src/MusicItems.cs:77 ../Rhythmbox/src/MusicItems.cs:77
+msgid "All music by"
+msgstr "All musik på"
+
+#: ../Exaile/src/MusicItemSource.cs:44
+msgid "Exaile Music"
+msgstr ""
+
+#: ../Exaile/src/MusicItemSource.cs:48
+msgid "Provides access to artists and albums from Exaile."
+msgstr ""
+
+#: ../Exaile/src/NextAction.cs:46
+msgid "Skip to the next track in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PauseAction.cs:46
+msgid "Pause music in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PlayAction.cs:46
+msgid "Play music in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PlayItemAction.cs:45
+msgid "Play an item in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PreviousAction.cs:46
+msgid "Skip to the previous track in Exaile."
+msgstr ""
+
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:186
 msgid "Show hidden files"
 msgstr "Visa dolda filer"
 
-#: ../File/src/PathNodeView.cs:51
-msgid "Folder"
-msgstr "Katalog"
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:203
+msgid "Indexed Folders"
+msgstr ""
 
-#: ../File/src/PathNodeView.cs:57
-msgid "Depth"
-msgstr "Djup"
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:311
+msgid "Ignored Folders"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:35
+msgid "Choose a folder to index"
+msgstr "Välj en mapp att indexera"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:36
+msgid "Choose a folder to ignore"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
+msgid "Copy to..."
+msgstr "Kopiera till..."
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
+msgid "Copies a file or folder to another location."
+msgstr "Kopierar en fil eller mapp till ett annat ställe."
 
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
 msgid "Delete File"
@@ -353,37 +642,19 @@ msgstr "Ta bort fil"
 msgid "Deletes a file or folder."
 msgstr "Tar bort en fil eller mapp."
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
-msgid "Choose a folder to index"
-msgstr "Välj en mapp att indexera"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:79
+msgid "Files and Folders"
+msgstr "Filer och mappar"
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
-#: ../SystemServices/src/SystemServicesConfig.cs:73
-msgid "Cancel"
-msgstr "Avbryt"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:84
+msgid "Catalogs important files and folders for quick access."
+msgstr "Katalogisera viktiga mappar och filer för snabb åtkomst"
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
-msgid "Choose folder"
-msgstr "Välj katalog"
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
-msgid "Rename file..."
-msgstr "Byt filnamn..."
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
-msgid "Renames a file."
-msgstr "Byter namn på en fil."
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
-msgid "Create New Folder"
-msgstr "Skapa ny katalog"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
-msgid "Creates an new folder."
-msgstr "Skapar en ny katalog."
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:103
+msgid "Home Folder"
+msgstr ""
 
 #: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
-#: ../RememberTheMilk/src/RTMMoveTask.cs:35
 msgid "Move to..."
 msgstr "Flytta till..."
 
@@ -399,30 +670,6 @@ msgstr "Flytta till papperskorgen"
 msgid "Moves a file or folder to the trash"
 msgstr "Flyttar en fil eller mapp till papperskorgen."
 
-#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
-msgid "Recent Files"
-msgstr "Senaste filer"
-
-#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
-msgid "Finds recently-opened files."
-msgstr "Visar senast öppnade filer"
-
-#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
-msgid "Copy to..."
-msgstr "Kopiera till..."
-
-#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
-msgid "Copies a file or folder to another location."
-msgstr "Kopierar en fil eller mapp till ett annat ställe."
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
-msgid "Files and Folders"
-msgstr "Filer och mappar"
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
-msgid "Catalogs important files and folders for quick access."
-msgstr "Katalogisera viktiga mappar och filer för snabb åtkomst"
-
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
 msgid "Create New File"
 msgstr "Skapa ny fil"
@@ -435,13 +682,65 @@ msgstr "Skapar en ny, tom fil."
 msgid "Untitled"
 msgstr "Namnlös"
 
-#: ../Firefox/src/BookmarkItemSource.cs:55
-msgid "Firefox Bookmarks"
-msgstr "Webbläsaren Firefoxs bokmärken"
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
+msgid "Create New Folder"
+msgstr "Skapa ny katalog"
 
-#: ../Firefox/src/BookmarkItemSource.cs:59
-msgid "Finds Firefox bookmarks in your default profile."
-msgstr "Visar din webbläsares bokmärken."
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
+msgid "Creates an new folder."
+msgstr "Skapar en ny katalog."
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:70
+msgid "Recent Files"
+msgstr "Senaste filer"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:74
+msgid "Finds recently-opened files."
+msgstr "Visar senast öppnade filer"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
+msgid "Rename file..."
+msgstr "Byt filnamn..."
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
+msgid "Renames a file."
+msgstr "Byter namn på en fil."
+
+#: ../File/src/IgnorePathNodeView.cs:48 ../File/src/IndexPathNodeView.cs:49
+msgid "Folder"
+msgstr "Katalog"
+
+#: ../File/src/IndexPathNodeView.cs:55
+msgid "Depth"
+msgstr "Djup"
+
+#: ../Firefox/src/BrowseBookmarkItem.cs:34
+msgid "Browse Firefox Bookmarks"
+msgstr ""
+
+#: ../Firefox/src/BrowseHistoryItem.cs:32
+msgid "History"
+msgstr ""
+
+#: ../Firefox/src/BrowseHistoryItem.cs:36
+msgid "Browse Firefox History"
+msgstr ""
+
+#: ../Firefox/src/FolderItem.cs:51
+msgid "A Firefox Bookmarks Directory"
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:69
+msgid "Firefox Places"
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:73
+msgid "Search your bookmarks and history."
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:250
+msgid "Mozilla Bookmarks"
+msgstr ""
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
 msgid ""
@@ -454,12 +753,12 @@ msgstr ""
 "utföra denna handling. "
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:171
 msgid "<b>Account</b>"
 msgstr "<b>Konto</b>"
 
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:118
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:136
 msgid "_Authorize"
 msgstr "_Auktorisera"
 
@@ -498,17 +797,17 @@ msgstr ""
 msgid "<b>Tags</b>"
 msgstr "<b>Taggar</b>"
 
-#: ../Flickr/src/UploadAction.cs:45
-msgid "Upload photo"
-msgstr "Överföra foto"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:36
+msgid "Flickr Upload"
+msgstr ""
 
-#: ../Flickr/src/UploadAction.cs:49
-msgid "Upload one or more photos to Flickr"
-msgstr "Överför ett eller flera foton till Flickr."
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:121
+msgid "_Hide"
+msgstr ""
 
-#: ../Flickr/src/FlickrItemSource.cs:34
-msgid "Account"
-msgstr "Konto"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:146
+msgid "_OK"
+msgstr ""
 
 #: ../Flickr/src/AccountConfig.cs:91
 msgid "Click to compete authorization"
@@ -519,11 +818,62 @@ msgstr "Klicka för att verkställa auktorisering."
 msgid "Thank you {0} for allowing Do access to Flickr."
 msgstr "Tack för att du {0} tillåter Do att komma åt ditt Flickr-konto."
 
-#: ../GNOME-Dictionary/src/DefineAction.cs:51
+#: ../Flickr/src/FlickrItemSource.cs:34
+msgid "Account"
+msgstr "Konto"
+
+#: ../Flickr/src/UploadAction.cs:40
+msgid "Upload photo"
+msgstr "Överföra foto"
+
+#: ../Flickr/src/UploadAction.cs:44
+msgid "Upload one or more photos to Flickr"
+msgstr "Överför ett eller flera foton till Flickr."
+
+#: ../Flickr/src/UploadDialog.cs:32
+#, csharp-format
+msgid "Uploading {0}..."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:33
+#, csharp-format
+msgid "Uploading {0} of {1}..."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:34
+msgid "Finished uploading images to Flickr."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:35
+#, csharp-format
+msgid "Uploaded {0} images"
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:36
+msgid "Your images are still being uploaded."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:41
+msgid "Your images are being uploaded to Flickr."
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:42
+msgid "Calculate"
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:46
+msgid "Use GNOME Calculator to make simple calculations."
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:61
+msgid "Sorry I couldn't understand your expression, try another way"
+msgstr ""
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:52
 msgid "Define"
 msgstr "Definiera"
 
-#: ../GNOME-Dictionary/src/DefineAction.cs:56
+#: ../GNOME-Dictionary/src/DefineAction.cs:57
 msgid "Define a given word."
 msgstr "Definerar ett givet ord."
 
@@ -534,14 +884,6 @@ msgstr "Nuvarande fönster"
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
 msgid "Take a screenshot of the current window."
 msgstr "Tar en skärmbild av nuvarande fönster"
-
-#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
-msgid "Whole screen"
-msgstr "Hela skärmen"
-
-#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
-msgid "Take a screenshot of the entire screen."
-msgstr "Tar en skärmbil av hela skärmen"
 
 #: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:37
 #, csharp-format
@@ -555,6 +897,14 @@ msgid_plural "Wait {0} seconds before taking the screenshot."
 msgstr[0] "Väntar i {0} seunder innan en skärmbild tas."
 msgstr[1] "Väntar i {0} seunder innan en skärmbild tas."
 
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
+msgid "GNOME Screenshot Items"
+msgstr "GNOMEs skärmbildstagare"
+
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
+msgid "Whole screen or current window."
+msgstr "Hela skärmen eller nuvarande fönster."
+
 #: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:34
 msgid "Take screenshot"
 msgstr "Ta skärmbild"
@@ -563,13 +913,13 @@ msgstr "Ta skärmbild"
 msgid "Takes a screenshot with optional delay."
 msgstr "Tar en skärmbild med eventuell fördröjning"
 
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
-msgid "GNOME Screenshot Items"
-msgstr "GNOMEs skärmbildstagare"
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
+msgid "Whole screen"
+msgstr "Hela skärmen"
 
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
-msgid "Whole screen or current window."
-msgstr "Hela skärmen eller nuvarande fönster."
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
+msgid "Take a screenshot of the entire screen."
+msgstr "Tar en skärmbil av hela skärmen"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
 msgid "GNOME Session Commands"
@@ -627,14 +977,6 @@ msgstr "Lås skärmen"
 msgid "Lock your screen."
 msgstr "Låser skärmen"
 
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:39
-msgid "Open Profile"
-msgstr "Öppna profil"
-
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
-msgid "Opens a GNOME Terminal with the selected profile."
-msgstr "Öppnar en GNOME-terminal med den valda profilen"
-
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
 msgid "Open Terminal Here"
 msgstr "Öppna terminal här"
@@ -642,6 +984,22 @@ msgstr "Öppna terminal här"
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
 msgid "Opens a GNOME Terminal in a given location."
 msgstr "Öppnar ett terminalfönster på en given plats"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:36
+msgid "Unnamed Profile"
+msgstr "Namnlös profil"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:37
+msgid "GNOME Terminal Profile"
+msgstr "Gnomes terminalprofiler"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:49
+msgid "GNOME Terminal Profiles"
+msgstr "Gnomes terminalprofiler"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:53
+msgid "Indexes your GNOME Terminal profiles."
+msgstr "Indexerar dina terminalprofiler"
 
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
 msgid "Run in Terminal"
@@ -651,34 +1009,35 @@ msgstr "Kör i terminal"
 msgid "Runs a command in GNOME Terminal."
 msgstr "Kör ett kommando i en Gnome-ternimal"
 
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
-msgid "GNOME Terminal Profiles"
-msgstr "Gnomes terminalprofiler"
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
-msgid "Indexes your GNOME Terminal profiles."
-msgstr "Indexerar dina terminalprofiler"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:33
-msgid "Unnamed Profile"
-msgstr "Namnlös profil"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:34
-msgid "GNOME Terminal Profile"
-msgstr "Gnomes terminalprofiler"
-
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:44
 msgid "Perform a calculation using Google Calculator."
 msgstr "Genomför en uträkning med Googles räknedosa"
 
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:92
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:76
 msgid "Google Calculator could not evaluate the expression."
 msgstr "Googles räknedosa kunde inte utföra beräkningen"
 
 #: ../GoogleCalendar/src/Configuration.cs:42
-#: ../GoogleDocs/src/Configuration.cs:41
+#: ../GoogleDocs/src/Configuration.cs:38
 msgid "E-Mail:"
 msgstr "E-post:"
+
+#: ../GoogleCalendar/src/GCalClient.cs:40
+msgid "All Events"
+msgstr "Alla händelser"
+
+#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:34
+#, csharp-format
+msgid "An error has occurred in {0}"
+msgstr "Ett fel inträffade i {0}"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr "Kunde inte ansluta till GCal-servicen"
+
+#: ../GoogleCalendar/src/GCalendarItem.cs:45
+msgid "Google Calendar"
+msgstr "Google-kalender"
 
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:40
 msgid "Google Calendars"
@@ -688,14 +1047,21 @@ msgstr "Google-kalendrar"
 msgid "Indexes your Google Calendars"
 msgstr "Visar dina Google-kalendrar"
 
-#: ../GoogleCalendar/src/GCalClient.cs:40
-msgid "All Events"
-msgstr "Alla händelser"
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
+msgid "New Event"
+msgstr "Ny händelse"
 
-#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
-#, csharp-format
-msgid "An error has occurred in {0}"
-msgstr "Ett fel inträffade i {0}"
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
+msgid "Create a new event in Google Calendar"
+msgstr "Skapa en ny händelse i din Google-kalender"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
+msgid "Search Events"
+msgstr "Sök händelser"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
+msgid "Search Google Calendar for Events"
+msgstr "Sök i dina Google-kalendrar efter händelser"
 
 #: ../GoogleCalendar/src/GCalendarViewActions.cs:41
 msgid "View Event"
@@ -713,30 +1079,6 @@ msgstr "Visa kalender"
 msgid "Open calendar in browser"
 msgstr "Öppnar en kalender i webbläsaren"
 
-#: ../GoogleCalendar/src/GCalendarItem.cs:45
-msgid "Google Calendar"
-msgstr "Google-kalender"
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
-msgid "Search Events"
-msgstr "Sök händelser"
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
-msgid "Search Google Calendar for Events"
-msgstr "Sök i dina Google-kalendrar efter händelser"
-
-#: ../GoogleCalendar/src/GCal.cs:34
-msgid "Failed to connect to GCal service"
-msgstr "Kunde inte ansluta till GCal-servicen"
-
-#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
-msgid "New Event"
-msgstr "Ny händelse"
-
-#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
-msgid "Create a new event in Google Calendar"
-msgstr "Skapa en ny händelse i din Google-kalender"
-
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:42
 msgid "Primary Phone"
 msgstr "Primär telefon"
@@ -748,6 +1090,14 @@ msgstr "E-post hem"
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:44
 msgid "Work Email"
 msgstr "E-post arbete"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
+msgid "Home Phone"
+msgstr "Hemtelefon"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
+msgid "Work Phone"
+msgstr "Jobbtelefon"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:47
 msgid "Primary Address"
@@ -761,6 +1111,14 @@ msgstr "Hemadress"
 msgid "Work Address"
 msgstr "Address arbete"
 
+#: ../GoogleContacts/src/GMailContactItemSource.cs:38
+msgid "GMail Contacts"
+msgstr "GMail-kontaker"
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:42
+msgid "Index your GMail contacts"
+msgstr "Indexserar ina GMail-kontakter"
+
 #: ../GoogleContacts/src/GMail.cs:35
 msgid "An error occurred connecting to google, are your credentials valid?"
 msgstr "Kunde inte ansluta till google, har du angivit rätt uppgifter?"
@@ -772,89 +1130,89 @@ msgid ""
 msgstr ""
 "Inloggningsuppgifter saknas. Ange dem i insticksmodulsinställningarna."
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:38
-msgid "GMail Contacts"
-msgstr "GMail-kontaker"
+#: ../GoogleContacts/src/RecentConversationsAction.cs:39
+msgid "View recent conversations"
+msgstr ""
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:42
-msgid "Index your GMail contacts"
-msgstr "Indexserar ina GMail-kontakter"
+#: ../GoogleContacts/src/RecentConversationsAction.cs:43
+msgid "View recent emails and chat logs with a friend"
+msgstr ""
 
-#: ../GoogleDocs/src/GDocs.cs:149
+#: ../GoogleDocs/src/GDocsAbstractItem.cs:43
+msgid "Google Docs Generic Document"
+msgstr "Google dokument allmänna dokument"
+
+#: ../GoogleDocs/src/GDocs.cs:139
 msgid "Uploading failed."
 msgstr "Uppladdningen misslyckades."
 
-#: ../GoogleDocs/src/GDocs.cs:150
+#: ../GoogleDocs/src/GDocs.cs:140
 msgid "An error occurred when uploading files to Google Docs."
 msgstr "Ett fel inträffade under uppladdningen till Goolge Docs."
 
-#: ../GoogleDocs/src/GDocs.cs:157
+#: ../GoogleDocs/src/GDocs.cs:147
 msgid "Deleting failed."
 msgstr "Bortagningen misslyckades."
 
-#: ../GoogleDocs/src/GDocs.cs:158
+#: ../GoogleDocs/src/GDocs.cs:148
 msgid "An error occurred when deleting the document at Google Docs."
 msgstr "Ett fel inträffade under borttagningen hos Goolge Docs."
 
-#: ../GoogleDocs/src/GDocs.cs:165
+#: ../GoogleDocs/src/GDocs.cs:155
 msgid "Document deleted."
 msgstr "Dokumentet borttaget."
 
-#: ../GoogleDocs/src/GDocs.cs:166
+#: ../GoogleDocs/src/GDocs.cs:156
 #, csharp-format
 msgid ""
 "The document '{0}' has been successfully moved into Trash at Google Docs."
 msgstr "Dokumentet '{0}' flyttades till Google Documents papperskorg."
 
-#: ../GoogleDocs/src/GDocsPresentationItem.cs:36
-msgid "Google Docs Presentation"
-msgstr "Google dokument presentation"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:36
-msgid "Google Docs"
-msgstr "Google Docs"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:40
-msgid "Indexes your documents stored at Google Docs"
-msgstr "Indexerar dina Google Docs-dokument"
-
-#: ../GoogleDocs/src/GDocsItem.cs:46
-msgid "Google Docs Generic Document"
-msgstr "Google dokument allmänna dokument"
-
-#: ../GoogleDocs/src/GDocsDocumentItem.cs:36
+#: ../GoogleDocs/src/GDocsDocumentItem.cs:33
 msgid "Google Docs Text Document"
 msgstr "Google Docs Textdokument"
 
-#: ../GoogleDocs/src/GDocsPDFItem.cs:36
+#: ../GoogleDocs/src/GDocsItemSource.cs:33
+msgid "Google Docs"
+msgstr "Google Docs"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:37
+msgid "Indexes your documents stored at Google Docs"
+msgstr "Indexerar dina Google Docs-dokument"
+
+#: ../GoogleDocs/src/GDocsPDFItem.cs:33
 msgid "Google Docs PDF Document"
 msgstr "Google Docs PDF-dokument"
 
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:38
-msgid "Delete Document"
-msgstr "Ta bort dokument"
+#: ../GoogleDocs/src/GDocsPresentationItem.cs:33
+msgid "Google Docs Presentation"
+msgstr "Google dokument presentation"
 
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:42
-msgid "Move a document into Trash at Google Docs"
-msgstr "Flytta ett dokument till Google Docs papperskorg"
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
-msgid "Upload Document"
-msgstr "Överför ett dokument"
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:45
-msgid "Upload a document to Google Docs"
-msgstr "Överför ett dokument till Google Docs"
-
-#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
+#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:33
 msgid "Google Docs Spreadsheet"
 msgstr "Google Docs kalkylark"
 
-#: ../GoogleMaps/src/MapAction.cs:39
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:35
+msgid "Delete Document"
+msgstr "Ta bort dokument"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:39
+msgid "Move a document into Trash at Google Docs"
+msgstr "Flytta ett dokument till Google Docs papperskorg"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:37
+msgid "Upload Document"
+msgstr "Överför ett dokument"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
+msgid "Upload a document to Google Docs"
+msgstr "Överför ett dokument till Google Docs"
+
+#: ../GoogleMaps/src/MapAction.cs:40
 msgid "Map"
 msgstr "Karta"
 
-#: ../GoogleMaps/src/MapAction.cs:44
+#: ../GoogleMaps/src/MapAction.cs:45
 msgid "Map a location or route in Google maps."
 msgstr "Visar en plats eller sträcka med Googles kartor"
 
@@ -899,6 +1257,14 @@ msgstr "Använd strikt filtrering"
 msgid "<b>SafeSearch Preferences</b>"
 msgstr "<b>SafeSearch Inställningar</b>"
 
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:45
+msgid "I'm Feeling Lucky!"
+msgstr "Jag har tur"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:54
+msgid "Searches Google and takes you to the first result"
+msgstr "Gör en googlesökning och tar dig till det första resultatet."
+
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:81
 msgid "Search Google"
 msgstr "Sök på Google"
@@ -906,14 +1272,6 @@ msgstr "Sök på Google"
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:90
 msgid "Allows you to perform Google Searches from Do"
 msgstr "Tillåter dig att göra googlesökningar från Do"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
-msgid "I'm Feeling Lucky!"
-msgstr "Jag har tur"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
-msgid "Searches Google and takes you to the first result"
-msgstr "Gör en googlesökning och tar dig till det första resultatet."
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
 msgid ""
@@ -940,26 +1298,17 @@ msgstr "_Hämta registreringskod"
 msgid "<b>Registration Code</b>"
 msgstr "<b>Registreringskod</b>"
 
-#: ../ImageShack/src/ImageShackAction.cs:57
+#: ../ImageShack/src/ImageShackAction.cs:54
 msgid "Upload to ImageShack"
 msgstr "Överför till ImageShack"
 
-#: ../ImageShack/src/ImageShackAction.cs:61
+#: ../ImageShack/src/ImageShackAction.cs:58
 msgid "Uploads the image to ImageShack."
 msgstr "Överför bilden till ImageShack"
 
-#: ../ImageShack/src/ImageShackAction.cs:106
-msgid "ImageShack exception: "
-msgstr "ImageShack undantag: "
-
-#: ../ImageShack/src/ImageShackAction.cs:116
+#: ../ImageShack/src/ImageShackAction.cs:101
 msgid "File size exceeds ImageShack's 1.5MB limit."
 msgstr "Filstorleken överskrider ImageShack:s gräns på 1.5Mb."
-
-#: ../ImageShack/src/ImageShackAction.cs:196
-msgid "Parsed url was empty. ImageShack has probably changed its format."
-msgstr ""
-"Den tolkade adressen var tom. ImageShack har antagligen ändrat dess format."
 
 #: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
 #: ../ImageShack/src/Notifications.cs:53
@@ -982,7 +1331,13 @@ msgstr "Sök i Launchpad"
 msgid "Search Launchpad properties."
 msgstr "Sök Launchpad:s egenskaper."
 
+#: ../LocateFiles/src/LocateFilesAction.cs:35
+msgid "Locate found 0 files for: "
+msgstr ""
+
 #: ../LocateFiles/src/LocateFilesAction.cs:39
+#: ../LocateFiles/src/LocateFilesAction.cs:79
+#: ../LocateFiles/src/LocateFilesAction.cs:110
 msgid "Locate Files"
 msgstr "Lokalisera filer"
 
@@ -990,29 +1345,41 @@ msgstr "Lokalisera filer"
 msgid "Search your filesystem using locate."
 msgstr "Sök igenom ditt filsystem genom att använda locate."
 
-#: ../ManLookUp/src/ManualPageItemSource.cs:50
-msgid "Manual pages (man)"
-msgstr "Manualsidor (man)"
+#: ../LocateFiles/src/LocateFilesAction.cs:80
+msgid "No text provided for searching."
+msgstr ""
 
-#: ../ManLookUp/src/ManualPageItemSource.cs:57
-msgid "Search and read help documentation (man)"
-msgstr "Sök bland och läs hjälpdokumentation (man)"
-
-#: ../ManLookUp/src/ReadManualPageAction.cs:42
+#: ../ManLookUp/src/ReadManualPageAction.cs:40
 msgid "Read manual page (man)"
 msgstr "Läs manualsida (man)"
 
-#: ../ManLookUp/src/ReadManualPageAction.cs:49
+#: ../ManLookUp/src/ReadManualPageAction.cs:47
 msgid "Look up and read a manual page."
 msgstr "Slå upp och läs en manuasida."
 
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:56
 msgid "Show friend status updates"
 msgstr "Visa vänners statusänding"
 
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:70
+msgid "Show direct messages"
+msgstr ""
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:83
 msgid "<b>General</b>"
 msgstr "<b>Allmänt</b>"
+
+#: ../Microblogging/src/FriendItem.cs:22
+msgid "No Status"
+msgstr ""
+
+#: ../Microblogging/src/FriendSource.cs:46
+msgid "Microblog friends"
+msgstr "Mikroblogg-vänner"
+
+#: ../Microblogging/src/FriendSource.cs:50
+msgid "Indexes your microblog friends"
+msgstr "Indexera dina mikroblogg-vänner"
 
 #: ../Microblogging/src/MicroblogClient.cs:42
 #, csharp-format
@@ -1032,14 +1399,6 @@ msgstr ""
 "Kunde inte posta en tweet. Kontrollera dina inloggningsuppgifter. Om du är "
 "bakom en proxy, försäkra att inställningarna i /system/http_proxy är "
 "korrekta."
-
-#: ../Microblogging/src/FriendSource.cs:47
-msgid "Microblog friends"
-msgstr "Mikroblogg-vänner"
-
-#: ../Microblogging/src/FriendSource.cs:51
-msgid "Indexes your microblog friends"
-msgstr "Indexera dina mikroblogg-vänner"
 
 #: ../Microblogging/src/Notifications.cs:40
 #, csharp-format
@@ -1061,8 +1420,8 @@ msgstr "Misslyckades med att posta '{0}' till '{1}'"
 
 #: ../Microblogging/src/Notifications.cs:60
 #, csharp-format
-msgid "'{0}' sucessfully posted to {1}"
-msgstr "'{0}' lyckosamt skickat till {1}"
+msgid "'{0}' successfully posted to {1}"
+msgstr ""
 
 #: ../Microblogging/src/PostAction.cs:44
 #, csharp-format
@@ -1103,8 +1462,8 @@ msgid "Opera Bookmarks"
 msgstr "Opera-bokmärken"
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:28
-msgid "Indexes your Opera 6 bookmarks"
-msgstr "Indexera dina bokmärken i Opera 6"
+msgid "Indexes your Opera bookmarks"
+msgstr ""
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
 msgid "Supported Codes\t\t\t"
@@ -1122,33 +1481,17 @@ msgstr "Sänd text till kopiering"
 msgid "Sends the text to Pastebin."
 msgstr "Sänder text till kopiering"
 
-#: ../Pastebin/src/Providers/LodgeIt.cs:77
+#: ../Pastebin/src/Providers/LodgeIt.cs:76
 msgid "Parsed url was empty. Lodge It has probably changed its format."
 msgstr "Tolkad url är tom. Lodge It har antagligen ändrat sitt format."
 
-#: ../Pidgin/src/PidginSetStatusAction.cs:48
-msgid "Set status"
-msgstr "Ställ in status"
+#: ../Pidgin/src/PidginAccountActions.cs:41
+msgid "Enable pidgin account"
+msgstr "Aktiverar Pidgin-konto"
 
-#: ../Pidgin/src/PidginSetStatusAction.cs:52
-msgid "Set pidgin status message"
-msgstr "Ställ in Pidgin-statusmeddelande"
-
-#: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
-msgid "Pidgin Statuses"
-msgstr "Pidginstatusar"
-
-#: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
-msgid "Saved Pidgin statuses"
-msgstr "Sparade Pidginstatusar"
-
-#: ../Pidgin/src/PidginContactItemSource.cs:59
-msgid "Pidgin Buddies"
-msgstr "Pidgin-vänner"
-
-#: ../Pidgin/src/PidginContactItemSource.cs:63
-msgid "Buddies on your Pidgin buddy list."
-msgstr "Vänner från Pidgin"
+#: ../Pidgin/src/PidginAccountActions.cs:95
+msgid "Disble pidgin account"
+msgstr "Inaktivera Pidgin-konto"
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:41
 msgid "Pidgin Accounts"
@@ -1158,71 +1501,68 @@ msgstr "Pidgin-konton"
 msgid "Available Pidgin IM Accounts"
 msgstr "Tillgängliga Pidgin-konton"
 
-#: ../Pidgin/src/PidginAccountActions.cs:36
-msgid "Sign on"
-msgstr "Logga in"
+#: ../Pidgin/src/PidginBrowseAccountItem.cs:35
+msgid "Browse Pidgin Accounts"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:40
-msgid "Enable pidgin account"
-msgstr "Aktiverar Pidgin-konto"
+#: ../Pidgin/src/PidginBrowseBuddyItem.cs:31
+#: ../Skype/src/SkypeBrowseBuddyItem.cs:31
+msgid "Buddies"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:82
-msgid "Sign off"
-msgstr "Logga ut"
+#: ../Pidgin/src/PidginBrowseBuddyItem.cs:35
+msgid "Browse Pidgin Buddies"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:86
-msgid "Disble pidgin account"
-msgstr "Inaktivera Pidgin-konto"
+#: ../Pidgin/src/PidginBrowseStatusItem.cs:35
+msgid "Browse Pidgin Statuses"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:45
-msgid "Offline"
-msgstr "Frånkopplad"
+#: ../Pidgin/src/PidginContactItemSource.cs:66
+msgid "Pidgin Buddies"
+msgstr "Pidgin-vänner"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:46
-msgid "Available"
-msgstr "Tillgänglig"
+#: ../Pidgin/src/PidginContactItemSource.cs:70
+msgid "Buddies on your Pidgin buddy list."
+msgstr "Vänner från Pidgin"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:47
-msgid "Busy"
-msgstr "Upptagen"
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43 ../Skype/src/Skype.cs:66
+msgid "Online"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:48
-msgid "Invisible"
-msgstr "Osynlig"
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:54
+msgid "Handle"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:49
-msgid "Away"
-msgstr "Inte vid datorn"
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:47
+msgid "Pidgin Statuses"
+msgstr "Pidginstatusar"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:50
-msgid "Unknown Status"
-msgstr "Okänd status"
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:51
+msgid "Saved Pidgin statuses"
+msgstr "Sparade Pidginstatusar"
 
-#: ../Pidgin/src/PidginChatAction.cs:41
-msgid "Chat"
-msgstr "Chatt"
+#: ../Pidgin/src/PidginSetStatusAction.cs:45
+msgid "Set pidgin status message"
+msgstr "Ställ in Pidgin-statusmeddelande"
 
-#: ../Pidgin/src/PidginChatAction.cs:45
-msgid "Send an instant message to a friend."
-msgstr "Skicika ett snabbmeddelande till en vän."
-
-#: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:70
 msgid "Application Key"
 msgstr "Programnyckel"
 
-#: ../PingFM/gtk-gui/PingFM.Configuration.cs:81
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:87
 msgid "<i>Verify and save your account information</i>"
 msgstr "<i>Verifiera och spara dina kontouppgifter</i>"
 
-#: ../PingFM/src/PingFMClient.cs:36
+#: ../PingFM/src/PingFMClient.cs:35
 msgid "Message posted"
 msgstr "Meddelandet skickat"
 
-#: ../PingFM/src/PingFMClient.cs:37
+#: ../PingFM/src/PingFMClient.cs:36
 msgid "Message posting failed"
 msgstr "Meddelandesändning misslyckades"
 
-#: ../PingFM/src/PingFMClient.cs:38
+#: ../PingFM/src/PingFMClient.cs:37
 msgid ""
 "Cannot connect to the Ping.FM API server, or the server responds with an "
 "error."
@@ -1230,17 +1570,17 @@ msgstr ""
 "Kan inte ansluta till Ping.FM API-server eller så är svaret från servern "
 "felaktigt."
 
-#: ../PingFM/src/PingFMClient.cs:39
+#: ../PingFM/src/PingFMClient.cs:38
 #, csharp-format
 msgid "Your {0} message has been successfully posted to {1}"
 msgstr "Ditt {0}-meddelande skickades till {1}"
 
-#: ../PingFM/src/PingFMClient.cs:40
+#: ../PingFM/src/PingFMClient.cs:39
 #, csharp-format
 msgid "Your message has been successfully posted to all {0} services"
 msgstr "Ditt meddelande har skickats till alla {0}-tjänster"
 
-#: ../PingFM/src/PingFMClient.cs:67
+#: ../PingFM/src/PingFMClient.cs:66
 msgid "Microblog"
 msgstr "Microblog"
 
@@ -1248,17 +1588,13 @@ msgstr "Microblog"
 msgid "Status"
 msgstr "Status"
 
-#: ../PingFM/src/PingFMClient.cs:82
+#: ../PingFM/src/PingFMClient.cs:83
 msgid "Error occurred in service response"
 msgstr "Fel uppstod i tjänstsvar"
 
-#: ../PingFM/src/PingFMServiceItem.cs:51
-msgid "Web service group supported by Ping.FM"
-msgstr "Webbtjänstgrupp som stöds av Ping.FM"
-
-#: ../PingFM/src/PingFMServiceItem.cs:52
-msgid "Web service supported by Ping.FM"
-msgstr "Webbtjänst som stöds av Ping.FM"
+#: ../PingFM/src/PingFM.cs:31
+msgid "Failed to connect to Ping.FM service"
+msgstr "Misslyckades att ansluta till tjänsten Ping.FM"
 
 #: ../PingFM/src/PingFMPost.cs:35
 msgid "Post via Ping.FM"
@@ -1271,17 +1607,30 @@ msgstr ""
 "Skicka ett textmeddelande som mikroblogg eller som statusuppdatering i ditt "
 "sociala nätverk"
 
-#: ../PingFM/src/PingFM.cs:32
-msgid "Failed to connect to Ping.FM service"
-msgstr "Misslyckades att ansluta till tjänsten Ping.FM"
+#: ../PingFM/src/PingFMServiceItem.cs:53
+#, csharp-format
+msgid "Post message to multiple {0} services."
+msgstr ""
 
-#: ../PingFM/src/PingFMServiceItemSource.cs:35
+#: ../PingFM/src/PingFMServiceItem.cs:54
+msgid "Service supported by Ping.FM"
+msgstr ""
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:33
 msgid "Ping.FM Services"
 msgstr "Ping.FM-tjänster"
 
-#: ../PingFM/src/PingFMServiceItemSource.cs:39
+#: ../PingFM/src/PingFMServiceItemSource.cs:37
 msgid "Web services suppported by Ping.FM"
 msgstr "Webbtjänster som stöds av Ping.FM"
+
+#: ../Putty/src/PuttyAction.cs:41
+msgid "Connect with PuTTY"
+msgstr "Anslut med PuTTY"
+
+#: ../Putty/src/PuttyAction.cs:45
+msgid "Create new conenction with PuTTY"
+msgstr "Skapa ny anslutning med PuTTY"
 
 #: ../Putty/src/PuttySession.cs:49
 #, csharp-format
@@ -1296,13 +1645,9 @@ msgstr "PuTTY-sessioner"
 msgid "PuTTY saved sessions"
 msgstr "Sparade PuTTY-sessioner"
 
-#: ../Putty/src/PuttyAction.cs:40
-msgid "Connect with PuTTY"
-msgstr "Anslut med PuTTY"
-
-#: ../Putty/src/PuttyAction.cs:44
-msgid "Create new conenction with PuTTY"
-msgstr "Skapa ny anslutning med PuTTY"
+#: ../Qalculate/src/QalculateAction.cs:21
+msgid "Perform a calculation using Qalculate."
+msgstr ""
 
 #: ../Quote/src/QuoteAction.cs:40
 msgid "Submit Quote"
@@ -1312,7 +1657,7 @@ msgstr "Skicka till Quote"
 msgid "Sends text to Quote service."
 msgstr "Skickar text till tjänsten Quote."
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:96
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:102
 msgid ""
 "Do needs your authorization in order to manage tasks in your Remember The "
 "Milk account. Press the \"Authorize\" button to open a web browser and give "
@@ -1322,19 +1667,27 @@ msgstr ""
 "konto. Klicka på knappen \"Authorize\" för att öppna en webbläsare och ge Do "
 "befogenhet."
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:191
-msgid "For overdue task(s)"
-msgstr "För försenade uppgifter"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:202
+msgid "minute(s)"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:203
-msgid "When actions (e.g. rename) are completed"
-msgstr "När åtgärder (t.ex byt namn) är klara"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:213
+msgid "Notify overdue task(s) every"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:224
-msgid "<b>Notification</b>"
-msgstr "<b>Notifiering</b>"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:244
+msgid "Show notification when actions are completed"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:260
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:256
+msgid "Return the newly created task"
+msgstr ""
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:268
+msgid "<b>Interactivity</b>"
+msgstr ""
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:305
 msgid ""
 "You can enter some advanced search operators here to limit the tasks Do "
 "indexes. E.g. \"priority:1 AND status:incomplete\" will force Do to only "
@@ -1344,11 +1697,11 @@ msgstr ""
 "indexerar.  Exempelvis \"priority:1 AND status:incomplete\" tvingar Do att "
 "enbart indexera ej färdigställda sysslor med hög prioritet."
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:294
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:339
 msgid "<b>Filter</b>"
 msgstr "<b>Filter</b>"
 
-#: ../RememberTheMilk/src/Configuration.cs:68
+#: ../RememberTheMilk/src/Configuration.cs:116
 msgid ""
 "A webpage from Remember The Milk should be opened in your web browser now. "
 "Please follow the instructions there and come back to complete the "
@@ -1358,131 +1711,166 @@ msgstr ""
 "Vänligen följ instruktionerna där och återvänd sedan hit för att slutföra "
 "attesteringen genom att klicka på knappen nedan."
 
-#: ../RememberTheMilk/src/Configuration.cs:76
+#: ../RememberTheMilk/src/Configuration.cs:124
 msgid "Complete authorization"
 msgstr "Slutför attesteringen"
 
-#: ../RememberTheMilk/src/Configuration.cs:93
+#: ../RememberTheMilk/src/Configuration.cs:150
 msgid "Fail to complete authorization."
 msgstr "Misslyckades med att slutföra attesteringen."
 
-#: ../RememberTheMilk/src/Configuration.cs:96
+#: ../RememberTheMilk/src/Configuration.cs:153
 msgid "Authorize again"
 msgstr "Attestera igen"
 
-#: ../RememberTheMilk/src/Configuration.cs:102
+#: ../RememberTheMilk/src/Configuration.cs:162
 #, csharp-format
 msgid ""
 "Thank you {0}, RTM plugin is now authorized to operate on your account."
 msgstr "Tack {0}. Insticksprogrammet RTM är nu attesterat för ditt konto."
 
-#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
-msgid "Uncomplete"
-msgstr "Ej klar"
+#: ../RememberTheMilk/src/RTMAddTags.cs:35
+msgid "Add Tag(s)"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
-msgid "Mark a selected task as \"incomplete\"."
-msgstr "Markera syssla som \"ej klar\""
+#: ../RememberTheMilk/src/RTMAddTags.cs:39
+msgid "Add one or more tags to a task."
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
-msgid "Delete"
-msgstr "Ta bort"
+#: ../RememberTheMilk/src/RTMCompleteTask.cs:35
+msgid "Complete"
+msgstr "Färdig"
 
-#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
-msgid "Delete a selected task from Remember The Milk"
-msgstr "Ta bort markerad syssla från Remember The Milk"
+#: ../RememberTheMilk/src/RTMCompleteTask.cs:39
+msgid "Complete a task"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTM.cs:268
+#: ../RememberTheMilk/src/RTM.cs:118
+msgid "Failed to initialize authentication."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:140
+msgid "Failed to complete authentication."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:328
 #, csharp-format
-msgid "{0} Task Overdue"
-msgid_plural "{0} Tasks Overdue"
-msgstr[0] "{0} Uppgift försenad"
-msgstr[1] "{0} Uppgifter försenade"
+msgid "An error occured when updating RTM lists: {0}"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTM.cs:368
+#: ../RememberTheMilk/src/RTM.cs:362
+#, csharp-format
+msgid "An error happend when updating RTM locations: {0}"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:411
+#, csharp-format
+msgid "An error occured when updating RTM tasks: {0}"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:487
+msgid "High"
+msgstr "Hög"
+
+#: ../RememberTheMilk/src/RTM.cs:488
+msgid "High Priority"
+msgstr "Hög prioritet"
+
+#: ../RememberTheMilk/src/RTM.cs:489
+msgid "Medium"
+msgstr "Mellan"
+
+#: ../RememberTheMilk/src/RTM.cs:490
+msgid "Medium Priority"
+msgstr "Medelhög prioritet"
+
+#: ../RememberTheMilk/src/RTM.cs:491
+msgid "Low"
+msgstr "Låg"
+
+#: ../RememberTheMilk/src/RTM.cs:492
+msgid "Low Priority"
+msgstr "Låg prioritet"
+
+#: ../RememberTheMilk/src/RTM.cs:493
+msgid "None"
+msgstr "Ingen"
+
+#: ../RememberTheMilk/src/RTM.cs:494
+msgid "No Priority"
+msgstr "Ingen prioritet"
+
+#: ../RememberTheMilk/src/RTM.cs:495
+msgid "Up"
+msgstr "Upp"
+
+#: ../RememberTheMilk/src/RTM.cs:496
+msgid "Increase the priority"
+msgstr "Öka prioriteten"
+
+#: ../RememberTheMilk/src/RTM.cs:497
+msgid "Down"
+msgstr "Ned"
+
+#: ../RememberTheMilk/src/RTM.cs:498
+msgid "Decrease the priority"
+msgstr "Minska prioriteten"
+
+#: ../RememberTheMilk/src/RTM.cs:516
+msgid "New Task Created"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:517
+msgid ""
+"The task has been successully added to your Remember The milk task list."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:540
 msgid "Task Deleted"
 msgstr "Syssla borttagen"
 
-#: ../RememberTheMilk/src/RTM.cs:369
+#: ../RememberTheMilk/src/RTM.cs:541
 msgid ""
 "The selected task has been successfully deleted from your Remember The Milk "
 "task list"
 msgstr "Den valda sysslan har tagits bort från din Remember The Milk-lista"
 
-#: ../RememberTheMilk/src/RTM.cs:383
+#: ../RememberTheMilk/src/RTM.cs:553
 msgid "Task Completed"
 msgstr "Syssla slutförd"
 
-#: ../RememberTheMilk/src/RTM.cs:384
+#: ../RememberTheMilk/src/RTM.cs:554
 msgid ""
 "The selected task in your Remember The Milk task list has been marked as "
 "completed."
 msgstr "Den valda sysslan i Remember The Milk har markerats som slutförd."
 
-#: ../RememberTheMilk/src/RTM.cs:392
-msgid "High"
-msgstr "Hög"
-
-#: ../RememberTheMilk/src/RTM.cs:393
-msgid "High Priority"
-msgstr "Hög prioritet"
-
-#: ../RememberTheMilk/src/RTM.cs:394
-msgid "Medium"
-msgstr "Mellan"
-
-#: ../RememberTheMilk/src/RTM.cs:395
-msgid "Medium Priority"
-msgstr "Medelhög prioritet"
-
-#: ../RememberTheMilk/src/RTM.cs:396
-msgid "Low"
-msgstr "Låg"
-
-#: ../RememberTheMilk/src/RTM.cs:397
-msgid "Low Priority"
-msgstr "Låg prioritet"
-
-#: ../RememberTheMilk/src/RTM.cs:398
-msgid "None"
-msgstr "Ingen"
-
-#: ../RememberTheMilk/src/RTM.cs:399
-msgid "No Priority"
-msgstr "Ingen prioritet"
-
-#: ../RememberTheMilk/src/RTM.cs:400
-msgid "Up"
-msgstr "Upp"
-
-#: ../RememberTheMilk/src/RTM.cs:401
-msgid "Increase the priority"
-msgstr "Öka prioriteten"
-
-#: ../RememberTheMilk/src/RTM.cs:402
-msgid "Down"
-msgstr "Ned"
-
-#: ../RememberTheMilk/src/RTM.cs:403
-msgid "Decrease the priority"
-msgstr "Minska prioriteten"
-
-#: ../RememberTheMilk/src/RTM.cs:419
+#: ../RememberTheMilk/src/RTM.cs:569
 msgid "Priority Changed"
 msgstr "Prioritet ändrad"
 
-#: ../RememberTheMilk/src/RTM.cs:420
+#: ../RememberTheMilk/src/RTM.cs:570
 msgid ""
 "The priority of the selected task in your Remember The Milk task list has "
 "been changed."
 msgstr ""
 "Den valda sysslans prioritet i din Remember The Milk-lista har ändrats"
 
-#: ../RememberTheMilk/src/RTM.cs:437
+#: ../RememberTheMilk/src/RTM.cs:586
+msgid "Due Date/Time Unset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:587
+msgid ""
+"The due date/time of the selected task in your Remember The Milk task list "
+"has been unset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:589
 msgid "Due Date/Time Changed"
 msgstr "Sluttid eller -datum har ändrats"
 
-#: ../RememberTheMilk/src/RTM.cs:438
+#: ../RememberTheMilk/src/RTM.cs:590
 msgid ""
 "The due date/time of the selected task in your Remember The Milk task list "
 "has been changed."
@@ -1490,29 +1878,34 @@ msgstr ""
 "Sluttid eller -datum för den valda sysslan i din Remember The Milk att-göra-"
 "lista har ändrats."
 
-#: ../RememberTheMilk/src/RTM.cs:452
+#: ../RememberTheMilk/src/RTM.cs:602
 msgid "Task Moved"
 msgstr "Sysslan har flyttats"
 
-#: ../RememberTheMilk/src/RTM.cs:468
+#: ../RememberTheMilk/src/RTM.cs:617
 msgid "Task Renamed"
 msgstr "Sysslan har döpts om"
 
-#: ../RememberTheMilk/src/RTM.cs:483
+#: ../RememberTheMilk/src/RTM.cs:618
+#, csharp-format
+msgid "The selected task has been renamed to \"{0}\"."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:631
 msgid "Task Postponed"
 msgstr "Sysslan har senarelagts"
 
-#: ../RememberTheMilk/src/RTM.cs:484
+#: ../RememberTheMilk/src/RTM.cs:632
 msgid ""
 "The selected task in your Remember The Milk task list has been postponed"
 msgstr ""
 "Den valda sysslan i din Remember The Milk att-göra-lista ha senarelagts"
 
-#: ../RememberTheMilk/src/RTM.cs:498
+#: ../RememberTheMilk/src/RTM.cs:644
 msgid "Recurrence Pattern Changed"
 msgstr "Återkommandemönstret har ändrats"
 
-#: ../RememberTheMilk/src/RTM.cs:499
+#: ../RememberTheMilk/src/RTM.cs:645
 msgid ""
 "The recurrence pattern of the selected task in your Remember The Milk task "
 "list has been changed."
@@ -1520,155 +1913,466 @@ msgstr ""
 "Återkommandemönstret för den valda sysslan i din Remember The Milk att-göra-"
 "lista har ändrats."
 
-#: ../RememberTheMilk/src/RTM.cs:513
+#: ../RememberTheMilk/src/RTM.cs:658
+msgid "Task URL Set"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:659
+msgid "The selected task has been assigned a URL."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:661
+msgid "Task URL Reset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:662
+msgid "The URL for the selected task has been reset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:677
+msgid "Task Estimated Time Unset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:678
+msgid "The estimated time for the selected task has been unset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:680
+msgid "Task Estimated Time Set"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:681
+msgid "The selected task has been assigned an estimated time."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:694
+msgid "Location Reset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:695
+msgid "The location of the selected task has been cleared."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:697
+msgid "Location changed"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:698
+msgid "The location of the selected task has been successfully changed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:712
 msgid "Task Uncompleted"
 msgstr "Sysslan ej klar"
 
-#: ../RememberTheMilk/src/RTM.cs:514
+#: ../RememberTheMilk/src/RTM.cs:713
 msgid "The selected task has been marked as \"incomplete\"."
 msgstr "Den valda sysslan har markerats som \"ej klar\"."
 
-#: ../RememberTheMilk/src/RTMNewTask.cs:37
+#: ../RememberTheMilk/src/RTM.cs:734
+msgid "New List Created"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:735
+#, csharp-format
+msgid "A new task list named \"{0}\" has been created."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:748
+msgid "List Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:749
+msgid "The selected task list has been deleted."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:765
+msgid "Task List Renamed"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:766
+#, csharp-format
+msgid "The selected task list has been renamed to \"{0}\"."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:804
+msgid "Note Added"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:805
+msgid "A note has been added to the selected task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:820
+msgid "Note Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:821
+msgid "The selected note has been deleted from the selected task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:840
+msgid "Tags Added"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:841
+msgid "New tags have been successfully added to the selected task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:857
+msgid "Tags Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:858
+msgid "Selected tags have been successfully removed from the selected task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:884
+msgid "Token verification failed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:894
+msgid "Remember The Milk timeline creation failed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:900
+msgid "Not authorized to use a Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:934
+#, csharp-format
+msgid "{0} Task Overdue"
+msgid_plural "{0} Tasks Overdue"
+msgstr[0] "{0} Uppgift försenad"
+msgstr[1] "{0} Uppgifter försenade"
+
+#: ../RememberTheMilk/src/RTMDeleteList.cs:35
+msgid "Delete List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteList.cs:39
+msgid "Delete a task list from Remember The Milk"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteNote.cs:35
+msgid "Delete Note"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteNote.cs:39
+msgid "Detele the a note from a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTags.cs:35
+msgid "Delete Tag(s)"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTags.cs:39
+msgid "Detele one or more tags from a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
+msgid "Delete"
+msgstr "Ta bort"
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
+msgid "Delete a task from Remember The Milk"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItem.cs:50
+msgid "Remember The Milk Task List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItemSource.cs:36
+msgid "Remember The Milk Lists"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItemSource.cs:40
+msgid "Task Lists in your Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMLocationItemSource.cs:35
+msgid "Remember The Milk Locations"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMLocationItemSource.cs:39
+msgid "Locations associated with your Remember The Milk tasks."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:35
+msgid "Move to ..."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:39
+msgid "Move the seleted task to another list"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:35
+msgid "New List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:39
+msgid "Create a new task list."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:59
+msgid "No list name provided for RTMNewList action"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewNote.cs:36
+msgid "New Note"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewNote.cs:40
+msgid "Add a new note to a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:35
+msgid "New Task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:39
 msgid "Create a new task in Remember The Milk"
 msgstr "Skapa ny syssla i Remember The Milk"
 
-#: ../RememberTheMilk/src/RTMMoveTask.cs:39
-msgid "Move a seleted task from one list to another"
-msgstr "Flytta en vald syssla från en lista till en annan"
+#: ../RememberTheMilk/src/RTMNewTask.cs:73
+msgid "No title provided for new task."
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMCompleteTask.cs:35
-msgid "Complete"
-msgstr "Färdig"
-
-#: ../RememberTheMilk/src/RTMCompleteTask.cs:39
-msgid "Complete a selected task"
-msgstr "Sluför en vald syssla"
-
-#: ../RememberTheMilk/src/RTMRenameTask.cs:33
-msgid "Rename to..."
-msgstr "Byt namn till..."
-
-#: ../RememberTheMilk/src/RTMRenameTask.cs:37
-msgid "Give the seleted task a new name"
-msgstr "Byt namn på den valda sysslan"
-
-#: ../RememberTheMilk/src/RTMSetRecurrence.cs:33
-msgid "Set Recurrence"
-msgstr "Gör till återkommande"
-
-#: ../RememberTheMilk/src/RTMSetRecurrence.cs:37
-msgid "Sets a recurrence pattern for a task."
-msgstr "Välj återkommandemönster för en syssla."
-
-#: ../RememberTheMilk/src/RTMPostponeTask.cs:33
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:35
 msgid "Postpone"
 msgstr "Senarelägg"
 
-#: ../RememberTheMilk/src/RTMPostponeTask.cs:37
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:39
 msgid "Postpone a selected task in Remember The Milk"
 msgstr "Senarelägg en vald syssla i Remember The Milk"
+
+#: ../RememberTheMilk/src/RTMRenameList.cs:35
+#: ../RememberTheMilk/src/RTMRenameTask.cs:35
+msgid "Rename"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMRenameList.cs:39
+msgid "Give a list a new name."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMRenameTask.cs:39
+msgid "Give the seleted task a new name"
+msgstr "Byt namn på den valda sysslan"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:35
+msgid "Set Due Date/Time"
+msgstr "Sätt sluttid eller -datum"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:39
+msgid "Set or change the due date/time of a task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:36
+msgid "Set Estimated Time"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:40
+msgid "Set or reset the estimated time for a task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:102
+msgid "Invalid Time format"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:103
+msgid "The estimated time entered cannot be understood."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetLocation.cs:35
+msgid "Set Location"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetLocation.cs:39
+msgid "Set or change the location of a task"
+msgstr ""
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:35
 msgid "Set Priority"
 msgstr "Sätt prioritet"
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:39
-msgid "Set the priority of a task"
-msgstr "Sätt en sysslas prioritet"
+msgid "Set or change the priority of a task"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMSetDue.cs:33
-msgid "Set Due Date/Time"
-msgstr "Sätt sluttid eller -datum"
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:35
+msgid "Set Recurrence"
+msgstr "Gör till återkommande"
 
-#: ../RememberTheMilk/src/RTMSetDue.cs:37
-msgid "Set the due date/time of a task"
-msgstr "Sätt sluttid eller -datum för en syssla"
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:39
+msgid "Set a recurrence pattern for a task."
+msgstr ""
 
-#: ../Rhythmbox/src/MusicItems.cs:77
-msgid "All music by"
-msgstr "All musik på"
+#: ../RememberTheMilk/src/RTMSetUrl.cs:48
+msgid "Set URL"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetUrl.cs:52
+msgid "Set or change the URL of a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetUrl.cs:119
+msgid "Invalid URL provided."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItem.cs:34
+msgid "Remember The Milk Tag"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItemSource.cs:35
+msgid "Remember The Milk Tags"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItemSource.cs:39
+msgid "Tags used by your Remember The Milk tasks."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTaskItemSource.cs:36
+msgid "Remember The Milk Tasks"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTaskItemSource.cs:40
+msgid "All the tasks in your Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
+msgid "Uncomplete"
+msgstr "Ej klar"
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
+msgid "Mark a task as \"incomplete\"."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:45
+msgid "Allow Snooze"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:49
+msgid "Allows this reminder to be snoozed."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:61
+msgid "No Snooze Allowed"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:65
+msgid "This reminder cannot be snoozed."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:75
+#, csharp-format
+msgid "You will be reminded in {0} hours, {1} minutes."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:76
+#, csharp-format
+msgid "You will be reminded in {0} minutes"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:77
+msgid "in"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:77
+msgid "at"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:81
+msgid "Remind Me"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:85
+msgid "Simple Reminders"
+msgstr ""
+
+#: ../RequestTracker/gtk-gui/RequestTracker.RTPrefs.cs:44
+#, csharp-format
+msgid ""
+"Use the list below to add/configure your Request Tracker sites.\n"
+"\n"
+"<i>The ticket number will be inserted into the URL at the place specified by "
+"the string: {0}</i>"
+msgstr ""
+
+#: ../RequestTracker/src/RequestTrackerAction.cs:46
+msgid "Request Tracker"
+msgstr ""
+
+#: ../RequestTracker/src/RequestTrackerAction.cs:50
+msgid "Display tickets from Request Tracker."
+msgstr ""
 
 #: ../Rhythmbox/src/EnqueueAction.cs:40
 msgid "Add an item to Rhythmbox's play queue."
 msgstr "Lägger till en grej till Rythmboxs uppspelningskö"
 
-#: ../Rhythmbox/src/RhythmboxItems.cs:49
-msgid "Browse Rhythmbox Music by Artist"
-msgstr "Bläddra i Rythmboxs musk efter artist"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:58
-msgid "Browse Rhythmbox Music by Album"
-msgstr "Bläddra igenom Rythmboxs musik sorterat efter album"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:69
-msgid "Play Current Track in Rhythmbox"
-msgstr "Spela upp nuvarande spår i Rythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:74
-msgid "Pause Rhythmbox Playback"
-msgstr "Pausa Rythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:79
-msgid "Play Next Track in Rhythmbox"
-msgstr "Spela nästa spår i Rythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:84
-msgid "Play Previous Track in Rhythmbox"
-msgstr "Spela föregående spår i Rythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:88
-msgid "Show Current Track"
-msgstr "Visa nuvarande spår"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:89
-msgid "Show Notification of Current Track in Rhythmbox"
-msgstr "Visa notifiering av nuvarande spår i Rhythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:93
-msgid "Mute"
-msgstr "Tyst"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:94
-msgid "Mute Rhythmbox Playback"
-msgstr "Tysta Rythmboxs uppspelning"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:98
-msgid "Unmute"
-msgstr "Avtysta"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:99
-msgid "Unmute Rhythmbox Playback"
-msgstr "Avtysta Rythmboxs uppspelning"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:103
-#: ../VolumeControl/src/VolumeUpItem.cs:31
-msgid "Volume Up"
-msgstr "Höj volymen"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:104
-msgid "Increase Rhythmbox Playback Volume"
-msgstr "Höj voluymen i Rythmbox"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:108
-#: ../VolumeControl/src/VolumeDownItem.cs:31
-msgid "Volume Down"
-msgstr "Sänk volymen"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:109
-msgid "Decrease Rhythmbox Playback Volume"
-msgstr "Sänk volymen i Rythmbox"
-
-#: ../Rhythmbox/src/PlayAction.cs:44
-msgid "Play an item in Rhythmbox."
-msgstr "Spela upp en sak i Rythmbox"
-
-#: ../Rhythmbox/src/MusicItemSource.cs:45
+#: ../Rhythmbox/src/MusicItemSource.cs:44
 msgid "Rhythmbox Music"
 msgstr "Rythmboxs musik"
 
-#: ../Rhythmbox/src/MusicItemSource.cs:49
+#: ../Rhythmbox/src/MusicItemSource.cs:48
 msgid "Provides access to artists and albums from Rhythmbox."
 msgstr "Get åtkomst till artister och album från Rythmbox"
+
+#: ../Rhythmbox/src/NextAction.cs:46
+msgid "Skip to the next track in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PauseAction.cs:46
+msgid "Pause music in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PlayAction.cs:46
+msgid "Play music in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PlayItemAction.cs:45
+msgid "Play an item in Rhythmbox."
+msgstr "Spela upp en sak i Rythmbox"
+
+#: ../Rhythmbox/src/PreviousAction.cs:46
+msgid "Skip to the previous track in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:51
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "Bläddra i Rythmboxs musk efter artist"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:60
+msgid "Browse Rhythmbox Music by Album"
+msgstr "Bläddra igenom Rythmboxs musik sorterat efter album"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:70
+msgid "Show Notification of Current Track in Rhythmbox"
+msgstr "Visa notifiering av nuvarande spår i Rhythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:75
+msgid "Mute"
+msgstr "Tyst"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:76
+msgid "Mute Rhythmbox Playback"
+msgstr "Tysta Rythmboxs uppspelning"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:81
+msgid "Unmute"
+msgstr "Avtysta"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:82
+msgid "Unmute Rhythmbox Playback"
+msgstr "Avtysta Rythmboxs uppspelning"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:88
+msgid "Increase Rhythmbox Playback Volume"
+msgstr "Höj voluymen i Rythmbox"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:94
+msgid "Decrease Rhythmbox Playback Volume"
+msgstr "Sänk volymen i Rythmbox"
 
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
 msgid "OPML feed file"
@@ -1682,50 +2386,135 @@ msgstr "Försök koppla upp dig i antat sekunder"
 msgid "Cache duration (in minutes)"
 msgstr "Cache-längd (i minuter)"
 
-#: ../Shelf/src/ShelfActions.cs:33
-msgid "Explore Shelf"
-msgstr "Utforska hylla"
-
-#: ../Shelf/src/ShelfActions.cs:37
-msgid "Get a list of everything in your shelf"
-msgstr "Få en lista på alla saker i din hylla"
-
-#: ../Shelf/src/ShelfActions.cs:60
-msgid "Remove From Shelf"
-msgstr "Ta bort från hyllan"
-
-#: ../Shelf/src/ShelfActions.cs:64
-msgid "Remove Selected Item From Shelf"
-msgstr "Ta bort markerade saker från hyllan"
-
-#: ../Shelf/src/ShelfActions.cs:101
+#: ../Shelf/src/ShelfAddToShelfAction.cs:32
 msgid "Add To Shelf"
 msgstr "Lägg till till hyllan"
 
-#: ../Shelf/src/ShelfActions.cs:105
-msgid "Add Selected Item to Shelf"
-msgstr "Ta bort markerade saker från hyllan"
+#: ../Shelf/src/ShelfAddToShelfAction.cs:36
+msgid "Add Selected Item to one Shelf"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:56
+#: ../Shelf/src/ShelfCreateShelfAction.cs:36
+msgid "Create a new Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfCreateShelfAction.cs:40
+msgid "Adds a new Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfDeleteShelfAction.cs:36
+msgid "Remove a shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfDeleteShelfAction.cs:40
+msgid "Removes a shelf from your shelves"
+msgstr ""
+
+#: ../Shelf/src/ShelfExploreAction.cs:31
+msgid "Explore Shelf"
+msgstr "Utforska hylla"
+
+#: ../Shelf/src/ShelfExploreAction.cs:35
+msgid "Get a list of everything in your shelf"
+msgstr "Få en lista på alla saker i din hylla"
+
+#: ../Shelf/src/ShelfItem.cs:53
 msgid " Shelf"
 msgstr " Hyllan"
 
-#: ../Shelf/src/ShelfItemSource.cs:62
+#: ../Shelf/src/ShelfItem.cs:59
 #, csharp-format
 msgid "Your {0} shelf items."
 msgstr "Dina {0} hyllobjekt"
 
-#: ../Shelf/src/ShelfItemSource.cs:90
-msgid "Shelf Items"
-msgstr "Hyllobjekt"
+#: ../Shelf/src/ShelfItemSource.cs:172
+msgid "Shelves"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:94
-msgid "Your Shelf Items"
-msgstr "Dina hyllsaker"
+#: ../Shelf/src/ShelfItemSource.cs:176
+msgid "Your Shelves"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:126
-msgid "Default"
-msgstr "Standardvärde"
+#: ../Shelf/src/ShelfRemoveFromShelfAction.cs:31
+msgid "Remove From Shelf"
+msgstr "Ta bort från hyllan"
+
+#: ../Shelf/src/ShelfRemoveFromShelfAction.cs:35
+msgid "Remove Selected Item From Shelf"
+msgstr "Ta bort markerade saker från hyllan"
+
+#: ../Shelf/src/ShelfRenameShelfAction.cs:36
+msgid "Rename a Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfRenameShelfAction.cs:40
+msgid "Changes a shelf's name"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:65
+msgid "Unknown"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:68
+msgid "Skype Me"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:70
+msgid "Not Available"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:71
+msgid "Do Not Disturb"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:73
+msgid "Logged Out"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:74
+msgid "Skype Out"
+msgstr ""
+
+#: ../Skype/src/SkypeBrowseBuddyItem.cs:35
+msgid "Browse Skype Buddies"
+msgstr ""
+
+#: ../Skype/src/SkypeBrowseStatusItem.cs:35
+msgid "Browse Skype Statuses"
+msgstr ""
+
+#: ../Skype/src/SkypeCallAction.cs:41
+msgid "Call"
+msgstr ""
+
+#: ../Skype/src/SkypeCallAction.cs:45
+msgid "Call a contact using Skype"
+msgstr ""
+
+#: ../Skype/src/SkypeChatAction.cs:39
+msgid "Chat with a buddy using Skype"
+msgstr ""
+
+#: ../Skype/src/SkypeContactItemSource.cs:54
+msgid "Skype Buddies"
+msgstr ""
+
+#: ../Skype/src/SkypeContactItemSource.cs:58
+msgid "Buddies on your Skype buddy list."
+msgstr ""
+
+#: ../Skype/src/SkypeSetStatusAction.cs:35
+msgid "Set Status"
+msgstr ""
+
+#: ../Skype/src/SkypeSetStatusAction.cs:39
+msgid "Set your Skype status"
+msgstr ""
+
+#: ../Skype/src/SkypeStatusItemSource.cs:43
+#: ../Skype/src/SkypeStatusItemSource.cs:47
+msgid "Skype Statuses"
+msgstr ""
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
@@ -1757,19 +2546,19 @@ msgstr ""
 "Om denna rutan är omarkerad, kommer dessa objekt läsas in när Do startar och "
 "orsaka en fördröjning tills alla objekt har överförts."
 
-#: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
+#: ../SSH/src/SSHAction.cs:37 ../SSH/src/SSHAction.cs:43
 msgid "Connect with SSH"
 msgstr "Anslut med SSH"
 
-#: ../SSH/src/SSHHosts.cs:42
+#: ../SSH/src/SSHHostItem.cs:39
 msgid "SSH Host"
 msgstr "SSH-v"
 
-#: ../SSH/src/SSHHosts.cs:62
+#: ../SSH/src/SSHHostItemSource.cs:43
 msgid "SSH Hosts"
 msgstr "SSH-värdar"
 
-#: ../SSH/src/SSHHosts.cs:63
+#: ../SSH/src/SSHHostItemSource.cs:44
 msgid "Parses ssh-config"
 msgstr "Tolka ssh-konfiguration"
 
@@ -1777,21 +2566,13 @@ msgstr "Tolka ssh-konfiguration"
 msgid "Command for start/stop services (gksudo, etc):"
 msgstr "Kommando för att starta/stoppa tjänster (gksudo etc):"
 
-#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:71
 msgid "..."
 msgstr "..."
 
-#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:86
 msgid "Services to control:"
 msgstr "Tjänster att kontrollera:"
-
-#: ../SystemServices/src/ServiceItemSource.cs:39
-msgid "System Services"
-msgstr "Systemtjänster"
-
-#: ../SystemServices/src/ServiceItemSource.cs:43
-msgid "List of all System Services"
-msgstr "Lista med samtliga systemtjänster"
 
 #: ../SystemServices/src/Service.cs:46
 #, csharp-format
@@ -1803,21 +2584,29 @@ msgstr "{0} tjänst"
 msgid "Control system {0} service"
 msgstr "Kontrollsystem {0} tjänst"
 
-#: ../SystemServices/src/SystemServicesConfig.cs:71
+#: ../SystemServices/src/ServiceItemSource.cs:39
+msgid "System Services"
+msgstr "Systemtjänster"
+
+#: ../SystemServices/src/ServiceItemSource.cs:43
+msgid "List of all System Services"
+msgstr "Lista med samtliga systemtjänster"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:72
 msgid "Choose the file to open"
 msgstr "Välj fil att öppna"
 
-#: ../SystemServices/src/SystemServicesConfig.cs:88
+#: ../SystemServices/src/SystemServicesConfig.cs:74
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:89
 msgid ""
 "Selected invalid file!\n"
 "Should be executable."
 msgstr ""
 "Vald fil är ogiltig!\n"
 "Filen måste vara exekverbar."
-
-#: ../Tasque/src/TasqueCategoryItem.cs:47
-msgid "Category"
-msgstr "Kategori"
 
 #: ../Tasque/src/TasqueAction.cs:42
 msgid "Create a new task"
@@ -1826,6 +2615,10 @@ msgstr "Skapa en ny uppgift"
 #: ../Tasque/src/TasqueAction.cs:46
 msgid "Create a new task in Tasque"
 msgstr "Skapa en ny uppgift i Tasque"
+
+#: ../Tasque/src/TasqueCategoryItem.cs:47
+msgid "Category"
+msgstr "Kategori"
 
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
@@ -1876,8 +2669,8 @@ msgid "Create a new Tomboy note."
 msgstr "Skapa ny Tomboy-anteckning."
 
 #: ../Tomboy/src/NotesItemSource.cs:56
-msgid "Tomboy Note Indexer"
-msgstr "Tomboy anteckningsindexerare"
+msgid "Tomboy Notes"
+msgstr ""
 
 #: ../Tomboy/src/NotesItemSource.cs:60
 msgid "Loads Tomboy notes for searching."
@@ -1891,55 +2684,55 @@ msgstr "Sök Tomboy-anteckningar"
 msgid "Searches contents of Tomboy notes."
 msgstr "Söker innehållet i Tomboy-anteckningar."
 
+#: ../Tomboy/src/TomboyBrowseNotesItem.cs:31
+msgid "Notes"
+msgstr ""
+
+#: ../Tomboy/src/TomboyBrowseNotesItem.cs:35
+msgid "Browse Tomboy Notes"
+msgstr ""
+
 #: ../Tomboy/src/TomboyItem.cs:50
 msgid "Tomboy note"
 msgstr "Tomboy anteckning"
 
-#: ../Tracker/src/TrackerSearch.cs:38
+#: ../Tracker/src/TrackerSearchAction.cs:17
 msgid "Search with Tracker"
 msgstr "Sök med Tracker"
 
-#: ../Tracker/src/TrackerSearch.cs:42
+#: ../Tracker/src/TrackerSearchAction.cs:21
 msgid "Launches Tracker with the given query."
 msgstr "Startar Tracker med angiven förfrågan."
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:58
-msgid "Translation Plugin Options"
-msgstr ""
-
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:71
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:74
 msgid "Translation Provider"
 msgstr ""
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:101
 msgid "Default Source Language"
 msgstr "Standard källspråk"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:128
 msgid "Default Web Interface Language"
 msgstr "Förvalt språk för webbgränssnitt"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
-msgid "Enable / Disable Language"
-msgstr "Aktivera / Avaktivera språk"
-
-#: ../Translate/src/TranslateAction.cs:58
-msgid "Translate"
-msgstr "Översätt"
-
-#: ../Translate/src/TranslateAction.cs:66
-msgid "Translates text"
-msgstr "Översätter text"
-
-#: ../Translate/src/UI/ConfigUI.cs:128
-msgid "Auto Detect (Recommended)"
-msgstr "Automatisk sökning (rekommenderas)"
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:151
+msgid "Supported Languages"
+msgstr ""
 
 #: ../Translate/src/Provider/Google.cs:35
+msgid "Albanian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:36
+msgid "Translate to Albanian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:37
 msgid "Arabic"
 msgstr "Arabiska"
 
-#: ../Translate/src/Provider/Google.cs:36
+#: ../Translate/src/Provider/Google.cs:38
 msgid "Translate to Arabic"
 msgstr "Översätt till arabiska"
 
@@ -1951,293 +2744,337 @@ msgstr "Bulgariska"
 msgid "Translate to Bulgarian"
 msgstr "Översätt till bulgariska"
 
-#: ../Translate/src/Provider/Google.cs:43
+#: ../Translate/src/Provider/Google.cs:41
 msgid "Catalon"
 msgstr "Katalanska"
 
-#: ../Translate/src/Provider/Google.cs:44
+#: ../Translate/src/Provider/Google.cs:42
 msgid "Translate to Catalon"
 msgstr "Översätt till katalanska"
 
-#: ../Translate/src/Provider/Google.cs:47
-msgid "Chinese (Simplified)"
-msgstr "Kinesiska (förenklad)"
+#: ../Translate/src/Provider/Google.cs:43
+msgid "Chinese"
+msgstr ""
 
-#: ../Translate/src/Provider/Google.cs:48
-msgid "Translate to Chinese (Simplified)"
-msgstr "Översätt till kinesiska (förenklad)"
+#: ../Translate/src/Provider/Google.cs:44
+msgid "Translate to Chinese"
+msgstr ""
 
-#: ../Translate/src/Provider/Google.cs:51
-msgid "Chinese (Traditional)"
-msgstr "Kinesiska (traditionell)"
-
-#: ../Translate/src/Provider/Google.cs:52
-msgid "Translate to Chinese (Traditional)"
-msgstr "Översätt till kinesiska (traditionell)"
-
-#: ../Translate/src/Provider/Google.cs:55
+#: ../Translate/src/Provider/Google.cs:45
 msgid "Croatian"
 msgstr "Kroatiska"
 
-#: ../Translate/src/Provider/Google.cs:56
+#: ../Translate/src/Provider/Google.cs:46
 msgid "Translate to Croatian"
 msgstr "Översätt till kroatiska"
 
-#: ../Translate/src/Provider/Google.cs:59
+#: ../Translate/src/Provider/Google.cs:47
 msgid "Czech"
 msgstr "Tjeckiska"
 
-#: ../Translate/src/Provider/Google.cs:60
+#: ../Translate/src/Provider/Google.cs:48
 msgid "Translate to Czech"
 msgstr "Översätt till tjeckiska"
 
-#: ../Translate/src/Provider/Google.cs:63
+#: ../Translate/src/Provider/Google.cs:49
 msgid "Danish"
 msgstr "Danska"
 
-#: ../Translate/src/Provider/Google.cs:64
+#: ../Translate/src/Provider/Google.cs:50
 msgid "Translate to Danish"
 msgstr "Översätt till danska"
 
-#: ../Translate/src/Provider/Google.cs:67
+#: ../Translate/src/Provider/Google.cs:51
 msgid "Dutch"
 msgstr "Nederländska"
 
-#: ../Translate/src/Provider/Google.cs:68
+#: ../Translate/src/Provider/Google.cs:52
 msgid "Translate to Dutch"
 msgstr "Översätt till nederländska"
 
-#: ../Translate/src/Provider/Google.cs:71
+#: ../Translate/src/Provider/Google.cs:53
 msgid "English"
 msgstr "Engelska"
 
-#: ../Translate/src/Provider/Google.cs:72
+#: ../Translate/src/Provider/Google.cs:54
 msgid "Translate to English"
 msgstr "Översätt till engelska"
 
-#: ../Translate/src/Provider/Google.cs:75
+#: ../Translate/src/Provider/Google.cs:55
+msgid "Estonian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:56
+msgid "Translate to Estonian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:57
 msgid "Filipino"
 msgstr "Filipinska"
 
-#: ../Translate/src/Provider/Google.cs:76
+#: ../Translate/src/Provider/Google.cs:58
 msgid "Translate to Filipino"
 msgstr "Översätt till filipinska"
 
-#: ../Translate/src/Provider/Google.cs:79
+#: ../Translate/src/Provider/Google.cs:59
 msgid "Finnish"
 msgstr "Finska"
 
-#: ../Translate/src/Provider/Google.cs:80
+#: ../Translate/src/Provider/Google.cs:60
 msgid "Translate to Finnish"
 msgstr "Översätt till finska"
 
-#: ../Translate/src/Provider/Google.cs:83
+#: ../Translate/src/Provider/Google.cs:61
 msgid "French"
 msgstr "Franska"
 
-#: ../Translate/src/Provider/Google.cs:84
+#: ../Translate/src/Provider/Google.cs:62
 msgid "Translate to French"
 msgstr "Översätt till franska"
 
-#: ../Translate/src/Provider/Google.cs:87
+#: ../Translate/src/Provider/Google.cs:63
+msgid "Galician"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:64
+msgid "Translate to Galician"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:65
 msgid "German"
 msgstr "Tyska"
 
-#: ../Translate/src/Provider/Google.cs:88
+#: ../Translate/src/Provider/Google.cs:66
 msgid "Translate to German"
 msgstr "Översätt till tyska"
 
-#: ../Translate/src/Provider/Google.cs:91
+#: ../Translate/src/Provider/Google.cs:67
 msgid "Greek"
 msgstr "Grekiska"
 
-#: ../Translate/src/Provider/Google.cs:92
+#: ../Translate/src/Provider/Google.cs:68
 msgid "Translate to Greek"
 msgstr "Översätt till grekiska"
 
-#: ../Translate/src/Provider/Google.cs:95
+#: ../Translate/src/Provider/Google.cs:69
 msgid "Hebrew"
 msgstr "Hebreiska"
 
-#: ../Translate/src/Provider/Google.cs:96
+#: ../Translate/src/Provider/Google.cs:70
 msgid "Translate to Hebrew"
 msgstr "Översätt till hebreiska"
 
-#: ../Translate/src/Provider/Google.cs:99
+#: ../Translate/src/Provider/Google.cs:71
 msgid "Hindi"
 msgstr "Hindi"
 
-#: ../Translate/src/Provider/Google.cs:100
+#: ../Translate/src/Provider/Google.cs:72
 msgid "Translate to Hindi"
 msgstr "Översätt till hindi"
 
-#: ../Translate/src/Provider/Google.cs:103
+#: ../Translate/src/Provider/Google.cs:73
+msgid "Hungarian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:74
+msgid "Translate to Hungarian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:75
 msgid "Indonesian"
 msgstr "Indonesiska"
 
-#: ../Translate/src/Provider/Google.cs:104
+#: ../Translate/src/Provider/Google.cs:76
 msgid "Translate to Indonesian"
 msgstr "Översätt till indonesiska"
 
-#: ../Translate/src/Provider/Google.cs:107
+#: ../Translate/src/Provider/Google.cs:77
 msgid "Italian"
 msgstr "Italienska"
 
-#: ../Translate/src/Provider/Google.cs:108
+#: ../Translate/src/Provider/Google.cs:78
 msgid "Translate to Italian"
 msgstr "Översätt till italienska"
 
-#: ../Translate/src/Provider/Google.cs:111
+#: ../Translate/src/Provider/Google.cs:79
 msgid "Japanese"
 msgstr "Japanska"
 
-#: ../Translate/src/Provider/Google.cs:112
+#: ../Translate/src/Provider/Google.cs:80
 msgid "Translate to Japanese"
 msgstr "Översätt till japanska"
 
-#: ../Translate/src/Provider/Google.cs:115
+#: ../Translate/src/Provider/Google.cs:81
 msgid "Korean"
 msgstr "Koreanska"
 
-#: ../Translate/src/Provider/Google.cs:116
+#: ../Translate/src/Provider/Google.cs:82
 msgid "Translate to Korean"
 msgstr "Översätt till koreanska"
 
-#: ../Translate/src/Provider/Google.cs:119
+#: ../Translate/src/Provider/Google.cs:83
 msgid "Latvian"
 msgstr "Lettiska"
 
-#: ../Translate/src/Provider/Google.cs:120
+#: ../Translate/src/Provider/Google.cs:84
 msgid "Translate to Latvian"
 msgstr "Översätt till lettisk"
 
-#: ../Translate/src/Provider/Google.cs:123
+#: ../Translate/src/Provider/Google.cs:85
 msgid "Lithuanian"
 msgstr "Litauiska"
 
-#: ../Translate/src/Provider/Google.cs:124
+#: ../Translate/src/Provider/Google.cs:86
 msgid "Translate to Lithuanian"
 msgstr "Översätt till litauiska"
 
-#: ../Translate/src/Provider/Google.cs:127
+#: ../Translate/src/Provider/Google.cs:87
+msgid "Maltese"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:88
+msgid "Translate to Maltese"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:89
 msgid "Norwegian"
 msgstr "Norska"
 
-#: ../Translate/src/Provider/Google.cs:128
+#: ../Translate/src/Provider/Google.cs:90
 msgid "Translate to Norwegian"
 msgstr "Översätt till norska"
 
-#: ../Translate/src/Provider/Google.cs:131
+#: ../Translate/src/Provider/Google.cs:91
 msgid "Polish"
 msgstr "Polska"
 
-#: ../Translate/src/Provider/Google.cs:132
+#: ../Translate/src/Provider/Google.cs:92
 msgid "Translate to Polish"
 msgstr "Översätt till polska"
 
-#: ../Translate/src/Provider/Google.cs:135
+#: ../Translate/src/Provider/Google.cs:93
 msgid "Portuguese"
 msgstr "Portugisiska"
 
-#: ../Translate/src/Provider/Google.cs:136
+#: ../Translate/src/Provider/Google.cs:94
 msgid "Translate to Portuguese"
 msgstr "Översätt till portugisiska"
 
-#: ../Translate/src/Provider/Google.cs:139
+#: ../Translate/src/Provider/Google.cs:95
 msgid "Romanian"
 msgstr "Rumänska"
 
-#: ../Translate/src/Provider/Google.cs:140
+#: ../Translate/src/Provider/Google.cs:96
 msgid "Translate to Romanian"
 msgstr "Översätt till rumänska"
 
-#: ../Translate/src/Provider/Google.cs:143
+#: ../Translate/src/Provider/Google.cs:97
 msgid "Russian"
 msgstr "Ryska"
 
-#: ../Translate/src/Provider/Google.cs:144
+#: ../Translate/src/Provider/Google.cs:98
 msgid "Translate to Russian"
 msgstr "Översätt till ryska"
 
-#: ../Translate/src/Provider/Google.cs:147
+#: ../Translate/src/Provider/Google.cs:99
 msgid "Serbian"
 msgstr "Serbiska"
 
-#: ../Translate/src/Provider/Google.cs:148
+#: ../Translate/src/Provider/Google.cs:100
 msgid "Translate to Serbian"
 msgstr "Översätt till serbiska"
 
-#: ../Translate/src/Provider/Google.cs:151
+#: ../Translate/src/Provider/Google.cs:101
 msgid "Slovak"
 msgstr "Slovakiska"
 
-#: ../Translate/src/Provider/Google.cs:152
+#: ../Translate/src/Provider/Google.cs:102
 msgid "Translate to Slovak"
 msgstr "Översätt till slovakiska"
 
-#: ../Translate/src/Provider/Google.cs:155
+#: ../Translate/src/Provider/Google.cs:103
 msgid "Slovenian"
 msgstr "Slovenska"
 
-#: ../Translate/src/Provider/Google.cs:156
+#: ../Translate/src/Provider/Google.cs:104
 msgid "Translate to Slovenian"
 msgstr "Översätt till slovenska"
 
-#: ../Translate/src/Provider/Google.cs:159
+#: ../Translate/src/Provider/Google.cs:105
 msgid "Spanish"
 msgstr "Spanska"
 
-#: ../Translate/src/Provider/Google.cs:160
+#: ../Translate/src/Provider/Google.cs:106
 msgid "Translate to Spanish"
 msgstr "Översätt till spanska"
 
-#: ../Translate/src/Provider/Google.cs:163
+#: ../Translate/src/Provider/Google.cs:107
 msgid "Swedish"
 msgstr "Svenska"
 
-#: ../Translate/src/Provider/Google.cs:164
+#: ../Translate/src/Provider/Google.cs:108
 msgid "Translate to Swedish"
 msgstr "Översätt till svenska"
 
-#: ../Translate/src/Provider/Google.cs:167
+#: ../Translate/src/Provider/Google.cs:109
+msgid "Thai"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:110
+msgid "Translate to Thai"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:111
+msgid "Turkish"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:112
+msgid "Translate to Turkish"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:113
 msgid "Ukranian"
 msgstr "Ukrainska"
 
-#: ../Translate/src/Provider/Google.cs:168
+#: ../Translate/src/Provider/Google.cs:114
 msgid "Translate to Ukranian"
 msgstr "Översätt till ukrainska"
 
-#: ../Translate/src/Provider/Google.cs:171
+#: ../Translate/src/Provider/Google.cs:115
 msgid "Vietnamese"
 msgstr "Vietnamesiska"
 
-#: ../Translate/src/Provider/Google.cs:172
+#: ../Translate/src/Provider/Google.cs:116
 msgid "Translate to Vietnamese"
 msgstr "Översätt till vietnamesiska"
 
-#: ../Vinagre/src/VNCHostSource.cs:39
-msgid "Vinagre Bookmarks"
-msgstr "Vinagres bokmärken"
+#: ../Translate/src/TranslateAction.cs:58
+msgid "Translate"
+msgstr "Översätt"
 
-#: ../Vinagre/src/VNCHostSource.cs:43
-msgid "Indexes your Vinagre Bookmarks"
-msgstr "Indexerar dina Vinagre-bokmärken"
+#: ../Translate/src/TranslateAction.cs:66
+msgid "Translates text"
+msgstr "Översätter text"
 
-#: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
+#: ../Translate/src/UI/ConfigUI.cs:130
+msgid "Auto Detect (Recommended)"
+msgstr "Automatisk sökning (rekommenderas)"
+
+#: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:35
+msgid "Browse Vinagre Bookmarks"
+msgstr ""
+
+#: ../Vinagre/src/Vinagre.cs:36 ../Vinagre/src/Vinagre.cs:40
 msgid "Connect with VNC"
 msgstr "Anslut med VNC"
 
-#: ../VirtualBox/src/SaveStateAction.cs:40
-msgid "Take Snapshot"
-msgstr "Ta skärmbild"
+#: ../Vinagre/src/VNCHostSource.cs:44
+msgid "Vinagre Bookmarks"
+msgstr "Vinagres bokmärken"
 
-#: ../VirtualBox/src/SaveStateAction.cs:44
-msgid "Save the current state as a Snapshot"
-msgstr "Spara aktuellt tillstånd som en ögonblicksbild"
-
-#: ../VirtualBox/src/SaveStateAction.cs:98
-msgid "Snapshot ("
-msgstr "Ögonblicksbild ("
+#: ../Vinagre/src/VNCHostSource.cs:48
+msgid "Indexes your Vinagre Bookmarks"
+msgstr "Indexerar dina Vinagre-bokmärken"
 
 #: ../VirtualBox/src/OffAction.cs:40
 msgid "Power Off Virtual Machine"
@@ -2265,6 +3102,14 @@ msgstr "Pausa den virtuella maskinen"
 msgid "Pauses the selected Virtual Machine"
 msgstr "Pausar den valda virtuella maskinen"
 
+#: ../VirtualBox/src/ResumeAction.cs:39
+msgid "Resume Virtual Machine"
+msgstr "Återuppta virtuell maskin"
+
+#: ../VirtualBox/src/ResumeAction.cs:43
+msgid "Resume the selected Virtual Machine"
+msgstr "Återuppta vald virtuell maskin"
+
 #: ../VirtualBox/src/SaveAction.cs:39
 msgid "Save Virtual Machine State"
 msgstr "Spara tillståndet för den virtuella maskinen"
@@ -2273,13 +3118,17 @@ msgstr "Spara tillståndet för den virtuella maskinen"
 msgid "Saves the state of the selected Virtual Machine"
 msgstr "Spara tillstånded för den valda virtuella maskinen"
 
-#: ../VirtualBox/src/VMItemSource.cs:38
-msgid "VirtualBox VMs"
-msgstr "VirtualBox virtuella maskiner"
+#: ../VirtualBox/src/SaveStateAction.cs:40
+msgid "Take Snapshot"
+msgstr "Ta skärmbild"
 
-#: ../VirtualBox/src/VMItemSource.cs:39
-msgid "Virtual Machines created with VirtualBox"
-msgstr "Virtuella maskiner skapade med VirtualBox"
+#: ../VirtualBox/src/SaveStateAction.cs:44
+msgid "Save the current state as a Snapshot"
+msgstr "Spara aktuellt tillstånd som en ögonblicksbild"
+
+#: ../VirtualBox/src/SaveStateAction.cs:98
+msgid "Snapshot ("
+msgstr "Ögonblicksbild ("
 
 #: ../VirtualBox/src/StartAction.cs:40
 msgid "Start Virtual Machine"
@@ -2305,29 +3154,25 @@ msgstr "Starta Headless"
 msgid "Start in Headless mode"
 msgstr "Starta i läget Headless"
 
-#: ../VirtualBox/src/ResumeAction.cs:39
-msgid "Resume Virtual Machine"
-msgstr "Återuppta virtuell maskin"
+#: ../VirtualBox/src/VBoxBrowseVMSItem.cs:31
+msgid "Virtual Machines"
+msgstr ""
 
-#: ../VirtualBox/src/ResumeAction.cs:43
-msgid "Resume the selected Virtual Machine"
-msgstr "Återuppta vald virtuell maskin"
+#: ../VirtualBox/src/VBoxBrowseVMSItem.cs:35
+msgid "Browse Virtual Machines"
+msgstr ""
+
+#: ../VirtualBox/src/VMItemSource.cs:41
+msgid "VirtualBox VMs"
+msgstr "VirtualBox virtuella maskiner"
+
+#: ../VirtualBox/src/VMItemSource.cs:47
+msgid "Virtual Machines created with VirtualBox"
+msgstr "Virtuella maskiner skapade med VirtualBox"
 
 #: ../VolumeControl/src/VolumeDownItem.cs:35
 msgid "Decrease system volume"
 msgstr "Sänk systemvolym"
-
-#: ../VolumeControl/src/VolumeUpItem.cs:35
-msgid "Increase system volume"
-msgstr "Öka systemvolym"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:31
-msgid "Mute Volume"
-msgstr "Tysta volym"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:35
-msgid "Mute system volume"
-msgstr "Stäng av systemljudet"
 
 #: ../VolumeControl/src/VolumeItemSource.cs:39
 msgid "Volume Actions"
@@ -2337,6 +3182,22 @@ msgstr "Volymåtgärder"
 msgid "Adjust your system volume"
 msgstr "Justera volym på systemljudet"
 
+#: ../VolumeControl/src/VolumeMaximizeItem.cs:31
+msgid "Maximize Volume"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeMaximizeItem.cs:35
+msgid "Maximize system volume"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:31
+msgid "Mute Volume"
+msgstr "Tysta volym"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:35
+msgid "Mute system volume"
+msgstr "Stäng av systemljudet"
+
 #: ../VolumeControl/src/VolumeUnmuteItem.cs:32
 msgid "Unmute Volume"
 msgstr "Sätt på ljud"
@@ -2345,120 +3206,143 @@ msgstr "Sätt på ljud"
 msgid "Unmute system volume"
 msgstr "Sätt på systemljud"
 
-#: ../WindowManager/src/WindowListAction.cs:65
-msgid "Action Window"
-msgstr ""
+#: ../VolumeControl/src/VolumeUpItem.cs:35
+msgid "Increase system volume"
+msgstr "Öka systemvolym"
 
-#: ../WindowManager/src/WindowListAction.cs:69
-msgid "Action a Window."
-msgstr ""
-
-#: ../WindowManager/src/WindowListAction.cs:190
-msgid "Maximize"
-msgstr "Maximera"
-
-#: ../WindowManager/src/WindowListAction.cs:194
-msgid "Make a window consume the whole screen"
-msgstr "Låt ett fönster ta upp hela skärmen"
-
-#: ../WindowManager/src/WindowListAction.cs:217
-msgid "Minimize/Restore"
-msgstr "Minimera/Återställ"
-
-#: ../WindowManager/src/WindowListAction.cs:221
-msgid "Minimize/Restore a Window"
-msgstr "Minimera/Återställ ett fönster"
-
-#: ../WindowManager/src/WindowListAction.cs:242
-msgid "Close All"
-msgstr "Stäng alla"
-
-#: ../WindowManager/src/WindowListAction.cs:246
-msgid "Close your current window."
-msgstr "Stäng aktuellt fönster"
-
-#: ../WindowManager/src/ScreenListAction.cs:277
-msgid "Tile Windows"
-msgstr "Organisera fönster sida vid sida"
-
-#: ../WindowManager/src/ScreenListAction.cs:281
-msgid "Tile All Windows in Current Viewport"
-msgstr "Organisera fönster sida vid sida i aktuell vy"
-
-#: ../WindowManager/src/ScreenListAction.cs:346
-msgid "Cascade Windows"
-msgstr "Organisera fönstren i rad"
-
-#: ../WindowManager/src/ScreenListAction.cs:350
-msgid "Cascade your Windows"
-msgstr "Organisera dina fönster i rad"
-
-#: ../WindowManager/src/ScreenListAction.cs:404
-msgid "Restore Windows"
-msgstr "Återställ fönster"
-
-#: ../WindowManager/src/ScreenListAction.cs:408
-msgid "Restore Windows to their Previous Positions"
-msgstr "Återställ fönstren till föregående position"
-
-#: ../WindowManager/src/ScreenItemSource.cs:37
-msgid "Window Screen Items"
-msgstr ""
-
-#: ../WindowManager/src/ScreenItemSource.cs:43
-msgid "Actions you can do to your screens."
-msgstr "Åtgärder du kan göra med dina skärmar"
-
-#: ../WindowManager/src/ScreenItemSource.cs:65
-msgid "Current Desktop"
-msgstr "Nuvarande skrivbord"
-
-#: ../WindowManager/src/ScreenItemSource.cs:66
-msgid "Everything on the Current Desktop"
-msgstr "Allt på nuvarande skrivbord"
-
-#: ../WindowManager/src/WindowItemSource.cs:38
-msgid "Generic Window Items"
-msgstr "Allmäna fönsterobjekt"
-
-#: ../WindowManager/src/WindowItemSource.cs:44
-msgid "Useful Generically Understood Window Items"
-msgstr ""
-
-#: ../WindowManager/src/WindowItemSource.cs:71
-msgid "Current Window"
-msgstr "Nuvarande fönster"
-
-#: ../WindowManager/src/WindowItemSource.cs:72
-msgid "The Currently Active Window"
-msgstr "Det nu aktiva fönstret"
-
-#: ../WindowManager/src/WindowItemSource.cs:75
+#: ../WindowManager/src/CurrentApplicationItem.cs:34
 msgid "Current Application"
 msgstr "Nuvarande applikation"
 
-#: ../WindowManager/src/WindowItemSource.cs:76
-msgid "The Currently Active Application"
-msgstr "Den nu aktiva applikationen"
+#: ../WindowManager/src/CurrentApplicationItem.cs:40
+msgid "Current Focused Application"
+msgstr ""
 
-#: ../WindowManager/src/WindowItemSource.cs:79
-msgid "Previous Window"
-msgstr "Föregående fönster"
+#: ../WindowManager/src/CurrentWindowItem.cs:34
+msgid "Current Window"
+msgstr "Nuvarande fönster"
 
-#: ../WindowManager/src/WindowItemSource.cs:80
-msgid "The Previously Active Window"
-msgstr "Föregående aktiva fönster"
+#: ../WindowManager/src/CurrentWindowItem.cs:40
+msgid "Current Focused Window"
+msgstr ""
 
-#: ../WindowManager/src/WindowItemSource.cs:83
-msgid "Previous Application"
-msgstr "Föregående applikation"
+#: ../WindowManager/src/Screen/CurrentScreenItem.cs:34
+msgid "Current Desktop"
+msgstr "Nuvarande skrivbord"
 
-#: ../WindowManager/src/WindowItemSource.cs:84
-msgid "The Previously Active Application"
-msgstr "Föregående aktiva applikation"
+#: ../WindowManager/src/Screen/CurrentScreenItem.cs:40
+msgid "Everything on the Current Desktop"
+msgstr "Allt på nuvarande skrivbord"
 
-#: ../Zim/src/ZimPage.cs:38
-msgid "Zim page in notebook: "
+#: ../WindowManager/src/Screen/ScreenCascadeAction.cs:37
+msgid "Cascade Windows"
+msgstr "Organisera fönstren i rad"
+
+#: ../WindowManager/src/Screen/ScreenCascadeAction.cs:41
+msgid "Cascade your Windows"
+msgstr "Organisera dina fönster i rad"
+
+#: ../WindowManager/src/Screen/ScreenItemSource.cs:38
+msgid "Window Screen Items"
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenItemSource.cs:44
+msgid "Screens and viewports on your desktop."
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenRestoreAction.cs:41
+msgid "Restore Windows"
+msgstr "Återställ fönster"
+
+#: ../WindowManager/src/Screen/ScreenRestoreAction.cs:45
+msgid "Restore Windows to their Previous Positions"
+msgstr "Återställ fönstren till föregående position"
+
+#: ../WindowManager/src/Screen/ScreenSwapAction.cs:38
+msgid "Swap With..."
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenSwapAction.cs:42
+msgid "Swap all windows on desktops"
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenTileAction.cs:35
+msgid "Tile Windows"
+msgstr "Organisera fönster sida vid sida"
+
+#: ../WindowManager/src/Screen/ScreenTileAction.cs:39
+msgid "Tile All Windows in a Viewport"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowCloseAction.cs:34
+msgid "Close"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowCloseAction.cs:38
+msgid "Close selected windows."
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowFocusAction.cs:34
+msgid "Focus"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowFocusAction.cs:38
+msgid "Focus selected windows."
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMaximizeAction.cs:33
+msgid "(Un)Maximize"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMaximizeAction.cs:37
+msgid "Make a window consume the whole screen or revert to its normal size"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMinimizeAction.cs:35
+msgid "Minimize/Restore"
+msgstr "Minimera/Återställ"
+
+#: ../WindowManager/src/WindowActions/WindowMinimizeAction.cs:39
+msgid "Minimize/Restore a Window"
+msgstr "Minimera/Återställ ett fönster"
+
+#: ../WindowManager/src/WindowItemSource.cs:41
+msgid "Generic Window Items"
+msgstr "Allmäna fönsterobjekt"
+
+#: ../WindowManager/src/WindowItemSource.cs:47
+msgid "Useful Generically Understood Window Items"
+msgstr ""
+
+#: ../WindowManager/src/Wink/ScreenUtils.cs:33
+msgid "Desktop"
+msgstr ""
+
+#: ../XRandR/src/OutputItem.cs:53 ../XRandR/src/OutputModeItem.cs:55
+#: ../XRandR/src/XRandRItemSource.cs:46
+msgid "Set your resolution"
+msgstr ""
+
+#: ../XRandR/src/OutputItem.cs:54
+msgid "Not connected"
+msgstr ""
+
+#: ../XRandR/src/XRandRItemSource.cs:42
+msgid "Displays"
+msgstr ""
+
+#: ../XRandR/src/XRandRItemSource.cs:74
+msgid "Off"
+msgstr ""
+
+#: ../YouTube/src/Youtube.cs:38
+msgid "An error occurred connecting to YouTube, are your credentials valid?"
+msgstr ""
+
+#: ../YouTube/src/Youtube.cs:41
+msgid ""
+"Missing login credentials. Please set login information in YouTube plugin "
+"configuration."
 msgstr ""
 
 #: ../Zim/src/ZimNewPageAction.cs:37
@@ -2477,6 +3361,10 @@ msgstr "Öppna Zim-sida"
 msgid "Open selected page in Zim"
 msgstr "Öppna vald sida i Zim"
 
+#: ../Zim/src/ZimPage.cs:38
+msgid "Zim page in notebook: "
+msgstr ""
+
 #: ../Zim/src/ZimPagesItemSource.cs:38
 msgid "Zim pages"
 msgstr "Zim-sidor"
@@ -2484,3 +3372,170 @@ msgstr "Zim-sidor"
 #: ../Zim/src/ZimPagesItemSource.cs:42
 msgid "Zim Desktop Wiki pages"
 msgstr ""
+
+#~ msgid "Evolution Contacts"
+#~ msgstr "Kontaker i Evolution"
+
+#~ msgid "Unmount volume"
+#~ msgstr "Avmontera volym"
+
+#~ msgid "Mobile Phone"
+#~ msgstr "Mobiltelefon"
+
+#~ msgid "Rename to..."
+#~ msgstr "Byt namn till..."
+
+#~ msgid "Finds Firefox bookmarks in your default profile."
+#~ msgstr "Visar din webbläsares bokmärken."
+
+#~ msgid "Firefox Bookmarks"
+#~ msgstr "Webbläsaren Firefoxs bokmärken"
+
+#~ msgid "Opens a GNOME Terminal with the selected profile."
+#~ msgstr "Öppnar en GNOME-terminal med den valda profilen"
+
+#~ msgid "Open Profile"
+#~ msgstr "Öppna profil"
+
+#~ msgid "Play Current Track in Rhythmbox"
+#~ msgstr "Spela upp nuvarande spår i Rythmbox"
+
+#~ msgid "Play Previous Track in Rhythmbox"
+#~ msgstr "Spela föregående spår i Rythmbox"
+
+#~ msgid "Play Next Track in Rhythmbox"
+#~ msgstr "Spela nästa spår i Rythmbox"
+
+#~ msgid "Pause Rhythmbox Playback"
+#~ msgstr "Pausa Rythmbox"
+
+#~ msgid "Default"
+#~ msgstr "Standardvärde"
+
+#~ msgid "Add Selected Item to Shelf"
+#~ msgstr "Ta bort markerade saker från hyllan"
+
+#~ msgid "Your Shelf Items"
+#~ msgstr "Dina hyllsaker"
+
+#~ msgid "Address"
+#~ msgstr "Adress"
+
+#~ msgid "Choose folder"
+#~ msgstr "Välj katalog"
+
+#~ msgid "Organizes your del.icio.bookmarks by tag"
+#~ msgstr "Organiserar dina del.icio.us.bookmarks efter taggar"
+
+#~ msgid "Manual pages (man)"
+#~ msgstr "Manualsidor (man)"
+
+#~ msgid "Indexes your Opera 6 bookmarks"
+#~ msgstr "Indexera dina bokmärken i Opera 6"
+
+#~ msgid "The Previously Active Application"
+#~ msgstr "Föregående aktiva applikation"
+
+#~ msgid "Previous Window"
+#~ msgstr "Föregående fönster"
+
+#~ msgid "Previous Application"
+#~ msgstr "Föregående applikation"
+
+#~ msgid "The Previously Active Window"
+#~ msgstr "Föregående aktiva fönster"
+
+#~ msgid "Maximize"
+#~ msgstr "Maximera"
+
+#~ msgid "Tile All Windows in Current Viewport"
+#~ msgstr "Organisera fönster sida vid sida i aktuell vy"
+
+#~ msgid "Close All"
+#~ msgstr "Stäng alla"
+
+#~ msgid "Close your current window."
+#~ msgstr "Stäng aktuellt fönster"
+
+#~ msgid "Actions you can do to your screens."
+#~ msgstr "Åtgärder du kan göra med dina skärmar"
+
+#~ msgid "When actions (e.g. rename) are completed"
+#~ msgstr "När åtgärder (t.ex byt namn) är klara"
+
+#~ msgid "Mark a selected task as \"incomplete\"."
+#~ msgstr "Markera syssla som \"ej klar\""
+
+#~ msgid "Delete a selected task from Remember The Milk"
+#~ msgstr "Ta bort markerad syssla från Remember The Milk"
+
+#~ msgid "Sets a recurrence pattern for a task."
+#~ msgstr "Välj återkommandemönster för en syssla."
+
+#~ msgid "Move a seleted task from one list to another"
+#~ msgstr "Flytta en vald syssla från en lista till en annan"
+
+#~ msgid "Complete a selected task"
+#~ msgstr "Sluför en vald syssla"
+
+#~ msgid "Shelf Items"
+#~ msgstr "Hyllobjekt"
+
+#~ msgid "Set the due date/time of a task"
+#~ msgstr "Sätt sluttid eller -datum för en syssla"
+
+#~ msgid "Set the priority of a task"
+#~ msgstr "Sätt en sysslas prioritet"
+
+#~ msgid "Tomboy Note Indexer"
+#~ msgstr "Tomboy anteckningsindexerare"
+
+#~ msgid "Enable / Disable Language"
+#~ msgstr "Aktivera / Avaktivera språk"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "Kinesiska (traditionell)"
+
+#~ msgid "Translate to Chinese (Traditional)"
+#~ msgstr "Översätt till kinesiska (traditionell)"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "Kinesiska (förenklad)"
+
+#~ msgid "Translate to Chinese (Simplified)"
+#~ msgstr "Översätt till kinesiska (förenklad)"
+
+#~ msgid "Make a window consume the whole screen"
+#~ msgstr "Låt ett fönster ta upp hela skärmen"
+
+#~ msgid "The Currently Active Application"
+#~ msgstr "Den nu aktiva applikationen"
+
+#~ msgid "The Currently Active Window"
+#~ msgstr "Det nu aktiva fönstret"
+
+#~ msgid "Search and read help documentation (man)"
+#~ msgstr "Sök bland och läs hjälpdokumentation (man)"
+
+#~ msgid "ImageShack exception: "
+#~ msgstr "ImageShack undantag: "
+
+#~ msgid "Parsed url was empty. ImageShack has probably changed its format."
+#~ msgstr ""
+#~ "Den tolkade adressen var tom. ImageShack har antagligen ändrat dess format."
+
+#, csharp-format
+#~ msgid "'{0}' sucessfully posted to {1}"
+#~ msgstr "'{0}' lyckosamt skickat till {1}"
+
+#~ msgid "Web service supported by Ping.FM"
+#~ msgstr "Webbtjänst som stöds av Ping.FM"
+
+#~ msgid "For overdue task(s)"
+#~ msgstr "För försenade uppgifter"
+
+#~ msgid "<b>Notification</b>"
+#~ msgstr "<b>Notifiering</b>"
+
+#~ msgid "Web service group supported by Ping.FM"
+#~ msgstr "Webbtjänstgrupp som stöds av Ping.FM"

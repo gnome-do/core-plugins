@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-01-26 08:04+1100\n"
+"POT-Creation-Date: 2011-05-22 18:49+1000\n"
 "PO-Revision-Date: 2009-04-03 06:43+0000\n"
 "Last-Translator: Jonathan Lumb <Unknown>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
-"X-Generator: Launchpad (build 12309)\n"
+"X-Launchpad-Export-Date: 2011-05-23 04:34+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -26,14 +26,6 @@ msgstr "指定别名..."
 msgid "Give an item an alternate name."
 msgstr "指定另外一个名字"
 
-#: ../Alias/src/DeleteAliasAction.cs:36
-msgid "Delete Alias"
-msgstr "删除别名"
-
-#: ../Alias/src/DeleteAliasAction.cs:40
-msgid "Deletes an alias."
-msgstr "删除一个别名。"
-
 #: ../Alias/src/AliasItemSource.cs:140
 msgid "Alias items"
 msgstr "给目标起别名"
@@ -42,13 +34,13 @@ msgstr "给目标起别名"
 msgid "Aliased items from Do's universe."
 msgstr "来自 Do 宇宙的别名项目"
 
-#: ../Archive/src/ExtractArchiveAction.cs:40
-msgid "Extract archive"
-msgstr "解压缩文件"
+#: ../Alias/src/DeleteAliasAction.cs:35
+msgid "Delete Alias"
+msgstr "删除别名"
 
-#: ../Archive/src/ExtractArchiveAction.cs:44
-msgid "Extract an archive to a given folder"
-msgstr "解压文件到指定文件夹"
+#: ../Alias/src/DeleteAliasAction.cs:39
+msgid "Deletes an alias."
+msgstr "删除一个别名。"
 
 #: ../Archive/src/CreateArchiveAction.cs:41
 msgid "Create archive"
@@ -58,7 +50,24 @@ msgstr "创建归档文件"
 msgid "Create an archive with the selected item"
 msgstr "对选中的项目创建归档文件"
 
-#: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
+#: ../Archive/src/ExtractArchiveAction.cs:40
+msgid "Extract archive"
+msgstr "解压缩文件"
+
+#: ../Archive/src/ExtractArchiveAction.cs:44
+msgid "Extract an archive to a given folder"
+msgstr "解压文件到指定文件夹"
+
+#: ../Baconator/src/BaconateAction.cs:55
+msgid "Baconate link"
+msgstr ""
+
+#: ../Baconator/src/BaconateAction.cs:59
+msgid "Bacon bacon beef, bacon beef"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:56 ../Exaile/src/ExaileItems.cs:50
+#: ../Rhythmbox/src/RhythmboxItems.cs:50
 msgid "Browse Artists"
 msgstr "浏览艺术家"
 
@@ -66,7 +75,8 @@ msgstr "浏览艺术家"
 msgid "Browse Music by Artist"
 msgstr "按照作者浏览音乐"
 
-#: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
+#: ../Banshee/src/BrowseMediaItems.cs:69 ../Exaile/src/ExaileItems.cs:58
+#: ../Rhythmbox/src/RhythmboxItems.cs:59
 msgid "Browse Albums"
 msgstr "浏览专辑"
 
@@ -98,6 +108,10 @@ msgstr "添加到播放队列"
 msgid "Add media to play queue"
 msgstr "将媒体添加到播放队列"
 
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr "所有音乐作品来自"
+
 #: ../Banshee/src/MediaItemSource.cs:46
 msgid "Banshee Media"
 msgstr "Banshee媒体"
@@ -106,11 +120,8 @@ msgstr "Banshee媒体"
 msgid "Indexes Media from Banshee Media Player"
 msgstr "索引Banshee播放器的媒体文件"
 
-#: ../Banshee/src/MediaItems.cs:191
-msgid "All Music by"
-msgstr "所有音乐作品来自"
-
-#: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
+#: ../Banshee/src/NextAction.cs:32 ../Exaile/src/NextAction.cs:42
+#: ../Rhythmbox/src/NextAction.cs:42
 msgid "Next"
 msgstr "下一步"
 
@@ -118,16 +129,18 @@ msgstr "下一步"
 msgid "Play next track"
 msgstr "播放下一首歌曲"
 
-#: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
+#: ../Banshee/src/PauseAction.cs:33 ../Exaile/src/PauseAction.cs:42
+#: ../Rhythmbox/src/PauseAction.cs:42
 msgid "Pause"
 msgstr "暂停"
 
-#: ../Banshee/src/PauseAction.cs:36
+#: ../Banshee/src/PauseAction.cs:37
 msgid "Pause playing track"
 msgstr "暂停播放中的歌曲"
 
-#: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
-#: ../Rhythmbox/src/PlayAction.cs:40
+#: ../Banshee/src/PlayAction.cs:35 ../Exaile/src/PlayAction.cs:42
+#: ../Exaile/src/PlayItemAction.cs:41 ../Rhythmbox/src/PlayAction.cs:42
+#: ../Rhythmbox/src/PlayItemAction.cs:41
 msgid "Play"
 msgstr "播放"
 
@@ -135,7 +148,8 @@ msgstr "播放"
 msgid "Play from your Banshee Collection"
 msgstr "播放您的Banshee收藏夹里的歌曲"
 
-#: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
+#: ../Banshee/src/PreviousAction.cs:32 ../Exaile/src/PreviousAction.cs:42
+#: ../Rhythmbox/src/PreviousAction.cs:42
 msgid "Previous"
 msgstr "上一首"
 
@@ -151,32 +165,32 @@ msgstr "在Banshee的媒体中搜索"
 msgid "Search your entire Banshee collection"
 msgstr "搜索Banshee收藏夹"
 
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:44
 msgid "Choose BibTeX file"
 msgstr "选择 BibTeX 文件"
 
 #. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:50
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
 msgid "Select A File"
 msgstr "选择一个文件"
 
 #. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:58
 msgid "Select your documents folder"
 msgstr "选择您的文件夹"
 
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:70
 msgid "Choose documents folder"
 msgstr "选择您的文件夹"
 
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
-msgid "ClawsMail contacts"
-msgstr "ClawsMail的联系人"
+#: ../Chromium/src/ChromiumBookmarkItemSource.cs:44
+msgid "Chromium Bookmarks"
+msgstr ""
 
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
-msgid "Contacts in ClawsMail address book"
-msgstr "在ClawsMail里的联系人的地址薄"
+#: ../Chromium/src/ChromiumBookmarkItemSource.cs:48
+msgid "Search your Chromium bookmarks"
+msgstr ""
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:71
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:41
@@ -184,7 +198,6 @@ msgid "Primary Email"
 msgstr "主要电子邮件"
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:74
-#: ../Evolution/src/EmailContactDetailItem.cs:34
 msgid "Email"
 msgstr "电子邮件"
 
@@ -195,6 +208,22 @@ msgstr "其他邮件地址"
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:82
 msgid "Other"
 msgstr "其他"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr "ClawsMail的联系人"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr "在ClawsMail里的联系人的地址薄"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Cl.ickable 项目"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr "有用的 Cl.ickable 项目"
 
 #: ../Cl.ickable/src/ClipAction.cs:38
 msgid "Clip"
@@ -212,19 +241,11 @@ msgstr "cl.ickable 便笺"
 msgid "Opens your cl.ickable clips"
 msgstr "打开 cl.ickable 便笺"
 
-#: ../Cl.ickable/src/ClickableItemSource.cs:31
-msgid "Cl.ickable Items"
-msgstr "Cl.ickable 项目"
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:35
-msgid "Usefull Cl.ickable Items"
-msgstr "有用的 Cl.ickable 项目"
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:53
 msgid "http://opensource.atlassian.com/confluence/spring"
 msgstr "http://opensource.atlassian.com/confluence/spring"
 
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:96
 msgid "username1"
 msgstr "username1"
 
@@ -235,23 +256,6 @@ msgstr "搜索 Confluence"
 #: ../Confluence/src/ConfluenceSearchAction.cs:93
 msgid "Searches Confluence and returns results to Do"
 msgstr "搜索 Confluence 并将结果显示在 Do 里"
-
-#: ../Del.icio.us/src/TagsItemSource.cs:34
-msgid "Del.icio.us Tags"
-msgstr "Del.icio.us 标签"
-
-#: ../Del.icio.us/src/TagsItemSource.cs:38
-msgid "Organizes your del.icio.bookmarks by tag"
-msgstr "按照标签来组织del.icio.us书签"
-
-#: ../Del.icio.us/src/TagItem.cs:45
-msgid "Untagged del.ico.us bookmarks"
-msgstr "未标签的del.icio.us书签"
-
-#: ../Del.icio.us/src/TagItem.cs:47
-#, csharp-format
-msgid "del.icio.us bookmarks tagged with {0}"
-msgstr "显示所有被标签为{0}的del.icio.us书签"
 
 #: ../Del.icio.us/src/BookmarksItemSource.cs:37
 msgid "Del.icio.us bookmarks"
@@ -269,22 +273,22 @@ msgstr "搜索del.icio.us"
 msgid "del.icio.us tag search"
 msgstr "搜索del.icio.us的标签"
 
-#: ../DiskMounter/src/OpenVolumeAction.cs:40
-#: ../SystemServices/src/SystemServicesConfig.cs:74
-msgid "Open"
-msgstr "打开"
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr "未标签的del.icio.us书签"
 
-#: ../DiskMounter/src/OpenVolumeAction.cs:44
-msgid "Open a removable volume"
-msgstr "打开在移动卷"
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr "显示所有被标签为{0}的del.icio.us书签"
 
-#: ../DiskMounter/src/UnmountAction.cs:31
-msgid "Unmount"
-msgstr "卸载"
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr "Del.icio.us 标签"
 
-#: ../DiskMounter/src/UnmountAction.cs:35
-msgid "Unmount volume"
-msgstr "卸载卷"
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.us bookmarks by tag"
+msgstr ""
 
 #: ../DiskMounter/src/MountAction.cs:32
 msgid "Mount"
@@ -293,6 +297,222 @@ msgstr "挂载"
 #: ../DiskMounter/src/MountAction.cs:36
 msgid "Mount volume"
 msgstr "加载卷"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:40
+#: ../SystemServices/src/SystemServicesConfig.cs:75
+msgid "Open"
+msgstr "打开"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:44
+msgid "Open a removable volume"
+msgstr "打开在移动卷"
+
+#: ../DiskMounter/src/UnmountAction.cs:33
+msgid "Unmount"
+msgstr "卸载"
+
+#: ../DiskMounter/src/UnmountAction.cs:37
+msgid "Unmount or eject a volume"
+msgstr ""
+
+#: ../Dropbox/gtk-gui/Dropbox.DropboxConfig.cs:80
+msgid "Dropbox Location"
+msgstr ""
+
+#: ../Dropbox/src/Config/DropboxConfig.cs:68
+msgid "Select location of Dropbox folder"
+msgstr ""
+
+#: ../Dropbox/src/DropboxAbstractAction.cs:48
+msgid "Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxLinkAction.cs:40
+msgid "Add to Dropbox..."
+msgstr ""
+
+#: ../Dropbox/src/DropboxLinkAction.cs:44
+msgid "Links a file or folder to your Dropbox."
+msgstr ""
+
+#: ../Dropbox/src/DropboxPuburlAction.cs:41
+msgid "Get public URL"
+msgstr ""
+
+#: ../Dropbox/src/DropboxPuburlAction.cs:45
+msgid "Gets public URL of a shared Dropbox file."
+msgstr ""
+
+#: ../Dropbox/src/DropboxRevisionsAction.cs:41
+msgid "View revisions"
+msgstr ""
+
+#: ../Dropbox/src/DropboxRevisionsAction.cs:45
+msgid "Views file history in Dropbox web interface."
+msgstr ""
+
+#: ../Dropbox/src/DropboxShareAction.cs:42
+msgid "Share with Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxShareAction.cs:46
+msgid "Links a file to your Dropbox public folder."
+msgstr ""
+
+#: ../Dropbox/src/DropboxStartAction.cs:41
+msgid "Start Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxStartAction.cs:45
+msgid "Starts the Dropbox daemon."
+msgstr ""
+
+#: ../Dropbox/src/DropboxStopAction.cs:39
+msgid "Stop Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxStopAction.cs:43
+msgid "Stops the Dropbox daemon."
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:41
+msgid "Stop sharing with Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:45
+msgid "Unlinks a file from your Dropbox public folder."
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:67
+#, csharp-format
+msgid "Stopped sharing"
+msgstr ""
+
+#: ../Dropbox/src/DropboxWebInterfaceAction.cs:39
+msgid "Dropbox web interface"
+msgstr ""
+
+#: ../Dropbox/src/DropboxWebInterfaceAction.cs:43
+msgid "View folder in Dropbox web interface."
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountActions.cs:36
+#: ../Pidgin/src/PidginAccountActions.cs:37
+msgid "Sign on"
+msgstr "登入"
+
+#: ../Empathy/src/EmpathyAccountActions.cs:41
+msgid "Enable empathy account"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountActions.cs:77
+#: ../Pidgin/src/PidginAccountActions.cs:91
+msgid "Sign off"
+msgstr "登出"
+
+#: ../Empathy/src/EmpathyAccountActions.cs:82
+msgid "Disable empathy account"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountItemSource.cs:41
+msgid "Empathy Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountItemSource.cs:46
+msgid "Available Empathy IM Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseAccountItem.cs:31
+#: ../Pidgin/src/PidginBrowseAccountItem.cs:31
+msgid "Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseAccountItem.cs:36
+msgid "Browse Empathy Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseBuddyItem.cs:30
+msgid "Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseBuddyItem.cs:35
+msgid "Browse Empathy Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseStatusItem.cs:33
+#: ../Pidgin/src/PidginBrowseStatusItem.cs:31
+#: ../Skype/src/SkypeBrowseStatusItem.cs:31
+msgid "Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseStatusItem.cs:38
+msgid "Browse Empathy Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathyChatAction.cs:39 ../Pidgin/src/PidginChatAction.cs:41
+#: ../Skype/src/SkypeChatAction.cs:35
+msgid "Chat"
+msgstr "聊天"
+
+#: ../Empathy/src/EmpathyChatAction.cs:44 ../Pidgin/src/PidginChatAction.cs:45
+msgid "Send an instant message to a friend."
+msgstr "向好友发送即时消息。"
+
+#: ../Empathy/src/EmpathyContactItemSource.cs:56
+msgid "Empathy Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyContactItemSource.cs:61
+msgid "Contacts on your Empathy contact alist."
+msgstr ""
+
+#: ../Empathy/src/EmpathySavedStatusItemSource.cs:60
+msgid "Empathy Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathySavedStatusItemSource.cs:65
+msgid "Saved Empathy statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathySetStatusAction.cs:43
+#: ../Pidgin/src/PidginSetStatusAction.cs:41
+msgid "Set status"
+msgstr "设定状态"
+
+#: ../Empathy/src/EmpathySetStatusAction.cs:48
+msgid "Set empathy status message"
+msgstr ""
+
+#: ../Empathy/src/EmpathyStatusItem.cs:54
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43
+#: ../Pidgin/src/PidginStatusTypeItem.cs:42 ../Skype/src/Skype.cs:67
+msgid "Offline"
+msgstr "离线"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:55
+#: ../Pidgin/src/PidginStatusTypeItem.cs:43
+msgid "Available"
+msgstr "在线"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:56
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46 ../Skype/src/Skype.cs:69
+msgid "Away"
+msgstr "离开"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:57
+#: ../Pidgin/src/PidginStatusTypeItem.cs:45 ../Skype/src/Skype.cs:72
+msgid "Invisible"
+msgstr "隐身"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:58
+#: ../Pidgin/src/PidginStatusTypeItem.cs:44
+msgid "Busy"
+msgstr "忙碌"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:59
+#: ../Pidgin/src/PidginStatusTypeItem.cs:47
+msgid "Unknown Status"
+msgstr "未知状态"
 
 #: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
 msgid "Play Slideshow"
@@ -310,40 +530,109 @@ msgstr "Epiphany 书签"
 msgid "Indexes your Epiphany bookmarks."
 msgstr "索引你的 Epiphany 书签"
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:34
-#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
-msgid "Work Phone"
-msgstr "工作电话"
+#: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:31
+#: ../Firefox/src/BrowseBookmarkItem.cs:30
+#: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:31
+msgid "Bookmarks"
+msgstr ""
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:35
-#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
-msgid "Home Phone"
-msgstr "家庭电话"
+#: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:35
+msgid "Browse Bookmarks"
+msgstr ""
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:36
-msgid "Mobile Phone"
-msgstr "手机"
+#: ../Exaile/src/ExaileItems.cs:50
+msgid "Browse Exaile Music by Artist"
+msgstr ""
 
-#: ../Evolution/src/ContactItemSource.cs:58
-#: ../Evolution/src/ContactItemSource.cs:59
-msgid "Evolution Contacts"
-msgstr "Evolution 联系人"
+#: ../Exaile/src/ExaileItems.cs:58
+msgid "Browse Exaile Music by Album"
+msgstr ""
 
-#: ../Evolution/src/AddressContactDetailItem.cs:34
-msgid "Address"
-msgstr "地址"
+#: ../Exaile/src/ExaileItems.cs:67 ../Rhythmbox/src/RhythmboxItems.cs:69
+msgid "Show Current Track"
+msgstr "显示当前曲目"
 
-#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
+#: ../Exaile/src/ExaileItems.cs:68
+msgid "Show Notification of Current Track in Exaile"
+msgstr ""
+
+#: ../Exaile/src/ExaileItems.cs:73 ../Rhythmbox/src/RhythmboxItems.cs:87
+#: ../VolumeControl/src/VolumeUpItem.cs:31
+msgid "Volume Up"
+msgstr "音量增加"
+
+#: ../Exaile/src/ExaileItems.cs:74
+msgid "Increase Exaile Playback Volume"
+msgstr ""
+
+#: ../Exaile/src/ExaileItems.cs:79 ../Rhythmbox/src/RhythmboxItems.cs:93
+#: ../VolumeControl/src/VolumeDownItem.cs:31
+msgid "Volume Down"
+msgstr "音量降低"
+
+#: ../Exaile/src/ExaileItems.cs:80
+msgid "Decrease Exaile Playback Volume"
+msgstr ""
+
+#: ../Exaile/src/MusicItems.cs:77 ../Rhythmbox/src/MusicItems.cs:77
+msgid "All music by"
+msgstr "所有音乐作品来自"
+
+#: ../Exaile/src/MusicItemSource.cs:44
+msgid "Exaile Music"
+msgstr ""
+
+#: ../Exaile/src/MusicItemSource.cs:48
+msgid "Provides access to artists and albums from Exaile."
+msgstr ""
+
+#: ../Exaile/src/NextAction.cs:46
+msgid "Skip to the next track in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PauseAction.cs:46
+msgid "Pause music in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PlayAction.cs:46
+msgid "Play music in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PlayItemAction.cs:45
+msgid "Play an item in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PreviousAction.cs:46
+msgid "Skip to the previous track in Exaile."
+msgstr ""
+
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:186
 msgid "Show hidden files"
 msgstr "显示隐藏文件"
 
-#: ../File/src/PathNodeView.cs:51
-msgid "Folder"
-msgstr "文件夹"
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:203
+msgid "Indexed Folders"
+msgstr ""
 
-#: ../File/src/PathNodeView.cs:57
-msgid "Depth"
-msgstr "深度"
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:311
+msgid "Ignored Folders"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:35
+msgid "Choose a folder to index"
+msgstr "选择要索引的文件夹"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:36
+msgid "Choose a folder to ignore"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
+msgid "Copy to..."
+msgstr "复制到 ..."
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
+msgid "Copies a file or folder to another location."
+msgstr "复制文件或文件夹到其它位置"
 
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
 msgid "Delete File"
@@ -353,37 +642,19 @@ msgstr "删除文件"
 msgid "Deletes a file or folder."
 msgstr "删除文件或文件夹"
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
-msgid "Choose a folder to index"
-msgstr "选择要索引的文件夹"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:79
+msgid "Files and Folders"
+msgstr "文件和文件夹"
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
-#: ../SystemServices/src/SystemServicesConfig.cs:73
-msgid "Cancel"
-msgstr "取消"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:84
+msgid "Catalogs important files and folders for quick access."
+msgstr "为了快速存取，将重要文件和文件夹编入目录"
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
-msgid "Choose folder"
-msgstr "选择文件夹"
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
-msgid "Rename file..."
-msgstr "重命名文件…"
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
-msgid "Renames a file."
-msgstr "重命名一个文件"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
-msgid "Create New Folder"
-msgstr "新建文件夹"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
-msgid "Creates an new folder."
-msgstr "新建文件夹"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:103
+msgid "Home Folder"
+msgstr ""
 
 #: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
-#: ../RememberTheMilk/src/RTMMoveTask.cs:35
 msgid "Move to..."
 msgstr "移动到"
 
@@ -399,30 +670,6 @@ msgstr "移动到回收站"
 msgid "Moves a file or folder to the trash"
 msgstr "将某文件或文件夹移动到回收站"
 
-#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
-msgid "Recent Files"
-msgstr "最近的文件"
-
-#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
-msgid "Finds recently-opened files."
-msgstr "搜索最近打开的文件"
-
-#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
-msgid "Copy to..."
-msgstr "复制到 ..."
-
-#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
-msgid "Copies a file or folder to another location."
-msgstr "复制文件或文件夹到其它位置"
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
-msgid "Files and Folders"
-msgstr "文件和文件夹"
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
-msgid "Catalogs important files and folders for quick access."
-msgstr "为了快速存取，将重要文件和文件夹编入目录"
-
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
 msgid "Create New File"
 msgstr "新建文件"
@@ -435,13 +682,65 @@ msgstr "新建一个空文件"
 msgid "Untitled"
 msgstr "未命名"
 
-#: ../Firefox/src/BookmarkItemSource.cs:55
-msgid "Firefox Bookmarks"
-msgstr "Firefox 书签"
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
+msgid "Create New Folder"
+msgstr "新建文件夹"
 
-#: ../Firefox/src/BookmarkItemSource.cs:59
-msgid "Finds Firefox bookmarks in your default profile."
-msgstr "在你的默认配置文件中搜索 Firefox 书签。"
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
+msgid "Creates an new folder."
+msgstr "新建文件夹"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:70
+msgid "Recent Files"
+msgstr "最近的文件"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:74
+msgid "Finds recently-opened files."
+msgstr "搜索最近打开的文件"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
+msgid "Rename file..."
+msgstr "重命名文件…"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
+msgid "Renames a file."
+msgstr "重命名一个文件"
+
+#: ../File/src/IgnorePathNodeView.cs:48 ../File/src/IndexPathNodeView.cs:49
+msgid "Folder"
+msgstr "文件夹"
+
+#: ../File/src/IndexPathNodeView.cs:55
+msgid "Depth"
+msgstr "深度"
+
+#: ../Firefox/src/BrowseBookmarkItem.cs:34
+msgid "Browse Firefox Bookmarks"
+msgstr ""
+
+#: ../Firefox/src/BrowseHistoryItem.cs:32
+msgid "History"
+msgstr ""
+
+#: ../Firefox/src/BrowseHistoryItem.cs:36
+msgid "Browse Firefox History"
+msgstr ""
+
+#: ../Firefox/src/FolderItem.cs:51
+msgid "A Firefox Bookmarks Directory"
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:69
+msgid "Firefox Places"
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:73
+msgid "Search your bookmarks and history."
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:250
+msgid "Mozilla Bookmarks"
+msgstr ""
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
 msgid ""
@@ -451,12 +750,12 @@ msgid ""
 msgstr "Do 需要你的授权以上传照片到你的 Flickr 账户。按下“授权”按钮打开浏览器并对 Do 进行授权。 "
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:171
 msgid "<b>Account</b>"
 msgstr "<b>账户</b>"
 
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:118
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:136
 msgid "_Authorize"
 msgstr "授权"
 
@@ -493,17 +792,17 @@ msgstr ""
 msgid "<b>Tags</b>"
 msgstr "<b>标签</b>"
 
-#: ../Flickr/src/UploadAction.cs:45
-msgid "Upload photo"
-msgstr "上传照片"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:36
+msgid "Flickr Upload"
+msgstr ""
 
-#: ../Flickr/src/UploadAction.cs:49
-msgid "Upload one or more photos to Flickr"
-msgstr "上传一张或多张照片到 Flickr"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:121
+msgid "_Hide"
+msgstr ""
 
-#: ../Flickr/src/FlickrItemSource.cs:34
-msgid "Account"
-msgstr "帐户"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:146
+msgid "_OK"
+msgstr ""
 
 #: ../Flickr/src/AccountConfig.cs:91
 msgid "Click to compete authorization"
@@ -514,11 +813,62 @@ msgstr "单击完全授权"
 msgid "Thank you {0} for allowing Do access to Flickr."
 msgstr "{0}, 感谢你允许 Do 访问 Flickr。"
 
-#: ../GNOME-Dictionary/src/DefineAction.cs:51
+#: ../Flickr/src/FlickrItemSource.cs:34
+msgid "Account"
+msgstr "帐户"
+
+#: ../Flickr/src/UploadAction.cs:40
+msgid "Upload photo"
+msgstr "上传照片"
+
+#: ../Flickr/src/UploadAction.cs:44
+msgid "Upload one or more photos to Flickr"
+msgstr "上传一张或多张照片到 Flickr"
+
+#: ../Flickr/src/UploadDialog.cs:32
+#, csharp-format
+msgid "Uploading {0}..."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:33
+#, csharp-format
+msgid "Uploading {0} of {1}..."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:34
+msgid "Finished uploading images to Flickr."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:35
+#, csharp-format
+msgid "Uploaded {0} images"
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:36
+msgid "Your images are still being uploaded."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:41
+msgid "Your images are being uploaded to Flickr."
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:42
+msgid "Calculate"
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:46
+msgid "Use GNOME Calculator to make simple calculations."
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:61
+msgid "Sorry I couldn't understand your expression, try another way"
+msgstr ""
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:52
 msgid "Define"
 msgstr "定义"
 
-#: ../GNOME-Dictionary/src/DefineAction.cs:56
+#: ../GNOME-Dictionary/src/DefineAction.cs:57
 msgid "Define a given word."
 msgstr "定义一个单词。"
 
@@ -529,14 +879,6 @@ msgstr "当前窗口"
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
 msgid "Take a screenshot of the current window."
 msgstr "对当前窗口进行屏幕截图"
-
-#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
-msgid "Whole screen"
-msgstr "全屏"
-
-#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
-msgid "Take a screenshot of the entire screen."
-msgstr "对整个屏幕进行屏幕截图"
 
 #: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:37
 #, csharp-format
@@ -549,6 +891,14 @@ msgid "Wait {0} second before taking the screenshot."
 msgid_plural "Wait {0} seconds before taking the screenshot."
 msgstr[0] "在进行屏幕截图前等待 {0} 秒"
 
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
+msgid "GNOME Screenshot Items"
+msgstr "GNOME 屏幕截图项"
+
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
+msgid "Whole screen or current window."
+msgstr "全屏或当前窗口"
+
 #: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:34
 msgid "Take screenshot"
 msgstr "屏幕截图"
@@ -557,13 +907,13 @@ msgstr "屏幕截图"
 msgid "Takes a screenshot with optional delay."
 msgstr "带有可选时延的屏幕截图。"
 
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
-msgid "GNOME Screenshot Items"
-msgstr "GNOME 屏幕截图项"
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
+msgid "Whole screen"
+msgstr "全屏"
 
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
-msgid "Whole screen or current window."
-msgstr "全屏或当前窗口"
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
+msgid "Take a screenshot of the entire screen."
+msgstr "对整个屏幕进行屏幕截图"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
 msgid "GNOME Session Commands"
@@ -621,14 +971,6 @@ msgstr "锁定屏幕"
 msgid "Lock your screen."
 msgstr "锁定你的屏幕。"
 
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:39
-msgid "Open Profile"
-msgstr "打开配置文件"
-
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
-msgid "Opens a GNOME Terminal with the selected profile."
-msgstr "打开一个使用所选配置文件的 GNOME 终端。"
-
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
 msgid "Open Terminal Here"
 msgstr "在此打开终端"
@@ -636,6 +978,22 @@ msgstr "在此打开终端"
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
 msgid "Opens a GNOME Terminal in a given location."
 msgstr "在指定位置打开 GNOME 终端。"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:36
+msgid "Unnamed Profile"
+msgstr "未命名的配置文件"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:37
+msgid "GNOME Terminal Profile"
+msgstr "GNOME终端文件"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:49
+msgid "GNOME Terminal Profiles"
+msgstr "GNOME终端文件"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:53
+msgid "Indexes your GNOME Terminal profiles."
+msgstr "索引您的GNOME终端配置文件"
 
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
 msgid "Run in Terminal"
@@ -645,34 +1003,35 @@ msgstr "在终端运行"
 msgid "Runs a command in GNOME Terminal."
 msgstr "在GNOME 终端中运行命令。"
 
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
-msgid "GNOME Terminal Profiles"
-msgstr "GNOME终端文件"
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
-msgid "Indexes your GNOME Terminal profiles."
-msgstr "索引您的GNOME终端配置文件"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:33
-msgid "Unnamed Profile"
-msgstr "未命名的配置文件"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:34
-msgid "GNOME Terminal Profile"
-msgstr "GNOME终端文件"
-
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:44
 msgid "Perform a calculation using Google Calculator."
 msgstr "用 Google 计算器进行计算。"
 
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:92
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:76
 msgid "Google Calculator could not evaluate the expression."
 msgstr "Google 计算器无法计算该表达式。"
 
 #: ../GoogleCalendar/src/Configuration.cs:42
-#: ../GoogleDocs/src/Configuration.cs:41
+#: ../GoogleDocs/src/Configuration.cs:38
 msgid "E-Mail:"
 msgstr "电子邮件："
+
+#: ../GoogleCalendar/src/GCalClient.cs:40
+msgid "All Events"
+msgstr "所有的事件"
+
+#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:34
+#, csharp-format
+msgid "An error has occurred in {0}"
+msgstr "{0}出错了"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr "GCal服务器连接失败"
+
+#: ../GoogleCalendar/src/GCalendarItem.cs:45
+msgid "Google Calendar"
+msgstr "Google 日历"
 
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:40
 msgid "Google Calendars"
@@ -682,14 +1041,21 @@ msgstr "Google 日历"
 msgid "Indexes your Google Calendars"
 msgstr "索引你的 Google 日历"
 
-#: ../GoogleCalendar/src/GCalClient.cs:40
-msgid "All Events"
-msgstr "所有的事件"
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
+msgid "New Event"
+msgstr "新事件"
 
-#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
-#, csharp-format
-msgid "An error has occurred in {0}"
-msgstr "{0}出错了"
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
+msgid "Create a new event in Google Calendar"
+msgstr "在 Google 日历中创建新事件"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
+msgid "Search Events"
+msgstr "搜索事件"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
+msgid "Search Google Calendar for Events"
+msgstr "在 Google 日历中搜索事件"
 
 #: ../GoogleCalendar/src/GCalendarViewActions.cs:41
 msgid "View Event"
@@ -707,30 +1073,6 @@ msgstr "查看日历"
 msgid "Open calendar in browser"
 msgstr "在浏览器里打开日历"
 
-#: ../GoogleCalendar/src/GCalendarItem.cs:45
-msgid "Google Calendar"
-msgstr "Google 日历"
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
-msgid "Search Events"
-msgstr "搜索事件"
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
-msgid "Search Google Calendar for Events"
-msgstr "在 Google 日历中搜索事件"
-
-#: ../GoogleCalendar/src/GCal.cs:34
-msgid "Failed to connect to GCal service"
-msgstr "GCal服务器连接失败"
-
-#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
-msgid "New Event"
-msgstr "新事件"
-
-#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
-msgid "Create a new event in Google Calendar"
-msgstr "在 Google 日历中创建新事件"
-
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:42
 msgid "Primary Phone"
 msgstr "主要电话"
@@ -742,6 +1084,14 @@ msgstr "家庭电子邮件"
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:44
 msgid "Work Email"
 msgstr "办公电子邮件"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
+msgid "Home Phone"
+msgstr "家庭电话"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
+msgid "Work Phone"
+msgstr "工作电话"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:47
 msgid "Primary Address"
@@ -755,6 +1105,14 @@ msgstr "家庭地址"
 msgid "Work Address"
 msgstr "工作地址"
 
+#: ../GoogleContacts/src/GMailContactItemSource.cs:38
+msgid "GMail Contacts"
+msgstr "GMail 联系人"
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:42
+msgid "Index your GMail contacts"
+msgstr "索引您的GMail联系人"
+
 #: ../GoogleContacts/src/GMail.cs:35
 msgid "An error occurred connecting to google, are your credentials valid?"
 msgstr "连接谷歌失败，请确认您的用户登录信息"
@@ -765,89 +1123,89 @@ msgid ""
 "configuration."
 msgstr "没有用户登录信息。请在插件配置中输入登录信息。"
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:38
-msgid "GMail Contacts"
-msgstr "GMail 联系人"
+#: ../GoogleContacts/src/RecentConversationsAction.cs:39
+msgid "View recent conversations"
+msgstr ""
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:42
-msgid "Index your GMail contacts"
-msgstr "索引您的GMail联系人"
+#: ../GoogleContacts/src/RecentConversationsAction.cs:43
+msgid "View recent emails and chat logs with a friend"
+msgstr ""
 
-#: ../GoogleDocs/src/GDocs.cs:149
+#: ../GoogleDocs/src/GDocsAbstractItem.cs:43
+msgid "Google Docs Generic Document"
+msgstr "Google 文件普通文档"
+
+#: ../GoogleDocs/src/GDocs.cs:139
 msgid "Uploading failed."
 msgstr "上传失败"
 
-#: ../GoogleDocs/src/GDocs.cs:150
+#: ../GoogleDocs/src/GDocs.cs:140
 msgid "An error occurred when uploading files to Google Docs."
 msgstr "上传文件到Google文件时出错"
 
-#: ../GoogleDocs/src/GDocs.cs:157
+#: ../GoogleDocs/src/GDocs.cs:147
 msgid "Deleting failed."
 msgstr "删除失败"
 
-#: ../GoogleDocs/src/GDocs.cs:158
+#: ../GoogleDocs/src/GDocs.cs:148
 msgid "An error occurred when deleting the document at Google Docs."
 msgstr "删除Google文件的文档时出错"
 
-#: ../GoogleDocs/src/GDocs.cs:165
+#: ../GoogleDocs/src/GDocs.cs:155
 msgid "Document deleted."
 msgstr "文档删除成功"
 
-#: ../GoogleDocs/src/GDocs.cs:166
+#: ../GoogleDocs/src/GDocs.cs:156
 #, csharp-format
 msgid ""
 "The document '{0}' has been successfully moved into Trash at Google Docs."
 msgstr "'{0}'文档已被移至Google文件的垃圾桶"
 
-#: ../GoogleDocs/src/GDocsPresentationItem.cs:36
-msgid "Google Docs Presentation"
-msgstr "Google文件演示文稿"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:36
-msgid "Google Docs"
-msgstr "Google文件"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:40
-msgid "Indexes your documents stored at Google Docs"
-msgstr "索引您在Google文件储存的文档"
-
-#: ../GoogleDocs/src/GDocsItem.cs:46
-msgid "Google Docs Generic Document"
-msgstr "Google 文件普通文档"
-
-#: ../GoogleDocs/src/GDocsDocumentItem.cs:36
+#: ../GoogleDocs/src/GDocsDocumentItem.cs:33
 msgid "Google Docs Text Document"
 msgstr "Google 文件文档"
 
-#: ../GoogleDocs/src/GDocsPDFItem.cs:36
+#: ../GoogleDocs/src/GDocsItemSource.cs:33
+msgid "Google Docs"
+msgstr "Google文件"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:37
+msgid "Indexes your documents stored at Google Docs"
+msgstr "索引您在Google文件储存的文档"
+
+#: ../GoogleDocs/src/GDocsPDFItem.cs:33
 msgid "Google Docs PDF Document"
 msgstr "Google文件PDF文档"
 
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:38
-msgid "Delete Document"
-msgstr "删除文档"
+#: ../GoogleDocs/src/GDocsPresentationItem.cs:33
+msgid "Google Docs Presentation"
+msgstr "Google文件演示文稿"
 
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:42
-msgid "Move a document into Trash at Google Docs"
-msgstr "将文档移至Google文件垃圾桶"
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
-msgid "Upload Document"
-msgstr "上传文档"
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:45
-msgid "Upload a document to Google Docs"
-msgstr "上传文档至Google文件"
-
-#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
+#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:33
 msgid "Google Docs Spreadsheet"
 msgstr "Google文件表格"
 
-#: ../GoogleMaps/src/MapAction.cs:39
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:35
+msgid "Delete Document"
+msgstr "删除文档"
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:39
+msgid "Move a document into Trash at Google Docs"
+msgstr "将文档移至Google文件垃圾桶"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:37
+msgid "Upload Document"
+msgstr "上传文档"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
+msgid "Upload a document to Google Docs"
+msgstr "上传文档至Google文件"
+
+#: ../GoogleMaps/src/MapAction.cs:40
 msgid "Map"
 msgstr "地图"
 
-#: ../GoogleMaps/src/MapAction.cs:44
+#: ../GoogleMaps/src/MapAction.cs:45
 msgid "Map a location or route in Google maps."
 msgstr "在 Google 地图中显示某个位置或路径。"
 
@@ -892,6 +1250,14 @@ msgstr "使用严格过滤"
 msgid "<b>SafeSearch Preferences</b>"
 msgstr "<b>SafeSearch 使用偏好</b>"
 
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:45
+msgid "I'm Feeling Lucky!"
+msgstr "手气不错！"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:54
+msgid "Searches Google and takes you to the first result"
+msgstr "进行Google搜索，自动打开搜到的第一个网页"
+
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:81
 msgid "Search Google"
 msgstr "用 Google 搜索"
@@ -899,14 +1265,6 @@ msgstr "用 Google 搜索"
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:90
 msgid "Allows you to perform Google Searches from Do"
 msgstr "让Do进行Google搜索"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
-msgid "I'm Feeling Lucky!"
-msgstr "手气不错！"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
-msgid "Searches Google and takes you to the first result"
-msgstr "进行Google搜索，自动打开搜到的第一个网页"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
 msgid ""
@@ -931,25 +1289,17 @@ msgstr "申请注册码 (_G)"
 msgid "<b>Registration Code</b>"
 msgstr "<b>注册码</b>"
 
-#: ../ImageShack/src/ImageShackAction.cs:57
+#: ../ImageShack/src/ImageShackAction.cs:54
 msgid "Upload to ImageShack"
 msgstr "将照片上传到 ImageShack"
 
-#: ../ImageShack/src/ImageShackAction.cs:61
+#: ../ImageShack/src/ImageShackAction.cs:58
 msgid "Uploads the image to ImageShack."
 msgstr "将照片上传到 ImageShack"
 
-#: ../ImageShack/src/ImageShackAction.cs:106
-msgid "ImageShack exception: "
-msgstr "ImageShack 出错: "
-
-#: ../ImageShack/src/ImageShackAction.cs:116
+#: ../ImageShack/src/ImageShackAction.cs:101
 msgid "File size exceeds ImageShack's 1.5MB limit."
 msgstr "文件大小超过 ImageShack 的1.5MB限制"
-
-#: ../ImageShack/src/ImageShackAction.cs:196
-msgid "Parsed url was empty. ImageShack has probably changed its format."
-msgstr "浏览的链接是空的，也许 ImageShack 更改了它的链接格式。"
 
 #: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
 #: ../ImageShack/src/Notifications.cs:53
@@ -972,7 +1322,13 @@ msgstr "搜索Launchpad"
 msgid "Search Launchpad properties."
 msgstr "搜索 Launchpad 项目"
 
+#: ../LocateFiles/src/LocateFilesAction.cs:35
+msgid "Locate found 0 files for: "
+msgstr ""
+
 #: ../LocateFiles/src/LocateFilesAction.cs:39
+#: ../LocateFiles/src/LocateFilesAction.cs:79
+#: ../LocateFiles/src/LocateFilesAction.cs:110
 msgid "Locate Files"
 msgstr "定位文件"
 
@@ -980,29 +1336,41 @@ msgstr "定位文件"
 msgid "Search your filesystem using locate."
 msgstr "用 locate 搜索你的文件系统。"
 
-#: ../ManLookUp/src/ManualPageItemSource.cs:50
-msgid "Manual pages (man)"
-msgstr "帮助内容(man)"
+#: ../LocateFiles/src/LocateFilesAction.cs:80
+msgid "No text provided for searching."
+msgstr ""
 
-#: ../ManLookUp/src/ManualPageItemSource.cs:57
-msgid "Search and read help documentation (man)"
-msgstr "搜索和阅读帮助内容"
-
-#: ../ManLookUp/src/ReadManualPageAction.cs:42
+#: ../ManLookUp/src/ReadManualPageAction.cs:40
 msgid "Read manual page (man)"
 msgstr "阅读技术文章 (man)"
 
-#: ../ManLookUp/src/ReadManualPageAction.cs:49
+#: ../ManLookUp/src/ReadManualPageAction.cs:47
 msgid "Look up and read a manual page."
 msgstr "查找并阅读技术文章"
 
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:56
 msgid "Show friend status updates"
 msgstr "显示好友状态更新"
 
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:70
+msgid "Show direct messages"
+msgstr ""
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:83
 msgid "<b>General</b>"
 msgstr "<b>常规</b>"
+
+#: ../Microblogging/src/FriendItem.cs:22
+msgid "No Status"
+msgstr ""
+
+#: ../Microblogging/src/FriendSource.cs:46
+msgid "Microblog friends"
+msgstr "微博客好友"
+
+#: ../Microblogging/src/FriendSource.cs:50
+msgid "Indexes your microblog friends"
+msgstr "索引你的微博客好友"
 
 #: ../Microblogging/src/MicroblogClient.cs:42
 #, csharp-format
@@ -1019,14 +1387,6 @@ msgid ""
 "Unable to post tweet. Check your login settings. If you are behind a proxy "
 "make sure that the settings in /system/http_proxy are correct."
 msgstr "发送信息失败。请确认你的登录信息。如果你使用网络代理服务器，请核对位于 /system/http_proxy 的设置。"
-
-#: ../Microblogging/src/FriendSource.cs:47
-msgid "Microblog friends"
-msgstr "微博客好友"
-
-#: ../Microblogging/src/FriendSource.cs:51
-msgid "Indexes your microblog friends"
-msgstr "索引你的微博客好友"
 
 #: ../Microblogging/src/Notifications.cs:40
 #, csharp-format
@@ -1048,8 +1408,8 @@ msgstr "发送 '{0}' 至 {1} 出错"
 
 #: ../Microblogging/src/Notifications.cs:60
 #, csharp-format
-msgid "'{0}' sucessfully posted to {1}"
-msgstr "'{0}' 已发送至 {1}"
+msgid "'{0}' successfully posted to {1}"
+msgstr ""
 
 #: ../Microblogging/src/PostAction.cs:44
 #, csharp-format
@@ -1090,8 +1450,8 @@ msgid "Opera Bookmarks"
 msgstr "Opera 书签"
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:28
-msgid "Indexes your Opera 6 bookmarks"
-msgstr "索引 Opera 6 的书签"
+msgid "Indexes your Opera bookmarks"
+msgstr ""
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
 msgid "Supported Codes\t\t\t"
@@ -1109,33 +1469,17 @@ msgstr "发送的剪贴板"
 msgid "Sends the text to Pastebin."
 msgstr "发送文件到剪贴板"
 
-#: ../Pastebin/src/Providers/LodgeIt.cs:77
+#: ../Pastebin/src/Providers/LodgeIt.cs:76
 msgid "Parsed url was empty. Lodge It has probably changed its format."
 msgstr "所浏览的链接是空的。Lodge It 也许改变了它的链接格式。"
 
-#: ../Pidgin/src/PidginSetStatusAction.cs:48
-msgid "Set status"
-msgstr "设定状态"
+#: ../Pidgin/src/PidginAccountActions.cs:41
+msgid "Enable pidgin account"
+msgstr "启用 Pidgin 账户"
 
-#: ../Pidgin/src/PidginSetStatusAction.cs:52
-msgid "Set pidgin status message"
-msgstr "设定 Pidgin 的状态消息"
-
-#: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
-msgid "Pidgin Statuses"
-msgstr "Pidgin 状态"
-
-#: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
-msgid "Saved Pidgin statuses"
-msgstr "保存 Pidgin 状态"
-
-#: ../Pidgin/src/PidginContactItemSource.cs:59
-msgid "Pidgin Buddies"
-msgstr "Pidgin 好友"
-
-#: ../Pidgin/src/PidginContactItemSource.cs:63
-msgid "Buddies on your Pidgin buddy list."
-msgstr "在你 Pidgin 好友列表上的好友。"
+#: ../Pidgin/src/PidginAccountActions.cs:95
+msgid "Disble pidgin account"
+msgstr "禁用 Pidgin 账户"
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:41
 msgid "Pidgin Accounts"
@@ -1145,87 +1489,84 @@ msgstr "Pidgin 账户"
 msgid "Available Pidgin IM Accounts"
 msgstr "可用的 Pidgin 账户"
 
-#: ../Pidgin/src/PidginAccountActions.cs:36
-msgid "Sign on"
-msgstr "登入"
+#: ../Pidgin/src/PidginBrowseAccountItem.cs:35
+msgid "Browse Pidgin Accounts"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:40
-msgid "Enable pidgin account"
-msgstr "启用 Pidgin 账户"
+#: ../Pidgin/src/PidginBrowseBuddyItem.cs:31
+#: ../Skype/src/SkypeBrowseBuddyItem.cs:31
+msgid "Buddies"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:82
-msgid "Sign off"
-msgstr "登出"
+#: ../Pidgin/src/PidginBrowseBuddyItem.cs:35
+msgid "Browse Pidgin Buddies"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:86
-msgid "Disble pidgin account"
-msgstr "禁用 Pidgin 账户"
+#: ../Pidgin/src/PidginBrowseStatusItem.cs:35
+msgid "Browse Pidgin Statuses"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:45
-msgid "Offline"
-msgstr "离线"
+#: ../Pidgin/src/PidginContactItemSource.cs:66
+msgid "Pidgin Buddies"
+msgstr "Pidgin 好友"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:46
-msgid "Available"
-msgstr "在线"
+#: ../Pidgin/src/PidginContactItemSource.cs:70
+msgid "Buddies on your Pidgin buddy list."
+msgstr "在你 Pidgin 好友列表上的好友。"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:47
-msgid "Busy"
-msgstr "忙碌"
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43 ../Skype/src/Skype.cs:66
+msgid "Online"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:48
-msgid "Invisible"
-msgstr "隐身"
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:54
+msgid "Handle"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:49
-msgid "Away"
-msgstr "离开"
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:47
+msgid "Pidgin Statuses"
+msgstr "Pidgin 状态"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:50
-msgid "Unknown Status"
-msgstr "未知状态"
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:51
+msgid "Saved Pidgin statuses"
+msgstr "保存 Pidgin 状态"
 
-#: ../Pidgin/src/PidginChatAction.cs:41
-msgid "Chat"
-msgstr "聊天"
+#: ../Pidgin/src/PidginSetStatusAction.cs:45
+msgid "Set pidgin status message"
+msgstr "设定 Pidgin 的状态消息"
 
-#: ../Pidgin/src/PidginChatAction.cs:45
-msgid "Send an instant message to a friend."
-msgstr "向好友发送即时消息。"
-
-#: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:70
 msgid "Application Key"
 msgstr "应用程序密钥"
 
-#: ../PingFM/gtk-gui/PingFM.Configuration.cs:81
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:87
 msgid "<i>Verify and save your account information</i>"
 msgstr "<i>核对并储存你的帐户信息</i>"
 
-#: ../PingFM/src/PingFMClient.cs:36
+#: ../PingFM/src/PingFMClient.cs:35
 msgid "Message posted"
 msgstr "信息已发送"
 
-#: ../PingFM/src/PingFMClient.cs:37
+#: ../PingFM/src/PingFMClient.cs:36
 msgid "Message posting failed"
 msgstr "信息发送失败"
 
-#: ../PingFM/src/PingFMClient.cs:38
+#: ../PingFM/src/PingFMClient.cs:37
 msgid ""
 "Cannot connect to the Ping.FM API server, or the server responds with an "
 "error."
 msgstr "不能连接到 Ping.FM API 服务器或是服务器出错"
 
-#: ../PingFM/src/PingFMClient.cs:39
+#: ../PingFM/src/PingFMClient.cs:38
 #, csharp-format
 msgid "Your {0} message has been successfully posted to {1}"
 msgstr "你的信息 {0} 已发送至 {1}"
 
-#: ../PingFM/src/PingFMClient.cs:40
+#: ../PingFM/src/PingFMClient.cs:39
 #, csharp-format
 msgid "Your message has been successfully posted to all {0} services"
 msgstr "你的信息已发送至 {0} 个服务"
 
-#: ../PingFM/src/PingFMClient.cs:67
+#: ../PingFM/src/PingFMClient.cs:66
 msgid "Microblog"
 msgstr "微博客"
 
@@ -1233,17 +1574,13 @@ msgstr "微博客"
 msgid "Status"
 msgstr "状态"
 
-#: ../PingFM/src/PingFMClient.cs:82
+#: ../PingFM/src/PingFMClient.cs:83
 msgid "Error occurred in service response"
 msgstr "服务回应出错"
 
-#: ../PingFM/src/PingFMServiceItem.cs:51
-msgid "Web service group supported by Ping.FM"
-msgstr "Ping.FM 所支持的社群网络服务"
-
-#: ../PingFM/src/PingFMServiceItem.cs:52
-msgid "Web service supported by Ping.FM"
-msgstr "Ping.FM 所支持的社群网络服务"
+#: ../PingFM/src/PingFM.cs:31
+msgid "Failed to connect to Ping.FM service"
+msgstr "Ping.FM 服务连接失败"
 
 #: ../PingFM/src/PingFMPost.cs:35
 msgid "Post via Ping.FM"
@@ -1254,17 +1591,30 @@ msgid ""
 "Post a text message as microblog or status update to your social network"
 msgstr "在微博客里发表帖子或者更新你的社群网络"
 
-#: ../PingFM/src/PingFM.cs:32
-msgid "Failed to connect to Ping.FM service"
-msgstr "Ping.FM 服务连接失败"
+#: ../PingFM/src/PingFMServiceItem.cs:53
+#, csharp-format
+msgid "Post message to multiple {0} services."
+msgstr ""
 
-#: ../PingFM/src/PingFMServiceItemSource.cs:35
+#: ../PingFM/src/PingFMServiceItem.cs:54
+msgid "Service supported by Ping.FM"
+msgstr ""
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:33
 msgid "Ping.FM Services"
 msgstr "Ping.FM 服务"
 
-#: ../PingFM/src/PingFMServiceItemSource.cs:39
+#: ../PingFM/src/PingFMServiceItemSource.cs:37
 msgid "Web services suppported by Ping.FM"
 msgstr "Ping.FM 所支持的社群网络服务"
+
+#: ../Putty/src/PuttyAction.cs:41
+msgid "Connect with PuTTY"
+msgstr "用 PuTTy 进行连接"
+
+#: ../Putty/src/PuttyAction.cs:45
+msgid "Create new conenction with PuTTY"
+msgstr "用 PuTTy 建立新的连接"
 
 #: ../Putty/src/PuttySession.cs:49
 #, csharp-format
@@ -1279,13 +1629,9 @@ msgstr "PuTTy 会话"
 msgid "PuTTY saved sessions"
 msgstr "PuTTy 储存的会话"
 
-#: ../Putty/src/PuttyAction.cs:40
-msgid "Connect with PuTTY"
-msgstr "用 PuTTy 进行连接"
-
-#: ../Putty/src/PuttyAction.cs:44
-msgid "Create new conenction with PuTTY"
-msgstr "用 PuTTy 建立新的连接"
+#: ../Qalculate/src/QalculateAction.cs:21
+msgid "Perform a calculation using Qalculate."
+msgstr ""
 
 #: ../Quote/src/QuoteAction.cs:40
 msgid "Submit Quote"
@@ -1295,26 +1641,34 @@ msgstr "提交引用"
 msgid "Sends text to Quote service."
 msgstr "将文字发送至引用服务网站"
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:96
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:102
 msgid ""
 "Do needs your authorization in order to manage tasks in your Remember The "
 "Milk account. Press the \"Authorize\" button to open a web browser and give "
 "Do authorization."
 msgstr "Do 需要你的授权以管理你的 Remember The Milk 任务。点击 “授权” 按钮打开浏览器并对 Do 进行授权。"
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:191
-msgid "For overdue task(s)"
-msgstr "当有过期的任务"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:202
+msgid "minute(s)"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:203
-msgid "When actions (e.g. rename) are completed"
-msgstr "当操作已完成（如重命名任务）"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:213
+msgid "Notify overdue task(s) every"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:224
-msgid "<b>Notification</b>"
-msgstr "<b>通知</b>"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:244
+msgid "Show notification when actions are completed"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:260
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:256
+msgid "Return the newly created task"
+msgstr ""
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:268
+msgid "<b>Interactivity</b>"
+msgstr ""
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:305
 msgid ""
 "You can enter some advanced search operators here to limit the tasks Do "
 "indexes. E.g. \"priority:1 AND status:incomplete\" will force Do to only "
@@ -1323,321 +1677,672 @@ msgstr ""
 "为了限制 Do 所索引的 RTM 任务，你可以在此输入一些高级搜索符号。例如：\"priority:1 AND status:incomplete\" "
 "会强迫 Do 只索引未完成的高优先级的任务。"
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:294
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:339
 msgid "<b>Filter</b>"
 msgstr "<b>过滤</b>"
 
-#: ../RememberTheMilk/src/Configuration.cs:68
+#: ../RememberTheMilk/src/Configuration.cs:116
 msgid ""
 "A webpage from Remember The Milk should be opened in your web browser now. "
 "Please follow the instructions there and come back to complete the "
 "authrozation by clicking the button below."
 msgstr "Remember The Milk 的网页将在您的浏览器中打开。请根据网页上的说明进行授权，再回到此窗口点击一下按钮。"
 
-#: ../RememberTheMilk/src/Configuration.cs:76
+#: ../RememberTheMilk/src/Configuration.cs:124
 msgid "Complete authorization"
 msgstr "完成授权"
 
-#: ../RememberTheMilk/src/Configuration.cs:93
+#: ../RememberTheMilk/src/Configuration.cs:150
 msgid "Fail to complete authorization."
 msgstr "授权失败"
 
-#: ../RememberTheMilk/src/Configuration.cs:96
+#: ../RememberTheMilk/src/Configuration.cs:153
 msgid "Authorize again"
 msgstr "重新授权"
 
-#: ../RememberTheMilk/src/Configuration.cs:102
+#: ../RememberTheMilk/src/Configuration.cs:162
 #, csharp-format
 msgid ""
 "Thank you {0}, RTM plugin is now authorized to operate on your account."
 msgstr "谢谢 {0}, RTM 插件已授权操作您的 RTM 帐户"
 
-#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
-msgid "Uncomplete"
-msgstr "未完成"
+#: ../RememberTheMilk/src/RTMAddTags.cs:35
+msgid "Add Tag(s)"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
-msgid "Mark a selected task as \"incomplete\"."
-msgstr "将选中的任务标记为\"未完成\""
-
-#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
-msgid "Delete"
-msgstr "删除任务"
-
-#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
-msgid "Delete a selected task from Remember The Milk"
-msgstr "将选中的任务从 Remember The Milk 删除"
-
-#: ../RememberTheMilk/src/RTM.cs:268
-#, csharp-format
-msgid "{0} Task Overdue"
-msgid_plural "{0} Tasks Overdue"
-msgstr[0] "{0} 项任务已过期"
-
-#: ../RememberTheMilk/src/RTM.cs:368
-msgid "Task Deleted"
-msgstr "任务已删除"
-
-#: ../RememberTheMilk/src/RTM.cs:369
-msgid ""
-"The selected task has been successfully deleted from your Remember The Milk "
-"task list"
-msgstr "Remember The Milk 任务列表中所选项目已删除"
-
-#: ../RememberTheMilk/src/RTM.cs:383
-msgid "Task Completed"
-msgstr "任务已完成"
-
-#: ../RememberTheMilk/src/RTM.cs:384
-msgid ""
-"The selected task in your Remember The Milk task list has been marked as "
-"completed."
-msgstr "Remember The Milk 任务列表中所选项目已标记为完成"
-
-#: ../RememberTheMilk/src/RTM.cs:392
-msgid "High"
-msgstr "高"
-
-#: ../RememberTheMilk/src/RTM.cs:393
-msgid "High Priority"
-msgstr "高优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:394
-msgid "Medium"
-msgstr "中"
-
-#: ../RememberTheMilk/src/RTM.cs:395
-msgid "Medium Priority"
-msgstr "中优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:396
-msgid "Low"
-msgstr "低"
-
-#: ../RememberTheMilk/src/RTM.cs:397
-msgid "Low Priority"
-msgstr "低优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:398
-msgid "None"
-msgstr "无"
-
-#: ../RememberTheMilk/src/RTM.cs:399
-msgid "No Priority"
-msgstr "无优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:400
-msgid "Up"
-msgstr "提高优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:401
-msgid "Increase the priority"
-msgstr "提高优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:402
-msgid "Down"
-msgstr "降低优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:403
-msgid "Decrease the priority"
-msgstr "降低优先级"
-
-#: ../RememberTheMilk/src/RTM.cs:419
-msgid "Priority Changed"
-msgstr "任务的优先级已更改"
-
-#: ../RememberTheMilk/src/RTM.cs:420
-msgid ""
-"The priority of the selected task in your Remember The Milk task list has "
-"been changed."
-msgstr "Remember The Milk 任务列表中所选项目的优先级已更改"
-
-#: ../RememberTheMilk/src/RTM.cs:437
-msgid "Due Date/Time Changed"
-msgstr "到期日／时间已更改"
-
-#: ../RememberTheMilk/src/RTM.cs:438
-msgid ""
-"The due date/time of the selected task in your Remember The Milk task list "
-"has been changed."
-msgstr "Remember The Milk 任务列表中所选项目的到期日／时间已更改"
-
-#: ../RememberTheMilk/src/RTM.cs:452
-msgid "Task Moved"
-msgstr "任务移动完成"
-
-#: ../RememberTheMilk/src/RTM.cs:468
-msgid "Task Renamed"
-msgstr "任务重命名完成"
-
-#: ../RememberTheMilk/src/RTM.cs:483
-msgid "Task Postponed"
-msgstr "任务推迟完成"
-
-#: ../RememberTheMilk/src/RTM.cs:484
-msgid ""
-"The selected task in your Remember The Milk task list has been postponed"
-msgstr "Remember The Milk 任务列表中所选项目已推迟"
-
-#: ../RememberTheMilk/src/RTM.cs:498
-msgid "Recurrence Pattern Changed"
-msgstr "重复间隔已更改"
-
-#: ../RememberTheMilk/src/RTM.cs:499
-msgid ""
-"The recurrence pattern of the selected task in your Remember The Milk task "
-"list has been changed."
-msgstr "Remember The Milk 任务列表中所选项目的重复间隔已更改"
-
-#: ../RememberTheMilk/src/RTM.cs:513
-msgid "Task Uncompleted"
-msgstr "任务未完成"
-
-#: ../RememberTheMilk/src/RTM.cs:514
-msgid "The selected task has been marked as \"incomplete\"."
-msgstr "所选任务已标记为\"未完成\""
-
-#: ../RememberTheMilk/src/RTMNewTask.cs:37
-msgid "Create a new task in Remember The Milk"
-msgstr "在 Remember The Milk 中添加任务"
-
-#: ../RememberTheMilk/src/RTMMoveTask.cs:39
-msgid "Move a seleted task from one list to another"
-msgstr "将选中的任务移动至另一个任务列表"
+#: ../RememberTheMilk/src/RTMAddTags.cs:39
+msgid "Add one or more tags to a task."
+msgstr ""
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:35
 msgid "Complete"
 msgstr "标记为完成"
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:39
-msgid "Complete a selected task"
-msgstr "将选中的任务标记为已完成"
+msgid "Complete a task"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMRenameTask.cs:33
-msgid "Rename to..."
-msgstr "重命名为..."
+#: ../RememberTheMilk/src/RTM.cs:118
+msgid "Failed to initialize authentication."
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMRenameTask.cs:37
-msgid "Give the seleted task a new name"
-msgstr "重命名所选任务"
+#: ../RememberTheMilk/src/RTM.cs:140
+msgid "Failed to complete authentication."
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMSetRecurrence.cs:33
-msgid "Set Recurrence"
-msgstr "设置重复间隔"
+#: ../RememberTheMilk/src/RTM.cs:328
+#, csharp-format
+msgid "An error occured when updating RTM lists: {0}"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMSetRecurrence.cs:37
-msgid "Sets a recurrence pattern for a task."
-msgstr "设置任务的重复间隔"
+#: ../RememberTheMilk/src/RTM.cs:362
+#, csharp-format
+msgid "An error happend when updating RTM locations: {0}"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMPostponeTask.cs:33
+#: ../RememberTheMilk/src/RTM.cs:411
+#, csharp-format
+msgid "An error occured when updating RTM tasks: {0}"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:487
+msgid "High"
+msgstr "高"
+
+#: ../RememberTheMilk/src/RTM.cs:488
+msgid "High Priority"
+msgstr "高优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:489
+msgid "Medium"
+msgstr "中"
+
+#: ../RememberTheMilk/src/RTM.cs:490
+msgid "Medium Priority"
+msgstr "中优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:491
+msgid "Low"
+msgstr "低"
+
+#: ../RememberTheMilk/src/RTM.cs:492
+msgid "Low Priority"
+msgstr "低优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:493
+msgid "None"
+msgstr "无"
+
+#: ../RememberTheMilk/src/RTM.cs:494
+msgid "No Priority"
+msgstr "无优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:495
+msgid "Up"
+msgstr "提高优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:496
+msgid "Increase the priority"
+msgstr "提高优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:497
+msgid "Down"
+msgstr "降低优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:498
+msgid "Decrease the priority"
+msgstr "降低优先级"
+
+#: ../RememberTheMilk/src/RTM.cs:516
+msgid "New Task Created"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:517
+msgid ""
+"The task has been successully added to your Remember The milk task list."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:540
+msgid "Task Deleted"
+msgstr "任务已删除"
+
+#: ../RememberTheMilk/src/RTM.cs:541
+msgid ""
+"The selected task has been successfully deleted from your Remember The Milk "
+"task list"
+msgstr "Remember The Milk 任务列表中所选项目已删除"
+
+#: ../RememberTheMilk/src/RTM.cs:553
+msgid "Task Completed"
+msgstr "任务已完成"
+
+#: ../RememberTheMilk/src/RTM.cs:554
+msgid ""
+"The selected task in your Remember The Milk task list has been marked as "
+"completed."
+msgstr "Remember The Milk 任务列表中所选项目已标记为完成"
+
+#: ../RememberTheMilk/src/RTM.cs:569
+msgid "Priority Changed"
+msgstr "任务的优先级已更改"
+
+#: ../RememberTheMilk/src/RTM.cs:570
+msgid ""
+"The priority of the selected task in your Remember The Milk task list has "
+"been changed."
+msgstr "Remember The Milk 任务列表中所选项目的优先级已更改"
+
+#: ../RememberTheMilk/src/RTM.cs:586
+msgid "Due Date/Time Unset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:587
+msgid ""
+"The due date/time of the selected task in your Remember The Milk task list "
+"has been unset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:589
+msgid "Due Date/Time Changed"
+msgstr "到期日／时间已更改"
+
+#: ../RememberTheMilk/src/RTM.cs:590
+msgid ""
+"The due date/time of the selected task in your Remember The Milk task list "
+"has been changed."
+msgstr "Remember The Milk 任务列表中所选项目的到期日／时间已更改"
+
+#: ../RememberTheMilk/src/RTM.cs:602
+msgid "Task Moved"
+msgstr "任务移动完成"
+
+#: ../RememberTheMilk/src/RTM.cs:617
+msgid "Task Renamed"
+msgstr "任务重命名完成"
+
+#: ../RememberTheMilk/src/RTM.cs:618
+#, csharp-format
+msgid "The selected task has been renamed to \"{0}\"."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:631
+msgid "Task Postponed"
+msgstr "任务推迟完成"
+
+#: ../RememberTheMilk/src/RTM.cs:632
+msgid ""
+"The selected task in your Remember The Milk task list has been postponed"
+msgstr "Remember The Milk 任务列表中所选项目已推迟"
+
+#: ../RememberTheMilk/src/RTM.cs:644
+msgid "Recurrence Pattern Changed"
+msgstr "重复间隔已更改"
+
+#: ../RememberTheMilk/src/RTM.cs:645
+msgid ""
+"The recurrence pattern of the selected task in your Remember The Milk task "
+"list has been changed."
+msgstr "Remember The Milk 任务列表中所选项目的重复间隔已更改"
+
+#: ../RememberTheMilk/src/RTM.cs:658
+msgid "Task URL Set"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:659
+msgid "The selected task has been assigned a URL."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:661
+msgid "Task URL Reset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:662
+msgid "The URL for the selected task has been reset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:677
+msgid "Task Estimated Time Unset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:678
+msgid "The estimated time for the selected task has been unset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:680
+msgid "Task Estimated Time Set"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:681
+msgid "The selected task has been assigned an estimated time."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:694
+msgid "Location Reset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:695
+msgid "The location of the selected task has been cleared."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:697
+msgid "Location changed"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:698
+msgid "The location of the selected task has been successfully changed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:712
+msgid "Task Uncompleted"
+msgstr "任务未完成"
+
+#: ../RememberTheMilk/src/RTM.cs:713
+msgid "The selected task has been marked as \"incomplete\"."
+msgstr "所选任务已标记为\"未完成\""
+
+#: ../RememberTheMilk/src/RTM.cs:734
+msgid "New List Created"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:735
+#, csharp-format
+msgid "A new task list named \"{0}\" has been created."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:748
+msgid "List Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:749
+msgid "The selected task list has been deleted."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:765
+msgid "Task List Renamed"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:766
+#, csharp-format
+msgid "The selected task list has been renamed to \"{0}\"."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:804
+msgid "Note Added"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:805
+msgid "A note has been added to the selected task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:820
+msgid "Note Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:821
+msgid "The selected note has been deleted from the selected task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:840
+msgid "Tags Added"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:841
+msgid "New tags have been successfully added to the selected task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:857
+msgid "Tags Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:858
+msgid "Selected tags have been successfully removed from the selected task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:884
+msgid "Token verification failed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:894
+msgid "Remember The Milk timeline creation failed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:900
+msgid "Not authorized to use a Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:934
+#, csharp-format
+msgid "{0} Task Overdue"
+msgid_plural "{0} Tasks Overdue"
+msgstr[0] "{0} 项任务已过期"
+
+#: ../RememberTheMilk/src/RTMDeleteList.cs:35
+msgid "Delete List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteList.cs:39
+msgid "Delete a task list from Remember The Milk"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteNote.cs:35
+msgid "Delete Note"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteNote.cs:39
+msgid "Detele the a note from a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTags.cs:35
+msgid "Delete Tag(s)"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTags.cs:39
+msgid "Detele one or more tags from a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
+msgid "Delete"
+msgstr "删除任务"
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
+msgid "Delete a task from Remember The Milk"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItem.cs:50
+msgid "Remember The Milk Task List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItemSource.cs:36
+msgid "Remember The Milk Lists"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItemSource.cs:40
+msgid "Task Lists in your Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMLocationItemSource.cs:35
+msgid "Remember The Milk Locations"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMLocationItemSource.cs:39
+msgid "Locations associated with your Remember The Milk tasks."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:35
+msgid "Move to ..."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:39
+msgid "Move the seleted task to another list"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:35
+msgid "New List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:39
+msgid "Create a new task list."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:59
+msgid "No list name provided for RTMNewList action"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewNote.cs:36
+msgid "New Note"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewNote.cs:40
+msgid "Add a new note to a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:35
+msgid "New Task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:39
+msgid "Create a new task in Remember The Milk"
+msgstr "在 Remember The Milk 中添加任务"
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:73
+msgid "No title provided for new task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:35
 msgid "Postpone"
 msgstr "推迟"
 
-#: ../RememberTheMilk/src/RTMPostponeTask.cs:37
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:39
 msgid "Postpone a selected task in Remember The Milk"
 msgstr "推迟 Remember The Milk 选中的任务"
+
+#: ../RememberTheMilk/src/RTMRenameList.cs:35
+#: ../RememberTheMilk/src/RTMRenameTask.cs:35
+msgid "Rename"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMRenameList.cs:39
+msgid "Give a list a new name."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMRenameTask.cs:39
+msgid "Give the seleted task a new name"
+msgstr "重命名所选任务"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:35
+msgid "Set Due Date/Time"
+msgstr "设置到期日／时间"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:39
+msgid "Set or change the due date/time of a task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:36
+msgid "Set Estimated Time"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:40
+msgid "Set or reset the estimated time for a task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:102
+msgid "Invalid Time format"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:103
+msgid "The estimated time entered cannot be understood."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetLocation.cs:35
+msgid "Set Location"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetLocation.cs:39
+msgid "Set or change the location of a task"
+msgstr ""
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:35
 msgid "Set Priority"
 msgstr "设置优先级"
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:39
-msgid "Set the priority of a task"
-msgstr "设置任务的优先级"
+msgid "Set or change the priority of a task"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMSetDue.cs:33
-msgid "Set Due Date/Time"
-msgstr "设置到期日／时间"
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:35
+msgid "Set Recurrence"
+msgstr "设置重复间隔"
 
-#: ../RememberTheMilk/src/RTMSetDue.cs:37
-msgid "Set the due date/time of a task"
-msgstr "设置任务的到期日／时间"
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:39
+msgid "Set a recurrence pattern for a task."
+msgstr ""
 
-#: ../Rhythmbox/src/MusicItems.cs:77
-msgid "All music by"
-msgstr "所有音乐作品来自"
+#: ../RememberTheMilk/src/RTMSetUrl.cs:48
+msgid "Set URL"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetUrl.cs:52
+msgid "Set or change the URL of a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetUrl.cs:119
+msgid "Invalid URL provided."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItem.cs:34
+msgid "Remember The Milk Tag"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItemSource.cs:35
+msgid "Remember The Milk Tags"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItemSource.cs:39
+msgid "Tags used by your Remember The Milk tasks."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTaskItemSource.cs:36
+msgid "Remember The Milk Tasks"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTaskItemSource.cs:40
+msgid "All the tasks in your Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
+msgid "Uncomplete"
+msgstr "未完成"
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
+msgid "Mark a task as \"incomplete\"."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:45
+msgid "Allow Snooze"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:49
+msgid "Allows this reminder to be snoozed."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:61
+msgid "No Snooze Allowed"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:65
+msgid "This reminder cannot be snoozed."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:75
+#, csharp-format
+msgid "You will be reminded in {0} hours, {1} minutes."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:76
+#, csharp-format
+msgid "You will be reminded in {0} minutes"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:77
+msgid "in"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:77
+msgid "at"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:81
+msgid "Remind Me"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:85
+msgid "Simple Reminders"
+msgstr ""
+
+#: ../RequestTracker/gtk-gui/RequestTracker.RTPrefs.cs:44
+#, csharp-format
+msgid ""
+"Use the list below to add/configure your Request Tracker sites.\n"
+"\n"
+"<i>The ticket number will be inserted into the URL at the place specified by "
+"the string: {0}</i>"
+msgstr ""
+
+#: ../RequestTracker/src/RequestTrackerAction.cs:46
+msgid "Request Tracker"
+msgstr ""
+
+#: ../RequestTracker/src/RequestTrackerAction.cs:50
+msgid "Display tickets from Request Tracker."
+msgstr ""
 
 #: ../Rhythmbox/src/EnqueueAction.cs:40
 msgid "Add an item to Rhythmbox's play queue."
 msgstr "添加项目到 Rhythmbox 的播放队列"
 
-#: ../Rhythmbox/src/RhythmboxItems.cs:49
-msgid "Browse Rhythmbox Music by Artist"
-msgstr "按艺术家浏览 Rhythmbox 曲库"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:58
-msgid "Browse Rhythmbox Music by Album"
-msgstr "按专辑浏览 Rhythmbox 曲库"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:69
-msgid "Play Current Track in Rhythmbox"
-msgstr "在 Rhythmbox 中播放当前曲目"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:74
-msgid "Pause Rhythmbox Playback"
-msgstr "暂停 Rhythmbox 播放"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:79
-msgid "Play Next Track in Rhythmbox"
-msgstr "在 Rhythmbox 中播放下一首曲目"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:84
-msgid "Play Previous Track in Rhythmbox"
-msgstr "在 Rhythmbox 中播放上一首曲目"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:88
-msgid "Show Current Track"
-msgstr "显示当前曲目"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:89
-msgid "Show Notification of Current Track in Rhythmbox"
-msgstr "在通知栏显示 Rhythmbox 当前播放的曲目"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:93
-msgid "Mute"
-msgstr "静音"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:94
-msgid "Mute Rhythmbox Playback"
-msgstr "Rhythmbox 静音播放"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:98
-msgid "Unmute"
-msgstr "取消静音"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:99
-msgid "Unmute Rhythmbox Playback"
-msgstr "取消 Rhythmbox 静音播放"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:103
-#: ../VolumeControl/src/VolumeUpItem.cs:31
-msgid "Volume Up"
-msgstr "音量增加"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:104
-msgid "Increase Rhythmbox Playback Volume"
-msgstr "增加 Rhythmbox 的播放音量"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:108
-#: ../VolumeControl/src/VolumeDownItem.cs:31
-msgid "Volume Down"
-msgstr "音量降低"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:109
-msgid "Decrease Rhythmbox Playback Volume"
-msgstr "降低 Rhythmbox 的播放音量"
-
-#: ../Rhythmbox/src/PlayAction.cs:44
-msgid "Play an item in Rhythmbox."
-msgstr "在 Rhythmbox 中播放项目"
-
-#: ../Rhythmbox/src/MusicItemSource.cs:45
+#: ../Rhythmbox/src/MusicItemSource.cs:44
 msgid "Rhythmbox Music"
 msgstr "Rhythmbox 曲库"
 
-#: ../Rhythmbox/src/MusicItemSource.cs:49
+#: ../Rhythmbox/src/MusicItemSource.cs:48
 msgid "Provides access to artists and albums from Rhythmbox."
 msgstr "提供对 Rhythmbox 曲库中艺术家和专辑的访问。"
+
+#: ../Rhythmbox/src/NextAction.cs:46
+msgid "Skip to the next track in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PauseAction.cs:46
+msgid "Pause music in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PlayAction.cs:46
+msgid "Play music in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PlayItemAction.cs:45
+msgid "Play an item in Rhythmbox."
+msgstr "在 Rhythmbox 中播放项目"
+
+#: ../Rhythmbox/src/PreviousAction.cs:46
+msgid "Skip to the previous track in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:51
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "按艺术家浏览 Rhythmbox 曲库"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:60
+msgid "Browse Rhythmbox Music by Album"
+msgstr "按专辑浏览 Rhythmbox 曲库"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:70
+msgid "Show Notification of Current Track in Rhythmbox"
+msgstr "在通知栏显示 Rhythmbox 当前播放的曲目"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:75
+msgid "Mute"
+msgstr "静音"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:76
+msgid "Mute Rhythmbox Playback"
+msgstr "Rhythmbox 静音播放"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:81
+msgid "Unmute"
+msgstr "取消静音"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:82
+msgid "Unmute Rhythmbox Playback"
+msgstr "取消 Rhythmbox 静音播放"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:88
+msgid "Increase Rhythmbox Playback Volume"
+msgstr "增加 Rhythmbox 的播放音量"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:94
+msgid "Decrease Rhythmbox Playback Volume"
+msgstr "降低 Rhythmbox 的播放音量"
 
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
 msgid "OPML feed file"
@@ -1651,50 +2356,135 @@ msgstr "超时 (秒）"
 msgid "Cache duration (in minutes)"
 msgstr "高速缓存持续时间（分钟）"
 
-#: ../Shelf/src/ShelfActions.cs:33
-msgid "Explore Shelf"
-msgstr "浏览架子"
-
-#: ../Shelf/src/ShelfActions.cs:37
-msgid "Get a list of everything in your shelf"
-msgstr "显示架子上所有内容"
-
-#: ../Shelf/src/ShelfActions.cs:60
-msgid "Remove From Shelf"
-msgstr "从架子上删除"
-
-#: ../Shelf/src/ShelfActions.cs:64
-msgid "Remove Selected Item From Shelf"
-msgstr "将所选项目从架子上删除"
-
-#: ../Shelf/src/ShelfActions.cs:101
+#: ../Shelf/src/ShelfAddToShelfAction.cs:32
 msgid "Add To Shelf"
 msgstr "加到架子上"
 
-#: ../Shelf/src/ShelfActions.cs:105
-msgid "Add Selected Item to Shelf"
-msgstr "将所选项目加到架子上"
+#: ../Shelf/src/ShelfAddToShelfAction.cs:36
+msgid "Add Selected Item to one Shelf"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:56
+#: ../Shelf/src/ShelfCreateShelfAction.cs:36
+msgid "Create a new Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfCreateShelfAction.cs:40
+msgid "Adds a new Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfDeleteShelfAction.cs:36
+msgid "Remove a shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfDeleteShelfAction.cs:40
+msgid "Removes a shelf from your shelves"
+msgstr ""
+
+#: ../Shelf/src/ShelfExploreAction.cs:31
+msgid "Explore Shelf"
+msgstr "浏览架子"
+
+#: ../Shelf/src/ShelfExploreAction.cs:35
+msgid "Get a list of everything in your shelf"
+msgstr "显示架子上所有内容"
+
+#: ../Shelf/src/ShelfItem.cs:53
 msgid " Shelf"
 msgstr " 架子"
 
-#: ../Shelf/src/ShelfItemSource.cs:62
+#: ../Shelf/src/ShelfItem.cs:59
 #, csharp-format
 msgid "Your {0} shelf items."
 msgstr "您 {0} 架子上的项目"
 
-#: ../Shelf/src/ShelfItemSource.cs:90
-msgid "Shelf Items"
-msgstr "架子上的项目"
+#: ../Shelf/src/ShelfItemSource.cs:172
+msgid "Shelves"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:94
-msgid "Your Shelf Items"
-msgstr "您架子上的项目"
+#: ../Shelf/src/ShelfItemSource.cs:176
+msgid "Your Shelves"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:126
-msgid "Default"
-msgstr "默认"
+#: ../Shelf/src/ShelfRemoveFromShelfAction.cs:31
+msgid "Remove From Shelf"
+msgstr "从架子上删除"
+
+#: ../Shelf/src/ShelfRemoveFromShelfAction.cs:35
+msgid "Remove Selected Item From Shelf"
+msgstr "将所选项目从架子上删除"
+
+#: ../Shelf/src/ShelfRenameShelfAction.cs:36
+msgid "Rename a Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfRenameShelfAction.cs:40
+msgid "Changes a shelf's name"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:65
+msgid "Unknown"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:68
+msgid "Skype Me"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:70
+msgid "Not Available"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:71
+msgid "Do Not Disturb"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:73
+msgid "Logged Out"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:74
+msgid "Skype Out"
+msgstr ""
+
+#: ../Skype/src/SkypeBrowseBuddyItem.cs:35
+msgid "Browse Skype Buddies"
+msgstr ""
+
+#: ../Skype/src/SkypeBrowseStatusItem.cs:35
+msgid "Browse Skype Statuses"
+msgstr ""
+
+#: ../Skype/src/SkypeCallAction.cs:41
+msgid "Call"
+msgstr ""
+
+#: ../Skype/src/SkypeCallAction.cs:45
+msgid "Call a contact using Skype"
+msgstr ""
+
+#: ../Skype/src/SkypeChatAction.cs:39
+msgid "Chat with a buddy using Skype"
+msgstr ""
+
+#: ../Skype/src/SkypeContactItemSource.cs:54
+msgid "Skype Buddies"
+msgstr ""
+
+#: ../Skype/src/SkypeContactItemSource.cs:58
+msgid "Buddies on your Skype buddy list."
+msgstr ""
+
+#: ../Skype/src/SkypeSetStatusAction.cs:35
+msgid "Set Status"
+msgstr ""
+
+#: ../Skype/src/SkypeSetStatusAction.cs:39
+msgid "Set your Skype status"
+msgstr ""
+
+#: ../Skype/src/SkypeStatusItemSource.cs:43
+#: ../Skype/src/SkypeStatusItemSource.cs:47
+msgid "Skype Statuses"
+msgstr ""
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
@@ -1725,19 +2515,19 @@ msgstr ""
 "后台加载艺人、专辑与互联网收音机 \n"
 "如果不启用，这些项目将在 DO 启动时加载，因而使启动所需时间更长"
 
-#: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
+#: ../SSH/src/SSHAction.cs:37 ../SSH/src/SSHAction.cs:43
 msgid "Connect with SSH"
 msgstr "用 SSH 连接"
 
-#: ../SSH/src/SSHHosts.cs:42
+#: ../SSH/src/SSHHostItem.cs:39
 msgid "SSH Host"
 msgstr "SSH 主机"
 
-#: ../SSH/src/SSHHosts.cs:62
+#: ../SSH/src/SSHHostItemSource.cs:43
 msgid "SSH Hosts"
 msgstr "SSH 主机"
 
-#: ../SSH/src/SSHHosts.cs:63
+#: ../SSH/src/SSHHostItemSource.cs:44
 msgid "Parses ssh-config"
 msgstr "解析 ssh-config"
 
@@ -1745,21 +2535,13 @@ msgstr "解析 ssh-config"
 msgid "Command for start/stop services (gksudo, etc):"
 msgstr "启用或停用服务的命令（gksudo等）"
 
-#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:71
 msgid "..."
 msgstr "..."
 
-#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:86
 msgid "Services to control:"
 msgstr "选择服务"
-
-#: ../SystemServices/src/ServiceItemSource.cs:39
-msgid "System Services"
-msgstr "系统服务"
-
-#: ../SystemServices/src/ServiceItemSource.cs:43
-msgid "List of all System Services"
-msgstr "所有系统服务列表"
 
 #: ../SystemServices/src/Service.cs:46
 #, csharp-format
@@ -1771,21 +2553,29 @@ msgstr "{0} 服务"
 msgid "Control system {0} service"
 msgstr "控制系统 {0} 服务"
 
-#: ../SystemServices/src/SystemServicesConfig.cs:71
+#: ../SystemServices/src/ServiceItemSource.cs:39
+msgid "System Services"
+msgstr "系统服务"
+
+#: ../SystemServices/src/ServiceItemSource.cs:43
+msgid "List of all System Services"
+msgstr "所有系统服务列表"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:72
 msgid "Choose the file to open"
 msgstr "选择文件"
 
-#: ../SystemServices/src/SystemServicesConfig.cs:88
+#: ../SystemServices/src/SystemServicesConfig.cs:74
+msgid "Cancel"
+msgstr "取消"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:89
 msgid ""
 "Selected invalid file!\n"
 "Should be executable."
 msgstr ""
 "所选的文件无效!\n"
 "文件应当是可执行的"
-
-#: ../Tasque/src/TasqueCategoryItem.cs:47
-msgid "Category"
-msgstr "分类"
 
 #: ../Tasque/src/TasqueAction.cs:42
 msgid "Create a new task"
@@ -1794,6 +2584,10 @@ msgstr "创建新任务"
 #: ../Tasque/src/TasqueAction.cs:46
 msgid "Create a new task in Tasque"
 msgstr "在 Tasque 中创建新任务"
+
+#: ../Tasque/src/TasqueCategoryItem.cs:47
+msgid "Category"
+msgstr "分类"
 
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
@@ -1842,8 +2636,8 @@ msgid "Create a new Tomboy note."
 msgstr "新建阿帖便笺"
 
 #: ../Tomboy/src/NotesItemSource.cs:56
-msgid "Tomboy Note Indexer"
-msgstr "阿帖便笺索引器"
+msgid "Tomboy Notes"
+msgstr ""
 
 #: ../Tomboy/src/NotesItemSource.cs:60
 msgid "Loads Tomboy notes for searching."
@@ -1857,55 +2651,55 @@ msgstr "搜索阿帖便笺"
 msgid "Searches contents of Tomboy notes."
 msgstr "搜索阿帖便笺的内容"
 
+#: ../Tomboy/src/TomboyBrowseNotesItem.cs:31
+msgid "Notes"
+msgstr ""
+
+#: ../Tomboy/src/TomboyBrowseNotesItem.cs:35
+msgid "Browse Tomboy Notes"
+msgstr ""
+
 #: ../Tomboy/src/TomboyItem.cs:50
 msgid "Tomboy note"
 msgstr "阿帖便笺"
 
-#: ../Tracker/src/TrackerSearch.cs:38
+#: ../Tracker/src/TrackerSearchAction.cs:17
 msgid "Search with Tracker"
 msgstr "用 Tracker 进行搜索"
 
-#: ../Tracker/src/TrackerSearch.cs:42
+#: ../Tracker/src/TrackerSearchAction.cs:21
 msgid "Launches Tracker with the given query."
 msgstr "打开 Tracker 并用所写的字句进行搜索"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:58
-msgid "Translation Plugin Options"
-msgstr "翻译插件首选项"
-
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:71
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:74
 msgid "Translation Provider"
 msgstr "翻译提供者"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:101
 msgid "Default Source Language"
 msgstr "默认原文语言"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:128
 msgid "Default Web Interface Language"
 msgstr "网页界面默认语言"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
-msgid "Enable / Disable Language"
-msgstr "启用或禁用语言"
-
-#: ../Translate/src/TranslateAction.cs:58
-msgid "Translate"
-msgstr "翻译"
-
-#: ../Translate/src/TranslateAction.cs:66
-msgid "Translates text"
-msgstr "翻译文字"
-
-#: ../Translate/src/UI/ConfigUI.cs:128
-msgid "Auto Detect (Recommended)"
-msgstr "自动检测（推荐）"
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:151
+msgid "Supported Languages"
+msgstr ""
 
 #: ../Translate/src/Provider/Google.cs:35
+msgid "Albanian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:36
+msgid "Translate to Albanian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:37
 msgid "Arabic"
 msgstr "阿拉伯语"
 
-#: ../Translate/src/Provider/Google.cs:36
+#: ../Translate/src/Provider/Google.cs:38
 msgid "Translate to Arabic"
 msgstr "翻译成阿拉伯文"
 
@@ -1917,293 +2711,337 @@ msgstr "保加利亚语"
 msgid "Translate to Bulgarian"
 msgstr "翻译成保加利亚文"
 
-#: ../Translate/src/Provider/Google.cs:43
+#: ../Translate/src/Provider/Google.cs:41
 msgid "Catalon"
 msgstr "加泰隆语"
 
-#: ../Translate/src/Provider/Google.cs:44
+#: ../Translate/src/Provider/Google.cs:42
 msgid "Translate to Catalon"
 msgstr "翻译成加泰隆文"
 
-#: ../Translate/src/Provider/Google.cs:47
-msgid "Chinese (Simplified)"
-msgstr "简体中文"
+#: ../Translate/src/Provider/Google.cs:43
+msgid "Chinese"
+msgstr ""
 
-#: ../Translate/src/Provider/Google.cs:48
-msgid "Translate to Chinese (Simplified)"
-msgstr "翻译成简体中文"
+#: ../Translate/src/Provider/Google.cs:44
+msgid "Translate to Chinese"
+msgstr ""
 
-#: ../Translate/src/Provider/Google.cs:51
-msgid "Chinese (Traditional)"
-msgstr "繁体中文"
-
-#: ../Translate/src/Provider/Google.cs:52
-msgid "Translate to Chinese (Traditional)"
-msgstr "翻译成繁体中文"
-
-#: ../Translate/src/Provider/Google.cs:55
+#: ../Translate/src/Provider/Google.cs:45
 msgid "Croatian"
 msgstr "克罗地亚语"
 
-#: ../Translate/src/Provider/Google.cs:56
+#: ../Translate/src/Provider/Google.cs:46
 msgid "Translate to Croatian"
 msgstr "翻译成克罗地亚文"
 
-#: ../Translate/src/Provider/Google.cs:59
+#: ../Translate/src/Provider/Google.cs:47
 msgid "Czech"
 msgstr "捷克语"
 
-#: ../Translate/src/Provider/Google.cs:60
+#: ../Translate/src/Provider/Google.cs:48
 msgid "Translate to Czech"
 msgstr "翻译成捷克文"
 
-#: ../Translate/src/Provider/Google.cs:63
+#: ../Translate/src/Provider/Google.cs:49
 msgid "Danish"
 msgstr "丹麦语"
 
-#: ../Translate/src/Provider/Google.cs:64
+#: ../Translate/src/Provider/Google.cs:50
 msgid "Translate to Danish"
 msgstr "翻译成丹麦文"
 
-#: ../Translate/src/Provider/Google.cs:67
+#: ../Translate/src/Provider/Google.cs:51
 msgid "Dutch"
 msgstr "荷兰语"
 
-#: ../Translate/src/Provider/Google.cs:68
+#: ../Translate/src/Provider/Google.cs:52
 msgid "Translate to Dutch"
 msgstr "翻译成荷兰文"
 
-#: ../Translate/src/Provider/Google.cs:71
+#: ../Translate/src/Provider/Google.cs:53
 msgid "English"
 msgstr "英语"
 
-#: ../Translate/src/Provider/Google.cs:72
+#: ../Translate/src/Provider/Google.cs:54
 msgid "Translate to English"
 msgstr "翻译成英文"
 
-#: ../Translate/src/Provider/Google.cs:75
+#: ../Translate/src/Provider/Google.cs:55
+msgid "Estonian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:56
+msgid "Translate to Estonian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:57
 msgid "Filipino"
 msgstr "菲律宾语"
 
-#: ../Translate/src/Provider/Google.cs:76
+#: ../Translate/src/Provider/Google.cs:58
 msgid "Translate to Filipino"
 msgstr "翻译成菲律宾文"
 
-#: ../Translate/src/Provider/Google.cs:79
+#: ../Translate/src/Provider/Google.cs:59
 msgid "Finnish"
 msgstr "芬兰语"
 
-#: ../Translate/src/Provider/Google.cs:80
+#: ../Translate/src/Provider/Google.cs:60
 msgid "Translate to Finnish"
 msgstr "翻译成芬兰文"
 
-#: ../Translate/src/Provider/Google.cs:83
+#: ../Translate/src/Provider/Google.cs:61
 msgid "French"
 msgstr "法语"
 
-#: ../Translate/src/Provider/Google.cs:84
+#: ../Translate/src/Provider/Google.cs:62
 msgid "Translate to French"
 msgstr "翻译成法文"
 
-#: ../Translate/src/Provider/Google.cs:87
+#: ../Translate/src/Provider/Google.cs:63
+msgid "Galician"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:64
+msgid "Translate to Galician"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:65
 msgid "German"
 msgstr "德语"
 
-#: ../Translate/src/Provider/Google.cs:88
+#: ../Translate/src/Provider/Google.cs:66
 msgid "Translate to German"
 msgstr "翻译成德文"
 
-#: ../Translate/src/Provider/Google.cs:91
+#: ../Translate/src/Provider/Google.cs:67
 msgid "Greek"
 msgstr "希腊语"
 
-#: ../Translate/src/Provider/Google.cs:92
+#: ../Translate/src/Provider/Google.cs:68
 msgid "Translate to Greek"
 msgstr "翻译成希腊文"
 
-#: ../Translate/src/Provider/Google.cs:95
+#: ../Translate/src/Provider/Google.cs:69
 msgid "Hebrew"
 msgstr "希伯来语"
 
-#: ../Translate/src/Provider/Google.cs:96
+#: ../Translate/src/Provider/Google.cs:70
 msgid "Translate to Hebrew"
 msgstr "翻译成希伯来文"
 
-#: ../Translate/src/Provider/Google.cs:99
+#: ../Translate/src/Provider/Google.cs:71
 msgid "Hindi"
 msgstr "印地语"
 
-#: ../Translate/src/Provider/Google.cs:100
+#: ../Translate/src/Provider/Google.cs:72
 msgid "Translate to Hindi"
 msgstr "翻译成印地文"
 
-#: ../Translate/src/Provider/Google.cs:103
+#: ../Translate/src/Provider/Google.cs:73
+msgid "Hungarian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:74
+msgid "Translate to Hungarian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:75
 msgid "Indonesian"
 msgstr "印度尼西亚语"
 
-#: ../Translate/src/Provider/Google.cs:104
+#: ../Translate/src/Provider/Google.cs:76
 msgid "Translate to Indonesian"
 msgstr "翻译成印度尼西亚文"
 
-#: ../Translate/src/Provider/Google.cs:107
+#: ../Translate/src/Provider/Google.cs:77
 msgid "Italian"
 msgstr "意大利语"
 
-#: ../Translate/src/Provider/Google.cs:108
+#: ../Translate/src/Provider/Google.cs:78
 msgid "Translate to Italian"
 msgstr "翻译成意大利文"
 
-#: ../Translate/src/Provider/Google.cs:111
+#: ../Translate/src/Provider/Google.cs:79
 msgid "Japanese"
 msgstr "日语"
 
-#: ../Translate/src/Provider/Google.cs:112
+#: ../Translate/src/Provider/Google.cs:80
 msgid "Translate to Japanese"
 msgstr "翻译成日文"
 
-#: ../Translate/src/Provider/Google.cs:115
+#: ../Translate/src/Provider/Google.cs:81
 msgid "Korean"
 msgstr "韩语"
 
-#: ../Translate/src/Provider/Google.cs:116
+#: ../Translate/src/Provider/Google.cs:82
 msgid "Translate to Korean"
 msgstr "翻译成韩文"
 
-#: ../Translate/src/Provider/Google.cs:119
+#: ../Translate/src/Provider/Google.cs:83
 msgid "Latvian"
 msgstr "拉脱维亚语"
 
-#: ../Translate/src/Provider/Google.cs:120
+#: ../Translate/src/Provider/Google.cs:84
 msgid "Translate to Latvian"
 msgstr "翻译成拉维亚文"
 
-#: ../Translate/src/Provider/Google.cs:123
+#: ../Translate/src/Provider/Google.cs:85
 msgid "Lithuanian"
 msgstr "立陶宛语"
 
-#: ../Translate/src/Provider/Google.cs:124
+#: ../Translate/src/Provider/Google.cs:86
 msgid "Translate to Lithuanian"
 msgstr "翻译成立陶宛文"
 
-#: ../Translate/src/Provider/Google.cs:127
+#: ../Translate/src/Provider/Google.cs:87
+msgid "Maltese"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:88
+msgid "Translate to Maltese"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:89
 msgid "Norwegian"
 msgstr "挪威语"
 
-#: ../Translate/src/Provider/Google.cs:128
+#: ../Translate/src/Provider/Google.cs:90
 msgid "Translate to Norwegian"
 msgstr "翻译成挪威文"
 
-#: ../Translate/src/Provider/Google.cs:131
+#: ../Translate/src/Provider/Google.cs:91
 msgid "Polish"
 msgstr "波兰语"
 
-#: ../Translate/src/Provider/Google.cs:132
+#: ../Translate/src/Provider/Google.cs:92
 msgid "Translate to Polish"
 msgstr "翻译成波兰文"
 
-#: ../Translate/src/Provider/Google.cs:135
+#: ../Translate/src/Provider/Google.cs:93
 msgid "Portuguese"
 msgstr "葡萄牙语"
 
-#: ../Translate/src/Provider/Google.cs:136
+#: ../Translate/src/Provider/Google.cs:94
 msgid "Translate to Portuguese"
 msgstr "翻译成葡萄牙文"
 
-#: ../Translate/src/Provider/Google.cs:139
+#: ../Translate/src/Provider/Google.cs:95
 msgid "Romanian"
 msgstr "罗马尼亚语"
 
-#: ../Translate/src/Provider/Google.cs:140
+#: ../Translate/src/Provider/Google.cs:96
 msgid "Translate to Romanian"
 msgstr "翻译成罗马尼亚文"
 
-#: ../Translate/src/Provider/Google.cs:143
+#: ../Translate/src/Provider/Google.cs:97
 msgid "Russian"
 msgstr "俄语"
 
-#: ../Translate/src/Provider/Google.cs:144
+#: ../Translate/src/Provider/Google.cs:98
 msgid "Translate to Russian"
 msgstr "翻译成俄文"
 
-#: ../Translate/src/Provider/Google.cs:147
+#: ../Translate/src/Provider/Google.cs:99
 msgid "Serbian"
 msgstr "塞尔维亚语"
 
-#: ../Translate/src/Provider/Google.cs:148
+#: ../Translate/src/Provider/Google.cs:100
 msgid "Translate to Serbian"
 msgstr "翻译成塞尔维亚文"
 
-#: ../Translate/src/Provider/Google.cs:151
+#: ../Translate/src/Provider/Google.cs:101
 msgid "Slovak"
 msgstr "斯洛伐克语"
 
-#: ../Translate/src/Provider/Google.cs:152
+#: ../Translate/src/Provider/Google.cs:102
 msgid "Translate to Slovak"
 msgstr "翻译成斯洛伐克文"
 
-#: ../Translate/src/Provider/Google.cs:155
+#: ../Translate/src/Provider/Google.cs:103
 msgid "Slovenian"
 msgstr "斯洛文尼亚语"
 
-#: ../Translate/src/Provider/Google.cs:156
+#: ../Translate/src/Provider/Google.cs:104
 msgid "Translate to Slovenian"
 msgstr "翻译成斯洛文尼亚语"
 
-#: ../Translate/src/Provider/Google.cs:159
+#: ../Translate/src/Provider/Google.cs:105
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: ../Translate/src/Provider/Google.cs:160
+#: ../Translate/src/Provider/Google.cs:106
 msgid "Translate to Spanish"
 msgstr "翻译成西班牙文"
 
-#: ../Translate/src/Provider/Google.cs:163
+#: ../Translate/src/Provider/Google.cs:107
 msgid "Swedish"
 msgstr "瑞典语"
 
-#: ../Translate/src/Provider/Google.cs:164
+#: ../Translate/src/Provider/Google.cs:108
 msgid "Translate to Swedish"
 msgstr "翻译成瑞典文"
 
-#: ../Translate/src/Provider/Google.cs:167
+#: ../Translate/src/Provider/Google.cs:109
+msgid "Thai"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:110
+msgid "Translate to Thai"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:111
+msgid "Turkish"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:112
+msgid "Translate to Turkish"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:113
 msgid "Ukranian"
 msgstr "乌克兰语"
 
-#: ../Translate/src/Provider/Google.cs:168
+#: ../Translate/src/Provider/Google.cs:114
 msgid "Translate to Ukranian"
 msgstr "翻译成乌克兰文"
 
-#: ../Translate/src/Provider/Google.cs:171
+#: ../Translate/src/Provider/Google.cs:115
 msgid "Vietnamese"
 msgstr "越南语"
 
-#: ../Translate/src/Provider/Google.cs:172
+#: ../Translate/src/Provider/Google.cs:116
 msgid "Translate to Vietnamese"
 msgstr "翻译成越南文"
 
-#: ../Vinagre/src/VNCHostSource.cs:39
-msgid "Vinagre Bookmarks"
-msgstr "Vinagre 书签"
+#: ../Translate/src/TranslateAction.cs:58
+msgid "Translate"
+msgstr "翻译"
 
-#: ../Vinagre/src/VNCHostSource.cs:43
-msgid "Indexes your Vinagre Bookmarks"
-msgstr "索引你的 Vinagre 书签"
+#: ../Translate/src/TranslateAction.cs:66
+msgid "Translates text"
+msgstr "翻译文字"
 
-#: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
+#: ../Translate/src/UI/ConfigUI.cs:130
+msgid "Auto Detect (Recommended)"
+msgstr "自动检测（推荐）"
+
+#: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:35
+msgid "Browse Vinagre Bookmarks"
+msgstr ""
+
+#: ../Vinagre/src/Vinagre.cs:36 ../Vinagre/src/Vinagre.cs:40
 msgid "Connect with VNC"
 msgstr "通过VNC连接"
 
-#: ../VirtualBox/src/SaveStateAction.cs:40
-msgid "Take Snapshot"
-msgstr "生成备份"
+#: ../Vinagre/src/VNCHostSource.cs:44
+msgid "Vinagre Bookmarks"
+msgstr "Vinagre 书签"
 
-#: ../VirtualBox/src/SaveStateAction.cs:44
-msgid "Save the current state as a Snapshot"
-msgstr "将目前的状态以备份模式保存"
-
-#: ../VirtualBox/src/SaveStateAction.cs:98
-msgid "Snapshot ("
-msgstr "备份"
+#: ../Vinagre/src/VNCHostSource.cs:48
+msgid "Indexes your Vinagre Bookmarks"
+msgstr "索引你的 Vinagre 书签"
 
 #: ../VirtualBox/src/OffAction.cs:40
 msgid "Power Off Virtual Machine"
@@ -2231,6 +3069,14 @@ msgstr "暂停虚拟机器状态"
 msgid "Pauses the selected Virtual Machine"
 msgstr "暂停所选虚拟机器状态"
 
+#: ../VirtualBox/src/ResumeAction.cs:39
+msgid "Resume Virtual Machine"
+msgstr "唤醒虚拟机器"
+
+#: ../VirtualBox/src/ResumeAction.cs:43
+msgid "Resume the selected Virtual Machine"
+msgstr "唤醒所选虚拟机器"
+
 #: ../VirtualBox/src/SaveAction.cs:39
 msgid "Save Virtual Machine State"
 msgstr "保存虚拟机器状态"
@@ -2239,13 +3085,17 @@ msgstr "保存虚拟机器状态"
 msgid "Saves the state of the selected Virtual Machine"
 msgstr "保存所选虚拟机器状态"
 
-#: ../VirtualBox/src/VMItemSource.cs:38
-msgid "VirtualBox VMs"
-msgstr "Virtualbox 的虚拟机器"
+#: ../VirtualBox/src/SaveStateAction.cs:40
+msgid "Take Snapshot"
+msgstr "生成备份"
 
-#: ../VirtualBox/src/VMItemSource.cs:39
-msgid "Virtual Machines created with VirtualBox"
-msgstr "Virtualbox 所创建的虚拟机器"
+#: ../VirtualBox/src/SaveStateAction.cs:44
+msgid "Save the current state as a Snapshot"
+msgstr "将目前的状态以备份模式保存"
+
+#: ../VirtualBox/src/SaveStateAction.cs:98
+msgid "Snapshot ("
+msgstr "备份"
 
 #: ../VirtualBox/src/StartAction.cs:40
 msgid "Start Virtual Machine"
@@ -2271,29 +3121,25 @@ msgstr "以无头模式运行虚拟机器"
 msgid "Start in Headless mode"
 msgstr "以无头模式启动虚拟机器"
 
-#: ../VirtualBox/src/ResumeAction.cs:39
-msgid "Resume Virtual Machine"
-msgstr "唤醒虚拟机器"
+#: ../VirtualBox/src/VBoxBrowseVMSItem.cs:31
+msgid "Virtual Machines"
+msgstr ""
 
-#: ../VirtualBox/src/ResumeAction.cs:43
-msgid "Resume the selected Virtual Machine"
-msgstr "唤醒所选虚拟机器"
+#: ../VirtualBox/src/VBoxBrowseVMSItem.cs:35
+msgid "Browse Virtual Machines"
+msgstr ""
+
+#: ../VirtualBox/src/VMItemSource.cs:41
+msgid "VirtualBox VMs"
+msgstr "Virtualbox 的虚拟机器"
+
+#: ../VirtualBox/src/VMItemSource.cs:47
+msgid "Virtual Machines created with VirtualBox"
+msgstr "Virtualbox 所创建的虚拟机器"
 
 #: ../VolumeControl/src/VolumeDownItem.cs:35
 msgid "Decrease system volume"
 msgstr "降低系统音量"
-
-#: ../VolumeControl/src/VolumeUpItem.cs:35
-msgid "Increase system volume"
-msgstr "增加系统音量"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:31
-msgid "Mute Volume"
-msgstr "静音"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:35
-msgid "Mute system volume"
-msgstr "静音系统音量"
 
 #: ../VolumeControl/src/VolumeItemSource.cs:39
 msgid "Volume Actions"
@@ -2303,6 +3149,22 @@ msgstr "音量动作"
 msgid "Adjust your system volume"
 msgstr "调整系统音量"
 
+#: ../VolumeControl/src/VolumeMaximizeItem.cs:31
+msgid "Maximize Volume"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeMaximizeItem.cs:35
+msgid "Maximize system volume"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:31
+msgid "Mute Volume"
+msgstr "静音"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:35
+msgid "Mute system volume"
+msgstr "静音系统音量"
+
 #: ../VolumeControl/src/VolumeUnmuteItem.cs:32
 msgid "Unmute Volume"
 msgstr "取消静音"
@@ -2311,121 +3173,144 @@ msgstr "取消静音"
 msgid "Unmute system volume"
 msgstr "取消系统静音"
 
-#: ../WindowManager/src/WindowListAction.cs:65
-msgid "Action Window"
-msgstr "动作窗口"
+#: ../VolumeControl/src/VolumeUpItem.cs:35
+msgid "Increase system volume"
+msgstr "增加系统音量"
 
-#: ../WindowManager/src/WindowListAction.cs:69
-msgid "Action a Window."
-msgstr "对窗口进行动作"
-
-#: ../WindowManager/src/WindowListAction.cs:190
-msgid "Maximize"
-msgstr "最大化"
-
-#: ../WindowManager/src/WindowListAction.cs:194
-msgid "Make a window consume the whole screen"
-msgstr "使窗口占据整个屏幕"
-
-#: ../WindowManager/src/WindowListAction.cs:217
-msgid "Minimize/Restore"
-msgstr "最小化/恢复窗口"
-
-#: ../WindowManager/src/WindowListAction.cs:221
-msgid "Minimize/Restore a Window"
-msgstr "最小化/恢复窗口"
-
-#: ../WindowManager/src/WindowListAction.cs:242
-msgid "Close All"
-msgstr "全部关闭"
-
-#: ../WindowManager/src/WindowListAction.cs:246
-msgid "Close your current window."
-msgstr "关闭当前窗口"
-
-#: ../WindowManager/src/ScreenListAction.cs:277
-msgid "Tile Windows"
-msgstr "排列窗口"
-
-#: ../WindowManager/src/ScreenListAction.cs:281
-msgid "Tile All Windows in Current Viewport"
-msgstr "排列当前视图中的所有窗口"
-
-#: ../WindowManager/src/ScreenListAction.cs:346
-msgid "Cascade Windows"
-msgstr "层叠窗口"
-
-#: ../WindowManager/src/ScreenListAction.cs:350
-msgid "Cascade your Windows"
-msgstr "层叠你的窗口"
-
-#: ../WindowManager/src/ScreenListAction.cs:404
-msgid "Restore Windows"
-msgstr "恢复窗口"
-
-#: ../WindowManager/src/ScreenListAction.cs:408
-msgid "Restore Windows to their Previous Positions"
-msgstr "恢复窗口至原位置"
-
-#: ../WindowManager/src/ScreenItemSource.cs:37
-msgid "Window Screen Items"
-msgstr "窗口屏幕项"
-
-#: ../WindowManager/src/ScreenItemSource.cs:43
-msgid "Actions you can do to your screens."
-msgstr "可对屏幕进行的动作"
-
-#: ../WindowManager/src/ScreenItemSource.cs:65
-msgid "Current Desktop"
-msgstr "当前桌面"
-
-#: ../WindowManager/src/ScreenItemSource.cs:66
-msgid "Everything on the Current Desktop"
-msgstr "当前所使用桌面上的所有窗口"
-
-#: ../WindowManager/src/WindowItemSource.cs:38
-msgid "Generic Window Items"
-msgstr "通用窗口项"
-
-#: ../WindowManager/src/WindowItemSource.cs:44
-msgid "Useful Generically Understood Window Items"
-msgstr "有用的通用窗口项"
-
-#: ../WindowManager/src/WindowItemSource.cs:71
-msgid "Current Window"
-msgstr "当前窗口"
-
-#: ../WindowManager/src/WindowItemSource.cs:72
-msgid "The Currently Active Window"
-msgstr "当前活动窗口"
-
-#: ../WindowManager/src/WindowItemSource.cs:75
+#: ../WindowManager/src/CurrentApplicationItem.cs:34
 msgid "Current Application"
 msgstr "当前应用程序"
 
-#: ../WindowManager/src/WindowItemSource.cs:76
-msgid "The Currently Active Application"
-msgstr "当前活动应用程序"
+#: ../WindowManager/src/CurrentApplicationItem.cs:40
+msgid "Current Focused Application"
+msgstr ""
 
-#: ../WindowManager/src/WindowItemSource.cs:79
-msgid "Previous Window"
-msgstr "上一个窗口"
+#: ../WindowManager/src/CurrentWindowItem.cs:34
+msgid "Current Window"
+msgstr "当前窗口"
 
-#: ../WindowManager/src/WindowItemSource.cs:80
-msgid "The Previously Active Window"
-msgstr "上一个活动窗口"
+#: ../WindowManager/src/CurrentWindowItem.cs:40
+msgid "Current Focused Window"
+msgstr ""
 
-#: ../WindowManager/src/WindowItemSource.cs:83
-msgid "Previous Application"
-msgstr "上一个应用程序"
+#: ../WindowManager/src/Screen/CurrentScreenItem.cs:34
+msgid "Current Desktop"
+msgstr "当前桌面"
 
-#: ../WindowManager/src/WindowItemSource.cs:84
-msgid "The Previously Active Application"
-msgstr "上一个活动应用程序"
+#: ../WindowManager/src/Screen/CurrentScreenItem.cs:40
+msgid "Everything on the Current Desktop"
+msgstr "当前所使用桌面上的所有窗口"
 
-#: ../Zim/src/ZimPage.cs:38
-msgid "Zim page in notebook: "
-msgstr "此 Zim 页面所在的笔记本: "
+#: ../WindowManager/src/Screen/ScreenCascadeAction.cs:37
+msgid "Cascade Windows"
+msgstr "层叠窗口"
+
+#: ../WindowManager/src/Screen/ScreenCascadeAction.cs:41
+msgid "Cascade your Windows"
+msgstr "层叠你的窗口"
+
+#: ../WindowManager/src/Screen/ScreenItemSource.cs:38
+msgid "Window Screen Items"
+msgstr "窗口屏幕项"
+
+#: ../WindowManager/src/Screen/ScreenItemSource.cs:44
+msgid "Screens and viewports on your desktop."
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenRestoreAction.cs:41
+msgid "Restore Windows"
+msgstr "恢复窗口"
+
+#: ../WindowManager/src/Screen/ScreenRestoreAction.cs:45
+msgid "Restore Windows to their Previous Positions"
+msgstr "恢复窗口至原位置"
+
+#: ../WindowManager/src/Screen/ScreenSwapAction.cs:38
+msgid "Swap With..."
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenSwapAction.cs:42
+msgid "Swap all windows on desktops"
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenTileAction.cs:35
+msgid "Tile Windows"
+msgstr "排列窗口"
+
+#: ../WindowManager/src/Screen/ScreenTileAction.cs:39
+msgid "Tile All Windows in a Viewport"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowCloseAction.cs:34
+msgid "Close"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowCloseAction.cs:38
+msgid "Close selected windows."
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowFocusAction.cs:34
+msgid "Focus"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowFocusAction.cs:38
+msgid "Focus selected windows."
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMaximizeAction.cs:33
+msgid "(Un)Maximize"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMaximizeAction.cs:37
+msgid "Make a window consume the whole screen or revert to its normal size"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMinimizeAction.cs:35
+msgid "Minimize/Restore"
+msgstr "最小化/恢复窗口"
+
+#: ../WindowManager/src/WindowActions/WindowMinimizeAction.cs:39
+msgid "Minimize/Restore a Window"
+msgstr "最小化/恢复窗口"
+
+#: ../WindowManager/src/WindowItemSource.cs:41
+msgid "Generic Window Items"
+msgstr "通用窗口项"
+
+#: ../WindowManager/src/WindowItemSource.cs:47
+msgid "Useful Generically Understood Window Items"
+msgstr "有用的通用窗口项"
+
+#: ../WindowManager/src/Wink/ScreenUtils.cs:33
+msgid "Desktop"
+msgstr ""
+
+#: ../XRandR/src/OutputItem.cs:53 ../XRandR/src/OutputModeItem.cs:55
+#: ../XRandR/src/XRandRItemSource.cs:46
+msgid "Set your resolution"
+msgstr ""
+
+#: ../XRandR/src/OutputItem.cs:54
+msgid "Not connected"
+msgstr ""
+
+#: ../XRandR/src/XRandRItemSource.cs:42
+msgid "Displays"
+msgstr ""
+
+#: ../XRandR/src/XRandRItemSource.cs:74
+msgid "Off"
+msgstr ""
+
+#: ../YouTube/src/Youtube.cs:38
+msgid "An error occurred connecting to YouTube, are your credentials valid?"
+msgstr ""
+
+#: ../YouTube/src/Youtube.cs:41
+msgid ""
+"Missing login credentials. Please set login information in YouTube plugin "
+"configuration."
+msgstr ""
 
 #: ../Zim/src/ZimNewPageAction.cs:37
 msgid "New Zim page"
@@ -2443,6 +3328,10 @@ msgstr "打开 Zim 页面"
 msgid "Open selected page in Zim"
 msgstr "在 Zim 中打开页面"
 
+#: ../Zim/src/ZimPage.cs:38
+msgid "Zim page in notebook: "
+msgstr "此 Zim 页面所在的笔记本: "
+
 #: ../Zim/src/ZimPagesItemSource.cs:38
 msgid "Zim pages"
 msgstr "Zim 页面"
@@ -2450,3 +3339,178 @@ msgstr "Zim 页面"
 #: ../Zim/src/ZimPagesItemSource.cs:42
 msgid "Zim Desktop Wiki pages"
 msgstr "Zim 桌面维基页面"
+
+#~ msgid "Unmount volume"
+#~ msgstr "卸载卷"
+
+#~ msgid "Evolution Contacts"
+#~ msgstr "Evolution 联系人"
+
+#~ msgid "Mobile Phone"
+#~ msgstr "手机"
+
+#~ msgid "Rename to..."
+#~ msgstr "重命名为..."
+
+#~ msgid "Firefox Bookmarks"
+#~ msgstr "Firefox 书签"
+
+#~ msgid "Open Profile"
+#~ msgstr "打开配置文件"
+
+#~ msgid "Opens a GNOME Terminal with the selected profile."
+#~ msgstr "打开一个使用所选配置文件的 GNOME 终端。"
+
+#~ msgid "Finds Firefox bookmarks in your default profile."
+#~ msgstr "在你的默认配置文件中搜索 Firefox 书签。"
+
+#~ msgid "Play Previous Track in Rhythmbox"
+#~ msgstr "在 Rhythmbox 中播放上一首曲目"
+
+#~ msgid "Play Next Track in Rhythmbox"
+#~ msgstr "在 Rhythmbox 中播放下一首曲目"
+
+#~ msgid "Pause Rhythmbox Playback"
+#~ msgstr "暂停 Rhythmbox 播放"
+
+#~ msgid "Play Current Track in Rhythmbox"
+#~ msgstr "在 Rhythmbox 中播放当前曲目"
+
+#~ msgid "Default"
+#~ msgstr "默认"
+
+#~ msgid "Tile All Windows in Current Viewport"
+#~ msgstr "排列当前视图中的所有窗口"
+
+#~ msgid "The Currently Active Window"
+#~ msgstr "当前活动窗口"
+
+#~ msgid "Make a window consume the whole screen"
+#~ msgstr "使窗口占据整个屏幕"
+
+#~ msgid "The Previously Active Application"
+#~ msgstr "上一个活动应用程序"
+
+#~ msgid "Previous Window"
+#~ msgstr "上一个窗口"
+
+#~ msgid "The Currently Active Application"
+#~ msgstr "当前活动应用程序"
+
+#~ msgid "Previous Application"
+#~ msgstr "上一个应用程序"
+
+#~ msgid "The Previously Active Window"
+#~ msgstr "上一个活动窗口"
+
+#~ msgid "Close your current window."
+#~ msgstr "关闭当前窗口"
+
+#~ msgid "Address"
+#~ msgstr "地址"
+
+#~ msgid "Organizes your del.icio.bookmarks by tag"
+#~ msgstr "按照标签来组织del.icio.us书签"
+
+#~ msgid "Choose folder"
+#~ msgstr "选择文件夹"
+
+#~ msgid "Search and read help documentation (man)"
+#~ msgstr "搜索和阅读帮助内容"
+
+#~ msgid "Manual pages (man)"
+#~ msgstr "帮助内容(man)"
+
+#~ msgid "ImageShack exception: "
+#~ msgstr "ImageShack 出错: "
+
+#, csharp-format
+#~ msgid "'{0}' sucessfully posted to {1}"
+#~ msgstr "'{0}' 已发送至 {1}"
+
+#~ msgid "Web service supported by Ping.FM"
+#~ msgstr "Ping.FM 所支持的社群网络服务"
+
+#~ msgid "Web service group supported by Ping.FM"
+#~ msgstr "Ping.FM 所支持的社群网络服务"
+
+#~ msgid "<b>Notification</b>"
+#~ msgstr "<b>通知</b>"
+
+#~ msgid "Delete a selected task from Remember The Milk"
+#~ msgstr "将选中的任务从 Remember The Milk 删除"
+
+#~ msgid "For overdue task(s)"
+#~ msgstr "当有过期的任务"
+
+#~ msgid "When actions (e.g. rename) are completed"
+#~ msgstr "当操作已完成（如重命名任务）"
+
+#~ msgid "Mark a selected task as \"incomplete\"."
+#~ msgstr "将选中的任务标记为\"未完成\""
+
+#~ msgid "Move a seleted task from one list to another"
+#~ msgstr "将选中的任务移动至另一个任务列表"
+
+#~ msgid "Sets a recurrence pattern for a task."
+#~ msgstr "设置任务的重复间隔"
+
+#~ msgid "Complete a selected task"
+#~ msgstr "将选中的任务标记为已完成"
+
+#~ msgid "Set the priority of a task"
+#~ msgstr "设置任务的优先级"
+
+#~ msgid "Set the due date/time of a task"
+#~ msgstr "设置任务的到期日／时间"
+
+#~ msgid "Shelf Items"
+#~ msgstr "架子上的项目"
+
+#~ msgid "Add Selected Item to Shelf"
+#~ msgstr "将所选项目加到架子上"
+
+#~ msgid "Your Shelf Items"
+#~ msgstr "您架子上的项目"
+
+#~ msgid "Indexes your Opera 6 bookmarks"
+#~ msgstr "索引 Opera 6 的书签"
+
+#~ msgid "Enable / Disable Language"
+#~ msgstr "启用或禁用语言"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "繁体中文"
+
+#~ msgid "Translate to Chinese (Traditional)"
+#~ msgstr "翻译成繁体中文"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "简体中文"
+
+#~ msgid "Translate to Chinese (Simplified)"
+#~ msgstr "翻译成简体中文"
+
+#~ msgid "Tomboy Note Indexer"
+#~ msgstr "阿帖便笺索引器"
+
+#~ msgid "Translation Plugin Options"
+#~ msgstr "翻译插件首选项"
+
+#~ msgid "Close All"
+#~ msgstr "全部关闭"
+
+#~ msgid "Actions you can do to your screens."
+#~ msgstr "可对屏幕进行的动作"
+
+#~ msgid "Maximize"
+#~ msgstr "最大化"
+
+#~ msgid "Action Window"
+#~ msgstr "动作窗口"
+
+#~ msgid "Action a Window."
+#~ msgstr "对窗口进行动作"
+
+#~ msgid "Parsed url was empty. ImageShack has probably changed its format."
+#~ msgstr "浏览的链接是空的，也许 ImageShack 更改了它的链接格式。"

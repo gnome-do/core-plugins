@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-01-26 08:04+1100\n"
+"POT-Creation-Date: 2011-05-22 18:49+1000\n"
 "PO-Revision-Date: 2009-03-13 09:39+0000\n"
 "Last-Translator: Shin Hungjae <0555283@xfp.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-02-06 08:43+0000\n"
-"X-Generator: Launchpad (build 12309)\n"
+"X-Launchpad-Export-Date: 2011-05-23 04:33+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -26,14 +26,6 @@ msgstr "별명 할당..."
 msgid "Give an item an alternate name."
 msgstr "항목에 대체명을 줌."
 
-#: ../Alias/src/DeleteAliasAction.cs:36
-msgid "Delete Alias"
-msgstr "별명 삭제"
-
-#: ../Alias/src/DeleteAliasAction.cs:40
-msgid "Deletes an alias."
-msgstr "별명 삭제"
-
 #: ../Alias/src/AliasItemSource.cs:140
 msgid "Alias items"
 msgstr "별명 항목"
@@ -42,13 +34,13 @@ msgstr "별명 항목"
 msgid "Aliased items from Do's universe."
 msgstr "Do의 유니버스에서 별명된 항목."
 
-#: ../Archive/src/ExtractArchiveAction.cs:40
-msgid "Extract archive"
-msgstr "보관파일 풀기"
+#: ../Alias/src/DeleteAliasAction.cs:35
+msgid "Delete Alias"
+msgstr "별명 삭제"
 
-#: ../Archive/src/ExtractArchiveAction.cs:44
-msgid "Extract an archive to a given folder"
-msgstr "보관파일을 주어진 폴더에 풀기"
+#: ../Alias/src/DeleteAliasAction.cs:39
+msgid "Deletes an alias."
+msgstr "별명 삭제"
 
 #: ../Archive/src/CreateArchiveAction.cs:41
 msgid "Create archive"
@@ -58,7 +50,24 @@ msgstr "보관피일 생성"
 msgid "Create an archive with the selected item"
 msgstr "선택된 항목으로 보관파일 생성"
 
-#: ../Banshee/src/BrowseMediaItems.cs:56 ../Rhythmbox/src/RhythmboxItems.cs:48
+#: ../Archive/src/ExtractArchiveAction.cs:40
+msgid "Extract archive"
+msgstr "보관파일 풀기"
+
+#: ../Archive/src/ExtractArchiveAction.cs:44
+msgid "Extract an archive to a given folder"
+msgstr "보관파일을 주어진 폴더에 풀기"
+
+#: ../Baconator/src/BaconateAction.cs:55
+msgid "Baconate link"
+msgstr ""
+
+#: ../Baconator/src/BaconateAction.cs:59
+msgid "Bacon bacon beef, bacon beef"
+msgstr ""
+
+#: ../Banshee/src/BrowseMediaItems.cs:56 ../Exaile/src/ExaileItems.cs:50
+#: ../Rhythmbox/src/RhythmboxItems.cs:50
 msgid "Browse Artists"
 msgstr "아티스트 찾기"
 
@@ -66,7 +75,8 @@ msgstr "아티스트 찾기"
 msgid "Browse Music by Artist"
 msgstr "아티스트로 음악 찾기"
 
-#: ../Banshee/src/BrowseMediaItems.cs:69 ../Rhythmbox/src/RhythmboxItems.cs:57
+#: ../Banshee/src/BrowseMediaItems.cs:69 ../Exaile/src/ExaileItems.cs:58
+#: ../Rhythmbox/src/RhythmboxItems.cs:59
 msgid "Browse Albums"
 msgstr "앨범 찾기"
 
@@ -98,6 +108,10 @@ msgstr "재생큐에 추가"
 msgid "Add media to play queue"
 msgstr "미디어를 재생큐에 추가"
 
+#: ../Banshee/src/MediaItems.cs:191
+msgid "All Music by"
+msgstr "의 모든 음악"
+
 #: ../Banshee/src/MediaItemSource.cs:46
 msgid "Banshee Media"
 msgstr "밴쉬 미디어"
@@ -106,11 +120,8 @@ msgstr "밴쉬 미디어"
 msgid "Indexes Media from Banshee Media Player"
 msgstr "밴쉬미디어플레이에서 미디이 색인"
 
-#: ../Banshee/src/MediaItems.cs:191
-msgid "All Music by"
-msgstr "의 모든 음악"
-
-#: ../Banshee/src/NextAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:78
+#: ../Banshee/src/NextAction.cs:32 ../Exaile/src/NextAction.cs:42
+#: ../Rhythmbox/src/NextAction.cs:42
 msgid "Next"
 msgstr "다음"
 
@@ -118,16 +129,18 @@ msgstr "다음"
 msgid "Play next track"
 msgstr "다음 트랙 재생"
 
-#: ../Banshee/src/PauseAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:73
+#: ../Banshee/src/PauseAction.cs:33 ../Exaile/src/PauseAction.cs:42
+#: ../Rhythmbox/src/PauseAction.cs:42
 msgid "Pause"
 msgstr "잠시중지"
 
-#: ../Banshee/src/PauseAction.cs:36
+#: ../Banshee/src/PauseAction.cs:37
 msgid "Pause playing track"
 msgstr "재생중 트랙 잠시중지"
 
-#: ../Banshee/src/PlayAction.cs:35 ../Rhythmbox/src/RhythmboxItems.cs:68
-#: ../Rhythmbox/src/PlayAction.cs:40
+#: ../Banshee/src/PlayAction.cs:35 ../Exaile/src/PlayAction.cs:42
+#: ../Exaile/src/PlayItemAction.cs:41 ../Rhythmbox/src/PlayAction.cs:42
+#: ../Rhythmbox/src/PlayItemAction.cs:41
 msgid "Play"
 msgstr "재생"
 
@@ -135,7 +148,8 @@ msgstr "재생"
 msgid "Play from your Banshee Collection"
 msgstr "밴쉬모음에서 재생"
 
-#: ../Banshee/src/PreviousAction.cs:32 ../Rhythmbox/src/RhythmboxItems.cs:83
+#: ../Banshee/src/PreviousAction.cs:32 ../Exaile/src/PreviousAction.cs:42
+#: ../Rhythmbox/src/PreviousAction.cs:42
 msgid "Previous"
 msgstr "이전"
 
@@ -151,32 +165,32 @@ msgstr "밴쉬미디어 검색"
 msgid "Search your entire Banshee collection"
 msgstr "전체 밴쉬모음에서 검색"
 
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:44
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:44
 msgid "Choose BibTeX file"
 msgstr "BibTex파일 선택"
 
 #. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:50
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:50
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:93
 msgid "Select A File"
 msgstr "파일 선택"
 
 #. Container child table1.Gtk.Table+TableChild
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:58
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:58
 msgid "Select your documents folder"
 msgstr "문서폴더 선택"
 
-#: ../Bibtex/gtk-gui/Do.Addins.Bibtex.Configuration.cs:71
+#: ../Bibtex/gtk-gui/Bibtex.Configuration.cs:70
 msgid "Choose documents folder"
 msgstr "문서 폴더 선택"
 
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
-msgid "ClawsMail contacts"
-msgstr "ClawsMail 연락처"
+#: ../Chromium/src/ChromiumBookmarkItemSource.cs:44
+msgid "Chromium Bookmarks"
+msgstr ""
 
-#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
-msgid "Contacts in ClawsMail address book"
-msgstr "ClawsMail 주소록에 연락처"
+#: ../Chromium/src/ChromiumBookmarkItemSource.cs:48
+msgid "Search your Chromium bookmarks"
+msgstr ""
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:71
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:41
@@ -184,7 +198,6 @@ msgid "Primary Email"
 msgstr "주 전자메일"
 
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:74
-#: ../Evolution/src/EmailContactDetailItem.cs:34
 msgid "Email"
 msgstr "전자메일"
 
@@ -195,6 +208,22 @@ msgstr "다른 전자메일"
 #: ../ClawsMail/src/ClawsContactDetailItem.cs:82
 msgid "Other"
 msgstr "다른"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:53
+msgid "ClawsMail contacts"
+msgstr "ClawsMail 연락처"
+
+#: ../ClawsMail/src/ClawsContactsItemSource.cs:57
+msgid "Contacts in ClawsMail address book"
+msgstr "ClawsMail 주소록에 연락처"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:31
+msgid "Cl.ickable Items"
+msgstr "Cl.ickable 항목"
+
+#: ../Cl.ickable/src/ClickableItemSource.cs:35
+msgid "Usefull Cl.ickable Items"
+msgstr "유용한 Cl.ickable 항목"
 
 #: ../Cl.ickable/src/ClipAction.cs:38
 msgid "Clip"
@@ -212,19 +241,11 @@ msgstr "Cl.ickable 클립"
 msgid "Opens your cl.ickable clips"
 msgstr "Cl.ickable 크립 열기"
 
-#: ../Cl.ickable/src/ClickableItemSource.cs:31
-msgid "Cl.ickable Items"
-msgstr "Cl.ickable 항목"
-
-#: ../Cl.ickable/src/ClickableItemSource.cs:35
-msgid "Usefull Cl.ickable Items"
-msgstr "유용한 Cl.ickable 항목"
-
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:54
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:53
 msgid "http://opensource.atlassian.com/confluence/spring"
 msgstr "http://opensource.atlassian.com/confluence/spring"
 
-#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:97
+#: ../Confluence/gtk-gui/Confluence.ConfluenceConfigWidget.cs:96
 msgid "username1"
 msgstr "사용자명1"
 
@@ -235,23 +256,6 @@ msgstr "집합 검색"
 #: ../Confluence/src/ConfluenceSearchAction.cs:93
 msgid "Searches Confluence and returns results to Do"
 msgstr "집합과 Do에서 반환된 결과에서 검색"
-
-#: ../Del.icio.us/src/TagsItemSource.cs:34
-msgid "Del.icio.us Tags"
-msgstr "Del.icio.us 꼬리표"
-
-#: ../Del.icio.us/src/TagsItemSource.cs:38
-msgid "Organizes your del.icio.bookmarks by tag"
-msgstr "꼬리표로 del.icio.us 서표 작성"
-
-#: ../Del.icio.us/src/TagItem.cs:45
-msgid "Untagged del.ico.us bookmarks"
-msgstr "꼬리표가 없는 del.ico.us 서표"
-
-#: ../Del.icio.us/src/TagItem.cs:47
-#, csharp-format
-msgid "del.icio.us bookmarks tagged with {0}"
-msgstr "{0}으로 꼬리표가 붙은 del.icio.us 서표"
 
 #: ../Del.icio.us/src/BookmarksItemSource.cs:37
 msgid "Del.icio.us bookmarks"
@@ -269,22 +273,22 @@ msgstr "del.icio.us 검색"
 msgid "del.icio.us tag search"
 msgstr "del.icio.us 꼬리표 검색"
 
-#: ../DiskMounter/src/OpenVolumeAction.cs:40
-#: ../SystemServices/src/SystemServicesConfig.cs:74
-msgid "Open"
-msgstr "열기"
+#: ../Del.icio.us/src/TagItem.cs:45
+msgid "Untagged del.ico.us bookmarks"
+msgstr "꼬리표가 없는 del.ico.us 서표"
 
-#: ../DiskMounter/src/OpenVolumeAction.cs:44
-msgid "Open a removable volume"
-msgstr "이동식 볼륨 열기"
+#: ../Del.icio.us/src/TagItem.cs:47
+#, csharp-format
+msgid "del.icio.us bookmarks tagged with {0}"
+msgstr "{0}으로 꼬리표가 붙은 del.icio.us 서표"
 
-#: ../DiskMounter/src/UnmountAction.cs:31
-msgid "Unmount"
-msgstr "마운트 해제"
+#: ../Del.icio.us/src/TagsItemSource.cs:34
+msgid "Del.icio.us Tags"
+msgstr "Del.icio.us 꼬리표"
 
-#: ../DiskMounter/src/UnmountAction.cs:35
-msgid "Unmount volume"
-msgstr "마운트된 볼륨 해제"
+#: ../Del.icio.us/src/TagsItemSource.cs:38
+msgid "Organizes your del.icio.us bookmarks by tag"
+msgstr ""
 
 #: ../DiskMounter/src/MountAction.cs:32
 msgid "Mount"
@@ -293,6 +297,222 @@ msgstr "마운트"
 #: ../DiskMounter/src/MountAction.cs:36
 msgid "Mount volume"
 msgstr "봄륨을 마운트"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:40
+#: ../SystemServices/src/SystemServicesConfig.cs:75
+msgid "Open"
+msgstr "열기"
+
+#: ../DiskMounter/src/OpenVolumeAction.cs:44
+msgid "Open a removable volume"
+msgstr "이동식 볼륨 열기"
+
+#: ../DiskMounter/src/UnmountAction.cs:33
+msgid "Unmount"
+msgstr "마운트 해제"
+
+#: ../DiskMounter/src/UnmountAction.cs:37
+msgid "Unmount or eject a volume"
+msgstr ""
+
+#: ../Dropbox/gtk-gui/Dropbox.DropboxConfig.cs:80
+msgid "Dropbox Location"
+msgstr ""
+
+#: ../Dropbox/src/Config/DropboxConfig.cs:68
+msgid "Select location of Dropbox folder"
+msgstr ""
+
+#: ../Dropbox/src/DropboxAbstractAction.cs:48
+msgid "Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxLinkAction.cs:40
+msgid "Add to Dropbox..."
+msgstr ""
+
+#: ../Dropbox/src/DropboxLinkAction.cs:44
+msgid "Links a file or folder to your Dropbox."
+msgstr ""
+
+#: ../Dropbox/src/DropboxPuburlAction.cs:41
+msgid "Get public URL"
+msgstr ""
+
+#: ../Dropbox/src/DropboxPuburlAction.cs:45
+msgid "Gets public URL of a shared Dropbox file."
+msgstr ""
+
+#: ../Dropbox/src/DropboxRevisionsAction.cs:41
+msgid "View revisions"
+msgstr ""
+
+#: ../Dropbox/src/DropboxRevisionsAction.cs:45
+msgid "Views file history in Dropbox web interface."
+msgstr ""
+
+#: ../Dropbox/src/DropboxShareAction.cs:42
+msgid "Share with Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxShareAction.cs:46
+msgid "Links a file to your Dropbox public folder."
+msgstr ""
+
+#: ../Dropbox/src/DropboxStartAction.cs:41
+msgid "Start Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxStartAction.cs:45
+msgid "Starts the Dropbox daemon."
+msgstr ""
+
+#: ../Dropbox/src/DropboxStopAction.cs:39
+msgid "Stop Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxStopAction.cs:43
+msgid "Stops the Dropbox daemon."
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:41
+msgid "Stop sharing with Dropbox"
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:45
+msgid "Unlinks a file from your Dropbox public folder."
+msgstr ""
+
+#: ../Dropbox/src/DropboxUnshareAction.cs:67
+#, csharp-format
+msgid "Stopped sharing"
+msgstr ""
+
+#: ../Dropbox/src/DropboxWebInterfaceAction.cs:39
+msgid "Dropbox web interface"
+msgstr ""
+
+#: ../Dropbox/src/DropboxWebInterfaceAction.cs:43
+msgid "View folder in Dropbox web interface."
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountActions.cs:36
+#: ../Pidgin/src/PidginAccountActions.cs:37
+msgid "Sign on"
+msgstr "연결 시작"
+
+#: ../Empathy/src/EmpathyAccountActions.cs:41
+msgid "Enable empathy account"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountActions.cs:77
+#: ../Pidgin/src/PidginAccountActions.cs:91
+msgid "Sign off"
+msgstr "연결 끊음"
+
+#: ../Empathy/src/EmpathyAccountActions.cs:82
+msgid "Disable empathy account"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountItemSource.cs:41
+msgid "Empathy Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyAccountItemSource.cs:46
+msgid "Available Empathy IM Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseAccountItem.cs:31
+#: ../Pidgin/src/PidginBrowseAccountItem.cs:31
+msgid "Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseAccountItem.cs:36
+msgid "Browse Empathy Accounts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseBuddyItem.cs:30
+msgid "Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseBuddyItem.cs:35
+msgid "Browse Empathy Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseStatusItem.cs:33
+#: ../Pidgin/src/PidginBrowseStatusItem.cs:31
+#: ../Skype/src/SkypeBrowseStatusItem.cs:31
+msgid "Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathyBrowseStatusItem.cs:38
+msgid "Browse Empathy Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathyChatAction.cs:39 ../Pidgin/src/PidginChatAction.cs:41
+#: ../Skype/src/SkypeChatAction.cs:35
+msgid "Chat"
+msgstr "잡담"
+
+#: ../Empathy/src/EmpathyChatAction.cs:44 ../Pidgin/src/PidginChatAction.cs:45
+msgid "Send an instant message to a friend."
+msgstr "친구에게 전갈 보내기."
+
+#: ../Empathy/src/EmpathyContactItemSource.cs:56
+msgid "Empathy Contacts"
+msgstr ""
+
+#: ../Empathy/src/EmpathyContactItemSource.cs:61
+msgid "Contacts on your Empathy contact alist."
+msgstr ""
+
+#: ../Empathy/src/EmpathySavedStatusItemSource.cs:60
+msgid "Empathy Statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathySavedStatusItemSource.cs:65
+msgid "Saved Empathy statuses"
+msgstr ""
+
+#: ../Empathy/src/EmpathySetStatusAction.cs:43
+#: ../Pidgin/src/PidginSetStatusAction.cs:41
+msgid "Set status"
+msgstr "상태 설정"
+
+#: ../Empathy/src/EmpathySetStatusAction.cs:48
+msgid "Set empathy status message"
+msgstr ""
+
+#: ../Empathy/src/EmpathyStatusItem.cs:54
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43
+#: ../Pidgin/src/PidginStatusTypeItem.cs:42 ../Skype/src/Skype.cs:67
+msgid "Offline"
+msgstr "오프라인"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:55
+#: ../Pidgin/src/PidginStatusTypeItem.cs:43
+msgid "Available"
+msgstr "이용가능"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:56
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46 ../Skype/src/Skype.cs:69
+msgid "Away"
+msgstr "항상"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:57
+#: ../Pidgin/src/PidginStatusTypeItem.cs:45 ../Skype/src/Skype.cs:72
+msgid "Invisible"
+msgstr "보이지 않음"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:58
+#: ../Pidgin/src/PidginStatusTypeItem.cs:44
+msgid "Busy"
+msgstr "바쁨"
+
+#: ../Empathy/src/EmpathyStatusItem.cs:59
+#: ../Pidgin/src/PidginStatusTypeItem.cs:47
+msgid "Unknown Status"
+msgstr "알수없는 상태"
 
 #: ../EOG-Slideshow/src/PlaySlideshowAction.cs:40
 msgid "Play Slideshow"
@@ -310,40 +530,109 @@ msgstr "Epiphany 서표"
 msgid "Indexes your Epiphany bookmarks."
 msgstr "Epiphany 서표 색인."
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:34
-#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
-msgid "Work Phone"
-msgstr "업무 전화"
+#: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:31
+#: ../Firefox/src/BrowseBookmarkItem.cs:30
+#: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:31
+msgid "Bookmarks"
+msgstr ""
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:35
-#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
-msgid "Home Phone"
-msgstr "집 전화"
+#: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:35
+msgid "Browse Bookmarks"
+msgstr ""
 
-#: ../Evolution/src/PhoneContactDetailItem.cs:36
-msgid "Mobile Phone"
-msgstr "휴대 전화"
+#: ../Exaile/src/ExaileItems.cs:50
+msgid "Browse Exaile Music by Artist"
+msgstr ""
 
-#: ../Evolution/src/ContactItemSource.cs:58
-#: ../Evolution/src/ContactItemSource.cs:59
-msgid "Evolution Contacts"
-msgstr "Evolution 연락처"
+#: ../Exaile/src/ExaileItems.cs:58
+msgid "Browse Exaile Music by Album"
+msgstr ""
 
-#: ../Evolution/src/AddressContactDetailItem.cs:34
-msgid "Address"
-msgstr "주소"
+#: ../Exaile/src/ExaileItems.cs:67 ../Rhythmbox/src/RhythmboxItems.cs:69
+msgid "Show Current Track"
+msgstr "현재 노래 보이기"
 
-#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:154
+#: ../Exaile/src/ExaileItems.cs:68
+msgid "Show Notification of Current Track in Exaile"
+msgstr ""
+
+#: ../Exaile/src/ExaileItems.cs:73 ../Rhythmbox/src/RhythmboxItems.cs:87
+#: ../VolumeControl/src/VolumeUpItem.cs:31
+msgid "Volume Up"
+msgstr "소리 높임"
+
+#: ../Exaile/src/ExaileItems.cs:74
+msgid "Increase Exaile Playback Volume"
+msgstr ""
+
+#: ../Exaile/src/ExaileItems.cs:79 ../Rhythmbox/src/RhythmboxItems.cs:93
+#: ../VolumeControl/src/VolumeDownItem.cs:31
+msgid "Volume Down"
+msgstr "소리를 낮춤"
+
+#: ../Exaile/src/ExaileItems.cs:80
+msgid "Decrease Exaile Playback Volume"
+msgstr ""
+
+#: ../Exaile/src/MusicItems.cs:77 ../Rhythmbox/src/MusicItems.cs:77
+msgid "All music by"
+msgstr "의 모든 음악"
+
+#: ../Exaile/src/MusicItemSource.cs:44
+msgid "Exaile Music"
+msgstr ""
+
+#: ../Exaile/src/MusicItemSource.cs:48
+msgid "Provides access to artists and albums from Exaile."
+msgstr ""
+
+#: ../Exaile/src/NextAction.cs:46
+msgid "Skip to the next track in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PauseAction.cs:46
+msgid "Pause music in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PlayAction.cs:46
+msgid "Play music in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PlayItemAction.cs:45
+msgid "Play an item in Exaile."
+msgstr ""
+
+#: ../Exaile/src/PreviousAction.cs:46
+msgid "Skip to the previous track in Exaile."
+msgstr ""
+
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:186
 msgid "Show hidden files"
 msgstr "숨김파일 보기"
 
-#: ../File/src/PathNodeView.cs:51
-msgid "Folder"
-msgstr "폴더"
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:203
+msgid "Indexed Folders"
+msgstr ""
 
-#: ../File/src/PathNodeView.cs:57
-msgid "Depth"
-msgstr "깊이"
+#: ../File/gtk-gui/Do.FilesAndFolders.Configuration.cs:311
+msgid "Ignored Folders"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:35
+msgid "Choose a folder to index"
+msgstr "폴더의 색인 선택"
+
+#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:36
+msgid "Choose a folder to ignore"
+msgstr ""
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
+msgid "Copy to..."
+msgstr "다른곳으로 복사..."
+
+#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
+msgid "Copies a file or folder to another location."
+msgstr "다른위치로 파일이나 폴더 복사."
 
 #: ../File/src/Do/Do.FilesAndFolders/DeleteAction.cs:37
 msgid "Delete File"
@@ -353,37 +642,19 @@ msgstr "파일 삭제"
 msgid "Deletes a file or folder."
 msgstr "파일이나 폴더 삭제"
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:52
-msgid "Choose a folder to index"
-msgstr "폴더의 색인 선택"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:79
+msgid "Files and Folders"
+msgstr "파일과 폴더"
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:54
-#: ../SystemServices/src/SystemServicesConfig.cs:73
-msgid "Cancel"
-msgstr "취소"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:84
+msgid "Catalogs important files and folders for quick access."
+msgstr "분류는 파일과 폴더를 빠르게 접근할때 매우 중욯바니다."
 
-#: ../File/src/Do/Do.FilesAndFolders/Configuration.cs:55
-msgid "Choose folder"
-msgstr "폴더 선택"
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
-msgid "Rename file..."
-msgstr "파일의 이름 변경..."
-
-#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
-msgid "Renames a file."
-msgstr "파일의 이름 변경 ..."
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
-msgid "Create New Folder"
-msgstr "새 폴더 만들기"
-
-#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
-msgid "Creates an new folder."
-msgstr "새 폴더 만들기"
+#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:103
+msgid "Home Folder"
+msgstr ""
 
 #: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
-#: ../RememberTheMilk/src/RTMMoveTask.cs:35
 msgid "Move to..."
 msgstr "다른곳으로 이동 ..."
 
@@ -399,30 +670,6 @@ msgstr "쓰레기통으로 이동"
 msgid "Moves a file or folder to the trash"
 msgstr "파일이나 폴더를 쓰레기통으로 이동"
 
-#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:68
-msgid "Recent Files"
-msgstr "최근 파일"
-
-#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:72
-msgid "Finds recently-opened files."
-msgstr "최근에 열었던 파일 검색"
-
-#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:37
-msgid "Copy to..."
-msgstr "다른곳으로 복사..."
-
-#: ../File/src/Do/Do.FilesAndFolders/CopyAction.cs:41
-msgid "Copies a file or folder to another location."
-msgstr "다른위치로 파일이나 폴더 복사."
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:78
-msgid "Files and Folders"
-msgstr "파일과 폴더"
-
-#: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:83
-msgid "Catalogs important files and folders for quick access."
-msgstr "분류는 파일과 폴더를 빠르게 접근할때 매우 중욯바니다."
-
 #: ../File/src/Do/Do.FilesAndFolders/NewFileAction.cs:37
 msgid "Create New File"
 msgstr "새 파일 만들기"
@@ -435,13 +682,65 @@ msgstr "새로운 빈 파일 만들기"
 msgid "Untitled"
 msgstr "제목 없음"
 
-#: ../Firefox/src/BookmarkItemSource.cs:55
-msgid "Firefox Bookmarks"
-msgstr "불여우 서표"
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:35
+msgid "Create New Folder"
+msgstr "새 폴더 만들기"
 
-#: ../Firefox/src/BookmarkItemSource.cs:59
-msgid "Finds Firefox bookmarks in your default profile."
-msgstr "기본프로파일에서 불여우 서표 검색"
+#: ../File/src/Do/Do.FilesAndFolders/NewFolderAction.cs:39
+msgid "Creates an new folder."
+msgstr "새 폴더 만들기"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:70
+msgid "Recent Files"
+msgstr "최근 파일"
+
+#: ../File/src/Do/Do.FilesAndFolders/RecentFileItemSource.cs:74
+msgid "Finds recently-opened files."
+msgstr "최근에 열었던 파일 검색"
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:37
+msgid "Rename file..."
+msgstr "파일의 이름 변경..."
+
+#: ../File/src/Do/Do.FilesAndFolders/RenameAction.cs:41
+msgid "Renames a file."
+msgstr "파일의 이름 변경 ..."
+
+#: ../File/src/IgnorePathNodeView.cs:48 ../File/src/IndexPathNodeView.cs:49
+msgid "Folder"
+msgstr "폴더"
+
+#: ../File/src/IndexPathNodeView.cs:55
+msgid "Depth"
+msgstr "깊이"
+
+#: ../Firefox/src/BrowseBookmarkItem.cs:34
+msgid "Browse Firefox Bookmarks"
+msgstr ""
+
+#: ../Firefox/src/BrowseHistoryItem.cs:32
+msgid "History"
+msgstr ""
+
+#: ../Firefox/src/BrowseHistoryItem.cs:36
+msgid "Browse Firefox History"
+msgstr ""
+
+#: ../Firefox/src/FolderItem.cs:51
+msgid "A Firefox Bookmarks Directory"
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:69
+msgid "Firefox Places"
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:73
+msgid "Search your bookmarks and history."
+msgstr ""
+
+#: ../Firefox/src/PlacesItemSource.cs:250
+msgid "Mozilla Bookmarks"
+msgstr ""
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
 msgid ""
@@ -452,12 +751,12 @@ msgstr ""
 "Flickr계정에 순서대로 사진을 올릴때 승인이 필요합니다. \"승인\" 버튼을 눌러 웹블라우즈를 열고 Do에 인증서를 넣어주세요. "
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:94
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:165
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:171
 msgid "<b>Account</b>"
 msgstr "<b>계정</b>"
 
-#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:120
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:130
+#: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:118
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:136
 msgid "_Authorize"
 msgstr "위임(_A)"
 
@@ -495,17 +794,17 @@ msgstr ""
 msgid "<b>Tags</b>"
 msgstr "<b>꼬리표</b>"
 
-#: ../Flickr/src/UploadAction.cs:45
-msgid "Upload photo"
-msgstr "사진 올리기"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:36
+msgid "Flickr Upload"
+msgstr ""
 
-#: ../Flickr/src/UploadAction.cs:49
-msgid "Upload one or more photos to Flickr"
-msgstr "Flickr에 한개이상의 사진 올리기"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:121
+msgid "_Hide"
+msgstr ""
 
-#: ../Flickr/src/FlickrItemSource.cs:34
-msgid "Account"
-msgstr "계정"
+#: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:146
+msgid "_OK"
+msgstr ""
 
 #: ../Flickr/src/AccountConfig.cs:91
 msgid "Click to compete authorization"
@@ -516,11 +815,62 @@ msgstr "인증을 완료하기 위해서 클릭"
 msgid "Thank you {0} for allowing Do access to Flickr."
 msgstr "{0}님 Flickr에서 Do로 접근가능하게 허용해줘서 고맙습니다."
 
-#: ../GNOME-Dictionary/src/DefineAction.cs:51
+#: ../Flickr/src/FlickrItemSource.cs:34
+msgid "Account"
+msgstr "계정"
+
+#: ../Flickr/src/UploadAction.cs:40
+msgid "Upload photo"
+msgstr "사진 올리기"
+
+#: ../Flickr/src/UploadAction.cs:44
+msgid "Upload one or more photos to Flickr"
+msgstr "Flickr에 한개이상의 사진 올리기"
+
+#: ../Flickr/src/UploadDialog.cs:32
+#, csharp-format
+msgid "Uploading {0}..."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:33
+#, csharp-format
+msgid "Uploading {0} of {1}..."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:34
+msgid "Finished uploading images to Flickr."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:35
+#, csharp-format
+msgid "Uploaded {0} images"
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:36
+msgid "Your images are still being uploaded."
+msgstr ""
+
+#: ../Flickr/src/UploadDialog.cs:41
+msgid "Your images are being uploaded to Flickr."
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:42
+msgid "Calculate"
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:46
+msgid "Use GNOME Calculator to make simple calculations."
+msgstr ""
+
+#: ../GNOME-Calculator/src/GCalcToolAction.cs:61
+msgid "Sorry I couldn't understand your expression, try another way"
+msgstr ""
+
+#: ../GNOME-Dictionary/src/DefineAction.cs:52
 msgid "Define"
 msgstr "정의"
 
-#: ../GNOME-Dictionary/src/DefineAction.cs:56
+#: ../GNOME-Dictionary/src/DefineAction.cs:57
 msgid "Define a given word."
 msgstr "주어진 단어 정의"
 
@@ -531,14 +881,6 @@ msgstr "현재 창"
 #: ../GNOME-Screenshot/src/CurrentWindowScreenshotItem.cs:32
 msgid "Take a screenshot of the current window."
 msgstr "현재창의 화면 갈무리."
-
-#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
-msgid "Whole screen"
-msgstr "전체 화면"
-
-#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
-msgid "Take a screenshot of the entire screen."
-msgstr "전체 화면 갈무리 하기"
 
 #: ../GNOME-Screenshot/src/ScreenshotDelayItem.cs:37
 #, csharp-format
@@ -551,6 +893,14 @@ msgid "Wait {0} second before taking the screenshot."
 msgid_plural "Wait {0} seconds before taking the screenshot."
 msgstr[0] "화면 갈무리 하기전에 {0}초간 대기"
 
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
+msgid "GNOME Screenshot Items"
+msgstr "그놈 화면 갈무리 항목"
+
+#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
+msgid "Whole screen or current window."
+msgstr "전체화면 또는 현재 창"
+
 #: ../GNOME-Screenshot/src/TakeScreenshotAction.cs:34
 msgid "Take screenshot"
 msgstr "화면 갈무리"
@@ -559,13 +909,13 @@ msgstr "화면 갈무리"
 msgid "Takes a screenshot with optional delay."
 msgstr "선택적 지연을 두고 화면 갈무리 하기"
 
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:40
-msgid "GNOME Screenshot Items"
-msgstr "그놈 화면 갈무리 항목"
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:28
+msgid "Whole screen"
+msgstr "전체 화면"
 
-#: ../GNOME-Screenshot/src/ScreenshotItemSource.cs:44
-msgid "Whole screen or current window."
-msgstr "전체화면 또는 현재 창"
+#: ../GNOME-Screenshot/src/WholeScreenScreenshotItem.cs:32
+msgid "Take a screenshot of the entire screen."
+msgstr "전체 화면 갈무리 하기"
 
 #: ../GNOME-Session/src/SessionCommandsItemSource.cs:41
 msgid "GNOME Session Commands"
@@ -623,14 +973,6 @@ msgstr "화면 잠그기"
 msgid "Lock your screen."
 msgstr "화면을 잠그기"
 
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:39
-msgid "Open Profile"
-msgstr "프로파일 열기"
-
-#: ../GNOME-Terminal/src/OpenProfileAction.cs:43
-msgid "Opens a GNOME Terminal with the selected profile."
-msgstr "선택된 프로파일로 그놈 터미넝 열기"
-
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:38
 msgid "Open Terminal Here"
 msgstr "여기에 터미널 열기"
@@ -638,6 +980,22 @@ msgstr "여기에 터미널 열기"
 #: ../GNOME-Terminal/src/OpenTerminalHereAction.cs:43
 msgid "Opens a GNOME Terminal in a given location."
 msgstr "주어진 위치에 그놈 터미널 열기"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:36
+msgid "Unnamed Profile"
+msgstr "명명되지 않은 프로파일"
+
+#: ../GNOME-Terminal/src/ProfileItem.cs:37
+msgid "GNOME Terminal Profile"
+msgstr "그놈 터미널 프로파일"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:49
+msgid "GNOME Terminal Profiles"
+msgstr "그놈 터니멀 프로파일"
+
+#: ../GNOME-Terminal/src/ProfileItemSource.cs:53
+msgid "Indexes your GNOME Terminal profiles."
+msgstr "그놈 터미널 프로파일 색인"
 
 #: ../GNOME-Terminal/src/RunInTerminalAction.cs:42
 msgid "Run in Terminal"
@@ -647,34 +1005,35 @@ msgstr "터미널에서 실행"
 msgid "Runs a command in GNOME Terminal."
 msgstr "그놈 터미널에서 명령 실행"
 
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:48
-msgid "GNOME Terminal Profiles"
-msgstr "그놈 터니멀 프로파일"
-
-#: ../GNOME-Terminal/src/ProfileItemSource.cs:52
-msgid "Indexes your GNOME Terminal profiles."
-msgstr "그놈 터미널 프로파일 색인"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:33
-msgid "Unnamed Profile"
-msgstr "명명되지 않은 프로파일"
-
-#: ../GNOME-Terminal/src/ProfileItem.cs:34
-msgid "GNOME Terminal Profile"
-msgstr "그놈 터미널 프로파일"
-
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:52
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:44
 msgid "Perform a calculation using Google Calculator."
 msgstr "구글달력을 사용해서 예측 수행."
 
-#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:92
+#: ../GoogleCalculator/src/GoogleCalculatorAction.cs:76
 msgid "Google Calculator could not evaluate the expression."
 msgstr "구글달력이 표현식을 계산할수 평가할 수 없음."
 
 #: ../GoogleCalendar/src/Configuration.cs:42
-#: ../GoogleDocs/src/Configuration.cs:41
+#: ../GoogleDocs/src/Configuration.cs:38
 msgid "E-Mail:"
 msgstr "전자메일:"
+
+#: ../GoogleCalendar/src/GCalClient.cs:40
+msgid "All Events"
+msgstr "모든 이벤트"
+
+#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:34
+#, csharp-format
+msgid "An error has occurred in {0}"
+msgstr "{0}에서 에러 발생"
+
+#: ../GoogleCalendar/src/GCal.cs:34
+msgid "Failed to connect to GCal service"
+msgstr "GCal 서비스에 연결 실패"
+
+#: ../GoogleCalendar/src/GCalendarItem.cs:45
+msgid "Google Calendar"
+msgstr "구글 달력"
 
 #: ../GoogleCalendar/src/GCalendarItemSource.cs:40
 msgid "Google Calendars"
@@ -684,14 +1043,21 @@ msgstr "구글 달력"
 msgid "Indexes your Google Calendars"
 msgstr "구글 달력 색인"
 
-#: ../GoogleCalendar/src/GCalClient.cs:40
-msgid "All Events"
-msgstr "모든 이벤트"
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
+msgid "New Event"
+msgstr "새로운 이벤트"
 
-#: ../GoogleCalendar/src/GCalClient.cs:41 ../PingFM/src/PingFMClient.cs:35
-#, csharp-format
-msgid "An error has occurred in {0}"
-msgstr "{0}에서 에러 발생"
+#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
+msgid "Create a new event in Google Calendar"
+msgstr "구글달력에서 새로운 이벤트 생성"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
+msgid "Search Events"
+msgstr "이벤트 검색"
+
+#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
+msgid "Search Google Calendar for Events"
+msgstr "구글달력에서 이벤트 검색"
 
 #: ../GoogleCalendar/src/GCalendarViewActions.cs:41
 msgid "View Event"
@@ -709,30 +1075,6 @@ msgstr "달력 보기"
 msgid "Open calendar in browser"
 msgstr "브라우즈로 달력 보기"
 
-#: ../GoogleCalendar/src/GCalendarItem.cs:45
-msgid "Google Calendar"
-msgstr "구글 달력"
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:40
-msgid "Search Events"
-msgstr "이벤트 검색"
-
-#: ../GoogleCalendar/src/GCalendarSearchEvents.cs:44
-msgid "Search Google Calendar for Events"
-msgstr "구글달력에서 이벤트 검색"
-
-#: ../GoogleCalendar/src/GCal.cs:34
-msgid "Failed to connect to GCal service"
-msgstr "GCal 서비스에 연결 실패"
-
-#: ../GoogleCalendar/src/GCalendarNewEvent.cs:38
-msgid "New Event"
-msgstr "새로운 이벤트"
-
-#: ../GoogleCalendar/src/GCalendarNewEvent.cs:42
-msgid "Create a new event in Google Calendar"
-msgstr "구글달력에서 새로운 이벤트 생성"
-
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:42
 msgid "Primary Phone"
 msgstr "주 전화"
@@ -744,6 +1086,14 @@ msgstr "집 전자메일"
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:44
 msgid "Work Email"
 msgstr "업무 전자메일"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:45
+msgid "Home Phone"
+msgstr "집 전화"
+
+#: ../GoogleContacts/src/GMailContactDetailItem.cs:46
+msgid "Work Phone"
+msgstr "업무 전화"
 
 #: ../GoogleContacts/src/GMailContactDetailItem.cs:47
 msgid "Primary Address"
@@ -757,6 +1107,14 @@ msgstr "집 주소"
 msgid "Work Address"
 msgstr "사무실 주소"
 
+#: ../GoogleContacts/src/GMailContactItemSource.cs:38
+msgid "GMail Contacts"
+msgstr "GMail 연락처"
+
+#: ../GoogleContacts/src/GMailContactItemSource.cs:42
+msgid "Index your GMail contacts"
+msgstr "GMail연락처 색인"
+
 #: ../GoogleContacts/src/GMail.cs:35
 msgid "An error occurred connecting to google, are your credentials valid?"
 msgstr "구글접속시 에러가 발생, 접속정보가 올바릅니까?"
@@ -767,89 +1125,89 @@ msgid ""
 "configuration."
 msgstr "로그인정보자 없음. 플러그인설정에 로그인정보를 설정하여 주십시요."
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:38
-msgid "GMail Contacts"
-msgstr "GMail 연락처"
+#: ../GoogleContacts/src/RecentConversationsAction.cs:39
+msgid "View recent conversations"
+msgstr ""
 
-#: ../GoogleContacts/src/GMailContactItemSource.cs:42
-msgid "Index your GMail contacts"
-msgstr "GMail연락처 색인"
+#: ../GoogleContacts/src/RecentConversationsAction.cs:43
+msgid "View recent emails and chat logs with a friend"
+msgstr ""
 
-#: ../GoogleDocs/src/GDocs.cs:149
+#: ../GoogleDocs/src/GDocsAbstractItem.cs:43
+msgid "Google Docs Generic Document"
+msgstr "구글문서 일반적인 문서"
+
+#: ../GoogleDocs/src/GDocs.cs:139
 msgid "Uploading failed."
 msgstr "올리기 실패."
 
-#: ../GoogleDocs/src/GDocs.cs:150
+#: ../GoogleDocs/src/GDocs.cs:140
 msgid "An error occurred when uploading files to Google Docs."
 msgstr "구글문서로 파일 올리는중 에러 발생."
 
-#: ../GoogleDocs/src/GDocs.cs:157
+#: ../GoogleDocs/src/GDocs.cs:147
 msgid "Deleting failed."
 msgstr "삭제 실패."
 
-#: ../GoogleDocs/src/GDocs.cs:158
+#: ../GoogleDocs/src/GDocs.cs:148
 msgid "An error occurred when deleting the document at Google Docs."
 msgstr "구글문서에서 문서삭제중 에러 발생."
 
-#: ../GoogleDocs/src/GDocs.cs:165
+#: ../GoogleDocs/src/GDocs.cs:155
 msgid "Document deleted."
 msgstr "문서가 삭제됨."
 
-#: ../GoogleDocs/src/GDocs.cs:166
+#: ../GoogleDocs/src/GDocs.cs:156
 #, csharp-format
 msgid ""
 "The document '{0}' has been successfully moved into Trash at Google Docs."
 msgstr "구글문서에서 '{0}'문서를 쓰레기통으로 옮기기 성공했음."
 
-#: ../GoogleDocs/src/GDocsPresentationItem.cs:36
-msgid "Google Docs Presentation"
-msgstr "구글문서 발표"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:36
-msgid "Google Docs"
-msgstr "구글 문서"
-
-#: ../GoogleDocs/src/GDocsItemSource.cs:40
-msgid "Indexes your documents stored at Google Docs"
-msgstr "구글문서에 저장된 문서를 색인"
-
-#: ../GoogleDocs/src/GDocsItem.cs:46
-msgid "Google Docs Generic Document"
-msgstr "구글문서 일반적인 문서"
-
-#: ../GoogleDocs/src/GDocsDocumentItem.cs:36
+#: ../GoogleDocs/src/GDocsDocumentItem.cs:33
 msgid "Google Docs Text Document"
 msgstr "구글문서 텍스트"
 
-#: ../GoogleDocs/src/GDocsPDFItem.cs:36
+#: ../GoogleDocs/src/GDocsItemSource.cs:33
+msgid "Google Docs"
+msgstr "구글 문서"
+
+#: ../GoogleDocs/src/GDocsItemSource.cs:37
+msgid "Indexes your documents stored at Google Docs"
+msgstr "구글문서에 저장된 문서를 색인"
+
+#: ../GoogleDocs/src/GDocsPDFItem.cs:33
 msgid "Google Docs PDF Document"
 msgstr "구글문서 PDF"
 
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:38
-msgid "Delete Document"
-msgstr "문서 삭제."
+#: ../GoogleDocs/src/GDocsPresentationItem.cs:33
+msgid "Google Docs Presentation"
+msgstr "구글문서 발표"
 
-#: ../GoogleDocs/src/GDocsTrashDocument.cs:42
-msgid "Move a document into Trash at Google Docs"
-msgstr "구글문서에서 문서를 쓰레기통으로 이동"
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
-msgid "Upload Document"
-msgstr "문서 올리기."
-
-#: ../GoogleDocs/src/GDocsUploadDocument.cs:45
-msgid "Upload a document to Google Docs"
-msgstr "구글문서로 문서 올리기"
-
-#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:36
+#: ../GoogleDocs/src/GDocsSpreadsheetItem.cs:33
 msgid "Google Docs Spreadsheet"
 msgstr "구글문서 표 계산기"
 
-#: ../GoogleMaps/src/MapAction.cs:39
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:35
+msgid "Delete Document"
+msgstr "문서 삭제."
+
+#: ../GoogleDocs/src/GDocsTrashDocument.cs:39
+msgid "Move a document into Trash at Google Docs"
+msgstr "구글문서에서 문서를 쓰레기통으로 이동"
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:37
+msgid "Upload Document"
+msgstr "문서 올리기."
+
+#: ../GoogleDocs/src/GDocsUploadDocument.cs:41
+msgid "Upload a document to Google Docs"
+msgstr "구글문서로 문서 올리기"
+
+#: ../GoogleMaps/src/MapAction.cs:40
 msgid "Map"
 msgstr "지도"
 
-#: ../GoogleMaps/src/MapAction.cs:44
+#: ../GoogleMaps/src/MapAction.cs:45
 msgid "Map a location or route in Google maps."
 msgstr "지역의 지도나 구글지도의 노선"
 
@@ -894,6 +1252,14 @@ msgstr "엄격한 여과기 사용."
 msgid "<b>SafeSearch Preferences</b>"
 msgstr "<b>안전한 검색 설정</b>"
 
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:45
+msgid "I'm Feeling Lucky!"
+msgstr "운 좋은 예감!"
+
+#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:54
+msgid "Searches Google and takes you to the first result"
+msgstr "구글에서 검색하고 첫번째 결과를 가져옴"
+
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:81
 msgid "Search Google"
 msgstr "구글에서 검색"
@@ -901,14 +1267,6 @@ msgstr "구글에서 검색"
 #: ../GoogleSearch/src/InlineGoogleSearch.cs:90
 msgid "Allows you to perform Google Searches from Do"
 msgstr "Do에서 구글검색을 수행하는것을 허용"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:44
-msgid "I'm Feeling Lucky!"
-msgstr "운 좋은 예감!"
-
-#: ../GoogleSearch/src/ImFeelingLuckyAction.cs:53
-msgid "Searches Google and takes you to the first result"
-msgstr "구글에서 검색하고 첫번째 결과를 가져옴"
 
 #: ../ImageShack/gtk-gui/ImageShack.ImageShackConfig.cs:69
 msgid ""
@@ -934,25 +1292,17 @@ msgstr "등록코드 얻기(_G)"
 msgid "<b>Registration Code</b>"
 msgstr "<b>등록 코드</b>"
 
-#: ../ImageShack/src/ImageShackAction.cs:57
+#: ../ImageShack/src/ImageShackAction.cs:54
 msgid "Upload to ImageShack"
 msgstr "ImageShack에 올리기"
 
-#: ../ImageShack/src/ImageShackAction.cs:61
+#: ../ImageShack/src/ImageShackAction.cs:58
 msgid "Uploads the image to ImageShack."
 msgstr "ImageShack에 그림 올리기."
 
-#: ../ImageShack/src/ImageShackAction.cs:106
-msgid "ImageShack exception: "
-msgstr "ImageShack 예외 발생: "
-
-#: ../ImageShack/src/ImageShackAction.cs:116
+#: ../ImageShack/src/ImageShackAction.cs:101
 msgid "File size exceeds ImageShack's 1.5MB limit."
 msgstr "ImageShack의 파일크기는 1.5MB로 제한됨."
-
-#: ../ImageShack/src/ImageShackAction.cs:196
-msgid "Parsed url was empty. ImageShack has probably changed its format."
-msgstr "분석된 url이 비어있음.  아마도 ImageShack이 형식을 바꿨을것이다."
 
 #: ../ImageShack/src/Notifications.cs:31 ../ImageShack/src/Notifications.cs:42
 #: ../ImageShack/src/Notifications.cs:53
@@ -975,7 +1325,13 @@ msgstr "런치패드에서 검색"
 msgid "Search Launchpad properties."
 msgstr "런치패드 속성 검색"
 
+#: ../LocateFiles/src/LocateFilesAction.cs:35
+msgid "Locate found 0 files for: "
+msgstr ""
+
 #: ../LocateFiles/src/LocateFilesAction.cs:39
+#: ../LocateFiles/src/LocateFilesAction.cs:79
+#: ../LocateFiles/src/LocateFilesAction.cs:110
 msgid "Locate Files"
 msgstr "파일 위치"
 
@@ -983,29 +1339,41 @@ msgstr "파일 위치"
 msgid "Search your filesystem using locate."
 msgstr "locate를 사용해서 파일시스템 검색"
 
-#: ../ManLookUp/src/ManualPageItemSource.cs:50
-msgid "Manual pages (man)"
-msgstr "도움말(man)"
+#: ../LocateFiles/src/LocateFilesAction.cs:80
+msgid "No text provided for searching."
+msgstr ""
 
-#: ../ManLookUp/src/ManualPageItemSource.cs:57
-msgid "Search and read help documentation (man)"
-msgstr "도움말을 검색하고 읽음(man)"
-
-#: ../ManLookUp/src/ReadManualPageAction.cs:42
+#: ../ManLookUp/src/ReadManualPageAction.cs:40
 msgid "Read manual page (man)"
 msgstr "도움말 읽기(man)"
 
-#: ../ManLookUp/src/ReadManualPageAction.cs:49
+#: ../ManLookUp/src/ReadManualPageAction.cs:47
 msgid "Look up and read a manual page."
 msgstr "도움말을 찾고 읽기."
 
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:54
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:56
 msgid "Show friend status updates"
 msgstr "친구의 갱신상태 보기"
 
-#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:68
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:70
+msgid "Show direct messages"
+msgstr ""
+
+#: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:83
 msgid "<b>General</b>"
 msgstr "<b>일반</b>"
+
+#: ../Microblogging/src/FriendItem.cs:22
+msgid "No Status"
+msgstr ""
+
+#: ../Microblogging/src/FriendSource.cs:46
+msgid "Microblog friends"
+msgstr "마이크로블로그 친구"
+
+#: ../Microblogging/src/FriendSource.cs:50
+msgid "Indexes your microblog friends"
+msgstr "마이크로블로그 친구 색인"
 
 #: ../Microblogging/src/MicroblogClient.cs:42
 #, csharp-format
@@ -1024,14 +1392,6 @@ msgid ""
 msgstr ""
 "트윗을 보낼수 없습니다. 로그인 설정을 확인하세요. 만약 프록시 아랫단에 있다면, /system/http_proxy 의 설정이 정상적인지 "
 "확인해주세요."
-
-#: ../Microblogging/src/FriendSource.cs:47
-msgid "Microblog friends"
-msgstr "마이크로블로그 친구"
-
-#: ../Microblogging/src/FriendSource.cs:51
-msgid "Indexes your microblog friends"
-msgstr "마이크로블로그 친구 색인"
 
 #: ../Microblogging/src/Notifications.cs:40
 #, csharp-format
@@ -1053,8 +1413,8 @@ msgstr "'{0}'에서 {1}로 보내기 실패"
 
 #: ../Microblogging/src/Notifications.cs:60
 #, csharp-format
-msgid "'{0}' sucessfully posted to {1}"
-msgstr "'{0}'을 {1}로 보내기 성공"
+msgid "'{0}' successfully posted to {1}"
+msgstr ""
 
 #: ../Microblogging/src/PostAction.cs:44
 #, csharp-format
@@ -1095,8 +1455,8 @@ msgid "Opera Bookmarks"
 msgstr "오페라 서표"
 
 #: ../Opera/src/OperaBookmarkItemSource.cs:28
-msgid "Indexes your Opera 6 bookmarks"
-msgstr "오페라 6 서표를 색인"
+msgid "Indexes your Opera bookmarks"
+msgstr ""
 
 #: ../Pastebin/gtk-gui/Pastebin.PastebinConfig.cs:72
 msgid "Supported Codes\t\t\t"
@@ -1114,33 +1474,17 @@ msgstr "Pastebin으로 보내기"
 msgid "Sends the text to Pastebin."
 msgstr "Pastebin으로 내용 보내기."
 
-#: ../Pastebin/src/Providers/LodgeIt.cs:77
+#: ../Pastebin/src/Providers/LodgeIt.cs:76
 msgid "Parsed url was empty. Lodge It has probably changed its format."
 msgstr "분석된 URL이 비어있습니다. Lodge가 아마도 형식을 변경했을 겁니다."
 
-#: ../Pidgin/src/PidginSetStatusAction.cs:48
-msgid "Set status"
-msgstr "상태 설정"
+#: ../Pidgin/src/PidginAccountActions.cs:41
+msgid "Enable pidgin account"
+msgstr "피진 계정 활성화"
 
-#: ../Pidgin/src/PidginSetStatusAction.cs:52
-msgid "Set pidgin status message"
-msgstr "피진 상태알림 설정"
-
-#: ../Pidgin/src/PidginSavedStatusItemSource.cs:42
-msgid "Pidgin Statuses"
-msgstr "피진 상태"
-
-#: ../Pidgin/src/PidginSavedStatusItemSource.cs:46
-msgid "Saved Pidgin statuses"
-msgstr "피진 상태가 저장됨."
-
-#: ../Pidgin/src/PidginContactItemSource.cs:59
-msgid "Pidgin Buddies"
-msgstr "피진 친구들"
-
-#: ../Pidgin/src/PidginContactItemSource.cs:63
-msgid "Buddies on your Pidgin buddy list."
-msgstr "피진친구목록에서 친구들"
+#: ../Pidgin/src/PidginAccountActions.cs:95
+msgid "Disble pidgin account"
+msgstr "피진 계정 비활성화"
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:41
 msgid "Pidgin Accounts"
@@ -1150,87 +1494,84 @@ msgstr "피진 계정"
 msgid "Available Pidgin IM Accounts"
 msgstr "피진 IM 계정 사용가능"
 
-#: ../Pidgin/src/PidginAccountActions.cs:36
-msgid "Sign on"
-msgstr "연결 시작"
+#: ../Pidgin/src/PidginBrowseAccountItem.cs:35
+msgid "Browse Pidgin Accounts"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:40
-msgid "Enable pidgin account"
-msgstr "피진 계정 활성화"
+#: ../Pidgin/src/PidginBrowseBuddyItem.cs:31
+#: ../Skype/src/SkypeBrowseBuddyItem.cs:31
+msgid "Buddies"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:82
-msgid "Sign off"
-msgstr "연결 끊음"
+#: ../Pidgin/src/PidginBrowseBuddyItem.cs:35
+msgid "Browse Pidgin Buddies"
+msgstr ""
 
-#: ../Pidgin/src/PidginAccountActions.cs:86
-msgid "Disble pidgin account"
-msgstr "피진 계정 비활성화"
+#: ../Pidgin/src/PidginBrowseStatusItem.cs:35
+msgid "Browse Pidgin Statuses"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:45
-msgid "Offline"
-msgstr "오프라인"
+#: ../Pidgin/src/PidginContactItemSource.cs:66
+msgid "Pidgin Buddies"
+msgstr "피진 친구들"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:46
-msgid "Available"
-msgstr "이용가능"
+#: ../Pidgin/src/PidginContactItemSource.cs:70
+msgid "Buddies on your Pidgin buddy list."
+msgstr "피진친구목록에서 친구들"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:47
-msgid "Busy"
-msgstr "바쁨"
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43 ../Skype/src/Skype.cs:66
+msgid "Online"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:48
-msgid "Invisible"
-msgstr "보이지 않음"
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:54
+msgid "Handle"
+msgstr ""
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:49
-msgid "Away"
-msgstr "항상"
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:47
+msgid "Pidgin Statuses"
+msgstr "피진 상태"
 
-#: ../Pidgin/src/PidginStatusTypeItem.cs:50
-msgid "Unknown Status"
-msgstr "알수없는 상태"
+#: ../Pidgin/src/PidginSavedStatusItemSource.cs:51
+msgid "Saved Pidgin statuses"
+msgstr "피진 상태가 저장됨."
 
-#: ../Pidgin/src/PidginChatAction.cs:41
-msgid "Chat"
-msgstr "잡담"
+#: ../Pidgin/src/PidginSetStatusAction.cs:45
+msgid "Set pidgin status message"
+msgstr "피진 상태알림 설정"
 
-#: ../Pidgin/src/PidginChatAction.cs:45
-msgid "Send an instant message to a friend."
-msgstr "친구에게 전갈 보내기."
-
-#: ../PingFM/gtk-gui/PingFM.Configuration.cs:64
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:70
 msgid "Application Key"
 msgstr "프로그램 키"
 
-#: ../PingFM/gtk-gui/PingFM.Configuration.cs:81
+#: ../PingFM/gtk-gui/PingFM.Configuration.cs:87
 msgid "<i>Verify and save your account information</i>"
 msgstr "<i>계정정보 검사/저장</i>"
 
-#: ../PingFM/src/PingFMClient.cs:36
+#: ../PingFM/src/PingFMClient.cs:35
 msgid "Message posted"
 msgstr "보낸 메세지"
 
-#: ../PingFM/src/PingFMClient.cs:37
+#: ../PingFM/src/PingFMClient.cs:36
 msgid "Message posting failed"
 msgstr "메세지 전달 실패"
 
-#: ../PingFM/src/PingFMClient.cs:38
+#: ../PingFM/src/PingFMClient.cs:37
 msgid ""
 "Cannot connect to the Ping.FM API server, or the server responds with an "
 "error."
 msgstr "Ping.FM API서버에 연결할 수 없거나 서버가 응답하지 않습니다."
 
-#: ../PingFM/src/PingFMClient.cs:39
+#: ../PingFM/src/PingFMClient.cs:38
 #, csharp-format
 msgid "Your {0} message has been successfully posted to {1}"
 msgstr "{0}메세지를 {1}에 성공적으로 보냈습니다."
 
-#: ../PingFM/src/PingFMClient.cs:40
+#: ../PingFM/src/PingFMClient.cs:39
 #, csharp-format
 msgid "Your message has been successfully posted to all {0} services"
 msgstr "메세지를 모든 {0}서비스에 성공적으로 보냈습니다."
 
-#: ../PingFM/src/PingFMClient.cs:67
+#: ../PingFM/src/PingFMClient.cs:66
 msgid "Microblog"
 msgstr "마이크로블로그"
 
@@ -1238,17 +1579,13 @@ msgstr "마이크로블로그"
 msgid "Status"
 msgstr "상태"
 
-#: ../PingFM/src/PingFMClient.cs:82
+#: ../PingFM/src/PingFMClient.cs:83
 msgid "Error occurred in service response"
 msgstr "서비스으압에 오류 발생"
 
-#: ../PingFM/src/PingFMServiceItem.cs:51
-msgid "Web service group supported by Ping.FM"
-msgstr "Ping.FM으로 웹서비스그룹 지원됨"
-
-#: ../PingFM/src/PingFMServiceItem.cs:52
-msgid "Web service supported by Ping.FM"
-msgstr "Ping.FM으로 웹서비스 지원됨"
+#: ../PingFM/src/PingFM.cs:31
+msgid "Failed to connect to Ping.FM service"
+msgstr "Ping.FM서비스에 연결 실패"
 
 #: ../PingFM/src/PingFMPost.cs:35
 msgid "Post via Ping.FM"
@@ -1259,17 +1596,30 @@ msgid ""
 "Post a text message as microblog or status update to your social network"
 msgstr "마이크로블로그 같은 테스트메세지나 상태를 사회망에 갱신합니다."
 
-#: ../PingFM/src/PingFM.cs:32
-msgid "Failed to connect to Ping.FM service"
-msgstr "Ping.FM서비스에 연결 실패"
+#: ../PingFM/src/PingFMServiceItem.cs:53
+#, csharp-format
+msgid "Post message to multiple {0} services."
+msgstr ""
 
-#: ../PingFM/src/PingFMServiceItemSource.cs:35
+#: ../PingFM/src/PingFMServiceItem.cs:54
+msgid "Service supported by Ping.FM"
+msgstr ""
+
+#: ../PingFM/src/PingFMServiceItemSource.cs:33
 msgid "Ping.FM Services"
 msgstr "Ping.FM 서비스"
 
-#: ../PingFM/src/PingFMServiceItemSource.cs:39
+#: ../PingFM/src/PingFMServiceItemSource.cs:37
 msgid "Web services suppported by Ping.FM"
 msgstr "Ping.FM으로 웹서비스 지원됨"
+
+#: ../Putty/src/PuttyAction.cs:41
+msgid "Connect with PuTTY"
+msgstr "PuTTY로 연결"
+
+#: ../Putty/src/PuttyAction.cs:45
+msgid "Create new conenction with PuTTY"
+msgstr "PuTTY를 사용해서 새로운 연결 생성"
 
 #: ../Putty/src/PuttySession.cs:49
 #, csharp-format
@@ -1284,13 +1634,9 @@ msgstr "PuTTY 세션"
 msgid "PuTTY saved sessions"
 msgstr "PuTTY세션 저장됨"
 
-#: ../Putty/src/PuttyAction.cs:40
-msgid "Connect with PuTTY"
-msgstr "PuTTY로 연결"
-
-#: ../Putty/src/PuttyAction.cs:44
-msgid "Create new conenction with PuTTY"
-msgstr "PuTTY를 사용해서 새로운 연결 생성"
+#: ../Qalculate/src/QalculateAction.cs:21
+msgid "Perform a calculation using Qalculate."
+msgstr ""
 
 #: ../Quote/src/QuoteAction.cs:40
 msgid "Submit Quote"
@@ -1300,7 +1646,7 @@ msgstr "제출할 묶음"
 msgid "Sends text to Quote service."
 msgstr "묶음서비스로 텍스트 보내기"
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:96
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:102
 msgid ""
 "Do needs your authorization in order to manage tasks in your Remember The "
 "Milk account. Press the \"Authorize\" button to open a web browser and give "
@@ -1309,19 +1655,27 @@ msgstr ""
 "Remember The Milk계정에 작업을 순서대로 관리하기 위해서는 인증이 필요합니다. \"인증\"을 눌러 웹브라우즈를 열고 Do에게 "
 "인증정보를 넣어주세요."
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:191
-msgid "For overdue task(s)"
-msgstr "작업 기한이 지났음"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:202
+msgid "minute(s)"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:203
-msgid "When actions (e.g. rename) are completed"
-msgstr "동작이 완료되었을때"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:213
+msgid "Notify overdue task(s) every"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:224
-msgid "<b>Notification</b>"
-msgstr "<b>통지</b>"
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:244
+msgid "Show notification when actions are completed"
+msgstr ""
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:260
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:256
+msgid "Return the newly created task"
+msgstr ""
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:268
+msgid "<b>Interactivity</b>"
+msgstr ""
+
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:305
 msgid ""
 "You can enter some advanced search operators here to limit the tasks Do "
 "indexes. E.g. \"priority:1 AND status:incomplete\" will force Do to only "
@@ -1330,321 +1684,672 @@ msgstr ""
 "몇가지 고급검색 명령은 Do색이작업에서 제한됨. 예. \"우선순위:1 과 상태:미완료\"는 Do에서 높은 우선순위를 가진 모든 완료되지  "
 "않을 작업을 강제로 색인합니다."
 
-#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:294
+#: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:339
 msgid "<b>Filter</b>"
 msgstr "<b>거르개</b>"
 
-#: ../RememberTheMilk/src/Configuration.cs:68
+#: ../RememberTheMilk/src/Configuration.cs:116
 msgid ""
 "A webpage from Remember The Milk should be opened in your web browser now. "
 "Please follow the instructions there and come back to complete the "
 "authrozation by clicking the button below."
 msgstr "지금 Remember The Milk에서 웹페이지를 브라우즈로 열수 있습니다. 아래의 버턴을 클릭하면 인증이 완료됩니다."
 
-#: ../RememberTheMilk/src/Configuration.cs:76
+#: ../RememberTheMilk/src/Configuration.cs:124
 msgid "Complete authorization"
 msgstr "인증 완료"
 
-#: ../RememberTheMilk/src/Configuration.cs:93
+#: ../RememberTheMilk/src/Configuration.cs:150
 msgid "Fail to complete authorization."
 msgstr "인증 완료 실패"
 
-#: ../RememberTheMilk/src/Configuration.cs:96
+#: ../RememberTheMilk/src/Configuration.cs:153
 msgid "Authorize again"
 msgstr "제 인증"
 
-#: ../RememberTheMilk/src/Configuration.cs:102
+#: ../RememberTheMilk/src/Configuration.cs:162
 #, csharp-format
 msgid ""
 "Thank you {0}, RTM plugin is now authorized to operate on your account."
 msgstr "{0} 감사합니다. RTM플러그인이 계정에서 사용하도록 인증되었습니다."
 
-#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
-msgid "Uncomplete"
-msgstr "미완료"
+#: ../RememberTheMilk/src/RTMAddTags.cs:35
+msgid "Add Tag(s)"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
-msgid "Mark a selected task as \"incomplete\"."
-msgstr "선택된 작업을 \"미완료\"으로 표시"
-
-#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
-msgid "Delete"
-msgstr "삭제"
-
-#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
-msgid "Delete a selected task from Remember The Milk"
-msgstr "Remember The Milk에서 선택된 작업 삭제"
-
-#: ../RememberTheMilk/src/RTM.cs:268
-#, csharp-format
-msgid "{0} Task Overdue"
-msgid_plural "{0} Tasks Overdue"
-msgstr[0] "{0} 작업이 기한이 지남"
-
-#: ../RememberTheMilk/src/RTM.cs:368
-msgid "Task Deleted"
-msgstr "작업이 삭제됨"
-
-#: ../RememberTheMilk/src/RTM.cs:369
-msgid ""
-"The selected task has been successfully deleted from your Remember The Milk "
-"task list"
-msgstr "선택된 작업이 Remember The Milk작업목록에서 성공적으로 삭제되었습니다."
-
-#: ../RememberTheMilk/src/RTM.cs:383
-msgid "Task Completed"
-msgstr "작업이 완료됨."
-
-#: ../RememberTheMilk/src/RTM.cs:384
-msgid ""
-"The selected task in your Remember The Milk task list has been marked as "
-"completed."
-msgstr "선택된 작업이 Remember The Milk작업목록에서 완료로 표시되었습니다."
-
-#: ../RememberTheMilk/src/RTM.cs:392
-msgid "High"
-msgstr "상"
-
-#: ../RememberTheMilk/src/RTM.cs:393
-msgid "High Priority"
-msgstr "우선순위 상"
-
-#: ../RememberTheMilk/src/RTM.cs:394
-msgid "Medium"
-msgstr "중"
-
-#: ../RememberTheMilk/src/RTM.cs:395
-msgid "Medium Priority"
-msgstr "우선순위 중"
-
-#: ../RememberTheMilk/src/RTM.cs:396
-msgid "Low"
-msgstr "하"
-
-#: ../RememberTheMilk/src/RTM.cs:397
-msgid "Low Priority"
-msgstr "우선순위 하"
-
-#: ../RememberTheMilk/src/RTM.cs:398
-msgid "None"
-msgstr "없음"
-
-#: ../RememberTheMilk/src/RTM.cs:399
-msgid "No Priority"
-msgstr "우선순위 없음"
-
-#: ../RememberTheMilk/src/RTM.cs:400
-msgid "Up"
-msgstr "위"
-
-#: ../RememberTheMilk/src/RTM.cs:401
-msgid "Increase the priority"
-msgstr "우선순위 증가"
-
-#: ../RememberTheMilk/src/RTM.cs:402
-msgid "Down"
-msgstr "아래"
-
-#: ../RememberTheMilk/src/RTM.cs:403
-msgid "Decrease the priority"
-msgstr "우선순위 낮춤"
-
-#: ../RememberTheMilk/src/RTM.cs:419
-msgid "Priority Changed"
-msgstr "우선순위가 변경됨"
-
-#: ../RememberTheMilk/src/RTM.cs:420
-msgid ""
-"The priority of the selected task in your Remember The Milk task list has "
-"been changed."
-msgstr "Remember The Milk작업목록에서 선택된 작업의 우선순위가 변경되었습니다."
-
-#: ../RememberTheMilk/src/RTM.cs:437
-msgid "Due Date/Time Changed"
-msgstr "기한이 변경됨."
-
-#: ../RememberTheMilk/src/RTM.cs:438
-msgid ""
-"The due date/time of the selected task in your Remember The Milk task list "
-"has been changed."
-msgstr "Remember The Milk작업목록에서 선택된 작업의 기한이 변경되었습니ㅏㄷ."
-
-#: ../RememberTheMilk/src/RTM.cs:452
-msgid "Task Moved"
-msgstr "작업이 이동됨."
-
-#: ../RememberTheMilk/src/RTM.cs:468
-msgid "Task Renamed"
-msgstr "작업 이름이 바뀜."
-
-#: ../RememberTheMilk/src/RTM.cs:483
-msgid "Task Postponed"
-msgstr "작업이 연기됨."
-
-#: ../RememberTheMilk/src/RTM.cs:484
-msgid ""
-"The selected task in your Remember The Milk task list has been postponed"
-msgstr "Remember The Milk 작업목록에서 선택된 작업이 연기됨."
-
-#: ../RememberTheMilk/src/RTM.cs:498
-msgid "Recurrence Pattern Changed"
-msgstr "반복패턴이 변경됨."
-
-#: ../RememberTheMilk/src/RTM.cs:499
-msgid ""
-"The recurrence pattern of the selected task in your Remember The Milk task "
-"list has been changed."
-msgstr "Remember The Milk작업목록에서 선택된 반복패턴이 변경되었습니다."
-
-#: ../RememberTheMilk/src/RTM.cs:513
-msgid "Task Uncompleted"
-msgstr "작업 미완료"
-
-#: ../RememberTheMilk/src/RTM.cs:514
-msgid "The selected task has been marked as \"incomplete\"."
-msgstr "선택된 작업을 \"미완료\"로 표시"
-
-#: ../RememberTheMilk/src/RTMNewTask.cs:37
-msgid "Create a new task in Remember The Milk"
-msgstr "Remember The Milk에서 새로운 작업 만들기"
-
-#: ../RememberTheMilk/src/RTMMoveTask.cs:39
-msgid "Move a seleted task from one list to another"
-msgstr "선택된 작업을 다른곳으로 옮김"
+#: ../RememberTheMilk/src/RTMAddTags.cs:39
+msgid "Add one or more tags to a task."
+msgstr ""
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:35
 msgid "Complete"
 msgstr "완료"
 
 #: ../RememberTheMilk/src/RTMCompleteTask.cs:39
-msgid "Complete a selected task"
-msgstr "선택된 작업 완료"
+msgid "Complete a task"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMRenameTask.cs:33
-msgid "Rename to..."
-msgstr "다른 이름으로 변경..."
+#: ../RememberTheMilk/src/RTM.cs:118
+msgid "Failed to initialize authentication."
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMRenameTask.cs:37
-msgid "Give the seleted task a new name"
-msgstr "선택된 작업에 새로운 이름 부여"
+#: ../RememberTheMilk/src/RTM.cs:140
+msgid "Failed to complete authentication."
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMSetRecurrence.cs:33
-msgid "Set Recurrence"
-msgstr "반복 설정"
+#: ../RememberTheMilk/src/RTM.cs:328
+#, csharp-format
+msgid "An error occured when updating RTM lists: {0}"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMSetRecurrence.cs:37
-msgid "Sets a recurrence pattern for a task."
-msgstr "작업에 반복패턴 설정"
+#: ../RememberTheMilk/src/RTM.cs:362
+#, csharp-format
+msgid "An error happend when updating RTM locations: {0}"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMPostponeTask.cs:33
+#: ../RememberTheMilk/src/RTM.cs:411
+#, csharp-format
+msgid "An error occured when updating RTM tasks: {0}"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:487
+msgid "High"
+msgstr "상"
+
+#: ../RememberTheMilk/src/RTM.cs:488
+msgid "High Priority"
+msgstr "우선순위 상"
+
+#: ../RememberTheMilk/src/RTM.cs:489
+msgid "Medium"
+msgstr "중"
+
+#: ../RememberTheMilk/src/RTM.cs:490
+msgid "Medium Priority"
+msgstr "우선순위 중"
+
+#: ../RememberTheMilk/src/RTM.cs:491
+msgid "Low"
+msgstr "하"
+
+#: ../RememberTheMilk/src/RTM.cs:492
+msgid "Low Priority"
+msgstr "우선순위 하"
+
+#: ../RememberTheMilk/src/RTM.cs:493
+msgid "None"
+msgstr "없음"
+
+#: ../RememberTheMilk/src/RTM.cs:494
+msgid "No Priority"
+msgstr "우선순위 없음"
+
+#: ../RememberTheMilk/src/RTM.cs:495
+msgid "Up"
+msgstr "위"
+
+#: ../RememberTheMilk/src/RTM.cs:496
+msgid "Increase the priority"
+msgstr "우선순위 증가"
+
+#: ../RememberTheMilk/src/RTM.cs:497
+msgid "Down"
+msgstr "아래"
+
+#: ../RememberTheMilk/src/RTM.cs:498
+msgid "Decrease the priority"
+msgstr "우선순위 낮춤"
+
+#: ../RememberTheMilk/src/RTM.cs:516
+msgid "New Task Created"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:517
+msgid ""
+"The task has been successully added to your Remember The milk task list."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:540
+msgid "Task Deleted"
+msgstr "작업이 삭제됨"
+
+#: ../RememberTheMilk/src/RTM.cs:541
+msgid ""
+"The selected task has been successfully deleted from your Remember The Milk "
+"task list"
+msgstr "선택된 작업이 Remember The Milk작업목록에서 성공적으로 삭제되었습니다."
+
+#: ../RememberTheMilk/src/RTM.cs:553
+msgid "Task Completed"
+msgstr "작업이 완료됨."
+
+#: ../RememberTheMilk/src/RTM.cs:554
+msgid ""
+"The selected task in your Remember The Milk task list has been marked as "
+"completed."
+msgstr "선택된 작업이 Remember The Milk작업목록에서 완료로 표시되었습니다."
+
+#: ../RememberTheMilk/src/RTM.cs:569
+msgid "Priority Changed"
+msgstr "우선순위가 변경됨"
+
+#: ../RememberTheMilk/src/RTM.cs:570
+msgid ""
+"The priority of the selected task in your Remember The Milk task list has "
+"been changed."
+msgstr "Remember The Milk작업목록에서 선택된 작업의 우선순위가 변경되었습니다."
+
+#: ../RememberTheMilk/src/RTM.cs:586
+msgid "Due Date/Time Unset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:587
+msgid ""
+"The due date/time of the selected task in your Remember The Milk task list "
+"has been unset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:589
+msgid "Due Date/Time Changed"
+msgstr "기한이 변경됨."
+
+#: ../RememberTheMilk/src/RTM.cs:590
+msgid ""
+"The due date/time of the selected task in your Remember The Milk task list "
+"has been changed."
+msgstr "Remember The Milk작업목록에서 선택된 작업의 기한이 변경되었습니ㅏㄷ."
+
+#: ../RememberTheMilk/src/RTM.cs:602
+msgid "Task Moved"
+msgstr "작업이 이동됨."
+
+#: ../RememberTheMilk/src/RTM.cs:617
+msgid "Task Renamed"
+msgstr "작업 이름이 바뀜."
+
+#: ../RememberTheMilk/src/RTM.cs:618
+#, csharp-format
+msgid "The selected task has been renamed to \"{0}\"."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:631
+msgid "Task Postponed"
+msgstr "작업이 연기됨."
+
+#: ../RememberTheMilk/src/RTM.cs:632
+msgid ""
+"The selected task in your Remember The Milk task list has been postponed"
+msgstr "Remember The Milk 작업목록에서 선택된 작업이 연기됨."
+
+#: ../RememberTheMilk/src/RTM.cs:644
+msgid "Recurrence Pattern Changed"
+msgstr "반복패턴이 변경됨."
+
+#: ../RememberTheMilk/src/RTM.cs:645
+msgid ""
+"The recurrence pattern of the selected task in your Remember The Milk task "
+"list has been changed."
+msgstr "Remember The Milk작업목록에서 선택된 반복패턴이 변경되었습니다."
+
+#: ../RememberTheMilk/src/RTM.cs:658
+msgid "Task URL Set"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:659
+msgid "The selected task has been assigned a URL."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:661
+msgid "Task URL Reset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:662
+msgid "The URL for the selected task has been reset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:677
+msgid "Task Estimated Time Unset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:678
+msgid "The estimated time for the selected task has been unset."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:680
+msgid "Task Estimated Time Set"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:681
+msgid "The selected task has been assigned an estimated time."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:694
+msgid "Location Reset"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:695
+msgid "The location of the selected task has been cleared."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:697
+msgid "Location changed"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:698
+msgid "The location of the selected task has been successfully changed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:712
+msgid "Task Uncompleted"
+msgstr "작업 미완료"
+
+#: ../RememberTheMilk/src/RTM.cs:713
+msgid "The selected task has been marked as \"incomplete\"."
+msgstr "선택된 작업을 \"미완료\"로 표시"
+
+#: ../RememberTheMilk/src/RTM.cs:734
+msgid "New List Created"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:735
+#, csharp-format
+msgid "A new task list named \"{0}\" has been created."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:748
+msgid "List Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:749
+msgid "The selected task list has been deleted."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:765
+msgid "Task List Renamed"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:766
+#, csharp-format
+msgid "The selected task list has been renamed to \"{0}\"."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:804
+msgid "Note Added"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:805
+msgid "A note has been added to the selected task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:820
+msgid "Note Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:821
+msgid "The selected note has been deleted from the selected task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:840
+msgid "Tags Added"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:841
+msgid "New tags have been successfully added to the selected task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:857
+msgid "Tags Deleted"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:858
+msgid "Selected tags have been successfully removed from the selected task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:884
+msgid "Token verification failed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:894
+msgid "Remember The Milk timeline creation failed."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:900
+msgid "Not authorized to use a Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTM.cs:934
+#, csharp-format
+msgid "{0} Task Overdue"
+msgid_plural "{0} Tasks Overdue"
+msgstr[0] "{0} 작업이 기한이 지남"
+
+#: ../RememberTheMilk/src/RTMDeleteList.cs:35
+msgid "Delete List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteList.cs:39
+msgid "Delete a task list from Remember The Milk"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteNote.cs:35
+msgid "Delete Note"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteNote.cs:39
+msgid "Detele the a note from a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTags.cs:35
+msgid "Delete Tag(s)"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTags.cs:39
+msgid "Detele one or more tags from a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:35
+msgid "Delete"
+msgstr "삭제"
+
+#: ../RememberTheMilk/src/RTMDeleteTask.cs:39
+msgid "Delete a task from Remember The Milk"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItem.cs:50
+msgid "Remember The Milk Task List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItemSource.cs:36
+msgid "Remember The Milk Lists"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMListItemSource.cs:40
+msgid "Task Lists in your Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMLocationItemSource.cs:35
+msgid "Remember The Milk Locations"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMLocationItemSource.cs:39
+msgid "Locations associated with your Remember The Milk tasks."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:35
+msgid "Move to ..."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMMoveTask.cs:39
+msgid "Move the seleted task to another list"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:35
+msgid "New List"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:39
+msgid "Create a new task list."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewList.cs:59
+msgid "No list name provided for RTMNewList action"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewNote.cs:36
+msgid "New Note"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewNote.cs:40
+msgid "Add a new note to a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:35
+msgid "New Task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:39
+msgid "Create a new task in Remember The Milk"
+msgstr "Remember The Milk에서 새로운 작업 만들기"
+
+#: ../RememberTheMilk/src/RTMNewTask.cs:73
+msgid "No title provided for new task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:35
 msgid "Postpone"
 msgstr "연기"
 
-#: ../RememberTheMilk/src/RTMPostponeTask.cs:37
+#: ../RememberTheMilk/src/RTMPostponeTask.cs:39
 msgid "Postpone a selected task in Remember The Milk"
 msgstr "Remember The Milk에서 선택된 작업 연기"
+
+#: ../RememberTheMilk/src/RTMRenameList.cs:35
+#: ../RememberTheMilk/src/RTMRenameTask.cs:35
+msgid "Rename"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMRenameList.cs:39
+msgid "Give a list a new name."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMRenameTask.cs:39
+msgid "Give the seleted task a new name"
+msgstr "선택된 작업에 새로운 이름 부여"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:35
+msgid "Set Due Date/Time"
+msgstr "기한 설정"
+
+#: ../RememberTheMilk/src/RTMSetDue.cs:39
+msgid "Set or change the due date/time of a task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:36
+msgid "Set Estimated Time"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:40
+msgid "Set or reset the estimated time for a task"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:102
+msgid "Invalid Time format"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetEstimate.cs:103
+msgid "The estimated time entered cannot be understood."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetLocation.cs:35
+msgid "Set Location"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetLocation.cs:39
+msgid "Set or change the location of a task"
+msgstr ""
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:35
 msgid "Set Priority"
 msgstr "우선순위 설정"
 
 #: ../RememberTheMilk/src/RTMSetPriority.cs:39
-msgid "Set the priority of a task"
-msgstr "작업의 우선순위 설정"
+msgid "Set or change the priority of a task"
+msgstr ""
 
-#: ../RememberTheMilk/src/RTMSetDue.cs:33
-msgid "Set Due Date/Time"
-msgstr "기한 설정"
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:35
+msgid "Set Recurrence"
+msgstr "반복 설정"
 
-#: ../RememberTheMilk/src/RTMSetDue.cs:37
-msgid "Set the due date/time of a task"
-msgstr "작업의 기한 설정"
+#: ../RememberTheMilk/src/RTMSetRecurrence.cs:39
+msgid "Set a recurrence pattern for a task."
+msgstr ""
 
-#: ../Rhythmbox/src/MusicItems.cs:77
-msgid "All music by"
-msgstr "의 모든 음악"
+#: ../RememberTheMilk/src/RTMSetUrl.cs:48
+msgid "Set URL"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetUrl.cs:52
+msgid "Set or change the URL of a task."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMSetUrl.cs:119
+msgid "Invalid URL provided."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItem.cs:34
+msgid "Remember The Milk Tag"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItemSource.cs:35
+msgid "Remember The Milk Tags"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTagItemSource.cs:39
+msgid "Tags used by your Remember The Milk tasks."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTaskItemSource.cs:36
+msgid "Remember The Milk Tasks"
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMTaskItemSource.cs:40
+msgid "All the tasks in your Remember The Milk account."
+msgstr ""
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:35
+msgid "Uncomplete"
+msgstr "미완료"
+
+#: ../RememberTheMilk/src/RTMUncompleteTask.cs:39
+msgid "Mark a task as \"incomplete\"."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:45
+msgid "Allow Snooze"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:49
+msgid "Allows this reminder to be snoozed."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:61
+msgid "No Snooze Allowed"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:65
+msgid "This reminder cannot be snoozed."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:75
+#, csharp-format
+msgid "You will be reminded in {0} hours, {1} minutes."
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:76
+#, csharp-format
+msgid "You will be reminded in {0} minutes"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:77
+msgid "in"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:77
+msgid "at"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:81
+msgid "Remind Me"
+msgstr ""
+
+#: ../RemindMe/src/RemindMe.cs:85
+msgid "Simple Reminders"
+msgstr ""
+
+#: ../RequestTracker/gtk-gui/RequestTracker.RTPrefs.cs:44
+#, csharp-format
+msgid ""
+"Use the list below to add/configure your Request Tracker sites.\n"
+"\n"
+"<i>The ticket number will be inserted into the URL at the place specified by "
+"the string: {0}</i>"
+msgstr ""
+
+#: ../RequestTracker/src/RequestTrackerAction.cs:46
+msgid "Request Tracker"
+msgstr ""
+
+#: ../RequestTracker/src/RequestTrackerAction.cs:50
+msgid "Display tickets from Request Tracker."
+msgstr ""
 
 #: ../Rhythmbox/src/EnqueueAction.cs:40
 msgid "Add an item to Rhythmbox's play queue."
 msgstr "리듬박스 재생목록에 항목 추가"
 
-#: ../Rhythmbox/src/RhythmboxItems.cs:49
-msgid "Browse Rhythmbox Music by Artist"
-msgstr "이름으로 리듬박스 노래에서 찾기"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:58
-msgid "Browse Rhythmbox Music by Album"
-msgstr "앨범으로 리듬박스 음악에서 찾기"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:69
-msgid "Play Current Track in Rhythmbox"
-msgstr "리듬박스에서 현재 노래 재생"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:74
-msgid "Pause Rhythmbox Playback"
-msgstr "리듬박스 재생기 중지"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:79
-msgid "Play Next Track in Rhythmbox"
-msgstr "리듬박스에서 다음노래 재생"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:84
-msgid "Play Previous Track in Rhythmbox"
-msgstr "리듬박스에서 이전노래 재생"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:88
-msgid "Show Current Track"
-msgstr "현재 노래 보이기"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:89
-msgid "Show Notification of Current Track in Rhythmbox"
-msgstr "리듬박스에서 현재 노래의 통지 보이기"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:93
-msgid "Mute"
-msgstr "음소거"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:94
-msgid "Mute Rhythmbox Playback"
-msgstr "리듬박스 재생기 음소거"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:98
-msgid "Unmute"
-msgstr "음소거 해제"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:99
-msgid "Unmute Rhythmbox Playback"
-msgstr "리듬박스 재생기 음소거 해제"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:103
-#: ../VolumeControl/src/VolumeUpItem.cs:31
-msgid "Volume Up"
-msgstr "소리 높임"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:104
-msgid "Increase Rhythmbox Playback Volume"
-msgstr "리듬박스 재생기의 소리를 올림"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:108
-#: ../VolumeControl/src/VolumeDownItem.cs:31
-msgid "Volume Down"
-msgstr "소리를 낮춤"
-
-#: ../Rhythmbox/src/RhythmboxItems.cs:109
-msgid "Decrease Rhythmbox Playback Volume"
-msgstr "리듬박스 재생기 소리를 낮춤"
-
-#: ../Rhythmbox/src/PlayAction.cs:44
-msgid "Play an item in Rhythmbox."
-msgstr "리듬박스에서 항목 재생"
-
-#: ../Rhythmbox/src/MusicItemSource.cs:45
+#: ../Rhythmbox/src/MusicItemSource.cs:44
 msgid "Rhythmbox Music"
 msgstr "리듬박스 노래"
 
-#: ../Rhythmbox/src/MusicItemSource.cs:49
+#: ../Rhythmbox/src/MusicItemSource.cs:48
 msgid "Provides access to artists and albums from Rhythmbox."
 msgstr "리듬박스에서 이름과 앨범으로 접근 제공"
+
+#: ../Rhythmbox/src/NextAction.cs:46
+msgid "Skip to the next track in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PauseAction.cs:46
+msgid "Pause music in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PlayAction.cs:46
+msgid "Play music in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/PlayItemAction.cs:45
+msgid "Play an item in Rhythmbox."
+msgstr "리듬박스에서 항목 재생"
+
+#: ../Rhythmbox/src/PreviousAction.cs:46
+msgid "Skip to the previous track in Rhythmbox."
+msgstr ""
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:51
+msgid "Browse Rhythmbox Music by Artist"
+msgstr "이름으로 리듬박스 노래에서 찾기"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:60
+msgid "Browse Rhythmbox Music by Album"
+msgstr "앨범으로 리듬박스 음악에서 찾기"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:70
+msgid "Show Notification of Current Track in Rhythmbox"
+msgstr "리듬박스에서 현재 노래의 통지 보이기"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:75
+msgid "Mute"
+msgstr "음소거"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:76
+msgid "Mute Rhythmbox Playback"
+msgstr "리듬박스 재생기 음소거"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:81
+msgid "Unmute"
+msgstr "음소거 해제"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:82
+msgid "Unmute Rhythmbox Playback"
+msgstr "리듬박스 재생기 음소거 해제"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:88
+msgid "Increase Rhythmbox Playback Volume"
+msgstr "리듬박스 재생기의 소리를 올림"
+
+#: ../Rhythmbox/src/RhythmboxItems.cs:94
+msgid "Decrease Rhythmbox Playback Volume"
+msgstr "리듬박스 재생기 소리를 낮춤"
 
 #: ../RSS/gtk-gui/Do.Plugins.Rss.Configuration.cs:67
 msgid "OPML feed file"
@@ -1658,50 +2363,135 @@ msgstr "시간초과(초단위)"
 msgid "Cache duration (in minutes)"
 msgstr "유지시간 저장(분단위)"
 
-#: ../Shelf/src/ShelfActions.cs:33
-msgid "Explore Shelf"
-msgstr "셜프에서 탐색"
-
-#: ../Shelf/src/ShelfActions.cs:37
-msgid "Get a list of everything in your shelf"
-msgstr "셜프에서 전체목록을 받기"
-
-#: ../Shelf/src/ShelfActions.cs:60
-msgid "Remove From Shelf"
-msgstr "셜프에서 삭제"
-
-#: ../Shelf/src/ShelfActions.cs:64
-msgid "Remove Selected Item From Shelf"
-msgstr "셜프에서 선택된 항목 삭제"
-
-#: ../Shelf/src/ShelfActions.cs:101
+#: ../Shelf/src/ShelfAddToShelfAction.cs:32
 msgid "Add To Shelf"
 msgstr "셜프에 추가"
 
-#: ../Shelf/src/ShelfActions.cs:105
-msgid "Add Selected Item to Shelf"
-msgstr "셜프에 선택된 항목 추가"
+#: ../Shelf/src/ShelfAddToShelfAction.cs:36
+msgid "Add Selected Item to one Shelf"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:56
+#: ../Shelf/src/ShelfCreateShelfAction.cs:36
+msgid "Create a new Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfCreateShelfAction.cs:40
+msgid "Adds a new Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfDeleteShelfAction.cs:36
+msgid "Remove a shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfDeleteShelfAction.cs:40
+msgid "Removes a shelf from your shelves"
+msgstr ""
+
+#: ../Shelf/src/ShelfExploreAction.cs:31
+msgid "Explore Shelf"
+msgstr "셜프에서 탐색"
+
+#: ../Shelf/src/ShelfExploreAction.cs:35
+msgid "Get a list of everything in your shelf"
+msgstr "셜프에서 전체목록을 받기"
+
+#: ../Shelf/src/ShelfItem.cs:53
 msgid " Shelf"
 msgstr " 셜프"
 
-#: ../Shelf/src/ShelfItemSource.cs:62
+#: ../Shelf/src/ShelfItem.cs:59
 #, csharp-format
 msgid "Your {0} shelf items."
 msgstr "{0} 셜프 항목"
 
-#: ../Shelf/src/ShelfItemSource.cs:90
-msgid "Shelf Items"
-msgstr "셜프 항목"
+#: ../Shelf/src/ShelfItemSource.cs:172
+msgid "Shelves"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:94
-msgid "Your Shelf Items"
-msgstr "내 셜프 항목"
+#: ../Shelf/src/ShelfItemSource.cs:176
+msgid "Your Shelves"
+msgstr ""
 
-#: ../Shelf/src/ShelfItemSource.cs:126
-msgid "Default"
-msgstr "기본"
+#: ../Shelf/src/ShelfRemoveFromShelfAction.cs:31
+msgid "Remove From Shelf"
+msgstr "셜프에서 삭제"
+
+#: ../Shelf/src/ShelfRemoveFromShelfAction.cs:35
+msgid "Remove Selected Item From Shelf"
+msgstr "셜프에서 선택된 항목 삭제"
+
+#: ../Shelf/src/ShelfRenameShelfAction.cs:36
+msgid "Rename a Shelf"
+msgstr ""
+
+#: ../Shelf/src/ShelfRenameShelfAction.cs:40
+msgid "Changes a shelf's name"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:65
+msgid "Unknown"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:68
+msgid "Skype Me"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:70
+msgid "Not Available"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:71
+msgid "Do Not Disturb"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:73
+msgid "Logged Out"
+msgstr ""
+
+#: ../Skype/src/Skype.cs:74
+msgid "Skype Out"
+msgstr ""
+
+#: ../Skype/src/SkypeBrowseBuddyItem.cs:35
+msgid "Browse Skype Buddies"
+msgstr ""
+
+#: ../Skype/src/SkypeBrowseStatusItem.cs:35
+msgid "Browse Skype Statuses"
+msgstr ""
+
+#: ../Skype/src/SkypeCallAction.cs:41
+msgid "Call"
+msgstr ""
+
+#: ../Skype/src/SkypeCallAction.cs:45
+msgid "Call a contact using Skype"
+msgstr ""
+
+#: ../Skype/src/SkypeChatAction.cs:39
+msgid "Chat with a buddy using Skype"
+msgstr ""
+
+#: ../Skype/src/SkypeContactItemSource.cs:54
+msgid "Skype Buddies"
+msgstr ""
+
+#: ../Skype/src/SkypeContactItemSource.cs:58
+msgid "Buddies on your Skype buddy list."
+msgstr ""
+
+#: ../Skype/src/SkypeSetStatusAction.cs:35
+msgid "Set Status"
+msgstr ""
+
+#: ../Skype/src/SkypeSetStatusAction.cs:39
+msgid "Set your Skype status"
+msgstr ""
+
+#: ../Skype/src/SkypeStatusItemSource.cs:43
+#: ../Skype/src/SkypeStatusItemSource.cs:47
+msgid "Skype Statuses"
+msgstr ""
 
 #: ../SqueezeCenter/gtk-gui/SqueezeCenter.Configuration.cs:69
 msgid "Load items in background"
@@ -1730,19 +2520,19 @@ msgid ""
 "delay until all items are loaded."
 msgstr "Do를 읽을때 이름, 앨범, 라디오를 배경으로 읽기"
 
-#: ../SSH/src/SSHAction.cs:36 ../SSH/src/SSHAction.cs:42
+#: ../SSH/src/SSHAction.cs:37 ../SSH/src/SSHAction.cs:43
 msgid "Connect with SSH"
 msgstr "SSH를 이용해서 연결"
 
-#: ../SSH/src/SSHHosts.cs:42
+#: ../SSH/src/SSHHostItem.cs:39
 msgid "SSH Host"
 msgstr "SSH 호스트"
 
-#: ../SSH/src/SSHHosts.cs:62
+#: ../SSH/src/SSHHostItemSource.cs:43
 msgid "SSH Hosts"
 msgstr "SSH 호스트"
 
-#: ../SSH/src/SSHHosts.cs:63
+#: ../SSH/src/SSHHostItemSource.cs:44
 msgid "Parses ssh-config"
 msgstr "ssh설정 분석"
 
@@ -1750,21 +2540,13 @@ msgstr "ssh설정 분석"
 msgid "Command for start/stop services (gksudo, etc):"
 msgstr "시작/종료 서비스용 명령(gksudo, 기타):"
 
-#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:72
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:71
 msgid "..."
 msgstr "..."
 
-#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:87
+#: ../SystemServices/gtk-gui/SystemServices.SystemServicesConfig.cs:86
 msgid "Services to control:"
 msgstr "제어할 서비스:"
-
-#: ../SystemServices/src/ServiceItemSource.cs:39
-msgid "System Services"
-msgstr "시스템 서비스"
-
-#: ../SystemServices/src/ServiceItemSource.cs:43
-msgid "List of all System Services"
-msgstr "모든 시스템 서비스의 목록"
 
 #: ../SystemServices/src/Service.cs:46
 #, csharp-format
@@ -1776,21 +2558,29 @@ msgstr "{0} 서비스"
 msgid "Control system {0} service"
 msgstr "{0} 시스템 서비스 제어"
 
-#: ../SystemServices/src/SystemServicesConfig.cs:71
+#: ../SystemServices/src/ServiceItemSource.cs:39
+msgid "System Services"
+msgstr "시스템 서비스"
+
+#: ../SystemServices/src/ServiceItemSource.cs:43
+msgid "List of all System Services"
+msgstr "모든 시스템 서비스의 목록"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:72
 msgid "Choose the file to open"
 msgstr "파일 열기 선택"
 
-#: ../SystemServices/src/SystemServicesConfig.cs:88
+#: ../SystemServices/src/SystemServicesConfig.cs:74
+msgid "Cancel"
+msgstr "취소"
+
+#: ../SystemServices/src/SystemServicesConfig.cs:89
 msgid ""
 "Selected invalid file!\n"
 "Should be executable."
 msgstr ""
 "선택된 보이는 파일!\n"
 "실행가능해야 합니다."
-
-#: ../Tasque/src/TasqueCategoryItem.cs:47
-msgid "Category"
-msgstr "분류"
 
 #: ../Tasque/src/TasqueAction.cs:42
 msgid "Create a new task"
@@ -1799,6 +2589,10 @@ msgstr "새로운 작업 만들기"
 #: ../Tasque/src/TasqueAction.cs:46
 msgid "Create a new task in Tasque"
 msgstr "Tasque에서 새로운 작업 만들기"
+
+#: ../Tasque/src/TasqueCategoryItem.cs:47
+msgid "Category"
+msgstr "분류"
 
 #: ../Text/src/AppendTextAction.cs:34
 msgid "Append to..."
@@ -1847,8 +2641,8 @@ msgid "Create a new Tomboy note."
 msgstr "새 톰보이 노트 만들기."
 
 #: ../Tomboy/src/NotesItemSource.cs:56
-msgid "Tomboy Note Indexer"
-msgstr "톰보이 노트 색인 작성자"
+msgid "Tomboy Notes"
+msgstr ""
 
 #: ../Tomboy/src/NotesItemSource.cs:60
 msgid "Loads Tomboy notes for searching."
@@ -1862,55 +2656,55 @@ msgstr "톰보이 노트 검색"
 msgid "Searches contents of Tomboy notes."
 msgstr "톰보이 노트의 내용 검색."
 
+#: ../Tomboy/src/TomboyBrowseNotesItem.cs:31
+msgid "Notes"
+msgstr ""
+
+#: ../Tomboy/src/TomboyBrowseNotesItem.cs:35
+msgid "Browse Tomboy Notes"
+msgstr ""
+
 #: ../Tomboy/src/TomboyItem.cs:50
 msgid "Tomboy note"
 msgstr "톰보이 노트"
 
-#: ../Tracker/src/TrackerSearch.cs:38
+#: ../Tracker/src/TrackerSearchAction.cs:17
 msgid "Search with Tracker"
 msgstr "트랙커를 이용해서 검색"
 
-#: ../Tracker/src/TrackerSearch.cs:42
+#: ../Tracker/src/TrackerSearchAction.cs:21
 msgid "Launches Tracker with the given query."
 msgstr "주어진 질의로 트랙커 실행"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:58
-msgid "Translation Plugin Options"
-msgstr "번역 플리그인 선택사항"
-
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:71
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:74
 msgid "Translation Provider"
 msgstr "번역 제공자"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:99
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:101
 msgid "Default Source Language"
 msgstr "기본 원래 언어"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:126
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:128
 msgid "Default Web Interface Language"
 msgstr "기본 웹출력 언어"
 
-#: ../Translate/gtk-gui/Translate.ConfigUI.cs:153
-msgid "Enable / Disable Language"
-msgstr "언어 활성화/비활성화"
-
-#: ../Translate/src/TranslateAction.cs:58
-msgid "Translate"
-msgstr "번역하다"
-
-#: ../Translate/src/TranslateAction.cs:66
-msgid "Translates text"
-msgstr "내용 번역"
-
-#: ../Translate/src/UI/ConfigUI.cs:128
-msgid "Auto Detect (Recommended)"
-msgstr "자동 검출(추천)"
+#: ../Translate/gtk-gui/Translate.ConfigUI.cs:151
+msgid "Supported Languages"
+msgstr ""
 
 #: ../Translate/src/Provider/Google.cs:35
+msgid "Albanian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:36
+msgid "Translate to Albanian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:37
 msgid "Arabic"
 msgstr "아라비아어"
 
-#: ../Translate/src/Provider/Google.cs:36
+#: ../Translate/src/Provider/Google.cs:38
 msgid "Translate to Arabic"
 msgstr "아라비아어로 번역"
 
@@ -1922,293 +2716,337 @@ msgstr "불가리아어"
 msgid "Translate to Bulgarian"
 msgstr "불가리아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:43
+#: ../Translate/src/Provider/Google.cs:41
 msgid "Catalon"
 msgstr "카탈로니아"
 
-#: ../Translate/src/Provider/Google.cs:44
+#: ../Translate/src/Provider/Google.cs:42
 msgid "Translate to Catalon"
 msgstr "카탈로니아로 번역"
 
-#: ../Translate/src/Provider/Google.cs:47
-msgid "Chinese (Simplified)"
-msgstr "중국어(간체)"
+#: ../Translate/src/Provider/Google.cs:43
+msgid "Chinese"
+msgstr ""
 
-#: ../Translate/src/Provider/Google.cs:48
-msgid "Translate to Chinese (Simplified)"
-msgstr "중국어(간체)로 번역"
+#: ../Translate/src/Provider/Google.cs:44
+msgid "Translate to Chinese"
+msgstr ""
 
-#: ../Translate/src/Provider/Google.cs:51
-msgid "Chinese (Traditional)"
-msgstr "중국어(번체)"
-
-#: ../Translate/src/Provider/Google.cs:52
-msgid "Translate to Chinese (Traditional)"
-msgstr "중국어(번체)로 번역"
-
-#: ../Translate/src/Provider/Google.cs:55
+#: ../Translate/src/Provider/Google.cs:45
 msgid "Croatian"
 msgstr "크로아티아어"
 
-#: ../Translate/src/Provider/Google.cs:56
+#: ../Translate/src/Provider/Google.cs:46
 msgid "Translate to Croatian"
 msgstr "크로아티아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:59
+#: ../Translate/src/Provider/Google.cs:47
 msgid "Czech"
 msgstr "체코어"
 
-#: ../Translate/src/Provider/Google.cs:60
+#: ../Translate/src/Provider/Google.cs:48
 msgid "Translate to Czech"
 msgstr "체코어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:63
+#: ../Translate/src/Provider/Google.cs:49
 msgid "Danish"
 msgstr "덴마크어"
 
-#: ../Translate/src/Provider/Google.cs:64
+#: ../Translate/src/Provider/Google.cs:50
 msgid "Translate to Danish"
 msgstr "덴마크어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:67
+#: ../Translate/src/Provider/Google.cs:51
 msgid "Dutch"
 msgstr "네덜란드어"
 
-#: ../Translate/src/Provider/Google.cs:68
+#: ../Translate/src/Provider/Google.cs:52
 msgid "Translate to Dutch"
 msgstr "네덜란드어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:71
+#: ../Translate/src/Provider/Google.cs:53
 msgid "English"
 msgstr "영어"
 
-#: ../Translate/src/Provider/Google.cs:72
+#: ../Translate/src/Provider/Google.cs:54
 msgid "Translate to English"
 msgstr "영어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:75
+#: ../Translate/src/Provider/Google.cs:55
+msgid "Estonian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:56
+msgid "Translate to Estonian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:57
 msgid "Filipino"
 msgstr "필리핀어"
 
-#: ../Translate/src/Provider/Google.cs:76
+#: ../Translate/src/Provider/Google.cs:58
 msgid "Translate to Filipino"
 msgstr "필리핀어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:79
+#: ../Translate/src/Provider/Google.cs:59
 msgid "Finnish"
 msgstr "핀란드어"
 
-#: ../Translate/src/Provider/Google.cs:80
+#: ../Translate/src/Provider/Google.cs:60
 msgid "Translate to Finnish"
 msgstr "핀란드어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:83
+#: ../Translate/src/Provider/Google.cs:61
 msgid "French"
 msgstr "프랑스어"
 
-#: ../Translate/src/Provider/Google.cs:84
+#: ../Translate/src/Provider/Google.cs:62
 msgid "Translate to French"
 msgstr "프랑스어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:87
+#: ../Translate/src/Provider/Google.cs:63
+msgid "Galician"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:64
+msgid "Translate to Galician"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:65
 msgid "German"
 msgstr "독일어"
 
-#: ../Translate/src/Provider/Google.cs:88
+#: ../Translate/src/Provider/Google.cs:66
 msgid "Translate to German"
 msgstr "독일어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:91
+#: ../Translate/src/Provider/Google.cs:67
 msgid "Greek"
 msgstr "그리스어"
 
-#: ../Translate/src/Provider/Google.cs:92
+#: ../Translate/src/Provider/Google.cs:68
 msgid "Translate to Greek"
 msgstr "그리스어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:95
+#: ../Translate/src/Provider/Google.cs:69
 msgid "Hebrew"
 msgstr "히브리어"
 
-#: ../Translate/src/Provider/Google.cs:96
+#: ../Translate/src/Provider/Google.cs:70
 msgid "Translate to Hebrew"
 msgstr "히브리어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:99
+#: ../Translate/src/Provider/Google.cs:71
 msgid "Hindi"
 msgstr "힌디어"
 
-#: ../Translate/src/Provider/Google.cs:100
+#: ../Translate/src/Provider/Google.cs:72
 msgid "Translate to Hindi"
 msgstr "힌디어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:103
+#: ../Translate/src/Provider/Google.cs:73
+msgid "Hungarian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:74
+msgid "Translate to Hungarian"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:75
 msgid "Indonesian"
 msgstr "인도네시아어"
 
-#: ../Translate/src/Provider/Google.cs:104
+#: ../Translate/src/Provider/Google.cs:76
 msgid "Translate to Indonesian"
 msgstr "인도네시아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:107
+#: ../Translate/src/Provider/Google.cs:77
 msgid "Italian"
 msgstr "이탈리아어"
 
-#: ../Translate/src/Provider/Google.cs:108
+#: ../Translate/src/Provider/Google.cs:78
 msgid "Translate to Italian"
 msgstr "이탈리아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:111
+#: ../Translate/src/Provider/Google.cs:79
 msgid "Japanese"
 msgstr "일본어"
 
-#: ../Translate/src/Provider/Google.cs:112
+#: ../Translate/src/Provider/Google.cs:80
 msgid "Translate to Japanese"
 msgstr "일본어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:115
+#: ../Translate/src/Provider/Google.cs:81
 msgid "Korean"
 msgstr "한국어"
 
-#: ../Translate/src/Provider/Google.cs:116
+#: ../Translate/src/Provider/Google.cs:82
 msgid "Translate to Korean"
 msgstr "한국어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:119
+#: ../Translate/src/Provider/Google.cs:83
 msgid "Latvian"
 msgstr "라트비아어"
 
-#: ../Translate/src/Provider/Google.cs:120
+#: ../Translate/src/Provider/Google.cs:84
 msgid "Translate to Latvian"
 msgstr "라트비아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:123
+#: ../Translate/src/Provider/Google.cs:85
 msgid "Lithuanian"
 msgstr "리투아니아어"
 
-#: ../Translate/src/Provider/Google.cs:124
+#: ../Translate/src/Provider/Google.cs:86
 msgid "Translate to Lithuanian"
 msgstr "리투아니아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:127
+#: ../Translate/src/Provider/Google.cs:87
+msgid "Maltese"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:88
+msgid "Translate to Maltese"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:89
 msgid "Norwegian"
 msgstr "노르웨이어"
 
-#: ../Translate/src/Provider/Google.cs:128
+#: ../Translate/src/Provider/Google.cs:90
 msgid "Translate to Norwegian"
 msgstr "노르웨이어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:131
+#: ../Translate/src/Provider/Google.cs:91
 msgid "Polish"
 msgstr "폴란드어"
 
-#: ../Translate/src/Provider/Google.cs:132
+#: ../Translate/src/Provider/Google.cs:92
 msgid "Translate to Polish"
 msgstr "폴란드어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:135
+#: ../Translate/src/Provider/Google.cs:93
 msgid "Portuguese"
 msgstr "포르투갈어"
 
-#: ../Translate/src/Provider/Google.cs:136
+#: ../Translate/src/Provider/Google.cs:94
 msgid "Translate to Portuguese"
 msgstr "포르투갈어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:139
+#: ../Translate/src/Provider/Google.cs:95
 msgid "Romanian"
 msgstr "루마니아어"
 
-#: ../Translate/src/Provider/Google.cs:140
+#: ../Translate/src/Provider/Google.cs:96
 msgid "Translate to Romanian"
 msgstr "루마니아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:143
+#: ../Translate/src/Provider/Google.cs:97
 msgid "Russian"
 msgstr "러시아어"
 
-#: ../Translate/src/Provider/Google.cs:144
+#: ../Translate/src/Provider/Google.cs:98
 msgid "Translate to Russian"
 msgstr "러시아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:147
+#: ../Translate/src/Provider/Google.cs:99
 msgid "Serbian"
 msgstr "세르비아어"
 
-#: ../Translate/src/Provider/Google.cs:148
+#: ../Translate/src/Provider/Google.cs:100
 msgid "Translate to Serbian"
 msgstr "세르비아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:151
+#: ../Translate/src/Provider/Google.cs:101
 msgid "Slovak"
 msgstr "슬로바키아어"
 
-#: ../Translate/src/Provider/Google.cs:152
+#: ../Translate/src/Provider/Google.cs:102
 msgid "Translate to Slovak"
 msgstr "슬로바키아어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:155
+#: ../Translate/src/Provider/Google.cs:103
 msgid "Slovenian"
 msgstr "슬로베니아족어"
 
-#: ../Translate/src/Provider/Google.cs:156
+#: ../Translate/src/Provider/Google.cs:104
 msgid "Translate to Slovenian"
 msgstr "슬로베니아족어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:159
+#: ../Translate/src/Provider/Google.cs:105
 msgid "Spanish"
 msgstr "스페인어"
 
-#: ../Translate/src/Provider/Google.cs:160
+#: ../Translate/src/Provider/Google.cs:106
 msgid "Translate to Spanish"
 msgstr "스페인어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:163
+#: ../Translate/src/Provider/Google.cs:107
 msgid "Swedish"
 msgstr "스웨덴어"
 
-#: ../Translate/src/Provider/Google.cs:164
+#: ../Translate/src/Provider/Google.cs:108
 msgid "Translate to Swedish"
 msgstr "스웨덴어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:167
+#: ../Translate/src/Provider/Google.cs:109
+msgid "Thai"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:110
+msgid "Translate to Thai"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:111
+msgid "Turkish"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:112
+msgid "Translate to Turkish"
+msgstr ""
+
+#: ../Translate/src/Provider/Google.cs:113
 msgid "Ukranian"
 msgstr "우크라이나어"
 
-#: ../Translate/src/Provider/Google.cs:168
+#: ../Translate/src/Provider/Google.cs:114
 msgid "Translate to Ukranian"
 msgstr "우크라이나어로 번역"
 
-#: ../Translate/src/Provider/Google.cs:171
+#: ../Translate/src/Provider/Google.cs:115
 msgid "Vietnamese"
 msgstr "베트남어"
 
-#: ../Translate/src/Provider/Google.cs:172
+#: ../Translate/src/Provider/Google.cs:116
 msgid "Translate to Vietnamese"
 msgstr "베트남어로 번역"
 
-#: ../Vinagre/src/VNCHostSource.cs:39
-msgid "Vinagre Bookmarks"
-msgstr "Vinagre 서표"
+#: ../Translate/src/TranslateAction.cs:58
+msgid "Translate"
+msgstr "번역하다"
 
-#: ../Vinagre/src/VNCHostSource.cs:43
-msgid "Indexes your Vinagre Bookmarks"
-msgstr "Vinagre 서표 색인"
+#: ../Translate/src/TranslateAction.cs:66
+msgid "Translates text"
+msgstr "내용 번역"
 
-#: ../Vinagre/src/Vinagre.cs:32 ../Vinagre/src/Vinagre.cs:36
+#: ../Translate/src/UI/ConfigUI.cs:130
+msgid "Auto Detect (Recommended)"
+msgstr "자동 검출(추천)"
+
+#: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:35
+msgid "Browse Vinagre Bookmarks"
+msgstr ""
+
+#: ../Vinagre/src/Vinagre.cs:36 ../Vinagre/src/Vinagre.cs:40
 msgid "Connect with VNC"
 msgstr "VNC를 이용해서 연결"
 
-#: ../VirtualBox/src/SaveStateAction.cs:40
-msgid "Take Snapshot"
-msgstr "화면 갈무리 하기"
+#: ../Vinagre/src/VNCHostSource.cs:44
+msgid "Vinagre Bookmarks"
+msgstr "Vinagre 서표"
 
-#: ../VirtualBox/src/SaveStateAction.cs:44
-msgid "Save the current state as a Snapshot"
-msgstr "현재상태를 갈무리처럼 저장"
-
-#: ../VirtualBox/src/SaveStateAction.cs:98
-msgid "Snapshot ("
-msgstr "갈무리 ("
+#: ../Vinagre/src/VNCHostSource.cs:48
+msgid "Indexes your Vinagre Bookmarks"
+msgstr "Vinagre 서표 색인"
 
 #: ../VirtualBox/src/OffAction.cs:40
 msgid "Power Off Virtual Machine"
@@ -2236,6 +3074,14 @@ msgstr "가상머신 중지"
 msgid "Pauses the selected Virtual Machine"
 msgstr "선택된 가상머신 중지"
 
+#: ../VirtualBox/src/ResumeAction.cs:39
+msgid "Resume Virtual Machine"
+msgstr "가상머신 계속진행"
+
+#: ../VirtualBox/src/ResumeAction.cs:43
+msgid "Resume the selected Virtual Machine"
+msgstr "선택된 가상머신 계속진행"
+
 #: ../VirtualBox/src/SaveAction.cs:39
 msgid "Save Virtual Machine State"
 msgstr "가상머신 상태 저장"
@@ -2244,13 +3090,17 @@ msgstr "가상머신 상태 저장"
 msgid "Saves the state of the selected Virtual Machine"
 msgstr "선택된 가상머신의 상태 저장"
 
-#: ../VirtualBox/src/VMItemSource.cs:38
-msgid "VirtualBox VMs"
-msgstr "VirtualBOX VMs"
+#: ../VirtualBox/src/SaveStateAction.cs:40
+msgid "Take Snapshot"
+msgstr "화면 갈무리 하기"
 
-#: ../VirtualBox/src/VMItemSource.cs:39
-msgid "Virtual Machines created with VirtualBox"
-msgstr "VirtualBox로 만들어진 가상머신"
+#: ../VirtualBox/src/SaveStateAction.cs:44
+msgid "Save the current state as a Snapshot"
+msgstr "현재상태를 갈무리처럼 저장"
+
+#: ../VirtualBox/src/SaveStateAction.cs:98
+msgid "Snapshot ("
+msgstr "갈무리 ("
 
 #: ../VirtualBox/src/StartAction.cs:40
 msgid "Start Virtual Machine"
@@ -2276,29 +3126,25 @@ msgstr "Headless 시작"
 msgid "Start in Headless mode"
 msgstr "Headless모드로 시작"
 
-#: ../VirtualBox/src/ResumeAction.cs:39
-msgid "Resume Virtual Machine"
-msgstr "가상머신 계속진행"
+#: ../VirtualBox/src/VBoxBrowseVMSItem.cs:31
+msgid "Virtual Machines"
+msgstr ""
 
-#: ../VirtualBox/src/ResumeAction.cs:43
-msgid "Resume the selected Virtual Machine"
-msgstr "선택된 가상머신 계속진행"
+#: ../VirtualBox/src/VBoxBrowseVMSItem.cs:35
+msgid "Browse Virtual Machines"
+msgstr ""
+
+#: ../VirtualBox/src/VMItemSource.cs:41
+msgid "VirtualBox VMs"
+msgstr "VirtualBOX VMs"
+
+#: ../VirtualBox/src/VMItemSource.cs:47
+msgid "Virtual Machines created with VirtualBox"
+msgstr "VirtualBox로 만들어진 가상머신"
 
 #: ../VolumeControl/src/VolumeDownItem.cs:35
 msgid "Decrease system volume"
 msgstr "시스템 소리 낮춤"
-
-#: ../VolumeControl/src/VolumeUpItem.cs:35
-msgid "Increase system volume"
-msgstr "시스템 소리 높임"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:31
-msgid "Mute Volume"
-msgstr "음소거"
-
-#: ../VolumeControl/src/VolumeMuteItem.cs:35
-msgid "Mute system volume"
-msgstr "시스템 음소거"
 
 #: ../VolumeControl/src/VolumeItemSource.cs:39
 msgid "Volume Actions"
@@ -2308,6 +3154,22 @@ msgstr "소리 높낮이 동작"
 msgid "Adjust your system volume"
 msgstr "시스템 소리크기 조정"
 
+#: ../VolumeControl/src/VolumeMaximizeItem.cs:31
+msgid "Maximize Volume"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeMaximizeItem.cs:35
+msgid "Maximize system volume"
+msgstr ""
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:31
+msgid "Mute Volume"
+msgstr "음소거"
+
+#: ../VolumeControl/src/VolumeMuteItem.cs:35
+msgid "Mute system volume"
+msgstr "시스템 음소거"
+
 #: ../VolumeControl/src/VolumeUnmuteItem.cs:32
 msgid "Unmute Volume"
 msgstr "음소거 해제"
@@ -2316,121 +3178,144 @@ msgstr "음소거 해제"
 msgid "Unmute system volume"
 msgstr "시스템 음소거 해제"
 
-#: ../WindowManager/src/WindowListAction.cs:65
-msgid "Action Window"
-msgstr "활성창"
+#: ../VolumeControl/src/VolumeUpItem.cs:35
+msgid "Increase system volume"
+msgstr "시스템 소리 높임"
 
-#: ../WindowManager/src/WindowListAction.cs:69
-msgid "Action a Window."
-msgstr "활성창"
-
-#: ../WindowManager/src/WindowListAction.cs:190
-msgid "Maximize"
-msgstr "최대화"
-
-#: ../WindowManager/src/WindowListAction.cs:194
-msgid "Make a window consume the whole screen"
-msgstr "전화화면으로 창 만들기"
-
-#: ../WindowManager/src/WindowListAction.cs:217
-msgid "Minimize/Restore"
-msgstr "최소화/복구"
-
-#: ../WindowManager/src/WindowListAction.cs:221
-msgid "Minimize/Restore a Window"
-msgstr "창을 최소화/복구"
-
-#: ../WindowManager/src/WindowListAction.cs:242
-msgid "Close All"
-msgstr "모두 닫기"
-
-#: ../WindowManager/src/WindowListAction.cs:246
-msgid "Close your current window."
-msgstr "현재창 닫기"
-
-#: ../WindowManager/src/ScreenListAction.cs:277
-msgid "Tile Windows"
-msgstr "타일식 창"
-
-#: ../WindowManager/src/ScreenListAction.cs:281
-msgid "Tile All Windows in Current Viewport"
-msgstr "현재 뷰포트에 모든창 타일형태로"
-
-#: ../WindowManager/src/ScreenListAction.cs:346
-msgid "Cascade Windows"
-msgstr "캐스케이드식 창"
-
-#: ../WindowManager/src/ScreenListAction.cs:350
-msgid "Cascade your Windows"
-msgstr "캐스케이드 창"
-
-#: ../WindowManager/src/ScreenListAction.cs:404
-msgid "Restore Windows"
-msgstr "창 복구"
-
-#: ../WindowManager/src/ScreenListAction.cs:408
-msgid "Restore Windows to their Previous Positions"
-msgstr "이전위치에서 창 복구"
-
-#: ../WindowManager/src/ScreenItemSource.cs:37
-msgid "Window Screen Items"
-msgstr "창의 화면 항목"
-
-#: ../WindowManager/src/ScreenItemSource.cs:43
-msgid "Actions you can do to your screens."
-msgstr "화면에서 할 수 있는 동작"
-
-#: ../WindowManager/src/ScreenItemSource.cs:65
-msgid "Current Desktop"
-msgstr "현재 바탕화면"
-
-#: ../WindowManager/src/ScreenItemSource.cs:66
-msgid "Everything on the Current Desktop"
-msgstr "현재 바탕화면의 모든것"
-
-#: ../WindowManager/src/WindowItemSource.cs:38
-msgid "Generic Window Items"
-msgstr "일반적인 창 항목"
-
-#: ../WindowManager/src/WindowItemSource.cs:44
-msgid "Useful Generically Understood Window Items"
-msgstr "유용하고 일반적으로 이해하기 쉬운 창 항목"
-
-#: ../WindowManager/src/WindowItemSource.cs:71
-msgid "Current Window"
-msgstr "현재 창"
-
-#: ../WindowManager/src/WindowItemSource.cs:72
-msgid "The Currently Active Window"
-msgstr "현재 활성 창"
-
-#: ../WindowManager/src/WindowItemSource.cs:75
+#: ../WindowManager/src/CurrentApplicationItem.cs:34
 msgid "Current Application"
 msgstr "현재 프로그램"
 
-#: ../WindowManager/src/WindowItemSource.cs:76
-msgid "The Currently Active Application"
-msgstr "현재 동작중인 프로그램"
+#: ../WindowManager/src/CurrentApplicationItem.cs:40
+msgid "Current Focused Application"
+msgstr ""
 
-#: ../WindowManager/src/WindowItemSource.cs:79
-msgid "Previous Window"
-msgstr "이전 창"
+#: ../WindowManager/src/CurrentWindowItem.cs:34
+msgid "Current Window"
+msgstr "현재 창"
 
-#: ../WindowManager/src/WindowItemSource.cs:80
-msgid "The Previously Active Window"
-msgstr "이전 활성 창"
+#: ../WindowManager/src/CurrentWindowItem.cs:40
+msgid "Current Focused Window"
+msgstr ""
 
-#: ../WindowManager/src/WindowItemSource.cs:83
-msgid "Previous Application"
-msgstr "이전 프로그램"
+#: ../WindowManager/src/Screen/CurrentScreenItem.cs:34
+msgid "Current Desktop"
+msgstr "현재 바탕화면"
 
-#: ../WindowManager/src/WindowItemSource.cs:84
-msgid "The Previously Active Application"
-msgstr "이전에 동작중인 프로그램"
+#: ../WindowManager/src/Screen/CurrentScreenItem.cs:40
+msgid "Everything on the Current Desktop"
+msgstr "현재 바탕화면의 모든것"
 
-#: ../Zim/src/ZimPage.cs:38
-msgid "Zim page in notebook: "
-msgstr "노트북의 Zim페이지: "
+#: ../WindowManager/src/Screen/ScreenCascadeAction.cs:37
+msgid "Cascade Windows"
+msgstr "캐스케이드식 창"
+
+#: ../WindowManager/src/Screen/ScreenCascadeAction.cs:41
+msgid "Cascade your Windows"
+msgstr "캐스케이드 창"
+
+#: ../WindowManager/src/Screen/ScreenItemSource.cs:38
+msgid "Window Screen Items"
+msgstr "창의 화면 항목"
+
+#: ../WindowManager/src/Screen/ScreenItemSource.cs:44
+msgid "Screens and viewports on your desktop."
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenRestoreAction.cs:41
+msgid "Restore Windows"
+msgstr "창 복구"
+
+#: ../WindowManager/src/Screen/ScreenRestoreAction.cs:45
+msgid "Restore Windows to their Previous Positions"
+msgstr "이전위치에서 창 복구"
+
+#: ../WindowManager/src/Screen/ScreenSwapAction.cs:38
+msgid "Swap With..."
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenSwapAction.cs:42
+msgid "Swap all windows on desktops"
+msgstr ""
+
+#: ../WindowManager/src/Screen/ScreenTileAction.cs:35
+msgid "Tile Windows"
+msgstr "타일식 창"
+
+#: ../WindowManager/src/Screen/ScreenTileAction.cs:39
+msgid "Tile All Windows in a Viewport"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowCloseAction.cs:34
+msgid "Close"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowCloseAction.cs:38
+msgid "Close selected windows."
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowFocusAction.cs:34
+msgid "Focus"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowFocusAction.cs:38
+msgid "Focus selected windows."
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMaximizeAction.cs:33
+msgid "(Un)Maximize"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMaximizeAction.cs:37
+msgid "Make a window consume the whole screen or revert to its normal size"
+msgstr ""
+
+#: ../WindowManager/src/WindowActions/WindowMinimizeAction.cs:35
+msgid "Minimize/Restore"
+msgstr "최소화/복구"
+
+#: ../WindowManager/src/WindowActions/WindowMinimizeAction.cs:39
+msgid "Minimize/Restore a Window"
+msgstr "창을 최소화/복구"
+
+#: ../WindowManager/src/WindowItemSource.cs:41
+msgid "Generic Window Items"
+msgstr "일반적인 창 항목"
+
+#: ../WindowManager/src/WindowItemSource.cs:47
+msgid "Useful Generically Understood Window Items"
+msgstr "유용하고 일반적으로 이해하기 쉬운 창 항목"
+
+#: ../WindowManager/src/Wink/ScreenUtils.cs:33
+msgid "Desktop"
+msgstr ""
+
+#: ../XRandR/src/OutputItem.cs:53 ../XRandR/src/OutputModeItem.cs:55
+#: ../XRandR/src/XRandRItemSource.cs:46
+msgid "Set your resolution"
+msgstr ""
+
+#: ../XRandR/src/OutputItem.cs:54
+msgid "Not connected"
+msgstr ""
+
+#: ../XRandR/src/XRandRItemSource.cs:42
+msgid "Displays"
+msgstr ""
+
+#: ../XRandR/src/XRandRItemSource.cs:74
+msgid "Off"
+msgstr ""
+
+#: ../YouTube/src/Youtube.cs:38
+msgid "An error occurred connecting to YouTube, are your credentials valid?"
+msgstr ""
+
+#: ../YouTube/src/Youtube.cs:41
+msgid ""
+"Missing login credentials. Please set login information in YouTube plugin "
+"configuration."
+msgstr ""
 
 #: ../Zim/src/ZimNewPageAction.cs:37
 msgid "New Zim page"
@@ -2448,6 +3333,10 @@ msgstr "Zim페이지 열기"
 msgid "Open selected page in Zim"
 msgstr "Zim에서 선택된 페이지 열기"
 
+#: ../Zim/src/ZimPage.cs:38
+msgid "Zim page in notebook: "
+msgstr "노트북의 Zim페이지: "
+
 #: ../Zim/src/ZimPagesItemSource.cs:38
 msgid "Zim pages"
 msgstr "Zim페이지"
@@ -2455,3 +3344,178 @@ msgstr "Zim페이지"
 #: ../Zim/src/ZimPagesItemSource.cs:42
 msgid "Zim Desktop Wiki pages"
 msgstr "Zim 바탕화면 위치 화면"
+
+#~ msgid "Organizes your del.icio.bookmarks by tag"
+#~ msgstr "꼬리표로 del.icio.us 서표 작성"
+
+#~ msgid "Unmount volume"
+#~ msgstr "마운트된 볼륨 해제"
+
+#~ msgid "Address"
+#~ msgstr "주소"
+
+#~ msgid "Mobile Phone"
+#~ msgstr "휴대 전화"
+
+#~ msgid "Evolution Contacts"
+#~ msgstr "Evolution 연락처"
+
+#~ msgid "Choose folder"
+#~ msgstr "폴더 선택"
+
+#~ msgid "Finds Firefox bookmarks in your default profile."
+#~ msgstr "기본프로파일에서 불여우 서표 검색"
+
+#~ msgid "Firefox Bookmarks"
+#~ msgstr "불여우 서표"
+
+#~ msgid "Opens a GNOME Terminal with the selected profile."
+#~ msgstr "선택된 프로파일로 그놈 터미넝 열기"
+
+#~ msgid "Open Profile"
+#~ msgstr "프로파일 열기"
+
+#~ msgid "ImageShack exception: "
+#~ msgstr "ImageShack 예외 발생: "
+
+#~ msgid "Parsed url was empty. ImageShack has probably changed its format."
+#~ msgstr "분석된 url이 비어있음.  아마도 ImageShack이 형식을 바꿨을것이다."
+
+#~ msgid "Search and read help documentation (man)"
+#~ msgstr "도움말을 검색하고 읽음(man)"
+
+#~ msgid "Manual pages (man)"
+#~ msgstr "도움말(man)"
+
+#, csharp-format
+#~ msgid "'{0}' sucessfully posted to {1}"
+#~ msgstr "'{0}'을 {1}로 보내기 성공"
+
+#~ msgid "Indexes your Opera 6 bookmarks"
+#~ msgstr "오페라 6 서표를 색인"
+
+#~ msgid "The Previously Active Application"
+#~ msgstr "이전에 동작중인 프로그램"
+
+#~ msgid "Previous Application"
+#~ msgstr "이전 프로그램"
+
+#~ msgid "The Currently Active Application"
+#~ msgstr "현재 동작중인 프로그램"
+
+#~ msgid "Web service supported by Ping.FM"
+#~ msgstr "Ping.FM으로 웹서비스 지원됨"
+
+#~ msgid "Web service group supported by Ping.FM"
+#~ msgstr "Ping.FM으로 웹서비스그룹 지원됨"
+
+#~ msgid "For overdue task(s)"
+#~ msgstr "작업 기한이 지났음"
+
+#~ msgid "When actions (e.g. rename) are completed"
+#~ msgstr "동작이 완료되었을때"
+
+#~ msgid "<b>Notification</b>"
+#~ msgstr "<b>통지</b>"
+
+#~ msgid "Delete a selected task from Remember The Milk"
+#~ msgstr "Remember The Milk에서 선택된 작업 삭제"
+
+#~ msgid "Move a seleted task from one list to another"
+#~ msgstr "선택된 작업을 다른곳으로 옮김"
+
+#~ msgid "Set the due date/time of a task"
+#~ msgstr "작업의 기한 설정"
+
+#~ msgid "Rename to..."
+#~ msgstr "다른 이름으로 변경..."
+
+#~ msgid "Sets a recurrence pattern for a task."
+#~ msgstr "작업에 반복패턴 설정"
+
+#~ msgid "Complete a selected task"
+#~ msgstr "선택된 작업 완료"
+
+#~ msgid "Set the priority of a task"
+#~ msgstr "작업의 우선순위 설정"
+
+#~ msgid "Play Next Track in Rhythmbox"
+#~ msgstr "리듬박스에서 다음노래 재생"
+
+#~ msgid "Pause Rhythmbox Playback"
+#~ msgstr "리듬박스 재생기 중지"
+
+#~ msgid "Play Current Track in Rhythmbox"
+#~ msgstr "리듬박스에서 현재 노래 재생"
+
+#~ msgid "Mark a selected task as \"incomplete\"."
+#~ msgstr "선택된 작업을 \"미완료\"으로 표시"
+
+#~ msgid "Play Previous Track in Rhythmbox"
+#~ msgstr "리듬박스에서 이전노래 재생"
+
+#~ msgid "Shelf Items"
+#~ msgstr "셜프 항목"
+
+#~ msgid "Add Selected Item to Shelf"
+#~ msgstr "셜프에 선택된 항목 추가"
+
+#~ msgid "Your Shelf Items"
+#~ msgstr "내 셜프 항목"
+
+#~ msgid "Default"
+#~ msgstr "기본"
+
+#~ msgid "Tomboy Note Indexer"
+#~ msgstr "톰보이 노트 색인 작성자"
+
+#~ msgid "Translation Plugin Options"
+#~ msgstr "번역 플리그인 선택사항"
+
+#~ msgid "Enable / Disable Language"
+#~ msgstr "언어 활성화/비활성화"
+
+#~ msgid "Translate to Chinese (Traditional)"
+#~ msgstr "중국어(번체)로 번역"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "중국어(간체)"
+
+#~ msgid "Translate to Chinese (Simplified)"
+#~ msgstr "중국어(간체)로 번역"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "중국어(번체)"
+
+#~ msgid "Make a window consume the whole screen"
+#~ msgstr "전화화면으로 창 만들기"
+
+#~ msgid "Action Window"
+#~ msgstr "활성창"
+
+#~ msgid "Action a Window."
+#~ msgstr "활성창"
+
+#~ msgid "Maximize"
+#~ msgstr "최대화"
+
+#~ msgid "Close All"
+#~ msgstr "모두 닫기"
+
+#~ msgid "Close your current window."
+#~ msgstr "현재창 닫기"
+
+#~ msgid "Actions you can do to your screens."
+#~ msgstr "화면에서 할 수 있는 동작"
+
+#~ msgid "Tile All Windows in Current Viewport"
+#~ msgstr "현재 뷰포트에 모든창 타일형태로"
+
+#~ msgid "Previous Window"
+#~ msgstr "이전 창"
+
+#~ msgid "The Previously Active Window"
+#~ msgstr "이전 활성 창"
+
+#~ msgid "The Currently Active Window"
+#~ msgstr "현재 활성 창"
