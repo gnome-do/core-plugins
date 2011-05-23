@@ -88,7 +88,7 @@ namespace Flickr
 			Frob = flickr.AuthGetFrob ();
 			Services.Environment.OpenUrl (flickr.AuthCalcUrl (Frob, AuthLevel.Write));
 			Widget image = auth_btn.Image;
-			auth_btn.Label = AddinManager.CurrentLocalizer.GetString ("Click to compete authorization");
+			auth_btn.Label = AddinManager.CurrentLocalizer.GetString ("Click to complete authorization");
 			auth_btn.Image = image; 
 			auth_btn.Clicked -= new EventHandler (OnAuthBtnClicked);
 			auth_btn.Clicked += new EventHandler (OnCompleteBtnClicked);
