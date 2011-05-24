@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-05-22 18:49+1000\n"
-"PO-Revision-Date: 2011-03-15 20:44+0000\n"
-"Last-Translator: Gergely Szarka <szarka.honved@gmail.com>\n"
+"PO-Revision-Date: 2011-05-23 09:39+0000\n"
+"Last-Translator: Robert Roth <evfool@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-23 04:33+0000\n"
+"X-Launchpad-Export-Date: 2011-05-24 04:31+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../Alias/src/AliasAction.cs:36
@@ -325,7 +325,7 @@ msgstr ""
 
 #: ../Dropbox/src/DropboxAbstractAction.cs:48
 msgid "Dropbox"
-msgstr ""
+msgstr "Dropbox"
 
 #: ../Dropbox/src/DropboxLinkAction.cs:40
 msgid "Add to Dropbox..."
@@ -361,19 +361,19 @@ msgstr ""
 
 #: ../Dropbox/src/DropboxStartAction.cs:41
 msgid "Start Dropbox"
-msgstr ""
+msgstr "Dropbox elindítása"
 
 #: ../Dropbox/src/DropboxStartAction.cs:45
 msgid "Starts the Dropbox daemon."
-msgstr ""
+msgstr "Elindítja a Dropbox démont."
 
 #: ../Dropbox/src/DropboxStopAction.cs:39
 msgid "Stop Dropbox"
-msgstr ""
+msgstr "Dropbox leállítása"
 
 #: ../Dropbox/src/DropboxStopAction.cs:43
 msgid "Stops the Dropbox daemon."
-msgstr ""
+msgstr "Leállítja a Dropbox démont"
 
 #: ../Dropbox/src/DropboxUnshareAction.cs:41
 msgid "Stop sharing with Dropbox"
@@ -390,7 +390,7 @@ msgstr ""
 
 #: ../Dropbox/src/DropboxWebInterfaceAction.cs:39
 msgid "Dropbox web interface"
-msgstr ""
+msgstr "Dropbox web-felület"
 
 #: ../Dropbox/src/DropboxWebInterfaceAction.cs:43
 msgid "View folder in Dropbox web interface."
@@ -399,7 +399,7 @@ msgstr ""
 #: ../Empathy/src/EmpathyAccountActions.cs:36
 #: ../Pidgin/src/PidginAccountActions.cs:37
 msgid "Sign on"
-msgstr ""
+msgstr "Bejelentkezés"
 
 #: ../Empathy/src/EmpathyAccountActions.cs:41
 msgid "Enable empathy account"
@@ -408,7 +408,7 @@ msgstr ""
 #: ../Empathy/src/EmpathyAccountActions.cs:77
 #: ../Pidgin/src/PidginAccountActions.cs:91
 msgid "Sign off"
-msgstr ""
+msgstr "Kijelentkezés"
 
 #: ../Empathy/src/EmpathyAccountActions.cs:82
 msgid "Disable empathy account"
@@ -433,7 +433,7 @@ msgstr ""
 
 #: ../Empathy/src/EmpathyBrowseBuddyItem.cs:30
 msgid "Contacts"
-msgstr ""
+msgstr "Névjegyek"
 
 #: ../Empathy/src/EmpathyBrowseBuddyItem.cs:35
 msgid "Browse Empathy Contacts"
@@ -443,7 +443,7 @@ msgstr ""
 #: ../Pidgin/src/PidginBrowseStatusItem.cs:31
 #: ../Skype/src/SkypeBrowseStatusItem.cs:31
 msgid "Statuses"
-msgstr ""
+msgstr "Állapotok"
 
 #: ../Empathy/src/EmpathyBrowseStatusItem.cs:38
 msgid "Browse Empathy Statuses"
@@ -477,7 +477,7 @@ msgstr ""
 #: ../Empathy/src/EmpathySetStatusAction.cs:43
 #: ../Pidgin/src/PidginSetStatusAction.cs:41
 msgid "Set status"
-msgstr ""
+msgstr "Állapot beállítása"
 
 #: ../Empathy/src/EmpathySetStatusAction.cs:48
 msgid "Set empathy status message"
@@ -534,7 +534,7 @@ msgstr "Epiphany könyvjelzők indexelése"
 #: ../Firefox/src/BrowseBookmarkItem.cs:30
 #: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:31
 msgid "Bookmarks"
-msgstr ""
+msgstr "Könyvjelzők"
 
 #: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:35
 msgid "Browse Bookmarks"
@@ -559,7 +559,7 @@ msgstr ""
 #: ../Exaile/src/ExaileItems.cs:73 ../Rhythmbox/src/RhythmboxItems.cs:87
 #: ../VolumeControl/src/VolumeUpItem.cs:31
 msgid "Volume Up"
-msgstr ""
+msgstr "Hangosítás"
 
 #: ../Exaile/src/ExaileItems.cs:74
 msgid "Increase Exaile Playback Volume"
@@ -568,7 +568,7 @@ msgstr ""
 #: ../Exaile/src/ExaileItems.cs:79 ../Rhythmbox/src/RhythmboxItems.cs:93
 #: ../VolumeControl/src/VolumeDownItem.cs:31
 msgid "Volume Down"
-msgstr ""
+msgstr "Halkítás"
 
 #: ../Exaile/src/ExaileItems.cs:80
 msgid "Decrease Exaile Playback Volume"
@@ -652,7 +652,7 @@ msgstr ""
 
 #: ../File/src/Do/Do.FilesAndFolders/FileItemSource.cs:103
 msgid "Home Folder"
-msgstr ""
+msgstr "Saját mappa"
 
 #: ../File/src/Do/Do.FilesAndFolders/MoveAction.cs:37
 msgid "Move to..."
@@ -740,7 +740,7 @@ msgstr ""
 
 #: ../Firefox/src/PlacesItemSource.cs:250
 msgid "Mozilla Bookmarks"
-msgstr ""
+msgstr "Mozilla könyvjelzők"
 
 #: ../Flickr/gtk-gui/Flickr.AccountConfig.cs:67
 msgid ""
@@ -801,7 +801,7 @@ msgstr ""
 
 #: ../Flickr/gtk-gui/Flickr.UploadDialog.cs:146
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Flickr/src/AccountConfig.cs:91
 msgid "Click to compete authorization"
@@ -1357,7 +1357,7 @@ msgstr ""
 
 #: ../Microblogging/gtk-gui/Microblogging.GenConfig.cs:83
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Általános</b>"
 
 #: ../Microblogging/src/FriendItem.cs:22
 msgid "No Status"
@@ -1523,7 +1523,7 @@ msgstr ""
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:47
 msgid "Pidgin Statuses"
-msgstr ""
+msgstr "Pidgin állapotok"
 
 #: ../Pidgin/src/PidginSavedStatusItemSource.cs:51
 msgid "Saved Pidgin statuses"
@@ -1567,11 +1567,11 @@ msgstr ""
 
 #: ../PingFM/src/PingFMClient.cs:66
 msgid "Microblog"
-msgstr ""
+msgstr "Mikroblog"
 
 #: ../PingFM/src/PingFMClient.cs:68
 msgid "Status"
-msgstr ""
+msgstr "Állapot"
 
 #: ../PingFM/src/PingFMClient.cs:83
 msgid "Error occurred in service response"
@@ -1649,7 +1649,7 @@ msgstr ""
 
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:202
 msgid "minute(s)"
-msgstr ""
+msgstr "perc"
 
 #: ../RememberTheMilk/gtk-gui/RememberTheMilk.Configuration.cs:213
 msgid "Notify overdue task(s) every"
@@ -1752,43 +1752,43 @@ msgstr ""
 
 #: ../RememberTheMilk/src/RTM.cs:489
 msgid "Medium"
-msgstr ""
+msgstr "Közepes"
 
 #: ../RememberTheMilk/src/RTM.cs:490
 msgid "Medium Priority"
-msgstr ""
+msgstr "Közepes prioritás"
 
 #: ../RememberTheMilk/src/RTM.cs:491
 msgid "Low"
-msgstr ""
+msgstr "Alacsony"
 
 #: ../RememberTheMilk/src/RTM.cs:492
 msgid "Low Priority"
-msgstr ""
+msgstr "Alacsony prioritás"
 
 #: ../RememberTheMilk/src/RTM.cs:493
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 #: ../RememberTheMilk/src/RTM.cs:494
 msgid "No Priority"
-msgstr ""
+msgstr "Nincs prioritás"
 
 #: ../RememberTheMilk/src/RTM.cs:495
 msgid "Up"
-msgstr ""
+msgstr "Feljebb"
 
 #: ../RememberTheMilk/src/RTM.cs:496
 msgid "Increase the priority"
-msgstr ""
+msgstr "A prioritás növelése"
 
 #: ../RememberTheMilk/src/RTM.cs:497
 msgid "Down"
-msgstr ""
+msgstr "Lejjebb"
 
 #: ../RememberTheMilk/src/RTM.cs:498
 msgid "Decrease the priority"
-msgstr ""
+msgstr "A prioritás csökkentése"
 
 #: ../RememberTheMilk/src/RTM.cs:516
 msgid "New Task Created"
