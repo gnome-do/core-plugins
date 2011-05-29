@@ -77,7 +77,7 @@ namespace GMail
 
 					AddDetails (buddy, entry.Emails);
 					AddDetails (buddy, entry.Phonenumbers);
-					AddDetails (buddy, entry.PostalAddresses);
+//					AddDetails (buddy, entry.PostalAddresses);
 					
 					contacts.Add (buddy);
 				}
