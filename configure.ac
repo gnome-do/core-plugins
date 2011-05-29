@@ -40,6 +40,10 @@ AC_ARG_ENABLE(banshee,
 
 if test "x$enable_banshee" != "xno"; then
 	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
+	if test "x$HAVE_BANSHEE" = "xno" ; then
+	   	# Banshee renamed this lib after 2.0.
+	   	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-collection-indexer], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
+	fi
 
 	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno"; then
 		AC_MSG_ERROR([Banshee support explicitly requested but dependencies not found])
