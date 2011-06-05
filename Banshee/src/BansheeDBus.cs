@@ -23,7 +23,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 using Do.Platform;

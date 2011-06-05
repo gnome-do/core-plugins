@@ -32,6 +32,10 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+dnl -- DBus# required for Banshee and Telepathy support
+PKG_CHECK_MODULES([DBUS_SHARP], [dbus-sharp-1.0], HAVE_DBUS_SHARP=yes, HAVE_DBUS_SHARP=no)
+PKG_CHECK_MODULES([DBUS_SHARP_GLIB], [dbus-sharp-glib-1.0], HAVE_DBUS_SHARP_GLIB=yes, HAVE_DBUS_SNARP_GLIB=no)
+
 dnl {{{ check for Banshee
 AC_ARG_ENABLE(banshee, 
 	AC_HELP_STRING([--enable-banshee], [Build plugin to interact with Banshee (default: auto)]),
@@ -45,15 +49,18 @@ if test "x$enable_banshee" != "xno"; then
 	   	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-collection-indexer], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
 	fi
 
-	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno"; then
-		AC_MSG_ERROR([Banshee support explicitly requested but dependencies not found])
+	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno" -a "x$HAVE_DBUS_SHARP" = "xno" ; then
+		AC_MSG_ERROR([Banshee support explicitly requested but dependencies not found (Banshee Libs $HAVE_BANSHEE, DBus♯ $HAVE_DBUS_SHARP)])
 	fi
 fi
 
-AM_CONDITIONAL(HAVE_BANSHEE, test "x$HAVE_BANSHEE" = "xyes")
+AM_CONDITIONAL(HAVE_BANSHEE, test "x$HAVE_BANSHEE" = "xyes" -a "x$HAVE_DBUS_SHARP" = "xyes")
 
 dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
-BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
+BANSHEE_INDEXER_DLL=`$PKG_CONFIG --variable=Libraries banshee-1-collection-indexer`
+if test "x$BANSHEE_INDEXER_DLL" = "x" ; then
+   BANSHEE_INDEXER_DLL=`$PKG_CONFIG --variable=Libraries banshee-collection-indexer`
+fi
 
 AC_SUBST([BANSHEE_INDEXER_DLL])
 dnl }}}
@@ -181,12 +188,7 @@ AC_ARG_ENABLE(empathy,
 	enable_empathy=auto)
 
 if test "x$enable_empathy" != "xno"; then
-   	PKG_CHECK_MODULES([DBUS_SHARP], [dbus-sharp-1.0], HAVE_EMPATHY=yes, HAVE_EMPATHY=no)
-	if test "x$HAVE_EMPATHY" == "xyes" ; then
-		PKG_CHECK_MODULES([DBUS_SHARP_GLIB], [dbus-sharp-glib-1.0], HAVE_EMPATHY=yes, HAVE_EMPATHY=no)
-	fi
-
-	if test "x$enable_empathy" = "xyes" -a "x$HAVE_EMPATHY" = "no"; then
+	if test "x$enable_empathy" = "xyes" -a "x$HAVE_DBUS_SHARP" = "no"; then
    		AC_MSG_ERROR([Empathy plugin explicitly requested but dbus-sharp dependencies not found])
 	fi
 fi
