@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: do-plugins\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-05-22 18:49+1000\n"
-"PO-Revision-Date: 2010-04-21 03:09+0000\n"
-"Last-Translator: Jorge Hernandez-M <centrodeayuda@newportnet.com>\n"
+"PO-Revision-Date: 2011-06-08 14:34+0000\n"
+"Last-Translator: Aiguanachein <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-23 04:34+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-09 04:33+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../Alias/src/AliasAction.cs:36
 msgid "Assign Alias..."
@@ -325,7 +325,7 @@ msgstr ""
 
 #: ../Dropbox/src/DropboxAbstractAction.cs:48
 msgid "Dropbox"
-msgstr ""
+msgstr "Dropbox"
 
 #: ../Dropbox/src/DropboxLinkAction.cs:40
 msgid "Add to Dropbox..."
@@ -425,7 +425,7 @@ msgstr ""
 #: ../Empathy/src/EmpathyBrowseAccountItem.cs:31
 #: ../Pidgin/src/PidginBrowseAccountItem.cs:31
 msgid "Accounts"
-msgstr ""
+msgstr "Cuentas"
 
 #: ../Empathy/src/EmpathyBrowseAccountItem.cs:36
 msgid "Browse Empathy Accounts"
@@ -433,7 +433,7 @@ msgstr ""
 
 #: ../Empathy/src/EmpathyBrowseBuddyItem.cs:30
 msgid "Contacts"
-msgstr ""
+msgstr "Contactos"
 
 #: ../Empathy/src/EmpathyBrowseBuddyItem.cs:35
 msgid "Browse Empathy Contacts"
@@ -443,7 +443,7 @@ msgstr ""
 #: ../Pidgin/src/PidginBrowseStatusItem.cs:31
 #: ../Skype/src/SkypeBrowseStatusItem.cs:31
 msgid "Statuses"
-msgstr ""
+msgstr "Estados"
 
 #: ../Empathy/src/EmpathyBrowseStatusItem.cs:38
 msgid "Browse Empathy Statuses"
@@ -534,7 +534,7 @@ msgstr "Indexa tus marcadores de Epiphany"
 #: ../Firefox/src/BrowseBookmarkItem.cs:30
 #: ../Vinagre/src/VinagreBrowseBookmarksItem.cs:31
 msgid "Bookmarks"
-msgstr ""
+msgstr "Marcadores"
 
 #: ../Epiphany/src/EpiphanyBrowseBookmarksItem.cs:35
 msgid "Browse Bookmarks"
@@ -592,7 +592,7 @@ msgstr ""
 
 #: ../Exaile/src/PauseAction.cs:46
 msgid "Pause music in Exaile."
-msgstr ""
+msgstr "Pausar música en Exaile."
 
 #: ../Exaile/src/PlayAction.cs:46
 msgid "Play music in Exaile."
