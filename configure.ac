@@ -195,9 +195,16 @@ AC_ARG_ENABLE(empathy,
 	enable_empathy=auto)
 
 if test "x$enable_empathy" != "xno"; then
-	if test "x$enable_empathy" = "xyes" -a "x$HAVE_DBUS_SHARP" = "no"; then
-   		AC_MSG_ERROR([Empathy plugin explicitly requested but dbus-sharp dependencies not found])
+   	if test "x$HAVE_DBUS_SHARP" = "xno" ; then
+	   	if test "x$enable_empathy" = "xyes" ; then
+		   	AC_MSG_ERROR([Empathy plugin explicitly requested but dbus-sharp dependencies not found])
+		fi
+		HAVE_EMPATHY=no
+	else
+		HAVE_EMPATHY=yes
 	fi
+else
+	HAVE_EMPATHY=no
 fi
 AC_SUBST([DBUS_SHARP_LIBS])
 AC_SUBST([DBUS_SHARP_GLIB_LIBS])
