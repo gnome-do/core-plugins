@@ -18,10 +18,10 @@ ASSEMBLY_FILE = $(BUILD_DIR)/$(ASSEMBLY).$(ASSEMBLY_EXTENSION)
 STD_REFERENCES = $(foreach ref,$(filter-out -r:%,$(REFERENCES)),-r:$(ref))
 BUILD_REFERENCES = $(filter -r:%,$(REFERENCES) $(STD_REFERENCES))
 
-OUTPUT_FILES = \
-        $(ASSEMBLY_FILE) \
-        $(ASSEMBLY_FILE).mdb
-
+OUTPUT_FILES = $(ASSEMBLY_FILE)
+if ENABLE_DEBUG
+OUTPUT_FILES += $(ASSEMBLY_FILE).mdb
+endif
 
 # Install plugins as data; there's no need for them to be excutable
 plugindir = ${libdir}/gnome-do/plugins
