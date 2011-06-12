@@ -4,6 +4,10 @@ endif
 
 ASSEMBLY=Banshee
 
+if BANSHEE_DBUS_SHARP
+BUILD_DEFINES=-define:USE_DBUS_SHARP
+endif
+
 FILES = \
 	src/AbstractPlayerAction.cs \
 	src/Banshee.cs \
@@ -26,7 +30,15 @@ REFERENCES = \
 	System \
 	System.Core \
 	$(BANSHEE_INDEXER_LIBS) \
-	$(DBUS_SHARP_LIBS) \
-	$(DBUS_SHARP_GLIB_LIBS) \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)
+
+if BANSHEE_DBUS_SHARP
+REFERENCES += \
+	$(DBUS_SHARP_LIBS) \
+	$(DBUS_SHARP_GLIB_LIBS)
+else
+REFERENCES += \
+	$(NDESK_DBUS_10_LIBS) \
+	$(NDESK_DBUS_GLIB_10_LIBS)
+endif

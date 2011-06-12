@@ -32,6 +32,12 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+
+dnl -- Banshee.CollectionIndexer.dll links to DBus# after 2.1, so the Banshee
+dnl -- plugin must follow suit.
+PKG_CHECK_EXISTS([banshee-collection-indexer >= 2.1], BANSHEE_USE_DBUS_SHARP=yes, BANSHEE_USE_DBUS_SHARP=no)
+AM_CONDITIONAL(BANSHEE_DBUS_SHARP, test "x$BANSHEE_USE_DBUS_SHARP" = "xyes")
+
 dnl -- DBus# required for Banshee and Telepathy support
 PKG_CHECK_MODULES([DBUS_SHARP], [dbus-sharp-1.0], HAVE_DBUS_SHARP=yes, HAVE_DBUS_SHARP=no)
 PKG_CHECK_MODULES([DBUS_SHARP_GLIB], [dbus-sharp-glib-1.0], HAVE_DBUS_SHARP_GLIB=yes, HAVE_DBUS_SNARP_GLIB=no)
@@ -49,12 +55,16 @@ if test "x$enable_banshee" != "xno"; then
 	   	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-collection-indexer], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
 	fi
 
-	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno" -a "x$HAVE_DBUS_SHARP" = "xno" ; then
-		AC_MSG_ERROR([Banshee support explicitly requested but dependencies not found (Banshee Libs $HAVE_BANSHEE, DBus♯ $HAVE_DBUS_SHARP)])
+	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno" ; then
+		AC_MSG_ERROR([Banshee support explicitly requested but dependencies not found.])
+	fi
+	if test "x$enable_banshee" = "xyes" -a "x$BANSHEE_USE_DBUS_SHARP" = "xyes" -a "x$HAVE_DBUS_SHARP" = "xno" ; then
+	   	AC_MSG_ERROR([Banshee support requires DBus♯, not found])
+		HAVE_BANSHEE=no
 	fi
 fi
 
-AM_CONDITIONAL(HAVE_BANSHEE, test "x$HAVE_BANSHEE" = "xyes" -a "x$HAVE_DBUS_SHARP" = "xyes")
+AM_CONDITIONAL(HAVE_BANSHEE, test "x$HAVE_BANSHEE" = "xyes")
 
 dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
 BANSHEE_INDEXER_DLL=`$PKG_CONFIG --variable=Libraries banshee-1-collection-indexer`
