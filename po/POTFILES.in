@@ -33,6 +33,7 @@ DiskMounter/src/OpenVolumeAction.cs
 DiskMounter/src/UnmountAction.cs
 Dropbox/gtk-gui/Dropbox.DropboxConfig.cs
 Dropbox/src/Config/DropboxConfig.cs
+Dropbox/src/Dropbox.cs
 Dropbox/src/DropboxAbstractAction.cs
 Dropbox/src/DropboxLinkAction.cs
 Dropbox/src/DropboxPuburlAction.cs
