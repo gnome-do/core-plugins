@@ -74,6 +74,7 @@ namespace Banshee
 
 		static BansheeDBus ()
 		{
+			BusG.Init ();
 			BuildObjectPathsDict ();
 			session_bus = Bus.Session.GetObject<IBus> (SessionBusName, new ObjectPath (object_paths[typeof (IBus)]));
 			session_bus.NameOwnerChanged += HandleNameOwnerChanged;
