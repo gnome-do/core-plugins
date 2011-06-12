@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-22 18:49+1000\n"
+"POT-Creation-Date: 2011-06-12 22:53+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,6 +321,15 @@ msgstr ""
 
 #: ../Dropbox/src/Config/DropboxConfig.cs:68
 msgid "Select location of Dropbox folder"
+msgstr ""
+
+#. Container child vbox6.Gtk.Box+BoxChild
+#: ../Dropbox/src/Dropbox.cs:46 ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
+msgid "Public"
+msgstr ""
+
+#: ../Dropbox/src/Dropbox.cs:47
+msgid "Files Shared from GNOME Do"
 msgstr ""
 
 #: ../Dropbox/src/DropboxAbstractAction.cs:48
@@ -772,11 +781,6 @@ msgstr ""
 msgid "Visible to family"
 msgstr ""
 
-#. Container child vbox6.Gtk.Box+BoxChild
-#: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:134
-msgid "Public"
-msgstr ""
-
 #: ../Flickr/gtk-gui/Flickr.UploadConfig.cs:149
 msgid "<b>Viewing permissions</b>"
 msgstr ""
@@ -804,7 +808,7 @@ msgid "_OK"
 msgstr ""
 
 #: ../Flickr/src/AccountConfig.cs:91
-msgid "Click to compete authorization"
+msgid "Click to complete authorization"
 msgstr ""
 
 #: ../Flickr/src/AccountConfig.cs:112
@@ -1476,7 +1480,7 @@ msgid "Enable pidgin account"
 msgstr ""
 
 #: ../Pidgin/src/PidginAccountActions.cs:95
-msgid "Disble pidgin account"
+msgid "Disable Pidgin account"
 msgstr ""
 
 #: ../Pidgin/src/PidginAccountItemSource.cs:41
