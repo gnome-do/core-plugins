@@ -50,9 +50,13 @@ AC_ARG_ENABLE(banshee,
 
 if test "x$enable_banshee" != "xno"; then
 	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
-	if test "x$HAVE_BANSHEE" = "xno" ; then
+	if test "x$HAVE_BANSHEE" = "xyes" ; then
+		dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
+		BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
+	else
 	   	# Banshee renamed this lib after 2.0.
 	   	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-collection-indexer], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
+		BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-collection-indexer)
 	fi
 
 	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno" ; then
@@ -60,17 +64,10 @@ if test "x$enable_banshee" != "xno"; then
 	fi
 	if test "x$enable_banshee" = "xyes" -a "x$BANSHEE_USE_DBUS_SHARP" = "xyes" -a "x$HAVE_DBUS_SHARP" = "xno" ; then
 	   	AC_MSG_ERROR([Banshee support requires DBus♯, not found])
-		HAVE_BANSHEE=no
 	fi
 fi
 
 AM_CONDITIONAL(HAVE_BANSHEE, test "x$HAVE_BANSHEE" = "xyes")
-
-dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
-BANSHEE_INDEXER_DLL=`$PKG_CONFIG --variable=Libraries banshee-1-collection-indexer`
-if test "x$BANSHEE_INDEXER_DLL" = "x" ; then
-   BANSHEE_INDEXER_DLL=`$PKG_CONFIG --variable=Libraries banshee-collection-indexer`
-fi
 
 AC_SUBST([BANSHEE_INDEXER_DLL])
 dnl }}}
