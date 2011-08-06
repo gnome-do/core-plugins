@@ -23,7 +23,12 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+#if USE_DBUS_SHARP
+using DBus;
+#else
 using NDesk.DBus;
+#endif
+
 using org.freedesktop.DBus;
 
 using Mono.Addins;

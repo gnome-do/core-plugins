@@ -30,12 +30,14 @@ RESOURCES = \
     Resources/statusIcons/lunch.png \
     Resources/statusIcons/online.png
 
+BUILD_DEFINES=$(DBUS_BUILD_DEFINES)
+
 REFERENCES = \
 	System \
 	System.Core \
 	System.Xml \
-	$(NDESK_DBUS_10_LIBS) \
-	$(NDESK_DBUS_GLIB_LIBS) \
+	$(DBUS_SHARP_LIBS) \
+	$(DBUS_SHARP_GLIB_LIBS) \
 	$(DO_UNIVERSE_LIBS) \
 	$(DO_PLATFORM_LIBS)
 

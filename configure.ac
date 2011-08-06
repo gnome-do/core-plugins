@@ -36,11 +36,21 @@ SHAMROCK_EXPAND_DATADIR
 dnl -- Banshee.CollectionIndexer.dll links to DBus# after 2.1, so the Banshee
 dnl -- plugin must follow suit.
 PKG_CHECK_EXISTS([banshee-collection-indexer >= 2.1], BANSHEE_USE_DBUS_SHARP=yes, BANSHEE_USE_DBUS_SHARP=no)
-AM_CONDITIONAL(BANSHEE_DBUS_SHARP, test "x$BANSHEE_USE_DBUS_SHARP" = "xyes")
 
 dnl -- DBus# required for Banshee and Telepathy support
 PKG_CHECK_MODULES([DBUS_SHARP], [dbus-sharp-1.0], HAVE_DBUS_SHARP=yes, HAVE_DBUS_SHARP=no)
 PKG_CHECK_MODULES([DBUS_SHARP_GLIB], [dbus-sharp-glib-1.0], HAVE_DBUS_SHARP_GLIB=yes, HAVE_DBUS_SNARP_GLIB=no)
+
+if test "x$HAVE_DBUS_SHARP" = "xyes" ; then
+	DBUS_BUILD_DEFINES=-define:USE_DBUS_SHARP
+else
+   	PKG_CHECK_MODULES([DBUS_SHARP], [ndesk-dbus-1.0])
+   	PKG_CHECK_MODULES([DBUS_SHARP_GLIB], [ndesk-dbus-glib-1.0])
+fi
+
+AC_SUBST([DBUS_BUILD_DEFINES])
+AC_SUBST([DBUS_SHARP_LIBS])
+AC_SUBST([DBUS_SHARP_GLIB_LIBS])
 
 dnl {{{ check for Banshee
 AC_ARG_ENABLE(banshee, 
@@ -187,8 +197,6 @@ AC_SUBST([WNCK_SHARP_10_LIBS])
 dnl}}}
 
 dnl {{{
-# Temporarily check for dbus-sharp only in Empathy build
-# The DBus-Sharp fork is relatively new, and probably not ubiquitous yet.
 AC_ARG_ENABLE(empathy,
 	AC_HELP_STRING([--enable-empathy], [Build plugin to Telepathy IM framework (default: auto]),
 	enable_empathy=$enableval,
@@ -206,8 +214,6 @@ if test "x$enable_empathy" != "xno"; then
 else
 	HAVE_EMPATHY=no
 fi
-AC_SUBST([DBUS_SHARP_LIBS])
-AC_SUBST([DBUS_SHARP_GLIB_LIBS])
 
 AM_CONDITIONAL(HAVE_EMPATHY, test "x$HAVE_EMPATHY" = "xyes")
 
@@ -227,8 +233,6 @@ PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([MONO_ADDINS], [mono-addins])
 PKG_CHECK_MODULES([MONO_ADDINS_GUI], [mono-addins-gui])
 PKG_CHECK_MODULES([MONO_ADDINS_SETUP], [mono-addins-setup])
-PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
-PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
 PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 
 
@@ -243,8 +247,6 @@ AC_SUBST([GTK_SHARP_20_LIBS])
 AC_SUBST([MONO_ADDINS_LIBS])
 AC_SUBST([MONO_ADDINS_GUI_LIBS])
 AC_SUBST([MONO_ADDINS_SETUP_LIBS])
-AC_SUBST([NDESK_DBUS_10_LIBS])
-AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
 
 dnl Do core references

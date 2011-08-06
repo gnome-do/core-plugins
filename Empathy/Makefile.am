@@ -26,6 +26,8 @@ FILES = \
 RESOURCES = \
 	Resources/Empathy.addin.xml
 
+BUILD_DEFINES=$(DBUS_BUILD_DEFINES)
+
 REFERENCES = \
 	$(DBUS_SHARP_LIBS) \
 	$(DBUS_SHARP_GLIB_LIBS) \
