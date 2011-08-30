@@ -9,6 +9,9 @@ FILES = \
 	src/OutputModeItem.cs \
 	src/XRandRItemSource.cs
 
+DLL_CONFIG_FILES = \
+	XRandR.dll.config
+
 RESOURCES = \
 	Resources/XRandR.addin.xml
 
