@@ -32,7 +32,25 @@ SHAMROCK_EXPAND_DATADIR
 
 dnl -- Banshee.CollectionIndexer.dll links to DBus# after 2.1, so the Banshee
 dnl -- plugin must follow suit.
-PKG_CHECK_EXISTS([banshee-collection-indexer >= 2.1], BANSHEE_USE_DBUS_SHARP=yes, BANSHEE_USE_DBUS_SHARP=no)
+AC_MSG_CHECKING([Banshee.CollectionIndexer package])
+PKG_CHECK_EXISTS([banshee-collection-indexer],
+		 [BANSHEE_COLLECTION_INDEXER=banshee-collection-indexer],
+		 [BANSHEE_COLLECTION_INDEXER=no])
+if test "x$BANSHEE_COLLECTION_INDEXER" = "xno" ; then
+	PKG_CHECK_EXISTS([banshee-collection-indexer-1],
+			 [BANSHEE_COLLECTION_INDEXER=banshee-collection-indexer-1],
+			 [BANSHEE_COLLECTION_INDEXER=not found])
+fi
+AC_MSG_RESULT([$BANSHEE_COLLECTION_INDEXER])
+
+AC_MSG_CHECKING([which DBus implementation Banshee.CollectionIndexer requires])
+if $PKG_CONFIG --print-requires $BANSHEE_COLLECTION_INDEXER 2>&1 | grep dbus-sharp-1.0 > /dev/null ; then
+	BANSHEE_USE_DBUS_SHARP=yes
+	AC_MSG_RESULT([dbus-sharp])
+else
+	BANSHEE_USE_DBUS_SHARP=no
+	AC_MSG_RESULT([ndesk-dbus])
+fi
 
 dnl -- DBus# required for Banshee and Telepathy support
 PKG_CHECK_MODULES([DBUS_SHARP], [dbus-sharp-1.0], HAVE_DBUS_SHARP=yes, HAVE_DBUS_SHARP=no)
@@ -56,15 +74,9 @@ AC_ARG_ENABLE(banshee,
 	enable_banshee=auto)
 
 if test "x$enable_banshee" != "xno"; then
-	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-1-collection-indexer >= 1.4.2], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
-	if test "x$HAVE_BANSHEE" = "xyes" ; then
-		dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
-		BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-1-collection-indexer)
-	else
-	   	# Banshee renamed this lib after 2.0.
-	   	PKG_CHECK_MODULES([BANSHEE_INDEXER], [banshee-collection-indexer], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
-		BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries banshee-collection-indexer)
-	fi
+	PKG_CHECK_MODULES([BANSHEE_INDEXER], [$BANSHEE_COLLECTION_INDEXER >= 1.4.2], HAVE_BANSHEE=yes, HAVE_BANSHEE=no)
+	dnl We need to copy Banshee.CollectionIndexer.dll; it's not in the GAC
+	BANSHEE_INDEXER_DLL=$($PKG_CONFIG --variable=Libraries $BANSHEE_COLLECTION_INDEXER)
 
 	if test "x$enable_banshee" = "xyes" -a "x$HAVE_BANSHEE" = "xno" ; then
 		AC_MSG_ERROR([Banshee support explicitly requested but dependencies not found.])
