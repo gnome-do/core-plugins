@@ -17,10 +17,7 @@ ASM_VERSION="$VERSION"
 AC_SUBST(ASM_VERSION)
 
 dnl pkg-config
-AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-if test "x$PKG_CONFIG" = "xno"; then
-        AC_MSG_ERROR([You need to install pkg-config])
-fi
+PKG_PROG_PKG_CONFIG
 
 AC_PROG_INSTALL
 
