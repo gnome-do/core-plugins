@@ -34,8 +34,8 @@ FILES = \
 	src/Xlib/X11Atoms.cs \
 	src/Xlib/Xlib.cs      
 
-
-
+DLL_CONFIG_FILES = \
+	WindowManager.dll.config
 
 RESOURCES = \
 	Resources/WindowManager.addin.xml 
