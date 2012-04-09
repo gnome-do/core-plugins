@@ -1,0 +1,52 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="alias">
+
+    <info>
+        <link type="guide" xref="index#plugins"/>
+    </info>
+
+	<title>Alias</title>
+
+    <section id="description">
+	<title>Description</title>
+	<p>
+	The alias plugin allows you to type your favorite actions quickly by using aliases.
+	</p>
+    </section>
+
+    <section id="usage">
+	<title>Usage</title>
+	<p>
+	Search in the first pane for the item you wish to provide an alias for,
+	type the alias you want to provide in the second pane.
+	</p>
+
+	<p>
+	For example if we want to alias Do's preferences to "e3" we will use the following steps:
+	</p>
+	<steps>
+	    <item><p>Activate Do (Ctrl+Space)</p></item>
+	    <item><p>Enter <keyseq><key>P</key><key>r</key><key>e</key><key>f</key></keyseq></p></item>
+	    <item><p>Select “Preferences” from the drop-down menu</p></item>
+	    <item><p>Hit <keyseq><key>Tab</key></keyseq>. In second pane type <keyseq><key>A</key><key>s</key><key>s</key><key>i</key></keyseq> and choose "Assign Alias" from the drop down menu.</p></item>
+	    <item><p>Hit <keyseq><key>Tab</key></keyseq> and enter "e3" into the third pane.</p></item>
+	    <item><p>Hit <keyseq><key>Enter</key></keyseq> to perform action.
+	</p></item>
+	</steps>
+	<p>
+	Now you can launch Do's preferences by typing ‘e3’!
+	</p>
+	<figure>
+	    <title>Example</title>
+	    <desc>Aliasing ‘Preferences’ to ‘e3’</desc>
+	    <media type="image" src="Alias1.png"/>
+	</figure>
+	<figure>
+	    <desc>Using the new ‘e3’ item</desc>
+	    <media type="image" src="Alias2.png"/>
+	</figure>
+    </section>
+
+</page>
+

@@ -1,0 +1,17 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="guide"
+      id="index">
+
+	<info>
+		<credit type="author">
+			<name>Christopher James Halse Rogers</name>
+			<email>raof@ubuntu.com</email>
+		</credit>
+	</info>
+
+	<title>Do Help</title>
+    
+    <section id="plugins">
+      <title>Plugin Documentation</title>
+    </section>
+</page>

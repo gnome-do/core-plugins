@@ -4,6 +4,7 @@ EXTRA_DIST = COPYING COPYRIGHT AUTHORS
 SUBDIRS = \
 	BundledLibraries \
 	po \
+	help \
 	Alias \
 	AptURL \
 	Archive \

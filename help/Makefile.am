@@ -1,0 +1,9 @@
+@YELP_HELP_RULES@
+
+HELP_ID = gnome-do
+HELP_FILES = 
+
+HELP_LINGUAS =
+
+DISTCLEANFILES = \
+	Makefile.in

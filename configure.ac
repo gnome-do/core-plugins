@@ -29,6 +29,8 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+dnl Mallard buildsystem
+YELP_HELP_INIT
 
 dnl -- Banshee.CollectionIndexer.dll links to DBus# after 2.1, so the Banshee
 dnl -- plugin must follow suit.
@@ -474,6 +476,7 @@ Zim/Makefile
 Zim/Resources/Zim.addin.xml
 Makefile
 po/Makefile.in
+help/Makefile
 BundledLibraries/Makefile
 BundledLibraries/telepathy-sharp/Makefile
 ])
