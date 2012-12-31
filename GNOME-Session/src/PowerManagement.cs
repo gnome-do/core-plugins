@@ -134,7 +134,7 @@ namespace GNOME
 		public static void Logout ()
 		{
 			try {
-				Process.Start ("gnome-session-save", "--kill --silent");
+				Process.Start ("gnome-session-quit", "--logout --no-prompt");
 			} catch (Exception e) {
 				Log<PowerManagement>.Error ("Could not logout: {0}", e.Message);
 				Log<PowerManagement>.Debug (e.StackTrace);
