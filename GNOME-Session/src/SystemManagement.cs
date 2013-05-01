@@ -35,25 +35,48 @@ namespace GNOME
 
 	class SystemManagement
 	{
+		[Interface ("org.freedesktop.login1.Manager")]
+		interface ILogind
+		{
+			void PowerOff (bool interactive);
+			void Reboot (bool interactive);
+		}
+
 		[Interface ("org.freedesktop.ConsoleKit.Manager")]
-		interface ISystemManagementProxy
+		interface IConsoleKit
 		{
 			void Stop ();
 			void Restart ();
 		}
 
-		const string BusName = "org.freedesktop.ConsoleKit";
-		const string ObjectPath = "/org/freedesktop/ConsoleKit/Manager";
+		const string LogindName = "org.freedesktop.login1";
+		const string LogindPath = "/org/freedesktop/login1";
+		const string ConsoleKitName = "org.freedesktop.ConsoleKit";
+		const string ConsoleKitPath = "/org/freedesktop/ConsoleKit/Manager";
 
-		static ISystemManagementProxy BusInstance
+		static SystemManagement ()
 		{
+			try {
+				BusG.Init ();
+			} catch (Exception e) {
+				Log<SystemManagement>.Error ("Could not initialize the bus: {0}", e.Message);
+				Log<SystemManagement>.Debug (e.StackTrace);
+			}
+		}
+
+		static object BusInstance {
 			get {
 				try {
-					return Bus.System.GetObject<ISystemManagementProxy> (BusName, new ObjectPath (ObjectPath));
+					if (Bus.System.NameHasOwner (LogindName)) {
+						return Bus.System.GetObject<ILogind> (LogindName, new ObjectPath (LogindPath));
+					} else if (Bus.System.NameHasOwner (ConsoleKitName)) {
+						return Bus.System.GetObject<IConsoleKit> (ConsoleKitName, new ObjectPath (ConsoleKitPath));
+					}
 				} catch (Exception e) {
-					Log<SystemManagement>.Error ("Could not get ConsoleKit bus object: {0}", e.Message);
+					Log<SystemManagement>.Error ("Could not get SystemManagement bus object: {0}", e.Message);
 					Log<SystemManagement>.Debug (e.StackTrace);
 				}
+
 				return null;
 			}
 		}
@@ -61,7 +84,12 @@ namespace GNOME
 		public static void Shutdown ()
 		{
 			try {
-				BusInstance.Stop ();
+				object instance = BusInstance;
+				if (instance is ILogind) {
+					(instance as ILogind).PowerOff (true);
+				} else if (instance is IConsoleKit) {
+					(instance as IConsoleKit).Stop ();
+				}
 			} catch (Exception e) {
 				Log<SystemManagement>.Error ("Could not shutdown: {0}", e.Message);
 				Log<SystemManagement>.Debug (e.StackTrace);
@@ -71,7 +99,12 @@ namespace GNOME
 		public static void Restart ()
 		{
 			try {
-				BusInstance.Restart ();
+				object instance = BusInstance;
+				if (instance is ILogind) {
+					(instance as ILogind).Reboot (true);
+				} else if (instance is IConsoleKit) {
+					(instance as IConsoleKit).Restart ();
+				}
 			} catch (Exception e) {
 				Log<SystemManagement>.Error ("Could not reboot: {0}", e.Message);
 				Log<SystemManagement>.Debug (e.StackTrace);

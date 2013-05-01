@@ -35,6 +35,13 @@ namespace GNOME
 
 	class PowerManagement
 	{
+		[Interface ("org.freedesktop.login1.Manager")]
+		interface ILogind
+		{
+			void Hibernate (bool interactive);
+			void Suspend (bool interactive);
+		}
+
 		[Interface (DeviceKitPowerName)]
 		interface IDeviceKitPower
 		{
@@ -55,7 +62,9 @@ namespace GNOME
 			void Hibernate ();
 			void Suspend ();
 		}
-		
+
+		const string LogindName = "org.freedesktop.login1";
+		const string LogindPath = "/org/freedesktop/login1";
 		const string UPowerName = "org.freedesktop.UPower";
 		const string UPowerPath = "/org/freedesktop/UPower";
 		const string DeviceKitPowerName = "org.freedesktop.DeviceKit.Power";
@@ -73,11 +82,12 @@ namespace GNOME
 			}
 		}
 
-		static object BusInstance
-		{
+		static object BusInstance {
 			get {
 				try {
-					if (Bus.System.NameHasOwner (UPowerName)) {
+					if (Bus.System.NameHasOwner (LogindName)) {
+						return Bus.System.GetObject<ILogind> (LogindName, new ObjectPath (LogindPath));
+					} else if (Bus.System.NameHasOwner (UPowerName)) {
 						return Bus.System.GetObject<IUPower> (UPowerName, new ObjectPath (UPowerPath));
 					} else if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
 						return Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
@@ -97,7 +107,10 @@ namespace GNOME
 		{
 			try {
 				object instance = BusInstance;
-				if (instance is IUPower) {
+				if (instance is ILogind) {
+					ScreenSaver.Lock ();
+					(instance as ILogind).Hibernate (true);
+				} else if (instance is IUPower) {
 					ScreenSaver.Lock ();
 					(instance as IUPower).Hibernate ();
 				} else if (instance is IDeviceKitPower) {
@@ -116,7 +129,10 @@ namespace GNOME
 		{
 			try {
 				object instance = BusInstance;
-				if (instance is IUPower) {
+				if (instance is ILogind) {
+					ScreenSaver.Lock ();
+					(instance as ILogind).Suspend (true);
+				} else if (instance is IUPower) {
 					ScreenSaver.Lock ();
 					(instance as IUPower).Suspend ();
 				} else if (instance is IDeviceKitPower) {
@@ -134,7 +150,7 @@ namespace GNOME
 		public static void Logout ()
 		{
 			try {
-				Process.Start ("gnome-session-save", "--kill --silent");
+				Process.Start ("gnome-session-quit", "--logout --no-prompt");
 			} catch (Exception e) {
 				Log<PowerManagement>.Error ("Could not logout: {0}", e.Message);
 				Log<PowerManagement>.Debug (e.StackTrace);

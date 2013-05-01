@@ -53,31 +53,31 @@ namespace GNOME
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Log Out"),
 					AddinManager.CurrentLocalizer.GetString ("Close your session and return to the login screen."),
-					"gnome-session-logout",
+					"system-log-out",
 					PowerManagement.Logout);
 
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Shutdown"),
 					AddinManager.CurrentLocalizer.GetString ("Turn your computer off."),
-					"gnome-session-halt",
+					"system-shutdown",
 					SystemManagement.Shutdown);
 
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Hibernate"),
 					AddinManager.CurrentLocalizer.GetString ("Put your computer into hibernation mode."),
-					"gnome-session-hibernate",
+					"system-shutdown",
 					PowerManagement.Hibernate);
 
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Suspend"),
 					AddinManager.CurrentLocalizer.GetString ("Put your computer into suspend mode."),
-					"gnome-session-suspend",
+					"system-shutdown",
 					PowerManagement.Suspend);
 
 				yield return new SessionCommandItem (
 					AddinManager.CurrentLocalizer.GetString ("Restart"),
 					AddinManager.CurrentLocalizer.GetString ("Restart your computer."),
-					"gnome-session-reboot",
+					"system-shutdown",
 					SystemManagement.Restart);
 
 				yield return new SessionCommandItem (
