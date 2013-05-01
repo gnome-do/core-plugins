@@ -18,14 +18,14 @@ ASSEMBLY_FILE = $(BUILD_DIR)/$(ASSEMBLY).$(ASSEMBLY_EXTENSION)
 STD_REFERENCES = $(foreach ref,$(filter-out -r:%,$(REFERENCES)),-r:$(ref))
 BUILD_REFERENCES = $(filter -r:%,$(REFERENCES) $(STD_REFERENCES))
 
-OUTPUT_FILES = $(ASSEMBLY_FILE) $(DLL_CONFIG_FILES)
+OUTPUT_FILES = $(ASSEMBLY_FILE)
 if ENABLE_DEBUG
 OUTPUT_FILES += $(ASSEMBLY_FILE).mdb
 endif
 
 # Install plugins as data; there's no need for them to be excutable
 plugindir = ${libdir}/gnome-do/plugins
-plugin_DATA = $(OUTPUT_FILES)
+plugin_DATA = $(OUTPUT_FILES) $(DLL_CONFIG_FILES)
 
 # All plugins should be translatable; every plugin will need to link to
 # Mono.Addins for this.
