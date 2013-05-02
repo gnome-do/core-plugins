@@ -231,6 +231,31 @@ TELEPATHY_SHARP_LIBS=-r:$(pwd)/build/telepathy-sharp.dll
 AC_SUBST([TELEPATHY_SHARP_LIBS])
 dnl }}}
 
+dnl {{{
+AC_ARG_ENABLE(transmission,
+	AC_HELP_STRING([--enable-transmission], [Build plugin for the Transmission bittorrent client (default: auto]),
+	enable_transmission=$enableval,
+	enable_transmission=auto)
+
+if test "x$enable_transmission" != "xno"; then
+   	PKG_CHECK_MODULES([NEWTONSOFT_JSON], [newtonsoft-json], HAVE_JSON=yes, HAVE_JSON=no)
+
+   	if test "x$HAVE_JSON" = "xno" ; then
+	   	if test "x$enable_transmission" = "xyes" ; then
+		   	AC_MSG_ERROR([Transmission plugin explicitly requested but newtonsoft-json dependencies not found])
+		fi
+		HAVE_TRANSMISSION=no
+	else
+		HAVE_TRANSMISSION=yes
+	fi
+else
+	HAVE_TRANSMISSION=no
+fi
+
+AM_CONDITIONAL(HAVE_TRANSMISSION, test "x$HAVE_TRANSMISSION" = "xyes")
+dnl }}}
+
+
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
@@ -423,6 +448,8 @@ Tracker/Makefile
 Tracker/Resources/TrackerSearch.addin.xml
 Translate/Makefile
 Translate/Resources/Translate.addin.xml
+Transmission/Makefile
+Transmission/Resources/Transmission.addin.xml
 Tomboy/Makefile
 Tomboy/Resources/Tomboy.addin.xml
 Vinagre/Makefile
@@ -471,6 +498,7 @@ ${PACKAGE}-${VERSION}
     Google Calendar:   ${HAVE_GCAL}
     Google Contacts:   ${HAVE_GMAIL}
     Google Docs:       ${HAVE_GDOCS}
+    Transmission:      ${HAVE_TRANSMISSION}
     Window Manager:    ${HAVE_WNCK}
     YouTube:           ${HAVE_YOUTUBE}
 
