@@ -39,6 +39,7 @@ namespace Tasque
 			} catch (Exception e) {
 				Log.Error ("Could not read Tasque's category: {0}", e.Message);
 				Log.Debug (e.StackTrace);
+				categories = new string[] {};
 			}
 			return categories.Select (category => new TasqueCategoryItem (category));
 		}
