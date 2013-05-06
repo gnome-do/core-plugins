@@ -15,5 +15,6 @@ RESOURCES = \
 REFERENCES = \
 	System \
 	System.Core \
+	$(GLIB_SHARP_20_LIBS) \
 	$(GNOME_VFS_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS)
