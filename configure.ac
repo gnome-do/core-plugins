@@ -2,7 +2,7 @@ dnl vim: set sw=4 sts=4 ts=4 noet ft=config foldmethod=marker foldmarker={{{,}}}
 
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([gnome-do-plugins], [0.8.4])
+AC_INIT([gnome-do-plugins], [0.8.5])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 
