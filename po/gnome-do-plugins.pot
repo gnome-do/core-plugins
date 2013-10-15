@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 22:53+1000\n"
+"POT-Creation-Date: 2013-10-15 21:32+1100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -494,7 +494,7 @@ msgstr ""
 
 #: ../Empathy/src/EmpathyStatusItem.cs:54
 #: ../Pidgin/src/PidginHandleContactDetailItem.cs:43
-#: ../Pidgin/src/PidginStatusTypeItem.cs:42 ../Skype/src/Skype.cs:67
+#: ../Pidgin/src/PidginStatusTypeItem.cs:42 ../Skype/src/Skype.cs:72
 msgid "Offline"
 msgstr ""
 
@@ -504,12 +504,12 @@ msgid "Available"
 msgstr ""
 
 #: ../Empathy/src/EmpathyStatusItem.cs:56
-#: ../Pidgin/src/PidginStatusTypeItem.cs:46 ../Skype/src/Skype.cs:69
+#: ../Pidgin/src/PidginStatusTypeItem.cs:46 ../Skype/src/Skype.cs:74
 msgid "Away"
 msgstr ""
 
 #: ../Empathy/src/EmpathyStatusItem.cs:57
-#: ../Pidgin/src/PidginStatusTypeItem.cs:45 ../Skype/src/Skype.cs:72
+#: ../Pidgin/src/PidginStatusTypeItem.cs:45 ../Skype/src/Skype.cs:77
 msgid "Invisible"
 msgstr ""
 
@@ -1516,7 +1516,7 @@ msgstr ""
 msgid "Buddies on your Pidgin buddy list."
 msgstr ""
 
-#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43 ../Skype/src/Skype.cs:66
+#: ../Pidgin/src/PidginHandleContactDetailItem.cs:43 ../Skype/src/Skype.cs:71
 msgid "Online"
 msgstr ""
 
@@ -2421,27 +2421,27 @@ msgstr ""
 msgid "Changes a shelf's name"
 msgstr ""
 
-#: ../Skype/src/Skype.cs:65
+#: ../Skype/src/Skype.cs:70
 msgid "Unknown"
 msgstr ""
 
-#: ../Skype/src/Skype.cs:68
+#: ../Skype/src/Skype.cs:73
 msgid "Skype Me"
 msgstr ""
 
-#: ../Skype/src/Skype.cs:70
+#: ../Skype/src/Skype.cs:75
 msgid "Not Available"
 msgstr ""
 
-#: ../Skype/src/Skype.cs:71
+#: ../Skype/src/Skype.cs:76
 msgid "Do Not Disturb"
 msgstr ""
 
-#: ../Skype/src/Skype.cs:73
+#: ../Skype/src/Skype.cs:78
 msgid "Logged Out"
 msgstr ""
 
-#: ../Skype/src/Skype.cs:74
+#: ../Skype/src/Skype.cs:79
 msgid "Skype Out"
 msgstr ""
 
@@ -2657,6 +2657,94 @@ msgstr ""
 
 #: ../Tomboy/src/TomboyItem.cs:50
 msgid "Tomboy note"
+msgstr ""
+
+#: ../Transmission/gtk-gui/Transmission.TransmissionConfig.cs:67
+msgid "Port"
+msgstr ""
+
+#: ../Transmission/gtk-gui/Transmission.TransmissionConfig.cs:94
+msgid "_Address"
+msgstr ""
+
+#: ../Transmission/gtk-gui/Transmission.TransmissionConfig.cs:104
+msgid "_Password"
+msgstr ""
+
+#: ../Transmission/gtk-gui/Transmission.TransmissionConfig.cs:116
+msgid "_Login"
+msgstr ""
+
+#: ../Transmission/src/TorrentFileSetPriorityAction.cs:47
+msgid "Set priority"
+msgstr ""
+
+#: ../Transmission/src/TorrentFileSetPriorityAction.cs:51
+msgid "Set download priority"
+msgstr ""
+
+#: ../Transmission/src/TorrentLimitDownloadSpeedAction.cs:17
+msgid "Limit download speed"
+msgstr ""
+
+#: ../Transmission/src/TorrentLimitDownloadSpeedAction.cs:21
+msgid "Set download speed limit"
+msgstr ""
+
+#: ../Transmission/src/TorrentLimitUploadSpeedAction.cs:17
+msgid "Limit upload speed"
+msgstr ""
+
+#: ../Transmission/src/TorrentLimitUploadSpeedAction.cs:21
+msgid "Set upload speed limit"
+msgstr ""
+
+#: ../Transmission/src/TorrentMarkForDownloadAction.cs:19
+msgid "Mark for download"
+msgstr ""
+
+#: ../Transmission/src/TorrentMarkForDownloadAction.cs:23
+msgid "Mark file as needed to be downloaded"
+msgstr ""
+
+#: ../Transmission/src/TorrentOperateAction.cs:15
+msgid "Operate on files"
+msgstr ""
+
+#: ../Transmission/src/TorrentOperateAction.cs:19
+msgid "Operate on downloaded file"
+msgstr ""
+
+#: ../Transmission/src/TorrentStartAction.cs:18
+msgid "Start"
+msgstr ""
+
+#: ../Transmission/src/TorrentStartAction.cs:22
+msgid "Start downloading torrent"
+msgstr ""
+
+#: ../Transmission/src/TorrentStopAction.cs:18
+msgid "Stop"
+msgstr ""
+
+#: ../Transmission/src/TorrentStopAction.cs:22
+msgid "Stop downloading torrent"
+msgstr ""
+
+#: ../Transmission/src/TorrentUnmarkForDownloadAction.cs:19
+msgid "Unmark for download"
+msgstr ""
+
+#: ../Transmission/src/TorrentUnmarkForDownloadAction.cs:23
+msgid "Unmark file as needed to be downloaded"
+msgstr ""
+
+#: ../Transmission/src/TorrentVerifyAction.cs:18
+msgid "Verify"
+msgstr ""
+
+#: ../Transmission/src/TorrentVerifyAction.cs:22
+msgid "Verify torrent"
 msgstr ""
 
 #: ../Tracker/src/TrackerSearchAction.cs:17
