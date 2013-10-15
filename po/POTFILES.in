@@ -248,6 +248,16 @@ Tomboy/src/NotesItemSource.cs
 Tomboy/src/SearchNotesAction.cs
 Tomboy/src/TomboyBrowseNotesItem.cs
 Tomboy/src/TomboyItem.cs
+Transmission/gtk-gui/Transmission.TransmissionConfig.cs
+Transmission/src/TorrentFileSetPriorityAction.cs
+Transmission/src/TorrentLimitDownloadSpeedAction.cs
+Transmission/src/TorrentLimitUploadSpeedAction.cs
+Transmission/src/TorrentMarkForDownloadAction.cs
+Transmission/src/TorrentOperateAction.cs
+Transmission/src/TorrentStartAction.cs
+Transmission/src/TorrentStopAction.cs
+Transmission/src/TorrentUnmarkForDownloadAction.cs
+Transmission/src/TorrentVerifyAction.cs
 Tracker/src/TrackerSearchAction.cs
 Translate/gtk-gui/Translate.ConfigUI.cs
 Translate/src/Provider/Google.cs
