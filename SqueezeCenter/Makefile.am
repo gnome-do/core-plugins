@@ -36,7 +36,9 @@ RESOURCES = \
 	Resources/icons/SB_off.png \
 	Resources/icons/SB_on.png \
 	Resources/icons/sync.png \
-	Resources/icons/unsync.png \
+	Resources/icons/unsync.png
+
+GENERATED_RESOURCES = \
 	Resources/SqueezeCenter.addin.xml	
 
 REFERENCES = \

@@ -7,7 +7,7 @@ FILES = \
 	src/SSHHostItem.cs \
 	src/SSHHostItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/SSH.addin.xml 
 
 REFERENCES = \

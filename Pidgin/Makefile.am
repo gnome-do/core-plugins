@@ -18,8 +18,9 @@ FILES = \
 	src/PidginBrowseAccountItem.cs \
 	src/PidginBrowseStatusItem.cs
 
+GENERATED_RESOURCES = \
+	Resources/Pidgin.addin.xml
 RESOURCES = \
-	Resources/Pidgin.addin.xml \
 	Resources/icons/internet-group-chat.svg
 
 BUILD_DEFINES=$(DBUS_BUILD_DEFINES)

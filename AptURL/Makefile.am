@@ -5,7 +5,7 @@ ASSEMBLY=AptURL
 FILES = \
 	src/AptUrl.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/AptURL.addin.xml
 
 REFERENCES = \

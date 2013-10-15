@@ -5,7 +5,7 @@ ASSEMBLY=GNOME-Dictionary
 FILES = \
 	src/DefineAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/GNOME-Dictionary.addin.xml
 
 REFERENCES = \

@@ -5,8 +5,9 @@ ASSEMBLY=Baconator
 FILES = \
 	src/BaconateAction.cs
 
+GENERATED_RESOURCES = \
+	Resources/Baconator.addin.xml
 RESOURCES = \
-	Resources/Baconator.addin.xml \
 	Resources/baconator.jpg
 
 REFERENCES = \

@@ -13,10 +13,12 @@ FILES = \
 	src/UI/ConfigUI.cs \
 	src/TranslateEngine.cs
 
+GENERATED_RESOURCES = \
+	Resources/Translate.addin.xml
+
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Resources/Translate.addin.xml \
 	Resources/icons/arabic.png \
 	Resources/icons/bulgarian.png \
 	Resources/icons/catalan.png \
@@ -51,7 +53,7 @@ RESOURCES = \
 	Resources/icons/slovak.png \
 	Resources/icons/slovenian.png \
 	Resources/icons/spanish.png \
- 	Resources/icons/swedish.png \
+	Resources/icons/swedish.png \
 	Resources/icons/ukranian.png \
 	Resources/icons/vietnamese.png  \
 	Resources/icons/albanian.png \

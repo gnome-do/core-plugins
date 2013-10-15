@@ -16,8 +16,9 @@ FILES = \
 	src/YoutubeVideoItem.cs \
 	src/CertHandler.cs
 
+GENERATED_RESOURCES = \
+	Resources/Youtube.addin.xml
 RESOURCES = \
-	Resources/Youtube.addin.xml \
 	Resources/youtube_user.png \
 	Resources/youtube_logo.png
 

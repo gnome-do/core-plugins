@@ -12,8 +12,9 @@ FILES = \
 	src/TagItem.cs \
 	src/TagsItemSource.cs 
 
+GENERATED_RESOURCES = \
+	Resources/delicious.addin.xml
 RESOURCES = \
-	Resources/delicious.addin.xml \
 	Resources/icons/delicious.png
 
 REFERENCES = \

@@ -12,7 +12,7 @@ FILES = \
 	gtk-gui/generated.cs \
 	gtk-gui/SystemServices.SystemServicesConfig.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/SystemServices.addin.xml
 
 REFERENCES = \

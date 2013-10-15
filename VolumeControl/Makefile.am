@@ -11,7 +11,7 @@ FILES = \
 	src/VolumeMaximizeItem.cs \
 	src/VolumeItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/VolumeControl.addin.xml 
 
 REFERENCES = \

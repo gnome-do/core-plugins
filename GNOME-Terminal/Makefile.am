@@ -8,7 +8,7 @@ FILES = \
 	src/ProfileItemSource.cs \
 	src/RunInTerminalAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/GNOME-Terminal.addin.xml
 
 REFERENCES = \

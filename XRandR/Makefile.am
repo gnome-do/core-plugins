@@ -12,7 +12,7 @@ FILES = \
 DLL_CONFIG_FILES = \
 	XRandR.dll.config
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/XRandR.addin.xml
 
 REFERENCES = \

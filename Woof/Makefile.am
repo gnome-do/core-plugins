@@ -6,7 +6,7 @@ FILES = \
 	src/Woof.cs \
 	src/WoofAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Woof.addin.xml 
 
 BUILD_DEFINES=$(DBUS_BUILD_DEFINES)

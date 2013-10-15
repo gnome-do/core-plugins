@@ -64,8 +64,9 @@ FILES = \
 	src/RtmNet/User.cs \
 	src/RtmNet/Utils.cs
 
+GENERATED_RESOURCES = \
+	Resources/RTM.addin.xml
 RESOURCES = \
-	Resources/RTM.addin.xml \
 	Resources/icons/note-add.png \
 	Resources/icons/note-delete.png \
 	Resources/icons/rtm.png \

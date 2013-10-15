@@ -10,7 +10,7 @@ FILES = \
 	src/PlaceItem.cs \
 	src/PlacesItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Firefox.addin.xml
 
 REFERENCES = \

@@ -8,7 +8,7 @@ FILES = \
 	src/VinagreBrowseBookmarksItem.cs \
 	src/VNCHostSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Vinagre.addin.xml 
 
 REFERENCES = \

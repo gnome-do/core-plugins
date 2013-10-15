@@ -5,7 +5,7 @@ ASSEMBLY=GoogleCalculator
 FILES = \
 	src/GoogleCalculatorAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/GoogleCalculator.addin.xml
 
 REFERENCES = \

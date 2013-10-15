@@ -9,7 +9,7 @@ FILES = \
 	src/ZimPage.cs \
 	src/ZimPagesItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Zim.addin.xml
 
 REFERENCES = \

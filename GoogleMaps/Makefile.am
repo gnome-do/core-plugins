@@ -5,7 +5,7 @@ ASSEMBLY=GoogleMaps
 FILES = \
 	src/MapAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/GoogleMaps.addin.xml
 
 REFERENCES = \

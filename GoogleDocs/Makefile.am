@@ -18,8 +18,9 @@ FILES = \
 	src/GDocsUploadDocument.cs \
 	src/Preferences.cs
 
+GENERATED_RESOURCES = \
+	Resources/GoogleDocs.addin.xml
 RESOURCES = \
-	Resources/GoogleDocs.addin.xml \
 	Resources/icons/gDocsIcon.png \
 	Resources/icons/gDocsTrashIcon.png \
 	Resources/icons/gDocsUploadIcon.png

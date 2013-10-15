@@ -8,7 +8,7 @@ FILES = \
 	src/Tasque.cs \
 	src/TasqueAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Tasque.addin.xml 
 
 BUILD_DEFINES=$(DBUS_BUILD_DEFINES)

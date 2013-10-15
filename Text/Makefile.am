@@ -5,7 +5,7 @@ ASSEMBLY=Text
 FILES = \
 	src/AppendTextAction.cs 
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Text.addin.xml 
 
 REFERENCES = \

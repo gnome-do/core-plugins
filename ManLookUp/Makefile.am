@@ -5,7 +5,7 @@ ASSEMBLY=ManLookUp
 FILES = \
 	src/ReadManualPageAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/ManLookUp.addin.xml
 
 REFERENCES = \

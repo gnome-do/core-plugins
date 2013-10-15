@@ -5,7 +5,7 @@ ASSEMBLY=TinyUrl
 FILES = \
 	src/TinyUrl/MakeUrlTinyAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/TinyUrl.addin.xml
 
 REFERENCES = \

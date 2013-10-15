@@ -5,7 +5,7 @@ ASSEMBLY=Chromium
 FILES = \
 	src/ChromiumBookmarkItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Chromium.addin.xml
 
 REFERENCES = \

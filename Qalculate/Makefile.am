@@ -5,7 +5,7 @@ ASSEMBLY=Qalculate
 FILES = \
 	src/QalculateAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Qalculate.addin.xml
 
 REFERENCES = \

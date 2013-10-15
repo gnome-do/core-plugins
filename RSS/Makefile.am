@@ -30,8 +30,9 @@ FILES = \
 	gtk-gui/Do.Plugins.Rss.Configuration.cs \
 	gtk-gui/generated.cs
 
+GENERATED_RESOURCES = \
+	Resources/RSS.addin.xml
 RESOURCES = \
-	Resources/RSS.addin.xml \
 	Resources/icons/feed-icon.png \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml

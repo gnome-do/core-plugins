@@ -5,8 +5,9 @@ ASSEMBLY=StockQuote
 FILES = \
 	src/StockQuoteAction.cs 
 
+GENERATED_RESOURCES = \
+	Resources/StockQuote.addin.xml
 RESOURCES = \
-	Resources/StockQuote.addin.xml \
 	Resources/icons/stock.png
 
 REFERENCES = \

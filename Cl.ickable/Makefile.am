@@ -7,7 +7,7 @@ FILES = \
 	src/ClipAction.cs \
 	src/WebClipsItem.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Cl.ickable.addin.xml
 
 REFERENCES = \

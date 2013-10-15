@@ -10,8 +10,9 @@ FILES = \
 	src/ConfluenceSearchAction.cs \
 	src/Remote/ConfluenceSoapServiceService.cs
 
+GENERATED_RESOURCES = \
+	Resources/Confluence.addin.xml
 RESOURCES = \
-	Resources/Confluence.addin.xml \
 	Resources/icons/confluence.png \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml

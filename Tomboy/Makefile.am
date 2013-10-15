@@ -13,7 +13,7 @@ FILES = \
 	src/TomboyBrowseNotesItem.cs \
 	gtk-gui/Tomboy.TomboyConfiguration.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Tomboy.addin.xml 
 
 BUILD_DEFINES=$(DBUS_BUILD_DEFINES)

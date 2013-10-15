@@ -7,7 +7,7 @@ FILES = \
 	src/TorrentResultItem.cs \
 	src/TorrentSearchAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Riptide.addin.xml 
 
 REFERENCES = \

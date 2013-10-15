@@ -7,7 +7,7 @@ FILES = \
 	src/CreateArchiveAction.cs \
 	src/ExtractArchiveAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Archive.addin.xml
 
 REFERENCES = \

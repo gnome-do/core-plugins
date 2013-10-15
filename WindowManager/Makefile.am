@@ -37,7 +37,7 @@ FILES = \
 DLL_CONFIG_FILES = \
 	WindowManager.dll.config
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/WindowManager.addin.xml 
 
 REFERENCES = \

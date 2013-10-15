@@ -18,8 +18,9 @@ FILES = \
     src/EmeseneChatAction.cs
 
 
+GENERATED_RESOURCES = \
+	Resources/Emesene.addin.xml
 RESOURCES = \
-	Resources/Emesene.addin.xml \
     Resources/statusIcons/away.png \
     Resources/statusIcons/busy.png \
     Resources/statusIcons/invisible.png \

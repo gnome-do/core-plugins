@@ -7,7 +7,8 @@ TARGET = library
 SOURCES_BUILD = $(addprefix $(srcdir)/, $(FILES))
 
 RESOURCES_EXPANDED = $(addprefix $(srcdir)/, $(RESOURCES))
-RESOURCES_BUILD = $(foreach resource, $(RESOURCES_EXPANDED), \
+GENERATED_RESOURCES_EXPANDED = $(addprefix $(builddir)/, $(GENERATED_RESOURCES))
+RESOURCES_BUILD = $(foreach resource, $(RESOURCES_EXPANDED) $(GENERATED_RESOURCES_EXPANDED), \
         -resource:$(resource),$(notdir $(resource)))
 
 BUILD_DIR = $(top_builddir)/build

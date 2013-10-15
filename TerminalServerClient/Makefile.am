@@ -6,7 +6,7 @@ FILES = \
 	src/TSClientItem.cs \
 	src/TSClientItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/TerminalServerClient.addin.xml 
 
 REFERENCES = \

@@ -23,7 +23,7 @@ FILES = \
 	src/EmpathyStatusItem.cs \
 	src/Status.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Empathy.addin.xml
 
 BUILD_DEFINES=$(DBUS_BUILD_DEFINES)

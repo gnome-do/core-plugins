@@ -10,8 +10,9 @@ FILES = \
 	src/Providers/IQuoteProvider.cs \
 	src/Providers/QuoteProviderFactory.cs
 
+GENERATED_RESOURCES = \
+	Resources/Quote.addin.xml
 RESOURCES = \
-	Resources/Quote.addin.xml \
 	Resources/icons/quoted-globe.svg
 
 REFERENCES = \

@@ -15,8 +15,9 @@ FILES = \
 	src/JIRAConfiguration.cs \
 	src/JIRAIssueSource.cs
 
+GENERATED_RESOURCES = \
+	Resources/JIRA.addin.xml
 RESOURCES = \
-	Resources/JIRA.addin.xml \
 	Resources/icons/jira.png
 
 REFERENCES = \

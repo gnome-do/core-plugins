@@ -15,7 +15,7 @@ FILES = \
 	src/PreviousAction.cs \
 	src/PlayItemAction.cs 
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Rhythmbox.addin.xml 
 
 REFERENCES = \

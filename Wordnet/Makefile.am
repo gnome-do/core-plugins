@@ -5,7 +5,7 @@ ASSEMBLY=Wordnet
 FILES = \
 	src/WordnetAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Wordnet.addin.xml 
 
 REFERENCES = \

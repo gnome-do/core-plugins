@@ -15,7 +15,9 @@ RESOURCES = \
 	Resources/icons/Launchpad.png \
 	Resources/icons/LaunchpadRegister.png \
 	Resources/icons/LaunchpadTranslations.png \
-	Resources/icons/LaunchpadUser.png \
+	Resources/icons/LaunchpadUser.png
+
+GENERATED_RESOURCES = \
 	Resources/Launchpad.addin.xml
 
 REFERENCES = \

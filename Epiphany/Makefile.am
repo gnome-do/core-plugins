@@ -6,7 +6,7 @@ FILES = \
 	src/EpiphanyBookmarkItemSource.cs \
 	src/EpiphanyBrowseBookmarksItem.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Epiphany.addin.xml
 
 REFERENCES = \

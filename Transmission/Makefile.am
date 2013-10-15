@@ -25,8 +25,9 @@ FILES = \
   src/TransmissionAPI.cs \
   src/TransmissionPlugin.cs
 
+GENERATED_RESOURCES = Resources/Transmission.addin.xml
+
 RESOURCES = \
-  Resources/Transmission.addin.xml \
   gtk-gui/gui.stetic \
   Resources/icons/transmission.png
 

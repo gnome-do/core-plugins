@@ -5,7 +5,7 @@ ASSEMBLY=LocateFiles
 FILES = \
 	src/LocateFilesAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/LocateFiles.addin.xml
 
 REFERENCES = \

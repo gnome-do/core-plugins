@@ -5,7 +5,7 @@ ASSEMBLY=GNOME-Calculator
 FILES = \
 	src/GCalcToolAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/GNOME-Calculator.addin.xml
 
 REFERENCES = \

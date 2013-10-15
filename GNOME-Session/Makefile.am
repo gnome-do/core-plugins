@@ -9,7 +9,7 @@ FILES = \
 	src/SessionCommandsItemSource.cs \
 	src/SystemManagement.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/GNOME-Session.addin.xml
 
 BUILD_DEFINES=$(DBUS_BUILD_DEFINES)

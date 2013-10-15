@@ -10,7 +10,7 @@ FILES = \
 	src/CachingOpenSearchItemSource.cs \
 	src/OpenSearchParser.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/OpenSearch.addin.xml
 
 REFERENCES = \

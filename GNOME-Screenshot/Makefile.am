@@ -10,7 +10,7 @@ FILES = \
 	src/TakeScreenshotAction.cs \
 	src/WholeScreenScreenshotItem.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/GNOME-Screenshot.addin.xml
 
 REFERENCES = \

@@ -16,8 +16,9 @@ FILES = \
 	src/UploadDialog.cs \
 	src/UploadConfig.cs
 
+GENERATED_RESOURCES = \
+	Resources/Flickr.addin.xml
 RESOURCES = \
-	Resources/Flickr.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
 	Resources/icons/flickr.png

@@ -15,8 +15,9 @@ FILES = \
 	src/Preferences.cs \
 	src/RecentConversationsAction.cs
 
+GENERATED_RESOURCES = \
+	Resources/GoogleContacts.addin.xml
 RESOURCES = \
-	Resources/GoogleContacts.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
 	Resources/icons/gmail-logo.png \

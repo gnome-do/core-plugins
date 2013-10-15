@@ -11,8 +11,9 @@ FILES = \
 	src/BibtexItemSource.cs \
 	src/Configuration.cs
 
+GENERATED_RESOURCES = \
+	Resources/Bibtex.addin.xml
 RESOURCES = \
-	Resources/Bibtex.addin.xml \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml
 

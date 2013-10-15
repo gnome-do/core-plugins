@@ -6,7 +6,7 @@ FILES = \
 	src/NXAction.cs \
 	src/NXHosts.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/NX.addin.xml 
 
 REFERENCES = \

@@ -19,7 +19,7 @@ FILES = \
 	src/PreviousAction.cs \
 	src/SearchCollectionAction.cs 
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Banshee.addin.xml
 
 BUILD_DEFINES=$(DBUS_BUILD_DEFINES)

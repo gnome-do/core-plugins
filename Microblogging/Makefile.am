@@ -33,10 +33,12 @@ FILES = \
 	src/Twitterizer/Twitterizer.Framework/TwitterRequest.cs \
 	src/Twitterizer/Twitterizer.Framework/Urls.cs
 
+GENERATED_RESOURCES = \
+	Resources/Microblogging.addin.xml
+
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Resources/Microblogging.addin.xml \
 	Resources/icons/microblogging.svg
 
 REFERENCES = \

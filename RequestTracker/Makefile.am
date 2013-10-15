@@ -11,8 +11,10 @@ FILES = \
   src/RequestTrackerItem.cs \
   src/RequestTrackerItems.cs
 
+GENERATED_RESOURCES = \
+	Resources/RequestTracker.addin.xml
+
 RESOURCES = \
-	Resources/RequestTracker.addin.xml \
 	Resources/icons/rt.png
 
 REFERENCES = \

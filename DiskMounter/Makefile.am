@@ -9,7 +9,7 @@ FILES = \
 	src/OpenVolumeAction.cs \
 	src/UnmountAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/DiskMounter.addin.xml
 
 REFERENCES = \

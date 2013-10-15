@@ -6,7 +6,7 @@ FILES = \
 	src/Mork.cs \
 	src/ThunderbirdContactItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Thunderbird.addin.xml
 
 REFERENCES = \

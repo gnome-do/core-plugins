@@ -7,7 +7,7 @@ FILES = \
 	src/PuttySession.cs \
 	src/PuttySessionItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Putty.addin.xml 
 
 REFERENCES = \

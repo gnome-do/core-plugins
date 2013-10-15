@@ -8,7 +8,7 @@ FILES = \
 	src/AliasItemSource.cs \
 	src/DeleteAliasAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Alias.addin.xml
 
 REFERENCES = \

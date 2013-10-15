@@ -14,8 +14,9 @@ FILES = \
 	src/PingFMServiceItem.cs \
 	src/PingFMServiceItemSource.cs 
 
+GENERATED_RESOURCES = \
+	Resources/PingFM.addin.xml
 RESOURCES = \
-	Resources/PingFM.addin.xml \
 	Resources/icons/bebo.png \
 	Resources/icons/blogger.png \
 	Resources/icons/brightkite.png \

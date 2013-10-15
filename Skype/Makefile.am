@@ -14,8 +14,9 @@ FILES = \
 	src/SkypeSetStatusAction.cs \
 	src/Skype.cs
 
+GENERATED_RESOURCES = \
+	Resources/Skype.addin.xml
 RESOURCES = \
-	Resources/Skype.addin.xml \
 	Resources/icons/CallStart.png \
 	Resources/icons/Message.png \
 	Resources/icons/SkypeOut.png \

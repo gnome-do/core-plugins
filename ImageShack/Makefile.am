@@ -12,7 +12,8 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Resources/icons/imageshack.png \
+	Resources/icons/imageshack.png
+GENERATED_RESOURCES = \
 	Resources/ImageShack.addin.xml
 
 REFERENCES = \

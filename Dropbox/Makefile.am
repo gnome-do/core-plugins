@@ -17,8 +17,9 @@ FILES = \
   src/DropboxLinkAction.cs \
   src/Dropbox.cs
 
+GENERATED_RESOURCES = \
+  Resources/Dropbox.addin.xml
 RESOURCES = \
-  Resources/Dropbox.addin.xml \
   gtk-gui/gui.stetic \
   Resources/icons/dropbox-add.png \
   Resources/icons/dropbox-remove.png \

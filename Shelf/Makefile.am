@@ -12,7 +12,7 @@ FILES = \
 	src/ShelfRenameShelfAction.cs \
 	src/ShelfDeleteShelfAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Shelf.addin.xml 
 
 REFERENCES = \

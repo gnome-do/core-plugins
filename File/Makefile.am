@@ -28,7 +28,8 @@ FILES = \
 
 RESOURCES = \
 	gtk-gui/gui.stetic \
-	gtk-gui/objects.xml \
+	gtk-gui/objects.xml
+GENERATED_RESOURCES = \
 	Resources/File.addin.xml
 
 REFERENCES = \

@@ -22,12 +22,14 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	gtk-gui/objects.xml \
-	Resources/Pastebin.addin.xml \
 	Resources/LodgeIt.xml \
 	Resources/Paste2.xml \
 	Resources/PasteUbuntu.xml \
 	Resources/PastebinCA.xml \
 	Resources/Pastebin.xml
+
+GENERATED_RESOURCES = \
+	Resources/Pastebin.addin.xml
 
 REFERENCES = \
 	System \

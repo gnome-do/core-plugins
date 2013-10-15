@@ -5,7 +5,7 @@ ASSEMBLY=EOG-Slideshow
 FILES = \
 	src/PlaySlideshowAction.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/EOG-Slideshow.addin.xml
 
 REFERENCES = \

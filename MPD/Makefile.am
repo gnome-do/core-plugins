@@ -9,7 +9,7 @@ FILES = \
 	src/MPDItems.cs \
 	src/MusicItems.cs 
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/MPD.addin.xml
 
 REFERENCES = \

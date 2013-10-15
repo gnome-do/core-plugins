@@ -13,7 +13,7 @@ FILES = \
 	src/xmms2QueueAction.cs
 
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/xmms2.addin.xml 
 
 REFERENCES = \

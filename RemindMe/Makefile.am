@@ -8,8 +8,9 @@ FILES = \
 	src/SnoozeableReminder.cs \
 	src/StringExtensions.cs
 
+GENERATED_RESOURCES = \
+	Resources/RemindMe.addin.xml
 RESOURCES = \
-	Resources/RemindMe.addin.xml \
 	Resources/alarm.png \
 	Resources/snooze.png
 

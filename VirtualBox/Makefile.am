@@ -17,8 +17,9 @@ FILES = \
 	src/VBoxBrowseVMSItem.cs \
 	src/IconMap.cs
 
+GENERATED_RESOURCES = Resources/VirtualBox.addin.xml
+
 RESOURCES = \
-	Resources/VirtualBox.addin.xml \
 	Resources/icons/os_dos.png \
 	Resources/icons/os_os2warp4.png \
 	Resources/icons/os_win95.png \

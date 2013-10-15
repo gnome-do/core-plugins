@@ -5,7 +5,7 @@ ASSEMBLY=Opera
 FILES = \
 	src/OperaBookmarkItemSource.cs
 
-RESOURCES = \
+GENERATED_RESOURCES = \
 	Resources/Opera.addin.xml
 
 REFERENCES = \
