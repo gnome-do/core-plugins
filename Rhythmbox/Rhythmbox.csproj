@@ -42,6 +42,7 @@
     <Reference Include="Do.Platform, Version=0.11.0.0, Culture=neutral">
       <Package>do.platform</Package>
     </Reference>
+    <Reference Include="dbus-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5675b0c3093115b5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\AbstractPlaybackAction.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="src\PreviousAction.cs" />
     <Compile Include="src\Rhythmbox.cs" />
     <Compile Include="src\RhythmboxItems.cs" />
+    <Compile Include="src\RhythmboxDBus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

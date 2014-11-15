@@ -34,6 +34,8 @@ namespace Do.Rhythmbox
 		List<Item> items;
 		List<AlbumMusicItem> albums;
 		List<ArtistMusicItem> artists;
+		List<SongMusicItem> songs;
+		List<PlaylistMusicItem> playlists;
 
 		public MusicItemSource ()
 		{
@@ -78,24 +80,29 @@ namespace Do.Rhythmbox
 			if (IsRhythmbox (parent)) {
 				yield return new BrowseAlbumsMusicItem ();
 				yield return new BrowseArtistsMusicItem ();
+				if (playlists.Count > 0)
+					yield return new BrowsePlaylistsMusicItem ();
+				yield return new BrowseSongsMusicItem ();
 				foreach (Item item in RhythmboxRunnableItem.Items)
 					yield return item;
-			}
-			else if (parent is ArtistMusicItem) {
+			} else if (parent is ArtistMusicItem) {
 				foreach (AlbumMusicItem album in albums.Where (album => album.Artist.Contains (parent.Name)))
 					yield return album;
-			}
-			else if (parent is AlbumMusicItem) {
+			} else if (parent is AlbumMusicItem) {
 				foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (parent as AlbumMusicItem))
 					yield return song;
-			}
-			else if (parent is BrowseAlbumsMusicItem) {
+			} else if (parent is BrowseAlbumsMusicItem) {
 				foreach (AlbumMusicItem album in albums)
 					yield return album;
-			}
-			else if (parent is BrowseArtistsMusicItem) {
+			} else if (parent is BrowseArtistsMusicItem) {
 				foreach (ArtistMusicItem artist in artists)
 					yield return artist;
+			} else if (parent is BrowseSongsMusicItem) {
+				foreach (SongMusicItem song in songs)
+					yield return song;
+			} else if (parent is BrowsePlaylistsMusicItem) {
+				foreach (PlaylistMusicItem playlist in playlists)
+					yield return playlist;
 			}
 		}
 
@@ -107,14 +114,24 @@ namespace Do.Rhythmbox
 			foreach (Item item in RhythmboxRunnableItem.Items)
 				items.Add (item);
 
+			// Add music data.
+			Rhythmbox.LoadMusicData (out albums, out artists, out songs, out playlists);
+			foreach (Item album in albums) items.Add (album);
+			foreach (Item artist in artists) items.Add (artist);
+			foreach (Item song in songs) items.Add (song);
+			foreach (Item playlist in playlists) items.Add (playlist);
+
 			// Add browse features.
 			items.Add (new BrowseAlbumsMusicItem ());
 			items.Add (new BrowseArtistsMusicItem ());
-
-			// Add albums and artists.
-			Rhythmbox.LoadAlbumsAndArtists (out albums, out artists);
-			foreach (Item album in albums) items.Add (album);
-			foreach (Item artist in artists) items.Add (artist);
+			items.Add (new BrowseSongsMusicItem ());
+			if (playlists.Count > 0) {
+				// If Rhythmbox isn't running, or if there are DBus issues,
+				// we don't want the "Browse by playlist" item to show up and be useless.
+				// Instead, we only show it when it's populated.
+				// Artists, albums and songs are fetched via XML and should never fail.
+				items.Add (new BrowsePlaylistsMusicItem ());
+			}
 		}
 	}
 }

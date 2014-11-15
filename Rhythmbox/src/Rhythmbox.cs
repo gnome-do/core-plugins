@@ -24,6 +24,7 @@ using System.Linq;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
+using DBus;
 
 using Do.Platform;
 
@@ -60,13 +61,15 @@ namespace Do.Rhythmbox
 			songs = new List<SongMusicItem> ();
 		}
 
-		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out)
+		public static void LoadMusicData(out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out, out List<SongMusicItem> songs_out, out List<PlaylistMusicItem> playlists_out)
 		{
 			Dictionary<Tuple<string, string>, AlbumMusicItem> albums;
 			Dictionary<string, ArtistMusicItem> artists;
 
 			albums_out = new List<AlbumMusicItem> ();
 			artists_out = new List<ArtistMusicItem> ();
+			songs_out = new List<SongMusicItem> ();
+			playlists_out = new List<PlaylistMusicItem> ();
 
 			albums = new Dictionary<Tuple<string, string>, AlbumMusicItem> ();
 			artists = new Dictionary<string, ArtistMusicItem> ();
@@ -79,21 +82,25 @@ namespace Do.Rhythmbox
 				if (!albums.ContainsKey (album) || albums[album].Cover == null) {
 					albums[album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);
 				}
+
+				songs_out.Add (song);
 			}
 			albums_out.AddRange (albums.Values);
 			artists_out.AddRange (artists.Values);
+
+			foreach (Playlist playlist in RhythmboxDBus.Playlists)
+				playlists_out.Add (new PlaylistMusicItem (playlist.Name));
 		}
 
 		public static IEnumerable<SongMusicItem> LoadSongsFor (MusicItem item)
 		{
 			if (item is SongMusicItem)
 				return new SongMusicItem[] { item as SongMusicItem };
-			
 			else if (item is ArtistMusicItem)
 				return LoadAllSongs ()
 					.Where (song => song.Artist.Contains (item.Name))
-					.OrderBy (song => song.Album).ThenBy (song => song.Track);
-			
+					.OrderBy (song => song.Album)
+					.ThenBy (song => song.Track);
 			else if (item is AlbumMusicItem)
 				return LoadAllSongs ()
 					.Where (song => song.Album == item.Name && song.Artist == item.Artist)
@@ -101,6 +108,9 @@ namespace Do.Rhythmbox
 					.ThenBy (song => song.Track);
 			else
 				return Enumerable.Empty<SongMusicItem> ();
+			// Sadly, as of 2014-11-09 neither MPRIS nor rhythmbox-client allows for loading
+			// tracks from a given playlist, so as far as I can tell, it's not possible
+			// (without modifications to Rhythmbox) to show the tracks present in a playlist here.
 		}
 
 		static string ReadXdgUserDir (string key, string fallback)
@@ -188,7 +198,7 @@ namespace Do.Rhythmbox
 					}
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
+				Console.Error.WriteLine ("[Rhythmbox] Could not read Rhythmbox database file: " + e.Message);
 			}
 			return songs;
 		}

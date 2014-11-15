@@ -79,6 +79,30 @@ namespace Do.Rhythmbox
 		}
 	}
 
+	public class PlaylistMusicItem : MusicItem
+	{
+		protected string playlistname;
+
+		public PlaylistMusicItem (string playlistname):
+		base ()
+		{
+			this.playlistname = playlistname;
+		}
+
+		public override string Description
+		{
+			get {
+				return string.Format (AddinManager.CurrentLocalizer.GetString ("Play playlist" + " {0}", playlistname));
+			}
+		}
+
+		public override string Name {
+			get {
+				return playlistname;
+			}
+		}
+	}
+
 	public class SongMusicItem : MusicItem, IComparable<SongMusicItem>
 	{
 		string file, album;

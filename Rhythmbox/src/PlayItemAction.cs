@@ -62,14 +62,26 @@ namespace Do.Rhythmbox
 
 				Rhythmbox.Client ("--pause --no-present");
 				Rhythmbox.Client ("--clear-queue --no-present", true);
-				foreach (Item item in items) {
-					if (item is MusicItem) {
-						string enqueue = "--no-present ";
-						foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
-							enqueue = string.Format ("{0} --enqueue \"{1}\" ", enqueue, song.File);
-						Rhythmbox.Client (enqueue, true);
+
+				if (items.Count() == 1 && items.ElementAt(0) is PlaylistMusicItem) {
+					// Because playlists are not enqueued, but played as is, playing
+					// more than one does not make any sense. Neither does playing e.g.
+					// one playlist and two songs.
+					// Therefore, only the case where the lone item selected is a playlist is supported.
+
+					RhythmboxDBus.PlayPlaylist((PlaylistMusicItem)items.ElementAt(0));
+				}
+				else {
+					foreach (Item item in items) {
+						if (item is MusicItem && !(item is PlaylistMusicItem)) {
+							string enqueue = "--no-present ";
+							foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (item as MusicItem))
+								enqueue = string.Format ("{0} --enqueue \"{1}\" ", enqueue, song.File);
+							Rhythmbox.Client (enqueue, true);
+						}
 					}
 				}
+
 				Rhythmbox.Client ("--next --no-present");
 				Rhythmbox.Client ("--play --no-present");
 			}).Start ();

@@ -45,7 +45,12 @@ namespace Do.Rhythmbox
 		}
 
 		public override IEnumerable<Type> SupportedItemTypes {
-			get { yield return typeof (MusicItem); }
+			get {
+				yield return typeof (ArtistMusicItem);
+				yield return typeof (AlbumMusicItem);
+				yield return typeof (SongMusicItem);
+				// PlaylistMusicItem is not supported, as there is no way to get the list of tracks from the playlist name
+			}
 		}
 
 		public override IEnumerable<Item> Perform (IEnumerable<Item> items, IEnumerable<Item> modItems)
