@@ -1,13 +1,13 @@
 <Addin
 	id="Rhythmbox"
 	namespace="Do"
-	version="2.1"
+	version="2.2"
 	name="Rhythmbox"
 	description="Search and play music in Rhythmbox."
 	author="David Siegel"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Rhythmbox_Plugin"
+    url="https://launchpad.net/do-plugins"
 	>
 
 	<Runtime>

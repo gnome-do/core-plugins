@@ -62,21 +62,22 @@ namespace Do.Rhythmbox
 
 		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out)
 		{
-			Dictionary<string, AlbumMusicItem> albums;
+			Dictionary<Tuple<string, string>, AlbumMusicItem> albums;
 			Dictionary<string, ArtistMusicItem> artists;
 
 			albums_out = new List<AlbumMusicItem> ();
 			artists_out = new List<ArtistMusicItem> ();
 
-			albums = new Dictionary<string, AlbumMusicItem> ();
+			albums = new Dictionary<Tuple<string, string>, AlbumMusicItem> ();
 			artists = new Dictionary<string, ArtistMusicItem> ();
-			foreach (SongMusicItem song in LoadAllSongs ()) {	
+			foreach (SongMusicItem song in LoadAllSongs ()) {
+				Tuple<string, string> album = new Tuple<string, string> (song.Artist, song.Album);
 				// Don't let null covers replace non-null covers.
 				if (!artists.ContainsKey (song.Artist) || artists[song.Artist].Cover == null) {
 					artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
 				}
-				if (!albums.ContainsKey (song.Album) || albums[song.Album].Cover == null) {
-					albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);	
+				if (!albums.ContainsKey (album) || albums[album].Cover == null) {
+					albums[album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);
 				}
 			}
 			albums_out.AddRange (albums.Values);
@@ -95,9 +96,8 @@ namespace Do.Rhythmbox
 			
 			else if (item is AlbumMusicItem)
 				return LoadAllSongs ()
-					.Where (song => song.Album == item.Name)
+					.Where (song => song.Album == item.Name && song.Artist == item.Artist)
 					.OrderBy (song => song.Track);
-			
 			else
 				return Enumerable.Empty<SongMusicItem> ();
 		}
