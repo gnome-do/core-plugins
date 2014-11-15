@@ -196,7 +196,7 @@ namespace Do.Rhythmbox
 					}
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine ("[Rhythmbox] Could not read Rhythmbox database file: " + e.Message);
+				Log.Error("[Rhythmbox] Could not read Rhythmbox database file: " + e.Message);
 			}
 			return songs;
 		}

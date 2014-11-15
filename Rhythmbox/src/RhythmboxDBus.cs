@@ -21,6 +21,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Do.Platform;
+
 using DBus;
 
 namespace Do.Rhythmbox
@@ -53,7 +55,7 @@ namespace Do.Rhythmbox
 					try {
 						mprisPlaylists = Bus.Session.GetObject<IPlaylists> ("org.mpris.MediaPlayer2.rhythmbox", new ObjectPath ("/org/mpris/MediaPlayer2"));
 					} catch (Exception e) {
-						Console.Error.WriteLine ("[Rhythmbox] Bus.Session.GetObject failed: " + e);
+						Log.Error ("[Rhythmbox] Bus.Session.GetObject failed: " + e);
 					}
 				}
 				return mprisPlaylists;
@@ -67,9 +69,9 @@ namespace Do.Rhythmbox
 					playlists = MPRISPlaylists.GetPlaylists(0, 4096, "Ascending", false);
 				}
 				catch (Exception e) {
-					Console.Error.WriteLine ("[Rhythmbox] GetPlaylists via MPRIS (D-Bus) failed: " + e);
+					Log.Error ("[Rhythmbox] GetPlaylists via MPRIS (D-Bus) failed: " + e);
 					if (e.Message.StartsWith("org.freedesktop.DBus.Error.ServiceUnknown"))
-						Console.Error.WriteLine("[Rhythmbox] If Rhythmbox is running, please ensure that the MPRIS plugin is enabled.");
+						Log.Info ("[Rhythmbox] If Rhythmbox is running, please ensure that the MPRIS plugin is enabled.");
 				}
 
 				return playlists != null ? new List<Playlist> (playlists) : Enumerable.Empty<Playlist> ();
