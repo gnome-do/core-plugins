@@ -22,13 +22,10 @@ using System.Collections.Generic;
 
 using Do.Universe;
 
-
 namespace Do.Rhythmbox
 {
-
 	public abstract class AbstractPlaybackAction : Act
 	{
-
 		public override IEnumerable<Type> SupportedItemTypes {
 			get { 
 				yield return typeof (IApplicationItem);

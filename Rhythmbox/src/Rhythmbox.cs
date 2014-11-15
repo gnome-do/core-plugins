@@ -30,10 +30,8 @@ using Do.Platform;
 
 namespace Do.Rhythmbox
 {
-
 	public static class Rhythmbox
 	{
-
 		static readonly string MusicLibraryFile;
 		static readonly string CoverArtDirectory;
 

@@ -28,7 +28,6 @@ using Do.Platform;
 
 namespace Do.Rhythmbox
 {
-
 	public class MusicItemSource : ItemSource
 	{
 		List<Item> items;

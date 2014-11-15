@@ -29,10 +29,8 @@ using Do.Universe;
 
 namespace Do.Rhythmbox
 {
-
 	public class PlayItemAction : Act
 	{
-
 		public PlayItemAction ()
 		{
 		}

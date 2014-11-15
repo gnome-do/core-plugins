@@ -28,10 +28,8 @@ using Do.Universe;
 
 namespace Do.Rhythmbox
 {
-
 	public class EnqueueAction : Act
 	{
-
 		public override string Name {
 			get { return AddinManager.CurrentLocalizer.GetString ("Add to Play Queue"); }
 		}

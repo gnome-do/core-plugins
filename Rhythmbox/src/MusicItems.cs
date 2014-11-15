@@ -26,7 +26,6 @@ using Do.Universe;
 
 namespace Do.Rhythmbox
 {
-
 	public abstract class MusicItem : Item
 	{
 		protected string name, artist, year, cover;
@@ -51,7 +50,6 @@ namespace Do.Rhythmbox
 		public virtual string Artist { get { return artist; } }
 		public virtual string Year { get { return year; } }
 		public virtual string Cover { get { return cover; } }
-
 	}
 
 	public class AlbumMusicItem : MusicItem

@@ -27,13 +27,10 @@ using Mono.Addins;
 
 using Do.Universe;
 
-
 namespace Do.Rhythmbox
 {
-
 	public class PauseAction : AbstractPlaybackAction
 	{
-
 		public PauseAction ()
 		{
 		}

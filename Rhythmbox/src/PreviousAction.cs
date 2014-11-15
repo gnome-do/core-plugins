@@ -27,13 +27,10 @@ using Mono.Addins;
 
 using Do.Universe;
 
-
 namespace Do.Rhythmbox
 {
-
 	public class PreviousAction : AbstractPlaybackAction
 	{
-
 		public PreviousAction ()
 		{
 		}
