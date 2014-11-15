@@ -83,13 +83,15 @@ namespace Do.Rhythmbox
 	{
 		string file, album;
 		int track;
+		int disc;
 
-		public SongMusicItem (string name, string artist, string album, string year, string cover, string file, int track):
+		public SongMusicItem (string name, string artist, string album, string year, string cover, string file, int track, int disc):
 			base (name, artist, year, cover)
 		{
 			this.file = file;
 			this.album = album;
 			this.track = track;
+			this.disc = disc;
 		}
 
 		public override string Icon { get { return "gnome-mime-audio"; } }
@@ -103,7 +105,8 @@ namespace Do.Rhythmbox
 		public virtual string File { get { return file; } }
 		public virtual string Album { get { return album; } }
 		public virtual int Track { get { return track; } }
-		
+		public virtual int Disc { get { return disc; } }
+
 		public int CompareTo (SongMusicItem other)
 		{
 			if (album.CompareTo (other.Album) == 0)

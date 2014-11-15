@@ -97,7 +97,8 @@ namespace Do.Rhythmbox
 			else if (item is AlbumMusicItem)
 				return LoadAllSongs ()
 					.Where (song => song.Album == item.Name && song.Artist == item.Artist)
-					.OrderBy (song => song.Track);
+					.OrderBy (song => song.Disc)
+					.ThenBy (song => song.Track);
 			else
 				return Enumerable.Empty<SongMusicItem> ();
 		}
@@ -175,11 +176,14 @@ namespace Do.Rhythmbox
 						int song_track = 0;
 						Int32.TryParse (GetNodeText (node.SelectSingleNode ("track-number")), out song_track);
 
+						int song_disc = 0;
+						Int32.TryParse (GetNodeText (node.SelectSingleNode ("disc-number")), out song_disc);
+
 						string cover = Path.Combine (CoverArtDirectory, string.Format ("{0} - {1}.jpg", artist_name, album_name)); 
 						if (!File.Exists (cover))
 							cover = null; 
 
-						SongMusicItem song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
+						SongMusicItem song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track, song_disc);
 						songs.Add (song);
 					}
 				}
