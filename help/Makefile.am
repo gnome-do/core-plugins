@@ -1,9 +1,9 @@
 @YELP_HELP_RULES@
 
-HELP_ID = gnome-do
-HELP_FILES = 
+HELP_ID = do-plugins
+HELP_FILES = \
+	index.page \
+	alias.page \
+	apturl.page
 
-HELP_LINGUAS =
-
-DISTCLEANFILES = \
-	Makefile.in
+HELP_LINGUAS = 
