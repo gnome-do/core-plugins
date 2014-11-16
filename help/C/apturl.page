@@ -1,0 +1,45 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="apturl">
+
+    <info>
+        <link type="guide" xref="index#plugins"/>
+	<credit type="author">
+		<name>Christer Edwards</name>
+	</credit>
+    </info>
+
+    <title>AptURL</title>
+
+    <section id="description">
+        <title>Description</title>
+        <p>
+        The apturl plugin for Do allows you to quickly install any package available in the Ubuntu repository by simply giving the package name.
+        </p>
+    </section>
+
+    <section id="usage">
+        <title>Usage</title>
+        <p>
+        The “Install” action takes the full name of a package and installs it.
+        </p>
+        
+        <p>
+        For example, to use Do to install the “gnome-do” package:
+	</p>
+        <steps>
+	    <item><p>Activate Do</p></item>
+	    <item><p>Enter “gnome-do”</p></item>
+	    <item><p>Hit <keyseq><key>Tab</key></keyseq>. In second pane type <keyseq><key>I</key><key>n</key><key>s</key><key>t</key></keyseq> and choose the “Install” action from the drop down menu.</p></item>
+	    <item><p>Hit <keyseq><key>Enter</key></keyseq> to perform the action.
+            </p></item>
+	</steps>
+	<figure>
+	    <title>Example</title>
+	    <desc>Installing gnome-do using the AptURL plugin</desc>
+	    <media type="image" src="AptURL.jpg"/>
+	</figure>
+    </section>
+
+</page>
+
