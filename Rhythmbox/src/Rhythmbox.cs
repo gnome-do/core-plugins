@@ -24,15 +24,14 @@ using System.Linq;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
+using DBus;
 
 using Do.Platform;
 
 namespace Do.Rhythmbox
 {
-
 	public static class Rhythmbox
 	{
-
 		static readonly string MusicLibraryFile;
 		static readonly string CoverArtDirectory;
 
@@ -60,46 +59,56 @@ namespace Do.Rhythmbox
 			songs = new List<SongMusicItem> ();
 		}
 
-		public static void LoadAlbumsAndArtists (out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out)
+		public static void LoadMusicData(out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out, out List<SongMusicItem> songs_out, out List<PlaylistMusicItem> playlists_out)
 		{
-			Dictionary<string, AlbumMusicItem> albums;
+			Dictionary<Tuple<string, string>, AlbumMusicItem> albums;
 			Dictionary<string, ArtistMusicItem> artists;
 
 			albums_out = new List<AlbumMusicItem> ();
 			artists_out = new List<ArtistMusicItem> ();
+			songs_out = new List<SongMusicItem> ();
+			playlists_out = new List<PlaylistMusicItem> ();
 
-			albums = new Dictionary<string, AlbumMusicItem> ();
+			albums = new Dictionary<Tuple<string, string>, AlbumMusicItem> ();
 			artists = new Dictionary<string, ArtistMusicItem> ();
-			foreach (SongMusicItem song in LoadAllSongs ()) {	
+			foreach (SongMusicItem song in LoadAllSongs ()) {
+				Tuple<string, string> album = new Tuple<string, string> (song.Artist, song.Album);
 				// Don't let null covers replace non-null covers.
 				if (!artists.ContainsKey (song.Artist) || artists[song.Artist].Cover == null) {
 					artists[song.Artist] = new ArtistMusicItem (song.Artist, song.Cover);
 				}
-				if (!albums.ContainsKey (song.Album) || albums[song.Album].Cover == null) {
-					albums[song.Album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);	
+				if (!albums.ContainsKey (album) || albums[album].Cover == null) {
+					albums[album] = new AlbumMusicItem (song.Album, song.Artist, song.Year, song.Cover);
 				}
+
+				songs_out.Add (song);
 			}
 			albums_out.AddRange (albums.Values);
 			artists_out.AddRange (artists.Values);
+
+			foreach (Playlist playlist in RhythmboxDBus.Playlists)
+				playlists_out.Add (new PlaylistMusicItem (playlist.Name));
 		}
 
 		public static IEnumerable<SongMusicItem> LoadSongsFor (MusicItem item)
 		{
 			if (item is SongMusicItem)
 				return new SongMusicItem[] { item as SongMusicItem };
-			
 			else if (item is ArtistMusicItem)
 				return LoadAllSongs ()
 					.Where (song => song.Artist.Contains (item.Name))
-					.OrderBy (song => song.Album).ThenBy (song => song.Track);
-			
+					.OrderBy (song => song.Album)
+					.ThenBy (song => song.Track);
 			else if (item is AlbumMusicItem)
 				return LoadAllSongs ()
-					.Where (song => song.Album == item.Name)
-					.OrderBy (song => song.Track);
-			
+					.Where (song => song.Album == item.Name && song.Artist == item.Artist)
+					.OrderBy (song => song.Disc)
+					.ThenBy (song => song.Track);
 			else
 				return Enumerable.Empty<SongMusicItem> ();
+			// Sadly, as of 2014-11-09 neither MPRIS nor rhythmbox-client allows for loading
+			// tracks from a given playlist, so as far as I can tell, it's not possible
+			// (without modifications to Rhythmbox) to show the tracks present in a playlist here.
 		}
 
 		static string ReadXdgUserDir (string key, string fallback)
@@ -175,16 +184,19 @@ namespace Do.Rhythmbox
 						int song_track = 0;
 						Int32.TryParse (GetNodeText (node.SelectSingleNode ("track-number")), out song_track);
 
+						int song_disc = 0;
+						Int32.TryParse (GetNodeText (node.SelectSingleNode ("disc-number")), out song_disc);
+
 						string cover = Path.Combine (CoverArtDirectory, string.Format ("{0} - {1}.jpg", artist_name, album_name)); 
 						if (!File.Exists (cover))
 							cover = null; 
 
-						SongMusicItem song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track);
+						SongMusicItem song = new SongMusicItem (song_name, artist_name, album_name, year, cover, song_file, song_track, song_disc);
 						songs.Add (song);
 					}
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Could not read Rhythmbox database file: " + e.Message);
+				Log.Error("[Rhythmbox] Could not read Rhythmbox database file: " + e.Message);
 			}
 			return songs;
 		}

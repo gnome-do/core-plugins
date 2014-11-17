@@ -26,7 +26,6 @@ using Do.Universe;
 
 namespace Do.Rhythmbox
 {
-
 	public abstract class MusicItem : Item
 	{
 		protected string name, artist, year, cover;
@@ -51,7 +50,6 @@ namespace Do.Rhythmbox
 		public virtual string Artist { get { return artist; } }
 		public virtual string Year { get { return year; } }
 		public virtual string Cover { get { return cover; } }
-
 	}
 
 	public class AlbumMusicItem : MusicItem
@@ -79,17 +77,43 @@ namespace Do.Rhythmbox
 		}
 	}
 
+	public class PlaylistMusicItem : MusicItem
+	{
+		protected string playlistname;
+
+		public PlaylistMusicItem (string playlistname):
+		base ()
+		{
+			this.playlistname = playlistname;
+		}
+
+		public override string Description
+		{
+			get {
+				return string.Format (AddinManager.CurrentLocalizer.GetString ("Play playlist" + " {0}", playlistname));
+			}
+		}
+
+		public override string Name {
+			get {
+				return playlistname;
+			}
+		}
+	}
+
 	public class SongMusicItem : MusicItem, IComparable<SongMusicItem>
 	{
 		string file, album;
 		int track;
+		int disc;
 
-		public SongMusicItem (string name, string artist, string album, string year, string cover, string file, int track):
+		public SongMusicItem (string name, string artist, string album, string year, string cover, string file, int track, int disc):
 			base (name, artist, year, cover)
 		{
 			this.file = file;
 			this.album = album;
 			this.track = track;
+			this.disc = disc;
 		}
 
 		public override string Icon { get { return "gnome-mime-audio"; } }
@@ -103,7 +127,8 @@ namespace Do.Rhythmbox
 		public virtual string File { get { return file; } }
 		public virtual string Album { get { return album; } }
 		public virtual int Track { get { return track; } }
-		
+		public virtual int Disc { get { return disc; } }
+
 		public int CompareTo (SongMusicItem other)
 		{
 			if (album.CompareTo (other.Album) == 0)

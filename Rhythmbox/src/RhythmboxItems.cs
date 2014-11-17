@@ -28,7 +28,6 @@ using Do.Platform;
 
 namespace Do.Rhythmbox
 {
-
 	class BrowseMusicItem: Item
 	{
 		string name, description;
@@ -47,7 +46,7 @@ namespace Do.Rhythmbox
 	class BrowseArtistsMusicItem : BrowseMusicItem
 	{
 		public BrowseArtistsMusicItem ():
-			base (AddinManager.CurrentLocalizer.GetString ("Browse Artists"), 
+		base (AddinManager.CurrentLocalizer.GetString ("Browse Artists"),
 				AddinManager.CurrentLocalizer.GetString ("Browse Rhythmbox Music by Artist"))
 		{
 		}
@@ -56,8 +55,26 @@ namespace Do.Rhythmbox
 	class BrowseAlbumsMusicItem : BrowseMusicItem
 	{
 		public BrowseAlbumsMusicItem ():
-			base (AddinManager.CurrentLocalizer.GetString ("Browse Albums"), 
+			base (AddinManager.CurrentLocalizer.GetString ("Browse Albums"),
 				AddinManager.CurrentLocalizer.GetString ("Browse Rhythmbox Music by Album"))
+		{
+		}
+	}
+
+	class BrowseSongsMusicItem : BrowseMusicItem
+	{
+		public BrowseSongsMusicItem ():
+		base (AddinManager.CurrentLocalizer.GetString ("Browse Songs"),
+			AddinManager.CurrentLocalizer.GetString ("Browse Rhythmbox Songs"))
+		{
+		}
+	}
+
+	class BrowsePlaylistsMusicItem : BrowseMusicItem
+	{
+		public BrowsePlaylistsMusicItem ():
+		base (AddinManager.CurrentLocalizer.GetString ("Browse Playlists"),
+			AddinManager.CurrentLocalizer.GetString ("Browse Rhythmbox Music by Playlist"))
 		{
 		}
 	}

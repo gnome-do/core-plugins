@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D2AE4DAE-CC83-4F33-A6BB-D6019F1C1A5C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Rhythmbox</RootNamespace>
+    <AssemblyName>Rhythmbox</AssemblyName>
+    <ReleaseVersion>2.2</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Addins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Do.Universe, Version=0.11.0.0, Culture=neutral">
+      <Package>do.universe</Package>
+    </Reference>
+    <Reference Include="Do.Platform, Version=0.11.0.0, Culture=neutral">
+      <Package>do.platform</Package>
+    </Reference>
+    <Reference Include="dbus-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5675b0c3093115b5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\AbstractPlaybackAction.cs" />
+    <Compile Include="src\EnqueueAction.cs" />
+    <Compile Include="src\MusicItems.cs" />
+    <Compile Include="src\MusicItemSource.cs" />
+    <Compile Include="src\NextAction.cs" />
+    <Compile Include="src\PauseAction.cs" />
+    <Compile Include="src\PlayAction.cs" />
+    <Compile Include="src\PlayItemAction.cs" />
+    <Compile Include="src\PreviousAction.cs" />
+    <Compile Include="src\Rhythmbox.cs" />
+    <Compile Include="src\RhythmboxItems.cs" />
+    <Compile Include="src\RhythmboxDBus.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Rhythmbox.addin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -5,6 +5,7 @@ ASSEMBLY=Rhythmbox
 FILES = \
 	src/MusicItems.cs \
 	src/Rhythmbox.cs \
+	src/RhythmboxDBus.cs \
 	src/EnqueueAction.cs \
 	src/RhythmboxItems.cs \
 	src/PlayAction.cs \
@@ -22,6 +23,7 @@ REFERENCES = \
 	System \
 	System.Core \
 	System.Xml \
+	$(DBUS_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(DO_PLATFORM_LIBS) \
 	$(DO_UNIVERSE_LIBS)
