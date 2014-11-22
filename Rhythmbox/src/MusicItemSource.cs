@@ -85,7 +85,7 @@ namespace Do.Rhythmbox
 				foreach (Item item in RhythmboxRunnableItem.Items)
 					yield return item;
 			} else if (parent is ArtistMusicItem) {
-				foreach (AlbumMusicItem album in albums.Where (album => album.Artist.Contains (parent.Name)))
+				foreach (AlbumMusicItem album in albums.Where (album => String.Equals(album.Artist, parent.Name, StringComparison.InvariantCultureIgnoreCase)))
 					yield return album;
 			} else if (parent is AlbumMusicItem) {
 				foreach (SongMusicItem song in Rhythmbox.LoadSongsFor (parent as AlbumMusicItem))
