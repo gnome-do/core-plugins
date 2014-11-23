@@ -40,11 +40,11 @@
 	<figure>
 	    <title>Example</title>
 	    <desc>Aliasing ‘Preferences’ to ‘e3’</desc>
-	    <media type="image" src="Alias1.png"/>
+	    <media type="image" src="media/Alias1.png"/>
 	</figure>
 	<figure>
 	    <desc>Using the new ‘e3’ item</desc>
-	    <media type="image" src="Alias2.png"/>
+	    <media type="image" src="media/Alias2.png"/>
 	</figure>
     </section>
 

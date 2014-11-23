@@ -37,7 +37,7 @@
 	<figure>
 	    <title>Example</title>
 	    <desc>Installing gnome-do using the AptURL plugin</desc>
-	    <media type="image" src="AptURL.jpg"/>
+	    <media type="image" src="media/AptURL.jpg"/>
 	</figure>
     </section>
 
