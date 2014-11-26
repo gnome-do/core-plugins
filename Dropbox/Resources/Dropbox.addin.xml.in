@@ -7,7 +7,6 @@
 	author="Stephen Elson"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Dropbox_Plugin"
 	>
 
 	<Runtime>

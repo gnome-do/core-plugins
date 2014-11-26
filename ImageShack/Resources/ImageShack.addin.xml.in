@@ -7,7 +7,6 @@
 	author="Jason Jones"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/ImageShack_Plugin"
 >
  
 	<Runtime>

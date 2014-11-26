@@ -7,7 +7,6 @@
 	author="Luis Miguel Montiel G"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Emesene_Plugin"
 >
 
 	<Runtime>

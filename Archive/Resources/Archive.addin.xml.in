@@ -7,7 +7,6 @@
 	author="Guillaume Beland"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Archive_Plugin"
 >
  
 	<Runtime>

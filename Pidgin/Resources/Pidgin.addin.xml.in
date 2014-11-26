@@ -7,7 +7,6 @@
 	author="David Siegel, Alex Launi, Chris Szikszoy"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Pidgin_Plugin"
 >
  
 	<Runtime>

@@ -7,7 +7,6 @@
 	author="Rick Harding, Chris Szikszoy"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Tomboy_Plugin"
 	>
 
 	<Runtime>

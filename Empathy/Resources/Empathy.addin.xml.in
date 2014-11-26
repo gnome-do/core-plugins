@@ -7,7 +7,6 @@
 	author="Xavier Calland"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Empathy_Plugin"
 >
  
 	<Runtime>

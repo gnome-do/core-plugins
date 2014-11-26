@@ -7,7 +7,6 @@
 	author="Ankit Solanki"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Terminal_Server_Client_Plugin"
 	>
 
 	<Runtime>

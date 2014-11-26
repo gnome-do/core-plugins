@@ -7,7 +7,6 @@
 	author="David Siegel"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Locate_Plugin"
 >
  
 	<Runtime>

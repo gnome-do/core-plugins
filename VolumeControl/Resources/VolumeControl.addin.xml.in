@@ -7,7 +7,6 @@
 	author="Alex Launi"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Volume_Control_Plugin"
 	>
 
 	<Runtime>

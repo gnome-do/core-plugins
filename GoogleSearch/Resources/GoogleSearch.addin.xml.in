@@ -7,7 +7,6 @@
 	author="Brian Lucas"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Google_Search_Plugin"
 >
  
 	<Runtime>

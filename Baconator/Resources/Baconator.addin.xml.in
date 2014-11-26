@@ -7,7 +7,6 @@
 	author="Alex Launi"
 	category="Community"
 	defaultEnabled="false"
-   url="http://bacolicio.us/http://do.davebsd.com/wiki/Baconator_Plugin"
 	>
 
 	<Runtime>

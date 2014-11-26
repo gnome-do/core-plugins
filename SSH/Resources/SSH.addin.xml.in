@@ -7,7 +7,6 @@
 	author="Peter Stuifzand"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/SSH_Plugin"
 	>
 
 	<Runtime>

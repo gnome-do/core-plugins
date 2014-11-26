@@ -7,7 +7,6 @@
 	author="Peng Deng"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Google_Docs_Plugin"
 	>
 
 	<Runtime>

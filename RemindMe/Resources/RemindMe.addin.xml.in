@@ -7,7 +7,6 @@
 	author="Chris Szikszoy, Daniel Foré"
 	category="Community"
 	defaultEnabled="false"
-	url="http://do.davebsd.com/wiki/RemindMe_Plugin"
 >
 
 	<Runtime>

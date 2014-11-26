@@ -7,7 +7,6 @@
 	author="Ken Simon, David Siegel"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Launchpad_Plugin"
 >
  
 	<Runtime>

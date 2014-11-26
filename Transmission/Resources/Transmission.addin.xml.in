@@ -7,7 +7,6 @@
 	author="Mikhail Trishchenkov"
 	category="Community"
 	defaultEnabled="true"
-    url="http://do.davebsd.com/wiki/Transmission_Plugin"
 	>
 
 	<Runtime>

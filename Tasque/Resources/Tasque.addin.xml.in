@@ -7,7 +7,6 @@
 	author="Guillaume Béland"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Tasque_Plugin"
 	>
 
 	<Runtime>

@@ -7,7 +7,6 @@
 	author="Marco Antonio Villegas Vega"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/GNOME_Calculator_Plugin"
 >
  
 	<Runtime>

@@ -7,7 +7,6 @@
 	author="Jason Smith"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Window_Manager_Plugin"
 	>
 
 	<Runtime>

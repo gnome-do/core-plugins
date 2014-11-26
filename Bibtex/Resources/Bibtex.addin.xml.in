@@ -7,7 +7,6 @@
 	author="Niall Murphy"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Bibtex_Plugin"
 >
 
 	<Runtime>

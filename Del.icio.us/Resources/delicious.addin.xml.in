@@ -7,7 +7,6 @@
 	author="Jacob Andreas, Alex Launi"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Delicious_Plugin"
 >
  
 	<Runtime>

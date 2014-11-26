@@ -7,7 +7,6 @@
 	author="David Siegel, Alex Launi, Ankit Solanki, Chris Szikszoy"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/File_Plugin"
 	>
 
 	<Runtime>

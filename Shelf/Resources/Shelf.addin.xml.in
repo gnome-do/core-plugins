@@ -7,7 +7,6 @@
 	author="Jason Smith"
 	category="Community"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Shelf_Plugin"
 	>
 
 	<Runtime>

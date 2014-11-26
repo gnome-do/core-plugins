@@ -7,7 +7,6 @@
 	author="Alex Launi"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/GMail_Contacts_Plugin"
 	>
 
 	<Runtime>
