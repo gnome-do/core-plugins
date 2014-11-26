@@ -7,7 +7,7 @@
 	author="David Siegel"
 	category="Official"
 	defaultEnabled="false"
-    url="http://do.davebsd.com/wiki/Alias_Plugin"
+        url="help:do-plugins/alias"
 	>
 
 	<Runtime>
