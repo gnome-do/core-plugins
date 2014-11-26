@@ -25,3 +25,4 @@ po/.intltool-merge-cache
 *.gmo
 m4/intltool.m4
 src/Main.cs
+compile

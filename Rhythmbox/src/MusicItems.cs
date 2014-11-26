@@ -90,7 +90,7 @@ namespace Do.Rhythmbox
 		public override string Description
 		{
 			get {
-				return string.Format (AddinManager.CurrentLocalizer.GetString ("Play playlist" + " {0}", playlistname));
+				return string.Format (AddinManager.CurrentLocalizer.GetString ("Play playlist") + " {0}", playlistname);
 			}
 		}
 

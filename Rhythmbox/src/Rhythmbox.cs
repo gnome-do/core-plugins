@@ -59,18 +59,31 @@ namespace Do.Rhythmbox
 			songs = new List<SongMusicItem> ();
 		}
 
+		class AlbumTupleComparer : IEqualityComparer<Tuple<string, string>>
+		{
+			public bool Equals(Tuple<string, string> lhs, Tuple<string, string> rhs)
+			{
+				return StringComparer.InvariantCultureIgnoreCase.Equals (lhs.Item1, rhs.Item1)
+				    && StringComparer.InvariantCultureIgnoreCase.Equals (lhs.Item2, rhs.Item2);
+			}
+
+			public int GetHashCode(Tuple<string, string> tuple)
+			{
+				return StringComparer.InvariantCultureIgnoreCase.GetHashCode (tuple.Item1)
+				     ^ StringComparer.InvariantCultureIgnoreCase.GetHashCode (tuple.Item2);
+			}
+		}
+
 		public static void LoadMusicData(out List<AlbumMusicItem> albums_out, out List<ArtistMusicItem> artists_out, out List<SongMusicItem> songs_out, out List<PlaylistMusicItem> playlists_out)
 		{
-			Dictionary<Tuple<string, string>, AlbumMusicItem> albums;
-			Dictionary<string, ArtistMusicItem> artists;
+			var artists = new Dictionary<string, ArtistMusicItem> (StringComparer.InvariantCultureIgnoreCase);
+			var albums = new Dictionary<Tuple<string, string>, AlbumMusicItem> (new AlbumTupleComparer ());
 
 			albums_out = new List<AlbumMusicItem> ();
 			artists_out = new List<ArtistMusicItem> ();
 			songs_out = new List<SongMusicItem> ();
 			playlists_out = new List<PlaylistMusicItem> ();
 
-			albums = new Dictionary<Tuple<string, string>, AlbumMusicItem> ();
-			artists = new Dictionary<string, ArtistMusicItem> ();
 			foreach (SongMusicItem song in LoadAllSongs ()) {
 				Tuple<string, string> album = new Tuple<string, string> (song.Artist, song.Album);
 				// Don't let null covers replace non-null covers.
@@ -96,12 +109,12 @@ namespace Do.Rhythmbox
 				return new SongMusicItem[] { item as SongMusicItem };
 			else if (item is ArtistMusicItem)
 				return LoadAllSongs ()
-					.Where (song => song.Artist.Contains (item.Name))
+					.Where(song => song.Artist.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase))
 					.OrderBy (song => song.Album)
 					.ThenBy (song => song.Track);
 			else if (item is AlbumMusicItem)
 				return LoadAllSongs ()
-					.Where (song => song.Album == item.Name && song.Artist == item.Artist)
+					.Where (song => song.Album.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase) && song.Artist.Equals(item.Artist, StringComparison.InvariantCultureIgnoreCase))
 					.OrderBy (song => song.Disc)
 					.ThenBy (song => song.Track);
 			else
