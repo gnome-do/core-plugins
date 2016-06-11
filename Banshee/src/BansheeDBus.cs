@@ -37,19 +37,19 @@ namespace Banshee
 {
 
 	[Interface ("org.bansheeproject.Banshee.PlayerEngine")]
-	interface IBansheePlayer {
+	public interface IBansheePlayer {
 		void Play ();
 		void Pause ();
 		string CurrentState { get; }
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlayQueue")]
-	interface IBansheePlayQueue {
+	public interface IBansheePlayQueue {
 		void EnqueueUri (string uri, bool prepend);
 	}
 	
 	[Interface ("org.bansheeproject.Banshee.PlaybackController")]
-	interface IBansheeController
+	public interface IBansheeController
 	{
 		void First ();
 		void Next (bool restart);

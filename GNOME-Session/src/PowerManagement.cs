@@ -36,28 +36,28 @@ namespace GNOME
 	class PowerManagement
 	{
 		[Interface ("org.freedesktop.login1.Manager")]
-		interface ILogind
+		public interface ILogind
 		{
 			void Hibernate (bool interactive);
 			void Suspend (bool interactive);
 		}
 
 		[Interface (DeviceKitPowerName)]
-		interface IDeviceKitPower
+		public interface IDeviceKitPower
 		{
 			void Hibernate ();
 			void Suspend ();
 		}
 
 		[Interface (PowerManagementName)]
-		interface IPowerManagement
+		public interface IPowerManagement
 		{
 			void Hibernate ();
 			void Suspend ();
 		}
 		
 		[Interface (UPowerName)]
-		interface IUPower : org.freedesktop.DBus.Properties
+		public interface IUPower : org.freedesktop.DBus.Properties
 		{
 			void Hibernate ();
 			void Suspend ();

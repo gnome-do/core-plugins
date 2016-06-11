@@ -36,14 +36,14 @@ namespace GNOME
 	class SystemManagement
 	{
 		[Interface ("org.freedesktop.login1.Manager")]
-		interface ILogind
+		public interface ILogind
 		{
 			void PowerOff (bool interactive);
 			void Reboot (bool interactive);
 		}
 
 		[Interface ("org.freedesktop.ConsoleKit.Manager")]
-		interface IConsoleKit
+		public interface IConsoleKit
 		{
 			void Stop ();
 			void Restart ();

@@ -40,7 +40,7 @@ namespace GNOME
 		private const string BusName = "org.gnome.ScreenSaver";
 
 		[Interface ("org.gnome.ScreenSaver")]
-		interface IScreenSaver
+		public interface IScreenSaver
 		{
 			void Lock ();
 			void SetActive (bool value);
